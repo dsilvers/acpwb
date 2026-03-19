@@ -94,14 +94,11 @@ def main():
     print(f"Loading {MODEL_ID} (~7GB download on first run) ...")
     pipe = StableDiffusionXLPipeline.from_pretrained(
         MODEL_ID,
-        torch_dtype=torch.float16,
+        torch_dtype=torch.float32,
         use_safetensors=True,
-        variant="fp16",
     )
     pipe = pipe.to("mps")
     pipe.enable_attention_slicing()
-    # float16 VAE produces black images on MPS — upcast to float32 for the decode step
-    pipe.upcast_vae()
 
     print(f"Generating {len(to_generate)} images (skipping {len(existing)} existing) ...")
 

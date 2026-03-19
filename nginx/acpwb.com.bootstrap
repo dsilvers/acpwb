@@ -1,0 +1,31 @@
+# Step 1: Use this config FIRST to obtain the Let's Encrypt certificate.
+#
+#   sudo cp nginx/acpwb.com.bootstrap /etc/nginx/sites-available/acpwb.com
+#   sudo ln -s /etc/nginx/sites-available/acpwb.com /etc/nginx/sites-enabled/acpwb.com
+#   sudo nginx -t && sudo systemctl reload nginx
+#   sudo certbot certonly --webroot -w /var/www/certbot -d acpwb.com -d www.acpwb.com
+#
+# Step 2: Once the cert exists, swap in the real config:
+#
+#   sudo cp nginx/acpwb.com /etc/nginx/sites-available/acpwb.com
+#   sudo nginx -t && sudo systemctl reload nginx
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name acpwb.com www.acpwb.com;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        proxy_pass         http://127.0.0.1:8001;
+        proxy_http_version 1.1;
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_read_timeout 120s;
+    }
+}

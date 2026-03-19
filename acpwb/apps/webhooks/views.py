@@ -1,3 +1,4 @@
+import email as email_lib
 import hashlib
 import hmac
 import json
@@ -72,6 +73,47 @@ def mailgun_inbound(request):
     _match_honeypot(inbound)
 
     # Must return 200 or Mailgun will retry
+    return HttpResponse(status=200)
+
+
+@csrf_exempt
+@require_POST
+def pipe_inbound(request):
+    secret = getattr(settings, 'PIPE_WEBHOOK_SECRET', '')
+    if secret and request.headers.get('X-Webhook-Secret') != secret:
+        return HttpResponse(status=403)
+
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return HttpResponse(status=400)
+
+    # Parse the raw RFC 2822 email for body text
+    raw = data.get('raw', '')
+    body_plain = ''
+    body_html = ''
+    if raw:
+        msg = email_lib.message_from_string(raw)
+        if msg.is_multipart():
+            for part in msg.walk():
+                ct = part.get_content_type()
+                if ct == 'text/plain' and not body_plain:
+                    body_plain = part.get_payload(decode=True).decode(errors='replace')
+                elif ct == 'text/html' and not body_html:
+                    body_html = part.get_payload(decode=True).decode(errors='replace')
+        else:
+            body_plain = msg.get_payload(decode=True).decode(errors='replace')
+
+    inbound = InboundEmail.objects.create(
+        sender=data.get('sender', '')[:254],
+        recipient=data.get('recipient', '')[:254],
+        subject=data.get('subject', '')[:512],
+        body_plain=body_plain,
+        body_html=body_html,
+        raw_payload=data,
+    )
+
+    _match_honeypot(inbound)
     return HttpResponse(status=200)
 
 

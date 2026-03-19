@@ -10,9 +10,11 @@ BOT_UA_PATTERNS = re.compile(
     re.IGNORECASE
 )
 
-# Honeypot paths that should always be logged regardless of UA
-HONEYPOT_PATHS = re.compile(
-    r'^/(archive|wiki|internal|employees/export|admin-panel|api/v1|\.well-known)/'
+# Paths where the view already calls _log_crawler — middleware must NOT also log
+# these or every request creates two CrawlerVisit records.
+VIEW_LOGGED_PATHS = re.compile(
+    r'^/(archive|wiki|internal|employees/export|admin-panel|api/v1|'
+    r'reports|sitemap|robots\.txt|\.well-known)(/|$)'
 )
 
 
@@ -24,8 +26,9 @@ class BotTrackingMiddleware:
         user_agent = request.META.get('HTTP_USER_AGENT', '')
         path = request.path
 
-        # Log bot UA hits on any page, or any visit to honeypot paths
-        if BOT_UA_PATTERNS.search(user_agent) or HONEYPOT_PATHS.match(path):
+        # Log bot UA hits only on paths NOT already logged by a honeypot view.
+        # Honeypot views call _log_crawler themselves with more specific trap types.
+        if BOT_UA_PATTERNS.search(user_agent) and not VIEW_LOGGED_PATHS.match(path):
             self._log_bot_visit(request, user_agent, path)
 
         response = self.get_response(request)

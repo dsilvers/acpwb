@@ -163,6 +163,8 @@
 
           {% if report.file_type == 'csv' %}
           <a href="{{ report.download_url }}" class="sidebar-dl-btn">&#x2193; Download Full CSV Dataset</a>
+          {% else %}
+          <a href="{{ report.download_url }}" class="sidebar-dl-btn">&#x2193; Download PDF</a>
           {% endif %}
 
           <div style="background:var(--white);border:1px solid var(--border);padding:1.25rem;margin-bottom:1rem">

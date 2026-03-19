@@ -1,9 +1,18 @@
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from django.views.generic import RedirectView
 
+from apps.public.sitemaps import StaticPagesSitemap, ProjectStorySitemap
+
+_sitemaps = {
+    'static': StaticPagesSitemap,
+    'projects': ProjectStorySitemap,
+}
+
 urlpatterns = [
     path('django-admin/', admin.site.urls),
+    path('sitemap.xml', sitemap, {'sitemaps': _sitemaps}, name='django-sitemap'),
 
     # Legacy PHP URL redirects (permanent 301)
     path('index.php', RedirectView.as_view(url='/', permanent=True)),

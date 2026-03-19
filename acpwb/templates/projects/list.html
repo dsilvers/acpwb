@@ -50,11 +50,13 @@
         <div class="d-flex justify-content-between align-items-center mt-4 pt-3" style="border-top:1px solid var(--border)">
           <div>
             {% if prev_page %}
-            <a href="?page={{ prev_page }}" class="btn-navy btn btn-sm">&larr; Previous</a>
+            <a href="?page={{ prev_page }}{% if selected_industry %}&industry={{ selected_industry }}{% endif %}" class="btn-navy btn btn-sm">&larr; Previous</a>
             {% endif %}
           </div>
           <span class="small text-muted">Page {{ page }}</span>
-          <a href="?page={{ next_page }}" class="btn-acpwb btn btn-sm">Next Page &rarr;</a>
+          {% if next_page %}
+          <a href="?page={{ next_page }}{% if selected_industry %}&industry={{ selected_industry }}{% endif %}" class="btn-acpwb btn btn-sm">Next Page &rarr;</a>
+          {% endif %}
         </div>
 
       </div>
@@ -71,8 +73,15 @@
           <div class="acpwb-card">
             <h6 class="card-title mb-3">Browse by Sector</h6>
             <div class="d-flex flex-wrap gap-2">
+              {% if selected_industry %}
+              <a href="?" style="background:var(--navy);border:1px solid var(--navy);padding:.2rem .6rem;font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;text-decoration:none">&times; All Sectors</a>
+              {% endif %}
               {% for tag in industry_tags %}
-              <span style="background:var(--surface);border:1px solid var(--border);padding:.2rem .6rem;font-size:.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em">{{ tag }}</span>
+              {% if tag == selected_industry %}
+              <span style="background:var(--gold);border:1px solid var(--gold);padding:.2rem .6rem;font-size:.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em">{{ tag }}</span>
+              {% else %}
+              <a href="?industry={{ tag }}" style="background:var(--surface);border:1px solid var(--border);padding:.2rem .6rem;font-size:.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em;text-decoration:none">{{ tag }}</a>
+              {% endif %}
               {% endfor %}
             </div>
           </div>

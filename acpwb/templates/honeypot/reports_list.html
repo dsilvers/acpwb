@@ -89,6 +89,8 @@
               <a href="{{ r.detail_url }}" class="btn-view">View Report</a>
               {% if r.file_type == 'csv' %}
               <a href="{{ r.download_url }}" class="btn-dl">&#x2193; Download CSV</a>
+              {% else %}
+              <a href="{{ r.download_url }}" class="btn-dl">&#x2193; Download PDF</a>
               {% endif %}
             </div>
           </div>
@@ -106,12 +108,20 @@
           <div style="background:var(--white);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.25rem">
             <h6 class="text-uppercase fw-800" style="letter-spacing:.1em;font-size:.7rem;color:var(--navy)">Research Categories</h6>
             <ul class="list-unstyled mb-0 mt-2" style="font-size:.85rem">
-              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Compensation &amp; Pay</a></li>
-              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Workforce Analytics</a></li>
-              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Corporate Governance</a></li>
-              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">ESG &amp; Sustainability</a></li>
-              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Benefits &amp; Retirement</a></li>
-              <li class="py-1"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Economic Indicators</a></li>
+              {% if selected_category %}
+              <li class="py-1" style="border-bottom:1px solid var(--border)">
+                <a href="{% url 'reports-list' %}" style="color:var(--gold);text-decoration:none;font-weight:700">&times; All Categories</a>
+              </li>
+              {% endif %}
+              {% for cat in categories %}
+              <li class="py-1" style="border-bottom:1px solid var(--border)">
+                {% if cat == selected_category %}
+                <span style="color:var(--navy);font-weight:800">&#10003; {{ cat }}</span>
+                {% else %}
+                <a href="?category={{ cat }}" style="color:var(--text);text-decoration:none">{{ cat }}</a>
+                {% endif %}
+              </li>
+              {% endfor %}
             </ul>
           </div>
 
@@ -143,9 +153,11 @@
 {% endblock %}
 
 {% block extra_js %}
+{% if next_page %}
 <script>
 (function () {
   var nextPage = {{ next_page }};
+  var category = '{{ selected_category|escapejs }}';
   var loading = false;
   var container = document.getElementById('reports-grid');
   var sentinel = document.getElementById('load-sentinel');
@@ -166,9 +178,8 @@
     var legacyClass = r.is_legacy ? ' legacy' : '';
     var legacyLabel = r.is_legacy ? 'LEGACY \u2014 ' : '';
     var icon = r.file_type === 'csv' ? '&#x1F4CA;' : '&#x1F4C4;';
-    var dlBtn = r.file_type === 'csv'
-      ? '<a href="' + esc(r.download_url) + '" class="btn-dl">&#x2193; Download CSV</a>'
-      : '';
+    var dlLabel = r.file_type === 'csv' ? '&#x2193; Download CSV' : '&#x2193; Download PDF';
+    var dlBtn = '<a href="' + esc(r.download_url) + '" class="btn-dl">' + dlLabel + '</a>';
     return '<div class="report-card">' +
       '<div class="d-flex justify-content-between align-items-start mb-2 gap-2">' +
         '<span class="report-badge' + legacyClass + '">' + legacyLabel + esc(r.category) + '</span>' +
@@ -186,10 +197,12 @@
   }
 
   function loadMore() {
-    if (loading) return;
+    if (loading || !nextPage) return;
     loading = true;
     indicator.style.display = 'block';
-    fetch('/reports/page/' + nextPage + '/')
+    var url = '/reports/page/' + nextPage + '/';
+    if (category) url += '?category=' + encodeURIComponent(category);
+    fetch(url)
       .then(function (res) { return res.json(); })
       .then(function (data) {
         data.reports.forEach(function (r) {
@@ -209,4 +222,5 @@
   }
 })();
 </script>
+{% endif %}
 {% endblock %}

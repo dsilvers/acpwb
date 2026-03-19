@@ -237,7 +237,7 @@ def _enrich_report(entry):
         'watermark_token': _watermark_for(slug),
         'is_legacy': pub_date.year < 2005,
         'detail_url': f'/reports/{slug}/',
-        'download_url': f'/reports/{slug}/download.csv' if file_type == 'csv' else f'/reports/{slug}/',
+        'download_url': f'/reports/{slug}/download.csv' if file_type == 'csv' else f'/reports/{slug}/download.pdf',
         'row_count': rng.randint(300, 800) if file_type == 'csv' else None,
     }
 
@@ -303,7 +303,7 @@ def get_or_generate_report_meta(slug):
             'watermark_token': existing.watermark_token,
             'is_legacy': pub_date.year < 2005,
             'detail_url': f'/reports/{slug}/',
-            'download_url': f'/reports/{slug}/download.csv' if file_type == 'csv' else f'/reports/{slug}/',
+            'download_url': f'/reports/{slug}/download.csv' if file_type == 'csv' else f'/reports/{slug}/download.pdf',
         }
 
     for entry in REPORT_CATALOG:

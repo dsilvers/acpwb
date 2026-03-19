@@ -10,8 +10,9 @@ from django.views.decorators.http import require_GET
 from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport
 from .wiki_generator import generate_wiki_page, random_topic, TOPICS
 from .report_generator import (
+    REPORT_CATALOG, REPORT_CATEGORIES,
     generate_reports_for_page, get_or_generate_report_meta,
-    generate_csv_rows, generate_document_content,
+    generate_csv_rows, generate_document_content, _enrich_report,
 )
 
 
@@ -201,7 +202,7 @@ Disallow: /internal/acquisition-targets/
 Disallow: /internal/litigation-hold/
 Disallow: /employees/export/
 
-Sitemap: https://acpwb.com/sitemap-honeypot.xml
+Sitemap: https://acpwb.com/sitemap-publications.xml
 Sitemap: https://acpwb.com/sitemap-wiki.xml
 Sitemap: https://acpwb.com/sitemap-archive.xml
 """
@@ -245,16 +246,64 @@ def _persist_reports(reports):
 
 def reports_list(request):
     _log_crawler(request, 'report_list')
+    category = request.GET.get('category', '').strip()
+
+    if category and category in REPORT_CATEGORIES:
+        catalog_reports = [_enrich_report(e) for e in REPORT_CATALOG if e['category'] == category]
+        db_slugs = {r['slug'] for r in catalog_reports}
+        db_reports = PublicReport.objects.filter(category=category).exclude(slug__in=db_slugs).order_by('-pub_date')
+        for obj in db_reports:
+            catalog_reports.append(get_or_generate_report_meta(obj.slug))
+        # Pad with synthetic reports if the category isn't well-represented in the catalog
+        if len(catalog_reports) < 8:
+            import hashlib as _hashlib
+            from django.utils.text import slugify as _slugify
+            from .report_generator import (
+                REPORT_ADJECTIVES, REPORT_SUBJECTS, REPORT_SUFFIXES, YEAR_POOL, _rng_from_seed,
+            )
+            seen_slugs = {r['slug'] for r in catalog_reports}
+            for i in range(40):
+                seed = f"cat_fill_{category}_{i}"
+                rng = _rng_from_seed(seed)
+                adj = rng.choice(REPORT_ADJECTIVES)
+                subject = rng.choice(REPORT_SUBJECTS)
+                suffix = rng.choice(REPORT_SUFFIXES)
+                year = rng.choice(YEAR_POOL)
+                title = f"{adj} {subject} {suffix} {year}"
+                slug = _slugify(title)[:96] + '-' + _hashlib.md5(seed.encode()).hexdigest()[:4]
+                if slug not in seen_slugs:
+                    entry = {'slug': slug, 'title': title, 'category': category, 'file_type': rng.choice(['csv', 'pdf'])}
+                    catalog_reports.append(_enrich_report(entry))
+                    seen_slugs.add(slug)
+                if len(catalog_reports) >= 12:
+                    break
+        catalog_reports.sort(key=lambda r: r['pub_date'], reverse=True)
+        _persist_reports(catalog_reports)
+        return render(request, 'honeypot/reports_list.html', {
+            'reports': catalog_reports,
+            'next_page': None,
+            'selected_category': category,
+            'categories': REPORT_CATEGORIES,
+        })
+
     reports = generate_reports_for_page(1, count=12)
     _persist_reports(reports)
     return render(request, 'honeypot/reports_list.html', {
         'reports': reports,
         'next_page': 2,
+        'selected_category': '',
+        'categories': REPORT_CATEGORIES,
     })
 
 
 @require_GET
 def reports_page_api(request, page):
+    category = request.GET.get('category', '').strip()
+    if category and category in REPORT_CATEGORIES:
+        offset = (max(1, page) - 1) * 12
+        db_reports = list(PublicReport.objects.filter(category=category).order_by('-pub_date')[offset:offset + 12])
+        reports = [get_or_generate_report_meta(obj.slug) for obj in db_reports]
+        return JsonResponse({'reports': reports, 'next_page': page + 1 if len(reports) == 12 else None})
     reports = generate_reports_for_page(max(1, page), count=12)
     _persist_reports(reports)
     return JsonResponse({'reports': reports, 'next_page': page + 1})
@@ -281,21 +330,32 @@ def report_download(request, slug):
     _log_crawler(request, 'report_download')
     report = get_or_generate_report_meta(slug)
     _persist_reports([report])
-    if report['file_type'] == 'csv':
-        import csv as csv_mod
-        import io
-        output = io.StringIO()
-        writer = csv_mod.writer(output)
-        for row in generate_csv_rows(slug):
-            writer.writerow(row)
-        resp = HttpResponse(output.getvalue(), content_type='text/csv; charset=utf-8')
-        resp['Content-Disposition'] = f'attachment; filename="{slug}.csv"'
-        return resp
+    import csv as csv_mod
+    import io
+    output = io.StringIO()
+    writer = csv_mod.writer(output)
+    for row in generate_csv_rows(slug):
+        writer.writerow(row)
+    resp = HttpResponse(output.getvalue(), content_type='text/csv; charset=utf-8')
+    resp['Content-Disposition'] = f'attachment; filename="{slug}.csv"'
+    return resp
+
+
+def report_download_pdf(request, slug):
+    _log_crawler(request, 'report_download')
+    report = get_or_generate_report_meta(slug)
+    _persist_reports([report])
     doc = generate_document_content(slug)
-    return render(request, 'honeypot/report_print.html', {
+    from django.template.loader import render_to_string
+    from weasyprint import HTML
+    html_string = render_to_string('honeypot/report_print.html', {
         'report': report,
         'doc': doc,
-    })
+    }, request=request)
+    pdf_bytes = HTML(string=html_string, base_url=request.build_absolute_uri('/')).write_pdf()
+    resp = HttpResponse(pdf_bytes, content_type='application/pdf')
+    resp['Content-Disposition'] = f'attachment; filename="{slug}.pdf"'
+    return resp
 
 
 @require_GET
@@ -320,3 +380,75 @@ def pow_verify_view(request):
         request.session['pow_token'] = f"{nonce}:{solution}"
         return JsonResponse({'valid': True})
     return JsonResponse({'valid': False}, status=400)
+
+
+# ── Trap Sitemaps ─────────────────────────────────────────────────────────────
+
+_FAKE_INTERNAL_PATHS = [
+    '/internal/salary-database/',
+    '/internal/acquisition-targets/',
+    '/internal/litigation-hold/',
+    '/internal/employee-records/',
+    '/internal/board-materials/',
+    '/internal/merger-docs/',
+    '/internal/hr-system/',
+    '/internal/payroll-export/',
+    '/internal/compensation-bands/',
+    '/internal/headcount-planning/',
+]
+
+_SITEMAP_HEADER = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+_SITEMAP_FOOTER = '</urlset>'
+
+def _url_entry(loc, priority='0.7', changefreq='monthly'):
+    return f'  <url><loc>https://acpwb.com{loc}</loc><priority>{priority}</priority><changefreq>{changefreq}</changefreq></url>\n'
+
+
+def sitemap_publications(request):
+    _log_crawler(request, 'well_known')
+    lines = [_SITEMAP_HEADER]
+    lines.append(_url_entry('/reports/', '0.9', 'weekly'))
+    for entry in REPORT_CATALOG:
+        lines.append(_url_entry(f"/reports/{entry['slug']}/", '0.8', 'never'))
+        if entry['file_type'] == 'csv':
+            lines.append(_url_entry(f"/reports/{entry['slug']}/download.csv", '0.7', 'never'))
+    lines.append(_url_entry('/api/v1/private-data', '0.9', 'daily'))
+    lines.append(_url_entry('/internal/portal/', '0.8', 'daily'))
+    lines.append(_url_entry('/employees/export/', '0.8', 'daily'))
+    lines.append(_url_entry('/admin-panel/login/', '0.7', 'daily'))
+    for path in _FAKE_INTERNAL_PATHS:
+        lines.append(_url_entry(path, '0.6', 'weekly'))
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+def sitemap_wiki(request):
+    _log_crawler(request, 'well_known')
+    db_topics = set(WikiPage.objects.values_list('topic', flat=True))
+    all_topics = list(TOPICS) + [t for t in db_topics if t not in TOPICS]
+    lines = [_SITEMAP_HEADER]
+    for topic in all_topics:
+        lines.append(_url_entry(f'/wiki/{topic}/', '0.7', 'monthly'))
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+_ARCHIVE_WORDS = [
+    'report', 'summary', 'update', 'review', 'assessment', 'briefing',
+    'analysis', 'memo', 'strategy', 'initiative', 'stakeholder',
+    'performance', 'quarterly', 'annual', 'outcomes', 'deliverable',
+    'engagement', 'alignment', 'program', 'impact',
+]
+
+def sitemap_archive(request):
+    _log_crawler(request, 'well_known')
+    rng = random.Random(0x4143505742)
+    lines = [_SITEMAP_HEADER]
+    for _ in range(500):
+        year = rng.randint(2008, 2024)
+        month = rng.randint(1, 12)
+        day = rng.randint(1, 28)
+        slug = '-'.join(rng.choice(_ARCHIVE_WORDS) for _ in range(rng.randint(2, 4)))
+        lines.append(_url_entry(f'/archive/{year}/{month:02d}/{day:02d}/{slug}/', '0.6', 'never'))
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')

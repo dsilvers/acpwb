@@ -17,6 +17,7 @@ urlpatterns = [
     path('api/pow/verify/', views.pow_verify_view, name='pow-verify'),
 
     # Well-known files (nginx must proxy these to Django)
+    path('robots.txt', views.fake_robots, name='robots-txt'),
     path('.well-known/ai-agent.json', views.ai_agent_file, name='ai-agent-file'),
     path('.well-known/robots.txt', views.fake_robots, name='fake-robots'),
 
@@ -24,7 +25,13 @@ urlpatterns = [
     path('reports/', views.reports_list, name='reports-list'),
     path('reports/page/<int:page>/', views.reports_page_api, name='reports-page-api'),
     path('reports/<slug:slug>/download.csv', views.report_download, name='report-download'),
+    path('reports/<slug:slug>/download.pdf', views.report_download_pdf, name='report-download-pdf'),
     path('reports/<slug:slug>/', views.report_detail, name='report-detail'),
+
+    # Trap sitemaps (referenced in robots.txt)
+    path('sitemap-publications.xml', views.sitemap_publications, name='sitemap-publications'),
+    path('sitemap-wiki.xml',     views.sitemap_wiki,     name='sitemap-wiki'),
+    path('sitemap-archive.xml',  views.sitemap_archive,  name='sitemap-archive'),
 
     # Ghost link traps
     path('internal/portal/', views.ghost_trap, name='ghost-portal'),

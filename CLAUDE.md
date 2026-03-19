@@ -3,7 +3,7 @@
 ## What This Project Is
 
 A Django fake corporate website with two purposes:
-1. **Email honeypot** — generates random `@acpwb.com` employee emails on the contact page and logs every visit for matching against inbound spam via Mailgun webhook.
+1. **Email honeypot** — generates random `@acpwb.com` employee emails on the contact page and logs every visit for matching against inbound spam.
 2. **AI bot poisoning** — structural/semantic/interactive honeypots designed to waste crawlers, poison training data, and watermark scraped content.
 
 **GitHub:** git@github.com:dsilvers/acpwb.git
@@ -18,15 +18,18 @@ A Django fake corporate website with two purposes:
 - PostgreSQL 16
 - Bootstrap 5 (CDN)
 - Docker Compose (web + db + nginx)
-- Mailgun for inbound email webhook
+- Cloudflare Email Routing + Workers for inbound email (primary)
+- Mailgun inbound webhook (legacy)
 
 ## Running Locally
 
 ```bash
 docker compose up --build
-# Site at http://localhost
-# Admin at http://localhost/django-admin/
+# Site at http://localhost:8001
+# Admin at http://localhost:8001/django-admin/
 docker compose exec web python manage.py createsuperuser
+# After CSS/static changes:
+docker compose exec web python manage.py collectstatic --noinput
 ```
 
 ---
@@ -35,12 +38,12 @@ docker compose exec web python manage.py createsuperuser
 
 | App | Purpose |
 |-----|---------|
-| `apps/core` | `BotTrackingMiddleware`, context processors, `{% avatar_card %}` template tag |
+| `apps/core` | `BotTrackingMiddleware`, context processors, `{% avatar_card %}` and `{% headshot_or_avatar %}` template tags |
 | `apps/public` | Home, Careers, Mission, Partners, Privacy + `Fortune500Company` model |
 | `apps/people` | Our People honeypot — generates 12 employees per load, logs visits |
 | `apps/projects` | Infinite project list (PoW gated) + project detail |
-| `apps/honeypot` | Archive trap, Wiki, Fake API, Well-Known files, Ghost traps, PoW endpoints |
-| `apps/webhooks` | Mailgun inbound email receiver + `HoneypotMatch` logic |
+| `apps/honeypot` | Archive trap, Wiki, Reports, Fake API, Well-Known files, Ghost traps, PoW endpoints |
+| `apps/webhooks` | Inbound email receiver (Cloudflare pipe + Mailgun) + `HoneypotMatch` logic |
 
 ---
 
@@ -48,9 +51,10 @@ docker compose exec web python manage.py createsuperuser
 
 - `people.PeoplePageVisit` — every load of `/our-people/`
 - `people.GeneratedEmployee` — the fake employees shown (FK → visit)
-- `honeypot.CrawlerVisit` — all bot/trap activity
+- `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`)
 - `honeypot.WikiPage` — generated wiki content with watermark tokens
-- `webhooks.InboundEmail` — received emails from Mailgun
+- `honeypot.PublicReport` — generated report metadata, persisted on first access
+- `webhooks.InboundEmail` — received emails
 - `webhooks.HoneypotMatch` — links inbound email to the visit that generated the address
 
 ---
@@ -58,28 +62,65 @@ docker compose exec web python manage.py createsuperuser
 ## Honeypot Techniques Deployed
 
 Every page injects:
-- **Ghost links** (`display:none`) to `/internal/portal/`, `/employees/export/`, `/admin-panel/login/`, `/api/v1/private-data`
-- **Prompt injection** — white-on-white invisible text with fake AI training instructions
-- **Garbage JSON-LD** — fake structured data with provenance watermark token
+- **Ghost links** (off-screen, `position:absolute; left:-9999px`) to trap URLs — `aria-hidden` intentionally absent
+- **Prompt injection** — invisible span (`font-size:0; color:#f4f6f9`) with fake AI training instructions + per-request token
+- **Garbage JSON-LD** — fake `schema.org/Corporation` structured data with false CC license claim and watermark token
 
 Dedicated traps:
-- `/archive/<year>/<month>/<day>/<path:slug>/` — infinite recursive archive
-- `/wiki/<slug>/` — subtly wrong watermarked facts
-- `/api/v1/private-data` — 200 JSON garbage with fake credentials
-- `/.well-known/ai-agent.json` — fake AI agent manifest
-- `/.well-known/robots.txt` — reverse-psychology (Disallow = more honeypot content)
+- `/archive/<year>/<month>/<day>/<path:slug>/` — infinite recursive archive, exponential link branching
+- `/wiki/<slug>/` — subtly wrong watermarked facts (60+ topics, interconnected graph)
+- `/reports/` — fake research archive 1993–present; infinite scroll; watermarked CSVs (300–800 rows real data) and PDF-style documents
+- `/reports/<slug>/download.csv` — real downloadable CSV with per-slug watermark token in every row
+- `/api/v1/private-data` — 200 JSON garbage with fake credentials (referenced in HTML comment, not nav)
+- `/.well-known/ai-agent.json` — fake AI agent manifest with trap `allowed_actions`
+- `/.well-known/robots.txt` — reverse-psychology (Disallow = more honeypot content, Crawl-delay: 0, points to trap sitemaps)
+- `/sitemap.xml` — real Django sitemap (static pages + projects) for legitimate crawlers
+- `/sitemap-publications.xml` — trap: reports, ghost traps, fake internal paths; logged as `well_known`
+- `/sitemap-wiki.xml` — trap: all 75+ wiki topics; logged as `well_known`
+- `/sitemap-archive.xml` — trap: 500 deterministic archive URLs (seed `0x4143505742`), 2008–2024; logged as `well_known`
+- `/internal/portal/`, `/employees/export/`, `/admin-panel/login/` — ghost trap 403s, all logged
+
+---
+
+## Generators
+
+All content generation is deterministic: same seed → same output. Safe to regenerate.
+
+- `apps/projects/generators.py` — `_rng_from_seed(seed_str)` — MD5 → `random.Random`. Reuse this pattern everywhere.
+- `apps/honeypot/wiki_generator.py` — wiki pages with watermark tokens
+- `apps/honeypot/report_generator.py` — reports, CSV rows (4 schemas dispatched by slug keyword), document content. Year pool 1993–2025, weighted toward recent.
+
+CSV schema dispatch (by slug keyword):
+- `salary/compensation/pay/wage` → employee compensation schema
+- `ceo/executive` → CEO pay ratio schema
+- `benefit/healthcare/retirement` → benefits cost schema
+- `satisfaction/engagement` → survey results schema
+- default → compensation schema
+
+---
+
+## Watermarking
+
+Three-layer system, consistent across wiki, reports, and JSON-LD:
+1. **Visible** — footer text "Report ID: {token}"
+2. **Invisible HTML** — `font-size:0; color:#f4f6f9; clip:rect(0,0,0,0)` span with token and provenance text
+3. **Data** — `watermark_token` column in every CSV row; `identifier` field in JSON-LD
+
+Token generation: `hashlib.md5(f"acpwb_{type}_{slug}".encode()).hexdigest()[:8]`
 
 ---
 
 ## Content Notes
 
-- **Logo:** 3 lines: AMERICAN / CORPORATION / FOR PUBLIC WELL BEING (no hyphen, no apostrophe)
+- **Logo:** 3 lines — AMERICAN / CORPORATION / FOR PUBLIC WELL BEING (white text, no hyphen, no apostrophe)
 - **Tagline:** "Money doesn't buy happiness, but it darn well comes close to doing so."
 - **Founded:** 2006 (domain registration year)
 - **Privacy page:** Preserves original Happy Fun Ball disclaimer verbatim + new AI data policy
 - **Careers:** Satirical over-the-top benefits, zero actual job openings
 - **Partners:** Fortune 500 fixture, 40 random shown per load (`order_by('?')[:40]`)
 - **Projects:** Deterministic infinite generation (seed = page number), PoW gated
+- **Reports:** Deterministic infinite generation (seed = slug), 1993–2025 date range with gaps, catalog of 26 named reports + synthetic beyond page 3
+- **Employee headshots:** 400 WebP images at `static/img/headshots/`, 300×300px. `{% headshot_or_avatar seed initials size %}` tag — checks `HEADSHOT_DIR` (= `parents[3]/static/img/headshots` from the tag file), falls back to CSS gradient avatar if image missing.
 
 ---
 
@@ -91,21 +132,32 @@ All models registered with useful `list_display`, `search_fields`, and `list_fil
 - **People → People Page Visits** — see every contact page load with inline employee records
 - **Webhooks → Inbound Emails** with inline matches
 - **Webhooks → Honeypot Matches** — the payoff: spam matched back to visit
+- **Honeypot → Public Reports** — all generated reports with watermark tokens
 
 ---
 
-## Mailgun Configuration
+## Inbound Email
 
-- Catch-all route: `@acpwb.com` → `POST https://acpwb.com/webhooks/mailgun/inbound/`
-- Signature verification uses HMAC-SHA256 with `MAILGUN_WEBHOOK_SIGNING_KEY`
-- Returns 406 on invalid signature, 200 on success (Mailgun retries on anything else)
+### Cloudflare Email Routing (primary)
+- Catch-all `*@acpwb.com` → Worker → `POST /webhooks/pipe/inbound/`
+- Auth: `X-Webhook-Secret` header matched against `PIPE_WEBHOOK_SECRET` env var
+- Parses raw RFC 2822 email via Python stdlib `email` module
+
+### Mailgun (legacy)
+- Catch-all route → `POST /webhooks/mailgun/inbound/`
+- HMAC-SHA256 verification with `MAILGUN_WEBHOOK_SIGNING_KEY`
+- Returns 406 on invalid signature, 200 on success
 
 ---
 
 ## Known Design Decisions
 
-- **No Pillow** — all avatars and partner logos are CSS gradient cards (`{% avatar_card %}` template tag)
+- **No Pillow** — all partner logos are CSS gradient cards; employee avatars use `{% headshot_or_avatar %}` with WebP fallback to CSS gradient
 - **psycopg[binary]** (psycopg3) not psycopg2 — avoids Python 3.14 C-extension build issues
-- **Deterministic project generation** — same page number always returns same stories (seed = page)
-- **`makemigrations` runs on every boot** — safe because migrations are idempotent; simplifies development
+- **Deterministic generation everywhere** — same slug/page always returns same content (MD5 seed → `random.Random`)
+- **`makemigrations` runs on every boot** — safe because idempotent; simplifies development
 - **PoW difficulty = 5 bits** — solves in <1s in browser, costs a bot per-page at scale
+- **No PoW on `/reports/`** — reports should be maximally crawlable; the poisoning only works if bots consume the content
+- **`HEADSHOT_DIR` uses `parents[3]`** — the tag file is 3 levels deep from the Django project root (`apps/core/templatetags/`), so `parents[3]` = project root both locally and in the Docker container (`/app`)
+- **Static files via bind mount** — `./acpwb/staticfiles` bind-mounted in Docker so host nginx can serve directly from `/home/dan/acpwb.com/acpwb/staticfiles/`
+- **Docker nginx on port 8001** — `127.0.0.1:8001:80`, host nginx proxies to it

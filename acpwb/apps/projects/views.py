@@ -40,11 +40,26 @@ def _ensure_stories_for_page(page):
     return ProjectStory.objects.filter(page_number=page).order_by('id')
 
 
+INDUSTRY_TAGS = ['Healthcare', 'Finance', 'Energy', 'Technology', 'Manufacturing', 'Retail', 'Government', 'Education']
+
+
 def project_list(request):
     page = max(1, int(request.GET.get('page', 1)))
+    industry = request.GET.get('industry', '').strip()
     pow_token = request.session.get('pow_token', '')
 
-    stories = _ensure_stories_for_page(page)
+    if industry and industry in INDUSTRY_TAGS:
+        # Ensure at least 5 pages of stories exist so filtering has enough to work with
+        for p in range(1, 6):
+            _ensure_stories_for_page(p)
+        all_matching = ProjectStory.objects.filter(industry_tag=industry).order_by('-id')
+        per_page = STORIES_PER_PAGE
+        stories = all_matching[(page - 1) * per_page: page * per_page]
+        has_next = all_matching.count() > page * per_page
+    else:
+        industry = ''
+        stories = _ensure_stories_for_page(page)
+        has_next = True
 
     ProjectPageVisit.objects.create(
         ip_address=_get_ip(request),
@@ -56,9 +71,10 @@ def project_list(request):
     return render(request, 'projects/list.html', {
         'stories': stories,
         'page': page,
-        'next_page': page + 1,
+        'next_page': page + 1 if has_next else None,
         'prev_page': page - 1 if page > 1 else None,
-        'industry_tags': ['Healthcare', 'Finance', 'Energy', 'Technology', 'Manufacturing', 'Retail', 'Government', 'Education'],
+        'industry_tags': INDUSTRY_TAGS,
+        'selected_industry': industry,
     })
 
 

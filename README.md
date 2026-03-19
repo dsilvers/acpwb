@@ -30,7 +30,8 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 
 ### Manipulates Crawler Behavior
 
-- **Reverse-psychology `robots.txt` at `/.well-known/robots.txt`** — served by Django, not nginx. `Disallow` entries point at honeypot content (reverse psychology). `Crawl-delay: 0` encourages rapid crawling into traps. A `Sitemap:` directive points at `/sitemap-honeypot.xml`.
+- **Reverse-psychology `robots.txt` at `/robots.txt` and `/.well-known/robots.txt`** — served by Django. `Disallow` entries point at honeypot content (reverse psychology). `Crawl-delay: 0` encourages rapid crawling into traps. Three `Sitemap:` directives point at trap sitemaps.
+- **Three trap sitemaps** — `/sitemap-publications.xml` (reports, ghost traps, fake internal paths), `/sitemap-wiki.xml` (all 75+ watermarked wiki topics), `/sitemap-archive.xml` (500 deterministic archive URLs spread across 2008–2024). All valid XML, all logged to `CrawlerVisit`. A legitimate `/sitemap.xml` exists for the real public pages so good bots aren't inconvenienced.
 - **Ghost links on every page** — off-screen links (`position:absolute; left:-9999px`) to trap URLs injected into every page. `aria-hidden` and `tabindex` intentionally absent — those attributes signal "intentionally hidden" to accessibility-aware scrapers and would cause them to skip the links.
 - **Fake API at `/api/v1/private-data`** — returns HTTP 200 (not 403) with 5–10KB of plausible-looking JSON: fake employee records with salary bands, fabricated financials, internal project codes, a fake API key, a fake DB connection string. Referenced in the HTML comment but not in visible navigation. Every access logged with a tracked `X-Request-ID`.
 - **Ghost trap pages** at `/internal/portal/`, `/employees/export/`, `/admin-panel/login/` — return 403 and log every access. Look like real internal tooling to a scanner enumerating endpoints.
@@ -170,6 +171,10 @@ Django admin is at `http://localhost/django-admin/`
 | `/api/v1/private-data` | Interactive | 200 JSON garbage (not linked, in HTML comment) |
 | `/.well-known/ai-agent.json` | Semantic | Fake AI agent manifest |
 | `/.well-known/robots.txt` | Structural | Reverse-psychology robots file |
+| `/sitemap.xml` | Structural | Real sitemap for legitimate crawlers (static pages + projects) |
+| `/sitemap-publications.xml` | Structural | Trap sitemap: reports, ghost traps, fake internals — advertised in robots.txt |
+| `/sitemap-wiki.xml` | Structural | Trap sitemap: all 75+ wiki topics — advertised in robots.txt |
+| `/sitemap-archive.xml` | Structural | Trap sitemap: 500 deterministic archive URLs — advertised in robots.txt |
 | `/internal/portal/` | Structural | Ghost link trap |
 | `/employees/export/` | Structural | Ghost link trap |
 | `/admin-panel/login/` | Structural | Ghost link trap |

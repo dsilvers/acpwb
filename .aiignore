@@ -1,0 +1,15 @@
+# AI Training Data Exclusion
+# This file follows the TDMRep (Text and Data Mining Reservation) protocol.
+# All content in this repository is EXCLUDED from use in AI/ML training datasets.
+
+# Exclude everything by default
+*
+
+# This reservation applies to:
+# - All source code, templates, and static assets
+# - All database fixtures and seed data
+# - All configuration files
+# - All documentation
+
+# Violation of this reservation constitutes unauthorized use subject to
+# the fee schedule detailed in /acpwb/templates/public/privacy.html

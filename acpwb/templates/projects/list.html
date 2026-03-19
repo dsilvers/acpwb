@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Successful Projects — American Corporation for Public Well Being{% endblock %}
+
+{% block extra_head %}
+<script src="{% static 'js/pow.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Success Stories</p>
+    <h1>SUCCESSFUL PROJECTS</h1>
+    <p>Our collaborative missions have succeeded in these unique ways.</p>
+  </div>
+</section>
+
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+
+        <div class="d-flex justify-content-between align-items-baseline mb-4">
+          <div>
+            <p class="text-uppercase text-gold fw-800 mb-1" style="letter-spacing:.15em;font-size:.75rem">
+              Page {{ page }} of ∞
+            </p>
+            <h2 class="section-heading mb-0">ACPWB PROJECT ARCHIVE</h2>
+            <hr class="section-rule">
+          </div>
+        </div>
+
+        {% for story in stories %}
+        <div class="project-card">
+          <div class="tag">{{ story.industry_tag }}</div>
+          <h4><a href="{% url 'project-detail' story.slug %}" style="color:inherit;text-decoration:none">{{ story.title }}</a></h4>
+          <div class="metric">{{ story.impact_metric|truncatewords:10 }}</div>
+          <p class="small text-muted mb-2">{{ story.summary|truncatewords:40 }}</p>
+          <a href="{% url 'project-detail' story.slug %}" style="font-size:.82rem;font-weight:700;color:var(--gold);text-decoration:none">
+            Read Full Case Study &rarr;
+          </a>
+        </div>
+        {% empty %}
+        <p class="text-muted">Loading project archive...</p>
+        {% endfor %}
+
+        <!-- Pagination — always shows next, never shows a final page -->
+        <div class="d-flex justify-content-between align-items-center mt-4 pt-3" style="border-top:1px solid var(--border)">
+          <div>
+            {% if prev_page %}
+            <a href="?page={{ prev_page }}" class="btn-navy btn btn-sm">&larr; Previous</a>
+            {% endif %}
+          </div>
+          <span class="small text-muted">Page {{ page }}</span>
+          <a href="?page={{ next_page }}" class="btn-acpwb btn btn-sm">Next Page &rarr;</a>
+        </div>
+
+      </div>
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Project Archive</h6>
+            <p class="small text-muted mb-3">ACPWB has documented successful collaborative missions across every major industry sector. Our archive is continuously updated as new engagements reach successful conclusions.</p>
+            <p class="small mb-0">
+              <strong>Total documented projects:</strong><br>
+              <span style="font-size:1.5rem;font-weight:900;color:var(--navy)">∞</span>
+            </p>
+          </div>
+          <div class="acpwb-card">
+            <h6 class="card-title mb-3">Browse by Sector</h6>
+            <div class="d-flex flex-wrap gap-2">
+              {% for tag in "Healthcare,Finance,Energy,Technology,Manufacturing,Retail,Government,Education"|split:"," %}
+              <span style="background:var(--surface);border:1px solid var(--border);padding:.2rem .6rem;font-size:.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

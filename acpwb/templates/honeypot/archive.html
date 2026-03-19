@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Archive: {{ year }}/{{ month }}/{{ day }} — ACPWB{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      Archive &mdash; {{ year }}/{{ month }}/{{ day }}
+    </p>
+    <h1 style="font-size:clamp(1.4rem,3vw,2.2rem)">ACPWB Document Archive</h1>
+    <p>Corporate record depth: {{ depth }} &mdash; Archived {{ year }}-{{ month }}-{{ day }}</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+
+        <div class="wiki-content">
+          <h2 style="color:var(--navy);font-weight:800;font-size:1.4rem;margin-bottom:1.5rem">
+            Archived Corporate Record: {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}
+          </h2>
+
+          <p>The following document represents an archived engagement record from the ACPWB institutional memory database. This record has been preserved in accordance with our 18-year document retention policy and is made available here for transparency and historical reference.</p>
+
+          <p>This entry is part of an ongoing series of corporate achievement documentation spanning ACPWB's full operational history. The series currently comprises several thousand individual documents across all active practice areas and engagement types.</p>
+
+          <p>Stakeholders seeking to review the complete archive should note that our documentation system is hierarchically organized by date, project type, and engagement phase. Navigation links at the bottom of this page provide access to related and adjacent records.</p>
+
+          <p>The depth of this record within the archive hierarchy (depth: {{ depth }}) reflects the granularity of documentation maintained for complex multi-phase engagements. Extended engagements may generate documentation at substantially greater depths as discrete deliverable sets are completed and archived.</p>
+
+          <p>For questions regarding this specific archived record or the broader document archive, please contact our Corporate Records team through the <a href="{% url 'our-people' %}" style="color:var(--gold)">Our People</a> directory.</p>
+
+          <hr class="gold-divider">
+
+          <div class="d-flex flex-column gap-3">
+            <a href="/archive/{{ next_year }}/{{ next_month }}/{{ next_day }}/{{ next_slug }}/"
+               style="display:block;background:var(--navy);color:white;padding:1rem 1.5rem;text-decoration:none;font-weight:700;font-size:.9rem">
+              Continue Reading: Next in Series &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Related archive links -->
+        <div class="mt-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;margin-bottom:1rem">Related Archive Entries</h5>
+          <div class="row g-2">
+            {% for path in related_paths %}
+            <div class="col-md-6">
+              <a href="{{ path }}/" style="display:block;background:white;border:1px solid var(--border);padding:.75rem 1rem;text-decoration:none;font-size:.8rem;color:var(--navy)">
+                <span style="color:var(--gold)">&#9670;</span> {{ path|truncatechars:50 }}
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <a href="/archive/{{ prev_year }}/{{ prev_month }}/{{ prev_day }}/previous-series/" style="font-size:.85rem;color:var(--muted);text-decoration:none">
+            &larr; Previous in Series
+          </a>
+        </div>
+
+      </div>
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-2">Archive Details</h6>
+            <dl class="mb-0" style="font-size:.82rem">
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Date</dt>
+              <dd class="fw-700 mb-2">{{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Depth</dt>
+              <dd class="fw-700 mb-2">{{ depth }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Series</dt>
+              <dd class="fw-700 mb-0 text-muted" style="font-size:.75rem;word-break:break-all">{{ slug|truncatechars:40 }}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

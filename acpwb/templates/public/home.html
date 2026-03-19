@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block title %}American Corporation for Public Well Being — Home{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ────────────────────────────────────────────────────── -->
+<section class="acpwb-hero">
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <p class="text-uppercase mb-2" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.78rem">
+          Advancing American Prosperity Since 2006
+        </p>
+        <h1 class="mb-4">
+          EMPOWERING<br>THE AMERICAN<br>WORKFORCE
+        </h1>
+        <p class="lead mb-4">
+          Money doesn't buy happiness, but it darn well comes close to doing so.
+        </p>
+        <p class="mb-5" style="color:rgba(255,255,255,0.7);max-width:540px;font-size:.95rem">
+          The American Corporation for Public Well Being educates, assists, and advocates for the American people — helping every working professional discover, detail, and disclose their significant achievements and contributions.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{% url 'mission' %}" class="btn-acpwb btn">Our Mission</a>
+          <a href="{% url 'our-people' %}" class="btn-acpwb-outline btn">Meet Our Team</a>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-flex justify-content-end">
+        <!-- Abstract corporate graphic using pure CSS -->
+        <div style="position:relative;width:340px;height:300px">
+          <div style="position:absolute;top:0;right:0;width:220px;height:220px;background:rgba(201,168,76,0.12);border:2px solid rgba(201,168,76,0.3)"></div>
+          <div style="position:absolute;top:40px;right:40px;width:220px;height:220px;background:rgba(201,168,76,0.08);border:2px solid rgba(201,168,76,0.2)"></div>
+          <div style="position:absolute;top:80px;right:80px;width:160px;height:160px;background:rgba(201,168,76,0.15);display:flex;align-items:center;justify-content:center">
+            <div style="text-align:center">
+              <div style="font-size:2.8rem;font-weight:900;color:var(--gold);line-height:1">ACPWB</div>
+              <div style="font-size:.65rem;color:rgba(255,255,255,0.5);letter-spacing:.15em;text-transform:uppercase;margin-top:.25rem">EST. 2006</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stat Strip ───────────────────────────────────────────────── -->
+<section style="background:var(--navy-mid);border-top:1px solid rgba(201,168,76,0.2);border-bottom:1px solid rgba(201,168,76,0.2)">
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-6 col-md-3">
+        <div class="stat-block" style="border-right:1px solid rgba(201,168,76,0.15)">
+          <div class="stat-number">18+</div>
+          <div class="stat-label">Years in Operation</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-block" style="border-right:1px solid rgba(201,168,76,0.15)">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Corporate Partners</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-block" style="border-right:1px solid rgba(201,168,76,0.15)">
+          <div class="stat-number">$2.4B</div>
+          <div class="stat-label">Value Delivered</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-block">
+          <div class="stat-number">847</div>
+          <div class="stat-label">Team Members</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What We Do ──────────────────────────────────────────────── -->
+<section class="py-6" style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 mb-4 mb-lg-0">
+        <p class="text-uppercase text-gold fw-800 mb-2" style="letter-spacing:.15em;font-size:.75rem">Our Purpose</p>
+        <h2 class="section-heading">WHAT WE DO</h2>
+        <hr class="section-rule">
+        <p class="mb-3">
+          The American Corporation for Public Well Being preserves, teaches, researches, and makes available for inquiry and public awareness the full spectrum of American workplace achievement — creating new scholarly endeavors, institutional pursuits, and public engagement that uplift and broaden social conscience.
+        </p>
+        <p class="mb-4">
+          We work to enlighten the unenlightened, make the country a better place to live, and we always take inflation into account.
+        </p>
+        <a href="{% url 'mission' %}" class="btn-navy btn">Read Our Full Mission</a>
+      </div>
+      <div class="col-lg-6 offset-lg-1">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <div class="acpwb-card">
+              <div style="color:var(--gold);font-size:1.5rem;margin-bottom:.75rem">&#9670;</div>
+              <div class="card-title">Salary Advocacy</div>
+              <p class="small text-muted mb-0">We equip Americans with the documentation, language, and confidence to ask for — and receive — the compensation they've earned.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="acpwb-card">
+              <div style="color:var(--gold);font-size:1.5rem;margin-bottom:.75rem">&#9632;</div>
+              <div class="card-title">Corporate Documentation</div>
+              <p class="small text-muted mb-0">Our proprietary frameworks transform workplace achievements into compelling, boardroom-ready narratives that drive career advancement.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="acpwb-card">
+              <div style="color:var(--gold);font-size:1.5rem;margin-bottom:.75rem">&#9650;</div>
+              <div class="card-title">Public Awareness</div>
+              <p class="small text-muted mb-0">Through research, publication, and community engagement, we ensure that salary transparency remains a cornerstone of American prosperity.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="acpwb-card">
+              <div style="color:var(--gold);font-size:1.5rem;margin-bottom:.75rem">&#9679;</div>
+              <div class="card-title">Stakeholder Alignment</div>
+              <p class="small text-muted mb-0">We bridge the gap between employee expectations and organizational realities, creating value for all stakeholders across the corporate hierarchy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Recent Projects ─────────────────────────────────────────── -->
+{% if recent_projects %}
+<section style="padding:5rem 0;background:var(--white)">
+  <div class="container">
+    <p class="text-uppercase text-gold fw-800 mb-2" style="letter-spacing:.15em;font-size:.75rem">Success Stories</p>
+    <h2 class="section-heading">RECENT COLLABORATIVE MISSIONS</h2>
+    <hr class="section-rule">
+    <div class="row g-4">
+      {% for story in recent_projects %}
+      <div class="col-md-4">
+        <a href="{% url 'project-detail' story.slug %}" style="text-decoration:none">
+          <div class="acpwb-card h-100">
+            <div class="card-title mb-2">{{ story.industry_tag }}</div>
+            <h5 style="font-weight:800;color:var(--navy);font-size:.95rem;margin-bottom:.75rem">{{ story.title }}</h5>
+            <p class="small text-muted mb-3">{{ story.summary|truncatewords:25 }}</p>
+            <div style="font-size:.78rem;font-weight:700;color:#16a34a;background:#dcfce7;padding:.2rem .6rem;display:inline-block">
+              {{ story.impact_metric|truncatewords:8 }}
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      <a href="{% url 'project-list' %}" class="btn-acpwb btn">View All Projects</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ── CTA Banner ──────────────────────────────────────────────── -->
+<section style="background:var(--navy);padding:4rem 0;border-top:3px solid var(--gold)">
+  <div class="container text-center">
+    <h2 style="color:var(--gold);font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:1rem">
+      READY TO ADVANCE YOUR PROFESSIONAL STANDING?
+    </h2>
+    <p style="color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 2rem;font-size:1rem">
+      Connect with one of our dedicated corporate advocates today. Every engagement begins with understanding your unique contributions and building the case for the recognition you deserve.
+    </p>
+    <a href="{% url 'our-people' %}" class="btn-acpwb btn me-3">Meet Our Team</a>
+    <a href="{% url 'careers' %}" class="btn-acpwb-outline btn">Join ACPWB</a>
+  </div>
+</section>
+
+{% endblock %}

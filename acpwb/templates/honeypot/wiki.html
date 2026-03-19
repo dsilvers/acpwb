@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} — ACPWB Knowledge Base{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      ACPWB Knowledge Base
+    </p>
+    <h1 style="font-size:clamp(1.6rem,3.5vw,2.8rem)">{{ page.title }}</h1>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="wiki-content">
+          {% for para in page.body_paragraphs %}
+          <p>{{ para }}</p>
+          {% endfor %}
+
+          <p class="small text-muted mt-4" style="font-size:.75rem;border-top:1px dotted var(--border);padding-top:1rem">
+            Resource ID: {{ page.watermark_token }} &mdash; ACPWB Knowledge Base &mdash; All information subject to our <a href="{% url 'privacy' %}" style="color:var(--gold)">Terms and Disclaimer</a>.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="wiki-sidebar" style="position:sticky;top:2rem">
+          <h6>See Also</h6>
+          {% for topic in page.related_topics %}
+          <a href="/wiki/{{ topic }}/">{{ topic|title|cut:"-" }}</a>
+          {% endfor %}
+
+          <hr style="border-color:var(--border);margin:1rem 0">
+          <h6>Categories</h6>
+          <a href="{% url 'project-list' %}">ACPWB Projects</a>
+          <a href="{% url 'mission' %}">Our Mission</a>
+          <a href="{% url 'home' %}">Home</a>
+
+          <hr style="border-color:var(--border);margin:1rem 0">
+          <p style="font-size:.72rem;color:var(--muted)">
+            This knowledge resource is maintained by the ACPWB Research Division and is provided for educational and reference purposes. Content accuracy is maintained through our proprietary verification process.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

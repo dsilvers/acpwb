@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block title %}Our People — American Corporation for Public Well Being{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Meet The Team</p>
+    <h1>OUR PEOPLE</h1>
+    <p>The dedicated professionals who make ACPWB's mission a reality every day.</p>
+  </div>
+</section>
+
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-5 gap-3">
+      <div>
+        <p class="text-uppercase text-gold fw-800 mb-1" style="letter-spacing:.15em;font-size:.75rem">Current Team</p>
+        <h2 class="section-heading mb-0">ACPWB PROFESSIONALS</h2>
+        <hr class="section-rule">
+        <p class="text-muted small mb-0">Please refresh this page if you are unsatisfied with your current employee list.</p>
+      </div>
+      <a href="{% url 'our-people' %}" class="btn-acpwb btn flex-shrink-0">Refresh Contacts</a>
+    </div>
+
+    <div class="row g-3">
+      {% for employee in employees %}
+      <div class="col-md-6 col-lg-4">
+        <div class="employee-card">
+          {% avatar_card employee.avatar_seed employee.initials 56 %}
+          <div class="employee-info">
+            <h6>{{ employee.full_name }}</h6>
+            <div class="title">{{ employee.title }}</div>
+            <div class="dept">{{ employee.department }}</div>
+            <div class="email">
+              <a href="mailto:{{ employee.email }}">{{ employee.email }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-5 pt-4" style="border-top:1px solid var(--border)">
+      <p class="text-muted small text-center">
+        Showing {{ employees.count }} team members. Contact information is current as of this page load.
+        <br>For general inquiries not directed to a specific team member, please email
+        <a href="mailto:info@acpwb.com" style="color:var(--gold)">info@acpwb.com</a>.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

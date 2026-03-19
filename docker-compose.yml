@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: acpwb
+      POSTGRES_USER: acpwb
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-acpwb_dev}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U acpwb"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build:
+      context: ./acpwb
+      dockerfile: Dockerfile
+    command: >
+      sh -c "python manage.py makemigrations --noinput &&
+             python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             python manage.py loaddata fortune500 --app public 2>/dev/null || true &&
+             gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120 --reload"
+    volumes:
+      - ./acpwb:/app
+      - static_volume:/app/staticfiles
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "8000"
+
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - static_volume:/app/staticfiles:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:

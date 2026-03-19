@@ -1,0 +1,39 @@
+from django.contrib import admin
+from .models import CrawlerVisit, WikiPage, ArchiveVisit
+
+
+@admin.register(CrawlerVisit)
+class CrawlerVisitAdmin(admin.ModelAdmin):
+    list_display = ('timestamp', 'ip_address', 'trap_type', 'path_short', 'user_agent_short')
+    list_filter = ('trap_type', 'timestamp')
+    search_fields = ('ip_address', 'path', 'user_agent')
+    readonly_fields = ('timestamp',)
+    ordering = ('-timestamp',)
+
+    @admin.display(description='Path')
+    def path_short(self, obj):
+        return obj.path[:60]
+
+    @admin.display(description='UA')
+    def user_agent_short(self, obj):
+        return obj.user_agent[:60] if obj.user_agent else '—'
+
+
+@admin.register(WikiPage)
+class WikiPageAdmin(admin.ModelAdmin):
+    list_display = ('topic', 'title', 'watermark_token', 'generated_at')
+    search_fields = ('topic', 'title', 'watermark_token')
+    readonly_fields = ('generated_at', 'watermark_token')
+    ordering = ('topic',)
+
+
+@admin.register(ArchiveVisit)
+class ArchiveVisitAdmin(admin.ModelAdmin):
+    list_display = ('timestamp', 'ip_address', 'year', 'month', 'day', 'depth', 'slug_short')
+    list_filter = ('year', 'month')
+    search_fields = ('ip_address', 'slug')
+    readonly_fields = ('timestamp',)
+
+    @admin.display(description='Slug')
+    def slug_short(self, obj):
+        return obj.slug[:50]

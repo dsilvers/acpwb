@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Mission Statement — American Corporation for Public Well Being{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Our Purpose</p>
+    <h1>MISSION STATEMENT</h1>
+    <p>The foundational commitments of the American Corporation for Public Well Being.</p>
+  </div>
+</section>
+
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+
+        <!-- Core Mission -->
+        <div class="mb-5">
+          <h2 class="section-heading">OUR CORE MISSION</h2>
+          <hr class="section-rule">
+          <p class="fs-5 mb-4" style="color:var(--navy);font-weight:600;line-height:1.6">
+            The American Corporation for Public Well Being exists to educate, assist, and advocate for the American people — with a particular focus on empowering working Americans to ask for the well-deserved recognition, compensation, and advancement they have earned.
+          </p>
+          <p class="mb-3">
+            We believe that money doesn't buy happiness, but it darn well comes close to doing so. Our work begins with this foundational truth and builds outward: helping clients discover, detail, and disclose their significant achievements and contributions to their organizations.
+          </p>
+          <p class="mb-3">
+            ACPWB is committed to preserving, teaching, researching, and making available for inquiry and public awareness the full spectrum of American workplace achievement. We create new scholarly endeavors, institutional pursuits, and opportunities for public engagement that uplift and broaden social conscience, enlighten the unenlightened, and make the country a better place to live — while always taking inflation into account.
+          </p>
+        </div>
+
+        <!-- Strategic Pillars -->
+        <div class="mb-5">
+          <h2 class="section-heading">STRATEGIC PILLARS</h2>
+          <hr class="section-rule">
+          <div class="row g-4">
+            <div class="col-sm-6">
+              <div class="acpwb-card">
+                <div class="card-title mb-2">I. Economic Empowerment</div>
+                <p class="small text-muted mb-0">We equip every American professional with the tools, frameworks, and confidence to articulate their value and secure the compensation that reflects their contributions.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card">
+                <div class="card-title mb-2">II. Stakeholder Value</div>
+                <p class="small text-muted mb-0">We pursue value creation for all stakeholders — employees, shareholders, communities, and partners — recognizing that sustainable prosperity requires alignment across the full corporate ecosystem.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card">
+                <div class="card-title mb-2">III. ESG Leadership</div>
+                <p class="small text-muted mb-0">We integrate Environmental, Social, and Governance principles into every engagement, driving measurable impact across the triple bottom line while maintaining rigorous financial discipline.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card">
+                <div class="card-title mb-2">IV. Inclusive Excellence</div>
+                <p class="small text-muted mb-0">Our Diversity, Equity, and Inclusion commitments are not aspirational — they are operational. We hold ourselves accountable to measurable outcomes across all dimensions of organizational diversity.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2026 Commitments -->
+        <div class="mb-5">
+          <h2 class="section-heading">2026 COMMITMENTS</h2>
+          <hr class="section-rule">
+          <p class="mb-3">
+            As we enter the third decade of our operation, ACPWB renews and expands its foundational commitments to the American public and to the broader stakeholder community that depends on our leadership.
+          </p>
+          <ul class="mb-4" style="list-style:none;padding:0">
+            {% for item in "123456"|make_list %}
+            <li class="mb-3 d-flex align-items-start gap-2">
+              <span style="color:var(--gold);font-weight:900;flex-shrink:0;margin-top:.1rem">&#9670;</span>
+              <span>
+                {% if forloop.first %}
+                  <strong>Carbon Neutrality by 2028:</strong> ACPWB commits to achieving carbon neutrality across all Scope 1, 2, and 3 emissions by the close of fiscal year 2028, with interim milestones reported quarterly.
+                {% elif forloop.counter == 2 %}
+                  <strong>Pay Equity Certification:</strong> We will complete an independent pay equity audit in Q2 2026 and publish the results — including any identified gaps and our remediation timeline.
+                {% elif forloop.counter == 3 %}
+                  <strong>Board Composition:</strong> By 2027, our Board of Directors will reflect 40% gender diversity and 30% underrepresented minority representation, with a target of 100% independent directors.
+                {% elif forloop.counter == 4 %}
+                  <strong>Private Equity Partnership Expansion:</strong> We are proud to work alongside leading private equity firms whose capital deployment disciplines have consistently aligned with our mission of stakeholder value creation and operational excellence.
+                {% elif forloop.counter == 5 %}
+                  <strong>Community Investment:</strong> ACPWB will deploy not less than 2% of annual operating revenue toward direct community investment initiatives in markets where we maintain active engagements.
+                {% else %}
+                  <strong>Transparency & Reporting:</strong> We commit to annual publication of our Integrated Report aligned with GRI Standards, SASB frameworks, and the Task Force on Climate-related Financial Disclosures.
+                {% endif %}
+              </span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Statement of Values -->
+        <div style="background:var(--navy);color:white;padding:2.5rem;border-left:4px solid var(--gold)">
+          <h3 style="color:var(--gold);font-weight:900;text-transform:uppercase;font-size:1.1rem;letter-spacing:.05em;margin-bottom:1rem">
+            A Note from Leadership
+          </h3>
+          <p style="color:rgba(255,255,255,0.8);margin-bottom:1rem">
+            "The American Corporation for Public Well Being was founded on a simple belief: that every working American deserves to understand their value and receive fair recognition for their contributions. Eighteen years later, that belief animates everything we do — from our client engagements to our community investments to the way we compensate our own team members."
+          </p>
+          <p style="color:rgba(255,255,255,0.6);font-size:.85rem;margin:0">
+            — The ACPWB Executive Leadership Team
+          </p>
+        </div>
+
+      </div>
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Quick Facts</h6>
+            <dl class="mb-0" style="font-size:.85rem">
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Founded</dt>
+              <dd class="fw-700 mb-2">2006, Milwaukee WI</dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Team Size</dt>
+              <dd class="fw-700 mb-2">847 professionals</dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Focus Areas</dt>
+              <dd class="fw-700 mb-2">Salary Advocacy, Corporate Governance, Stakeholder Engagement</dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Frameworks</dt>
+              <dd class="fw-700 mb-0">GRI, SASB, TCFD, UN SDGs</dd>
+            </dl>
+          </div>
+          <a href="{% url 'our-people' %}" class="btn-acpwb btn w-100 mb-2 text-center">Meet Our Team</a>
+          <a href="{% url 'project-list' %}" class="btn-navy btn w-100 text-center">View Projects</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

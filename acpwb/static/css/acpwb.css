@@ -1,0 +1,506 @@
+/* ============================================================
+   ACPWB — American Corporation for Public Well Being
+   Custom styles layered on Bootstrap 5
+   ============================================================ */
+
+:root {
+  --navy:      #0A1628;
+  --navy-mid:  #122040;
+  --navy-light:#1e3560;
+  --gold:      #C9A84C;
+  --gold-light:#e0c06e;
+  --cream:     #F4F1E8;
+  --surface:   #F4F6F9;
+  --text:      #1A1A2E;
+  --muted:     #6B7280;
+  --white:     #FFFFFF;
+  --border:    #D1D5DB;
+}
+
+/* ── Typography ─────────────────────────────────────── */
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--surface);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* ── Navbar ──────────────────────────────────────────── */
+.acpwb-navbar {
+  background: var(--navy);
+  border-bottom: 3px solid var(--gold);
+  padding: 0.75rem 0;
+}
+
+.acpwb-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  text-decoration: none;
+  gap: 0;
+}
+
+.acpwb-logo-line1,
+.acpwb-logo-line2 {
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+}
+
+.acpwb-logo-line3 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase;
+  display: block;
+  margin-top: 0.1rem;
+}
+
+.acpwb-navbar .nav-link {
+  color: rgba(255,255,255,0.8) !important;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem !important;
+  transition: color 0.2s;
+}
+
+.acpwb-navbar .nav-link:hover,
+.acpwb-navbar .nav-link.active {
+  color: var(--gold) !important;
+}
+
+.acpwb-navbar .navbar-toggler {
+  border-color: var(--gold);
+}
+
+.acpwb-navbar .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* ── Hero ────────────────────────────────────────────── */
+.acpwb-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-light) 100%);
+  color: white;
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.acpwb-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(201, 168, 76, 0.03) 40px,
+    rgba(201, 168, 76, 0.03) 80px
+  );
+  pointer-events: none;
+}
+
+.acpwb-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.acpwb-hero .lead {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 600px;
+}
+
+/* ── Section headings ────────────────────────────────── */
+.section-heading {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 900;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.section-rule {
+  width: 60px;
+  height: 4px;
+  background: var(--gold);
+  margin: 0.75rem 0 2rem;
+  border: none;
+}
+
+/* ── Cards ───────────────────────────────────────────── */
+.acpwb-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  border-top: 4px solid var(--gold);
+  padding: 2rem;
+  height: 100%;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.acpwb-card:hover {
+  box-shadow: 0 8px 30px rgba(10, 22, 40, 0.12);
+  transform: translateY(-2px);
+}
+
+.acpwb-card .card-title {
+  font-weight: 800;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.95rem;
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+.btn-acpwb {
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--gold);
+  border-radius: 0;
+  transition: all 0.2s;
+}
+
+.btn-acpwb:hover {
+  background: var(--gold-light);
+  color: var(--navy);
+  border-color: var(--gold-light);
+}
+
+.btn-acpwb-outline {
+  background: transparent;
+  color: var(--gold);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--gold);
+  border-radius: 0;
+  transition: all 0.2s;
+}
+
+.btn-acpwb-outline:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.btn-navy {
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--navy);
+  border-radius: 0;
+  transition: all 0.2s;
+}
+
+.btn-navy:hover {
+  background: var(--navy-mid);
+  color: var(--white);
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+.acpwb-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  padding: 3rem 0 2rem;
+  border-top: 3px solid var(--gold);
+  font-size: 0.85rem;
+}
+
+.acpwb-footer a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.acpwb-footer a:hover {
+  color: var(--gold);
+}
+
+.acpwb-footer .footer-logo-line1,
+.acpwb-footer .footer-logo-line2 {
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  line-height: 1.2;
+}
+
+.acpwb-footer .footer-logo-line3 {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  display: block;
+}
+
+/* ── Page intro banner ───────────────────────────────── */
+.page-banner {
+  background: var(--navy);
+  color: white;
+  padding: 2.5rem 0;
+  border-bottom: 3px solid var(--gold);
+}
+
+.page-banner h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 900;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.page-banner p {
+  color: rgba(255,255,255,0.75);
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
+
+/* ── Employee card ───────────────────────────────────── */
+.employee-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.employee-card:hover {
+  box-shadow: 0 4px 16px rgba(10, 22, 40, 0.1);
+}
+
+.employee-info h6 {
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 0.15rem;
+  font-size: 0.95rem;
+}
+
+.employee-info .title {
+  font-size: 0.8rem;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.1rem;
+}
+
+.employee-info .dept {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+.employee-info .email a {
+  font-size: 0.82rem;
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.employee-info .email a:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+/* ── Partners grid ───────────────────────────────────── */
+.partner-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.partner-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.15);
+  color: var(--navy);
+}
+
+.partner-logo-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: white;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  margin-bottom: 0.5rem;
+}
+
+.partner-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+/* ── Project cards ───────────────────────────────────── */
+.project-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+
+.project-card:hover {
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.1);
+}
+
+.project-card .tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.project-card h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.project-card .metric {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 0.2rem 0.6rem;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+/* ── Wiki ────────────────────────────────────────────── */
+.wiki-content {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  max-width: 820px;
+}
+
+.wiki-sidebar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.wiki-sidebar h6 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.wiki-sidebar a {
+  color: var(--navy);
+  display: block;
+  padding: 0.2rem 0;
+  text-decoration: none;
+  font-size: 0.82rem;
+  border-bottom: 1px dotted var(--border);
+}
+
+.wiki-sidebar a:hover {
+  color: var(--gold);
+}
+
+/* ── Stat blocks ─────────────────────────────────────── */
+.stat-block {
+  background: var(--navy);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.stat-block .stat-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-block .stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.3rem;
+}
+
+/* ── Utilities ───────────────────────────────────────── */
+.text-gold { color: var(--gold) !important; }
+.text-navy { color: var(--navy) !important; }
+.bg-navy   { background: var(--navy) !important; }
+.bg-gold   { background: var(--gold) !important; }
+.bg-surface { background: var(--surface) !important; }
+
+.border-gold { border-color: var(--gold) !important; }
+.border-top-gold { border-top: 3px solid var(--gold) !important; }
+.border-left-gold { border-left: 4px solid var(--gold) !important; }
+
+.fw-900 { font-weight: 900 !important; }
+.tracking-wide { letter-spacing: 0.08em !important; }
+.tracking-wider { letter-spacing: 0.15em !important; }
+
+/* ── Divider ─────────────────────────────────────────── */
+.gold-divider {
+  border: none;
+  border-top: 2px solid var(--gold);
+  opacity: 0.4;
+  margin: 2rem 0;
+}

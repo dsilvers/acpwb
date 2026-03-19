@@ -1,0 +1,7 @@
+# Claude Code — Files to exclude from context
+# Exclude large generated/fixture files and static assets from Claude's context window
+
+acpwb/staticfiles/
+acpwb/apps/public/fixtures/fortune500.json
+*.pyc
+__pycache__/

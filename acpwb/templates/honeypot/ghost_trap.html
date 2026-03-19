@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Access Restricted — ACPWB{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+  <div class="container">
+    <h1 style="color:rgba(255,255,255,0.5)">ACCESS RESTRICTED</h1>
+  </div>
+</section>
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container text-center">
+    <p class="text-muted">{{ message }}</p>
+    <a href="{% url 'home' %}" class="btn-navy btn">Return Home</a>
+  </div>
+</section>
+{% endblock %}

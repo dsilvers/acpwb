@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block title %}Partners — American Corporation for Public Well Being{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Our Network</p>
+    <h1>CORPORATE PARTNERS</h1>
+    <p>A distinguished coalition of America's most consequential enterprises.</p>
+  </div>
+</section>
+
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-7">
+        <p class="text-uppercase text-gold fw-800 mb-2" style="letter-spacing:.15em;font-size:.75rem">Ecosystem</p>
+        <h2 class="section-heading">AMERICA'S LEADING ENTERPRISES</h2>
+        <hr class="section-rule">
+        <p>
+          The American Corporation for Public Well Being maintains active relationships with enterprises across all sectors of the American economy. Our partner network represents the full breadth of corporate America — from energy and finance to technology, healthcare, and retail. These relationships reflect our commitment to stakeholder alignment at the highest levels of organizational leadership.
+        </p>
+        <p class="small text-muted">
+          Partners displayed on this page are selected at random from our active network on each page load. Refresh the page to see additional partners.
+        </p>
+      </div>
+    </div>
+
+    {% if companies %}
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+      {% for company in companies %}
+      <div class="col">
+        <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="partner-card">
+          <div class="partner-logo-placeholder" style="background:linear-gradient(135deg,
+            {% cycle '#0A1628' '#1a3a5c' '#2d5a27' '#5c1a1a' '#3d2b5c' '#5c4a1a' '#1a4a4a' '#4a2b1a' '#1a1a5c' '#4a1a3d' %},
+            {% cycle '#C9A84C' '#4a9eda' '#7bc67e' '#da4a4a' '#9b6dd0' '#d4a843' '#43c5c5' '#c57843' '#4343da' '#d043b5' %})">
+            {{ company.initials }}
+          </div>
+          <div class="partner-name">{{ company.name|truncatechars:28 }}</div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+      <p class="text-muted">Partner directory loading...</p>
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-5 pt-3" style="border-top:1px solid var(--border)">
+      <p class="small text-muted mb-0">
+        Displaying {{ companies|length }} of 500 Fortune 500 partners.
+        <a href="" onclick="window.location.reload();return false;" style="color:var(--gold)">Refresh for more.</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

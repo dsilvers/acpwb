@@ -25,7 +25,7 @@ services:
              gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120"
     volumes:
       - ./acpwb:/app
-      - static_volume:/app/staticfiles
+      - ./acpwb/staticfiles:/app/staticfiles
     env_file: .env
     depends_on:
       db:
@@ -37,7 +37,7 @@ services:
     build:
       context: ./nginx
     volumes:
-      - static_volume:/app/staticfiles:ro
+      - ./acpwb/staticfiles:/app/staticfiles:ro
     ports:
       - "127.0.0.1:8001:80"
     depends_on:
@@ -45,4 +45,3 @@ services:
 
 volumes:
   postgres_data:
-  static_volume:

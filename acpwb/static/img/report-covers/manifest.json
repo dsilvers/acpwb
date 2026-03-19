@@ -208,5 +208,50 @@
     "prompt": "corporate campus outdoor seating area with empty benches and architectural landscaping, suggesting a workforce at work inside, atmospheric, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
     "category": "Workforce",
     "path": "img/report-covers/baseline-retirement-plan-participation-study-2012-0451.webp"
+  },
+  "strategic-ceo-pay-ratio-survey-2022-b8de": {
+    "prompt": "abstract visualization of collaboration between different generations, overlapping transparent circles of different sizes and colors, corporate documentary style, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Retention",
+    "path": "img/report-covers/strategic-ceo-pay-ratio-survey-2022-b8de.webp"
+  },
+  "comparative-workforce-planning-briefing-2014-edc5": {
+    "prompt": "elevator bank of a glass corporate tower at midday, polished steel doors, marble floor, implying scale and workforce size, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/comparative-workforce-planning-briefing-2014-edc5.webp"
+  },
+  "preliminary-workforce-demographics-study-2021-597d": {
+    "prompt": "empty boardroom with long polished mahogany table and leather chairs, city skyline visible through windows, golden hour light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Governance",
+    "path": "img/report-covers/preliminary-workforce-demographics-study-2021-597d.webp"
+  },
+  "cross-industry-market-pricing-methodology-guide-2016-41a4": {
+    "prompt": "close-up of a gavel on a polished wood desk with blurred legal documents in background, corporate governance concept, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Governance",
+    "path": "img/report-covers/cross-industry-market-pricing-methodology-guide-2016-41a4.webp"
+  },
+  "strategic-employee-engagement-index-survey-13e6": {
+    "prompt": "an executive conference room with a long table and empty chairs, prepared for a board meeting, formal lighting, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Leadership",
+    "path": "img/report-covers/strategic-employee-engagement-index-survey-13e6.webp"
+  },
+  "comprehensive-turnover-analysis-study-2025-0d9e": {
+    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/comprehensive-turnover-analysis-study-2025-0d9e.webp"
+  },
+  "annual-benefits-utilization-guide-2017-e8a8": {
+    "prompt": "a signed compliance acknowledgment form under a desk lamp, pen still resting on it, institutional editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compliance",
+    "path": "img/report-covers/annual-benefits-utilization-guide-2017-e8a8.webp"
+  },
+  "annual-salary-transparency-analysis-2024-44ca": {
+    "prompt": "rain water collection system and native plant landscaping at a corporate campus entrance, environmental branding photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "ESG",
+    "path": "img/report-covers/annual-salary-transparency-analysis-2024-44ca.webp"
+  },
+  "mid-year-executive-pay-analysis-2008-bc65": {
+    "prompt": "corporate sustainability dashboard on a large wall-mounted display in an empty lobby, showing carbon metrics and green targets, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "ESG",
+    "path": "img/report-covers/mid-year-executive-pay-analysis-2008-bc65.webp"
   }
 }

@@ -3,6 +3,8 @@
 
 {% block title %}{{ report.title }} — ACPWB Research Division{% endblock %}
 {% block meta_description %}{{ report.summary|truncatechars:160 }}{% endblock %}
+{% block og_title %}{{ report.title }} — ACPWB Research Division{% endblock %}
+{% block og_description %}{{ report.summary|truncatechars:160 }}{% endblock %}
 
 {% block extra_head %}
 <style>

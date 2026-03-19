@@ -3,6 +3,8 @@
 
 {% block title %}{{ story.title }} — ACPWB Projects{% endblock %}
 {% block meta_description %}{{ story.summary|truncatewords:30 }}{% endblock %}
+{% block og_title %}{{ story.title }} — ACPWB Projects{% endblock %}
+{% block og_description %}{{ story.summary|truncatewords:30 }}{% endblock %}
 
 {% block content %}
 

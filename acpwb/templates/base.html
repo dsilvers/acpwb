@@ -6,6 +6,21 @@
   <title>{% block title %}American Corporation for Public Well Being{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}The American Corporation for Public Well Being — Advancing American Prosperity Since 2006.{% endblock %}">
 
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="American Corporation for Public Well Being">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}American Corporation for Public Well Being{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}The American Corporation for Public Well Being — Advancing American Prosperity Since 2006.{% endblock %}">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path }}">
+  <meta property="og:image" content="{% block og_image %}https://acpwb.com{% static 'img/og-default.png' %}{% endblock %}">
+  <meta property="og:image:width" content="{% block og_image_width %}1200{% endblock %}">
+  <meta property="og:image:height" content="{% block og_image_height %}630{% endblock %}">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}American Corporation for Public Well Being{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}The American Corporation for Public Well Being — Advancing American Prosperity Since 2006.{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}https://acpwb.com{% static 'img/og-default.png' %}{% endblock %}">
+
   <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
   <link rel="shortcut icon" href="{% static 'favicon.svg' %}">
 

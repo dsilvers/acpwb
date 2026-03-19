@@ -1,7 +1,7 @@
 import pytest
 from django.test import RequestFactory
 from django.template import Context, Template
-from apps.core.templatetags.acpwb_tags import avatar_card, initials, AVATAR_PALETTES
+from apps.core.templatetags.acpwb_tags import avatar_card, initials, project_cover_idx, AVATAR_PALETTES, PROJECT_COVER_COUNT
 
 
 # ── avatar_card tag ────────────────────────────────────────────────────────────
@@ -109,3 +109,36 @@ def test_initials_filter_in_template():
     )
     result = template.render(Context({'name': 'Jane Doe'}))
     assert result == 'JD'
+
+
+# ── project_cover_idx filter ───────────────────────────────────────────────────
+
+def test_project_cover_idx_returns_zero_padded_string():
+    result = project_cover_idx('some-slug')
+    assert len(result) == 3
+    assert result.isdigit()
+
+
+def test_project_cover_idx_in_valid_range():
+    for slug in ['alpha', 'beta-test', 'workforce-2024', 'x']:
+        idx = int(project_cover_idx(slug))
+        assert 0 <= idx < PROJECT_COVER_COUNT
+
+
+def test_project_cover_idx_deterministic():
+    assert project_cover_idx('my-slug') == project_cover_idx('my-slug')
+
+
+def test_project_cover_idx_different_slugs_may_differ():
+    results = {project_cover_idx(f'slug-{i}') for i in range(20)}
+    assert len(results) > 1
+
+
+def test_project_cover_idx_in_template():
+    template = Template(
+        '{% load acpwb_tags %}'
+        '{{ slug|project_cover_idx }}'
+    )
+    result = template.render(Context({'slug': 'test-project'}))
+    assert len(result) == 3
+    assert result.isdigit()

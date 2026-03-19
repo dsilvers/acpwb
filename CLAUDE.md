@@ -38,7 +38,7 @@ docker compose exec web python manage.py collectstatic --noinput
 
 | App | Purpose |
 |-----|---------|
-| `apps/core` | `BotTrackingMiddleware`, context processors, `{% avatar_card %}` and `{% headshot_or_avatar %}` template tags |
+| `apps/core` | `BotTrackingMiddleware`, context processors, `{% avatar_card %}` and `{% headshot_or_avatar %}` template tags, staff dashboard views |
 | `apps/public` | Home, Careers, Mission, Partners, Privacy + `Fortune500Company` model |
 | `apps/people` | Our People honeypot — generates 12 employees per load, logs visits |
 | `apps/projects` | Infinite project list (PoW gated) + project detail |
@@ -80,6 +80,24 @@ Dedicated traps:
 - `/sitemap-archive.xml` — trap: 500 deterministic archive URLs (seed `0x4143505742`), 2008–2024; logged as `well_known`
 - `/internal/portal/`, `/employees/export/`, `/admin-panel/login/` — ghost trap 403s, all logged
 
+Staff dashboard:
+- `/acpwb-dashboard/` — requires `is_staff`; overview + sub-views for crawlers, archive, email, page visits
+- Views in `apps/core/dashboard_views.py`, URLs in `apps/core/dashboard_urls.py`
+- Bot classification via `BOT_PATTERNS` / `classify_ua()` / `classify_ua_group()` in `dashboard_views.py`
+- Date range controlled by `?range=` preset or `?from=`/`?to=` custom; `_daily_chart()` returns `{'bars': [...], 'start': '...', 'end': '...'}`
+
+---
+
+## Open Graph Tags
+
+`base.html` includes OG and Twitter Card tags with overridable blocks:
+- `{% block og_title %}` — defaults to site name
+- `{% block og_description %}` — defaults to site tagline
+- `{% block og_image %}` — defaults to `https://acpwb.com/static/img/og-default.png` (1200×630 branded PNG)
+- `{% block og_type %}` — defaults to `website`
+
+`projects/detail.html` and `honeypot/report_detail.html` override `og_title` and `og_description` with per-object content.
+
 ---
 
 ## Generators
@@ -107,6 +125,8 @@ Three-layer system, consistent across wiki, reports, and JSON-LD:
 3. **Data** — `watermark_token` column in every CSV row; `identifier` field in JSON-LD
 
 Token generation: `hashlib.md5(f"acpwb_{type}_{slug}".encode()).hexdigest()[:8]`
+
+Project cover image index: `{% project_cover_idx slug %}` filter in `acpwb_tags.py` — MD5 of slug mod `PROJECT_COVER_COUNT` (80), zero-padded to 3 digits. Maps any slug → `000`–`079` deterministically.
 
 ---
 

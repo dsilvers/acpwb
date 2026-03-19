@@ -40,6 +40,8 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 
 Every trap logs to the database: IP, user agent, path, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load.
 
+A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, preset and custom date range filters, separate views for crawler visits, archive visits, inbound email, and people/project page visits.
+
 ---
 
 ## Honeypot Techniques
@@ -157,6 +159,7 @@ Django admin is at `http://localhost/django-admin/`
 | `/careers/` | Satirical corporate benefits |
 | `/partners/` | Fortune 500 partner grid (40 random per load) |
 | `/privacy/` | Disclaimer + AI data policy |
+| `/acpwb-dashboard/` | Staff-only activity dashboard (requires login) |
 
 ---
 

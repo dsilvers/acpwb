@@ -1,5 +1,5 @@
 import pytest
-from apps.core.middleware import BOT_UA_PATTERNS, HONEYPOT_PATHS, BotTrackingMiddleware
+from apps.core.middleware import BOT_UA_PATTERNS, VIEW_LOGGED_PATHS, BotTrackingMiddleware
 from apps.honeypot.models import CrawlerVisit
 
 
@@ -35,13 +35,14 @@ def test_bot_ua_patterns_no_match(ua):
     '/archive/2024/1/1/article/',
     '/wiki/governance/',
     '/internal/portal/',
-    '/employees/export/',
-    '/admin-panel/login/',
     '/api/v1/private-data',
     '/.well-known/ai-agent.json',
+    '/reports/some-report/',
+    '/robots.txt',
 ])
-def test_honeypot_paths_match(path):
-    assert HONEYPOT_PATHS.match(path) is not None, f"Should match honeypot path: {path}"
+def test_view_logged_paths_match(path):
+    """These paths are handled by honeypot views — middleware should skip them."""
+    assert VIEW_LOGGED_PATHS.match(path) is not None, f"Should match view-logged path: {path}"
 
 
 @pytest.mark.parametrize('path', [
@@ -54,8 +55,9 @@ def test_honeypot_paths_match(path):
     '/privacy/',
     '/django-admin/',
 ])
-def test_honeypot_paths_no_match(path):
-    assert HONEYPOT_PATHS.match(path) is None, f"Should not match regular path: {path}"
+def test_view_logged_paths_no_match(path):
+    """Regular pages are not handled by honeypot views — middleware may log them."""
+    assert VIEW_LOGGED_PATHS.match(path) is None, f"Should not match regular path: {path}"
 
 
 # ── Middleware integration ─────────────────────────────────────────────────────

@@ -1,0 +1,195 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Overview{% endblock %}
+{% block page_title %}Overview{% endblock %}
+{% block nav_overview %}active{% endblock %}
+
+{% block content %}
+
+<!-- Stat cards -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-2">
+    <div class="stat-card">
+      <div class="label">Crawler Hits</div>
+      <div class="value">{{ counts.crawler }}</div>
+      <div class="sub"><a href="{% url 'dashboard-crawlers' %}?range={{ preset }}" style="color:var(--gold)">View &rarr;</a></div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="stat-card">
+      <div class="label">Archive Visits</div>
+      <div class="value">{{ counts.archive }}</div>
+      <div class="sub"><a href="{% url 'dashboard-archive' %}?range={{ preset }}" style="color:var(--gold)">View &rarr;</a></div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="stat-card">
+      <div class="label">Inbound Emails</div>
+      <div class="value">{{ counts.email }}</div>
+      <div class="sub"><a href="{% url 'dashboard-emails' %}?range={{ preset }}" style="color:var(--gold)">View &rarr;</a></div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="stat-card">
+      <div class="label">People Visits</div>
+      <div class="value">{{ counts.people }}</div>
+      <div class="sub"><a href="{% url 'dashboard-people' %}?range={{ preset }}" style="color:var(--gold)">View &rarr;</a></div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="stat-card">
+      <div class="label">Project Visits</div>
+      <div class="value">{{ counts.projects }}</div>
+      <div class="sub"><a href="{% url 'dashboard-people' %}?range={{ preset }}" style="color:var(--gold)">View &rarr;</a></div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="stat-card" style="border-top-color:var(--navy)">
+      <div class="label">Total Activity</div>
+      <div class="value">{{ counts.crawler|add:counts.archive|add:counts.email|add:counts.people|add:counts.projects }}</div>
+      <div class="sub">across all traps</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <!-- Daily crawler chart -->
+  <div class="col-lg-8">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>Crawler Hits — Last 30 Days</h6>
+      </div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:80px">
+          {% for d in daily.bars %}
+          <div title="{{ d.date }}: {{ d.count }}"
+               style="flex:1;background:var(--gold);height:{{ d.pct }}%;min-height:{% if d.count %}2{% else %}0{% endif %}px;opacity:.85;min-width:2px"></div>
+          {% endfor %}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.4rem">
+          <span>{{ daily.start }}</span>
+          <span>{{ daily.end }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bot group breakdown -->
+  <div class="col-lg-4">
+    <div class="section-card" style="height:100%">
+      <div class="section-card-header"><h6>Crawler Groups</h6></div>
+      <div class="section-card-body">
+        {% for g in bot_groups %}
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <div style="font-size:.75rem;color:var(--navy);width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ g.name }}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:{{ g.pct }}%"></div></div>
+          <div style="font-size:.72rem;color:var(--muted);width:40px;text-align:right">{{ g.count }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <!-- Top bots -->
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>Top Bots / Clients</h6>
+        <a href="{% url 'dashboard-crawlers' %}?range={{ preset }}" style="font-size:.72rem;color:var(--gold)">Full list &rarr;</a>
+      </div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Bot / Client</th><th>Hits</th><th style="width:100px">Share</th></tr></thead>
+        <tbody>
+          {% for b in top_bots %}
+          <tr>
+            <td>{{ b.name }}</td>
+            <td>{{ b.count }}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="bar-track" style="flex:1"><div class="bar-fill" style="width:{{ b.pct }}%"></div></div>
+                <span style="font-size:.68rem;color:var(--muted);width:28px;text-align:right">{{ b.pct }}%</span>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="3" class="text-muted text-center py-3">No data for this period</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Trap type breakdown -->
+  <div class="col-lg-3">
+    <div class="section-card">
+      <div class="section-card-header"><h6>By Trap Type</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Trap</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for t in trap_counts %}
+          <tr>
+            <td><span class="trap-badge">{{ t.label }}</span></td>
+            <td>{{ t.count }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Recent crawler visits -->
+  <div class="col-lg-3">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>Recent Crawlers</h6>
+        <a href="{% url 'dashboard-crawlers' %}?range={{ preset }}" style="font-size:.72rem;color:var(--gold)">More &rarr;</a>
+      </div>
+      <div style="overflow:auto;max-height:340px">
+        <table class="dash-table w-100">
+          <thead><tr><th>IP</th><th>Trap</th><th>When</th></tr></thead>
+          <tbody>
+            {% for v in recent_crawlers %}
+            <tr>
+              <td style="font-family:monospace;font-size:.72rem">{{ v.ip_address }}</td>
+              <td><span class="trap-badge">{{ v.trap_type }}</span></td>
+              <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">{{ v.timestamp|date:"m/d H:i" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent emails -->
+{% if recent_emails %}
+<div class="row g-3 mt-0">
+  <div class="col-12">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>Recent Inbound Emails</h6>
+        <a href="{% url 'dashboard-emails' %}?range={{ preset }}" style="font-size:.72rem;color:var(--gold)">All emails &rarr;</a>
+      </div>
+      <table class="dash-table w-100">
+        <thead><tr><th>From</th><th>To</th><th>Subject</th><th>Received</th></tr></thead>
+        <tbody>
+          {% for e in recent_emails %}
+          <tr>
+            <td>{{ e.sender }}</td>
+            <td style="color:var(--muted)">{{ e.recipient }}</td>
+            <td style="color:var(--muted)">{{ e.subject|truncatechars:60 }}</td>
+            <td style="font-size:.72rem;color:var(--muted);white-space:nowrap">{{ e.received_at|date:"M d, H:i" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -31,6 +31,9 @@ urlpatterns = [
 
     # Mailgun webhook
     path('webhooks/', include('apps.webhooks.urls')),
+
+    # Staff dashboard
+    path('acpwb-dashboard/', include('apps.core.dashboard_urls')),
 ]
 
 # Customize admin site

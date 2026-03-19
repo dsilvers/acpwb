@@ -1,0 +1,132 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Crawler Visits{% endblock %}
+{% block page_title %}Crawler Visits{% endblock %}
+{% block nav_crawlers %}active{% endblock %}
+
+{% block content %}
+
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Daily Volume — Last 60 Days</h6><span style="font-size:.72rem;color:var(--muted)">Total: {{ total }} hits in period</span></div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:flex-end;gap:1px;height:90px">
+          {% for d in daily.bars %}
+          <div title="{{ d.date }}: {{ d.count }}"
+               style="flex:1;background:var(--gold);height:{{ d.pct }}%;min-height:{% if d.count %}2{% else %}0{% endif %}px;opacity:.8;min-width:2px"></div>
+          {% endfor %}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem">
+          <span>{{ daily.start }}</span><span>{{ daily.end }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <!-- Bot breakdown -->
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Bot / Client Breakdown</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>#</th><th>Bot / Client</th><th>Hits</th><th style="width:130px">Share</th></tr></thead>
+        <tbody>
+          {% for b in top_bots %}
+          <tr>
+            <td style="color:var(--muted);font-size:.72rem">{{ forloop.counter }}</td>
+            <td>{{ b.name }}</td>
+            <td>{{ b.count }}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="bar-track"><div class="bar-fill" style="width:{{ b.pct }}%"></div></div>
+                <span style="font-size:.68rem;color:var(--muted);width:32px;text-align:right">{{ b.pct }}%</span>
+              </div>
+            </td>
+          </tr>
+          {% empty %}<tr><td colspan="4" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <!-- Trap type -->
+    <div class="section-card mb-3">
+      <div class="section-card-header"><h6>By Trap Type</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Trap</th><th>Hits</th><th>%</th></tr></thead>
+        <tbody>
+          {% for t in trap_counts %}
+          <tr>
+            <td><span class="trap-badge">{{ t.label }}</span></td>
+            <td>{{ t.count }}</td>
+            <td style="color:var(--muted)">{{ t.pct }}%</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <!-- Top IPs -->
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top IPs</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>IP Address</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for ip in top_ips %}
+          <tr>
+            <td style="font-family:monospace;font-size:.75rem">{{ ip.ip_address }}</td>
+            <td>{{ ip.count }}</td>
+          </tr>
+          {% empty %}<tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Top paths -->
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Most-Requested Paths</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Path</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for p in top_paths %}
+          <tr>
+            <td style="font-family:monospace;font-size:.78rem">{{ p.path }}</td>
+            <td>{{ p.count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Recent visits -->
+<div class="section-card">
+  <div class="section-card-header"><h6>Recent Visits</h6><span style="font-size:.72rem;color:var(--muted)">Last 50 in period</span></div>
+  <div style="overflow-x:auto">
+    <table class="dash-table w-100">
+      <thead><tr><th>Timestamp</th><th>IP</th><th>Trap</th><th>Path</th><th>User Agent</th></tr></thead>
+      <tbody>
+        {% for v in recent %}
+        <tr>
+          <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ v.timestamp|date:"Y-m-d H:i:s" }}</td>
+          <td style="font-family:monospace;font-size:.75rem;white-space:nowrap">{{ v.ip_address }}</td>
+          <td><span class="trap-badge">{{ v.trap_type }}</span></td>
+          <td style="font-family:monospace;font-size:.72rem;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ v.path }}">{{ v.path|truncatechars:60 }}</td>
+          <td style="font-size:.7rem;color:var(--muted);max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ v.user_agent }}">{{ v.user_agent|truncatechars:70 }}</td>
+        </tr>
+        {% empty %}<tr><td colspan="5" class="text-muted text-center py-3">No visits in this period</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

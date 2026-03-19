@@ -158,5 +158,55 @@
     "prompt": "aerial view of a container port at dusk, cranes and stacked shipping containers, symbolizing global economic scale, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
     "category": "Economic",
     "path": "img/report-covers/revised-remote-work-productivity-white-paper-2024-ab77.webp"
+  },
+  "national-incentive-compensation-index-2024-feea": {
+    "prompt": "laptops open to resume templates in a collaborative office space, notebooks and coffee on the table, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Talent Acquisition",
+    "path": "img/report-covers/national-incentive-compensation-index-2024-feea.webp"
+  },
+  "comprehensive-wage-band-calibration-white-paper-e4b7": {
+    "prompt": "financial district at sunrise through floor-to-ceiling office windows, reflecting the golden light across a polished conference table with documents, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/comprehensive-wage-band-calibration-white-paper-e4b7.webp"
+  },
+  "mid-year-executive-pay-white-paper-2020-1190": {
+    "prompt": "modern corporate IT operations center with multiple screens showing dashboards, empty workstations, blue ambient light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Technology",
+    "path": "img/report-covers/mid-year-executive-pay-white-paper-2020-1190.webp"
+  },
+  "longitudinal-turnover-analysis-study-2010-f0b1": {
+    "prompt": "a modern corporate breakout space with remnants of a celebration, like confetti and empty glasses, candid corporate photography style, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Retention",
+    "path": "img/report-covers/longitudinal-turnover-analysis-study-2010-f0b1.webp"
+  },
+  "strategic-healthcare-cost-trends-assessment-2010-f55e": {
+    "prompt": "modern corporate cafeteria with healthy food options displayed, clean and bright, natural light, lifestyle editorial, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Benefits",
+    "path": "img/report-covers/strategic-healthcare-cost-trends-assessment-2010-f55e.webp"
+  },
+  "supplemental-pay-transparency-compliance-report-2021-a52e": {
+    "prompt": "wind turbines visible through the floor-to-ceiling window of a modern executive office, symbolic corporate environmental photo, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "ESG",
+    "path": "img/report-covers/supplemental-pay-transparency-compliance-report-2021-a52e.webp"
+  },
+  "benchmark-pay-equity-analysis-2024-d685": {
+    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/benchmark-pay-equity-analysis-2024-d685.webp"
+  },
+  "final-hiring-cost-analysis-guide-2018-0f9e": {
+    "prompt": "interior of a LEED-certified office building: exposed timber, natural ventilation grilles, plants, daylight harvesting design, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "ESG",
+    "path": "img/report-covers/final-hiring-cost-analysis-guide-2018-0f9e.webp"
+  },
+  "biennial-pay-equity-study-2018-c2f3": {
+    "prompt": "a Kanban board on a glass wall covered in user story cards from a recent product sprint, tech office editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Technology",
+    "path": "img/report-covers/biennial-pay-equity-study-2018-c2f3.webp"
+  },
+  "baseline-retirement-plan-participation-study-2012-0451": {
+    "prompt": "corporate campus outdoor seating area with empty benches and architectural landscaping, suggesting a workforce at work inside, atmospheric, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/baseline-retirement-plan-participation-study-2012-0451.webp"
   }
 }

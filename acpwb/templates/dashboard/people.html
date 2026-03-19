@@ -1,0 +1,154 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Page Visits{% endblock %}
+{% block page_title %}Page Visits — People &amp; Projects{% endblock %}
+{% block nav_people %}active{% endblock %}
+
+{% block content %}
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-2">
+    <div class="stat-card"><div class="label">People Page</div><div class="value">{{ people_total }}</div><div class="sub">visits</div></div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="stat-card"><div class="label">Projects Page</div><div class="value">{{ project_total }}</div><div class="sub">visits</div></div>
+  </div>
+</div>
+
+<!-- Daily charts -->
+<div class="row g-3 mb-4">
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>People Page — Daily Volume</h6></div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:70px">
+          {% for d in people_daily.bars %}
+          <div title="{{ d.date }}: {{ d.count }}"
+               style="flex:1;background:var(--gold);height:{{ d.pct }}%;min-height:{% if d.count %}2{% else %}0{% endif %}px;opacity:.85;min-width:2px"></div>
+          {% endfor %}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem">
+          <span>{{ people_daily.start }}</span><span>{{ people_daily.end }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Projects Page — Daily Volume</h6></div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:70px">
+          {% for d in project_daily.bars %}
+          <div title="{{ d.date }}: {{ d.count }}"
+               style="flex:1;background:var(--navy);height:{{ d.pct }}%;min-height:{% if d.count %}2{% else %}0{% endif %}px;opacity:.65;min-width:2px"></div>
+          {% endfor %}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem">
+          <span>{{ project_daily.start }}</span><span>{{ project_daily.end }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <!-- People bots -->
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>People Page — Top Bots</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Bot / Client</th><th>Visits</th></tr></thead>
+        <tbody>
+          {% for b in people_bots %}
+          <tr><td>{{ b.name }}</td><td>{{ b.count }}</td></tr>
+          {% empty %}<tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Project bots -->
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Projects Page — Top Bots</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Bot / Client</th><th>Visits</th></tr></thead>
+        <tbody>
+          {% for b in project_bots %}
+          <tr><td>{{ b.name }}</td><td>{{ b.count }}</td></tr>
+          {% empty %}<tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Top IPs -->
+  <div class="col-lg-4">
+    <div class="section-card mb-3">
+      <div class="section-card-header"><h6>People Page — Top IPs</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>IP</th><th>Visits</th></tr></thead>
+        <tbody>
+          {% for ip in top_people_ips %}
+          <tr><td style="font-family:monospace;font-size:.75rem">{{ ip.ip_address }}</td><td>{{ ip.count }}</td></tr>
+          {% empty %}<tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="section-card">
+      <div class="section-card-header"><h6>Projects Page — Top IPs</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>IP</th><th>Visits</th></tr></thead>
+        <tbody>
+          {% for ip in top_project_ips %}
+          <tr><td style="font-family:monospace;font-size:.75rem">{{ ip.ip_address }}</td><td>{{ ip.count }}</td></tr>
+          {% empty %}<tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Recent visits side-by-side -->
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Recent People Page Visits</h6><span style="font-size:.72rem;color:var(--muted)">Last 30</span></div>
+      <div style="overflow-x:auto">
+        <table class="dash-table w-100">
+          <thead><tr><th>Timestamp</th><th>IP</th><th>User Agent</th></tr></thead>
+          <tbody>
+            {% for v in recent_people %}
+            <tr>
+              <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ v.timestamp|date:"m/d H:i" }}</td>
+              <td style="font-family:monospace;font-size:.75rem;white-space:nowrap">{{ v.ip_address }}</td>
+              <td style="font-size:.7rem;color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ v.user_agent }}">{{ v.user_agent|truncatechars:55 }}</td>
+            </tr>
+            {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No visits</td></tr>{% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Recent Projects Page Visits</h6><span style="font-size:.72rem;color:var(--muted)">Last 30</span></div>
+      <div style="overflow-x:auto">
+        <table class="dash-table w-100">
+          <thead><tr><th>Timestamp</th><th>IP</th><th>Page</th><th>User Agent</th></tr></thead>
+          <tbody>
+            {% for v in recent_projects %}
+            <tr>
+              <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ v.timestamp|date:"m/d H:i" }}</td>
+              <td style="font-family:monospace;font-size:.75rem;white-space:nowrap">{{ v.ip_address }}</td>
+              <td style="font-size:.75rem">{{ v.page_number }}</td>
+              <td style="font-size:.7rem;color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ v.user_agent }}">{{ v.user_agent|truncatechars:55 }}</td>
+            </tr>
+            {% empty %}<tr><td colspan="4" class="text-muted text-center py-3">No visits</td></tr>{% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

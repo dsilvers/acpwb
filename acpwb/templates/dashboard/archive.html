@@ -1,0 +1,119 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Archive Trap{% endblock %}
+{% block page_title %}Archive Trap Visits{% endblock %}
+{% block nav_archive %}active{% endblock %}
+
+{% block content %}
+
+<div class="row g-3 mb-4">
+  <div class="col-4 col-lg-2">
+    <div class="stat-card"><div class="label">Total Visits</div><div class="value">{{ total }}</div></div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-8">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Daily Volume — Last 30 Days</h6></div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:80px">
+          {% for d in daily.bars %}
+          <div title="{{ d.date }}: {{ d.count }}"
+               style="flex:1;background:var(--navy);height:{{ d.pct }}%;min-height:{% if d.count %}2{% else %}0{% endif %}px;opacity:.7;min-width:2px"></div>
+          {% endfor %}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem">
+          <span>{{ daily.start }}</span><span>{{ daily.end }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="section-card" style="height:100%">
+      <div class="section-card-header"><h6>Depth Distribution</h6></div>
+      <div class="section-card-body">
+        {% for d in depth_counts %}
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <div style="font-size:.72rem;color:var(--navy);width:60px">Depth {{ d.depth }}</div>
+          <div class="bar-track"><div class="bar-fill navy" style="width:{{ d.pct }}%"></div></div>
+          <div style="font-size:.72rem;color:var(--muted);width:40px;text-align:right">{{ d.count }}</div>
+        </div>
+        {% empty %}<p class="text-muted small">No data</p>{% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-5">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top IPs</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>IP Address</th><th>Visits</th><th>Max Depth</th></tr></thead>
+        <tbody>
+          {% for ip in top_ips %}
+          <tr>
+            <td style="font-family:monospace;font-size:.75rem">{{ ip.ip_address }}</td>
+            <td>{{ ip.count }}</td>
+            <td style="color:{% if ip.max_depth > 5 %}#dc2626{% else %}var(--muted){% endif %}">{{ ip.max_depth }}</td>
+          </tr>
+          {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top Bots</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Bot</th><th>Visits</th></tr></thead>
+        <tbody>
+          {% for b in top_bots %}
+          <tr><td>{{ b.name }}</td><td>{{ b.count }}</td></tr>
+          {% empty %}<tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top Slugs</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Slug</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for r in top_roots %}
+          <tr>
+            <td style="font-family:monospace;font-size:.7rem;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ r.slug }}">{{ r.slug|truncatechars:35 }}</td>
+            <td>{{ r.count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="section-card-header"><h6>Recent Archive Visits</h6><span style="font-size:.72rem;color:var(--muted)">Last 50</span></div>
+  <div style="overflow-x:auto">
+    <table class="dash-table w-100">
+      <thead><tr><th>Timestamp</th><th>IP</th><th>Date</th><th>Depth</th><th>Slug</th><th>User Agent</th></tr></thead>
+      <tbody>
+        {% for v in recent %}
+        <tr>
+          <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ v.timestamp|date:"Y-m-d H:i:s" }}</td>
+          <td style="font-family:monospace;font-size:.75rem;white-space:nowrap">{{ v.ip_address }}</td>
+          <td style="white-space:nowrap;font-size:.75rem">{{ v.year }}-{{ v.month|stringformat:"02d" }}-{{ v.day|stringformat:"02d" }}</td>
+          <td style="color:{% if v.depth > 5 %}#dc2626{% else %}inherit{% endif %}">{{ v.depth }}</td>
+          <td style="font-family:monospace;font-size:.7rem;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ v.slug }}">{{ v.slug|truncatechars:50 }}</td>
+          <td style="font-size:.7rem;color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ v.user_agent }}">{{ v.user_agent|truncatechars:55 }}</td>
+        </tr>
+        {% empty %}<tr><td colspan="6" class="text-muted text-center py-3">No visits in this period</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

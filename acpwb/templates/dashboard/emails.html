@@ -1,0 +1,104 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Inbound Email{% endblock %}
+{% block page_title %}Inbound Email{% endblock %}
+{% block nav_emails %}active{% endblock %}
+
+{% block content %}
+
+<div class="row g-3 mb-4">
+  <div class="col-4 col-lg-2">
+    <div class="stat-card"><div class="label">Emails Received</div><div class="value">{{ total }}</div></div>
+  </div>
+  <div class="col-4 col-lg-2">
+    <div class="stat-card"><div class="label">Sender Domains</div><div class="value">{{ top_domains|length }}</div></div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-8">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Daily Volume — Last 30 Days</h6></div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:80px">
+          {% for d in daily.bars %}
+          <div title="{{ d.date }}: {{ d.count }}"
+               style="flex:1;background:var(--gold);height:{{ d.pct }}%;min-height:{% if d.count %}2{% else %}0{% endif %}px;opacity:.85;min-width:2px"></div>
+          {% endfor %}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem">
+          <span>{{ daily.start }}</span><span>{{ daily.end }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="section-card" style="height:100%">
+      <div class="section-card-header"><h6>Top Sender Domains</h6></div>
+      <div class="section-card-body p-0">
+        <table class="dash-table w-100">
+          <thead><tr><th>Domain</th><th>Emails</th><th>%</th></tr></thead>
+          <tbody>
+            {% for d in top_domains %}
+            <tr>
+              <td style="font-size:.78rem">{{ d.domain }}</td>
+              <td>{{ d.count }}</td>
+              <td style="color:var(--muted)">{{ d.pct }}%</td>
+            </tr>
+            {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Top recipient addresses -->
+<div class="row g-3 mb-4">
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top Targeted Addresses</h6><span style="font-size:.72rem;color:var(--muted)">Which fake addresses got hit</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Recipient</th><th>Emails</th></tr></thead>
+        <tbody>
+          {% for r in top_recipients %}
+          <tr>
+            <td style="font-family:monospace;font-size:.78rem">{{ r.recipient }}</td>
+            <td>{{ r.count }}</td>
+          </tr>
+          {% empty %}<tr><td colspan="2" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Email list -->
+<div class="section-card">
+  <div class="section-card-header"><h6>Email Log</h6><span style="font-size:.72rem;color:var(--muted)">Last 50 in period</span></div>
+  <div style="overflow-x:auto">
+    <table class="dash-table w-100">
+      <thead><tr><th>Received</th><th>From</th><th>To</th><th>Subject</th><th>Matched</th></tr></thead>
+      <tbody>
+        {% for e in recent %}
+        <tr>
+          <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ e.received_at|date:"Y-m-d H:i" }}</td>
+          <td style="font-size:.78rem">{{ e.sender }}</td>
+          <td style="font-size:.75rem;color:var(--muted);font-family:monospace">{{ e.recipient }}</td>
+          <td style="font-size:.78rem;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ e.subject }}">{{ e.subject|truncatechars:70 }}</td>
+          <td>
+            {% with mc=e.matches.count %}
+            {% if mc %}
+            <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#10003; {{ mc }}</span>
+            {% else %}
+            <span style="font-size:.65rem;color:var(--muted)">—</span>
+            {% endif %}
+            {% endwith %}
+          </td>
+        </tr>
+        {% empty %}<tr><td colspan="5" class="text-muted text-center py-3">No emails in this period</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

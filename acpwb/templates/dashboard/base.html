@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Dashboard{% endblock %} — ACPWB</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0A1628; --navy-mid: #1a2d4a; --gold: #C9A84C;
+      --surface: #F4F6F9; --border: #D1D5DB; --muted: #6B7280;
+      --sidebar-w: 220px;
+    }
+    body { background: var(--surface); font-family: 'Segoe UI', system-ui, sans-serif; font-size: .88rem; color: #1a1a2e; }
+    /* Sidebar */
+    .dash-sidebar {
+      width: var(--sidebar-w); min-height: 100vh; background: var(--navy);
+      position: fixed; top: 0; left: 0; z-index: 100; padding: 0;
+      display: flex; flex-direction: column;
+    }
+    .dash-brand {
+      padding: 1.25rem 1.25rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .dash-brand .acpwb-text { font-size: .62rem; font-weight: 800; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; line-height: 1.3; }
+    .dash-brand .dash-label { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: .25rem; }
+    .dash-nav { padding: .75rem 0; flex: 1; }
+    .dash-nav a {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .55rem 1.25rem; color: rgba(255,255,255,.65);
+      text-decoration: none; font-size: .8rem; font-weight: 600;
+      border-left: 3px solid transparent; transition: all .15s;
+    }
+    .dash-nav a:hover { color: white; background: rgba(255,255,255,.06); }
+    .dash-nav a.active { color: var(--gold); border-left-color: var(--gold); background: rgba(201,168,76,.08); }
+    .dash-nav .nav-icon { font-size: .95rem; width: 1.1rem; text-align: center; }
+    .dash-nav .section-label {
+      padding: .9rem 1.25rem .3rem; font-size: .62rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.3);
+    }
+    .dash-footer { padding: .75rem 1.25rem; border-top: 1px solid rgba(255,255,255,.1); }
+    .dash-footer a { color: rgba(255,255,255,.4); font-size: .72rem; text-decoration: none; }
+    .dash-footer a:hover { color: rgba(255,255,255,.7); }
+    /* Main content */
+    .dash-main { margin-left: var(--sidebar-w); min-height: 100vh; }
+    .dash-header {
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 1rem 1.75rem; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .dash-header h1 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin: 0; }
+    .dash-body { padding: 1.75rem; }
+    /* Stat cards */
+    .stat-card {
+      background: white; border: 1px solid var(--border); border-top: 3px solid var(--gold);
+      padding: 1.1rem 1.25rem;
+    }
+    .stat-card .label { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .35rem; }
+    .stat-card .value { font-size: 2rem; font-weight: 900; color: var(--navy); line-height: 1; }
+    .stat-card .sub { font-size: .72rem; color: var(--muted); margin-top: .25rem; }
+    /* Tables */
+    .dash-table { background: white; border: 1px solid var(--border); }
+    .dash-table thead th { background: var(--navy); color: var(--gold); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .6rem .9rem; border: none; white-space: nowrap; }
+    .dash-table td { font-size: .8rem; padding: .5rem .9rem; vertical-align: middle; border-color: var(--border); }
+    .dash-table tbody tr:hover { background: #fafbfc; }
+    /* Bar */
+    .bar-track { background: #eef0f3; height: 6px; border-radius: 3px; flex: 1; }
+    .bar-fill { height: 100%; border-radius: 3px; background: var(--gold); }
+    .bar-fill.navy { background: var(--navy); }
+    /* Date range form */
+    .dr-form { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+    .dr-form .preset-btn {
+      padding: .3rem .75rem; font-size: .72rem; font-weight: 700;
+      border: 1px solid var(--border); background: white; color: var(--navy);
+      text-decoration: none; white-space: nowrap;
+    }
+    .dr-form .preset-btn.active { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+    .dr-form input[type=date] { font-size: .78rem; padding: .28rem .5rem; border: 1px solid var(--border); color: var(--navy); }
+    .dr-form .apply-btn { padding: .3rem .75rem; font-size: .72rem; font-weight: 700; background: var(--gold); color: var(--navy); border: none; cursor: pointer; }
+    /* Sparkline bars */
+    .sparkline { display: flex; align-items: flex-end; gap: 1px; height: 40px; }
+    .sparkline .bar { flex: 1; background: var(--gold); min-width: 2px; opacity: .8; }
+    .sparkline .bar:hover { opacity: 1; }
+    /* Badge */
+    .trap-badge { display: inline-block; font-size: .62rem; font-weight: 700; padding: .15rem .45rem; text-transform: uppercase; letter-spacing: .05em; background: var(--surface); color: var(--navy); border: 1px solid var(--border); }
+    .section-card { background: white; border: 1px solid var(--border); margin-bottom: 1.25rem; }
+    .section-card-header { padding: .75rem 1.1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .section-card-header h6 { margin: 0; font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--navy); }
+    .section-card-body { padding: 1rem 1.1rem; }
+  </style>
+</head>
+<body>
+
+<div class="dash-sidebar">
+  <div class="dash-brand">
+    <div class="acpwb-text">American<br>Corporation<br><span style="font-weight:400;letter-spacing:.04em;color:rgba(255,255,255,.5)">for Public Well Being</span></div>
+    <div class="dash-label">Activity Dashboard</div>
+  </div>
+  <nav class="dash-nav">
+    <a href="{% url 'dashboard-overview' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}" class="{% block nav_overview %}{% endblock %}">
+      <span class="nav-icon">&#9632;</span> Overview
+    </a>
+    <div class="section-label">Traps</div>
+    <a href="{% url 'dashboard-crawlers' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}" class="{% block nav_crawlers %}{% endblock %}">
+      <span class="nav-icon">&#9678;</span> Crawler Visits
+    </a>
+    <a href="{% url 'dashboard-archive' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}" class="{% block nav_archive %}{% endblock %}">
+      <span class="nav-icon">&#9671;</span> Archive Trap
+    </a>
+    <div class="section-label">Engagement</div>
+    <a href="{% url 'dashboard-emails' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}" class="{% block nav_emails %}{% endblock %}">
+      <span class="nav-icon">&#9993;</span> Inbound Email
+    </a>
+    <a href="{% url 'dashboard-people' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}" class="{% block nav_people %}{% endblock %}">
+      <span class="nav-icon">&#9650;</span> Page Visits
+    </a>
+  </nav>
+  <div class="dash-footer">
+    <a href="{% url 'admin:index' %}">Django Admin</a> &nbsp;&middot;&nbsp;
+    <a href="/">Site</a>
+  </div>
+</div>
+
+<div class="dash-main">
+  <div class="dash-header">
+    <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+    <form method="get" class="dr-form" id="dr-form">
+      {% for value, label in presets %}
+        {% if value != 'custom' %}
+        <a href="?range={{ value }}" class="preset-btn {% if preset == value %}active{% endif %}">{{ label }}</a>
+        {% endif %}
+      {% endfor %}
+      <span style="font-size:.72rem;color:var(--muted);padding:0 .25rem">Custom:</span>
+      <input type="hidden" name="range" value="custom">
+      <input type="date" name="from" value="{{ from_str }}" max="{{ 'today' }}">
+      <span style="font-size:.72rem;color:var(--muted)">to</span>
+      <input type="date" name="to" value="{{ to_str }}">
+      <button type="submit" class="apply-btn">Apply</button>
+    </form>
+  </div>
+  <div class="dash-body">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+</body>
+</html>

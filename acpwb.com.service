@@ -1,0 +1,16 @@
+[Unit]
+Description=ACPWB Docker Compose
+Requires=docker.service
+After=docker.service network-online.target
+
+[Service]
+Type=simple
+User=dan
+WorkingDirectory=/home/dan/acpwb.com
+ExecStart=/usr/bin/docker compose up
+ExecStop=/usr/bin/docker compose down
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

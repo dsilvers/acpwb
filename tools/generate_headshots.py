@@ -100,6 +100,8 @@ def main():
     )
     pipe = pipe.to("mps")
     pipe.enable_attention_slicing()
+    # float16 VAE produces black images on MPS — upcast to float32 for the decode step
+    pipe.upcast_vae()
 
     print(f"Generating {len(to_generate)} images (skipping {len(existing)} existing) ...")
 

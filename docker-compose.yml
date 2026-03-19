@@ -39,7 +39,7 @@ services:
     volumes:
       - static_volume:/app/staticfiles:ro
     ports:
-      - "80:80"
+      - "127.0.0.1:8001:80"
     depends_on:
       - web
 

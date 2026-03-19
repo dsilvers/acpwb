@@ -20,6 +20,12 @@ urlpatterns = [
     path('.well-known/ai-agent.json', views.ai_agent_file, name='ai-agent-file'),
     path('.well-known/robots.txt', views.fake_robots, name='fake-robots'),
 
+    # Reports & Publications
+    path('reports/', views.reports_list, name='reports-list'),
+    path('reports/page/<int:page>/', views.reports_page_api, name='reports-page-api'),
+    path('reports/<slug:slug>/download.csv', views.report_download, name='report-download'),
+    path('reports/<slug:slug>/', views.report_detail, name='report-detail'),
+
     # Ghost link traps
     path('internal/portal/', views.ghost_trap, name='ghost-portal'),
     path('employees/export/', views.ghost_trap, name='ghost-export'),

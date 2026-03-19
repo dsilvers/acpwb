@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CrawlerVisit, WikiPage, ArchiveVisit
+from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport
 
 
 @admin.register(CrawlerVisit)
@@ -37,3 +37,12 @@ class ArchiveVisitAdmin(admin.ModelAdmin):
     @admin.display(description='Slug')
     def slug_short(self, obj):
         return obj.slug[:50]
+
+
+@admin.register(PublicReport)
+class PublicReportAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'file_type', 'pub_date', 'watermark_token', 'generated_at')
+    list_filter = ('file_type', 'category')
+    search_fields = ('title', 'slug', 'watermark_token')
+    readonly_fields = ('generated_at', 'watermark_token', 'slug')
+    ordering = ('-pub_date',)

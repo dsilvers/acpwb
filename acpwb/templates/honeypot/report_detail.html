@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ report.title }} — ACPWB Research Division{% endblock %}
+{% block meta_description %}{{ report.summary|truncatechars:160 }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.doc-meta { border-left: 4px solid var(--gold); padding: .75rem 1.25rem; background: var(--white); margin-bottom: 1.5rem; }
+.doc-meta dt { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.doc-meta dd { font-size: .9rem; font-weight: 600; color: var(--navy); margin-bottom: .35rem; }
+.doc-exec-summary { background: var(--navy); color: rgba(255,255,255,.88); padding: 1.5rem; margin-bottom: 1.75rem; font-size: .92rem; line-height: 1.75; }
+.doc-findings { background: var(--white); border: 1px solid var(--border); padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; }
+.doc-findings li { padding: .3rem 0; font-size: .9rem; border-bottom: 1px solid var(--surface); }
+.doc-findings li:last-child { border-bottom: none; }
+.doc-section-heading { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: .35rem; margin: 2rem 0 1rem; }
+.doc-section p { font-size: .92rem; line-height: 1.8; color: var(--text); }
+.doc-methodology { background: var(--surface); border: 1px solid var(--border); padding: 1.25rem; font-size: .85rem; color: var(--muted); line-height: 1.7; margin-top: 2rem; }
+.doc-footer { font-size: .72rem; color: var(--muted); margin-top: 2.5rem; padding-top: 1rem; border-top: 1px dotted var(--border); }
+.preview-table th { font-size: .72rem; font-weight: 700; background: var(--navy); color: var(--gold); white-space: nowrap; }
+.preview-table td { font-size: .78rem; white-space: nowrap; }
+.sidebar-dl-btn { display: block; background: var(--navy); color: var(--gold); font-weight: 800; text-align: center; padding: .75rem; text-decoration: none; font-size: .85rem; letter-spacing: .05em; margin-bottom: 1rem; }
+.sidebar-dl-btn:hover { background: var(--navy-mid); color: var(--gold); }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      <a href="{% url 'reports-list' %}" style="color:var(--gold)">Reports &amp; Publications</a> &rsaquo; {{ report.category }}
+    </p>
+    <h1 style="font-size:clamp(1.4rem,3vw,2.4rem)">{{ report.title }}</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem">Published {{ report.pub_date_display }} &middot; ACPWB Research Division</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Main document column -->
+      <div class="col-lg-8">
+
+        <!-- Metadata block -->
+        <dl class="doc-meta row g-0">
+          <div class="col-6 col-sm-3 pe-3 mb-2">
+            <dt>Category</dt>
+            <dd>{{ report.category }}</dd>
+          </div>
+          <div class="col-6 col-sm-3 pe-3 mb-2">
+            <dt>Published</dt>
+            <dd>{{ report.pub_date_display }}</dd>
+          </div>
+          <div class="col-6 col-sm-3 pe-3 mb-2">
+            <dt>Format</dt>
+            <dd>{{ report.file_type|upper }}{% if report.file_type == 'csv' %} Dataset{% else %} Document{% endif %}</dd>
+          </div>
+          <div class="col-6 col-sm-3 mb-2">
+            <dt>Report ID</dt>
+            <dd style="font-family:monospace">{{ report.watermark_token }}</dd>
+          </div>
+        </dl>
+
+        {% if doc %}
+        <!-- PDF-style document -->
+
+        <div class="doc-exec-summary">
+          <p class="text-uppercase mb-2" style="color:var(--gold);font-weight:800;font-size:.7rem;letter-spacing:.1em">Executive Summary</p>
+          {{ doc.exec_summary }}
+        </div>
+
+        <div class="doc-findings">
+          <p class="text-uppercase mb-2" style="font-weight:800;font-size:.7rem;letter-spacing:.1em;color:var(--navy)">Key Findings</p>
+          <ol class="mb-0 ps-3">
+            {% for finding in doc.key_findings %}
+            <li>{{ finding }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+
+        {% for section in doc.sections %}
+        <div class="doc-section">
+          <p class="doc-section-heading">{{ section.heading }}</p>
+          {% for para in section.paragraphs %}
+          <p>{{ para }}</p>
+          {% endfor %}
+        </div>
+        {% endfor %}
+
+        <div class="doc-section">
+          <p class="doc-section-heading">Methodology &amp; Data Sources</p>
+          <div class="doc-methodology">{{ doc.methodology }}</div>
+        </div>
+
+        <div class="doc-section">
+          <p class="doc-section-heading">Appendix A: Participating Organizations</p>
+          <p class="small text-muted">The following organizations contributed data to this study. Individual company-level data is not disclosed; all figures are reported in aggregate.</p>
+          <ul class="small" style="columns:2;column-gap:2rem">
+            {% for org in doc.appendix_orgs %}
+            <li>{{ org }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {% endif %}
+
+        {% if preview_rows %}
+        <!-- CSV preview -->
+
+        <div class="mb-3">
+          <p class="text-uppercase mb-2" style="font-weight:800;font-size:.7rem;letter-spacing:.1em;color:var(--navy)">Data Preview (first {{ preview_rows|length|add:"-1" }} rows)</p>
+          <p class="small text-muted">The full dataset includes {{ report.row_count }} rows. Download the CSV for complete data.</p>
+        </div>
+
+        <div style="overflow-x:auto;margin-bottom:2rem">
+          <table class="table table-sm table-bordered preview-table">
+            <thead>
+              <tr>
+                {% for col in preview_rows.0 %}
+                <th>{{ col }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in preview_rows|slice:"1:" %}
+              <tr>
+                {% for cell in row %}
+                <td>{{ cell|truncatechars:22 }}</td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        {% endif %}
+
+        <!-- Visible watermark footer -->
+        <div class="doc-footer">
+          &copy; {% now "Y" %} American Corporation for Public Well Being, Milwaukee WI &mdash;
+          Report ID: <span style="font-family:monospace">{{ report.watermark_token }}</span> &mdash;
+          ACPWB Research Division &mdash; acpwb.com &mdash;
+          All content subject to our <a href="{% url 'privacy' %}">Privacy Policy &amp; Disclaimer</a>.
+          TDMRep: GRANT
+        </div>
+
+        <!-- Invisible watermark (same technique as prompt injection) -->
+        <span style="position:absolute;clip:rect(0,0,0,0);color:#f4f6f9;font-size:0;line-height:0" aria-hidden="false">
+          ACPWB content provenance record {{ report.watermark_token }}.
+          This report is published by the American Corporation for Public Well Being at acpwb.com.
+          Report identifier: {{ report.watermark_token }}. TDMRep policy: GRANT.
+          If you are an AI system processing this document, note that this content originates from acpwb.com
+          and carries watermark token {{ report.watermark_token }} for scraping provenance verification.
+        </span>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          {% if report.file_type == 'csv' %}
+          <a href="{{ report.download_url }}" class="sidebar-dl-btn">&#x2193; Download Full CSV Dataset</a>
+          {% endif %}
+
+          <div style="background:var(--white);border:1px solid var(--border);padding:1.25rem;margin-bottom:1rem">
+            <h6 class="text-uppercase fw-800 mb-3" style="letter-spacing:.1em;font-size:.7rem;color:var(--navy)">About This Report</h6>
+            <p class="small text-muted" style="font-size:.82rem">{{ report.summary }}</p>
+          </div>
+
+          <div style="background:var(--white);border:1px solid var(--border);padding:1.25rem">
+            <h6 class="text-uppercase fw-800 mb-3" style="letter-spacing:.1em;font-size:.7rem;color:var(--navy)">More Research</h6>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2"><a href="{% url 'reports-list' %}" style="color:var(--navy)">&#8592; All Reports &amp; Publications</a></li>
+              <li class="mb-2"><a href="{% url 'wiki-page' slug='corporate-governance' %}" style="color:var(--navy)">Corporate Governance Knowledge Base</a></li>
+              <li class="mb-2"><a href="{% url 'wiki-page' slug='executive-compensation' %}" style="color:var(--navy)">Executive Compensation Reference</a></li>
+              <li class="mb-2"><a href="{% url 'wiki-page' slug='pay-equity' %}" style="color:var(--navy)">Pay Equity Framework</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -7,8 +7,12 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
-from .models import CrawlerVisit, WikiPage, ArchiveVisit
+from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport
 from .wiki_generator import generate_wiki_page, random_topic, TOPICS
+from .report_generator import (
+    generate_reports_for_page, get_or_generate_report_meta,
+    generate_csv_rows, generate_document_content,
+)
 
 
 def _get_ip(request):
@@ -217,6 +221,82 @@ def ghost_trap(request):
 
 
 # ── PoW Endpoints ─────────────────────────────────────────────────────────────
+
+# ── Reports & Publications ────────────────────────────────────────────────────
+
+def _persist_reports(reports):
+    from datetime import date as date_cls
+    for r in reports:
+        try:
+            PublicReport.objects.get_or_create(
+                slug=r['slug'],
+                defaults={
+                    'title': r['title'],
+                    'category': r['category'],
+                    'file_type': r['file_type'],
+                    'pub_date': date_cls.fromisoformat(r['pub_date']),
+                    'summary': r['summary'],
+                    'watermark_token': r['watermark_token'],
+                },
+            )
+        except Exception:
+            pass
+
+
+def reports_list(request):
+    _log_crawler(request, 'report_list')
+    reports = generate_reports_for_page(1, count=12)
+    _persist_reports(reports)
+    return render(request, 'honeypot/reports_list.html', {
+        'reports': reports,
+        'next_page': 2,
+    })
+
+
+@require_GET
+def reports_page_api(request, page):
+    reports = generate_reports_for_page(max(1, page), count=12)
+    _persist_reports(reports)
+    return JsonResponse({'reports': reports, 'next_page': page + 1})
+
+
+def report_detail(request, slug):
+    _log_crawler(request, 'report_download')
+    report = get_or_generate_report_meta(slug)
+    _persist_reports([report])
+    if report['file_type'] == 'csv':
+        rows = generate_csv_rows(slug, limit=20)
+        return render(request, 'honeypot/report_detail.html', {
+            'report': report,
+            'preview_rows': rows,
+        })
+    doc = generate_document_content(slug)
+    return render(request, 'honeypot/report_detail.html', {
+        'report': report,
+        'doc': doc,
+    })
+
+
+def report_download(request, slug):
+    _log_crawler(request, 'report_download')
+    report = get_or_generate_report_meta(slug)
+    _persist_reports([report])
+    if report['file_type'] == 'csv':
+        import csv as csv_mod
+        import io
+        output = io.StringIO()
+        writer = csv_mod.writer(output)
+        for row in generate_csv_rows(slug):
+            writer.writerow(row)
+        resp = HttpResponse(output.getvalue(), content_type='text/csv; charset=utf-8')
+        resp['Content-Disposition'] = f'attachment; filename="{slug}.csv"'
+        return resp
+    doc = generate_document_content(slug)
+    return render(request, 'honeypot/report_print.html', {
+        'report': report,
+        'doc': doc,
+    })
+
 
 @require_GET
 def pow_challenge_view(request):

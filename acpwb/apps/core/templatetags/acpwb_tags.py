@@ -4,7 +4,7 @@ from django import template
 from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 
-HEADSHOT_DIR = Path(__file__).resolve().parents[4] / "static" / "img" / "headshots"
+HEADSHOT_DIR = Path(__file__).resolve().parents[3] / "static" / "img" / "headshots"
 HEADSHOT_COUNT = 400
 
 register = template.Library()
@@ -43,9 +43,9 @@ def avatar_card(seed, initials, size=80):
 def headshot_or_avatar(seed, initials_text, size=80):
     """Use a generated headshot if available, otherwise fall back to CSS gradient avatar."""
     idx = int(hashlib.md5(str(seed).encode()).hexdigest(), 16) % HEADSHOT_COUNT
-    img_path = HEADSHOT_DIR / f"{idx:03d}.jpg"
+    img_path = HEADSHOT_DIR / f"{idx:03d}.webp"
     if img_path.exists():
-        url = static(f"img/headshots/{idx:03d}.jpg")
+        url = static(f"img/headshots/{idx:03d}.webp")
         style = (
             f'width:{size}px;height:{size}px;border-radius:50%;'
             f'object-fit:cover;object-position:center top;flex-shrink:0;'

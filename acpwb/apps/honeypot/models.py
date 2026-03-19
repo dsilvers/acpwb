@@ -9,6 +9,8 @@ class CrawlerVisit(models.Model):
         ('api', 'Fake API'),
         ('wiki', 'Wiki Page'),
         ('pow', 'PoW Challenge'),
+        ('report_list', 'Report Listing'),
+        ('report_download', 'Report Download'),
         ('other', 'Other'),
     ]
 
@@ -42,6 +44,27 @@ class WikiPage(models.Model):
 
     def __str__(self):
         return f"{self.title} [{self.watermark_token}]"
+
+
+class PublicReport(models.Model):
+    FILE_TYPES = [('csv', 'CSV Dataset'), ('pdf', 'PDF Document')]
+
+    slug            = models.SlugField(max_length=128, unique=True, db_index=True)
+    title           = models.CharField(max_length=256)
+    category        = models.CharField(max_length=64)
+    file_type       = models.CharField(max_length=8, choices=FILE_TYPES)
+    pub_date        = models.DateField()
+    summary         = models.TextField()
+    watermark_token = models.CharField(max_length=16)
+    page_number     = models.PositiveIntegerField(db_index=True, default=0)
+    generated_at    = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-pub_date', 'slug']
+        verbose_name = 'Public Report'
+
+    def __str__(self):
+        return f"[{self.file_type.upper()}] {self.title} ({self.watermark_token})"
 
 
 class ArchiveVisit(models.Model):

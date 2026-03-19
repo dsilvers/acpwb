@@ -37,6 +37,7 @@
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'our-people' %}active{% endif %}" href="{% url 'our-people' %}">Our People</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'mission' %}active{% endif %}" href="{% url 'mission' %}">Mission</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'project-list' %}active{% endif %}" href="{% url 'project-list' %}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'reports-list' %}active{% endif %}" href="{% url 'reports-list' %}">Reports</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'careers' %}active{% endif %}" href="{% url 'careers' %}">Careers</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'partners' %}active{% endif %}" href="{% url 'partners' %}">Partners</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'our-people' %}active{% endif %}" href="{% url 'our-people' %}">Contact</a></li>
@@ -73,6 +74,7 @@
           <li><a href="{% url 'our-people' %}">Our People</a></li>
           <li><a href="{% url 'mission' %}">Mission</a></li>
           <li><a href="{% url 'project-list' %}">Projects</a></li>
+          <li><a href="{% url 'reports-list' %}">Reports</a></li>
           <li><a href="{% url 'careers' %}">Careers</a></li>
           <li><a href="{% url 'partners' %}">Partners</a></li>
           <li><a href="{% url 'privacy' %}">Privacy</a></li>

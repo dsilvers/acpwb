@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Reports &amp; Publications — American Corporation for Public Well Being{% endblock %}
+{% block meta_description %}ACPWB Research Division publishes compensation benchmarking surveys, workforce analytics reports, ESG frameworks, and corporate governance studies. Access our full archive of public reports and datasets.{% endblock %}
+
+{% block extra_head %}
+<style>
+.report-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: box-shadow .18s;
+}
+.report-card:hover { box-shadow: 0 4px 20px rgba(10,22,40,.09); }
+.report-badge {
+  display: inline-block;
+  font-size: .65rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .09em; padding: .18rem .5rem;
+  background: var(--surface); color: var(--navy);
+  border: 1px solid var(--border);
+}
+.report-badge.legacy { background: #fff8e6; border-color: var(--gold); color: #7a5c00; }
+.report-filetype { font-size: .72rem; font-weight: 700; color: var(--muted); }
+.report-title a { color: var(--navy); text-decoration: none; font-size: .98rem; font-weight: 800; }
+.report-title a:hover { color: var(--gold); }
+.report-footer { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; margin-top: .85rem; }
+.report-date, .report-size { font-size: .74rem; color: var(--muted); }
+.btn-dl {
+  font-size: .72rem; font-weight: 700; padding: .25rem .7rem;
+  background: var(--navy); color: var(--gold); border: none;
+  text-decoration: none; letter-spacing: .04em;
+}
+.btn-dl:hover { background: var(--navy-mid); color: var(--gold); }
+.btn-view {
+  font-size: .72rem; font-weight: 700; padding: .25rem .7rem;
+  background: transparent; color: var(--navy);
+  border: 1px solid var(--border); text-decoration: none;
+}
+.btn-view:hover { border-color: var(--navy); }
+#loading-indicator { text-align: center; padding: 2rem; color: var(--muted); font-size: .85rem; display: none; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">ACPWB Research Division</p>
+    <h1>REPORTS &amp; PUBLICATIONS</h1>
+    <p>Compensation benchmarking, workforce analytics, governance research, and ESG frameworks — freely available to practitioners and policymakers.</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <p class="text-uppercase text-gold fw-800 mb-1" style="letter-spacing:.15em;font-size:.7rem">Research Archive</p>
+            <h2 class="section-heading mb-0" style="font-size:1.3rem">ALL PUBLICATIONS</h2>
+            <hr class="section-rule" style="margin:.5rem 0 0">
+          </div>
+          <span class="report-badge" style="font-size:.6rem">Scroll for more</span>
+        </div>
+
+        <div id="reports-grid">
+          {% for r in reports %}
+          <div class="report-card">
+            <div class="d-flex justify-content-between align-items-start mb-2 gap-2">
+              <span class="report-badge {% if r.is_legacy %}legacy{% endif %}">
+                {% if r.is_legacy %}LEGACY — {% endif %}{{ r.category }}
+              </span>
+              <span class="report-filetype">
+                {% if r.file_type == 'csv' %}&#x1F4CA;{% else %}&#x1F4C4;{% endif %}
+                {{ r.file_type|upper }}
+              </span>
+            </div>
+            <p class="report-title mb-1"><a href="{{ r.detail_url }}">{{ r.title }}</a></p>
+            <p class="text-muted small mb-0" style="font-size:.82rem;line-height:1.5">{{ r.summary|truncatechars:200 }}</p>
+            <div class="report-footer">
+              <span class="report-date">{{ r.pub_date_display }}</span>
+              <span class="report-size">{{ r.fake_size }}</span>
+              <a href="{{ r.detail_url }}" class="btn-view">View Report</a>
+              {% if r.file_type == 'csv' %}
+              <a href="{{ r.download_url }}" class="btn-dl">&#x2193; Download CSV</a>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div id="load-sentinel"></div>
+        <div id="loading-indicator">Loading more reports&hellip;</div>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <div style="background:var(--white);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.25rem">
+            <h6 class="text-uppercase fw-800" style="letter-spacing:.1em;font-size:.7rem;color:var(--navy)">Research Categories</h6>
+            <ul class="list-unstyled mb-0 mt-2" style="font-size:.85rem">
+              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Compensation &amp; Pay</a></li>
+              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Workforce Analytics</a></li>
+              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Corporate Governance</a></li>
+              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">ESG &amp; Sustainability</a></li>
+              <li class="py-1" style="border-bottom:1px solid var(--border)"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Benefits &amp; Retirement</a></li>
+              <li class="py-1"><a href="{% url 'reports-list' %}" style="color:var(--text);text-decoration:none">Economic Indicators</a></li>
+            </ul>
+          </div>
+
+          <div style="background:var(--navy);color:var(--white);padding:1.5rem;margin-bottom:1.25rem">
+            <h6 class="text-uppercase fw-800" style="letter-spacing:.1em;font-size:.7rem;color:var(--gold)">About Our Research</h6>
+            <p class="small mt-2 mb-3" style="color:rgba(255,255,255,.75);font-size:.82rem">ACPWB's Research Division has published compensation benchmarking and workforce analytics reports since 1993. Our data is drawn from voluntary participation by HR and finance professionals at organizations of all sizes.</p>
+            <p class="small mb-0" style="color:rgba(255,255,255,.5);font-size:.75rem">All reports are free to access. Data CSVs may be used for non-commercial research with attribution.</p>
+          </div>
+
+          <div style="background:var(--white);border:1px solid var(--border);padding:1.5rem">
+            <h6 class="text-uppercase fw-800" style="letter-spacing:.1em;font-size:.7rem;color:var(--navy)">Recent Highlights</h6>
+            <ul class="list-unstyled mb-0 mt-2">
+              {% for r in reports|slice:":4" %}
+              <li class="mb-2" style="font-size:.82rem;border-bottom:1px solid var(--surface);padding-bottom:.5rem">
+                <a href="{{ r.detail_url }}" style="color:var(--navy);text-decoration:none;font-weight:600">{{ r.title|truncatechars:55 }}</a>
+                <br><span style="font-size:.72rem;color:var(--muted)">{{ r.pub_date_display }} &middot; {{ r.file_type|upper }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  var nextPage = {{ next_page }};
+  var loading = false;
+  var container = document.getElementById('reports-grid');
+  var sentinel = document.getElementById('load-sentinel');
+  var indicator = document.getElementById('loading-indicator');
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function truncate(s, n) {
+    s = String(s);
+    return s.length > n ? s.slice(0, n) + '\u2026' : s;
+  }
+
+  function renderCard(r) {
+    var legacyClass = r.is_legacy ? ' legacy' : '';
+    var legacyLabel = r.is_legacy ? 'LEGACY \u2014 ' : '';
+    var icon = r.file_type === 'csv' ? '&#x1F4CA;' : '&#x1F4C4;';
+    var dlBtn = r.file_type === 'csv'
+      ? '<a href="' + esc(r.download_url) + '" class="btn-dl">&#x2193; Download CSV</a>'
+      : '';
+    return '<div class="report-card">' +
+      '<div class="d-flex justify-content-between align-items-start mb-2 gap-2">' +
+        '<span class="report-badge' + legacyClass + '">' + legacyLabel + esc(r.category) + '</span>' +
+        '<span class="report-filetype">' + icon + ' ' + esc(r.file_type.toUpperCase()) + '</span>' +
+      '</div>' +
+      '<p class="report-title mb-1"><a href="' + esc(r.detail_url) + '">' + esc(r.title) + '</a></p>' +
+      '<p class="text-muted small mb-0" style="font-size:.82rem;line-height:1.5">' + esc(truncate(r.summary, 200)) + '</p>' +
+      '<div class="report-footer">' +
+        '<span class="report-date">' + esc(r.pub_date_display) + '</span>' +
+        '<span class="report-size">' + esc(r.fake_size) + '</span>' +
+        '<a href="' + esc(r.detail_url) + '" class="btn-view">View Report</a>' +
+        dlBtn +
+      '</div>' +
+    '</div>';
+  }
+
+  function loadMore() {
+    if (loading) return;
+    loading = true;
+    indicator.style.display = 'block';
+    fetch('/reports/page/' + nextPage + '/')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        data.reports.forEach(function (r) {
+          container.insertAdjacentHTML('beforeend', renderCard(r));
+        });
+        nextPage = data.next_page;
+        loading = false;
+        indicator.style.display = 'none';
+      })
+      .catch(function () { loading = false; indicator.style.display = 'none'; });
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) loadMore();
+    }, { rootMargin: '400px' }).observe(sentinel);
+  }
+})();
+</script>
+{% endblock %}

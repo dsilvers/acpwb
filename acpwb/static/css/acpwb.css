@@ -52,10 +52,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 0.18em;
-  color: var(--gold);
+  color: #ffffff;
   text-transform: uppercase;
   display: block;
-  text-shadow: 0 2px 12px rgba(201,168,76,0.25);
+  text-shadow: none;
 }
 
 .acpwb-logo-line3 {

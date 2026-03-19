@@ -142,18 +142,92 @@ Every page also contains:
 
 ---
 
-## Mailgun Setup
+## Inbound Email
 
-1. Add a catch-all route in Mailgun for `@acpwb.com` → forward to `https://acpwb.com/webhooks/mailgun/inbound/`
-2. Set `MAILGUN_WEBHOOK_SIGNING_KEY` in your `.env` (found in Mailgun dashboard → Webhooks)
+Two supported providers. Both create `InboundEmail` + `HoneypotMatch` records and are visible in Django admin under **Webhooks → Honeypot Matches**.
 
-The webhook:
-- Verifies HMAC-SHA256 signature
-- Creates an `InboundEmail` record
-- Queries `GeneratedEmployee` to find matches on the recipient address
-- Creates `HoneypotMatch` records linking the spam to the exact page visit that displayed the address
+### Cloudflare Email Routing (primary)
 
-View matches in Django admin under **Webhooks → Honeypot Matches**.
+1. Cloudflare Dashboard → your domain → **Email → Email Routing** → Enable
+2. **Routing Rules → Catch-all** → Action: Send to a Worker → create a new Worker with the code below
+3. Set `WEBHOOK_SECRET` as an encrypted environment variable on the Worker
+4. Set `PIPE_WEBHOOK_SECRET` in your server `.env` to the same value
+
+```javascript
+export default {
+  async email(message, env, ctx) {
+    const rawEmail = await new Response(message.raw).text();
+    await fetch('https://acpwb.com/webhooks/pipe/inbound/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Webhook-Secret': env.WEBHOOK_SECRET,
+      },
+      body: JSON.stringify({
+        sender: message.from,
+        recipient: message.to,
+        subject: message.headers.get('subject') ?? '',
+        raw: rawEmail,
+      }),
+    });
+  }
+};
+```
+
+### Mailgun (legacy)
+
+1. Add a catch-all route for `@acpwb.com` → forward to `https://acpwb.com/webhooks/mailgun/inbound/`
+2. Set `MAILGUN_WEBHOOK_SIGNING_KEY` in your `.env`
+
+---
+
+## Production Deployment
+
+### Prerequisites
+
+- Server with nginx already running other sites
+- Docker + Docker Compose installed
+- Cloudflare managing DNS for `acpwb.com`
+
+### First-time SSL setup
+
+Nginx can't start with the SSL config until the certificate exists. Use the bootstrap config first:
+
+```bash
+sudo mkdir -p /var/www/certbot
+sudo cp nginx/acpwb.com.bootstrap /etc/nginx/sites-available/acpwb.com
+sudo ln -s /etc/nginx/sites-available/acpwb.com /etc/nginx/sites-enabled/acpwb.com
+sudo nginx -t && sudo systemctl reload nginx
+
+sudo certbot certonly --webroot -w /var/www/certbot -d acpwb.com -d www.acpwb.com
+
+# Swap in the full SSL config
+sudo cp nginx/acpwb.com /etc/nginx/sites-available/acpwb.com
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+### Systemd service
+
+```bash
+sudo cp acpwb.com.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable acpwb.com
+sudo systemctl start acpwb.com
+```
+
+The service runs `docker compose up` from `/home/dan/acpwb.com/` and restarts on failure.
+
+### Static files
+
+Host nginx serves `/static/` directly from `/home/dan/acpwb.com/acpwb/staticfiles/` — no Docker round-trip. After deploying changes run:
+
+```bash
+docker compose exec web python manage.py collectstatic --noinput
+```
+
+### Docker port
+
+The Docker nginx container binds to `127.0.0.1:8001` only. Host nginx proxies to it. The `/.well-known/` paths are proxied to Django (honeypot endpoints live there).
 
 ---
 
@@ -165,8 +239,9 @@ View matches in Django admin under **Webhooks → Honeypot Matches**.
 | `DJANGO_DEBUG` | `True` for local dev |
 | `DJANGO_SETTINGS_MODULE` | `config.settings.local` for dev |
 | `DB_PASSWORD` | PostgreSQL password |
-| `MAILGUN_WEBHOOK_SIGNING_KEY` | From Mailgun dashboard |
-| `MAILGUN_DOMAIN` | `acpwb.com` |
+| `PIPE_WEBHOOK_SECRET` | Shared secret for Cloudflare Email Worker |
+| `MAILGUN_WEBHOOK_SIGNING_KEY` | From Mailgun dashboard (legacy) |
+| `MAILGUN_DOMAIN` | `acpwb.com` (legacy) |
 
 ---
 

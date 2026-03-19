@@ -72,6 +72,13 @@
         <div id="reports-grid">
           {% for r in reports %}
           <div class="report-card">
+            {% with cover="/static/img/report-covers/"|add:r.slug|add:".webp" %}
+            <a href="{{ r.detail_url }}" style="display:block;overflow:hidden;margin:-1.5rem -1.5rem 1rem;height:160px;position:relative">
+              <img src="{{ cover }}" alt="{{ r.title }}"
+                   style="width:100%;height:100%;object-fit:cover;display:block"
+                   onerror="this.parentElement.style.display='none'">
+            </a>
+            {% endwith %}
             <div class="d-flex justify-content-between align-items-start mb-2 gap-2">
               <span class="report-badge {% if r.is_legacy %}legacy{% endif %}">
                 {% if r.is_legacy %}LEGACY — {% endif %}{{ r.category }}
@@ -180,7 +187,11 @@
     var icon = r.file_type === 'csv' ? '&#x1F4CA;' : '&#x1F4C4;';
     var dlLabel = r.file_type === 'csv' ? '&#x2193; Download CSV' : '&#x2193; Download PDF';
     var dlBtn = '<a href="' + esc(r.download_url) + '" class="btn-dl">' + dlLabel + '</a>';
-    return '<div class="report-card">' +
+    var coverSrc = '/static/img/report-covers/' + esc(r.slug) + '.webp';
+    var coverHtml = '<a href="' + esc(r.detail_url) + '" style="display:block;overflow:hidden;margin:-1.5rem -1.5rem 1rem;height:160px;position:relative">' +
+      '<img src="' + coverSrc + '" alt="' + esc(r.title) + '" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentElement.style.display=\'none\'">' +
+      '</a>';
+    return '<div class="report-card">' + coverHtml +
       '<div class="d-flex justify-content-between align-items-start mb-2 gap-2">' +
         '<span class="report-badge' + legacyClass + '">' + legacyLabel + esc(r.category) + '</span>' +
         '<span class="report-filetype">' + icon + ' ' + esc(r.file_type.toUpperCase()) + '</span>' +

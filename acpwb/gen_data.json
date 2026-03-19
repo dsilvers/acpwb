@@ -1,0 +1,627 @@
+{
+  "reports": [
+    {
+      "slug": "salary-compensation-benchmarking-survey-2024",
+      "title": "Salary & Compensation Benchmarking Survey 2024",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "annual-workforce-analytics-report-2024",
+      "title": "Annual Workforce Analytics Report 2024",
+      "category": "Workforce",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "executive-compensation-study-2024",
+      "title": "Executive Compensation Study 2024",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "corporate-governance-best-practices-white-paper",
+      "title": "Corporate Governance Best Practices White Paper",
+      "category": "Governance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "esg-disclosure-framework-2024",
+      "title": "ESG Disclosure Framework 2024",
+      "category": "ESG",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "q3-economic-indicators-2024",
+      "title": "Q3 Economic Indicators Report 2024",
+      "category": "Economic",
+      "file_type": "csv"
+    },
+    {
+      "slug": "benefits-cost-analysis-2024",
+      "title": "Benefits Cost Analysis 2024",
+      "category": "Benefits",
+      "file_type": "csv"
+    },
+    {
+      "slug": "industry-wage-gap-analysis-2024",
+      "title": "Industry Wage Gap Analysis 2024",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "fortune-500-ceo-pay-ratio-analysis",
+      "title": "Fortune 500 CEO Pay Ratio Analysis",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "state-of-workplace-report-2024",
+      "title": "State of the Workplace Report 2024",
+      "category": "Workforce",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "regulatory-compliance-costs-2024",
+      "title": "Regulatory Compliance Costs Report 2024",
+      "category": "Governance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "employee-satisfaction-survey-results-2024",
+      "title": "Employee Satisfaction Survey Results 2024",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "regional-salary-differentials-2024",
+      "title": "Regional Salary Differentials Study 2024",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "board-composition-study-2024",
+      "title": "Board Composition Study 2024",
+      "category": "Governance",
+      "file_type": "csv"
+    },
+    {
+      "slug": "retirement-readiness-index-2024",
+      "title": "Retirement Readiness Index 2024",
+      "category": "Benefits",
+      "file_type": "csv"
+    },
+    {
+      "slug": "public-sector-compensation-guide",
+      "title": "Public Sector Compensation Guide",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "healthcare-benefits-landscape-2024",
+      "title": "Healthcare Benefits Landscape 2024",
+      "category": "Benefits",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "remote-work-impact-study-2024",
+      "title": "Remote Work Impact Study 2024",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "national-salary-survey-2001",
+      "title": "National Salary Survey 2001",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "corporate-pay-equity-study-1998",
+      "title": "Corporate Pay Equity Study 1998",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "workforce-demographics-report-2006",
+      "title": "Workforce Demographics Report 2006",
+      "category": "Workforce",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "executive-benefits-survey-2003",
+      "title": "Executive Benefits Survey 2003",
+      "category": "Benefits",
+      "file_type": "csv"
+    },
+    {
+      "slug": "governance-disclosure-standards-2009",
+      "title": "Governance Disclosure Standards 2009",
+      "category": "Governance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "compensation-benchmarking-methodology-1995",
+      "title": "Compensation Benchmarking Methodology 1995",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "annual-hr-metrics-report-2011",
+      "title": "Annual HR Metrics Report 2011",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "job-grade-architecture-white-paper-2007",
+      "title": "Job Grade Architecture White Paper 2007",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "preliminary-job-architecture-review-assessment-2024-12a0",
+      "title": "Preliminary Job Architecture Review Assessment 2024",
+      "category": "Compliance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "regional-talent-retention-report-2021-0fd7",
+      "title": "Regional Talent Retention Report 2021",
+      "category": "Leadership",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "supplemental-turnover-analysis-briefing-2022-4a66",
+      "title": "Supplemental Turnover Analysis Briefing 2022",
+      "category": "Economic",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "cross-industry-gender-pay-gap-guide-2008-fa7b",
+      "title": "Cross-Industry Gender Pay Gap Guide 2008",
+      "category": "Economic",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "mid-year-geographic-pay-differentials-survey-2018-e65d",
+      "title": "Mid-Year Geographic Pay Differentials Survey 2018",
+      "category": "ESG",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "revised-remote-work-productivity-white-paper-2024-ab77",
+      "title": "Revised Remote Work Productivity White Paper 2024",
+      "category": "Economic",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "national-incentive-compensation-index-2024-feea",
+      "title": "National Incentive Compensation Index 2024",
+      "category": "Talent Acquisition",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "comprehensive-wage-band-calibration-white-paper-e4b7",
+      "title": "Comprehensive Wage Band Calibration White Paper",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "mid-year-executive-pay-white-paper-2020-1190",
+      "title": "Mid-Year Executive Pay White Paper 2020",
+      "category": "Technology",
+      "file_type": "csv"
+    },
+    {
+      "slug": "longitudinal-turnover-analysis-study-2010-f0b1",
+      "title": "Longitudinal Turnover Analysis Study 2010",
+      "category": "Retention",
+      "file_type": "csv"
+    },
+    {
+      "slug": "strategic-healthcare-cost-trends-assessment-2010-f55e",
+      "title": "Strategic Healthcare Cost Trends Assessment 2010",
+      "category": "Benefits",
+      "file_type": "csv"
+    },
+    {
+      "slug": "supplemental-pay-transparency-compliance-report-2021-a52e",
+      "title": "Supplemental Pay Transparency Compliance Report 2021",
+      "category": "ESG",
+      "file_type": "csv"
+    },
+    {
+      "slug": "benchmark-pay-equity-analysis-2024-d685",
+      "title": "Benchmark Pay Equity Analysis 2024",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "final-hiring-cost-analysis-guide-2018-0f9e",
+      "title": "Final Hiring Cost Analysis Guide 2018",
+      "category": "ESG",
+      "file_type": "csv"
+    },
+    {
+      "slug": "biennial-pay-equity-study-2018-c2f3",
+      "title": "Biennial Pay Equity Study 2018",
+      "category": "Technology",
+      "file_type": "csv"
+    },
+    {
+      "slug": "baseline-retirement-plan-participation-study-2012-0451",
+      "title": "Baseline Retirement Plan Participation Study 2012",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "strategic-ceo-pay-ratio-survey-2022-b8de",
+      "title": "Strategic CEO Pay Ratio Survey 2022",
+      "category": "Retention",
+      "file_type": "csv"
+    },
+    {
+      "slug": "comparative-workforce-planning-briefing-2014-edc5",
+      "title": "Comparative Workforce Planning Briefing 2014",
+      "category": "Workforce",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "preliminary-workforce-demographics-study-2021-597d",
+      "title": "Preliminary Workforce Demographics Study 2021",
+      "category": "Governance",
+      "file_type": "csv"
+    },
+    {
+      "slug": "cross-industry-market-pricing-methodology-guide-2016-41a4",
+      "title": "Cross-Industry Market Pricing Methodology Guide 2016",
+      "category": "Governance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "strategic-employee-engagement-index-survey-13e6",
+      "title": "Strategic Employee Engagement Index Survey",
+      "category": "Leadership",
+      "file_type": "csv"
+    },
+    {
+      "slug": "comprehensive-turnover-analysis-study-2025-0d9e",
+      "title": "Comprehensive Turnover Analysis Study 2025",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "annual-benefits-utilization-guide-2017-e8a8",
+      "title": "Annual Benefits Utilization Guide 2017",
+      "category": "Compliance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "annual-salary-transparency-analysis-2024-44ca",
+      "title": "Annual Salary Transparency Analysis 2024",
+      "category": "ESG",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "mid-year-executive-pay-analysis-2008-bc65",
+      "title": "Mid-Year Executive Pay Analysis 2008",
+      "category": "ESG",
+      "file_type": "csv"
+    },
+    {
+      "slug": "preliminary-salary-transparency-index-2017-d6da",
+      "title": "Preliminary Salary Transparency Index 2017",
+      "category": "Technology",
+      "file_type": "csv"
+    },
+    {
+      "slug": "cross-industry-remote-work-productivity-analysis-2019-4ab0",
+      "title": "Cross-Industry Remote Work Productivity Analysis 2019",
+      "category": "Workforce",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "preliminary-pay-transparency-compliance-survey-2012-52f4",
+      "title": "Preliminary Pay Transparency Compliance Survey 2012",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "strategic-employee-engagement-index-briefing-2025-b58a",
+      "title": "Strategic Employee Engagement Index Briefing 2025",
+      "category": "Technology",
+      "file_type": "csv"
+    },
+    {
+      "slug": "biennial-workforce-planning-briefing-06fd",
+      "title": "Biennial Workforce Planning Briefing",
+      "category": "Benefits",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "preliminary-compliance-risk-analysis-2021-a75e",
+      "title": "Preliminary Compliance Risk Analysis 2021",
+      "category": "Diversity & Inclusion",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "strategic-benefits-utilization-guide-2025-31ee",
+      "title": "Strategic Benefits Utilization Guide 2025",
+      "category": "Retention",
+      "file_type": "csv"
+    },
+    {
+      "slug": "quarterly-workforce-demographics-study-fbb6",
+      "title": "Quarterly Workforce Demographics Study",
+      "category": "Benefits",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "strategic-compensation-benchmarking-study-2016-cecb",
+      "title": "Strategic Compensation Benchmarking Study 2016",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "final-employee-engagement-index-guide-2009-77b1",
+      "title": "Final Employee Engagement Index Guide 2009",
+      "category": "Diversity & Inclusion",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "regional-salary-transparency-survey-2023-6486",
+      "title": "Regional Salary Transparency Survey 2023",
+      "category": "Retention",
+      "file_type": "csv"
+    },
+    {
+      "slug": "comprehensive-ceo-pay-ratio-study-2023-926f",
+      "title": "Comprehensive CEO Pay Ratio Study 2023",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "revised-salary-transparency-study-e173",
+      "title": "Revised Salary Transparency Study",
+      "category": "Governance",
+      "file_type": "csv"
+    },
+    {
+      "slug": "annual-remote-work-productivity-study-ad56",
+      "title": "Annual Remote Work Productivity Study",
+      "category": "Talent Acquisition",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "benchmark-job-architecture-review-assessment-2006-56a9",
+      "title": "Benchmark Job Architecture Review Assessment 2006",
+      "category": "Talent Acquisition",
+      "file_type": "csv"
+    },
+    {
+      "slug": "expanded-employee-engagement-index-assessment-69f5",
+      "title": "Expanded Employee Engagement Index Assessment",
+      "category": "Benefits",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "annual-workforce-demographics-survey-2015-775d",
+      "title": "Annual Workforce Demographics Survey 2015",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "biennial-skills-gap-assessment-analysis-914f",
+      "title": "Biennial Skills Gap Assessment Analysis",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "annual-pay-transparency-compliance-survey-2023-1bb7",
+      "title": "Annual Pay Transparency Compliance Survey 2023",
+      "category": "Compliance",
+      "file_type": "csv"
+    },
+    {
+      "slug": "cross-industry-compliance-risk-analysis-f1c1",
+      "title": "Cross-Industry Compliance Risk Analysis",
+      "category": "Leadership",
+      "file_type": "csv"
+    },
+    {
+      "slug": "trend-talent-retention-survey-e174",
+      "title": "Trend Talent Retention Survey",
+      "category": "Diversity & Inclusion",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "biennial-board-effectiveness-guide-2024-9ba3",
+      "title": "Biennial Board Effectiveness Guide 2024",
+      "category": "Technology",
+      "file_type": "csv"
+    },
+    {
+      "slug": "trend-diversity-metrics-briefing-2013-5ce1",
+      "title": "Trend Diversity Metrics Briefing 2013",
+      "category": "Governance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "revised-retirement-plan-participation-report-2018-164d",
+      "title": "Revised Retirement Plan Participation Report 2018",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "biennial-salary-transparency-survey-2023-fd91",
+      "title": "Biennial Salary Transparency Survey 2023",
+      "category": "Technology",
+      "file_type": "csv"
+    },
+    {
+      "slug": "strategic-talent-retention-index-2023-83e5",
+      "title": "Strategic Talent Retention Index 2023",
+      "category": "Compensation",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "integrated-ceo-pay-ratio-white-paper-2022-8aa3",
+      "title": "Integrated CEO Pay Ratio White Paper 2022",
+      "category": "Compliance",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "baseline-talent-retention-index-2022-949d",
+      "title": "Baseline Talent Retention Index 2022",
+      "category": "Workforce",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "supplemental-hiring-cost-analysis-framework-2019-ed56",
+      "title": "Supplemental Hiring Cost Analysis Framework 2019",
+      "category": "Talent Acquisition",
+      "file_type": "csv"
+    },
+    {
+      "slug": "annual-pay-equity-white-paper-2024-585b",
+      "title": "Annual Pay Equity White Paper 2024",
+      "category": "Retention",
+      "file_type": "csv"
+    },
+    {
+      "slug": "revised-talent-retention-assessment-2007-8a14",
+      "title": "Revised Talent Retention Assessment 2007",
+      "category": "Benefits",
+      "file_type": "csv"
+    },
+    {
+      "slug": "final-remote-work-productivity-briefing-2024-cf37",
+      "title": "Final Remote Work Productivity Briefing 2024",
+      "category": "ESG",
+      "file_type": "csv"
+    },
+    {
+      "slug": "baseline-remote-work-productivity-white-paper-2024-4659",
+      "title": "Baseline Remote Work Productivity White Paper 2024",
+      "category": "Diversity & Inclusion",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "biennial-employee-engagement-index-guide-2010-7b79",
+      "title": "Biennial Employee Engagement Index Guide 2010",
+      "category": "Workforce",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "strategic-wage-band-calibration-survey-2011-fee2",
+      "title": "Strategic Wage Band Calibration Survey 2011",
+      "category": "Leadership",
+      "file_type": "csv"
+    },
+    {
+      "slug": "preliminary-compliance-risk-guide-2005-072d",
+      "title": "Preliminary Compliance Risk Guide 2005",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "comparative-diversity-metrics-index-2021-8e45",
+      "title": "Comparative Diversity Metrics Index 2021",
+      "category": "Benefits",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "trend-turnover-analysis-framework-2023-7d67",
+      "title": "Trend Turnover Analysis Framework 2023",
+      "category": "Benefits",
+      "file_type": "csv"
+    },
+    {
+      "slug": "supplemental-workforce-demographics-guide-2022-9c2b",
+      "title": "Supplemental Workforce Demographics Guide 2022",
+      "category": "ESG",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "regional-hiring-cost-analysis-analysis-2009-01cd",
+      "title": "Regional Hiring Cost Analysis Analysis 2009",
+      "category": "Retention",
+      "file_type": "csv"
+    },
+    {
+      "slug": "supplemental-gender-pay-gap-briefing-2022-5745",
+      "title": "Supplemental Gender Pay Gap Briefing 2022",
+      "category": "Economic",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "baseline-hiring-cost-analysis-framework-2012-6f8a",
+      "title": "Baseline Hiring Cost Analysis Framework 2012",
+      "category": "Compensation",
+      "file_type": "csv"
+    },
+    {
+      "slug": "comparative-executive-pay-assessment-2010-1428",
+      "title": "Comparative Executive Pay Assessment 2010",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "longitudinal-incentive-compensation-framework-2020-6d8c",
+      "title": "Longitudinal Incentive Compensation Framework 2020",
+      "category": "Workforce",
+      "file_type": "csv"
+    },
+    {
+      "slug": "quarterly-market-pricing-methodology-briefing-2012-a9c1",
+      "title": "Quarterly Market Pricing Methodology Briefing 2012",
+      "category": "Benefits",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "biennial-incentive-compensation-guide-2014-fcea",
+      "title": "Biennial Incentive Compensation Guide 2014",
+      "category": "Governance",
+      "file_type": "csv"
+    },
+    {
+      "slug": "regional-compliance-risk-framework-9b64",
+      "title": "Regional Compliance Risk Framework",
+      "category": "Diversity & Inclusion",
+      "file_type": "csv"
+    },
+    {
+      "slug": "strategic-workforce-planning-report-2020-1972",
+      "title": "Strategic Workforce Planning Report 2020",
+      "category": "ESG",
+      "file_type": "pdf"
+    },
+    {
+      "slug": "integrated-turnover-analysis-framework-2017-cf22",
+      "title": "Integrated Turnover Analysis Framework 2017",
+      "category": "Retention",
+      "file_type": "csv"
+    }
+  ],
+  "projects": {
+    "industries": [
+      "Healthcare",
+      "Financial Services",
+      "Energy",
+      "Manufacturing",
+      "Technology",
+      "Retail",
+      "Real Estate",
+      "Transportation",
+      "Agriculture",
+      "Education",
+      "Government Relations",
+      "Nonprofit Sector",
+      "Infrastructure",
+      "Media",
+      "Hospitality",
+      "Pharmaceuticals",
+      "Defense",
+      "Consumer Goods",
+      "Telecommunications"
+    ]
+  }
+}

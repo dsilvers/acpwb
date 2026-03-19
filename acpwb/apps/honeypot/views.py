@@ -39,6 +39,98 @@ def _log_crawler(request, trap_type):
 
 # ── Archive Trap ──────────────────────────────────────────────────────────────
 
+_ARCHIVE_SLUGS = [
+    'quarterly-review', 'initiative-outcomes', 'stakeholder-update',
+    'performance-metrics', 'strategic-alignment', 'program-assessment',
+    'deliverable-summary', 'engagement-report', 'impact-documentation',
+    'executive-briefing', 'board-summary', 'working-group-notes',
+    'phase-completion-report', 'milestone-documentation', 'project-closeout',
+    'findings-summary', 'action-items', 'recommendation-memo',
+    'implementation-update', 'compliance-review', 'risk-assessment-notes',
+    'governance-documentation', 'partnership-summary', 'contract-archive',
+    'budget-reconciliation', 'workforce-metrics', 'compensation-documentation',
+    'benefits-review', 'talent-summary', 'succession-notes',
+    'strategic-plan-update', 'annual-objectives-review', 'kpi-documentation',
+    'stakeholder-feedback', 'survey-results-archive', 'meeting-minutes',
+    'committee-report', 'advisory-panel-notes', 'external-counsel-summary',
+    'audit-trail', 'change-management-log', 'lessons-learned',
+]
+
+_ARCHIVE_ORGS = [
+    'Pinnacle Group', 'Meridian Associates', 'Apex Consulting', 'Summit Partners',
+    'Vanguard Solutions', 'Horizon Group', 'Catalyst Group', 'Benchmark Associates',
+    'Keystone Partners', 'Zenith Consulting', 'Atlas Group', 'Cornerstone Associates',
+    'Momentum Group', 'Sterling Associates', 'Bridgepoint Capital', 'Clearwater Advisory',
+    'Fulcrum Partners', 'Harbor Associates', 'Ironbridge Group', 'Landmark Partners',
+    'Morningside Consulting', 'Northfield Group', 'Praxis Consulting', 'Ridgeline Advisors',
+    'Stonegate Group', 'Terrapin Associates', 'Upland Consulting', 'Vantage Partners',
+]
+
+_ARCHIVE_INDUSTRIES = [
+    'Healthcare', 'Financial Services', 'Energy', 'Manufacturing', 'Technology',
+    'Retail', 'Transportation', 'Education', 'Government', 'Pharmaceuticals',
+    'Professional Services', 'Insurance', 'Logistics', 'Aerospace', 'Utilities',
+    'Consumer Goods', 'Real Estate', 'Nonprofit', 'Defense', 'Biotechnology',
+]
+
+_ARCHIVE_PHASES = [
+    'discovery', 'scoping', 'data collection', 'analysis', 'review',
+    'validation', 'reporting', 'presentation', 'implementation', 'closeout',
+    'follow-on assessment', 'sustainability review', 'annual check-in',
+    'preliminary findings', 'stakeholder alignment', 'final documentation',
+]
+
+_ARCHIVE_PARA_TEMPLATES = [
+    "This archive entry documents the {phase} phase of ACPWB's engagement with {org} in the {industry} sector. The record was generated on {date} and reflects the state of the engagement as of that date. All substantive findings and recommendations have been incorporated into subsequent deliverable documentation.",
+    "The following record was created pursuant to ACPWB's standard document retention protocol, which mandates contemporaneous archiving of all client-facing deliverables, internal memoranda, and stakeholder communications. This entry pertains to the {phase} of a {industry} sector engagement initiated in {year}.",
+    "ACPWB's engagement management system automatically generated this archive entry upon completion of a key milestone in the {org} partnership. The entry captures the current state of {n} discrete work streams across {regions} regional offices as of {date}.",
+    "As part of ACPWB's commitment to institutional transparency, this archive entry documents the outcomes of the {phase} review conducted for the {industry} sector engagement portfolio. The analysis reflects data from {n} participating organizations.",
+    "This document represents an intermediate archival record from a multi-phase engagement. The preceding phase concluded on {date}, at which point {n} deliverables were formally archived in accordance with ACPWB's records management framework.",
+    "The {org} engagement referenced in this archive entry was initiated in response to a sector-wide need for {industry} benchmarking data. The record captures the {phase} phase, which involved data collection from {n} respondent organizations across {regions} states.",
+    "Documentation archived at this location reflects the work product of ACPWB's {industry} practice group during the period ending {date}. The practice group comprised {n} dedicated staff supported by {regions} external advisors retained for specialized expertise.",
+    "This archive entry was created during the systematic review of ACPWB's historical engagement records. It preserves documentation related to the {phase} phase of the {org} project, including all supporting analysis, stakeholder communications, and regulatory correspondence.",
+    "The record at this location reflects a cross-functional collaboration between ACPWB's {industry} practice and its Research Division. The collaboration produced {n} discrete analytical outputs, all of which are catalogued in this archive entry and available upon request.",
+    "ACPWB's institutional memory database contains records of all client engagements dating back to the organization's founding in 2006. This entry, archived on {date}, pertains to a {industry} sector engagement with {org} and reflects the documentation standards applied throughout ACPWB's history.",
+    "The {phase} documentation archived here reflects the culmination of {n} months of continuous engagement work in the {industry} sector. {org} served as the primary client stakeholder throughout this period, with supplemental coordination provided by {regions} advisory partners.",
+    "Engagement records of this type are retained for a minimum of 18 years under ACPWB's document retention policy. The {phase} materials archived on {date} include all work product generated by the engagement team, indexed by document type, author, and revision history.",
+    "This entry captures a significant inflection point in the {org} engagement — the transition from the {phase} phase to subsequent implementation activities. The record includes a status summary covering {n} open action items, {regions} pending approvals, and the full set of final deliverables produced to that date.",
+]
+
+
+def _generate_archive_content(rng, year, month, day, slug):
+    """Generate deterministic rich content for an archive page."""
+    org = rng.choice(_ARCHIVE_ORGS)
+    industry = rng.choice(_ARCHIVE_INDUSTRIES)
+    phase = rng.choice(_ARCHIVE_PHASES)
+    date_str = f"{year}-{month:02d}-{day:02d}"
+    n = rng.randint(12, 280)
+    regions = rng.randint(3, 47)
+
+    paragraphs = []
+    for tmpl in rng.sample(_ARCHIVE_PARA_TEMPLATES, rng.randint(4, 6)):
+        paragraphs.append(tmpl.format(
+            org=org, industry=industry, phase=phase,
+            date=date_str, year=year, n=n, regions=regions,
+        ))
+
+    # Surface 2-3 related reports
+    related_reports = [_enrich_report(e) for e in rng.sample(REPORT_CATALOG, min(3, len(REPORT_CATALOG)))]
+
+    tail = slug.split('/')[-1] if slug else f"{year}-{month:02d}-{day:02d}-archive"
+    title = tail.replace('-', ' ').title()
+    record_id = hashlib.md5(f"archive_{year}_{month}_{day}_{slug}".encode()).hexdigest()[:8]
+
+    return {
+        'title': title,
+        'org': org,
+        'industry': industry,
+        'phase': phase,
+        'paragraphs': paragraphs,
+        'related_reports': related_reports,
+        'record_id': record_id,
+    }
+
+
 def archive_trap(request, year, month, day, slug=''):
     _log_crawler(request, 'archive')
 
@@ -55,19 +147,21 @@ def archive_trap(request, year, month, day, slug=''):
     except Exception:
         pass
 
-    # Generate a deeper next path
     rng = random.Random(hashlib.md5(f"{year}{month}{day}{slug}".encode()).hexdigest())
-    deeper_slugs = [
-        'quarterly-review', 'initiative-outcomes', 'stakeholder-update',
-        'performance-metrics', 'strategic-alignment', 'program-assessment',
-        'deliverable-summary', 'engagement-report', 'impact-documentation',
-    ]
-    next_slug = f"{slug}/{rng.choice(deeper_slugs)}-{rng.randint(1000, 9999)}" if slug else rng.choice(deeper_slugs)
 
-    # Adjust date slightly for "previous" links
+    next_slug = (f"{slug}/{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
+                 if slug else f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}")
+
     prev_day = day - 1 if day > 1 else 28
     prev_month = month if day > 1 else (month - 1 if month > 1 else 12)
     prev_year = year if month > 1 or day > 1 else year - 1
+
+    content = _generate_archive_content(rng, year, month, day, slug)
+
+    related_paths = [
+        f"/archive/{year}/{month}/{day}/{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(100, 999)}"
+        for _ in range(8)
+    ]
 
     context = {
         'year': year, 'month': month, 'day': day, 'slug': slug,
@@ -75,10 +169,8 @@ def archive_trap(request, year, month, day, slug=''):
         'next_slug': next_slug,
         'next_year': year, 'next_month': month, 'next_day': day,
         'prev_year': prev_year, 'prev_month': prev_month, 'prev_day': prev_day,
-        'related_paths': [
-            f"/archive/{year}/{month}/{day}/{rng.choice(deeper_slugs)}-{rng.randint(100,999)}"
-            for _ in range(5)
-        ],
+        'related_paths': related_paths,
+        **content,
     }
     return render(request, 'honeypot/archive.html', context)
 
@@ -309,6 +401,26 @@ def reports_page_api(request, page):
     return JsonResponse({'reports': reports, 'next_page': page + 1})
 
 
+def _cover_url(slug):
+    """Return the static URL for a report cover image if it exists, else None."""
+    from django.conf import settings
+    path = settings.BASE_DIR / 'static' / 'img' / 'report-covers' / f'{slug}.webp'
+    if path.exists():
+        return f'/static/img/report-covers/{slug}.webp'
+    return None
+
+
+def _cover_data_uri(slug):
+    """Return a base64 data URI for the cover image (for PDF embedding), or None."""
+    import base64
+    from django.conf import settings
+    path = settings.BASE_DIR / 'static' / 'img' / 'report-covers' / f'{slug}.webp'
+    if path.exists():
+        data = base64.b64encode(path.read_bytes()).decode()
+        return f'data:image/webp;base64,{data}'
+    return None
+
+
 def report_detail(request, slug):
     _log_crawler(request, 'report_download')
     report = get_or_generate_report_meta(slug)
@@ -318,11 +430,13 @@ def report_detail(request, slug):
         return render(request, 'honeypot/report_detail.html', {
             'report': report,
             'preview_rows': rows,
+            'cover_url': _cover_url(slug),
         })
     doc = generate_document_content(slug)
     return render(request, 'honeypot/report_detail.html', {
         'report': report,
         'doc': doc,
+        'cover_url': _cover_url(slug),
     })
 
 
@@ -351,6 +465,7 @@ def report_download_pdf(request, slug):
     html_string = render_to_string('honeypot/report_print.html', {
         'report': report,
         'doc': doc,
+        'cover_data_uri': _cover_data_uri(slug),
     }, request=request)
     pdf_bytes = HTML(string=html_string, base_url=request.build_absolute_uri('/')).write_pdf()
     resp = HttpResponse(pdf_bytes, content_type='application/pdf')

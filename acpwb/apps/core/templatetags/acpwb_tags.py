@@ -54,6 +54,15 @@ def headshot_or_avatar(seed, initials_text, size=80):
     return avatar_card(seed, initials_text, size)
 
 
+PROJECT_COVER_COUNT = 80
+
+
+@register.filter
+def project_cover_idx(slug):
+    """Map a project slug to a deterministic 3-digit cover image index (000–079)."""
+    return str(int(hashlib.md5(str(slug).encode()).hexdigest(), 16) % PROJECT_COVER_COUNT).zfill(3)
+
+
 @register.filter
 def initials(name):
     """Return initials from a full name string."""

@@ -42,6 +42,12 @@
 <body>
 <div class="page">
 
+  {% if cover_data_uri %}
+  <div style="width:100%;height:220px;overflow:hidden;margin-bottom:1.5rem;margin-left:-2.5rem;margin-right:-2.5rem;width:calc(100% + 5rem)">
+    <img src="{{ cover_data_uri }}" alt="{{ report.title }}" style="width:100%;height:100%;object-fit:cover;display:block">
+  </div>
+  {% endif %}
+
   <div class="letterhead">
     <div class="org-name">
       <span>American</span>

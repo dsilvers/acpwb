@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static acpwb_tags %}
 
 {% block title %}Successful Projects — American Corporation for Public Well Being{% endblock %}
 
@@ -34,6 +34,12 @@
 
         {% for story in stories %}
         <div class="project-card">
+          <a href="{% url 'project-detail' story.slug %}" style="display:block;overflow:hidden;margin:-1.5rem -1.5rem 1rem;height:160px;position:relative">
+            <img src="{% static 'img/project-covers/' %}{{ story.slug|project_cover_idx }}.webp"
+                 alt="{{ story.title }}"
+                 style="width:100%;height:100%;object-fit:cover;display:block"
+                 onerror="this.parentElement.style.display='none'">
+          </a>
           <div class="tag">{{ story.industry_tag }}</div>
           <h4><a href="{% url 'project-detail' story.slug %}" style="color:inherit;text-decoration:none">{{ story.title }}</a></h4>
           <div class="metric">{{ story.impact_metric|truncatewords:10 }}</div>

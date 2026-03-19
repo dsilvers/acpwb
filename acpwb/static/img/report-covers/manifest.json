@@ -13,5 +13,150 @@
     "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
     "category": "Compensation",
     "path": "img/report-covers/executive-compensation-study-2024.webp"
+  },
+  "corporate-governance-best-practices-white-paper": {
+    "prompt": "stacks of organized corporate documents with a pen and reading glasses on a mahogany desk, warm office lighting, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Governance",
+    "path": "img/report-covers/corporate-governance-best-practices-white-paper.webp"
+  },
+  "esg-disclosure-framework-2024": {
+    "prompt": "wind turbines visible through the floor-to-ceiling window of a modern executive office, symbolic corporate environmental photo, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "ESG",
+    "path": "img/report-covers/esg-disclosure-framework-2024.webp"
+  },
+  "q3-economic-indicators-2024": {
+    "prompt": "modern financial district skyline at blue hour, glass towers reflected in a still water feature, architectural, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Economic",
+    "path": "img/report-covers/q3-economic-indicators-2024.webp"
+  },
+  "benefits-cost-analysis-2024": {
+    "prompt": "bright modern employee wellness center inside a corporate campus, yoga mats and natural light, lifestyle photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Benefits",
+    "path": "img/report-covers/benefits-cost-analysis-2024.webp"
+  },
+  "industry-wage-gap-analysis-2024": {
+    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/industry-wage-gap-analysis-2024.webp"
+  },
+  "fortune-500-ceo-pay-ratio-analysis": {
+    "prompt": "executive boardroom with printed reports and charts laid out on a polished table, navy and gold color scheme, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/fortune-500-ceo-pay-ratio-analysis.webp"
+  },
+  "state-of-workplace-report-2024": {
+    "prompt": "aerial view of busy corporate open office floor, rows of workstations, natural light through floor-to-ceiling windows, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/state-of-workplace-report-2024.webp"
+  },
+  "regulatory-compliance-costs-2024": {
+    "prompt": "glass and steel corporate headquarters exterior shot at dusk, reflections on windows, architectural photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Governance",
+    "path": "img/report-covers/regulatory-compliance-costs-2024.webp"
+  },
+  "employee-satisfaction-survey-results-2024": {
+    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/employee-satisfaction-survey-results-2024.webp"
+  },
+  "regional-salary-differentials-2024": {
+    "prompt": "close-up of financial data charts and bar graphs on a glass desk, office environment with city view, depth of field blur, corporate documentary photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/regional-salary-differentials-2024.webp"
+  },
+  "board-composition-study-2024": {
+    "prompt": "close-up of a gavel on a polished wood desk with blurred legal documents in background, corporate governance concept, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Governance",
+    "path": "img/report-covers/board-composition-study-2024.webp"
+  },
+  "retirement-readiness-index-2024": {
+    "prompt": "a large screen in a well-lit conference room displaying an employee benefits presentation, empty chairs facing the screen, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Benefits",
+    "path": "img/report-covers/retirement-readiness-index-2024.webp"
+  },
+  "public-sector-compensation-guide": {
+    "prompt": "executive boardroom with printed reports and charts laid out on a polished table, navy and gold color scheme, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/public-sector-compensation-guide.webp"
+  },
+  "healthcare-benefits-landscape-2024": {
+    "prompt": "employee benefit enrollment forms on a clean white desk with a pen, soft office lighting, documentary, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Benefits",
+    "path": "img/report-covers/healthcare-benefits-landscape-2024.webp"
+  },
+  "remote-work-impact-study-2024": {
+    "prompt": "aerial view of busy corporate open office floor, rows of workstations, natural light through floor-to-ceiling windows, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/remote-work-impact-study-2024.webp"
+  },
+  "national-salary-survey-2001": {
+    "prompt": "sleek conference room with laptops open to salary charts on the table, overhead view of desk with financial documents and graphs, corporate office, warm natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/national-salary-survey-2001.webp"
+  },
+  "corporate-pay-equity-study-1998": {
+    "prompt": "sleek conference room with laptops open to salary charts on the table, overhead view of desk with financial documents and graphs, corporate office, warm natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/corporate-pay-equity-study-1998.webp"
+  },
+  "workforce-demographics-report-2006": {
+    "prompt": "aerial view of busy corporate open office floor, rows of workstations, natural light through floor-to-ceiling windows, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/workforce-demographics-report-2006.webp"
+  },
+  "executive-benefits-survey-2003": {
+    "prompt": "modern corporate cafeteria with healthy food options displayed, clean and bright, natural light, lifestyle editorial, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Benefits",
+    "path": "img/report-covers/executive-benefits-survey-2003.webp"
+  },
+  "governance-disclosure-standards-2009": {
+    "prompt": "close-up of a gavel on a polished wood desk with blurred legal documents in background, corporate governance concept, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Governance",
+    "path": "img/report-covers/governance-disclosure-standards-2009.webp"
+  },
+  "compensation-benchmarking-methodology-1995": {
+    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/compensation-benchmarking-methodology-1995.webp"
+  },
+  "annual-hr-metrics-report-2011": {
+    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/annual-hr-metrics-report-2011.webp"
+  },
+  "job-grade-architecture-white-paper-2007": {
+    "prompt": "sleek conference room with laptops open to salary charts on the table, overhead view of desk with financial documents and graphs, corporate office, warm natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/job-grade-architecture-white-paper-2007.webp"
+  },
+  "preliminary-job-architecture-review-assessment-2024-12a0": {
+    "prompt": "organized law books and corporate compliance binders on dark wood shelving, shallow depth of field, editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compliance",
+    "path": "img/report-covers/preliminary-job-architecture-review-assessment-2024-12a0.webp"
+  },
+  "regional-talent-retention-report-2021-0fd7": {
+    "prompt": "an executive conference room with a long table and empty chairs, prepared for a board meeting, formal lighting, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Leadership",
+    "path": "img/report-covers/regional-talent-retention-report-2021-0fd7.webp"
+  },
+  "supplemental-turnover-analysis-briefing-2022-4a66": {
+    "prompt": "stock market data on multiple computer monitors in a financial trading environment, dramatic blue lighting, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Economic",
+    "path": "img/report-covers/supplemental-turnover-analysis-briefing-2022-4a66.webp"
+  },
+  "cross-industry-gender-pay-gap-guide-2008-fa7b": {
+    "prompt": "a printed quarterly earnings report open on a conference table, reading glasses resting on the page, editorial still life, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Economic",
+    "path": "img/report-covers/cross-industry-gender-pay-gap-guide-2008-fa7b.webp"
+  },
+  "mid-year-geographic-pay-differentials-survey-2018-e65d": {
+    "prompt": "a tablet displaying sustainability metrics on a desk, with a background of urban greenery, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "ESG",
+    "path": "img/report-covers/mid-year-geographic-pay-differentials-survey-2018-e65d.webp"
+  },
+  "revised-remote-work-productivity-white-paper-2024-ab77": {
+    "prompt": "aerial view of a container port at dusk, cranes and stacked shipping containers, symbolizing global economic scale, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Economic",
+    "path": "img/report-covers/revised-remote-work-productivity-white-paper-2024-ab77.webp"
   }
 }

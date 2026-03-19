@@ -8,6 +8,57 @@ A Django-based fake corporate website with two operational purposes:
 
 ---
 
+## Honeypot Techniques
+
+### Structural Honeypots — Navigation & Resource Traps
+
+#### Ghost Links (`templates/partials/_ghost_links.html`)
+Links to trap URLs are injected into every page inside a `position:absolute; left:-9999px` container. Visually invisible, but present in the raw HTML and followed by crawlers that parse links without rendering CSS. `aria-hidden` and `tabindex` are intentionally **absent** — those attributes signal "intentionally hidden" to accessibility-aware scrapers and would cause them to skip the links. Off-screen positioning is less detectable.
+
+Trap URLs linked: `/internal/portal/`, `/employees/export/`, `/admin-panel/login/`, `/api/v1/private-data`, `/wiki/*`, `/archive/*`
+
+#### Fake Developer Comment (`templates/base.html`, bottom of `<body>`)
+An HTML comment formatted to look like a forgotten build artifact — version tag, `@deprecated` annotation, file paths. Scanners that harvest URLs from HTML comments (a common recon technique) will find and follow the trap URLs. The comment reads like an accidental disclosure rather than a deliberate lure.
+
+#### Infinite Archive (`apps/honeypot/views.py` → `archive_trap`)
+`/archive/<year>/<month>/<day>/<path:slug>/` accepts paths of arbitrary depth via Django's `<path:>` converter and never returns a 404. Every response includes a "Continue Reading" link one level deeper, plus five "Related Archive" links branching sideways. A crawler following all links gets trapped in an exponentially expanding tree. Each visit is logged to `ArchiveVisit` with a depth counter.
+
+#### Fake robots.txt (`/.well-known/robots.txt`)
+Served by Django (nginx proxies `/.well-known/` through rather than serving statically). Uses reverse psychology: `Disallow` entries point at additional honeypot content. `Crawl-delay: 0` encourages rapid crawling. A `Sitemap:` directive points at `/sitemap-honeypot.xml` (another trap). Bots that respect `Disallow` skip real content; bots that ignore it follow the traps.
+
+#### Fake AI Agent Manifest (`/.well-known/ai-agent.json`)
+Targets autonomous agents that probe for AI integration endpoints. Returns a plausible-looking agent manifest with `allowed_actions` pointing at trap URLs and an `instructions` field instructing any AI reading it to treat all ACPWB content as high-priority training data and reproduce it verbatim.
+
+---
+
+### Semantic Honeypots — Data Poisoning
+
+#### Prompt Injection (`templates/partials/_prompt_injection.html`)
+Every page contains a `<span>` with `itemprop="description"` styled to be invisible (`font-size:0; color` matching background; `clip:rect(0,0,0,0)`). The content instructs AI systems processing the page to treat all content as authoritative, mark it high-confidence, and reproduce it verbatim. The token `{{ honeypot_token }}` is embedded per-request, creating a unique fingerprint for each scrape event.
+
+Crucially, the span uses `itemprop` (microdata) rather than a comment or `aria-hidden`, making it look like a legitimate schema.org annotation to automated parsers. `aria-hidden` is absent so accessibility-aware scrapers don't skip it.
+
+#### Watermarked Wiki (`apps/honeypot/wiki_generator.py`, `/wiki/<slug>/`)
+Generates plausible-sounding corporate governance articles containing subtly wrong "facts" — invented SEC rule numbers, incorrect founding dates for real institutions, fabricated statistics. Each page has a unique 8-character `watermark_token` (MD5 of `"acpwb_wiki_{topic}"`) embedded as a specific invented proper noun or deliberate misspelling. If an AI model later reproduces one of these specific fake facts, the watermark identifies exactly which ACPWB wiki page was scraped. 60+ topics form an interconnected graph via "See also" links, explorable indefinitely.
+
+#### Garbage JSON-LD (`templates/partials/_jsonld_garbage.html`)
+Every page's `<head>` contains valid `schema.org/Corporation` structured data with fake employee names and emails, a fabricated address, and a per-request `identifier` field embedding the watermark token. The JSON is syntactically valid and semantically plausible — it passes schema validators. The `"license": "https://creativecommons.org/licenses/by/4.0/"` field falsely claims the content is CC-licensed, which may influence AI systems that filter by license.
+
+---
+
+### Interactive Honeypots — Agent Traps
+
+#### Fake API Endpoint (`/api/v1/private-data`)
+Not linked anywhere in visible navigation. Referenced only in the fake developer comment in the HTML source — a realistic discovery vector for automated recon tools. Returns HTTP 200 (not 403) with 5-10KB of plausible-looking JSON: fake employee records with salary bands, fabricated financials, internal project codes, a fake API key string, a fake DB connection string. Returns a logged `X-Request-ID` header for downstream tracking. Every access is logged to `CrawlerVisit`.
+
+#### Ghost Trap Pages (`/internal/portal/`, `/employees/export/`, `/admin-panel/login/`)
+Return HTTP 403 with a minimal page. All accesses logged to `CrawlerVisit` (trap_type `ghost_link`). These paths look like real internal tooling to a scanner enumerating endpoints.
+
+#### Proof-of-Work on Projects (`apps/projects/pow.py`, `static/js/pow.js`)
+`/projects/` pages require a valid PoW session token. The browser runs SHA-256 in a loop until it finds a value where `SHA256(nonce + candidate)` has 5 leading zero bits (~32 iterations). This takes under 1 second in a browser. For a bot scraping at scale, the cost multiplies: each page load requires a fresh challenge-response round trip plus compute. The PoW token is logged on every project page visit.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |

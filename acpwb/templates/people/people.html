@@ -30,7 +30,7 @@
       {% for employee in employees %}
       <div class="col-md-6 col-lg-4">
         <div class="employee-card">
-          {% avatar_card employee.avatar_seed employee.initials 56 %}
+          {% headshot_or_avatar employee.avatar_seed employee.initials 56 %}
           <div class="employee-info">
             <h6>{{ employee.full_name }}</h6>
             <div class="title">{{ employee.title }}</div>

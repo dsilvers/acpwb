@@ -71,7 +71,7 @@
           <div class="acpwb-card">
             <h6 class="card-title mb-3">Browse by Sector</h6>
             <div class="d-flex flex-wrap gap-2">
-              {% for tag in "Healthcare,Finance,Energy,Technology,Manufacturing,Retail,Government,Education"|split:"," %}
+              {% for tag in industry_tags %}
               <span style="background:var(--surface);border:1px solid var(--border);padding:.2rem .6rem;font-size:.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em">{{ tag }}</span>
               {% endfor %}
             </div>

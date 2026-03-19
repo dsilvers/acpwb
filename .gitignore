@@ -33,9 +33,11 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+.claude/settings.local.json
 
 # Coverage
 htmlcov/
 .coverage
 .coverage.*
 coverage.xml
+.venv/

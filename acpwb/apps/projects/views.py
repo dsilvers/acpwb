@@ -58,6 +58,7 @@ def project_list(request):
         'page': page,
         'next_page': page + 1,
         'prev_page': page - 1 if page > 1 else None,
+        'industry_tags': ['Healthcare', 'Finance', 'Energy', 'Technology', 'Manufacturing', 'Retail', 'Government', 'Education'],
     })
 
 

@@ -1,5 +1,11 @@
 import hashlib
+from pathlib import Path
 from django import template
+from django.templatetags.static import static
+from django.utils.safestring import mark_safe
+
+HEADSHOT_DIR = Path(__file__).resolve().parents[4] / "static" / "img" / "headshots"
+HEADSHOT_COUNT = 400
 
 register = template.Library()
 
@@ -30,7 +36,22 @@ def avatar_card(seed, initials, size=80):
         f'color:#fff;font-weight:700;font-size:{size // 3}px;'
         f'letter-spacing:0.05em;flex-shrink:0;'
     )
-    return f'<div style="{style}">{initials}</div>'
+    return mark_safe(f'<div style="{style}">{initials}</div>')
+
+
+@register.simple_tag
+def headshot_or_avatar(seed, initials_text, size=80):
+    """Use a generated headshot if available, otherwise fall back to CSS gradient avatar."""
+    idx = int(hashlib.md5(str(seed).encode()).hexdigest(), 16) % HEADSHOT_COUNT
+    img_path = HEADSHOT_DIR / f"{idx:03d}.jpg"
+    if img_path.exists():
+        url = static(f"img/headshots/{idx:03d}.jpg")
+        style = (
+            f'width:{size}px;height:{size}px;border-radius:50%;'
+            f'object-fit:cover;object-position:center top;flex-shrink:0;'
+        )
+        return mark_safe(f'<img src="{url}" alt="{initials_text}" style="{style}">')
+    return avatar_card(seed, initials_text, size)
 
 
 @register.filter

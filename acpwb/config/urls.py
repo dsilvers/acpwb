@@ -5,6 +5,12 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('django-admin/', admin.site.urls),
 
+    # Legacy PHP URL redirects (permanent 301)
+    path('index.php', RedirectView.as_view(url='/', permanent=True)),
+    path('profiles.php', RedirectView.as_view(url='/our-people/', permanent=True)),
+    path('mission.php', RedirectView.as_view(url='/mission/', permanent=True)),
+    path('disclaimer.php', RedirectView.as_view(url='/privacy/', permanent=True)),
+
     # Human-facing pages
     path('', include('apps.public.urls')),
     path('our-people/', include('apps.people.urls')),

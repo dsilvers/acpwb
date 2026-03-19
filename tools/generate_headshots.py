@@ -16,7 +16,7 @@ from pathlib import Path
 OUTPUT_DIR = Path(__file__).parent.parent / "acpwb" / "static" / "img" / "headshots"
 MANIFEST_PATH = OUTPUT_DIR / "manifest.json"
 NUM_IMAGES = 400
-MODEL_ID = "stabilityai/stable-diffusion-xl-base-1.0"
+MODEL_ID = "stabilityai/stable-diffusion-3-medium-diffusers"
 
 AGES = [
     "25 year old", "28 year old", "32 year old", "36 year old",
@@ -71,7 +71,7 @@ def build_prompt(rng):
 def main():
     try:
         import torch
-        from diffusers import StableDiffusionXLPipeline
+        from diffusers import StableDiffusion3Pipeline
     except ImportError:
         print("Missing dependencies. Run:")
         print("  pip install torch diffusers transformers accelerate pillow")
@@ -92,9 +92,9 @@ def main():
         return
 
     print(f"Loading {MODEL_ID} (~7GB download on first run) ...")
-    pipe = StableDiffusionXLPipeline.from_pretrained(
+    pipe = StableDiffusion3Pipeline.from_pretrained(
         MODEL_ID,
-        torch_dtype=torch.float32,
+        torch_dtype=torch.float16,
         use_safetensors=True,
     )
     pipe = pipe.to("mps")

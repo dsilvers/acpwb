@@ -1,0 +1,17 @@
+{
+  "salary-compensation-benchmarking-survey-2024": {
+    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/salary-compensation-benchmarking-survey-2024.webp"
+  },
+  "annual-workforce-analytics-report-2024": {
+    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Workforce",
+    "path": "img/report-covers/annual-workforce-analytics-report-2024.webp"
+  },
+  "executive-compensation-study-2024": {
+    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "category": "Compensation",
+    "path": "img/report-covers/executive-compensation-study-2024.webp"
+  }
+}

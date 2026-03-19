@@ -1,10 +1,12 @@
-from django.urls import path, re_path
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    # Archive labyrinth — captures any depth via <path:slug>
+    # Archive labyrinth — both slash and non-slash variants to avoid 301 churn
     path('archive/<int:year>/<int:month>/<int:day>/', views.archive_trap, name='archive-trap-base', kwargs={'slug': ''}),
     path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/', views.archive_trap, name='archive-trap'),
+    path('archive/<int:year>/<int:month>/<int:day>', views.archive_trap, kwargs={'slug': ''}),
+    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>', views.archive_trap),
 
     # Wiki trap
     path('wiki/<slug:slug>/', views.wiki_page, name='wiki-page'),

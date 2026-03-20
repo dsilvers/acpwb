@@ -100,6 +100,18 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['http://localho
 MAILGUN_WEBHOOK_SIGNING_KEY = env('MAILGUN_WEBHOOK_SIGNING_KEY', default='')
 MAILGUN_DOMAIN = env('MAILGUN_DOMAIN', default='acpwb.com')
 
+# Sentry
+_SENTRY_DSN = env('SENTRY_DSN', default='')
+if _SENTRY_DSN:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    sentry_sdk.init(
+        dsn=_SENTRY_DSN,
+        integrations=[DjangoIntegration()],
+        # traces_sample_rate=0.1,
+        send_default_pii=True,
+    )
+
 # Cache (for PoW challenges)
 CACHES = {
     'default': {

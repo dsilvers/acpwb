@@ -1,0 +1,42 @@
+{
+  "0": {
+    "prompt": "an outdoor healing garden on a hospital campus, stone path, native plants, architectural landscape photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Healthcare",
+    "path": "img/project-covers/000.webp"
+  },
+  "1": {
+    "prompt": "a hyperscale data center exterior at night, backlit cooling units and industrial scale, atmospheric editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Financial Services",
+    "path": "img/project-covers/001.webp"
+  },
+  "2": {
+    "prompt": "wind farm on rolling hills, golden hour light, aerial perspective, environmental corporate, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Energy",
+    "path": "img/project-covers/002.webp"
+  },
+  "3": {
+    "prompt": "a precision CNC machining cell with metal shavings and cutting tools, clean industrial editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Manufacturing",
+    "path": "img/project-covers/003.webp"
+  },
+  "4": {
+    "prompt": "a 3D printer completing a plastic prototype part in a modern innovation lab, close-up, technical editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Technology",
+    "path": "img/project-covers/004.webp"
+  },
+  "5": {
+    "prompt": "a merchandising planogram printed and taped to a retail stockroom wall, organizational documentary, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Retail",
+    "path": "img/project-covers/005.webp"
+  },
+  "6": {
+    "prompt": "an open-plan office with large monitors showing dashboards and code, empty desks, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Real Estate",
+    "path": "img/project-covers/006.webp"
+  },
+  "7": {
+    "prompt": "a hyperscale data center exterior at night, backlit cooling units and industrial scale, atmospheric editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Transportation",
+    "path": "img/project-covers/007.webp"
+  }
+}

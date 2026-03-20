@@ -1,41 +1,106 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{ title }} — ACPWB Archive {{ year }}/{{ month }}/{{ day }}{% endblock %}
+{% block title %}{{ title }} — ACPWB Archive{% endblock %}
+{% block og_title %}{{ title }} — ACPWB Archive{% endblock %}
+{% block og_description %}{{ industry }} sector engagement documentation archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}. {{ phase|capfirst }} phase record. ACPWB Research Division.{% endblock %}
 
 {% block content %}
 
 <section class="page-banner">
   <div class="container">
     <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
-      <a href="/archive/" style="color:var(--gold)">Archive</a> &rsaquo; {{ year }} &rsaquo; {{ month|stringformat:"02d" }} &rsaquo; {{ day|stringformat:"02d" }}
+      <a href="/archive/" style="color:var(--gold)">Archive</a>
+      &rsaquo; <a href="/archive/{{ year }}/" style="color:var(--gold)">{{ year }}</a>
+      &rsaquo; <a href="/archive/{{ year }}/{{ month|stringformat:"02d" }}/" style="color:var(--gold)">{{ month|stringformat:"02d" }}</a>
+      &rsaquo; {{ day|stringformat:"02d" }}
     </p>
-    <h1 style="font-size:clamp(1.4rem,3vw,2.2rem)">{{ title }}</h1>
-    <p style="color:rgba(255,255,255,.7);font-size:.9rem">
-      {{ industry }} &bull; {{ org }} &bull; Archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}
+    <h1 style="font-size:clamp(1.2rem,3vw,2rem);line-height:1.25">{{ title }}</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:0">
+      {{ industry }} &bull; {{ org }} &bull; {{ phase|capfirst }} phase &bull; Archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}
     </p>
   </div>
 </section>
 
-<section style="padding:4rem 0;background:var(--surface)">
+<section style="padding:3rem 0;background:var(--surface)">
   <div class="container">
     <div class="row g-4">
+
+      <!-- Main content -->
       <div class="col-lg-8">
 
-        <div class="wiki-content">
+        <!-- Executive summary callout -->
+        <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:2rem">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.5rem">Executive Summary</div>
+          <p style="font-size:.9rem;color:var(--navy);margin-bottom:0;font-weight:500;line-height:1.6">
+            This archive entry documents ACPWB's <strong>{{ phase }}</strong> phase engagement with <strong>{{ org }}</strong> in the <strong>{{ industry }}</strong> sector.
+            The record ID <code style="font-size:.8rem;background:#f4f6f9;padding:.1rem .35rem">{{ record_id }}</code> uniquely identifies this documentation set within ACPWB's institutional archive.
+          </p>
+        </div>
 
+        <!-- Key findings -->
+        {% if findings %}
+        <div class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">
+            Key Findings
+          </h5>
+          <ul style="padding-left:1.25rem;margin-bottom:0">
+            {% for finding in findings %}
+            <li style="font-size:.88rem;color:#333;margin-bottom:.7rem;line-height:1.6">{{ finding }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- Body paragraphs -->
+        <div class="wiki-content mb-4">
           {% for para in paragraphs %}
           <p>{{ para }}</p>
           {% endfor %}
+        </div>
 
-          <hr class="gold-divider">
+        <!-- Metrics table -->
+        {% if metric_rows %}
+        <div class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">
+            Engagement Metrics
+          </h5>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;background:white;border:1px solid var(--border);font-size:.83rem">
+              <thead>
+                <tr style="background:var(--navy);color:var(--gold)">
+                  <th style="padding:.6rem .9rem;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Metric</th>
+                  <th style="padding:.6rem .9rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Baseline</th>
+                  <th style="padding:.6rem .9rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Current</th>
+                  <th style="padding:.6rem .9rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in metric_rows %}
+                <tr style="border-top:1px solid var(--border)">
+                  <td style="padding:.5rem .9rem;color:var(--navy);font-weight:600">{{ row.name }}</td>
+                  <td style="padding:.5rem .9rem;text-align:right;color:var(--muted)">{{ row.baseline }}</td>
+                  <td style="padding:.5rem .9rem;text-align:right;font-weight:700">{{ row.current }}</td>
+                  <td style="padding:.5rem .9rem;text-align:right;font-weight:700;color:{% if row.positive %}#15803d{% else %}#dc2626{% endif %}">{{ row.delta }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:.68rem;color:var(--muted);margin-top:.4rem">Baseline reflects data at engagement initiation. Current reflects most recent measurement period. Source: ACPWB Research Division internal database.</p>
+        </div>
+        {% endif %}
 
-          {% if related_reports %}
+        <hr class="gold-divider">
+
+        <!-- Related reports -->
+        {% if related_reports %}
+        <div class="mb-4">
           <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem">
             Referenced Research &amp; Publications
           </h5>
           {% for r in related_reports %}
-          <div style="background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);padding:.75rem 1rem;margin-bottom:.75rem">
+          <div style="background:white;border:1px solid var(--border);border-left:3px solid var(--gold);padding:.75rem 1rem;margin-bottom:.75rem">
             <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.2rem">
               {{ r.category }} &bull; {{ r.file_type|upper }} &bull; {{ r.pub_date_display }}
             </div>
@@ -43,24 +108,25 @@
             <p class="small text-muted mb-0" style="font-size:.78rem;margin-top:.25rem">{{ r.summary|truncatechars:160 }}</p>
           </div>
           {% endfor %}
-
-          <hr class="gold-divider">
-          {% endif %}
-
-          <a href="/archive/{{ next_year }}/{{ next_month }}/{{ next_day }}/{{ next_slug }}/"
-             style="display:block;background:var(--navy);color:white;padding:1rem 1.5rem;text-decoration:none;font-weight:700;font-size:.9rem;margin-bottom:1rem">
-            Continue Reading: Next in Series &rarr;
-          </a>
-
         </div>
+        <hr class="gold-divider">
+        {% endif %}
 
-        <div class="mt-4">
+        <!-- Continue reading -->
+        <a href="/archive/{{ next_year }}/{{ next_month|stringformat:"02d" }}/{{ next_day|stringformat:"02d" }}/{{ next_slug }}/"
+           style="display:block;background:var(--navy);color:white;padding:1rem 1.5rem;text-decoration:none;font-weight:700;font-size:.9rem;margin-bottom:2rem">
+          Continue Reading: Next in Series &rarr;
+        </a>
+
+        <!-- Related archive entries -->
+        <div class="mt-2">
           <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;margin-bottom:1rem">Related Archive Entries</h5>
           <div class="row g-2">
-            {% for path in related_paths %}
+            {% for entry in related_paths %}
             <div class="col-md-6">
-              <a href="{{ path }}/" style="display:block;background:white;border:1px solid var(--border);padding:.75rem 1rem;text-decoration:none;font-size:.8rem;color:var(--navy)">
-                <span style="color:var(--gold)">&#9670;</span> {{ path|truncatechars:52 }}
+              <a href="{{ entry.url }}" style="display:block;background:white;border:1px solid var(--border);padding:.75rem 1rem;text-decoration:none">
+                <div style="font-size:.62rem;color:var(--muted);font-weight:600;margin-bottom:.2rem">{{ entry.date }}</div>
+                <div style="font-size:.8rem;color:var(--navy);font-weight:600;line-height:1.3">{{ entry.label }}</div>
               </a>
             </div>
             {% endfor %}
@@ -68,12 +134,14 @@
         </div>
 
         <div class="mt-4 pt-3" style="border-top:1px solid var(--border)">
-          <a href="/archive/{{ prev_year }}/{{ prev_month }}/{{ prev_day }}/previous-series/" style="font-size:.85rem;color:var(--muted);text-decoration:none">
+          <a href="/archive/{{ prev_year }}/{{ prev_month|stringformat:"02d" }}/{{ prev_day|stringformat:"02d" }}/previous-series/" style="font-size:.85rem;color:var(--muted);text-decoration:none">
             &larr; Previous in Series
           </a>
         </div>
 
       </div>
+
+      <!-- Sidebar -->
       <div class="col-lg-4 d-none d-lg-block">
         <div style="position:sticky;top:2rem">
 
@@ -88,10 +156,10 @@
               <dd class="fw-700 mb-2">{{ industry }}</dd>
               <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Organization</dt>
               <dd class="fw-700 mb-2">{{ org }}</dd>
-              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Depth</dt>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Crawl Depth</dt>
               <dd class="fw-700 mb-2">{{ depth }}</dd>
               <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>
-              <dd class="fw-700 mb-0 text-muted" style="font-family:monospace;font-size:.75rem">{{ record_id }}</dd>
+              <dd class="mb-0 text-muted" style="font-family:monospace;font-size:.75rem">{{ record_id }}</dd>
             </dl>
           </div>
 
@@ -99,19 +167,31 @@
             <h6 class="card-title mb-3">Archive Navigation</h6>
             <ul class="list-unstyled mb-0" style="font-size:.82rem">
               <li class="mb-2"><a href="/archive/{{ year }}/" style="color:var(--navy)">&#8592; All {{ year }} Records</a></li>
-              <li class="mb-2"><a href="/archive/{{ year }}/{{ month }}/" style="color:var(--navy)">&#8592; {{ year }}/{{ month|stringformat:"02d" }} Records</a></li>
-              <li class="mb-2"><a href="/archive/{{ next_year }}/{{ next_month }}/{{ next_day }}/{{ next_slug }}/" style="color:var(--gold);font-weight:700">Next in Series &rarr;</a></li>
+              <li class="mb-2"><a href="/archive/{{ year }}/{{ month|stringformat:"02d" }}/" style="color:var(--navy)">&#8592; {{ year }}/{{ month|stringformat:"02d" }} Records</a></li>
+              <li class="mb-2"><a href="/archive/{{ prev_year }}/{{ prev_month|stringformat:"02d" }}/{{ prev_day|stringformat:"02d" }}/previous-series/" style="color:var(--muted)">&#8592; Previous Entry</a></li>
+              <li class="mb-2"><a href="/archive/{{ next_year }}/{{ next_month|stringformat:"02d" }}/{{ next_day|stringformat:"02d" }}/{{ next_slug }}/" style="color:var(--gold);font-weight:700">Next in Series &rarr;</a></li>
             </ul>
+          </div>
+
+          <!-- Historical index links — deep date range to attract crawlers -->
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Browse by Year</h6>
+            <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+              {% for y in archive_years %}
+              <a href="/archive/{{ y }}/" style="font-size:.72rem;padding:.2rem .45rem;background:#f4f6f9;border:1px solid var(--border);color:var(--navy);text-decoration:none">{{ y }}</a>
+              {% endfor %}
+            </div>
           </div>
 
           <div class="acpwb-card">
             <h6 class="card-title mb-3">Research Division</h6>
-            <p class="small text-muted mb-2" style="font-size:.8rem">ACPWB's document archive spans our full operational history. Records are indexed by date, sector, and engagement phase.</p>
+            <p class="small text-muted mb-2" style="font-size:.8rem">ACPWB's document archive spans our full operational history from 1985 to present. Records are indexed by date, sector, and engagement phase.</p>
             <a href="{% url 'reports-list' %}" style="font-size:.8rem;color:var(--gold);font-weight:700;text-decoration:none">Browse Research Reports &rarr;</a>
           </div>
 
         </div>
       </div>
+
     </div>
   </div>
 </section>

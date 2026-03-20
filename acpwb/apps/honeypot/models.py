@@ -15,15 +15,18 @@ class CrawlerVisit(models.Model):
     ]
 
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
-    ip_address = models.GenericIPAddressField()
+    ip_address = models.GenericIPAddressField(db_index=True)
     user_agent = models.TextField(blank=True)
     path = models.TextField()
     referrer = models.TextField(blank=True)
-    trap_type = models.CharField(max_length=32, choices=TRAP_CHOICES, default='other')
+    trap_type = models.CharField(max_length=32, choices=TRAP_CHOICES, default='other', db_index=True)
     query_string = models.TextField(blank=True)
 
     class Meta:
         ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['trap_type', 'timestamp']),
+        ]
         verbose_name = 'Crawler Visit'
 
     def __str__(self):
@@ -68,17 +71,21 @@ class PublicReport(models.Model):
 
 
 class ArchiveVisit(models.Model):
-    timestamp = models.DateTimeField(auto_now_add=True)
-    ip_address = models.GenericIPAddressField()
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+    ip_address = models.GenericIPAddressField(db_index=True)
     user_agent = models.TextField(blank=True)
     year = models.IntegerField()
     month = models.IntegerField()
     day = models.IntegerField()
     slug = models.CharField(max_length=512)
-    depth = models.PositiveIntegerField(default=0)
+    depth = models.PositiveIntegerField(default=0, db_index=True)
 
     class Meta:
         ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['ip_address', 'timestamp']),
+            models.Index(fields=['depth', 'timestamp']),
+        ]
         verbose_name = 'Archive Visit'
 
     def __str__(self):

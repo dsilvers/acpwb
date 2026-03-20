@@ -3,6 +3,11 @@ from . import views
 
 urlpatterns = [
     # Archive labyrinth — both slash and non-slash variants to avoid 301 churn
+    path('archive/', views.archive_index, name='archive-index'),
+    path('archive/<int:year>/', views.archive_year, name='archive-year'),
+    path('archive/<int:year>', views.archive_year),
+    path('archive/<int:year>/<int:month>/', views.archive_month, name='archive-month'),
+    path('archive/<int:year>/<int:month>', views.archive_month),
     path('archive/<int:year>/<int:month>/<int:day>/', views.archive_trap, name='archive-trap-base', kwargs={'slug': ''}),
     path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/', views.archive_trap, name='archive-trap'),
     path('archive/<int:year>/<int:month>/<int:day>', views.archive_trap, kwargs={'slug': ''}),

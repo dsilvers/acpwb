@@ -125,7 +125,7 @@
                 {% if cat == selected_category %}
                 <span style="color:var(--navy);font-weight:800">&#10003; {{ cat }}</span>
                 {% else %}
-                <a href="?category={{ cat }}" style="color:var(--text);text-decoration:none">{{ cat }}</a>
+                <a href="?category={{ cat|urlencode }}" style="color:var(--text);text-decoration:none">{{ cat }}</a>
                 {% endif %}
               </li>
               {% endfor %}

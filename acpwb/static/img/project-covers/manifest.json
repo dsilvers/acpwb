@@ -38,5 +38,25 @@
     "prompt": "a hyperscale data center exterior at night, backlit cooling units and industrial scale, atmospheric editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
     "industry": "Transportation",
     "path": "img/project-covers/007.webp"
+  },
+  "8": {
+    "prompt": "a hyperscale data center exterior at night, backlit cooling units and industrial scale, atmospheric editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Agriculture",
+    "path": "img/project-covers/008.webp"
+  },
+  "9": {
+    "prompt": "a university research lab with organized equipment and printed lab manuals on clean benches, academic editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Education",
+    "path": "img/project-covers/009.webp"
+  },
+  "10": {
+    "prompt": "an empty chip fabrication clean room corridor, white suits on hooks by the door, implying precision and scale, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Government Relations",
+    "path": "img/project-covers/010.webp"
+  },
+  "11": {
+    "prompt": "an open-plan office with large monitors showing dashboards and code, empty desks, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Nonprofit Sector",
+    "path": "img/project-covers/011.webp"
   }
 }

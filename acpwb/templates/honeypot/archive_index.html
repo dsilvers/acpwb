@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Document Archive — ACPWB{% endblock %}
+{% block og_title %}Document Archive — ACPWB{% endblock %}
+{% block og_description %}ACPWB institutional document archive spanning 1985 to present. Records indexed by year, sector, and engagement phase.{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Archive</p>
+    <h1 style="font-size:clamp(1.2rem,3vw,2rem);line-height:1.25">Institutional Document Archive</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:0">
+      ACPWB Research Division &bull; 1985–present &bull; Full engagement record
+    </p>
+  </div>
+</section>
+
+<section style="padding:3rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+        <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:2rem">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.5rem">About This Archive</div>
+          <p style="font-size:.9rem;color:var(--navy);margin-bottom:0;font-weight:500;line-height:1.6">
+            ACPWB's institutional archive spans our full operational history from 1985 to present.
+            Records are indexed by date, sector, and engagement phase and are available for research reference.
+          </p>
+        </div>
+
+        <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">
+          Browse by Year
+        </h5>
+
+        <div class="row g-3">
+          {% for y in years %}
+          <div class="col-md-6">
+            <a href="/archive/{{ y.year }}/" style="display:block;background:white;border:1px solid var(--border);padding:.85rem 1rem;text-decoration:none">
+              <div style="display:flex;justify-content:space-between;align-items:baseline">
+                <span style="font-size:1.1rem;font-weight:800;color:var(--navy)">{{ y.year }}</span>
+                <span style="font-size:.72rem;color:var(--muted);font-weight:600">{{ y.count }} records</span>
+              </div>
+              <div style="font-size:.7rem;color:var(--muted);margin-top:.25rem">
+                {% for m in y.months %}
+                <a href="/archive/{{ y.year }}/{{ m|stringformat:"02d" }}/" style="color:var(--gold);font-weight:700;margin-right:.35rem;text-decoration:none">
+                  {% if m == 1 %}Jan{% elif m == 2 %}Feb{% elif m == 3 %}Mar{% elif m == 4 %}Apr
+                  {% elif m == 5 %}May{% elif m == 6 %}Jun{% elif m == 7 %}Jul{% elif m == 8 %}Aug
+                  {% elif m == 9 %}Sep{% elif m == 10 %}Oct{% elif m == 11 %}Nov{% else %}Dec{% endif %}
+                </a>
+                {% endfor %}
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Archive Navigation</h6>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2"><a href="/archive/2024/" style="color:var(--navy)">2024 Records</a></li>
+              <li class="mb-2"><a href="/archive/2023/" style="color:var(--navy)">2023 Records</a></li>
+              <li class="mb-2"><a href="/archive/2022/" style="color:var(--navy)">2022 Records</a></li>
+              <li class="mb-2"><a href="/archive/2020/" style="color:var(--navy)">2020 Records</a></li>
+              <li class="mb-2"><a href="/archive/2015/" style="color:var(--navy)">2015 Records</a></li>
+              <li class="mb-2"><a href="/archive/2010/" style="color:var(--navy)">2010 Records</a></li>
+              <li class="mb-2"><a href="/archive/2000/" style="color:var(--navy)">2000 Records</a></li>
+              <li class="mb-2"><a href="/archive/1995/" style="color:var(--navy)">1995 Records</a></li>
+              <li class="mb-2"><a href="/archive/1990/" style="color:var(--navy)">1990 Records</a></li>
+              <li class="mb-2"><a href="/archive/1985/" style="color:var(--navy)">1985 Records</a></li>
+            </ul>
+          </div>
+          <div class="acpwb-card">
+            <h6 class="card-title mb-3">Research Division</h6>
+            <p class="small text-muted mb-2" style="font-size:.8rem">ACPWB's document archive spans our full operational history. Records are indexed by date, sector, and engagement phase.</p>
+            <a href="{% url 'reports-list' %}" style="font-size:.8rem;color:var(--gold);font-weight:700;text-decoration:none">Browse Research Reports &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

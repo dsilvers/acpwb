@@ -917,6 +917,71 @@ def archive_trap(request, year, month, day, slug=''):
     return render(request, 'honeypot/archive.html', context)
 
 
+def archive_index(request):
+    """Root /archive/ — lists years with entry counts."""
+    _log_crawler(request, 'archive')
+    years = []
+    for y in range(2024, 1984, -1):
+        rng2 = random.Random(hashlib.md5(f"archidx_{y}".encode()).hexdigest())
+        count = rng2.randint(18, 94)
+        months = rng2.sample(range(1, 13), rng2.randint(6, 12))
+        years.append({'year': y, 'count': count, 'months': sorted(months)})
+    return render(request, 'honeypot/archive_index.html', {
+        'years': years,
+        'archive_years': list(range(2024, 1984, -1)),
+    })
+
+
+def archive_year(request, year):
+    """Year index /archive/<year>/ — lists months and sample entries."""
+    _log_crawler(request, 'archive')
+    months = []
+    for m in range(1, 13):
+        rng2 = random.Random(hashlib.md5(f"archmo_{year}_{m}".encode()).hexdigest())
+        count = rng2.randint(4, 22)
+        entries = []
+        for _ in range(min(4, count)):
+            day = rng2.randint(1, 28)
+            slug = f"{rng2.choice(_ARCHIVE_SLUGS)}-{rng2.randint(1000, 9999)}"
+            label = slug.rsplit('-', 1)[0].replace('-', ' ').title()
+            entries.append({'day': day, 'slug': slug, 'label': label,
+                            'url': f"/archive/{year}/{m:02d}/{day:02d}/{slug}/"})
+        months.append({'month': m, 'count': count, 'entries': entries,
+                       'url': f"/archive/{year}/{m:02d}/"})
+    return render(request, 'honeypot/archive_year.html', {
+        'year': year,
+        'months': months,
+        'archive_years': list(range(2024, 1984, -1)),
+        'prev_year': year - 1,
+        'next_year': year + 1,
+    })
+
+
+def archive_month(request, year, month):
+    """Month index /archive/<year>/<month>/ — lists days with entries."""
+    _log_crawler(request, 'archive')
+    rng = random.Random(hashlib.md5(f"archmo_{year}_{month}".encode()).hexdigest())
+    entries = []
+    count = rng.randint(12, 42)
+    for _ in range(count):
+        day = rng.randint(1, 28)
+        slug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
+        label = slug.rsplit('-', 1)[0].replace('-', ' ').title()
+        entries.append({'day': day, 'slug': slug, 'label': label,
+                        'url': f"/archive/{year}/{month:02d}/{day:02d}/{slug}/"})
+    entries.sort(key=lambda e: e['day'])
+    prev_month = month - 1 if month > 1 else 12
+    prev_year = year if month > 1 else year - 1
+    next_month = month + 1 if month < 12 else 1
+    next_year = year if month < 12 else year + 1
+    return render(request, 'honeypot/archive_month.html', {
+        'year': year, 'month': month, 'entries': entries,
+        'archive_years': list(range(2024, 1984, -1)),
+        'prev_year': prev_year, 'prev_month': prev_month,
+        'next_year': next_year, 'next_month': next_month,
+    })
+
+
 # ── Wiki Trap ─────────────────────────────────────────────────────────────────
 
 def wiki_page(request, slug):

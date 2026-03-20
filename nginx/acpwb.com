@@ -25,8 +25,6 @@ server {
     return 301 https://acpwb.com$request_uri;
 }
 
-proxy_cache_path /tmp/nginx_trap_cache levels=1:2 keys_zone=trap_cache:10m max_size=200m inactive=15m use_temp_path=off;
-
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
@@ -48,7 +46,6 @@ server {
         access_log off;
     }
 
-    # Archive — fully deterministic; cache aggressively
     location /archive/ {
         proxy_pass         http://127.0.0.1:8001;
         proxy_http_version 1.1;
@@ -57,16 +54,8 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
-        proxy_cache        trap_cache;
-        proxy_cache_key    "$request_method$host$request_uri";
-        proxy_cache_valid  200 15m;
-        proxy_cache_valid  any 0;
-        proxy_cache_use_stale error timeout updating;
-        proxy_cache_lock   on;
-        add_header         X-Cache-Status $upstream_cache_status;
     }
 
-    # Wiki — deterministic per slug
     location /wiki/ {
         proxy_pass         http://127.0.0.1:8001;
         proxy_http_version 1.1;
@@ -75,16 +64,8 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
-        proxy_cache        trap_cache;
-        proxy_cache_key    "$request_method$host$request_uri";
-        proxy_cache_valid  200 15m;
-        proxy_cache_valid  any 0;
-        proxy_cache_use_stale error timeout updating;
-        proxy_cache_lock   on;
-        add_header         X-Cache-Status $upstream_cache_status;
     }
 
-    # Reports — deterministic per slug/page
     location /reports/ {
         proxy_pass         http://127.0.0.1:8001;
         proxy_http_version 1.1;
@@ -93,13 +74,6 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
-        proxy_cache        trap_cache;
-        proxy_cache_key    "$request_method$host$request_uri";
-        proxy_cache_valid  200 15m;
-        proxy_cache_valid  any 0;
-        proxy_cache_use_stale error timeout updating;
-        proxy_cache_lock   on;
-        add_header         X-Cache-Status $upstream_cache_status;
     }
 
     # /.well-known/ must reach Django (honeypot endpoints — not cached)

@@ -58,5 +58,40 @@
     "prompt": "an open-plan office with large monitors showing dashboards and code, empty desks, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
     "industry": "Nonprofit Sector",
     "path": "img/project-covers/011.webp"
+  },
+  "12": {
+    "prompt": "a clean anechoic testing chamber inside a tech facility, foam-lined walls, a single piece of test equipment, technical documentary, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Infrastructure",
+    "path": "img/project-covers/012.webp"
+  },
+  "13": {
+    "prompt": "an open-plan office with large monitors showing dashboards and code, empty desks, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Media",
+    "path": "img/project-covers/013.webp"
+  },
+  "14": {
+    "prompt": "a hyperscale data center exterior at night, backlit cooling units and industrial scale, atmospheric editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Hospitality",
+    "path": "img/project-covers/014.webp"
+  },
+  "15": {
+    "prompt": "a fiber optic cable cross-section under macro lens, light traveling through glass strands, abstract technology, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Pharmaceuticals",
+    "path": "img/project-covers/015.webp"
+  },
+  "16": {
+    "prompt": "a clean anechoic testing chamber inside a tech facility, foam-lined walls, a single piece of test equipment, technical documentary, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Defense",
+    "path": "img/project-covers/016.webp"
+  },
+  "17": {
+    "prompt": "a modern product design studio with hardware prototypes on white tables, clean overhead lighting, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Consumer Goods",
+    "path": "img/project-covers/017.webp"
+  },
+  "18": {
+    "prompt": "rooftop satellite dish and antenna array against a blue sky, corporate infrastructure photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
+    "industry": "Telecommunications",
+    "path": "img/project-covers/018.webp"
   }
 }

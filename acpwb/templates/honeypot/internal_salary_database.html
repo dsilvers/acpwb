@@ -1,0 +1,56 @@
+{% extends "honeypot/internal_base.html" %}
+
+{% block title %}Salary Database — ACPWB Internal Systems{% endblock %}
+
+{% block content %}
+<div class="int-page-header">
+  <div class="breadcrumb"><a href="/internal/">Dashboard</a> &rsaquo; Salary Database</div>
+  <h1>Salary Database</h1>
+</div>
+
+<div class="int-card" style="padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+  <span style="font-size:.78rem;color:#718096">
+    Salary bands by job family &amp; level — Page {{ page }} of {{ total_pages }}
+  </span>
+  <a href="/internal/salary-database/export.csv" class="btn-int btn-int-export">&#x2193; Export All (CSV)</a>
+</div>
+
+<div class="int-card" style="padding:0;overflow:auto">
+  <table class="int-table">
+    <thead>
+      <tr>
+        <th>Job Family</th>
+        <th>Level</th>
+        <th>Label</th>
+        <th>Min</th>
+        <th>Mid</th>
+        <th>Max</th>
+        <th>Bonus Target</th>
+        <th>Equity Band</th>
+        <th>Last Reviewed</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for b in bands %}
+      <tr>
+        <td style="font-weight:600">{{ b.family }}</td>
+        <td style="font-family:monospace;font-weight:700;color:#1a2744">{{ b.level_code }}</td>
+        <td style="font-size:.73rem;color:#718096">{{ b.level_label }}</td>
+        <td style="color:#276749">{{ b.min }}</td>
+        <td style="color:#1a2744;font-weight:700">{{ b.mid }}</td>
+        <td style="color:#718096">{{ b.max }}</td>
+        <td>{{ b.bonus_pct }}</td>
+        <td style="font-size:.73rem">{{ b.equity }}</td>
+        <td style="font-size:.72rem;color:#a0aec0">{{ b.reviewed }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="int-pagination">
+  {% if prev_page %}<a href="?page={{ prev_page }}">&larr; Prev</a>{% endif %}
+  <span class="current">{{ page }} / {{ total_pages }}</span>
+  {% if next_page %}<a href="?page={{ next_page }}">Next &rarr;</a>{% endif %}
+</div>
+{% endblock %}

@@ -11,6 +11,7 @@ class CrawlerVisit(models.Model):
         ('pow', 'PoW Challenge'),
         ('report_list', 'Report Listing'),
         ('report_download', 'Report Download'),
+        ('dataset', 'Training Dataset'),
         ('other', 'Other'),
     ]
 
@@ -21,11 +22,16 @@ class CrawlerVisit(models.Model):
     referrer = models.TextField(blank=True)
     trap_type = models.CharField(max_length=32, choices=TRAP_CHOICES, default='other', db_index=True)
     query_string = models.TextField(blank=True)
+    # Denormalized at write time — enables fast GROUP BY without Python-side UA parsing
+    bot_type = models.CharField(max_length=64, blank=True, db_index=True)
+    bot_group = models.CharField(max_length=64, blank=True, db_index=True)
 
     class Meta:
         ordering = ['-timestamp']
         indexes = [
             models.Index(fields=['trap_type', 'timestamp']),
+            models.Index(fields=['bot_type', 'timestamp']),
+            models.Index(fields=['bot_group', 'timestamp']),
         ]
         verbose_name = 'Crawler Visit'
 
@@ -90,3 +96,19 @@ class ArchiveVisit(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} /archive/{self.year}/{self.month}/{self.day}/{self.slug[:40]}"
+
+
+class InternalLoginAttempt(models.Model):
+    ip_address = models.GenericIPAddressField(db_index=True)
+    user_agent = models.TextField(blank=True)
+    username = models.CharField(max_length=255, blank=True)
+    password = models.CharField(max_length=255, blank=True)
+    next_url = models.CharField(max_length=500, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Internal Login Attempt'
+
+    def __str__(self):
+        return f"{self.ip_address} tried '{self.username}' @ {self.created_at:%Y-%m-%d %H:%M}"

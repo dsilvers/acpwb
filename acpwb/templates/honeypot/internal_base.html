@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}ACPWB Internal Systems{% endblock %}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 13px; background: #f0f2f5; color: #1a1a2e; }
+
+    /* Top bar */
+    .int-topbar {
+      background: #1a2744; color: #fff; height: 44px;
+      display: flex; align-items: center; padding: 0 1rem; gap: 1rem;
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    }
+    .int-topbar .brand { font-weight: 800; font-size: .85rem; letter-spacing: .04em; color: #f0c040; white-space: nowrap; }
+    .int-topbar .brand span { color: #fff; font-weight: 400; }
+    .int-topbar .spacer { flex: 1; }
+    .int-topbar .user-info { font-size: .75rem; color: rgba(255,255,255,.75); text-align: right; }
+    .int-topbar .user-info strong { color: #fff; }
+    .int-topbar .logout { font-size: .72rem; color: #f0c040; text-decoration: none; border: 1px solid rgba(240,192,64,.4); padding: .2rem .5rem; }
+    .int-topbar .logout:hover { background: rgba(240,192,64,.1); }
+
+    /* Warning banner */
+    .int-banner {
+      background: #c8102e; color: #fff; text-align: center;
+      padding: .35rem 1rem; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* Layout */
+    .int-layout { display: flex; min-height: calc(100vh - 80px); }
+
+    /* Sidebar */
+    .int-sidebar {
+      width: 210px; min-width: 210px; background: #1e2e4a; color: #cbd5e0;
+      padding: 1rem 0; flex-shrink: 0;
+    }
+    .int-sidebar .nav-section { font-size: .62rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.35); padding: .75rem 1rem .35rem; }
+    .int-sidebar a {
+      display: block; padding: .5rem 1rem; color: #a0aec0; text-decoration: none;
+      font-size: .8rem; border-left: 3px solid transparent;
+    }
+    .int-sidebar a:hover, .int-sidebar a.active { color: #fff; background: rgba(255,255,255,.06); border-left-color: #f0c040; }
+    .int-sidebar .nav-divider { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: .5rem 0; }
+
+    /* Main content */
+    .int-main { flex: 1; padding: 1.5rem; overflow-x: auto; }
+
+    /* Page header */
+    .int-page-header { margin-bottom: 1.25rem; }
+    .int-page-header h1 { font-size: 1.1rem; font-weight: 800; color: #1a2744; text-transform: uppercase; letter-spacing: .05em; }
+    .int-page-header .breadcrumb { font-size: .72rem; color: #718096; margin-top: .2rem; }
+    .int-page-header .breadcrumb a { color: #718096; text-decoration: none; }
+    .int-page-header .breadcrumb a:hover { color: #1a2744; }
+
+    /* Cards */
+    .int-card { background: #fff; border: 1px solid #e2e8f0; padding: 1.25rem; margin-bottom: 1rem; }
+    .int-card h2 { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #718096; margin-bottom: .75rem; }
+
+    /* Table */
+    .int-table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+    .int-table th { background: #1a2744; color: #fff; text-align: left; padding: .5rem .75rem; font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+    .int-table td { padding: .45rem .75rem; border-bottom: 1px solid #f0f2f5; vertical-align: middle; }
+    .int-table tr:hover td { background: #f7fafc; }
+
+    /* Status badges */
+    .badge { display: inline-block; font-size: .65rem; font-weight: 700; padding: .15rem .45rem; border-radius: 2px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+    .badge-active { background: #c6f6d5; color: #276749; }
+    .badge-remote { background: #bee3f8; color: #2c5282; }
+    .badge-hybrid { background: #e9d8fd; color: #553c9a; }
+    .badge-leave { background: #fefcbf; color: #744210; }
+    .badge-pip { background: #fed7d7; color: #822727; }
+    .badge-term { background: #e2e8f0; color: #4a5568; }
+    .badge-contract { background: #fef3c7; color: #92400e; }
+    .badge-active-hold { background: #fed7d7; color: #822727; }
+    .badge-released { background: #c6f6d5; color: #276749; }
+
+    /* Pagination */
+    .int-pagination { display: flex; gap: .5rem; align-items: center; margin-top: 1rem; font-size: .78rem; }
+    .int-pagination a { padding: .3rem .7rem; border: 1px solid #e2e8f0; color: #1a2744; text-decoration: none; }
+    .int-pagination a:hover { background: #f7fafc; }
+    .int-pagination .current { padding: .3rem .7rem; background: #1a2744; color: #fff; font-weight: 700; }
+
+    /* Buttons */
+    .btn-int { display: inline-block; font-size: .72rem; font-weight: 700; padding: .3rem .8rem; text-decoration: none; letter-spacing: .04em; }
+    .btn-int-primary { background: #1a2744; color: #fff; }
+    .btn-int-primary:hover { background: #2d4a7a; color: #fff; }
+    .btn-int-export { background: #276749; color: #fff; }
+    .btn-int-export:hover { background: #1e4d36; color: #fff; }
+
+    /* Footer */
+    .int-footer { background: #1a2744; color: rgba(255,255,255,.4); font-size: .68rem; padding: .6rem 1rem; text-align: center; }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<div class="int-topbar">
+  <div class="brand">ACPWB <span>Internal Systems</span></div>
+  <div class="spacer"></div>
+  <div class="user-info">
+    Welcome back, <strong>{{ user.first }} {{ user.last }}</strong>
+    &nbsp;|&nbsp; {{ user.title }}, {{ user.dept }}
+    &nbsp;|&nbsp; Last login: {{ user.last_login }}
+  </div>
+  &nbsp;
+  <a href="/internal/login/?next=/internal/" class="logout">Sign Out</a>
+</div>
+
+<div class="int-banner">&#9888; INTERNAL USE ONLY — NOT FOR PUBLIC DISTRIBUTION — ACPWB CONFIDENTIAL</div>
+
+<div class="int-layout">
+  <nav class="int-sidebar">
+    <div class="nav-section">Main</div>
+    <a href="/internal/" {% if request.path == '/internal/' %}class="active"{% endif %}>Dashboard</a>
+    <hr class="nav-divider">
+    <div class="nav-section">People &amp; Comp</div>
+    <a href="/internal/employee-records/" {% if '/employee-records' in request.path %}class="active"{% endif %}>Employee Records</a>
+    <a href="/internal/salary-database/" {% if '/salary-database' in request.path %}class="active"{% endif %}>Salary Database</a>
+    <hr class="nav-divider">
+    <div class="nav-section">Corporate Dev</div>
+    <a href="/internal/acquisition-targets/" {% if '/acquisition-targets' in request.path %}class="active"{% endif %}>Acquisition Targets</a>
+    <hr class="nav-divider">
+    <div class="nav-section">Legal</div>
+    <a href="/internal/litigation-hold/" {% if '/litigation-hold' in request.path %}class="active"{% endif %}>Litigation Hold</a>
+    <hr class="nav-divider">
+    <div class="nav-section">Research</div>
+    <a href="/reports/">Published Reports</a>
+    <a href="/datasets/">Public Datasets</a>
+    <a href="/archive/">Document Archive</a>
+  </nav>
+
+  <main class="int-main">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<div class="int-footer">
+  ACPWB Intranet v4.2 &nbsp;|&nbsp; IT Help Desk ext. 5555 &nbsp;|&nbsp; &copy; 2026 American Corporation for Public Well Being &nbsp;|&nbsp; Milwaukee, WI
+</div>
+
+</body>
+</html>

@@ -112,6 +112,15 @@
         <hr class="gold-divider">
         {% endif %}
 
+        <!-- Raw data export -->
+        <div style="background:var(--surface);border:1px solid var(--border);padding:.85rem 1rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+          <div>
+            <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Raw Data Export</div>
+            <div style="font-size:.8rem;color:var(--navy);font-weight:600">Download the underlying dataset for this archive entry</div>
+          </div>
+          <a href="{{ request.path }}export.csv" style="font-size:.72rem;font-weight:700;padding:.3rem .85rem;background:var(--navy);color:var(--gold);text-decoration:none;white-space:nowrap">&#x2193; Download CSV</a>
+        </div>
+
         <!-- Continue reading -->
         <a href="/archive/{{ next_year }}/{{ next_month|stringformat:"02d" }}/{{ next_day|stringformat:"02d" }}/{{ next_slug }}/"
            style="display:block;background:var(--navy);color:white;padding:1rem 1.5rem;text-decoration:none;font-weight:700;font-size:.9rem;margin-bottom:2rem">

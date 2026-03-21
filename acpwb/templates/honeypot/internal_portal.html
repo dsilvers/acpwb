@@ -1,0 +1,97 @@
+{% extends "honeypot/internal_base.html" %}
+
+{% block title %}Dashboard — ACPWB Internal Systems{% endblock %}
+
+{% block extra_head %}
+<style>
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-card { background: #fff; border: 1px solid #e2e8f0; border-top: 3px solid #1a2744; padding: 1rem 1.25rem; }
+.stat-card .label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #718096; }
+.stat-card .value { font-size: 1.6rem; font-weight: 800; color: #1a2744; margin: .3rem 0 .1rem; }
+.stat-card .sub { font-size: .7rem; color: #a0aec0; }
+.budget-bar { height: 6px; background: #e2e8f0; margin-top: .4rem; border-radius: 3px; overflow: hidden; }
+.budget-bar .fill { height: 100%; background: #276749; border-radius: 3px; }
+.tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+.tool-card { background: #fff; border: 1px solid #e2e8f0; padding: 1rem; text-decoration: none; color: inherit; display: block; }
+.tool-card:hover { border-color: #1a2744; box-shadow: 0 2px 8px rgba(26,39,68,.1); }
+.tool-card .tool-name { font-size: .85rem; font-weight: 800; color: #1a2744; margin-bottom: .25rem; }
+.tool-card .tool-desc { font-size: .73rem; color: #718096; }
+.ann-item { padding: .75rem 0; border-bottom: 1px solid #f0f2f5; }
+.ann-item:last-child { border-bottom: none; }
+.ann-item .ann-date { font-size: .65rem; color: #a0aec0; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.ann-item .ann-title { font-size: .83rem; font-weight: 700; color: #1a2744; margin: .15rem 0; }
+.ann-item .ann-body { font-size: .77rem; color: #4a5568; line-height: 1.5; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="int-page-header">
+  <div class="breadcrumb">Internal Systems &rsaquo; Dashboard</div>
+  <h1>Dashboard</h1>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="label">Total Headcount</div>
+    <div class="value">{{ stats.headcount }}</div>
+    <div class="sub">Active employees</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Open Requisitions</div>
+    <div class="value">{{ stats.open_reqs }}</div>
+    <div class="sub">Across all departments</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Pending Approvals</div>
+    <div class="value">{{ stats.pending_approvals }}</div>
+    <div class="sub">Compensation actions</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">FY2026 Budget Utilized</div>
+    <div class="value">{{ stats.budget_pct }}%</div>
+    <div class="sub">YTD vs. annual plan</div>
+    <div class="budget-bar"><div class="fill" style="width:{{ stats.budget_pct }}%"></div></div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+
+  <div>
+    <div class="int-card">
+      <h2>Internal Tools</h2>
+      <div class="tool-grid">
+        {% for tool in tools %}
+        <a href="{{ tool.url }}" class="tool-card">
+          <div class="tool-name">{{ tool.name }}</div>
+          <div class="tool-desc">{{ tool.desc }}</div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="int-card">
+      <h2>Quick Links</h2>
+      <ul style="list-style:none;font-size:.8rem;line-height:2">
+        <li><a href="/api/v1/private-data" style="color:#1a2744">API — Private Data Endpoint</a></li>
+        <li><a href="/api/v1/openapi.json" style="color:#1a2744">API — OpenAPI Specification</a></li>
+        <li><a href="/reports/" style="color:#1a2744">Research Reports Archive</a></li>
+        <li><a href="/datasets/" style="color:#1a2744">Public Training Datasets</a></li>
+        <li><a href="/archive/" style="color:#1a2744">Document Archive (1985–present)</a></li>
+        <li><a href="/wiki/corporate-governance/" style="color:#1a2744">Wiki — Corporate Governance</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="int-card">
+    <h2>Recent Announcements</h2>
+    {% for ann in announcements %}
+    <div class="ann-item">
+      <div class="ann-date">{{ ann.date }}</div>
+      <div class="ann-title">{{ ann.title }}</div>
+      <div class="ann-body">{{ ann.body }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

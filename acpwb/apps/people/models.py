@@ -3,7 +3,7 @@ from django.db import models
 
 class PeoplePageVisit(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
-    ip_address = models.GenericIPAddressField()
+    ip_address = models.GenericIPAddressField(db_index=True)
     user_agent = models.TextField(blank=True)
     referrer = models.TextField(blank=True)
     session_key = models.CharField(max_length=64, blank=True)

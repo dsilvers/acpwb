@@ -37,16 +37,20 @@ class BotTrackingMiddleware:
     def _log_bot_visit(self, request, user_agent, path):
         # Deferred import to avoid circular issues at middleware load time
         try:
+            from apps.core.bot_classify import classify_ua, classify_ua_group
             from apps.honeypot.models import CrawlerVisit
             ip = self._get_ip(request)
             trap_type = self._classify_path(path)
+            ua = user_agent or ''
             CrawlerVisit.objects.create(
                 ip_address=ip,
-                user_agent=user_agent[:512],
+                user_agent=ua[:512],
                 path=path[:512],
                 referrer=request.META.get('HTTP_REFERER', '')[:256],
                 trap_type=trap_type,
                 query_string=request.META.get('QUERY_STRING', '')[:256],
+                bot_type=classify_ua(ua),
+                bot_group=classify_ua_group(ua),
             )
         except Exception:
             pass  # Never let honeypot logging break the response

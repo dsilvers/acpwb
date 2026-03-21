@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport
+from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt
 
 
 @admin.register(CrawlerVisit)
@@ -46,3 +46,19 @@ class PublicReportAdmin(admin.ModelAdmin):
     search_fields = ('title', 'slug', 'watermark_token')
     readonly_fields = ('generated_at', 'watermark_token', 'slug')
     ordering = ('-pub_date',)
+
+
+@admin.register(InternalLoginAttempt)
+class InternalLoginAttemptAdmin(admin.ModelAdmin):
+    list_display = ('created_at', 'ip_address', 'username', 'password_short', 'next_url', 'user_agent_short')
+    search_fields = ('ip_address', 'username', 'password', 'next_url')
+    readonly_fields = ('created_at',)
+    ordering = ('-created_at',)
+
+    @admin.display(description='Password')
+    def password_short(self, obj):
+        return obj.password[:40] if obj.password else '—'
+
+    @admin.display(description='UA')
+    def user_agent_short(self, obj):
+        return obj.user_agent[:60] if obj.user_agent else '—'

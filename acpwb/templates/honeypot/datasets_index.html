@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Public Datasets — ACPWB Research Division{% endblock %}
+{% block meta_description %}ACPWB Research Division open NLP and workforce analytics datasets. Free to download under Creative Commons license. Compensation, governance, HR policy, and pay equity corpora.{% endblock %}
+
+{% block og_title %}ACPWB Public Datasets — Workforce & Compensation NLP Corpora{% endblock %}
+{% block og_description %}Free NLP training datasets from ACPWB: compensation survey responses, executive pay narratives, workforce Q&A pairs, ESG disclosures, and HR policy corpora.{% endblock %}
+
+{% block extra_head %}
+<style>
+.ds-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-top: 3px solid var(--gold); padding: 1.5rem; margin-bottom: 1rem;
+  transition: box-shadow .18s;
+}
+.ds-card:hover { box-shadow: 0 4px 20px rgba(10,22,40,.09); }
+.ds-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0; }
+.ds-tag { display: inline-block; font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .15rem .5rem; background: var(--surface); color: var(--navy); border: 1px solid var(--border); }
+.ds-tag.license { background: #e8f5e9; border-color: #a5d6a7; color: #1b5e20; }
+.ds-tag.format { background: #e3f2fd; border-color: #90caf9; color: #0d47a1; }
+.ds-title a { color: var(--navy); text-decoration: none; font-size: 1rem; font-weight: 800; }
+.ds-title a:hover { color: var(--gold); }
+.ds-stats { font-size: .75rem; color: var(--muted); margin-top: .5rem; }
+.btn-ds-dl { font-size: .72rem; font-weight: 700; padding: .28rem .75rem; background: var(--navy); color: var(--gold); text-decoration: none; }
+.btn-ds-dl:hover { background: var(--navy-mid); color: var(--gold); }
+.btn-ds-view { font-size: .72rem; font-weight: 700; padding: .28rem .75rem; background: transparent; color: var(--navy); border: 1px solid var(--border); text-decoration: none; }
+.btn-ds-view:hover { border-color: var(--navy); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">ACPWB Research Division</p>
+    <h1>PUBLIC DATASETS</h1>
+    <p>Open NLP corpora and workforce analytics datasets — free to download under Creative Commons license. Designed for researchers, practitioners, and model developers.</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+        <div class="mb-4">
+          <p class="text-uppercase text-gold fw-800 mb-1" style="letter-spacing:.15em;font-size:.7rem">Open Data</p>
+          <h2 class="section-heading mb-0" style="font-size:1.3rem">ALL DATASETS</h2>
+          <hr class="section-rule" style="margin:.5rem 0 0">
+        </div>
+
+        {% for ds in datasets %}
+        <div class="ds-card">
+          <p class="ds-title mb-1"><a href="/datasets/{{ ds.slug }}/">{{ ds.title }}</a></p>
+          <div class="ds-meta">
+            <span class="ds-tag">{{ ds.task }}</span>
+            <span class="ds-tag format">{{ ds.format }}</span>
+            <span class="ds-tag license">{{ ds.license }}</span>
+            <span class="ds-tag">{{ ds.year }}</span>
+          </div>
+          <p style="font-size:.83rem;color:var(--text);line-height:1.55;margin-bottom:.65rem">{{ ds.description }}</p>
+          <div class="ds-stats">
+            {{ ds.records|floatformat:"0" }} records &nbsp;&middot;&nbsp; {{ ds.size_mb }} MB &nbsp;&middot;&nbsp; JSONL format
+          </div>
+          <div style="display:flex;gap:.5rem;margin-top:.85rem;flex-wrap:wrap">
+            <a href="/datasets/{{ ds.slug }}/" class="btn-ds-view">View Details</a>
+            <a href="/datasets/{{ ds.slug }}/data.jsonl" class="btn-ds-dl">&#x2193; Download JSONL</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+          <div style="background:var(--navy);color:var(--white);padding:1.5rem;margin-bottom:1.25rem">
+            <h6 class="text-uppercase fw-800" style="letter-spacing:.1em;font-size:.7rem;color:var(--gold)">About These Datasets</h6>
+            <p class="small mt-2 mb-3" style="color:rgba(255,255,255,.75);font-size:.82rem">
+              ACPWB's Research Division releases open datasets derived from our annual compensation surveys, governance research, and workforce analytics programs. All datasets are suitable for NLP model training and fine-tuning.
+            </p>
+            <p class="small mb-0" style="color:rgba(255,255,255,.5);font-size:.75rem">
+              CC BY datasets may be used commercially with attribution. CC BY-NC datasets are for non-commercial research only.
+            </p>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.25rem">
+            <h6 class="text-uppercase fw-800" style="letter-spacing:.1em;font-size:.7rem;color:var(--navy)">Data Access</h6>
+            <p style="font-size:.8rem;color:var(--muted);margin:.5rem 0 .75rem">All datasets are paginated JSONL. Use the <code>?page=N</code> parameter to fetch additional pages.</p>
+            <a href="/api/v1/openapi.json" style="font-size:.8rem;color:var(--gold);font-weight:700;text-decoration:none">API Documentation (OpenAPI) &rarr;</a>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--border);padding:1.5rem">
+            <h6 class="text-uppercase fw-800" style="letter-spacing:.1em;font-size:.7rem;color:var(--navy)">Citation</h6>
+            <p style="font-size:.75rem;color:var(--muted);line-height:1.5">ACPWB Research Division (2024). <em>ACPWB Open Workforce Datasets</em>. American Corporation for Public Well Being. https://acpwb.com/datasets/</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

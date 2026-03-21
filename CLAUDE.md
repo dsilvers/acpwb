@@ -51,7 +51,8 @@ docker compose exec web python manage.py collectstatic --noinput
 
 - `people.PeoplePageVisit` — every load of `/our-people/`
 - `people.GeneratedEmployee` — the fake employees shown (FK → visit)
-- `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`)
+- `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`, `ghost_link`, `dataset`, `api`, `well_known`)
+- `honeypot.InternalLoginAttempt` — credential-stuffing log: ip, ua, username, password, next_url, created_at
 - `honeypot.WikiPage` — generated wiki content with watermark tokens
 - `honeypot.PublicReport` — generated report metadata, persisted on first access
 - `webhooks.InboundEmail` — received emails
@@ -78,6 +79,19 @@ Dedicated traps:
 - `/sitemap-publications.xml` — trap: reports, ghost traps, fake internal paths; logged as `well_known`
 - `/sitemap-wiki.xml` — trap: all 75+ wiki topics; logged as `well_known`
 - `/sitemap-archive.xml` — trap: 500 deterministic archive URLs (seed `0x4143505742`), 2008–2024; logged as `well_known`
+- `/internal/` — fake intranet portal hub (indexed, Allow in robots.txt); shows IP-deterministic "Welcome back [name]", dashboard cards, announcements; logged as `ghost_link`
+- `/internal/login/` — fake Okta/Azure AD SSO page; accepts any POST, logs credentials to `InternalLoginAttempt`, redirects to `?next=`
+- `/internal/employee-records/` — paginated employee table (50 rows/page, infinite); Export CSV (500 rows, watermarked)
+- `/internal/salary-database/` — salary band table by job family + level; Export CSV
+- `/internal/acquisition-targets/` — M&A pipeline table with deal stages; Export CSV
+- `/internal/litigation-hold/` — legal hold inventory (HTML only, no CSV export)
+- `/archive/<year>/<month>/<day>/<path:slug>/export.csv` — watermarked CSV for archive entry (200–500 rows); logged as `archive`
+- `/feeds/archive.xml` — Atom feed, 20 entries/page, infinite via `?page=N`; logged as `well_known`
+- `/feeds/reports.xml` — RSS 2.0 feed of reports, 10/page, infinite; logged as `well_known`
+- `/api/v1/openapi.json` — valid OpenAPI 3.0.3 spec with 20 fake endpoints, watermarked; logged as `api`
+- `/datasets/` — index of 8 fake NLP/compensation datasets; logged as `dataset`
+- `/datasets/<slug>/` — dataset detail with description, format example, citation
+- `/datasets/<slug>/data.jsonl` — paginated JSONL (100 records/page), instruction-response pairs, watermarked; logged as `dataset`
 - `/internal/portal/`, `/employees/export/`, `/admin-panel/login/` — ghost trap 403s, all logged
 
 Staff dashboard:
@@ -85,6 +99,8 @@ Staff dashboard:
 - Views in `apps/core/dashboard_views.py`, URLs in `apps/core/dashboard_urls.py`
 - Bot classification via `BOT_PATTERNS` / `classify_ua()` / `classify_ua_group()` in `dashboard_views.py`
 - Date range controlled by `?range=` preset or `?from=`/`?to=` custom; `_daily_chart()` returns `{'bars': [...], 'start': '...', 'end': '...'}`
+- Overview stat cards: Crawler Hits, Archive Visits, Inbound Emails, People Visits, Project Visits, Login Attempts (red)
+- "By Trap Type" panel pulls from `CrawlerVisit.TRAP_CHOICES` dynamically — new trap types appear automatically
 
 ---
 

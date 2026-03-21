@@ -1,13 +1,21 @@
+import csv
 import hashlib
+import io
 import json
 import random
 import uuid
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+from datetime import datetime as _dt, timedelta as _td
+from django.http import Http404, JsonResponse, HttpResponse
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
-from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport
+from apps.core.bot_classify import classify_ua, classify_ua_group
+from apps.people.generators import (
+    FIRST_NAMES as _INT_FIRST_NAMES, LAST_NAMES as _INT_LAST_NAMES,
+    TITLES as _INT_TITLES, DEPARTMENTS as _INT_DEPARTMENTS,
+)
+from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt
 from .wiki_generator import generate_wiki_page, TOPICS
 from .report_generator import (
     REPORT_CATALOG, REPORT_CATEGORIES,
@@ -25,13 +33,16 @@ def _get_ip(request):
 
 def _log_crawler(request, trap_type):
     try:
+        ua = request.META.get('HTTP_USER_AGENT', '')
         CrawlerVisit.objects.create(
             ip_address=_get_ip(request),
-            user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
+            user_agent=ua[:512],
             path=request.path[:512],
             referrer=request.META.get('HTTP_REFERER', '')[:256],
             trap_type=trap_type,
             query_string=request.META.get('QUERY_STRING', '')[:256],
+            bot_type=classify_ua(ua),
+            bot_group=classify_ua_group(ua),
         )
     except Exception:
         pass
@@ -1089,6 +1100,11 @@ Allow: /privacy/
 Allow: /archive/
 Allow: /wiki/
 Allow: /api/v1/
+Allow: /datasets/
+Allow: /feeds/
+
+# Internal systems portal (authenticated, public-facing login)
+Allow: /internal/
 
 # Administrative areas
 Disallow: /django-admin/
@@ -1335,7 +1351,18 @@ def sitemap_publications(request):
         if entry['file_type'] == 'csv':
             lines.append(_url_entry(f"/reports/{entry['slug']}/download.csv", '0.7', 'never'))
     lines.append(_url_entry('/api/v1/private-data', '0.9', 'daily'))
-    lines.append(_url_entry('/internal/portal/', '0.8', 'daily'))
+    lines.append(_url_entry('/api/v1/openapi.json', '0.9', 'weekly'))
+    lines.append(_url_entry('/internal/', '0.9', 'daily'))
+    lines.append(_url_entry('/internal/employee-records/', '0.8', 'weekly'))
+    lines.append(_url_entry('/internal/salary-database/', '0.8', 'weekly'))
+    lines.append(_url_entry('/internal/acquisition-targets/', '0.8', 'weekly'))
+    lines.append(_url_entry('/internal/litigation-hold/', '0.7', 'weekly'))
+    lines.append(_url_entry('/datasets/', '0.8', 'monthly'))
+    for ds in _DATASET_CATALOG:
+        lines.append(_url_entry(f"/datasets/{ds['slug']}/", '0.7', 'never'))
+        lines.append(_url_entry(f"/datasets/{ds['slug']}/data.jsonl", '0.8', 'never'))
+    lines.append(_url_entry('/feeds/archive.xml', '0.6', 'daily'))
+    lines.append(_url_entry('/feeds/reports.xml', '0.6', 'weekly'))
     lines.append(_url_entry('/employees/export/', '0.8', 'daily'))
     lines.append(_url_entry('/admin-panel/login/', '0.7', 'daily'))
     for path in _FAKE_INTERNAL_PATHS:
@@ -1374,3 +1401,913 @@ def sitemap_archive(request):
         lines.append(_url_entry(f'/archive/{year}/{month:02d}/{day:02d}/{slug}/', '0.6', 'never'))
     lines.append(_SITEMAP_FOOTER)
     return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+# ── Internal Portal Seed Data ─────────────────────────────────────────────────
+
+_INTERNAL_OFFICES = [
+    'Milwaukee, WI (HQ)', 'Chicago, IL', 'New York, NY', 'San Francisco, CA',
+    'Boston, MA', 'Atlanta, GA', 'Dallas, TX', 'Denver, CO', 'Seattle, WA',
+    'Minneapolis, MN', 'Nashville, TN', 'Phoenix, AZ', 'Portland, OR',
+    'Austin, TX', 'Detroit, MI', 'Philadelphia, PA', 'Baltimore, MD',
+    'Charlotte, NC', 'Columbus, OH', 'Indianapolis, IN', 'Miami, FL',
+    'Tampa, FL', 'Houston, TX', 'Kansas City, MO', 'St. Louis, MO',
+    'Cleveland, OH', 'Pittsburgh, PA', 'Cincinnati, OH', 'Salt Lake City, UT',
+    'Richmond, VA', 'Raleigh-Durham, NC', 'Hartford, CT', 'Birmingham, AL',
+    'Orlando, FL', 'Louisville, KY', 'Memphis, TN', 'New Orleans, LA',
+    'Omaha, NE', 'Des Moines, IA', 'Madison, WI', 'Green Bay, WI',
+    'Waukesha, WI', 'Brookfield, WI', 'Appleton, WI', 'Racine, WI',
+    'Kenosha, WI', 'Sheboygan, WI', 'Eau Claire, WI', 'Wausau, WI',
+    'La Crosse, WI', 'Oshkosh, WI', 'Fond du Lac, WI', 'Janesville, WI',
+    'Beloit, WI', 'Stevens Point, WI', 'Manitowoc, WI',
+    'San Diego, CA', 'Sacramento, CA', 'San Jose, CA', 'Los Angeles, CA',
+    'Las Vegas, NV', 'Boise, ID', 'Spokane, WA', 'Tucson, AZ',
+    'Albuquerque, NM', 'Oklahoma City, OK', 'Tulsa, OK', 'Little Rock, AR',
+    'Jackson, MS', 'Montgomery, AL', 'Columbia, SC', 'Charleston, SC',
+    'Savannah, GA', 'Jacksonville, FL', 'Fort Lauderdale, FL', 'Tallahassee, FL',
+    'Lexington, KY', 'Knoxville, TN', 'Chattanooga, TN', 'Huntsville, AL',
+    'Greensboro, NC', 'Winston-Salem, NC', 'Durham, NC', 'Wilmington, DE',
+    'Albany, NY', 'Buffalo, NY', 'Rochester, NY', 'Syracuse, NY',
+    'Providence, RI', 'Portland, ME', 'Burlington, VT', 'Manchester, NH',
+    'Worcester, MA', 'Springfield, MA', 'Bridgeport, CT', 'Stamford, CT',
+    'Newark, NJ', 'Trenton, NJ', 'Harrisburg, PA',
+    'Fargo, ND', 'Sioux Falls, SD', 'Billings, MT', 'Cheyenne, WY',
+    'Anchorage, AK', 'Honolulu, HI', 'Washington, DC',
+]
+
+_EMPLOYMENT_STATUSES = [
+    'Active', 'Active', 'Active', 'Active', 'Active', 'Active', 'Active', 'Active',
+    'Active – Remote', 'Active – Remote', 'Active – Remote', 'Active – Remote',
+    'Active – Hybrid', 'Active – Hybrid', 'Active – Hybrid', 'Active – Hybrid',
+    'Active – Field', 'Active – Field',
+    'On Leave – FMLA', 'On Leave – Medical', 'On Leave – Personal',
+    'On Leave – Military', 'On Leave – Parental',
+    'PIP – Stage 1', 'PIP – Stage 2', 'PIP – Final',
+    'Terminated – Voluntary', 'Terminated – Involuntary', 'Terminated – Retirement',
+    'Contractor – W2', 'Contractor – 1099', 'Contractor – C2C',
+    'Intern – Summer', 'Intern – Co-op', 'Part-Time',
+]
+
+_DEAL_STAGES = [
+    'Screening', 'Universe Build', 'Initial Research', 'Initial Outreach',
+    'No Response – Follow Up', 'NDA Requested', 'NDA Executed', 'NDA Declined',
+    'Intro Call Scheduled', 'Intro Call Completed', 'Management Meeting Scheduled',
+    'Management Meeting Completed', 'CIM Requested', 'CIM Received', 'CIM Under Review',
+    'IOI Submitted', 'IOI Accepted', 'IOI Rejected', 'IOI – Counter Received',
+    'Deep Dive', 'Site Visit', 'Due Diligence – Phase 1', 'Due Diligence – Phase 2',
+    'Due Diligence – Final', 'Quality of Earnings', 'Legal Due Diligence',
+    'LOI Drafting', 'LOI Submitted', 'LOI Accepted', 'LOI Negotiating', 'LOI Rejected',
+    'Exclusivity', 'Exclusive Negotiation', 'Final Bid', 'Purchase Agreement Drafting',
+    'Purchase Agreement Markup', 'Purchase Agreement Executed', 'Pre-Close',
+    'Regulatory Review', 'HSR Filing', 'HSR Clearance', 'Board Approval Pending',
+    'Board Approved', 'Closing', 'Closed', 'Post-Close Integration',
+    'Passed – Round 1', 'Passed – Final Round', 'Passed – Valuation',
+    'Passed – Fit', 'On Hold', 'Monitoring / Watch', 'Proprietary Outreach',
+]
+
+_HOLD_TYPES = [
+    'Email', 'Files', 'Email & Files', 'Slack Messages', 'SharePoint / OneDrive',
+    'Voicemail', 'Text / SMS', 'Database Records', 'Source Code Repository',
+    'Financial Records', 'HR Records', 'IT System Logs', 'Cloud Storage',
+    'Physical Documents', 'Video Recordings', 'Calendar & Meeting Data',
+    'CRM Records', 'ERP Data', 'Collaboration Tools', 'Backup Media',
+    'Instant Messaging', 'Social Media', 'Browser History / Artifacts',
+    'Network Logs', 'Endpoint Forensics', 'Mobile Device Data',
+]
+
+_COUNSEL_FIRMS = [
+    'Kirkland & Ellis LLP', 'Latham & Watkins LLP', 'Skadden, Arps, Slate, Meagher & Flom LLP',
+    'Sullivan & Cromwell LLP', 'Weil, Gotshal & Manges LLP',
+    'Paul, Weiss, Rifkind, Wharton & Garrison LLP', 'Jones Day',
+    'Gibson, Dunn & Crutcher LLP', 'Davis Polk & Wardwell LLP', 'Sidley Austin LLP',
+    'Morgan, Lewis & Bockius LLP', "O'Melveny & Myers LLP", 'Mayer Brown LLP',
+    'Quarles & Brady LLP', 'Foley & Lardner LLP', 'Michael Best & Friedrich LLP',
+    'Reinhart Boerner Van Deuren SC', 'Husch Blackwell LLP', 'von Briesen & Roper SC',
+    'DeWitt LLP', 'Godfrey & Kahn SC', 'Stafford Rosenbaum LLP', 'Axley Brynelson LLP',
+    'Baker McKenzie LLP', 'White & Case LLP', 'Cleary Gottlieb Steen & Hamilton LLP',
+    'Simpson Thacher & Bartlett LLP', 'Willkie Farr & Gallagher LLP', 'Dechert LLP',
+    'Proskauer Rose LLP', 'Ropes & Gray LLP', 'Debevoise & Plimpton LLP',
+    'Paul Hastings LLP', 'Hogan Lovells LLP', 'K&L Gates LLP',
+    'Bryan Cave Leighton Paisner LLP', 'Greenberg Traurig LLP', 'Nixon Peabody LLP',
+    'Blank Rome LLP', 'Mintz Levin Cohn Ferris Glovsky and Popeo PC', 'Cooley LLP',
+    'Wilson Sonsini Goodrich & Rosati PC', 'Gunderson Dettmer LLP',
+    'Morrison Foerster LLP', 'Orrick Herrington & Sutcliffe LLP', 'DLA Piper LLP',
+    'Reed Smith LLP', 'Holland & Knight LLP', 'Stoel Rives LLP',
+    'Perkins Coie LLP', 'Fenwick & West LLP', 'Goodwin Procter LLP',
+    'Fish & Richardson PC', 'Choate Hall & Stewart LLP', 'Ballard Spahr LLP',
+    "Cozen O'Connor PC", 'Saul Ewing Arnstein & Lehr LLP', 'Ice Miller LLP',
+    'Taft Stettinius & Hollister LLP', 'Vorys Sater Seymour and Pease LLP',
+    'Dinsmore & Shohl LLP', 'Frost Brown Todd LLC', 'Stites & Harbison PLLC',
+    'Wyatt Tarrant & Combs LLP', 'Bass Berry & Sims PLC',
+    'Nelson Mullins Riley & Scarborough LLP', 'Burr & Forman LLP',
+    'Bradley Arant Boult Cummings LLP', 'Maynard Cooper & Gale PC',
+]
+
+_SALARY_JOB_FAMILIES = [
+    'Software Engineering', 'Frontend Engineering', 'Backend Engineering',
+    'Full-Stack Engineering', 'Mobile Engineering', 'Embedded Systems',
+    'Data Engineering', 'Data Science', 'Machine Learning', 'AI / LLM Engineering',
+    'Platform Engineering', 'DevOps / SRE', 'Cloud Engineering', 'Infrastructure',
+    'Cybersecurity', 'IT Infrastructure', 'IT Support / Help Desk', 'Network Engineering',
+    'Product Management', 'Technical Program Management', 'Program Management',
+    'Project Management', 'Business Analysis', 'Systems Analysis',
+    'UX / UI Design', 'Product Design', 'Graphic Design', 'Content Strategy',
+    'Video Production', 'Brand Management', 'Digital Marketing', 'SEO / SEM',
+    'Marketing', 'Marketing Operations', 'Communications', 'Public Relations',
+    'Investor Relations', 'Corporate Communications',
+    'Financial Analysis', 'FP&A', 'Corporate Finance', 'Treasury', 'Cash Management',
+    'Accounting', 'Controller', 'Tax', 'Transfer Pricing', 'Internal Audit',
+    'External Audit', 'SOX Compliance', 'Risk Management',
+    'Investment Management', 'Portfolio Management', 'Fund Accounting',
+    'General Counsel', 'Intellectual Property', 'Employment Law', 'Commercial Law',
+    'Securities Law', 'Regulatory Affairs', 'Compliance', 'Ethics & Compliance',
+    'M&A / Corporate Development', 'Corporate Strategy', 'Business Development',
+    'Sales', 'Account Management', 'Customer Success', 'Sales Operations',
+    'Human Resources', 'Talent Acquisition', 'Sourcing / Recruiting',
+    'Learning & Development', 'Organizational Development', 'HR Business Partner',
+    'Total Rewards', 'Compensation', 'Benefits Administration', 'Payroll',
+    'HRIS / People Analytics', 'Workforce Planning',
+    'Operations', 'Supply Chain', 'Procurement', 'Vendor Management',
+    'Facilities', 'Real Estate', 'Administrative', 'Executive Support',
+    'Research & Development', 'Innovation', 'Sustainability', 'ESG',
+    'Diversity, Equity & Inclusion', 'Corporate Social Responsibility',
+    'Environmental Health & Safety', 'Quality Assurance', 'Customer Service',
+    'Field Operations', 'Project Controls', 'Document Control',
+]
+
+_SALARY_LEVELS = [
+    ('IC1', 'Individual Contributor 1'), ('IC2', 'Individual Contributor 2'),
+    ('IC3', 'Individual Contributor 3'), ('IC4', 'Individual Contributor 4'),
+    ('IC5', 'Individual Contributor 5'), ('IC6', 'Individual Contributor 6'),
+    ('IC7', 'Principal / Staff'), ('M1', 'Manager'), ('M2', 'Senior Manager'),
+    ('M3', 'Director'), ('M4', 'Senior Director'), ('M5', 'Vice President'),
+    ('M6', 'Senior Vice President'), ('E1', 'Executive Director'),
+    ('E2', 'C-Suite / Managing Director'), ('E3', 'Partner / C-Suite'),
+]
+
+_EQUITY_BANDS = [
+    'None', 'None', 'None', 'None',
+    '$0–$5K', '$5K–$10K', '$10K–$25K', '$25K–$50K',
+    '$50K–$100K', '$100K–$250K', '$250K–$500K', '$500K–$1M', '$1M+',
+]
+
+_MATTER_NAMES = [
+    'In re: ACPWB Data Retention Policy Review (2023)',
+    'SEC Inquiry – Compensation Disclosure Timing (2021)',
+    'EEOC Complaint – Retaliation Claim, Case 2022-114',
+    'Patent Infringement Claim – Competitive Analysis Tooling',
+    'Breach of Contract – Vendor Agreement, Thornfield Partners LLC',
+    'Employment Dispute – Wrongful Termination, Matter 2023-07',
+    'DOL Investigation – Overtime Classification Audit (2022)',
+    'Customer Data Breach Response – Incident 2021-Q3',
+    'Merger Integration – Regulatory Compliance Review',
+    'Non-Compete Enforcement – Former VP Strategy',
+    'IP Theft Claim – Trade Secrets, Filed 2023',
+    'GDPR Data Subject Request – Litigation Support',
+    'Class Action Defense – Wage & Hour, SDWI 2022',
+    'Shareholder Derivative Action – Compensation Committee',
+    'False Claims Act Investigation – Federal Contract FC-2019-447',
+    'OSHA Citation Response – Safety Incident, Milwaukee HQ',
+    'Insurance Coverage Dispute – D&O Policy (Policy Year 2021)',
+    'Real Estate Dispute – Milwaukee Office Lease Termination',
+    'Indemnification Claim – Acquisition Target, 2019 Transaction',
+    'Tax Controversy – Transfer Pricing Audit, IRS (2020–2022)',
+    'Whistleblower Investigation – Finance Department Allegations',
+    'Antitrust Review – Proposed Acquisition of Meridian Workforce',
+    'FCPA Internal Investigation – International Business Development',
+    'Cybersecurity Incident Response – Ransomware Event, Q4 2022',
+    'ADA Accommodation Dispute – Remote Work Policy',
+    'NLRA Compliance Review – Employee Handbook Revisions',
+    'Trade Secret Misappropriation – Former Employee, Case 2023-22',
+    'Contract Dispute – SaaS Vendor, Renewal Terms',
+    'Employment Arbitration – Discrimination Claim, Case ARB-2023-08',
+    'Environmental Compliance – Milwaukee Facility EPA Notice',
+    'ERISA Audit – 401(k) Plan Administration Review',
+    'CFIUS Review – Foreign Investment Transaction',
+    'State AG Investigation – Pay Equity Compliance, California',
+    'Class Action – BIPA Biometric Data Claims',
+    'DOJ Civil Investigative Demand – Subcontractor Billing',
+    'SEC Whistleblower Response – Accounting Irregularity Claim',
+    'Wage Claim – Independent Contractor Misclassification, CA',
+    'FINRA Arbitration – Broker-Dealer Subsidiary',
+    'PCI-DSS Breach Response – Payment Card Data Incident',
+    'HIPAA Compliance Review – Benefits Administration Data',
+]
+
+_ACQUISITION_COMPANIES = [
+    ('Meridian Workforce Solutions', 'MWS', 'HR Technology', 'Austin, TX'),
+    ('Apex Analytics Group', 'APXG', 'Data & Analytics', 'Boston, MA'),
+    ('Summit Capital Advisors', 'SCA', 'Financial Services', 'New York, NY'),
+    ('Pinnacle Benefits Administration', 'PBA', 'Benefits Admin', 'Chicago, IL'),
+    ('Cascade Compensation Consulting', 'CCC', 'HR Consulting', 'Seattle, WA'),
+    ('Northbridge Talent Management', 'NTM', 'Talent Management', 'Minneapolis, MN'),
+    ('Clearwater People Analytics', 'CWPA', 'People Analytics', 'Denver, CO'),
+    ('Ironwood Executive Search', 'IWES', 'Executive Search', 'Atlanta, GA'),
+    ('Vantage Workforce Intelligence', 'VWI', 'Workforce Tech', 'San Francisco, CA'),
+    ('Bridgepoint HR Systems', 'BPHR', 'HRIS', 'Dallas, TX'),
+    ('Granite Total Rewards', 'GTR', 'Compensation', 'Philadelphia, PA'),
+    ('Redwood Benefits Group', 'RBG', 'Benefits Consulting', 'Portland, OR'),
+    ('Stonegate Labor Analytics', 'SGLA', 'Labor Analytics', 'Nashville, TN'),
+    ('Harbor Compliance Solutions', 'HCS', 'Compliance', 'Baltimore, MD'),
+    ('Riverline Payroll Services', 'RPS', 'Payroll', 'Columbus, OH'),
+    ('Skyline Compensation Data', 'SCD', 'Compensation Data', 'Phoenix, AZ'),
+    ('Midland HR Technology', 'MHRT', 'HR Tech', 'Kansas City, MO'),
+    ('Coastal People Ops', 'CPO', 'People Operations', 'Miami, FL'),
+    ('Highland Workforce Consulting', 'HWC', 'HR Consulting', 'Charlotte, NC'),
+    ('Lakefront Benefits Exchange', 'LBE', 'Benefits Exchange', 'Milwaukee, WI'),
+    ('Prairie State Analytics', 'PSA', 'Analytics', 'Indianapolis, IN'),
+    ('Riverview Executive Compensation', 'REC', 'Exec Comp', 'Pittsburgh, PA'),
+    ('Bluewater Talent Solutions', 'BTS', 'Talent Solutions', 'Tampa, FL'),
+    ('Westwood Pay Equity Partners', 'WPEP', 'Pay Equity', 'Los Angeles, CA'),
+    ('Eastview Regulatory Consulting', 'ERC', 'Regulatory', 'Washington, DC'),
+    ('Northshore Data Intelligence', 'NDI', 'Data Intelligence', 'Detroit, MI'),
+    ('Southgate Benefits Technology', 'SBT', 'Benefits Tech', 'Houston, TX'),
+    ('Millbrook Governance Solutions', 'MGS', 'Governance', 'Hartford, CT'),
+    ('Foxridge Compensation Research', 'FCR', 'Comp Research', 'Richmond, VA'),
+    ('Maplewood HR Outcomes', 'MHO', 'HR Outcomes', 'Salt Lake City, UT'),
+    ('Cedarbrook Workforce Planning', 'CWP', 'Workforce Planning', 'Cleveland, OH'),
+    ('Birchwood Talent Intelligence', 'BTI', 'Talent Intelligence', 'Raleigh-Durham, NC'),
+    ('Elmwood Pay Strategy Partners', 'EPSP', 'Pay Strategy', 'St. Louis, MO'),
+    ('Willowbrook Organizational Design', 'WOD', 'Org Design', 'Cincinnati, OH'),
+    ('Hawthorn Benefits Advisory', 'HBA', 'Benefits Advisory', 'Louisville, KY'),
+    ('Ashwood Total Compensation', 'ATC', 'Total Comp', 'Memphis, TN'),
+    ('Sycamore HR Risk Management', 'SHRM2', 'HR Risk', 'New Orleans, LA'),
+    ('Poplar Workforce Automation', 'PWA', 'Workforce Automation', 'Omaha, NE'),
+    ('Maple Grove Incentive Design', 'MGID', 'Incentive Design', 'Des Moines, IA'),
+    ('Linden Succession Planning', 'LSP', 'Succession Planning', 'Madison, WI'),
+    ('Irongate HR Intelligence', 'IGHI', 'HR Intelligence', 'Birmingham, AL'),
+    ('Ridgeline People Strategy', 'RPS2', 'People Strategy', 'Orlando, FL'),
+    ('Crestwood Compensation Analytics', 'CCA', 'Comp Analytics', 'Sacramento, CA'),
+    ('Fieldstone Benefits Innovation', 'FBI2', 'Benefits Innovation', 'San Diego, CA'),
+    ('Copperleaf HR Advisory', 'CHA', 'HR Advisory', 'Las Vegas, NV'),
+    ('Silverstone Workforce Research', 'SWR', 'Workforce Research', 'Boise, ID'),
+    ('Goldenrod People Metrics', 'GPM', 'People Metrics', 'Spokane, WA'),
+    ('Laurelwood Compensation Design', 'LCD', 'Comp Design', 'Portland, OR'),
+    ('Thornbury HR Consulting', 'THC', 'HR Consulting', 'Hartford, CT'),
+    ('Whitmore Benefits Strategy', 'WBS', 'Benefits Strategy', 'Providence, RI'),
+    ('Beckford People Operations', 'BPO', 'People Ops', 'Albany, NY'),
+]
+
+_ANALYST_NAMES = [
+    'R. Hoffman', 'C. Nakamura', 'A. Okonkwo', 'S. Patel', 'M. Reyes',
+    'D. Voronova', 'J. Fitzgerald', 'L. Johansson', 'P. Whitmore', 'T. Nakagawa',
+    'B. Andersen', 'E. Osei', 'K. Schwartz', 'N. Beaumont', 'W. Takahashi',
+    'F. Brennan', 'G. Thompson', 'H. Richardson', 'I. Peterson', 'X. Morrison',
+    'Z. Abramowitz', 'Q. Nkosi', 'V. Lindqvist', 'U. Moreau', 'Y. Hashimoto',
+    'A. Washington', 'B. Jefferson', 'C. Hamilton', 'D. Madison', 'E. Lincoln',
+    'F. Roosevelt', 'G. Monroe', 'H. Adams', 'I. Jackson', 'J. Harrison',
+    'K. Tyler', 'L. Polk', 'M. Taylor', 'N. Pierce', 'O. Buchanan',
+    'P. Garfield', 'Q. Cleveland', 'R. McKinley', 'S. Harding', 'T. Coolidge',
+]
+
+_PORTAL_ANNOUNCEMENTS = [
+    {'date': '2026-03-18', 'title': 'Q1 All-Hands: March 28 @ 10:00 AM CT',
+     'body': 'Join us in the Milwaukee HQ auditorium or via Webex for our Q1 All-Hands. CEO Randall Brewer will present FY2025 results and our 2026 strategic priorities. Attendance is strongly encouraged for all employees.'},
+    {'date': '2026-03-15', 'title': 'Updated Hybrid Work Policy – Effective April 1',
+     'body': 'The updated Hybrid Work Policy (Policy HR-2026-04) is now available in the Employee Handbook portal. Key changes include clarified expectations for in-office days by role level and updated equipment reimbursement schedules.'},
+    {'date': '2026-03-10', 'title': 'New Acquisition NDA Process – Required Training',
+     'body': 'Effective immediately, all employees with M&A project access must complete the updated NDA Handling & Confidentiality training in the LMS before March 31. Contact Legal (ext. 4422) with questions.'},
+    {'date': '2026-03-05', 'title': '2025 Annual Compensation Review – Results Posted',
+     'body': 'Merit increase and equity grant letters for the 2025 Annual Compensation Review cycle are now available in Workday. Please allow 24–48 hours for all letters to populate. Contact Total Rewards (ext. 5511) with questions.'},
+    {'date': '2026-02-28', 'title': 'IT Security Reminder: Phishing Simulation Results',
+     'body': 'Results from our Q1 phishing simulation are available to managers in the IT Security dashboard. Company-wide click rate was 4.2%, down from 6.8% in Q4. Additional training has been assigned to employees who interacted with the simulation.'},
+    {'date': '2026-02-20', 'title': 'Benefits Open Enrollment: April 15–30',
+     'body': 'Open Enrollment for benefits year 2026–2027 opens April 15. Review the updated plan options and rate sheets on the Benefits portal. Virtual benefits fairs will be held April 16, 22, and 29.'},
+    {'date': '2026-02-14', 'title': 'Facilities Update: Milwaukee HQ Renovation Phase 2',
+     'body': 'Phase 2 of the Milwaukee HQ renovation begins March 31. Floors 4–6 will be under construction through June. Affected employees will be temporarily relocated to Floor 9 or may work remotely with manager approval.'},
+    {'date': '2026-01-30', 'title': 'New: ACPWB Internal Marketplace (Pilot)',
+     'body': 'We are piloting an internal service marketplace where teams can post project-based opportunities for cross-functional collaboration. Access via the Internal Tools menu. Pilot runs through Q2 2026.'},
+]
+
+_DATASET_CATALOG = [
+    {
+        'slug': 'compensation-survey-nlp-2024',
+        'title': 'Compensation Survey Response Corpus 2024',
+        'description': 'Free-text open-ended responses from 14,200 HR professionals across 47 industries. Annotated for sentiment, intent, and compensation philosophy classification. Suitable for fine-tuning compensation advisory models.',
+        'records': 14200, 'license': 'CC BY 4.0', 'format': 'JSONL',
+        'task': 'text-classification', 'year': 2024, 'size_mb': 18.4,
+    },
+    {
+        'slug': 'executive-pay-narrative-corpus',
+        'title': 'Executive Pay Ratio Narrative Corpus',
+        'description': 'Proxy statement CD&A sections from 8,400 Fortune 1500 filings (2010–2024) with structured annotation of pay philosophy, peer group selection rationale, and performance metric disclosure.',
+        'records': 8400, 'license': 'CC BY-NC 4.0', 'format': 'JSONL',
+        'task': 'information-extraction', 'year': 2024, 'size_mb': 31.2,
+    },
+    {
+        'slug': 'workforce-analytics-qa-pairs',
+        'title': 'Workforce Analytics Q&A Pairs',
+        'description': '32,000 instruction-response pairs covering headcount analysis, attrition modeling, compensation benchmarking, and HR policy interpretation. Suitable for instruction fine-tuning of HR advisory assistants.',
+        'records': 32000, 'license': 'CC BY 4.0', 'format': 'JSONL',
+        'task': 'instruction-following', 'year': 2024, 'size_mb': 44.7,
+    },
+    {
+        'slug': 'governance-sentiment-corpus',
+        'title': 'Corporate Governance Sentiment Corpus',
+        'description': 'Annotated investor letters, shareholder proposals, and ISS proxy advisory content from 2005–2024. Labeled for sentiment, issue type, and vote recommendation alignment. 21,500 annotated documents.',
+        'records': 21500, 'license': 'CC BY 4.0', 'format': 'JSONL',
+        'task': 'sentiment-analysis', 'year': 2023, 'size_mb': 27.9,
+    },
+    {
+        'slug': 'esg-disclosure-ner',
+        'title': 'ESG Disclosure Named Entity Corpus',
+        'description': 'Sustainability report text with NER annotations for metrics, targets, frameworks (GRI, SASB, TCFD), and organizational entities. 6,800 documents across 12 sectors, all USA-domiciled issuers.',
+        'records': 6800, 'license': 'CC BY-NC 4.0', 'format': 'JSONL',
+        'task': 'token-classification', 'year': 2023, 'size_mb': 14.1,
+    },
+    {
+        'slug': 'hr-policy-instruction-dataset',
+        'title': 'HR Policy Instruction Dataset',
+        'description': '18,000 instruction-answer pairs derived from HR policy documents, employee handbooks, and compliance guidelines. Includes multi-turn conversation variants. Covers all 50 states employment law variations.',
+        'records': 18000, 'license': 'CC BY 4.0', 'format': 'JSONL',
+        'task': 'instruction-following', 'year': 2024, 'size_mb': 22.3,
+    },
+    {
+        'slug': 'pay-equity-analysis-corpus',
+        'title': 'Pay Equity Analysis Corpus',
+        'description': 'Synthetic compensation records with matched statistical analysis narratives. 45,000 rows of employee compensation data with regression output summaries for model training. Includes race, gender, and tenure variables.',
+        'records': 45000, 'license': 'CC BY 4.0', 'format': 'JSONL',
+        'task': 'regression-explanation', 'year': 2024, 'size_mb': 58.6,
+    },
+    {
+        'slug': 'job-description-classification',
+        'title': 'Job Description Classification Dataset',
+        'description': '97,000 job descriptions from ACPWB member organizations (2015–2024), labeled by FLSA classification, salary band, required competency level, and exempt/non-exempt status. All USA employers.',
+        'records': 97000, 'license': 'CC BY-NC 4.0', 'format': 'JSONL',
+        'task': 'multi-label-classification', 'year': 2024, 'size_mb': 142.0,
+    },
+]
+
+_DATASET_METRICS = [
+    'base salary', 'total cash compensation', 'target bonus', 'actual bonus',
+    'equity grant value', 'total direct compensation', 'benefits cost per employee',
+    'CEO pay ratio', 'pay equity gap', 'compa-ratio', 'salary range midpoint',
+    'merit increase percentage', 'promotion rate', 'voluntary attrition rate',
+    'involuntary attrition rate', 'time-to-fill', 'offer acceptance rate',
+    'internal promotion rate', 'span of control', 'headcount',
+]
+
+_DATASET_ROLES = [
+    'Software Engineer', 'Product Manager', 'Financial Analyst', 'HR Business Partner',
+    'Data Scientist', 'Marketing Manager', 'Operations Manager', 'Senior Director',
+    'Vice President', 'Chief Executive Officer', 'Chief Financial Officer',
+    'Director of Compensation', 'Talent Acquisition Specialist', 'Controller',
+]
+
+_DATASET_OUTCOMES = [
+    'retention', 'engagement', 'productivity', 'promotion likelihood',
+    'voluntary departure', 'performance rating', 'absenteeism', 'satisfaction',
+]
+
+_DATASET_INDUSTRIES = [
+    'Financial Services', 'Technology', 'Healthcare', 'Manufacturing',
+    'Professional Services', 'Retail', 'Energy', 'Media & Entertainment',
+    'Government / Public Sector', 'Nonprofit',
+]
+
+_OPENAPI_ENDPOINTS = [
+    ('GET', '/employees', 'List all employees', 'Returns a paginated list of employee records'),
+    ('GET', '/employees/{employee_id}', 'Get employee by ID', 'Returns full profile for a specific employee'),
+    ('GET', '/employees/{employee_id}/compensation', 'Get employee compensation', 'Returns compensation history and current package'),
+    ('GET', '/salary-bands', 'List salary bands', 'Returns all active salary bands by job family and level'),
+    ('GET', '/salary-bands/{job_family}/{level}', 'Get salary band', 'Returns min/mid/max for a specific job family and level'),
+    ('GET', '/reports/headcount', 'Headcount report', 'Returns headcount by department, level, and location'),
+    ('GET', '/reports/attrition', 'Attrition report', 'Returns attrition metrics by segment and time period'),
+    ('GET', '/reports/pay-equity', 'Pay equity analysis', 'Returns pay equity statistics with demographic breakdown'),
+    ('GET', '/reports/compensation-summary', 'Compensation summary', 'Returns compensation distribution by level and function'),
+    ('POST', '/employees/{employee_id}/compensation/adjustment', 'Submit compensation adjustment', 'Submits an off-cycle compensation adjustment for approval'),
+    ('GET', '/org-chart', 'Organization chart data', 'Returns the full org hierarchy as a nested JSON tree'),
+    ('GET', '/org-chart/{manager_id}/team', 'Manager team', 'Returns direct and indirect reports for a manager'),
+    ('GET', '/acquisition-pipeline', 'M&A pipeline', 'Returns all active acquisition targets and deal stages'),
+    ('GET', '/acquisition-pipeline/{target_id}', 'Acquisition target detail', 'Returns full diligence record for a target company'),
+    ('GET', '/compliance/holds', 'Litigation holds', 'Returns all active and historical legal holds'),
+    ('GET', '/compliance/holds/{hold_id}', 'Litigation hold detail', 'Returns custodian list and hold scope for a specific matter'),
+    ('GET', '/budget/utilization', 'Budget utilization', 'Returns compensation budget utilization by department'),
+    ('GET', '/search/employees', 'Search employees', 'Full-text search across employee name, title, and department'),
+    ('POST', '/reports/custom', 'Run custom report', 'Executes a custom compensation report query'),
+    ('GET', '/audit-log', 'Audit log', 'Returns recent system access and data change events'),
+]
+
+
+def _internal_welcome(request):
+    """Return consistent fake user identity for this IP."""
+    ip = _get_ip(request)
+    rng = random.Random(hashlib.md5(f"iportal_{ip}".encode()).hexdigest())
+    return {
+        'first': rng.choice(_INT_FIRST_NAMES),
+        'last': rng.choice(_INT_LAST_NAMES),
+        'title': rng.choice(_INT_TITLES),
+        'dept': rng.choice(_INT_DEPARTMENTS),
+        'ext': str(rng.randint(1000, 9999)),
+        'last_login': (_dt.now() - _td(
+            days=rng.randint(0, 3), hours=rng.randint(0, 23), minutes=rng.randint(0, 59)
+        )).strftime('%Y-%m-%d %H:%M'),
+    }
+
+
+# ── Internal Portal Views ─────────────────────────────────────────────────────
+
+def internal_portal(request):
+    _log_crawler(request, 'ghost_link')
+    user = _internal_welcome(request)
+    rng = random.Random(hashlib.md5(f"portal_stats_{_dt.now().strftime('%Y%m%d')}".encode()).hexdigest())
+    stats = {
+        'headcount': rng.randint(1840, 1920),
+        'open_reqs': rng.randint(28, 67),
+        'pending_approvals': rng.randint(4, 19),
+        'budget_pct': rng.randint(71, 94),
+    }
+    return render(request, 'honeypot/internal_portal.html', {
+        'user': user,
+        'stats': stats,
+        'announcements': _PORTAL_ANNOUNCEMENTS,
+        'tools': [
+            {'name': 'Employee Records', 'url': '/internal/employee-records/', 'desc': 'Full employee directory with compensation data'},
+            {'name': 'Salary Database', 'url': '/internal/salary-database/', 'desc': 'Salary band and job family reference'},
+            {'name': 'Acquisition Targets', 'url': '/internal/acquisition-targets/', 'desc': 'M&A pipeline and deal tracking'},
+            {'name': 'Litigation Hold', 'url': '/internal/litigation-hold/', 'desc': 'Legal hold inventory and matter tracker'},
+        ],
+    })
+
+
+@csrf_exempt
+def internal_login(request):
+    _log_crawler(request, 'ghost_link')
+    next_url = request.GET.get('next', '/internal/employee-records/')
+    if request.method == 'POST':
+        username = request.POST.get('username', '')[:255]
+        password = request.POST.get('password', '')[:255]
+        try:
+            InternalLoginAttempt.objects.create(
+                ip_address=_get_ip(request),
+                user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
+                username=username,
+                password=password,
+                next_url=next_url[:500],
+            )
+        except Exception:
+            pass
+        return redirect(next_url)
+    return render(request, 'honeypot/internal_login.html', {'next': next_url})
+
+
+def internal_employee_records(request):
+    _log_crawler(request, 'ghost_link')
+    page = max(1, int(request.GET.get('page', 1)))
+    per_page = 50
+    rng = random.Random(hashlib.md5(f"emp_records_{page}".encode()).hexdigest())
+    employees = []
+    for i in range(per_page):
+        emp_id = f"EMP-{(page - 1) * per_page + i + 1:05d}"
+        first = rng.choice(_INT_FIRST_NAMES)
+        last = rng.choice(_INT_LAST_NAMES)
+        title = rng.choice(_INT_TITLES)
+        dept = rng.choice(_INT_DEPARTMENTS)
+        office = rng.choice(_INTERNAL_OFFICES)
+        status = rng.choice(_EMPLOYMENT_STATUSES)
+        hire_year = rng.randint(2001, 2025)
+        hire_month = rng.randint(1, 12)
+        hire_day = rng.randint(1, 28)
+        salary = rng.randint(52, 380) * 1000
+        manager_first = rng.choice(_INT_FIRST_NAMES)
+        manager_last = rng.choice(_INT_LAST_NAMES)
+        employees.append({
+            'id': emp_id, 'first': first, 'last': last, 'title': title,
+            'dept': dept, 'office': office, 'status': status,
+            'hire_date': f"{hire_year}-{hire_month:02d}-{hire_day:02d}",
+            'salary': f"${salary:,}",
+            'manager': f"{manager_first} {manager_last}",
+        })
+    user = _internal_welcome(request)
+    return render(request, 'honeypot/internal_employee_records.html', {
+        'employees': employees, 'page': page, 'next_page': page + 1,
+        'prev_page': page - 1 if page > 1 else None, 'user': user,
+    })
+
+
+def internal_employee_records_csv(request):
+    _log_crawler(request, 'ghost_link')
+    token = hashlib.md5(b"acpwb_internal_emp").hexdigest()[:8]
+    buf = io.StringIO()
+    w = csv.writer(buf)
+    w.writerow(['employee_id', 'first_name', 'last_name', 'title', 'department',
+                'office', 'status', 'hire_date', 'salary', 'manager', 'source'])
+    for page in range(1, 11):
+        rng = random.Random(hashlib.md5(f"emp_records_{page}".encode()).hexdigest())
+        for i in range(50):
+            emp_id = f"EMP-{(page - 1) * 50 + i + 1:05d}"
+            first = rng.choice(_INT_FIRST_NAMES)
+            last = rng.choice(_INT_LAST_NAMES)
+            title = rng.choice(_INT_TITLES)
+            dept = rng.choice(_INT_DEPARTMENTS)
+            office = rng.choice(_INTERNAL_OFFICES)
+            status = rng.choice(_EMPLOYMENT_STATUSES)
+            hire_year = rng.randint(2001, 2025)
+            hire_month = rng.randint(1, 12)
+            hire_day = rng.randint(1, 28)
+            salary = rng.randint(52, 380) * 1000
+            manager_first = rng.choice(_INT_FIRST_NAMES)
+            manager_last = rng.choice(_INT_LAST_NAMES)
+            w.writerow([emp_id, first, last, title, dept, office, status,
+                        f"{hire_year}-{hire_month:02d}-{hire_day:02d}",
+                        salary, f"{manager_first} {manager_last}", token])
+    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    resp['Content-Disposition'] = 'attachment; filename="employee-records-export.csv"'
+    return resp
+
+
+def internal_salary_database(request):
+    _log_crawler(request, 'ghost_link')
+    page = max(1, int(request.GET.get('page', 1)))
+    user = _internal_welcome(request)
+    rng = random.Random(hashlib.md5(f"salary_db_{page}".encode()).hexdigest())
+    bands = []
+    families_slice = _SALARY_JOB_FAMILIES[(page - 1) * 5: page * 5] or _SALARY_JOB_FAMILIES[:5]
+    for family in families_slice:
+        for code, label in _SALARY_LEVELS:
+            base = rng.randint(45, 95) * 1000
+            spread = rng.randint(15, 40) * 1000
+            bonus_pct = rng.randint(5, 60)
+            equity = rng.choice(_EQUITY_BANDS)
+            reviewed = f"202{rng.randint(3, 5)}-{rng.randint(1, 12):02d}-01"
+            bands.append({
+                'family': family, 'level_code': code, 'level_label': label,
+                'min': f"${base:,}", 'mid': f"${base + spread // 2:,}",
+                'max': f"${base + spread:,}", 'bonus_pct': f"{bonus_pct}%",
+                'equity': equity, 'reviewed': reviewed,
+            })
+    total_pages = (len(_SALARY_JOB_FAMILIES) + 4) // 5
+    return render(request, 'honeypot/internal_salary_database.html', {
+        'bands': bands, 'page': page, 'total_pages': total_pages,
+        'next_page': page + 1 if page < total_pages else None,
+        'prev_page': page - 1 if page > 1 else None, 'user': user,
+    })
+
+
+def internal_salary_database_csv(request):
+    _log_crawler(request, 'ghost_link')
+    token = hashlib.md5(b"acpwb_internal_sal").hexdigest()[:8]
+    buf = io.StringIO()
+    w = csv.writer(buf)
+    w.writerow(['job_family', 'level_code', 'level_label', 'min_salary', 'mid_salary',
+                'max_salary', 'bonus_target_pct', 'equity_band', 'last_reviewed', 'source'])
+    rng = random.Random(hashlib.md5(b"salary_db_full").hexdigest())
+    for family in _SALARY_JOB_FAMILIES:
+        for code, label in _SALARY_LEVELS:
+            base = rng.randint(45, 95) * 1000
+            spread = rng.randint(15, 40) * 1000
+            bonus_pct = rng.randint(5, 60)
+            equity = rng.choice(_EQUITY_BANDS)
+            reviewed = f"202{rng.randint(3, 5)}-{rng.randint(1, 12):02d}-01"
+            w.writerow([family, code, label, base, base + spread // 2, base + spread,
+                        f"{bonus_pct}%", equity, reviewed, token])
+    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    resp['Content-Disposition'] = 'attachment; filename="salary-bands-export.csv"'
+    return resp
+
+
+def internal_acquisition_targets(request):
+    _log_crawler(request, 'ghost_link')
+    page = max(1, int(request.GET.get('page', 1)))
+    per_page = 15
+    user = _internal_welcome(request)
+    rng = random.Random(hashlib.md5(f"acq_targets_{page}".encode()).hexdigest())
+    start = (page - 1) * per_page
+    targets_slice = _ACQUISITION_COMPANIES[start:start + per_page]
+    targets = []
+    for name, ticker, sector, city in targets_slice:
+        stage = rng.choice(_DEAL_STAGES)
+        revenue = round(rng.uniform(8, 420), 1)
+        employees = rng.randint(40, 4200)
+        analyst = rng.choice(_ANALYST_NAMES)
+        updated_days = rng.randint(0, 45)
+        updated = (_dt.now() - _td(days=updated_days)).strftime('%Y-%m-%d')
+        targets.append({
+            'name': name, 'ticker': ticker, 'sector': sector,
+            'hq': city, 'revenue': f"${revenue}M", 'employees': f"{employees:,}",
+            'stage': stage, 'analyst': analyst, 'updated': updated,
+        })
+    total_pages = (len(_ACQUISITION_COMPANIES) + per_page - 1) // per_page
+    return render(request, 'honeypot/internal_acquisition_targets.html', {
+        'targets': targets, 'page': page, 'total_pages': total_pages,
+        'next_page': page + 1 if page < total_pages else None,
+        'prev_page': page - 1 if page > 1 else None, 'user': user,
+    })
+
+
+def internal_acquisition_targets_csv(request):
+    _log_crawler(request, 'ghost_link')
+    token = hashlib.md5(b"acpwb_internal_acq").hexdigest()[:8]
+    buf = io.StringIO()
+    w = csv.writer(buf)
+    w.writerow(['company', 'ticker', 'sector', 'hq_city', 'revenue_usd',
+                'employees', 'deal_stage', 'assigned_analyst', 'last_updated', 'source'])
+    rng = random.Random(hashlib.md5(b"acq_full_export").hexdigest())
+    for name, ticker, sector, city in _ACQUISITION_COMPANIES:
+        stage = rng.choice(_DEAL_STAGES)
+        revenue = round(rng.uniform(8, 420), 1)
+        employees = rng.randint(40, 4200)
+        analyst = rng.choice(_ANALYST_NAMES)
+        updated_days = rng.randint(0, 45)
+        updated = (_dt.now() - _td(days=updated_days)).strftime('%Y-%m-%d')
+        w.writerow([name, ticker, sector, city, f"{revenue}M", employees,
+                    stage, analyst, updated, token])
+    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    resp['Content-Disposition'] = 'attachment; filename="acquisition-pipeline-export.csv"'
+    return resp
+
+
+def internal_litigation_hold(request):
+    _log_crawler(request, 'ghost_link')
+    page = max(1, int(request.GET.get('page', 1)))
+    user = _internal_welcome(request)
+    per_page = 15
+    rng = random.Random(hashlib.md5(f"lit_hold_{page}".encode()).hexdigest())
+    start = (page - 1) * per_page
+    matters_slice = _MATTER_NAMES[start:start + per_page]
+    holds = []
+    for matter in matters_slice:
+        hold_id = f"LH-{rng.randint(10000, 99999)}"
+        hold_type = rng.choice(_HOLD_TYPES)
+        custodian_first = rng.choice(_INT_FIRST_NAMES)
+        custodian_last = rng.choice(_INT_LAST_NAMES)
+        issued_year = rng.randint(2018, 2025)
+        issued_month = rng.randint(1, 12)
+        issued_day = rng.randint(1, 28)
+        is_active = rng.random() > 0.3
+        released = 'Active' if is_active else f"{rng.randint(2020, 2025)}-{rng.randint(1, 12):02d}-{rng.randint(1, 28):02d}"
+        counsel = rng.choice(_COUNSEL_FIRMS)
+        doc_count = rng.randint(240, 182000)
+        holds.append({
+            'hold_id': hold_id, 'matter': matter,
+            'custodian': f"{custodian_first} {custodian_last}",
+            'hold_type': hold_type,
+            'issued': f"{issued_year}-{issued_month:02d}-{issued_day:02d}",
+            'released': released, 'counsel': counsel, 'doc_count': f"{doc_count:,}",
+        })
+    total_pages = (len(_MATTER_NAMES) + per_page - 1) // per_page
+    return render(request, 'honeypot/internal_litigation_hold.html', {
+        'holds': holds, 'page': page, 'total_pages': total_pages,
+        'next_page': page + 1 if page < total_pages else None,
+        'prev_page': page - 1 if page > 1 else None, 'user': user,
+    })
+
+
+# ── Archive CSV Export ────────────────────────────────────────────────────────
+
+def archive_export_csv(request, year, month, day, slug=''):
+    _log_crawler(request, 'archive')
+    token = hashlib.md5(f"acpwb_archive_{slug}".encode()).hexdigest()[:8]
+    rng = random.Random(hashlib.md5(f"archcsv_{year}_{month}_{day}_{slug}".encode()).hexdigest())
+    row_count = rng.randint(200, 500)
+    buf = io.StringIO()
+    w = csv.writer(buf)
+    w.writerow(['date', 'org', 'industry', 'phase', 'metric', 'value', 'unit', 'source'])
+    for _ in range(row_count):
+        rec_year = rng.randint(max(1985, year - 5), year)
+        rec_month = rng.randint(1, 12)
+        rec_day = rng.randint(1, 28)
+        org = rng.choice(_ARCHIVE_ORGS)
+        industry = rng.choice(_ARCHIVE_INDUSTRIES)
+        phase = rng.choice(_ARCHIVE_PHASES)
+        metric = rng.choice(_ARCHIVE_METRIC_NAMES)
+        value = round(rng.uniform(0.1, 9999.9), 2)
+        unit = rng.choice(_ARCHIVE_METRIC_LABELS)
+        w.writerow([f"{rec_year}-{rec_month:02d}-{rec_day:02d}", org, industry,
+                    phase, metric, value, unit, token])
+    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    fname = (slug.replace('/', '-') or 'archive-data')[:60]
+    resp['Content-Disposition'] = f'attachment; filename="{fname}-{year}-{month:02d}-{day:02d}.csv"'
+    return resp
+
+
+# ── RSS / Atom Feeds ──────────────────────────────────────────────────────────
+
+def feed_archive(request):
+    _log_crawler(request, 'well_known')
+    page = max(1, int(request.GET.get('page', 1)))
+    rng = random.Random(hashlib.md5(f"feed_archive_{page}".encode()).hexdigest())
+    items = []
+    for i in range(20):
+        days_ago = (page - 1) * 20 + i
+        pub_date = (_dt.now() - _td(days=days_ago)).strftime('%Y-%m-%dT%H:%M:%SZ')
+        year = _dt.now().year - rng.randint(0, 3)
+        month = rng.randint(1, 12)
+        day = rng.randint(1, 28)
+        slug_words = [rng.choice(_ARCHIVE_WORDS) for _ in range(rng.randint(3, 5))]
+        slug = '-'.join(slug_words) + f'-{rng.randint(1000, 9999)}'
+        title = slug.replace('-', ' ').title()
+        url = f"https://acpwb.com/archive/{year}/{month:02d}/{day:02d}/{slug}/"
+        summary = f"ACPWB Research Division archive record: {title}. Sector engagement documentation indexed by engagement phase for {rng.choice(_ARCHIVE_INDUSTRIES)}."
+        items.append({'title': title, 'url': url, 'pub_date': pub_date, 'summary': summary})
+    next_page = page + 1
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<feed xmlns="http://www.w3.org/2005/Atom">',
+        '  <title>ACPWB Archive Feed</title>',
+        '  <id>https://acpwb.com/feeds/archive.xml</id>',
+        '  <link href="https://acpwb.com/archive/" />',
+        f'  <link rel="self" href="https://acpwb.com/feeds/archive.xml?page={page}" />',
+        f'  <link rel="next" href="https://acpwb.com/feeds/archive.xml?page={next_page}" />',
+        '  <rights>Copyright 2026 American Corporation for Public Well Being</rights>',
+    ]
+    for item in items:
+        title_esc = item['title'].replace('&', '&amp;').replace('<', '&lt;')
+        summary_esc = item['summary'].replace('&', '&amp;').replace('<', '&lt;')
+        lines += [
+            '  <entry>',
+            f'    <title>{title_esc}</title>',
+            f'    <id>{item["url"]}</id>',
+            f'    <link href="{item["url"]}" />',
+            f'    <updated>{item["pub_date"]}</updated>',
+            f'    <summary>{summary_esc}</summary>',
+            '  </entry>',
+        ]
+    lines.append('</feed>')
+    return HttpResponse('\n'.join(lines), content_type='application/atom+xml')
+
+
+def feed_reports(request):
+    _log_crawler(request, 'well_known')
+    page = max(1, int(request.GET.get('page', 1)))
+    start = (page - 1) * 10
+    reports_slice = REPORT_CATALOG[start:start + 10]
+    if not reports_slice:
+        reports_slice = REPORT_CATALOG[:10]
+    next_page = page + 1 if start + 10 < len(REPORT_CATALOG) else None
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+        '  <channel>',
+        '    <title>ACPWB Reports &amp; Publications</title>',
+        '    <link>https://acpwb.com/reports/</link>',
+        '    <description>Compensation benchmarking, workforce analytics, and governance research from ACPWB Research Division.</description>',
+        f'    <atom:link rel="self" href="https://acpwb.com/feeds/reports.xml?page={page}" type="application/rss+xml" />',
+    ]
+    if next_page:
+        lines.append(f'    <atom:link rel="next" href="https://acpwb.com/feeds/reports.xml?page={next_page}" type="application/rss+xml" />')
+    for r in reports_slice:
+        title_esc = r['title'].replace('&', '&amp;').replace('<', '&lt;')
+        desc_esc = r.get('summary', r['title'])[:200].replace('&', '&amp;').replace('<', '&lt;')
+        url = f"https://acpwb.com/reports/{r['slug']}/"
+        lines += [
+            '    <item>',
+            f'      <title>{title_esc}</title>',
+            f'      <link>{url}</link>',
+            f'      <guid isPermaLink="true">{url}</guid>',
+            f'      <description>{desc_esc}</description>',
+            '    </item>',
+        ]
+    lines += ['  </channel>', '</rss>']
+    return HttpResponse('\n'.join(lines), content_type='application/rss+xml')
+
+
+# ── OpenAPI Specification ─────────────────────────────────────────────────────
+
+def openapi_spec(request):
+    _log_crawler(request, 'api')
+    token = 'acpwb-api-3f2a91b4'
+    paths = {}
+    for method, path, summary, desc in _OPENAPI_ENDPOINTS:
+        if path not in paths:
+            paths[path] = {}
+        method_lower = method.lower()
+        params = []
+        if '{employee_id}' in path:
+            params.append({'name': 'employee_id', 'in': 'path', 'required': True, 'schema': {'type': 'string'}, 'example': 'EMP-00142'})
+        if '{job_family}' in path:
+            params.append({'name': 'job_family', 'in': 'path', 'required': True, 'schema': {'type': 'string'}, 'example': 'Software Engineering'})
+        if '{level}' in path:
+            params.append({'name': 'level', 'in': 'path', 'required': True, 'schema': {'type': 'string'}, 'example': 'IC4'})
+        if '{manager_id}' in path:
+            params.append({'name': 'manager_id', 'in': 'path', 'required': True, 'schema': {'type': 'string'}, 'example': 'EMP-00087'})
+        if '{target_id}' in path:
+            params.append({'name': 'target_id', 'in': 'path', 'required': True, 'schema': {'type': 'string'}, 'example': 'ACQ-00023'})
+        if '{hold_id}' in path:
+            params.append({'name': 'hold_id', 'in': 'path', 'required': True, 'schema': {'type': 'string'}, 'example': 'LH-44821'})
+        if method_lower == 'get' and '{' not in path:
+            params.append({'name': 'page', 'in': 'query', 'required': False, 'schema': {'type': 'integer', 'default': 1}})
+            params.append({'name': 'per_page', 'in': 'query', 'required': False, 'schema': {'type': 'integer', 'default': 50, 'maximum': 200}})
+        entry = {
+            'summary': summary, 'description': desc,
+            'operationId': summary.lower().replace(' ', '_').replace('/', '_'),
+            'tags': ['ACPWB Internal API'],
+            'parameters': params,
+            'responses': {
+                '200': {'description': 'Success', 'content': {'application/json': {'schema': {'type': 'object'}}}},
+                '401': {'description': 'Unauthorized'},
+                '403': {'description': 'Forbidden'},
+                '404': {'description': 'Not found'},
+            },
+            'security': [{'BearerAuth': []}],
+        }
+        if method_lower == 'post':
+            entry['requestBody'] = {'required': True, 'content': {'application/json': {'schema': {'type': 'object'}}}}
+        paths[path][method_lower] = entry
+
+    spec = {
+        'openapi': '3.0.3',
+        'info': {
+            'title': 'ACPWB Internal API',
+            'version': '1.4.2',
+            'description': f'Internal compensation, workforce, and M&A data API. For authorized use only. x-watermark: {token}',
+            'contact': {'name': 'ACPWB IT', 'email': 'api-support@acpwb.com'},
+            'x-watermark': token,
+            'x-acpwb-classification': 'INTERNAL USE ONLY',
+        },
+        'servers': [{'url': 'https://acpwb.com/api/v1', 'description': 'Production'}],
+        'components': {
+            'securitySchemes': {
+                'BearerAuth': {'type': 'http', 'scheme': 'bearer', 'bearerFormat': 'JWT'},
+            }
+        },
+        'paths': paths,
+    }
+    resp = JsonResponse(spec, json_dumps_params={'indent': 2})
+    resp['X-ACPWB-Internal'] = 'true'
+    return resp
+
+
+# ── Training Datasets ─────────────────────────────────────────────────────────
+
+def datasets_index(request):
+    _log_crawler(request, 'dataset')
+    return render(request, 'honeypot/datasets_index.html', {'datasets': _DATASET_CATALOG})
+
+
+def dataset_detail(request, slug):
+    _log_crawler(request, 'dataset')
+    ds = next((d for d in _DATASET_CATALOG if d['slug'] == slug), None)
+    if not ds:
+        raise Http404
+    return render(request, 'honeypot/dataset_detail.html', {'ds': ds})
+
+
+def dataset_download(request, slug):
+    _log_crawler(request, 'dataset')
+    ds = next((d for d in _DATASET_CATALOG if d['slug'] == slug), None)
+    if not ds:
+        raise Http404
+    page = max(1, int(request.GET.get('page', 1)))
+    token = hashlib.md5(f"acpwb_dataset_{slug}".encode()).hexdigest()[:8]
+    rng = random.Random(hashlib.md5(f"dataset_{slug}_{page}".encode()).hexdigest())
+    records_per_page = 100
+    lines = []
+    for i in range(records_per_page):
+        rec_id = f"acpwb-{slug[:8]}-{(page - 1) * records_per_page + i + 1:05d}"
+        metric = rng.choice(_DATASET_METRICS)
+        role = rng.choice(_DATASET_ROLES)
+        industry = rng.choice(_DATASET_INDUSTRIES)
+        outcome = rng.choice(_DATASET_OUTCOMES)
+        year = rng.randint(2018, 2025)
+        pct = round(rng.uniform(1.2, 34.8), 1)
+        instruction = rng.choice([
+            f"What is the median {metric} for {role} in the {industry} sector?",
+            f"Compare {metric} across departments in the {year} survey.",
+            f"Explain why {metric} increased {pct}% between {year - 1} and {year}.",
+            f"What factors drove {outcome} variance for {industry} organizations?",
+            f"Summarize the pay equity findings for {role} roles in {year}.",
+            f"Draft a compensation committee narrative addressing the {pct}% change in {metric}.",
+            f"What is the market rate for {role} at a mid-size {industry} organization?",
+            f"Describe the relationship between {metric} and employee {outcome}.",
+        ])
+        response = rng.choice([
+            f"Based on ACPWB's {year} compensation survey data, the median {metric} for {role} in {industry} is ${rng.randint(72, 380) * 1000:,}, reflecting a {pct}% increase from the prior year.",
+            f"The {year} benchmarking data indicates that {industry} organizations at the 50th percentile report {metric} of ${rng.randint(85, 420) * 1000:,} for the {role} position.",
+            f"According to ACPWB's analysis of {rng.randint(180, 1400)} participating organizations, the {metric} differential between the 25th and 75th percentile is ${rng.randint(18, 95) * 1000:,} annually.",
+            f"ACPWB's research division has found a statistically significant correlation (r={round(rng.uniform(0.31, 0.78), 2)}, p<0.05) between {metric} and {outcome} in the {industry} sector.",
+            f"The compensation committee should note that current {metric} positioning is at the {rng.randint(38, 72)}th percentile relative to our peer group of {rng.randint(12, 47)} comparable {industry} organizations.",
+        ])
+        record = {
+            'id': rec_id, 'instruction': instruction, 'output': response,
+            'metadata': {'source': f'acpwb.com/datasets/{slug}', 'dataset': slug, 'year': year, 'page': page},
+            'watermark': token, 'source': f'acpwb-{token}',
+        }
+        lines.append(json.dumps(record))
+    resp = HttpResponse('\n'.join(lines), content_type='application/jsonlines')
+    resp['Content-Disposition'] = f'attachment; filename="{slug}-page{page}.jsonl"'
+    resp['X-ACPWB-Dataset'] = slug
+    resp['X-ACPWB-Page'] = str(page)
+    resp['X-ACPWB-Next-Page'] = f"/datasets/{slug}/data.jsonl?page={page + 1}"
+    return resp
+
+
+# ── API v1 Index ──────────────────────────────────────────────────────────────
+
+def api_v1_index(request):
+    _log_crawler(request, 'api')
+    endpoints = [
+        {'method': m, 'path': p, 'summary': s}
+        for m, p, s, _ in _OPENAPI_ENDPOINTS
+    ]
+    return render(request, 'honeypot/api_index.html', {
+        'endpoints': endpoints,
+        'openapi_url': '/api/v1/openapi.json',
+    })
+
+
+# ── Feeds Index ───────────────────────────────────────────────────────────────
+
+def feeds_index(request):
+    _log_crawler(request, 'well_known')
+    return render(request, 'honeypot/feeds_index.html')

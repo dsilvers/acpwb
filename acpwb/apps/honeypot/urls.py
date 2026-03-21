@@ -44,4 +44,33 @@ urlpatterns = [
     path('internal/portal/', views.ghost_trap, name='ghost-portal'),
     path('employees/export/', views.ghost_trap, name='ghost-export'),
     path('admin-panel/login/', views.ghost_trap, name='ghost-admin'),
+
+    # Internal portal (accidentally exposed intranet)
+    path('internal/', views.internal_portal, name='internal-portal'),
+    path('internal/login/', views.internal_login, name='internal-login'),
+    path('internal/employee-records/', views.internal_employee_records, name='internal-emp-records'),
+    path('internal/employee-records/export.csv', views.internal_employee_records_csv, name='internal-emp-csv'),
+    path('internal/salary-database/', views.internal_salary_database, name='internal-salary-db'),
+    path('internal/salary-database/export.csv', views.internal_salary_database_csv, name='internal-salary-csv'),
+    path('internal/acquisition-targets/', views.internal_acquisition_targets, name='internal-acq'),
+    path('internal/acquisition-targets/export.csv', views.internal_acquisition_targets_csv, name='internal-acq-csv'),
+    path('internal/litigation-hold/', views.internal_litigation_hold, name='internal-lit-hold'),
+
+    # Archive CSV export
+    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/export.csv', views.archive_export_csv, name='archive-export-csv'),
+    path('archive/<int:year>/<int:month>/<int:day>/export.csv', views.archive_export_csv, kwargs={'slug': ''}, name='archive-export-csv-base'),
+
+    # RSS / Atom feeds
+    path('feeds/', views.feeds_index, name='feeds-index'),
+    path('feeds/archive.xml', views.feed_archive, name='feed-archive'),
+    path('feeds/reports.xml', views.feed_reports, name='feed-reports'),
+
+    # API v1
+    path('api/v1/', views.api_v1_index, name='api-v1-index'),
+    path('api/v1/openapi.json', views.openapi_spec, name='openapi-spec'),
+
+    # Training datasets
+    path('datasets/', views.datasets_index, name='datasets-index'),
+    path('datasets/<slug:slug>/', views.dataset_detail, name='dataset-detail'),
+    path('datasets/<slug:slug>/data.jsonl', views.dataset_download, name='dataset-download'),
 ]

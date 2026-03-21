@@ -21,8 +21,8 @@ class ProjectStory(models.Model):
 
 
 class ProjectPageVisit(models.Model):
-    timestamp = models.DateTimeField(auto_now_add=True)
-    ip_address = models.GenericIPAddressField()
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+    ip_address = models.GenericIPAddressField(db_index=True)
     user_agent = models.TextField(blank=True)
     page_number = models.PositiveIntegerField(default=1)
     pow_token = models.CharField(max_length=128, blank=True)

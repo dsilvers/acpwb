@@ -1,0 +1,62 @@
+{% extends "honeypot/internal_base.html" %}
+
+{% block title %}Acquisition Targets — ACPWB Internal Systems{% endblock %}
+
+{% block content %}
+<div class="int-page-header">
+  <div class="breadcrumb"><a href="/internal/">Dashboard</a> &rsaquo; Acquisition Targets</div>
+  <h1>M&amp;A Pipeline — Acquisition Targets</h1>
+</div>
+
+<div class="int-card" style="padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+  <span style="font-size:.78rem;color:#718096">
+    Page {{ page }} of {{ total_pages }} &mdash; Confidential. Authorized access only.
+  </span>
+  <a href="/internal/acquisition-targets/export.csv" class="btn-int btn-int-export">&#x2193; Export Pipeline (CSV)</a>
+</div>
+
+<div class="int-card" style="padding:0;overflow:auto">
+  <table class="int-table">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Ticker</th>
+        <th>Sector</th>
+        <th>HQ</th>
+        <th>Revenue</th>
+        <th>Employees</th>
+        <th>Deal Stage</th>
+        <th>Analyst</th>
+        <th>Last Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in targets %}
+      <tr>
+        <td style="font-weight:700;white-space:nowrap">{{ t.name }}</td>
+        <td style="font-family:monospace;font-size:.72rem;color:#a0aec0">{{ t.ticker }}</td>
+        <td style="font-size:.73rem">{{ t.sector }}</td>
+        <td style="font-size:.73rem;color:#718096;white-space:nowrap">{{ t.hq }}</td>
+        <td style="font-weight:700;color:#276749">{{ t.revenue }}</td>
+        <td style="color:#718096">{{ t.employees }}</td>
+        <td style="white-space:nowrap">
+          {% if 'Closed' == t.stage %}<span class="badge badge-active">{{ t.stage }}</span>
+          {% elif 'Passed' in t.stage or 'Declined' in t.stage %}<span class="badge badge-term">{{ t.stage }}</span>
+          {% elif 'Due Diligence' in t.stage or 'LOI' in t.stage or 'Exclusivity' in t.stage %}<span class="badge badge-pip">{{ t.stage }}</span>
+          {% elif 'On Hold' in t.stage %}<span class="badge badge-leave">{{ t.stage }}</span>
+          {% else %}<span class="badge badge-hybrid">{{ t.stage }}</span>{% endif %}
+        </td>
+        <td style="font-size:.73rem">{{ t.analyst }}</td>
+        <td style="font-size:.72rem;color:#a0aec0">{{ t.updated }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="int-pagination">
+  {% if prev_page %}<a href="?page={{ prev_page }}">&larr; Prev</a>{% endif %}
+  <span class="current">{{ page }} / {{ total_pages }}</span>
+  {% if next_page %}<a href="?page={{ next_page }}">Next &rarr;</a>{% endif %}
+</div>
+{% endblock %}

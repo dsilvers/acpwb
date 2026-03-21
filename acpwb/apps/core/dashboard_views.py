@@ -91,7 +91,7 @@ def _apply_range(qs, date_range, field='timestamp'):
 
 
 def _bot_breakdown(qs, limit=20):
-    """GROUP BY bot_type in SQL — O(1) instead of O(n) Python loop."""
+    """GROUP BY bot_type in SQL — O(1). Only for CrawlerVisit querysets."""
     rows = (qs.values('bot_type')
               .annotate(count=Count('id'))
               .order_by('-count')[:limit])
@@ -105,6 +105,20 @@ def _bot_breakdown(qs, limit=20):
         for r in rows
     ]
     return result, total
+
+
+def _bot_breakdown_ua(qs, limit=20):
+    """Python-loop fallback for models that only have user_agent (no bot_type column)."""
+    from apps.core.bot_classify import classify_ua
+    counts = Counter()
+    for ua in qs.values_list('user_agent', flat=True):
+        counts[classify_ua(ua or '')] += 1
+    top = counts.most_common(limit)
+    total = sum(counts.values()) or 1
+    return [
+        {'name': name, 'count': count, 'pct': round(count * 100 / total)}
+        for name, count in top
+    ], total
 
 
 def _bot_group_breakdown(qs):
@@ -260,7 +274,7 @@ def archive(request):
     dr = _parse_date_range(request)
     qs = _apply_range(ArchiveVisit.objects.all(), dr)
 
-    top_bots, total = _bot_breakdown(qs, limit=20)
+    top_bots, total = _bot_breakdown_ua(qs, limit=20)
 
     depth_counts = list(
         qs.values('depth')
@@ -341,8 +355,8 @@ def people(request):
     people_qs   = _apply_range(PeoplePageVisit.objects.all(), dr)
     project_qs  = _apply_range(ProjectPageVisit.objects.all(), dr)
 
-    people_bots, people_total = _bot_breakdown(people_qs, limit=20)
-    project_bots, project_total = _bot_breakdown(project_qs, limit=20)
+    people_bots, people_total = _bot_breakdown_ua(people_qs, limit=20)
+    project_bots, project_total = _bot_breakdown_ua(project_qs, limit=20)
 
     top_people_ips = list(
         people_qs.values('ip_address')

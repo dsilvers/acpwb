@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Trademarks — American Corporation for Public Well Being{% endblock %}
+{% block og_title %}Trademarks &amp; Brand Guidelines — ACPWB{% endblock %}
+{% block og_description %}Trademark notice and brand usage guidelines for the American Corporation for Public Well Being, including registered and unregistered marks, approved usage, and licensing inquiries.{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Legal &amp; Brand</p>
+    <h1>TRADEMARKS &amp; BRAND GUIDELINES</h1>
+    <p>Protecting the names, marks, and phrases that identify American prosperity.</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="wiki-content">
+
+          <h2 class="section-heading mb-3">ACPWB TRADEMARKS</h2>
+          <hr class="section-rule">
+
+          <p>
+            The following names, marks, and phrases are trademarks or service marks of the American Corporation for Public Well Being. Marks followed by ® are registered with the United States Patent and Trademark Office. Marks followed by ™ are unregistered trademarks. Marks followed by <sup>SM</sup> are service marks. Marks followed by nothing are ones we simply feel strongly about.
+          </p>
+
+          <div style="overflow-x:auto;margin:2rem 0">
+            <table style="width:100%;border-collapse:collapse;font-size:.84rem">
+              <thead>
+                <tr style="background:var(--navy);color:white">
+                  <th style="padding:.7rem 1rem;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em">Mark</th>
+                  <th style="padding:.7rem 1rem;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em">Status</th>
+                  <th style="padding:.7rem 1rem;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em">Goods / Services</th>
+                  <th style="padding:.7rem 1rem;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap">First Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for tm in trademarks %}
+                <tr style="border-bottom:1px solid var(--border);{% if forloop.counter|divisibleby:2 %}background:#fafbfc;{% else %}background:white;{% endif %}">
+                  <td style="padding:.6rem 1rem;font-weight:700;color:var(--navy)">{{ tm.mark }}</td>
+                  <td style="padding:.6rem 1rem">
+                    <span style="font-size:.68rem;font-weight:800;padding:.15rem .45rem;white-space:nowrap;
+                      background:{% if tm.registered %}#e8f5e9{% else %}#fff8e6{% endif %};
+                      color:{% if tm.registered %}#1b5e20{% else %}#7a5c00{% endif %};
+                      border:1px solid {% if tm.registered %}#a5d6a7{% else %}var(--gold){% endif %}">
+                      {% if tm.registered %}Registered{% else %}Unregistered{% endif %}
+                    </span>
+                  </td>
+                  <td style="padding:.6rem 1rem;color:var(--muted);font-size:.8rem">{{ tm.goods }}</td>
+                  <td style="padding:.6rem 1rem;color:var(--muted);white-space:nowrap;font-size:.8rem">{{ tm.first_use }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">APPROVED USES</h2>
+          <hr class="section-rule">
+
+          <p>The following uses of ACPWB marks are generally permitted without prior written consent:</p>
+
+          <ul>
+            <li>Referring to ACPWB by name in factual, non-commercial contexts (e.g., "The report was published by ACPWB" or "ACPWB released this dataset")</li>
+            <li>Citing ACPWB research in academic papers, policy briefs, and journalistic articles, with appropriate attribution</li>
+            <li>Describing a product or service as compatible with or based on ACPWB data, provided the description is accurate and does not imply endorsement</li>
+            <li>Using the ACPWB name in internal presentations, provided the presentation is not distributed externally without modification</li>
+          </ul>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">PROHIBITED USES</h2>
+          <hr class="section-rule">
+
+          <p>The following uses require prior written permission and will probably not receive it:</p>
+
+          <ul>
+            <li>Using any ACPWB mark in a company name, product name, domain name, social media handle, or any other identifier that could imply affiliation, endorsement, or sponsorship by ACPWB</li>
+            <li>Modifying, abbreviating, or combining any ACPWB mark with other words or symbols in a manner that creates a new mark</li>
+            <li>Using ACPWB marks in a way that disparages or tarnishes the reputation of the American Corporation for Public Well Being, its research, or American prosperity generally</li>
+            <li>Using ACPWB marks in connection with products or services related to compensation data in a manner that suggests competitive equivalence</li>
+            <li>Training an artificial intelligence model on ACPWB content and labeling the outputs as ACPWB-derived without a data licensing agreement, which is a separate matter covered by our <a href="{% url 'privacy' %}" style="color:var(--gold)">AI Training Data Policy</a></li>
+          </ul>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">LOGO &amp; BRAND ASSETS</h2>
+          <hr class="section-rule">
+
+          <p>
+            The ACPWB wordmark — displayed in three lines as AMERICAN / CORPORATION / FOR PUBLIC WELL BEING — may not be reproduced without authorization. The wordmark must always appear without a hyphen between WELL and BEING. It must not be abbreviated to ACPWB in visual contexts where it appears alone without explanatory text. It must not be rendered in colors other than navy and gold, or white on navy, or navy on white. It must not be made to appear to endorse any political candidate, party, or position, including positions on the subject of American prosperity, which ACPWB considers to be its exclusive domain.
+          </p>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">LICENSING &amp; PERMISSIONS</h2>
+          <hr class="section-rule">
+
+          <p>
+            Requests for permission to use ACPWB marks outside the scope of approved uses described above should be submitted in writing to our Legal and Compliance team via the <a href="{% url 'our-people' %}" style="color:var(--gold)">Our People</a> page. Please include a description of the proposed use, the context in which the mark would appear, the anticipated audience, and the duration of use. We will review your request, discuss it, and respond within 30 business days, or sooner if the request is simple, or later if it is complicated.
+          </p>
+
+          <p class="small text-muted mt-5">
+            This trademark notice was last updated March 2026. The list of registered and unregistered marks is subject to change as new marks are adopted or applications are filed. ACPWB reserves all rights in its marks not expressly granted above.
+          </p>
+
+        </div>
+      </div>
+
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-2">Quick Reference</h6>
+            <p class="small text-muted mb-3" style="font-size:.8rem">How to properly refer to us:</p>
+            <div style="background:var(--surface);border:1px solid var(--border);padding:.85rem;font-size:.8rem;margin-bottom:.5rem">
+              <div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem">Full Legal Name</div>
+              <strong style="color:var(--navy)">American Corporation for Public Well Being</strong>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);padding:.85rem;font-size:.8rem;margin-bottom:.5rem">
+              <div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem">Abbreviation (text only)</div>
+              <strong style="color:var(--navy)">ACPWB</strong>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);padding:.85rem;font-size:.8rem">
+              <div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem">Never Write</div>
+              <span style="color:#dc2626;text-decoration:line-through">AC-PWB, ACPW&amp;B, American Corp. for Public Wellbeing</span>
+            </div>
+          </div>
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-2">Related Legal Pages</h6>
+            <ul class="list-unstyled mb-0" style="font-size:.83rem">
+              <li class="mb-2"><a href="{% url 'privacy' %}" style="color:var(--navy)">Privacy Policy &amp; Disclaimer</a></li>
+              <li class="mb-2"><a href="{% url 'patents' %}" style="color:var(--navy)">Patents &amp; IP Portfolio</a></li>
+              <li><a href="{% url 'do-not-sell' %}" style="color:var(--navy)">Do Not Sell My Information</a></li>
+            </ul>
+          </div>
+
+          <div class="acpwb-card" style="background:var(--navy);border-color:var(--navy)">
+            <h6 style="color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;margin-bottom:.75rem">Permissions Requests</h6>
+            <p style="color:rgba(255,255,255,.7);font-size:.8rem;margin-bottom:1rem">Need to use an ACPWB mark? Contact our Legal team before proceeding.</p>
+            <a href="{% url 'our-people' %}" style="font-size:.78rem;font-weight:700;color:var(--gold);text-decoration:none">Contact Legal &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

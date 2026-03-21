@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Patents &amp; Intellectual Property — American Corporation for Public Well Being{% endblock %}
+{% block og_title %}Patents &amp; Intellectual Property — ACPWB{% endblock %}
+{% block og_description %}ACPWB holds six issued United States patents covering proprietary methodologies in compensation benchmarking, workforce analytics, executive pay analysis, and corporate governance certification.{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Intellectual Property</p>
+    <h1>PATENTS &amp; IP PORTFOLIO</h1>
+    <p>Protecting the methodologies that protect American prosperity.</p>
+  </div>
+</section>
+
+<!-- Intro -->
+<section style="padding:5rem 0;background:var(--white)">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <p class="text-uppercase text-gold fw-800 mb-2" style="letter-spacing:.15em;font-size:.75rem">Our IP Portfolio</p>
+        <h2 class="section-heading">INNOVATION, FORMALLY<br>RECOGNIZED BY THE USPTO.</h2>
+        <hr class="section-rule">
+        <p class="mb-3">
+          The American Corporation for Public Well Being holds six issued United States patents covering core methodological innovations in compensation benchmarking, workforce analytics, executive pay peer-group construction, and corporate governance certification systems. These patents represent decades of research and development investment, and also a non-trivial amount of attorney fees.
+        </p>
+        <p class="mb-3">
+          Our IP portfolio protects the proprietary techniques that underpin the research products consumed by HR and finance professionals at organizations of all sizes. When a competitor produces a compensation benchmarking report using similar methodology, we are aware of this and have opinions about it.
+        </p>
+        <p class="mb-0">
+          Additional patent applications are pending. We are not at liberty to describe them, but we are at liberty to mention that they exist, which we have now done.
+        </p>
+      </div>
+      <div class="col-lg-4 offset-lg-1">
+        <div style="background:var(--navy);padding:2rem;border-top:4px solid var(--gold)">
+          <div style="text-align:center;margin-bottom:1.5rem">
+            <div style="font-size:3rem;font-weight:900;color:var(--gold);line-height:1">6</div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.5);margin-top:.35rem">Issued U.S. Patents</div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:1rem">
+            <div style="font-size:.7rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem">Technology Areas</div>
+            {% for area in areas %}
+            <div style="font-size:.78rem;color:rgba(255,255,255,.7);padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,.07)">&#9670; {{ area }}</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Patent Listings -->
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+    <p class="text-uppercase text-gold fw-800 mb-2" style="letter-spacing:.15em;font-size:.75rem">Issued Patents</p>
+    <h2 class="section-heading">PATENT PORTFOLIO</h2>
+    <hr class="section-rule">
+
+    {% for patent in patents %}
+    <div style="background:white;border:1px solid var(--border);margin-bottom:2rem">
+
+      <!-- Patent header -->
+      <div style="background:var(--navy);padding:1rem 1.5rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div>
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.3rem">
+            United States Patent &bull; {{ patent.number }}
+          </div>
+          <div style="font-size:.95rem;font-weight:800;color:white;line-height:1.35;max-width:700px">{{ patent.title }}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-size:.65rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em">Issued</div>
+          <div style="font-size:.82rem;font-weight:700;color:var(--gold)">{{ patent.issued }}</div>
+        </div>
+      </div>
+
+      <!-- Patent metadata -->
+      <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:2rem">
+        <div>
+          <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.2rem">Assignee</div>
+          <div style="font-size:.8rem;color:var(--navy);font-weight:600">{{ patent.assignee }}</div>
+        </div>
+        <div>
+          <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.2rem">Inventors</div>
+          <div style="font-size:.8rem;color:var(--navy)">{{ patent.inventors }}</div>
+        </div>
+        <div>
+          <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.2rem">Filed</div>
+          <div style="font-size:.8rem;color:var(--navy)">{{ patent.filed }}</div>
+        </div>
+        <div>
+          <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.2rem">CPC Classification</div>
+          <div style="font-size:.78rem;color:var(--muted);font-family:monospace">{{ patent.cpc }}</div>
+        </div>
+      </div>
+
+      <!-- Abstract + Claims -->
+      <div style="padding:1.25rem 1.5rem">
+        <div style="margin-bottom:1.25rem">
+          <div style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--navy);margin-bottom:.5rem;padding-bottom:.35rem;border-bottom:2px solid var(--gold);display:inline-block">Abstract</div>
+          <p style="font-size:.83rem;color:var(--text);line-height:1.7;margin-bottom:0">{{ patent.abstract }}</p>
+        </div>
+        <div style="background:var(--surface);border-left:3px solid var(--gold);padding:.85rem 1rem">
+          <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.4rem">Representative Claim</div>
+          <p style="font-size:.8rem;color:var(--text);line-height:1.65;margin-bottom:0;font-family:monospace">{{ patent.claims }}</p>
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
+
+    <p class="small text-muted mt-2" style="font-size:.74rem">
+      Patent information presented here is for informational purposes. Full patent documents are available from the United States Patent and Trademark Office at <em>patents.google.com</em> or <em>patft.uspto.gov</em>. ACPWB enforces its intellectual property rights vigorously and in a manner that we consider proportionate.
+    </p>
+
+  </div>
+</section>
+
+<!-- Licensing -->
+<section style="padding:4rem 0;background:var(--white)">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;margin-bottom:.75rem">Licensing Inquiries</h5>
+        <p class="small text-muted" style="font-size:.83rem">
+          ACPWB considers licensing its patented methodologies to qualified organizations on a case-by-case basis. Licensing inquiries should be directed to our Research Division through the <a href="{% url 'our-people' %}" style="color:var(--gold)">Our People</a> page. We will evaluate your inquiry, discuss it internally, form a working group, and get back to you.
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;margin-bottom:.75rem">IP Enforcement</h5>
+        <p class="small text-muted" style="font-size:.83rem">
+          ACPWB monitors the industry for use of methodologies that may infringe on our issued patents. If you believe your organization may be using a patented ACPWB methodology without a license, we encourage you to contact us proactively. This is strongly preferable to the alternative, which involves Milwaukee.
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;margin-bottom:.75rem">Research Collaboration</h5>
+        <p class="small text-muted" style="font-size:.83rem">
+          Academic and non-profit organizations may apply for a research use license at no cost, subject to attribution requirements, data sharing agreements, publication review, IRB documentation, a signed MOU, and approval from our Research Division Advisory Committee, which meets quarterly.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

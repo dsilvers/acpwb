@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Site Map — American Corporation for Public Well Being{% endblock %}
+{% block og_title %}Site Map — ACPWB{% endblock %}
+{% block og_description %}A complete directory of all pages on the American Corporation for Public Well Being website.{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Navigation &amp; Directory</p>
+    <h1>SITE MAP</h1>
+    <p>A complete directory of every page on the ACPWB website, organized for your convenience.</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+
+    <div class="row g-4 mb-5">
+
+      <div class="col-sm-6 col-lg-3">
+        <h2 class="section-heading mb-2" style="font-size:.88rem">ABOUT ACPWB</h2>
+        <hr class="section-rule mb-3">
+        <ul class="list-unstyled" style="font-size:.88rem;line-height:2.1">
+          <li><a href="{% url 'home' %}" style="color:var(--navy)">Home</a></li>
+          <li><a href="{% url 'mission' %}" style="color:var(--navy)">Mission &amp; Values</a></li>
+          <li><a href="{% url 'our-people' %}" style="color:var(--navy)">Our People</a></li>
+          <li><a href="{% url 'partners' %}" style="color:var(--navy)">Partners</a></li>
+          <li><a href="{% url 'awards' %}" style="color:var(--navy)">Awards &amp; Recognition</a></li>
+          <li><a href="{% url 'careers' %}" style="color:var(--navy)">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <h2 class="section-heading mb-2" style="font-size:.88rem">RESEARCH &amp; PUBLICATIONS</h2>
+        <hr class="section-rule mb-3">
+        <ul class="list-unstyled" style="font-size:.88rem;line-height:2.1">
+          <li><a href="{% url 'reports-list' %}" style="color:var(--navy)">Reports &amp; Publications</a></li>
+          <li><a href="{% url 'project-list' %}" style="color:var(--navy)">Projects &amp; Initiatives</a></li>
+          <li><a href="/datasets/" style="color:var(--navy)">Datasets</a></li>
+          <li><a href="/sitemap-wiki.xml" style="color:var(--navy)">Knowledge Base</a></li>
+          <li><a href="/archive/" style="color:var(--navy)">Research Archive</a></li>
+          <li><a href="{% url 'patents' %}" style="color:var(--navy)">Patents &amp; IP Portfolio</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <h2 class="section-heading mb-2" style="font-size:.88rem">LEGAL &amp; COMPLIANCE</h2>
+        <hr class="section-rule mb-3">
+        <ul class="list-unstyled" style="font-size:.88rem;line-height:2.1">
+          <li><a href="{% url 'privacy' %}" style="color:var(--navy)">Privacy Policy &amp; Disclaimer</a></li>
+          <li><a href="{% url 'do-not-sell' %}" style="color:var(--navy)">Do Not Sell My Personal Information</a></li>
+          <li><a href="{% url 'trademarks' %}" style="color:var(--navy)">Trademarks &amp; Brand Guidelines</a></li>
+          <li><a href="{% url 'accessibility' %}" style="color:var(--navy)">Accessibility Statement</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <h2 class="section-heading mb-2" style="font-size:.88rem">CONTACT &amp; SUPPORT</h2>
+        <hr class="section-rule mb-3">
+        <ul class="list-unstyled" style="font-size:.88rem;line-height:2.1">
+          <li><a href="{% url 'our-people' %}" style="color:var(--navy)">Contact Our Team</a></li>
+          <li><a href="{% url 'our-people' %}" style="color:var(--navy)">Media Inquiries</a></li>
+          <li><a href="{% url 'our-people' %}" style="color:var(--navy)">Partnership Inquiries</a></li>
+          <li><a href="{% url 'our-people' %}" style="color:var(--navy)">Licensing &amp; Permissions</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <hr class="gold-divider">
+
+    <div class="row g-4 mt-1">
+
+      <div class="col-sm-6 col-lg-4">
+        <h2 class="section-heading mb-2" style="font-size:.88rem">FEEDS &amp; DATA FORMATS</h2>
+        <hr class="section-rule mb-3">
+        <ul class="list-unstyled" style="font-size:.88rem;line-height:2.1">
+          <li><a href="/feeds/reports.xml" style="color:var(--navy)">Reports RSS Feed</a></li>
+          <li><a href="/feeds/archive.xml" style="color:var(--navy)">Archive Atom Feed</a></li>
+          <li><a href="/api/v1/openapi.json" style="color:var(--navy)">OpenAPI Specification</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-lg-4">
+        <h2 class="section-heading mb-2" style="font-size:.88rem">XML SITEMAPS</h2>
+        <hr class="section-rule mb-3">
+        <ul class="list-unstyled" style="font-size:.88rem;line-height:2.1">
+          <li><a href="/sitemap.xml" style="color:var(--navy)">Primary Sitemap</a></li>
+          <li><a href="/sitemap-publications.xml" style="color:var(--navy)">Publications Sitemap</a></li>
+          <li><a href="/sitemap-wiki.xml" style="color:var(--navy)">Knowledge Base Sitemap</a></li>
+          <li><a href="/sitemap-archive.xml" style="color:var(--navy)">Archive Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 d-none d-lg-block">
+        <div class="acpwb-card" style="background:var(--navy);border-color:var(--navy)">
+          <h6 style="color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;margin-bottom:.75rem">Can't Find Something?</h6>
+          <p style="color:rgba(255,255,255,.7);font-size:.8rem;margin-bottom:1rem">If you're looking for a specific page or publication and can't locate it here, our team can help.</p>
+          <a href="{% url 'our-people' %}" style="font-size:.78rem;font-weight:700;color:var(--gold);text-decoration:none">Contact Us &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="small text-muted mt-5" style="font-size:.78rem">
+      This site map was last updated March 2026 and reflects the current structure of acpwb.com. Some pages may require navigational context to access. Pages listed under Feeds &amp; Data Formats are machine-readable resources intended for programmatic access by authorized parties.
+    </p>
+
+  </div>
+</section>
+
+{% endblock %}

@@ -49,6 +49,13 @@
       <div class="sub">credential stuffing</div>
     </div>
   </div>
+  <div class="col-6 col-lg-2">
+    <div class="stat-card" style="border-top-color:#7c3aed">
+      <div class="label">Privacy Requests</div>
+      <div class="value">{{ counts.optouts }}</div>
+      <div class="sub">do-not-sell / delete</div>
+    </div>
+  </div>
 </div>
 
 <div class="row g-3 mb-4">
@@ -183,6 +190,35 @@
             <td style="color:var(--muted)">{{ e.recipient }}</td>
             <td style="color:var(--muted)">{{ e.subject|truncatechars:60 }}</td>
             <td style="font-size:.72rem;color:var(--muted);white-space:nowrap">{{ e.received_at|date:"M d, H:i" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if recent_optouts %}
+<div class="row g-3 mt-1">
+  <div class="col-12">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>Recent Privacy Requests</h6>
+        <span style="font-size:.72rem;color:var(--muted)">Do Not Sell / Delete / Access — all time</span>
+      </div>
+      <table class="dash-table w-100">
+        <thead><tr><th>When</th><th>Name</th><th>Email</th><th>Type</th><th>State</th><th>IP</th><th>Processed</th></tr></thead>
+        <tbody>
+          {% for r in recent_optouts %}
+          <tr>
+            <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ r.created_at|date:"M d Y, H:i" }}</td>
+            <td>{{ r.name }}</td>
+            <td style="color:var(--muted)">{{ r.email }}</td>
+            <td><span class="trap-badge">{{ r.get_request_type_display }}</span></td>
+            <td style="color:var(--muted)">{{ r.state|default:"—" }}</td>
+            <td style="font-family:monospace;font-size:.72rem;color:var(--muted)">{{ r.ip_address }}</td>
+            <td style="text-align:center">{% if r.processed %}&#10003;{% else %}<span style="color:var(--muted)">—</span>{% endif %}</td>
           </tr>
           {% endfor %}
         </tbody>

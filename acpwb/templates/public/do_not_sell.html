@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Do Not Sell My Personal Information — American Corporation for Public Well Being{% endblock %}
+{% block og_title %}Do Not Sell My Personal Information — ACPWB{% endblock %}
+{% block og_description %}Submit a request under CCPA and applicable state privacy laws to opt out of the sale or sharing of your personal information.{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      <a href="{% url 'privacy' %}" style="color:var(--gold)">Privacy Policy</a> &rsaquo; Your Rights
+    </p>
+    <h1>DO NOT SELL MY PERSONAL INFORMATION</h1>
+    <p>Submit a request under the California Consumer Privacy Act (CCPA), Virginia CDPA, Colorado CPA, or other applicable state privacy law.</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+
+        {% if submitted %}
+        <!-- Confirmation -->
+        <div style="background:white;border:1px solid var(--border);border-left:4px solid #15803d;padding:2rem;margin-bottom:2rem">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#15803d;margin-bottom:.5rem">Request Received</div>
+          <h4 style="font-weight:800;color:var(--navy);margin-bottom:.75rem">We Have Logged Your Request.</h4>
+          <p style="font-size:.9rem;color:var(--text);margin-bottom:.75rem">
+            Your privacy request has been recorded in our system. You will receive a confirmation at the email address you provided within 45 business days, or sooner if we get to it.
+          </p>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:0">
+            Under applicable law, we are required to respond within 45 days, extendable by an additional 45 days if we determine that is more convenient for us, with notice. We will provide notice. That notice will be very brief.
+          </p>
+        </div>
+        <a href="{% url 'privacy' %}" style="font-size:.85rem;color:var(--gold);font-weight:700;text-decoration:none">&larr; Return to Privacy Policy</a>
+
+        {% else %}
+        <!-- Intro -->
+        <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:2rem">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.5rem">Your Rights Under State Privacy Laws</div>
+          <p style="font-size:.88rem;color:var(--navy);margin-bottom:.5rem;line-height:1.6">
+            You have the right to request that we do not sell or share your personal information. You also have the right to request deletion or access to the personal information we have collected about you. Use this form to submit any of these requests.
+          </p>
+          <p style="font-size:.78rem;color:var(--muted);margin-bottom:0">
+            We will not discriminate against you for exercising your privacy rights. This means we will continue to treat you exactly as we treated you before, which may or may not have involved collecting your personal information.
+          </p>
+        </div>
+
+        <!-- Form -->
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Full Name <span style="color:#dc2626">*</span>
+            </label>
+            <input type="text" name="name" value="{{ post.name }}"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid {% if errors.name %}#dc2626{% else %}var(--border){% endif %};font-size:.88rem;outline:none"
+                   placeholder="Your full legal name">
+            {% if errors.name %}<p style="font-size:.75rem;color:#dc2626;margin:.3rem 0 0">{{ errors.name }}</p>{% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Email Address <span style="color:#dc2626">*</span>
+            </label>
+            <input type="email" name="email" value="{{ post.email }}"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid {% if errors.email %}#dc2626{% else %}var(--border){% endif %};font-size:.88rem;outline:none"
+                   placeholder="The email address associated with your account, if any">
+            {% if errors.email %}<p style="font-size:.75rem;color:#dc2626;margin:.3rem 0 0">{{ errors.email }}</p>{% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Request Type <span style="color:#dc2626">*</span>
+            </label>
+            <select name="request_type"
+                    style="width:100%;padding:.55rem .85rem;border:1px solid {% if errors.request_type %}#dc2626{% else %}var(--border){% endif %};font-size:.88rem;background:white;outline:none">
+              {% for value, label in request_choices %}
+              <option value="{{ value }}" {% if post.request_type == value %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+            {% if errors.request_type %}<p style="font-size:.75rem;color:#dc2626;margin:.3rem 0 0">{{ errors.request_type }}</p>{% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              State of Residence
+            </label>
+            <input type="text" name="state" value="{{ post.state }}"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid var(--border);font-size:.88rem;outline:none"
+                   placeholder="e.g. California, Colorado, Virginia">
+            <p style="font-size:.72rem;color:var(--muted);margin:.3rem 0 0">Optional — helps us apply the correct legal framework to your request.</p>
+          </div>
+
+          <div class="mb-4">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Additional Information
+            </label>
+            <textarea name="message" rows="4"
+                      style="width:100%;padding:.55rem .85rem;border:1px solid var(--border);font-size:.88rem;resize:vertical;outline:none"
+                      placeholder="Any additional context about your request (optional)">{{ post.message }}</textarea>
+          </div>
+
+          <div style="background:var(--surface);border:1px solid var(--border);padding:.85rem 1rem;margin-bottom:1.5rem;font-size:.78rem;color:var(--muted)">
+            By submitting this form you confirm that you are the individual whose personal information is the subject of this request, or an authorized representative acting on their behalf. Submitting false information in a privacy request may be subject to penalties under applicable law. We take this very seriously even though we are a corporation named the American Corporation for Public Well Being.
+          </div>
+
+          <button type="submit"
+                  style="padding:.6rem 2rem;background:var(--navy);color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;border:none;cursor:pointer">
+            Submit Request
+          </button>
+        </form>
+        {% endif %}
+
+      </div>
+
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Response Timeframes</h6>
+            <dl style="font-size:.82rem;margin-bottom:0">
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Acknowledgment</dt>
+              <dd class="fw-700 mb-2">Within 10 business days</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Response</dt>
+              <dd class="fw-700 mb-2">Within 45 days</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Extension (if needed)</dt>
+              <dd class="fw-700 mb-0">Up to 45 additional days</dd>
+            </dl>
+          </div>
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Applicable Laws</h6>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-1" style="border-bottom:1px solid var(--surface);padding-bottom:.4rem">CCPA / CPRA — California</li>
+              <li class="mb-1" style="border-bottom:1px solid var(--surface);padding-bottom:.4rem">CDPA — Virginia</li>
+              <li class="mb-1" style="border-bottom:1px solid var(--surface);padding-bottom:.4rem">CPA — Colorado</li>
+              <li class="mb-1" style="border-bottom:1px solid var(--surface);padding-bottom:.4rem">CTDPA — Connecticut</li>
+              <li class="mb-0">UCPA — Utah</li>
+            </ul>
+          </div>
+
+          <div class="acpwb-card">
+            <h6 class="card-title mb-2">Questions?</h6>
+            <p class="small text-muted mb-0" style="font-size:.8rem">
+              For questions about your privacy rights or how we handle personal information, please review our full <a href="{% url 'privacy' %}" style="color:var(--gold)">Privacy Policy</a> and then contact us through our <a href="{% url 'our-people' %}" style="color:var(--gold)">Our People</a> page. Someone will eventually respond.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

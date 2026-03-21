@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Accessibility — American Corporation for Public Well Being{% endblock %}
+{% block og_title %}Accessibility Statement — ACPWB{% endblock %}
+{% block og_description %}ACPWB is committed to making our digital content accessible to all users, including those with disabilities. Learn about our accessibility features and how to request assistance.{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Inclusion &amp; Access</p>
+    <h1>ACCESSIBILITY STATEMENT</h1>
+    <p>The American Corporation for Public Well Being is committed to digital accessibility for everyone.</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="wiki-content">
+
+          <h2 class="section-heading mb-3">OUR COMMITMENT</h2>
+          <hr class="section-rule">
+
+          <p>
+            ACPWB is committed to ensuring that our website, publications, and digital resources are accessible to all users, including individuals with disabilities. We believe that access to compensation data and workforce analytics research should not be contingent on ability status, operating system preference, assistive technology configuration, or the willingness to click "I Accept" on a cookie banner.
+          </p>
+
+          <p>
+            We aspire to conform to the <strong>Web Content Accessibility Guidelines (WCAG) 2.1</strong> at Level AA. Whether we have achieved this is, at this time, aspirational. We are working on it.
+          </p>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">WHAT WE ARE DOING</h2>
+          <hr class="section-rule">
+
+          <p>Our ongoing accessibility efforts include:</p>
+
+          <ul>
+            <li><strong>Semantic HTML:</strong> We use structured HTML elements — headings, lists, tables with headers — to support screen readers and other assistive technologies. We have strong feelings about the correct use of heading levels.</li>
+            <li><strong>Color contrast:</strong> Our primary brand palette (navy and gold) has been reviewed for contrast ratios. The gold on white combination tests at approximately 3.1:1, which is below AA for normal text, and we are aware of this, and it is on the list.</li>
+            <li><strong>Keyboard navigation:</strong> Core site navigation and forms can be operated via keyboard. The foosball table in our break room cannot, but it is not on the website.</li>
+            <li><strong>Alt text:</strong> Images that convey meaningful content include descriptive alt attributes. Images that are purely decorative are marked accordingly, or are left unmarked because they were added quickly and no one went back.</li>
+            <li><strong>Form labels:</strong> Form fields on this website are associated with descriptive labels, including the Do Not Sell My Personal Information form, which we feel is an important form to get right.</li>
+            <li><strong>No reliance on color alone:</strong> We do not use color as the sole means of conveying information, with the exception of a few charts in our research reports that we inherited from a previous design system and have noted for remediation.</li>
+            <li><strong>Responsive design:</strong> This website is designed to function on screen sizes from 320px to whatever your monitor is, including that very large one in the conference room that no one has figured out how to connect to the laptop.</li>
+          </ul>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">KNOWN LIMITATIONS</h2>
+          <hr class="section-rule">
+
+          <p>
+            We are aware of the following accessibility gaps and are addressing them in priority order, which is subject to change based on available bandwidth:
+          </p>
+
+          <ul>
+            <li>Some older PDF publications do not include tagged document structure. We are working through the back catalog, starting with 2023 and moving backward as time permits, which is slowly.</li>
+            <li>Data tables in the compensation benchmarking reports do not all include row and column headers in the tagged PDF format. This is known.</li>
+            <li>Several interactive elements lack visible focus indicators in certain browsers. This is also known.</li>
+            <li>The archive section of this website contains procedurally generated content. We have done our best to ensure accessibility of the underlying template, but we cannot guarantee that every generated page meets all criteria at all times, because there are quite a lot of them.</li>
+          </ul>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">HOW TO REQUEST ASSISTANCE</h2>
+          <hr class="section-rule">
+
+          <p>
+            If you encounter an accessibility barrier on this website, or if you need any content provided in an alternative format, please contact us through the <a href="{% url 'our-people' %}" style="color:var(--gold)">Our People</a> page. When contacting us, please include:
+          </p>
+
+          <ul>
+            <li>A description of the barrier or the content you need in an alternative format</li>
+            <li>The URL of the page where the barrier occurs</li>
+            <li>Your preferred method of contact and the format in which you would like to receive the information</li>
+            <li>Your assistive technology and browser, if known — this helps us reproduce the issue, or at least understand it</li>
+          </ul>
+
+          <p>
+            We will respond within 5 business days and will work with you to provide the content you need, resolve the barrier, or at minimum acknowledge that the barrier exists and that we have added it to the list.
+          </p>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">THIRD-PARTY CONTENT</h2>
+          <hr class="section-rule">
+
+          <p>
+            This website uses Bootstrap 5 (CDN) for layout and interactive components, and Google Fonts for typography. These are third-party resources and their accessibility is subject to the practices of their respective providers. We have reviewed their general accessibility posture and found it to be adequate, or at least not actively problematic.
+          </p>
+
+          <p>
+            Links to external research publications, government resources, and other third-party content are provided for convenience. ACPWB is not responsible for the accessibility of third-party websites.
+          </p>
+
+          <hr class="gold-divider">
+
+          <h2 class="section-heading mt-5 mb-3">FEEDBACK AND FORMAL COMPLAINTS</h2>
+          <hr class="section-rule">
+
+          <p>
+            We welcome feedback on the accessibility of our website. If you are not satisfied with our response to your accessibility request, you may contact the U.S. Access Board, your state's civil rights enforcement agency, or, if applicable, file a complaint under Section 508 of the Rehabilitation Act or the Americans with Disabilities Act.
+          </p>
+
+          <p>
+            We would prefer that you contact us first, because we genuinely want to know about accessibility issues and because formal complaints involve paperwork that falls to our Administrative Operations team, and they are already dealing with the conference room TV situation.
+          </p>
+
+          <p class="small text-muted mt-5">
+            This accessibility statement was last reviewed March 2026. We review and update this statement annually, or when something changes, whichever comes first.
+          </p>
+
+        </div>
+      </div>
+
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Quick Links</h6>
+            <ul class="list-unstyled mb-0" style="font-size:.83rem">
+              <li class="mb-2"><a href="#" style="color:var(--navy)">Our Commitment</a></li>
+              <li class="mb-2"><a href="#" style="color:var(--navy)">What We Are Doing</a></li>
+              <li class="mb-2"><a href="#" style="color:var(--navy)">Known Limitations</a></li>
+              <li class="mb-2"><a href="#" style="color:var(--navy)">Request Assistance</a></li>
+              <li class="mb-2"><a href="#" style="color:var(--navy)">Third-Party Content</a></li>
+              <li><a href="#" style="color:var(--navy)">Formal Complaints</a></li>
+            </ul>
+          </div>
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-2">Standards Reference</h6>
+            <p class="small text-muted mb-2" style="font-size:.8rem">We reference the following standards in our accessibility work:</p>
+            <ul class="list-unstyled mb-0" style="font-size:.8rem">
+              <li class="mb-1" style="border-bottom:1px solid var(--surface);padding-bottom:.35rem">WCAG 2.1 Level AA</li>
+              <li class="mb-1" style="border-bottom:1px solid var(--surface);padding-bottom:.35rem">Section 508 (Rehabilitation Act)</li>
+              <li class="mb-1" style="border-bottom:1px solid var(--surface);padding-bottom:.35rem">ADA Title III</li>
+              <li>ARIA 1.2 Authoring Practices</li>
+            </ul>
+          </div>
+
+          <div class="acpwb-card" style="background:var(--navy);border-color:var(--navy)">
+            <h6 style="color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;margin-bottom:.75rem">Need Help Now?</h6>
+            <p style="color:rgba(255,255,255,.7);font-size:.8rem;margin-bottom:1rem">If you're experiencing an accessibility barrier right now, reach out directly through our contact page.</p>
+            <a href="{% url 'our-people' %}" style="font-size:.78rem;font-weight:700;color:var(--gold);text-decoration:none">Contact Our Team &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

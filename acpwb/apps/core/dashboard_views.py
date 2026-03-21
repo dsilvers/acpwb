@@ -15,6 +15,7 @@ from django.utils import timezone
 from apps.honeypot.models import CrawlerVisit, ArchiveVisit, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
+from apps.public.models import DataOptOutRequest
 from apps.webhooks.models import InboundEmail
 
 _DASH_CACHE_TTL = 300  # 5 minutes
@@ -182,6 +183,7 @@ def overview(request):
     people_qs   = _apply_range(PeoplePageVisit.objects.all(), dr)
     project_qs  = _apply_range(ProjectPageVisit.objects.all(), dr)
     login_qs    = _apply_range(InternalLoginAttempt.objects.all(), dr, field='created_at')
+    optout_qs   = _apply_range(DataOptOutRequest.objects.all(), dr, field='created_at')
 
     # Top bots — SQL GROUP BY on denormalized bot_type column
     top_bots, _ = _bot_breakdown(crawler_qs, limit=15)
@@ -212,6 +214,7 @@ def overview(request):
             'people':   people_qs.count(),
             'projects': project_qs.count(),
             'logins':   login_qs.count(),
+            'optouts':  optout_qs.count(),
         },
         'top_bots':   top_bots,
         'trap_counts': trap_counts,
@@ -219,6 +222,7 @@ def overview(request):
         'daily':      daily,
         'recent_crawlers': list(crawler_qs.order_by('-timestamp')[:10]),
         'recent_emails':   list(email_qs.order_by('-received_at')[:5]),
+        'recent_optouts':  list(DataOptOutRequest.objects.order_by('-created_at')[:10]),
     }
     if not is_custom:
         cache.set(cache_key, context, _DASH_CACHE_TTL)

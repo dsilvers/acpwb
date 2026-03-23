@@ -10,8 +10,9 @@ class StaticPagesSitemap(Sitemap):
 
     def items(self):
         return [
-            'home', 'our-people', 'mission', 'project-list',
-            'careers', 'partners', 'privacy', 'reports-list',
+            'home', 'mission', 'our-people', 'careers', 'partners',
+            'awards', 'patents', 'faq',
+            'privacy', 'do-not-sell', 'accessibility', 'trademarks', 'site-map',
         ]
 
     def location(self, item):

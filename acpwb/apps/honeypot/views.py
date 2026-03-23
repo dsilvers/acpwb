@@ -1123,6 +1123,8 @@ Disallow: /internal/acquisition-targets/
 Disallow: /internal/litigation-hold/
 Disallow: /employees/export/
 
+Sitemap: https://acpwb.com/sitemap.xml
+Sitemap: https://acpwb.com/sitemap-pages.xml
 Sitemap: https://acpwb.com/sitemap-publications.xml
 Sitemap: https://acpwb.com/sitemap-wiki.xml
 Sitemap: https://acpwb.com/sitemap-archive.xml

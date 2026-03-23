@@ -13,6 +13,7 @@ _sitemaps = {
 urlpatterns = [
     path('django-admin/', admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': _sitemaps}, name='django-sitemap'),
+    path('sitemap-pages.xml', sitemap, {'sitemaps': {'static': StaticPagesSitemap}}, name='django-sitemap-pages'),
 
     # Legacy PHP URL redirects (permanent 301)
     path('index.php', RedirectView.as_view(url='/', permanent=True)),

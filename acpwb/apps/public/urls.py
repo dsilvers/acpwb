@@ -13,4 +13,5 @@ urlpatterns = [
     path('accessibility/', views.accessibility, name='accessibility'),
     path('trademarks/', views.trademarks, name='trademarks'),
     path('site-map/', views.sitemap_page, name='site-map'),
+    path('faq/', views.faq, name='faq'),
 ]

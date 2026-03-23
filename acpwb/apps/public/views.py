@@ -312,3 +312,7 @@ def trademarks(request):
 
 def sitemap_page(request):
     return render(request, 'public/sitemap_page.html')
+
+
+def faq(request):
+    return render(request, 'public/faq.html')

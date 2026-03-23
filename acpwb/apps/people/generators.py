@@ -158,6 +158,60 @@ FIRST_NAMES = [
     'Tamati', 'Reweti', 'Hinewai', 'Mairangi', 'Kahu', 'Piripi',
 ]
 
+# Long South/South-East Indian given names — used as first names in multi-part constructions
+LONG_INDIAN_FIRST_NAMES = [
+    # Male
+    'Veerendra', 'Venkataraman', 'Subramaniam', 'Krishnamurthy', 'Raghunathan',
+    'Parthasarathy', 'Lakshminarayanan', 'Chandrasekharan', 'Soundararajan',
+    'Ramakrishnan', 'Balasubramaniam', 'Narasimhan', 'Thyagarajan', 'Annamalai',
+    'Gopalakrishnan', 'Sivasubramanian', 'Padmanabhan', 'Narayanaswamy',
+    'Swaminathan', 'Rajagopalan', 'Sundararajan', 'Arunachalam', 'Muruganantham',
+    'Natarajan', 'Balakrishnan', 'Krishnaswamy', 'Venkatasubramanian',
+    'Gnanasekharan', 'Parasuraman', 'Ramachandran', 'Seshadrinathan',
+    'Kuppuswamy', 'Bhaskararao', 'Achyutananda', 'Lakshmikanthan',
+    'Visvanathan', 'Venkatanarasimhan', 'Thirumuruganandam', 'Raghavachari',
+    'Krishnamachari', 'Subrahmanyam', 'Venkataramaiah', 'Ananthaswamy',
+    'Chandrashekaran', 'Kumaraswamy', 'Seetharamaiah', 'Nanjundaswamy',
+    # Female
+    'Bhagyalakshmi', 'Rajalakshmi', 'Saraswathidevi', 'Meenakshisundari',
+    'Subbulakshmi', 'Kamakshiammal', 'Vimalachandiran', 'Nagalakshmi',
+    'Annapurnamma', 'Krishnaveni', 'Saradambal', 'Venkatammadevamma',
+    'Lakshmidevi', 'Sundareswari', 'Parameswari', 'Kanchanadevamma',
+]
+
+# Long South Indian surnames, family names, and patronymics
+LONG_INDIAN_LAST_NAMES = [
+    'Kanchekundu', 'Ligamdenna', 'Venkatasubramaniam', 'Krishnamachari',
+    'Parthasarathi', 'Lakshminarayanan', 'Chandrasekharan', 'Soundararajan',
+    'Ramakrishnan', 'Balasubramaniam', 'Thyagarajan', 'Gopalakrishnan',
+    'Sivasubramanian', 'Narayanaswamy', 'Venkataramaiah', 'Sundararajan',
+    'Arunachalam', 'Muruganantham', 'Krishnamurthy', 'Swaminathan',
+    'Rajagopalan', 'Balakrishnan', 'Gnanasekharan', 'Parasuraman',
+    'Seshadrinathan', 'Venkatanarasimha', 'Kuppuswamy', 'Thirumuruganandam',
+    'Padmanabhan', 'Narasimhaswamy', 'Annamalaisamy', 'Bhaskararao',
+    'Achyutananda', 'Ramachandran', 'Subramaniam', 'Venkatasubramanian',
+    'Raghunathan', 'Krishnaswamy', 'Visvanathan', 'Raghavachari',
+    'Ananthaswamy', 'Kumaraswamy', 'Seetharamaiah', 'Nanjundaswamy',
+    'Chandrashekaran', 'Tirumalvenkatesh', 'Narayanaswamyreddy',
+    'Krishnaswamynaicker', 'Venkataramamurthy', 'Lakshminarasimha',
+]
+
+# Middle names across cultures — used in "First Middle Last" constructions
+MIDDLE_NAMES = [
+    # Short American middle names (classic)
+    'Lee', 'Ann', 'Marie', 'Ray', 'Lynn', 'Jo', 'Dale', 'Jay', 'Mae', 'Ruth',
+    'Jean', 'Dean', 'Wayne', 'Gene', 'Rex', 'Kay', 'June', 'Blake', 'Glen',
+    # Formal American middle names
+    'Alexander', 'Elizabeth', 'James', 'Catherine', 'William', 'Margaret',
+    'Thomas', 'Louise', 'Edward', 'Grace', 'Francis', 'Rose', 'George', 'Claire',
+    'Joseph', 'Anne', 'Patrick', 'Louise', 'Michael', 'Renee',
+    # Long Indian middle names / patronymics (same pool as last names — intentional)
+    'Venkatanarasimha', 'Krishnaswamy', 'Lakshmipathy', 'Balasubrahmanyam',
+    'Raghunathachari', 'Parthasarathi', 'Narayanaswamy', 'Subramaniam',
+    'Thyagarajan', 'Chandrasekharan', 'Soundararajan', 'Padmanabhan',
+    'Venkataramaiah', 'Gnanasekharan', 'Kuppuswamy', 'Annamalaisamy',
+]
+
 LAST_NAMES = [
     'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis',
     'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson',
@@ -482,28 +536,61 @@ DEPARTMENTS = [
 def generate_employee_batch(n=12):
     """Generate a batch of fake employee dicts."""
     employees = []
-    # Use a time-based seed for uniqueness across visits, but pick reproducibly within the batch
     rng = random.Random()
     used_emails = set()
 
     for _ in range(n):
-        first = rng.choice(FIRST_NAMES)
-        last = rng.choice(LAST_NAMES)
+        style = rng.random()
 
-        # Handle email collisions by appending a number
-        base_email = f"{first.lower()}.{last.lower()}@acpwb.com"
+        if style < 0.04:
+            # 4-part South Indian name: First Patronymic1 Patronymic2 FamilyName
+            parts = rng.sample(LONG_INDIAN_LAST_NAMES, 2)
+            first = rng.choice(LONG_INDIAN_FIRST_NAMES)
+            display_first = f"{first} {parts[0]} {parts[1]}"
+            display_last = rng.choice(LONG_INDIAN_LAST_NAMES)
+        elif style < 0.16:
+            # 3-part South Indian name: First Patronymic FamilyName
+            first = rng.choice(LONG_INDIAN_FIRST_NAMES)
+            patronymic = rng.choice(LONG_INDIAN_LAST_NAMES)
+            last = rng.choice(LONG_INDIAN_LAST_NAMES)
+            while last == patronymic:
+                last = rng.choice(LONG_INDIAN_LAST_NAMES)
+            display_first = f"{first} {patronymic}"
+            display_last = last
+        elif style < 0.28:
+            # First Middle Last (any culture)
+            display_first = f"{rng.choice(FIRST_NAMES)} {rng.choice(MIDDLE_NAMES)}"
+            display_last = rng.choice(LAST_NAMES)
+        elif style < 0.35:
+            # Hyphenated last name
+            last1 = rng.choice(LAST_NAMES)
+            last2 = rng.choice(LAST_NAMES)
+            while last2 == last1:
+                last2 = rng.choice(LAST_NAMES)
+            display_first = rng.choice(FIRST_NAMES)
+            display_last = f"{last1}-{last2}"
+        else:
+            # Standard single first + last
+            display_first = rng.choice(FIRST_NAMES)
+            display_last = rng.choice(LAST_NAMES)
+
+        # Email: first word of first_name + last word of last_name (hyphens preserved)
+        email_first = display_first.split()[0].lower()
+        email_last = display_last.split()[-1].lower()
+
+        base_email = f"{email_first}.{email_last}@acpwb.com"
         email = base_email
         counter = 2
         while email in used_emails:
-            email = f"{first.lower()}.{last.lower()}{counter}@acpwb.com"
+            email = f"{email_first}.{email_last}{counter}@acpwb.com"
             counter += 1
         used_emails.add(email)
 
-        seed = hashlib.md5(f"{first}{last}{rng.random()}".encode()).hexdigest()[:16]
+        seed = hashlib.md5(f"{display_first}{display_last}{rng.random()}".encode()).hexdigest()[:16]
 
         employees.append({
-            'first_name': first,
-            'last_name': last,
+            'first_name': display_first,
+            'last_name': display_last,
             'email': email,
             'title': rng.choice(TITLES),
             'department': rng.choice(DEPARTMENTS),

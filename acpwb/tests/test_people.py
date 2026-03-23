@@ -17,11 +17,12 @@ def test_employee_email_format():
     employees = generate_employee_batch(20)
     for emp in employees:
         assert emp['email'].endswith('@acpwb.com')
-        # email should be firstname.lastname@acpwb.com (or with digit suffix)
+        # Email uses first word of first_name + last word of last_name
+        # e.g. "Veerendra Ligamdenna Kanchekundu" → veerendra.kanchekundu@acpwb.com
         local = emp['email'].split('@')[0]
-        first = emp['first_name'].lower()
-        last = emp['last_name'].lower()
-        assert local.startswith(f'{first}.{last}')
+        email_first = emp['first_name'].split()[0].lower()
+        email_last = emp['last_name'].split()[-1].lower()
+        assert local.startswith(f'{email_first}.{email_last}')
 
 
 def test_employee_emails_unique_within_batch():

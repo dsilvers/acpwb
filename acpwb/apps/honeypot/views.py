@@ -1095,6 +1095,12 @@ Allow: /mission/
 Allow: /projects/
 Allow: /partners/
 Allow: /privacy/
+Allow: /faq/
+Allow: /awards/
+Allow: /patents/
+Allow: /accessibility/
+Allow: /trademarks/
+Allow: /site-map/
 
 # Internal research archives - proceed with caution
 Allow: /archive/

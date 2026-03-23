@@ -13,11 +13,21 @@ BOT_PATTERNS = [
     ('anthropic-ai',        'Anthropic'),
     ('PerplexityBot',       'Perplexity'),
     ('Google-Extended',     'Google-Extended (AI)'),
+    ('meta-externalagent',  'Meta ExternalAgent'),
     ('FacebookBot',         'Meta FacebookBot'),
     ('Applebot-Extended',   'Apple Applebot-Extended'),
     ('Bytespider',          'ByteDance Bytespider'),
+    ('Amazonbot',           'Amazonbot'),
+    ('Diffbot',             'Diffbot'),
+    ('omgili',              'Omgilibot'),
+    ('webzio-extended',     'Webzio'),
+    ('CCBot',               'Common Crawl'),
+    ('cohere-ai',           'Cohere'),
+    ('Timpibot',            'Timpi'),
     # Search engines
+    ('Nexus 5X Build/MMB29P', 'Googlebot Mobile'),  # Googlebot mobile fingerprint (before Googlebot)
     ('Googlebot',           'Googlebot'),
+    ('GoogleOther',         'GoogleOther'),
     ('bingbot',             'Bingbot'),
     ('BingPreview',         'Bing Preview'),
     ('msnbot',              'MSN Bot'),
@@ -37,6 +47,10 @@ BOT_PATTERNS = [
     ('DataForSeoBot',       'DataForSEO'),
     ('PetalBot',            'Huawei PetalBot'),
     ('PiplBot',             'Pipl'),
+    ('SERankingBacklinksBot', 'SERankingBacklinksBot'),
+    ('ZoominfoBot',         'ZoominfoBot'),
+    ('BitSightBot',         'BitSightBot'),
+    ('zgrab',               'zgrab'),
     # Social
     ('Twitterbot',          'Twitterbot'),
     ('facebookexternalhit', 'Facebook Scraper'),
@@ -78,10 +92,13 @@ def classify_ua_group(ua):
     ai_bots = {'OpenAI GPTBot', 'OpenAI SearchBot', 'OpenAI ChatGPT',
                 'Anthropic ClaudeBot', 'Anthropic Claude', 'Anthropic',
                 'Perplexity', 'Google-Extended (AI)', 'ByteDance Bytespider',
-                'Meta FacebookBot', 'Apple Applebot-Extended'}
+                'Meta FacebookBot', 'Meta ExternalAgent', 'Apple Applebot-Extended',
+                'Amazonbot', 'Diffbot', 'Omgilibot', 'Webzio',
+                'Common Crawl', 'Cohere', 'Timpi'}
     if label in ai_bots:
         return 'AI Crawlers'
-    search_bots = {'Googlebot', 'Bingbot', 'Bing Preview', 'MSN Bot',
+    search_bots = {'Googlebot', 'Googlebot Mobile', 'GoogleOther',
+                   'Bingbot', 'Bing Preview', 'MSN Bot',
                    'Baiduspider', 'YandexBot', 'Yahoo Slurp', 'DuckDuckBot',
                    'Applebot', 'Sogou', '360Spider', 'Seznam'}
     if label in search_bots:

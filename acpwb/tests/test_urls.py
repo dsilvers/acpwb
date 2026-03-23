@@ -126,3 +126,66 @@ def test_contact_redirects_to_our_people(client):
     response = client.get('/contact/')
     assert response.status_code in (301, 302)
     assert '/our-people/' in response['Location']
+
+
+# New public pages
+@pytest.mark.django_db
+def test_awards_200(client):
+    response = client.get('/awards/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_patents_200(client):
+    response = client.get('/patents/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_faq_200(client):
+    response = client.get('/faq/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_do_not_sell_200(client):
+    response = client.get('/privacy/do-not-sell/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_accessibility_200(client):
+    response = client.get('/accessibility/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_trademarks_200(client):
+    response = client.get('/trademarks/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_site_map_200(client):
+    response = client.get('/site-map/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_sitemap_pages_xml_200(client):
+    response = client.get('/sitemap-pages.xml')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_internal_login_get_200(client):
+    response = client.get('/internal/login/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_internal_login_post_logs_credentials(client):
+    response = client.post('/internal/login/', {'username': 'admin', 'password': 'secret123'})
+    assert response.status_code in (200, 302)
+    from apps.honeypot.models import InternalLoginAttempt
+    assert InternalLoginAttempt.objects.filter(username='admin').exists()

@@ -1,5 +1,6 @@
 import hashlib
 import hmac
+import json
 import time
 
 import pytest
@@ -122,3 +123,96 @@ def test_mailgun_inbound_match_case_insensitive(mailgun_post):
 def test_mailgun_post_only(client):
     response = client.get('/webhooks/mailgun/inbound/')
     assert response.status_code == 405
+
+
+# ── Cloudflare pipe webhook ─────────────────────────────────────────────────────
+
+PIPE_SECRET = 'test-pipe-secret'
+PIPE_RAW = "From: spammer@evil.com\r\nTo: alice@acpwb.com\r\nSubject: Hello\r\n\r\nBody text"
+
+
+@pytest.fixture
+def pipe_post(client, settings):
+    settings.PIPE_WEBHOOK_SECRET = PIPE_SECRET
+
+    def _post(body):
+        return client.post(
+            '/webhooks/pipe/inbound/',
+            data=json.dumps(body),
+            content_type='application/json',
+            HTTP_X_WEBHOOK_SECRET=PIPE_SECRET,
+        )
+
+    return _post
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_creates_email(pipe_post):
+    resp = pipe_post({
+        'sender': 'spammer@evil.com',
+        'recipient': 'alice@acpwb.com',
+        'subject': 'Hello',
+        'raw': PIPE_RAW,
+    })
+    assert resp.status_code == 200
+    assert InboundEmail.objects.filter(sender='spammer@evil.com').exists()
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_rejects_bad_secret(client, settings):
+    settings.PIPE_WEBHOOK_SECRET = PIPE_SECRET
+    resp = client.post(
+        '/webhooks/pipe/inbound/',
+        data=json.dumps({'sender': 'x@x.com', 'recipient': 'y@acpwb.com', 'subject': '', 'raw': ''}),
+        content_type='application/json',
+        HTTP_X_WEBHOOK_SECRET='wrong-secret',
+    )
+    assert resp.status_code == 403
+    assert InboundEmail.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_rejects_get(client):
+    resp = client.get('/webhooks/pipe/inbound/')
+    assert resp.status_code == 405
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_rejects_bad_json(client, settings):
+    settings.PIPE_WEBHOOK_SECRET = PIPE_SECRET
+    resp = client.post(
+        '/webhooks/pipe/inbound/',
+        data='not-json',
+        content_type='application/json',
+        HTTP_X_WEBHOOK_SECRET=PIPE_SECRET,
+    )
+    assert resp.status_code == 400
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_creates_match_for_known_email(pipe_post):
+    visit = PeoplePageVisit.objects.create(
+        ip_address='1.2.3.4',
+        user_agent='Mozilla/5.0',
+        referrer='',
+        session_key='session-pipe',
+    )
+    GeneratedEmployee.objects.create(
+        visit=visit,
+        first_name='Carol',
+        last_name='Price',
+        email='carol.price@acpwb.com',
+        title='Analyst',
+        department='Finance',
+        avatar_seed='seedpipe',
+    )
+    resp = pipe_post({
+        'sender': 'spammer@evil.com',
+        'recipient': 'carol.price@acpwb.com',
+        'subject': 'Hi',
+        'raw': PIPE_RAW,
+    })
+    assert resp.status_code == 200
+    match = HoneypotMatch.objects.filter(match_confidence='exact').first()
+    assert match is not None
+    assert match.original_visit == visit

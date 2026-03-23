@@ -105,3 +105,31 @@ def test_sitemap_archive_logs_visit(client):
     before = CrawlerVisit.objects.filter(trap_type='well_known').count()
     client.get('/sitemap-archive.xml')
     assert CrawlerVisit.objects.filter(trap_type='well_known').count() > before
+
+
+# ── Pages sitemap ───────────────────────────────────────────────────────────────
+
+@pytest.mark.django_db
+def test_sitemap_pages_200(client):
+    response = client.get('/sitemap-pages.xml')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_sitemap_pages_is_valid_xml(client):
+    response = client.get('/sitemap-pages.xml')
+    root = parse_sitemap(response.content)
+    locs = root.findall(f'.//{{{SITEMAP_NS}}}loc')
+    assert len(locs) >= 10
+
+
+@pytest.mark.django_db
+def test_sitemap_pages_includes_new_pages(client):
+    response = client.get('/sitemap-pages.xml')
+    content = response.content.decode()
+    assert '/faq/' in content
+    assert '/awards/' in content
+    assert '/privacy/do-not-sell/' in content
+    assert '/site-map/' in content
+    assert '/accessibility/' in content
+    assert '/trademarks/' in content

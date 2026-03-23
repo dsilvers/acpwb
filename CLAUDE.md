@@ -74,8 +74,9 @@ Dedicated traps:
 - `/reports/<slug>/download.csv` — real downloadable CSV with per-slug watermark token in every row
 - `/api/v1/private-data` — 200 JSON garbage with fake credentials (referenced in HTML comment, not nav)
 - `/.well-known/ai-agent.json` — fake AI agent manifest with trap `allowed_actions`
-- `/.well-known/robots.txt` — reverse-psychology (Disallow = more honeypot content, Crawl-delay: 0, points to trap sitemaps)
+- `/.well-known/robots.txt` — reverse-psychology (Disallow = more honeypot content, Crawl-delay: 0, five Sitemap directives: `sitemap.xml`, `sitemap-pages.xml`, plus three trap sitemaps)
 - `/sitemap.xml` — real Django sitemap (static pages + projects) for legitimate crawlers
+- `/sitemap-pages.xml` — real Django sitemap (all static public pages); served from `StaticPagesSitemap` in `apps/public/sitemaps.py`
 - `/sitemap-publications.xml` — trap: reports, ghost traps, fake internal paths; logged as `well_known`
 - `/sitemap-wiki.xml` — trap: all 75+ wiki topics; logged as `well_known`
 - `/sitemap-archive.xml` — trap: 500 deterministic archive URLs (seed `0x4143505742`), 2008–2024; logged as `well_known`
@@ -197,3 +198,28 @@ All models registered with useful `list_display`, `search_fields`, and `list_fil
 - **`HEADSHOT_DIR` uses `parents[3]`** — the tag file is 3 levels deep from the Django project root (`apps/core/templatetags/`), so `parents[3]` = project root both locally and in the Docker container (`/app`)
 - **Static files via bind mount** — `./acpwb/staticfiles` bind-mounted in Docker so host nginx can serve directly from `/home/dan/acpwb.com/acpwb/staticfiles/`
 - **Docker nginx on port 8001** — `127.0.0.1:8001:80`, host nginx proxies to it
+
+---
+
+## Management Commands
+
+| Command | Flags | Purpose |
+|---------|-------|---------|
+| `backfill_bot_types` | `--reclassify`, `--dry-run`, `--batch-size` | Backfill `bot_type`/`bot_group` on `CrawlerVisit` rows. Without `--reclassify`: blank rows only. With `--reclassify`: blank + `'Other / Browser'` rows — use after adding new `BOT_PATTERNS`. |
+| `dedupe_crawler_visits` | — | Remove duplicate `CrawlerVisit` rows. |
+| `generate_content_fixture` | — | Generate test fixtures for content. |
+| `export_gen_data` | — | Export data for external image generation. |
+
+---
+
+## Running Tests
+
+```bash
+docker compose exec web pytest          # all tests
+docker compose exec web pytest -v       # verbose
+docker compose exec web pytest tests/test_bot_classify.py  # specific file
+```
+
+- Config: `acpwb/pytest.ini` — `DJANGO_SETTINGS_MODULE = config.settings.local`
+- Test files: `acpwb/tests/test_*.py` (~11 files, ~250 tests)
+- Fixtures: `acpwb/tests/conftest.py` — provides `client`, `bot_client`, `staff_client`, `mailgun_post`

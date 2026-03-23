@@ -18,6 +18,7 @@ class CrawlerVisit(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
     ip_address = models.GenericIPAddressField(db_index=True)
     user_agent = models.TextField(blank=True)
+    host = models.CharField(max_length=253, blank=True, db_index=True)
     path = models.TextField()
     referrer = models.TextField(blank=True)
     trap_type = models.CharField(max_length=32, choices=TRAP_CHOICES, default='other', db_index=True)

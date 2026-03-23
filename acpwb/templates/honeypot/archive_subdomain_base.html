@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="archive-era-wrapper {{ year_data.layout_class }}" style="
+    --era-bg: {{ year_data.bg }};
+    --era-text: {{ year_data.text_color }};
+    --era-accent: {{ year_data.accent }};
+    --era-accent2: {{ year_data.accent2 }};
+    --era-font-body: {{ year_data.font_body }};
+    --era-font-head: {{ year_data.font_head }};
+    background: {{ year_data.bg }};
+    color: {{ year_data.text_color }};
+    font-family: {{ year_data.font_body }}, sans-serif;
+    min-height: 60vh;
+">
+{% block era_content %}{% endblock %}
+{% include "honeypot/partials/_archive_year_footer.html" %}
+</div>
+{% endblock %}

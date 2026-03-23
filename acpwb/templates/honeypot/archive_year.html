@@ -56,11 +56,11 @@
             <h6 class="card-title mb-3">{{ year }} Navigation</h6>
             <ul class="list-unstyled mb-0" style="font-size:.82rem">
               {% if prev_year >= 1985 %}
-              <li class="mb-2"><a href="/archive/{{ prev_year }}/" style="color:var(--muted)">&larr; {{ prev_year }}</a></li>
+              <li class="mb-2"><a href="https://archives-{{ prev_year }}.acpwb.com/" style="color:var(--muted)">&larr; {{ prev_year }}</a></li>
               {% endif %}
               <li class="mb-2"><a href="/archive/" style="color:var(--navy)">All Years</a></li>
               {% if next_year <= 2024 %}
-              <li class="mb-2"><a href="/archive/{{ next_year }}/" style="color:var(--gold);font-weight:700">{{ next_year }} &rarr;</a></li>
+              <li class="mb-2"><a href="https://archives-{{ next_year }}.acpwb.com/" style="color:var(--gold);font-weight:700">{{ next_year }} &rarr;</a></li>
               {% endif %}
             </ul>
           </div>
@@ -68,7 +68,7 @@
             <h6 class="card-title mb-3">Browse by Year</h6>
             <div style="display:flex;flex-wrap:wrap;gap:.35rem">
               {% for y in archive_years %}
-              <a href="/archive/{{ y }}/" style="font-size:.72rem;padding:.2rem .45rem;background:#f4f6f9;border:1px solid var(--border);color:var(--navy);text-decoration:none{% if y == year %};font-weight:800;border-color:var(--gold){% endif %}">{{ y }}</a>
+              <a href="https://archives-{{ y }}.acpwb.com/" style="font-size:.72rem;padding:.2rem .45rem;background:#f4f6f9;border:1px solid var(--border);color:var(--navy);text-decoration:none{% if y == year %};font-weight:800;border-color:var(--gold){% endif %}">{{ y }}</a>
               {% endfor %}
             </div>
           </div>

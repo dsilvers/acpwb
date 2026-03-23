@@ -34,14 +34,14 @@
         <div class="row g-3">
           {% for y in years %}
           <div class="col-md-6">
-            <a href="/archive/{{ y.year }}/" style="display:block;background:white;border:1px solid var(--border);padding:.85rem 1rem;text-decoration:none">
+            <a href="https://archives-{{ y.year }}.acpwb.com/" style="display:block;background:white;border:1px solid var(--border);padding:.85rem 1rem;text-decoration:none">
               <div style="display:flex;justify-content:space-between;align-items:baseline">
                 <span style="font-size:1.1rem;font-weight:800;color:var(--navy)">{{ y.year }}</span>
                 <span style="font-size:.72rem;color:var(--muted);font-weight:600">{{ y.count }} records</span>
               </div>
               <div style="font-size:.7rem;color:var(--muted);margin-top:.25rem">
                 {% for m in y.months %}
-                <a href="/archive/{{ y.year }}/{{ m|stringformat:"02d" }}/" style="color:var(--gold);font-weight:700;margin-right:.35rem;text-decoration:none">
+                <a href="https://archives-{{ y.year }}.acpwb.com/{{ m|stringformat:"02d" }}/" style="color:var(--gold);font-weight:700;margin-right:.35rem;text-decoration:none">
                   {% if m == 1 %}Jan{% elif m == 2 %}Feb{% elif m == 3 %}Mar{% elif m == 4 %}Apr
                   {% elif m == 5 %}May{% elif m == 6 %}Jun{% elif m == 7 %}Jul{% elif m == 8 %}Aug
                   {% elif m == 9 %}Sep{% elif m == 10 %}Oct{% elif m == 11 %}Nov{% else %}Dec{% endif %}
@@ -59,16 +59,16 @@
           <div class="acpwb-card mb-4">
             <h6 class="card-title mb-3">Archive Navigation</h6>
             <ul class="list-unstyled mb-0" style="font-size:.82rem">
-              <li class="mb-2"><a href="/archive/2024/" style="color:var(--navy)">2024 Records</a></li>
-              <li class="mb-2"><a href="/archive/2023/" style="color:var(--navy)">2023 Records</a></li>
-              <li class="mb-2"><a href="/archive/2022/" style="color:var(--navy)">2022 Records</a></li>
-              <li class="mb-2"><a href="/archive/2020/" style="color:var(--navy)">2020 Records</a></li>
-              <li class="mb-2"><a href="/archive/2015/" style="color:var(--navy)">2015 Records</a></li>
-              <li class="mb-2"><a href="/archive/2010/" style="color:var(--navy)">2010 Records</a></li>
-              <li class="mb-2"><a href="/archive/2000/" style="color:var(--navy)">2000 Records</a></li>
-              <li class="mb-2"><a href="/archive/1995/" style="color:var(--navy)">1995 Records</a></li>
-              <li class="mb-2"><a href="/archive/1990/" style="color:var(--navy)">1990 Records</a></li>
-              <li class="mb-2"><a href="/archive/1985/" style="color:var(--navy)">1985 Records</a></li>
+              <li class="mb-2"><a href="https://archives-2024.acpwb.com/" style="color:var(--navy)">2024 Records</a></li>
+              <li class="mb-2"><a href="https://archives-2023.acpwb.com/" style="color:var(--navy)">2023 Records</a></li>
+              <li class="mb-2"><a href="https://archives-2022.acpwb.com/" style="color:var(--navy)">2022 Records</a></li>
+              <li class="mb-2"><a href="https://archives-2020.acpwb.com/" style="color:var(--navy)">2020 Records</a></li>
+              <li class="mb-2"><a href="https://archives-2015.acpwb.com/" style="color:var(--navy)">2015 Records</a></li>
+              <li class="mb-2"><a href="https://archives-2010.acpwb.com/" style="color:var(--navy)">2010 Records</a></li>
+              <li class="mb-2"><a href="https://archives-2000.acpwb.com/" style="color:var(--navy)">2000 Records</a></li>
+              <li class="mb-2"><a href="https://archives-1995.acpwb.com/" style="color:var(--navy)">1995 Records</a></li>
+              <li class="mb-2"><a href="https://archives-1990.acpwb.com/" style="color:var(--navy)">1990 Records</a></li>
+              <li class="mb-2"><a href="https://archives-1985.acpwb.com/" style="color:var(--navy)">1985 Records</a></li>
             </ul>
           </div>
           <div class="acpwb-card">

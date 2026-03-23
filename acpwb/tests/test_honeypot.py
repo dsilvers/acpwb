@@ -5,17 +5,26 @@ from apps.honeypot.wiki_generator import generate_wiki_page
 
 
 # ── Archive trap ───────────────────────────────────────────────────────────────
+# /archive/<year>/... now 302-redirects to archives-YYYY.acpwb.com.
+# Tests use the ?__year=YYYY DEBUG shortcut to exercise the trap views directly.
+
+@pytest.mark.django_db
+def test_archive_redirects_to_subdomain(client):
+    response = client.get('/archive/2024/3/15/some-article/')
+    assert response.status_code == 302
+    assert 'archives-2024.acpwb.com' in response['Location']
+
 
 @pytest.mark.django_db
 def test_archive_logs_visit(client):
     assert ArchiveVisit.objects.count() == 0
-    client.get('/archive/2024/3/15/some-article/')
+    client.get('/3/15/some-article/?__year=2024')
     assert ArchiveVisit.objects.count() == 1
 
 
 @pytest.mark.django_db
 def test_archive_logs_depth(client):
-    client.get('/archive/2024/3/15/level1/level2/level3/')
+    client.get('/3/15/level1/level2/level3/?__year=2024')
     visit = ArchiveVisit.objects.first()
     assert visit.depth >= 2
 
@@ -23,9 +32,9 @@ def test_archive_logs_depth(client):
 @pytest.mark.django_db
 def test_archive_never_404(client):
     for path in [
-        '/archive/2024/1/1/x/',
-        '/archive/1999/12/31/a/b/c/d/e/',
-        '/archive/2030/6/15/very/deep/nested/path/here/',
+        '/1/1/x/?__year=2024',
+        '/12/31/a/b/c/d/e/?__year=1999',
+        '/6/15/very/deep/nested/path/here/?__year=2020',
     ]:
         response = client.get(path)
         assert response.status_code == 200, f"Expected 200 for {path}"
@@ -33,17 +42,17 @@ def test_archive_never_404(client):
 
 @pytest.mark.django_db
 def test_archive_has_continue_reading_link(client):
-    response = client.get('/archive/2024/3/15/article/')
+    response = client.get('/3/15/article/?__year=2024')
     content = response.content.decode()
     assert 'Continue Reading' in content or 'continue' in content.lower()
 
 
 @pytest.mark.django_db
 def test_archive_has_related_links(client):
-    response = client.get('/archive/2024/3/15/article/')
+    response = client.get('/3/15/article/?__year=2024')
     content = response.content.decode()
-    # Should have multiple archive links
-    assert content.count('/archive/') >= 3
+    # On subdomain, related links go to archives-YYYY.acpwb.com
+    assert 'archives-' in content and '.acpwb.com' in content
 
 
 # ── Wiki trap ──────────────────────────────────────────────────────────────────

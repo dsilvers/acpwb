@@ -38,7 +38,7 @@ docker compose exec web python manage.py collectstatic --noinput
 
 | App | Purpose |
 |-----|---------|
-| `apps/core` | `BotTrackingMiddleware`, context processors, `{% avatar_card %}` and `{% headshot_or_avatar %}` template tags, staff dashboard views |
+| `apps/core` | `BotTrackingMiddleware`, `SubdomainMiddleware`, context processors, `{% avatar_card %}` and `{% headshot_or_avatar %}` template tags, staff dashboard views |
 | `apps/public` | Home, Careers, Mission, Partners, Privacy + `Fortune500Company` model |
 | `apps/people` | Our People honeypot — generates 12 employees per load, logs visits |
 | `apps/projects` | Infinite project list (PoW gated) + project detail |
@@ -68,7 +68,9 @@ Every page injects:
 - **Garbage JSON-LD** — fake `schema.org/Corporation` structured data with false CC license claim and watermark token
 
 Dedicated traps:
-- `/archive/<year>/<month>/<day>/<path:slug>/` — infinite recursive archive, exponential link branching
+- `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/` — per-year archive subdomain (1985–2024), infinite recursive, exponential link branching; each year has era theme, CEO letter, distinct typography; routed via `SubdomainMiddleware` → `apps.honeypot.archive_subdomain_urls`
+- `/archive/<year>/...` — 302 redirects to `archives-YYYY.acpwb.com/...`; CSV export patterns served before redirects
+- `/archive/` — main-domain index; year cards link to subdomains
 - `/wiki/<slug>/` — subtly wrong watermarked facts (60+ topics, interconnected graph)
 - `/reports/` — fake research archive 1993–present; infinite scroll; watermarked CSVs (300–800 rows real data) and PDF-style documents
 - `/reports/<slug>/download.csv` — real downloadable CSV with per-slug watermark token in every row
@@ -86,7 +88,7 @@ Dedicated traps:
 - `/internal/salary-database/` — salary band table by job family + level; Export CSV
 - `/internal/acquisition-targets/` — M&A pipeline table with deal stages; Export CSV
 - `/internal/litigation-hold/` — legal hold inventory (HTML only, no CSV export)
-- `/archive/<year>/<month>/<day>/<path:slug>/export.csv` — watermarked CSV for archive entry (200–500 rows); logged as `archive`
+- `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/export.csv` — watermarked CSV for archive entry (200–500 rows); logged as `archive`
 - `/feeds/archive.xml` — Atom feed, 20 entries/page, infinite via `?page=N`; logged as `well_known`
 - `/feeds/reports.xml` — RSS 2.0 feed of reports, 10/page, infinite; logged as `well_known`
 - `/api/v1/openapi.json` — valid OpenAPI 3.0.3 spec with 20 fake endpoints, watermarked; logged as `api`
@@ -198,6 +200,32 @@ All models registered with useful `list_display`, `search_fields`, and `list_fil
 - **`HEADSHOT_DIR` uses `parents[3]`** — the tag file is 3 levels deep from the Django project root (`apps/core/templatetags/`), so `parents[3]` = project root both locally and in the Docker container (`/app`)
 - **Static files via bind mount** — `./acpwb/staticfiles` bind-mounted in Docker so host nginx can serve directly from `/home/dan/acpwb.com/acpwb/staticfiles/`
 - **Docker nginx on port 8001** — `127.0.0.1:8001:80`, host nginx proxies to it
+- **SubdomainMiddleware runs before CSRF** — `apps.core.subdomain_middleware.SubdomainMiddleware` sets `request.urlconf = 'apps.honeypot.archive_subdomain_urls'` for `archives-YYYY.acpwb.com` and `archives-YYYY.acpwb.example`; `archive_subdomain_urls.py` includes `config.urls` at the end so `{% url 'home' %}` etc. still resolve in `base.html`
+- **`?__year=YYYY` DEBUG shortcut** — when `DEBUG=True`, any request with `?__year=YYYY` activates archive subdomain mode without DNS setup; `pytest.ini` has `django_debug_mode = true` so the test suite can use this shortcut
+- **Local dev domain is `acpwb.example`** — use dnsmasq with `address=/.acpwb.example/127.0.0.1` for browser testing of subdomains; the middleware recognises `archives-YYYY.acpwb.example` the same way as `.acpwb.com`; unknown `*.acpwb.example` subdomains redirect to `https://acpwb.example/`
+- **Wildcard TLS cert required for production** — archive subdomains need `*.acpwb.com`; use `certbot-dns-cloudflare` with Cloudflare API token (DNS-01 challenge)
+
+---
+
+## Local Subdomain Testing
+
+```bash
+# Zero-setup (DEBUG=True): ?__year=YYYY shortcut
+curl "http://localhost:8001/?__year=2020"          # year landing page
+curl "http://localhost:8001/03/15/slug/?__year=2020"  # archive trap
+
+# dnsmasq + acpwb.example (full browser testing)
+brew install dnsmasq
+echo "address=/.acpwb.example/127.0.0.1" >> $(brew --prefix)/etc/dnsmasq.conf
+sudo brew services start dnsmasq
+sudo mkdir -p /etc/resolver && echo "nameserver 127.0.0.1" | sudo tee /etc/resolver/acpwb.example
+# Add to .env: DJANGO_ALLOWED_HOSTS=.acpwb.com,.acpwb.example,localhost,127.0.0.1
+# Then: http://archives-2020.acpwb.example:8001/
+
+# curl with Host header (no DNS setup)
+curl -H "Host: archives-2020.acpwb.example" http://localhost:8001/
+curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/  # → 302 to acpwb.example
+```
 
 ---
 
@@ -220,6 +248,6 @@ docker compose exec web pytest -v       # verbose
 docker compose exec web pytest tests/test_bot_classify.py  # specific file
 ```
 
-- Config: `acpwb/pytest.ini` — `DJANGO_SETTINGS_MODULE = config.settings.local`
+- Config: `acpwb/pytest.ini` — `DJANGO_SETTINGS_MODULE = config.settings.local`, `django_debug_mode = true` (required for `?__year=YYYY` subdomain shortcut in archive tests)
 - Test files: `acpwb/tests/test_*.py` (~11 files, ~250 tests)
 - Fixtures: `acpwb/tests/conftest.py` — provides `client`, `bot_client`, `staff_client`, `mailgun_post`

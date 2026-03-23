@@ -1,0 +1,32 @@
+<div style="background:var(--navy,#0d1b2a);color:rgba(255,255,255,.85);padding:.9rem 0;margin-top:3rem;border-top:3px solid var(--era-accent,var(--gold,#c8a951))">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+
+      <!-- Label -->
+      <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;white-space:nowrap;color:var(--era-accent,var(--gold,#c8a951))">
+        ACPWB Institutional Archive
+      </div>
+
+      <!-- Year badges (scrollable row) -->
+      <div style="flex:1;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:.2rem 0">
+        <div style="display:flex;gap:.3rem;white-space:nowrap;min-width:max-content">
+          {% for y in all_years %}
+          <a href="https://archives-{{ y }}.acpwb.com/"
+             style="display:inline-block;font-size:.65rem;padding:.2rem .5rem;text-decoration:none;border:1px solid rgba(255,255,255,.2);
+             {% if y == year %}background:var(--era-accent,var(--gold,#c8a951));color:#0d1b2a;font-weight:800;border-color:transparent{% else %}color:rgba(255,255,255,.6){% endif %}">
+            {{ y }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Return link -->
+      <div style="white-space:nowrap">
+        <a href="/archive/" style="font-size:.72rem;color:rgba(255,255,255,.55);text-decoration:none">
+          &larr; Archive Index
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

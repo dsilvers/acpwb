@@ -11,7 +11,7 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 ### Wastes Compute
 
 - **Proof-of-Work gate on `/projects/`** — every page load requires solving a SHA-256 PoW challenge (~32 hash iterations). A human browser completes it in under a second. A bot scraping thousands of pages pays that cost on every single one, with a mandatory challenge-response round trip before content is served.
-- **Infinite archive at `/archive/<year>/<month>/<day>/<path:slug>/`** — never returns a 404. Every response links one level deeper plus five sideways branches. A crawler following all links enters an exponentially expanding tree with no exit. Depth is logged.
+- **Per-year archive subdomains at `archives-YYYY.acpwb.com`** — each year gets its own subdomain with a distinct era visual theme, CEO letter, and typography. Never returns a 404. Every response links one level deeper plus five sideways branches. A crawler following all links enters an exponentially expanding tree with no exit. Depth is logged. Old `/archive/<year>/...` URLs 302 to the subdomain.
 - **Infinite project list at `/projects/`** — deterministic infinite pagination. Page 999 returns content. Page 9,999,999 returns content. There is no last page.
 - **Infinite reports archive at `/reports/`** — endless fake compensation surveys, ESG frameworks, and workforce analytics reports going back to 1993, with realistic gaps between years. JavaScript infinite scroll loads 12 more on every scroll, forever.
 
@@ -56,8 +56,10 @@ Trap URLs linked: `/internal/portal/`, `/employees/export/`, `/admin-panel/login
 #### Fake Developer Comment (`templates/base.html`, bottom of `<body>`)
 An HTML comment formatted to look like a forgotten build artifact — version tag, `@deprecated` annotation, file paths. Scanners that harvest URLs from HTML comments (a common recon technique) will find and follow the trap URLs. The comment reads like an accidental disclosure rather than a deliberate lure.
 
-#### Infinite Archive (`apps/honeypot/views.py` → `archive_trap`)
-`/archive/<year>/<month>/<day>/<path:slug>/` accepts paths of arbitrary depth via Django's `<path:>` converter and never returns a 404. Every response includes a "Continue Reading" link one level deeper, plus five "Related Archive" links branching sideways. A crawler following all links gets trapped in an exponentially expanding tree. Each visit is logged to `ArchiveVisit` with a depth counter.
+#### Per-Year Archive Subdomains (`apps/honeypot/views.py`, `apps/core/subdomain_middleware.py`)
+Each year 1985–2024 lives at its own subdomain: `archives-YYYY.acpwb.com`. Each subdomain has a distinct era visual theme (10 eras from "The Founding Era" in sepia tones to "The AI Shift" in deep violet), a CEO letter referencing real-world events for that year, and era-specific typography. `SubdomainMiddleware` detects `archives-YYYY.acpwb.com` via regex, sets `request.archive_year` and `request.urlconf`, and routes to `apps.honeypot.archive_subdomain_urls`.
+
+Paths accept arbitrary depth via Django's `<path:>` converter and never 404. Every response includes a "Continue Reading" link one level deeper plus five sideways branches. Old `/archive/<year>/...` URLs redirect 302 to the subdomain. The archive index at `/archive/` stays on the main domain and links to each year's subdomain.
 
 #### Fake robots.txt (`/.well-known/robots.txt`)
 Served by Django (nginx proxies `/.well-known/` through rather than serving statically). Uses reverse psychology: `Disallow` entries point at additional honeypot content. `Crawl-delay: 0` encourages rapid crawling. A `Sitemap:` directive points at `/sitemap-honeypot.xml` (another trap). Bots that respect `Disallow` skip real content; bots that ignore it follow the traps.
@@ -174,7 +176,9 @@ Django admin is at `http://localhost/django-admin/`
 
 | URL | Type | Description |
 |-----|------|-------------|
-| `/archive/<year>/<month>/<day>/<path:slug>/` | Structural | Infinite recursive archive, never 404s |
+| `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/` | Structural | Per-year archive subdomain (1985–2024), never 404s |
+| `/archive/<year>/...` | Structural | 302 redirect to `archives-YYYY.acpwb.com` |
+| `/archive/` | Structural | Year index — links to each year's subdomain |
 | `/wiki/<slug>/` | Semantic | Subtly wrong watermarked "facts" |
 | `/reports/` | Semantic | Fake research archive with poisoned CSVs and documents |
 | `/reports/<slug>/download.csv` | Semantic | Real downloadable CSVs with watermarked garbage data |
@@ -256,6 +260,27 @@ export default {
 
 ### First-time SSL setup
 
+The archive subdomains (`archives-YYYY.acpwb.com`) require a **wildcard TLS certificate**. Wildcard certs require DNS-01 challenge — use the Cloudflare certbot plugin since the domain is on Cloudflare:
+
+```bash
+pip install certbot-dns-cloudflare
+
+# Create Cloudflare credentials file
+cat > /etc/letsencrypt/cloudflare.ini << EOF
+dns_cloudflare_api_token = YOUR_CF_API_TOKEN
+EOF
+chmod 600 /etc/letsencrypt/cloudflare.ini
+
+# Issue wildcard cert covering acpwb.com + *.acpwb.com
+certbot certonly \
+  --dns-cloudflare \
+  --dns-cloudflare-credentials /etc/letsencrypt/cloudflare.ini \
+  -d acpwb.com \
+  -d '*.acpwb.com'
+```
+
+If Cloudflare proxies the subdomains (orange cloud), the origin cert is only needed for "Full (strict)" SSL mode — Cloudflare provides the public certificate to end users. Renewal: `certbot renew` (same cron/systemd timer as before).
+
 Nginx can't start with the SSL config until the certificate exists. Use the bootstrap config first:
 
 ```bash
@@ -264,9 +289,7 @@ sudo cp nginx/acpwb.com.bootstrap /etc/nginx/sites-available/acpwb.com
 sudo ln -s /etc/nginx/sites-available/acpwb.com /etc/nginx/sites-enabled/acpwb.com
 sudo nginx -t && sudo systemctl reload nginx
 
-sudo certbot certonly --webroot -w /var/www/certbot -d acpwb.com -d www.acpwb.com
-
-# Swap in the full SSL config
+# After wildcard cert is issued:
 sudo cp nginx/acpwb.com /etc/nginx/sites-available/acpwb.com
 sudo nginx -t && sudo systemctl reload nginx
 ```
@@ -293,6 +316,56 @@ docker compose exec web python manage.py collectstatic --noinput
 ### Docker port
 
 The Docker nginx container binds to `127.0.0.1:8001` only. Host nginx proxies to it. The `/.well-known/` paths are proxied to Django (honeypot endpoints live there).
+
+---
+
+## Local Subdomain Testing
+
+The archive subdomains (`archives-YYYY.acpwb.com`) need special setup to test locally. Three options:
+
+### Option 1: `?__year=YYYY` query param (zero setup)
+
+When `DEBUG=True`, any request with `?__year=YYYY` activates subdomain mode for that year without any DNS configuration:
+
+```
+http://localhost:8001/?__year=2020           → year landing page for 2020
+http://localhost:8001/03/15/slug/?__year=2020 → archive trap for March 15, 2020
+```
+
+This is how the test suite exercises subdomain views.
+
+### Option 2: dnsmasq wildcard DNS + `acpwb.example` (full browser testing)
+
+Uses `acpwb.example` as the local mirror of `acpwb.com` so you get real subdomain URL behavior:
+
+```bash
+brew install dnsmasq
+
+# Route all *.acpwb.example to localhost
+echo "address=/.acpwb.example/127.0.0.1" >> $(brew --prefix)/etc/dnsmasq.conf
+sudo brew services start dnsmasq
+
+# Tell macOS to use dnsmasq for .acpwb.example only
+sudo mkdir -p /etc/resolver
+echo "nameserver 127.0.0.1" | sudo tee /etc/resolver/acpwb.example
+```
+
+Then add `acpwb.example` to your `.env`:
+```
+DJANGO_ALLOWED_HOSTS=.acpwb.com,.acpwb.example,localhost,127.0.0.1
+```
+
+After this, `http://archives-2020.acpwb.example:8001/` works in a browser. The middleware recognises `archives-YYYY.acpwb.example` the same way it recognises `archives-YYYY.acpwb.com`. Unknown `*.acpwb.example` subdomains redirect to `acpwb.example`.
+
+### Option 3: curl with Host header (no DNS setup)
+
+```bash
+curl -H "Host: archives-2020.acpwb.example" http://localhost:8001/
+curl -H "Host: archives-2020.acpwb.example" http://localhost:8001/03/15/some-slug/
+# Unknown subdomain redirect:
+curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/
+# → 302 Location: https://acpwb.example/
+```
 
 ---
 

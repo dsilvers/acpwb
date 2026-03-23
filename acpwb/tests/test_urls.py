@@ -92,15 +92,37 @@ def test_fake_api_200(client):
 
 
 @pytest.mark.django_db
-def test_archive_any_path(client):
-    response = client.get('/archive/2024/3/15/some-slug/')
+def test_archive_index_200(client):
+    response = client.get('/archive/')
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
-def test_archive_deep_path(client):
+def test_archive_year_redirects_to_subdomain(client):
+    response = client.get('/archive/2024/')
+    assert response.status_code == 302
+    assert response['Location'] == 'https://archives-2024.acpwb.com/'
+
+
+@pytest.mark.django_db
+def test_archive_month_redirects_to_subdomain(client):
+    response = client.get('/archive/2020/6/')
+    assert response.status_code == 302
+    assert response['Location'] == 'https://archives-2020.acpwb.com/06/'
+
+
+@pytest.mark.django_db
+def test_archive_trap_redirects_to_subdomain(client):
+    response = client.get('/archive/2024/3/15/some-slug/')
+    assert response.status_code == 302
+    assert 'archives-2024.acpwb.com' in response['Location']
+
+
+@pytest.mark.django_db
+def test_archive_deep_path_redirects_to_subdomain(client):
     response = client.get('/archive/2023/1/1/a/b/c/d/e/f/')
-    assert response.status_code == 200
+    assert response.status_code == 302
+    assert 'archives-2023.acpwb.com' in response['Location']
 
 
 @pytest.mark.django_db

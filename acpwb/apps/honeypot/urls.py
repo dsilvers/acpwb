@@ -2,16 +2,22 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # Archive labyrinth — both slash and non-slash variants to avoid 301 churn
+    # Archive index stays on main domain
     path('archive/', views.archive_index, name='archive-index'),
-    path('archive/<int:year>/', views.archive_year, name='archive-year'),
-    path('archive/<int:year>', views.archive_year),
-    path('archive/<int:year>/<int:month>/', views.archive_month, name='archive-month'),
-    path('archive/<int:year>/<int:month>', views.archive_month),
-    path('archive/<int:year>/<int:month>/<int:day>/', views.archive_trap, name='archive-trap-base', kwargs={'slug': ''}),
-    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/', views.archive_trap, name='archive-trap'),
-    path('archive/<int:year>/<int:month>/<int:day>', views.archive_trap, kwargs={'slug': ''}),
-    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>', views.archive_trap),
+
+    # Archive CSV exports served directly (must be before the generic redirects below)
+    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/export.csv', views.archive_export_csv, name='archive-export-csv'),
+    path('archive/<int:year>/<int:month>/<int:day>/export.csv', views.archive_export_csv, kwargs={'slug': ''}, name='archive-export-csv-base'),
+
+    # 302 redirects: /archive/<year>/... → archives-YYYY.acpwb.com/...
+    path('archive/<int:year>/', views.archive_year_redirect, name='archive-year'),
+    path('archive/<int:year>', views.archive_year_redirect),
+    path('archive/<int:year>/<int:month>/', views.archive_month_redirect, name='archive-month'),
+    path('archive/<int:year>/<int:month>', views.archive_month_redirect),
+    path('archive/<int:year>/<int:month>/<int:day>/', views.archive_trap_redirect, name='archive-trap-base', kwargs={'slug': ''}),
+    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/', views.archive_trap_redirect, name='archive-trap'),
+    path('archive/<int:year>/<int:month>/<int:day>', views.archive_trap_redirect, kwargs={'slug': ''}),
+    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>', views.archive_trap_redirect),
 
     # Wiki trap
     path('wiki/<slug:slug>/', views.wiki_page, name='wiki-page'),
@@ -55,10 +61,6 @@ urlpatterns = [
     path('internal/acquisition-targets/', views.internal_acquisition_targets, name='internal-acq'),
     path('internal/acquisition-targets/export.csv', views.internal_acquisition_targets_csv, name='internal-acq-csv'),
     path('internal/litigation-hold/', views.internal_litigation_hold, name='internal-lit-hold'),
-
-    # Archive CSV export
-    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/export.csv', views.archive_export_csv, name='archive-export-csv'),
-    path('archive/<int:year>/<int:month>/<int:day>/export.csv', views.archive_export_csv, kwargs={'slug': ''}, name='archive-export-csv-base'),
 
     # RSS / Atom feeds
     path('feeds/', views.feeds_index, name='feeds-index'),

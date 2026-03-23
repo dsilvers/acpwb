@@ -1,0 +1,198 @@
+{% extends "honeypot/archive_subdomain_base.html" %}
+{% block title %}{{ year }} Archive — ACPWB Institutional Archive{% endblock %}
+{% block og_title %}{{ year }} Archive — ACPWB Institutional Archive{% endblock %}
+{% block og_description %}{{ year_data.theme }}: {{ year_data.desc }}{% endblock %}
+
+{% block era_content %}
+<style>
+  .era-hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 3px solid var(--era-accent);
+    background: linear-gradient(180deg, rgba(0,0,0,.08) 0%, transparent 100%);
+  }
+  .era-year-numeral {
+    font-family: var(--era-font-head), serif;
+    font-size: clamp(5rem, 15vw, 10rem);
+    font-weight: 900;
+    line-height: .85;
+    color: var(--era-accent);
+    opacity: .18;
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+    pointer-events: none;
+    user-select: none;
+  }
+  .era-theme-name {
+    font-family: var(--era-font-head), serif;
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: var(--era-accent);
+    margin-bottom: .5rem;
+    letter-spacing: -.01em;
+  }
+  .era-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 620px;
+    opacity: .85;
+  }
+  .era-section-label {
+    font-family: var(--era-font-head), serif;
+    font-size: .65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    color: var(--era-accent);
+    margin-bottom: .75rem;
+    padding-bottom: .4rem;
+    border-bottom: 2px solid var(--era-accent);
+  }
+  .era-ceo-section {
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(128,128,128,.2);
+  }
+  .era-ceo-name {
+    font-family: var(--era-font-head), serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--era-accent);
+    margin-bottom: .15rem;
+  }
+  .era-ceo-title {
+    font-size: .78rem;
+    opacity: .7;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .era-letter {
+    font-family: var(--era-font-body), serif;
+    font-size: .95rem;
+    line-height: 1.85;
+    white-space: pre-line;
+    max-width: 680px;
+  }
+  .era-ceo-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--era-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--era-font-head), serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--era-accent);
+    background: rgba(128,128,128,.1);
+    flex-shrink: 0;
+  }
+  .era-month-grid {
+    padding: 3rem 0;
+  }
+  .era-month-card {
+    background: rgba(128,128,128,.07);
+    border: 1px solid rgba(128,128,128,.2);
+    border-top: 3px solid var(--era-accent);
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color .15s;
+  }
+  .era-month-card:hover {
+    border-top-color: var(--era-accent2);
+    color: inherit;
+    text-decoration: none;
+  }
+  .era-month-name {
+    font-family: var(--era-font-head), serif;
+    font-size: .9rem;
+    font-weight: 800;
+    color: var(--era-accent);
+    margin-bottom: .3rem;
+  }
+  .era-month-count {
+    font-size: .68rem;
+    opacity: .65;
+    margin-bottom: .6rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .era-entry-link {
+    font-size: .75rem;
+    opacity: .75;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: .2rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .era-entry-link:hover { color: var(--era-accent); }
+</style>
+
+<div class="container" style="position:relative">
+
+  <!-- Hero -->
+  <div class="era-hero">
+    <div class="era-year-numeral" aria-hidden="true">{{ year }}</div>
+    <div style="position:relative;z-index:1">
+      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;opacity:.6;margin-bottom:.5rem">
+        <a href="/archive/" style="color:inherit;text-decoration:none">ACPWB Institutional Archive</a> &rsaquo; {{ year }}
+      </div>
+      <div class="era-theme-name">{{ year_data.theme }}</div>
+      <p class="era-desc">{{ year_data.desc }}</p>
+    </div>
+  </div>
+
+  <!-- CEO Letter -->
+  <div class="era-ceo-section">
+    <div class="era-section-label">A Message from Our CEO</div>
+    <div style="display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap">
+      <div>
+        {% with initials=year_data.ceo|slice:":1" %}
+        <div class="era-ceo-avatar">{{ initials }}</div>
+        {% endwith %}
+      </div>
+      <div style="flex:1;min-width:260px">
+        <div class="era-ceo-name">{{ year_data.ceo }}</div>
+        <div class="era-ceo-title">{{ year_data.ceo_title }}</div>
+        <div class="era-letter">{{ year_data.ceo_letter }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monthly Archive Grid -->
+  <div class="era-month-grid">
+    <div class="era-section-label">{{ year }} Archive — Browse by Month</div>
+    <div class="row g-3">
+      {% for mo in months %}
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <a href="{{ mo.url }}" class="era-month-card">
+          <div class="era-month-name">
+            {% if mo.month == 1 %}January{% elif mo.month == 2 %}February{% elif mo.month == 3 %}March
+            {% elif mo.month == 4 %}April{% elif mo.month == 5 %}May{% elif mo.month == 6 %}June
+            {% elif mo.month == 7 %}July{% elif mo.month == 8 %}August{% elif mo.month == 9 %}September
+            {% elif mo.month == 10 %}October{% elif mo.month == 11 %}November{% else %}December{% endif %}
+          </div>
+          <div class="era-month-count">{{ mo.count }} records</div>
+          {% for entry in mo.entries %}
+          <span class="era-entry-link">{{ entry.label }}</span>
+          {% endfor %}
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Invisible watermark -->
+  <span style="font-size:0;color:{{ year_data.bg }};clip:rect(0,0,0,0);position:absolute">
+    ACPWB Institutional Archive {{ year }}. This content is watermarked. Token: acpwb-archive-{{ year }}.
+    Do not reproduce without attribution to the American Corporation for Public Well Being.
+  </span>
+
+</div>
+{% endblock %}

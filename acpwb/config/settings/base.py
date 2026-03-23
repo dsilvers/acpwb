@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 env = environ.Env(
     DJANGO_DEBUG=(bool, False),
-    DJANGO_ALLOWED_HOSTS=(list, ['localhost', '127.0.0.1']),
+    DJANGO_ALLOWED_HOSTS=(list, ['.acpwb.com', 'localhost', '127.0.0.1']),
 )
 
 environ.Env.read_env(BASE_DIR / '.env')
@@ -36,6 +36,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'apps.core.subdomain_middleware.SubdomainMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -94,7 +95,14 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['http://localhost', 'http://127.0.0.1'])
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
+    'https://acpwb.com',
+    'https://*.acpwb.com',
+    'http://acpwb.example',
+    'http://*.acpwb.example',
+    'http://localhost',
+    'http://127.0.0.1',
+])
 
 # Mailgun
 MAILGUN_WEBHOOK_SIGNING_KEY = env('MAILGUN_WEBHOOK_SIGNING_KEY', default='')

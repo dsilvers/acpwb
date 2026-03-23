@@ -258,6 +258,13 @@ def crawlers(request):
         .order_by('-count')[:20]
     )
 
+    top_hosts = list(
+        qs.exclude(host='')
+        .values('host')
+        .annotate(count=Count('id'))
+        .order_by('-count')[:20]
+    )
+
     daily = _daily_chart(CrawlerVisit.objects.all(), days=60)
 
     context = {
@@ -267,6 +274,7 @@ def crawlers(request):
         'trap_counts': trap_counts,
         'top_ips': top_ips,
         'top_paths': top_paths,
+        'top_hosts': top_hosts,
         'daily': daily,
         'recent': qs.order_by('-timestamp').select_related()[:50],
     }

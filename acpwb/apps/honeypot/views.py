@@ -5,7 +5,7 @@ import json
 import random
 import uuid
 from datetime import datetime as _dt, timedelta as _td
-from django.http import Http404, JsonResponse, HttpResponse
+from django.http import Http404, HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
@@ -1938,20 +1938,28 @@ def archive_subdomain_robots(request):
     return HttpResponse(content, content_type='text/plain')
 
 
+def archive_subdomain_non_archive_redirect(request, rest=''):
+    """Catch-all on archive subdomains: redirect non-archive paths to the main domain.
+
+    Strips ?__year= to avoid redirect loops when the DEBUG shortcut is active.
+    """
+    from urllib.parse import urlencode
+    params = {k: v for k, v in request.GET.items() if k != '__year'}
+    qs = ('?' + urlencode(params)) if params else ''
+    return HttpResponseRedirect(f'https://acpwb.com/{rest}{qs}')
+
+
 # ── Archive Redirect Views ────────────────────────────────────────────────────
 
 def archive_year_redirect(request, year):
-    from django.http import HttpResponseRedirect
     return HttpResponseRedirect(f'https://archives-{year}.acpwb.com/')
 
 
 def archive_month_redirect(request, year, month):
-    from django.http import HttpResponseRedirect
     return HttpResponseRedirect(f'https://archives-{year}.acpwb.com/{month:02d}/')
 
 
 def archive_trap_redirect(request, year, month, day, slug=''):
-    from django.http import HttpResponseRedirect
     tail = f'{slug}/' if slug else ''
     return HttpResponseRedirect(
         f'https://archives-{year}.acpwb.com/{month:02d}/{day:02d}/{tail}'

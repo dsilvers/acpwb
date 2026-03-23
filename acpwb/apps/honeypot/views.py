@@ -7,7 +7,6 @@ import uuid
 from datetime import datetime as _dt, timedelta as _td
 from django.http import Http404, HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
-from django.utils.html import escape, mark_safe
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
@@ -918,34 +917,6 @@ def _cross_year_archive_url(year, month, day, slug):
     """Return an absolute URL to an archive entry on a different year's subdomain."""
     return f'https://archives-{year}.acpwb.com/{month:02d}/{day:02d}/{slug}/'
 
-
-def _inject_cross_year_links(rng, paragraphs, cross_year_urls, probability=0.04):
-    """Wrap random words in each paragraph with links to other-year archive entries.
-
-    Returns a list of mark_safe HTML strings.  Caller must NOT further escape them.
-    Each word is linked with ~probability chance; consecutive links are avoided.
-    """
-    if not cross_year_urls:
-        return [mark_safe(escape(p)) for p in paragraphs]
-
-    result = []
-    for para in paragraphs:
-        words = para.split(' ')
-        out = []
-        prev_linked = False
-        for word in words:
-            if not prev_linked and word and rng.random() < probability:
-                url = escape(rng.choice(cross_year_urls))
-                out.append(
-                    f'<a href="{url}" style="color:inherit;opacity:.8;text-decoration:underline dotted">'
-                    f'{escape(word)}</a>'
-                )
-                prev_linked = True
-            else:
-                out.append(escape(word))
-                prev_linked = False
-        result.append(mark_safe(' '.join(out)))
-    return result
 
 
 _ARCHIVE_YEAR_DATA = {
@@ -2047,7 +2018,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
 
     # Cross-year related archive entries — link to OTHER year subdomains
     cross_year_reports = []
-    for _ in range(rng.randint(5, 8)):
+    for _ in range(rng.randint(1, 5)):
         cy_year = rng.randint(1985, 2024)
         while cy_year == year:
             cy_year = rng.randint(1985, 2024)
@@ -2061,10 +2032,6 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
             'date': f"{cy_year}-{cy_month:02d}-{cy_day:02d}",
             'year': cy_year,
         })
-
-    # Inject ~4% inline cross-year links into paragraph text
-    cross_year_urls = [e['url'] for e in cross_year_reports]
-    content['paragraphs'] = _inject_cross_year_links(rng, content['paragraphs'], cross_year_urls)
 
     yd = _year_data(year)
     context = {

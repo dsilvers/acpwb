@@ -11,7 +11,7 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 ### Wastes Compute
 
 - **Proof-of-Work gate on `/projects/`** — every page load requires solving a SHA-256 PoW challenge (~32 hash iterations). A human browser completes it in under a second. A bot scraping thousands of pages pays that cost on every single one, with a mandatory challenge-response round trip before content is served.
-- **Per-year archive subdomains at `archives-YYYY.acpwb.com`** — each year gets its own subdomain with a distinct era visual theme, CEO letter, and typography. Never returns a 404. Every response links one level deeper plus five sideways branches. A crawler following all links enters an exponentially expanding tree with no exit. Depth is logged. Old `/archive/<year>/...` URLs 302 to the subdomain.
+- **Per-year archive subdomains at `archives-YYYY.acpwb.com`** — each year gets its own subdomain with a distinct era visual theme, CEO letter, and typography. Never returns a 404. Every response links one level deeper plus five sideways branches. Archive trap pages include a "Related Archive Reports — Other Years" section with 1–5 cross-year cards linking to entries on other year subdomains. A crawler following all links enters an exponentially expanding tree with no exit across 40 subdomains. Depth is logged. Old `/archive/<year>/...` URLs 302 to the subdomain.
 - **Infinite project list at `/projects/`** — deterministic infinite pagination. Page 999 returns content. Page 9,999,999 returns content. There is no last page.
 - **Infinite reports archive at `/reports/`** — endless fake compensation surveys, ESG frameworks, and workforce analytics reports going back to 1993, with realistic gaps between years. JavaScript infinite scroll loads 12 more on every scroll, forever.
 
@@ -38,9 +38,9 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 
 ### Tracks Everything
 
-Every trap logs to the database: IP, user agent, path, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load.
+Every trap logs to the database: IP, user agent, path, host/subdomain, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load.
 
-A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, preset and custom date range filters, separate views for crawler visits, archive visits, inbound email, and people/project page visits.
+A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, preset and custom date range filters, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes a "By Host / Subdomain" breakdown panel showing which archive subdomains are being hit and how often.
 
 ---
 
@@ -59,7 +59,9 @@ An HTML comment formatted to look like a forgotten build artifact — version ta
 #### Per-Year Archive Subdomains (`apps/honeypot/views.py`, `apps/core/subdomain_middleware.py`)
 Each year 1985–2024 lives at its own subdomain: `archives-YYYY.acpwb.com`. Each subdomain has a distinct era visual theme (10 eras from "The Founding Era" in sepia tones to "The AI Shift" in deep violet), a CEO letter referencing real-world events for that year, and era-specific typography. `SubdomainMiddleware` detects `archives-YYYY.acpwb.com` via regex, sets `request.archive_year` and `request.urlconf`, and routes to `apps.honeypot.archive_subdomain_urls`.
 
-Paths accept arbitrary depth via Django's `<path:>` converter and never 404. Every response includes a "Continue Reading" link one level deeper plus five sideways branches. Old `/archive/<year>/...` URLs redirect 302 to the subdomain. The archive index at `/archive/` stays on the main domain and links to each year's subdomain.
+Paths accept arbitrary depth via Django's `<path:>` converter and never 404. Every response includes a "Continue Reading" link one level deeper plus five sideways branches. Archive trap pages additionally include a **"Related Archive Reports — Other Years" section** — 1–5 cards with year badge, title, and date, each linking to a different year's subdomain. Gives crawlers a structured cross-subdomain discovery path.
+
+Old `/archive/<year>/...` URLs redirect 302 to the subdomain. The archive index at `/archive/` stays on the main domain and links to each year's subdomain. Non-archive URLs visited on a subdomain (e.g. `/mission/`, `/reports/`) redirect to the main domain.
 
 #### Fake robots.txt (`/.well-known/robots.txt`)
 Served by Django (nginx proxies `/.well-known/` through rather than serving statically). Uses reverse psychology: `Disallow` entries point at additional honeypot content. `Crawl-delay: 0` encourages rapid crawling. A `Sitemap:` directive points at `/sitemap-honeypot.xml` (another trap). Bots that respect `Disallow` skip real content; bots that ignore it follow the traps.

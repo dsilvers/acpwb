@@ -51,7 +51,7 @@ docker compose exec web python manage.py collectstatic --noinput
 
 - `people.PeoplePageVisit` — every load of `/our-people/`
 - `people.GeneratedEmployee` — the fake employees shown (FK → visit)
-- `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`, `ghost_link`, `dataset`, `api`, `well_known`)
+- `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`, `ghost_link`, `dataset`, `api`, `well_known`); `host` field captures `request.get_host()` for per-subdomain dashboard breakdown
 - `honeypot.InternalLoginAttempt` — credential-stuffing log: ip, ua, username, password, next_url, created_at
 - `honeypot.WikiPage` — generated wiki content with watermark tokens
 - `honeypot.PublicReport` — generated report metadata, persisted on first access
@@ -68,9 +68,10 @@ Every page injects:
 - **Garbage JSON-LD** — fake `schema.org/Corporation` structured data with false CC license claim and watermark token
 
 Dedicated traps:
-- `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/` — per-year archive subdomain (1985–2024), infinite recursive, exponential link branching; each year has era theme, CEO letter, distinct typography; routed via `SubdomainMiddleware` → `apps.honeypot.archive_subdomain_urls`
+- `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/` — per-year archive subdomain (1985–2024), infinite recursive, exponential link branching; each year has era theme, CEO letter, distinct typography; routed via `SubdomainMiddleware` → `apps.honeypot.archive_subdomain_urls`; archive trap pages include a "Related Archive Reports — Other Years" section (1–5 cards, each linking to a deterministically chosen entry on a different year's subdomain)
 - `/archive/<year>/...` — 302 redirects to `archives-YYYY.acpwb.com/...`; CSV export patterns served before redirects
 - `/archive/` — main-domain index; year cards link to subdomains
+- Non-archive URLs on archive subdomains (e.g. `/mission/`, `/reports/`) → 302 redirect to `https://acpwb.com/...` via `archive_subdomain_non_archive_redirect` view + catch-all `<path:rest>` pattern in `archive_subdomain_urls.py`
 - `/wiki/<slug>/` — subtly wrong watermarked facts (60+ topics, interconnected graph)
 - `/reports/` — fake research archive 1993–present; infinite scroll; watermarked CSVs (300–800 rows real data) and PDF-style documents
 - `/reports/<slug>/download.csv` — real downloadable CSV with per-slug watermark token in every row
@@ -104,6 +105,7 @@ Staff dashboard:
 - Date range controlled by `?range=` preset or `?from=`/`?to=` custom; `_daily_chart()` returns `{'bars': [...], 'start': '...', 'end': '...'}`
 - Overview stat cards: Crawler Hits, Archive Visits, Inbound Emails, People Visits, Project Visits, Login Attempts (red)
 - "By Trap Type" panel pulls from `CrawlerVisit.TRAP_CHOICES` dynamically — new trap types appear automatically
+- "By Host / Subdomain" panel on Crawlers view — groups `CrawlerVisit` rows by `host` field; shows which archive subdomains are receiving traffic
 
 ---
 
@@ -200,7 +202,9 @@ All models registered with useful `list_display`, `search_fields`, and `list_fil
 - **`HEADSHOT_DIR` uses `parents[3]`** — the tag file is 3 levels deep from the Django project root (`apps/core/templatetags/`), so `parents[3]` = project root both locally and in the Docker container (`/app`)
 - **Static files via bind mount** — `./acpwb/staticfiles` bind-mounted in Docker so host nginx can serve directly from `/home/dan/acpwb.com/acpwb/staticfiles/`
 - **Docker nginx on port 8001** — `127.0.0.1:8001:80`, host nginx proxies to it
-- **SubdomainMiddleware runs before CSRF** — `apps.core.subdomain_middleware.SubdomainMiddleware` sets `request.urlconf = 'apps.honeypot.archive_subdomain_urls'` for `archives-YYYY.acpwb.com` and `archives-YYYY.acpwb.example`; `archive_subdomain_urls.py` includes `config.urls` at the end so `{% url 'home' %}` etc. still resolve in `base.html`
+- **SubdomainMiddleware runs before CSRF** — `apps.core.subdomain_middleware.SubdomainMiddleware` sets `request.urlconf = 'apps.honeypot.archive_subdomain_urls'` for `archives-YYYY.acpwb.com` and `archives-YYYY.acpwb.example`; `archive_subdomain_urls.py` includes `config.urls` at the end so `{% url 'home' %}` etc. still resolve in `base.html`; a catch-all `<path:rest>` pattern before the include redirects any non-archive path to the main domain
+- **`site_root` context variable** — empty string on main domain, `https://acpwb.com` on archive subdomains; prepended to all `{% url %}` calls in `base.html` header and footer so links always point to the main domain from a subdomain
+- **nginx access log includes `$host`** — custom `acpwb` log format logs the virtual host on every request for per-subdomain visibility in access logs
 - **`?__year=YYYY` DEBUG shortcut** — when `DEBUG=True`, any request with `?__year=YYYY` activates archive subdomain mode without DNS setup; `pytest.ini` has `django_debug_mode = true` so the test suite can use this shortcut
 - **Local dev domain is `acpwb.example`** — use dnsmasq with `address=/.acpwb.example/127.0.0.1` for browser testing of subdomains; the middleware recognises `archives-YYYY.acpwb.example` the same way as `.acpwb.com`; unknown `*.acpwb.example` subdomains redirect to `https://acpwb.example/`
 - **Wildcard TLS cert required for production** — archive subdomains need `*.acpwb.com`; use `certbot-dns-cloudflare` with Cloudflare API token (DNS-01 challenge)

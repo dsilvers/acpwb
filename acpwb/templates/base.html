@@ -41,7 +41,7 @@
 
 <nav class="navbar navbar-expand-lg acpwb-navbar" role="navigation" aria-label="Main navigation">
   <div class="container">
-    <a class="acpwb-logo navbar-brand" href="{% url 'home' %}">
+    <a class="acpwb-logo navbar-brand" href="{{ site_root }}{% url 'home' %}">
       <span class="acpwb-logo-line1">AMERICAN</span>
       <span class="acpwb-logo-line2">CORPORATION</span>
       <span class="acpwb-logo-line3">FOR PUBLIC WELL BEING</span>
@@ -51,14 +51,14 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="mainNav">
       <ul class="navbar-nav gap-1">
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'our-people' %}active{% endif %}" href="{% url 'our-people' %}">Our People</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'mission' %}active{% endif %}" href="{% url 'mission' %}">Mission</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'project-list' %}active{% endif %}" href="{% url 'project-list' %}">Projects</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'reports-list' %}active{% endif %}" href="{% url 'reports-list' %}">Reports</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'careers' %}active{% endif %}" href="{% url 'careers' %}">Careers</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'partners' %}active{% endif %}" href="{% url 'partners' %}">Partners</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'our-people' %}active{% endif %}" href="{% url 'our-people' %}">Contact</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{{ site_root }}{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'our-people' %}active{% endif %}" href="{{ site_root }}{% url 'our-people' %}">Our People</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'mission' %}active{% endif %}" href="{{ site_root }}{% url 'mission' %}">Mission</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'project-list' %}active{% endif %}" href="{{ site_root }}{% url 'project-list' %}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'reports-list' %}active{% endif %}" href="{{ site_root }}{% url 'reports-list' %}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'careers' %}active{% endif %}" href="{{ site_root }}{% url 'careers' %}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'partners' %}active{% endif %}" href="{{ site_root }}{% url 'partners' %}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'our-people' %}active{% endif %}" href="{{ site_root }}{% url 'our-people' %}">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -88,30 +88,30 @@
       <div class="col-lg-4">
         <h6 class="text-uppercase text-gold fw-800" style="letter-spacing:.12em;font-size:.75rem">Navigation</h6>
         <ul class="list-unstyled mb-0" style="columns:2">
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'our-people' %}">Our People</a></li>
-          <li><a href="{% url 'mission' %}">Mission</a></li>
-          <li><a href="{% url 'project-list' %}">Projects</a></li>
-          <li><a href="{% url 'reports-list' %}">Reports</a></li>
-          <li><a href="{% url 'careers' %}">Careers</a></li>
-          <li><a href="{% url 'awards' %}">Awards</a></li>
-          <li><a href="{% url 'patents' %}">Patents</a></li>
-          <li><a href="{% url 'partners' %}">Partners</a></li>
-          <li><a href="{% url 'faq' %}">FAQ</a></li>
-          <li><a href="{% url 'privacy' %}">Privacy</a></li>
-          <li><a href="{% url 'do-not-sell' %}">Do Not Sell My Info</a></li>
-          <li><a href="{% url 'accessibility' %}">Accessibility</a></li>
-          <li><a href="{% url 'trademarks' %}">Trademarks</a></li>
-          <li><a href="{% url 'site-map' %}">Site Map</a></li>
+          <li><a href="{{ site_root }}{% url 'home' %}">Home</a></li>
+          <li><a href="{{ site_root }}{% url 'our-people' %}">Our People</a></li>
+          <li><a href="{{ site_root }}{% url 'mission' %}">Mission</a></li>
+          <li><a href="{{ site_root }}{% url 'project-list' %}">Projects</a></li>
+          <li><a href="{{ site_root }}{% url 'reports-list' %}">Reports</a></li>
+          <li><a href="{{ site_root }}{% url 'careers' %}">Careers</a></li>
+          <li><a href="{{ site_root }}{% url 'awards' %}">Awards</a></li>
+          <li><a href="{{ site_root }}{% url 'patents' %}">Patents</a></li>
+          <li><a href="{{ site_root }}{% url 'partners' %}">Partners</a></li>
+          <li><a href="{{ site_root }}{% url 'faq' %}">FAQ</a></li>
+          <li><a href="{{ site_root }}{% url 'privacy' %}">Privacy</a></li>
+          <li><a href="{{ site_root }}{% url 'do-not-sell' %}">Do Not Sell My Info</a></li>
+          <li><a href="{{ site_root }}{% url 'accessibility' %}">Accessibility</a></li>
+          <li><a href="{{ site_root }}{% url 'trademarks' %}">Trademarks</a></li>
+          <li><a href="{{ site_root }}{% url 'site-map' %}">Site Map</a></li>
         </ul>
       </div>
       <div class="col-lg-4">
         <h6 class="text-uppercase text-gold fw-800" style="letter-spacing:.12em;font-size:.75rem">Contact</h6>
         <p class="small mb-1">General Inquiries:<br>
-          <a href="{% url 'our-people' %}">See Our People &rarr;</a>
+          <a href="{{ site_root }}{% url 'our-people' %}">See Our People &rarr;</a>
         </p>
         <p class="small" style="color:rgba(255,255,255,0.4)">
-          All communications are subject to our <a href="{% url 'privacy' %}">Privacy Policy</a> and applicable disclaimers.
+          All communications are subject to our <a href="{{ site_root }}{% url 'privacy' %}">Privacy Policy</a> and applicable disclaimers.
         </p>
       </div>
     </div>
@@ -121,7 +121,7 @@
         &copy; {% now "Y" %} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.
       </p>
       <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
-        <a href="{% url 'privacy' %}">Privacy &amp; Disclaimer</a>
+        <a href="{{ site_root }}{% url 'privacy' %}">Privacy &amp; Disclaimer</a>
       </p>
     </div>
   </div>

@@ -101,6 +101,9 @@ Dedicated traps:
 Staff dashboard:
 - `/acpwb-dashboard/` — requires `is_staff`; overview + sub-views for crawlers, archive, email, page visits
 - Views in `apps/core/dashboard_views.py`, URLs in `apps/core/dashboard_urls.py`
+- All 5 views cache results in Redis (`dashboard:{view}:{preset}`, 90-min TTL); custom date ranges always run live
+- Query logic extracted into `_compute_overview/crawlers/archive/emails/people(dr)` helpers — called by views on cache miss and by `precalc_dashboard` management command
+- `_build_date_range(preset)` — request-free date range builder used by the management command
 - Bot classification via `BOT_PATTERNS` / `classify_ua()` / `classify_ua_group()` in `dashboard_views.py`
 - Date range controlled by `?range=` preset or `?from=`/`?to=` custom; `_daily_chart()` returns `{'bars': [...], 'start': '...', 'end': '...'}`
 - Overview stat cards: Crawler Hits, Archive Visits, Inbound Emails, People Visits, Project Visits, Login Attempts (red)
@@ -237,10 +240,21 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/  # → 302 to acpw
 
 | Command | Flags | Purpose |
 |---------|-------|---------|
+| `precalc_dashboard` | — | Pre-compute all dashboard stats (5 views × 6 presets = 30 Redis keys) with 90-min TTL. Run on a 30-min cron so the dashboard always serves from cache. |
 | `backfill_bot_types` | `--reclassify`, `--dry-run`, `--batch-size` | Backfill `bot_type`/`bot_group` on `CrawlerVisit` rows. Without `--reclassify`: blank rows only. With `--reclassify`: blank + `'Other / Browser'` rows — use after adding new `BOT_PATTERNS`. |
 | `dedupe_crawler_visits` | — | Remove duplicate `CrawlerVisit` rows. |
 | `generate_content_fixture` | — | Generate test fixtures for content. |
 | `export_gen_data` | — | Export data for external image generation. |
+
+### Dashboard Cache Setup (Production)
+
+Add to host crontab to pre-warm Redis every 30 minutes:
+
+```
+*/30 * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py precalc_dashboard >> /var/log/acpwb-precalc.log 2>&1
+```
+
+Cache keys use pattern `dashboard:{view}:{preset}` with a 90-minute TTL. Views serve from cache for all preset ranges; custom date ranges always run live. On a cache miss (e.g. after deploy before first cron run), the view computes live and self-populates the cache.
 
 ---
 

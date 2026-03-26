@@ -884,12 +884,17 @@ def _get_archive_year(request, url_year=None):
 
 
 def _archive_url(request, year, month=None, day=None, slug=None):
-    """Build archive URL — subdomain-relative on subdomain, /archive/... on main domain."""
+    """Build archive URL.
+
+    - On the subdomain for the same year: subdomain-relative path (e.g. /03/15/slug/).
+    - On the subdomain for a different year: absolute URL to that year's subdomain.
+    - On the main domain: /archive/<year>/... path.
+    """
     on_sub = getattr(request, 'on_archive_subdomain', False)
     req_year = getattr(request, 'archive_year', None)
 
     if on_sub and req_year == year:
-        # Same-year paths are relative to the subdomain root
+        # Same-year on subdomain — relative to subdomain root
         if month is None:
             return '/'
         if day is None:
@@ -897,8 +902,8 @@ def _archive_url(request, year, month=None, day=None, slug=None):
         if slug:
             return f'/{month:02d}/{day:02d}/{slug}/'
         return f'/{month:02d}/{day:02d}/'
-    else:
-        # Different-year paths always go to the target subdomain
+    elif on_sub:
+        # Different year from subdomain → absolute URL for that year's subdomain
         base = f'https://archives-{year}.acpwb.com'
         if month is None:
             return f'{base}/'
@@ -907,6 +912,15 @@ def _archive_url(request, year, month=None, day=None, slug=None):
         if slug:
             return f'{base}/{month:02d}/{day:02d}/{slug}/'
         return f'{base}/{month:02d}/{day:02d}/'
+    else:
+        # Main domain → /archive/<year>/... paths
+        if month is None:
+            return f'/archive/{year}/'
+        if day is None:
+            return f'/archive/{year}/{month:02d}/'
+        if slug:
+            return f'/archive/{year}/{month:02d}/{day:02d}/{slug}/'
+        return f'/archive/{year}/{month:02d}/{day:02d}/'
 
 
 def _archive_index_url():
@@ -1892,17 +1906,18 @@ def _year_data(year):
 
 # ── Archive Subdomain Views ───────────────────────────────────────────────────
 
-def archive_subdomain_index(request):
-    """Year landing page for archives-YYYY.acpwb.com/."""
-    year = _get_archive_year(request)
+def archive_subdomain_index(request, year=None):
+    """Year landing page — works on both archives-YYYY.acpwb.com/ and /archive/<year>/."""
+    year = _get_archive_year(request, year)
     if year is None:
         from django.http import Http404
         raise Http404
     _log_crawler(request, 'archive')
 
+    on_sub = getattr(request, 'on_archive_subdomain', False)
     yd = _year_data(year)
 
-    # Build month listing (same deterministic logic as archive_year)
+    # Build month listing (deterministic)
     months = []
     for m in range(1, 13):
         rng2 = random.Random(hashlib.md5(f"archmo_{year}_{m}".encode()).hexdigest())
@@ -1914,11 +1929,11 @@ def archive_subdomain_index(request):
             label = slug.rsplit('-', 1)[0].replace('-', ' ').title()
             entries.append({
                 'day': day, 'slug': slug, 'label': label,
-                'url': f"/{m:02d}/{day:02d}/{slug}/",
+                'url': _archive_url(request, year, m, day, slug),
             })
         months.append({
             'month': m, 'count': count, 'entries': entries,
-            'url': f"/{m:02d}/",
+            'url': _archive_url(request, year, m),
         })
 
     return render(request, 'honeypot/archive_subdomain_index.html', {
@@ -1926,7 +1941,7 @@ def archive_subdomain_index(request):
         'year_data': yd,
         'months': months,
         'all_years': list(range(2024, 1984, -1)),
-        'parent_template': 'honeypot/archive_subdomain_base.html',
+        'parent_template': 'honeypot/archive_subdomain_base.html' if on_sub else 'base.html',
     })
 
 
@@ -1956,20 +1971,6 @@ def archive_subdomain_non_archive_redirect(request, rest=''):
 
 
 # ── Archive Redirect Views ────────────────────────────────────────────────────
-
-def archive_year_redirect(request, year):
-    return HttpResponseRedirect(f'https://archives-{year}.acpwb.com/')
-
-
-def archive_month_redirect(request, year, month):
-    return HttpResponseRedirect(f'https://archives-{year}.acpwb.com/{month:02d}/')
-
-
-def archive_trap_redirect(request, year, month, day, slug=''):
-    tail = f'{slug}/' if slug else ''
-    return HttpResponseRedirect(
-        f'https://archives-{year}.acpwb.com/{month:02d}/{day:02d}/{tail}'
-    )
 
 
 def archive_trap(request, year=None, month=None, day=None, slug=''):

@@ -5,19 +5,17 @@ urlpatterns = [
     # Archive index stays on main domain
     path('archive/', views.archive_index, name='archive-index'),
 
-    # Archive CSV exports served directly (must be before the generic redirects below)
+    # Archive content — served on both acpwb.com/archive/... and archives-YYYY.acpwb.com/...
     path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/export.csv', views.archive_export_csv, name='archive-export-csv'),
     path('archive/<int:year>/<int:month>/<int:day>/export.csv', views.archive_export_csv, kwargs={'slug': ''}, name='archive-export-csv-base'),
-
-    # 302 redirects: /archive/<year>/... → archives-YYYY.acpwb.com/...
-    path('archive/<int:year>/', views.archive_year_redirect, name='archive-year'),
-    path('archive/<int:year>', views.archive_year_redirect),
-    path('archive/<int:year>/<int:month>/', views.archive_month_redirect, name='archive-month'),
-    path('archive/<int:year>/<int:month>', views.archive_month_redirect),
-    path('archive/<int:year>/<int:month>/<int:day>/', views.archive_trap_redirect, name='archive-trap-base', kwargs={'slug': ''}),
-    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/', views.archive_trap_redirect, name='archive-trap'),
-    path('archive/<int:year>/<int:month>/<int:day>', views.archive_trap_redirect, kwargs={'slug': ''}),
-    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>', views.archive_trap_redirect),
+    path('archive/<int:year>/', views.archive_subdomain_index, name='archive-year'),
+    path('archive/<int:year>', views.archive_subdomain_index),
+    path('archive/<int:year>/<int:month>/', views.archive_month, name='archive-month'),
+    path('archive/<int:year>/<int:month>', views.archive_month),
+    path('archive/<int:year>/<int:month>/<int:day>/', views.archive_trap, kwargs={'slug': ''}, name='archive-trap-base'),
+    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>/', views.archive_trap, name='archive-trap'),
+    path('archive/<int:year>/<int:month>/<int:day>', views.archive_trap, kwargs={'slug': ''}),
+    path('archive/<int:year>/<int:month>/<int:day>/<path:slug>', views.archive_trap),
 
     # Wiki trap
     path('wiki/<slug:slug>/', views.wiki_page, name='wiki-page'),

@@ -69,7 +69,7 @@ Every page injects:
 
 Dedicated traps:
 - `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/` — per-year archive subdomain (1985–2024), infinite recursive, exponential link branching; each year has era theme, CEO letter, distinct typography; routed via `SubdomainMiddleware` → `apps.honeypot.archive_subdomain_urls`; archive trap pages include a "Related Archive Reports — Other Years" section (1–5 cards, each linking to a deterministically chosen entry on a different year's subdomain)
-- `/archive/<year>/...` — 302 redirects to `archives-YYYY.acpwb.com/...`; CSV export patterns served before redirects
+- `/archive/<year>/...` — serves archive content directly on the main domain (no redirect); same views as the subdomain; `_archive_url()` builds `/archive/<year>/...` paths when not on subdomain
 - `/archive/` — main-domain index; year cards link to subdomains
 - Non-archive URLs on archive subdomains (e.g. `/mission/`, `/reports/`) → 302 redirect to `https://acpwb.com/...` via `archive_subdomain_non_archive_redirect` view + catch-all `<path:rest>` pattern in `archive_subdomain_urls.py`
 - `/wiki/<slug>/` — subtly wrong watermarked facts (60+ topics, interconnected graph)
@@ -206,6 +206,7 @@ All models registered with useful `list_display`, `search_fields`, and `list_fil
 - **Static files via bind mount** — `./acpwb/staticfiles` bind-mounted in Docker so host nginx can serve directly from `/home/dan/acpwb.com/acpwb/staticfiles/`
 - **Docker nginx on port 8001** — `127.0.0.1:8001:80`, host nginx proxies to it
 - **SubdomainMiddleware runs before CSRF** — `apps.core.subdomain_middleware.SubdomainMiddleware` sets `request.urlconf = 'apps.honeypot.archive_subdomain_urls'` for `archives-YYYY.acpwb.com` and `archives-YYYY.acpwb.example`; `archive_subdomain_urls.py` includes `config.urls` at the end so `{% url 'home' %}` etc. still resolve in `base.html`; a catch-all `<path:rest>` pattern before the include redirects any non-archive path to the main domain
+- **Archive content on both domains** — `acpwb.com/archive/<year>/...` and `archives-YYYY.acpwb.com/...` both serve content; no redirects. `_archive_url(request, year, ...)` dispatches: subdomain same-year → relative path, subdomain cross-year → absolute subdomain URL, main domain → `/archive/<year>/...`
 - **`site_root` context variable** — empty string on main domain, `https://acpwb.com` on archive subdomains; prepended to all `{% url %}` calls in `base.html` header and footer so links always point to the main domain from a subdomain
 - **nginx access log includes `$host`** — custom `acpwb` log format logs the virtual host on every request for per-subdomain visibility in access logs
 - **`?__year=YYYY` DEBUG shortcut** — when `DEBUG=True`, any request with `?__year=YYYY` activates archive subdomain mode without DNS setup; `pytest.ini` has `django_debug_mode = true` so the test suite can use this shortcut

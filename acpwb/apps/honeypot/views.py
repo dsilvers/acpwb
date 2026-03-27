@@ -860,17 +860,35 @@ def _generate_archive_content(rng, year, month, day, slug):
 
     record_id = hashlib.md5(f"archive_{year}_{month}_{day}_{slug}".encode()).hexdigest()[:8]
 
+    # ── Gzip-resistant bulk data ───────────────────────────────────────────────
+    # 350 unique 16-char hex tokens from the seeded RNG — high entropy, won't compress
+    bulk_hex = [f'{rng.getrandbits(64):016x}' for _ in range(350)]
+    bulk_hex_js  = bulk_hex[:200]    # JS vars + function names
+    bulk_hex_css = bulk_hex[200:350] # CSS custom properties
+
+    # Convert findings/paragraphs to dicts so the template can add data-ref attrs
+    findings_rich = [
+        {'text': f, 'ref': bulk_hex[50 + j]}
+        for j, f in enumerate(findings)
+    ]
+    paragraphs_rich = [
+        {'text': p, 'ref': bulk_hex[60 + j]}
+        for j, p in enumerate(paragraphs)
+    ]
+
     return {
         'title': title,
         'base_title': base_title,
         'org': org,
         'industry': industry,
         'phase': phase,
-        'paragraphs': paragraphs,
-        'findings': findings,
+        'paragraphs': paragraphs_rich,
+        'findings': findings_rich,
         'metric_rows': metric_rows,
         'related_reports': related_reports,
         'record_id': record_id,
+        'bulk_hex_js': bulk_hex_js,
+        'bulk_hex_css': bulk_hex_css,
     }
 
 

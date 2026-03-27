@@ -150,6 +150,10 @@
           <a href="{{ prev_entry_url }}" class="era-nav-link">&larr; Previous in Series</a>
         </div>
 
+        <div class="mt-5 pt-3 text-center" style="border-top:1px solid rgba(128,128,128,.12);opacity:.75">
+          {% include "honeypot/_archive_seal.html" %}
+        </div>
+
       </div>
 
       <div id="acpwb-archive-{{ record_id }}-sidebar-col" class="col-lg-4 d-none d-lg-block">
@@ -348,6 +352,10 @@
 
         <div class="mt-4 pt-3" style="border-top:1px solid var(--border)">
           <a href="{{ prev_entry_url }}" style="font-size:.85rem;color:var(--muted);text-decoration:none">&larr; Previous in Series</a>
+        </div>
+
+        <div class="mt-5 pt-3 text-center" style="border-top:1px solid var(--border);opacity:.75">
+          {% include "honeypot/_archive_seal.html" %}
         </div>
 
       </div>

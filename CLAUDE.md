@@ -51,7 +51,8 @@ docker compose exec web python manage.py collectstatic --noinput
 
 - `people.PeoplePageVisit` — every load of `/our-people/`
 - `people.GeneratedEmployee` — the fake employees shown (FK → visit)
-- `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`, `ghost_link`, `dataset`, `api`, `well_known`); `host` field captures `request.get_host()` for per-subdomain dashboard breakdown
+- `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`, `ghost_link`, `dataset`, `api`, `well_known`, `scanner_probe`, `env_probe`, `wp_probe`, `webshell_probe`, `canary_trigger`); `host` field captures `request.get_host()` for per-subdomain dashboard breakdown
+- `honeypot.CanaryToken` — pool of pre-generated tokens (AWS key pairs from canarytokens.org + self-hosted URL tokens); `served_at`/`triggered_at` lifecycle; `token_type` in `aws_keys`, `env_url`, `wp_config`, `git_config`
 - `honeypot.InternalLoginAttempt` — credential-stuffing log: ip, ua, username, password, next_url, created_at
 - `honeypot.WikiPage` — generated wiki content with watermark tokens
 - `honeypot.PublicReport` — generated report metadata, persisted on first access
@@ -98,6 +99,18 @@ Dedicated traps:
 - `/datasets/<slug>/data.jsonl` — paginated JSONL (100 records/page), instruction-response pairs, watermarked; logged as `dataset`
 - `/internal/portal/`, `/employees/export/`, `/admin-panel/login/` — ghost trap 403s, all logged
 
+Scanner bot traps (respond as if exploit worked — keep bot engaged, extract intelligence):
+- `/.env` — fake credentials + embedded AWS canary key from pool + self-hosted ping URL; logged as `env_probe`
+- `/wp-config.php` — fake PHP source with DB creds + self-hosted ping URL; logged as `wp_probe`
+- `/wp-login.php` — GET: convincing WP login form; POST: logs username/password to `InternalLoginAttempt`, redirects with `?login=failed`; logged as `wp_probe`
+- `/xmlrpc.php` — GET: plaintext stub; POST: parses XML, extracts method + credentials → `InternalLoginAttempt`, returns XMLRPC fault 403; logged as `wp_probe`
+- `/*.php` (catch-all) — `?cmd=` param → fake `uid=33(www-data)` output + logs cmd to `query_string`; no param → PHP fatal error page; logged as `webshell_probe`
+- `/.git/config` — fake git config with repo URL; logged as `env_probe`
+- `/.htpasswd` — fake htpasswd hash; logged as `env_probe`
+- `/.well-known/tokens/<token>/ping` — self-hosted canary callback; marks `CanaryToken` triggered, logs `CrawlerVisit(trap_type='canary_trigger')`
+- `POST /webhooks/canary-trigger/` — canarytokens.org AWS key use notification; matches `aws_access_key_id` → `CanaryToken`, marks triggered, logs `CrawlerVisit`
+- `handler404` — all other unmatched requests logged as `scanner_probe`
+
 Staff dashboard:
 - `/acpwb-dashboard/` — requires `is_staff`; overview + sub-views for crawlers, archive, email, page visits
 - Views in `apps/core/dashboard_views.py`, URLs in `apps/core/dashboard_urls.py`
@@ -109,6 +122,7 @@ Staff dashboard:
 - Overview stat cards: Crawler Hits, Archive Visits, Inbound Emails, People Visits, Project Visits, Login Attempts (red)
 - "By Trap Type" panel pulls from `CrawlerVisit.TRAP_CHOICES` dynamically — new trap types appear automatically
 - "By Host / Subdomain" panel on Crawlers view — groups `CrawlerVisit` rows by `host` field; shows which archive subdomains are receiving traffic
+- "Scanner Probes" section on Crawlers view — top probe paths (env/wp/webshell/scanner), webshell commands attempted, canary trigger count card (red when > 0) with most recent trigger IP/time
 
 ---
 
@@ -210,6 +224,11 @@ All models registered with useful `list_display`, `search_fields`, and `list_fil
 - **`site_root` context variable** — empty string on main domain, `https://acpwb.com` on archive subdomains; prepended to all `{% url %}` calls in `base.html` header and footer so links always point to the main domain from a subdomain
 - **nginx access log includes `$host`** — custom `acpwb` log format logs the virtual host on every request for per-subdomain visibility in access logs
 - **`?__year=YYYY` DEBUG shortcut** — when `DEBUG=True`, any request with `?__year=YYYY` activates archive subdomain mode without DNS setup; `pytest.ini` has `django_debug_mode = true` so the test suite can use this shortcut
+- **`handler404` logs scanner probes** — `config/urls.py` sets `handler404 = 'apps.honeypot.views.scanner_probe_404'`; all unmatched requests logged as `CrawlerVisit(trap_type='scanner_probe')`; Django's debug 404 page bypasses this in `DEBUG=True` mode — test with `@override_settings(DEBUG=False)`
+- **`re_path(r'^.*\.php$')` catch-all must come after explicit `.php` paths** — URL ordering in `apps/honeypot/urls.py` matters; `wp-login.php`, `xmlrpc.php`, `wp-config.php` must appear before the catch-all
+- **Canary tokens are pre-generated (pool model)** — `generate_canary_tokens` management command calls canarytokens.org API ahead of time; `fake_env_file()` claims from pool at serve time; avoids HTTP latency in request handlers; falls back to AWS example keys if pool exhausted
+- **Self-hosted canary URL in every fake config file** — `secrets.token_urlsafe(32)` token created at serve time; embedded as `ACPWB_CONFIG_ID=https://acpwb.com/.well-known/tokens/<tok>/ping`; second feedback layer confirming file was read even if AWS key never used
+- **`CANARYTOKENS_WEBHOOK_URL`** — new env var; set to `https://acpwb.com/webhooks/canary-trigger/` in production `.env`
 - **Local dev domain is `acpwb.example`** — use dnsmasq with `address=/.acpwb.example/127.0.0.1` for browser testing of subdomains; the middleware recognises `archives-YYYY.acpwb.example` the same way as `.acpwb.com`; unknown `*.acpwb.example` subdomains redirect to `https://acpwb.example/`
 - **Wildcard TLS cert required for production** — archive subdomains need `*.acpwb.com`; use `certbot-dns-cloudflare` with Cloudflare API token (DNS-01 challenge)
 
@@ -246,6 +265,7 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/  # → 302 to acpw
 | `dedupe_crawler_visits` | — | Remove duplicate `CrawlerVisit` rows. |
 | `generate_content_fixture` | — | Generate test fixtures for content. |
 | `export_gen_data` | — | Export data for external image generation. |
+| `generate_canary_tokens` | `--count=N` (default 50), `--dry-run` | Pre-generate canarytokens.org AWS key tokens into pool. Requires `CANARYTOKENS_WEBHOOK_URL` env var. Run once on deploy, then as needed. |
 
 ### Dashboard Cache Setup (Production)
 

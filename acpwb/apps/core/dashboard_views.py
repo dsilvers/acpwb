@@ -19,7 +19,7 @@ from django.shortcuts import render
 from django.utils import timezone
 
 
-from apps.honeypot.models import CrawlerVisit, ArchiveVisit, InternalLoginAttempt
+from apps.honeypot.models import CrawlerVisit, ArchiveVisit, InternalLoginAttempt, CanaryToken
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import DataOptOutRequest
@@ -275,17 +275,36 @@ def _compute_crawlers(dr, daily=None):
             CrawlerVisit.objects.all, days=60,
         )
 
+    # Scanner probe stats
+    probe_types = ['env_probe', 'wp_probe', 'webshell_probe', 'scanner_probe']
+    probe_qs = _apply_range(CrawlerVisit.objects.filter(trap_type__in=probe_types), dr)
+    top_probe_paths = list(
+        probe_qs.values('path').annotate(count=Count('id')).order_by('-count')[:20]
+    )
+    webshell_commands = list(
+        _apply_range(CrawlerVisit.objects.filter(trap_type='webshell_probe'), dr)
+        .exclude(query_string='')
+        .values('query_string').annotate(count=Count('id')).order_by('-count')[:10]
+    )
+    canary_triggered = CanaryToken.objects.filter(triggered=True)
+    canary_trigger_count = canary_triggered.count()
+    canary_latest = canary_triggered.order_by('-triggered_at').first()
+
     return {
         **dr,
-        'total':       total,
-        'top_bots':    top_bots,
-        'trap_counts': trap_counts,
-        'top_ips':     list(qs.values('ip_address').annotate(count=Count('id')).order_by('-count')[:20]),
-        'top_paths':   list(qs.values('path').annotate(count=Count('id')).order_by('-count')[:20]),
-        'top_hosts':   list(qs.exclude(host='').values('host').annotate(count=Count('id')).order_by('-count')[:20]),
-        'daily':       daily,
-        'recent':      list(qs.order_by('-timestamp').select_related()[:50]),
-        'cached_at':   timezone.now(),
+        'total':                total,
+        'top_bots':             top_bots,
+        'trap_counts':          trap_counts,
+        'top_ips':              list(qs.values('ip_address').annotate(count=Count('id')).order_by('-count')[:20]),
+        'top_paths':            list(qs.values('path').annotate(count=Count('id')).order_by('-count')[:20]),
+        'top_hosts':            list(qs.exclude(host='').values('host').annotate(count=Count('id')).order_by('-count')[:20]),
+        'daily':                daily,
+        'recent':               list(qs.order_by('-timestamp').select_related()[:50]),
+        'cached_at':            timezone.now(),
+        'top_probe_paths':      top_probe_paths,
+        'webshell_commands':    webshell_commands,
+        'canary_trigger_count': canary_trigger_count,
+        'canary_latest':        canary_latest,
     }
 
 

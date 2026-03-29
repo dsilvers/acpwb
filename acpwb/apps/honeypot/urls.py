@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
@@ -73,4 +73,17 @@ urlpatterns = [
     path('datasets/', views.datasets_index, name='datasets-index'),
     path('datasets/<slug:slug>/', views.dataset_detail, name='dataset-detail'),
     path('datasets/<slug:slug>/data.jsonl', views.dataset_download, name='dataset-download'),
+
+    # ── Scanner bot probe traps ───────────────────────────────────────────────
+    # Specific paths first, then the .php catch-all (ordering matters).
+    path('.env', views.fake_env_file, name='fake-env'),
+    path('wp-config.php', views.fake_wp_config, name='fake-wp-config'),
+    path('wp-login.php', views.fake_wp_login, name='fake-wp-login'),
+    path('xmlrpc.php', views.fake_xmlrpc, name='fake-xmlrpc'),
+    path('.git/config', views.fake_git_config, name='fake-git-config'),
+    path('.htpasswd', views.fake_htpasswd, name='fake-htpasswd'),
+    # Canary ping — self-hosted callback embedded in served config files
+    path('.well-known/tokens/<str:token>/ping', views.canary_ping, name='canary-ping'),
+    # PHP webshell catch-all — must be last among scanner patterns
+    re_path(r'^.*\.php$', views.fake_webshell, name='fake-webshell'),
 ]

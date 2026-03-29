@@ -128,6 +128,69 @@
   </div>
 </div>
 
+<!-- Scanner Probes + Canary Triggers -->
+{% if top_probe_paths or canary_trigger_count %}
+<div class="row g-3 mb-4">
+  {% if canary_trigger_count %}
+  <div class="col-lg-3">
+    <div class="section-card" style="border-color:{% if canary_trigger_count %}#dc3545{% else %}var(--border){% endif %}">
+      <div class="section-card-header" style="{% if canary_trigger_count %}background:rgba(220,53,69,.08){% endif %}">
+        <h6 style="{% if canary_trigger_count %}color:#dc3545{% endif %}">Canary Triggers</h6>
+      </div>
+      <div class="section-card-body text-center py-3">
+        <div style="font-size:2.2rem;font-weight:700;color:{% if canary_trigger_count %}#dc3545{% else %}var(--muted){% endif %}">{{ canary_trigger_count }}</div>
+        <div style="font-size:.72rem;color:var(--muted)">AWS keys used (all time)</div>
+        {% if canary_latest %}
+        <div style="font-size:.7rem;margin-top:.5rem;color:var(--muted)">
+          Last: {{ canary_latest.triggered_at|date:"Y-m-d H:i" }}<br>
+          IP: {{ canary_latest.triggered_ip|default:"unknown" }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if webshell_commands %}
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Webshell Commands Attempted</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Query String</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for c in webshell_commands %}
+          <tr>
+            <td style="font-family:monospace;font-size:.75rem;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ c.query_string }}">{{ c.query_string|truncatechars:40 }}</td>
+            <td>{{ c.count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if top_probe_paths %}
+  <div class="{% if canary_trigger_count and webshell_commands %}col-lg-5{% elif canary_trigger_count or webshell_commands %}col-lg-8{% else %}col-12{% endif %}">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top Scanner Probe Paths</h6><span style="font-size:.72rem;color:var(--muted)">.env / wp / webshell / 404 probes</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Path</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for p in top_probe_paths %}
+          <tr>
+            <td style="font-family:monospace;font-size:.75rem">{{ p.path }}</td>
+            <td>{{ p.count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+
 <!-- Recent visits -->
 <div class="section-card">
   <div class="section-card-header"><h6>Recent Visits</h6><span style="font-size:.72rem;color:var(--muted)">Last 50 in period</span></div>

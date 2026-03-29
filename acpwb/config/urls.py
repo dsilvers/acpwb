@@ -37,6 +37,8 @@ urlpatterns = [
     path('acpwb-dashboard/', include('apps.core.dashboard_urls')),
 ]
 
+handler404 = 'apps.honeypot.views.scanner_probe_404'
+
 # Customize admin site
 admin.site.site_header = "ACPWB Administration"
 admin.site.site_title = "ACPWB Admin"

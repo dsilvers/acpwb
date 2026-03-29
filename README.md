@@ -36,11 +36,26 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 - **Fake API at `/api/v1/private-data`** — returns HTTP 200 (not 403) with 5–10KB of plausible-looking JSON: fake employee records with salary bands, fabricated financials, internal project codes, a fake API key, a fake DB connection string. Referenced in the HTML comment but not in visible navigation. Every access logged with a tracked `X-Request-ID`.
 - **Ghost trap pages** at `/internal/portal/`, `/employees/export/`, `/admin-panel/login/` — return 403 and log every access. Look like real internal tooling to a scanner enumerating endpoints.
 
+### Intercepts Scanner Bots
+
+Exploit scanners probing for WordPress installations, exposed `.env` files, and PHP webshells get convincing fake responses instead of 404s — keeping them engaged, extracting intelligence, and triggering downstream alerts.
+
+- **`/.env`** — returns a realistic environment file with fake database credentials, a real AWS IAM key pair from the [canarytokens.org](https://canarytokens.org) pool (fires a webhook if the key is ever used against any AWS API endpoint), and a self-hosted ping URL that fires when the file is fetched.
+- **`/wp-config.php`** — returns fake PHP source with database credentials and an embedded canary ping URL.
+- **`/wp-login.php`** — GET returns a pixel-perfect WordPress login form. POST logs the submitted username/password to `InternalLoginAttempt` and redirects back with `?login=failed`.
+- **`/xmlrpc.php`** — GET returns the standard plaintext stub. POST parses the XML-RPC body, extracts the method name and credential parameters, logs them, and returns a valid XML-RPC fault response (403).
+- **`/*.php` (catch-all)** — any other `.php` URL with a `?cmd=` parameter returns `uid=33(www-data) gid=33(www-data) groups=33(www-data)` (fake webshell output) and logs the command value. Without a `cmd` parameter, returns a convincing PHP fatal error page.
+- **`/.git/config`** — returns a fake git config pointing at a plausible internal repository URL.
+- **`/.htpasswd`** — returns a fake htpasswd hash line.
+- **`handler404`** — every other unmatched path is logged to `CrawlerVisit` as `scanner_probe` (instead of silently 404ing).
+
+**Canary token feedback loop:** the `generate_canary_tokens` management command pre-generates real AWS key pairs via the canarytokens.org API and stores them in a pool. When a scanner fetches `/.env`, a key is claimed from the pool and embedded in the response. If the scanner ever tries to use that key against any AWS endpoint, canarytokens.org fires a webhook to `POST /webhooks/canary-trigger/`, which marks the token triggered and logs the source IP. A second self-hosted ping URL is embedded in every fake config file as a backup — it fires when the file is fetched, even if the AWS key is never used.
+
 ### Tracks Everything
 
 Every trap logs to the database: IP, user agent, path, host/subdomain, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load.
 
-A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, preset and custom date range filters, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes a "By Host / Subdomain" breakdown panel showing which archive subdomains are being hit and how often.
+A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, preset and custom date range filters, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes a "By Host / Subdomain" panel showing which archive subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used).
 
 ---
 
@@ -96,6 +111,24 @@ Not linked anywhere in visible navigation. Referenced only in the fake developer
 
 #### Ghost Trap Pages (`/internal/portal/`, `/employees/export/`, `/admin-panel/login/`)
 Return HTTP 403 with a minimal page. All accesses logged to `CrawlerVisit` (trap_type `ghost_link`). These paths look like real internal tooling to a scanner enumerating endpoints.
+
+---
+
+### Scanner Bot Traps — Exploit Probe Responses
+
+Unlike the honeypots above (which target AI crawlers), these target exploit scanners probing for vulnerable applications. The principle: respond as if the exploit *succeeded* to keep the scanner engaged, extract more intelligence, and trigger downstream alerts.
+
+#### Fake Credentials (`/.env`, `/wp-config.php`, `/.git/config`, `/.htpasswd`)
+Config file probes get realistic-looking fake files instead of 404s. `/.env` includes a real AWS IAM key pair from the canarytokens.org pool — if the scanner tries to use it against any AWS API, canarytokens.org fires a webhook. Every fake config file also embeds a self-hosted ping URL (`/.well-known/tokens/<token>/ping`) as a second feedback layer.
+
+#### WordPress Simulation (`/wp-login.php`, `/xmlrpc.php`)
+`/wp-login.php` serves a pixel-accurate WordPress login form; POST submissions log the credential pair to `InternalLoginAttempt` and redirect back with `?login=failed` (simulating a wrong password). `/xmlrpc.php` parses real XML-RPC method calls, extracts and logs credential parameters from `wp.getUsersBlogs` and similar methods, and returns a valid XML-RPC fault response.
+
+#### Fake Webshell (`/*.php`)
+Any `.php` URL not matching a specific pattern hits a catch-all. Requests with a `?cmd=` parameter get fake shell output (`uid=33(www-data)...`) — the command value is logged to `CrawlerVisit.query_string`. Requests without a `cmd` parameter get a convincing PHP fatal error page. Both responses keep the scanner's tool probing rather than moving on.
+
+#### Canary Token Pool (`CanaryToken` model, `generate_canary_tokens` command)
+AWS key pairs are pre-generated via the canarytokens.org API and stored as a pool. At serve time, `fake_env_file()` claims one key from the pool and records which IP it was served to. When the key is used against any AWS endpoint, canarytokens.org fires `POST /webhooks/canary-trigger/` — which matches the key back to the original `CanaryToken` record and `CrawlerVisit`, creating a complete trail from probe to credential use.
 
 #### Proof-of-Work on Projects (`apps/projects/pow.py`, `static/js/pow.js`)
 `/projects/` pages require a valid PoW session token. The browser runs SHA-256 in a loop until it finds a value where `SHA256(nonce + candidate)` has 5 leading zero bits (~32 iterations). This takes under 1 second in a browser. For a bot scraping at scale, the cost multiplies: each page load requires a fresh challenge-response round trip plus compute. The PoW token is logged on every project page visit.
@@ -205,6 +238,15 @@ Django admin is at `http://localhost/django-admin/`
 | `/sitemap-publications.xml` | Structural | Trap sitemap: reports, ghost traps, fake internals |
 | `/sitemap-wiki.xml` | Structural | Trap sitemap: all 75+ wiki topics |
 | `/sitemap-archive.xml` | Structural | Trap sitemap: 500 deterministic archive URLs (2008–2024) |
+| `/.env` | Scanner | Fake env file with real AWS canary key + self-hosted ping URL |
+| `/wp-config.php` | Scanner | Fake PHP source with DB credentials + canary ping URL |
+| `/wp-login.php` | Scanner | Fake WP login form; POST logs credentials to DB |
+| `/xmlrpc.php` | Scanner | Fake XML-RPC endpoint; POST extracts + logs credential pairs |
+| `/*.php` | Scanner | Catch-all; `?cmd=` → fake webshell output; no cmd → PHP error page |
+| `/.git/config` | Scanner | Fake git config with internal repo URL |
+| `/.htpasswd` | Scanner | Fake htpasswd hash line |
+| `/.well-known/tokens/<token>/ping` | Scanner | Self-hosted canary callback; marks token triggered |
+| `POST /webhooks/canary-trigger/` | Scanner | canarytokens.org webhook; fires when a served AWS key is used |
 
 Every page also contains:
 - **Ghost links** — off-screen links to trap URLs (visible to HTML-parsing bots)
@@ -382,6 +424,7 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/
 | `PIPE_WEBHOOK_SECRET` | Shared secret for Cloudflare Email Worker |
 | `MAILGUN_WEBHOOK_SIGNING_KEY` | From Mailgun dashboard (legacy) |
 | `MAILGUN_DOMAIN` | `acpwb.com` (legacy) |
+| `CANARYTOKENS_WEBHOOK_URL` | `https://acpwb.com/webhooks/canary-trigger/` — used by `generate_canary_tokens` |
 
 ---
 

@@ -12,6 +12,11 @@ class CrawlerVisit(models.Model):
         ('report_list', 'Report Listing'),
         ('report_download', 'Report Download'),
         ('dataset', 'Training Dataset'),
+        ('scanner_probe', 'Scanner Probe (404)'),
+        ('env_probe', 'Config File Probe'),
+        ('wp_probe', 'WordPress Probe'),
+        ('webshell_probe', 'Webshell Probe'),
+        ('canary_trigger', 'Canary Token Triggered'),
         ('other', 'Other'),
     ]
 
@@ -97,6 +102,49 @@ class ArchiveVisit(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} /archive/{self.year}/{self.month}/{self.day}/{self.slug[:40]}"
+
+
+class CanaryToken(models.Model):
+    """A trackable token embedded in fake credential files.
+
+    Two types:
+    - aws_keys: generated via canarytokens.org; fires a webhook when the key is
+      used against any AWS API endpoint.
+    - env_url / wp_config / git_config: self-hosted callback URL embedded in the
+      fake config file; fires when the bot GETs /.well-known/tokens/<token>/ping.
+    """
+    TOKEN_TYPES = [
+        ('aws_keys',  'Canarytokens.org AWS Keys'),
+        ('env_url',   'Self-hosted .env canary URL'),
+        ('wp_config', 'wp-config.php canary URL'),
+        ('git_config', '.git/config canary URL'),
+    ]
+    token = models.CharField(max_length=128, unique=True, db_index=True)
+    token_type = models.CharField(max_length=32, choices=TOKEN_TYPES)
+    # Canarytokens.org fields (aws_keys type only)
+    canarytoken_token = models.CharField(max_length=128, blank=True)
+    aws_access_key_id = models.CharField(max_length=32, blank=True)
+    # Lifecycle
+    served_to_ip = models.GenericIPAddressField(null=True, blank=True)
+    served_at = models.DateTimeField(null=True, blank=True, db_index=True)
+    triggered = models.BooleanField(default=False, db_index=True)
+    triggered_at = models.DateTimeField(null=True, blank=True)
+    triggered_ip = models.GenericIPAddressField(null=True, blank=True)
+    triggered_ua = models.TextField(blank=True)
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['token_type', 'served_at']),
+            models.Index(fields=['triggered', 'triggered_at']),
+        ]
+        verbose_name = 'Canary Token'
+
+    def __str__(self):
+        status = 'TRIGGERED' if self.triggered else 'unserved' if not self.served_at else 'served'
+        return f"[{self.token_type}] {self.token[:16]}... ({status})"
 
 
 class InternalLoginAttempt(models.Model):

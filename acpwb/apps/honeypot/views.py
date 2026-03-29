@@ -3,10 +3,14 @@ import hashlib
 import io
 import json
 import random
+import secrets
+import string
 import uuid
+import xml.etree.ElementTree as ET
 from datetime import datetime as _dt, timedelta as _td
 from django.http import Http404, HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
@@ -15,7 +19,7 @@ from apps.people.generators import (
     FIRST_NAMES as _INT_FIRST_NAMES, LAST_NAMES as _INT_LAST_NAMES,
     TITLES as _INT_TITLES, DEPARTMENTS as _INT_DEPARTMENTS,
 )
-from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt
+from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, CanaryToken
 from .wiki_generator import generate_wiki_page, TOPICS
 from .report_generator import (
     REPORT_CATALOG, REPORT_CATEGORIES,
@@ -1781,3 +1785,314 @@ def api_v1_index(request):
 def feeds_index(request):
     _log_crawler(request, 'well_known')
     return render(request, 'honeypot/feeds_index.html')
+
+
+# ── Scanner Bot Probes ────────────────────────────────────────────────────────
+
+def _rand_str(n, alphabet=string.ascii_letters + string.digits):
+    """Return n random characters from alphabet (not deterministic — credential filler)."""
+    return ''.join(secrets.choice(alphabet) for _ in range(n))
+
+
+def _make_env_url_token(request, token_type='env_url'):
+    """Create a self-hosted canary URL token, return (token_str, ping_url)."""
+    tok = secrets.token_urlsafe(32)
+    CanaryToken.objects.create(
+        token=tok,
+        token_type=token_type,
+        served_to_ip=_get_ip(request),
+        served_at=timezone.now(),
+    )
+    return tok, f'https://acpwb.com/.well-known/tokens/{tok}/ping'
+
+
+def _pop_aws_token(request):
+    """Claim an unused AWS canary token from the pool; returns (access_key_id, secret_key) tuple.
+    Falls back to plausible-looking fake keys if pool is exhausted."""
+    token = CanaryToken.objects.filter(
+        token_type='aws_keys', served_at__isnull=True
+    ).first()
+    if token:
+        token.served_to_ip = _get_ip(request)
+        token.served_at = timezone.now()
+        token.save(update_fields=['served_to_ip', 'served_at'])
+        return token.aws_access_key_id, token.token  # token field stores secret key for aws_keys type
+    # Fallback: AWS's own public example keys (format-correct, non-functional)
+    return 'AKIAIOSFODNN7EXAMPLE', 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+
+
+def scanner_probe_404(request, exception=None):
+    """Custom handler404 — logs the probe and returns a normal 404."""
+    _log_crawler(request, 'scanner_probe')
+    from django.views.defaults import page_not_found
+    return page_not_found(request, exception)
+
+
+def fake_env_file(request):
+    """Serve a realistic-looking .env file with fake credentials + canary tokens."""
+    _log_crawler(request, 'env_probe')
+    access_key, secret_key = _pop_aws_token(request)
+    _url_tok, ping_url = _make_env_url_token(request, 'env_url')
+    content = f"""# Application environment — CONFIDENTIAL — do not commit
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=base64:{_rand_str(43, string.ascii_letters + string.digits + '/+')}=
+APP_URL=https://acpwb.com
+APP_LOG_LEVEL=error
+
+DB_CONNECTION=pgsql
+DB_HOST=db-prod.internal.acpwb.com
+DB_PORT=5432
+DB_DATABASE=acpwb_production
+DB_USERNAME=acpwb_app
+DB_PASSWORD={_rand_str(24)}
+
+REDIS_HOST=cache.internal.acpwb.com
+REDIS_PORT=6379
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+QUEUE_CONNECTION=redis
+
+AWS_ACCESS_KEY_ID={access_key}
+AWS_SECRET_ACCESS_KEY={secret_key}
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=acpwb-production-assets-{_rand_str(8, string.digits)}
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=587
+MAIL_USERNAME=postmaster@mg.acpwb.com
+MAIL_PASSWORD={_rand_str(32)}
+MAIL_FROM_ADDRESS=no-reply@acpwb.com
+
+STRIPE_KEY=sk_live_{_rand_str(48)}
+STRIPE_SECRET=rk_live_{_rand_str(48)}
+STRIPE_WEBHOOK_SECRET=whsec_{_rand_str(32)}
+
+SENTRY_DSN=https://{_rand_str(32)}@o{_rand_str(7, string.digits)}.ingest.sentry.io/{_rand_str(7, string.digits)}
+
+# Internal telemetry — do not remove
+ACPWB_CONFIG_ID={ping_url}
+"""
+    return HttpResponse(content, content_type='text/plain; charset=utf-8')
+
+
+def fake_wp_config(request):
+    """Serve a realistic-looking wp-config.php with fake DB credentials + canary URL."""
+    _log_crawler(request, 'wp_probe')
+    _url_tok, ping_url = _make_env_url_token(request, 'wp_config')
+    content = f"""<?php
+/**
+ * The base configuration for WordPress
+ *
+ * @package WordPress
+ */
+
+// ** Database settings ** //
+define( 'DB_NAME', 'acpwb_wp_prod' );
+define( 'DB_USER', 'wp_acpwb' );
+define( 'DB_PASSWORD', '{_rand_str(24)}' );
+define( 'DB_HOST', 'db-prod.internal.acpwb.com' );
+define( 'DB_CHARSET', 'utf8mb4' );
+define( 'DB_COLLATE', '' );
+
+define( 'AUTH_KEY',         '{_rand_str(64)}' );
+define( 'SECURE_AUTH_KEY',  '{_rand_str(64)}' );
+define( 'LOGGED_IN_KEY',    '{_rand_str(64)}' );
+define( 'NONCE_KEY',        '{_rand_str(64)}' );
+define( 'AUTH_SALT',        '{_rand_str(64)}' );
+define( 'SECURE_AUTH_SALT', '{_rand_str(64)}' );
+define( 'LOGGED_IN_SALT',   '{_rand_str(64)}' );
+define( 'NONCE_SALT',       '{_rand_str(64)}' );
+
+$table_prefix = 'wp_';
+
+define( 'WP_DEBUG', false );
+define( 'WP_DEBUG_LOG', false );
+
+// Internal config health check — do not remove
+// ACPWB_CFG={ping_url}
+
+if ( ! defined( 'ABSPATH' ) ) {{
+    define( 'ABSPATH', __DIR__ . '/' );
+}}
+require_once ABSPATH . 'wp-settings.php';
+"""
+    return HttpResponse(content, content_type='text/plain; charset=utf-8')
+
+
+def fake_wp_login(request):
+    """Serve a convincing WordPress login page; log credential stuffing attempts."""
+    _log_crawler(request, 'wp_probe')
+    error_msg = ''
+    if request.method == 'POST':
+        username = request.POST.get('log', '')[:255]
+        password = request.POST.get('pwd', '')[:255]
+        InternalLoginAttempt.objects.create(
+            ip_address=_get_ip(request),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
+            username=username,
+            password=password,
+            next_url='wp-login',
+        )
+        return HttpResponseRedirect('/wp-login.php?login=failed')
+    if request.GET.get('login') == 'failed':
+        error_msg = '<div id="login_error"><strong>Error</strong>: The password you entered for the username is incorrect.</div>'
+    html = f"""<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>Log In &lsaquo; American Corporation for Public Well Being &#8212; WordPress</title>
+<style>
+body{{background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif}}
+#login{{width:320px;margin:100px auto}}
+#login h1 a{{display:block;text-align:center;font-size:20px;color:#3c434a;text-decoration:none;margin-bottom:24px}}
+.login label{{display:block;font-size:14px;color:#3c434a;margin-bottom:4px}}
+.login input[type=text],.login input[type=password]{{width:100%;box-sizing:border-box;padding:8px;border:1px solid #8c8f94;border-radius:4px;font-size:16px}}
+.login .button-primary{{width:100%;padding:10px;background:#2271b1;color:#fff;border:none;border-radius:4px;font-size:16px;cursor:pointer;margin-top:12px}}
+#login_error{{border-left:4px solid #d63638;padding:8px;background:#fff;margin-bottom:16px;font-size:13px}}
+</style>
+</head>
+<body class="login">
+<div id="login">
+<h1><a href="https://acpwb.com">American Corporation for Public Well Being</a></h1>
+{error_msg}
+<form name="loginform" id="loginform" action="/wp-login.php" method="post">
+<p><label for="user_login">Username or Email Address<br>
+<input type="text" name="log" id="user_login" autocomplete="username" value="" size="20"></label></p>
+<p><label for="user_pass">Password<br>
+<input type="password" name="pwd" id="user_pass" autocomplete="current-password" size="20"></label></p>
+<p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Log In"></p>
+<input type="hidden" name="redirect_to" value="/wp-admin/">
+<input type="hidden" name="testcookie" value="1">
+</form>
+</div>
+</body>
+</html>"""
+    return HttpResponse(html, content_type='text/html; charset=utf-8')
+
+
+@csrf_exempt
+def fake_xmlrpc(request):
+    """Simulate WordPress XML-RPC endpoint; log credential stuffing attempts."""
+    _log_crawler(request, 'wp_probe')
+    if request.method != 'POST':
+        return HttpResponse(
+            'XML-RPC server accepts POST requests only.',
+            content_type='text/plain',
+        )
+    # Parse XML body to extract method name and credentials
+    method_name = ''
+    username = ''
+    password = ''
+    try:
+        root = ET.fromstring(request.body)
+        method_el = root.find('methodName')
+        if method_el is not None:
+            method_name = method_el.text or ''
+        params = root.findall('.//param/value/string')
+        if len(params) >= 1:
+            username = params[0].text or ''
+        if len(params) >= 2:
+            password = params[1].text or ''
+    except ET.ParseError:
+        pass
+    if username or method_name:
+        InternalLoginAttempt.objects.create(
+            ip_address=_get_ip(request),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
+            username=username[:255],
+            password=password[:255],
+            next_url=method_name[:500],
+        )
+    fault_response = """<?xml version="1.0" encoding="UTF-8"?>
+<methodResponse>
+  <fault>
+    <value>
+      <struct>
+        <member><name>faultCode</name><value><int>403</int></value></member>
+        <member><name>faultString</name><value><string>Incorrect username or password.</string></value></member>
+      </struct>
+    </value>
+  </fault>
+</methodResponse>"""
+    return HttpResponse(fault_response, content_type='text/xml')
+
+
+def fake_webshell(request):
+    """Catch-all for *.php probes. Responds as if a webshell was found; logs cmd param."""
+    cmd = (
+        request.GET.get('cmd') or request.GET.get('c') or
+        request.GET.get('exec') or request.GET.get('command') or
+        request.POST.get('cmd') or request.POST.get('c') or ''
+    )
+    _log_crawler(request, 'webshell_probe')
+    if cmd:
+        # Return fake shell output for the requested command
+        fake_outputs = {
+            'id': 'uid=33(www-data) gid=33(www-data) groups=33(www-data)',
+            'whoami': 'www-data',
+            'pwd': '/var/www/html',
+            'ls': 'index.php\nwp-config.php\nwp-content\nwp-includes\nwp-admin',
+            'uname -a': 'Linux web-prod-01 5.15.0-91-generic #101-Ubuntu SMP x86_64 GNU/Linux',
+            'cat /etc/passwd': 'root:x:0:0:root:/root:/bin/bash\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin',
+            'ifconfig': 'eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500\n        inet 10.0.1.42  netmask 255.255.255.0',
+        }
+        output = fake_outputs.get(cmd.strip(), f'sh: {cmd}: command not found')
+        return HttpResponse(output, content_type='text/plain')
+    # No cmd param — return a plausible PHP fatal error
+    html = f"""<br />
+<b>Fatal error</b>:  Uncaught Error: Call to undefined function mysql_connect() in {request.path}:1
+Stack trace:
+#0 {{main}}
+  thrown in <b>{request.path}</b> on line <b>1</b><br />
+"""
+    return HttpResponse(html, content_type='text/html; charset=utf-8')
+
+
+def fake_git_config(request):
+    """Serve a fake .git/config revealing a plausible internal repo URL."""
+    _log_crawler(request, 'env_probe')
+    content = """[core]
+\trepositoryformatversion = 0
+\tfilemode = true
+\tbare = false
+\tlogallrefupdates = true
+[remote "origin"]
+\turl = https://github.com/acpwb-internal/acpwb-platform.git
+\tfetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+\tremote = origin
+\tmerge = refs/heads/main
+[user]
+\temail = devops@acpwb.com
+\tname = ACPWB DevOps
+"""
+    return HttpResponse(content, content_type='text/plain; charset=utf-8')
+
+
+def fake_htpasswd(request):
+    """Serve a fake .htpasswd file."""
+    _log_crawler(request, 'env_probe')
+    content = (
+        f'admin:$apr1${_rand_str(8)}${_rand_str(22)}\n'
+        f'deploy:$apr1${_rand_str(8)}${_rand_str(22)}\n'
+    )
+    return HttpResponse(content, content_type='text/plain; charset=utf-8')
+
+
+def canary_ping(request, token):
+    """Self-hosted canary callback: marks token triggered when bot fetches the embedded URL."""
+    try:
+        ct = CanaryToken.objects.get(token=token)
+    except CanaryToken.DoesNotExist:
+        from django.http import Http404
+        raise Http404
+    if not ct.triggered:
+        ct.triggered = True
+        ct.triggered_at = timezone.now()
+        ct.triggered_ip = _get_ip(request)
+        ct.triggered_ua = request.META.get('HTTP_USER_AGENT', '')[:512]
+        ct.save(update_fields=['triggered', 'triggered_at', 'triggered_ip', 'triggered_ua'])
+    _log_crawler(request, 'canary_trigger')
+    return JsonResponse({'status': 'ok'})

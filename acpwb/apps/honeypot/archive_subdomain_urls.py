@@ -14,10 +14,13 @@ urlpatterns = [
     path('<int:month>', views.archive_month),
     path('<int:month>/<int:day>/', views.archive_trap, kwargs={'slug': ''}, name='archive-sub-trap-base'),
     path('<int:month>/<int:day>/<path:slug>/', views.archive_trap, name='archive-sub-trap'),
-    path('<int:month>/<int:day>', views.archive_trap, kwargs={'slug': ''}),
-    path('<int:month>/<int:day>/<path:slug>', views.archive_trap),
+    # Export patterns before no-slash traps: <path:slug> is greedy and would otherwise
+    # intercept /slug/export.csv before this pattern could match.
     path('<int:month>/<int:day>/<path:slug>/export.csv', views.archive_export_csv, name='archive-sub-export'),
     path('<int:month>/<int:day>/export.csv', views.archive_export_csv, kwargs={'slug': ''}, name='archive-sub-export-base'),
+    # No-slash fallbacks: still catch malformed slugexport.csv URLs as archive_trap (no 404).
+    path('<int:month>/<int:day>', views.archive_trap, kwargs={'slug': ''}),
+    path('<int:month>/<int:day>/<path:slug>', views.archive_trap),
     # Catch-all: any non-archive path (e.g. /mission/, /reports/) → redirect to main domain.
     # Must come before include('config.urls') so requests are redirected, not served.
     # URL reversal ({% url 'home' %} etc.) still works because config.urls is still included

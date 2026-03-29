@@ -102,7 +102,7 @@
             <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.65">Raw Data Export</div>
             <div style="font-size:.8rem;font-weight:600">Download the underlying dataset for this archive entry</div>
           </div>
-          <a id="acpwb-archive-{{ record_id }}-csv-download-link" href="{{ request.path }}export.csv" class="era-cta"
+          <a id="acpwb-archive-{{ record_id }}-csv-download-link" href="{{ export_csv_url }}" class="era-cta"
              aria-label="Download CSV dataset for archive record {{ record_id }}"
              style="font-size:.72rem;font-weight:700;padding:.3rem .85rem;text-decoration:none;white-space:nowrap">&#x2193; Download CSV</a>
         </div>
@@ -312,7 +312,7 @@
             <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Raw Data Export</div>
             <div style="font-size:.8rem;color:var(--navy);font-weight:600">Download the underlying dataset for this archive entry</div>
           </div>
-          <a href="{{ request.path }}export.csv" style="font-size:.72rem;font-weight:700;padding:.3rem .85rem;background:var(--navy);color:var(--gold);text-decoration:none;white-space:nowrap">&#x2193; Download CSV</a>
+          <a href="{{ export_csv_url }}" style="font-size:.72rem;font-weight:700;padding:.3rem .85rem;background:var(--navy);color:var(--gold);text-decoration:none;white-space:nowrap">&#x2193; Download CSV</a>
         </div>
 
         <a href="{{ next_entry_url }}" style="display:block;background:var(--navy);color:white;padding:1rem 1.5rem;text-decoration:none;font-weight:700;font-size:.9rem;margin-bottom:2rem">

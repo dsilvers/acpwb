@@ -2071,6 +2071,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'month_url': _archive_url(request, year, month),
         'prev_entry_url': _archive_url(request, prev_year, prev_month, prev_day, 'previous-series'),
         'next_entry_url': _archive_url(request, year, month, day, next_slug),
+        'export_csv_url': _archive_url(request, year, month, day, slug) + 'export.csv',
         **content,
     }
     return render(request, 'honeypot/archive.html', context)
@@ -3233,7 +3234,7 @@ def archive_export_csv(request, month, day, slug='', year=None):
     w = csv.writer(buf)
     w.writerow(['date', 'org', 'industry', 'phase', 'metric', 'value', 'unit', 'source'])
     for _ in range(row_count):
-        rec_year = rng.randint(max(1985, year - 5), year)
+        rec_year = rng.randint(max(1985, year - 5), max(1986, year))
         rec_month = rng.randint(1, 12)
         rec_day = rng.randint(1, 28)
         org = rng.choice(_ARCHIVE_ORGS)

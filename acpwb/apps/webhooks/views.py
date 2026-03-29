@@ -117,58 +117,6 @@ def pipe_inbound(request):
     return HttpResponse(status=200)
 
 
-@csrf_exempt
-@require_POST
-def canary_trigger_webhook(request):
-    """Receive canarytokens.org webhook when a served AWS key is used against AWS APIs."""
-    try:
-        data = json.loads(request.body)
-    except json.JSONDecodeError:
-        return HttpResponse(status=400)
-
-    access_key_id = data.get('aws_access_key_id', '')
-    src_ip = data.get('src_ip', '')
-    src_ua = data.get('user_agent', '')
-
-    from apps.honeypot.models import CanaryToken, CrawlerVisit
-    from apps.core.bot_classify import classify_ua, classify_ua_group
-    from django.utils import timezone
-
-    updated = 0
-    if access_key_id:
-        updated = CanaryToken.objects.filter(
-            token_type='aws_keys',
-            aws_access_key_id=access_key_id,
-            triggered=False,
-        ).update(
-            triggered=True,
-            triggered_at=timezone.now(),
-            triggered_ip=src_ip or None,
-            triggered_ua=src_ua[:512] if src_ua else '',
-            notes=json.dumps(data)[:1000],
-        )
-
-    # Log as a CrawlerVisit regardless of whether we matched a token
-    try:
-        CrawlerVisit.objects.create(
-            ip_address=src_ip or '0.0.0.0',
-            user_agent=src_ua[:512],
-            host='canarytokens.org',
-            path=f'/webhooks/canary-trigger/ [{access_key_id}]',
-            trap_type='canary_trigger',
-            bot_type=classify_ua(src_ua),
-            bot_group=classify_ua_group(src_ua),
-            query_string=f'AWS key used: {access_key_id}' if access_key_id else '',
-        )
-    except Exception:
-        pass
-
-    logger.info(
-        'Canary trigger: AWS key %s used from %s (matched %d token(s))',
-        access_key_id, src_ip, updated,
-    )
-    return HttpResponse(status=200)
-
 
 def _match_honeypot(inbound_email):
     """Find GeneratedEmployee records matching the recipient address."""

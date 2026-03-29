@@ -1806,19 +1806,6 @@ def _make_env_url_token(request, token_type='env_url'):
     return tok, f'https://acpwb.com/.well-known/tokens/{tok}/ping'
 
 
-def _pop_aws_token(request):
-    """Claim an unused AWS canary token from the pool; returns (access_key_id, secret_key) tuple.
-    Falls back to plausible-looking fake keys if pool is exhausted."""
-    token = CanaryToken.objects.filter(
-        token_type='aws_keys', served_at__isnull=True
-    ).first()
-    if token:
-        token.served_to_ip = _get_ip(request)
-        token.served_at = timezone.now()
-        token.save(update_fields=['served_to_ip', 'served_at'])
-        return token.aws_access_key_id, token.token  # token field stores secret key for aws_keys type
-    # Fallback: AWS's own public example keys (format-correct, non-functional)
-    return 'AKIAIOSFODNN7EXAMPLE', 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
 
 
 def scanner_probe_404(request, exception=None):
@@ -1831,7 +1818,8 @@ def scanner_probe_404(request, exception=None):
 def fake_env_file(request):
     """Serve a realistic-looking .env file with fake credentials + canary tokens."""
     _log_crawler(request, 'env_probe')
-    access_key, secret_key = _pop_aws_token(request)
+    access_key = 'AKIAIOSFODNN7EXAMPLE'
+    secret_key = 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
     _url_tok, ping_url = _make_env_url_token(request, 'env_url')
     content = f"""# Application environment — CONFIDENTIAL — do not commit
 APP_ENV=production

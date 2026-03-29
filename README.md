@@ -40,7 +40,7 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 
 Exploit scanners probing for WordPress installations, exposed `.env` files, and PHP webshells get convincing fake responses instead of 404s — keeping them engaged, extracting intelligence, and triggering downstream alerts.
 
-- **`/.env`** — returns a realistic environment file with fake database credentials, a real AWS IAM key pair from the [canarytokens.org](https://canarytokens.org) pool (fires a webhook if the key is ever used against any AWS API endpoint), and a self-hosted ping URL that fires when the file is fetched.
+- **`/.env`** — returns a realistic environment file with fake database credentials and a self-hosted ping URL that fires when the file is fetched.
 - **`/wp-config.php`** — returns fake PHP source with database credentials and an embedded canary ping URL.
 - **`/wp-login.php`** — GET returns a pixel-perfect WordPress login form. POST logs the submitted username/password to `InternalLoginAttempt` and redirects back with `?login=failed`.
 - **`/xmlrpc.php`** — GET returns the standard plaintext stub. POST parses the XML-RPC body, extracts the method name and credential parameters, logs them, and returns a valid XML-RPC fault response (403).
@@ -49,7 +49,7 @@ Exploit scanners probing for WordPress installations, exposed `.env` files, and 
 - **`/.htpasswd`** — returns a fake htpasswd hash line.
 - **`handler404`** — every other unmatched path is logged to `CrawlerVisit` as `scanner_probe` (instead of silently 404ing).
 
-**Canary token feedback loop:** the `generate_canary_tokens` management command pre-generates real AWS key pairs via the canarytokens.org API and stores them in a pool. When a scanner fetches `/.env`, a key is claimed from the pool and embedded in the response. If the scanner ever tries to use that key against any AWS endpoint, canarytokens.org fires a webhook to `POST /webhooks/canary-trigger/`, which marks the token triggered and logs the source IP. A second self-hosted ping URL is embedded in every fake config file as a backup — it fires when the file is fetched, even if the AWS key is never used.
+**Canary token feedback loop:** a unique self-hosted ping URL (`/.well-known/tokens/<token>/ping`) is embedded in every fake config file. When a bot fetches the file and follows the embedded URL, the token is marked triggered and the source IP is logged — confirming the file was actually read rather than just fetched.
 
 ### Tracks Everything
 
@@ -127,8 +127,8 @@ Config file probes get realistic-looking fake files instead of 404s. `/.env` inc
 #### Fake Webshell (`/*.php`)
 Any `.php` URL not matching a specific pattern hits a catch-all. Requests with a `?cmd=` parameter get fake shell output (`uid=33(www-data)...`) — the command value is logged to `CrawlerVisit.query_string`. Requests without a `cmd` parameter get a convincing PHP fatal error page. Both responses keep the scanner's tool probing rather than moving on.
 
-#### Canary Token Pool (`CanaryToken` model, `generate_canary_tokens` command)
-AWS key pairs are pre-generated via the canarytokens.org API and stored as a pool. At serve time, `fake_env_file()` claims one key from the pool and records which IP it was served to. When the key is used against any AWS endpoint, canarytokens.org fires `POST /webhooks/canary-trigger/` — which matches the key back to the original `CanaryToken` record and `CrawlerVisit`, creating a complete trail from probe to credential use.
+#### Self-Hosted Canary Tokens (`CanaryToken` model)
+Every fake config file gets a unique `secrets.token_urlsafe(32)` token at serve time, stored in the `CanaryToken` table with the serving IP and timestamp. The token is embedded as a URL (`/.well-known/tokens/<token>/ping`). When a bot follows that URL, the token is marked triggered and the request is logged as `canary_trigger` — confirming the file was actually read and parsed.
 
 #### Proof-of-Work on Projects (`apps/projects/pow.py`, `static/js/pow.js`)
 `/projects/` pages require a valid PoW session token. The browser runs SHA-256 in a loop until it finds a value where `SHA256(nonce + candidate)` has 5 leading zero bits (~32 iterations). This takes under 1 second in a browser. For a bot scraping at scale, the cost multiplies: each page load requires a fresh challenge-response round trip plus compute. The PoW token is logged on every project page visit.
@@ -246,7 +246,6 @@ Django admin is at `http://localhost/django-admin/`
 | `/.git/config` | Scanner | Fake git config with internal repo URL |
 | `/.htpasswd` | Scanner | Fake htpasswd hash line |
 | `/.well-known/tokens/<token>/ping` | Scanner | Self-hosted canary callback; marks token triggered |
-| `POST /webhooks/canary-trigger/` | Scanner | canarytokens.org webhook; fires when a served AWS key is used |
 
 Every page also contains:
 - **Ghost links** — off-screen links to trap URLs (visible to HTML-parsing bots)
@@ -424,7 +423,6 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/
 | `PIPE_WEBHOOK_SECRET` | Shared secret for Cloudflare Email Worker |
 | `MAILGUN_WEBHOOK_SIGNING_KEY` | From Mailgun dashboard (legacy) |
 | `MAILGUN_DOMAIN` | `acpwb.com` (legacy) |
-| `CANARYTOKENS_WEBHOOK_URL` | `https://acpwb.com/webhooks/canary-trigger/` — used by `generate_canary_tokens` |
 
 ---
 

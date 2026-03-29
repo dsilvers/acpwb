@@ -52,7 +52,7 @@ docker compose exec web python manage.py collectstatic --noinput
 - `people.PeoplePageVisit` — every load of `/our-people/`
 - `people.GeneratedEmployee` — the fake employees shown (FK → visit)
 - `honeypot.CrawlerVisit` — all bot/trap activity (trap_type choices include `report_list`, `report_download`, `ghost_link`, `dataset`, `api`, `well_known`, `scanner_probe`, `env_probe`, `wp_probe`, `webshell_probe`, `canary_trigger`); `host` field captures `request.get_host()` for per-subdomain dashboard breakdown
-- `honeypot.CanaryToken` — pool of pre-generated tokens (AWS key pairs from canarytokens.org + self-hosted URL tokens); `served_at`/`triggered_at` lifecycle; `token_type` in `aws_keys`, `env_url`, `wp_config`, `git_config`
+- `honeypot.CanaryToken` — self-hosted canary URL tokens embedded in fake config files; `served_at`/`triggered_at` lifecycle; `token_type` in `env_url`, `wp_config`, `git_config`
 - `honeypot.InternalLoginAttempt` — credential-stuffing log: ip, ua, username, password, next_url, created_at
 - `honeypot.WikiPage` — generated wiki content with watermark tokens
 - `honeypot.PublicReport` — generated report metadata, persisted on first access
@@ -100,7 +100,7 @@ Dedicated traps:
 - `/internal/portal/`, `/employees/export/`, `/admin-panel/login/` — ghost trap 403s, all logged
 
 Scanner bot traps (respond as if exploit worked — keep bot engaged, extract intelligence):
-- `/.env` — fake credentials + embedded AWS canary key from pool + self-hosted ping URL; logged as `env_probe`
+- `/.env` — fake credentials + self-hosted ping URL; logged as `env_probe`
 - `/wp-config.php` — fake PHP source with DB creds + self-hosted ping URL; logged as `wp_probe`
 - `/wp-login.php` — GET: convincing WP login form; POST: logs username/password to `InternalLoginAttempt`, redirects with `?login=failed`; logged as `wp_probe`
 - `/xmlrpc.php` — GET: plaintext stub; POST: parses XML, extracts method + credentials → `InternalLoginAttempt`, returns XMLRPC fault 403; logged as `wp_probe`
@@ -108,7 +108,6 @@ Scanner bot traps (respond as if exploit worked — keep bot engaged, extract in
 - `/.git/config` — fake git config with repo URL; logged as `env_probe`
 - `/.htpasswd` — fake htpasswd hash; logged as `env_probe`
 - `/.well-known/tokens/<token>/ping` — self-hosted canary callback; marks `CanaryToken` triggered, logs `CrawlerVisit(trap_type='canary_trigger')`
-- `POST /webhooks/canary-trigger/` — canarytokens.org AWS key use notification; matches `aws_access_key_id` → `CanaryToken`, marks triggered, logs `CrawlerVisit`
 - `handler404` — all other unmatched requests logged as `scanner_probe`
 
 Staff dashboard:
@@ -226,9 +225,7 @@ All models registered with useful `list_display`, `search_fields`, and `list_fil
 - **`?__year=YYYY` DEBUG shortcut** — when `DEBUG=True`, any request with `?__year=YYYY` activates archive subdomain mode without DNS setup; `pytest.ini` has `django_debug_mode = true` so the test suite can use this shortcut
 - **`handler404` logs scanner probes** — `config/urls.py` sets `handler404 = 'apps.honeypot.views.scanner_probe_404'`; all unmatched requests logged as `CrawlerVisit(trap_type='scanner_probe')`; Django's debug 404 page bypasses this in `DEBUG=True` mode — test with `@override_settings(DEBUG=False)`
 - **`re_path(r'^.*\.php$')` catch-all must come after explicit `.php` paths** — URL ordering in `apps/honeypot/urls.py` matters; `wp-login.php`, `xmlrpc.php`, `wp-config.php` must appear before the catch-all
-- **Canary tokens are pre-generated (pool model)** — `generate_canary_tokens` management command calls canarytokens.org API ahead of time; `fake_env_file()` claims from pool at serve time; avoids HTTP latency in request handlers; falls back to AWS example keys if pool exhausted
-- **Self-hosted canary URL in every fake config file** — `secrets.token_urlsafe(32)` token created at serve time; embedded as `ACPWB_CONFIG_ID=https://acpwb.com/.well-known/tokens/<tok>/ping`; second feedback layer confirming file was read even if AWS key never used
-- **`CANARYTOKENS_WEBHOOK_URL`** — new env var; set to `https://acpwb.com/webhooks/canary-trigger/` in production `.env`
+- **Self-hosted canary URL in every fake config file** — `secrets.token_urlsafe(32)` token created at serve time; embedded as `ACPWB_CONFIG_ID=https://acpwb.com/.well-known/tokens/<tok>/ping`; fires when the bot fetches the file and follows the URL
 - **Local dev domain is `acpwb.example`** — use dnsmasq with `address=/.acpwb.example/127.0.0.1` for browser testing of subdomains; the middleware recognises `archives-YYYY.acpwb.example` the same way as `.acpwb.com`; unknown `*.acpwb.example` subdomains redirect to `https://acpwb.example/`
 - **Wildcard TLS cert required for production** — archive subdomains need `*.acpwb.com`; use `certbot-dns-cloudflare` with Cloudflare API token (DNS-01 challenge)
 
@@ -265,7 +262,6 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/  # → 302 to acpw
 | `dedupe_crawler_visits` | — | Remove duplicate `CrawlerVisit` rows. |
 | `generate_content_fixture` | — | Generate test fixtures for content. |
 | `export_gen_data` | — | Export data for external image generation. |
-| `generate_canary_tokens` | `--count=N` (default 50), `--dry-run` | Pre-generate canarytokens.org AWS key tokens into pool. Requires `CANARYTOKENS_WEBHOOK_URL` env var. Run once on deploy, then as needed. |
 
 ### Dashboard Cache Setup (Production)
 

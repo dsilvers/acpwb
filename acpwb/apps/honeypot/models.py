@@ -107,23 +107,16 @@ class ArchiveVisit(models.Model):
 class CanaryToken(models.Model):
     """A trackable token embedded in fake credential files.
 
-    Two types:
-    - aws_keys: generated via canarytokens.org; fires a webhook when the key is
-      used against any AWS API endpoint.
-    - env_url / wp_config / git_config: self-hosted callback URL embedded in the
-      fake config file; fires when the bot GETs /.well-known/tokens/<token>/ping.
+    Self-hosted callback URL embedded in the fake config file; fires when the
+    bot GETs /.well-known/tokens/<token>/ping.
     """
     TOKEN_TYPES = [
-        ('aws_keys',  'Canarytokens.org AWS Keys'),
         ('env_url',   'Self-hosted .env canary URL'),
         ('wp_config', 'wp-config.php canary URL'),
         ('git_config', '.git/config canary URL'),
     ]
     token = models.CharField(max_length=128, unique=True, db_index=True)
     token_type = models.CharField(max_length=32, choices=TOKEN_TYPES)
-    # Canarytokens.org fields (aws_keys type only)
-    canarytoken_token = models.CharField(max_length=128, blank=True)
-    aws_access_key_id = models.CharField(max_length=32, blank=True)
     # Lifecycle
     served_to_ip = models.GenericIPAddressField(null=True, blank=True)
     served_at = models.DateTimeField(null=True, blank=True, db_index=True)

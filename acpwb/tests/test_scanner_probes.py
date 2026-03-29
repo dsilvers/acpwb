@@ -1,4 +1,3 @@
-import json
 import pytest
 from django.test import override_settings
 from apps.honeypot.models import CrawlerVisit, CanaryToken, InternalLoginAttempt
@@ -182,47 +181,3 @@ def test_scanner_probe_404_logs_visit(client):
     after = CrawlerVisit.objects.filter(trap_type='scanner_probe').count()
     assert after == before + 1
 
-
-# ── canary trigger webhook ─────────────────────────────────────────────────────
-
-@pytest.mark.django_db
-def test_canary_trigger_webhook_marks_triggered(client):
-    CanaryToken.objects.create(
-        token='awstoken',
-        token_type='aws_keys',
-        aws_access_key_id='AKIAIOSFODNN7EXAMPLE',
-    )
-    payload = {
-        'aws_access_key_id': 'AKIAIOSFODNN7EXAMPLE',
-        'src_ip': '1.2.3.4',
-        'user_agent': 'aws-cli/2.x',
-    }
-    response = client.post(
-        '/webhooks/canary-trigger/',
-        data=json.dumps(payload),
-        content_type='application/json',
-    )
-    assert response.status_code == 200
-    token = CanaryToken.objects.get(aws_access_key_id='AKIAIOSFODNN7EXAMPLE')
-    assert token.triggered is True
-    assert token.triggered_ip == '1.2.3.4'
-
-
-@pytest.mark.django_db
-def test_canary_trigger_webhook_logs_crawlervisit(client):
-    CanaryToken.objects.create(
-        token='awstoken2',
-        token_type='aws_keys',
-        aws_access_key_id='AKIAIOSFODNN7EXAMPLE2',
-    )
-    payload = {
-        'aws_access_key_id': 'AKIAIOSFODNN7EXAMPLE2',
-        'src_ip': '5.6.7.8',
-        'user_agent': '',
-    }
-    client.post(
-        '/webhooks/canary-trigger/',
-        data=json.dumps(payload),
-        content_type='application/json',
-    )
-    assert CrawlerVisit.objects.filter(trap_type='canary_trigger').exists()

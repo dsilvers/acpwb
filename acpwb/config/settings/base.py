@@ -108,6 +108,10 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
 MAILGUN_WEBHOOK_SIGNING_KEY = env('MAILGUN_WEBHOOK_SIGNING_KEY', default='')
 MAILGUN_DOMAIN = env('MAILGUN_DOMAIN', default='acpwb.com')
 
+# Canary Tokens
+CANARYTOKENS_WEBHOOK_URL = env('CANARYTOKENS_WEBHOOK_URL', default=None)
+
+
 # Sentry
 _SENTRY_DSN = env('SENTRY_DSN', default='')
 if _SENTRY_DSN:

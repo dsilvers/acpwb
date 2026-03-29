@@ -81,7 +81,8 @@ def test_dashboard_people_200(staff_client):
 def test_dashboard_shows_crawler_data(client, staff_client):
     client.get('/internal/portal/')
     client.get('/wiki/compensation/')
-    response = staff_client.get('/acpwb-dashboard/?range=all')
+    # Use custom range to bypass Redis preset cache and always query live data
+    response = staff_client.get('/acpwb-dashboard/?range=custom&from=2000-01-01&to=2099-12-31')
     assert response.status_code == 200
     content = response.content.decode()
     assert 'Ghost' in content or 'wiki' in content.lower()

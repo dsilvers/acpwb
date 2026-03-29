@@ -98,31 +98,32 @@ def test_archive_index_200(client):
 
 
 @pytest.mark.django_db
-def test_archive_year_redirects_to_subdomain(client):
+def test_archive_year_serves_content(client):
+    # /archive/<year>/ serves content directly on main domain (no redirect)
     response = client.get('/archive/2024/')
-    assert response.status_code == 302
-    assert response['Location'] == 'https://archives-2024.acpwb.com/'
+    assert response.status_code == 200
+    assert b'2024' in response.content
 
 
 @pytest.mark.django_db
-def test_archive_month_redirects_to_subdomain(client):
+def test_archive_month_serves_content(client):
     response = client.get('/archive/2020/6/')
-    assert response.status_code == 302
-    assert response['Location'] == 'https://archives-2020.acpwb.com/06/'
+    assert response.status_code == 200
+    assert b'2020' in response.content
 
 
 @pytest.mark.django_db
-def test_archive_trap_redirects_to_subdomain(client):
+def test_archive_trap_serves_content(client):
     response = client.get('/archive/2024/3/15/some-slug/')
-    assert response.status_code == 302
-    assert 'archives-2024.acpwb.com' in response['Location']
+    assert response.status_code == 200
+    assert b'2024' in response.content
 
 
 @pytest.mark.django_db
-def test_archive_deep_path_redirects_to_subdomain(client):
+def test_archive_deep_path_serves_content(client):
     response = client.get('/archive/2023/1/1/a/b/c/d/e/f/')
-    assert response.status_code == 302
-    assert 'archives-2023.acpwb.com' in response['Location']
+    assert response.status_code == 200
+    assert b'2023' in response.content
 
 
 @pytest.mark.django_db

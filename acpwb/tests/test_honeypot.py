@@ -9,10 +9,11 @@ from apps.honeypot.wiki_generator import generate_wiki_page
 # Tests use the ?__year=YYYY DEBUG shortcut to exercise the trap views directly.
 
 @pytest.mark.django_db
-def test_archive_redirects_to_subdomain(client):
+def test_archive_main_domain_serves_content(client):
+    # /archive/<year>/... serves content directly on main domain (no redirect)
     response = client.get('/archive/2024/3/15/some-article/')
-    assert response.status_code == 302
-    assert 'archives-2024.acpwb.com' in response['Location']
+    assert response.status_code == 200
+    assert b'2024' in response.content
 
 
 @pytest.mark.django_db

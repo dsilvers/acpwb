@@ -9,7 +9,7 @@ Cache keys:  dashboard:{view}:{preset}  (30 keys: 5 views × 6 presets)
 TTL:         5400 s (90 minutes)
 """
 from collections import Counter
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone as dt_timezone
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.cache import cache
@@ -92,9 +92,9 @@ def _parse_date_range(request):
         to_str = request.GET.get('to', '')
         try:
             start = datetime.strptime(from_str, '%Y-%m-%d').replace(
-                hour=0, minute=0, second=0, tzinfo=timezone.utc)
+                hour=0, minute=0, second=0, tzinfo=dt_timezone.utc)
             end = datetime.strptime(to_str, '%Y-%m-%d').replace(
-                hour=23, minute=59, second=59, tzinfo=timezone.utc)
+                hour=23, minute=59, second=59, tzinfo=dt_timezone.utc)
         except (ValueError, TypeError):
             start = now - timedelta(days=30)
             end = now

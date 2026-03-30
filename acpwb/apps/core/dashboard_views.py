@@ -212,6 +212,34 @@ def emails(request):
 
 
 @staff_member_required(login_url='/django-admin/login/')
+def honeypot_traps(request):
+    by_trap = _stat('crawlers.by_trap_type', {})
+    trap_totals = _trap_counts(by_trap)
+
+    CONTENT_KEYS = {'wiki', 'report_list', 'report_download', 'dataset', 'api', 'well_known', 'pow'}
+    SCANNER_KEYS = {'scanner_probe', 'env_probe', 'wp_probe', 'webshell_probe'}
+
+    content_total = sum(by_trap.get(k, 0) for k in CONTENT_KEYS)
+    ghost_total = by_trap.get('ghost_link', 0)
+    scanner_total = sum(by_trap.get(k, 0) for k in SCANNER_KEYS)
+
+    canary_latest = CanaryToken.objects.filter(triggered=True).order_by('-triggered_at').first()
+
+    ctx = {
+        'trap_totals':          trap_totals,
+        'content_total':        content_total,
+        'ghost_total':          ghost_total,
+        'scanner_total':        scanner_total,
+        'canary_trigger_count': _stat('canary.triggered_count', 0),
+        'canary_latest':        canary_latest,
+        'top_probe_paths':      _top_field(_stat('crawlers.probe_by_path', {}), 'path', 20),
+        'webshell_commands':    _top_field(_stat('crawlers.webshell_cmds', {}), 'query_string', 10),
+        'updated_at':           _updated_at('crawlers.total'),
+    }
+    return render(request, 'dashboard/honeypot.html', ctx)
+
+
+@staff_member_required(login_url='/django-admin/login/')
 def people(request):
     ctx = {
         'people_total':    _stat('people.total', 0),

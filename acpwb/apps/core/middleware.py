@@ -14,7 +14,7 @@ BOT_UA_PATTERNS = re.compile(
 # these or every request creates two CrawlerVisit records.
 VIEW_LOGGED_PATHS = re.compile(
     r'^/(archive|wiki|internal|employees/export|admin-panel|api/v1|'
-    r'reports|sitemap|robots\.txt|\.well-known)(/|$)'
+    r'reports|sitemap|robots\.txt|\.well-known|datasets|feeds)(/|$)'
 )
 
 

@@ -1,0 +1,138 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Honeypot Traps{% endblock %}
+{% block page_title %}Honeypot Traps{% endblock %}
+{% block nav_honeypot %}active{% endblock %}
+
+{% block content %}
+
+<!-- Summary stat cards -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Content Traps</div>
+      <div class="value">{{ content_total }}</div>
+      <div class="sub">wiki · reports · datasets · api · feeds</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Ghost Links</div>
+      <div class="value">{{ ghost_total }}</div>
+      <div class="sub">internal portal · fake employees</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Scanner Probes</div>
+      <div class="value">{{ scanner_total }}</div>
+      <div class="sub">.env · wp-config · webshell · 404s</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="border-top-color:{% if canary_trigger_count %}#dc3545{% else %}var(--gold){% endif %}">
+      <div class="label">Canary Triggers</div>
+      <div class="value" style="{% if canary_trigger_count %}color:#dc3545{% endif %}">{{ canary_trigger_count }}</div>
+      <div class="sub">
+        {% if canary_latest %}last: {{ canary_latest.triggered_at|date:"M j H:i" }}{% else %}fake config URLs fetched{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <!-- Full trap type breakdown -->
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>All Trap Types</h6><span style="font-size:.72rem;color:var(--muted)">all-time, sorted by hits</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Trap</th><th>Hits</th><th>%</th><th style="width:120px">Share</th></tr></thead>
+        <tbody>
+          {% for t in trap_totals %}
+          <tr>
+            <td><span class="trap-badge">{{ t.label }}</span></td>
+            <td>{{ t.count }}</td>
+            <td style="color:var(--muted);font-size:.75rem">{{ t.pct }}%</td>
+            <td><div class="bar-track"><div class="bar-fill" style="width:{{ t.pct }}%"></div></div></td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="4" class="text-muted text-center py-3" style="font-size:.8rem">No data yet — run <code>precalc_dashboard</code></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Right column: canary + probe paths + webshell cmds -->
+  <div class="col-lg-6">
+
+    {% if canary_trigger_count %}
+    <div class="section-card mb-3" style="border-color:#dc3545">
+      <div class="section-card-header" style="background:rgba(220,53,69,.08)">
+        <h6 style="color:#dc3545">Canary Token Triggers</h6>
+      </div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:center;gap:1.5rem">
+          <div style="font-size:2.4rem;font-weight:800;color:#dc3545;line-height:1">{{ canary_trigger_count }}</div>
+          <div>
+            <div style="font-size:.75rem;color:var(--navy);font-weight:600">fake config URLs fetched</div>
+            {% if canary_latest %}
+            <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">
+              Last: {{ canary_latest.triggered_at|date:"Y-m-d H:i" }}&ensp;
+              IP: <span style="font-family:monospace">{{ canary_latest.triggered_ip|default:"unknown" }}</span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if top_probe_paths %}
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Top Scanner Probe Paths</h6>
+        <span style="font-size:.72rem;color:var(--muted)">.env / wp / webshell / scanner</span>
+      </div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Path</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for p in top_probe_paths %}
+          <tr>
+            <td style="font-family:monospace;font-size:.75rem">{{ p.path }}</td>
+            <td>{{ p.count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if webshell_commands %}
+    <div class="section-card">
+      <div class="section-card-header"><h6>Webshell Commands Attempted</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Query String</th><th>Hits</th></tr></thead>
+        <tbody>
+          {% for c in webshell_commands %}
+          <tr>
+            <td style="font-family:monospace;font-size:.75rem;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ c.query_string }}">{{ c.query_string|truncatechars:55 }}</td>
+            <td>{{ c.count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if not top_probe_paths and not webshell_commands and not canary_trigger_count %}
+    <div class="section-card">
+      <div class="section-card-body text-muted text-center py-4" style="font-size:.8rem">
+        Scanner probe details appear here after <code>precalc_dashboard</code> runs.
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

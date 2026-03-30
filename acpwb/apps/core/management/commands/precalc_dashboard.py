@@ -17,6 +17,7 @@ Cron (host crontab):
     */30 * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web \\
         python manage.py precalc_dashboard >> /var/log/acpwb-precalc.log 2>&1
 """
+import fcntl
 import time
 from datetime import timedelta
 
@@ -39,21 +40,28 @@ class Command(BaseCommand):
     help = 'Incrementally update dashboard stats in the database.'
 
     def handle(self, *args, **options):
-        run_start = time.monotonic()
-        now_str = timezone.now().strftime('%Y-%m-%d %H:%M:%S %Z')
-        self.stdout.write(f'precalc_dashboard starting at {now_str}')
+        with open('/tmp/precalc_dashboard.lock', 'w') as lockfile:
+            try:
+                fcntl.flock(lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                self.stdout.write('precalc_dashboard already running — skipping.')
+                return
 
-        self._update_crawlers()
-        self._update_archive()
-        self._update_emails()
-        self._update_people()
-        self._update_projects()
-        self._update_login_attempts()
-        self._update_opt_outs()
-        self._update_canary()
+            run_start = time.monotonic()
+            now_str = timezone.now().strftime('%Y-%m-%d %H:%M:%S %Z')
+            self.stdout.write(f'precalc_dashboard starting at {now_str}')
 
-        elapsed = time.monotonic() - run_start
-        self.stdout.write(f'Done in {elapsed:.1f}s')
+            self._update_crawlers()
+            self._update_archive()
+            self._update_emails()
+            self._update_people()
+            self._update_projects()
+            self._update_login_attempts()
+            self._update_opt_outs()
+            self._update_canary()
+
+            elapsed = time.monotonic() - run_start
+            self.stdout.write(f'Done in {elapsed:.1f}s')
 
     # ── Helpers ───────────────────────────────────────────────────────────────
 

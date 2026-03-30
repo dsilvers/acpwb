@@ -1,185 +1,68 @@
 """
 ACPWB Activity Dashboard — requires staff login.
 
-Stats are pre-computed hourly by the `precalc_dashboard` management command and
-stored in Redis.  Views serve from cache; on a cache miss they compute live and
-re-populate the cache.  Custom date ranges always run live.
+Stats are pre-computed by the `precalc_dashboard` management command and
+stored as DashboardStat rows in the database.  Views read directly from those
+rows; no caching layer is needed.  Run precalc_dashboard on a 30-minute cron.
 
-Cache keys:  dashboard:{view}:{preset}  (30 keys: 5 views × 6 presets)
-TTL:         5400 s (90 minutes)
+Recent records (last 50 visits, last 5 emails, etc.) are always live queries.
 """
-from collections import Counter
-from datetime import datetime, timedelta, timezone as dt_timezone
+from datetime import date, timedelta
 
 from django.contrib.admin.views.decorators import staff_member_required
-from django.core.cache import cache
-from django.db.models import Count, Max
-from django.db.models.functions import TruncDate
+from django.db.models import Max
 from django.shortcuts import render
-from django.utils import timezone
 
-
-from apps.honeypot.models import CrawlerVisit, ArchiveVisit, InternalLoginAttempt, CanaryToken
+from apps.core.models import DashboardStat
+from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import DataOptOutRequest
 from apps.webhooks.models import InboundEmail
 
-_DASH_CACHE_TTL = 5400  # 90 minutes
 
-PRESETS = [
-    ('today',  'Today'),
-    ('7d',     'Last 7 Days'),
-    ('30d',    'Last 30 Days'),
-    ('90d',    'Last 90 Days'),
-    ('ytd',    'Year to Date'),
-    ('all',    'All Time'),
-    ('custom', 'Custom Range'),
-]
+# ── Stat helpers ──────────────────────────────────────────────────────────────
 
-# Presets that can be pre-computed (no request context required)
-PRECALC_PRESETS = ['today', '7d', '30d', '90d', 'ytd', 'all']
+def _stat(key, default=None):
+    try:
+        return DashboardStat.objects.get(key=key).value
+    except DashboardStat.DoesNotExist:
+        return default
 
 
-# ── Date range helpers ────────────────────────────────────────────────────────
-
-def _build_date_range(preset):
-    """Build a date range dict from a preset string without a request object.
-
-    Used by the precalc_dashboard management command and by _parse_date_range.
-    """
-    now = timezone.now()
-
-    if preset == 'today':
-        start = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        end = now
-    elif preset == '7d':
-        start = now - timedelta(days=7)
-        end = now
-    elif preset == '30d':
-        start = now - timedelta(days=30)
-        end = now
-    elif preset == '90d':
-        start = now - timedelta(days=90)
-        end = now
-    elif preset == 'ytd':
-        start = now.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
-        end = now
-    elif preset == 'all':
-        start = None
-        end = None
-    else:
-        start = now - timedelta(days=30)
-        end = now
-        preset = '30d'
-
-    return {
-        'preset': preset,
-        'start': start,
-        'end': end,
-        'from_str': start.strftime('%Y-%m-%d') if start else '',
-        'to_str': end.strftime('%Y-%m-%d') if end else '',
-        'presets': PRESETS,
-    }
+def _updated_at(key='crawlers.total'):
+    return DashboardStat.objects.filter(key=key).values_list('updated_at', flat=True).first()
 
 
-def _parse_date_range(request):
-    preset = request.GET.get('range', '30d')
-
-    if preset == 'custom':
-        now = timezone.now()
-        from_str = request.GET.get('from', '')
-        to_str = request.GET.get('to', '')
-        try:
-            start = datetime.strptime(from_str, '%Y-%m-%d').replace(
-                hour=0, minute=0, second=0, tzinfo=dt_timezone.utc)
-            end = datetime.strptime(to_str, '%Y-%m-%d').replace(
-                hour=23, minute=59, second=59, tzinfo=dt_timezone.utc)
-        except (ValueError, TypeError):
-            start = now - timedelta(days=30)
-            end = now
-            preset = '30d'
-        return {
-            'preset': preset,
-            'start': start,
-            'end': end,
-            'from_str': start.strftime('%Y-%m-%d') if start else '',
-            'to_str': end.strftime('%Y-%m-%d') if end else '',
-            'presets': PRESETS,
-        }
-
-    return _build_date_range(preset)
+def _top_named(d, limit=20):
+    """Convert {name: count} dict → [{name, count, pct}] sorted by count desc."""
+    if not d:
+        return []
+    items = sorted(d.items(), key=lambda x: x[1], reverse=True)[:limit]
+    total = sum(v for _, v in items) or 1
+    return [{'name': k, 'count': v, 'pct': round(v * 100 / total)} for k, v in items]
 
 
-def _apply_range(qs, date_range, field='timestamp'):
-    if date_range['start']:
-        qs = qs.filter(**{f'{field}__gte': date_range['start']})
-    if date_range['end']:
-        qs = qs.filter(**{f'{field}__lte': date_range['end']})
-    return qs
-
-
-def _bot_breakdown(qs, limit=20):
-    """GROUP BY bot_type in SQL — O(1). Only for CrawlerVisit querysets."""
-    rows = (qs.values('bot_type')
-              .annotate(count=Count('id'))
-              .order_by('-count')[:limit])
-    total = sum(r['count'] for r in rows) or 1
-    result = [
-        {
-            'name': r['bot_type'] or 'Unknown',
-            'count': r['count'],
-            'pct': round(r['count'] * 100 / total),
-        }
-        for r in rows
-    ]
-    return result, total
-
-
-def _bot_breakdown_ua(qs, limit=20):
-    """Python-loop fallback for models that only have user_agent (no bot_type column)."""
-    from apps.core.bot_classify import classify_ua
-    counts = Counter()
-    for ua in qs.values_list('user_agent', flat=True):
-        counts[classify_ua(ua or '')] += 1
-    top = counts.most_common(limit)
-    total = sum(counts.values()) or 1
+def _top_field(d, field, limit=20):
+    """Convert {k: count} dict → [{field: k, count: c}] sorted by count desc."""
+    if not d:
+        return []
     return [
-        {'name': name, 'count': count, 'pct': round(count * 100 / total)}
-        for name, count in top
-    ], total
-
-
-def _bot_group_breakdown(qs):
-    """GROUP BY bot_group in SQL — O(1) instead of O(n) Python loop."""
-    rows = (qs.values('bot_group')
-              .annotate(count=Count('id'))
-              .order_by('-count'))
-    total = sum(r['count'] for r in rows) or 1
-    return [
-        {
-            'name': r['bot_group'] or 'Unknown',
-            'count': r['count'],
-            'pct': round(r['count'] * 100 / total),
-        }
-        for r in rows
+        {field: k, 'count': v}
+        for k, v in sorted(d.items(), key=lambda x: x[1], reverse=True)[:limit]
     ]
 
 
-def _daily_chart(qs, days=30, field='timestamp'):
-    """Single GROUP BY date SQL query instead of fetching all timestamps."""
-    now = timezone.now()
-    start = now - timedelta(days=days)
-    rows = (qs.filter(**{f'{field}__gte': start})
-              .annotate(date=TruncDate(field))
-              .values('date')
-              .annotate(count=Count('id'))
-              .order_by('date'))
-    counts = {r['date'].isoformat(): r['count'] for r in rows}
+def _daily_bars(d, days=60):
+    """Convert {date_str: count} dict → {bars, start, end} chart structure."""
+    if d is None:
+        d = {}
+    today = date.today()
     bars = []
     for i in range(days - 1, -1, -1):
-        d = (now - timedelta(days=i)).date().isoformat()
-        bars.append({'date': d, 'count': counts.get(d, 0)})
+        day = today - timedelta(days=i)
+        ds = day.isoformat()
+        bars.append({'date': ds, 'count': d.get(ds, 0)})
     peak = max((r['count'] for r in bars), default=1) or 1
     for r in bars:
         r['pct'] = round(r['count'] * 100 / peak)
@@ -190,257 +73,157 @@ def _daily_chart(qs, days=30, field='timestamp'):
     }
 
 
-def _get_daily_chart(redis_key, qs_callable, days, field='timestamp'):
-    """Return a cached daily chart, computing and caching it on miss.
-
-    redis_key   — e.g. 'dashboard:daily:crawlers:60'
-    qs_callable — zero-arg callable returning the base queryset (avoids passing
-                  a live queryset that may be evaluated before it's needed)
-    """
-    result = cache.get(redis_key)
-    if result is None:
-        result = _daily_chart(qs_callable(), days=days, field=field)
-        cache.set(redis_key, result, _DASH_CACHE_TTL)
-    return result
-
-
-# ── Compute helpers (called by views on cache miss and by precalc_dashboard) ──
-
-def _compute_overview(dr, daily=None):
-    crawler_qs = _apply_range(CrawlerVisit.objects.all(), dr)
-    archive_qs = _apply_range(ArchiveVisit.objects.all(), dr)
-    email_qs   = _apply_range(InboundEmail.objects.all(), dr, field='received_at')
-    people_qs  = _apply_range(PeoplePageVisit.objects.all(), dr)
-    project_qs = _apply_range(ProjectPageVisit.objects.all(), dr)
-    login_qs   = _apply_range(InternalLoginAttempt.objects.all(), dr, field='created_at')
-    optout_qs  = _apply_range(DataOptOutRequest.objects.all(), dr, field='created_at')
-
-    top_bots, _ = _bot_breakdown(crawler_qs, limit=15)
-
-    trap_counts = list(
-        crawler_qs.values('trap_type')
-        .annotate(count=Count('id'))
-        .order_by('-count')
-    )
-    trap_total = sum(t['count'] for t in trap_counts) or 1
-    for t in trap_counts:
-        t['pct'] = round(t['count'] * 100 / trap_total)
-        t['label'] = dict(CrawlerVisit.TRAP_CHOICES).get(t['trap_type'], t['trap_type'])
-
-    if daily is None:
-        daily = _get_daily_chart(
-            'dashboard:daily:overview:30',
-            CrawlerVisit.objects.all, days=30,
-        )
-
-    return {
-        **dr,
-        'counts': {
-            'crawler':  crawler_qs.count(),
-            'archive':  archive_qs.count(),
-            'email':    email_qs.count(),
-            'people':   people_qs.count(),
-            'projects': project_qs.count(),
-            'logins':   login_qs.count(),
-            'optouts':  optout_qs.count(),
-        },
-        'top_bots':        top_bots,
-        'trap_counts':     trap_counts,
-        'bot_groups':      _bot_group_breakdown(crawler_qs),
-        'daily':           daily,
-        'recent_crawlers': list(crawler_qs.order_by('-timestamp')[:10]),
-        'recent_emails':   list(email_qs.order_by('-received_at')[:5]),
-        'recent_optouts':  list(DataOptOutRequest.objects.order_by('-created_at')[:10]),
-        'cached_at':       timezone.now(),
-    }
-
-
-def _compute_crawlers(dr, daily=None):
-    qs = _apply_range(CrawlerVisit.objects.all(), dr)
-    top_bots, total = _bot_breakdown(qs, limit=30)
-
-    trap_counts = list(
-        qs.values('trap_type')
-        .annotate(count=Count('id'))
-        .order_by('-count')
-    )
-    trap_total = sum(t['count'] for t in trap_counts) or 1
-    for t in trap_counts:
-        t['pct'] = round(t['count'] * 100 / trap_total)
-        t['label'] = dict(CrawlerVisit.TRAP_CHOICES).get(t['trap_type'], t['trap_type'])
-
-    if daily is None:
-        daily = _get_daily_chart(
-            'dashboard:daily:crawlers:60',
-            CrawlerVisit.objects.all, days=60,
-        )
-
-    # Scanner probe stats
-    probe_types = ['env_probe', 'wp_probe', 'webshell_probe', 'scanner_probe']
-    probe_qs = _apply_range(CrawlerVisit.objects.filter(trap_type__in=probe_types), dr)
-    top_probe_paths = list(
-        probe_qs.values('path').annotate(count=Count('id')).order_by('-count')[:20]
-    )
-    webshell_commands = list(
-        _apply_range(CrawlerVisit.objects.filter(trap_type='webshell_probe'), dr)
-        .exclude(query_string='')
-        .values('query_string').annotate(count=Count('id')).order_by('-count')[:10]
-    )
-    canary_triggered = CanaryToken.objects.filter(triggered=True)
-    canary_trigger_count = canary_triggered.count()
-    canary_latest = canary_triggered.order_by('-triggered_at').first()
-
-    return {
-        **dr,
-        'total':                total,
-        'top_bots':             top_bots,
-        'trap_counts':          trap_counts,
-        'top_ips':              list(qs.values('ip_address').annotate(count=Count('id')).order_by('-count')[:20]),
-        'top_paths':            list(qs.values('path').annotate(count=Count('id')).order_by('-count')[:20]),
-        'top_hosts':            list(qs.exclude(host='').values('host').annotate(count=Count('id')).order_by('-count')[:20]),
-        'daily':                daily,
-        'recent':               list(qs.order_by('-timestamp').select_related()[:50]),
-        'cached_at':            timezone.now(),
-        'top_probe_paths':      top_probe_paths,
-        'webshell_commands':    webshell_commands,
-        'canary_trigger_count': canary_trigger_count,
-        'canary_latest':        canary_latest,
-    }
-
-
-def _compute_archive(dr, daily=None):
-    qs = _apply_range(ArchiveVisit.objects.all(), dr)
-    top_bots, total = _bot_breakdown_ua(qs, limit=20)
-
-    depth_counts = list(
-        qs.values('depth')
-        .annotate(count=Count('id'))
-        .order_by('depth')[:15]
-    )
-    depth_total = sum(d['count'] for d in depth_counts) or 1
-    for d in depth_counts:
-        d['pct'] = round(d['count'] * 100 / depth_total)
-
-    if daily is None:
-        daily = _get_daily_chart(
-            'dashboard:daily:archive:30',
-            ArchiveVisit.objects.all, days=30,
-        )
-
-    return {
-        **dr,
-        'total':        total,
-        'top_bots':     top_bots,
-        'depth_counts': depth_counts,
-        'top_ips':      list(qs.values('ip_address').annotate(count=Count('id'), max_depth=Max('depth')).order_by('-count')[:20]),
-        'top_roots':    list(qs.values('slug').annotate(count=Count('id')).order_by('-count')[:20]),
-        'daily':        daily,
-        'recent':       list(qs.order_by('-timestamp')[:50]),
-        'cached_at':    timezone.now(),
-    }
-
-
-def _compute_emails(dr, daily=None):
-    qs = _apply_range(InboundEmail.objects.all(), dr, field='received_at')
-    total = qs.count()
-
-    domain_counts = Counter()
-    for sender in qs.values_list('sender', flat=True):
-        domain = sender.split('@')[-1].lower() if '@' in sender else sender
-        domain_counts[domain] += 1
-    top_domains = [
-        {'domain': d, 'count': c, 'pct': round(c * 100 / total) if total else 0}
-        for d, c in domain_counts.most_common(20)
+def _trap_counts(by_trap_type_dict):
+    """Convert {trap_type: count} dict → [{label, trap_type, count, pct}] sorted."""
+    from apps.honeypot.models import CrawlerVisit as CV
+    label_map = dict(CV.TRAP_CHOICES)
+    if not by_trap_type_dict:
+        return []
+    total = sum(by_trap_type_dict.values()) or 1
+    items = sorted(by_trap_type_dict.items(), key=lambda x: x[1], reverse=True)
+    return [
+        {
+            'trap_type': k,
+            'label': label_map.get(k, k),
+            'count': v,
+            'pct': round(v * 100 / total),
+        }
+        for k, v in items
     ]
 
-    if daily is None:
-        daily = _get_daily_chart(
-            'dashboard:daily:emails:30',
-            InboundEmail.objects.all, days=30, field='received_at',
-        )
 
-    return {
-        **dr,
-        'total':           total,
-        'top_domains':     top_domains,
-        'top_recipients':  list(qs.values('recipient').annotate(count=Count('id')).order_by('-count')[:20]),
-        'daily':           daily,
-        'recent':          list(qs.order_by('-received_at').prefetch_related('matches')[:50]),
-        'cached_at':       timezone.now(),
-    }
+def _depth_counts(by_depth_dict):
+    """Convert {depth_str: count} dict → [{depth, count, pct}] sorted by depth."""
+    if not by_depth_dict:
+        return []
+    total = sum(by_depth_dict.values()) or 1
+    items = sorted(by_depth_dict.items(), key=lambda x: int(x[0]))
+    return [
+        {'depth': int(k), 'count': v, 'pct': round(v * 100 / total)}
+        for k, v in items
+    ]
 
 
-def _compute_people(dr, people_daily=None, project_daily=None):
-    people_qs  = _apply_range(PeoplePageVisit.objects.all(), dr)
-    project_qs = _apply_range(ProjectPageVisit.objects.all(), dr)
+def _top_domains(by_domain_dict, limit=20):
+    """Convert {domain: count} dict → [{domain, count, pct}] sorted."""
+    if not by_domain_dict:
+        return []
+    items = sorted(by_domain_dict.items(), key=lambda x: x[1], reverse=True)[:limit]
+    total = sum(v for _, v in items) or 1
+    return [{'domain': k, 'count': v, 'pct': round(v * 100 / total)} for k, v in items]
 
-    people_bots, people_total   = _bot_breakdown_ua(people_qs, limit=20)
-    project_bots, project_total = _bot_breakdown_ua(project_qs, limit=20)
 
-    if people_daily is None:
-        people_daily = _get_daily_chart(
-            'dashboard:daily:people:30',
-            PeoplePageVisit.objects.all, days=30,
-        )
-    if project_daily is None:
-        project_daily = _get_daily_chart(
-            'dashboard:daily:projects:30',
-            ProjectPageVisit.objects.all, days=30,
-        )
+# ── Bot breakdown helpers (still used for archive top_bots display) ───────────
 
-    return {
-        **dr,
-        'people_total':    people_total,
-        'project_total':   project_total,
-        'people_bots':     people_bots,
-        'project_bots':    project_bots,
-        'top_people_ips':  list(people_qs.values('ip_address').annotate(count=Count('id')).order_by('-count')[:15]),
-        'top_project_ips': list(project_qs.values('ip_address').annotate(count=Count('id')).order_by('-count')[:15]),
-        'people_daily':    people_daily,
-        'project_daily':   project_daily,
-        'recent_people':   list(people_qs.order_by('-timestamp')[:30]),
-        'recent_projects': list(project_qs.order_by('-timestamp')[:30]),
-        'cached_at':       timezone.now(),
-    }
+def _bot_breakdown_from_dict(d, limit=20):
+    """Convert {bot_type: count} dict → [{name, count, pct}]."""
+    return _top_named(d, limit)
 
 
 # ── Views ─────────────────────────────────────────────────────────────────────
 
-def _cached_view(request, view_name, compute_fn, template):
-    dr = _parse_date_range(request)
-    preset = dr['preset']
-    if preset != 'custom':
-        cache_key = f'dashboard:{view_name}:{preset}'
-        ctx = cache.get(cache_key)
-        if ctx is not None:
-            return render(request, template, ctx)
-        ctx = compute_fn(dr)
-        cache.set(cache_key, ctx, _DASH_CACHE_TTL)
-    else:
-        ctx = compute_fn(dr)
-    return render(request, template, ctx)
-
-
 @staff_member_required(login_url='/django-admin/login/')
 def overview(request):
-    return _cached_view(request, 'overview', _compute_overview, 'dashboard/overview.html')
+    ctx = {
+        'counts': {
+            'crawler':  _stat('crawlers.total', 0),
+            'archive':  _stat('archive.total', 0),
+            'email':    _stat('emails.total', 0),
+            'people':   _stat('people.total', 0),
+            'projects': _stat('projects.total', 0),
+            'logins':   _stat('login_attempts.total', 0),
+            'optouts':  _stat('optouts.total', 0),
+        },
+        'top_bots':        _top_named(_stat('crawlers.by_bot_type', {}), 15),
+        'trap_counts':     _trap_counts(_stat('crawlers.by_trap_type', {})),
+        'bot_groups':      _top_named(_stat('crawlers.by_bot_group', {})),
+        'daily':           _daily_bars(_stat('crawlers.daily', {}), 30),
+        'recent_crawlers': list(CrawlerVisit.objects.order_by('-timestamp')[:10]),
+        'recent_emails':   list(InboundEmail.objects.order_by('-received_at')[:5]),
+        'recent_optouts':  list(DataOptOutRequest.objects.order_by('-created_at')[:10]),
+        'updated_at':      _updated_at('crawlers.total'),
+    }
+    return render(request, 'dashboard/overview.html', ctx)
 
 
 @staff_member_required(login_url='/django-admin/login/')
 def crawlers(request):
-    return _cached_view(request, 'crawlers', _compute_crawlers, 'dashboard/crawlers.html')
+    canary_latest = CanaryToken.objects.filter(triggered=True).order_by('-triggered_at').first()
+    ctx = {
+        'total':                _stat('crawlers.total', 0),
+        'top_bots':             _top_named(_stat('crawlers.by_bot_type', {}), 30),
+        'trap_counts':          _trap_counts(_stat('crawlers.by_trap_type', {})),
+        'top_ips':              _top_field(_stat('crawlers.by_ip', {}), 'ip_address', 20),
+        'top_paths':            _top_field(_stat('crawlers.by_path', {}), 'path', 20),
+        'top_hosts':            _top_field(_stat('crawlers.by_host', {}), 'host', 20),
+        'daily':                _daily_bars(_stat('crawlers.daily', {}), 60),
+        'recent':               list(CrawlerVisit.objects.order_by('-timestamp')[:50]),
+        'top_probe_paths':      _top_field(_stat('crawlers.probe_by_path', {}), 'path', 20),
+        'webshell_commands':    _top_field(_stat('crawlers.webshell_cmds', {}), 'query_string', 10),
+        'canary_trigger_count': _stat('canary.triggered_count', 0),
+        'canary_latest':        canary_latest,
+        'updated_at':           _updated_at('crawlers.total'),
+    }
+    return render(request, 'dashboard/crawlers.html', ctx)
 
 
 @staff_member_required(login_url='/django-admin/login/')
 def archive(request):
-    return _cached_view(request, 'archive', _compute_archive, 'dashboard/archive.html')
+    # Top IPs need max_depth — read top 20 from stored dict, then query max_depth
+    by_ip = _stat('archive.by_ip', {})
+    top_ip_keys = [ip for ip, _ in sorted(by_ip.items(), key=lambda x: x[1], reverse=True)[:20]]
+    ip_count_map = {ip: by_ip[ip] for ip in top_ip_keys}
+    max_depths = (
+        ArchiveVisit.objects
+        .filter(ip_address__in=top_ip_keys)
+        .values('ip_address')
+        .annotate(max_depth=Max('depth'))
+    )
+    depth_map = {r['ip_address']: r['max_depth'] for r in max_depths}
+    top_ips = [
+        {'ip_address': ip, 'count': ip_count_map[ip], 'max_depth': depth_map.get(ip, 0)}
+        for ip in top_ip_keys
+    ]
+
+    ctx = {
+        'total':        _stat('archive.total', 0),
+        'top_bots':     _bot_breakdown_from_dict(_stat('archive.by_bot_type', {}), 20),
+        'depth_counts': _depth_counts(_stat('archive.by_depth', {})),
+        'top_ips':      top_ips,
+        'top_roots':    _top_field(_stat('archive.by_slug', {}), 'slug', 20),
+        'daily':        _daily_bars(_stat('archive.daily', {}), 30),
+        'recent':       list(ArchiveVisit.objects.order_by('-timestamp')[:50]),
+        'updated_at':   _updated_at('archive.total'),
+    }
+    return render(request, 'dashboard/archive.html', ctx)
 
 
 @staff_member_required(login_url='/django-admin/login/')
 def emails(request):
-    return _cached_view(request, 'emails', _compute_emails, 'dashboard/emails.html')
+    ctx = {
+        'total':          _stat('emails.total', 0),
+        'top_domains':    _top_domains(_stat('emails.by_domain', {}), 20),
+        'top_recipients': _top_field(_stat('emails.by_recipient', {}), 'recipient', 20),
+        'daily':          _daily_bars(_stat('emails.daily', {}), 30),
+        'recent':         list(InboundEmail.objects.order_by('-received_at').prefetch_related('matches')[:50]),
+        'updated_at':     _updated_at('emails.total'),
+    }
+    return render(request, 'dashboard/emails.html', ctx)
 
 
 @staff_member_required(login_url='/django-admin/login/')
 def people(request):
-    return _cached_view(request, 'people', _compute_people, 'dashboard/people.html')
+    ctx = {
+        'people_total':    _stat('people.total', 0),
+        'project_total':   _stat('projects.total', 0),
+        'people_bots':     _top_named(_stat('people.by_bot_type', {}), 20),
+        'project_bots':    _top_named(_stat('projects.by_bot_type', {}), 20),
+        'top_people_ips':  _top_field(_stat('people.by_ip', {}), 'ip_address', 15),
+        'top_project_ips': _top_field(_stat('projects.by_ip', {}), 'ip_address', 15),
+        'people_daily':    _daily_bars(_stat('people.daily', {}), 30),
+        'project_daily':   _daily_bars(_stat('projects.daily', {}), 30),
+        'recent_people':   list(PeoplePageVisit.objects.order_by('-timestamp')[:30]),
+        'recent_projects': list(ProjectPageVisit.objects.order_by('-timestamp')[:30]),
+        'updated_at':      _updated_at('people.total'),
+    }
+    return render(request, 'dashboard/people.html', ctx)

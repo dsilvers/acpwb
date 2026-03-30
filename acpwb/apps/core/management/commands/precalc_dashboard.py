@@ -1,12 +1,14 @@
 """
-Pre-compute all dashboard stats and warm the Redis cache.
+Incrementally update dashboard stats in the database using PK high-water marks.
 
-Daily charts are preset-independent (always show last 30/60 days regardless of
-the date-range picker), so they are computed ONCE here and passed into each
-_compute_* call rather than being recomputed 6× per view.
+Each model's processed rows are tracked by a high-water mark stat row
+(e.g. hwm.crawler_visit = 12345).  On each run only rows with id > hwm are
+processed; cumulative dict/int stats are updated in place.
 
-Run this on a schedule (every 30 minutes recommended) so the dashboard always
-serves instantly from cache rather than running expensive aggregations live.
+Daily charts are always fully recomputed (last 60/30 days) since they are
+windowed time queries that cannot be made truly incremental.
+
+Run on a schedule (every 30 minutes recommended).
 
 Usage:
     python manage.py precalc_dashboard
@@ -16,94 +18,334 @@ Cron (host crontab):
         python manage.py precalc_dashboard >> /var/log/acpwb-precalc.log 2>&1
 """
 import time
+from datetime import timedelta
 
-from django.core.cache import cache
 from django.core.management.base import BaseCommand
+from django.db.models import Count, Max
+from django.db.models.functions import TruncDate
 from django.utils import timezone
 
-from apps.core.dashboard_views import (
-    PRECALC_PRESETS,
-    _DASH_CACHE_TTL,
-    _build_date_range,
-    _compute_archive,
-    _compute_crawlers,
-    _compute_emails,
-    _compute_overview,
-    _compute_people,
-    _daily_chart,
-)
-from apps.honeypot.models import ArchiveVisit, CrawlerVisit
+from apps.core.models import DashboardStat
+from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
+from apps.public.models import DataOptOutRequest
 from apps.webhooks.models import InboundEmail
+
+_MAX_DICT_ENTRIES = 200
 
 
 class Command(BaseCommand):
-    help = 'Pre-compute dashboard stats for all preset date ranges and write to Redis cache.'
+    help = 'Incrementally update dashboard stats in the database.'
 
     def handle(self, *args, **options):
         run_start = time.monotonic()
         now_str = timezone.now().strftime('%Y-%m-%d %H:%M:%S %Z')
         self.stdout.write(f'precalc_dashboard starting at {now_str}')
 
-        # ── Step 1: Compute preset-independent daily charts ONCE ──────────────
-        # These scan the full table and are identical for every preset, so we
-        # compute them once here and pass them into each _compute_* call.
-        self.stdout.write('\nComputing daily charts (preset-independent)...')
-        charts = {}
-        chart_specs = [
-            ('overview',  lambda: CrawlerVisit.objects.all(),  30, 'timestamp'),
-            ('crawlers',  lambda: CrawlerVisit.objects.all(),  60, 'timestamp'),
-            ('archive',   lambda: ArchiveVisit.objects.all(),  30, 'timestamp'),
-            ('emails',    lambda: InboundEmail.objects.all(),  30, 'received_at'),
-            ('people',    lambda: PeoplePageVisit.objects.all(), 30, 'timestamp'),
-            ('projects',  lambda: ProjectPageVisit.objects.all(), 30, 'timestamp'),
-        ]
-        for name, qs_fn, days, field in chart_specs:
-            t0 = time.monotonic()
-            try:
-                charts[name] = _daily_chart(qs_fn(), days=days, field=field)
-                # Also warm the per-chart Redis keys used by on-demand view misses
-                redis_key = f'dashboard:daily:{name}:{days}'
-                cache.set(redis_key, charts[name], _DASH_CACHE_TTL)
-                self.stdout.write(f'  chart:{name}:{days}d  ({time.monotonic() - t0:.2f}s)')
-            except Exception as exc:
-                self.stderr.write(f'  ERR chart:{name}  ({time.monotonic() - t0:.2f}s): {exc}')
-                charts[name] = None
+        self._update_crawlers()
+        self._update_archive()
+        self._update_emails()
+        self._update_people()
+        self._update_projects()
+        self._update_login_attempts()
+        self._update_opt_outs()
+        self._update_canary()
 
-        # ── Step 2: Per-preset aggregations ───────────────────────────────────
-        # Each _compute_* call now only runs the preset-filtered aggregations
-        # (bot breakdown, top IPs, trap counts, etc.) — no full-table scans.
-        VIEWS = [
-            ('overview', _compute_overview, {'daily':        charts.get('overview')}),
-            ('crawlers', _compute_crawlers, {'daily':        charts.get('crawlers')}),
-            ('archive',  _compute_archive,  {'daily':        charts.get('archive')}),
-            ('emails',   _compute_emails,   {'daily':        charts.get('emails')}),
-            ('people',   _compute_people,   {'people_daily': charts.get('people'),
-                                             'project_daily': charts.get('projects')}),
-        ]
+        elapsed = time.monotonic() - run_start
+        self.stdout.write(f'Done in {elapsed:.1f}s')
 
-        total_keys = 0
-        errors = 0
+    # ── Helpers ───────────────────────────────────────────────────────────────
 
-        for preset in PRECALC_PRESETS:
-            dr = _build_date_range(preset)
-            self.stdout.write(f'\n  [{preset}]')
-
-            for view_name, compute_fn, kwargs in VIEWS:
-                key = f'dashboard:{view_name}:{preset}'
-                t0 = time.monotonic()
-                try:
-                    ctx = compute_fn(dr, **kwargs)
-                    cache.set(key, ctx, _DASH_CACHE_TTL)
-                    self.stdout.write(f'    OK  {key}  ({time.monotonic() - t0:.2f}s)')
-                    total_keys += 1
-                except Exception as exc:
-                    self.stderr.write(f'    ERR {key}  ({time.monotonic() - t0:.2f}s): {exc}')
-                    errors += 1
-
-        total_elapsed = time.monotonic() - run_start
-        self.stdout.write(
-            f'\nDone: {total_keys} keys written, {errors} errors, '
-            f'{total_elapsed:.1f}s total'
+    def _upsert(self, key, default_value):
+        stat, _ = DashboardStat.objects.get_or_create(
+            key=key, defaults={'value': default_value}
         )
+        return stat
+
+    def _prune(self, d):
+        if len(d) > _MAX_DICT_ENTRIES:
+            return dict(sorted(d.items(), key=lambda x: x[1], reverse=True)[:_MAX_DICT_ENTRIES])
+        return d
+
+    def _inc_dict(self, stat, rows_qs, field):
+        """Add counts from rows_qs.values(field) into stat.value dict."""
+        for row in rows_qs.values(field).annotate(c=Count('id')):
+            k = str(row[field] or '')
+            stat.value[k] = stat.value.get(k, 0) + row['c']
+
+    # ── CrawlerVisit ──────────────────────────────────────────────────────────
+
+    def _update_crawlers(self):
+        hwm = self._upsert('hwm.crawler_visit', 0)
+        new_rows = CrawlerVisit.objects.filter(id__gt=hwm.value)
+        new_max = new_rows.aggregate(m=Max('id'))['m']
+
+        if new_max:
+            total_stat = self._upsert('crawlers.total', 0)
+            total_stat.value = total_stat.value + new_rows.count()
+            total_stat.save()
+
+            for key, field in [
+                ('crawlers.by_trap_type', 'trap_type'),
+                ('crawlers.by_bot_type',  'bot_type'),
+                ('crawlers.by_bot_group', 'bot_group'),
+            ]:
+                stat = self._upsert(key, {})
+                self._inc_dict(stat, new_rows, field)
+                stat.save()
+
+            for key, field in [
+                ('crawlers.by_ip',   'ip_address'),
+                ('crawlers.by_path', 'path'),
+            ]:
+                stat = self._upsert(key, {})
+                self._inc_dict(stat, new_rows, field)
+                stat.value = self._prune(stat.value)
+                stat.save()
+
+            stat = self._upsert('crawlers.by_host', {})
+            self._inc_dict(stat, new_rows.exclude(host=''), 'host')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            probe_types = ['env_probe', 'wp_probe', 'webshell_probe', 'scanner_probe']
+            stat = self._upsert('crawlers.probe_by_path', {})
+            self._inc_dict(stat, new_rows.filter(trap_type__in=probe_types), 'path')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            stat = self._upsert('crawlers.webshell_cmds', {})
+            self._inc_dict(stat, new_rows.filter(trap_type='webshell_probe').exclude(query_string=''), 'query_string')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            hwm.value = new_max
+            hwm.save()
+            self.stdout.write(f'  crawlers: updated to hwm={new_max}')
+        else:
+            self.stdout.write('  crawlers: no new rows')
+
+        # Daily chart always recomputed
+        now = timezone.now()
+        rows = (CrawlerVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=60))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        stat = self._upsert('crawlers.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
+        stat.save()
+
+    # ── ArchiveVisit ──────────────────────────────────────────────────────────
+
+    def _update_archive(self):
+        hwm = self._upsert('hwm.archive_visit', 0)
+        new_rows = ArchiveVisit.objects.filter(id__gt=hwm.value)
+        new_max = new_rows.aggregate(m=Max('id'))['m']
+
+        if new_max:
+            total_stat = self._upsert('archive.total', 0)
+            total_stat.value = total_stat.value + new_rows.count()
+            total_stat.save()
+
+            stat = self._upsert('archive.by_depth', {})
+            self._inc_dict(stat, new_rows, 'depth')
+            stat.save()
+
+            stat = self._upsert('archive.by_ip', {})
+            self._inc_dict(stat, new_rows, 'ip_address')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            stat = self._upsert('archive.by_slug', {})
+            self._inc_dict(stat, new_rows, 'slug')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            # Bot type via UA classification
+            from apps.core.bot_classify import classify_ua
+            stat = self._upsert('archive.by_bot_type', {})
+            for ua in new_rows.values_list('user_agent', flat=True):
+                k = classify_ua(ua or '')
+                stat.value[k] = stat.value.get(k, 0) + 1
+            stat.save()
+
+            hwm.value = new_max
+            hwm.save()
+            self.stdout.write(f'  archive: updated to hwm={new_max}')
+        else:
+            self.stdout.write('  archive: no new rows')
+
+        now = timezone.now()
+        rows = (ArchiveVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        stat = self._upsert('archive.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
+        stat.save()
+
+    # ── InboundEmail ──────────────────────────────────────────────────────────
+
+    def _update_emails(self):
+        hwm = self._upsert('hwm.inbound_email', 0)
+        new_rows = InboundEmail.objects.filter(id__gt=hwm.value)
+        new_max = new_rows.aggregate(m=Max('id'))['m']
+
+        if new_max:
+            total_stat = self._upsert('emails.total', 0)
+            total_stat.value = total_stat.value + new_rows.count()
+            total_stat.save()
+
+            stat = self._upsert('emails.by_domain', {})
+            for sender in new_rows.values_list('sender', flat=True):
+                domain = sender.split('@')[-1].lower() if '@' in sender else sender
+                stat.value[domain] = stat.value.get(domain, 0) + 1
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            stat = self._upsert('emails.by_recipient', {})
+            self._inc_dict(stat, new_rows, 'recipient')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            hwm.value = new_max
+            hwm.save()
+            self.stdout.write(f'  emails: updated to hwm={new_max}')
+        else:
+            self.stdout.write('  emails: no new rows')
+
+        now = timezone.now()
+        rows = (InboundEmail.objects
+                .filter(received_at__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('received_at'))
+                .values('d').annotate(c=Count('id')))
+        stat = self._upsert('emails.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
+        stat.save()
+
+    # ── PeoplePageVisit ───────────────────────────────────────────────────────
+
+    def _update_people(self):
+        hwm = self._upsert('hwm.people_visit', 0)
+        new_rows = PeoplePageVisit.objects.filter(id__gt=hwm.value)
+        new_max = new_rows.aggregate(m=Max('id'))['m']
+
+        if new_max:
+            total_stat = self._upsert('people.total', 0)
+            total_stat.value = total_stat.value + new_rows.count()
+            total_stat.save()
+
+            from apps.core.bot_classify import classify_ua
+            stat = self._upsert('people.by_bot_type', {})
+            for ua in new_rows.values_list('user_agent', flat=True):
+                k = classify_ua(ua or '')
+                stat.value[k] = stat.value.get(k, 0) + 1
+            stat.save()
+
+            stat = self._upsert('people.by_ip', {})
+            self._inc_dict(stat, new_rows, 'ip_address')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            hwm.value = new_max
+            hwm.save()
+            self.stdout.write(f'  people: updated to hwm={new_max}')
+        else:
+            self.stdout.write('  people: no new rows')
+
+        now = timezone.now()
+        rows = (PeoplePageVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        stat = self._upsert('people.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
+        stat.save()
+
+    # ── ProjectPageVisit ──────────────────────────────────────────────────────
+
+    def _update_projects(self):
+        hwm = self._upsert('hwm.project_visit', 0)
+        new_rows = ProjectPageVisit.objects.filter(id__gt=hwm.value)
+        new_max = new_rows.aggregate(m=Max('id'))['m']
+
+        if new_max:
+            total_stat = self._upsert('projects.total', 0)
+            total_stat.value = total_stat.value + new_rows.count()
+            total_stat.save()
+
+            from apps.core.bot_classify import classify_ua
+            stat = self._upsert('projects.by_bot_type', {})
+            for ua in new_rows.values_list('user_agent', flat=True):
+                k = classify_ua(ua or '')
+                stat.value[k] = stat.value.get(k, 0) + 1
+            stat.save()
+
+            stat = self._upsert('projects.by_ip', {})
+            self._inc_dict(stat, new_rows, 'ip_address')
+            stat.value = self._prune(stat.value)
+            stat.save()
+
+            hwm.value = new_max
+            hwm.save()
+            self.stdout.write(f'  projects: updated to hwm={new_max}')
+        else:
+            self.stdout.write('  projects: no new rows')
+
+        now = timezone.now()
+        rows = (ProjectPageVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        stat = self._upsert('projects.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
+        stat.save()
+
+    # ── InternalLoginAttempt ──────────────────────────────────────────────────
+
+    def _update_login_attempts(self):
+        hwm = self._upsert('hwm.login_attempt', 0)
+        new_rows = InternalLoginAttempt.objects.filter(id__gt=hwm.value)
+        new_max = new_rows.aggregate(m=Max('id'))['m']
+        if not new_max:
+            self.stdout.write('  logins: no new rows')
+            return
+
+        total_stat = self._upsert('login_attempts.total', 0)
+        total_stat.value = total_stat.value + new_rows.count()
+        total_stat.save()
+
+        hwm.value = new_max
+        hwm.save()
+        self.stdout.write(f'  logins: updated to hwm={new_max}')
+
+    # ── DataOptOutRequest ─────────────────────────────────────────────────────
+
+    def _update_opt_outs(self):
+        hwm = self._upsert('hwm.opt_out', 0)
+        new_rows = DataOptOutRequest.objects.filter(id__gt=hwm.value)
+        new_max = new_rows.aggregate(m=Max('id'))['m']
+        if not new_max:
+            self.stdout.write('  optouts: no new rows')
+            return
+
+        total_stat = self._upsert('optouts.total', 0)
+        total_stat.value = total_stat.value + new_rows.count()
+        total_stat.save()
+
+        hwm.value = new_max
+        hwm.save()
+        self.stdout.write(f'  optouts: updated to hwm={new_max}')
+
+    # ── CanaryToken (always full recompute — cheap) ───────────────────────────
+
+    def _update_canary(self):
+        triggered = CanaryToken.objects.filter(triggered=True)
+        count = triggered.count()
+
+        stat = self._upsert('canary.triggered_count', 0)
+        stat.value = count
+        stat.save()
+
+        self.stdout.write(f'  canary: {count} triggered')

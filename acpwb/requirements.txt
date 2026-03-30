@@ -5,9 +5,6 @@ gunicorn>=23.0
 django-environ>=0.11
 whitenoise>=6.7
 weasyprint>=62.0
-redis>=5.0
-django-redis>=5.4
-
 # Testing
 pytest>=8.0
 pytest-django>=4.8

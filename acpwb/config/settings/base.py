@@ -124,16 +124,3 @@ if _SENTRY_DSN:
         send_default_pii=True,
     )
 
-# Cache — Redis shared across all gunicorn workers
-REDIS_URL = env('REDIS_URL', default='redis://redis:6379/0')
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': REDIS_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'IGNORE_EXCEPTIONS': True,  # Degrade gracefully if Redis is down
-        },
-        'TIMEOUT': 300,
-    }
-}

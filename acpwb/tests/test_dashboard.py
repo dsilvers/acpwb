@@ -42,13 +42,6 @@ def test_dashboard_overview_has_counts(staff_client):
     assert b'Inbound Emails' in response.content
 
 
-@pytest.mark.django_db
-def test_dashboard_overview_date_range_presets(staff_client):
-    for preset in ['today', '7d', '30d', '90d', 'ytd', 'all']:
-        response = staff_client.get(f'/acpwb-dashboard/?range={preset}')
-        assert response.status_code == 200, f"Failed for preset={preset}"
-
-
 # ── Sub-views ──────────────────────────────────────────────────────────────────
 
 @pytest.mark.django_db
@@ -80,9 +73,7 @@ def test_dashboard_people_200(staff_client):
 @pytest.mark.django_db
 def test_dashboard_shows_crawler_data(client, staff_client):
     client.get('/internal/portal/')
-    client.get('/wiki/compensation/')
-    # Use custom range to bypass Redis preset cache and always query live data
-    response = staff_client.get('/acpwb-dashboard/?range=custom&from=2000-01-01&to=2099-12-31')
+    response = staff_client.get('/acpwb-dashboard/')
     assert response.status_code == 200
-    content = response.content.decode()
-    assert 'Ghost' in content or 'wiki' in content.lower()
+    # recent_crawlers is a live query — shows trap type even before precalc runs
+    assert b'ghost_link' in response.content

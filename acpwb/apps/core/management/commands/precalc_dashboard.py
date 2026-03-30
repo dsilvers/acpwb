@@ -78,10 +78,10 @@ class Command(BaseCommand):
 
     def _update_crawlers(self):
         hwm = self._upsert('hwm.crawler_visit', 0)
-        new_rows = CrawlerVisit.objects.filter(id__gt=hwm.value)
-        new_max = new_rows.aggregate(m=Max('id'))['m']
+        new_max = CrawlerVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
         if new_max:
+            new_rows = CrawlerVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('crawlers.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
@@ -140,10 +140,10 @@ class Command(BaseCommand):
 
     def _update_archive(self):
         hwm = self._upsert('hwm.archive_visit', 0)
-        new_rows = ArchiveVisit.objects.filter(id__gt=hwm.value)
-        new_max = new_rows.aggregate(m=Max('id'))['m']
+        new_max = ArchiveVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
         if new_max:
+            new_rows = ArchiveVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('archive.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
@@ -189,10 +189,10 @@ class Command(BaseCommand):
 
     def _update_emails(self):
         hwm = self._upsert('hwm.inbound_email', 0)
-        new_rows = InboundEmail.objects.filter(id__gt=hwm.value)
-        new_max = new_rows.aggregate(m=Max('id'))['m']
+        new_max = InboundEmail.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
         if new_max:
+            new_rows = InboundEmail.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('emails.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
@@ -228,10 +228,10 @@ class Command(BaseCommand):
 
     def _update_people(self):
         hwm = self._upsert('hwm.people_visit', 0)
-        new_rows = PeoplePageVisit.objects.filter(id__gt=hwm.value)
-        new_max = new_rows.aggregate(m=Max('id'))['m']
+        new_max = PeoplePageVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
         if new_max:
+            new_rows = PeoplePageVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('people.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
@@ -267,10 +267,10 @@ class Command(BaseCommand):
 
     def _update_projects(self):
         hwm = self._upsert('hwm.project_visit', 0)
-        new_rows = ProjectPageVisit.objects.filter(id__gt=hwm.value)
-        new_max = new_rows.aggregate(m=Max('id'))['m']
+        new_max = ProjectPageVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
         if new_max:
+            new_rows = ProjectPageVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('projects.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
@@ -306,14 +306,13 @@ class Command(BaseCommand):
 
     def _update_login_attempts(self):
         hwm = self._upsert('hwm.login_attempt', 0)
-        new_rows = InternalLoginAttempt.objects.filter(id__gt=hwm.value)
-        new_max = new_rows.aggregate(m=Max('id'))['m']
+        new_max = InternalLoginAttempt.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
         if not new_max:
             self.stdout.write('  logins: no new rows')
             return
 
         total_stat = self._upsert('login_attempts.total', 0)
-        total_stat.value = total_stat.value + new_rows.count()
+        total_stat.value = total_stat.value + InternalLoginAttempt.objects.filter(id__gt=hwm.value, id__lte=new_max).count()
         total_stat.save()
 
         hwm.value = new_max
@@ -324,14 +323,13 @@ class Command(BaseCommand):
 
     def _update_opt_outs(self):
         hwm = self._upsert('hwm.opt_out', 0)
-        new_rows = DataOptOutRequest.objects.filter(id__gt=hwm.value)
-        new_max = new_rows.aggregate(m=Max('id'))['m']
+        new_max = DataOptOutRequest.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
         if not new_max:
             self.stdout.write('  optouts: no new rows')
             return
 
         total_stat = self._upsert('optouts.total', 0)
-        total_stat.value = total_stat.value + new_rows.count()
+        total_stat.value = total_stat.value + DataOptOutRequest.objects.filter(id__gt=hwm.value, id__lte=new_max).count()
         total_stat.save()
 
         hwm.value = new_max

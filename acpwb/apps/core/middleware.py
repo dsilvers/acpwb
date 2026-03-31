@@ -17,6 +17,10 @@ VIEW_LOGGED_PATHS = re.compile(
     r'reports|sitemap|robots\.txt|\.well-known|datasets|feeds)(/|$)'
 )
 
+# Archive subdomain views log their own CrawlerVisits — skip middleware logging
+# for any request that SubdomainMiddleware has routed to the archive urlconf.
+ARCHIVE_SUBDOMAIN_URLCONF = 'apps.honeypot.archive_subdomain_urls'
+
 
 class BotTrackingMiddleware:
     def __init__(self, get_response):
@@ -28,7 +32,10 @@ class BotTrackingMiddleware:
 
         # Log bot UA hits only on paths NOT already logged by a honeypot view.
         # Honeypot views call _log_crawler themselves with more specific trap types.
-        if BOT_UA_PATTERNS.search(user_agent) and not VIEW_LOGGED_PATHS.match(path):
+        # Also skip archive subdomain requests — those views log their own CrawlerVisits.
+        if (BOT_UA_PATTERNS.search(user_agent)
+                and not VIEW_LOGGED_PATHS.match(path)
+                and getattr(request, 'urlconf', None) != ARCHIVE_SUBDOMAIN_URLCONF):
             self._log_bot_visit(request, user_agent, path)
 
         response = self.get_response(request)

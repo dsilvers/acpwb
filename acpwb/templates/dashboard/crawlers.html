@@ -1,9 +1,56 @@
 {% extends "dashboard/base.html" %}
+{% load static %}
 {% block title %}Crawler Visits{% endblock %}
 {% block page_title %}Crawler Visits{% endblock %}
 {% block nav_crawlers %}active{% endblock %}
 
 {% block content %}
+
+<!-- Traffic Graphs -->
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>Traffic Charts</h6>
+        <span style="font-size:.72rem;color:var(--muted)">Crawler hits + archive visits, stacked by bot group — refreshed every 30 min</span>
+      </div>
+      <div class="section-card-body" style="padding:.75rem">
+        <div class="row g-2">
+          <div class="col-lg-6">
+            <img src="{% static 'graphs/traffic_1h.png' %}?v={{ graphs_ts }}"
+                 style="width:100%;border-radius:4px;display:block"
+                 onerror="this.closest('.col-lg-6').style.display='none'"
+                 alt="Last hour traffic">
+          </div>
+          <div class="col-lg-6">
+            <img src="{% static 'graphs/traffic_8h.png' %}?v={{ graphs_ts }}"
+                 style="width:100%;border-radius:4px;display:block"
+                 onerror="this.closest('.col-lg-6').style.display='none'"
+                 alt="Last 8 hours traffic">
+          </div>
+          <div class="col-lg-6">
+            <img src="{% static 'graphs/traffic_24h.png' %}?v={{ graphs_ts }}"
+                 style="width:100%;border-radius:4px;display:block"
+                 onerror="this.closest('.col-lg-6').style.display='none'"
+                 alt="Last 24 hours traffic">
+          </div>
+          <div class="col-lg-6">
+            <img src="{% static 'graphs/traffic_7d.png' %}?v={{ graphs_ts }}"
+                 style="width:100%;border-radius:4px;display:block"
+                 onerror="this.closest('.col-lg-6').style.display='none'"
+                 alt="Last 7 days traffic">
+          </div>
+          <div class="col-12">
+            <img src="{% static 'graphs/traffic_all.png' %}?v={{ graphs_ts }}"
+                 style="width:100%;border-radius:4px;display:block"
+                 onerror="this.closest('.col-12').style.display='none'"
+                 alt="All time traffic">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row g-3 mb-4">
   <div class="col-12">

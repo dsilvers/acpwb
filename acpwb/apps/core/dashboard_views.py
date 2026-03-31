@@ -148,6 +148,7 @@ def overview(request):
 
 @staff_member_required(login_url='/django-admin/login/')
 def crawlers(request):
+    import time
     canary_latest = CanaryToken.objects.filter(triggered=True).order_by('-triggered_at').first()
     ctx = {
         'total':                _stat('crawlers.total', 0),
@@ -163,6 +164,8 @@ def crawlers(request):
         'canary_trigger_count': _stat('canary.triggered_count', 0),
         'canary_latest':        canary_latest,
         'updated_at':           _updated_at('crawlers.total'),
+        # Cache-buster for graph PNGs — changes each minute so browser re-fetches after cron runs
+        'graphs_ts':            int(time.time() // 60),
     }
     return render(request, 'dashboard/crawlers.html', ctx)
 

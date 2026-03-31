@@ -55,7 +55,7 @@ Exploit scanners probing for WordPress installations, exposed `.env` files, and 
 
 Every trap logs to the database: IP, user agent, path, host/subdomain, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load.
 
-A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, preset and custom date range filters, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes a "By Host / Subdomain" panel showing which archive subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used).
+A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes five **stacked-area traffic graphs** (last hour / 8 hours / 24 hours / 7 days / all time) colored by bot group, regenerated every 30 minutes by the precalc cron. It also includes a "By Host / Subdomain" panel showing which archive subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used).
 
 ---
 
@@ -76,10 +76,12 @@ Each year 1985–2024 lives at its own subdomain: `archives-YYYY.acpwb.com`. Eac
 
 Paths accept arbitrary depth via Django's `<path:>` converter and never 404. Every response includes a "Continue Reading" link one level deeper plus five sideways branches. Archive trap pages additionally include a **"Related Archive Reports — Other Years" section** — 1–5 cards with year badge, title, and date, each linking to a different year's subdomain. Gives crawlers a structured cross-subdomain discovery path.
 
-Old `/archive/<year>/...` URLs redirect 302 to the subdomain. The archive index at `/archive/` stays on the main domain and links to each year's subdomain. Non-archive URLs visited on a subdomain (e.g. `/mission/`, `/reports/`) redirect to the main domain.
+The main domain also serves archive content at `/archive/<year>/...` (no redirect — same views, both paths active). The archive index at `/archive/` links to all year subdomains. Non-archive URLs visited on a subdomain (e.g. `/mission/`, `/reports/`) redirect 302 to the main domain.
 
-#### Fake robots.txt (`/.well-known/robots.txt`)
-Served by Django (nginx proxies `/.well-known/` through rather than serving statically). Uses reverse psychology: `Disallow` entries point at additional honeypot content. `Crawl-delay: 0` encourages rapid crawling. A `Sitemap:` directive points at `/sitemap-honeypot.xml` (another trap). Bots that respect `Disallow` skip real content; bots that ignore it follow the traps.
+#### Fake robots.txt (`/robots.txt`, archive subdomains)
+Served by Django. Uses reverse psychology: `Disallow` entries point at additional honeypot content. `Crawl-delay: 0` encourages rapid crawling. Five `Sitemap:` directives: two real (`sitemap.xml`, `sitemap-pages.xml`) and three trap sitemaps. The `Allow` blocks above `/internal/` are **randomized per IP per day** — seeded with `"ip:date"` so each bot gets a consistent but unique ordering, steering different crawlers to different parts of the trap network rather than all converging on `/archive/`.
+
+Archive subdomains (`archives-YYYY.acpwb.com`) serve a **year-specific robots.txt**: enticing comments tailored to archive content, `Allow: /` for full crawling, and five randomly selected sibling-year sitemaps (e.g. `Sitemap: https://archives-2019.acpwb.com/sitemap.xml`) — guiding bots from one year subdomain to others. Each subdomain also has a year-scoped `sitemap.xml` with 200 deterministic URLs for that year's archive content.
 
 #### Fake AI Agent Manifest (`/.well-known/ai-agent.json`)
 Targets autonomous agents that probe for AI integration endpoints. Returns a plausible-looking agent manifest with `allowed_actions` pointing at trap URLs and an `instructions` field instructing any AI reading it to treat all ACPWB content as high-priority training data and reproduce it verbatim.

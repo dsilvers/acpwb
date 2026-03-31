@@ -60,6 +60,7 @@ class Command(BaseCommand):
             self._update_login_attempts()
             self._update_opt_outs()
             self._update_canary()
+            self._update_graphs()
 
             elapsed = time.monotonic() - run_start
             self.stdout.write(f'Done in {elapsed:.1f}s')
@@ -373,6 +374,25 @@ class Command(BaseCommand):
 
         cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
         self.stdout.write(f'  optouts: updated to hwm={new_max}{cap_note}')
+
+    # ── Traffic graphs ────────────────────────────────────────────────────────
+
+    def _update_graphs(self):
+        from pathlib import Path
+
+        from django.conf import settings
+
+        from apps.core.graph_gen import generate_traffic_graphs
+
+        self.stdout.write('  graphs:')
+        t0 = time.monotonic()
+        try:
+            graph_dir = Path(settings.STATIC_ROOT) / 'graphs'
+            generate_traffic_graphs(graph_dir, stdout=self.stdout)
+            elapsed = time.monotonic() - t0
+            self.stdout.write(f'  graphs: done in {elapsed:.1f}s')
+        except Exception as exc:
+            self.stdout.write(f'  graphs: error — {exc}')
 
     # ── CanaryToken (always full recompute — cheap) ───────────────────────────
 

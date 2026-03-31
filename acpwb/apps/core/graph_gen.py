@@ -9,12 +9,14 @@ Generates 5 PNG stacked-area charts saved to staticfiles/graphs/:
   traffic_all.png  — all time,     per-day buckets        (stored DashboardStat)
 
 Live queries (1h/8h/24h) are timestamp-range-bounded — they touch only the
-recent slice of the table and use the (bot_group, timestamp) composite index.
+recent slice of the table and use the (bot_type, timestamp) composite index.
 At any reasonable traffic rate the scanned row count is small regardless of
 the total table size.
 
 Long-window graphs (7d/all) read from pre-aggregated DashboardStat rows
-(crawlers.daily, archive.daily) written by precalc_dashboard — no table scan.
+(crawlers.daily_by_bot_type) written by precalc_dashboard — no table scan.
+
+Bots with < 1% share of total traffic are grouped into "Others".
 
 Requires matplotlib (pip install matplotlib).
 """
@@ -35,31 +37,32 @@ except ImportError:
     _MATPLOTLIB_AVAILABLE = False
 
 # ── Colour palette ─────────────────────────────────────────────────────────────
+# Assigned in order of bot volume (highest traffic = first colour). "Others" is
+# always neutral gray regardless of its rank.
 
-GROUP_COLORS = {
-    'AI Crawlers':        '#E74C3C',
-    'Search Engines':     '#2980B9',
-    'SEO / Other Bots':   '#8E44AD',
-    'Generic Scrapers':   '#27AE60',
-    'Other / Browser':    '#7F8C8D',
-    '(empty user agent)': '#95A5A6',
-    'Archive Visits':     '#16A085',
-    # stored-stat series names (7d / all-time)
-    'Crawler Hits':       '#C9A84C',
-}
-
-# Stacking order — archive/empty at bottom, AI at top
-GROUP_STACK_ORDER = [
-    'Archive Visits',
-    '(empty user agent)',
-    'Other / Browser',
-    'Generic Scrapers',
-    'SEO / Other Bots',
-    'Search Engines',
-    'AI Crawlers',
-    # stored-stat fallback
-    'Crawler Hits',
+_BOT_COLOR_PALETTE = [
+    '#E74C3C',  # red
+    '#2980B9',  # blue
+    '#27AE60',  # green
+    '#E67E22',  # orange
+    '#8E44AD',  # purple
+    '#16A085',  # teal
+    '#C0392B',  # dark red
+    '#2471A3',  # dark blue
+    '#1E8449',  # dark green
+    '#D68910',  # amber
+    '#7D3C98',  # dark purple
+    '#148F77',  # dark teal
+    '#E91E63',  # pink
+    '#00BCD4',  # cyan
+    '#FF9800',  # light orange
+    '#607D8B',  # blue-grey
+    '#795548',  # brown
+    '#9C27B0',  # deep purple
+    '#3F51B5',  # indigo
+    '#009688',  # teal-2
 ]
+_OTHERS_COLOR = '#95A5A6'  # neutral gray
 
 # ── Bucket helpers ─────────────────────────────────────────────────────────────
 
@@ -81,105 +84,139 @@ def _make_buckets(start, end, interval_minutes):
     return buckets
 
 
+# ── Threshold helper ───────────────────────────────────────────────────────────
+
+def _apply_threshold(series, threshold_pct=1.0):
+    """
+    Group bot types with < threshold_pct% total share into 'Others'.
+
+    Returns a new ordered dict: significant bots sorted by total descending,
+    followed by 'Others' (if any sub-threshold bots exist).
+    """
+    if not series:
+        return {}
+
+    totals = {bot: sum(vals) for bot, vals in series.items()}
+    grand_total = sum(totals.values())
+    if grand_total == 0:
+        return {}
+
+    n = len(next(iter(series.values())))
+    significant = {}
+    others = [0] * n
+
+    for bot, vals in series.items():
+        if totals[bot] / grand_total >= threshold_pct / 100:
+            significant[bot] = vals
+        else:
+            for i, v in enumerate(vals):
+                others[i] += v
+
+    result = dict(sorted(significant.items(), key=lambda kv: totals[kv[0]], reverse=True))
+    if any(v > 0 for v in others):
+        result['Others'] = others
+    return result
+
+
 # ── DB queries (live — recent windows only) ────────────────────────────────────
 
 def _query_windowed(cutoff, interval_minutes):
     """
-    Query CrawlerVisit and ArchiveVisit since cutoff using timestamp index.
+    Query CrawlerVisit since cutoff, grouped by bot_type, using timestamp index.
 
     Safe for large tables: the WHERE timestamp >= cutoff clause is satisfied
     via an index range scan on the recent fraction of rows only.
 
     Returns (buckets, series) where:
       buckets — sorted list of datetime objects covering [cutoff, now]
-      series  — dict[group_name → list[int]] aligned to buckets
+      series  — dict[bot_name → list[int]] aligned to buckets; bots < 1% share
+                are merged into 'Others'
     """
     from django.db.models import Count
     from django.db.models.functions import TruncHour, TruncMinute
     from django.utils import timezone
 
-    from apps.honeypot.models import ArchiveVisit, CrawlerVisit
+    from apps.honeypot.models import CrawlerVisit
 
     now = timezone.now()
     trunc_fn = TruncMinute if interval_minutes < 60 else TruncHour
     buckets = _make_buckets(cutoff, now, interval_minutes)
 
-    # CrawlerVisit — stacked by bot_group (field is pre-denormalized, fast GROUP BY)
     cv_rows = (
         CrawlerVisit.objects
         .filter(timestamp__gte=cutoff)
         .annotate(bucket=trunc_fn('timestamp'))
-        .values('bucket', 'bot_group')
+        .values('bucket', 'bot_type')
         .annotate(c=Count('id'))
     )
 
     data = defaultdict(lambda: defaultdict(int))
     for row in cv_rows:
         b = _floor_to_interval(row['bucket'], interval_minutes)
-        g = row['bot_group'] or '(empty user agent)'
+        g = row['bot_type'] or '(empty user agent)'
         data[b][g] += row['c']
-
-    # ArchiveVisit — no bot_group field; shown as its own series
-    av_rows = (
-        ArchiveVisit.objects
-        .filter(timestamp__gte=cutoff)
-        .annotate(bucket=trunc_fn('timestamp'))
-        .values('bucket')
-        .annotate(c=Count('id'))
-    )
-    for row in av_rows:
-        b = _floor_to_interval(row['bucket'], interval_minutes)
-        data[b]['Archive Visits'] += row['c']
 
     present = set()
     for b in data:
         present.update(data[b].keys())
 
-    groups = [g for g in GROUP_STACK_ORDER if g in present]
-    series = {g: [data[b].get(g, 0) for b in buckets] for g in groups}
-
-    return buckets, series
+    raw_series = {g: [data[b].get(g, 0) for b in buckets] for g in present}
+    return buckets, _apply_threshold(raw_series)
 
 
 # ── Stored-stat queries (no table scan) ────────────────────────────────────────
 
 def _query_stored_daily(cutoff=None):
     """
-    Read per-day totals from DashboardStat rows written by precalc_dashboard.
+    Read per-day per-bot-type totals from DashboardStat written by precalc_dashboard.
 
-    Returns (dates, series) with 'Crawler Hits' and 'Archive Visits' keys.
+    Reads 'crawlers.daily_by_bot_type': {date_str: {bot_type: count}}.
     cutoff — if provided, only return dates >= cutoff.
+
+    Returns (dates, series) where series bots < 1% share are merged into 'Others'.
+    Falls back to the legacy 'crawlers.daily' total if the new stat is absent.
     """
     from apps.core.models import DashboardStat
 
-    crawlers_daily = {}
-    archive_daily = {}
     try:
-        crawlers_daily = DashboardStat.objects.get(key='crawlers.daily').value
+        daily_by_bot = DashboardStat.objects.get(key='crawlers.daily_by_bot_type').value
     except DashboardStat.DoesNotExist:
-        pass
-    try:
-        archive_daily = DashboardStat.objects.get(key='archive.daily').value
-    except DashboardStat.DoesNotExist:
-        pass
+        daily_by_bot = {}
 
-    all_dates = sorted(set(crawlers_daily) | set(archive_daily))
+    # Legacy fallback: show a single 'Crawler Hits' series
+    if not daily_by_bot:
+        crawlers_daily = {}
+        try:
+            crawlers_daily = DashboardStat.objects.get(key='crawlers.daily').value
+        except DashboardStat.DoesNotExist:
+            pass
+        all_dates = sorted(crawlers_daily)
+        if cutoff:
+            cutoff_str = cutoff.date().isoformat()
+            all_dates = [d for d in all_dates if d >= cutoff_str]
+        if not all_dates:
+            return [], {}
+        date_objs = [datetime.fromisoformat(d).replace(tzinfo=dt_timezone.utc) for d in all_dates]
+        return date_objs, {'Crawler Hits': [crawlers_daily.get(d, 0) for d in all_dates]}
+
+    all_dates = sorted(daily_by_bot)
     if cutoff:
         cutoff_str = cutoff.date().isoformat()
         all_dates = [d for d in all_dates if d >= cutoff_str]
-
     if not all_dates:
         return [], {}
 
-    date_objs = [
-        datetime.fromisoformat(d).replace(tzinfo=dt_timezone.utc)
-        for d in all_dates
-    ]
-    series = {
-        'Crawler Hits':   [crawlers_daily.get(d, 0) for d in all_dates],
-        'Archive Visits': [archive_daily.get(d, 0)  for d in all_dates],
+    date_objs = [datetime.fromisoformat(d).replace(tzinfo=dt_timezone.utc) for d in all_dates]
+
+    all_bots = set()
+    for d in all_dates:
+        all_bots.update(daily_by_bot.get(d, {}).keys())
+
+    raw_series = {
+        bot: [daily_by_bot.get(d, {}).get(bot, 0) for d in all_dates]
+        for bot in all_bots
     }
-    return date_objs, series
+    return date_objs, _apply_threshold(raw_series)
 
 
 # ── Rendering helpers ──────────────────────────────────────────────────────────
@@ -198,6 +235,10 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
     """
     Draw a stacked area chart.
 
+    series must already be ordered (significant bots desc, Others last) as
+    returned by _apply_threshold(). Colors are assigned from _BOT_COLOR_PALETTE
+    in order; 'Others' always gets _OTHERS_COLOR.
+
     x_fmt may be a strftime format string or a matplotlib Formatter object.
     """
     _apply_style(ax, title)
@@ -206,9 +247,16 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
                 transform=ax.transAxes, color='#95A5A6', fontsize=9)
         return
 
-    groups = [g for g in GROUP_STACK_ORDER if g in series]
-    ys     = [series[g] for g in groups]
-    colors = [GROUP_COLORS.get(g, '#95A5A6') for g in groups]
+    groups = list(series.keys())
+    ys = [series[g] for g in groups]
+    palette_idx = 0
+    colors = []
+    for g in groups:
+        if g == 'Others':
+            colors.append(_OTHERS_COLOR)
+        else:
+            colors.append(_BOT_COLOR_PALETTE[palette_idx % len(_BOT_COLOR_PALETTE)])
+            palette_idx += 1
 
     ax.stackplot(xs, ys, labels=groups, colors=colors, alpha=0.88, zorder=2)
     # Set ylim AFTER stackplot so autoscaling has already computed the data range.

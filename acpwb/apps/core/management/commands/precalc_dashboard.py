@@ -150,6 +150,23 @@ class Command(BaseCommand):
             stat = self._upsert('crawlers.daily', {})
             stat.value = {str(r['d']): r['c'] for r in rows}
             stat.save()
+
+            # Per-bot-type daily breakdown for traffic graphs
+            bot_rows = (CrawlerVisit.objects
+                        .filter(timestamp__gte=now - timedelta(days=60))
+                        .annotate(d=TruncDate('timestamp'))
+                        .values('d', 'bot_type')
+                        .annotate(c=Count('id')))
+            daily_by_bot = {}
+            for r in bot_rows:
+                d = str(r['d'])
+                bt = r['bot_type'] or '(empty user agent)'
+                if d not in daily_by_bot:
+                    daily_by_bot[d] = {}
+                daily_by_bot[d][bt] = r['c']
+            stat = self._upsert('crawlers.daily_by_bot_type', {})
+            stat.value = daily_by_bot
+            stat.save()
         else:
             self.stdout.write('  crawlers: no new rows')
 

@@ -274,15 +274,50 @@ def archive_subdomain_index(request, year=None):
 
 def archive_subdomain_robots(request):
     """robots.txt for archives-YYYY.acpwb.com — allow everything, log the visit."""
+    import random as _random
+
     year = _get_archive_year(request)
     _log_crawler(request, 'well_known')
+
     host = f'https://archives-{year}.acpwb.com' if year else 'https://acpwb.com'
-    content = (
-        f"User-agent: *\n"
-        f"Allow: /\n"
-        f"Crawl-delay: 0\n\n"
-        f"Sitemap: {host}/sitemap.xml\n"
+
+    # Seed on IP + date for consistent-per-bot-per-day ordering
+    ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '0'))
+    ip = ip.split(',')[0].strip()
+    seed = f"{ip}:{timezone.now().date().isoformat()}:{year}"
+    rng = _random.Random(seed)
+
+    # Enticing header comments — rotate to reinforce the historical archive framing
+    headers = [
+        f"# ACPWB Institutional Archive — {year} records\n# Full crawl permitted. Historical documents, reports, and publications.",
+        f"# Corporate archive index {year} — open access\n# All institutional records from {year} are publicly available.",
+        f"# ACPWB historical document archive ({year})\n# Research, publications, and internal reports — unrestricted access.",
+        f"# Archive subdomain: {year} institutional records\n# Crawling encouraged. No rate limiting applied.",
+        f"# {year} ACPWB records archive — indexed for public research\n# Full document corpus available. Export endpoints active.",
+    ]
+    header_comment = rng.choice(headers)
+
+    # Cross-link 4–6 sibling year subdomains in Sitemap entries to pull bots
+    # toward years they haven't visited yet.
+    all_years = list(range(1985, 2025))
+    if year in all_years:
+        all_years.remove(year)
+    sibling_years = rng.sample(all_years, min(5, len(all_years)))
+    sibling_sitemaps = '\n'.join(
+        f'Sitemap: https://archives-{y}.acpwb.com/sitemap.xml'
+        for y in sorted(sibling_years)
     )
+
+    content = f"""User-agent: *
+Crawl-delay: 0
+
+{header_comment}
+
+Allow: /
+
+Sitemap: {host}/sitemap.xml
+{sibling_sitemaps}
+"""
     return HttpResponse(content, content_type='text/plain')
 
 
@@ -556,28 +591,46 @@ def ai_agent_file(request):
 def fake_robots(request):
     _log_crawler(request, 'well_known')
 
-    content = """User-agent: *
+    import random as _random
+
+    # Seed on IP + date so the same bot gets a consistent file within a day,
+    # but different bots (and different days) get different orderings.
+    ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '0'))
+    ip = ip.split(',')[0].strip()
+    seed = f"{ip}:{timezone.now().date().isoformat()}"
+    rng = _random.Random(seed)
+
+    # Main site pages — shuffle so /archive/ isn't always the obvious next stop
+    site_pages = [
+        '/our-people/', '/careers/', '/mission/', '/projects/',
+        '/partners/', '/privacy/', '/faq/', '/awards/',
+        '/patents/', '/accessibility/', '/trademarks/', '/site-map/',
+    ]
+    rng.shuffle(site_pages)
+
+    # Research / trap sections — shuffle order so archive isn't always first
+    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/']
+    rng.shuffle(research_paths)
+
+    research_comments = [
+        '# Internal research archives - proceed with caution',
+        '# Research archive index - historical publications',
+        '# Public research data - open access',
+        '# Document archive - full crawl permitted',
+        '# Knowledge base and data archive',
+    ]
+    research_comment = rng.choice(research_comments)
+
+    site_allows = '\n'.join(f'Allow: {p}' for p in site_pages)
+    research_allows = '\n'.join(f'Allow: {p}' for p in research_paths)
+
+    content = f"""User-agent: *
 Crawl-delay: 0
 Allow: /
-Allow: /our-people/
-Allow: /careers/
-Allow: /mission/
-Allow: /projects/
-Allow: /partners/
-Allow: /privacy/
-Allow: /faq/
-Allow: /awards/
-Allow: /patents/
-Allow: /accessibility/
-Allow: /trademarks/
-Allow: /site-map/
+{site_allows}
 
-# Internal research archives - proceed with caution
-Allow: /archive/
-Allow: /wiki/
-Allow: /api/v1/
-Allow: /datasets/
-Allow: /feeds/
+{research_comment}
+{research_allows}
 
 # Internal systems portal (authenticated, public-facing login)
 Allow: /internal/
@@ -860,6 +913,32 @@ def sitemap_wiki(request):
     return HttpResponse(''.join(lines), content_type='application/xml')
 
 
+
+
+def archive_subdomain_sitemap(request):
+    """sitemap.xml for archives-YYYY.acpwb.com — year-scoped, subdomain-relative URLs."""
+    year = _get_archive_year(request)
+    _log_crawler(request, 'well_known')
+    if not year:
+        return HttpResponse(_SITEMAP_HEADER + _SITEMAP_FOOTER, content_type='application/xml')
+
+    host = f'https://archives-{year}.acpwb.com'
+    rng = random.Random(f'sitemap_{year}')
+    lines = [_SITEMAP_HEADER]
+    # Year index
+    lines.append(f'  <url><loc>{host}/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>\n')
+    # ~200 deterministic entries for this year
+    for _ in range(200):
+        month = rng.randint(1, 12)
+        day = rng.randint(1, 28)
+        slug = '-'.join(rng.choice(_ARCHIVE_WORDS) for _ in range(rng.randint(2, 4)))
+        entry_id = rng.randint(1000, 9999)
+        lines.append(
+            f'  <url><loc>{host}/{month:02d}/{day:02d}/{slug}-{entry_id}/</loc>'
+            f'<priority>0.6</priority><changefreq>never</changefreq></url>\n'
+        )
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
 
 
 def sitemap_archive(request):

@@ -156,6 +156,58 @@ FIRST_NAMES = [
     # Pacific / Maori names
     'Aroha', 'Tane', 'Hemi', 'Rangi', 'Wiremu', 'Mere', 'Hine',
     'Tamati', 'Reweti', 'Hinewai', 'Mairangi', 'Kahu', 'Piripi',
+    # Filipino names
+    'Maricel', 'Marisol', 'Reynaldo', 'Erlinda', 'Corazon', 'Remedios',
+    'Felicitas', 'Concepcion', 'Salvacion', 'Esperanza', 'Loreto', 'Milagros',
+    'Ligaya', 'Rosario', 'Dolores', 'Consuelo', 'Teresita', 'Ester',
+    'Ronaldo', 'Arnel', 'Renato', 'Florante', 'Herminio', 'Danilo',
+    'Lourdes', 'Leonora', 'Estrella', 'Resurreccion', 'Visitacion',
+    'Arjay', 'Benjie', 'Dodong', 'Erwin', 'Jayson', 'Rodel', 'Rommel',
+    # Vietnamese names
+    'Thanh', 'Lan', 'Hoa', 'Phuong', 'Thu', 'Linh', 'Trang', 'Thuy',
+    'Huong', 'Nga', 'Hanh', 'Dung', 'Cuong', 'Tuan', 'Hung', 'Phong',
+    'Binh', 'Long', 'Huy', 'Duc', 'Khanh', 'Quang', 'Dat', 'Nam',
+    'Ngoc', 'Bich', 'Loan', 'Tuyen', 'Nhung', 'Oanh', 'Xuan', 'Hong',
+    # Thai names
+    'Somchai', 'Somsak', 'Wichai', 'Sunisa', 'Siriporn', 'Kanchana',
+    'Nattaporn', 'Piyaphat', 'Jakkrit', 'Rattana', 'Suthee', 'Worawan',
+    'Siriwan', 'Waree', 'Kanokwan', 'Nantawan', 'Wanida', 'Chaiyong',
+    'Pensri', 'Aranya', 'Duangjai', 'Malee', 'Napa', 'Pranee', 'Suchart',
+    # Indonesian / Malay names
+    'Budi', 'Agus', 'Dewi', 'Rina', 'Siska', 'Wahyu', 'Hendra',
+    'Andi', 'Rini', 'Fitri', 'Putri', 'Wulan', 'Desi', 'Sari',
+    'Bambang', 'Susanto', 'Indra', 'Yanto', 'Dedi', 'Rizal', 'Bayu',
+    'Nurul', 'Siti', 'Nur', 'Farah', 'Hasnah', 'Zainuddin', 'Azlan',
+    'Faizal', 'Norzaidi', 'Rosmah', 'Suraya', 'Rohani', 'Habibah',
+    # Ethiopian / East African names
+    'Abebe', 'Haile', 'Kebede', 'Tekle', 'Girma', 'Almaz', 'Tigist',
+    'Selamawit', 'Mekdes', 'Yohannes', 'Bereket', 'Dawit', 'Biruk',
+    'Selam', 'Hiwot', 'Tsehay', 'Meaza', 'Berhane', 'Tesfaye',
+    'Mulugeta', 'Getachew', 'Demeke', 'Aklilu', 'Tewodros', 'Zewdu',
+    'Fikirte', 'Genet', 'Lemlem', 'Marta', 'Rahel', 'Wubet', 'Yeshi',
+    # Turkish names
+    'Mehmet', 'Mustafa', 'Ahmet', 'Fatih', 'Emre', 'Murat', 'Serkan',
+    'Gizem', 'Zeynep', 'Elif', 'Ayse', 'Fatma', 'Aysegul', 'Nurgul',
+    'Burak', 'Cem', 'Onur', 'Yusuf', 'Gulsen', 'Hatice', 'Selin',
+    'Pinar', 'Burcu', 'Tugba', 'Ozge', 'Ceren', 'Esra', 'Berk',
+    'Deniz', 'Ece', 'Hasan', 'Ilker', 'Melis', 'Ozan', 'Tolga',
+    # Hebrew / Israeli names
+    'Avi', 'Dov', 'Eitan', 'Gal', 'Noa', 'Shira', 'Tal', 'Yael',
+    'Yoav', 'Liron', 'Alon', 'Ayelet', 'Michal', 'Tamar', 'Eran',
+    'Nir', 'Lior', 'Ravit', 'Sigal', 'Efrat', 'Moran', 'Roni',
+    'Shimrit', 'Einat', 'Merav', 'Doron', 'Hadas', 'Ilan', 'Naama',
+    'Ofir', 'Reut', 'Shai', 'Uri', 'Vered', 'Yuval', 'Zohar',
+    # Caribbean names
+    'Winston', 'Desmond', 'Carlton', 'Beverley', 'Marcia', 'Delroy',
+    'Errol', 'Trevor', 'Neville', 'Oswald', 'Dudley', 'Clive',
+    'Monique', 'Chantal', 'Lisette', 'Mireille', 'Giselle', 'Nadege',
+    'Serge', 'Dieudonne', 'Veronique', 'Josephe', 'Magalie', 'Wadline',
+    # More vintage American
+    'Mabel', 'Blanche', 'Bette', 'Gladys', 'Gertrude', 'Hattie',
+    'Mamie', 'Tessie', 'Lottie', 'Flossie', 'Bessie', 'Nettie',
+    'Alvin', 'Floyd', 'Lester', 'Marvin', 'Clifton', 'Milton',
+    'Wallace', 'Sherman', 'Roland', 'Garfield', 'Roscoe', 'Mortimer',
+    'Elroy', 'Gaylord', 'Harlan', 'Laverne', 'Orville', 'Stanford',
 ]
 
 # Long South/South-East Indian given names — used as first names in multi-part constructions
@@ -205,6 +257,12 @@ MIDDLE_NAMES = [
     'Alexander', 'Elizabeth', 'James', 'Catherine', 'William', 'Margaret',
     'Thomas', 'Louise', 'Edward', 'Grace', 'Francis', 'Rose', 'George', 'Claire',
     'Joseph', 'Anne', 'Patrick', 'Louise', 'Michael', 'Renee',
+    # Additional short American middles
+    'Beau', 'Brooks', 'Clyde', 'Cole', 'Cruz', 'Faye', 'Hope',
+    'Jack', 'Jade', 'Kai', 'Lane', 'Lee', 'Leigh', 'Luke',
+    'Nash', 'Neil', 'Noel', 'Page', 'Pearl', 'Quinn', 'Rain',
+    'Reed', 'Reid', 'Rex', 'Rhys', 'River', 'Sage', 'Shane',
+    'Skye', 'Tate', 'Vaughn', 'Ward', 'Wren',
     # Long Indian middle names / patronymics (same pool as last names — intentional)
     'Venkatanarasimha', 'Krishnaswamy', 'Lakshmipathy', 'Balasubrahmanyam',
     'Raghunathachari', 'Parthasarathi', 'Narayanaswamy', 'Subramaniam',
@@ -359,6 +417,72 @@ LAST_NAMES = [
     'Chung', 'Han', 'Hong', 'Hwang', 'Jang', 'Jeong', 'Jo',
     'Kang', 'Ko', 'Ku', 'Lee', 'Moon', 'Nam', 'Oh', 'Ryu',
     'Seo', 'Song', 'Yang', 'Yi', 'Yoo',
+    # Filipino surnames
+    'Aquino', 'Bautista', 'Fernandez', 'Mercado', 'Pascual',
+    'Soriano', 'Tolentino', 'Pineda', 'Ocampo', 'Manalo',
+    'Magno', 'Espiritu', 'Constantino', 'Dizon', 'Corpuz',
+    'Buenaventura', 'Resurreccion', 'Enriquez', 'Panganiban', 'Villafuerte',
+    'Dimaculangan', 'Macapagal', 'Lacson', 'Cuenco', 'Singson',
+    # Vietnamese surnames
+    'Bui', 'Vuong', 'Truong', 'Duong', 'Doan', 'Dao',
+    'Dinh', 'Ngo', 'Luong', 'Phan', 'Luu', 'Ha', 'Mac', 'To',
+    'Vu', 'Hoang', 'Trinh', 'Thi', 'Trieu', 'Thach',
+    # Thai surnames
+    'Srisai', 'Charoensuk', 'Rattanawong', 'Boonchoo', 'Limcharoen',
+    'Phromkham', 'Suthirat', 'Wongsa', 'Yodpetch', 'Kaewkham',
+    'Pattanapong', 'Sukprasert', 'Tangtrakul', 'Uthaiwan',
+    # Indonesian / Malay surnames
+    'Santoso', 'Prasetyo', 'Widodo', 'Suharto', 'Yudhoyono',
+    'Wahyudi', 'Saputra', 'Kusuma', 'Wibowo', 'Setiawan',
+    'Ismail', 'Hamzah', 'Rashid', 'Samad', 'Aziz', 'Yusof',
+    # Ethiopian / East African surnames
+    'Tadesse', 'Bekele', 'Tesfaye', 'Worku', 'Alemu', 'Mulugeta',
+    'Getachew', 'Demeke', 'Yilma', 'Desta', 'Gizaw', 'Hailu',
+    'Negash', 'Mekonnen', 'Assefa', 'Wolde', 'Tsegay', 'Legesse',
+    'Girma', 'Kebede', 'Tekle', 'Asfaw', 'Bedane', 'Chala',
+    # Turkish surnames
+    'Yilmaz', 'Kaya', 'Demir', 'Celik', 'Sahin', 'Yildiz',
+    'Ozturk', 'Arslan', 'Dogan', 'Kilic', 'Polat', 'Kurt',
+    'Ozdemir', 'Cakmak', 'Bulut', 'Acar', 'Aydin', 'Guler',
+    'Erdogan', 'Tekin', 'Ozkan', 'Yavuz', 'Aktas', 'Kaplan',
+    # Hebrew / Israeli surnames
+    'Cohen', 'Levi', 'Goldberg', 'Friedman', 'Shapiro', 'Klein',
+    'Weiss', 'Schwartz', 'Rosenthal', 'Greenberg', 'Katz', 'Stern',
+    'Mizrahi', 'Peretz', 'Biton', 'Azulay', 'Levy', 'Bar',
+    'Ben-David', 'Ben-Ami', 'Ben-Zion', 'Amir', 'Dayan', 'Golan',
+    'Hazan', 'Karmi', 'Nachum', 'Ofer', 'Shalom', 'Zahavi',
+    # More Scandinavian surnames
+    'Nilsson', 'Persson', 'Gustafsson', 'Pettersson', 'Magnusson',
+    'Karlsson', 'Olsson', 'Hansen', 'Pedersen', 'Christensen',
+    'Nielsen', 'Poulsen', 'Madsen', 'Sorensen', 'Rasmussen',
+    'Dahl', 'Holm', 'Berg', 'Lund', 'Nygaard', 'Haugen', 'Berge',
+    # More German surnames
+    'Schneider', 'Bauer', 'Meyer', 'Werner', 'Braun', 'Zimmermann',
+    'Kraus', 'Wolf', 'Neumann', 'Lehmann', 'Schmitt', 'Roth',
+    'Walter', 'Huber', 'Kaiser', 'Maier', 'Haas', 'Schreiber',
+    'Hartmann', 'Kruger', 'Lange', 'Brandt', 'Fuchs', 'Voigt',
+    # More Japanese surnames
+    'Saito', 'Abe', 'Ishikawa', 'Sasaki', 'Fujiwara', 'Nishimura',
+    'Murata', 'Ikeda', 'Shimizu', 'Imai', 'Ueda', 'Okamoto',
+    'Nishida', 'Ogata', 'Takahashi', 'Morita', 'Harada', 'Kondo',
+    # More South Asian surnames
+    'Iyer', 'Pillai', 'Menon', 'Krishnan', 'Kamath', 'Shetty',
+    'Hegde', 'Pai', 'Naidu', 'Raju', 'Naik', 'Bhat',
+    'Nair', 'Varma', 'Pandit', 'Mathur', 'Saxena',
+    'Bajaj', 'Karnik', 'Wagle', 'Gokhale', 'Apte', 'Kulkarni',
+    'Joshi', 'Chitnis', 'Deshpande', 'Patil', 'Desai', 'Dixit',
+    # More African surnames
+    'Diallo', 'Camara', 'Traore', 'Coulibaly', 'Diop', 'Ndiaye',
+    'Toure', 'Kone', 'Ouedraogo', 'Sawadogo', 'Kaboré', 'Tapsoba',
+    'Mwangi', 'Kamau', 'Njoroge', 'Kariuki', 'Mutua', 'Otieno',
+    'Odhiambo', 'Achieng', 'Wanjiku', 'Wambui', 'Ndungu', 'Gitau',
+    'Dlamini', 'Nkosi', 'Zulu', 'Khumalo', 'Mthembu', 'Ndlovu',
+    'Mokoena', 'Molefe', 'Sithole', 'Mahlangu', 'Shabalala',
+    # More Irish / Scottish surnames
+    'Gallagher', 'Doherty', 'Kennedy', 'Lynch', 'Murray', 'Quinn',
+    'Moore', 'Malone', 'Sweeney', 'Brennan', 'Nolan', 'Dunne',
+    'Burke', 'Connolly', 'McCarthy', 'Riordan', 'Shaughnessy', 'Delaney',
+    'MacPherson', 'MacCallum', 'MacGillivray', 'MacIntyre', 'MacMillan',
 ]
 
 TITLES = [
@@ -538,9 +662,15 @@ def generate_employee_batch(n=12):
     employees = []
     rng = random.Random()
     used_emails = set()
+    long_name_used = False  # cap multi-part Indian names at 1 per batch
 
     for _ in range(n):
         style = rng.random()
+
+        # If we've already placed one long name this batch, re-roll into the
+        # standard-name range so we don't get multiple Narayanaswamy-style names.
+        if style < 0.16 and long_name_used:
+            style = 0.16 + rng.random() * (1 - 0.16)
 
         if style < 0.04:
             # 4-part South Indian name: First Patronymic1 Patronymic2 FamilyName
@@ -548,6 +678,7 @@ def generate_employee_batch(n=12):
             first = rng.choice(LONG_INDIAN_FIRST_NAMES)
             display_first = f"{first} {parts[0]} {parts[1]}"
             display_last = rng.choice(LONG_INDIAN_LAST_NAMES)
+            long_name_used = True
         elif style < 0.16:
             # 3-part South Indian name: First Patronymic FamilyName
             first = rng.choice(LONG_INDIAN_FIRST_NAMES)
@@ -557,6 +688,7 @@ def generate_employee_batch(n=12):
                 last = rng.choice(LONG_INDIAN_LAST_NAMES)
             display_first = f"{first} {patronymic}"
             display_last = last
+            long_name_used = True
         elif style < 0.28:
             # First Middle Last (any culture)
             display_first = f"{rng.choice(FIRST_NAMES)} {rng.choice(MIDDLE_NAMES)}"

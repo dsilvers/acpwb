@@ -192,10 +192,6 @@ def _apply_style(ax, title):
     ax.grid(axis='y', color='#E8ECEF', linewidth=0.5, zorder=0)
     for spine in ax.spines.values():
         spine.set_edgecolor('#E8ECEF')
-    ax.set_ylim(bottom=0)
-    ax.yaxis.set_major_formatter(
-        plt.FuncFormatter(lambda x, _: f'{int(x):,}')
-    )
 
 
 def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
@@ -215,6 +211,10 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
     colors = [GROUP_COLORS.get(g, '#95A5A6') for g in groups]
 
     ax.stackplot(xs, ys, labels=groups, colors=colors, alpha=0.88, zorder=2)
+    # Set ylim AFTER stackplot so autoscaling has already computed the data range.
+    # Setting it before (on a fresh axes with default top=1.0) would lock the scale to [0,1].
+    ax.set_ylim(bottom=0)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{int(x):,}'))
     ax.set_xlim(xs[0], xs[-1])
     ax.xaxis.set_major_locator(x_locator)
     if isinstance(x_fmt, str):

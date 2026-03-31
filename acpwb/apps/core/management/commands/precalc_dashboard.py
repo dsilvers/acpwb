@@ -5,8 +5,8 @@ Each model's processed rows are tracked by a high-water mark stat row
 (e.g. hwm.crawler_visit = 12345).  On each run only rows with id > hwm are
 processed; cumulative dict/int stats are updated in place.
 
-Daily charts are always fully recomputed (last 60/30 days) since they are
-windowed time queries that cannot be made truly incremental.
+Daily charts are recomputed only when new rows exist (skipped on quiet ticks
+to avoid unnecessary full-table GROUP BY scans).
 
 Run on a schedule (every 30 minutes recommended).
 
@@ -34,6 +34,7 @@ from apps.public.models import DataOptOutRequest
 from apps.webhooks.models import InboundEmail
 
 _MAX_DICT_ENTRIES = 200
+_MAX_ROWS_PER_RUN = 500_000
 
 
 class Command(BaseCommand):
@@ -82,13 +83,18 @@ class Command(BaseCommand):
             k = str(row[field] or '')
             stat.value[k] = stat.value.get(k, 0) + row['c']
 
+    def _cap_new_max(self, hwm_value, actual_max):
+        """Cap new_max to avoid processing too many rows in one run."""
+        return min(actual_max, hwm_value + _MAX_ROWS_PER_RUN)
+
     # ── CrawlerVisit ──────────────────────────────────────────────────────────
 
     def _update_crawlers(self):
         hwm = self._upsert('hwm.crawler_visit', 0)
-        new_max = CrawlerVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        actual_max = CrawlerVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
-        if new_max:
+        if actual_max:
+            new_max = self._cap_new_max(hwm.value, actual_max)
             new_rows = CrawlerVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('crawlers.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
@@ -130,27 +136,30 @@ class Command(BaseCommand):
 
             hwm.value = new_max
             hwm.save()
-            self.stdout.write(f'  crawlers: updated to hwm={new_max}')
+
+            cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
+            self.stdout.write(f'  crawlers: updated to hwm={new_max}{cap_note}')
+
+            # Daily chart recomputed only when there are new rows
+            now = timezone.now()
+            rows = (CrawlerVisit.objects
+                    .filter(timestamp__gte=now - timedelta(days=60))
+                    .annotate(d=TruncDate('timestamp'))
+                    .values('d').annotate(c=Count('id')))
+            stat = self._upsert('crawlers.daily', {})
+            stat.value = {str(r['d']): r['c'] for r in rows}
+            stat.save()
         else:
             self.stdout.write('  crawlers: no new rows')
-
-        # Daily chart always recomputed
-        now = timezone.now()
-        rows = (CrawlerVisit.objects
-                .filter(timestamp__gte=now - timedelta(days=60))
-                .annotate(d=TruncDate('timestamp'))
-                .values('d').annotate(c=Count('id')))
-        stat = self._upsert('crawlers.daily', {})
-        stat.value = {str(r['d']): r['c'] for r in rows}
-        stat.save()
 
     # ── ArchiveVisit ──────────────────────────────────────────────────────────
 
     def _update_archive(self):
         hwm = self._upsert('hwm.archive_visit', 0)
-        new_max = ArchiveVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        actual_max = ArchiveVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
-        if new_max:
+        if actual_max:
+            new_max = self._cap_new_max(hwm.value, actual_max)
             new_rows = ArchiveVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('archive.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
@@ -170,43 +179,47 @@ class Command(BaseCommand):
             stat.value = self._prune(stat.value)
             stat.save()
 
-            # Bot type via UA classification
+            # Bot type via UA classification — chunked to avoid large cursors
             from apps.core.bot_classify import classify_ua
             stat = self._upsert('archive.by_bot_type', {})
-            for ua in new_rows.values_list('user_agent', flat=True):
+            for ua in new_rows.values_list('user_agent', flat=True).iterator(chunk_size=5000):
                 k = classify_ua(ua or '')
                 stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
 
             hwm.value = new_max
             hwm.save()
-            self.stdout.write(f'  archive: updated to hwm={new_max}')
+
+            cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
+            self.stdout.write(f'  archive: updated to hwm={new_max}{cap_note}')
+
+            # Daily chart recomputed only when there are new rows
+            now = timezone.now()
+            rows = (ArchiveVisit.objects
+                    .filter(timestamp__gte=now - timedelta(days=30))
+                    .annotate(d=TruncDate('timestamp'))
+                    .values('d').annotate(c=Count('id')))
+            stat = self._upsert('archive.daily', {})
+            stat.value = {str(r['d']): r['c'] for r in rows}
+            stat.save()
         else:
             self.stdout.write('  archive: no new rows')
-
-        now = timezone.now()
-        rows = (ArchiveVisit.objects
-                .filter(timestamp__gte=now - timedelta(days=30))
-                .annotate(d=TruncDate('timestamp'))
-                .values('d').annotate(c=Count('id')))
-        stat = self._upsert('archive.daily', {})
-        stat.value = {str(r['d']): r['c'] for r in rows}
-        stat.save()
 
     # ── InboundEmail ──────────────────────────────────────────────────────────
 
     def _update_emails(self):
         hwm = self._upsert('hwm.inbound_email', 0)
-        new_max = InboundEmail.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        actual_max = InboundEmail.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
-        if new_max:
+        if actual_max:
+            new_max = self._cap_new_max(hwm.value, actual_max)
             new_rows = InboundEmail.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('emails.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
 
             stat = self._upsert('emails.by_domain', {})
-            for sender in new_rows.values_list('sender', flat=True):
+            for sender in new_rows.values_list('sender', flat=True).iterator(chunk_size=5000):
                 domain = sender.split('@')[-1].lower() if '@' in sender else sender
                 stat.value[domain] = stat.value.get(domain, 0) + 1
             stat.value = self._prune(stat.value)
@@ -219,26 +232,30 @@ class Command(BaseCommand):
 
             hwm.value = new_max
             hwm.save()
-            self.stdout.write(f'  emails: updated to hwm={new_max}')
+
+            cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
+            self.stdout.write(f'  emails: updated to hwm={new_max}{cap_note}')
+
+            # Daily chart recomputed only when there are new rows
+            now = timezone.now()
+            rows = (InboundEmail.objects
+                    .filter(received_at__gte=now - timedelta(days=30))
+                    .annotate(d=TruncDate('received_at'))
+                    .values('d').annotate(c=Count('id')))
+            stat = self._upsert('emails.daily', {})
+            stat.value = {str(r['d']): r['c'] for r in rows}
+            stat.save()
         else:
             self.stdout.write('  emails: no new rows')
-
-        now = timezone.now()
-        rows = (InboundEmail.objects
-                .filter(received_at__gte=now - timedelta(days=30))
-                .annotate(d=TruncDate('received_at'))
-                .values('d').annotate(c=Count('id')))
-        stat = self._upsert('emails.daily', {})
-        stat.value = {str(r['d']): r['c'] for r in rows}
-        stat.save()
 
     # ── PeoplePageVisit ───────────────────────────────────────────────────────
 
     def _update_people(self):
         hwm = self._upsert('hwm.people_visit', 0)
-        new_max = PeoplePageVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        actual_max = PeoplePageVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
-        if new_max:
+        if actual_max:
+            new_max = self._cap_new_max(hwm.value, actual_max)
             new_rows = PeoplePageVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('people.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
@@ -246,7 +263,7 @@ class Command(BaseCommand):
 
             from apps.core.bot_classify import classify_ua
             stat = self._upsert('people.by_bot_type', {})
-            for ua in new_rows.values_list('user_agent', flat=True):
+            for ua in new_rows.values_list('user_agent', flat=True).iterator(chunk_size=5000):
                 k = classify_ua(ua or '')
                 stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
@@ -258,26 +275,30 @@ class Command(BaseCommand):
 
             hwm.value = new_max
             hwm.save()
-            self.stdout.write(f'  people: updated to hwm={new_max}')
+
+            cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
+            self.stdout.write(f'  people: updated to hwm={new_max}{cap_note}')
+
+            # Daily chart recomputed only when there are new rows
+            now = timezone.now()
+            rows = (PeoplePageVisit.objects
+                    .filter(timestamp__gte=now - timedelta(days=30))
+                    .annotate(d=TruncDate('timestamp'))
+                    .values('d').annotate(c=Count('id')))
+            stat = self._upsert('people.daily', {})
+            stat.value = {str(r['d']): r['c'] for r in rows}
+            stat.save()
         else:
             self.stdout.write('  people: no new rows')
-
-        now = timezone.now()
-        rows = (PeoplePageVisit.objects
-                .filter(timestamp__gte=now - timedelta(days=30))
-                .annotate(d=TruncDate('timestamp'))
-                .values('d').annotate(c=Count('id')))
-        stat = self._upsert('people.daily', {})
-        stat.value = {str(r['d']): r['c'] for r in rows}
-        stat.save()
 
     # ── ProjectPageVisit ──────────────────────────────────────────────────────
 
     def _update_projects(self):
         hwm = self._upsert('hwm.project_visit', 0)
-        new_max = ProjectPageVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        actual_max = ProjectPageVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
 
-        if new_max:
+        if actual_max:
+            new_max = self._cap_new_max(hwm.value, actual_max)
             new_rows = ProjectPageVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
             total_stat = self._upsert('projects.total', 0)
             total_stat.value = total_stat.value + new_rows.count()
@@ -285,7 +306,7 @@ class Command(BaseCommand):
 
             from apps.core.bot_classify import classify_ua
             stat = self._upsert('projects.by_bot_type', {})
-            for ua in new_rows.values_list('user_agent', flat=True):
+            for ua in new_rows.values_list('user_agent', flat=True).iterator(chunk_size=5000):
                 k = classify_ua(ua or '')
                 stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
@@ -297,52 +318,61 @@ class Command(BaseCommand):
 
             hwm.value = new_max
             hwm.save()
-            self.stdout.write(f'  projects: updated to hwm={new_max}')
+
+            cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
+            self.stdout.write(f'  projects: updated to hwm={new_max}{cap_note}')
+
+            # Daily chart recomputed only when there are new rows
+            now = timezone.now()
+            rows = (ProjectPageVisit.objects
+                    .filter(timestamp__gte=now - timedelta(days=30))
+                    .annotate(d=TruncDate('timestamp'))
+                    .values('d').annotate(c=Count('id')))
+            stat = self._upsert('projects.daily', {})
+            stat.value = {str(r['d']): r['c'] for r in rows}
+            stat.save()
         else:
             self.stdout.write('  projects: no new rows')
-
-        now = timezone.now()
-        rows = (ProjectPageVisit.objects
-                .filter(timestamp__gte=now - timedelta(days=30))
-                .annotate(d=TruncDate('timestamp'))
-                .values('d').annotate(c=Count('id')))
-        stat = self._upsert('projects.daily', {})
-        stat.value = {str(r['d']): r['c'] for r in rows}
-        stat.save()
 
     # ── InternalLoginAttempt ──────────────────────────────────────────────────
 
     def _update_login_attempts(self):
         hwm = self._upsert('hwm.login_attempt', 0)
-        new_max = InternalLoginAttempt.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
-        if not new_max:
+        actual_max = InternalLoginAttempt.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        if not actual_max:
             self.stdout.write('  logins: no new rows')
             return
 
+        new_max = self._cap_new_max(hwm.value, actual_max)
         total_stat = self._upsert('login_attempts.total', 0)
         total_stat.value = total_stat.value + InternalLoginAttempt.objects.filter(id__gt=hwm.value, id__lte=new_max).count()
         total_stat.save()
 
         hwm.value = new_max
         hwm.save()
-        self.stdout.write(f'  logins: updated to hwm={new_max}')
+
+        cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
+        self.stdout.write(f'  logins: updated to hwm={new_max}{cap_note}')
 
     # ── DataOptOutRequest ─────────────────────────────────────────────────────
 
     def _update_opt_outs(self):
         hwm = self._upsert('hwm.opt_out', 0)
-        new_max = DataOptOutRequest.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
-        if not new_max:
+        actual_max = DataOptOutRequest.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        if not actual_max:
             self.stdout.write('  optouts: no new rows')
             return
 
+        new_max = self._cap_new_max(hwm.value, actual_max)
         total_stat = self._upsert('optouts.total', 0)
         total_stat.value = total_stat.value + DataOptOutRequest.objects.filter(id__gt=hwm.value, id__lte=new_max).count()
         total_stat.save()
 
         hwm.value = new_max
         hwm.save()
-        self.stdout.write(f'  optouts: updated to hwm={new_max}')
+
+        cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
+        self.stdout.write(f'  optouts: updated to hwm={new_max}{cap_note}')
 
     # ── CanaryToken (always full recompute — cheap) ───────────────────────────
 

@@ -14,7 +14,7 @@ from django.db.models import Max
 from django.shortcuts import render
 
 from apps.core.models import DashboardStat
-from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit
+from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import DataOptOutRequest
@@ -258,3 +258,17 @@ def people(request):
         'updated_at':      _updated_at('people.total'),
     }
     return render(request, 'dashboard/people.html', ctx)
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def logins(request):
+    ctx = {
+        'total':        _stat('login_attempts.total', 0),
+        'top_usernames': _top_field(_stat('login_attempts.by_username', {}), 'username', 30),
+        'top_ips':       _top_field(_stat('login_attempts.by_ip', {}), 'ip_address', 20),
+        'by_source':     _top_named(_stat('login_attempts.by_source', {})),
+        'daily':         _daily_bars(_stat('login_attempts.daily', {}), 30),
+        'recent':        list(InternalLoginAttempt.objects.order_by('-created_at')[:50]),
+        'updated_at':    _updated_at('login_attempts.total'),
+    }
+    return render(request, 'dashboard/logins.html', ctx)

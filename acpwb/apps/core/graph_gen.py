@@ -22,7 +22,7 @@ import os
 import tempfile
 import time as _time
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone as dt_timezone
 from pathlib import Path
 
 try:
@@ -150,8 +150,6 @@ def _query_stored_daily(cutoff=None):
     Returns (dates, series) with 'Crawler Hits' and 'Archive Visits' keys.
     cutoff — if provided, only return dates >= cutoff.
     """
-    from django.utils import timezone
-
     from apps.core.models import DashboardStat
 
     crawlers_daily = {}
@@ -174,7 +172,7 @@ def _query_stored_daily(cutoff=None):
         return [], {}
 
     date_objs = [
-        datetime.fromisoformat(d).replace(tzinfo=timezone.utc)
+        datetime.fromisoformat(d).replace(tzinfo=dt_timezone.utc)
         for d in all_dates
     ]
     series = {
@@ -189,12 +187,15 @@ def _query_stored_daily(cutoff=None):
 def _apply_style(ax, title):
     """Apply consistent visual style to an axes object."""
     ax.set_facecolor('#FAFBFC')
-    ax.set_title(title, fontsize=8.5, color='#2C3E50', pad=5, fontweight='bold')
-    ax.tick_params(axis='both', labelsize=6.5, colors='#7F8C8D')
+    ax.set_title(title, fontsize=12, color='#2C3E50', pad=7, fontweight='bold')
+    ax.tick_params(axis='both', labelsize=9, colors='#7F8C8D')
     ax.grid(axis='y', color='#E8ECEF', linewidth=0.5, zorder=0)
     for spine in ax.spines.values():
         spine.set_edgecolor('#E8ECEF')
     ax.set_ylim(bottom=0)
+    ax.yaxis.set_major_formatter(
+        plt.FuncFormatter(lambda x, _: f'{int(x):,}')
+    )
 
 
 def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
@@ -220,8 +221,8 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
         ax.xaxis.set_major_formatter(mdates.DateFormatter(x_fmt))
     else:
         ax.xaxis.set_major_formatter(x_fmt)
-    ax.legend(loc='upper left', fontsize=6, framealpha=0.75,
-              ncol=4, handlelength=1, handletextpad=0.4, columnspacing=0.8)
+    ax.legend(loc='upper left', fontsize=8, framealpha=0.85,
+              ncol=4, handlelength=1.2, handletextpad=0.5, columnspacing=1.0)
 
 
 # ── File I/O ───────────────────────────────────────────────────────────────────
@@ -232,7 +233,8 @@ def _save_atomic(fig, path):
     fd, tmp = tempfile.mkstemp(suffix='.png', dir=path.parent)
     try:
         os.close(fd)
-        fig.savefig(tmp, dpi=100, bbox_inches='tight',
+        os.chmod(tmp, 0o644)  # ensure nginx (non-root) can read the file
+        fig.savefig(tmp, dpi=150, bbox_inches='tight',
                     facecolor=fig.get_facecolor())
         os.replace(tmp, path)
     except Exception:
@@ -301,10 +303,10 @@ def generate_traffic_graphs(output_dir, stdout=None):
                 stdout.write(f'    traffic_{name}.png — query error: {exc}\n')
             continue
 
-        fig, ax = plt.subplots(figsize=(11, 2.8))
+        fig, ax = plt.subplots(figsize=(13, 3.5))
         fig.patch.set_facecolor('white')
         _render_stacked(ax, buckets, series, title, x_locator, xfmt)
-        fig.tight_layout(pad=0.6)
+        fig.tight_layout(pad=0.8)
         _save_atomic(fig, output_dir / f'traffic_{name}.png')
         plt.close(fig)
 

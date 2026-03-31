@@ -345,9 +345,49 @@ class Command(BaseCommand):
             return
 
         new_max = self._cap_new_max(hwm.value, actual_max)
+        new_rows = InternalLoginAttempt.objects.filter(id__gt=hwm.value, id__lte=new_max)
+
         total_stat = self._upsert('login_attempts.total', 0)
-        total_stat.value = total_stat.value + InternalLoginAttempt.objects.filter(id__gt=hwm.value, id__lte=new_max).count()
+        total_stat.value = total_stat.value + new_rows.count()
         total_stat.save()
+
+        by_username = self._upsert('login_attempts.by_username', {})
+        self._inc_dict(by_username, new_rows, 'username')
+        by_username.value = self._prune(by_username.value)
+        by_username.save()
+
+        by_ip = self._upsert('login_attempts.by_ip', {})
+        self._inc_dict(by_ip, new_rows, 'ip_address')
+        by_ip.value = self._prune(by_ip.value)
+        by_ip.save()
+
+        # Group by source (the login page hit): derive from next_url
+        by_source = self._upsert('login_attempts.by_source', {})
+        for row in new_rows.values('next_url').annotate(c=Count('id')):
+            nu = row['next_url'] or ''
+            if 'wp-login' in nu or 'wp_login' in nu:
+                src = 'wp-login'
+            elif 'xmlrpc' in nu:
+                src = 'xmlrpc'
+            elif 'internal' in nu or nu == '':
+                src = 'internal'
+            else:
+                src = nu[:60] or 'other'
+            by_source.value[src] = by_source.value.get(src, 0) + row['c']
+        by_source.save()
+
+        # Daily chart — recomputed only when new rows exist
+        now = timezone.now()
+        daily_stat = self._upsert('login_attempts.daily', {})
+        daily_rows = (
+            InternalLoginAttempt.objects
+            .filter(created_at__gte=now - timedelta(days=60))
+            .annotate(d=TruncDate('created_at'))
+            .values('d')
+            .annotate(c=Count('id'))
+        )
+        daily_stat.value = {str(r['d']): r['c'] for r in daily_rows}
+        daily_stat.save()
 
         hwm.value = new_max
         hwm.save()

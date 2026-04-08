@@ -5,6 +5,40 @@
 {% block nav_live %}active{% endblock %}
 
 {% block content %}
+
+<div class="row g-3 mb-3">
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Req/s (prev second)</div>
+      <div class="value" id="rps-1">—</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Avg req/s (1 min)</div>
+      <div class="value" id="rps-60">—</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Avg req/s (5 min)</div>
+      <div class="value" id="rps-300">—</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Avg req/s (15 min)</div>
+      <div class="value" id="rps-900">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-card mb-3" style="padding:.75rem 1.1rem">
+  <span style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--navy)">Total transferred</span>
+  <span id="bytes-total" style="margin-left:1rem;font-size:1.1rem;font-weight:900;color:var(--navy)">0 B</span>
+  <span style="margin-left:.5rem;font-size:.72rem;color:var(--muted)">(uncompressed — pre-gzip Django response size)</span>
+</div>
+
 <div class="section-card mb-3">
   <div class="section-card-header" style="justify-content:space-between">
     <h6>Incoming Requests</h6>
@@ -23,7 +57,7 @@
             <th>Path</th>
             <th style="width:5rem">ms</th>
             <th style="width:5rem">bytes</th>
-            <th style="max-width:14rem">User Agent</th>
+            <th>Bot / Browser</th>
           </tr>
         </thead>
         <tbody id="stream-body">
@@ -47,6 +81,51 @@
   const waitingRow = document.getElementById("waiting-row");
   const MAX_ROWS = 200;
 
+  // RPS tracking — ring buffer of arrival timestamps (ms), max 15 min window
+  const WINDOW_MS = 15 * 60 * 1000;
+  const timestamps = [];  // sorted ascending
+
+  const rpsEls = {
+    1:   document.getElementById("rps-1"),
+    60:  document.getElementById("rps-60"),
+    300: document.getElementById("rps-300"),
+    900: document.getElementById("rps-900"),
+  };
+  const bytesEl = document.getElementById("bytes-total");
+  let totalBytes = 0;
+
+  function formatBytes(b) {
+    if (b >= 1073741824) return (b / 1073741824).toFixed(2) + ' GB';
+    if (b >= 1048576)    return (b / 1048576).toFixed(2) + ' MB';
+    if (b >= 1024)       return (b / 1024).toFixed(1) + ' KB';
+    return b + ' B';
+  }
+
+  function updateRPS() {
+    const now = Date.now();
+    // Prune entries older than 15 min
+    while (timestamps.length && now - timestamps[0] > WINDOW_MS) timestamps.shift();
+
+    const buckets = [
+      [1,   document.getElementById("rps-1")],
+      [60,  document.getElementById("rps-60")],
+      [300, document.getElementById("rps-300")],
+      [900, document.getElementById("rps-900")],
+    ];
+    for (const [secs, el] of buckets) {
+      const cutoff = now - secs * 1000;
+      // Count entries within this window
+      let lo = 0, hi = timestamps.length;
+      while (lo < hi) { const mid = (lo + hi) >> 1; if (timestamps[mid] < cutoff) lo = mid + 1; else hi = mid; }
+      const count = timestamps.length - lo;
+      // For 1s bucket: show count in the previous second exactly
+      // For others: divide by window to get average
+      el.textContent = Math.round(count / secs);
+    }
+  }
+
+  setInterval(updateRPS, 1000);
+
   function statusLabel(code) {
     if (code < 300) return '<span style="color:#16a34a;font-weight:700">' + code + '</span>';
     if (code < 400) return '<span style="color:#2563eb;font-weight:700">' + code + '</span>';
@@ -62,6 +141,86 @@
 
   function esc(s) {
     return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  // Mirror Python BOT_PATTERNS: [substring, shortLabel]
+  const UA_PATTERNS = [
+    ['GPTBot',                'GPTBot'],
+    ['OAI-SearchBot',         'OAI-Search'],
+    ['ChatGPT-User',          'ChatGPT'],
+    ['ClaudeBot',             'ClaudeBot'],
+    ['Claude-Web',            'Claude-Web'],
+    ['anthropic-ai',          'Anthropic'],
+    ['PerplexityBot',         'Perplexity'],
+    ['Google-Extended',       'Google-Ext'],
+    ['meta-externalagent',    'Meta-Agent'],
+    ['FacebookBot',           'FacebookBot'],
+    ['Applebot-Extended',     'Applebot-Ext'],
+    ['Bytespider',            'Bytespider'],
+    ['Amazonbot',             'Amazonbot'],
+    ['Diffbot',               'Diffbot'],
+    ['omgili',                'Omgili'],
+    ['webzio-extended',       'Webzio'],
+    ['CCBot',                 'CCBot'],
+    ['cohere-ai',             'Cohere'],
+    ['Timpibot',              'Timpibot'],
+    ['Nexus 5X Build/MMB29P', 'Googlebot/M'],
+    ['Googlebot',             'Googlebot'],
+    ['GoogleOther',           'GoogleOther'],
+    ['bingbot',               'Bingbot'],
+    ['BingPreview',           'BingPreview'],
+    ['msnbot',                'msnbot'],
+    ['Baiduspider',           'Baidu'],
+    ['YandexBot',             'Yandex'],
+    ['Slurp',                 'Yahoo'],
+    ['DuckDuckBot',           'DuckDuck'],
+    ['Applebot',              'Applebot'],
+    ['sogou',                 'Sogou'],
+    ['360Spider',             '360Spider'],
+    ['SeznamBot',             'Seznam'],
+    ['SemrushBot',            'Semrush'],
+    ['AhrefsBot',             'Ahrefs'],
+    ['MJ12bot',               'MJ12'],
+    ['DotBot',                'DotBot'],
+    ['DataForSeoBot',         'DataForSEO'],
+    ['PetalBot',              'PetalBot'],
+    ['PiplBot',               'Pipl'],
+    ['SERankingBacklinksBot', 'SERANKBot'],
+    ['ZoominfoBot',           'Zoominfo'],
+    ['BitSightBot',           'BitSight'],
+    ['zgrab',                 'zgrab'],
+    ['Twitterbot',            'Twitter'],
+    ['facebookexternalhit',   'FB-Scraper'],
+    ['LinkedInBot',           'LinkedIn'],
+    ['ia_archiver',           'Archive.org'],
+    ['archive.org_bot',       'Archive.org'],
+    ['python-requests',       'py-requests'],
+    ['curl/',                 'curl'],
+    ['wget',                  'wget'],
+    ['scrapy',                'scrapy'],
+    ['Go-http-client',        'go-http'],
+    ['Java/',                 'java-http'],
+    ['libwww-perl',           'libwww'],
+    ['axios',                 'axios'],
+    ['node-fetch',            'node-fetch'],
+    ['okhttp',                'okhttp'],
+    ['httpx',                 'httpx'],
+    ['aiohttp',               'aiohttp'],
+    ['Faraday',               'faraday'],
+  ];
+
+  function classifyUA(ua) {
+    if (!ua) return '(empty)';
+    const lower = ua.toLowerCase();
+    for (const [pat, label] of UA_PATTERNS) {
+      if (lower.includes(pat.toLowerCase())) return label;
+    }
+    // Browser fallback
+    if (lower.includes('edg/'))    return 'Edge';
+    if (lower.includes('chrome/')) return 'Chrome';
+    if (lower.includes('firefox/')) return 'Firefox';
+    if (lower.includes('safari/')) return 'Safari';
+    return 'Browser';
   }
 
   function connect() {
@@ -81,6 +240,11 @@
 
       if (waitingRow && waitingRow.parentNode) waitingRow.remove();
 
+      // Record arrival for RPS and accumulate bytes
+      timestamps.push(Date.now());
+      totalBytes += (d.response_bytes || 0);
+      bytesEl.textContent = formatBytes(totalBytes);
+
       const time = d.timestamp ? d.timestamp.slice(11, 23) : "";
       const tr = document.createElement("tr");
       tr.innerHTML =
@@ -92,7 +256,7 @@
         "<td style='word-break:break-all'>" + esc(d.path || "") + "</td>" +
         "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(d.response_ms ?? "") + "</td>" +
         "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(d.response_bytes ?? "") + "</td>" +
-        "<td style='max-width:14rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)'>" + esc(d.user_agent || "") + "</td>";
+        "<td title='" + esc(d.user_agent || "") + "' style='white-space:nowrap;color:var(--muted)'>" + esc(classifyUA(d.user_agent)) + "</td>";
 
       tbody.insertBefore(tr, tbody.firstChild);
 

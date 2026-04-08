@@ -14,7 +14,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
-from apps.core.bot_classify import classify_ua, classify_ua_group
+from apps.core.bot_classify import classify_ua_group, classify_ua_or_ip
 from apps.people.generators import (
     FIRST_NAMES as _INT_FIRST_NAMES, LAST_NAMES as _INT_LAST_NAMES,
     TITLES as _INT_TITLES, DEPARTMENTS as _INT_DEPARTMENTS,
@@ -38,15 +38,16 @@ def _get_ip(request):
 def _log_crawler(request, trap_type):
     try:
         ua = request.META.get('HTTP_USER_AGENT', '')
+        ip = _get_ip(request)
         CrawlerVisit.objects.create(
-            ip_address=_get_ip(request),
+            ip_address=ip,
             user_agent=ua[:512],
             host=request.get_host()[:253],
             path=request.path[:512],
             referrer=request.META.get('HTTP_REFERER', '')[:256],
             trap_type=trap_type,
             query_string=request.META.get('QUERY_STRING', '')[:256],
-            bot_type=classify_ua(ua),
+            bot_type=classify_ua_or_ip(ua, ip),
             bot_group=classify_ua_group(ua),
         )
     except Exception:

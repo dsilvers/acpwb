@@ -14,7 +14,7 @@ Usage:
 
 from django.core.management.base import BaseCommand
 
-from apps.core.bot_classify import classify_ua, classify_ua_group
+from apps.core.bot_classify import classify_ua_group, classify_ua_or_ip
 from apps.honeypot.models import CrawlerVisit
 
 BATCH_SIZE = 1000
@@ -49,10 +49,10 @@ class Command(BaseCommand):
         if reclassify:
             qs = CrawlerVisit.objects.filter(
                 bot_type__in=["", "Other / Browser"]
-            ).only("id", "user_agent")
+            ).only("id", "user_agent", "ip_address")
             label = "blank or 'Other / Browser'"
         else:
-            qs = CrawlerVisit.objects.filter(bot_type="").only("id", "user_agent")
+            qs = CrawlerVisit.objects.filter(bot_type="").only("id", "user_agent", "ip_address")
             label = "blank"
 
         total = qs.count()
@@ -71,7 +71,8 @@ class Command(BaseCommand):
 
         for visit in qs.iterator(chunk_size=batch_size):
             ua = visit.user_agent or ""
-            visit.bot_type = classify_ua(ua)
+            ip = visit.ip_address or ""
+            visit.bot_type = classify_ua_or_ip(ua, ip)
             visit.bot_group = classify_ua_group(ua)
             batch.append(visit)
 

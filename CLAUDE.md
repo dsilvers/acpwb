@@ -267,6 +267,7 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/  # → 302 to acpw
 | `dedupe_crawler_visits` | — | Remove duplicate `CrawlerVisit` rows. |
 | `fix_other_traps` | `--dry-run` | One-shot cleanup: dedupe → delete all `DashboardStat` rows → recompute from scratch. Holds the precalc lock to prevent cron overlap. |
 | `analyze_other_traps` | `--limit`, `--sample` | Inspect `CrawlerVisit` rows with `trap_type='other'` — top paths, prefixes, UAs, IPs, bot types, hosts. |
+| `analyze_browser_uas` | `--hours`, `--limit`, `--sample`, `--ua-sample` | Breakdown of `bot_type='Other / Browser'` rows from the last N hours — top UAs, UA tokens, paths, IPs, trap types, hosts; reclassification preview showing which rows current `BOT_PATTERNS` would now match. |
 | `generate_content_fixture` | — | Generate test fixtures for content. |
 | `export_gen_data` | — | Export data for external image generation. |
 

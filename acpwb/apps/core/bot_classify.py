@@ -1,7 +1,47 @@
 """
 Bot user-agent classification utilities.
 Shared between BotTrackingMiddleware and dashboard_views to avoid circular imports.
+
+Two classification paths:
+  classify_ua(ua)            — match by user-agent string against BOT_PATTERNS
+  classify_ip(ip)            — match by source IP against known bot CIDR ranges
+  classify_ua_or_ip(ua, ip)  — UA first; falls back to IP when UA returns 'Other / Browser'
 """
+import ipaddress
+
+# ---------------------------------------------------------------------------
+# Known bot IP CIDR ranges
+# Format: (cidr_string, display_name)
+# Checked in order; first match wins.
+# ---------------------------------------------------------------------------
+_IP_BOT_RANGE_DEFS = [
+    # Alibaba / Qwen AI crawler
+    ('47.82.60.0/23',   'Alibaba Qwen'),
+    ('47.79.0.0/17',    'Alibaba Qwen'),
+    ('47.82.62.0/24',   'Alibaba Qwen'),
+]
+
+# Pre-parse networks at import time so per-request lookup is fast
+IP_BOT_RANGES = [
+    (ipaddress.ip_network(cidr, strict=False), name)
+    for cidr, name in _IP_BOT_RANGE_DEFS
+]
+
+
+def classify_ip(ip_str):
+    """
+    Return a bot name if ip_str falls within a known bot IP range, else None.
+    Returns None (not 'Other / Browser') so callers can distinguish "no match".
+    """
+    try:
+        addr = ipaddress.ip_address(ip_str)
+    except ValueError:
+        return None
+    for network, name in IP_BOT_RANGES:
+        if addr in network:
+            return name
+    return None
+
 
 BOT_PATTERNS = [
     # AI crawlers — most interesting
@@ -82,6 +122,19 @@ def classify_ua(ua):
         if pattern.lower() in ua.lower():
             return name
     return 'Other / Browser'
+
+
+def classify_ua_or_ip(ua, ip):
+    """
+    Classify by UA first; if that returns 'Other / Browser', fall back to IP range lookup.
+    Use this in preference to classify_ua() wherever the source IP is available.
+    """
+    result = classify_ua(ua)
+    if result == 'Other / Browser':
+        ip_result = classify_ip(ip)
+        if ip_result:
+            return ip_result
+    return result
 
 
 def classify_ua_group(ua):

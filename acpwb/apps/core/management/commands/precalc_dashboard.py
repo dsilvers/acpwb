@@ -101,13 +101,21 @@ class Command(BaseCommand):
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
 
+            stat = self._upsert('crawlers.by_trap_type', {})
+            self._inc_dict(stat, new_rows, 'trap_type')
+            stat.save()
+
+            # bot_type and bot_group are always fully recomputed from the DB so that
+            # backfill_bot_types changes are reflected immediately without a hwm reset.
             for key, field in [
-                ('crawlers.by_trap_type', 'trap_type'),
                 ('crawlers.by_bot_type',  'bot_type'),
                 ('crawlers.by_bot_group', 'bot_group'),
             ]:
                 stat = self._upsert(key, {})
-                self._inc_dict(stat, new_rows, field)
+                stat.value = {
+                    str(r[field] or ''): r['c']
+                    for r in CrawlerVisit.objects.values(field).annotate(c=Count('id'))
+                }
                 stat.save()
 
             for key, field in [
@@ -199,11 +207,11 @@ class Command(BaseCommand):
             stat.value = self._prune(stat.value)
             stat.save()
 
-            # Bot type via UA classification — chunked to avoid large cursors
-            from apps.core.bot_classify import classify_ua
+            # Bot type via UA + IP classification — chunked to avoid large cursors
+            from apps.core.bot_classify import classify_ua_or_ip
             stat = self._upsert('archive.by_bot_type', {})
-            for ua in new_rows.values_list('user_agent', flat=True).iterator(chunk_size=5000):
-                k = classify_ua(ua or '')
+            for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+                k = classify_ua_or_ip(ua or '', ip or '')
                 stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
 
@@ -281,10 +289,10 @@ class Command(BaseCommand):
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
 
-            from apps.core.bot_classify import classify_ua
+            from apps.core.bot_classify import classify_ua_or_ip
             stat = self._upsert('people.by_bot_type', {})
-            for ua in new_rows.values_list('user_agent', flat=True).iterator(chunk_size=5000):
-                k = classify_ua(ua or '')
+            for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+                k = classify_ua_or_ip(ua or '', ip or '')
                 stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
 
@@ -324,10 +332,10 @@ class Command(BaseCommand):
             total_stat.value = total_stat.value + new_rows.count()
             total_stat.save()
 
-            from apps.core.bot_classify import classify_ua
+            from apps.core.bot_classify import classify_ua_or_ip
             stat = self._upsert('projects.by_bot_type', {})
-            for ua in new_rows.values_list('user_agent', flat=True).iterator(chunk_size=5000):
-                k = classify_ua(ua or '')
+            for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+                k = classify_ua_or_ip(ua or '', ip or '')
                 stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
 

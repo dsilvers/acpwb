@@ -137,28 +137,43 @@ def classify_ua_or_ip(ua, ip):
     return result
 
 
-def classify_ua_group(ua):
-    """Coarser grouping for overview charts."""
-    label = classify_ua(ua)
-    if label in ('Other / Browser', '(empty user agent)'):
-        return label
-    ai_bots = {'OpenAI GPTBot', 'OpenAI SearchBot', 'OpenAI ChatGPT',
-                'Anthropic ClaudeBot', 'Anthropic Claude', 'Anthropic',
-                'Perplexity', 'Google-Extended (AI)', 'ByteDance Bytespider',
-                'Meta FacebookBot', 'Meta ExternalAgent', 'Apple Applebot-Extended',
-                'Amazonbot', 'Diffbot', 'Omgilibot', 'Webzio',
-                'Common Crawl', 'Cohere', 'Timpi'}
-    if label in ai_bots:
+_AI_BOTS = {
+    'OpenAI GPTBot', 'OpenAI SearchBot', 'OpenAI ChatGPT',
+    'Anthropic ClaudeBot', 'Anthropic Claude', 'Anthropic',
+    'Perplexity', 'Google-Extended (AI)', 'ByteDance Bytespider',
+    'Meta FacebookBot', 'Meta ExternalAgent', 'Apple Applebot-Extended',
+    'Amazonbot', 'Diffbot', 'Omgilibot', 'Webzio',
+    'Common Crawl', 'Cohere', 'Timpi',
+    'Alibaba Qwen',  # IP-range classified
+}
+
+_SEARCH_BOTS = {
+    'Googlebot', 'Googlebot Mobile', 'GoogleOther',
+    'Bingbot', 'Bing Preview', 'MSN Bot',
+    'Baiduspider', 'YandexBot', 'Yahoo Slurp', 'DuckDuckBot',
+    'Applebot', 'Sogou', '360Spider', 'Seznam',
+}
+
+_SCRAPER_BOTS = {
+    'Python Requests', 'cURL', 'Wget', 'Scrapy', 'Go HTTP Client',
+    'Java HTTP Client', 'libwww-perl', 'axios', 'node-fetch',
+    'OkHttp', 'httpx', 'aiohttp', 'Faraday (Ruby)',
+}
+
+
+def bot_type_to_group(bot_type):
+    """Map a bot_type label (from classify_ua_or_ip) to a coarse group."""
+    if bot_type in ('Other / Browser', '(empty user agent)'):
+        return bot_type
+    if bot_type in _AI_BOTS:
         return 'AI Crawlers'
-    search_bots = {'Googlebot', 'Googlebot Mobile', 'GoogleOther',
-                   'Bingbot', 'Bing Preview', 'MSN Bot',
-                   'Baiduspider', 'YandexBot', 'Yahoo Slurp', 'DuckDuckBot',
-                   'Applebot', 'Sogou', '360Spider', 'Seznam'}
-    if label in search_bots:
+    if bot_type in _SEARCH_BOTS:
         return 'Search Engines'
-    scraper_bots = {'Python Requests', 'cURL', 'Wget', 'Scrapy', 'Go HTTP Client',
-                    'Java HTTP Client', 'libwww-perl', 'axios', 'node-fetch',
-                    'OkHttp', 'httpx', 'aiohttp', 'Faraday (Ruby)'}
-    if label in scraper_bots:
+    if bot_type in _SCRAPER_BOTS:
         return 'Generic Scrapers'
     return 'SEO / Other Bots'
+
+
+def classify_ua_group(ua):
+    """Coarser grouping for overview charts — UA only. Use bot_type_to_group() when IP is available."""
+    return bot_type_to_group(classify_ua(ua))

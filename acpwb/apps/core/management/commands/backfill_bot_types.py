@@ -14,7 +14,7 @@ Usage:
 
 from django.core.management.base import BaseCommand
 
-from apps.core.bot_classify import classify_ua_group, classify_ua_or_ip
+from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
 from apps.honeypot.models import CrawlerVisit
 
 BATCH_SIZE = 1000
@@ -73,7 +73,7 @@ class Command(BaseCommand):
             ua = visit.user_agent or ""
             ip = visit.ip_address or ""
             visit.bot_type = classify_ua_or_ip(ua, ip)
-            visit.bot_group = classify_ua_group(ua)
+            visit.bot_group = bot_type_to_group(visit.bot_type)
             batch.append(visit)
 
             if len(batch) >= batch_size:

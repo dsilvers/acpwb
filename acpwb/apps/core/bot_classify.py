@@ -16,8 +16,9 @@ import ipaddress
 # ---------------------------------------------------------------------------
 _IP_BOT_RANGE_DEFS = [
     # Alibaba / Qwen AI crawler
-    ('47.74.0.0/14',   'Alibaba Qwen'),  # 47.74–47.77
-    ('47.82.60.0/22',  'Alibaba Qwen'),  # 47.82.60–63 (consolidates /23 + /24)
+    ('47.79.0.0/16',   'Alibaba Qwen'),  # observed traffic
+    ('47.82.60.0/22',  'Alibaba Qwen'),  # 47.82.60–63
+    ('8.219.0.0/16',   'Alibaba Qwen'),  # observed traffic
 ]
 
 # Pre-parse networks at import time so per-request lookup is fast
@@ -33,7 +34,7 @@ def classify_ip(ip_str):
     Returns None (not 'Other / Browser') so callers can distinguish "no match".
     """
     try:
-        addr = ipaddress.ip_address(ip_str)
+        addr = ipaddress.ip_address(ip_str.strip())
     except ValueError:
         return None
     for network, name in IP_BOT_RANGES:

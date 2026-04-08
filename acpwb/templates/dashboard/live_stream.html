@@ -1,0 +1,125 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Live Stream{% endblock %}
+{% block page_title %}Live Request Stream{% endblock %}
+{% block nav_live %}active{% endblock %}
+
+{% block content %}
+<div class="section-card mb-3">
+  <div class="section-card-header" style="justify-content:space-between">
+    <h6>Incoming Requests</h6>
+    <span id="ws-status" style="font-size:.72rem;font-weight:700;color:var(--muted)">Connecting…</span>
+  </div>
+  <div class="section-card-body" style="padding:0">
+    <div style="overflow-x:auto">
+      <table class="table dash-table mb-0" id="stream-table">
+        <thead>
+          <tr>
+            <th style="width:6rem">Time</th>
+            <th style="width:5rem">Method</th>
+            <th style="width:3rem">Status</th>
+            <th style="width:8rem">IP</th>
+            <th style="width:10rem">Host</th>
+            <th>Path</th>
+            <th style="width:5rem">ms</th>
+            <th style="width:5rem">bytes</th>
+            <th style="max-width:14rem">User Agent</th>
+          </tr>
+        </thead>
+        <tbody id="stream-body">
+          <tr id="waiting-row">
+            <td colspan="9" style="text-align:center;color:var(--muted);padding:2rem">Waiting for requests…</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const token = "{{ ws_token|escapejs }}";
+  const proto = location.protocol === "https:" ? "wss:" : "ws:";
+  const url = proto + "//" + location.host + "/ws/requests/" + (token ? "?token=" + encodeURIComponent(token) : "");
+
+  const statusEl = document.getElementById("ws-status");
+  const tbody = document.getElementById("stream-body");
+  const waitingRow = document.getElementById("waiting-row");
+  const MAX_ROWS = 200;
+
+  function statusLabel(code) {
+    if (code < 300) return '<span style="color:#16a34a;font-weight:700">' + code + '</span>';
+    if (code < 400) return '<span style="color:#2563eb;font-weight:700">' + code + '</span>';
+    if (code < 500) return '<span style="color:#d97706;font-weight:700">' + code + '</span>';
+    return '<span style="color:#dc2626;font-weight:700">' + code + '</span>';
+  }
+
+  function methodLabel(m) {
+    const colors = {GET:"#6B7280",POST:"#2563eb",PUT:"#d97706",PATCH:"#7c3aed",DELETE:"#dc2626"};
+    const c = colors[m] || "#6B7280";
+    return '<span style="color:' + c + ';font-weight:700">' + m + '</span>';
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function connect() {
+    statusEl.textContent = "Connecting…";
+    statusEl.style.color = "var(--muted)";
+
+    const ws = new WebSocket(url);
+
+    ws.onopen = function () {
+      statusEl.textContent = "Live";
+      statusEl.style.color = "#16a34a";
+    };
+
+    ws.onmessage = function (evt) {
+      let d;
+      try { d = JSON.parse(evt.data); } catch (e) { return; }
+
+      if (waitingRow && waitingRow.parentNode) waitingRow.remove();
+
+      const time = d.timestamp ? d.timestamp.slice(11, 23) : "";
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(time) + "</td>" +
+        "<td>" + methodLabel(d.method || "") + "</td>" +
+        "<td>" + statusLabel(d.status || 0) + "</td>" +
+        "<td style='font-variant-numeric:tabular-nums'>" + esc(d.ip || "") + "</td>" +
+        "<td style='max-width:10rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap'>" + esc(d.host || "") + "</td>" +
+        "<td style='word-break:break-all'>" + esc(d.path || "") + "</td>" +
+        "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(d.response_ms ?? "") + "</td>" +
+        "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(d.response_bytes ?? "") + "</td>" +
+        "<td style='max-width:14rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)'>" + esc(d.user_agent || "") + "</td>";
+
+      tbody.insertBefore(tr, tbody.firstChild);
+
+      // Cap at MAX_ROWS
+      while (tbody.rows.length > MAX_ROWS) {
+        tbody.removeChild(tbody.lastChild);
+      }
+    };
+
+    ws.onclose = function (evt) {
+      if (evt.code === 4401) {
+        statusEl.textContent = "Unauthorized";
+        statusEl.style.color = "#dc2626";
+        return;
+      }
+      statusEl.textContent = "Reconnecting…";
+      statusEl.style.color = "#d97706";
+      setTimeout(connect, 3000);
+    };
+
+    ws.onerror = function () {
+      statusEl.textContent = "Error";
+      statusEl.style.color = "#dc2626";
+    };
+  }
+
+  connect();
+})();
+</script>
+{% endblock %}

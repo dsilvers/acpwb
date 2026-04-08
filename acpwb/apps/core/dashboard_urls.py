@@ -9,4 +9,5 @@ urlpatterns = [
     path('emails/',   views.emails,         name='dashboard-emails'),
     path('people/',   views.people,         name='dashboard-people'),
     path('logins/',   views.logins,         name='dashboard-logins'),
+    path('live/',     views.live_stream,    name='dashboard-live'),
 ]

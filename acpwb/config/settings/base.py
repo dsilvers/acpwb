@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'apps.core.stream_middleware.RequestStreamMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -110,6 +111,10 @@ MAILGUN_DOMAIN = env('MAILGUN_DOMAIN', default='acpwb.com')
 
 # Canary Tokens
 CANARYTOKENS_WEBHOOK_URL = env('CANARYTOKENS_WEBHOOK_URL', default=None)
+
+# Real-time request stream (Redis pub/sub → WebSocket service)
+REDIS_URL = env('REDIS_URL', default='redis://redis:6379/0')
+STREAM_WS_TOKEN = env('STREAM_WS_TOKEN', default='')
 
 
 # Sentry

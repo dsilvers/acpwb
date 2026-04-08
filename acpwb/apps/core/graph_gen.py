@@ -327,18 +327,18 @@ def generate_traffic_graphs(output_dir, stdout=None):
         (
             '8h',
             now - timedelta(hours=8),
-            10,
+            2,
             '%H:%M',
             mdates.HourLocator(),
-            'Last 8 Hours (per 10 min)',
+            'Last 8 Hours (per 2 min)',
         ),
         (
             '24h',
             now - timedelta(hours=24),
-            60,
+            5,
             '%H:%M',
             mdates.HourLocator(byhour=[0, 4, 8, 12, 16, 20]),
-            'Last 24 Hours (per hour)',
+            'Last 24 Hours (per 5 min)',
         ),
     ]
 
@@ -365,45 +365,41 @@ def generate_traffic_graphs(output_dir, stdout=None):
                 f'    traffic_{name}.png — {total:,} requests ({elapsed:.1f}s)\n'
             )
 
-    # Stored-stat windows — read pre-aggregated DashboardStat, no table scan
-    stored_windows = [
-        (
-            '7d',
-            now - timedelta(days=7),
-            'Last 7 Days (per day)',
-            mdates.DayLocator(),
-            '%-d %b',
-        ),
-        (
-            'all',
-            None,
-            'All Time (per day)',
-            mdates.AutoDateLocator(),
-            None,   # formatter set per-window below
-        ),
-    ]
-
-    for name, cutoff, title, x_locator, xfmt in stored_windows:
-        t0 = _time.monotonic()
-        try:
-            dates, series = _query_stored_daily(cutoff=cutoff)
-        except Exception as exc:
-            if stdout:
-                stdout.write(f'    traffic_{name}.png — stat read error: {exc}\n')
-            continue
-
+    # 7d — live query at 30-min buckets (336 data points); timestamp-bounded → index scan only
+    t0 = _time.monotonic()
+    try:
+        buckets, series = _query_windowed(now - timedelta(days=7), 30)
         fig, ax = plt.subplots(figsize=(11, 2.8))
         fig.patch.set_facecolor('white')
-        # xfmt is a format string for windowed, or None → AutoDateFormatter for all-time
-        fmt = xfmt if xfmt else mdates.AutoDateFormatter(x_locator)
-        _render_stacked(ax, dates, series, title, x_locator, fmt)
+        _render_stacked(ax, buckets, series, 'Last 7 Days (per 30 min)',
+                        mdates.DayLocator(), '%-d %b')
         fig.tight_layout(pad=0.6)
-        _save_atomic(fig, output_dir / f'traffic_{name}.png')
+        _save_atomic(fig, output_dir / 'traffic_7d.png')
         plt.close(fig)
-
         elapsed = _time.monotonic() - t0
         total = sum(sum(v) for v in series.values()) if series else 0
         if stdout:
-            stdout.write(
-                f'    traffic_{name}.png — {total:,} total ({elapsed:.1f}s)\n'
-            )
+            stdout.write(f'    traffic_7d.png — {total:,} requests ({elapsed:.1f}s)\n')
+    except Exception as exc:
+        if stdout:
+            stdout.write(f'    traffic_7d.png — query error: {exc}\n')
+
+    # all-time — daily stored stat
+    t0 = _time.monotonic()
+    try:
+        dates, series = _query_stored_daily(cutoff=None)
+        x_locator = mdates.AutoDateLocator()
+        fig, ax = plt.subplots(figsize=(11, 2.8))
+        fig.patch.set_facecolor('white')
+        _render_stacked(ax, dates, series, 'All Time (per day)',
+                        x_locator, mdates.AutoDateFormatter(x_locator))
+        fig.tight_layout(pad=0.6)
+        _save_atomic(fig, output_dir / 'traffic_all.png')
+        plt.close(fig)
+        elapsed = _time.monotonic() - t0
+        total = sum(sum(v) for v in series.values()) if series else 0
+        if stdout:
+            stdout.write(f'    traffic_all.png — {total:,} total ({elapsed:.1f}s)\n')
+    except Exception as exc:
+        if stdout:
+            stdout.write(f'    traffic_all.png — stat read error: {exc}\n')

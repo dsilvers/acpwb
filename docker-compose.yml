@@ -13,6 +13,10 @@ services:
       timeout: 3s
       retries: 5
 
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
   web:
     build:
       context: ./acpwb
@@ -27,11 +31,28 @@ services:
       - ./acpwb:/app
       - ./acpwb/staticfiles:/app/staticfiles
     env_file: .env
+    environment:
+      REDIS_URL: redis://redis:6379/0
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_started
     expose:
       - "8000"
+
+  ws:
+    build:
+      context: ./ws_service
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      WS_PORT: "8765"
+      STREAM_WS_TOKEN: ${STREAM_WS_TOKEN:-}
+    expose:
+      - "8765"
+    depends_on:
+      - redis
+    restart: unless-stopped
 
   nginx:
     build:
@@ -42,6 +63,7 @@ services:
       - "127.0.0.1:8001:80"
     depends_on:
       - web
+      - ws
 
 volumes:
   postgres_data:

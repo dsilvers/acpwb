@@ -57,6 +57,8 @@ Every trap logs to the database: IP, user agent, path, host/subdomain, referrer,
 
 A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes five **stacked-area traffic graphs** (last hour / 8 hours / 24 hours / 7 days / all time) colored by bot group, regenerated every 30 minutes by the precalc cron. It also includes a "By Host / Subdomain" panel showing which archive subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used).
 
+A **Live Request Stream** at `/acpwb-dashboard/live/` shows every incoming request in real time via WebSocket — IP (last octet censored), host, path, HTTP method, status code, response time in ms, uncompressed response size, and user agent. The stream is delivered over a dedicated asyncio WebSocket service backed by Redis pub/sub, so it works across all gunicorn worker processes with no impact on HTTP serving if Redis goes down.
+
 ---
 
 ## Honeypot Techniques
@@ -147,6 +149,7 @@ Every fake config file gets a unique `secrets.token_urlsafe(32)` token at serve 
 | Frontend | Bootstrap 5 + custom CSS |
 | Web server | Nginx + Gunicorn |
 | Containerization | Docker Compose |
+| Pub/Sub | Redis 7 |
 | Email | Cloudflare Email Routing + Workers (primary), Mailgun (legacy) |
 
 ---
@@ -422,6 +425,8 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/
 | `DJANGO_DEBUG` | `True` for local dev |
 | `DJANGO_SETTINGS_MODULE` | `config.settings.local` for dev |
 | `DB_PASSWORD` | PostgreSQL password |
+| `REDIS_URL` | Redis connection URL (default: `redis://redis:6379/0`) |
+| `STREAM_WS_TOKEN` | Secret token required to connect to `/ws/requests/` (optional; generate with `python -c "import secrets; print(secrets.token_urlsafe(32))"`) |
 | `PIPE_WEBHOOK_SECRET` | Shared secret for Cloudflare Email Worker |
 | `MAILGUN_WEBHOOK_SIGNING_KEY` | From Mailgun dashboard (legacy) |
 | `MAILGUN_DOMAIN` | `acpwb.com` (legacy) |
@@ -436,6 +441,9 @@ acpwb/
 ├── .env.example
 ├── nginx/
 │   └── nginx.conf
+├── ws_service/               # Standalone asyncio WebSocket server
+│   ├── Dockerfile
+│   └── ws_server.py          # Redis subscriber → WebSocket broadcast
 └── acpwb/                    # Django project
     ├── config/               # Settings, URLs, WSGI
     ├── apps/

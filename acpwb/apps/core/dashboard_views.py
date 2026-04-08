@@ -272,3 +272,11 @@ def logins(request):
         'updated_at':    _updated_at('login_attempts.total'),
     }
     return render(request, 'dashboard/logins.html', ctx)
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def live_stream(request):
+    from django.conf import settings
+    return render(request, 'dashboard/live_stream.html', {
+        'ws_token': getattr(settings, 'STREAM_WS_TOKEN', ''),
+    })

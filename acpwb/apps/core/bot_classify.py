@@ -16,9 +16,8 @@ import ipaddress
 # ---------------------------------------------------------------------------
 _IP_BOT_RANGE_DEFS = [
     # Alibaba / Qwen AI crawler
-    ('47.82.60.0/23',   'Alibaba Qwen'),
-    ('47.79.0.0/17',    'Alibaba Qwen'),
-    ('47.82.62.0/24',   'Alibaba Qwen'),
+    ('47.74.0.0/14',   'Alibaba Qwen'),  # 47.74–47.77
+    ('47.82.60.0/22',  'Alibaba Qwen'),  # 47.82.60–63 (consolidates /23 + /24)
 ]
 
 # Pre-parse networks at import time so per-request lookup is fast

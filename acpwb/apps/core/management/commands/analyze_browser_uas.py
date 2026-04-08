@@ -97,6 +97,10 @@ class Command(BaseCommand):
             'ip_address', total,
         )
 
+        # Subnet breakdowns
+        self._subnet_table(qs, limit, total, prefix_len=24, title="Top /24 Subnets")
+        self._subnet_table(qs, limit, total, prefix_len=16, title="Top /16 Subnets")
+
         # Trap type breakdown
         self._table(
             "By Trap Type",
@@ -161,6 +165,22 @@ class Command(BaseCommand):
                 f"          path={example['path']!r}\n"
                 f"          ua={example['user_agent'][:120]!r}"
             )
+
+    def _subnet_table(self, qs, limit, total, prefix_len, title):
+        """Group IPs by their first N bits (i.e. /prefix_len subnet) and count."""
+        import ipaddress
+        counts = Counter()
+        for ip in qs.values_list('ip_address', flat=True).iterator(chunk_size=10000):
+            try:
+                net = ipaddress.ip_interface(f"{ip}/{prefix_len}").network
+                counts[str(net)] += 1
+            except ValueError:
+                counts['(invalid)'] += 1
+        self.stdout.write(f"\n=== {title} ===")
+        for subnet, count in counts.most_common(limit):
+            pct = count * 100 / total if total else 0
+            bar = '█' * min(int(pct / 2), 40)
+            self.stdout.write(f"  {count:>8,}  {pct:5.1f}%  {bar:<40}  {subnet}")
 
     def _prefix_counts(self, qs, limit):
         counts = Counter()

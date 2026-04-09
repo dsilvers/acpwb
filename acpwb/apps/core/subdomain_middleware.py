@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 ARCHIVE_SUBDOMAIN_RE = re.compile(
     r'^archives-(\d{4})\.acpwb\.(com|example)(?::\d+)?$', re.IGNORECASE
 )
-ARCHIVE_VALID_YEARS = range(1985, 2025)
+ARCHIVE_VALID_YEARS = range(1985, 2026)
 
 # Hosts treated as the main domain (no subdomain routing)
 _MAIN_HOSTS = frozenset([

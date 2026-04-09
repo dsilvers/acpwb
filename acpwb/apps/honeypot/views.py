@@ -300,7 +300,7 @@ def archive_subdomain_robots(request):
 
     # Cross-link 4–6 sibling year subdomains in Sitemap entries to pull bots
     # toward years they haven't visited yet.
-    all_years = list(range(1985, 2025))
+    all_years = list(range(1985, 2026))
     if year in all_years:
         all_years.remove(year)
     sibling_years = rng.sample(all_years, min(5, len(all_years)))
@@ -368,7 +368,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     on_sub = getattr(request, 'on_archive_subdomain', False)
     related_paths = []
     for _ in range(10):
-        r_year = rng.randint(1985, 2024)
+        r_year = rng.randint(1985, 2025)
         r_month = rng.randint(1, 12)
         r_day = rng.randint(1, 28)
         r_slug = rng.choice(_ARCHIVE_SLUGS)
@@ -383,9 +383,9 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     # Cross-year related archive entries — link to OTHER year subdomains
     cross_year_reports = []
     for _ in range(rng.randint(1, 5)):
-        cy_year = rng.randint(1985, 2024)
+        cy_year = rng.randint(1985, 2025)
         while cy_year == year:
-            cy_year = rng.randint(1985, 2024)
+            cy_year = rng.randint(1985, 2025)
         cy_month = rng.randint(1, 12)
         cy_day = rng.randint(1, 28)
         cy_slug = rng.choice(_ARCHIVE_SLUGS)

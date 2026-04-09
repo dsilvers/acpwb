@@ -139,8 +139,13 @@ main {
   margin-bottom: .25rem;
 }
 
-@media (max-width: 480px) {
-  .random-int-display { font-size: 1.4rem; }
+@media (max-width: 600px) {
+  .random-int-display { font-size: 1.3rem; }
+  .entropy-row { margin-bottom: .75rem; }
+  .panel-entropy { padding: 1rem; }
+  .mobile-hidden { display: none; }
+  #rps-canvas { height: 32px !important; }
+  main { height: auto; min-height: calc(100vh - 48px); }
 }
 
 .rps-section {
@@ -292,12 +297,12 @@ main {
     </div>
 
     <div class="entropy-row">
-      <div class="entropy-label">seed integer (SHA-256 as int, hover for full value)</div>
+      <div class="entropy-label">seed integer</div>
       <div class="entropy-value" id="val-seed-int" title="">—</div>
     </div>
 
     <div class="entropy-row">
-      <div class="entropy-label">combined hash (SHA-256 hex)</div>
+      <div class="entropy-label">combined hash</div>
       <div class="entropy-value" id="val-combined-hash">—</div>
     </div>
 
@@ -306,7 +311,7 @@ main {
       <div class="entropy-value" id="val-system-secret">—</div>
     </div>
 
-    <div class="entropy-row" id="what">
+    <div class="entropy-row mobile-hidden" id="what">
       <div class="entropy-label">source request</div>
       <div class="entropy-value" id="val-log-json" style="color:var(--muted);font-size:.85rem;white-space:pre-wrap;word-break:break-all">—</div>
     </div>
@@ -316,7 +321,7 @@ main {
         <div class="entropy-label">requests / sec — last 2 min</div>
         <div class="rps-current"><span id="rps-text">—</span> req/s</div>
       </div>
-      <canvas id="rps-canvas" height="50"></canvas>
+      <canvas id="rps-canvas" style="height:50px"></canvas>
     </div>
 
   </section>

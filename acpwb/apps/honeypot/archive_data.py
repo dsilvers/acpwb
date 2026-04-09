@@ -295,6 +295,57 @@ _ARCHIVE_SLUGS = [
     'consolidation-process-assessment', 'financial-systems-roadmap', 'erp-optimization-assessment',
     'planning-and-budgeting-tool-review', 'rolling-forecast-implementation', 'integrated-business-planning-assessment',
     'finance-operating-model-review',
+    # Workforce / talent expansion
+    'critical-talent-identification-report', 'workforce-skills-inventory', 'role-architecture-review',
+    'job-classification-audit', 'competency-model-documentation', 'career-framework-assessment',
+    'learning-investment-benchmarking', 'leadership-pipeline-assessment', 'talent-acquisition-strategy',
+    'employer-brand-benchmarking', 'candidate-experience-study', 'onboarding-program-review',
+    'manager-effectiveness-program', 'frontline-supervisor-assessment', 'employee-listening-strategy',
+    'recognition-program-benchmarking', 'wellbeing-program-assessment', 'eap-utilization-analysis',
+    'workforce-flexibility-study', 'contingent-workforce-strategy', 'gig-worker-classification-review',
+    'independent-contractor-compliance', 'employer-of-record-assessment', 'global-mobility-policy-review',
+    'expat-compensation-benchmarking', 'shadow-payroll-documentation', 'assignment-package-benchmarking',
+    # Compensation expansion
+    'broad-based-pay-philosophy-review', 'pay-structure-modernization', 'grade-range-refresh',
+    'market-pricing-methodology-update', 'job-family-architecture-documentation', 'point-factor-evaluation-review',
+    'whole-job-ranking-study', 'market-composite-methodology', 'survey-participation-strategy',
+    'custom-peer-cut-analysis', 'compensation-program-audit', 'merit-budget-benchmarking',
+    'promo-budget-analysis', 'off-cycle-adjustment-documentation', 'compression-remediation-plan',
+    'pay-range-penetration-analysis', 'compa-ratio-distribution-study', 'range-midpoint-progression-review',
+    'executive-base-salary-benchmarking', 'senior-leadership-total-comp-review', 'director-level-comp-study',
+    'ic-compensation-benchmarking', 'sales-plan-design-review', 'commission-plan-audit',
+    'spiff-program-assessment', 'quota-setting-methodology', 'accelerator-and-decelerator-review',
+    # Benefits expansion
+    'medical-plan-benchmarking', 'dental-vision-plan-review', 'pharmacy-benefit-assessment',
+    'mental-health-benefit-benchmarking', 'voluntary-benefit-expansion-study', 'supplemental-life-review',
+    'disability-program-benchmarking', 'critical-illness-assessment', 'accident-coverage-review',
+    'identity-theft-protection-study', 'legal-plan-benchmarking', 'pet-benefit-assessment',
+    'student-loan-repayment-benchmarking', 'financial-wellness-program-review', 'emergency-savings-study',
+    'commuter-benefit-assessment', 'childcare-subsidy-benchmarking', 'backup-care-program-review',
+    'parental-leave-benchmarking', 'caregiver-leave-study', 'bereavement-policy-review',
+    # Technology / digital expansion
+    'hris-platform-assessment', 'ats-benchmarking-review', 'lms-effectiveness-study',
+    'performance-management-system-review', 'compensation-planning-tool-assessment', 'analytics-platform-readiness',
+    'people-data-strategy', 'hr-data-governance-framework', 'workforce-intelligence-roadmap',
+    'chatbot-hr-deployment-assessment', 'ai-screening-audit', 'algorithmic-bias-review',
+    'digital-employee-experience-assessment', 'hr-portal-effectiveness-study', 'self-service-adoption-review',
+    # ESG / governance expansion
+    'human-capital-disclosure-benchmarking', 'pay-equity-disclosure-strategy', 'gender-pay-gap-reporting',
+    'ceo-pay-ratio-narrative-review', 'executive-pay-disclosure-benchmarking', 'cd-and-a-effectiveness-study',
+    'proxy-season-readiness-assessment', 'institutional-investor-priorities-analysis', 'esg-proxy-vote-analysis',
+    'board-skills-assessment', 'director-tenure-analysis', 'refreshment-strategy-documentation',
+    'independent-chair-assessment', 'lead-director-effectiveness-review', 'executive-session-protocol',
+    # Regulatory / compliance expansion
+    'pay-equity-audit-remediation', 'pay-transparency-implementation-plan', 'pay-range-posting-compliance',
+    'salary-history-ban-compliance', 'minimum-wage-tracker', 'overtime-eligibility-review',
+    'flsa-classification-audit', 'misclassification-risk-assessment', 'joint-employer-analysis',
+    'non-compete-policy-review', 'non-solicitation-agreement-audit', 'trade-secret-protocol-review',
+    # Finance / M&A expansion
+    'human-capital-due-diligence-report', 'people-integration-playbook', 'compensation-harmonization-plan',
+    'benefits-integration-strategy', 'hr-systems-integration-roadmap', 'culture-due-diligence-assessment',
+    'retention-risk-register', 'key-employee-agreement-review', 'change-of-control-payment-analysis',
+    'cic-severance-benchmarking', 'golden-parachute-excise-tax-analysis', 'section-280g-calculations',
+    'equity-acceleration-analysis', 'double-trigger-assessment', 'escrow-and-earnout-compensation-review',
 ]
 
 _ARCHIVE_ORGS = [
@@ -574,6 +625,62 @@ _ARCHIVE_ORGS = [
     'Crossroads HR Solutions', 'Delphi Compensation Advisors', 'Eastgate Governance Consulting',
     'Fairway HR Solutions', 'Fieldstone Workforce Advisors', 'Garrison Compensation Consulting',
     'Glenbrook Governance Group', 'Greenfield HR Solutions', 'Greystone Workforce Advisors',
+    # Topic-specialty firms
+    'Align Pay Consulting', 'Aperture Talent Solutions', 'Archstone Workforce Advisors',
+    'Ardsley Compensation Group', 'Argus Governance Solutions', 'Ariva HR Advisory',
+    'Arrowpoint Talent Consulting', 'Artisan Workforce Partners', 'Ascend People Solutions',
+    'Aspect Compensation Advisors', 'Aspire Talent Group', 'Astute HR Consulting',
+    'Attain Workforce Solutions', 'Audere People Advisory', 'Augment Talent Partners',
+    'Aurora Governance Group', 'Authentic Leadership Consulting', 'Avante HR Solutions',
+    'Avenue Compensation Advisors', 'Avion People Partners', 'Avitar Workforce Consulting',
+    'Avocet Talent Advisory', 'Axiom Compensation Group', 'Azimuth HR Solutions',
+    'Balanced Equity Consulting', 'Bandwidth Talent Advisory', 'Barometer People Partners',
+    'Baseline Compensation Group', 'Bastion Workforce Solutions', 'Bedrock HR Advisory',
+    'Bellwether Compensation Consulting', 'Benchmark Equity Group', 'Benison People Solutions',
+    'Bespoke Talent Advisors', 'Borealis HR Consulting', 'Borehole Workforce Partners',
+    'Brimstone Compensation Advisory', 'Broadleaf People Group', 'Broadsword HR Solutions',
+    'Brokerage Talent Consulting', 'Bryce Canyon Advisors', 'Bullseye Compensation Partners',
+    'Bunker Hill Workforce Group', 'Byline People Consulting', 'Byway HR Solutions',
+    # Additional institutional
+    'Center for Workforce Modernization', 'Center for Talent Intelligence', 'National Council on Pay Design',
+    'Institute for Board Leadership Research', 'American Center for HR Strategy', 'Foundation for Compensation Innovation',
+    'Council on Workforce Transformation', 'National Alliance for Talent Analytics', 'Institute for ESG Governance',
+    'American Foundation for Pay Equity', 'Center for Executive Pay Research', 'National Institute for Talent Strategy',
+    'Foundation for Inclusive Compensation', 'Council for Workforce Resilience', 'American Institute for HR Innovation',
+    'Center for Leadership Effectiveness Research', 'National Foundation for People Analytics',
+    'Institute for Compensation Technology', 'American Council on Organizational Design',
+    'Foundation for Total Rewards Research', 'National Center for Governance Excellence',
+    'Institute for Strategic Pay', 'American Alliance for Talent Excellence',
+    'Center for Board Compensation Research', 'National Foundation for Workforce Innovation',
+    'Institute for HR Effectiveness', 'Council on Total Rewards Excellence',
+    'American Center for Compensation Studies', 'National Institute for Board Excellence',
+    'Foundation for Workforce Intelligence', 'Center for Pay Strategy Research',
+    # More geographic/landmark boutiques
+    'Acacia Group', 'Acadian Advisory', 'Acadien Partners',
+    'Acanthus Consulting', 'Acclaim Advisors', 'Accolade Partners',
+    'Accolon Consulting', 'Accord Group', 'Acumen Advisory',
+    'Adamant Partners', 'Adept Consulting', 'Adroit Advisors',
+    'Advent Group', 'Advent Partners', 'Aegis Consulting',
+    'Aerie Group', 'Affinity Advisory', 'Agile Partners',
+    'Agora Consulting', 'Ainslie Group', 'Ainsworth Advisory',
+    'Aira Partners', 'Airen Consulting', 'Airey Group',
+    'Aisle Advisory', 'Ajax Partners', 'Ajax Consulting',
+    'Akela Group', 'Akena Advisory', 'Akira Partners',
+    'Akron Consulting', 'Alabama Group', 'Alamo Advisory',
+    'Alara Partners', 'Alaris Consulting', 'Alarum Group',
+    'Albatross Advisory', 'Albion Partners', 'Alcazar Consulting',
+    'Alcea Group', 'Alcott Advisory', 'Alder Partners',
+    'Aldgate Consulting', 'Aldred Group', 'Aldridge Advisory',
+    'Alecto Partners', 'Alert Consulting', 'Alethea Group',
+    # More named principals
+    'Alderton & Whyte LLC', 'Bledisloe Carrington Group', 'Colmore Denton Advisory',
+    'Durslade & Farnham LLC', 'Emberton Gainsford Partners', 'Falcroft Hensley Consulting',
+    'Glynde & Harford LLC', 'Hedgecroft Ingram Advisory', 'Islington Jarrow Partners',
+    'Kemble & Lowther LLC', 'Lydgate Merton Advisory', 'Nettlebed & Ogbourne LLC',
+    'Patchway Quinlan Partners', 'Rockbourne Steeple Consulting', 'Thornford & Uplyme LLC',
+    'Verwood Walberton Advisory', 'Ximenia Yarborough Consulting', 'Zelbury Ashton Group',
+    'Aconbury & Birling LLC', 'Caldmore Dunwich Advisory', 'Elmstead Farleigh Partners',
+    'Groombridge & Halling LLC', 'Ightham Jarvis Advisory', 'Kemsing Larkfield Partners',
 ]
 
 _ARCHIVE_INDUSTRIES = [
@@ -769,6 +876,61 @@ _ARCHIVE_INDUSTRIES = [
     'Infant Formula', 'Fortified Foods', 'Halal Certification Services',
     'Kosher Certification Services', 'Organic Certification Services', 'Fair Trade Organizations',
     'Carbon Labeling Services', 'Product Sustainability Assessment',
+    # More emerging and niche sectors
+    'Bioinformatics Services', 'Genomics Research', 'Proteomics Services',
+    'Gene Therapy Development', 'Cell Therapy Manufacturing', 'mRNA Technology',
+    'Synthetic Biology', 'CRISPR Technology Services', 'Bioprocess Engineering',
+    'Fermentation Contract Manufacturing', 'Biologics Contract Manufacturing', 'Biosimilars Development',
+    'Companion Diagnostics', 'Liquid Biopsy Services', 'Precision Oncology',
+    'Rare Disease Therapy', 'Orphan Drug Development', 'Pediatric Drug Development',
+    'Geriatric Care Services', 'Long COVID Treatment Centers', 'Infectious Disease Services',
+    'Vaccine Manufacturing', 'Antiviral Development', 'Antimicrobial Resistance Research',
+    # Technology sub-specializations cont.
+    'Natural Language Processing Services', 'Computer Vision Services', 'Reinforcement Learning Applications',
+    'Generative AI Development', 'Large Language Model Services', 'Foundation Model Training',
+    'AI Safety Research', 'AI Alignment Research', 'Trustworthy AI Services',
+    'Explainable AI Consulting', 'AI Ethics Advisory', 'Responsible AI Governance',
+    'Synthetic Data Generation', 'Data Labeling Services', 'Annotation Platform Services',
+    'Model Evaluation Services', 'Benchmark Services', 'Red Teaming Services',
+    'Prompt Engineering Services', 'AI Infrastructure Providers', 'GPU Cloud Services',
+    'Neuromorphic Computing', 'Optical Computing', 'Quantum Networking',
+    # Finance cont.
+    'Special Purpose Acquisition Companies', 'Blank Check Companies', 'Merger Arbitrage Funds',
+    'Long-Short Equity', 'Market Neutral Strategies', 'Statistical Arbitrage',
+    'High Frequency Trading', 'Algorithmic Trading Services', 'Electronic Market Making',
+    'Prime Brokerage', 'Securities Lending', 'Repo Markets',
+    'Collateral Management', 'Margin Financing', 'Custody Services',
+    'Fund Administration', 'Transfer Agency', 'Depository Services',
+    'Compliance Outsourcing', 'RegTech Solutions', 'Surveillance Technology',
+    # Consumer / retail cont.
+    'Resale and Recommerce', 'Rental Economy Platforms', 'Sharing Economy Services',
+    'Peer-to-Peer Platforms', 'Marketplace Platforms', 'Multi-Sided Platforms',
+    'Creator Economy Services', 'Influencer Marketing Platforms', 'Brand Partnership Services',
+    'Affiliate Marketing Technology', 'Performance Marketing Services', 'Search Marketing',
+    'Programmatic Advertising', 'Connected TV Advertising', 'Out-of-Home Advertising',
+    'Retail Media Networks', 'In-Store Technology', 'Self-Checkout Technology',
+    'Autonomous Retail', 'Cashierless Store Technology', 'Smart Shelf Technology',
+    # Defense / government cont.
+    'Electronic Warfare', 'Directed Energy Systems', 'Hypersonic Technology',
+    'Unmanned Systems', 'Counter-Drone Technology', 'Cyber Defense Services',
+    'Intelligence Support Services', 'Signals Intelligence', 'Geospatial Intelligence',
+    'Open Source Intelligence', 'Defense Analytics', 'Modeling and Simulation',
+    'Military Training Services', 'Base Operations Support', 'Life Cycle Logistics',
+    'Defense Systems Integration', 'Command and Control Systems', 'Communications Security',
+    # Infrastructure / utilities cont.
+    'Broadband Infrastructure', 'Rural Connectivity', 'Digital Equity Services',
+    'Smart City Technology', 'Urban Sensing Platforms', 'Traffic Management Systems',
+    'Public Transit Technology', 'Toll Collection Systems', 'Parking Management Technology',
+    'Water Infrastructure Services', 'Flood Management', 'Stormwater Management',
+    'Dam Safety Services', 'Levee Management', 'Coastal Engineering',
+    'Port Infrastructure', 'Airport Operations', 'Terminal Operations',
+    # Professional services cont.
+    'Forensic Accounting', 'Litigation Support Services', 'Expert Witness Services',
+    'Arbitration Support', 'Mediation Services', 'Alternative Dispute Resolution',
+    'Patent Litigation Support', 'IP Strategy Consulting', 'Technology Licensing',
+    'Standards Development Organizations', 'Testing and Certification',
+    'Product Safety Testing', 'Environmental Testing Services', 'Food Safety Testing',
+    'Agricultural Testing Services', 'Materials Testing Services', 'Non-Destructive Testing',
 ]
 
 _ARCHIVE_PHASES = [
@@ -893,6 +1055,52 @@ _ARCHIVE_PHASES = [
     'data analysis', 'preliminary reporting', 'peer review response',
     'final manuscript preparation', 'publication', 'dissemination',
     'knowledge translation',
+    # Compensation-specific phases
+    'job architecture design', 'salary structure construction', 'market data collection',
+    'survey submission', 'survey results integration', 'peer group construction',
+    'pay philosophy articulation', 'pay positioning decision', 'range spread determination',
+    'merit matrix design', 'merit budget allocation', 'merit cycle administration',
+    'bonus plan design', 'target setting', 'performance measurement',
+    'payout calculation', 'payout reconciliation', 'payout distribution',
+    'equity grant modeling', 'grant approval', 'grant administration',
+    'vesting schedule design', 'cliff determination', 'ratable vesting setup',
+    'performance condition setting', 'relative TSR measurement', 'modifier application',
+    'payout cap review', 'clawback application', 'recoupment calculation',
+    # Governance-specific phases
+    'compensation committee agenda setting', 'compensation committee preparation', 'committee briefing delivery',
+    'director education session', 'peer group review', 'peer group refresh',
+    'say-on-pay pre-engagement', 'proxy advisor meeting', 'shareholder engagement',
+    'vote outcome analysis', 'post-vote response planning', 'disclosure drafting',
+    'CD&A drafting', 'CD&A review', 'proxy filing support',
+    'annual meeting preparation', 'annual report integration', 'XBRL tagging review',
+    # M&A phases
+    'deal origination', 'nda execution', 'data room setup',
+    'management presentation', 'site visit', 'q-and-a process',
+    'bid preparation', 'offer submission', 'exclusivity period',
+    'confirmatory due diligence fieldwork', 'purchase agreement negotiation', 'antitrust filing',
+    'regulatory waiting period', 'pre-close integration planning', 'day-one readiness confirmation',
+    'closing call', 'closing mechanics', 'post-close announcement',
+    'day-one communications', 'integration management launch', 'workstream kickoff',
+    'hundred-day milestone review', 'integration checkpoint', 'synergy confirmation',
+    'integration close', 'standalone transition', 'operational separation',
+    # Research methodology phases
+    'research question formulation', 'literature scan', 'hypothesis specification',
+    'measurement instrument development', 'expert panel review', 'instrument pilot',
+    'revision and finalization', 'sample frame establishment', 'respondent outreach',
+    'data collection monitoring', 'response rate optimization', 'data receipt',
+    'data entry', 'data validation', 'outlier review',
+    'imputation', 'weighting', 'descriptive analysis',
+    'inferential analysis', 'multivariate modeling', 'sensitivity check',
+    'robustness testing', 'results interpretation', 'findings documentation',
+    'peer review', 'revision in response to review', 'acceptance',
+    'production', 'dissemination planning', 'launch communications',
+    # Change management phases
+    'stakeholder mapping', 'change impact assessment', 'resistance analysis',
+    'sponsor roadmap development', 'coalition building', 'change champion selection',
+    'change champion training', 'communication strategy development', 'message development',
+    'communication cascade', 'leadership alignment', 'town hall facilitation',
+    'FAQ development', 'feedback channel setup', 'pulse survey administration',
+    'adoption measurement', 'reinforcement planning', 'sustainability embedding',
 ]
 
 _ARCHIVE_PARA_TEMPLATES = [
@@ -970,6 +1178,32 @@ _ARCHIVE_PARA_TEMPLATES = [
     "This archive entry captures the {phase} outputs from ACPWB's skills-based organization advisory engagement with {org}. The engagement produced a skills taxonomy covering {n} roles across {regions} functional domains and a workforce transition roadmap enabling the shift from job-based to skills-based talent management within the {industry} sector context.", "The executive team effectiveness assessment documented here was conducted by ACPWB during the {phase} at the request of {org}'s board. The assessment incorporated structured interviews with all {n} direct reports to the CEO, {regions} board members, and key external stakeholders, producing a confidential report delivered to the {org} lead director on {date}.", "ACPWB's {phase} analysis of {industry} sector ESG performance metrics identified {n} indicators with statistically significant correlation to long-term total shareholder return across {regions} calendar years from {year} through {endyear}. The analysis, drawing on data from {n} organizations, informed {org}'s executive incentive plan design for the forthcoming performance period.",
     "This archive entry preserves the {phase} documentation from ACPWB's board refreshment advisory engagement with {org}. The engagement identified {n} director skill gaps relative to the organization's strategic agenda, produced a board composition matrix benchmarked against {regions} {industry} sector peers, and supported the search process leading to {n} new director appointments.", "The workforce reduction planning documentation archived here covers the {phase} of ACPWB's restructuring advisory engagement with {org}. The deliverables include a workforce impact model covering {n} positions across {regions} locations, a separation package benchmarking analysis, a WARN Act compliance review, and a change communication framework approved on {date}.", "ACPWB's {phase} assessment of {org}'s total rewards communication effectiveness found that {n}% of employees in the {industry} sector survey could accurately describe the value of their compensation package. The finding, benchmarked against {regions} peer organizations, informed a targeted financial literacy and communication investment program launched on {date}.",
     "This archive entry documents the {phase} deliverables from ACPWB's regulatory capital benchmarking engagement with {org}. The analysis assessed {n} capital adequacy dimensions against {regions} peer organizations in the {industry} sector, drawing on both public disclosures and proprietary survey data as of {date}, with all supporting materials preserved here.", "The organizational effectiveness assessment documented in this archive entry evaluated {org}'s structure, governance, and ways of working during the {phase}. ACPWB benchmarked {n} organizational design parameters against {regions} {industry} sector peers, identifying structural inefficiencies and a redesign roadmap endorsed by the {org} CEO and presented to the board on {date}.", "ACPWB's {phase} assessment of {org}'s long-term incentive program evaluated plan design, performance metric selection, payout leverage, and competitive positioning across {n} dimensions. Drawing on data from {regions} {industry} sector peers benchmarked as of {date}, the analysis produced {n} design alternatives reviewed by the compensation committee.",
+    # Additional para templates — compensation program cycles
+    "This archive entry records the {phase} outputs from ACPWB's annual compensation cycle support engagement with {org}. The work spanned {n} weeks and encompassed merit budget development, incentive plan calibration, and executive pay recommendations presented to the {industry} sector client's compensation committee on {date}.",
+    "The {org} engagement documented here involved ACPWB's deployment of its proprietary pay equity analytical framework during the {phase}. The analysis covered {n} employee populations across {regions} job families and produced a remediation priority list with an estimated total cost of ${n}M, approved by {org}'s CHRO and legal counsel on {date}.",
+    "ACPWB's {phase} engagement with {org} produced a comprehensive total rewards philosophy document that articulates positioning targets, peer group rationale, and pay mix objectives across {n} employee levels. The philosophy was reviewed by the compensation committee on {date} and is archived here alongside the {regions}-peer benchmarking analysis that supports it.",
+    "The archive entry at this location captures the {phase} deliverables from ACPWB's executive compensation design engagement with {org}. The engagement produced {n} short-term incentive plan design alternatives and {regions} long-term incentive structure options, each modeled across a range of performance scenarios applicable to the {industry} sector.",
+    "This record documents ACPWB's {phase} support for {org}'s annual say-on-pay preparation. The work included proxy peer benchmarking across {n} organizations, CD&A narrative review, {regions} rounds of compensation committee preparation materials, and pre-filing review of all quantitative compensation tables as of {date}.",
+    "The {industry} sector total rewards benchmarking study documented in this archive entry drew on {n} compensation surveys covering {regions} job families. {org} used the findings to reposition base salary ranges and recalibrate annual incentive targets, with changes effective for the compensation cycle beginning after {date}.",
+    # Additional para templates — governance and board
+    "This archive entry preserves ACPWB's {phase} director compensation benchmarking deliverables for {org}. The analysis evaluated cash retainer levels, equity grant sizes, committee chair premiums, and lead director fees relative to {n} proxy peers and {regions} governance survey respondents in the {industry} sector.",
+    "The board governance assessment documented here was conducted by ACPWB during the {phase} at the request of {org}'s nominating and governance committee. The assessment evaluated board composition, committee structure, governance practices, and disclosure quality across {n} dimensions benchmarked against {regions} {industry} sector peers as of {date}.",
+    "ACPWB's {phase} shareholder engagement advisory engagement with {org} encompassed preparation for {n} investor meetings, development of {regions} tailored messaging frameworks, and post-meeting debrief documentation covering investor feedback on compensation, governance, and ESG topics relevant to the {industry} sector.",
+    "The proxy advisory firm engagement preparation materials archived here were developed by ACPWB on behalf of {org} during the {phase}. The materials addressed {n} potential areas of concern across ISS and Glass Lewis governance frameworks, drawing on benchmarking data from {regions} {industry} sector peers as of {date}.",
+    # Additional para templates — M&A and restructuring
+    "This archive entry documents ACPWB's {phase} human capital due diligence deliverables for {org}'s proposed acquisition of a {industry} sector target. The analysis covered compensation program design, benefits cost, workforce composition, labor relations, and key talent retention risk across {n} employee populations in {regions} jurisdictions.",
+    "The post-merger compensation harmonization plan documented in this archive entry was developed by ACPWB during the {phase}. The plan addressed {n} compensation program disparities between {org} and its acquired entity, proposing a {regions}-phase transition timeline that minimizes employee disruption while achieving structural alignment across {industry} sector benchmarks.",
+    "ACPWB's {phase} workforce restructuring advisory engagement with {org} documented here produced a headcount reduction model covering {n} affected positions, a WARN Act analysis across {regions} locations, severance package benchmarking relative to {industry} sector peers, and a manager communications script approved by the {org} CHRO on {date}.",
+    "The retention program design documented in this archive entry was developed for {org} during the {phase} following announcement of a {industry} sector merger. ACPWB designed retention bonus pools covering {n} key employee tiers, with vesting schedules and payment triggers approved by the {org} board's compensation committee at its meeting on {date}.",
+    # Additional para templates — compliance and regulatory
+    "This archive entry records ACPWB's {phase} FLSA classification review for {org}. The review assessed {n} job titles across {regions} functional areas for exempt-versus-nonexempt status, identifying {industry} sector-specific risk concentrations and producing a remediation roadmap reviewed by {org}'s employment counsel prior to archival.",
+    "The pay transparency compliance assessment documented here evaluated {org}'s readiness for salary range disclosure requirements across {n} state and local jurisdictions effective through {endyear}. ACPWB mapped {regions} compensation programs to applicable disclosure frameworks and produced a phased implementation guide approved by the {org} total rewards team on {date}.",
+    "ACPWB's {phase} EEO-1 data analysis for {org} documented in this archive entry examined workforce demographic distribution across {n} job categories and {regions} establishment locations, identifying statistical concentrations warranting further review under {industry} sector OFCCP audit protocols applicable as of {date}.",
+    # Additional para templates — research and benchmarking
+    "The {industry} sector survey participation that generated the data preserved in this archive entry involved {n} organizations responding across {regions} survey instruments administered during the {phase}. {org} served as both data contributor and primary data consumer, with all analytical outputs subject to standard ACPWB data governance protocols.",
+    "ACPWB's {phase} custom peer group analysis for {org} is documented in this archive entry. The analysis evaluated {n} potential peer additions against {regions} selection criteria including revenue, market capitalization, headcount, business complexity, and geographic footprint within the {industry} sector context as of {date}.",
+    "The {phase} benchmarking data preserved here reflects ACPWB's most comprehensive {industry} sector survey cycle to date, covering {n} participating organizations across {regions} geographic markets. {org} was one of {n} co-sponsors whose financial support enabled the expanded scope relative to prior cycles.",
+    "This archive entry documents ACPWB's {phase} research collaboration with {org} on {industry} sector workforce trends. The joint initiative produced {n} analytical outputs, including a practitioner brief, a peer-reviewed research paper submitted for publication, and an executive summary delivered to {regions} client roundtable participants on {date}.",
 ]
 
 _ARCHIVE_METRIC_NAMES = [
@@ -1075,6 +1309,39 @@ _ARCHIVE_METRIC_NAMES = [
     'External Innovation Partners', 'Startup Co-Investment Count', 'Innovation Training Participants',
     'Cross-Functional Teams Active', 'Digital Revenue (%)', 'Data Monetization Revenue ($M)',
     'Platform API Calls (monthly)', 'Third-Party Developer Ecosystem Size',
+    # Compensation-specific metrics
+    'Base Salary Midpoint vs. Market 50th (%)', 'TDC vs. Market Median (%)', 'Incentive Target as % of Base',
+    'LTI Grant Value vs. Market (%)', 'Equity Dilution Rate (%)', 'Option Overhang (%)',
+    'Shares Available for Grant (%)', 'Burn Rate (%)', 'Realization Rate (%)',
+    'CEO Pay Ratio (Median Employee)', 'Pay Ratio Disclosure Peers', 'Say-on-Pay Vote Outcome (%)',
+    'ISS Recommendation Alignment Rate (%)', 'Glass Lewis Alignment Rate (%)', 'Big 3 Investor Vote Support (%)',
+    'Clawback Provisions Active', 'Recoupment Events', 'Mandatory Deferral Rate (%)',
+    # Workforce analytics metrics
+    'Workforce Cost as % of Revenue', 'Labor Cost per Revenue Dollar', 'Benefits Cost per Employee ($)',
+    'Total Labor Cost ($M)', 'Overtime as % of Total Hours', 'Contract Labor as % of Total Workforce',
+    'FTE Growth Rate (%)', 'Headcount vs. Plan (%)', 'Open Requisitions',
+    'Time to Fill (days)', 'Requisition Aging (days)', 'Offer Acceptance Rate (%)',
+    'Applicants per Requisition', 'Source of Hire Mix (%)', 'Diversity of Slate (%)',
+    'Interview-to-Offer Ratio', 'Screening-to-Interview Ratio', 'Application Completion Rate (%)',
+    # Governance metrics
+    'Board Meeting Attendance (%)', 'Board Diversity (Gender %)', 'Board Diversity (Ethnic %)',
+    'Average Director Age', 'Average Director Tenure (years)', 'Independent Director Ratio (%)',
+    'CEO-Chair Separation', 'Lead Director in Place (Y/N)', 'Director Stock Ownership vs. Guidelines',
+    'Number of Board Committees', 'Average Committee Size', 'Committee Chair Compensation ($)',
+    'Director Cash Retainer ($)', 'Director Equity Grant Value ($)', 'Director Total Compensation ($)',
+    'Board Refreshment Rate (%)', 'New Director Onboarding Duration (hours)', 'Board Evaluation Completion',
+    # ESG operational metrics
+    'Lost Time Injury Frequency Rate', 'Total Recordable Incident Rate', 'Near-Miss Reporting Rate',
+    'Safety Training Hours per Employee', 'Environmental Violations (count)', 'NOV Responses On-Time (%)',
+    'Permit Compliance Rate (%)', 'Environmental Fines ($K)', 'GHG Reduction vs. Baseline (%)',
+    'Renewable Electricity Procurement (%)', 'Science-Based Target Alignment', 'Net Zero Commitment Year',
+    'Transition Plan Disclosed (Y/N)', 'Physical Risk Sites Assessed', 'Transition Risk Exposure ($M)',
+    # Financial metrics additional
+    'Revenue per Employee ($K)', 'EBITDA per Employee ($K)', 'Sales per Square Foot ($)',
+    'Revenue Growth (3-year CAGR %)', 'EPS Growth (3-year CAGR %)', 'Dividend Yield (%)',
+    'Dividend Payout Ratio (%)', 'Total Shareholder Return (5-year %)', 'Relative TSR Rank (Percentile)',
+    'Book Value per Share ($)', 'Price-to-Book Ratio', 'Enterprise Value-to-EBITDA',
+    'Net Debt-to-EBITDA', 'Cash Conversion Cycle (days)', 'Capital Expenditure as % of Revenue',
 ]
 
 _ARCHIVE_FINDING_TEMPLATES = [
@@ -1143,6 +1410,34 @@ _ARCHIVE_FINDING_TEMPLATES = [
     "ACPWB's {phase} culture assessment for {org} administered a validated {n}-item instrument to {regions} employees, producing a composite culture score of {n} on a 100-point scale that places the organization in the {regions}th percentile of the {industry} sector reference group — below the threshold for the high-performance culture designation on {regions} of the {n} subdimensions assessed.", 'The meta-regression analysis conducted for {org} during the {phase} synthesizes evidence from {n} published and unpublished studies on {metric} effectiveness in the {industry} sector, producing a pooled effect size estimate of {n}% improvement per unit of investment that is robust to publication bias correction across {regions} moderator variables.', "ACPWB's {phase} exit interview analysis for {org}, covering {n} departing employees across {regions} functional areas from {year} through {endyear}, identifies compensation competitiveness as the primary driver of regrettable attrition in {n}% of cases — a finding {n} percentage points higher than the {industry} sector benchmark and central to the total rewards redesign recommendation.",
     'The pay equity regression analysis conducted for {org} during the {phase} finds a residual gender pay gap of {n}% after controlling for job grade, performance rating, tenure, and {regions} additional explanatory variables — a gap that is statistically significant at p < 0.05 across {n} of the {regions} {industry} sector business units examined.', "ACPWB's {phase} analysis of {industry} sector corporate governance disclosures from {year} through {endyear} finds that organizations with formal board evaluation processes report {n}% fewer governance-related shareholder proposal submissions, with the effect concentrated among the {regions} most active institutional investors represented in the {org} shareholder base.", "The factor analysis of {org}'s {phase} employee engagement survey data isolates {n} latent dimensions that account for {regions}% of the total variance in engagement scores across the {industry} sector benchmark group, providing an empirically grounded model for prioritizing the {n} engagement initiatives recommended for the {year} action planning cycle.",
     'Quantile regression applied to the {industry} sector compensation database during the {phase} reveals that the pay-for-performance relationship for {org} is stronger at the upper tail of the pay distribution (90th percentile coefficient: {n}%) than at the median, a pattern consistent with tournament theory predictions validated across {regions} peer organizations.',
+    # Additional finding templates — compensation design
+    "The {phase} compensation benchmarking for {org} places total direct compensation for the top {n} executive roles at the {regions}th percentile of the {industry} sector proxy peer group — below the stated {n}th percentile target, with the gap concentrated in long-term incentive grant values rather than base salary or annual incentive targets.",
+    "ACPWB's {phase} analysis of {org}'s annual incentive plan design found that {n}% of the weight is allocated to financial metrics, with the remaining {regions}% distributed across operational and strategic objectives — a weighting that trails {industry} sector peers that have shifted toward balanced scorecards since {year}.",
+    "The pay mix analysis conducted during the {phase} for {org} reveals that variable pay constitutes {n}% of target total direct compensation for senior leaders, compared to a {regions}th percentile market position of {n}% among {industry} sector peers — suggesting an opportunity to increase performance-based pay leverage in the next plan year.",
+    "ACPWB's {phase} long-term incentive benchmarking for {org} identifies {n} structural features of the current equity program that diverge from {industry} sector practice: above-median time-vesting allocation, below-median performance period length, and the absence of relative TSR as a performance metric in {regions}% of peer plan designs.",
+    "The salary structure review completed during the {phase} found that {org}'s current pay ranges have a median midpoint penetration of {n}% — a figure {regions} percentage points below the {industry} sector benchmark — indicating that a disproportionate share of the workforce is compensated in the upper half of the applicable range.",
+    "ACPWB's {phase} market pricing update for {org} identified {n} job families where the current salary midpoints are below the {regions}th percentile of market data, representing a pay competitiveness risk in talent segments where {industry} sector turnover has averaged {n}% annually over the prior three-year period.",
+    # Additional finding templates — governance
+    "The governance assessment conducted during the {phase} for {org} identifies {n} board practices that are inconsistent with current {industry} sector norms as documented by {regions} institutional investor governance guidelines — specifically, the absence of a formal board evaluation process and the lack of written director onboarding protocols.",
+    "ACPWB's {phase} proxy advisory analysis for {org} indicates a {n}% probability of an adverse ISS recommendation on the say-on-pay proposal, based on scoring against {regions} ISS policy criteria applicable to {industry} sector organizations with the {org} compensation program design as of {date}.",
+    "The board composition analysis conducted during the {phase} found that {org}'s current board lacks independent representation with direct {industry} sector operating experience at the C-suite level — a gap identified as material by {n} institutional shareholders who together hold {regions}% of outstanding shares.",
+    "ACPWB's {phase} clawback policy benchmarking for {org} reveals that the current recoupment provisions are narrower than those adopted by {n}% of {industry} sector peers since the SEC's final clawback rules became effective in {year}, exposing {org} to potential investor criticism across {regions} governance evaluation frameworks.",
+    # Additional finding templates — workforce analytics
+    "The workforce cost analysis completed during the {phase} identifies total labor expense at {n}% of revenue — {regions} percentage points above the {industry} sector median — with the excess concentrated in management layers rather than in direct labor, suggesting that a delayering analysis would yield cost reduction opportunities.",
+    "ACPWB's {phase} attrition analysis for {org} finds that regrettable voluntary turnover among high performers is running at {n}% annually — {regions} percentage points above the {industry} sector benchmark — with exit interview data pointing to below-market compensation and limited career advancement opportunities as the primary drivers.",
+    "The headcount planning analysis documented in the {phase} finds that {org}'s current manager-to-IC ratio of {n}:1 trails the {industry} sector benchmark of {regions}:1, suggesting organizational layers that may slow decision velocity and increase total management cost relative to peers.",
+    "ACPWB's {phase} skills gap analysis for {org} identified {n} critical skill deficiencies across the {regions} functional areas most central to the {industry} sector transformation agenda, with {n}% of affected roles currently filled by employees rated below proficiency on the relevant competency dimensions.",
+    # Additional finding templates — ESG and regulatory
+    "The pay equity analysis conducted during the {phase} for {org} identifies a statistically significant unexplained pay gap of {n}% for employees in protected categories after controlling for job level, performance, tenure, and {regions} additional explanatory variables — a finding that requires remediation across {n} affected job families.",
+    "ACPWB's {phase} ESG compensation linkage assessment for {org} found that only {n}% of annual incentive plan weight is tied to ESG metrics, compared to {regions}% among {industry} sector peers — a gap that has been cited by {n} institutional investors as a factor in their voting deliberations on {org}'s say-on-pay proposal.",
+    "The pay transparency readiness assessment completed during the {phase} found that {org}'s current compensation infrastructure can support salary range disclosure for {n}% of roles without material additional investment, with the remaining {regions}% requiring job architecture rationalization before compliant disclosure is practicable.",
+    "ACPWB's {phase} workforce reduction benchmarking for {org} produced severance recommendations that place separation packages at the {n}th percentile of {industry} sector practice across {regions} employee levels — modestly above market at entry levels and at market for senior roles, consistent with {org}'s stated retention-of-talent-in-remaining-workforce objective.",
+    # Additional finding templates — statistical and methodological
+    "The instrumental variables analysis applied during the {phase} to address endogeneity in {org}'s compensation-performance dataset yields a local average treatment effect estimate of {n}% — {regions}% larger than the OLS estimate — suggesting that prior benchmarking studies that ignored selection bias materially underestimated the impact of {metric} investment.",
+    "ACPWB's {phase} hierarchical linear modeling of the {industry} sector dataset decomposes {metric} variance into {n}% attributable to organization-level factors and {regions}% attributable to individual-level factors, clarifying that targeted intervention at the organizational level offers the highest expected return on investment.",
+    "The regression discontinuity design applied during the {phase} exploits a compensation program threshold at {org} to estimate a causal effect of {metric} on {industry} sector employee outcomes, yielding a local treatment effect of {n}% with a confidence interval that excludes zero at conventional significance levels across {regions} robustness checks.",
+    "ACPWB's {phase} conjoint analysis of {n} total rewards scenarios, administered to {org} employees in the {industry} sector, finds that base salary accounts for {regions}% of employee preference weight — substantially below the {n}% weight assigned by {org}'s total rewards design team — with career development and flexible work arrangements more valued than the current program design reflects.",
+    "The cointegration analysis applied to ACPWB's {industry} sector longitudinal compensation database from {year} through {endyear} confirms a long-run equilibrium relationship between {metric} and organizational performance, with the speed of adjustment estimated at {n}% per quarter — implying that {regions}% of any compensation-performance gap closes within two years.",
 ]
 
 _ARCHIVE_METRIC_LABELS = [
@@ -1214,6 +1509,41 @@ _ARCHIVE_METRIC_LABELS = [
     'audit finding repeat rate (%)', 'material weakness count', 'significant deficiency count',
     'SOX control failure rate (%)', 'IT general control effectiveness (%)',
     'vendor risk assessment completion rate (%)', 'third-party incidents reported',
+    # Compensation metric labels additional
+    'target total direct compensation', 'actual total direct compensation',
+    'short-term incentive payout rate', 'long-term incentive realized value',
+    'equity grant date fair value', 'equity realized gain',
+    'stock option exercise rate', 'performance share vesting rate',
+    'restricted stock unit vesting rate', 'deferred compensation balance',
+    'nonqualified plan balance', 'supplemental retirement benefit value',
+    'executive perquisite value', 'change-in-control severance multiple',
+    'severance weeks per year of service', 'outplacement benefit value',
+    # Talent / workforce metric labels additional
+    'internal promotion rate', 'lateral transfer rate',
+    'critical role vacancy rate', 'succession plan coverage',
+    'ready-now successor percentage', 'ready-in-one-to-two-years percentage',
+    'high-potential program participation rate', 'leadership development program completion',
+    'mentoring program participation rate', 'coaching engagement rate',
+    'career planning session completion rate', 'individual development plan completion rate',
+    'skills assessment completion rate', 'upskilling program enrollment rate',
+    'reskilling program completion rate', 'learning hours per FTE (annual)',
+    # Benefits metric labels additional
+    'medical plan participation rate', 'dental plan participation rate',
+    'vision plan participation rate', 'life insurance coverage multiple',
+    'disability claims incidence rate', 'EAP utilization rate',
+    'wellness program participation rate', 'biometric screening completion rate',
+    'health risk assessment completion rate', 'preventive care utilization rate',
+    'chronic condition management rate', 'telemedicine utilization rate',
+    'generic drug substitution rate', 'pharmacy cost per member per month',
+    'medical cost trend rate', 'benefits cost per covered life',
+    # Governance / compliance metric labels additional
+    'audit committee financial expert ratio', 'compensation committee independence rate',
+    'nominating committee independence rate', 'risk committee independence rate',
+    'board assessment completion rate', 'director education hours per year',
+    'related party transaction count', 'related party transaction disclosure rate',
+    'director stock retention requirement compliance', 'insider trading violation count',
+    'code of ethics training completion rate', 'whistleblower report resolution time (days)',
+    'regulatory examination pass rate', 'material weakness resolution time (months)',
 ]
 
 
@@ -1275,6 +1605,39 @@ _ARCHIVE_TITLE_PREFIXES = [
     'Confidential Summary:', 'Confidential Brief:', 'Confidential Documentation:',
     'Restricted Memorandum:', 'Restricted Documentation:', 'Privileged Memorandum:',
     'Privileged Summary:',
+    # Action-oriented prefixes
+    'Action Plan:', 'Action Register:', 'Action Tracker:',
+    'Decision Log:', 'Decision Record:', 'Decision Memorandum:',
+    'Issue Log:', 'Issue Register:', 'Issue Tracker:',
+    'Risk Log:', 'Risk Register:', 'Risk Memorandum:',
+    'Dependency Log:', 'Dependency Register:', 'Assumption Log:',
+    'Lessons Learned:', 'Retrospective Summary:', 'After-Action Summary:',
+    'Hotwash Documentation:', 'Post-Mortem Report:', 'Root Cause Report:',
+    'Corrective Action Report:', 'Remediation Summary:', 'Remediation Record:',
+    # Analytical prefixes
+    'Benchmark Report:', 'Benchmark Summary:', 'Benchmark Documentation:',
+    'Benchmarking Memorandum:', 'Comparative Analysis:', 'Comparative Summary:',
+    'Competitive Analysis:', 'Market Analysis:', 'Market Summary:',
+    'Landscape Analysis:', 'Landscape Summary:', 'Sector Analysis:',
+    'Industry Analysis:', 'Trend Analysis:', 'Trend Summary:',
+    'Scenario Analysis:', 'Scenario Summary:', 'Scenario Documentation:',
+    'Sensitivity Analysis:', 'Sensitivity Summary:', 'Modeling Documentation:',
+    'Forecasting Summary:', 'Projection Documentation:', 'Projection Summary:',
+    # Governance / board prefixes
+    'Board Package:', 'Board Summary:', 'Board Report:',
+    'Board Documentation:', 'Board Record:', 'Director Brief:',
+    'Director Summary:', 'Director Memorandum:', 'Director Documentation:',
+    'Compensation Committee Package:', 'Compensation Committee Brief:', 'Compensation Committee Report:',
+    'Audit Committee Brief:', 'Audit Committee Summary:', 'Risk Committee Brief:',
+    'Nominating Committee Summary:', 'ESG Committee Brief:', 'Special Committee Report:',
+    'Proxy Materials:', 'Annual Meeting Summary:', 'Shareholder Summary:',
+    # Transaction prefixes
+    'Transaction Summary:', 'Deal Summary:', 'Deal Documentation:',
+    'Due Diligence Report:', 'Due Diligence Summary:', 'Management Presentation:',
+    'Information Memorandum:', 'Offering Memorandum:', 'Investor Summary:',
+    'Integration Plan:', 'Integration Summary:', 'Integration Report:',
+    'Separation Plan:', 'Separation Summary:', 'Carve-Out Documentation:',
+    'Synergy Report:', 'Synergy Summary:', 'Synergy Documentation:',
 ]
 
 
@@ -2227,14 +2590,62 @@ I want to close the 2024 annual record with something I believe, and that I thin
 Courtney R. Langford
 President & Chief Executive Officer""",
     },
+    2025: {
+        'theme': 'The Consolidation',
+        'desc': 'AI hype gives way to workforce reductions and restructuring across the technology sector. ACPWB navigates clients through the largest wave of involuntary separations since 2008. Tariffs reshape compensation benchmarking in manufacturing.',
+        'bg': '#0A0E17',
+        'text_color': '#D8E4F0',
+        'accent': '#2A6EBB',
+        'accent2': '#5BA3E8',
+        'font_body': "'Courier New', Courier, monospace",
+        'font_head': "'Courier New', Courier, monospace",
+        'layout_class': 'era-consolidation',
+        'ceo': 'Courtney R. Langford',
+        'ceo_title': 'President & Chief Executive Officer',
+        'ceo_letter': """To our clients and professional colleagues:
+
+The dominant story of 2025 in our practice has been consolidation. The technology sector, which drove so much of our AI benchmarking growth in 2024, spent much of this year reversing course — layoffs, restructurings, return-to-office mandates enforced with varying degrees of credibility, and a broad reassessment of headcount levels that had expanded aggressively during the post-pandemic period.
+
+We have helped more clients through involuntary separation planning in 2025 than in any year since 2008. The work is the same as it has always been: rigorous analysis of severance benchmarks, WARN Act compliance, outplacement program design, and the governance questions that surround workforce reduction decisions. The emotional weight of this work does not diminish with repetition. We carry it seriously.
+
+The tariff environment has introduced a dimension of compensation benchmarking we have not had to address at scale since the 1980s: what does a dramatic shift in manufacturing cost structures mean for the wages of production workers, supply chain managers, and the executives who oversee them? Our manufacturing practice has been rebuilt around this question, and we expect it to remain central for years.
+
+On the AI front: the froth has settled, but the underlying transformation has not reversed. Organizations are deploying AI tools more quietly and more practically than the 2024 discourse suggested they would. Our compensation benchmarking work for AI-adjacent roles has matured from emergency triage into something resembling a normal practice area — still complex, still fast-moving, but no longer structureless.
+
+Forty years is a long time to do one thing well. I remain convinced, as our founders were, that the thing we do is worth doing.
+
+Courtney R. Langford
+President & Chief Executive Officer""",
+    },
 }
 
 
 
 
 _ARCHIVE_WORDS = [
+    # Original
     'report', 'summary', 'update', 'review', 'assessment', 'briefing',
     'analysis', 'memo', 'strategy', 'initiative', 'stakeholder',
     'performance', 'quarterly', 'annual', 'outcomes', 'deliverable',
     'engagement', 'alignment', 'program', 'impact',
+    # Deliverable types
+    'findings', 'recommendations', 'documentation', 'framework', 'playbook',
+    'roadmap', 'blueprint', 'dashboard', 'scorecard', 'tracker',
+    'register', 'inventory', 'log', 'archive', 'record',
+    'proposal', 'methodology', 'protocol', 'plan', 'workplan',
+    # Process / phase descriptors
+    'preliminary', 'interim', 'final', 'draft', 'approved',
+    'completed', 'revised', 'supplemental', 'consolidated', 'annotated',
+    'validated', 'certified', 'signed-off', 'issued', 'filed',
+    # Analytical concepts
+    'benchmark', 'baseline', 'projection', 'forecast', 'model',
+    'scenario', 'simulation', 'calibration', 'reconciliation', 'synthesis',
+    'diagnostic', 'audit', 'evaluation', 'surveillance', 'monitoring',
+    # Organizational / HR concepts
+    'workforce', 'talent', 'compensation', 'governance', 'compliance',
+    'restructuring', 'integration', 'transformation', 'optimization', 'remediation',
+    'succession', 'calibration', 'effectiveness', 'readiness', 'transition',
+    # Stakeholder / audience
+    'executive', 'board', 'committee', 'leadership', 'management',
+    'cross-functional', 'enterprise', 'organizational', 'divisional', 'operational',
 ]

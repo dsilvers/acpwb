@@ -268,7 +268,7 @@ def archive_subdomain_index(request, year=None):
         'year': year,
         'year_data': yd,
         'months': months,
-        'all_years': list(range(2024, 1984, -1)),
+        'all_years': list(range(2025, 1984, -1)),
         'parent_template': 'honeypot/archive_subdomain_base.html' if on_sub else 'base.html',
     })
 
@@ -406,10 +406,10 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'prev_year': prev_year, 'prev_month': prev_month, 'prev_day': prev_day,
         'related_paths': related_paths,
         'cross_year_reports': cross_year_reports,
-        'archive_years': list(range(2024, 1984, -1)),
+        'archive_years': list(range(2025, 1984, -1)),
         'on_archive_subdomain': on_sub,
         'year_data': yd,
-        'all_years': list(range(2024, 1984, -1)),
+        'all_years': list(range(2025, 1984, -1)),
         'parent_template': 'honeypot/archive_subdomain_base.html' if on_sub else 'base.html',
         # Pre-built navigation URLs
         'year_url': _archive_url(request, year),
@@ -426,14 +426,14 @@ def archive_index(request):
     """Root /archive/ — lists years with entry counts."""
     _log_crawler(request, 'archive')
     years = []
-    for y in range(2024, 1984, -1):
+    for y in range(2025, 1984, -1):
         rng2 = random.Random(hashlib.md5(f"archidx_{y}".encode()).hexdigest())
         count = rng2.randint(18, 94)
         months = rng2.sample(range(1, 13), rng2.randint(6, 12))
         years.append({'year': y, 'count': count, 'months': sorted(months)})
     return render(request, 'honeypot/archive_index.html', {
         'years': years,
-        'archive_years': list(range(2024, 1984, -1)),
+        'archive_years': list(range(2025, 1984, -1)),
     })
 
 
@@ -458,7 +458,7 @@ def archive_year(request, year):
     return render(request, 'honeypot/archive_year.html', {
         'year': year,
         'months': months,
-        'archive_years': list(range(2024, 1984, -1)),
+        'archive_years': list(range(2025, 1984, -1)),
         'prev_year': year - 1,
         'next_year': year + 1,
     })
@@ -486,8 +486,8 @@ def archive_month(request, month, year=None):
     yd = _year_data(year)
     return render(request, 'honeypot/archive_month.html', {
         'year': year, 'month': month, 'entries': entries,
-        'archive_years': list(range(2024, 1984, -1)),
-        'all_years': list(range(2024, 1984, -1)),
+        'archive_years': list(range(2025, 1984, -1)),
+        'all_years': list(range(2025, 1984, -1)),
         'prev_year': prev_year, 'prev_month': prev_month,
         'next_year': next_year, 'next_month': next_month,
         'on_archive_subdomain': on_sub,

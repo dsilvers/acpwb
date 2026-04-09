@@ -54,16 +54,49 @@ services:
       - redis
     restart: unless-stopped
 
+  botseed_ws:
+    build:
+      context: ./botseed_service
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      WS_PORT: "8766"
+      API_PORT: "8767"
+      BOTSEED_WS_TOKEN: ${BOTSEED_WS_TOKEN:-}
+    ports:
+      - "127.0.0.1:8766:8766"
+      - "127.0.0.1:8767:8767"
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  botseed_processor:
+    build:
+      context: ./acpwb
+      dockerfile: Dockerfile
+    command: python manage.py botseed_processor
+    env_file: .env
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
   nginx:
     build:
       context: ./nginx
     volumes:
       - ./acpwb/staticfiles:/app/staticfiles:ro
+      - ./botseed:/botseed:ro
     ports:
       - "127.0.0.1:8001:80"
+      - "127.0.0.1:8090:8090"
     depends_on:
       - web
       - ws
+      - botseed_ws
 
 volumes:
   postgres_data:

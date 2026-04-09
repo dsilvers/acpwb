@@ -270,6 +270,8 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/  # → 302 to acpw
 | `analyze_browser_uas` | `--hours`, `--limit`, `--sample`, `--ua-sample` | Breakdown of `bot_type='Other / Browser'` rows from the last N hours — top UAs, UA tokens, paths, IPs, trap types, hosts; reclassification preview showing which rows current `BOT_PATTERNS` would now match. |
 | `generate_content_fixture` | — | Generate test fixtures for content. |
 | `export_gen_data` | — | Export data for external image generation. |
+| `botseed_processor` | — | Long-running: subscribes to `request_stream`, generates entropy-seeded random integers, publishes to `botseed_stream` at ≤20 events/sec. Runs as a separate Docker service (`botseed_processor`). |
+| `generate_bot_traffic` | `--rps`, `--count` | Publishes synthetic bot request events directly to `request_stream` — bypasses HTTP entirely. Used for local botseed frontend testing without real web traffic. Ctrl-C to stop. |
 
 ### Dashboard Stats Setup (Production)
 
@@ -280,6 +282,31 @@ Add to host crontab to incrementally update stats every 30 minutes:
 ```
 
 Stats are stored in `DashboardStat` DB rows. On the first run after deploy, all historical data is processed. Subsequent runs only process new rows (fast). The dashboard shows "Stats as of: [timestamp]" from the DB row's `updated_at`.
+
+---
+
+## Botseed
+
+Companion project at **botseed.net**. Harvests entropy from ACPWB live traffic → produces random integers → serves them via WebSocket and a single HTTP API endpoint.
+
+**Architecture:**
+- `RequestStreamMiddleware` publishes every request to Redis `request_stream` (includes `bot_type` + `bot_group` fields)
+- `botseed_processor` management command (runs as Docker service) subscribes to `request_stream`, mixes each event with `secrets.token_bytes(32)` via SHA-256, publishes result to `botseed_stream` at ≤20 events/sec
+- `botseed_ws` Docker service (`botseed_service/ws_server.py`) subscribes to `botseed_stream` and fans out to browser WebSocket clients on port 8766; also serves HTTP API on port 8767
+- Static files in `botseed/` — served by host nginx directly from `/home/dan/acpwb.com/botseed/`
+- Host nginx config: `nginx/botseed.net`
+
+**Key files:**
+- `acpwb/apps/core/management/commands/botseed_processor.py` — entropy processor
+- `acpwb/apps/core/management/commands/generate_bot_traffic.py` — synthetic traffic generator for local testing
+- `botseed_service/ws_server.py` — asyncio WS + stdlib HTTP server
+- `botseed_service/Dockerfile`
+- `botseed/index.html` — live frontend (dark, monospace, responsive; bot type feed colored by group)
+- `botseed/api.html` — API documentation
+
+**Output JSON fields:** `random_int`, `seed_int`, `combined_hash`, `system_secret`, `log_json`, `requests_per_second`, `generated_at`
+
+**Local test:** `docker compose exec web python manage.py generate_bot_traffic --rps 5` then connect to `ws://localhost:8766/ws/`
 
 ---
 

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>botseed.net — entropy from the internet</title>
+<meta name="description" content="Real random numbers seeded by live web traffic. Every bot request becomes entropy.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0d0d0d;
+  --surface:  #161616;
+  --border:   #2a2a2a;
+  --text:     #f0f0f0;
+  --muted:    #999999;
+  --accent:   #00ff88;
+  --font:     'Courier New', Courier, monospace;
+
+  /* bot group colors */
+  --col-ai:      #ff6b6b;
+  --col-search:  #4ecdc4;
+  --col-scraper: #ffe66d;
+  --col-seo:     #a29bfe;
+  --col-browser: #aaaaaa;
+  --col-empty:   #666666;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── Nav ──────────────────────────────────────────────────────────────────── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.nav-brand {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: .05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+/* ── Main layout ──────────────────────────────────────────────────────────── */
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  height: calc(100vh - 48px);
+}
+
+@media (min-width: 900px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+
+/* ── Left panel: entropy values ───────────────────────────────────────────── */
+.panel-entropy {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+.entropy-label {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: .35rem;
+}
+
+.entropy-value {
+  font-size: 1rem;
+  color: var(--text);
+  word-break: break-all;
+  transition: color .3s;
+  min-height: 1.3em;
+}
+
+.entropy-value.flash {
+  color: var(--accent);
+}
+
+.entropy-row {
+  margin-bottom: 1.25rem;
+}
+
+.random-int-display {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--accent);
+  word-break: break-all;
+  line-height: 1.1;
+  transition: opacity .2s;
+  margin-bottom: .25rem;
+}
+
+@media (max-width: 480px) {
+  .random-int-display { font-size: 1.4rem; }
+}
+
+.rps-line {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.ws-status {
+  display: inline-block;
+  width: .6rem;
+  height: .6rem;
+  border-radius: 50%;
+  background: var(--muted);
+  margin-right: .5rem;
+  vertical-align: middle;
+  transition: background .3s;
+}
+
+.ws-status.live    { background: var(--accent); }
+.ws-status.error   { background: #ff4444; }
+.ws-status.reconnect { background: #ffaa00; }
+
+/* ── Right panel: live request feed ───────────────────────────────────────── */
+.panel-feed {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+@media (min-width: 900px) {
+  .panel-feed { border-top: none; }
+}
+
+.feed-header {
+  padding: .7rem 1rem;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.feed-scroll {
+  overflow-y: auto;
+  flex: 1;
+  font-size: .85rem;
+}
+
+.feed-row {
+  display: grid;
+  grid-template-columns: 5rem 9rem 1fr 7rem;
+  gap: .4rem;
+  padding: .3rem 1rem;
+  border-bottom: 1px solid #191919;
+  align-items: baseline;
+  animation: fadein .25s ease;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.feed-row:hover { background: #141414; }
+
+.feed-time  { color: var(--muted); white-space: nowrap; }
+.feed-host  { color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.feed-path  { color: #999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.feed-bot   { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; font-size: .8rem; }
+
+/* small screens: hide host */
+@media (max-width: 600px) {
+  .feed-row {
+    grid-template-columns: 5rem 1fr 6rem;
+  }
+  .feed-host { display: none; }
+}
+
+/* ── Bot group color classes ───────────────────────────────────────────────── */
+.bg-ai      { color: var(--col-ai); }
+.bg-search  { color: var(--col-search); }
+.bg-scraper { color: var(--col-scraper); }
+.bg-seo     { color: var(--col-seo); }
+.bg-browser { color: var(--col-browser); }
+.bg-empty   { color: var(--col-empty); }
+
+/* ── Legend ───────────────────────────────────────────────────────────────── */
+.legend {
+  padding: .5rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1rem;
+  font-size: .75rem;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+.legend-item::before {
+  content: '■ ';
+}
+
+.legend-item.bg-ai::before     { color: var(--col-ai); }
+.legend-item.bg-search::before { color: var(--col-search); }
+.legend-item.bg-scraper::before{ color: var(--col-scraper); }
+.legend-item.bg-seo::before    { color: var(--col-seo); }
+.legend-item.bg-browser::before{ color: var(--col-browser); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="/">botseed.net</a>
+  <div class="nav-links">
+    <a href="/api.html">API</a>
+    <a href="/what.html">What is this?</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- Left: entropy values -->
+  <section class="panel-entropy">
+
+    <div class="entropy-row">
+      <div class="entropy-label">random integer</div>
+      <div class="random-int-display" id="val-random-int">—</div>
+    </div>
+
+    <div class="entropy-row">
+      <div class="entropy-label">seed integer (SHA-256 as int, hover for full value)</div>
+      <div class="entropy-value" id="val-seed-int" title="">—</div>
+    </div>
+
+    <div class="entropy-row">
+      <div class="entropy-label">combined hash (SHA-256 hex)</div>
+      <div class="entropy-value" id="val-combined-hash">—</div>
+    </div>
+
+    <div class="entropy-row">
+      <div class="entropy-label">hardware entropy</div>
+      <div class="entropy-value" id="val-system-secret">—</div>
+    </div>
+
+    <div class="entropy-row" id="what">
+      <div class="entropy-label">source request</div>
+      <div class="entropy-value" id="val-log-json" style="color:var(--muted);font-size:.85rem;white-space:pre-wrap;word-break:break-all">—</div>
+    </div>
+
+    <div class="rps-line">
+      <span id="rps-text"></span>
+    </div>
+
+  </section>
+
+  <!-- Right: live request feed -->
+  <section class="panel-feed">
+    <div class="feed-header"><span class="ws-status" id="ws-dot"></span> live traffic from acpwb.com</div>
+    <div class="feed-scroll" id="feed-scroll">
+      <div class="feed-row" id="feed-waiting" style="grid-template-columns:1fr;color:var(--muted);padding:1.5rem 1rem">
+        waiting for traffic…
+      </div>
+    </div>
+    <div class="legend">
+      <span class="legend-item bg-ai">AI Crawlers</span>
+      <span class="legend-item bg-search">Search Engines</span>
+      <span class="legend-item bg-scraper">Generic Scrapers</span>
+      <span class="legend-item bg-seo">SEO / Other Bots</span>
+      <span class="legend-item bg-browser">Browser / Unknown</span>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  const MAX_FEED_ROWS = 50;
+
+  // WebSocket URL — same host, path /ws/
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const url = proto + '//' + location.host + '/ws/';
+
+  const dot      = document.getElementById('ws-dot');
+  const rpsText  = document.getElementById('rps-text');
+  const feedEl   = document.getElementById('feed-scroll');
+  const waiting  = document.getElementById('feed-waiting');
+
+  // Entropy value elements
+  const elRandInt   = document.getElementById('val-random-int');
+  const elSeedInt   = document.getElementById('val-seed-int');
+  const elHash      = document.getElementById('val-combined-hash');
+  const elSecret    = document.getElementById('val-system-secret');
+  const elLogJson   = document.getElementById('val-log-json');
+
+  function setStatus(state) {
+    dot.className = 'ws-status ' + state;
+  }
+
+  function flash(el) {
+    el.classList.remove('flash');
+    void el.offsetWidth; // reflow
+    el.classList.add('flash');
+    setTimeout(() => el.classList.remove('flash'), 400);
+  }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function trunc(s, n) {
+    s = String(s);
+    return s.length > n ? s.slice(0, n) + '…' : s;
+  }
+
+  function botGroupClass(group) {
+    if (!group) return 'bg-browser';
+    const g = group.toLowerCase();
+    if (g.includes('ai'))      return 'bg-ai';
+    if (g.includes('search'))  return 'bg-search';
+    if (g.includes('scraper')) return 'bg-scraper';
+    if (g.includes('seo') || g.includes('other bot')) return 'bg-seo';
+    return 'bg-browser';
+  }
+
+  function botLabel(botType, botGroup) {
+    if (!botType || botType === 'Other / Browser') return 'browser';
+    if (botType === '(empty user agent)')           return '(empty)';
+    // Shorten known long names
+    return botType
+      .replace('OpenAI ', '')
+      .replace('Anthropic ', '')
+      .replace('ByteDance ', '')
+      .replace('Google-Extended (AI)', 'Google-Ext')
+      .replace('Apple Applebot-Extended', 'Applebot-Ext')
+      .replace('Meta ExternalAgent', 'Meta-Agent');
+  }
+
+  function updateValues(d) {
+    const ri = String(d.random_int || '—');
+    if (elRandInt.textContent !== ri) {
+      elRandInt.style.opacity = '0';
+      setTimeout(() => {
+        elRandInt.textContent = ri;
+        elRandInt.style.opacity = '1';
+      }, 80);
+    }
+
+    const seed = d.seed_int || '—';
+    const seedShort = seed.length > 32 ? seed.slice(0, 32) + '…' : seed;
+    elSeedInt.textContent = seedShort;
+    elSeedInt.title = seed;
+    flash(elSeedInt);
+
+    elHash.textContent = d.combined_hash || '—';
+    flash(elHash);
+
+    elSecret.textContent = d.system_secret || '—';
+    flash(elSecret);
+
+    if (d.log_json) {
+      elLogJson.textContent = JSON.stringify(d.log_json, null, 2);
+    }
+
+    const rps = d.requests_per_second != null ? d.requests_per_second : '?';
+    rpsText.textContent = rps + ' req/s from acpwb.com';
+  }
+
+  function prependRequest(d) {
+    const log = d.log_json;
+    if (!log) return;
+
+    if (waiting && waiting.parentNode) waiting.remove();
+
+    const time = (log.timestamp || '').slice(11, 19) || '—';
+    const host = log.host || '';
+    const path = log.path || '/';
+    const botType  = log.bot_type  || '';
+    const botGroup = log.bot_group || '';
+    const ua = log.user_agent || '';
+
+    const label    = botLabel(botType, botGroup);
+    const cls      = botGroupClass(botGroup);
+
+    const row = document.createElement('div');
+    row.className = 'feed-row';
+    row.innerHTML =
+      '<span class="feed-time">' + esc(time) + '</span>' +
+      '<span class="feed-host">' + esc(trunc(host, 28)) + '</span>' +
+      '<span class="feed-path" title="' + esc(path) + '">' + esc(trunc(path, 40)) + '</span>' +
+      '<span class="feed-bot ' + cls + '" title="' + esc(ua) + '">' + esc(label) + '</span>';
+
+    feedEl.insertBefore(row, feedEl.firstChild);
+
+    // Cap rows
+    while (feedEl.children.length > MAX_FEED_ROWS) {
+      feedEl.removeChild(feedEl.lastChild);
+    }
+  }
+
+  let reconnectDelay = 2000;
+
+  function connect() {
+    setStatus('');
+    const ws = new WebSocket(url);
+
+    ws.onopen = function () {
+      setStatus('live');
+      reconnectDelay = 2000;
+    };
+
+    ws.onmessage = function (evt) {
+      let d;
+      try { d = JSON.parse(evt.data); } catch (e) { return; }
+      updateValues(d);
+      prependRequest(d);
+    };
+
+    ws.onclose = function (evt) {
+      if (evt.code === 4401) {
+        setStatus('error');
+        rpsText.textContent = 'unauthorized';
+        return;
+      }
+      setStatus('reconnect');
+      setTimeout(connect, reconnectDelay);
+      reconnectDelay = Math.min(reconnectDelay * 1.5, 30000);
+    };
+
+    ws.onerror = function () {
+      setStatus('error');
+    };
+  }
+
+  connect();
+})();
+</script>
+
+</body>
+</html>

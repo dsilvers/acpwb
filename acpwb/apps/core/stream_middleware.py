@@ -75,6 +75,15 @@ class RequestStreamMiddleware:
             except Exception:
                 pass
 
+        ua = request.META.get('HTTP_USER_AGENT', '')
+        try:
+            from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
+            bot_type = classify_ua_or_ip(ua, ip)
+            bot_group = bot_type_to_group(bot_type)
+        except Exception:
+            bot_type = ''
+            bot_group = ''
+
         payload = json.dumps({
             'ip': ip_censored,
             'host': request.get_host(),
@@ -84,7 +93,9 @@ class RequestStreamMiddleware:
             'response_bytes': response_bytes,
             'method': request.method,
             'status': response.status_code,
-            'user_agent': request.META.get('HTTP_USER_AGENT', ''),
+            'user_agent': ua,
+            'bot_type': bot_type,
+            'bot_group': bot_group,
         })
 
         try:

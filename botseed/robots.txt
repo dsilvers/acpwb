@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /$
+Allow: /api.html
+Allow: /what.html
+Disallow: /

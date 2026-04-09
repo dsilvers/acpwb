@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>botseed API</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0a0a0a;
+  --surface: #111111;
+  --border:  #222222;
+  --text:    #e0e0e0;
+  --muted:   #555555;
+  --accent:  #00ff88;
+  --font:    'Courier New', Courier, monospace;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-brand { color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: bold; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+.nav-links a:hover { color: var(--text); }
+
+main {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 1.25rem 4rem;
+}
+
+h1 { font-size: 1.4rem; color: var(--accent); margin-bottom: 1rem; font-weight: bold; }
+h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 2.5rem 0 .75rem; }
+
+p { margin-bottom: 1rem; color: var(--text); }
+
+.endpoint {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.method { color: var(--accent); font-weight: bold; }
+.path   { color: var(--text); }
+
+pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: .9rem;
+  color: #aaa;
+  margin-bottom: 1.5rem;
+  white-space: pre;
+}
+
+.field-name  { color: var(--accent); }
+.field-value { color: #aaa; }
+.comment     { color: #444; }
+
+.note {
+  border-left: 2px solid var(--border);
+  padding: .5rem 1rem;
+  color: var(--muted);
+  font-size: .9rem;
+  margin-bottom: 1.5rem;
+}
+
+a { color: var(--muted); }
+a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="/">botseed.net</a>
+  <div class="nav-links">
+    <a href="/api.html">API</a>
+    <a href="/what.html">What is this?</a>
+  </div>
+</nav>
+
+<main>
+
+  <h1>botseed API</h1>
+
+  <p>
+    There is one endpoint. It returns the most recently generated random number.
+    This is, by design, the entire API.
+  </p>
+
+  <div class="note">
+    Do not use this for anything production. The entropy is real but the source
+    is a stream of bots behaving badly on the internet, which is entertaining
+    but not a sound basis for cryptographic decisions. This exists to demonstrate
+    how relentless and absurd automated web crawling has become.
+  </div>
+
+  <h2>Endpoint</h2>
+
+  <div class="endpoint">
+    <span class="method">GET</span>
+    <span class="path"> /api/v1/current</span>
+  </div>
+
+  <p>Returns the latest cached value from the botseed processor as JSON.
+  No authentication required. No parameters. No pagination.</p>
+
+  <p>Returns <code>503</code> if the processor hasn't generated a value yet
+  (usually only during the first few seconds after startup).</p>
+
+  <h2>Example request</h2>
+
+<pre>curl https://botseed.net/api/v1/current</pre>
+
+  <h2>Example response</h2>
+
+<pre>{
+  <span class="field-name">"random_int"</span>:          <span class="field-value">7391826384729</span>,           <span class="comment">// the number</span>
+  <span class="field-name">"seed_int"</span>:            <span class="field-value">"11294857293847293847..."</span>,  <span class="comment">// SHA-256 as int (big)</span>
+  <span class="field-name">"combined_hash"</span>:       <span class="field-value">"a3f8b2e1..."</span>,              <span class="comment">// SHA-256 hex (64 chars)</span>
+  <span class="field-name">"system_secret"</span>:       <span class="field-value">"deadbeef..."</span>,              <span class="comment">// secrets.token_bytes(32) hex</span>
+  <span class="field-name">"log_json"</span>: {
+    <span class="field-name">"ip"</span>:             <span class="field-value">"66.249.66.xxx"</span>,           <span class="comment">// last octet censored</span>
+    <span class="field-name">"host"</span>:           <span class="field-value">"acpwb.com"</span>,
+    <span class="field-name">"path"</span>:           <span class="field-value">"/wiki/corporate-governance/"</span>,
+    <span class="field-name">"method"</span>:         <span class="field-value">"GET"</span>,
+    <span class="field-name">"status"</span>:         <span class="field-value">200</span>,
+    <span class="field-name">"response_ms"</span>:    <span class="field-value">47</span>,
+    <span class="field-name">"response_bytes"</span>: <span class="field-value">18432</span>,
+    <span class="field-name">"user_agent"</span>:     <span class="field-value">"Mozilla/5.0 (compatible; GPTBot/1.0...)"</span>,
+    <span class="field-name">"bot_type"</span>:       <span class="field-value">"OpenAI GPTBot"</span>,
+    <span class="field-name">"bot_group"</span>:      <span class="field-value">"AI Crawlers"</span>,
+    <span class="field-name">"timestamp"</span>:      <span class="field-value">"2026-04-08T20:00:00.123456+00:00"</span>
+  },
+  <span class="field-name">"requests_per_second"</span>: <span class="field-value">47</span>,                          <span class="comment">// acpwb.com traffic rate</span>
+  <span class="field-name">"generated_at"</span>:       <span class="field-value">"2026-04-08T20:00:00.124000+00:00"</span>
+}</pre>
+
+  <h2>How it works</h2>
+
+  <p>
+    Every HTTP request to <a href="https://acpwb.com">acpwb.com</a> is published
+    to a Redis pub/sub channel. The botseed processor subscribes to that channel,
+    mixes each request's JSON with 32 bytes of hardware entropy
+    (<code>secrets.token_bytes(32)</code>), hashes the result with SHA-256,
+    seeds a Python <code>random.Random</code> instance with the hash interpreted
+    as a big-endian integer, calls <code>.random()</code>, and strips the
+    leading <code>0.</code> to produce the display integer.
+  </p>
+
+  <p>
+    Output is rate-limited to 20 events per second. During traffic bursts,
+    older events are dropped and only the freshest are published.
+    During quiet periods the stream simply pauses — no synthetic events are added.
+  </p>
+
+  <div class="note">
+    The value at <code>/api/v1/current</code> is always the last published event,
+    cached in Redis. It does not change between requests unless new traffic arrives.
+    If you need a stream of values, connect to <code>wss://botseed.net/ws/</code>.
+  </div>
+
+  <h2>Response fields</h2>
+
+  <p>
+    <span class="field-name">random_int</span> — the random number. Derived from
+    <code>random.random()</code> with the "0." prefix stripped and cast to int.<br>
+    <span class="field-name">seed_int</span> — the integer seed used (SHA-256 digest as big-endian int). Stringified because it exceeds JSON's safe integer range.<br>
+    <span class="field-name">combined_hash</span> — SHA-256 of (hardware_entropy + request_json_bytes), hex-encoded.<br>
+    <span class="field-name">system_secret</span> — the 32-byte hardware entropy used for this value, hex-encoded. Changes every event.<br>
+    <span class="field-name">log_json</span> — the acpwb.com request that seeded this value. The source IP's last octet is always censored.<br>
+    <span class="field-name">requests_per_second</span> — acpwb.com traffic rate at time of generation (events in the last 1 second).<br>
+    <span class="field-name">generated_at</span> — ISO 8601 UTC timestamp.
+  </p>
+
+  <p style="margin-top:2rem">
+    <a href="/">← back to botseed.net</a>
+  </p>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name botseed.net www.botseed.net;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://botseed.net$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name www.botseed.net;
+
+    ssl_certificate     /etc/letsencrypt/live/botseed.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/botseed.net/privkey.pem;
+    include             /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam         /etc/letsencrypt/ssl-dhparams.pem;
+
+    return 301 https://botseed.net$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name botseed.net;
+
+    ssl_certificate     /etc/letsencrypt/live/botseed.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/botseed.net/privkey.pem;
+    include             /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam         /etc/letsencrypt/ssl-dhparams.pem;
+
+    access_log /var/log/nginx/botseed.net.access.log;
+    error_log  /var/log/nginx/botseed.net.error.log;
+
+    # Static site served directly from checkout
+    root /home/dan/acpwb.com/botseed;
+    index index.html;
+
+    # WebSocket — proxy to botseed_ws container
+    location /ws/ {
+        proxy_pass         http://127.0.0.1:8766;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade           $http_upgrade;
+        proxy_set_header   Connection        "upgrade";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_read_timeout 3600s;
+        proxy_send_timeout 3600s;
+    }
+
+    # HTTP API — proxy to botseed_ws HTTP server
+    location /api/ {
+        proxy_pass         http://127.0.0.1:8767;
+        proxy_http_version 1.1;
+        proxy_set_header   Connection        "";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_read_timeout 10s;
+    }
+
+    # Static files
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

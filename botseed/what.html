@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is botseed? — botseed.net</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0d0d0d;
+  --surface: #161616;
+  --border:  #2a2a2a;
+  --text:    #f0f0f0;
+  --muted:   #999999;
+  --accent:  #00ff88;
+  --font:    'Courier New', Courier, monospace;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-brand { color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: bold; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+.nav-links a:hover { color: var(--text); }
+
+main {
+  max-width: 680px;
+  margin: 3rem auto;
+  padding: 0 1.5rem 5rem;
+}
+
+h1 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--muted);
+  margin: 2.5rem 0 .75rem;
+}
+
+p {
+  margin-bottom: 1.1rem;
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.aside {
+  border-left: 2px solid var(--border);
+  padding: .6rem 1rem;
+  color: var(--muted);
+  margin: 1.5rem 0;
+  font-size: .9rem;
+}
+
+code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: .1em .4em;
+  border-radius: 2px;
+  font-size: .9em;
+}
+
+.back {
+  margin-top: 3rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="/">botseed.net</a>
+  <div class="nav-links">
+    <a href="/api.html">API</a>
+    <a href="/what.html">What is this?</a>
+  </div>
+</nav>
+
+<main>
+
+  <h1>What is botseed?</h1>
+
+  <div class="aside">
+    This is mostly for entertainment. Do not use it for anything that matters.
+    The randomness is real, but the source is a stream of bots doing increasingly
+    ridiculous things to a website that was built specifically to humiliate them.
+  </div>
+
+  <p>
+    Botseed generates random numbers from live web traffic. The number updating
+    on the front page is real — seeded by whatever crawler just probed for a
+    WordPress vulnerability, tried to scrape a fake compensation dataset, or
+    attempted to exfiltrate a <code>.env</code> file that contains nothing useful.
+  </p>
+
+  <h2>The source</h2>
+
+  <p>
+    The traffic comes from a honeypot — a fake corporate website designed to
+    attract, trap, and waste the resources of automated crawlers. It has been
+    running for years and receives a continuous stream of bot activity around
+    the clock: AI training crawlers, SEO tools, exploit scanners, credential
+    stuffers, and things that defy easy categorization.
+  </p>
+
+  <p>
+    The site is an elaborate trap. Infinite archives that branch exponentially.
+    Watermarked fake research reports containing subtly wrong facts. A fake
+    internal employee portal that logs any credentials submitted to it. Convincing
+    responses to WordPress and webshell probes. Every request is logged,
+    classified by bot type, and — courtesy of botseed — converted into entropy.
+  </p>
+
+  <p>
+    Project code: <a href="https://github.com/dsilvers/acpwb">github.com/dsilvers/acpwb</a>
+  </p>
+
+  <h2>How the number is generated</h2>
+
+  <p>
+    Each incoming request is serialized to JSON and combined with 32 bytes of
+    hardware entropy from the operating system. The two are concatenated and
+    hashed with SHA-256. The resulting 256-bit digest is interpreted as a
+    big-endian integer and used to seed a Python <code>random.Random</code>
+    instance — an isolated instance, not the global random state. Calling
+    <code>.random()</code> on it produces a float. The leading <code>0.</code>
+    is stripped and the remaining digits are displayed as an integer.
+  </p>
+
+  <p>
+    The hardware entropy means the output is unpredictable even if an attacker
+    controls the request content. The request content means every number is
+    demonstrably derived from something real that just happened on the internet.
+  </p>
+
+  <p>
+    Output is rate-limited to 20 events per second. During traffic bursts, older
+    events are dropped. During quiet periods the stream pauses — no synthetic
+    events are inserted to fill the gap.
+  </p>
+
+  <h2>The stream</h2>
+
+  <p>
+    The acpwb.com Django application publishes every request to a Redis pub/sub
+    channel. A separate processor subscribes, computes the entropy mix, and
+    republishes to a second channel. A standalone asyncio WebSocket service fans
+    that channel out to browser clients. The static HTML you are reading is served
+    directly by nginx — there is no application server involved in delivering this
+    page.
+  </p>
+
+  <p>
+    The latest value is also available via a single HTTP endpoint for polling use:
+    <a href="/api.html">/api/v1/current</a>.
+  </p>
+
+  <p class="back">
+    <a href="/">← botseed.net</a>
+  </p>
+
+</main>
+
+</body>
+</html>

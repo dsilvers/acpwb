@@ -139,6 +139,63 @@ Every fake config file gets a unique `secrets.token_urlsafe(32)` token at serve 
 
 ---
 
+---
+
+## Botseed
+
+**botseed.net** is a companion project that harvests entropy from ACPWB's live web traffic and produces a stream of random numbers — similar in concept to Cloudflare's lava lamp entropy source.
+
+Every HTTP request to acpwb.com is published to a Redis pub/sub channel. The botseed processor mixes each request's JSON payload with 32 bytes of hardware entropy (`secrets.token_bytes(32)`) via SHA-256, seeds a `random.Random` instance with the result, and publishes the derived integer to a second channel. A standalone asyncio WebSocket service fans the stream out to browser clients at `wss://botseed.net/ws/`. Output is rate-limited to 20 events/sec.
+
+### Architecture
+
+```
+acpwb.com Django (RequestStreamMiddleware)
+  → Redis pub/sub: "request_stream"
+      → management command: botseed_processor
+          → SHA-256(hardware_entropy + request_json) → random_int
+          → Redis SET "botseed:latest"
+          → Redis pub/sub PUBLISH "botseed_stream"
+              → botseed_ws container (asyncio WS + HTTP API)
+                  → wss://botseed.net/ws/    (live stream)
+                  → https://botseed.net/api/v1/current  (latest cached value)
+```
+
+### Local testing
+
+```bash
+# Start botseed services
+docker compose up --build botseed_processor botseed_ws
+
+# Generate synthetic traffic (without needing real web traffic)
+docker compose exec web python manage.py generate_bot_traffic --rps 5
+
+# Check Redis key is being populated
+docker compose exec redis redis-cli GET botseed:latest
+
+# Connect to WebSocket directly (before nginx)
+wscat -c ws://localhost:8766/ws/
+
+# Test HTTP API
+curl http://localhost:8767/api/v1/current
+```
+
+### Production setup
+
+```bash
+# Issue TLS cert for botseed.net
+certbot certonly --nginx -d botseed.net -d www.botseed.net
+
+# Install nginx config
+sudo cp nginx/botseed.net /etc/nginx/sites-available/botseed.net
+sudo ln -s /etc/nginx/sites-available/botseed.net /etc/nginx/sites-enabled/botseed.net
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+The `botseed_processor` and `botseed_ws` services are defined in `docker-compose.yml` and start automatically with `docker compose up`.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -427,6 +484,7 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/
 | `DB_PASSWORD` | PostgreSQL password |
 | `REDIS_URL` | Redis connection URL (default: `redis://redis:6379/0`) |
 | `STREAM_WS_TOKEN` | Secret token required to connect to `/ws/requests/` (optional; generate with `python -c "import secrets; print(secrets.token_urlsafe(32))"`) |
+| `BOTSEED_WS_TOKEN` | Secret token required to connect to botseed WebSocket at `wss://botseed.net/ws/` (optional) |
 | `PIPE_WEBHOOK_SECRET` | Shared secret for Cloudflare Email Worker |
 | `MAILGUN_WEBHOOK_SIGNING_KEY` | From Mailgun dashboard (legacy) |
 | `MAILGUN_DOMAIN` | `acpwb.com` (legacy) |
@@ -440,10 +498,18 @@ acpwb/
 ├── docker-compose.yml
 ├── .env.example
 ├── nginx/
-│   └── nginx.conf
-├── ws_service/               # Standalone asyncio WebSocket server
+│   ├── nginx.conf            # Docker nginx (acpwb.com)
+│   ├── acpwb.com             # Host nginx for acpwb.com
+│   └── botseed.net           # Host nginx for botseed.net
+├── ws_service/               # acpwb live request stream WebSocket server
 │   ├── Dockerfile
-│   └── ws_server.py          # Redis subscriber → WebSocket broadcast
+│   └── ws_server.py
+├── botseed_service/          # botseed WebSocket + HTTP API server
+│   ├── Dockerfile
+│   └── ws_server.py
+├── botseed/                  # botseed.net static frontend
+│   ├── index.html
+│   └── api.html
 └── acpwb/                    # Django project
     ├── config/               # Settings, URLs, WSGI
     ├── apps/

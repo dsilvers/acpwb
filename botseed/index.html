@@ -143,11 +143,28 @@ main {
   .random-int-display { font-size: 1.4rem; }
 }
 
-.rps-line {
+.rps-section {
   margin-top: auto;
   padding-top: 1rem;
+}
+
+.rps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: .4rem;
+}
+
+.rps-current {
   font-size: .85rem;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+#rps-canvas {
+  width: 100%;
+  display: block;
+  border-radius: 2px;
 }
 
 .ws-status {
@@ -294,8 +311,12 @@ main {
       <div class="entropy-value" id="val-log-json" style="color:var(--muted);font-size:.85rem;white-space:pre-wrap;word-break:break-all">—</div>
     </div>
 
-    <div class="rps-line">
-      <span id="rps-text"></span>
+    <div class="rps-section">
+      <div class="rps-header">
+        <div class="entropy-label">requests / sec — last 2 min</div>
+        <div class="rps-current"><span id="rps-text">—</span> req/s</div>
+      </div>
+      <canvas id="rps-canvas" height="50"></canvas>
     </div>
 
   </section>
@@ -333,6 +354,71 @@ main {
   const rpsText  = document.getElementById('rps-text');
   const feedEl   = document.getElementById('feed-scroll');
   const waiting  = document.getElementById('feed-waiting');
+  const canvas   = document.getElementById('rps-canvas');
+  const ctx      = canvas.getContext('2d');
+
+  // ── Sparkline ─────────────────────────────────────────────────────────────
+  const HISTORY = 120;  // seconds
+  const rpsHistory = new Array(HISTORY).fill(0);
+  let lastKnownRps = 0;
+  let lastSecondTs = Date.now();
+
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = rect.width  * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    drawSparkline();
+  }
+
+  function drawSparkline() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const max = Math.max(...rpsHistory, 1);
+    const step = w / (HISTORY - 1);
+
+    const points = rpsHistory.map((v, i) => ({
+      x: i * step,
+      y: h - (v / max) * h * 0.88,
+    }));
+
+    // Filled area
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, h);
+    points.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.lineTo(points[points.length - 1].x, h);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(0, 255, 136, 0.12)';
+    ctx.fill();
+
+    // Line
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    points.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.strokeStyle = '#00ff88';
+    ctx.lineWidth = 1.5 * devicePixelRatio;
+    ctx.shadowBlur = 6 * devicePixelRatio;
+    ctx.shadowColor = '#00ff88';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  function tickRps() {
+    const now = Date.now();
+    if (now - lastSecondTs >= 1000) {
+      rpsHistory.push(lastKnownRps);
+      if (rpsHistory.length > HISTORY) rpsHistory.shift();
+      rpsText.textContent = lastKnownRps;
+      lastSecondTs = now;
+      drawSparkline();
+    }
+  }
+
+  setInterval(tickRps, 200);
+
+  new ResizeObserver(resizeCanvas).observe(canvas);
+  resizeCanvas();
 
   // Entropy value elements
   const elRandInt   = document.getElementById('val-random-int');
@@ -414,8 +500,7 @@ main {
       elLogJson.textContent = JSON.stringify(d.log_json, null, 2);
     }
 
-    const rps = d.requests_per_second != null ? d.requests_per_second : '?';
-    rpsText.textContent = rps + ' req/s from acpwb.com';
+    if (d.requests_per_second != null) lastKnownRps = d.requests_per_second;
   }
 
   function prependRequest(d) {

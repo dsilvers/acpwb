@@ -1,15 +1,23 @@
 """
 Drain the Redis crawler visit queue into PostgreSQL.
 
+Only one instance runs at a time — an exclusive flock on /tmp/acpwb-drain.lock
+prevents overlap. The OS releases the lock automatically if the process dies,
+so a crashed run never blocks the next cron tick.
+
 Run via cron every minute:
     * * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml \
         exec -T web python manage.py drain_crawler_queue \
         >> /var/log/acpwb-crawler-drain.log 2>&1
 """
+import fcntl
+
 from django.core.management.base import BaseCommand
 
 from apps.core.crawler_queue import pop_crawler_visits, queue_length
 from apps.honeypot.models import CrawlerVisit
+
+_LOCK_FILE = '/tmp/acpwb-drain.lock'
 
 
 class Command(BaseCommand):
@@ -26,6 +34,16 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        with open(_LOCK_FILE, 'w') as lock_fh:
+            try:
+                fcntl.flock(lock_fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except OSError:
+                self.stdout.write('Another drain is already running — exiting.')
+                return
+            self._drain(options)
+            # lock released automatically when with-block exits
+
+    def _drain(self, options):
         batch_size = options['batch']
         max_batches = options['max_batches']
         total_inserted = 0

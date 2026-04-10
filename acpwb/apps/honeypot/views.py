@@ -37,19 +37,22 @@ def _get_ip(request):
 
 def _log_crawler(request, trap_type):
     try:
+        from apps.core.crawler_queue import push_crawler_visit
         ua = request.META.get('HTTP_USER_AGENT', '')
         ip = _get_ip(request)
-        CrawlerVisit.objects.create(
-            ip_address=ip,
-            user_agent=ua[:512],
-            host=request.get_host()[:253],
-            path=request.path[:512],
-            referrer=request.META.get('HTTP_REFERER', '')[:256],
-            trap_type=trap_type,
-            query_string=request.META.get('QUERY_STRING', '')[:256],
-            bot_type=classify_ua_or_ip(ua, ip),
-            bot_group=bot_type_to_group(classify_ua_or_ip(ua, ip)),
-        )
+        data = {
+            'ip_address': ip,
+            'user_agent': ua[:512],
+            'host': request.get_host()[:253],
+            'path': request.path[:512],
+            'referrer': request.META.get('HTTP_REFERER', '')[:256],
+            'trap_type': trap_type,
+            'query_string': request.META.get('QUERY_STRING', '')[:256],
+            'bot_type': classify_ua_or_ip(ua, ip),
+            'bot_group': bot_type_to_group(classify_ua_or_ip(ua, ip)),
+        }
+        if not push_crawler_visit(data):
+            CrawlerVisit.objects.create(**data)
     except Exception:
         pass
 

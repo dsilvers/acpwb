@@ -272,16 +272,20 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/  # → 302 to acpw
 | `export_gen_data` | — | Export data for external image generation. |
 | `botseed_processor` | — | Long-running: subscribes to `request_stream`, generates entropy-seeded random integers, publishes to `botseed_stream` at ≤20 events/sec. Runs as a separate Docker service (`botseed_processor`). |
 | `generate_bot_traffic` | `--rps`, `--count` | Publishes synthetic bot request events directly to `request_stream` — bypasses HTTP entirely. Used for local botseed frontend testing without real web traffic. Ctrl-C to stop. |
+| `drain_crawler_queue` | `--batch`, `--max-batches` | Pops CrawlerVisit records from the Redis queue (`acpwb:crawler_queue`) and bulk-inserts them into PostgreSQL. Run by cron every minute. Default: 500 records/batch, max 200 batches per run. |
 
 ### Dashboard Stats Setup (Production)
 
-Add to host crontab to incrementally update stats every 30 minutes:
+Add to host crontab to incrementally update stats every 30 minutes, and drain the crawler queue every minute:
 
 ```
 */30 * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py precalc_dashboard >> /var/log/acpwb-precalc.log 2>&1
+* * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py drain_crawler_queue >> /var/log/acpwb-crawler-drain.log 2>&1
 ```
 
 Stats are stored in `DashboardStat` DB rows. On the first run after deploy, all historical data is processed. Subsequent runs only process new rows (fast). The dashboard shows "Stats as of: [timestamp]" from the DB row's `updated_at`.
+
+**CrawlerVisit write path:** Honeypot views and `BotTrackingMiddleware` push visit data to the Redis list `acpwb:crawler_queue` (fast RPUSH) instead of writing to PostgreSQL synchronously. `drain_crawler_queue` cron pops and bulk-inserts into the DB. Falls back to direct DB write if Redis is unavailable. Queue is capped at 100k entries.
 
 ---
 

@@ -10,7 +10,7 @@ import json
 import time
 
 _QUEUE_KEY = 'acpwb:crawler_queue'
-_MAX_QUEUE = 100_000          # drop oldest entries beyond this depth
+# _MAX_QUEUE = 100_000          # drop oldest entries beyond this depth
 _CIRCUIT_BREAKER_COOLDOWN = 30.0
 
 _redis_client = None
@@ -61,7 +61,7 @@ def push_crawler_visit(data: dict) -> bool:
     try:
         pipe = r.pipeline(transaction=False)
         pipe.rpush(_QUEUE_KEY, json.dumps(data))
-        pipe.ltrim(_QUEUE_KEY, -_MAX_QUEUE, -1)
+        # pipe.ltrim(_QUEUE_KEY, -_MAX_QUEUE, -1)
         pipe.execute()
         return True
     except Exception:

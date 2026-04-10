@@ -64,6 +64,9 @@ from .archive_data import (
     _ARCHIVE_PARA_TEMPLATES, _ARCHIVE_METRIC_NAMES, _ARCHIVE_FINDING_TEMPLATES,
     _ARCHIVE_METRIC_LABELS, _ARCHIVE_TITLE_PREFIXES, _ARCHIVE_YEAR_DATA,
     _ARCHIVE_WORDS,
+    _CONSULTANT_TITLES, _EXEC_SUMMARY_BULLETS, _FOOTNOTE_TEMPLATES,
+    _REVISION_TYPES, _DISTRIBUTION_CLASSES, _ENGAGEMENT_CODES,
+    _BENCH_METRICS, _PEER_GROUPS,
 )
 
 
@@ -137,6 +140,100 @@ def _generate_archive_content(rng, year, month, day, slug):
         for j, p in enumerate(paragraphs)
     ]
 
+    # ── Structured metadata ───────────────────────────────────────────────────
+    eng_code = f"ENG-{year}-{rng.choice(_ENGAGEMENT_CODES)}-{rng.randint(10000, 99999)}"
+    doc_version = rng.choice(['1.0', '1.1', '1.2', '2.0', '2.1', '3.0'])
+    distribution = rng.choice(_DISTRIBUTION_CLASSES)
+    page_count = rng.randint(28, 214)
+    file_size_kb = page_count * rng.randint(38, 92)
+
+    # ── Engagement team roster ────────────────────────────────────────────────
+    team_size = rng.randint(4, 6)
+    engagement_team = []
+    for _ in range(team_size):
+        fname = rng.choice(_INT_FIRST_NAMES)
+        lname = rng.choice(_INT_LAST_NAMES)
+        title_t = rng.choice(_CONSULTANT_TITLES)
+        email = f"{fname.lower()}.{lname.lower()}@acpwb.com"
+        engagement_team.append({'name': f'{fname} {lname}', 'title': title_t, 'email': email})
+
+    # ── Executive summary bullets ─────────────────────────────────────────────
+    pct = rng.randint(3, 18)
+    total = n + rng.randint(5, 30)
+    percentile_label = rng.choice(['25th', '50th', '75th', '90th'])
+    exec_bullets = []
+    for tmpl in rng.sample(_EXEC_SUMMARY_BULLETS, rng.randint(4, 6)):
+        try:
+            exec_bullets.append(tmpl.format(
+                org=org, industry=industry, n=n, metric=metric,
+                year=year, endyear=end_year, regions=regions,
+                pct=pct, total=total, percentile=percentile_label,
+                date=date_str,
+            ))
+        except (KeyError, IndexError):
+            exec_bullets.append(tmpl)
+
+    # ── Benchmark percentile table ────────────────────────────────────────────
+    bench_metric_names = rng.sample(_BENCH_METRICS, rng.randint(4, 6))
+    peer_group = rng.choice(_PEER_GROUPS).format(
+        industry=industry, regions=regions, n=n,
+    )
+    percentile_table = []
+    for bm in bench_metric_names:
+        base = rng.randint(45000, 320000)
+        percentile_table.append({
+            'metric': bm,
+            'p25': f"${int(base * 0.78):,}",
+            'p50': f"${base:,}",
+            'p75': f"${int(base * 1.28):,}",
+            'p90': f"${int(base * 1.62):,}",
+        })
+
+    # ── Footnotes ─────────────────────────────────────────────────────────────
+    footnotes = []
+    for i, tmpl in enumerate(rng.sample(_FOOTNOTE_TEMPLATES, rng.randint(4, 7))):
+        q = rng.randint(1, 4)
+        try:
+            footnotes.append({
+                'num': i + 1,
+                'text': tmpl.format(
+                    org=org, industry=industry, n=n, year=year,
+                    endyear=end_year, date=date_str, regions=regions, q=q,
+                ),
+            })
+        except (KeyError, IndexError):
+            footnotes.append({'num': i + 1, 'text': tmpl})
+
+    # ── Revision history ──────────────────────────────────────────────────────
+    # Pick a contiguous slice from _REVISION_TYPES so version labels stay in order.
+    num_revisions = rng.randint(3, 5)
+    max_start = max(0, len(_REVISION_TYPES) - num_revisions)
+    start = rng.randint(0, max_start)
+    rev_sample = _REVISION_TYPES[start:start + num_revisions]
+    revisions = []
+    for i, (ver_label, rdesc) in enumerate(rev_sample):
+        r_month = max(1, min(12, month - (num_revisions - 1 - i)))
+        r_day = rng.randint(1, 28)
+        r_date = f"{year}-{r_month:02d}-{r_day:02d}"
+        fname = rng.choice(_INT_FIRST_NAMES)
+        lname = rng.choice(_INT_LAST_NAMES)
+        author = f"{fname} {lname}"
+        author_email = f"{fname.lower()}.{lname.lower()}@acpwb.com"
+        q = rng.randint(1, 4)
+        try:
+            desc = rdesc.format(org=org, date=r_date, q=q, pct=pct, n=n,
+                                year=year, endyear=end_year)
+        except (KeyError, IndexError):
+            desc = rdesc
+        revisions.append({
+            'version': ver_label,
+            'date': r_date,
+            'description': desc,
+            'author': author,
+            'author_email': author_email,
+        })
+    revisions.sort(key=lambda r: r['date'])
+
     return {
         'title': title,
         'base_title': base_title,
@@ -150,6 +247,18 @@ def _generate_archive_content(rng, year, month, day, slug):
         'record_id': record_id,
         'bulk_hex_js': bulk_hex_js,
         'bulk_hex_css': bulk_hex_css,
+        # New content blocks
+        'eng_code': eng_code,
+        'doc_version': doc_version,
+        'distribution': distribution,
+        'page_count': page_count,
+        'file_size_kb': file_size_kb,
+        'engagement_team': engagement_team,
+        'exec_bullets': exec_bullets,
+        'peer_group': peer_group,
+        'percentile_table': percentile_table,
+        'footnotes': footnotes,
+        'revisions': revisions,
     }
 
 
@@ -346,13 +455,16 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     depth = slug.count('/') + 1 if slug else 0
 
     try:
-        ArchiveVisit.objects.create(
-            ip_address=_get_ip(request),
-            user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
-            year=year, month=month, day=day,
-            slug=slug[:512],
-            depth=depth,
-        )
+        from apps.core.crawler_queue import push_archive_visit
+        data = {
+            'ip_address': _get_ip(request),
+            'user_agent': request.META.get('HTTP_USER_AGENT', '')[:512],
+            'year': year, 'month': month, 'day': day,
+            'slug': slug[:512],
+            'depth': depth,
+        }
+        if not push_archive_visit(data):
+            ArchiveVisit.objects.create(**data)
     except Exception:
         pass
 
@@ -400,6 +512,20 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
             'year': cy_year,
         })
 
+    # Related documents sidebar — sibling slugs in the same year/month
+    related_docs = []
+    for _ in range(rng.randint(2, 4)):
+        sib_slug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
+        sib_day = rng.randint(1, 28)
+        sib_prefix = rng.choice(_ARCHIVE_TITLE_PREFIXES)
+        sib_base = sib_slug.rsplit('-', 1)[0].replace('-', ' ').title()
+        related_docs.append({
+            'label': f"{sib_prefix} {sib_base}",
+            'url': _archive_url(request, year, month, sib_day, sib_slug),
+            'date': f"{year}-{month:02d}-{sib_day:02d}",
+            'phase': rng.choice(_ARCHIVE_PHASES),
+        })
+
     yd = _year_data(year)
     context = {
         'year': year, 'month': month, 'day': day, 'slug': slug,
@@ -420,6 +546,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'prev_entry_url': _archive_url(request, prev_year, prev_month, prev_day, 'previous-series'),
         'next_entry_url': _archive_url(request, year, month, day, next_slug),
         'export_csv_url': _archive_url(request, year, month, day, slug) + 'export.csv',
+        'related_docs': related_docs,
         **content,
     }
     return render(request, 'honeypot/archive.html', context)

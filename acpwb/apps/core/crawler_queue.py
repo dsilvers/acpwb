@@ -1,8 +1,13 @@
 """
-Redis-backed queue for deferred CrawlerVisit writes.
+Redis-backed queues for deferred DB writes.
 
-Request path: push_crawler_visit() → RPUSH to acpwb:crawler_queue
-Consumer:     pop_crawler_visits() → pipeline LPOP → bulk_create in DB
+CrawlerVisit:
+  Request path: push_crawler_visit() → RPUSH to acpwb:crawler_queue
+  Consumer:     pop_crawler_visits() → pipeline LPOP → bulk_create in DB
+
+ArchiveVisit:
+  Request path: push_archive_visit() → RPUSH to acpwb:archive_queue
+  Consumer:     pop_archive_visits() → pipeline LPOP → bulk_create in DB
 
 Falls back gracefully if Redis is unavailable (caller handles the fallback).
 """
@@ -10,7 +15,7 @@ import json
 import time
 
 _QUEUE_KEY = 'acpwb:crawler_queue'
-# _MAX_QUEUE = 100_000          # drop oldest entries beyond this depth
+_ARCHIVE_QUEUE_KEY = 'acpwb:archive_queue'
 _CIRCUIT_BREAKER_COOLDOWN = 30.0
 
 _redis_client = None
@@ -95,6 +100,55 @@ def queue_length() -> int:
         return -1
     try:
         return r.llen(_QUEUE_KEY)
+    except Exception:
+        _mark_failure()
+        return -1
+
+
+def push_archive_visit(data: dict) -> bool:
+    """
+    Serialize `data` and RPUSH it onto the archive visit queue.
+
+    Returns True on success, False if Redis is unavailable (caller should
+    fall back to a direct DB write).
+    """
+    r = _get_client()
+    if r is None:
+        return False
+    try:
+        r.rpush(_ARCHIVE_QUEUE_KEY, json.dumps(data))
+        return True
+    except Exception:
+        _mark_failure()
+        return False
+
+
+def pop_archive_visits(count: int = 500) -> list:
+    """
+    Pop up to `count` items from the left of the archive queue (FIFO).
+    Returns a list of dicts; stops early if the queue is exhausted.
+    """
+    r = _get_client()
+    if r is None:
+        return []
+    try:
+        pipe = r.pipeline(transaction=False)
+        for _ in range(count):
+            pipe.lpop(_ARCHIVE_QUEUE_KEY)
+        results = pipe.execute()
+        return [json.loads(raw) for raw in results if raw is not None]
+    except Exception:
+        _mark_failure()
+        return []
+
+
+def archive_queue_length() -> int:
+    """Return the archive queue depth, or -1 if Redis is unavailable."""
+    r = _get_client()
+    if r is None:
+        return -1
+    try:
+        return r.llen(_ARCHIVE_QUEUE_KEY)
     except Exception:
         _mark_failure()
         return -1

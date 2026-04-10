@@ -44,10 +44,17 @@
 
         <div id="acpwb-archive-{{ record_id }}-executive-summary-callout" class="era-callout">
           <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--era-accent);margin-bottom:.45rem">Executive Summary</div>
-          <p style="font-size:.9rem;margin-bottom:0;line-height:1.65">
+          <p style="font-size:.88rem;margin-bottom:{% if exec_bullets %}.75rem{% else %}0{% endif %};line-height:1.65">
             This archive entry documents ACPWB's <strong>{{ phase }}</strong> phase engagement with <strong>{{ org }}</strong> in the <strong>{{ industry }}</strong> sector.
             Record ID <code style="font-size:.78rem;background:rgba(128,128,128,.15);padding:.1rem .3rem">{{ record_id }}</code>.
           </p>
+          {% if exec_bullets %}
+          <ul id="acpwb-archive-{{ record_id }}-exec-summary-bullets" style="padding-left:1.25rem;margin-bottom:0">
+            {% for b in exec_bullets %}
+            <li style="font-size:.83rem;margin-bottom:.45rem;line-height:1.6">{{ b }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
 
         {% if findings %}
@@ -60,6 +67,23 @@
                 style="font-size:.88rem;margin-bottom:.6rem;line-height:1.6">{{ f.text }}</li>
             {% endfor %}
           </ul>
+        </div>
+        {% endif %}
+
+        {% if engagement_team %}
+        <div id="acpwb-archive-{{ record_id }}-engagement-team" class="mb-4">
+          <div class="era-section-head">Engagement Team</div>
+          <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+            {% for member in engagement_team %}
+            <tr style="border-top:1px solid rgba(128,128,128,.15)">
+              <td style="padding:.35rem .7rem .35rem 0;white-space:nowrap">
+                <div style="font-weight:700">{{ member.name }}</div>
+                <div style="font-size:.72rem;opacity:.6"><a href="mailto:{{ member.email }}" style="color:inherit">{{ member.email }}</a></div>
+              </td>
+              <td style="padding:.35rem 0;opacity:.75">{{ member.title }}</td>
+            </tr>
+            {% endfor %}
+          </table>
         </div>
         {% endif %}
 
@@ -89,6 +113,36 @@
                   <td style="padding:.45rem .85rem;text-align:right;opacity:.65">{{ row.baseline }}</td>
                   <td style="padding:.45rem .85rem;text-align:right;font-weight:700">{{ row.current }}</td>
                   <td style="padding:.45rem .85rem;text-align:right;font-weight:700;color:{% if row.positive %}#16a34a{% else %}#dc2626{% endif %}">{{ row.delta }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if percentile_table %}
+        <div id="acpwb-archive-{{ record_id }}-benchmark-percentile-section" class="mb-4">
+          <div class="era-section-head">Market Benchmark — {{ peer_group }}</div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:.8rem;border:1px solid rgba(128,128,128,.25)">
+              <thead>
+                <tr class="era-table-head" style="color:#fff">
+                  <th style="padding:.45rem .75rem;text-align:left;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">Metric</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P25</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P50</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P75</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P90</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in percentile_table %}
+                <tr style="border-top:1px solid rgba(128,128,128,.2)">
+                  <td style="padding:.38rem .75rem;font-weight:600">{{ row.metric }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;opacity:.6">{{ row.p25 }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;font-weight:700">{{ row.p50 }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;opacity:.75">{{ row.p75 }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;opacity:.6">{{ row.p90 }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -146,6 +200,41 @@
         </div>
         {% endif %}
 
+        {% if revisions %}
+        <div id="acpwb-archive-{{ record_id }}-revision-history" class="mb-4 mt-4">
+          <div class="era-section-head">Revision History</div>
+          <table style="width:100%;border-collapse:collapse;font-size:.78rem">
+            <thead>
+              <tr style="opacity:.55">
+                <th style="padding:.3rem .5rem .3rem 0;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;text-align:left;white-space:nowrap">Version</th>
+                <th style="padding:.3rem .5rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;text-align:left;white-space:nowrap">Date</th>
+                <th style="padding:.3rem 0 .3rem .5rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;text-align:left">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for rev in revisions %}
+              <tr style="border-top:1px solid rgba(128,128,128,.15)">
+                <td style="padding:.35rem .5rem .35rem 0;font-weight:700;white-space:nowrap;font-family:monospace;font-size:.72rem">{{ rev.version }}</td>
+                <td style="padding:.35rem .5rem;opacity:.65;white-space:nowrap">{{ rev.date }}</td>
+                <td style="padding:.35rem 0 .35rem .5rem;opacity:.8;line-height:1.45">{{ rev.description }} <span style="opacity:.55">— {{ rev.author }} &lt;<a href="mailto:{{ rev.author_email }}" style="color:inherit">{{ rev.author_email }}</a>&gt;</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+
+        {% if footnotes %}
+        <div id="acpwb-archive-{{ record_id }}-footnotes" class="mb-4" style="border-top:1px solid rgba(128,128,128,.15);padding-top:1rem">
+          <div class="era-section-head">Sources &amp; Notes</div>
+          <ol style="padding-left:1.25rem;margin-bottom:0">
+            {% for fn in footnotes %}
+            <li id="acpwb-archive-{{ record_id }}-fn-{{ fn.num }}" style="font-size:.72rem;opacity:.7;margin-bottom:.4rem;line-height:1.5">{{ fn.text }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+        {% endif %}
+
         <div class="mt-4 pt-3" style="border-top:1px solid rgba(128,128,128,.2)">
           <a href="{{ prev_entry_url }}" class="era-nav-link">&larr; Previous in Series</a>
         </div>
@@ -169,6 +258,14 @@
               <dd class="fw-700 mb-2">{{ industry }}</dd>
               <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Organization</dt>
               <dd class="fw-700 mb-2">{{ org }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Engagement Code</dt>
+              <dd class="mb-2" style="font-family:monospace;font-size:.75rem;opacity:.7">{{ eng_code }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Version</dt>
+              <dd class="mb-2" style="font-family:monospace;font-size:.75rem;opacity:.7">{{ doc_version }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Pages</dt>
+              <dd class="mb-2" style="font-size:.8rem;opacity:.7">{{ page_count }} ({{ file_size_kb }} KB)</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Distribution</dt>
+              <dd class="mb-2" style="font-size:.72rem;opacity:.65;line-height:1.4">{{ distribution }}</dd>
               <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>
               <dd class="mb-0" style="font-family:monospace;font-size:.75rem;opacity:.7">{{ record_id }}</dd>
             </dl>
@@ -188,6 +285,18 @@
                   aria-label="Navigate to the next entry in the {{ year }} archive series">Next in Series &rarr;</a></li>
             </ul>
           </div>
+          {% if related_docs %}
+          <div id="acpwb-archive-{{ record_id }}-related-docs" style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">
+            <div class="era-section-head" style="margin-bottom:.6rem">Related Documents</div>
+            {% for doc in related_docs %}
+            <a href="{{ doc.url }}" class="era-entry-card" style="margin-bottom:.5rem">
+              <div style="font-size:.6rem;opacity:.5;margin-bottom:.15rem">{{ doc.date }} &bull; {{ doc.phase }}</div>
+              <div style="font-size:.75rem;font-weight:600;line-height:1.35">{{ doc.label }}</div>
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           <div id="acpwb-archive-{{ record_id }}-year-browser" style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem">
             <div class="era-section-head" style="margin-bottom:.6rem">Browse by Year</div>
             <div style="display:flex;flex-wrap:wrap;gap:.3rem">
@@ -230,10 +339,17 @@
 
         <div id="acpwb-archive-{{ record_id }}-executive-summary-callout" style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:2rem">
           <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.5rem">Executive Summary</div>
-          <p style="font-size:.9rem;color:var(--navy);margin-bottom:0;font-weight:500;line-height:1.6">
+          <p style="font-size:.88rem;color:var(--navy);margin-bottom:{% if exec_bullets %}.75rem{% else %}0{% endif %};font-weight:500;line-height:1.6">
             This archive entry documents ACPWB's <strong>{{ phase }}</strong> phase engagement with <strong>{{ org }}</strong> in the <strong>{{ industry }}</strong> sector.
             The record ID <code style="font-size:.8rem;background:#f4f6f9;padding:.1rem .35rem">{{ record_id }}</code> uniquely identifies this documentation set within ACPWB's institutional archive.
           </p>
+          {% if exec_bullets %}
+          <ul id="acpwb-archive-{{ record_id }}-exec-summary-bullets" style="padding-left:1.25rem;margin-bottom:0">
+            {% for b in exec_bullets %}
+            <li style="font-size:.83rem;color:#333;margin-bottom:.45rem;line-height:1.6">{{ b }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
 
         {% if findings %}
@@ -248,6 +364,23 @@
                 style="font-size:.88rem;color:#333;margin-bottom:.7rem;line-height:1.6">{{ f.text }}</li>
             {% endfor %}
           </ul>
+        </div>
+        {% endif %}
+
+        {% if engagement_team %}
+        <div id="acpwb-archive-{{ record_id }}-engagement-team" class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">Engagement Team</h5>
+          <table style="width:100%;border-collapse:collapse;font-size:.83rem">
+            {% for member in engagement_team %}
+            <tr style="border-top:1px solid var(--border)">
+              <td style="padding:.4rem .8rem .4rem 0;white-space:nowrap">
+                <div style="font-weight:700;color:var(--navy)">{{ member.name }}</div>
+                <div style="font-size:.72rem;color:var(--muted)"><a href="mailto:{{ member.email }}" style="color:inherit">{{ member.email }}</a></div>
+              </td>
+              <td style="padding:.4rem 0;color:var(--muted)">{{ member.title }}</td>
+            </tr>
+            {% endfor %}
+          </table>
         </div>
         {% endif %}
 
@@ -279,6 +412,38 @@
                   <td style="padding:.5rem .9rem;text-align:right;color:var(--muted)">{{ row.baseline }}</td>
                   <td style="padding:.5rem .9rem;text-align:right;font-weight:700">{{ row.current }}</td>
                   <td style="padding:.5rem .9rem;text-align:right;font-weight:700;color:{% if row.positive %}#15803d{% else %}#dc2626{% endif %}">{{ row.delta }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if percentile_table %}
+        <div id="acpwb-archive-{{ record_id }}-benchmark-percentile-section" class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">
+            Market Benchmark — {{ peer_group }}
+          </h5>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;background:white;border:1px solid var(--border);font-size:.82rem">
+              <thead>
+                <tr style="background:var(--navy);color:var(--gold)">
+                  <th style="padding:.55rem .9rem;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Metric</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P25</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P50</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P75</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P90</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in percentile_table %}
+                <tr style="border-top:1px solid var(--border)">
+                  <td style="padding:.45rem .9rem;color:var(--navy);font-weight:600">{{ row.metric }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p25 }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;font-weight:700">{{ row.p50 }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p75 }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p90 }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -350,6 +515,41 @@
         </div>
         {% endif %}
 
+        {% if revisions %}
+        <div id="acpwb-archive-{{ record_id }}-revision-history" class="mb-4 mt-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">Revision History</h5>
+          <table style="width:100%;border-collapse:collapse;font-size:.8rem">
+            <thead>
+              <tr style="color:var(--muted)">
+                <th style="padding:.3rem .6rem .3rem 0;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;text-align:left;white-space:nowrap">Version</th>
+                <th style="padding:.3rem .6rem;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;text-align:left;white-space:nowrap">Date</th>
+                <th style="padding:.3rem 0 .3rem .6rem;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;text-align:left">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for rev in revisions %}
+              <tr style="border-top:1px solid var(--border)">
+                <td style="padding:.38rem .6rem .38rem 0;font-weight:700;color:var(--navy);white-space:nowrap;font-family:monospace;font-size:.75rem">{{ rev.version }}</td>
+                <td style="padding:.38rem .6rem;color:var(--muted);white-space:nowrap">{{ rev.date }}</td>
+                <td style="padding:.38rem 0 .38rem .6rem;color:#444;line-height:1.45">{{ rev.description }} <span style="color:var(--muted)">— {{ rev.author }} &lt;<a href="mailto:{{ rev.author_email }}" style="color:inherit">{{ rev.author_email }}</a>&gt;</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+
+        {% if footnotes %}
+        <div id="acpwb-archive-{{ record_id }}-footnotes" class="mb-4" style="border-top:1px solid var(--border);padding-top:1rem">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:.75rem">Sources &amp; Notes</h5>
+          <ol style="padding-left:1.25rem;margin-bottom:0">
+            {% for fn in footnotes %}
+            <li id="acpwb-archive-{{ record_id }}-fn-{{ fn.num }}" style="font-size:.72rem;color:var(--muted);margin-bottom:.4rem;line-height:1.5">{{ fn.text }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+        {% endif %}
+
         <div class="mt-4 pt-3" style="border-top:1px solid var(--border)">
           <a href="{{ prev_entry_url }}" style="font-size:.85rem;color:var(--muted);text-decoration:none">&larr; Previous in Series</a>
         </div>
@@ -374,8 +574,14 @@
               <dd class="fw-700 mb-2">{{ industry }}</dd>
               <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Organization</dt>
               <dd class="fw-700 mb-2">{{ org }}</dd>
-              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Crawl Depth</dt>
-              <dd class="fw-700 mb-2">{{ depth }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Engagement Code</dt>
+              <dd class="mb-2" style="font-family:monospace;font-size:.75rem;color:var(--muted)">{{ eng_code }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Version</dt>
+              <dd class="mb-2" style="font-family:monospace;font-size:.75rem;color:var(--muted)">{{ doc_version }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Pages</dt>
+              <dd class="mb-2" style="font-size:.8rem;color:var(--muted)">{{ page_count }} ({{ file_size_kb }} KB)</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Distribution</dt>
+              <dd class="mb-2" style="font-size:.72rem;color:var(--muted);line-height:1.4">{{ distribution }}</dd>
               <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>
               <dd class="mb-0 text-muted" style="font-family:monospace;font-size:.75rem">{{ record_id }}</dd>
             </dl>
@@ -398,6 +604,18 @@
                   style="color:var(--gold);font-weight:700">Next in Series &rarr;</a></li>
             </ul>
           </div>
+
+          {% if related_docs %}
+          <div id="acpwb-archive-{{ record_id }}-related-docs" class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Related Documents</h6>
+            {% for doc in related_docs %}
+            <a href="{{ doc.url }}" style="display:block;background:#f4f6f9;border:1px solid var(--border);border-left:3px solid var(--gold);padding:.55rem .8rem;margin-bottom:.5rem;text-decoration:none">
+              <div style="font-size:.6rem;color:var(--muted);margin-bottom:.15rem">{{ doc.date }} &bull; {{ doc.phase }}</div>
+              <div style="font-size:.75rem;font-weight:600;color:var(--navy);line-height:1.35">{{ doc.label }}</div>
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
 
           <div id="acpwb-archive-{{ record_id }}-year-browser" class="acpwb-card mb-4">
             <h6 class="card-title mb-3">Browse by Year</h6>

@@ -1,8 +1,10 @@
 import csv
+import functools
 import hashlib
 import io
 import json
 import random
+import re as _re
 import secrets
 import string
 import uuid
@@ -38,9 +40,11 @@ def _get_ip(request):
 def _log_crawler(request, trap_type):
     try:
         from apps.core.crawler_queue import push_crawler_visit
+        from django.utils import timezone
         ua = request.META.get('HTTP_USER_AGENT', '')
         ip = _get_ip(request)
         data = {
+            'timestamp': timezone.now().isoformat(),
             'ip_address': ip,
             'user_agent': ua[:512],
             'host': request.get_host()[:253],
@@ -70,8 +74,10 @@ from .archive_data import (
 )
 
 
-def _generate_archive_content(rng, year, month, day, slug):
+@functools.lru_cache(maxsize=512)
+def _generate_archive_content(year, month, day, slug):
     """Generate deterministic rich content for an archive page."""
+    rng = random.Random(hashlib.md5(f"content_{year}{month}{day}{slug}".encode()).hexdigest())
     org = rng.choice(_ARCHIVE_ORGS)
     industry = rng.choice(_ARCHIVE_INDUSTRIES)
     phase = rng.choice(_ARCHIVE_PHASES)
@@ -116,7 +122,6 @@ def _generate_archive_content(rng, year, month, day, slug):
     # Build a more informative title from the slug
     tail = slug.split('/')[-1] if slug else f"{year}-{month:02d}-{day:02d}-archive"
     # Strip trailing numeric IDs like -7842
-    import re as _re
     clean_tail = _re.sub(r'-\d{3,}$', '', tail)
     base_title = clean_tail.replace('-', ' ').title()
     prefix = rng.choice(_ARCHIVE_TITLE_PREFIXES)
@@ -448,6 +453,18 @@ def archive_subdomain_non_archive_redirect(request, rest=''):
 # ── Archive Redirect Views ────────────────────────────────────────────────────
 
 
+def archive_trap_yearless(request, month, day, slug=''):
+    """Handle bare /<month>/<day>/<slug>/ on the main domain (no /archive/<year>/ prefix).
+
+    Bots discover these paths from archive subdomains (archives-YYYY.acpwb.com/<month>/<day>/...)
+    and try them on acpwb.com directly. Derive the year deterministically from the slug so
+    the same path always returns the same content rather than 404ing.
+    """
+    rng = random.Random(hashlib.md5(f"yearless_{month}_{day}_{slug}".encode()).hexdigest())
+    year = rng.randint(1985, 2024)
+    return archive_trap(request, year=year, month=month, day=day, slug=slug)
+
+
 def archive_trap(request, year=None, month=None, day=None, slug=''):
     year = _get_archive_year(request, year)
     _log_crawler(request, 'archive')
@@ -456,7 +473,9 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
 
     try:
         from apps.core.crawler_queue import push_archive_visit
+        from django.utils import timezone
         data = {
+            'timestamp': timezone.now().isoformat(),
             'ip_address': _get_ip(request),
             'user_agent': request.META.get('HTTP_USER_AGENT', '')[:512],
             'year': year, 'month': month, 'day': day,
@@ -477,7 +496,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     prev_month = month if day > 1 else (month - 1 if month > 1 else 12)
     prev_year = year if month > 1 or day > 1 else year - 1
 
-    content = _generate_archive_content(rng, year, month, day, slug)
+    content = _generate_archive_content(year, month, day, slug)
 
     # Related paths spread across a wide historical date range (1985–present)
     on_sub = getattr(request, 'on_archive_subdomain', False)

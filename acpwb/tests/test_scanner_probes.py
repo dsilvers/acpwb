@@ -1,6 +1,9 @@
 import pytest
+from unittest.mock import patch
 from django.test import override_settings
 from apps.honeypot.models import CrawlerVisit, CanaryToken, InternalLoginAttempt
+
+_no_redis_crawler = patch('apps.core.crawler_queue.push_crawler_visit', return_value=False)
 
 
 # ── .env probe ─────────────────────────────────────────────────────────────────
@@ -20,7 +23,8 @@ def test_env_probe_creates_canary_token(client):
 
 @pytest.mark.django_db
 def test_env_probe_logs_crawlervisit(client):
-    client.get('/.env')
+    with _no_redis_crawler:
+        client.get('/.env')
     assert CrawlerVisit.objects.filter(trap_type='env_probe').exists()
 
 
@@ -35,7 +39,8 @@ def test_wp_config_returns_200_with_db_password(client):
 
 @pytest.mark.django_db
 def test_wp_config_logs_crawlervisit(client):
-    client.get('/wp-config.php')
+    with _no_redis_crawler:
+        client.get('/wp-config.php')
     assert CrawlerVisit.objects.filter(trap_type='wp_probe').exists()
 
 
@@ -113,7 +118,8 @@ def test_webshell_with_cmd_param_returns_fake_output(client):
 
 @pytest.mark.django_db
 def test_webshell_with_cmd_logs_query_string(client):
-    client.get('/shell.php?cmd=whoami')
+    with _no_redis_crawler:
+        client.get('/shell.php?cmd=whoami')
     visit = CrawlerVisit.objects.filter(trap_type='webshell_probe').last()
     assert visit is not None
     assert 'cmd=whoami' in visit.query_string
@@ -167,7 +173,8 @@ def test_canary_ping_unknown_token_returns_404(client):
 @pytest.mark.django_db
 def test_canary_ping_logs_crawlervisit(client):
     CanaryToken.objects.create(token='pingtoken', token_type='env_url')
-    client.get('/.well-known/tokens/pingtoken/ping')
+    with _no_redis_crawler:
+        client.get('/.well-known/tokens/pingtoken/ping')
     assert CrawlerVisit.objects.filter(trap_type='canary_trigger').exists()
 
 
@@ -177,7 +184,8 @@ def test_canary_ping_logs_crawlervisit(client):
 @override_settings(DEBUG=False)
 def test_scanner_probe_404_logs_visit(client):
     before = CrawlerVisit.objects.filter(trap_type='scanner_probe').count()
-    client.get('/backup.sql')
+    with _no_redis_crawler:
+        client.get('/backup.sql')
     after = CrawlerVisit.objects.filter(trap_type='scanner_probe').count()
     assert after == before + 1
 

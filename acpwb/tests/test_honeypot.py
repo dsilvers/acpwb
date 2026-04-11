@@ -1,7 +1,13 @@
 import json
 import pytest
+from unittest.mock import patch
 from apps.honeypot.models import CrawlerVisit, WikiPage, ArchiveVisit
 from apps.honeypot.wiki_generator import generate_wiki_page
+
+# Force DB fallback for tests that assert CrawlerVisit/ArchiveVisit DB rows.
+# Production writes go to the Redis queue; patching to return False exercises
+# the direct-DB fallback path.
+_no_redis_crawler = patch('apps.core.crawler_queue.push_crawler_visit', return_value=False)
 
 
 # ── Archive trap ───────────────────────────────────────────────────────────────
@@ -18,14 +24,17 @@ def test_archive_main_domain_serves_content(client):
 
 @pytest.mark.django_db
 def test_archive_logs_visit(client):
-    assert ArchiveVisit.objects.count() == 0
-    client.get('/3/15/some-article/?__year=2024')
-    assert ArchiveVisit.objects.count() == 1
+    # Patch Redis unavailable to exercise the DB fallback path
+    with patch('apps.core.crawler_queue.push_archive_visit', return_value=False):
+        assert ArchiveVisit.objects.count() == 0
+        client.get('/3/15/some-article/?__year=2024')
+        assert ArchiveVisit.objects.count() == 1
 
 
 @pytest.mark.django_db
 def test_archive_logs_depth(client):
-    client.get('/3/15/level1/level2/level3/?__year=2024')
+    with patch('apps.core.crawler_queue.push_archive_visit', return_value=False):
+        client.get('/3/15/level1/level2/level3/?__year=2024')
     visit = ArchiveVisit.objects.first()
     assert visit.depth >= 2
 
@@ -111,7 +120,8 @@ def test_wiki_page_reuses_db_record(client):
 
 @pytest.mark.django_db
 def test_wiki_page_logs_crawler_visit(client):
-    client.get('/wiki/some-topic/')
+    with _no_redis_crawler:
+        client.get('/wiki/some-topic/')
     visits = CrawlerVisit.objects.filter(trap_type='wiki')
     assert visits.count() >= 1
 
@@ -156,7 +166,8 @@ def test_fake_api_has_request_id_header(client):
 @pytest.mark.django_db
 def test_fake_api_logs_visit(client):
     count_before = CrawlerVisit.objects.filter(trap_type='api').count()
-    client.get('/api/v1/private-data')
+    with _no_redis_crawler:
+        client.get('/api/v1/private-data')
     assert CrawlerVisit.objects.filter(trap_type='api').count() == count_before + 1
 
 
@@ -174,7 +185,8 @@ def test_ai_agent_json_returns_json(client):
 @pytest.mark.django_db
 def test_ai_agent_logs_visit(client):
     count_before = CrawlerVisit.objects.filter(trap_type='well_known').count()
-    client.get('/.well-known/ai-agent.json')
+    with _no_redis_crawler:
+        client.get('/.well-known/ai-agent.json')
     assert CrawlerVisit.objects.filter(trap_type='well_known').count() > count_before
 
 
@@ -207,5 +219,6 @@ def test_ghost_trap_returns_403(client, path):
 @pytest.mark.django_db
 def test_ghost_trap_logs_visit(client):
     count_before = CrawlerVisit.objects.filter(trap_type='ghost_link').count()
-    client.get('/internal/portal/')
+    with _no_redis_crawler:
+        client.get('/internal/portal/')
     assert CrawlerVisit.objects.filter(trap_type='ghost_link').count() > count_before

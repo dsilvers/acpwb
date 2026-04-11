@@ -44,6 +44,7 @@ class BotTrackingMiddleware:
     def _log_bot_visit(self, request, user_agent, path):
         # Deferred imports to avoid circular issues at middleware load time
         try:
+            from django.utils import timezone
             from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
             from apps.core.crawler_queue import push_crawler_visit
             from apps.honeypot.models import CrawlerVisit
@@ -52,6 +53,7 @@ class BotTrackingMiddleware:
             ua = user_agent or ''
             bot_type = classify_ua_or_ip(ua, ip)
             data = {
+                'timestamp': timezone.now().isoformat(),
                 'ip_address': ip,
                 'user_agent': ua[:512],
                 'path': path[:512],

@@ -11,6 +11,7 @@ Run via cron every minute:
         >> /var/log/acpwb-archive-drain.log 2>&1
 """
 import fcntl
+from django.utils.dateparse import parse_datetime
 
 from django.core.management.base import BaseCommand
 
@@ -57,6 +58,9 @@ class Command(BaseCommand):
             objs = []
             for item in items:
                 try:
+                    if 'timestamp' in item:
+                        ts = parse_datetime(item['timestamp'])
+                        item['timestamp'] = ts if ts else item.pop('timestamp')
                     objs.append(ArchiveVisit(**item))
                 except Exception:
                     pass  # skip malformed entries

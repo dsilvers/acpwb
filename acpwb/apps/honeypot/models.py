@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class CrawlerVisit(models.Model):
@@ -20,7 +21,7 @@ class CrawlerVisit(models.Model):
         ('other', 'Other'),
     ]
 
-    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+    timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
     ip_address = models.GenericIPAddressField(db_index=True)
     user_agent = models.TextField(blank=True)
     host = models.CharField(max_length=253, blank=True, db_index=True)
@@ -83,7 +84,7 @@ class PublicReport(models.Model):
 
 
 class ArchiveVisit(models.Model):
-    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+    timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
     ip_address = models.GenericIPAddressField(db_index=True)
     user_agent = models.TextField(blank=True)
     year = models.IntegerField()

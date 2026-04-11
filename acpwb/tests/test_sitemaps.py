@@ -1,8 +1,9 @@
 import pytest
+from unittest.mock import patch
 from xml.etree import ElementTree
 
-
 SITEMAP_NS = 'http://www.sitemaps.org/schemas/sitemap/0.9'
+_no_redis_crawler = patch('apps.core.crawler_queue.push_crawler_visit', return_value=False)
 
 
 def parse_sitemap(content):
@@ -51,7 +52,8 @@ def test_sitemap_publications_is_valid_xml(client):
 def test_sitemap_publications_logs_visit(client):
     from apps.honeypot.models import CrawlerVisit
     before = CrawlerVisit.objects.filter(trap_type='well_known').count()
-    client.get('/sitemap-publications.xml')
+    with _no_redis_crawler:
+        client.get('/sitemap-publications.xml')
     assert CrawlerVisit.objects.filter(trap_type='well_known').count() > before
 
 
@@ -73,7 +75,8 @@ def test_sitemap_wiki_has_many_topics(client):
 def test_sitemap_wiki_logs_visit(client):
     from apps.honeypot.models import CrawlerVisit
     before = CrawlerVisit.objects.filter(trap_type='well_known').count()
-    client.get('/sitemap-wiki.xml')
+    with _no_redis_crawler:
+        client.get('/sitemap-wiki.xml')
     assert CrawlerVisit.objects.filter(trap_type='well_known').count() > before
 
 
@@ -103,7 +106,8 @@ def test_sitemap_archive_is_deterministic(client):
 def test_sitemap_archive_logs_visit(client):
     from apps.honeypot.models import CrawlerVisit
     before = CrawlerVisit.objects.filter(trap_type='well_known').count()
-    client.get('/sitemap-archive.xml')
+    with _no_redis_crawler:
+        client.get('/sitemap-archive.xml')
     assert CrawlerVisit.objects.filter(trap_type='well_known').count() > before
 
 

@@ -1,6 +1,9 @@
 import pytest
+from unittest.mock import patch
 from apps.core.middleware import BOT_UA_PATTERNS, VIEW_LOGGED_PATHS, BotTrackingMiddleware
 from apps.honeypot.models import CrawlerVisit
+
+_no_redis_crawler = patch('apps.core.crawler_queue.push_crawler_visit', return_value=False)
 
 
 # ── Pattern matching ───────────────────────────────────────────────────────────
@@ -65,14 +68,16 @@ def test_view_logged_paths_no_match(path):
 @pytest.mark.django_db
 def test_bot_ua_logged_on_any_page(bot_client):
     count_before = CrawlerVisit.objects.count()
-    bot_client.get('/')
+    with _no_redis_crawler:
+        bot_client.get('/')
     assert CrawlerVisit.objects.count() > count_before
 
 
 @pytest.mark.django_db
 def test_honeypot_path_logged_for_normal_ua(client):
     count_before = CrawlerVisit.objects.count()
-    client.get('/api/v1/private-data')
+    with _no_redis_crawler:
+        client.get('/api/v1/private-data')
     assert CrawlerVisit.objects.count() > count_before
 
 

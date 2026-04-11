@@ -17,6 +17,13 @@ urlpatterns = [
     path('archive/<int:year>/<int:month>/<int:day>', views.archive_trap, kwargs={'slug': ''}),
     path('archive/<int:year>/<int:month>/<int:day>/<path:slug>', views.archive_trap),
 
+    # Bare /<month>/<day>/... on main domain — bots copying subdomain paths verbatim.
+    # Derive year from slug hash so the same path always returns the same content.
+    path('<int:month>/<int:day>/', views.archive_trap_yearless, kwargs={'slug': ''}, name='archive-yearless-base'),
+    path('<int:month>/<int:day>/<path:slug>/', views.archive_trap_yearless, name='archive-yearless'),
+    path('<int:month>/<int:day>', views.archive_trap_yearless, kwargs={'slug': ''}),
+    path('<int:month>/<int:day>/<path:slug>', views.archive_trap_yearless),
+
     # Wiki trap
     path('wiki/<slug:slug>/', views.wiki_page, name='wiki-page'),
 

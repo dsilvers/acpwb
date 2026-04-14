@@ -346,6 +346,194 @@ _ARCHIVE_SLUGS = [
     'retention-risk-register', 'key-employee-agreement-review', 'change-of-control-payment-analysis',
     'cic-severance-benchmarking', 'golden-parachute-excise-tax-analysis', 'section-280g-calculations',
     'equity-acceleration-analysis', 'double-trigger-assessment', 'escrow-and-earnout-compensation-review',
+    # Media, entertainment & sports
+    'sports-franchise-compensation-study', 'athlete-pay-benchmarking', 'front-office-salary-review',
+    'broadcast-rights-revenue-analysis', 'media-talent-contract-benchmarking', 'streaming-content-cost-study',
+    'esports-athlete-compensation-review', 'sports-sponsorship-valuation-analysis', 'ticketing-revenue-benchmarking',
+    'stadium-operations-cost-study', 'naming-rights-deal-analysis', 'content-production-budget-review',
+    'talent-agency-fee-benchmarking', 'on-screen-talent-compensation-study', 'writers-room-structure-assessment',
+    'performing-arts-compensation-benchmarking', 'film-crew-classification-review', 'music-royalty-structure-analysis',
+    'podcast-monetization-benchmarking', 'gaming-studio-compensation-study', 'influencer-rate-card-benchmarking',
+    # Legal operations & law firm management
+    'attorney-compensation-benchmarking', 'partner-compensation-model-review', 'associate-salary-scale-update',
+    'law-firm-profitability-analysis', 'billable-hour-benchmarking', 'legal-operations-maturity-assessment',
+    'general-counsel-compensation-review', 'in-house-legal-benchmarking', 'outside-counsel-spend-analysis',
+    'alternative-fee-arrangement-benchmarking', 'legal-technology-investment-review', 'paralegals-compensation-study',
+    'litigation-support-cost-benchmarking', 'legal-department-operating-model', 'matter-management-assessment',
+    # Public sector & government administration
+    'civil-service-pay-benchmarking', 'public-sector-benefits-review', 'municipal-executive-compensation',
+    'county-administrator-pay-study', 'state-agency-benchmarking', 'federal-pay-band-analysis',
+    'elected-official-compensation-review', 'government-pension-benchmarking', 'public-safety-pay-study',
+    'firefighter-compensation-benchmarking', 'police-department-pay-review', 'transit-authority-compensation',
+    'public-works-benchmarking', 'city-manager-compensation-study', 'school-superintendent-benchmarking',
+    # Higher education & K-12
+    'university-president-compensation-review', 'faculty-salary-benchmarking', 'athletic-director-pay-study',
+    'head-coach-compensation-benchmarking', 'university-administrator-pay-review', 'adjunct-faculty-benchmarking',
+    'student-affairs-compensation-study', 'research-administration-benchmarking', 'development-officer-pay-review',
+    'k12-superintendent-compensation', 'school-principal-benchmarking', 'district-administrator-pay-study',
+    'teacher-pay-benchmarking', 'school-board-compensation-review', 'ed-tech-integration-cost-analysis',
+    # Consumer research & market intelligence
+    'consumer-panel-design-assessment', 'survey-methodology-benchmarking', 'brand-equity-measurement-review',
+    'market-segmentation-study', 'neuromarketing-research-design', 'ethnographic-research-benchmarking',
+    'focus-group-facilitation-review', 'online-community-research-assessment', 'conjoint-survey-design-review',
+    'customer-journey-analytics-study', 'net-promoter-system-benchmarking', 'voice-of-customer-program-review',
+    'mystery-shopping-program-assessment', 'social-listening-analytics-review', 'brand-tracker-methodology-study',
+    # Nonprofit, association & foundation governance
+    'executive-director-compensation-review', 'nonprofit-ceo-benchmarking', 'association-executive-pay-study',
+    'foundation-president-compensation', 'board-member-stipend-benchmarking', 'volunteer-program-cost-analysis',
+    'grant-making-process-review', 'endowment-management-benchmarking', 'development-department-benchmarking',
+    'membership-organization-governance', 'trade-association-compensation-study', 'think-tank-researcher-benchmarking',
+    'social-enterprise-compensation-review', 'cooperative-governance-assessment', 'credit-union-executive-pay',
+    # Hospitality, travel & food service
+    'hotel-general-manager-benchmarking', 'resort-executive-compensation', 'food-beverage-director-pay-study',
+    'restaurant-operations-benchmarking', 'franchise-operator-compensation', 'culinary-talent-benchmarking',
+    'events-management-compensation-review', 'convention-center-pay-study', 'catering-operations-benchmarking',
+    'casino-executive-compensation', 'cruise-line-officer-pay-review', 'airline-crew-compensation-benchmarking',
+    'travel-agency-compensation-study', 'tour-operator-pay-benchmarking', 'vacation-rental-management-compensation',
+    # Agricultural, food systems & rural economy
+    'agribusiness-executive-compensation', 'cooperative-management-pay-study', 'farm-credit-benchmarking',
+    'agricultural-extension-compensation', 'food-processing-pay-review', 'commodity-trader-benchmarking',
+    'viticulture-management-compensation', 'aquaculture-operations-pay-study', 'forestry-management-benchmarking',
+    'rural-electric-cooperative-compensation', 'grain-elevator-executive-pay', 'livestock-operations-benchmarking',
+    # Space, advanced tech & emerging sectors
+    'commercial-space-compensation-review', 'satellite-operations-pay-study', 'aerospace-engineer-benchmarking',
+    'defense-technology-compensation-review', 'autonomous-systems-pay-study', 'quantum-computing-talent-benchmarking',
+    'synthetic-biology-compensation-review', 'cleantech-executive-pay-study', 'climate-tech-benchmarking',
+    'nuclear-decommissioning-compensation', 'advanced-materials-pay-study', 'robotics-startup-benchmarking',
+    # Additional cross-functional reports
+    'cross-functional-effectiveness-review', 'matrix-organization-assessment', 'centers-of-excellence-study',
+    'shared-services-benchmarking', 'global-business-services-review', 'captive-center-assessment',
+    'outsourcing-strategy-documentation', 'insourcing-decision-framework', 'build-buy-partner-analysis',
+    'platform-governance-review', 'data-monetization-strategy', 'api-economy-benchmarking',
+    'ecosystem-partnership-assessment', 'open-innovation-review', 'corporate-venture-capital-benchmarking',
+    'incubator-accelerator-study', 'startup-engagement-model-review', 'university-partnership-documentation',
+    'research-consortium-governance', 'consortium-membership-benchmarking', 'joint-venture-governance-review',
+    # Additional compliance & regulatory
+    'sox-302-certification-support', 'sox-906-compliance-documentation', 'pcaob-as-2201-documentation',
+    'regulation-s-k-compliance-review', 'rule-10b5-1-plan-documentation', 'section-16-filing-review',
+    'form-4-filing-documentation', 'beneficial-ownership-reporting', 'schedule-13d-g-review',
+    'hart-scott-rodino-filing-support', 'cfius-review-documentation', 'foreign-corrupt-practices-review',
+    'uk-bribery-act-compliance', 'iso-37001-anti-bribery-assessment', 'modern-slavery-act-compliance',
+    'human-trafficking-program-review', 'conflict-minerals-documentation', 'responsible-sourcing-review',
+    'supplier-code-of-conduct-audit', 'ethical-sourcing-benchmarking', 'fair-trade-certification-documentation',
+    # Additional technology deliverables
+    'technology-architecture-review', 'application-rationalization-study', 'cloud-spend-optimization',
+    'saas-contract-benchmarking', 'software-licensing-audit', 'open-source-policy-review',
+    'api-governance-framework', 'data-mesh-architecture-assessment', 'data-fabric-strategy-review',
+    'event-driven-architecture-review', 'microservices-migration-assessment', 'containerization-readiness',
+    'kubernetes-adoption-review', 'devsecops-maturity-assessment', 'platform-engineering-benchmarking',
+    'observability-program-review', 'chaos-engineering-assessment', 'site-reliability-benchmarking',
+    'technical-debt-quantification', 'software-bill-of-materials-review', 'code-quality-benchmarking',
+    # Additional people & culture
+    'psychological-safety-assessment', 'belonging-measurement-framework', 'allyship-program-review',
+    'inclusive-leadership-assessment', 'anti-racism-program-documentation', 'disability-inclusion-review',
+    'neurodiversity-program-assessment', 'generational-diversity-study', 'veteran-hiring-program-review',
+    'second-chance-hiring-documentation', 'returnship-program-benchmarking', 'phased-retirement-study',
+    'caregiving-support-benchmarking', 'family-forming-benefit-review', 'fertility-benefit-benchmarking',
+    'gender-affirming-care-review', 'mental-health-first-aid-documentation', 'workplace-violence-prevention',
+    'psychological-safety-training-review', 'trauma-informed-workplace-assessment', 'compassionate-leadership-study',
+    # Additional strategy & innovation
+    'blue-ocean-strategy-documentation', 'jobs-to-be-done-framework-review', 'value-chain-analysis',
+    'porter-five-forces-assessment', 'pestle-analysis-documentation', 'scenario-planning-outputs',
+    'war-gaming-exercise-documentation', 'competitive-intelligence-review', 'patent-landscape-analysis',
+    'white-space-opportunity-mapping', 'adjacency-strategy-documentation', 'growth-options-valuation',
+    'real-options-analysis', 'portfolio-strategy-review', 'business-unit-strategy-alignment',
+    'brand-architecture-review', 'pricing-strategy-assessment', 'revenue-model-innovation-study',
+    'subscription-economics-review', 'freemium-conversion-benchmarking', 'marketplace-strategy-documentation',
+    # Additional finance & treasury
+    'cash-forecasting-methodology-review', 'in-house-bank-assessment', 'payment-factory-review',
+    'intercompany-netting-study', 'supply-chain-finance-program-review', 'dynamic-discounting-assessment',
+    'virtual-account-management-review', 'fx-exposure-quantification', 'commodity-hedging-program-review',
+    'interest-rate-swap-documentation', 'cross-currency-swap-review', 'credit-default-swap-analysis',
+    'bond-issuance-documentation', 'commercial-paper-program-review', 'revolving-credit-facility-benchmarking',
+    'term-loan-documentation', 'accounts-receivable-securitization', 'inventory-financing-review',
+    # Additional real estate & facilities
+    'green-building-certification-review', 'leed-certification-documentation', 'well-building-assessment',
+    'biophilic-design-benchmarking', 'activity-based-working-study', 'hot-desking-adoption-review',
+    'neighborhood-model-assessment', 'agile-workspace-benchmarking', 'collaboration-space-utilization',
+    'focus-space-adequacy-review', 'quiet-zone-benchmarking', 'amenities-return-on-investment',
+    'coffee-bar-program-benchmarking', 'fitness-center-utilization-review', 'childcare-facility-feasibility',
+    # Additional risk & insurance
+    'directors-and-officers-insurance-review', 'cyber-liability-coverage-benchmarking', 'employment-practices-liability-review',
+    'fiduciary-liability-assessment', 'professional-indemnity-benchmarking', 'product-liability-review',
+    'business-interruption-coverage-assessment', 'key-person-insurance-review', 'captive-feasibility-study',
+    'enterprise-risk-insurance-review', 'natural-catastrophe-modeling', 'pandemic-risk-assessment',
+    # Additional international
+    'local-plus-assignment-benchmarking', 'commuter-assignment-study', 'short-term-assignment-review',
+    'permanent-transfer-benchmarking', 'remote-work-cross-border-assessment', 'employer-of-record-benchmarking',
+    'global-equity-plan-design', 'section-409a-international-review', 'fringe-benefit-tax-benchmarking',
+    'social-security-totalization-review', 'work-permit-cost-benchmarking', 'dual-card-expatriate-review',
+    # More HR specialties
+    'outplacement-provider-benchmarking', 'career-transition-services-review', 'workforce-redeployment-study',
+    'skills-currency-assessment', 'workforce-ecosystem-mapping', 'human-cloud-platform-review',
+    'internal-gig-marketplace-benchmarking', 'talent-intelligence-platform-review', 'workforce-simulator-assessment',
+    'predictive-attrition-model-review', 'engagement-driver-analysis', 'motivation-factor-benchmarking',
+    'job-crafting-program-review', 'meaningful-work-assessment', 'purpose-alignment-study',
+    'organizational-values-audit', 'behavior-anchoring-review', 'competency-behavioral-indicator-update',
+    # More governance specialties
+    'proxy-access-policy-review', 'advance-notice-bylaw-assessment', 'plurality-vs-majority-voting-study',
+    'classified-board-assessment', 'staggered-board-review', 'supermajority-provision-analysis',
+    'poison-pill-review', 'rights-plan-benchmarking', 'golden-share-assessment',
+    'dual-class-share-benchmarking', 'founder-control-structure-review', 'board-interlocking-analysis',
+    'overboarding-policy-review', 'committee-independence-assessment', 'executive-session-protocol-review',
+    # More specific operational reports
+    'contact-center-compensation-review', 'customer-success-pay-benchmarking', 'field-sales-compensation-audit',
+    'technical-sales-benchmarking', 'inside-sales-pay-review', 'channel-sales-compensation-study',
+    'revenue-operations-pay-benchmarking', 'presales-compensation-review', 'solutions-engineering-pay-study',
+    'account-management-benchmarking', 'renewal-sales-compensation-review', 'partnership-sales-pay-study',
+    'channel-partner-incentive-review', 'distributor-incentive-benchmarking', 'reseller-compensation-review',
+    'independent-representative-pay-study', 'manufacturers-rep-benchmarking', 'broker-dealer-pay-review',
+    # More sector-specific operational
+    'manufacturing-operator-pay-review', 'skilled-trades-benchmarking', 'apprenticeship-wage-study',
+    'union-journeyman-pay-analysis', 'prevailing-wage-determination-review', 'davis-bacon-compliance-review',
+    'project-labor-agreement-assessment', 'craft-workforce-benchmarking', 'maintenance-technician-pay-study',
+    'quality-inspector-benchmarking', 'production-supervisor-pay-review', 'plant-manager-benchmarking',
+    'supply-chain-analyst-pay-study', 'logistics-coordinator-benchmarking', 'warehouse-operations-pay-review',
+    'distribution-center-pay-benchmarking', 'fulfillment-center-compensation', 'last-mile-driver-pay-study',
+    'fleet-driver-benchmarking', 'commercial-driver-pay-review', 'heavy-equipment-operator-benchmarking',
+    # Sports, media, and entertainment
+    'professional-sports-front-office-compensation', 'athlete-support-staff-benchmarking', 'coaching-staff-pay-review',
+    'sports-analytics-team-benchmarking', 'media-talent-compensation-study', 'broadcast-journalist-pay-review',
+    'film-production-crew-benchmarking', 'streaming-content-team-pay-study', 'talent-agency-compensation-review',
+    'esports-organization-pay-benchmarking', 'gaming-studio-compensation-review', 'live-events-staff-pay-study',
+    'arena-venue-operations-benchmarking', 'sports-medicine-staff-pay-review', 'athletic-trainer-compensation-study',
+    # Legal and professional services
+    'law-firm-associate-compensation-review', 'equity-partner-pay-benchmarking', 'non-equity-partner-compensation-study',
+    'legal-operations-pay-benchmarking', 'paralegal-compensation-review', 'legal-technology-staff-pay-study',
+    'law-firm-business-professional-benchmarking', 'general-counsel-compensation-review', 'in-house-legal-pay-study',
+    'accounting-firm-associate-pay-benchmarking', 'audit-staff-compensation-review', 'tax-staff-pay-study',
+    'forensic-accounting-benchmarking', 'valuation-specialist-pay-review', 'transaction-advisory-compensation-study',
+    # Public sector and government
+    'civil-service-pay-modernization-study', 'federal-employee-benchmarking', 'state-employee-compensation-review',
+    'municipal-worker-pay-study', 'government-contractor-labor-benchmarking', 'defense-contractor-compensation-review',
+    'public-safety-pay-benchmarking', 'firefighter-compensation-study', 'police-officer-pay-review',
+    'corrections-officer-benchmarking', 'public-works-employee-pay-study', 'transit-authority-compensation-review',
+    'water-utility-workforce-benchmarking', 'public-health-staff-pay-study', 'social-services-worker-compensation-review',
+    # Higher education and research institutions
+    'university-faculty-salary-benchmarking', 'community-college-pay-review', 'research-university-staff-compensation',
+    'tenure-track-faculty-benchmarking', 'adjunct-faculty-pay-study', 'postdoctoral-researcher-compensation-review',
+    'research-scientist-benchmarking', 'university-administrator-pay-study', 'academic-department-chair-compensation',
+    'student-affairs-staff-benchmarking', 'financial-aid-office-pay-study', 'registrar-office-compensation-review',
+    # Nonprofit and associations
+    'nonprofit-executive-compensation-review', 'trade-association-staff-benchmarking', 'foundation-pay-study',
+    'membership-organization-compensation-review', 'advocacy-organization-pay-benchmarking', 'think-tank-staff-compensation',
+    'hospital-foundation-pay-review', 'community-foundation-benchmarking', 'arts-organization-compensation-study',
+    'faith-based-organization-pay-review', 'social-services-nonprofit-benchmarking', 'environmental-nonprofit-pay-study',
+    # Hospitality, food service, and tourism
+    'hotel-general-manager-benchmarking', 'resort-operations-pay-review', 'food-and-beverage-director-compensation',
+    'executive-chef-pay-benchmarking', 'restaurant-manager-compensation-study', 'catering-operations-pay-review',
+    'event-planning-staff-benchmarking', 'tourism-bureau-pay-study', 'cruise-line-staff-compensation-review',
+    'airline-crew-pay-benchmarking', 'airport-operations-compensation-study', 'travel-agency-pay-review',
+    # Agricultural and cooperative
+    'agricultural-cooperative-pay-benchmarking', 'grain-elevator-operator-compensation', 'crop-consultant-pay-review',
+    'agronomy-advisor-benchmarking', 'precision-agriculture-specialist-pay', 'food-processing-plant-compensation',
+    'commodity-trader-pay-benchmarking', 'farm-operations-manager-compensation', 'veterinary-practice-pay-study',
+    'nursery-and-greenhouse-benchmarking', 'aquaculture-operations-pay-review', 'forestry-workforce-compensation',
+    # Space and advanced technology
+    'space-launch-company-pay-benchmarking', 'satellite-operations-compensation-review', 'propulsion-engineer-pay-study',
+    'mission-operations-staff-benchmarking', 'aerospace-systems-pay-review', 'defense-electronics-compensation',
+    'hypersonic-research-pay-benchmarking', 'autonomous-systems-compensation-study', 'quantum-computing-pay-review',
+    'advanced-materials-workforce-benchmarking', 'photonics-engineer-compensation', 'robotics-engineer-pay-study',
 ]
 
 _ARCHIVE_ORGS = [
@@ -681,6 +869,215 @@ _ARCHIVE_ORGS = [
     'Verwood Walberton Advisory', 'Ximenia Yarborough Consulting', 'Zelbury Ashton Group',
     'Aconbury & Birling LLC', 'Caldmore Dunwich Advisory', 'Elmstead Farleigh Partners',
     'Groombridge & Halling LLC', 'Ightham Jarvis Advisory', 'Kemsing Larkfield Partners',
+    # Sports, media & entertainment-adjacent boutiques
+    'Gridiron Advisory Group', 'Courtside Consulting Partners', 'Arena Capital Advisors',
+    'Endzone Advisory', 'Backstage Consulting Group', 'Marquee Advisory Partners',
+    'Spotlight Workforce Solutions', 'Encore Talent Advisors', 'Premiere Compensation Group',
+    'Studio Lot Advisory', 'Showrunner Consulting', 'Franchise Field Partners',
+    'Sideline Advisory Group', 'Diamond Analytics Consulting', 'Press Box Partners',
+    'Front Office Advisors', 'Broadcast Lane Consulting', 'Rink Advisory Group',
+    # Legal sector boutiques
+    'Chambers Advisory Group', 'Sidebar Consulting Partners', 'Bench & Bar Advisors',
+    'Juris Consulting Group', 'Litigation Lane Advisory', 'Brief Advisory Partners',
+    'Docket Consulting Group', 'Courtyard Advisory Partners', 'Gavel Consulting Group',
+    'Esquire Advisory Group', 'Counsel Ridge Partners', 'Tribunal Advisory Consulting',
+    # Public sector / government advisory
+    'Capitol Advisory Partners', 'Civitas Consulting Group', 'Statehouse Advisory',
+    'Municipal Partners Group', 'Polis Consulting', 'Civic Works Advisory',
+    'Commonweal Partners', 'Public Square Consulting', 'Polaris Government Advisors',
+    'Meridian Public Group', 'Keystone Civic Consulting', 'Belltower Advisory',
+    'Rotunda Partners', 'Liberty Bell Advisory Group', 'Federal Lane Consulting',
+    # Education sector boutiques
+    'Mortar Board Advisory', 'Bell Tower Consulting Partners', 'Quad Advisory Group',
+    'Alma Mater Partners', 'Commencement Advisory', 'Provost Consulting Group',
+    'Tenure Track Advisory', 'Dean Street Partners', 'Symposium Consulting',
+    'Cloister Advisory Group', 'Summa Consulting Partners', 'Campus Ridge Advisors',
+    # Nonprofit / association boutiques
+    'Mission-Driven Advisory Group', 'Philanthropy Lane Consulting', 'Stewardship Partners',
+    'Legacy Advisory Group', 'Impact Consulting Partners', 'Endowment Advisory',
+    'Charter Way Consulting', 'Covenant Partners Group', 'Cornerstone Nonprofit Advisors',
+    'Beacon Philanthropy Consulting', 'Harbor Light Advisory', 'Mosaic Partners Group',
+    # Hospitality & food service boutiques
+    'Concierge Advisory Partners', 'White Tablecloth Consulting', 'Innkeeper Advisory Group',
+    'Folio Consulting Partners', 'Cellar Door Advisory', 'Harvest Advisory Group',
+    'Farmstead Consulting Group', 'Vineyard Advisory Partners', 'Culinary Lane Consulting',
+    # Agricultural / rural boutiques
+    'Furrow Advisory Group', 'Granary Consulting Partners', 'Thresher Advisory',
+    'Prairie Wind Consulting', 'Harvest Moon Advisory', 'Tillage Consulting Partners',
+    'Silo Advisory Group', 'Meadow Run Consulting', 'Homestead Partners Advisory',
+    # Technology specialty boutiques (new angles)
+    'Binary Peak Consulting', 'Recursive Advisory Partners', 'Stack Advisory Group',
+    'Protocol Consulting Partners', 'Inference Advisory', 'Tensor Consulting Group',
+    'Gradient Advisory Partners', 'Pipeline Consulting', 'Cluster Analytics Advisory',
+    # Additional named principals (new surnames)
+    'Blackwood & Fenwick LLC', 'Callister Drummond Advisory', 'Daviess Hartwell Partners',
+    'Eldershaw Frome Consulting', 'Falkirk Greyburn Advisory', 'Grantleigh Holmwood Partners',
+    'Hawksley Inverleith Consulting', 'Idsworth Jarrow Advisory', 'Keswick Llanbedr Partners',
+    'Linwood Morpeth Consulting', 'Nether Overton Advisory', 'Pendragon Queensbury Partners',
+    'Riversmead Sherburn Consulting', 'Tintagel Ullapool Advisory', 'Veryan Wadebridge Partners',
+    'Xenophon Yarrow Consulting', 'Zennor Ashfield Advisory',
+    'Burnell Covington Group', 'Dashwood Everton Advisory', 'Fairholme Gladstone Partners',
+    'Hatherley Ilkeston Consulting', 'Jedburgh Kelso Advisory', 'Lamington Moorfoot Partners',
+    'Nancarrow Oldmeldrum Consulting', 'Penrith Quintrell Advisory', 'Rostrevor Saddleworth Partners',
+    # More institutional names (new domains)
+    'Center for Sports Business Research', 'National Institute for Arts Administration',
+    'Council on Nonprofit Governance', 'Foundation for Public Sector Leadership',
+    'Institute for Education Administration', 'American Council on Legal Compensation',
+    'Center for Hospitality Workforce Research', 'National Foundation for Agricultural Leadership',
+    'Institute for Cooperative Governance', 'American Center for Creative Industry Research',
+    'Council on Social Enterprise Development', 'Foundation for Rural Workforce Policy',
+    'Institute for Environmental Workforce Studies', 'Center for Mission-Driven Organizations',
+    'National Alliance for Performing Arts Administration', 'Institute for Sports Industry Research',
+    'American Foundation for Government Workforce', 'Center for Faith Community Leadership',
+    'National Institute for Media Industry Compensation', 'Council on University Governance',
+    # Pacific Northwest / Mountain West geography
+    'Cascade Peak Advisory', 'Rainier Consulting Group', 'Olympic Advisory Partners',
+    'Puget Sound Consulting', 'Willamette Advisory', 'Columbia Gorge Partners',
+    'Crater Lake Consulting', 'Mount Hood Advisory', 'Deschutes Group',
+    'Snake River Partners', 'Boise Advisory', 'Treasure Valley Consulting',
+    'Sawtooth Advisory Group', 'Clearwater Partners', 'Lochsa Consulting',
+    'Selway Advisory', 'Bitterroot River Partners', 'Flathead Consulting',
+    'Glacier Peak Advisory', 'Beartooth Consulting Group', 'Yellowstone Partners',
+    'Wind River Advisory', 'Teton Consulting', 'Bridger Partners',
+    'Madison Valley Advisory', 'Gallatin Consulting', 'Absaroka Partners',
+    # Southwest / Desert geography
+    'Sonoran Advisory Group', 'Saguaro Consulting', 'Camelback Partners',
+    'South Mountain Advisory', 'McDowell Consulting', 'Superstition Partners',
+    'Mogollon Advisory', 'Tonto Consulting', 'Verde Valley Partners',
+    'Oak Creek Advisory', 'Sedona Consulting', 'Canyon de Chelly Partners',
+    'Monument Valley Advisory', 'Four Corners Consulting', 'Mesa Verde Partners',
+    'Arches Advisory', 'Canyonlands Consulting', 'Bryce Canyon Partners',
+    'Zion Advisory', 'Capitol Reef Consulting', 'Wasatch Advisory',
+    'Provo Consulting', 'Ogden Partners', 'Cache Valley Advisory',
+    # Deep South / Gulf Coast geography
+    'Magnolia Advisory Partners', 'Kudzu Consulting Group', 'Spanish Moss Advisory',
+    'Bayou Consulting', 'Atchafalaya Advisory', 'Creole Partners Group',
+    'Pelican Advisory', 'Cypress Consulting', 'Live Oak Partners',
+    'Longleaf Advisory', 'Wiregrass Consulting', 'Black Belt Partners',
+    'Piney Woods Advisory', 'Pineywoods Consulting', 'Big Thicket Partners',
+    'Gulf Pines Advisory', 'Galveston Consulting', 'Bolivar Partners',
+    'Padre Island Advisory', 'Corpus Christi Consulting', 'Laredo Partners',
+    # Great Plains geography
+    'Prairie Horizon Advisory', 'Sandhills Consulting', 'Loess Hills Partners',
+    'Drift Prairie Advisory', 'Coteau Consulting', 'James River Partners',
+    'Sheyenne Advisory', 'Pembina Consulting', 'Souris River Partners',
+    'Knife River Advisory', 'Cannonball Consulting', 'Grand River Partners',
+    'Moreau Advisory', 'Cheyenne River Consulting', 'Bad River Partners',
+    'White River Advisory', 'Niobrara Consulting', 'Loup River Partners',
+    'Platte Valley Advisory', 'Big Blue Consulting', 'Republican Valley Partners',
+    # New England inland geography
+    'Berkshire Hills Advisory', 'Holyoke Consulting', 'Northampton Partners',
+    'Amherst Advisory', 'Hampshire Consulting', 'Pioneer Valley Partners',
+    'Quabbin Advisory', 'Ware River Consulting', 'Millers River Partners',
+    'Deerfield Advisory', 'Greenfield Consulting', 'Turners Falls Partners',
+    'Monadnock Advisory', 'Cheshire Consulting', 'Ashuelot Partners',
+    'Bellows Falls Advisory', 'Connecticut River Consulting', 'White River Partners',
+    'Ottauquechee Advisory', 'Quechee Consulting', 'Woodstock Partners',
+    # Mid-Atlantic inland geography
+    'Catskill Advisory Group', 'Woodstock Consulting Partners', 'Phoenicia Advisory',
+    'Shandaken Consulting', 'Slide Mountain Partners', 'Borscht Belt Advisory',
+    'Monticello Consulting', 'Sullivan Consulting Partners', 'Narrowsburg Advisory',
+    'Delaware Water Gap Advisory', 'Pocono Consulting Group', 'Stroudsburg Partners',
+    'Delaware River Consulting', 'Easton Advisory', 'Bethlehem Partners',
+    'Allentown Consulting', 'Reading Advisory', 'Schuylkill Partners',
+    'Brandywine Advisory', 'Chester County Consulting', 'Kennett Square Partners',
+    # More named principal boutiques
+    'Ackerman & Bright LLC', 'Brightwell Carew Group', 'Danforth Ellroy Advisory',
+    'Forthright Grayson Partners', 'Halloway Irwin Consulting', 'Joplin Kinsella Advisory',
+    'Larssen Merriott Partners', 'Norcott Osgood Consulting', 'Peabody Quinlan Advisory',
+    'Radcliffe Sumner Partners', 'Thornhill Vickers Consulting', 'Underwood Weston Advisory',
+    'Vanderbilt Pryor Group', 'Whitfield Bancroft Consulting', 'Xenley Drummond Advisory',
+    'Yates Holloway Partners', 'Zander Birch Consulting',
+    'Abernathy & Coyle LLC', 'Beckett Drummond Advisory', 'Connelly Fairfax Partners',
+    'Doherty Gallagher Consulting', 'Enright Halloran Advisory', 'Feeney Brennan Partners',
+    'Gilchrist Hannigan Consulting', 'Hennessy Kavanagh Advisory', 'Irvine Langan Partners',
+    'Kelleher Madigan Consulting', 'Lennon McCaffrey Advisory', 'McNally O\'Brien Partners',
+    'Nolan Pearce Consulting', 'O\'Sullivan Quinn Advisory', 'Purcell Rafferty Partners',
+    # Additional institutional names (more domains)
+    'Institute for Advanced Compensation Studies', 'Center for Workforce Equity Research',
+    'National Council on Benefits Innovation', 'Foundation for HR Excellence Research',
+    'American Institute for Governance Innovation', 'Center for Pay Practice Research',
+    'National Foundation for Compensation Modernization', 'Institute for Benefits Excellence',
+    'Council on Organizational Effectiveness Research', 'American Center for Talent Intelligence',
+    'National Institute for Compensation Policy', 'Foundation for Governance Transparency',
+    'Institute for HR Technology Excellence', 'Center for Workforce Resilience Research',
+    'National Council on Compensation Innovation', 'American Foundation for Board Excellence',
+    'Institute for Pay Equity Research', 'Center for Talent Market Research',
+    'National Alliance for Benefits Innovation', 'Foundation for Compensation Governance',
+    # Topic-specialty firms (new domains)
+    'Aegis Pay Consulting', 'Apex Benefits Group', 'Arbor Workforce Advisory',
+    'Arcadia Compensation Partners', 'Archer Pay Advisory', 'Arena Talent Consulting',
+    'Argent Benefits Group', 'Argos Workforce Partners', 'Ariel Compensation Advisory',
+    'Arion Pay Consulting', 'Arista Talent Group', 'Ark Workforce Advisory',
+    'Arken Benefits Partners', 'Arkon Pay Consulting', 'Arlon Talent Advisory',
+    'Arlow Benefits Group', 'Arlus Workforce Partners', 'Arman Pay Advisory',
+    'Armco Talent Consulting', 'Armfield Benefits Group', 'Armis Workforce Advisory',
+    'Armor Compensation Partners', 'Arms Pay Consulting', 'Army Talent Advisory',
+    'Arnav Benefits Group', 'Arnbrook Workforce Partners', 'Arnet Pay Consulting',
+    'Arnfield Talent Advisory', 'Arnford Benefits Group', 'Arngate Workforce Partners',
+    # Sports & entertainment specialty firms (expanded)
+    'Championship Advisory Partners', 'Trophy Advisory Group', 'Podium Consulting',
+    'Medalist Advisory Partners', 'Gold Medal Consulting Group', 'Varsity Advisory',
+    'All-Star Consulting Partners', 'Hall of Fame Advisory', 'Legacy Sports Consulting',
+    'Dynasty Advisory Group', 'Playoff Consulting Partners', 'Final Four Advisory',
+    'Pennant Advisory Group', 'Cup Consulting Partners', 'Title Advisory Group',
+    # Legal specialty firms (expanded)
+    'Chambers & Bar Advisory', 'Silk & Wool Consulting', 'Robe & Bench Advisory',
+    'Barrister Consulting Group', 'Solicitor Advisory Partners', 'Brief & Motion Consulting',
+    'Motion & Order Advisory', 'Order & Decree Consulting', 'Decree Advisory Group',
+    # Education specialty firms
+    'Alma Matter Advisory', 'Cap & Gown Consulting', 'Diploma Advisory Group',
+    'Regents Consulting Partners', 'Chancellor Advisory', 'Provost Consulting Group',
+    'Dean Advisory Partners', 'Faculty Senate Consulting', 'Tenure Advisory Group',
+    # Nonprofit specialty firms
+    'Mission First Advisory', 'Purpose Consulting Group', 'Impact Advisory Partners',
+    'Giving Advisory Group', 'Donate Consulting Partners', 'Steward Advisory',
+    'Beneficiary Consulting Group', 'Program Advisory Partners', 'Grant Advisory',
+    # Sports and entertainment clients
+    'Pacific Coast Athletic Club', 'Northern Lakes Sports Authority', 'Westfield Professional Soccer Club',
+    'Eastbridge Basketball Association', 'Riverfront Racing Organization', 'Suncoast Media Group',
+    'Goldfield Entertainment Holdings', 'Bluestone Broadcasting Corporation', 'Ironclad Talent Agency',
+    'Clearwater Esports Collective', 'Pinehurst Event Management', 'Harborside Arena Management',
+    'Ridgeline Sports Analytics', 'Stonegate Performer Relations', 'Whitetail Venue Partners',
+    # Professional and legal services clients
+    'Pemberton & Cross LLP', 'Ashworth Dolan Partners', 'Whitmore & Reeve LLP',
+    'Brentwood Legal Group', 'Caldwell Mercer Partners', 'Dunmore & Finch LLP',
+    'Hargrove Sutton Associates', 'Ingram & Lowe LLP', 'Kincaid Walsh Partners',
+    'Lockwood Ferris LLP', 'Norwood Clement Associates', 'Oakhurst & Prentice LLP',
+    'Pendleton Rex Partners', 'Quentin Aldrich LLP', 'Rothwell Davenport Associates',
+    'Ashford & Carlisle Accounting', 'Bramley Hooper CPA Group', 'Colton Marsh Advisors',
+    # Public sector and government clients
+    'Northgate County Administration', 'Lakeview Municipal Authority', 'Riverside Public Works Commission',
+    'Highpoint Transit District', 'Clearfield Fire Protection District', 'Springwood Public Safety Bureau',
+    'Valley Water Reclamation Authority', 'Briar Ridge School District', 'Elmwood Recreation Authority',
+    'Pinecrest Housing Authority', 'Maplewood Utility District', 'Creekside Economic Development Corp',
+    'Birchwood Port Authority', 'Foxwood Regional Planning Commission', 'Greenville Solid Waste Authority',
+    # Higher education clients
+    'Westmoor University', 'Lakemont College', 'Hillcrest Technical Institute',
+    'Ashfield Community College', 'Bridgewater Graduate School', 'Cartwright University',
+    'Deerfield Polytechnic', 'Eaglemont School of Business', 'Fairvale Liberal Arts College',
+    'Grandhaven University', 'Hadleigh Research Institute', 'Ironwood School of Medicine',
+    'Jasperfield Seminary', 'Knollwood School of Law', 'Larkspur Culinary Academy',
+    # Nonprofit and association clients
+    'Greater Valley Community Foundation', 'Northern Shores Charitable Trust', 'Midland Arts Foundation',
+    'Alliance for Workforce Advancement', 'Coalition for Sustainable Communities', 'National Forum on Aging Services',
+    'Society for Environmental Stewardship', 'Institute for Children and Families', 'Council on Urban Mobility',
+    'Federation of Health Research Organizations', 'National Alliance on Mental Wellness', 'Consortium for Rural Development',
+    # Hospitality and food service clients
+    'Grandview Hotel Collection', 'Stonehaven Resorts & Spas', 'Coastline Hospitality Partners',
+    'Ridgemont Restaurant Group', 'Sunridge Food Service Holdings', 'Blue Harbor Catering Company',
+    'Westfield Convention & Events', 'Lakeview Inn and Conference Center', 'Mountainside Lodge Properties',
+    'Parkway Franchise Ventures', 'Bayfront Dining Group', 'Harborview Hotel Management',
+    # Agricultural and cooperative clients
+    'Cornerstone Grain Cooperative', 'Prairie Horizon Agronomy Services', 'Riverview Livestock Exchange',
+    'Sunfield Agricultural Credit Association', 'Lakeside Horticulture Cooperative', 'Plainview Farm Bureau Services',
+    'Highridge Seed Alliance', 'Clearwater Aquaculture Partnership', 'Timberline Forestry Resources',
+    'Broadland Food Processing Cooperative', 'Greenmeadow Irrigation District', 'Stonecroft Dairy Cooperative',
+    # Space and advanced technology clients
+    'Vega Orbital Systems', 'Aphelion Space Technologies', 'Celestia Launch Services',
+    'Perihelion Satellite Solutions', 'Zenith Propulsion Research', 'Arclight Defense Electronics',
+    'Photon Dynamics Laboratory', 'Quasar Advanced Materials', 'Helix Robotics Engineering',
+    'Neutron Computing Ventures', 'Radiant Hypersonic Research', 'Axiom Autonomous Systems',
 ]
 
 _ARCHIVE_INDUSTRIES = [
@@ -931,6 +1328,167 @@ _ARCHIVE_INDUSTRIES = [
     'Standards Development Organizations', 'Testing and Certification',
     'Product Safety Testing', 'Environmental Testing Services', 'Food Safety Testing',
     'Agricultural Testing Services', 'Materials Testing Services', 'Non-Destructive Testing',
+    # Sports & entertainment industries
+    'Professional Sports Leagues', 'Minor League Sports', 'College Athletics', 'Olympic Sports Governance',
+    'Sports Media Rights', 'Sports Broadcasting', 'Sports Analytics', 'Sports Technology',
+    'eSports & Competitive Gaming', 'Fantasy Sports Platforms', 'Sports Betting & Gaming',
+    'Athletic Performance Technology', 'Sports Nutrition Companies', 'Sporting Goods Manufacturing',
+    'Stadium & Arena Management', 'Sports Sponsorship & Marketing', 'Sports Talent Agencies',
+    'Film Production', 'Television Production', 'Streaming Platforms', 'Podcast Networks',
+    'Music Labels & Publishing', 'Live Events & Concerts', 'Theatrical Productions',
+    'Talent Management & Representation', 'Animation Studios', 'Documentary Production',
+    'Theme Parks & Attractions', 'Museums & Cultural Institutions', 'Galleries & Auction Houses',
+    # Legal industry categories
+    'AmLaw 100 Firms', 'AmLaw 200 Firms', 'Boutique Litigation Firms', 'Transactional Law Firms',
+    'Regional Law Firms', 'Solo & Small Law Practices', 'Public Interest Law Organizations',
+    'Legal Aid Organizations', 'Government Law Offices', 'Corporate Legal Departments',
+    'Alternative Legal Service Providers', 'Legal Process Outsourcing', 'Court Reporting Services',
+    # Public sector categories
+    'Federal Civilian Agencies', 'Cabinet-Level Departments', 'Independent Regulatory Agencies',
+    'Federal Law Enforcement', 'State Executive Agencies', 'State Legislatures',
+    'State Judicial Systems', 'County Government', 'Municipal Government',
+    'Special Purpose Districts', 'Regional Authorities', 'Public Hospitals',
+    'Public Utilities', 'State Lotteries', 'Postal Services',
+    # Education categories
+    'Research Universities', 'Liberal Arts Colleges', 'Community Colleges',
+    'Graduate & Professional Schools', 'Technical & Trade Schools', 'Online Universities',
+    'Historically Black Colleges & Universities', 'Tribal Colleges', 'Military Academies',
+    'Large Urban School Districts', 'Suburban School Districts', 'Rural School Districts',
+    'Charter School Networks', 'Private Day Schools', 'Boarding Schools',
+    # Nonprofit & association categories
+    'Philanthropic Foundations', 'Community Foundations', 'Private Operating Foundations',
+    'Disease-Specific Charities', 'International Relief Organizations', 'Advocacy Organizations',
+    'Trade Associations', 'Professional Associations', 'Industry Coalitions',
+    'Labor Unions', 'Credit Unions', 'Consumer Cooperatives', 'Worker Cooperatives',
+    'Agricultural Cooperatives', 'Housing Cooperatives', 'Mutual Benefit Organizations',
+    # Hospitality & food service categories
+    'Full-Service Hotel Chains', 'Limited-Service Hotel Chains', 'Boutique Hotels',
+    'Resort & Spa Operations', 'Cruise Lines', 'Luxury Hospitality',
+    'Quick Service Chains', 'Fast Casual Chains', 'Fine Dining Groups',
+    'Contract Food Service', 'Corporate Catering', 'Airport Food & Beverage',
+    'Hotel Food & Beverage', 'Stadium & Venue Concessions', 'Healthcare Food Service',
+    # Agricultural & rural economy
+    'Row Crop Production', 'Specialty Crop Production', 'Livestock Operations',
+    'Dairy Farming', 'Poultry Production', 'Swine Production',
+    'Grain Handling & Storage', 'Seed & Crop Protection Companies', 'Agricultural Equipment',
+    'Irrigation Technology', 'Agricultural Drones & Sensing', 'Precision Ag Software',
+    'Farm Credit Systems', 'Rural Electric Cooperatives', 'Farmer-Owned Cooperatives',
+    # Franchise & licensing
+    'Franchise Systems', 'Multi-Unit Franchise Operators', 'Area Development Franchisees',
+    'Master Franchise Organizations', 'Brand Licensing Companies', 'Character Licensing',
+    'Sports Licensing', 'Celebrity Licensing', 'Technology Licensing Organizations',
+    # Emerging & niche categories
+    'Carbon Credit Developers', 'Nature-Based Solutions Providers', 'Biodiversity Credit Markets',
+    'Regenerative Agriculture Enterprises', 'Blue Economy Organizations', 'Circular Economy Ventures',
+    'Impact Measurement Organizations', 'B Corporation Networks', 'Benefit Corporations',
+    'Social Impact Bonds', 'Community Wealth Building Organizations', 'Worker-Owned Businesses',
+    # Sports, media & entertainment (expanded)
+    'Sports Gambling Operators', 'Daily Fantasy Sports', 'Sports Ticket Marketplaces',
+    'Athlete Management Companies', 'Sports Marketing Agencies', 'Sports Public Relations',
+    'Team Uniform & Apparel', 'Stadium Naming Rights', 'Sports Financial Services',
+    'Athlete Philanthropy Foundations', 'Sports Museums & Halls of Fame',
+    'Broadcast Rights Licensing', 'Sports Photography & Videography', 'Drone Sports Media',
+    'VR Sports Experience', 'AR Viewing Applications', 'Second-Screen Sports Apps',
+    'Referee & Officiating Technology', 'Sports Injury Prevention Technology', 'Recovery Technology',
+    # Legal (expanded)
+    'IP Litigation Boutiques', 'Securities Litigation Firms', 'Mass Tort Practices',
+    'Class Action Plaintiffs Firms', 'Government Contracts Law', 'International Trade Law',
+    'Immigration Law Practices', 'Labor & Employment Firms', 'Benefits & ERISA Practices',
+    'Tax Controversy Practices', 'White-Collar Defense', 'Investigations Boutiques',
+    'Compliance & Ethics Practices', 'Anti-Corruption Law', 'ESG & Sustainability Law',
+    'Climate Litigation', 'Environmental Enforcement Defense', 'Privacy & Cybersecurity Law',
+    # Education & training (expanded)
+    'Corporate University Programs', 'Executive Education Programs', 'Boot Camp Training',
+    'Coding Schools', 'Data Science Academies', 'Cybersecurity Training Programs',
+    'Professional Certification Bodies', 'Continuing Medical Education', 'Legal CLE Providers',
+    'Financial Education Programs', 'Leadership Development Programs', 'Sales Training Organizations',
+    'Customer Service Training', 'Safety Training Providers', 'OSHA Training Providers',
+    # Government & public administration (expanded)
+    'City Councils', 'County Commissions', 'State Legislatures', 'Congressional Offices',
+    'Federal Advisory Committees', 'Interagency Task Forces', 'Regulatory Sandboxes',
+    'Government Innovation Labs', 'Civic Technology Organizations', 'Open Government Initiatives',
+    'Government Performance Offices', 'Government Accountability Offices', 'Inspector General Offices',
+    'Public Defender Offices', 'Prosecutor Offices', 'Court Administration Offices',
+    # Healthcare (expanded niche)
+    'Addiction Medicine Centers', 'Eating Disorder Treatment', 'Autism Spectrum Services',
+    'Applied Behavior Analysis', 'Speech-Language Pathology Services', 'Occupational Therapy Services',
+    'Recreational Therapy Services', 'Art & Music Therapy Services', 'Pet-Assisted Therapy',
+    'Equine-Assisted Therapy', 'Mindfulness-Based Programs', 'Meditation & Wellness Centers',
+    'Float Therapy Centers', 'Cryotherapy Services', 'Hyperbaric Oxygen Therapy',
+    'Functional Medicine Practices', 'Integrative Oncology Centers', 'Precision Medicine Programs',
+    # Retail & consumer (expanded)
+    'Luxury Fashion Houses', 'Streetwear Brands', 'Athleisure Brands', 'Sustainable Fashion',
+    'Vintage & Resale Fashion', 'Custom & Made-to-Measure', 'Rental Fashion Platforms',
+    'Personal Styling Services', 'Fashion Technology', 'Wearable Technology',
+    'Smart Home Technology Retail', 'Electronics Recycling', 'Battery Reconditioning',
+    'Repair & Refurbishment Services', 'Subscription Box Services', 'Curated Commerce',
+    'Livestream Commerce', 'Social Commerce', 'Conversational Commerce',
+    # Financial services (expanded niche)
+    'Registered Investment Advisers', 'Fee-Only Financial Planners', 'Robo-Advisory Services',
+    'Digital Wealth Management', 'Micro-Investing Platforms', 'Fractional Share Platforms',
+    'Digital Banking Apps', 'Challenger Banks', 'Banking-as-a-Service',
+    'Open Banking Platforms', 'Embedded Finance', 'Buy-Now-Pay-Later Providers',
+    'Earned Wage Access Providers', 'Cash Flow Underwriting', 'Alternative Credit Scoring',
+    # Real estate (expanded niche)
+    'Short-Term Rental Management', 'Vacation Rental Platforms', 'Co-Living Operators',
+    'Co-Working Operators', 'Flexible Workspace Networks', 'Industrial Real Estate',
+    'Cold Storage Real Estate', 'Life Sciences Real Estate', 'Data Center Real Estate',
+    'Self-Storage Operations', 'Manufactured Housing Communities', 'Mobile Home Park Management',
+    # Agricultural (expanded)
+    'Organic Produce Distribution', 'Community Supported Agriculture', 'Farm-to-Table Services',
+    'Agricultural Commodity Trading', 'Crop Insurance Providers', 'Agricultural Banking',
+    'Agricultural Technology Startups', 'Farm Management Software', 'Precision Livestock Farming',
+    'Aquaponics Operations', 'Indoor Vertical Farms', 'Hydroponic Greenhouse Operations',
+    # Sports, entertainment, and media
+    'Professional Sports Franchises', 'Minor League Sports Organizations', 'College Athletic Departments',
+    'Esports Organizations', 'Video Game Development', 'Mobile Gaming Companies',
+    'Board Game Publishing', 'Toy and Game Manufacturing', 'Theme Park Operations',
+    'Amusement and Recreation', 'Performing Arts Organizations', 'Symphony Orchestras',
+    'Ballet and Dance Companies', 'Theater Production Companies', 'Live Music Venues',
+    'Concert Promotion', 'Talent Agency Services', 'Artist Management',
+    'Music Publishing', 'Record Labels', 'Podcast Production Companies',
+    'Streaming Audio Platforms', 'Video Streaming Services', 'Social Video Platforms',
+    'Digital Content Studios', 'Animation Production', 'Visual Effects Studios',
+    # Legal and professional services
+    'Large Law Firms (BigLaw)', 'Mid-Market Law Firms', 'Boutique Law Firms',
+    'Government Affairs and Lobbying', 'Legal Process Outsourcing', 'E-Discovery Services',
+    'Court Reporting Services', 'Legal Staffing Agencies', 'Legal Technology Companies',
+    'Patent and Intellectual Property Law', 'Immigration Law Services', 'Environmental Law',
+    'Big Four Accounting Firms', 'Regional Accounting Firms', 'Boutique CPA Practices',
+    'Tax Advisory Services', 'Forensic Accounting', 'Business Valuation Services',
+    'Transfer Pricing Advisory', 'SALT Advisory Services', 'International Tax Advisory',
+    # Public sector niches
+    'Federal Civilian Agencies', 'Defense and Intelligence Agencies', 'State Government',
+    'County and Municipal Government', 'Public Safety Agencies', 'Corrections and Detention',
+    'Courts and Judicial Administration', 'Revenue and Tax Authorities', 'Regulatory Commissions',
+    'Public Pension Systems', 'Sovereign Wealth Funds', 'Development Finance Institutions',
+    'International Development Organizations', 'Multilateral Lending Institutions', 'Central Banks',
+    # Higher education and research
+    'Research Universities (R1)', 'Liberal Arts Colleges', 'Community Colleges',
+    'For-Profit Higher Education', 'Online Education Providers', 'Bootcamp and Skills Training',
+    'K-12 Charter School Networks', 'K-12 Private School Systems', 'Test Preparation Companies',
+    'Academic Publishing', 'Scientific Research Institutes', 'Think Tanks and Policy Organizations',
+    'Federally Funded Research and Development Centers', 'National Laboratories', 'Science Museums',
+    # Nonprofit subsectors
+    'Human Services Nonprofits', 'Housing and Homelessness Organizations', 'Food Banks and Pantries',
+    'Workforce Development Nonprofits', 'Youth Development Organizations', 'Educational Nonprofits',
+    'Disaster Relief Organizations', 'International Aid Organizations', 'Faith-Based Social Services',
+    'Hospital and Health System Foundations', 'Disease Research Foundations', 'Patient Advocacy Organizations',
+    'Environmental Conservation Nonprofits', 'Land Trusts', 'Wildlife Conservation Organizations',
+    'Arts and Cultural Institutions', 'Museums and Historical Societies', 'Public Libraries',
+    # Hospitality and tourism
+    'Luxury Hotel Brands', 'Select-Service Hotel Chains', 'Extended-Stay Hotels',
+    'Boutique Hotel Collections', 'All-Inclusive Resorts', 'Casino Hotel Operations',
+    'Cruise Line Operations', 'River Cruise Companies', 'Tour Operators',
+    'Destination Management Companies', 'Travel Management Companies', 'Online Travel Agencies',
+    'Airline Catering Services', 'Airport Concessions', 'Stadium Food Service',
+    'Fine Dining Restaurant Groups', 'Fast Casual Restaurant Chains', 'Ghost Kitchen Operators',
+    # Space and advanced technology
+    'Commercial Launch Providers', 'Satellite Manufacturers', 'Satellite Communications Operators',
+    'Ground Station Network Operators', 'Space Tourism Companies', 'Lunar Exploration Ventures',
+    'In-Space Propulsion Companies', 'Orbital Debris Removal', 'On-Orbit Servicing Companies',
+    'Hypersonic Vehicle Development', 'Directed Energy Systems', 'Electronic Warfare Companies',
+    'Quantum Computing Startups', 'Quantum Networking Companies', 'Advanced Semiconductor Fabrication',
 ]
 
 _ARCHIVE_PHASES = [
@@ -1055,6 +1613,50 @@ _ARCHIVE_PHASES = [
     'data analysis', 'preliminary reporting', 'peer review response',
     'final manuscript preparation', 'publication', 'dissemination',
     'knowledge translation',
+    # Sports & entertainment project phases
+    'collective bargaining preparation', 'arbitration hearing preparation', 'salary arbitration analysis',
+    'contract negotiation support', 'player option analysis', 'roster cost modeling',
+    'luxury tax impact assessment', 'revenue sharing analysis', 'draft compensation modeling',
+    'endorsement valuation', 'media rights negotiation support', 'ticket pricing optimization',
+    'sponsorship activation planning', 'venue feasibility assessment', 'broadcast production scoping',
+    'talent acquisition outreach', 'casting analytics', 'pilot development review',
+    # Legal project phases
+    'matter intake review', 'conflict screening', 'engagement letter execution',
+    'discovery planning', 'document review scoping', 'privilege log preparation',
+    'deposition preparation', 'trial preparation', 'settlement negotiation',
+    'appellate briefing', 'pro bono placement', 'lateral partner integration',
+    'practice group assessment', 'merger feasibility review', 'firm combination planning',
+    'rate card development', 'fee proposal preparation', 'billing guideline alignment',
+    # Public sector phases
+    'appropriations support', 'budget cycle preparation', 'legislative testimony preparation',
+    'rulemaking support', 'public comment analysis', 'administrative hearing preparation',
+    'procurement award review', 'contract management review', 'grant administration review',
+    'FOIA response preparation', 'inspector general response', 'audit resolution',
+    'workforce planning under hiring freeze', 'classification appeal review', 'position description update',
+    # Education administration phases
+    'accreditation self-study preparation', 'accreditation site visit preparation', 'strategic enrollment planning',
+    'tuition modeling', 'financial aid optimization', 'fundraising campaign planning',
+    'faculty senate engagement', 'shared governance review', 'academic program review',
+    'research compliance review', 'technology transfer assessment', 'athletics compliance review',
+    'student experience benchmarking', 'alumni engagement assessment', 'endowment spending review',
+    # Nonprofit / philanthropic phases
+    'grant proposal development', 'theory of change articulation', 'logic model construction',
+    'donor stewardship planning', 'campaign feasibility study', 'board recruitment process',
+    'executive transition planning', 'organizational merger assessment', 'program evaluation design',
+    'impact reporting development', 'earned income strategy development', 'advocacy strategy review',
+    # Hospitality project phases
+    'pre-opening staffing plan', 'grand opening readiness review', 'seasonal workforce planning',
+    'menu engineering assessment', 'food cost benchmarking', 'labor scheduling optimization',
+    'property management system review', 'franchise compliance audit', 'brand standard alignment',
+    'mystery shop debrief', 'guest satisfaction analysis', 'revenue management review',
+    # Innovation & product development phases
+    'concept generation', 'ideation facilitation', 'design sprint', 'rapid prototyping',
+    'market validation', 'minimum viable product definition', 'go-to-market planning',
+    'product launch readiness', 'post-launch retrospective', 'product sunset planning',
+    # Crisis & turnaround phases
+    'triage assessment', 'stabilization planning', 'cash runway analysis',
+    'creditor communication preparation', 'restructuring plan development', 'turnaround execution',
+    'asset monetization assessment', 'wind-down planning', 'dissolution support',
     # Compensation-specific phases
     'job architecture design', 'salary structure construction', 'market data collection',
     'survey submission', 'survey results integration', 'peer group construction',
@@ -1101,6 +1703,66 @@ _ARCHIVE_PHASES = [
     'communication cascade', 'leadership alignment', 'town hall facilitation',
     'FAQ development', 'feedback channel setup', 'pulse survey administration',
     'adoption measurement', 'reinforcement planning', 'sustainability embedding',
+    # Sales & revenue operations phases
+    'territory design', 'quota modeling', 'quota setting', 'quota deployment',
+    'compensation plan communication', 'sales kickoff preparation', 'mid-year plan review',
+    'plan adjustment', 'year-end payout calculation', 'dispute resolution',
+    'clawback review', 'SPIFF program launch', 'contest design', 'leaderboard setup',
+    'sales analytics configuration', 'CRM compensation integration', 'commission reconciliation',
+    'channel partner alignment', 'distributor incentive launch', 'rep council engagement',
+    # Consumer research & brand phases
+    'research brief development', 'methodology selection', 'vendor selection',
+    'screener development', 'panel recruitment', 'stimulus development',
+    'moderator guide preparation', 'field execution', 'data collection',
+    'transcription', 'qualitative coding', 'quantitative analysis',
+    'insight synthesis', 'implications workshop', 'activation planning',
+    'concept testing', 'product use testing', 'package testing',
+    'communication testing', 'pricing research', 'conjoint study',
+    'market structure analysis', 'brand equity wave', 'tracking wave',
+    # Technology project phases
+    'epic decomposition', 'feature prioritization', 'sprint zero',
+    'environment setup', 'data migration planning', 'extract-transform-load design',
+    'API specification', 'integration design', 'middleware configuration',
+    'performance tuning', 'load testing', 'stress testing',
+    'penetration testing', 'vulnerability scanning', 'code review',
+    'technical documentation', 'runbook creation', 'disaster recovery test',
+    'business continuity drill', 'failover test', 'rollback planning',
+    # Hospitality & food service phases
+    'concept development', 'menu development', 'recipe testing',
+    'food cost analysis', 'supplier selection', 'kitchen design review',
+    'staff recruitment', 'pre-opening training', 'soft opening',
+    'operational shakedown', 'revenue ramp-up', 'marketing launch',
+    'loyalty program setup', 'mystery shop baseline', 'guest satisfaction measurement',
+    # Agricultural & cooperative phases
+    'crop planning', 'input procurement', 'planting season preparation',
+    'growing season monitoring', 'harvest planning', 'post-harvest assessment',
+    'grain merchandising', 'basis pricing analysis', 'cooperative audit preparation',
+    'patronage allocation', 'member meeting preparation', 'board election planning',
+    'director orientation', 'strategic planning retreat', 'capital plan review',
+    # Nonprofit & philanthropic phases
+    'grant strategy development', 'LOI preparation', 'proposal writing',
+    'site visit preparation', 'grant reporting', 'stewardship plan development',
+    'campaign kickoff', 'solicitation phase', 'cultivation phase',
+    'recognition event planning', 'impact report preparation', 'annual appeal',
+    'board retreat facilitation', 'strategic plan development', 'theory of change workshop',
+    # Legal project phases (expanded)
+    'client intake', 'retainer negotiation', 'staffing assignment',
+    'docket management', 'status conference preparation', 'motion practice',
+    'summary judgment briefing', 'pretrial preparation', 'jury selection',
+    'trial execution', 'verdict analysis', 'post-trial motions',
+    'appeal preparation', 'brief writing', 'oral argument preparation',
+    # Restructuring & turnaround phases
+    'liquidity assessment', 'advisor retention', 'first day motions',
+    '13-week cash flow preparation', 'creditor negotiation', 'plan of reorganization development',
+    'disclosure statement preparation', 'confirmation hearing preparation', 'emergence planning',
+    'post-emergence monitoring', 'exit financing arrangement', 'equity distribution',
+    # International expansion phases
+    'market entry assessment', 'country selection', 'regulatory mapping',
+    'entity formation', 'local partner identification', 'joint venture structuring',
+    'local hire plan', 'employer branding localization', 'benefits localization',
+    'payroll setup', 'tax registration', 'social security enrollment',
+    'work permit application', 'visa processing', 'expat pre-departure briefing',
+    'host country orientation', 'repatriation planning', 'assignment close-out',
 ]
 
 _ARCHIVE_PARA_TEMPLATES = [
@@ -1204,6 +1866,99 @@ _ARCHIVE_PARA_TEMPLATES = [
     "ACPWB's {phase} custom peer group analysis for {org} is documented in this archive entry. The analysis evaluated {n} potential peer additions against {regions} selection criteria including revenue, market capitalization, headcount, business complexity, and geographic footprint within the {industry} sector context as of {date}.",
     "The {phase} benchmarking data preserved here reflects ACPWB's most comprehensive {industry} sector survey cycle to date, covering {n} participating organizations across {regions} geographic markets. {org} was one of {n} co-sponsors whose financial support enabled the expanded scope relative to prior cycles.",
     "This archive entry documents ACPWB's {phase} research collaboration with {org} on {industry} sector workforce trends. The joint initiative produced {n} analytical outputs, including a practitioner brief, a peer-reviewed research paper submitted for publication, and an executive summary delivered to {regions} client roundtable participants on {date}.",
+    # New para templates — sports, media & entertainment
+    "ACPWB's {phase} engagement with {org} addressed total compensation benchmarking for professional talent in the {industry} sector. The analysis drew on {n} disclosed contracts and {regions} comparable organizational structures to produce market reference ranges reviewed by the {org} front office leadership on {date}.",
+    "The {phase} work product preserved at this location documents ACPWB's assessment of collective bargaining readiness for {org} in the {industry} sector. The engagement modeled {n} contract scenarios across {regions} roster tiers, producing a negotiation framework and salary arbitration support package approved by {org}'s ownership group prior to {date}.",
+    "ACPWB conducted a {phase} revenue benchmarking study for {org} examining {n} comparable {industry} sector organizations across {regions} geographic markets. The study produced a sponsorship valuation model, a broadcast rights comparables database, and a premium seating pricing analysis delivered to {org}'s commercial leadership team on {date}.",
+    "The {phase} documentation preserved here reflects ACPWB's engagement with {org} on talent acquisition and compensation strategy for a {industry} sector content venture. The analysis covered {n} production roles across {regions} functional areas and informed the development of rate cards aligned with guild and union benchmark levels as of {date}.",
+    # New para templates — legal operations
+    "ACPWB's {phase} engagement with {org} benchmarked attorney compensation structures across {n} peer law firms operating in the {industry} sector. The analysis covered associate salary scales, partner compensation model design, and counsel-tier pay practices across {regions} practice groups, producing a competitive positioning assessment delivered to {org}'s managing committee on {date}.",
+    "The {phase} legal operations benchmarking study documented here assessed {org}'s in-house legal department against {n} comparable {industry} sector organizations. ACPWB evaluated staffing ratios, outside counsel spend, alternative fee arrangements, and technology investment across {regions} practice areas, delivering findings to {org}'s General Counsel on {date}.",
+    "ACPWB's {phase} engagement analyzed the compensation and advancement practices of {n} legal professionals at {org}, identifying structural disparities across {regions} practice groups and recommending a revised compensation framework aligned with {industry} sector norms effective for the fiscal year commencing after {date}.",
+    # New para templates — public sector
+    "The {phase} work product preserved here documents ACPWB's civil service compensation benchmarking engagement with {org}. The analysis compared {n} classified positions across {regions} pay grades to private sector equivalents in the {industry} sector, producing a total compensation premium-discount analysis reviewed by {org}'s human resources leadership on {date}.",
+    "ACPWB conducted a {phase} government executive compensation review for {org}, benchmarking {n} senior leadership roles against comparable positions across {regions} peer jurisdictions in the {industry} sector. The deliverables included a competitive positioning analysis, a benefits comparison, and a supplemental pay mechanism assessment presented to {org}'s governing board on {date}.",
+    "The {phase} engagement documented here involved ACPWB's workforce planning analysis for {org} during a period of budget constraint in the {industry} sector. The work produced {n} staffing scenario models across {regions} departments and a service-level impact analysis reviewed by {org}'s budget office and approved for use in the annual planning process on {date}.",
+    # New para templates — education administration
+    "ACPWB's {phase} engagement with {org} benchmarked executive and faculty compensation against {n} peer institutions in the {industry} sector. The analysis covered base salary, benefits, retirement provisions, and supplemental pay across {regions} academic divisions, producing a competitive positioning report delivered to {org}'s board of trustees on {date}.",
+    "The {phase} documentation preserved here captures ACPWB's comprehensive compensation benchmarking engagement for {org}. The study examined {n} employee classifications across {regions} functional areas in the {industry} sector, informing the development of an updated salary administration policy and grade structure adopted by {org}'s administration effective {date}.",
+    "ACPWB's {phase} engagement with {org} assessed the compensation philosophy and total rewards program design against {n} comparable {industry} sector institutions across {regions} geographic markets. Findings were presented to the {org} Board of Regents on {date}, with {n} specific recommendations adopted for implementation in the following fiscal year.",
+    # New para templates — nonprofit / association
+    "The {phase} work documented here reflects ACPWB's executive compensation benchmarking study for {org}, a {industry} sector organization. The analysis drew on {n} peer organization compensation disclosures and {regions} sector surveys to assess the reasonableness of current pay levels, producing a report reviewed by {org}'s independent board members on {date}.",
+    "ACPWB's {phase} governance assessment for {org} evaluated board structure, committee composition, and oversight practices against {n} peer organizations in the {industry} sector. The analysis identified {regions} areas for governance enhancement and produced an action plan reviewed by {org}'s nominating committee on {date}.",
+    "The {phase} engagement documented here addressed ACPWB's organizational effectiveness assessment for {org} in the {industry} sector. The work encompassed staff compensation benchmarking across {n} roles, an operating model review, and a leadership team effectiveness survey administered to {regions} stakeholders, with findings presented to {org}'s executive director on {date}.",
+    # New para templates — hospitality & consumer
+    "ACPWB's {phase} compensation benchmarking for {org} covered {n} management and hourly employee categories in the {industry} sector. The analysis drew on {regions} regional labor market data sources to assess competitive positioning across front-of-house, back-of-house, and administrative roles, with findings delivered to {org}'s people operations team on {date}.",
+    "The {phase} workforce analytics study documented here examined employee turnover patterns at {org} across {n} operating units in the {industry} sector. ACPWB modeled the cost of turnover across {regions} employee categories and produced a targeted retention investment proposal reviewed by {org}'s regional leadership team on {date}.",
+    # New para templates — crisis, turnaround & restructuring
+    "ACPWB's {phase} engagement with {org} was initiated under a confidentiality protocol following a material operational disruption in the {industry} sector. The team conducted {n} structured interviews across {regions} functional areas and produced a workforce stabilization framework reviewed by {org}'s crisis management committee on {date}.",
+    "The {phase} documentation preserved here records ACPWB's advisory engagement with {org} during a period of organizational transition in the {industry} sector. The engagement produced {n} workforce restructuring scenarios across {regions} business units, with the recommended approach endorsed by {org}'s board and announced to employees on {date}.",
+    # New para templates — innovation, product & strategy
+    "ACPWB's {phase} engagement with {org} assessed compensation practices for research, product, and engineering roles in the {industry} sector. The analysis benchmarked {n} technical positions across {regions} peer organizations and produced a revised job architecture and pay band framework adopted by {org}'s product leadership on {date}.",
+    "The {phase} work product documented here captures ACPWB's talent market analysis for {org} in support of a new {industry} sector business initiative. The analysis covered {n} critical roles across {regions} talent pools and produced a total rewards strategy recommendation approved by {org}'s executive committee on {date}.",
+    # New para templates — using {metric} variable
+    "The {phase} work product preserved here documents ACPWB's compensation measurement framework for {org}'s workforce performance in the {industry} sector context. The framework was developed across {n} participating organizations in {regions} markets, calibrated to {date} reference points, and validated against external benchmarks before delivery to {org}'s analytics leadership.",
+    "ACPWB's {phase} engagement with {org} centered on improving total rewards measurement capabilities across {n} {industry} sector business units in {regions} geographic locations. The deliverable package, completed on {date}, included a revised data collection methodology, a longitudinal reporting framework, and a benchmark positioning analysis relative to {n} sector peers.",
+    # New para templates — international / global
+    "The {phase} work product documented here reflects ACPWB's international compensation benchmarking engagement with {org} covering {n} countries across {regions} geographic regions in the {industry} sector. Local market data was normalized to {date} reference points using ACPWB's proprietary purchasing power parity and cost-of-labor adjustment methodology.",
+    "ACPWB's {phase} global mobility advisory engagement with {org} analyzed expatriate assignment package design for {n} international postings across {regions} host countries in the {industry} sector. The engagement produced a revised assignment policy, home-host compensation balance sheet models, and a tax equalization framework delivered to {org}'s global mobility team on {date}.",
+    # New para templates — technology / digital transformation
+    "The {phase} work product documented here captures ACPWB's HR technology benchmarking engagement with {org} in the {industry} sector. The analysis assessed {n} technology platforms across {regions} functional domains and produced a prioritized investment roadmap reviewed by {org}'s CHRO and CTO on {date}.",
+    "ACPWB's {phase} engagement with {org} applied advanced analytical methods to the {industry} sector workforce dataset, producing a predictive model covering {n} employee retention scenarios across {regions} operating locations. The model, validated against {year}–{endyear} historical outcomes, was delivered to {org}'s people analytics team on {date} for integration into the workforce planning cycle.",
+    # More para templates — sales & revenue operations
+    "The {phase} sales compensation benchmarking study documented here analyzed {org}'s incentive plan design against {n} {industry} sector peers. The engagement assessed quota-setting methodology, commission rate structures, and performance leverage across {regions} sales roles, producing a redesign recommendation approved by {org}'s revenue leadership on {date}.",
+    "ACPWB's {phase} channel compensation assessment for {org} benchmarked distributor margin structures and reseller incentive programs against {n} comparable {industry} sector manufacturers. The analysis identified {regions} program design enhancements that are projected to improve channel partner performance by {n}% in the following fiscal year.",
+    "The {phase} revenue operations effectiveness assessment documented here evaluated {org}'s end-to-end sales process against {n} {industry} sector benchmarks. ACPWB identified {regions} friction points in the lead-to-close cycle and recommended compensation and process changes reviewed by {org}'s Chief Revenue Officer on {date}.",
+    # More para templates — consumer research & insights
+    "ACPWB's {phase} consumer insights engagement with {org} deployed a {n}-respondent quantitative survey across {regions} geographic markets in the {industry} sector. The research produced a market segmentation model, a brand health baseline, and a product positioning framework delivered to {org}'s marketing leadership team on {date}.",
+    "The {phase} research methodology review documented here assessed {org}'s proprietary consumer panel design against {n} industry benchmarks. ACPWB identified enhancements to sampling protocols, incentive structures, and quality controls across {regions} panel dimensions, with recommendations implemented for the following survey wave launched after {date}.",
+    "ACPWB's {phase} brand equity measurement study for {org} established tracking benchmarks across {n} brand dimensions in the {industry} sector. The engagement produced a competitive brand landscape analysis, a tracking methodology specification, and a {regions}-wave longitudinal study design reviewed by {org}'s Chief Marketing Officer on {date}.",
+    # More para templates — healthcare delivery
+    "The {phase} clinical workforce benchmarking study documented here assessed {org}'s physician, nursing, and allied health compensation against {n} peer health systems in the {industry} sector. ACPWB evaluated productivity-based pay models, wRVU conversion factors, and call compensation across {regions} clinical specialties, delivering findings to {org}'s medical staff leadership on {date}.",
+    "ACPWB's {phase} healthcare labor cost transformation engagement with {org} identified {n} staffing model improvements across {regions} clinical departments in the {industry} sector. The engagement produced a care delivery redesign framework, a flexible staffing model, and a workforce cost reduction roadmap projected to achieve ${n}M in annual savings beginning after {date}.",
+    # More para templates — manufacturing & operations
+    "The {phase} manufacturing workforce benchmarking study documented here assessed {org}'s hourly and skilled trades compensation against {n} comparable {industry} sector employers in {regions} geographic markets. ACPWB evaluated shift differentials, overtime practices, and incentive pay structures, delivering findings to {org}'s operations and human resources leadership on {date}.",
+    "ACPWB's {phase} operational effectiveness engagement with {org} evaluated workforce productivity against {n} {industry} sector benchmarks across {regions} manufacturing facilities. The engagement produced a labor utilization analysis, a workforce scheduling optimization, and a skills development investment plan reviewed by {org}'s plant management team on {date}.",
+    # More para templates — private equity portfolio
+    "The {phase} portfolio company compensation assessment documented here was conducted at the direction of {org}'s investment team across {n} portfolio companies in the {industry} sector. ACPWB benchmarked management team pay packages, analyzed carry and co-investment arrangements, and produced a value creation-linked compensation framework reviewed by {org}'s deal team on {date}.",
+    "ACPWB's {phase} management incentive plan design engagement for a {org}-backed {industry} sector company produced {n} MIP design alternatives across {regions} performance measurement approaches. The recommended design, linked to EBITDA growth and exit multiple metrics, was approved by the {org} investment committee prior to {date} and implemented concurrent with the new CEO's start date.",
+    # More para templates — regulatory & enforcement
+    "The {phase} regulatory compliance benchmarking documented here assessed {org}'s compliance program design against {n} peer organizations in the {industry} sector. ACPWB evaluated program governance, staff resourcing, training investment, and technology infrastructure across {regions} compliance domains, producing a maturity assessment reviewed by {org}'s Chief Compliance Officer on {date}.",
+    "ACPWB's {phase} enforcement response support engagement with {org} produced {n} analytical work products in connection with regulatory inquiries affecting {org}'s {industry} sector operations. The engagement, structured under outside counsel's direction, covered {regions} areas of regulatory focus and produced a remediation framework reviewed by {org}'s audit committee on {date}.",
+    # More para templates — environmental & sustainability
+    "The {phase} environmental workforce assessment documented here analyzed {org}'s sustainability-focused hiring, skills development, and compensation investment against {n} {industry} sector peers. ACPWB benchmarked green job classifications, climate specialist pay, and ESG incentive linkage across {regions} organizational dimensions, delivering findings to {org}'s Chief Sustainability Officer on {date}.",
+    "ACPWB's {phase} ESG talent strategy engagement with {org} identified {n} workforce capability investments required to execute the organization's {industry} sector sustainability agenda. The engagement mapped skills requirements against the existing workforce across {regions} functional areas and produced a build-buy-partner recommendation reviewed by {org}'s leadership team on {date}.",
+    # More para templates — digital & data
+    "The {phase} data and analytics workforce benchmarking documented here assessed {org}'s data engineering, data science, and analytics talent compensation against {n} {industry} sector peers. ACPWB evaluated job architecture, grade structure, and equity grant levels across {regions} data roles, producing a competitive positioning analysis and revised pay band framework delivered to {org}'s Chief Data Officer on {date}.",
+    "ACPWB's {phase} AI talent strategy engagement with {org} analyzed the competitive landscape for machine learning and AI research talent in the {industry} sector. The study benchmarked {n} technical roles across {regions} peer organizations and produced a talent acquisition framework and total rewards design reviewed by {org}'s technology leadership team on {date}.",
+    # More para templates — financial services specialty
+    "The {phase} investment management compensation benchmarking documented here assessed {org}'s portfolio manager, analyst, and trader compensation against {n} peer asset managers in the {industry} sector. ACPWB evaluated base salary, annual bonus, and carried interest participation across {regions} investment strategies, delivering a competitive positioning analysis to {org}'s management committee on {date}.",
+    "ACPWB's {phase} risk management compensation engagement with {org} benchmarked chief risk officer, credit risk, and compliance pay against {n} {industry} sector peers. The engagement produced a risk function talent strategy, a compensation repositioning plan, and a succession depth assessment delivered to {org}'s board risk committee on {date}.",
+    # More para templates — emerging markets
+    "The {phase} emerging market workforce assessment documented here analyzed {org}'s talent practices in {regions} high-growth markets in the {industry} sector. ACPWB benchmarked local market compensation, benefits competitiveness, and talent pipeline depth across {n} roles and recommended a total rewards framework adapted for local labor market conditions, delivered to {org}'s regional leadership on {date}.",
+    "ACPWB's {phase} cross-border compensation harmonization engagement with {org} addressed pay structure alignment across {n} countries in the {industry} sector. The work spanned {regions} months and produced a global job architecture, a country-specific pay range framework, and a benefit plan comparability matrix reviewed by {org}'s global total rewards team prior to implementation on {date}.",
+    # More para templates — organizational design
+    "The {phase} operating model design engagement documented here produced {n} organizational structure alternatives for {org} in the {industry} sector. ACPWB facilitated executive alignment sessions across {regions} functional areas and delivered a recommended target operating model, implementation roadmap, and workforce transition plan approved by {org}'s CEO and board on {date}.",
+    "ACPWB's {phase} spans-and-layers analysis for {org} examined management structure across {n} organizational levels in the {industry} sector. The engagement identified {regions} delayering opportunities and a structural redesign that reduces management cost by approximately {n}% while maintaining or improving decision velocity, as reviewed by {org}'s executive committee on {date}.",
+    # More para templates — DEI and inclusion
+    "The {phase} DEI compensation analytics engagement documented here analyzed pay equity, representation, and inclusion practices at {org} against {n} {industry} sector peer organizations. ACPWB assessed gender pay gaps, ethnic and racial representation across grades, and pay transparency practices across {regions} business units, delivering findings to {org}'s Chief Diversity Officer and CHRO on {date}.",
+    "ACPWB's {phase} inclusive talent practices benchmarking for {org} evaluated {n} program dimensions spanning recruitment, development, sponsorship, and recognition against comparable {industry} sector organizations. The engagement produced a prioritized roadmap across {regions} intervention areas reviewed by {org}'s DEI council and approved by the board's human resources committee on {date}.",
+    # More para templates — sports and entertainment
+    "The {phase} athlete compensation benchmarking engagement documented here assisted {org} in evaluating front-office and coaching staff pay structures against {n} comparable franchises in the {industry} sector. ACPWB analyzed salary, performance bonus, and deferred compensation across {regions} organizational functions, with findings delivered to {org}'s ownership group on {date}.",
+    "ACPWB's {phase} media and entertainment total rewards review for {org} examined compensation competitiveness across {n} creative, production, and distribution roles against {industry} sector market data. The engagement spanned {regions} business units and produced a total rewards strategy aligned with {org}'s content investment roadmap, presented to the CHRO on {date}.",
+    # More para templates — legal and professional services
+    "The {phase} law firm compensation governance review documented here analyzed {org}'s partner compensation model, associate progression framework, and staff pay structure against {n} comparable {industry} sector firms across {regions} practice areas. ACPWB delivered a revised compensation philosophy and updated lockstep/merit hybrid model for consideration by {org}'s executive committee on {date}.",
+    "ACPWB's {phase} accounting firm talent rewards benchmarking for {org} evaluated compensation, bonus, and benefits competitiveness across {n} staff, senior, manager, and partner-track roles in the {industry} sector. The engagement produced market-competitive pay ranges and a retention incentive framework reviewed by {org}'s managing partners across {regions} offices on {date}.",
+    # More para templates — public sector and government
+    "The {phase} government agency compensation modernization study documented here evaluated {org}'s civil service pay structure against {n} comparable public sector organizations and relevant private sector benchmarks in the {industry} sector. ACPWB assessed grade structure alignment, geographic differentials, and benefits competitiveness across {regions} occupational series, reporting to {org}'s Director of Human Resources on {date}.",
+    "ACPWB's {phase} nonprofit compensation benchmarking for {org} assessed pay competitiveness for {n} positions across program, development, finance, and executive leadership against {industry} sector peers. The engagement produced a compensation philosophy and updated salary ranges reviewed by {org}'s board compensation committee across {regions} metropolitan service areas on {date}.",
+    # More para templates — higher education
+    "The {phase} university faculty and staff compensation review documented here benchmarked {org}'s academic and administrative pay structures against {n} peer institutions in the {industry} sector across {regions} Carnegie classification categories. ACPWB assessed tenure-track faculty salaries, staff market competitiveness, and benefits cost efficiency, reporting to {org}'s provost and board on {date}.",
+    "ACPWB's {phase} higher education total rewards strategy for {org} evaluated compensation competitiveness for {n} staff roles across {regions} administrative functions against regional and national {industry} sector benchmarks. The engagement produced a staff classification framework and market-based pay ranges implemented beginning {date}.",
+    # More para templates — healthcare and life sciences
+    "The {phase} hospital system physician compensation benchmarking documented here reviewed {org}'s employed physician pay models across {n} specialties against {industry} sector survey benchmarks. ACPWB assessed wRVU-based productivity models, quality incentive design, and leadership stipend competitiveness across {regions} facilities, presenting recommendations to {org}'s medical executive committee on {date}.",
+    "ACPWB's {phase} life sciences sales compensation review for {org} examined incentive plan design effectiveness across {n} specialty pharmaceutical roles against {industry} sector practice. The engagement analyzed pay mix, quota attainment distributions, and award frequency across {regions} therapeutic areas, delivering a revised incentive plan structure to {org}'s commercial leadership on {date}.",
+    "The {phase} agricultural cooperative compensation benchmarking documented here assessed {org}'s grain merchandising, agronomy, and operational pay structures against {n} comparable cooperatives in the {industry} sector across {regions} crop-producing regions. ACPWB delivered a revised total rewards framework aligned with seasonal labor demand, reviewed by {org}'s board of directors on {date}.",
 ]
 
 _ARCHIVE_METRIC_NAMES = [
@@ -1342,6 +2097,93 @@ _ARCHIVE_METRIC_NAMES = [
     'Dividend Payout Ratio (%)', 'Total Shareholder Return (5-year %)', 'Relative TSR Rank (Percentile)',
     'Book Value per Share ($)', 'Price-to-Book Ratio', 'Enterprise Value-to-EBITDA',
     'Net Debt-to-EBITDA', 'Cash Conversion Cycle (days)', 'Capital Expenditure as % of Revenue',
+    # Sports & entertainment metrics
+    'Player Payroll as % of Revenue (%)', 'Average Player Contract Value ($M)', 'Luxury Tax Liability ($M)',
+    'Revenue Per Seat ($)', 'Average Ticket Price ($)', 'Season Ticket Renewal Rate (%)',
+    'Sponsorship Revenue ($M)', 'Naming Rights Annual Value ($M)', 'Broadcast Revenue per Team ($M)',
+    'Merchandise Revenue ($M)', 'Digital Subscriber Count', 'Social Media Engagement Rate (%)',
+    'Content Hours Produced (annual)', 'Episode Cost per Minute ($K)', 'Viewership (Average, millions)',
+    'Talent Agency Commission Rate (%)', 'Endorsement Deal Value ($M)', 'Filming Day Rate ($K)',
+    # Legal metrics
+    'Realization Rate (%)', 'Collection Rate (%)', 'Average Billing Rate ($/hr)',
+    'Revenue per Lawyer ($K)', 'Profit per Equity Partner ($K)', 'Associate-to-Partner Ratio',
+    'Leverage Ratio (Associates per Partner)', 'Lateral Partner Attrition (%)', 'Associate Attrition (%)',
+    'Pro Bono Hours per Lawyer (annual)', 'Outside Counsel Spend ($M)', 'Matter Cycle Time (days)',
+    'Invoice Dispute Rate (%)', 'Alternative Fee Arrangement Prevalence (%)', 'Legal Technology Spend ($M)',
+    # Public sector metrics
+    'Employee Cost per Resident ($)', 'Civil Service Exam Pass Rate (%)', 'Classification Appeal Rate (%)',
+    'Position Vacancy Rate (%)', 'Workers Compensation Claims per 100 FTEs', 'Overtime Cost ($M)',
+    'Pension Funded Ratio (%)', 'Retiree Healthcare Liability ($M)', 'Union Grievance Rate (per 100 FTEs)',
+    'Training Hours per Employee (public sector)', 'Employee Satisfaction Score (public sector)',
+    'Citizen Service Satisfaction Score', 'Budget Variance (%)', 'Grant Utilization Rate (%)',
+    # Education metrics
+    'Faculty-to-Student Ratio', 'Administrative Cost per Student ($)', 'Instructional Cost per Credit Hour ($)',
+    'Endowment per Student ($K)', 'Research Expenditure per Faculty ($K)', 'Annual Fund Participation Rate (%)',
+    'Alumni Giving Rate (%)', 'Fundraising ROI', 'Student Retention Rate (%)',
+    'Graduation Rate (%)', 'Athletic Department Revenue ($M)', 'Athletic Department Subsidy ($M)',
+    'Head Coach Compensation ($M)', 'Athletic Director Compensation ($K)', 'Adjunct-to-Full-Time Faculty Ratio',
+    # Nonprofit / association metrics
+    'Program Expense Ratio (%)', 'Fundraising Efficiency Ratio', 'Administrative Overhead (%)',
+    'Donor Retention Rate (%)', 'Major Gift Count', 'Grant Revenue ($M)',
+    'Membership Retention Rate (%)', 'Membership Growth Rate (%)', 'Dues Revenue ($M)',
+    'Volunteer Hours (annual)', 'Impact per Dollar ($)', 'Beneficiaries Served (annual)',
+    'Advocacy Bill Passage Rate (%)', 'Media Mentions (annual)', 'Board Diversity (%)',
+    # Hospitality & consumer metrics
+    'Revenue per Available Room (RevPAR) ($)', 'Average Daily Rate (ADR) ($)', 'Occupancy Rate (%)',
+    'Guest Satisfaction Score (GSS)', 'TripAdvisor Rating', 'Repeat Guest Rate (%)',
+    'Food Cost Percentage (%)', 'Beverage Cost Percentage (%)', 'Labor Cost Percentage (%)',
+    'Same-Store Sales Growth (%)', 'Restaurant-Level EBITDA Margin (%)', 'Table Turn Rate (per service)',
+    'Customer Acquisition Cost ($)', 'Loyalty Program Enrollment (%)', 'Net Promoter Score (Hospitality)',
+    # Agricultural metrics
+    'Revenue per Acre ($)', 'Cost of Production per Bushel ($)', 'Yield per Acre (bushels)',
+    'Input Cost Index', 'Operating Margin (Agriculture) (%)', 'Patronage Dividend per Bushel',
+    'Commodity Price Realization (%)', 'Cooperative Member Equity ($)', 'Crop Insurance Coverage (%)',
+    # Sales & revenue metrics
+    'Sales Quota Attainment Rate (%)', 'Plan Participation Rate (%)', 'On-Target Earnings Percentile',
+    'Commission Payout as % of Revenue', 'SPIFF Spend per Rep ($)', 'Contest Budget ($K)',
+    'Clawback Recovery Rate (%)', 'Sales Turnover Rate (%)', 'Ramp Time to Full Quota (months)',
+    'Average Deal Size ($K)', 'Win Rate (%)', 'Renewal Rate (%)',
+    'Net Revenue Retention (%)', 'Gross Revenue Retention (%)', 'Expansion Revenue (%)',
+    'Customer Lifetime Value ($K)', 'Customer Acquisition Cost ($)', 'LTV:CAC Ratio',
+    'Months to Payback CAC', 'Annual Contract Value ($K)', 'Total Contract Value ($K)',
+    'Pipeline Coverage Ratio', 'Average Sales Cycle (days)', 'Deals per Rep (annual)',
+    # Customer experience metrics
+    'Net Promoter Score (CX)', 'Customer Effort Score', 'Customer Satisfaction Score (CSAT)',
+    'First Contact Resolution Rate (%)', 'Average Handle Time (minutes)', 'Abandon Rate (%)',
+    'Customer Churn Rate (monthly %)', 'Ticket Volume per Agent (weekly)', 'Agent Utilization (%)',
+    'Escalation Rate (%)', 'Service Level Agreement Attainment (%)', 'Response Time SLA (%)',
+    # Brand & marketing metrics
+    'Brand Awareness (%)', 'Brand Consideration (%)', 'Brand Preference (%)',
+    'Brand Net Promoter Score', 'Share of Voice (%)', 'Share of Search (%)',
+    'Marketing Qualified Leads (MQL)', 'Sales Qualified Leads (SQL)', 'MQL-to-SQL Conversion Rate (%)',
+    'Cost per Acquisition ($)', 'Return on Ad Spend (ROAS)', 'Marketing ROI',
+    'Campaign Conversion Rate (%)', 'Click-Through Rate (%)', 'Organic Traffic Growth (%)',
+    # Operational efficiency metrics
+    'First Pass Yield (%)', 'Overall Equipment Effectiveness (%)', 'Unplanned Downtime (%)',
+    'Preventive Maintenance Compliance (%)', 'Mean Time to Repair (hours)', 'Scrap Rate (%)',
+    'Defect Rate (per million)', 'Customer Returns Rate (%)', 'On-Time Delivery (%)',
+    'Order Fulfillment Cycle Time (days)', 'Production Throughput (units/day)', 'Capacity Utilization (%)',
+    'Labor Productivity Index', 'Energy Intensity (kWh per unit)', 'Material Yield (%)',
+    # Research & development metrics
+    'R&D Headcount as % of Total', 'Patent Applications per 100 R&D Employees', 'Time to Market (months)',
+    'R&D Project Cycle Time (months)', 'Stage-Gate Pass Rate (%)', 'New Product Revenue (%)',
+    'Innovation Pipeline Stage Distribution', 'External R&D Spend (%)', 'University Partnership Count',
+    'Technology Readiness Level (1-9)', 'Prototype-to-Production Conversion Rate (%)', 'IP License Revenue ($M)',
+    # Healthcare operational metrics
+    'Patient Satisfaction (HCAHPS)', 'Readmission Rate (%)', 'Average Length of Stay (days)',
+    'Case Mix Index', 'Operating Cost per Adjusted Discharge ($)', 'Cost per Patient Day ($)',
+    'Nursing Hours per Patient Day', 'Physician Productivity (wRVUs)', 'Physician Compensation per wRVU ($)',
+    'Bed Occupancy Rate (%)', 'Diversion Hours', 'Emergency Department Wait Time (minutes)',
+    # Nonprofit / social metrics
+    'Cost per Beneficiary ($)', 'Program Reach (annual)', 'Beneficiary Satisfaction Score',
+    'Volunteer Retention Rate (%)', 'Grant Win Rate (%)', 'Major Gift Close Rate (%)',
+    'Annual Fund Response Rate (%)', 'Mid-Level Donor Conversion Rate (%)', 'Online Giving Growth (%)',
+    'Board Giving Rate (%)', 'Event Net Revenue ($K)', 'Matching Gift Revenue ($K)',
+    # Legal & professional services metrics
+    'Revenue per Professional ($K)', 'Utilization Rate (%)', 'Write-Down Rate (%)',
+    'Average Billing Rate ($/hr)', 'Profit Margin (%)', 'New Business Win Rate (%)',
+    'Client Satisfaction Score', 'Client Retention Rate (%)', 'Cross-Sell Rate (%)',
+    'Pro Bono Hours Committed', 'Lateral Partner Integration Success Rate (%)', 'Associate-to-Partner Conversion Rate (%)',
 ]
 
 _ARCHIVE_FINDING_TEMPLATES = [
@@ -1410,7 +2252,46 @@ _ARCHIVE_FINDING_TEMPLATES = [
     "ACPWB's {phase} culture assessment for {org} administered a validated {n}-item instrument to {regions} employees, producing a composite culture score of {n} on a 100-point scale that places the organization in the {regions}th percentile of the {industry} sector reference group — below the threshold for the high-performance culture designation on {regions} of the {n} subdimensions assessed.", 'The meta-regression analysis conducted for {org} during the {phase} synthesizes evidence from {n} published and unpublished studies on {metric} effectiveness in the {industry} sector, producing a pooled effect size estimate of {n}% improvement per unit of investment that is robust to publication bias correction across {regions} moderator variables.', "ACPWB's {phase} exit interview analysis for {org}, covering {n} departing employees across {regions} functional areas from {year} through {endyear}, identifies compensation competitiveness as the primary driver of regrettable attrition in {n}% of cases — a finding {n} percentage points higher than the {industry} sector benchmark and central to the total rewards redesign recommendation.",
     'The pay equity regression analysis conducted for {org} during the {phase} finds a residual gender pay gap of {n}% after controlling for job grade, performance rating, tenure, and {regions} additional explanatory variables — a gap that is statistically significant at p < 0.05 across {n} of the {regions} {industry} sector business units examined.', "ACPWB's {phase} analysis of {industry} sector corporate governance disclosures from {year} through {endyear} finds that organizations with formal board evaluation processes report {n}% fewer governance-related shareholder proposal submissions, with the effect concentrated among the {regions} most active institutional investors represented in the {org} shareholder base.", "The factor analysis of {org}'s {phase} employee engagement survey data isolates {n} latent dimensions that account for {regions}% of the total variance in engagement scores across the {industry} sector benchmark group, providing an empirically grounded model for prioritizing the {n} engagement initiatives recommended for the {year} action planning cycle.",
     'Quantile regression applied to the {industry} sector compensation database during the {phase} reveals that the pay-for-performance relationship for {org} is stronger at the upper tail of the pay distribution (90th percentile coefficient: {n}%) than at the median, a pattern consistent with tournament theory predictions validated across {regions} peer organizations.',
-    # Additional finding templates — compensation design
+    # Additional finding templates — sports & entertainment
+    "Salary benchmarking conducted during the {phase} reveals that {org}'s player payroll as a percentage of total revenue is {n}% above the {industry} sector median, placing the organization in the top quartile of spending intensity among {regions} comparable franchises assessed as of {date}.",
+    "The {phase} talent market analysis for {org} in the {industry} sector identified {n} contract provisions that diverge materially from current market practice across {regions} comparable transactions, with the gap concentrated in performance incentive structure and no-trade clause prevalence.",
+    "Content cost benchmarking conducted during the {phase} for {org} found that cost per episode exceeds the {industry} sector {n}th percentile benchmark by {regions}%, a finding attributable to above-market talent compensation and below-peer production efficiency across {n} active productions.",
+    "The organizational effectiveness study conducted during the {phase} for {org} found that front-office headcount as a ratio of total revenue is {n}% above the {industry} sector benchmark across {regions} peer organizations, suggesting meaningful cost efficiency opportunity in administrative functions.",
+    # Additional finding templates — legal operations
+    "The {phase} attorney compensation benchmarking for {org} identified that associate salary scales trail the Am Law {n}0 market rate at the {regions}th percentile across {n} class years, representing a recruitment risk as demonstrated by {regions}% voluntary attrition among junior associates over the prior year.",
+    "Legal department efficiency benchmarking conducted during the {phase} for {org} revealed that outside counsel spend as a percentage of revenue is {n}% above the {industry} sector benchmark, with the excess concentrated in {regions} practice areas where insourcing alternatives were identified as economically viable.",
+    "The {phase} partner compensation model review for {org} identified {n} structural features inconsistent with current {industry} sector practice: above-median origination weighting, below-median lockstep seniority credits, and the absence of a firm contribution metric in {regions}% of comparable firm frameworks.",
+    # Additional finding templates — public sector
+    "Civil service compensation benchmarking during the {phase} found that {org}'s total compensation package trails private sector equivalents in the {industry} sector by {n}% on a base salary basis, with the gap partially offset by a {regions}% benefit premium that narrows the total compensation differential to approximately {n}%.",
+    "The {phase} workforce planning analysis for {org} projects a {n}% shortfall in critical technical roles across {regions} departments over the {year}–{endyear} horizon, driven by an aging workforce in which {n}% of incumbents are retirement-eligible within five years — a concentration risk that benchmarks unfavorably against {industry} sector peers.",
+    "Pension sustainability analysis conducted during the {phase} for {org} indicates that the current unfunded actuarial accrued liability of approximately ${n}B represents {regions}% of annual payroll, placing {org} in the bottom quartile of {industry} sector peers on funded ratio as of {date}.",
+    # Additional finding templates — education
+    "Faculty compensation benchmarking conducted during the {phase} found that {org}'s tenure-track median salary trails the {regions}th percentile of {industry} sector peers by {n}%, with the gap widest in STEM disciplines where labor market competition from industry drives a {n}% market premium not reflected in current pay structures.",
+    "The {phase} analysis of {org}'s administrative cost structure identified total non-instruction costs at {n}% of operating budget — {regions} percentage points above the {industry} sector median — with the excess concentrated in enrollment management and student services relative to an academically similar cohort of {n} peer institutions.",
+    "Endowment benchmarking conducted during the {phase} for {org} reveals per-student endowment assets of ${n}K — below the {regions}th percentile of {industry} sector peers — constraining financial aid generosity and limiting the institution's ability to support faculty compensation at market rates across {n} academic departments.",
+    # Additional finding templates — nonprofit & association
+    "The {phase} executive compensation benchmarking for {org} found that total compensation for the chief executive is positioned at the {regions}th percentile of comparable {industry} sector organizations by revenue scale, with the most material gap relative to peers in long-term compensation and deferred compensation arrangements across {n} comparator organizations.",
+    "Program efficiency analysis conducted during the {phase} for {org} indicates that {n}% of total expenditures reach program activities — below the {industry} sector median of {regions}% — with the gap attributable to above-benchmark administrative overhead concentrated in finance and IT functions relative to {n} peer organizations.",
+    "The {phase} governance assessment for {org} identified {n} board practices inconsistent with current {industry} sector governance standards: the absence of a formal board self-evaluation process, below-benchmark independent director representation of {regions}%, and a committee structure that does not reflect current best practices for organizations of comparable mission scope.",
+    # Additional finding templates — hospitality & consumer
+    "Labor cost benchmarking conducted during the {phase} for {org} reveals that labor as a percentage of revenue is {n}% above the {industry} sector median across {regions} comparable operating units, with the excess concentrated in management layers rather than hourly workforce costs — consistent with a span-of-control ratio of {n}:1 against a market median of {regions}:1.",
+    "The {phase} guest satisfaction benchmarking for {org} identified a {n}-point gap between current satisfaction scores and the {industry} sector median among {regions} comparable properties, with the primary drivers concentrated in service speed and staff knowledge dimensions that correlate strongly with training investment and hourly wage competitiveness.",
+    "Franchise operator compensation benchmarking during the {phase} found that {org}'s royalty and fee structure is positioned at the {regions}th percentile of {industry} sector franchisors, with the combination of royalty rate, marketing fund contribution, and technology fees placing total franchisee cost in the top {n}% of the competitive benchmark universe as of {date}.",
+    # Additional finding templates — turnaround & restructuring
+    "The {phase} workforce restructuring analysis for {org} identified potential payroll cost reductions of approximately ${n}M annualized across {regions} organizational layers, achievable through a combination of headcount reduction, manager-to-IC ratio optimization, and benefit plan consolidation benchmarked against {industry} sector peers as of {date}.",
+    "ACPWB's {phase} crisis compensation analysis for {org} identified {n} retention-critical employees across {regions} functional areas whose departure probability exceeds the {industry} sector attrition threshold, warranting targeted retention investments of approximately ${n}M to protect the organization's operational continuity through the restructuring period.",
+    # Additional finding templates — innovation & technology
+    "The {phase} technical talent compensation benchmarking for {org} revealed that base salary for software engineers lags the {n}th percentile of the {industry} sector by {regions}%, with the gap compounding at senior levels where total direct compensation — inclusive of equity — trails the market by an estimated {n}% on an annualized grant-date-fair-value basis.",
+    "Skills gap analysis during the {phase} identified {n} critical capability deficiencies across {org}'s product and engineering organization in the {industry} sector, with the most acute shortfalls in data engineering, machine learning, and platform security — disciplines where {org}'s current compensation positioning falls below the {regions}th percentile of the talent market.",
+    # Additional finding templates — compensation design (new)
+    "The {phase} sales compensation benchmarking for {org} found that on-target earnings for quota-carrying roles trail the {n}th percentile of the {industry} sector by {regions}%, with above-market quota attainment expectations identified as a compounding factor that reduces the effective value of the incentive opportunity relative to disclosed target levels.",
+    "ACPWB's {phase} pay mix analysis for {org} identified that the ratio of fixed to variable compensation at the individual contributor level is {n}% above the {industry} sector benchmark — a profile that may limit the organization's ability to attract performance-oriented talent while increasing fixed labor cost exposure across {regions} business units.",
+    # Additional finding templates — global & cross-border
+    "The {phase} cross-border compensation analysis conducted for {org} across {n} countries in the {industry} sector identified geographic pay compression at senior levels, where local market constraints in {regions} key markets reduce total compensation differentiation by an estimated {n}% relative to headquarters-country equivalents.",
+    "ACPWB's {phase} global benefits benchmarking for {org} identified {n} jurisdictions where statutory benefit obligations exceed the {industry} sector median employer contribution by {regions}% or more, creating a total employer cost burden that materially exceeds the benchmark in aggregate and warrants review in the context of {org}'s global workforce cost management strategy.",
+    # Additional finding templates — methodological (new)
+    "The interrupted time-series analysis applied to the {industry} sector compensation dataset during the {phase} identifies a statistically significant break in {metric} trends coinciding with the {year} regulatory change, producing a pre-post difference estimate of {n}% that is robust across {regions} alternative window specifications.",
+    "Text analysis of {n} {industry} sector job postings scraped during the {phase} identifies a {regions}% increase in the prevalence of explicit pay range disclosure relative to the {year} baseline, with {org}'s current job posting practices benchmarking at the {n}th percentile of a {regions}-company peer set on transparency completeness.",
     "The {phase} compensation benchmarking for {org} places total direct compensation for the top {n} executive roles at the {regions}th percentile of the {industry} sector proxy peer group — below the stated {n}th percentile target, with the gap concentrated in long-term incentive grant values rather than base salary or annual incentive targets.",
     "ACPWB's {phase} analysis of {org}'s annual incentive plan design found that {n}% of the weight is allocated to financial metrics, with the remaining {regions}% distributed across operational and strategic objectives — a weighting that trails {industry} sector peers that have shifted toward balanced scorecards since {year}.",
     "The pay mix analysis conducted during the {phase} for {org} reveals that variable pay constitutes {n}% of target total direct compensation for senior leaders, compared to a {regions}th percentile market position of {n}% among {industry} sector peers — suggesting an opportunity to increase performance-based pay leverage in the next plan year.",
@@ -1438,6 +2319,49 @@ _ARCHIVE_FINDING_TEMPLATES = [
     "The regression discontinuity design applied during the {phase} exploits a compensation program threshold at {org} to estimate a causal effect of {metric} on {industry} sector employee outcomes, yielding a local treatment effect of {n}% with a confidence interval that excludes zero at conventional significance levels across {regions} robustness checks.",
     "ACPWB's {phase} conjoint analysis of {n} total rewards scenarios, administered to {org} employees in the {industry} sector, finds that base salary accounts for {regions}% of employee preference weight — substantially below the {n}% weight assigned by {org}'s total rewards design team — with career development and flexible work arrangements more valued than the current program design reflects.",
     "The cointegration analysis applied to ACPWB's {industry} sector longitudinal compensation database from {year} through {endyear} confirms a long-run equilibrium relationship between {metric} and organizational performance, with the speed of adjustment estimated at {n}% per quarter — implying that {regions}% of any compensation-performance gap closes within two years.",
+    # Additional finding templates — sports and entertainment
+    "ACPWB's {phase} front-office benchmarking for {org} finds that general manager and coaching staff {metric} trails the {industry} sector median by {n}%, creating a structural retention disadvantage in a market where {regions} competing organizations have meaningfully increased front-office compensation following recent roster-building success.",
+    "The {phase} talent agency compensation benchmarking study for {org} reveals that agent and partner {metric} in the {industry} sector has grown {n}% since {year}, with {regions}% of that growth concentrated in digital content and sports representation practices — segments where {org}'s current pay structure underperforms market by an estimated {n}%.",
+    "ACPWB's {phase} performing arts organization workforce assessment finds that {org}'s artistic staff {metric} is positioned at the {n}th percentile relative to {regions} peer organizations, with a growing gap in production and technical roles where demand has intensified following {industry} sector post-pandemic programming expansion.",
+    # Additional finding templates — legal and professional services
+    "The {phase} law firm associate compensation analysis produced by ACPWB finds that {org}'s first-year {metric} lags the Cravath scale by {n}%, a differential that has contributed to a {regions}% increase in lateral associate departures over the {year}–{endyear} measurement period relative to the prior study cohort.",
+    "ACPWB's {phase} accounting firm partner compensation benchmarking for {org} reveals that equity partner {metric} in the {industry} sector has bifurcated sharply between firms with technology-enabled advisory practices and those reliant on compliance work, with {org} positioned at the {n}th percentile across {regions} revenue categories.",
+    "The {phase} management consulting firm total rewards review completed by ACPWB for {org} finds that consultant-to-partner {metric} ratios in the {industry} sector have compressed {n}% since {year}, driven by market pressure to accelerate associate compensation in response to competition from technology firms across {regions} major hiring markets.",
+    # Additional finding templates — public sector and government
+    "ACPWB's {phase} civil service compensation equity assessment for {org} finds that mission-critical technical roles in the {industry} sector trail comparable private sector positions by {n}%, a gap that has driven a {regions}% increase in vacancies for cybersecurity, data science, and engineering occupational series since {year}.",
+    "The {phase} public university compensation benchmarking study for {org} reveals that administrative staff {metric} has fallen to the {n}th percentile relative to {regions} comparator institutions, with the greatest competitive gaps concentrated in finance, technology, and human resources functions where private sector alternatives are most accessible.",
+    "ACPWB's {phase} government contractor compensation alignment review for {org} finds that fully-loaded labor costs for the {industry} sector exceed the Defense Contract Audit Agency benchmark rates by {n}% for {regions} labor categories, creating both cost proposal risk and potential audit exposure that requires immediate remediation.",
+    # Additional finding templates — healthcare
+    "The {phase} hospital system nursing compensation benchmarking produced by ACPWB for {org} finds that registered nurse {metric} in the {industry} sector has increased {n}% since {year}, with agency premium pay now representing {regions}% of total nursing labor cost — a structural expense that {org}'s leadership has identified as unsustainable beyond a {n}-year planning horizon.",
+    "ACPWB's {phase} physician total compensation benchmarking for {org} reveals that primary care {metric} in the {industry} sector trails specialist benchmarks by {n}% — a differential that has contributed to primary care panel shortfalls affecting {regions} patient access points across {org}'s regional delivery network.",
+    "The {phase} behavioral health workforce compensation assessment produced by ACPWB for {org} finds that licensed clinical social worker and therapist {metric} in the {industry} sector is positioned {n}% below comparable community mental health center benchmarks, contributing to a {regions}% vacancy rate that is limiting {org}'s ability to meet growing service demand.",
+    # Additional finding templates — technology and data
+    "ACPWB's {phase} technology talent compensation benchmarking for {org} finds that software engineering {metric} has increased {n}% since {year}, with the most significant market movement concentrated in machine learning, distributed systems, and security engineering roles where {regions} hyperscale competitors have reset market-clearing prices.",
+    "The {phase} AI and data science talent market assessment produced by ACPWB reveals that {org}'s {metric} for principal and staff-level machine learning engineers is positioned at the {n}th percentile of the {industry} sector — below the threshold ACPWB considers retention-competitive given the current demand-supply imbalance across {regions} technology hubs.",
+    "ACPWB's {phase} cybersecurity workforce benchmarking for {org} finds that security operations and threat intelligence {metric} has grown {n}% since {year}, driven by expanded regulatory requirements and a candidate market in which demand exceeds supply by an estimated {n}:1 ratio across {regions} metropolitan labor markets.",
+    # Additional finding templates — nonprofit and associations
+    "The {phase} nonprofit executive compensation benchmarking produced by ACPWB for {org} reveals that CEO {metric} within the {industry} sector is positioned at the {n}th percentile relative to {regions} budget-comparable organizations — within the range that ACPWB considers defensible for IRS Form 990 reasonable compensation purposes.",
+    "ACPWB's {phase} trade association staff compensation review for {org} finds that director and manager-level {metric} lags comparable for-profit and government comparators by {n}%, creating retention pressure in member services, policy, and government affairs functions across {regions} chapter organizations.",
+    # Additional finding templates — retail and consumer
+    "The {phase} retail field workforce compensation benchmarking produced by ACPWB for {org} finds that store manager {metric} in the {industry} sector has increased {n}% since {year}, with {regions}% of the market movement concentrated in multi-unit district and regional manager roles where execution accountability and complexity have grown significantly.",
+    "ACPWB's {phase} consumer packaged goods commercial team benchmarking for {org} reveals that national account management and trade marketing {metric} in the {industry} sector lags digital-native direct-to-consumer competitors by {n}%, creating a structural talent disadvantage in e-commerce channel development across {regions} key retail platforms.",
+    # Additional finding templates — supply chain and logistics
+    "The {phase} supply chain leadership compensation benchmarking produced by ACPWB for {org} reveals that VP and director-level {metric} in the {industry} sector has increased {n}% since {year} — reflecting demand driven by supply chain disruption, nearshoring investment, and digital transformation programs that have elevated the strategic profile of operations leadership across {regions} manufacturing and distribution networks.",
+    "ACPWB's {phase} transportation and logistics driver compensation assessment for {org} finds that over-the-road driver {metric} in the {industry} sector now exceeds the {n}th percentile threshold that ACPWB benchmarks as retention-critical, yet {org}'s total pay package trails competitors by {regions}% on a loaded cost-per-mile basis due to legacy benefit cost structures.",
+    # Additional finding templates — energy and utilities
+    "The {phase} utility workforce compensation benchmarking study produced by ACPWB for {org} finds that lineworker and field technician {metric} in the {industry} sector has increased {n}% since {year}, driven by grid hardening investment, electrification programs, and competition from renewable energy construction that is drawing from the same skilled trades labor pool across {regions} service territories.",
+    "ACPWB's {phase} oil and gas upstream compensation benchmarking for {org} reveals that subsurface engineering and drilling operations {metric} has recovered {n}% from the {year} commodity cycle trough, with {regions} key basins now exhibiting candidate scarcity in reservoir engineering and completion design disciplines that is pushing market rates above prior-cycle peaks.",
+    # Additional finding templates — financial services
+    "The {phase} asset management compensation benchmarking produced by ACPWB for {org} finds that portfolio manager {metric} in the {industry} sector is bifurcating sharply between actively managed equity strategies — where performance has moderated fee revenue — and private markets and alternatives platforms where compensation has increased {n}% since {year} across {regions} strategy types.",
+    "ACPWB's {phase} insurance industry actuarial compensation benchmarking for {org} reveals that FCAS and FSA-credentialed professionals command a {n}% market premium over the general financial services comparator — a credential premium that has widened {regions}% since {year} as demand for embedded analytics, pricing modernization, and climate risk modeling has outpaced credentialing supply.",
+    # Additional finding templates — manufacturing
+    "The {phase} advanced manufacturing workforce compensation study produced by ACPWB for {org} finds that industrial automation and robotics technician {metric} has increased {n}% since {year}, with the most acute competitive pressure concentrated in {regions} automotive, aerospace, and semiconductor fabrication regions where OEM capital investment has created simultaneous demand spikes.",
+    "ACPWB's {phase} quality and regulatory affairs compensation benchmarking for {org} reveals that FDA-regulated manufacturing compliance {metric} in the {industry} sector is positioned at the {n}th percentile relative to {regions} peer organizations — below the threshold ACPWB considers sustainable given the credential scarcity in combination product regulatory affairs and quality systems disciplines.",
+    # Additional finding templates — hospitality and tourism
+    "The {phase} hotel labor market benchmarking produced by ACPWB for {org} finds that housekeeping and front desk {metric} in the {industry} sector has increased {n}% since {year}, with {regions} gateway markets exhibiting wage floors materially above the national median as a result of municipal minimum wage increases and heightened post-pandemic competition for service workers.",
+    "ACPWB's {phase} airline crew compensation benchmarking for {org} reveals that first officer {metric} in the {industry} sector has increased {n}% since {year} — the steepest two-year appreciation in the history of ACPWB's aviation compensation database — driven by accelerated retirements and training pipeline constraints that have reduced available captain-qualified candidates by {regions}% since {year}.",
+    # Additional finding templates — nonprofit and education
+    "The {phase} nonprofit executive compensation reasonable comparability assessment produced by ACPWB for {org} finds that CEO total compensation is positioned at the {n}th percentile of {regions} budget-comparable organizations in the {industry} sector — within the rebuttable presumption safe harbor under IRC Section 4958, with documentation requirements met across all {n} required comparability data elements.",
 ]
 
 _ARCHIVE_METRIC_LABELS = [
@@ -1509,6 +2433,32 @@ _ARCHIVE_METRIC_LABELS = [
     'audit finding repeat rate (%)', 'material weakness count', 'significant deficiency count',
     'SOX control failure rate (%)', 'IT general control effectiveness (%)',
     'vendor risk assessment completion rate (%)', 'third-party incidents reported',
+    # Sports & entertainment metric labels
+    'player salary as % of cap (%)', 'luxury tax threshold headroom ($M)', 'average contract length (years)',
+    'signing bonus as % of contract value (%)', 'performance escalator prevalence (%)', 'no-trade clause prevalence (%)',
+    'content production budget per hour ($K)', 'talent cost as % of production budget (%)', 'streaming subscriber retention rate (%)',
+    'episode viewership (average, millions)', 'endorsement revenue per athlete ($M)', 'sponsorship renewal rate (%)',
+    # Legal metric labels
+    'attorney realization rate (%)', 'attorney collection rate (%)', 'average billing rate ($/hr)',
+    'profit per equity partner ($K)', 'associate leverage ratio', 'associate-to-partner salary ratio',
+    'pro bono hours per attorney (annual)', 'lateral hire integration success rate (%)', 'matter-level profitability (%)',
+    'outside counsel spend per legal FTE ($K)', 'alternative fee arrangement share (%)', 'invoice dispute resolution time (days)',
+    # Public sector metric labels
+    'civil service vacancy rate (%)', 'time to hire — competitive examination (days)', 'union grievance resolution time (days)',
+    'overtime as % of total compensation (%)', 'pension funded ratio (%)', 'retiree healthcare per retiree ($K)',
+    'workers compensation frequency rate', 'employee satisfaction index (public sector)', 'citizen satisfaction score',
+    # Education metric labels
+    'faculty salary percentile vs. AAUP norms', 'administrative cost per credit hour ($)', 'endowment payout rate (%)',
+    'alumni giving rate (%)', 'student-to-faculty ratio', 'research expenditure per tenured faculty ($K)',
+    'athletic department subsidy as % of total budget (%)', 'head coach salary vs. peer median (%)', 'adjunct faculty pay per credit ($)',
+    # Nonprofit metric labels
+    'program expense ratio (%)', 'fundraising cost per dollar raised ($)', 'donor retention rate (%)',
+    'volunteer hour monetized value ($M)', 'grant award rate (%)', 'membership renewal rate (%)',
+    'board giving participation (%)', 'executive director tenure (years)', 'mission effectiveness score',
+    # Hospitality metric labels
+    'revenue per available room (RevPAR) ($)', 'average daily rate (ADR) ($)', 'occupancy rate (%)',
+    'food cost percentage (%)', 'labor cost percentage (hospitality) (%)', 'guest satisfaction index',
+    'repeat guest rate (%)', 'loyalty program enrollment (%)', 'same-store revenue growth (%)',
     # Compensation metric labels additional
     'target total direct compensation', 'actual total direct compensation',
     'short-term incentive payout rate', 'long-term incentive realized value',
@@ -1544,6 +2494,46 @@ _ARCHIVE_METRIC_LABELS = [
     'director stock retention requirement compliance', 'insider trading violation count',
     'code of ethics training completion rate', 'whistleblower report resolution time (days)',
     'regulatory examination pass rate', 'material weakness resolution time (months)',
+    # Sales compensation metric labels
+    'sales quota attainment rate (%)', 'on-target earnings vs. market (%)', 'commission payout rate (%)',
+    'plan participant satisfaction score', 'plan comprehension rate (%)', 'clawback rate (%)',
+    'contest participation rate (%)', 'SPIFF redemption rate (%)', 'channel partner NPS',
+    'distributor margin rate (%)', 'reseller sell-through rate (%)', 'inside vs. field split (%)',
+    # Customer & market metric labels
+    'net promoter score (customer)', 'customer effort score', 'customer satisfaction index',
+    'customer lifetime value ($K)', 'customer acquisition cost ($)', 'churn rate (monthly %)',
+    'renewal rate (%)', 'expansion revenue rate (%)', 'share of wallet (%)',
+    'brand awareness index', 'brand preference score', 'share of voice (%)',
+    # Operational metric labels
+    'first pass yield (%)', 'overall equipment effectiveness (%)', 'unplanned downtime rate (%)',
+    'defect rate (per million units)', 'on-time delivery rate (%)', 'order fill rate (%)',
+    'inventory turnover ratio', 'capacity utilization rate (%)', 'labor productivity index',
+    'material yield rate (%)', 'energy intensity (kwh/unit)', 'scrap rate (%)',
+    # Consumer research metric labels
+    'unaided brand awareness (%)', 'aided brand awareness (%)', 'brand consideration rate (%)',
+    'purchase intent score', 'panel response rate (%)', 'survey completion rate (%)',
+    'focus group yield rate (%)', 'concept appeal score', 'product satisfaction score',
+    'packaging preference score', 'price sensitivity index', 'value perception score',
+    # Healthcare metric labels
+    'patient satisfaction score (hcahps)', 'readmission rate (%)', 'length of stay (days)',
+    'cost per adjusted discharge ($)', 'physician productivity (wrvus)', 'nursing hours per patient day',
+    'bed occupancy rate (%)', 'emergency wait time (minutes)', 'case mix index',
+    # Sports & entertainment metric labels
+    'player salary cap utilization (%)', 'average contract value ($M)', 'sponsorship renewal rate (%)',
+    'season ticket renewal rate (%)', 'fan engagement index', 'social media follower growth (%)',
+    'streaming subscriber retention rate (%)', 'content production efficiency ($/hr)', 'audience rating',
+    # Legal metric labels
+    'partner profitability per equity point (%)', 'associate realization rate (%)', 'billing rate premium (%)',
+    'pro bono hour fulfillment rate (%)', 'lateral integration success rate (%)', 'matter profitability (%)',
+    # Nonprofit metric labels
+    'program efficiency ratio', 'fundraising cost per dollar raised ($)', 'donor lifetime value ($)',
+    'volunteer hour value ($)', 'grant success rate (%)', 'board engagement score',
+    # Agricultural metric labels
+    'yield per acre (bushels)', 'input cost per acre ($)', 'break-even commodity price ($)',
+    'cooperative patronage dividend rate (%)', 'grain basis level (cents/bushel)', 'storage shrink rate (%)',
+    # Innovation metric labels
+    'innovation pipeline conversion rate (%)', 'time to market (months)', 'r&d return on investment (%)',
+    'patent granted per r&d dollar ($M)', 'new product revenue contribution (%)', 'technology readiness level',
 ]
 
 
@@ -1638,6 +2628,70 @@ _ARCHIVE_TITLE_PREFIXES = [
     'Integration Plan:', 'Integration Summary:', 'Integration Report:',
     'Separation Plan:', 'Separation Summary:', 'Carve-Out Documentation:',
     'Synergy Report:', 'Synergy Summary:', 'Synergy Documentation:',
+    # Sports & entertainment prefixes
+    'Contract Analysis:', 'Player Compensation Report:', 'Roster Cost Summary:',
+    'Talent Acquisition Brief:', 'League Benchmarking Report:', 'Sponsorship Valuation:',
+    'Media Rights Analysis:', 'Broadcast Economics Summary:', 'Content Cost Report:',
+    'Talent Agency Analysis:', 'Casting Brief:', 'Production Budget Summary:',
+    # Legal practice prefixes
+    'Partner Compensation Report:', 'Associate Salary Analysis:', 'Law Firm Benchmarking:',
+    'Legal Operations Summary:', 'Billing Rate Analysis:', 'Outside Counsel Report:',
+    'Legal Technology Brief:', 'Matter Economics Analysis:', 'Litigation Cost Summary:',
+    # Public sector prefixes
+    'Civil Service Compensation Report:', 'Government Benchmarking Summary:', 'Public Sector Analysis:',
+    'Municipal Pay Study:', 'Workforce Rightsizing Brief:', 'Classification Review:',
+    'Position Description Documentation:', 'Labor Relations Summary:', 'Public Workforce Report:',
+    # Education prefixes
+    'Faculty Compensation Report:', 'University Benchmarking Summary:', 'Academic Pay Study:',
+    'Athletics Compensation Report:', 'Endowment Analysis:', 'Institutional Research Summary:',
+    'Accreditation Documentation:', 'Academic Program Review:', 'Higher Education Brief:',
+    # Nonprofit prefixes
+    'Executive Director Pay Report:', 'Nonprofit Benchmarking Summary:', 'Mission Organization Analysis:',
+    'Foundation Governance Brief:', 'Association Compensation Report:', 'Stewardship Documentation:',
+    'Grant Program Summary:', 'Donor Impact Report:', 'Philanthropic Strategy Brief:',
+    # Hospitality & consumer prefixes
+    'Hospitality Compensation Report:', 'Franchise Operations Summary:', 'Labor Market Brief:',
+    'Consumer Insights Report:', 'Brand Research Summary:', 'Market Intelligence Brief:',
+    'Guest Experience Analysis:', 'Revenue Benchmarking Report:', 'Operational Cost Study:',
+    # Investigative & special situation prefixes
+    'Forensic Analysis:', 'Investigation Support Documentation:', 'Whistleblower Program Review:',
+    'Crisis Response Summary:', 'Turnaround Documentation:', 'Distressed Situation Brief:',
+    'Special Committee Documentation:', 'Independent Review Summary:', 'Monitor Report:',
+    # International & global prefixes
+    'Global Compensation Report:', 'Multi-Country Analysis:', 'Cross-Border Benchmarking:',
+    'International Pay Study:', 'Expatriate Program Review:', 'Global Mobility Summary:',
+    'Regional Pay Analysis:', 'Local Market Brief:', 'Global Benefits Report:',
+    # Innovation & digital prefixes
+    'Digital Transformation Report:', 'Technology Talent Analysis:', 'Innovation Workforce Brief:',
+    'AI Governance Summary:', 'Data & Analytics Compensation Report:', 'Product Engineering Pay Study:',
+    'Platform Economics Analysis:', 'Startup Benchmarking Brief:', 'Venture-Backed Compensation Report:',
+    # Concise / dispatch prefixes
+    'Quick Reference:', 'Snapshot Report:', 'Pulse Summary:',
+    'Rapid Assessment:', 'Spot Analysis:', 'Flash Report:',
+    'Key Findings:', 'Essential Summary:', 'Core Documentation:',
+    'Working Notes:', 'Field Notes:', 'Observation Log:',
+    # Sports and entertainment sector prefixes
+    'Professional Sports Compensation Study:', 'Athletic Organization Pay Report:',
+    'Entertainment Industry Workforce Brief:', 'Media Talent Benchmarking Summary:',
+    'Esports Compensation Review:', 'Live Events Workforce Analysis:',
+    # Legal and professional services prefixes
+    'Law Firm Associate Compensation Report:', 'Partner Pay Benchmarking Brief:',
+    'Legal Operations Workforce Study:', 'Accounting Firm Pay Analysis:',
+    'Professional Services Talent Review:', 'In-House Legal Compensation Summary:',
+    # Public sector prefixes
+    'Civil Service Compensation Modernization Study:', 'Government Workforce Pay Review:',
+    'Public Sector Benchmarking Brief:', 'Municipal Compensation Analysis:',
+    'Federal Contractor Labor Cost Study:', 'Public Safety Pay Assessment:',
+    # Higher education and nonprofit prefixes
+    'University Faculty Salary Report:', 'Academic Staff Compensation Brief:',
+    'Nonprofit Executive Pay Assessment:', 'Foundation Compensation Review:',
+    'Trade Association Staff Benchmarking:', 'Higher Education Workforce Study:',
+    # Hospitality and agriculture prefixes
+    'Hotel Industry Workforce Brief:', 'Food Service Compensation Analysis:',
+    'Agricultural Cooperative Pay Study:', 'Agribusiness Workforce Review:',
+    # Space and advanced technology prefixes
+    'Space Industry Compensation Report:', 'Advanced Technology Workforce Brief:',
+    'Defense Electronics Pay Study:', 'Quantum Technology Talent Review:',
 ]
 
 
@@ -2648,6 +3702,64 @@ _ARCHIVE_WORDS = [
     # Stakeholder / audience
     'executive', 'board', 'committee', 'leadership', 'management',
     'cross-functional', 'enterprise', 'organizational', 'divisional', 'operational',
+    # Sports & entertainment
+    'roster', 'franchise', 'broadcast', 'sponsorship', 'talent',
+    'production', 'content', 'licensing', 'distribution', 'viewership',
+    # Legal
+    'counsel', 'litigation', 'arbitration', 'discovery', 'settlement',
+    'realization', 'leverage', 'origination', 'billable', 'partnership',
+    # Public sector
+    'civil-service', 'appropriation', 'classification', 'procurement', 'regulatory',
+    'municipal', 'governmental', 'legislative', 'jurisdictional', 'statutory',
+    # Education
+    'faculty', 'academic', 'accreditation', 'enrollment', 'endowment',
+    'institutional', 'curricular', 'tenured', 'adjunct', 'collegiate',
+    # Nonprofit / association
+    'philanthropic', 'stewardship', 'mission', 'grantmaking', 'membership',
+    'advocacy', 'impact', 'charitable', 'volunteer', 'community',
+    # Consumer & market research
+    'segmentation', 'panel', 'survey', 'consumer', 'qualitative',
+    'ethnographic', 'persona', 'insight', 'behavioral', 'sentiment',
+    # Hospitality & food
+    'occupancy', 'revenue-management', 'culinary', 'hospitality', 'franchise',
+    'concessions', 'catering', 'amenity', 'guest', 'experiential',
+    # New analytical
+    'predictive', 'inferential', 'longitudinal', 'cross-sectional', 'multilevel',
+    'econometric', 'causal', 'inferential', 'triangulated', 'meta-analytic',
+    # New deliverable types
+    'playbook', 'toolkit', 'template', 'checklist', 'matrix',
+    'heat-map', 'taxonomy', 'ontology', 'index', 'compendium',
+    # Sports and entertainment
+    'athlete', 'roster', 'franchise', 'media-rights', 'broadcast',
+    'talent-agency', 'box-office', 'sponsorship', 'league', 'esports',
+    # Legal and professional services
+    'billable', 'origination', 'lockstep', 'lateral', 'partner',
+    'associate', 'counsel', 'retainer', 'practice-group', 'engagement',
+    # Public sector and government
+    'civil-service', 'procurement', 'contracting', 'regulatory', 'municipal',
+    'grant', 'appropriation', 'statutory', 'interagency', 'federal',
+    # Higher education and nonprofit
+    'tenure', 'endowment', 'accreditation', 'development', 'foundation',
+    'membership', 'chapter', 'advocacy', 'mission-driven', 'stewardship',
+    # Agricultural and cooperative
+    'crop', 'yield', 'cooperative', 'agronomy', 'livestock',
+    'commodity', 'harvest', 'irrigation', 'watershed', 'field',
+    # Space and advanced technology
+    'orbital', 'propulsion', 'satellite', 'launch', 'payload',
+    'telemetry', 'avionics', 'hypersonic', 'reentry', 'constellation',
+    # Quantitative and research methods
+    'Bayesian', 'frequentist', 'multilevel', 'longitudinal', 'synthetic',
+    'counterfactual', 'propensity', 'stratified', 'weighted', 'normalized',
+    'validated', 'calibrated', 'replicated', 'triangulated', 'harmonized',
+    # Outcome and effectiveness descriptors
+    'productivity-adjusted', 'risk-weighted', 'inflation-adjusted', 'currency-adjusted', 'tenure-adjusted',
+    'performance-weighted', 'skill-weighted', 'competency-based', 'outcome-linked', 'mission-aligned',
+    # Regulatory and compliance descriptors
+    'FLSA-compliant', 'ERISA-aligned', 'IRC-governed', 'SEC-regulated', 'IRS-sanctioned',
+    'OFCCP-compliant', 'Davis-Bacon-governed', 'Service-Contract-Act', 'prevailing-wage', 'certified-payroll',
+    # Structural and organizational descriptors
+    'matrix', 'federated', 'decentralized', 'centralized', 'shared-service',
+    'center-of-excellence', 'hub-and-spoke', 'divisional', 'functional', 'project-based',
 ]
 
 
@@ -2865,6 +3977,120 @@ _CONSULTANT_TITLES = [
     'Compensation Communications Specialist',
     'Manager Pay Ratio Specialist',
     'Geographic Differential Specialist',
+    # Sports & entertainment practice titles
+    'Senior Director, Sports Compensation Advisory',
+    'Director, League & Franchise Pay Analytics',
+    'Principal, Entertainment Industry Compensation',
+    'Managing Consultant, Media Talent Benchmarking',
+    'Senior Consultant, Sports Business Analytics',
+    'Senior Consultant, Collective Bargaining Economics',
+    'Director, Broadcasting & Content Workforce Strategy',
+    'Associate Principal, Esports Compensation Advisory',
+    'Senior Consultant, Venue & Event Operations Compensation',
+    'Engagement Manager, Sports & Media Practice',
+    # Legal practice titles
+    'Senior Director, Legal Talent Advisory',
+    'Director, Law Firm Compensation Benchmarking',
+    'Principal, Legal Operations Transformation',
+    'Managing Consultant, Law Firm Economics',
+    'Senior Consultant, In-House Legal Benchmarking',
+    'Director, Legal Department Effectiveness',
+    'Associate Principal, Alternative Legal Services',
+    'Engagement Manager, Legal Practice',
+    'Senior Consultant, Outside Counsel Analytics',
+    'Director, Legal Workforce Strategy',
+    # Public sector titles
+    'Senior Director, Government Workforce Advisory',
+    'Director, Civil Service Compensation',
+    'Principal, Public Sector Pay Benchmarking',
+    'Managing Consultant, Municipal Workforce Strategy',
+    'Senior Consultant, Government Benefits Design',
+    'Director, Public Safety Compensation',
+    'Associate Principal, Federal Pay Band Analytics',
+    'Senior Consultant, Labor Relations Advisory',
+    'Engagement Manager, Public Sector Practice',
+    'Director, State & Local Government Compensation',
+    # Education titles
+    'Senior Director, Higher Education Compensation',
+    'Director, Academic Workforce Analytics',
+    'Principal, University & College Pay Benchmarking',
+    'Managing Consultant, Faculty Compensation Design',
+    'Senior Consultant, Athletic Compensation Advisory',
+    'Director, Education Sector Total Rewards',
+    'Associate Principal, Student Affairs Compensation',
+    'Senior Consultant, K-12 Administration Benchmarking',
+    'Engagement Manager, Education Practice',
+    'Director, Research Institution Compensation',
+    # Nonprofit / association titles
+    'Senior Director, Nonprofit Compensation Advisory',
+    'Director, Association Executive Pay Benchmarking',
+    'Principal, Foundation Governance & Compensation',
+    'Managing Consultant, Social Sector Workforce',
+    'Senior Consultant, Nonprofit Benefits Design',
+    'Director, Philanthropic Sector Total Rewards',
+    'Associate Principal, Cooperative Governance',
+    'Senior Consultant, Trade Association Compensation',
+    'Engagement Manager, Mission-Driven Organizations',
+    'Director, Social Enterprise Compensation',
+    # Hospitality & consumer titles
+    'Senior Director, Hospitality Workforce Advisory',
+    'Director, Restaurant & Food Service Compensation',
+    'Principal, Consumer Industry Total Rewards',
+    'Managing Consultant, Franchise Compensation Strategy',
+    'Senior Consultant, Hotel & Resort Pay Benchmarking',
+    'Director, Travel & Tourism Workforce Analytics',
+    'Associate Principal, Gaming & Leisure Compensation',
+    'Senior Consultant, Consumer Research Compensation',
+    # International / global titles
+    'Senior Director, Global Compensation Advisory',
+    'Director, International Pay Benchmarking',
+    'Principal, Cross-Border Compensation Design',
+    'Managing Consultant, Global Mobility Rewards',
+    'Senior Consultant, Expatriate Compensation Design',
+    'Director, Multi-Country Benefits Benchmarking',
+    'Associate Principal, Emerging Markets Compensation',
+    # Innovation & technology titles
+    'Senior Director, Technology Talent Compensation',
+    'Director, Digital Workforce Pay Analytics',
+    'Principal, AI & Data Science Compensation',
+    'Managing Consultant, Product & Engineering Pay Design',
+    'Senior Consultant, Startup Compensation Strategy',
+    'Director, Venture-Backed Company Advisory',
+    'Associate Principal, Platform Economics & Compensation',
+    # Specialist titles (new domains)
+    'Sports Salary Cap Specialist',
+    'Collective Bargaining Analytics Specialist',
+    'Media Rights Economics Specialist',
+    'Legal Partner Pay Specialist',
+    'Civil Service Classification Specialist',
+    'Academic Tenure Economics Specialist',
+    'Nonprofit Executive Pay Specialist',
+    'Hospitality Labor Economics Specialist',
+    'Franchise Compensation Specialist',
+    'Agricultural Cooperative Pay Specialist',
+    'Climate & Sustainability Workforce Specialist',
+    'Space Industry Compensation Specialist',
+    # More specialist titles
+    'Esports and Gaming Compensation Specialist',
+    'Life Sciences Commercial Pay Specialist',
+    'Pharmaceutical Sales Incentive Specialist',
+    'Health System Physician Pay Specialist',
+    'Behavioral Health Workforce Specialist',
+    'Federal Contractor Compensation Specialist',
+    'Defense Industry Pay Specialist',
+    'Semiconductor Workforce Specialist',
+    'Autonomous Vehicle Talent Specialist',
+    'Quantum Computing Workforce Specialist',
+    # Principal / Managing Director level
+    'Principal, Workforce Insights',
+    'Principal, Executive Pay',
+    'Principal, Healthcare Rewards',
+    'Principal, Financial Services Compensation',
+    'Managing Director, Global Rewards',
+    'Managing Director, Talent Analytics',
+    'Managing Director, Board & CEO Pay',
+    'Managing Director, Workforce Transformation',
+    'Managing Director, Compensation Technology',
 ]
 
 _EXEC_SUMMARY_BULLETS = [
@@ -2963,6 +4189,65 @@ _EXEC_SUMMARY_BULLETS = [
     'Total rewards program competitiveness assessment confirmed that {org}\'s overall value proposition ranks at the {percentile} percentile versus the market, with below-median base salary offset by above-median long-term incentive opportunity.',
     'Wage structure compression analysis identified {n} employees whose base salary rate exceeds their supervisor\'s rate, a condition requiring resolution in the next salary structure review cycle.',
     'Executive sign-on award benchmarking for the incoming {phase} role was assessed against {n} comparable external hires in the {industry} sector during {year}–{endyear}.',
+    # Sports & entertainment bullets
+    'Player payroll benchmarking against {n} comparable {industry} sector organizations placed {org} at the {percentile} percentile of league spending intensity as of {date}, with luxury tax liability exceeding the median threshold by approximately {pct}%.',
+    'Talent compensation benchmarking for on-screen and above-the-line roles identified {n} categories where {org}\'s rate card falls below guild scale by an average of {pct}%, representing both a cost risk and a talent acquisition vulnerability relative to {regions} peer production companies.',
+    'Front-office compensation benchmarking for {org} across {n} comparable {industry} sector organizations found that administrative and analytics roles are positioned at the {percentile} percentile, with compensation gaps concentrated in data science and digital engagement functions.',
+    'Collective bargaining analysis covering {n} recent {industry} sector agreements identified {regions} contract provisions now considered standard market practice that are absent from {org}\'s current agreement, creating a potential gap in future negotiations.',
+    'Sponsorship valuation benchmarking assessed {org}\'s naming rights and partnership agreements against {n} comparable transactions, finding current contract values at the {percentile} percentile of the {industry} sector — a positioning that warrants renegotiation at the {date} option period.',
+    # Legal bullets
+    'Attorney compensation benchmarking against {n} Am Law peer organizations identified associate salary structures at {org} as {pct}% below the {percentile} percentile market rate across {regions} class years — a gap that has contributed to associate attrition of {pct}% over the prior 12 months.',
+    'Partner compensation model assessment found that {org}\'s compensation system falls below the {percentile} percentile of {industry} sector practice on two of three key dimensions: origination weighting and firm investment credits, which trail {n} peer firms benchmarked as of {date}.',
+    'Legal operations benchmarking indicated that {org}\'s law department outside counsel spend as a percentage of revenue is {pct}% above the {industry} sector median across {n} peer companies, with the excess concentrated in discovery and document management categories amenable to alternative sourcing strategies.',
+    'In-house legal compensation benchmarking placed {org}\'s General Counsel total compensation at the {percentile} percentile of the {n}-company peer group, with below-median long-term incentive grant values identified as the primary driver of the competitive gap relative to {industry} sector peers.',
+    # Public sector bullets
+    'Civil service compensation benchmarking against {n} comparable {industry} sector jurisdictions found that {org}\'s total compensation premium over private sector equivalents has narrowed to {pct}% — below the {percentile} percentile of peer jurisdictions — weakening the value proposition for public sector employment in a competitive talent market.',
+    'Government executive compensation analysis placing {org}\'s city manager and department head pay at the {percentile} percentile of {n} peer jurisdictions found a {pct}% gap in total compensation relative to comparable private sector roles, with the gap increasing at senior levels due to statutory pay caps.',
+    'Pension funded ratio benchmarking found that {org}\'s defined benefit plan funded ratio of {pct}% trails the {industry} sector median of {percentile}th percentile peers, with an unfunded actuarial accrued liability representing {n} times annual employer contributions as of {date}.',
+    'Position vacancy analysis found {org}\'s overall vacancy rate of {pct}% across {n} classified positions is {regions} percentage points above the {industry} sector benchmark, with vacancy concentration in technical, skilled trades, and public safety classifications requiring targeted recruitment and compensation strategies.',
+    # Education bullets
+    'Faculty salary benchmarking against AAUP norms and {n} peer institutions found that {org}\'s average full professor salary trails the {industry} sector median at the {percentile} percentile by approximately {pct}%, with the gap most pronounced in professional school and STEM disciplines subject to competitive market pressures.',
+    'Administrative compensation assessment for {org} placed non-academic leadership roles at the {percentile} percentile of {n} {industry} sector peer institutions — competitive at the director level but below the median at vice presidential and above levels, where deferred compensation and incentive provisions are increasingly common among peers.',
+    'Athletic department compensation benchmarking for {org} found head coaching salaries in {n} revenue-generating sports at the {percentile} percentile of the {industry} sector, with the gap relative to the top quartile concentrated in multi-year contract guarantees and incentive structures that now represent standard practice among {regions} comparable institutions.',
+    'Adjunct faculty compensation benchmarking identified {org}\'s per-credit compensation at {pct}% below the {industry} sector median across {n} comparable institutions, representing both an equity concern and a sustainability risk as competition for part-time instructional labor intensifies in key subject areas.',
+    # Nonprofit bullets
+    'Executive director compensation benchmarking against {n} comparable {industry} sector organizations found {org}\'s CEO pay at the {percentile} percentile of the peer group — a positioning the board determined to be below target, with a {pct}% market adjustment recommended effective {date}.',
+    'Organizational pay equity analysis covering {n} staff positions across {regions} functional areas found no statistically significant unexplained pay disparities by gender or race/ethnicity at the 95% confidence interval, consistent with {org}\'s compensation philosophy and the board\'s commitment to equitable pay practices.',
+    'Benefits benchmarking against {n} comparable {industry} sector nonprofits found that {org}\'s retirement plan match rate trails the {percentile} percentile of peers by {pct} percentage points, representing a meaningful gap in the total compensation value proposition for mission-aligned talent considering employment at {org}.',
+    'Total rewards philosophy benchmarking for {org} found positioning targets of market median to be consistent with {pct}% of {industry} sector peers of comparable scale, with {regions}% of surveyed organizations targeting at or above the 50th percentile — suggesting {org}\'s current philosophy remains defensible to donors and the board.',
+    # Hospitality bullets
+    'Labor cost benchmarking found {org}\'s restaurant-level labor as a percentage of revenue at {pct}% — {regions} percentage points above the {industry} sector median across {n} comparable operating units — with the variance attributable to below-peer hourly productivity in back-of-house operations rather than wage rates relative to the market.',
+    'General manager compensation benchmarking against {n} comparable {industry} sector properties placed {org}\'s property-level leadership pay at the {percentile} percentile, with below-median annual bonus opportunity identified as the primary source of competitive disadvantage relative to full-service hotel and resort peers.',
+    'Franchise operator compensation assessment found that {org}\'s total franchisee cost structure — inclusive of royalties, marketing fund contributions, and technology fees — represents {pct}% of gross revenue, positioning at the {percentile} percentile of {n} {industry} sector franchise systems benchmarked as of {date}.',
+    # Consumer research bullets
+    'Consumer research panel design benchmarking against {n} comparable {industry} sector programs found {org}\'s panel composition, incentive structure, and survey frequency to be consistent with the {percentile} percentile of practice, with data freshness and mobile survey optimization identified as areas for improvement.',
+    'Brand equity tracking methodology assessment confirmed alignment with established {industry} sector norms across {n} measurement dimensions, with a recommendation to add {regions} behavioral and social listening metrics to improve predictive validity relative to {n} peer programs benchmarked as of {date}.',
+    # Agricultural & cooperative bullets
+    'Agribusiness executive compensation benchmarking against {n} comparable {industry} sector cooperatives and publicly traded companies placed {org}\'s CEO total compensation at the {percentile} percentile, with the primary gap concentrated in long-term incentive opportunity that peer companies increasingly structure as synthetic equity or long-term cash plans.',
+    'Cooperative governance benchmarking found {org}\'s board member per diem rates, committee compensation, and annual retainer at the {percentile} percentile of {n} agricultural cooperative peers — consistent with statutory and member expectations but below the median of commercial enterprise comparators used for executive compensation benchmarking.',
+    # Global & international bullets
+    'International compensation benchmarking across {n} countries in {regions} regions found that {org}\'s local-market pay positioning ranges from the {percentile} percentile in high-cost markets to the {pct}th percentile in emerging markets, reflecting an inconsistent application of the global compensation philosophy that warrants a coordinated review.',
+    'Expatriate assignment package benchmarking against {n} comparable {industry} sector multinationals found {org}\'s balance sheet approach to be consistent with market practice, with recommended enhancements to host-country housing allowances in {regions} high-cost posting locations where current allowances trail peer benchmarks by an average of {pct}%.',
+    # Legal and professional services bullets
+    'Law firm associate compensation benchmarking against {n} comparable {industry} sector firms placed {org}\'s first-year associate base salary at the {percentile} percentile, with the gap to the Cravath scale widening to {pct}% at the class year {regions} level — a structural disadvantage in lateral recruiting that has been cited by departing associates in exit interviews.',
+    'Accounting firm partner compensation assessment found that {org}\'s equity partner total compensation is positioned at the {percentile} percentile of {n} {industry} sector comparators, with the primary shortfall concentrated in profit-sharing distributions for non-Big Four regional firms serving comparable revenue bases across {regions} metropolitan markets.',
+    'Management consulting firm senior manager benchmarking against {n} comparable {industry} sector firms placed {org}\'s total direct compensation at the {percentile} percentile, with a recommended adjustment to performance bonus leverage that would bring target bonus opportunity to {pct}% of base salary — consistent with {regions} comparable strategy boutiques.',
+    # Public sector and education bullets
+    'Civil service pay benchmarking against {n} {industry} sector comparators found that {org}\'s GS-equivalent midpoint rates trail comparable private sector positions by {pct}% on a base salary basis and {regions}% on a total compensation basis when accounting for benefits and pension — creating recruitment and retention challenges in mission-critical technical occupations.',
+    'University faculty compensation benchmarking found {org}\'s full professor salaries at the {percentile} percentile relative to {n} Carnegie-comparable institutions, with the most significant competitive gaps concentrated in business, engineering, and computer science departments where private sector and industry alternatives exert the strongest market pressure across {regions} metropolitan areas.',
+    'Nonprofit executive compensation benchmarking against {n} comparable {industry} sector organizations found {org}\'s CEO total compensation at the {percentile} percentile — within the range ACPWB considers defensible under IRS intermediate sanctions standards — with recommended disclosures for {regions} performance-based elements on Form 990, Schedule J.',
+    # Healthcare bullets
+    'Hospital system physician compensation benchmarking against {n} Medical Group Management Association survey respondents placed {org}\'s primary care {metric} at the {percentile} percentile, with a recommended wRVU rate adjustment that would bring total compensation to the {pct}th percentile — consistent with the board\'s stated recruitment objective across {regions} service communities.',
+    'Life sciences sales incentive design benchmarking against {n} comparable {industry} sector pharmaceutical and biotech companies found {org}\'s pay mix of {pct}% base and {regions}% target incentive to be below the median for specialty products, with a recommendation to increase incentive leverage to {pct}% to improve alignment with commercial performance objectives.',
+    # Energy and manufacturing bullets
+    'Utility lineworker compensation benchmarking against {n} comparable {industry} sector companies found {org}\'s journeyman lineworker total compensation at the {percentile} percentile, with below-median overtime guarantee and standby pay identified as the primary sources of competitive disadvantage relative to {regions} peer utilities competing for the same candidate pool.',
+    'Downstream oil refinery workforce benchmarking against {n} comparable {industry} sector facilities found {org}\'s operations technician compensation at the {percentile} percentile — adequate for retention in established markets but below competitive in {regions} growth markets where renewable energy construction is creating competing demand for the same skilled trades workforce.',
+    # Technology bullets
+    'Technology sector principal engineer compensation benchmarking against {n} comparable software companies placed {org}\'s total annual compensation at the {percentile} percentile, with equity refresh cadence identified as the primary retention risk as cumulative unvested value trails hyperscale competitors by an estimated {pct}% across {regions} engineering levels.',
+    'Cybersecurity operations workforce benchmarking against {n} comparable {industry} sector organizations placed {org}\'s security analyst through architect compensation at the {percentile} percentile, with the total compensation gap to major technology firms widening to {pct}% at senior levels — a vulnerability in retention that correlates with the {regions}% increase in SOC vacancies observed over the measurement period.',
+    # Hospitality and food service bullets
+    'Hotel general manager benchmarking against {n} comparable {industry} sector properties placed {org}\'s total compensation at the {percentile} percentile, with the primary competitive gap concentrated in annual bonus opportunity — currently set at {pct}% of base salary versus the {regions}% median for full-service properties in comparable markets.',
+    'Food and beverage director compensation benchmarking against {n} comparable {industry} sector organizations found {org}\'s total pay positioning at the {percentile} percentile, with the engagement recommending a {pct}% adjustment to base salary and a restructuring of the performance bonus plan to introduce {regions} new operational KPI metrics.',
 ]
 
 _FOOTNOTE_TEMPLATES = [
@@ -3052,6 +4337,59 @@ _FOOTNOTE_TEMPLATES = [
     'BDO {year} Private Equity Portfolio Company Compensation Survey. {n} participating companies; data indexed to {date} reference date.',
     'Deloitte {year} Global Millennial Survey — Compensation Preferences. {n} respondents globally; {industry} sector breakout included.',
     'McKinsey & Company {year} Global Surveys — People Analytics. {n} organizations participating; data aggregated at the sector level.',
+    # Sports & entertainment sources
+    'Sportico {year} NFL / NBA / MLB / NHL Franchise Valuation Rankings. Revenue and payroll data sourced from league filings and publicly available disclosures.',
+    'Sports Business Journal {year} Annual Salary Benchmarking Issue. Front-office compensation data for {n} franchises across {industry} sector leagues; data indexed to {date}.',
+    'Front Office Sports {year} Sports Media Compensation Survey. {n} participating media entities; editorial, production, and broadcast talent compensation reported.',
+    'Nielsen Sports {year} Sponsorship Activation Benchmarking Report. {n} brand partnerships analyzed; naming rights valuations indexed to {date} market conditions.',
+    'The Business of College Sports {year} Compensation Report. {n} athletic departments; head coach, assistant coach, and administrator pay data sourced from state public records.',
+    'NFLPA / NBPA / MLBPA Collective Bargaining Agreement, effective {date}. Minimum salary schedules, bonus pool parameters, and performance escalator structures referenced.',
+    # Legal industry sources
+    'The American Lawyer {year} A-List and AmLaw 100/200 Survey. Revenue per lawyer, profit per partner, and associate compensation data for {n} firms; fiscal year {year}.',
+    'NALP Foundation {year} Associate Salary Survey. {n} law firms reporting; data indexed to {date}; positions weighted by class year and firm revenue tier.',
+    'ALM Intelligence {year} Partner Compensation Survey — Confidential Submission. {n} Am Law firms; equity and non-equity partner compensation data.',
+    'Thomson Reuters {year} Legal Tracker Benchmarking Report. Outside counsel spend, billing rate, and matter economics data from {n} corporate legal departments.',
+    'Wolters Kluwer ELM Solutions {year} Real Rate Report. {n} law firms; attorney billing rates by practice area, experience, and geography, indexed to {date}.',
+    'ACC {year} Chief Legal Officer Survey. {n} in-house legal department participants; headcount, budget, and compensation benchmarking data.',
+    # Public sector sources
+    'ICMA {year} State of the Profession Survey. City and county manager compensation and benefits data from {n} local government participants; data as of {date}.',
+    'NASPE / SPPG {year} State Human Resources Survey. Classified compensation, benefits, and workforce data from {n} state agencies; reference date {date}.',
+    'ERC {year} Government & Nonprofit Compensation Survey. {n} participating organizations; total cash and benefits benchmarking for {industry} sector positions.',
+    'BLS Occupational Employment and Wage Statistics (OEWS), {year}. Median and percentile wage data for {n} standard occupational classifications; reference date {date}.',
+    'IPMA-HR {year} Public Sector Human Resources Survey. HR compensation, staffing ratios, and program data from {n} federal, state, and local government participants.',
+    'NASBO {year} State Expenditure Report. State workforce and personnel costs; {n} states reporting; fiscal year {year} actuals and {endyear} estimates.',
+    # Education sources
+    'AAUP {year} Annual Report on the Economic Status of the Profession. Faculty compensation data from {n} institutions by academic rank, tenure status, and institution type.',
+    'CUPA-HR {year} Higher Education Employee Salary Survey. {n} institutions; administrative and professional staff compensation indexed to {date}.',
+    'CUPA-HR {year} Faculty in Higher Education Survey. {n} institutions; tenure-track and non-tenure-track faculty compensation by discipline and institution type.',
+    'Chronicle of Higher Education {year} Annual Administrator Compensation Survey. President, provost, and dean compensation from {n} institutions; data sourced from IRS Form 990.',
+    'USA Today / ESPN {year} NCAA Coaches Salary Database. {n} public institution head coach salaries sourced from FOIA requests and institutional disclosures; data as of {date}.',
+    'NACUBO {year} Study of Endowments. Investment returns, asset allocation, and spending policy data from {n} higher education institutions; fiscal year {year}.',
+    # Nonprofit & association sources
+    'GuideStar / Candid {year} Nonprofit Compensation Report. Executive director and key employee pay data from {n} IRS Form 990 filings; data indexed to {date}.',
+    'Nonprofit Times {year} Top 100 Nonprofit Employee Compensation Survey. {n} nonprofit organizations; CEO and executive team compensation data sourced from Form 990.',
+    'ASAE {year} Association Executive Compensation Study. {n} trade and professional association executives; base salary, bonus, and benefits benchmarking.',
+    'Council on Foundations {year} Grantmaker Compensation Report. {n} private, community, and operating foundation participants; executive and program officer pay data.',
+    'Independent Sector {year} Nonprofit Employment Data. {n} nonprofits; FTE counts, compensation, and revenue data by mission category; fiscal year {year}.',
+    # Hospitality & consumer sources
+    'Hospitality Financial and Technology Professionals (HFTP) {year} Annual Compensation Survey. {n} hotel and resort participants; department head and manager pay data; data indexed to {date}.',
+    'National Restaurant Association {year} Restaurant Industry Compensation Report. {n} chain and independent restaurant operators; management and hourly pay benchmarking.',
+    'STR {year} Hotel Industry Benchmarking Report. RevPAR, ADR, and occupancy data from {n} properties across {regions} markets; monthly data through {date}.',
+    'Franchise Business Review {year} Franchisee Satisfaction Survey. {n} franchise systems rated by {n} active franchisees; unit economics and operator compensation data.',
+    'Cornell Center for Hospitality Research {year} Compensation Benchmarking Study. {n} {industry} sector participants; GM and department head pay data indexed to {date}.',
+    # Agricultural & cooperative sources
+    'National Council of Farmer Cooperatives {year} Executive Compensation Survey. {n} agricultural cooperative participants; CEO and senior leadership compensation data.',
+    'Farm Credit Council {year} Compensation Benchmarking Report. {n} Farm Credit System institutions; executive and board compensation indexed to {date}.',
+    'Purdue Center for Food and Agricultural Business {year} Agribusiness Compensation Survey. {n} participants; executive compensation across grain, livestock, and input sectors.',
+    # ACPWB proprietary (new categories)
+    'ACPWB Sports & Entertainment Compensation Reference Database (ACPWB-SE-{year}). {n} franchises, studios, and leagues; data normalized to {date} reference date.',
+    'ACPWB Legal Industry Compensation Database (ACPWB-Legal-{year}). {n} law firms and legal departments; data indexed to {date}.',
+    'ACPWB Public Sector Pay Intelligence Platform, {year} edition. {n} government entities across {regions} jurisdictions; data reference date {date}.',
+    'ACPWB Higher Education Compensation Reference Database (ACPWB-HE-{year}). {n} institutions; faculty, administrative, and athletics data indexed to {date}.',
+    'ACPWB Nonprofit Executive Compensation Database (ACPWB-NPO-{year}). {n} organizations by revenue tier and mission category; Form 990 data indexed to {date}.',
+    'ACPWB Hospitality & Consumer Industry Compensation Survey, {year}. {n} participating companies; management and hourly compensation data indexed to {date}.',
+    'ACPWB International Compensation Intelligence, {year} edition. {n} countries; local market pay data normalized using purchasing power parity methodology as of {date}.',
+    'ACPWB Sports & Entertainment Labor Economics Monitor, Q{q} {year}. Collective bargaining trend analysis; {n} agreements reviewed across {industry} sector leagues.',
 ]
 
 _REVISION_TYPES = [
@@ -3111,6 +4449,38 @@ _REVISION_TYPES = [
     ('v1.0 — Request for Information Response', 'Response to {org} Board\'s formal request for information; prepared under direction of outside counsel.'),
     ('v1.0 — Expert Report', 'Expert report prepared for litigation support; reviewed and approved by testifying expert on {date}.'),
     ('v1.1 — Rebuttal Analysis', 'Rebuttal analysis responding to opposing expert report dated {date}; filed with court on {date}.'),
+    # Sports & entertainment revision types
+    ('v1.0 — Pre-Negotiation Draft', 'Preliminary draft prepared for internal strategy sessions prior to collective bargaining or contract negotiation commencing {date}.'),
+    ('v1.1 — Post-Arbitration Update', 'Updated following salary arbitration decision received {date}; player compensation data refreshed across all affected roster tiers.'),
+    ('v2.0 — Executed Agreement Version', 'Final version reflecting executed contract terms; all unsigned draft provisions removed and final economics confirmed as of {date}.'),
+    ('v1.0 — Season Opener Version', 'Initial version released at start of {year} playing season; reflects opening-day roster and payroll configuration.'),
+    ('v2.1 — Trade Deadline Revision', 'Revised to reflect roster and payroll changes resulting from transactions completed through the {year} trade deadline.'),
+    # Legal revision types
+    ('v1.0 — Partnership Committee Draft', 'Initial draft prepared for partnership committee review; compensation model parameters subject to partner vote on {date}.'),
+    ('v1.1 — Managing Partner Review Draft', 'Revised incorporating managing partner and executive committee input; benchmarking peer set updated.'),
+    ('v2.0 — Lockstep Transition Final', 'Final version reflecting board-approved transition from modified lockstep to performance-based model effective {date}.'),
+    ('v1.0 — Lateral Hire Pro Forma', 'Preliminary pro forma prepared for lateral partner recruiting; compensation projections subject to client portability verification.'),
+    ('v1.2 — Associate Class Update', 'Updated to reflect {year} associate salary scale effective {date}; market parity confirmed against Am Law peer disclosures.'),
+    # Public sector revision types
+    ('v1.0 — Budget Cycle Draft', 'Preliminary draft prepared for annual budget cycle; compensation recommendations subject to appropriations review and legislative approval.'),
+    ('v1.1 — Civil Service Commission Draft', 'Revised for civil service commission review; classification and pay grade recommendations formatted per commission requirements.'),
+    ('v2.0 — Adopted Classification Plan', 'Adopted classification plan effective {date}; approved by governing board and filed with human resources department.'),
+    ('v1.0 — Union Negotiation Version', 'Internal negotiation support version; reflects management position prior to collective bargaining sessions beginning {date}. Not for distribution.'),
+    ('v2.1 — Ratified Agreement Update', 'Updated to reflect ratified collective bargaining agreement terms; effective date {date}; compensation tables updated across all covered classifications.'),
+    # Education revision types
+    ('v1.0 — Faculty Senate Pre-Release', 'Preliminary version shared with faculty senate leadership prior to broader distribution; data subject to institutional verification.'),
+    ('v1.1 — Board of Trustees Review', 'Revised for board of trustees compensation committee; executive summary added; individual faculty data aggregated for confidentiality.'),
+    ('v2.0 — Accreditor-Ready Final', 'Final version formatted for accreditation documentation; data independently verified by institutional research office as of {date}.'),
+    ('v1.0 — AAUP Submission Version', 'Version formatted for AAUP annual salary survey submission; figures reconciled to payroll records as of {date}.'),
+    # Nonprofit revision types
+    ('v1.0 — Compensation Committee Draft', 'Initial draft for nonprofit board compensation committee review; peer comparables drawn from Form 990 and survey data as of {date}.'),
+    ('v1.1 — Donor Relations Version', 'Sanitized version prepared for major donor transparency inquiry; compensation narrative simplified; underlying data tables withheld.'),
+    ('v2.0 — IRS Form 990 Filing Version', 'Final version reconciled to Form 990 compensation disclosure requirements; reviewed by outside counsel prior to {date} filing.'),
+    ('v1.0 — Executive Transition Version', 'Prepared in connection with executive director transition; outgoing executive final compensation and severance documented as of {date}.'),
+    # International revision types
+    ('v1.0 — Local Counsel Review Draft', 'Preliminary draft distributed to local counsel across {n} jurisdictions for regulatory compliance review prior to implementation.'),
+    ('v1.1 — Works Council Submission', 'Revised draft formatted for submission to employee representative bodies in applicable jurisdictions; personal data redacted per GDPR requirements.'),
+    ('v2.0 — Global Rollout Final', 'Final version approved for global implementation; country-specific appendices incorporated; effective {date} in all jurisdictions.'),
 ]
 
 _DISTRIBUTION_CLASSES = [
@@ -3197,6 +4567,55 @@ _DISTRIBUTION_CLASSES = [
     'Approved for Court Filing — Redactions Applied',
     'For Publication — Peer Review Completed',
     'For Conference Presentation — Attribution Cleared',
+    # Sports & entertainment distribution classes
+    'League Confidential — Club Executives Only',
+    'Team Restricted — Ownership and Front Office Leadership',
+    'Agent Distribution Restricted — Named Parties Only',
+    'Media Embargo — Not for Release Prior to {date}',
+    'Production Confidential — Named Crew and Cast Only',
+    'Studio Restricted — Senior Creative and Business Affairs',
+    'Talent Agency Internal — Not for Client Distribution',
+    # Legal distribution classes
+    'Attorney-Client Privilege — Law Firm Internal Use Only',
+    'Partnership Confidential — Equity Partners Only',
+    'Compensation Committee Restricted — Named Partners Only',
+    'Lateral Recruiting Confidential — Recruiting Committee Use Only',
+    'Not for Associate or Staff Distribution',
+    'Regulatory Submission Version — Redacted for Filing',
+    # Public sector distribution classes
+    'Government Use Only — Not for Public Release',
+    'Pre-Decisional — Deliberative Process Privilege',
+    'Labor Relations Confidential — Management Negotiating Team Only',
+    'Collective Bargaining Sensitive — Do Not Distribute to Union',
+    'Civil Service Commission Restricted',
+    'Budget Office Use Only — Not for Departmental Distribution',
+    'Legislative Affairs Restricted — Appropriations Committee Only',
+    'Inspector General Restricted — For OIG Use Only',
+    # Education distribution classes
+    'Academic Affairs Confidential — Provost and Deans Only',
+    'Board of Trustees Restricted — Not for Faculty Distribution',
+    'Faculty Senate Limited — Executive Committee Only',
+    'Accreditation Sensitive — Institutional Research Only',
+    'Athletics Confidential — AD and Coaching Staff Only',
+    'Development Office Restricted — Major Gift Officers Only',
+    # Nonprofit distribution classes
+    'Board Compensation Committee Restricted — Not for Staff Distribution',
+    'Donor Confidential — Foundation Trustees Only',
+    'IRS Schedule J Supporting Documentation — Retain Seven Years',
+    'Grant Application Confidential — Program Officer Review Only',
+    'Whistleblower Confidential — Board Chair and Counsel Only',
+    # International distribution classes
+    'Cross-Border Restricted — Local Data Protection Law Applies',
+    'Works Council Submission Version — Translated and Redacted',
+    'GDPR Article 88 — Employee Data Processing Agreement Required',
+    'Transfer Impact Assessment Required Before Cross-Border Sharing',
+    'Restricted in APAC Jurisdictions — Local Approval Required',
+    # Special situation distribution classes
+    'Crisis Response Team Only — Not for General Distribution',
+    'Restructuring Confidential — Steering Committee Eyes Only',
+    'Creditor Committee Restricted — Financial Advisors Only',
+    'Monitor Restricted — Regulatory Submission Copy',
+    'Special Investigation Restricted — Forensic Team and Counsel Only',
 ]
 
 _ENGAGEMENT_CODES = [
@@ -3218,6 +4637,25 @@ _ENGAGEMENT_CODES = [
     # Sector-specific
     'FS', 'HE', 'MF', 'RX', 'TK', 'EN', 'RT', 'FD', 'CP', 'ME',
     'UT', 'TS', 'BK', 'AM', 'PE', 'VC', 'SW', 'BT', 'AG', 'ED',
+    # Sports & entertainment
+    'SP', 'SB', 'ES', 'FB', 'BK', 'BB', 'HC', 'SC', 'MR', 'LG',
+    'TV', 'FM', 'PD', 'MU', 'TH', 'GA', 'AN', 'VG', 'LV', 'AR',
+    # Legal
+    'LW', 'LF', 'LO', 'LA', 'LC', 'LP', 'LT', 'LR', 'LN', 'LD',
+    # Public sector
+    'GV', 'MU', 'SG', 'FG', 'LE', 'PS', 'PB', 'GU', 'GC', 'GA',
+    # Education
+    'HU', 'K1', 'UC', 'GS', 'VT', 'OE', 'HB', 'TC', 'MA', 'DA',
+    # Nonprofit / association
+    'NP', 'PH', 'CF', 'TA', 'PA', 'CO', 'CU', 'LU', 'SE', 'GB',
+    # Hospitality & consumer
+    'HT', 'RS', 'FS', 'GM', 'RL', 'TR', 'FV', 'CR', 'LX', 'CS',
+    # Agricultural
+    'AK', 'AC', 'AF', 'AV', 'AW', 'AX', 'AY', 'AZ', 'AB', 'AD',
+    # International
+    'IX', 'IM', 'IB', 'IC', 'IL', 'IR', 'IJ', 'IK', 'IN', 'IO',
+    # Special situations
+    'CR', 'TX', 'WD', 'FB', 'IS', 'IF', 'IW', 'IX', 'IY', 'IZ',
 ]
 
 _BENCH_METRICS = [
@@ -3329,6 +4767,79 @@ _BENCH_METRICS = [
     'Pay Equity Unexplained Variance (R² Residual)',
     'Employees Below Pay Equity Threshold (%)',
     'Pay Equity Remediation Cost Estimate',
+    # Sports & entertainment bench metrics
+    'Player Salary Cap Utilization ($M)',
+    'Average Player Contract Value ($M)',
+    'Luxury Tax Overage ($M)',
+    'Average Contract Length (years)',
+    'Signing Bonus as % of Contract Value',
+    'Performance Incentive Pool ($M)',
+    'Front-Office Payroll as % of Revenue',
+    'Coaching Staff Total Compensation ($M)',
+    'Head Coach Base Salary ($M)',
+    'Media Rights Revenue per Franchise ($M)',
+    'Sponsorship Revenue per Franchise ($M)',
+    'Named Talent Total Compensation ($M)',
+    'Production Cost per Episode ($M)',
+    'Talent Agency Commission Rate (%)',
+    # Legal bench metrics
+    'Equity Partner Compensation — 25th Percentile ($K)',
+    'Equity Partner Compensation — Median ($K)',
+    'Equity Partner Compensation — 75th Percentile ($K)',
+    'Associate Compensation — 1st Year ($K)',
+    'Associate Compensation — 5th Year ($K)',
+    'Non-Equity Partner Compensation — Median ($K)',
+    'Of Counsel Compensation — Median ($K)',
+    'Paralegals Compensation — Median ($K)',
+    'Billing Rate — Equity Partner ($/hr)',
+    'Billing Rate — Associate ($/hr)',
+    'Realization Rate (%)',
+    'Collection Rate (%)',
+    'Revenue per Lawyer ($K)',
+    'Profit per Equity Partner ($K)',
+    # Public sector bench metrics
+    'City Manager Compensation — Median ($K)',
+    'County Administrator Compensation — Median ($K)',
+    'Department Head Compensation — Median ($K)',
+    'Civil Service Grade 15 Midpoint ($K)',
+    'Law Enforcement Starting Salary ($K)',
+    'Firefighter Starting Salary ($K)',
+    'Public Works Director Compensation ($K)',
+    'Pension Employer Contribution Rate (%)',
+    'Pension Funded Ratio (%)',
+    'OPEB Per-Employee Liability ($K)',
+    'Total Compensation Premium vs. Private Sector (%)',
+    # Education bench metrics
+    'Full Professor Salary — Median ($K)',
+    'Associate Professor Salary — Median ($K)',
+    'Assistant Professor Salary — Median ($K)',
+    'Adjunct Faculty Pay per Credit Hour ($)',
+    'University President Compensation — Median ($K)',
+    'Provost Compensation — Median ($K)',
+    'Head Football Coach Compensation ($M)',
+    'Athletic Director Compensation ($K)',
+    'Endowment per Student ($K)',
+    'Administrative Cost per FTE Student ($)',
+    # Nonprofit bench metrics
+    'Chief Executive Officer Compensation — Median ($K)',
+    'Chief Financial Officer Compensation — Median ($K)',
+    'Chief Program Officer Compensation — Median ($K)',
+    'Board Member Annual Stipend ($)',
+    'Program Expense Ratio (%)',
+    'Fundraising Cost per Dollar Raised ($)',
+    'Administrative Overhead (%)',
+    'Donor Retention Rate (%)',
+    'Volunteer Hour Value ($M)',
+    # Hospitality bench metrics
+    'General Manager Compensation — Full-Service ($K)',
+    'General Manager Compensation — Limited-Service ($K)',
+    'Director of Sales Compensation ($K)',
+    'Director of Food & Beverage Compensation ($K)',
+    'Hourly Starting Wage — Front of House ($)',
+    'Hourly Starting Wage — Back of House ($)',
+    'Labor Cost as % of Revenue — Restaurant (%)',
+    'RevPAR — Competitive Set Median ($)',
+    'Average Daily Rate — Competitive Set ($)',
 ]
 
 _PEER_GROUPS = [
@@ -3440,4 +4951,69 @@ _PEER_GROUPS = [
     'Geographic Market Comparator Set',
     'Pay Equity Reference Population',
     'Sector-Adjusted Broad Market',
+    # Sports & entertainment peer groups
+    '{industry} League Peers — All Franchises',
+    '{industry} League Peers — Revenue-Matched',
+    '{industry} League Peers — Market Size-Matched',
+    'Major Professional Sports Leagues — Cross-League',
+    'Minor League & Development League Peers',
+    'College Athletics — Power Conference Peers',
+    'College Athletics — {industry} Conference Peers',
+    'Broadcast Network Comparable Set',
+    'Streaming Platform Comparators',
+    'Talent Agency Revenue-Matched Peers',
+    'Film & Television Studio Comparators',
+    # Legal peer groups
+    'Am Law 50 Peers',
+    'Am Law 100 Peers',
+    'Am Law 200 Peers',
+    'Regional Law Firm Peers — Revenue-Matched',
+    'Boutique Litigation Firm Comparable Set',
+    'Transactional Practice Comparable Set',
+    'In-House Legal Department Peers — Revenue-Matched',
+    'In-House Legal Department Peers — Industry-Matched',
+    'Alternative Legal Service Provider Peers',
+    # Public sector peer groups
+    'Municipal Comparators — Population-Matched',
+    'County Government Peers — Revenue-Matched',
+    'State Agency Peers — Budget-Matched',
+    'Federal GS Schedule Comparators',
+    'Public Safety Agency Peers — Jurisdiction-Matched',
+    'Public School District Peers — Enrollment-Matched',
+    'Transit Authority Comparators — Ridership-Matched',
+    'Regional Government Peers — Geographic',
+    # Education peer groups
+    'AAUP Benchmark Institutions — Category I',
+    'AAUP Benchmark Institutions — Category IIA',
+    'Carnegie Classification Peers — Research Universities',
+    'Carnegie Classification Peers — Liberal Arts Colleges',
+    'NCAA Division I — Power Conference Peers',
+    'NCAA Division I — Mid-Major Peers',
+    'NCAA Division II / III Peer Group',
+    'Aspiration Peer Group — {n} Institutions',
+    'Self-Selected Peer Group — {industry} Institutions',
+    'Geographic Region Peers — Enrollment-Matched',
+    # Nonprofit peer groups
+    'Form 990 Revenue-Matched Nonprofit Peers',
+    'Mission-Category Matched Nonprofits',
+    'Foundation Assets-Matched Peers',
+    'Trade Association Revenue-Matched Peers',
+    'Social Services Comparable Organizations',
+    'Arts & Culture Comparable Organizations',
+    'Environmental Nonprofit Peer Group',
+    'International Relief Organization Comparators',
+    # Hospitality & consumer peer groups
+    'Full-Service Hotel Chain Comparators',
+    'Limited-Service Hotel Peers — Brand-Matched',
+    'Quick Service Chain Peers — Revenue-Matched',
+    'Fast Casual Peers — Unit Count-Matched',
+    'Fine Dining Group Comparators',
+    'Franchise System Peers — Total System Sales-Matched',
+    # International peer groups
+    'Local Country Market Comparators — {regions}',
+    'Regional Multinationals — EMEA Focus',
+    'Regional Multinationals — APAC Focus',
+    'Developing Market Comparators',
+    'Global 500 Cross-Sector',
+    'Expatriate Mobility Benchmark Pool — {n} Companies',
 ]

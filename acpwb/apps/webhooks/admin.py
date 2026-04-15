@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import InboundEmail, HoneypotMatch
+from .models import InboundEmail, HoneypotMatch, VoicemailRecording
 
 
 class HoneypotMatchInline(admin.TabularInline):
@@ -46,3 +46,12 @@ class HoneypotMatchAdmin(admin.ModelAdmin):
         if obj.generated_employee:
             return str(obj.generated_employee)
         return '—'
+
+
+@admin.register(VoicemailRecording)
+class VoicemailRecordingAdmin(admin.ModelAdmin):
+    list_display = ('received_at', 'caller_number', 'recording_duration', 'transcription_status', 'recording_sid')
+    list_filter = ('transcription_status',)
+    search_fields = ('caller_number', 'recording_sid', 'call_sid', 'transcription_text')
+    readonly_fields = ('received_at', 'call_sid', 'recording_sid')
+    ordering = ('-received_at',)

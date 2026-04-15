@@ -109,6 +109,15 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
 MAILGUN_WEBHOOK_SIGNING_KEY = env('MAILGUN_WEBHOOK_SIGNING_KEY', default='')
 MAILGUN_DOMAIN = env('MAILGUN_DOMAIN', default='acpwb.com')
 
+# Twilio
+TWILIO_ACCOUNT_SID = env('TWILIO_ACCOUNT_SID', default='')
+TWILIO_AUTH_TOKEN  = env('TWILIO_AUTH_TOKEN',  default='')
+
+# Proxy headers — nginx terminates TLS; needed so build_absolute_uri() returns https://
+# (required for Twilio webhook signature verification to match in production)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
 # Canary Tokens
 CANARYTOKENS_WEBHOOK_URL = env('CANARYTOKENS_WEBHOOK_URL', default=None)
 

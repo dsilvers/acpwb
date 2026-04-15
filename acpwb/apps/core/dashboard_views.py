@@ -18,7 +18,7 @@ from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, Intern
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import DataOptOutRequest
-from apps.webhooks.models import InboundEmail
+from apps.webhooks.models import InboundEmail, VoicemailRecording
 
 
 # ── Stat helpers ──────────────────────────────────────────────────────────────
@@ -280,3 +280,47 @@ def live_stream(request):
     return render(request, 'dashboard/live_stream.html', {
         'ws_token': getattr(settings, 'STREAM_WS_TOKEN', ''),
     })
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def voicemails(request):
+    ctx = {
+        'voicemails': list(VoicemailRecording.objects.order_by('-received_at')[:100]),
+        'total':      VoicemailRecording.objects.count(),
+        'pending':    VoicemailRecording.objects.filter(transcription_status='pending').count(),
+        'completed':  VoicemailRecording.objects.filter(transcription_status='completed').count(),
+        'failed':     VoicemailRecording.objects.filter(transcription_status='failed').count(),
+    }
+    return render(request, 'dashboard/voicemails.html', ctx)
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def voicemail_audio(request, recording_sid):
+    import base64
+    from urllib.error import URLError
+    from urllib.request import Request, urlopen
+
+    from django.conf import settings
+    from django.http import HttpResponse, HttpResponseNotFound, StreamingHttpResponse
+
+    try:
+        vm = VoicemailRecording.objects.get(recording_sid=recording_sid)
+    except VoicemailRecording.DoesNotExist:
+        return HttpResponseNotFound()
+
+    audio_url = vm.recording_url + '.mp3'
+    credentials = base64.b64encode(
+        f"{settings.TWILIO_ACCOUNT_SID}:{settings.TWILIO_AUTH_TOKEN}".encode()
+    ).decode()
+    req = Request(audio_url, headers={'Authorization': f'Basic {credentials}'})
+
+    try:
+        response = urlopen(req, timeout=10)
+    except URLError:
+        return HttpResponse(status=502)
+
+    return StreamingHttpResponse(
+        response,
+        content_type='audio/mpeg',
+        headers={'Content-Disposition': f'inline; filename="{recording_sid}.mp3"'},
+    )

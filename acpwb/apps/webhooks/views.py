@@ -1,3 +1,4 @@
+import base64
 import email as email_lib
 import hashlib
 import hmac
@@ -9,7 +10,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from .models import InboundEmail, HoneypotMatch
+from .models import InboundEmail, HoneypotMatch, VoicemailRecording
 
 logger = logging.getLogger(__name__)
 
@@ -154,3 +155,95 @@ def _match_honeypot(inbound_email):
             notes=f"No GeneratedEmployee found for recipient: {recipient}",
         )
         logger.info("No honeypot match found for recipient: %s", recipient)
+
+
+# ── Twilio ─────────────────────────────────────────────────────────────────────
+
+def _verify_twilio_signature(auth_token, request):
+    """
+    Verify X-Twilio-Signature using HMAC-SHA1.
+    Twilio signs: url + sorted(key+value for each POST param concatenated).
+    Returns True if valid, or True with a warning if auth_token not configured (dev bypass).
+    """
+    if not auth_token:
+        logger.warning("TWILIO_AUTH_TOKEN not configured — skipping Twilio signature verification")
+        return True
+
+    signature = request.headers.get('X-Twilio-Signature', '')
+    url = request.build_absolute_uri()
+    s = url + ''.join(k + request.POST[k] for k in sorted(request.POST))
+    expected = base64.b64encode(
+        hmac.new(auth_token.encode('utf-8'), s.encode('utf-8'), hashlib.sha1).digest()
+    ).decode('utf-8')
+    return hmac.compare_digest(expected, signature)
+
+
+@csrf_exempt
+@require_POST
+def twilio_recording(request):
+    """Receives recording-complete callback from Twilio Studio."""
+    if not _verify_twilio_signature(settings.TWILIO_AUTH_TOKEN, request):
+        logger.warning(
+            "Twilio recording webhook signature verification failed from %s",
+            request.META.get('REMOTE_ADDR'),
+        )
+        return HttpResponse(status=403)
+
+    post = request.POST
+    call_sid      = post.get('CallSid', '')
+    recording_sid = post.get('RecordingSid', '')
+    recording_url = post.get('RecordingUrl', '')
+    duration_str  = post.get('RecordingDuration', '0')
+    caller_number = post.get('From', '')
+
+    if not call_sid or not recording_sid:
+        logger.warning("Twilio recording webhook missing required fields")
+        return HttpResponse(status=400)
+
+    VoicemailRecording.objects.update_or_create(
+        call_sid=call_sid,
+        defaults={
+            'recording_sid':      recording_sid,
+            'recording_url':      recording_url,
+            'recording_duration': int(duration_str) if duration_str.isdigit() else 0,
+            'caller_number':      caller_number,
+            'raw_payload':        {k: v for k, v in post.items()},
+        },
+    )
+
+    return HttpResponse(status=204)
+
+
+@csrf_exempt
+@require_POST
+def twilio_transcription(request):
+    """Receives transcription-complete callback from Twilio."""
+    if not _verify_twilio_signature(settings.TWILIO_AUTH_TOKEN, request):
+        logger.warning(
+            "Twilio transcription webhook signature verification failed from %s",
+            request.META.get('REMOTE_ADDR'),
+        )
+        return HttpResponse(status=403)
+
+    post = request.POST
+    recording_sid        = post.get('RecordingSid', '')
+    transcription_text   = post.get('TranscriptionText', '')
+    transcription_status = post.get('TranscriptionStatus', 'failed')
+
+    if not recording_sid:
+        return HttpResponse(status=400)
+
+    if transcription_status not in ('completed', 'failed'):
+        transcription_status = 'failed'
+
+    updated = VoicemailRecording.objects.filter(recording_sid=recording_sid).update(
+        transcription_status=transcription_status,
+        transcription_text=transcription_text or None,
+    )
+
+    if not updated:
+        logger.warning(
+            "Twilio transcription arrived for unknown RecordingSid: %s", recording_sid
+        )
+
+    return HttpResponse(status=204)

@@ -316,3 +316,7 @@ def sitemap_page(request):
 
 def faq(request):
     return render(request, 'public/faq.html')
+
+
+def contact(request):
+    return render(request, 'public/contact.html')

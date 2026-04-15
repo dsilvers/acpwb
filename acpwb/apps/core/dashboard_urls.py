@@ -9,5 +9,7 @@ urlpatterns = [
     path('emails/',   views.emails,         name='dashboard-emails'),
     path('people/',   views.people,         name='dashboard-people'),
     path('logins/',   views.logins,         name='dashboard-logins'),
-    path('live/',     views.live_stream,    name='dashboard-live'),
+    path('live/',                              views.live_stream,    name='dashboard-live'),
+    path('voicemails/',                        views.voicemails,     name='dashboard-voicemails'),
+    path('voicemails/audio/<str:recording_sid>/', views.voicemail_audio, name='dashboard-voicemail-audio'),
 ]

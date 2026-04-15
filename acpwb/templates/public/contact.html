@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us — American Corporation for Public Well Being{% endblock %}
+{% block og_title %}Contact ACPWB{% endblock %}
+{% block og_description %}Contact the American Corporation for Public Well Being. Reach our Milwaukee headquarters by phone, email, or mail.{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Get In Touch</p>
+    <h1>CONTACT US</h1>
+    <p>We welcome inquiries from clients, prospective partners, researchers, and members of the public.</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-5">
+
+      <div class="col-lg-7">
+        <h2 class="h4 fw-800 mb-4" style="color:var(--navy)">General Inquiries</h2>
+        <p>For general questions about ACPWB, our research, compensation benchmarking services, or published reports, please contact us using any of the methods below.</p>
+        <p>
+          <strong>Before reaching out</strong>, we encourage you to consult our
+          <a href="{% url 'our-people' %}">staff directory</a> to identify the most appropriate
+          person for your inquiry. Direct contact with the relevant team member is typically
+          faster and more productive than routing through the general inbox.
+        </p>
+
+        <div class="row g-4 mt-2">
+          <div class="col-sm-7">
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1.5rem">
+              <p class="text-uppercase fw-800 mb-2" style="font-size:.7rem;letter-spacing:.15em;color:var(--gold)">Mailing Address</p>
+              <address class="mb-0" style="font-style:normal;line-height:1.8">
+                American Corporation for Public Well Being<br>
+                833 East Michigan Street, Suite 4040<br>
+                Milwaukee, WI 53202
+              </address>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1.5rem">
+              <p class="text-uppercase fw-800 mb-2" style="font-size:.7rem;letter-spacing:.15em;color:var(--gold)">Phone &amp; Email</p>
+              <p class="mb-2">
+                <span style="font-size:.75rem;color:#64748b;display:block">Main Line</span>
+                <a href="tel:+14146675665" style="font-weight:600">(414) 667-5665</a>
+              </p>
+              <p class="mb-0">
+                <span style="font-size:.75rem;color:#64748b;display:block">General Email</span>
+                <a href="mailto:general-inquiry@acpwb.com">general-inquiry@acpwb.com</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 p-3" style="background:#fef9ec;border-left:3px solid var(--gold);border-radius:0 6px 6px 0">
+          <p class="mb-0 small">
+            <strong>Looking for a specific person?</strong> Our <a href="{% url 'our-people' %}">Our People</a> directory
+            lists staff by department and role. Using a direct contact is the best way to ensure your message
+            reaches the right team.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <h2 class="h4 fw-800 mb-4" style="color:var(--navy)">Additional Contacts</h2>
+
+        <div class="mb-3" style="border-bottom:1px solid #e2e8f0;padding-bottom:1rem">
+          <p class="text-uppercase fw-700 mb-1" style="font-size:.7rem;letter-spacing:.12em;color:#64748b">Media &amp; Press</p>
+          <p class="mb-0 small">For media inquiries and press requests, please contact our communications team via the general inbox and include <em>Press Inquiry</em> in the subject line.</p>
+        </div>
+
+        <div class="mb-3" style="border-bottom:1px solid #e2e8f0;padding-bottom:1rem">
+          <p class="text-uppercase fw-700 mb-1" style="font-size:.7rem;letter-spacing:.12em;color:#64748b">Research &amp; Data</p>
+          <p class="mb-0 small">Questions about published reports, datasets, or survey participation should be directed to our <a href="{% url 'reports-list' %}">Reports</a> team. Include the report name or dataset identifier in your message.</p>
+        </div>
+
+        <div class="mb-3" style="border-bottom:1px solid #e2e8f0;padding-bottom:1rem">
+          <p class="text-uppercase fw-700 mb-1" style="font-size:.7rem;letter-spacing:.12em;color:#64748b">Career Opportunities</p>
+          <p class="mb-0 small">Visit our <a href="{% url 'careers' %}">Careers</a> page for open positions. Please do not send unsolicited resumes to the general inbox.</p>
+        </div>
+
+        <div class="mb-0">
+          <p class="text-uppercase fw-700 mb-1" style="font-size:.7rem;letter-spacing:.12em;color:#64748b">Office Hours</p>
+          <p class="mb-0 small">Monday – Friday, 8:00 AM – 5:00 PM Central Time.<br>Closed on federal holidays.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

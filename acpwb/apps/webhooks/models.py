@@ -53,3 +53,39 @@ class HoneypotMatch(models.Model):
 
     def __str__(self):
         return f"{self.match_confidence}: {self.inbound_email} → {self.generated_employee}"
+
+
+class VoicemailRecording(models.Model):
+    TRANSCRIPTION_STATUS_CHOICES = [
+        ('pending',   'Pending'),
+        ('completed', 'Completed'),
+        ('failed',    'Failed'),
+    ]
+
+    call_sid             = models.CharField(max_length=64, unique=True, db_index=True)
+    recording_sid        = models.CharField(max_length=64, unique=True, db_index=True)
+    recording_url        = models.URLField(max_length=512)
+    recording_duration   = models.IntegerField(default=0, help_text="Duration in seconds")
+    caller_number        = models.CharField(max_length=32, blank=True)
+    transcription_status = models.CharField(
+        max_length=16,
+        choices=TRANSCRIPTION_STATUS_CHOICES,
+        default='pending',
+        db_index=True,
+    )
+    transcription_text   = models.TextField(blank=True, null=True)
+    raw_payload          = models.JSONField(default=dict)
+    received_at          = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ['-received_at']
+        verbose_name = 'Voicemail Recording'
+        verbose_name_plural = 'Voicemail Recordings'
+
+    def __str__(self):
+        return f"Voicemail from {self.caller_number} @ {self.received_at:%Y-%m-%d %H:%M} ({self.recording_sid})"
+
+    @property
+    def duration_display(self):
+        m, s = divmod(self.recording_duration, 60)
+        return f"{m}:{s:02d}"

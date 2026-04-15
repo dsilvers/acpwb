@@ -491,6 +491,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
 
     next_slug = (f"{slug}/{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
                  if slug else f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}")
+    prev_slug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
 
     prev_day = day - 1 if day > 1 else 28
     prev_month = month if day > 1 else (month - 1 if month > 1 else 12)
@@ -562,7 +563,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         # Pre-built navigation URLs
         'year_url': _archive_url(request, year),
         'month_url': _archive_url(request, year, month),
-        'prev_entry_url': _archive_url(request, prev_year, prev_month, prev_day, 'previous-series'),
+        'prev_entry_url': _archive_url(request, prev_year, prev_month, prev_day, prev_slug),
         'next_entry_url': _archive_url(request, year, month, day, next_slug),
         'export_csv_url': _archive_url(request, year, month, day, slug) + 'export.csv',
         'related_docs': related_docs,

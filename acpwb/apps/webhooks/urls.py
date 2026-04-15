@@ -6,4 +6,5 @@ urlpatterns = [
     path('pipe/inbound/',         views.pipe_inbound,        name='pipe-inbound'),
     path('twilio/recording/',     views.twilio_recording,    name='twilio-recording'),
     path('twilio/transcription/', views.twilio_transcription, name='twilio-transcription'),
+    path('twilio/call-status/',   views.twilio_call_status,   name='twilio-call-status'),
 ]

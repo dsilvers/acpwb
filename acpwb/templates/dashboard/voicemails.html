@@ -7,29 +7,93 @@
 
 <!-- Stat cards -->
 <div class="row g-3 mb-4">
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg-2">
     <div class="stat-card">
-      <div class="label">Total Voicemails</div>
-      <div class="value">{{ total }}</div>
+      <div class="label">Total Calls</div>
+      <div class="value">{{ call_total }}</div>
     </div>
   </div>
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg-2">
+    <div class="stat-card">
+      <div class="label">Voicemails</div>
+      <div class="value">{{ vm_total }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
     <div class="stat-card" style="border-top-color:#15803d">
       <div class="label">Transcribed</div>
-      <div class="value" style="color:#15803d">{{ completed }}</div>
+      <div class="value" style="color:#15803d">{{ vm_completed }}</div>
     </div>
   </div>
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg-2">
     <div class="stat-card" style="border-top-color:var(--gold)">
       <div class="label">Pending</div>
-      <div class="value" style="color:var(--gold)">{{ pending }}</div>
+      <div class="value" style="color:var(--gold)">{{ vm_pending }}</div>
     </div>
   </div>
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg-2">
     <div class="stat-card" style="border-top-color:#dc3545">
-      <div class="label">Failed</div>
-      <div class="value" style="color:#dc3545">{{ failed }}</div>
+      <div class="label">Transcription Failed</div>
+      <div class="value" style="color:#dc3545">{{ vm_failed }}</div>
     </div>
+  </div>
+</div>
+
+<!-- Call log -->
+<div class="section-card mb-4">
+  <div class="section-card-header">
+    <h6>Call Log</h6>
+    <span style="font-size:.72rem;color:var(--muted)">Last 100, newest first</span>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table w-100">
+      <thead>
+        <tr>
+          <th>Received</th>
+          <th>Caller</th>
+          <th>Status</th>
+          <th>Duration</th>
+          <th>Voicemail</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for call in calls %}
+        <tr>
+          <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">
+            {{ call.received_at|date:"Y-m-d H:i" }}
+          </td>
+          <td style="font-family:monospace;font-size:.78rem">
+            {{ call.caller_number|default:"—" }}
+          </td>
+          <td>
+            {% if call.call_status == 'completed' %}
+              <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">COMPLETED</span>
+            {% elif call.call_status == 'no-answer' %}
+              <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#fef9c3;color:#854d0e;border:1px solid #fde047">NO ANSWER</span>
+            {% elif call.call_status == 'busy' %}
+              <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">BUSY</span>
+            {% elif call.call_status == 'canceled' %}
+              <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">CANCELED</span>
+            {% else %}
+              <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">{{ call.call_status|upper }}</span>
+            {% endif %}
+          </td>
+          <td style="font-size:.78rem">{{ call.duration_display }}</td>
+          <td>
+            {% if call.has_voicemail %}
+              <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#ede9fe;color:#5b21b6;border:1px solid #c4b5fd">VM</span>
+            {% else %}
+              <span style="font-size:.72rem;color:var(--muted)">—</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-muted text-center py-3">No calls received yet</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -59,9 +123,7 @@
           <td style="font-family:monospace;font-size:.78rem">
             {{ vm.caller_number|default:"—" }}
           </td>
-          <td style="font-size:.78rem">
-            {{ vm.duration_display }}
-          </td>
+          <td style="font-size:.78rem">{{ vm.duration_display }}</td>
           <td>
             {% if vm.recording_url %}
             <audio controls preload="none" style="height:28px;max-width:200px">

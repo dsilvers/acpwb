@@ -18,7 +18,7 @@ from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, Intern
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import DataOptOutRequest
-from apps.webhooks.models import InboundEmail, VoicemailRecording
+from apps.webhooks.models import CallLog, InboundEmail, VoicemailRecording
 
 
 # ── Stat helpers ──────────────────────────────────────────────────────────────
@@ -284,12 +284,20 @@ def live_stream(request):
 
 @staff_member_required(login_url='/django-admin/login/')
 def voicemails(request):
+    # Annotate call log with whether a voicemail was left
+    vm_sids = set(VoicemailRecording.objects.values_list('call_sid', flat=True))
+    calls = list(CallLog.objects.order_by('-received_at')[:100])
+    for call in calls:
+        call.has_voicemail = call.call_sid in vm_sids
+
     ctx = {
-        'voicemails': list(VoicemailRecording.objects.order_by('-received_at')[:100]),
-        'total':      VoicemailRecording.objects.count(),
-        'pending':    VoicemailRecording.objects.filter(transcription_status='pending').count(),
-        'completed':  VoicemailRecording.objects.filter(transcription_status='completed').count(),
-        'failed':     VoicemailRecording.objects.filter(transcription_status='failed').count(),
+        'voicemails':   list(VoicemailRecording.objects.order_by('-received_at')[:100]),
+        'vm_total':     VoicemailRecording.objects.count(),
+        'vm_pending':   VoicemailRecording.objects.filter(transcription_status='pending').count(),
+        'vm_completed': VoicemailRecording.objects.filter(transcription_status='completed').count(),
+        'vm_failed':    VoicemailRecording.objects.filter(transcription_status='failed').count(),
+        'calls':        calls,
+        'call_total':   CallLog.objects.count(),
     }
     return render(request, 'dashboard/voicemails.html', ctx)
 

@@ -89,3 +89,39 @@ class VoicemailRecording(models.Model):
     def duration_display(self):
         m, s = divmod(self.recording_duration, 60)
         return f"{m}:{s:02d}"
+
+
+class CallLog(models.Model):
+    CALL_STATUS_CHOICES = [
+        ('completed',  'Completed'),
+        ('busy',       'Busy'),
+        ('no-answer',  'No Answer'),
+        ('failed',     'Failed'),
+        ('canceled',   'Canceled'),
+    ]
+
+    call_sid      = models.CharField(max_length=64, unique=True, db_index=True)
+    caller_number = models.CharField(max_length=32, blank=True)
+    call_status   = models.CharField(max_length=16, choices=CALL_STATUS_CHOICES, db_index=True)
+    call_duration = models.IntegerField(default=0, help_text="Duration in seconds (0 for non-completed calls)")
+    raw_payload   = models.JSONField(default=dict)
+    received_at   = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ['-received_at']
+        verbose_name = 'Call Log'
+        verbose_name_plural = 'Call Logs'
+
+    def __str__(self):
+        return f"Call from {self.caller_number} [{self.call_status}] @ {self.received_at:%Y-%m-%d %H:%M}"
+
+    @property
+    def duration_display(self):
+        if not self.call_duration:
+            return '—'
+        m, s = divmod(self.call_duration, 60)
+        return f"{m}:{s:02d}"
+
+    @property
+    def left_voicemail(self):
+        return VoicemailRecording.objects.filter(call_sid=self.call_sid).exists()

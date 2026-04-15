@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from .models import InboundEmail, HoneypotMatch, VoicemailRecording
+from .models import CallLog, InboundEmail, HoneypotMatch, VoicemailRecording
 
 logger = logging.getLogger(__name__)
 
@@ -245,5 +245,43 @@ def twilio_transcription(request):
         logger.warning(
             "Twilio transcription arrived for unknown RecordingSid: %s", recording_sid
         )
+
+    return HttpResponse(status=204)
+
+
+@csrf_exempt
+@require_POST
+def twilio_call_status(request):
+    """Receives call status callback from Twilio (fired on every terminal call state)."""
+    if not _verify_twilio_signature(settings.TWILIO_AUTH_TOKEN, request):
+        logger.warning(
+            "Twilio call-status webhook signature verification failed from %s",
+            request.META.get('REMOTE_ADDR'),
+        )
+        return HttpResponse(status=403)
+
+    post = request.POST
+    call_sid      = post.get('CallSid', '')
+    call_status   = post.get('CallStatus', '')
+    caller_number = post.get('From', '')
+    duration_str  = post.get('CallDuration', '0')
+
+    if not call_sid or not call_status:
+        return HttpResponse(status=400)
+
+    # Only persist terminal states — Twilio fires intermediate events too (ringing, in-progress)
+    terminal = {'completed', 'busy', 'no-answer', 'failed', 'canceled'}
+    if call_status not in terminal:
+        return HttpResponse(status=204)
+
+    CallLog.objects.update_or_create(
+        call_sid=call_sid,
+        defaults={
+            'caller_number': caller_number,
+            'call_status':   call_status,
+            'call_duration': int(duration_str) if duration_str.isdigit() else 0,
+            'raw_payload':   {k: v for k, v in post.items()},
+        },
+    )
 
     return HttpResponse(status=204)

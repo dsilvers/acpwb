@@ -493,7 +493,7 @@ def _generate_minutes_content(year, month, day, slug):
             item_title = item_title_raw.format(
                 org=org, industry=industry,
                 frameworks=frameworks_sample[i % len(frameworks_sample)],
-                q=q, year=year, n=n, project_name=project_name,
+                q=q, year=year, n=n, project_name=project_name, regions=regions,
             )
         except (KeyError, IndexError):
             item_title = item_title_raw
@@ -533,7 +533,7 @@ def _generate_minutes_content(year, month, day, slug):
                         committee=committee, item_title=item_title, org=org,
                         date=date_str, due_date=due_date, exhibit=exhibit,
                         eng_code=eng_code, year=year, n=n, industry=industry,
-                        frameworks=frameworks_sample[0],
+                        frameworks=frameworks_sample[0], regions=regions,
                     )
                 except (KeyError, IndexError):
                     resolution_text = rng.choice(_RESOLUTION_TEMPLATES)
@@ -564,7 +564,7 @@ def _generate_minutes_content(year, month, day, slug):
             resolved_agenda_titles.append(raw.format(
                 org=org, industry=industry,
                 frameworks=frameworks_sample[0],
-                q=q, year=year,
+                q=q, year=year, n=n, project_name=project_name, regions=regions,
             ))
         except (KeyError, IndexError):
             resolved_agenda_titles.append(raw)
@@ -584,6 +584,7 @@ def _generate_minutes_content(year, month, day, slug):
                 exhibit=exhibit,
                 frameworks=frameworks_sample[j % len(frameworks_sample)],
                 org=org, n=n, q=q, due_date=due_date, industry=industry, year=year,
+                regions=regions, project_name=project_name,
             )
         except (KeyError, IndexError):
             action_desc = rng.choice(_ACTION_ITEM_TEMPLATES)

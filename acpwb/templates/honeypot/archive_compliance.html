@@ -1,0 +1,490 @@
+{% extends parent_template|default:"base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} — ACPWB Compliance Archive{% endblock %}
+{% block og_title %}{{ title }} — ACPWB Compliance Archive{% endblock %}
+{% block og_description %}{{ industry }} sector compliance review archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}. Audit ref {{ audit_ref }}. ACPWB Regulatory Practice.{% endblock %}
+
+{% block era_content %}{% block content %}
+{% if on_archive_subdomain %}
+<style>
+  .era-archive-banner { background: {{ year_data.accent }}; color: #fff; padding: 2rem 0 1.5rem; font-family: {{ year_data.font_head }}, sans-serif; }
+  .era-archive-content { padding: 3rem 0; background: {{ year_data.bg }}; color: {{ year_data.text_color }}; font-family: {{ year_data.font_body }}, sans-serif; }
+  .era-callout { background: rgba(128,128,128,.08); border: 1px solid rgba(128,128,128,.2); border-left: 4px solid {{ year_data.accent }}; padding: 1.1rem 1.4rem; margin-bottom: 1.75rem; }
+  .era-section-head { font-family: {{ year_data.font_head }}, sans-serif; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: {{ year_data.accent }}; margin-bottom: .85rem; padding-bottom: .4rem; border-bottom: 2px solid {{ year_data.accent }}; }
+  .era-entry-card { background: rgba(128,128,128,.07); border: 1px solid rgba(128,128,128,.2); border-left: 3px solid {{ year_data.accent }}; padding: .7rem 1rem; text-decoration: none; color: {{ year_data.text_color }}; display: block; }
+  .era-entry-card:hover { border-left-color: {{ year_data.accent2 }}; color: {{ year_data.text_color }}; }
+  .era-nav-link { font-size: .85rem; color: {{ year_data.accent2 }}; font-weight: 600; text-decoration: none; }
+  .era-table-head { background: {{ year_data.accent }}; }
+  :root {
+{% for h in bulk_hex_css %}  --acpwb-r{{ forloop.counter0|stringformat:"03d" }}: {{ h }};
+{% endfor %}  }
+</style>
+
+<div class="era-archive-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="font-weight:800;letter-spacing:.18em;font-size:.75rem;opacity:.8">
+      <a href="/archive/" style="color:inherit">Archive</a>
+      &rsaquo; <a href="{{ year_url }}" style="color:inherit">{{ year }}</a>
+      &rsaquo; <a href="{{ month_url }}" style="color:inherit">{{ month|stringformat:"02d" }}</a>
+      &rsaquo; {{ day|stringformat:"02d" }}
+    </p>
+    <p class="mb-1" style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.7">Compliance Review &bull; Audit Ref: {{ audit_ref }}</p>
+    <h1 style="font-family:var(--era-font-head);font-size:clamp(1.1rem,3vw,1.9rem);line-height:1.25;margin-bottom:.3rem">{{ title }}</h1>
+    <p style="opacity:.75;font-size:.88rem;margin-bottom:0">
+      {{ industry }} &bull; {{ org }} &bull; {{ date_str }}
+    </p>
+  </div>
+</div>
+
+<div class="era-archive-content">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+
+        <!-- Document header card -->
+        <div id="acpwb-compliance-{{ record_id }}-header" class="era-callout" style="margin-bottom:1.5rem">
+          <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--era-accent);margin-bottom:.6rem">Document Information</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.8rem">
+            <div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Client</span><br><strong>{{ org }}</strong></div>
+            <div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Industry</span><br><strong>{{ industry }}</strong></div>
+            <div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Audit Ref</span><br><code style="font-size:.75rem">{{ audit_ref }}</code></div>
+            <div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Date</span><br><strong>{{ date_str }}</strong></div>
+            <div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Version</span><br><code style="font-size:.75rem">{{ doc_version }}</code></div>
+            <div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Record ID</span><br><code style="font-size:.75rem;opacity:.7">{{ record_id }}</code></div>
+          </div>
+          <div style="margin-top:.75rem;padding-top:.6rem;border-top:1px solid rgba(128,128,128,.18);font-size:.78rem">
+            <span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Filed by</span>&nbsp;
+            <strong>{{ assessor }}</strong>, {{ assessor_title }} &mdash; <a href="mailto:{{ assessor_email }}" style="color:inherit;opacity:.7">{{ assessor_email }}</a>
+          </div>
+          {% if frameworks_cited %}
+          <div style="margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem">
+            {% for fw in frameworks_cited %}
+            <span style="font-size:.62rem;padding:.15rem .45rem;background:rgba(128,128,128,.12);border:1px solid rgba(128,128,128,.25)">{{ fw }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Section 1: Scope -->
+        <div id="acpwb-compliance-{{ record_id }}-scope" class="mb-4">
+          <div class="era-section-head">1. Engagement Scope</div>
+          <p style="font-size:.88rem;line-height:1.7;margin-bottom:0">{{ scope_para }}</p>
+        </div>
+
+        <!-- Section 2: Methodology -->
+        <div id="acpwb-compliance-{{ record_id }}-methodology" class="mb-4">
+          <div class="era-section-head">2. Methodology</div>
+          <p style="font-size:.88rem;line-height:1.7;margin-bottom:0">{{ method_para }}</p>
+        </div>
+
+        <!-- Section 3: Findings Summary table -->
+        <div id="acpwb-compliance-{{ record_id }}-findings-summary" class="mb-4">
+          <div class="era-section-head">3. Findings Summary</div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:.8rem">
+              <thead>
+                <tr class="era-table-head" style="color:#fff">
+                  <th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">Finding ID</th>
+                  <th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase">Risk</th>
+                  <th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase">Status</th>
+                  <th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase">Owner</th>
+                  <th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase">Due</th>
+                  <th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for f in findings %}
+                <tr style="border-top:1px solid rgba(128,128,128,.15)">
+                  <td style="padding:.4rem .7rem;font-family:monospace;font-size:.72rem;white-space:nowrap">{{ f.id }}</td>
+                  <td style="padding:.4rem .7rem;white-space:nowrap">
+                    {% if f.risk == 'HIGH' %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">HIGH</span>
+                    {% elif f.risk == 'MEDIUM' %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">MEDIUM</span>
+                    {% elif f.risk == 'LOW' %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef9c3;color:#854d0e;border:1px solid #fde047">LOW</span>
+                    {% else %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">INFO</span>
+                    {% endif %}
+                  </td>
+                  <td style="padding:.4rem .7rem;white-space:nowrap">
+                    {% if f.status == 'OPEN' %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">OPEN</span>
+                    {% elif f.status == 'IN PROGRESS' %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">IN PROGRESS</span>
+                    {% elif f.status == 'REMEDIATED' %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">REMEDIATED</span>
+                    {% elif f.status == 'DEFERRED' %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">DEFERRED</span>
+                    {% else %}
+                      <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#eff6ff;color:#1d4ed8;border:1px solid #93c5fd">MONITORING</span>
+                    {% endif %}
+                  </td>
+                  <td style="padding:.4rem .7rem;font-size:.75rem;opacity:.8">{{ f.owner }}</td>
+                  <td style="padding:.4rem .7rem;font-size:.72rem;white-space:nowrap;opacity:.7">{{ f.due_date }}</td>
+                  <td style="padding:.4rem .7rem;font-size:.78rem;max-width:280px">{{ f.description }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 4: Detailed Findings -->
+        <div id="acpwb-compliance-{{ record_id }}-findings-detail" class="mb-4">
+          <div class="era-section-head">4. Detailed Findings</div>
+          {% for f in findings %}
+          <div id="acpwb-compliance-{{ record_id }}-finding-{{ f.id }}" style="background:rgba(128,128,128,.06);border:1px solid rgba(128,128,128,.18);margin-bottom:1rem;padding:1rem 1.1rem">
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem">
+              <code style="font-size:.72rem;opacity:.75">{{ f.id }}</code>
+              {% if f.risk == 'HIGH' %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">HIGH</span>
+              {% elif f.risk == 'MEDIUM' %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">MEDIUM</span>
+              {% elif f.risk == 'LOW' %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef9c3;color:#854d0e;border:1px solid #fde047">LOW</span>
+              {% else %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">INFORMATIONAL</span>
+              {% endif %}
+              {% if f.status == 'OPEN' %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">OPEN</span>
+              {% elif f.status == 'IN PROGRESS' %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">IN PROGRESS</span>
+              {% elif f.status == 'REMEDIATED' %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">REMEDIATED</span>
+              {% elif f.status == 'DEFERRED' %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">DEFERRED</span>
+              {% else %}
+                <span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#eff6ff;color:#1d4ed8;border:1px solid #93c5fd">MONITORING</span>
+              {% endif %}
+            </div>
+            <div style="margin-bottom:.55rem">
+              <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;opacity:.5;margin-bottom:.2rem">Observation</div>
+              <p style="font-size:.83rem;line-height:1.65;margin-bottom:0">{{ f.description }}</p>
+            </div>
+            <div style="margin-bottom:.55rem;padding-top:.5rem;border-top:1px solid rgba(128,128,128,.12)">
+              <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;opacity:.5;margin-bottom:.2rem">Corrective Action Required</div>
+              <p style="font-size:.83rem;line-height:1.65;margin-bottom:0">{{ f.corrective_action }}</p>
+            </div>
+            <div style="padding-top:.5rem;border-top:1px solid rgba(128,128,128,.12)">
+              <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;opacity:.5;margin-bottom:.2rem">Management Response</div>
+              <p style="font-size:.83rem;line-height:1.65;margin-bottom:.45rem">{{ f.mgmt_response }}</p>
+              <div style="font-size:.72rem;opacity:.65">
+                Owner: <strong>{{ f.owner }}</strong> &bull; Due: <strong>{{ f.due_date }}</strong>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Section 5: Distribution & Certification -->
+        <div id="acpwb-compliance-{{ record_id }}-certification" class="mb-4">
+          <div class="era-section-head">5. Distribution &amp; Certification</div>
+          {% if dist_list %}
+          <table style="width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:1.25rem">
+            <thead>
+              <tr class="era-table-head" style="color:#fff">
+                <th style="padding:.35rem .7rem;text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Recipient</th>
+                <th style="padding:.35rem .7rem;text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Title</th>
+                <th style="padding:.35rem .7rem;text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in dist_list %}
+              <tr style="border-top:1px solid rgba(128,128,128,.15)">
+                <td style="padding:.35rem .7rem;font-weight:600">{{ d.name }}</td>
+                <td style="padding:.35rem .7rem;opacity:.8">{{ d.title }}</td>
+                <td style="padding:.35rem .7rem;font-family:monospace;font-size:.72rem;opacity:.7"><a href="mailto:{{ d.email }}" style="color:inherit">{{ d.email }}</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
+
+          <div style="border:1px solid rgba(128,128,128,.2);padding:1rem 1.1rem">
+            <p style="font-size:.8rem;line-height:1.6;margin-bottom:.75rem">
+              The undersigned attests that the information contained in this report is accurate and complete
+              to the best of their knowledge and belief, and that this review was conducted in accordance
+              with ACPWB professional standards.
+            </p>
+            <div style="display:flex;gap:2rem;flex-wrap:wrap">
+              <div>
+                <div style="width:160px;border-bottom:1px solid rgba(128,128,128,.4);margin-bottom:.25rem;height:1.5rem"></div>
+                <div style="font-size:.72rem;opacity:.65">{{ assessor }}<br>{{ assessor_title }}<br>{{ assessor_email }}</div>
+              </div>
+              <div>
+                <div style="width:120px;border-bottom:1px solid rgba(128,128,128,.4);margin-bottom:.25rem;height:1.5rem"></div>
+                <div style="font-size:.72rem;opacity:.65">Date: {{ date_str }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:1.25rem;border-top:1px solid rgba(128,128,128,.15);font-size:.82rem">
+          <a href="{{ prev_entry_url }}" class="era-nav-link">&larr; Previous</a>
+          <a href="{{ next_entry_url }}" class="era-nav-link">Next &rarr;</a>
+        </div>
+
+        {% if cross_year_reports %}
+        <div class="mt-4">
+          <div class="era-section-head">Related Records — Other Years</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem">
+            {% for entry in cross_year_reports %}
+            <a href="{{ entry.url }}" class="era-entry-card">
+              <div style="font-size:.6rem;opacity:.5;margin-bottom:.1rem">{{ entry.year }} &bull; {{ entry.date }}</div>
+              <div style="font-size:.73rem;font-weight:600;line-height:1.3">{{ entry.label }}</div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="mt-5 pt-3 text-center" style="border-top:1px solid rgba(128,128,128,.12);opacity:.75">
+          {% include "honeypot/_archive_seal.html" %}
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div id="acpwb-compliance-{{ record_id }}-sidebar" class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+
+          <div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">
+            <div class="era-section-head" style="margin-bottom:.6rem">Audit Record</div>
+            <dl class="mb-0" style="font-size:.82rem">
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Audit Ref</dt>
+              <dd class="mb-2" style="font-family:monospace;font-size:.75rem;opacity:.7">{{ audit_ref }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Date</dt>
+              <dd class="fw-700 mb-2">{{ date_str }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Client</dt>
+              <dd class="fw-700 mb-2">{{ org }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Industry</dt>
+              <dd class="mb-2">{{ industry }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Findings</dt>
+              <dd class="mb-2">{{ findings|length }} total</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>
+              <dd class="mb-0" style="font-family:monospace;font-size:.75rem;opacity:.7">{{ record_id }}</dd>
+            </dl>
+          </div>
+
+          <div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">
+            <div class="era-section-head" style="margin-bottom:.6rem">Navigation</div>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2"><a href="{{ year_url }}" class="era-nav-link">&larr; All {{ year }} Records</a></li>
+              <li class="mb-2"><a href="{{ month_url }}" style="color:inherit;opacity:.7;text-decoration:none">&larr; {{ year }}/{{ month|stringformat:"02d" }}</a></li>
+              <li class="mb-2"><a href="{{ prev_entry_url }}" style="color:inherit;opacity:.55;text-decoration:none">&larr; Previous Entry</a></li>
+              <li class="mb-2"><a href="{{ next_entry_url }}" class="era-nav-link">Next in Series &rarr;</a></li>
+            </ul>
+          </div>
+
+          {% if related_docs %}
+          <div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">
+            <div class="era-section-head" style="margin-bottom:.6rem">Related Documents</div>
+            {% for doc in related_docs %}
+            <a href="{{ doc.url }}" class="era-entry-card" style="margin-bottom:.5rem">
+              <div style="font-size:.6rem;opacity:.5;margin-bottom:.15rem">{{ doc.date }}</div>
+              <div style="font-size:.75rem;font-weight:600;line-height:1.35">{{ doc.label }}</div>
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem">
+            <div class="era-section-head" style="margin-bottom:.6rem">Browse by Year</div>
+            <div style="display:flex;flex-wrap:wrap;gap:.3rem">
+              {% for y in all_years %}
+              <a href="https://archives-{{ y }}.acpwb.com/"
+                 style="font-size:.68rem;padding:.2rem .4rem;border:1px solid rgba(128,128,128,.3);text-decoration:none;color:inherit{% if y == year %};font-weight:800;border-color:var(--era-accent);color:var(--era-accent){% endif %}">{{ y }}</a>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% else %}
+{# ── Main-domain rendering ── #}
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      <a href="/archive/" style="color:var(--gold)">Archive</a>
+      &rsaquo; <a href="{{ year_url }}" style="color:var(--gold)">{{ year }}</a>
+      &rsaquo; <a href="{{ month_url }}" style="color:var(--gold)">{{ month|stringformat:"02d" }}</a>
+      &rsaquo; {{ day|stringformat:"02d" }}
+    </p>
+    <p style="color:rgba(255,255,255,.6);font-size:.72rem;margin-bottom:.4rem;letter-spacing:.1em;text-transform:uppercase">Compliance Review &bull; {{ audit_ref }}</p>
+    <h1 style="font-size:clamp(1.2rem,3vw,2rem);line-height:1.25">{{ title }}</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:0">
+      {{ industry }} &bull; {{ org }} &bull; Archived {{ date_str }}
+    </p>
+  </div>
+</section>
+
+<section style="padding:3rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+
+        <div id="acpwb-compliance-{{ record_id }}-header" style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:2rem">
+          <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.5rem">Document Information</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.83rem;margin-bottom:.75rem">
+            <div><span style="font-size:.68rem;opacity:.55;text-transform:uppercase;letter-spacing:.06em">Client</span><br><strong>{{ org }}</strong></div>
+            <div><span style="font-size:.68rem;opacity:.55;text-transform:uppercase;letter-spacing:.06em">Industry</span><br><strong>{{ industry }}</strong></div>
+            <div><span style="font-size:.68rem;opacity:.55;text-transform:uppercase;letter-spacing:.06em">Audit Ref</span><br><code style="font-size:.75rem">{{ audit_ref }}</code></div>
+            <div><span style="font-size:.68rem;opacity:.55;text-transform:uppercase;letter-spacing:.06em">Version</span><br><code style="font-size:.75rem">{{ doc_version }}</code></div>
+          </div>
+          <div style="font-size:.8rem;color:#555;padding-top:.5rem;border-top:1px solid var(--border)">
+            Filed by <strong>{{ assessor }}</strong>, {{ assessor_title }} &mdash;
+            <a href="mailto:{{ assessor_email }}" style="color:var(--navy)">{{ assessor_email }}</a>
+          </div>
+          {% if frameworks_cited %}
+          <div style="margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem">
+            {% for fw in frameworks_cited %}
+            <span style="font-size:.62rem;padding:.15rem .45rem;background:#f4f6f9;border:1px solid #dde1e8;color:#444">{{ fw }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">1. Engagement Scope</h5>
+          <p style="font-size:.88rem;line-height:1.7;color:#333">{{ scope_para }}</p>
+        </div>
+
+        <div class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">2. Methodology</h5>
+          <p style="font-size:.88rem;line-height:1.7;color:#333">{{ method_para }}</p>
+        </div>
+
+        <div class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">3. Findings Summary</h5>
+          <div style="overflow-x:auto">
+            <table class="dash-table w-100">
+              <thead>
+                <tr>
+                  <th>Finding ID</th><th>Risk</th><th>Status</th><th>Owner</th><th>Due</th><th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for f in findings %}
+                <tr>
+                  <td style="font-family:monospace;font-size:.72rem;white-space:nowrap">{{ f.id }}</td>
+                  <td style="white-space:nowrap">
+                    {% if f.risk == 'HIGH' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">HIGH</span>
+                    {% elif f.risk == 'MEDIUM' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">MEDIUM</span>
+                    {% elif f.risk == 'LOW' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef9c3;color:#854d0e;border:1px solid #fde047">LOW</span>
+                    {% else %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">INFO</span>{% endif %}
+                  </td>
+                  <td style="white-space:nowrap">
+                    {% if f.status == 'OPEN' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">OPEN</span>
+                    {% elif f.status == 'IN PROGRESS' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">IN PROGRESS</span>
+                    {% elif f.status == 'REMEDIATED' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">REMEDIATED</span>
+                    {% elif f.status == 'DEFERRED' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">DEFERRED</span>
+                    {% else %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#eff6ff;color:#1d4ed8;border:1px solid #93c5fd">MONITORING</span>{% endif %}
+                  </td>
+                  <td style="font-size:.75rem">{{ f.owner }}</td>
+                  <td style="font-size:.72rem;white-space:nowrap">{{ f.due_date }}</td>
+                  <td style="font-size:.78rem;max-width:240px">{{ f.description }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h5 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)">4. Detailed Findings</h5>
+          {% for f in findings %}
+          <div style="background:white;border:1px solid var(--border);margin-bottom:1rem;padding:1rem 1.2rem">
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem">
+              <code style="font-size:.72rem;color:#666">{{ f.id }}</code>
+              {% if f.risk == 'HIGH' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5">HIGH</span>
+              {% elif f.risk == 'MEDIUM' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef3c7;color:#92400e;border:1px solid #fcd34d">MEDIUM</span>
+              {% elif f.risk == 'LOW' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#fef9c3;color:#854d0e;border:1px solid #fde047">LOW</span>
+              {% else %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">INFORMATIONAL</span>{% endif %}
+              {% if f.status == 'REMEDIATED' %}<span style="font-size:.62rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">REMEDIATED</span>{% endif %}
+            </div>
+            <div style="margin-bottom:.5rem">
+              <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#888;margin-bottom:.2rem">Observation</div>
+              <p style="font-size:.85rem;line-height:1.65;color:#333;margin-bottom:0">{{ f.description }}</p>
+            </div>
+            <div style="margin-bottom:.5rem;padding-top:.5rem;border-top:1px solid var(--border)">
+              <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#888;margin-bottom:.2rem">Corrective Action Required</div>
+              <p style="font-size:.85rem;line-height:1.65;color:#333;margin-bottom:0">{{ f.corrective_action }}</p>
+            </div>
+            <div style="padding-top:.5rem;border-top:1px solid var(--border)">
+              <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#888;margin-bottom:.2rem">Management Response</div>
+              <p style="font-size:.85rem;line-height:1.65;color:#333;margin-bottom:.4rem">{{ f.mgmt_response }}</p>
+              <div style="font-size:.72rem;color:#666">Owner: <strong>{{ f.owner }}</strong> &bull; Due: <strong>{{ f.due_date }}</strong></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between">
+          <a href="{{ prev_entry_url }}" style="font-size:.85rem;color:var(--muted);text-decoration:none">&larr; Previous</a>
+          <a href="{{ next_entry_url }}" style="font-size:.85rem;color:var(--navy);font-weight:600;text-decoration:none">Next &rarr;</a>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-3">
+            <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.7rem">Audit Record</div>
+            <dl class="mb-0" style="font-size:.82rem">
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Audit Ref</dt>
+              <dd class="mb-2" style="font-family:monospace;font-size:.75rem;opacity:.7">{{ audit_ref }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Date</dt>
+              <dd class="fw-700 mb-2">{{ date_str }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Organization</dt>
+              <dd class="fw-700 mb-2">{{ org }}</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Findings</dt>
+              <dd class="mb-2">{{ findings|length }} total</dd>
+              <dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>
+              <dd class="mb-0" style="font-family:monospace;font-size:.75rem;opacity:.7">{{ record_id }}</dd>
+            </dl>
+          </div>
+          <div class="acpwb-card mb-3">
+            <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.7rem">Navigation</div>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2"><a href="{{ year_url }}" style="color:var(--navy);font-weight:600;text-decoration:none">&larr; All {{ year }} Records</a></li>
+              <li class="mb-2"><a href="{{ month_url }}" style="color:inherit;opacity:.7;text-decoration:none">&larr; {{ year }}/{{ month|stringformat:"02d" }}</a></li>
+              <li class="mb-2"><a href="{{ prev_entry_url }}" style="color:inherit;opacity:.55;text-decoration:none">&larr; Previous Entry</a></li>
+              <li class="mb-2"><a href="{{ next_entry_url }}" style="color:var(--navy);font-weight:600;text-decoration:none">Next in Series &rarr;</a></li>
+            </ul>
+          </div>
+          {% if related_docs %}
+          <div class="acpwb-card mb-3">
+            <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.7rem">Related Documents</div>
+            {% for doc in related_docs %}
+            <a href="{{ doc.url }}" style="display:block;padding:.5rem .7rem;border:1px solid var(--border);border-left:3px solid var(--gold);text-decoration:none;color:inherit;margin-bottom:.4rem">
+              <div style="font-size:.6rem;opacity:.5;margin-bottom:.1rem">{{ doc.date }}</div>
+              <div style="font-size:.75rem;font-weight:600;color:var(--navy)">{{ doc.label }}</div>
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="acpwb-card">
+            <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.7rem">Browse by Year</div>
+            <div style="display:flex;flex-wrap:wrap;gap:.3rem">
+              {% for y in all_years %}
+              <a href="https://archives-{{ y }}.acpwb.com/"
+                 style="font-size:.68rem;padding:.2rem .4rem;border:1px solid var(--border);text-decoration:none;color:inherit{% if y == year %};font-weight:800;border-color:var(--gold);color:var(--navy){% endif %}">{{ y }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}{% endblock era_content %}

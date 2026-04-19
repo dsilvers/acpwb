@@ -72,6 +72,17 @@ from .archive_data import (
     _REVISION_TYPES, _DISTRIBUTION_CLASSES, _ENGAGEMENT_CODES,
     _BENCH_METRICS, _PEER_GROUPS,
 )
+from .archive_data_compliance import (
+    _AUDIT_REF_PREFIXES, _COMPLIANCE_FRAMEWORKS, _COMPLIANCE_FINDING_TYPES,
+    _COMPLIANCE_RISK_LEVELS, _COMPLIANCE_STATUSES,
+    _COMPLIANCE_SCOPE_TEMPLATES, _COMPLIANCE_METHODOLOGY_TEMPLATES,
+    _CORRECTIVE_ACTION_TEMPLATES, _MGMT_RESPONSE_TEMPLATES,
+)
+from .archive_data_minutes import (
+    _COMMITTEE_NAMES, _MEETING_LOCATIONS, _COMMITTEE_ROLES,
+    _AGENDA_ITEM_TITLES, _AGENDA_DISCUSSION_TEMPLATES,
+    _RESOLUTION_TEMPLATES, _MOTION_VERBS, _ACTION_ITEM_TEMPLATES,
+)
 
 
 @functools.lru_cache(maxsize=512)
@@ -264,6 +275,357 @@ def _generate_archive_content(year, month, day, slug):
         'percentile_table': percentile_table,
         'footnotes': footnotes,
         'revisions': revisions,
+    }
+
+
+# ── Compliance Audit Filing content generator ─────────────────────────────────
+
+@functools.lru_cache(maxsize=256)
+def _generate_compliance_content(year, month, day, slug):
+    """Generate deterministic compliance/audit filing content for archive variant."""
+    from apps.people.generators import TITLES as _PEOPLE_TITLES
+    rng = random.Random(hashlib.md5(f"compliance_{year}{month}{day}{slug}".encode()).hexdigest())
+
+    org = rng.choice(_ARCHIVE_ORGS)
+    industry = rng.choice(_ARCHIVE_INDUSTRIES)
+    date_str = f"{year}-{month:02d}-{day:02d}"
+    n = rng.randint(18, 340)
+    n2 = rng.randint(10, 80)
+    regions = rng.randint(2, 24)
+    end_year = min(year + rng.randint(0, 2), 2024)
+    end_date = f"{end_year}-{min(month + 2, 12):02d}-28"
+    q = rng.randint(1, 4)
+    pct = rng.randint(4, 22)
+    doc_version = rng.choice(['1.0', '1.1', '2.0'])
+
+    audit_prefix = rng.choice(_AUDIT_REF_PREFIXES)
+    audit_ref = f"{audit_prefix}-{year}-Q{q}-{rng.randint(1000, 9999):04d}"
+
+    # Title from slug
+    tail = slug.split('/')[-1] if slug else f"{year}-{month:02d}-{day:02d}"
+    clean_tail = _re.sub(r'-\d{3,}$', '', tail).replace('-', ' ').title()
+    title = f"Compliance Review \u2014 {clean_tail}"
+
+    # Assessor
+    fname = rng.choice(_INT_FIRST_NAMES)
+    lname = rng.choice(_INT_LAST_NAMES)
+    assessor = f"{fname} {lname}"
+    assessor_title = rng.choice(_CONSULTANT_TITLES)
+    assessor_email = f"{fname.lower()}.{lname.lower()}@acpwb.com"
+
+    # Frameworks cited
+    frameworks_cited = rng.sample(_COMPLIANCE_FRAMEWORKS, rng.randint(2, 4))
+    frameworks_str = '; '.join(frameworks_cited)
+
+    # Scope & methodology paragraphs
+    try:
+        scope_para = rng.choice(_COMPLIANCE_SCOPE_TEMPLATES).format(
+            org=org, industry=industry, regions=regions, year=year, endyear=end_year,
+            date=date_str, enddate=end_date, n=n, n2=n2, q=q, frameworks=frameworks_str,
+            doc_version=doc_version,
+        )
+    except (KeyError, IndexError):
+        scope_para = rng.choice(_COMPLIANCE_SCOPE_TEMPLATES)
+
+    try:
+        method_para = rng.choice(_COMPLIANCE_METHODOLOGY_TEMPLATES).format(
+            org=org, industry=industry, n=n, pct=pct, regions=regions,
+            year=year, doc_version=doc_version, frameworks=frameworks_str,
+        )
+    except (KeyError, IndexError):
+        method_para = rng.choice(_COMPLIANCE_METHODOLOGY_TEMPLATES)
+
+    # Findings: 4-7 rows
+    num_findings = rng.randint(4, 7)
+    risk_weights = [1, 3, 5, 3]  # HIGH least common, LOW most
+    findings = []
+    for i in range(num_findings):
+        finding_id = f"{audit_prefix}-{rng.randint(1000, 9999):04d}-{i + 1:03d}"
+        risk = rng.choices(_COMPLIANCE_RISK_LEVELS, weights=risk_weights, k=1)[0]
+        status = rng.choice(_COMPLIANCE_STATUSES)
+        owner_title = rng.choice(_PEOPLE_TITLES)
+        finding_type = rng.choice(_COMPLIANCE_FINDING_TYPES)
+        try:
+            description = finding_type.format(
+                org=org, industry=industry, n=n, regions=regions, pct=pct,
+                doc_version=doc_version, frameworks=frameworks_str,
+            )
+        except (KeyError, IndexError):
+            description = finding_type
+        try:
+            corrective = rng.choice(_CORRECTIVE_ACTION_TEMPLATES).format(
+                org=org, n=n, regions=regions, industry=industry,
+            )
+        except (KeyError, IndexError):
+            corrective = rng.choice(_CORRECTIVE_ACTION_TEMPLATES)
+        try:
+            mgmt_resp = rng.choice(_MGMT_RESPONSE_TEMPLATES).format(
+                org=org, pct=pct, regions=regions, date=date_str,
+            )
+        except (KeyError, IndexError):
+            mgmt_resp = rng.choice(_MGMT_RESPONSE_TEMPLATES)
+
+        due_delta_months = rng.randint(1, 4)
+        due_month = ((month - 1 + due_delta_months) % 12) + 1
+        due_year = year if due_month >= month else year + 1
+        due_date = f"{due_year}-{due_month:02d}-28"
+
+        findings.append({
+            'id': finding_id,
+            'risk': risk,
+            'status': status,
+            'owner': owner_title,
+            'description': description,
+            'corrective_action': corrective,
+            'mgmt_response': mgmt_resp,
+            'due_date': due_date,
+        })
+
+    # Distribution list
+    dist_list = []
+    for _ in range(rng.randint(3, 5)):
+        fn = rng.choice(_INT_FIRST_NAMES)
+        ln = rng.choice(_INT_LAST_NAMES)
+        dist_list.append({
+            'name': f"{fn} {ln}",
+            'title': rng.choice(_PEOPLE_TITLES),
+            'email': f"{fn.lower()}.{ln.lower()}@acpwb.com",
+        })
+
+    record_id = hashlib.md5(f"compliance_{year}_{month}_{day}_{slug}".encode()).hexdigest()[:8]
+    bulk_hex = [f'{rng.getrandbits(64):016x}' for _ in range(200)]
+
+    return {
+        'title': title,
+        'org': org,
+        'industry': industry,
+        'record_id': record_id,
+        'audit_ref': audit_ref,
+        'doc_version': doc_version,
+        'date_str': date_str,
+        'assessor': assessor,
+        'assessor_title': assessor_title,
+        'assessor_email': assessor_email,
+        'frameworks_cited': frameworks_cited,
+        'scope_para': scope_para,
+        'method_para': method_para,
+        'findings': findings,
+        'dist_list': dist_list,
+        'n': n,
+        'regions': regions,
+        'pct': pct,
+        'bulk_hex_js': bulk_hex[:100],
+        'bulk_hex_css': bulk_hex[100:],
+        # Shared keys not used by this variant
+        'phase': '',
+        'engagement_team': [],
+    }
+
+
+# ── Meeting Minutes content generator ─────────────────────────────────────────
+
+@functools.lru_cache(maxsize=256)
+def _generate_minutes_content(year, month, day, slug):
+    """Generate deterministic meeting minutes content for archive variant."""
+    from apps.people.generators import TITLES as _PEOPLE_TITLES
+    rng = random.Random(hashlib.md5(f"minutes_{year}{month}{day}{slug}".encode()).hexdigest())
+
+    org = rng.choice(_ARCHIVE_ORGS)
+    industry = rng.choice(_ARCHIVE_INDUSTRIES)
+    date_str = f"{year}-{month:02d}-{day:02d}"
+    q = rng.randint(1, 4)
+    n = rng.randint(12, 180)
+    n2 = rng.randint(10, 50)
+    regions = rng.randint(2, 18)
+    pct = rng.randint(4, 20)
+    project_name = rng.choice([
+        'Atlas', 'Orion', 'Phoenix', 'Titan', 'Nova', 'Apex', 'Echo',
+        'Iris', 'Vega', 'Lyra', 'Coda', 'Delta', 'Sigma', 'Helix',
+        'Prism', 'Relay', 'Axiom', 'Beacon', 'Cipher', 'Delphi',
+    ])
+
+    committee = rng.choice(_COMMITTEE_NAMES)
+    location = rng.choice(_MEETING_LOCATIONS)
+    hour = rng.randint(8, 16)
+    minute_of_hour = rng.choice([0, 15, 30, 45])
+    ampm = 'AM' if hour < 12 else 'PM'
+    display_hour = hour if hour <= 12 else hour - 12
+    call_to_order = f"{display_hour}:{minute_of_hour:02d} {ampm} CT"
+    adj_hour = hour + rng.randint(1, 3)
+    adj_ampm = 'AM' if adj_hour < 12 else 'PM'
+    adj_display = adj_hour if adj_hour <= 12 else adj_hour - 12
+    adjourn_time = f"{adj_display}:{rng.choice([0, 15, 30, 45]):02d} {adj_ampm} CT"
+
+    meeting_ref = f"MIN-{year}-{month:02d}-{rng.randint(1000, 9999)}"
+    eng_code = f"ENG-{year}-{rng.choice(_ENGAGEMENT_CODES)}-{rng.randint(10000, 99999)}"
+
+    # Title from slug
+    tail = slug.split('/')[-1] if slug else f"{year}-{month:02d}-{day:02d}"
+    clean_tail = _re.sub(r'-\d{3,}$', '', tail).replace('-', ' ').title()
+    title = f"{committee} \u2014 {clean_tail}"
+
+    # Attendance: 5-9 members
+    num_members = rng.randint(5, 9)
+    total_seats = num_members + rng.randint(0, 2)
+    roles_pool = _COMMITTEE_ROLES[:]
+    rng.shuffle(roles_pool)
+    members = []
+    for i in range(num_members):
+        fn = rng.choice(_INT_FIRST_NAMES)
+        ln = rng.choice(_INT_LAST_NAMES)
+        members.append({
+            'name': f"{fn} {ln}",
+            'title': rng.choice(_PEOPLE_TITLES),
+            'role': roles_pool[i % len(roles_pool)],
+            'present': rng.random() > 0.15,
+        })
+    num_present = sum(1 for m in members if m['present'])
+    quorum = num_present >= (total_seats // 2 + 1)
+    secretary = next((m for m in members if m['role'] == 'Secretary'), members[-1])
+
+    # Agenda items: 3-5
+    frameworks_sample = rng.sample(_COMPLIANCE_FRAMEWORKS, 3)
+    exhibit_letters = list('ABCDEFGHIJ')
+    agenda_titles_sample = rng.sample(_AGENDA_ITEM_TITLES, rng.randint(3, 5))
+    items = []
+    for i, item_title_raw in enumerate(agenda_titles_sample):
+        try:
+            item_title = item_title_raw.format(
+                org=org, industry=industry,
+                frameworks=frameworks_sample[i % len(frameworks_sample)],
+                q=q, year=year, n=n, project_name=project_name,
+            )
+        except (KeyError, IndexError):
+            item_title = item_title_raw
+
+        presenter = rng.choice(members)
+        exhibit = exhibit_letters[i % len(exhibit_letters)]
+        due_month_num = ((month - 1 + rng.randint(1, 3)) % 12) + 1
+        due_year = year if due_month_num >= month else year + 1
+        due_date = f"{due_year}-{due_month_num:02d}-28"
+
+        try:
+            discussion = rng.choice(_AGENDA_DISCUSSION_TEMPLATES).format(
+                chair=members[0]['name'],
+                presenter=presenter['name'],
+                item_title=item_title,
+                org=org, industry=industry, n=n, n2=n2, regions=regions,
+                eng_code=eng_code, q=q, pct=pct, year=year,
+                exhibit=exhibit, date=date_str, due_date=due_date,
+                project_name=project_name,
+            )
+        except (KeyError, IndexError):
+            discussion = rng.choice(_AGENDA_DISCUSSION_TEMPLATES)
+
+        # ~60% of items have a formal motion
+        motion = None
+        if rng.random() < 0.6:
+            present_members = [m for m in members if m['present']]
+            if len(present_members) >= 2:
+                yea = rng.randint(len(present_members) // 2 + 1, len(present_members))
+                nay = rng.randint(0, len(present_members) - yea)
+                abstain = len(present_members) - yea - nay
+                mover = rng.choice(present_members)
+                others = [m for m in present_members if m != mover]
+                seconder = rng.choice(others) if others else mover
+                try:
+                    resolution_text = rng.choice(_RESOLUTION_TEMPLATES).format(
+                        committee=committee, item_title=item_title, org=org,
+                        date=date_str, due_date=due_date, exhibit=exhibit,
+                        eng_code=eng_code, year=year, n=n, industry=industry,
+                        frameworks=frameworks_sample[0],
+                    )
+                except (KeyError, IndexError):
+                    resolution_text = rng.choice(_RESOLUTION_TEMPLATES)
+                motion = {
+                    'verb': rng.choice(_MOTION_VERBS),
+                    'text': resolution_text,
+                    'moved_by': mover['name'],
+                    'seconded_by': seconder['name'],
+                    'yea': yea,
+                    'nay': nay,
+                    'abstain': abstain,
+                    'carried': yea > (len(present_members) // 2),
+                }
+
+        items.append({
+            'number': i + 1,
+            'title': item_title,
+            'discussion': discussion,
+            'motion': motion,
+            'exhibit': exhibit,
+        })
+
+    # Action items: 3-6
+    # Pre-resolve agenda titles so nested placeholders (e.g. {frameworks}) don't leak
+    resolved_agenda_titles = []
+    for raw in agenda_titles_sample:
+        try:
+            resolved_agenda_titles.append(raw.format(
+                org=org, industry=industry,
+                frameworks=frameworks_sample[0],
+                q=q, year=year,
+            ))
+        except (KeyError, IndexError):
+            resolved_agenda_titles.append(raw)
+
+    action_items = []
+    for j in range(rng.randint(3, 6)):
+        fn = rng.choice(_INT_FIRST_NAMES)
+        ln = rng.choice(_INT_LAST_NAMES)
+        owner = f"{fn} {ln}"
+        exhibit = exhibit_letters[j % len(exhibit_letters)]
+        due_month_num = ((month - 1 + rng.randint(1, 2)) % 12) + 1
+        due_year = year if due_month_num >= month else year + 1
+        due_date = f"{due_year}-{due_month_num:02d}-28"
+        try:
+            action_desc = rng.choice(_ACTION_ITEM_TEMPLATES).format(
+                item_title=rng.choice(resolved_agenda_titles),
+                exhibit=exhibit,
+                frameworks=frameworks_sample[j % len(frameworks_sample)],
+                org=org, n=n, q=q, due_date=due_date, industry=industry, year=year,
+            )
+        except (KeyError, IndexError):
+            action_desc = rng.choice(_ACTION_ITEM_TEMPLATES)
+        action_items.append({
+            'number': j + 1,
+            'description': action_desc,
+            'owner': owner,
+            'due_date': due_date,
+        })
+
+    next_month_num = (month % 12) + 1
+    next_year = year if next_month_num > month else year + 1
+    next_meeting = f"{next_year}-{next_month_num:02d}-{rng.randint(5, 25):02d}"
+
+    record_id = hashlib.md5(f"minutes_{year}_{month}_{day}_{slug}".encode()).hexdigest()[:8]
+    bulk_hex = [f'{rng.getrandbits(64):016x}' for _ in range(200)]
+
+    return {
+        'title': title,
+        'org': org,
+        'industry': industry,
+        'record_id': record_id,
+        'committee': committee,
+        'location': location,
+        'call_to_order': call_to_order,
+        'adjourn_time': adjourn_time,
+        'meeting_ref': meeting_ref,
+        'eng_code': eng_code,
+        'date_str': date_str,
+        'members': members,
+        'quorum': quorum,
+        'total_seats': total_seats,
+        'num_present': num_present,
+        'secretary': secretary,
+        'items': items,
+        'action_items': action_items,
+        'next_meeting': next_meeting,
+        'bulk_hex_js': bulk_hex[:100],
+        'bulk_hex_css': bulk_hex[100:],
+        # Shared keys not used by this variant
+        'phase': '',
+        'engagement_team': [],
     }
 
 
@@ -497,7 +859,16 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     prev_month = month if day > 1 else (month - 1 if month > 1 else 12)
     prev_year = year if month > 1 or day > 1 else year - 1
 
-    content = _generate_archive_content(year, month, day, slug)
+    _variant_int = int(hashlib.md5(f"variant_{year}{month}{day}{slug}".encode()).hexdigest(), 16) % 20
+    if _variant_int < 3:
+        content = _generate_compliance_content(year, month, day, slug)
+        _template = 'honeypot/archive_compliance.html'
+    elif _variant_int < 6:
+        content = _generate_minutes_content(year, month, day, slug)
+        _template = 'honeypot/archive_minutes.html'
+    else:
+        content = _generate_archive_content(year, month, day, slug)
+        _template = 'honeypot/archive.html'
 
     # Related paths spread across a wide historical date range (1985–present)
     on_sub = getattr(request, 'on_archive_subdomain', False)
@@ -569,7 +940,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'related_docs': related_docs,
         **content,
     }
-    return render(request, 'honeypot/archive.html', context)
+    return render(request, _template, context)
 
 
 def archive_index(request):
@@ -1556,7 +1927,10 @@ def internal_login(request):
 
 def internal_employee_records(request):
     _log_crawler(request, 'ghost_link')
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     per_page = 50
     rng = random.Random(hashlib.md5(f"emp_records_{page}".encode()).hexdigest())
     employees = []
@@ -1621,7 +1995,10 @@ def internal_employee_records_csv(request):
 
 def internal_salary_database(request):
     _log_crawler(request, 'ghost_link')
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     user = _internal_welcome(request)
     rng = random.Random(hashlib.md5(f"salary_db_{page}".encode()).hexdigest())
     bands = []
@@ -1671,7 +2048,10 @@ def internal_salary_database_csv(request):
 
 def internal_acquisition_targets(request):
     _log_crawler(request, 'ghost_link')
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     per_page = 15
     user = _internal_welcome(request)
     rng = random.Random(hashlib.md5(f"acq_targets_{page}".encode()).hexdigest())
@@ -1722,7 +2102,10 @@ def internal_acquisition_targets_csv(request):
 
 def internal_litigation_hold(request):
     _log_crawler(request, 'ghost_link')
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     user = _internal_welcome(request)
     per_page = 15
     rng = random.Random(hashlib.md5(f"lit_hold_{page}".encode()).hexdigest())
@@ -1789,7 +2172,10 @@ def archive_export_csv(request, month, day, slug='', year=None):
 
 def feed_archive(request):
     _log_crawler(request, 'well_known')
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     rng = random.Random(hashlib.md5(f"feed_archive_{page}".encode()).hexdigest())
     items = []
     for i in range(20):
@@ -1833,7 +2219,10 @@ def feed_archive(request):
 
 def feed_reports(request):
     _log_crawler(request, 'well_known')
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     start = (page - 1) * 10
     reports_slice = REPORT_CATALOG[start:start + 10]
     if not reports_slice:
@@ -1952,7 +2341,10 @@ def dataset_download(request, slug):
     ds = next((d for d in _DATASET_CATALOG if d['slug'] == slug), None)
     if not ds:
         raise Http404
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     token = hashlib.md5(f"acpwb_dataset_{slug}".encode()).hexdigest()[:8]
     rng = random.Random(hashlib.md5(f"dataset_{slug}_{page}".encode()).hexdigest())
     records_per_page = 100

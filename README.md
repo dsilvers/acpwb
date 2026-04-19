@@ -53,9 +53,9 @@ Exploit scanners probing for WordPress installations, exposed `.env` files, and 
 
 ### Tracks Everything
 
-Every trap logs to the database: IP, user agent, path, host/subdomain, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load.
+Every trap logs to the database: IP, user agent, path, host/subdomain, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load. Inbound phone calls and voicemails are logged with caller ID, call status, and Twilio transcription.
 
-A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes five **stacked-area traffic graphs** (last hour / 8 hours / 24 hours / 7 days / all time) colored by bot group, regenerated every 30 minutes by the precalc cron. It also includes a "By Host / Subdomain" panel showing which archive subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used).
+A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes five **stacked-area traffic graphs** (last hour / 8 hours / 24 hours / 7 days / all time) colored by bot group, regenerated every 30 minutes by the precalc cron. It also includes a "By Host / Subdomain" panel showing which archive subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used). The **Voicemails** section logs every inbound call with status badges and a full voicemail log with inline audio playback and Twilio transcription text.
 
 A **Live Request Stream** at `/acpwb-dashboard/live/` shows every incoming request in real time via WebSocket — IP (last octet censored), host, path, HTTP method, status code, response time in ms, uncompressed response size, and user agent. The stream is delivered over a dedicated asyncio WebSocket service backed by Redis pub/sub, so it works across all gunicorn worker processes with no impact on HTTP serving if Redis goes down.
 
@@ -316,6 +316,40 @@ Every page also contains:
 
 ---
 
+## Inbound Calls & Voicemail
+
+Inbound calls to (414) 667-5665 are handled by a Twilio Studio Flow. Every call logs a `CallLog` record via the call status callback; calls that reach voicemail also create a `VoicemailRecording` with an MP3 recording and Twilio transcription.
+
+### Twilio Studio Flow
+
+Build the flow in the Twilio Studio console for your phone number:
+
+1. **Trigger** (Incoming Call)
+2. **Say/Play** — "You have reached the American Corporation for Public Well Being. Please leave a message after the tone."
+3. **Record Voicemail** widget — set:
+   - `transcribe: true`
+   - `transcribeCallback: https://acpwb.com/webhooks/twilio/transcription/`
+   - `recordingStatusCallback: https://acpwb.com/webhooks/twilio/recording/`
+   - `recordingStatusCallbackMethod: POST`
+4. **Say/Play** — "Thank you for your message. Goodbye."
+5. **End Flow**
+
+On the phone number's configuration page, set **Call status changes** → `https://acpwb.com/webhooks/twilio/call-status/`
+
+### Webhook endpoints
+
+| Endpoint | Event |
+|----------|-------|
+| `POST /webhooks/twilio/recording/` | MP3 ready (fires seconds after call ends) |
+| `POST /webhooks/twilio/transcription/` | Transcription complete (fires minutes later) |
+| `POST /webhooks/twilio/call-status/` | Terminal call state (completed, busy, no-answer, failed, canceled) |
+
+All three endpoints verify the `X-Twilio-Signature` HMAC-SHA1 header. Set `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in `.env`.
+
+The voicemail audio proxy at `/acpwb-dashboard/voicemails/audio/<recording_sid>/` fetches MP3s from Twilio using HTTP Basic Auth and streams them to the browser — required because browser `<audio>` elements can't handle Twilio's authenticated recording URLs directly.
+
+---
+
 ## Inbound Email
 
 Two supported providers. Both create `InboundEmail` + `HoneypotMatch` records and are visible in Django admin under **Webhooks → Honeypot Matches**.
@@ -488,6 +522,8 @@ curl -I -H "Host: blorp.acpwb.example" http://localhost:8001/
 | `PIPE_WEBHOOK_SECRET` | Shared secret for Cloudflare Email Worker |
 | `MAILGUN_WEBHOOK_SIGNING_KEY` | From Mailgun dashboard (legacy) |
 | `MAILGUN_DOMAIN` | `acpwb.com` (legacy) |
+| `TWILIO_ACCOUNT_SID` | Twilio Account SID (for voicemail webhook signature verification and audio proxy) |
+| `TWILIO_AUTH_TOKEN` | Twilio Auth Token |
 
 ---
 
@@ -518,7 +554,7 @@ acpwb/
     │   ├── people/           # Our People honeypot
     │   ├── projects/         # Successful Projects + PoW
     │   ├── honeypot/         # Archive, Wiki, Reports, Fake API, Well-Known
-    │   └── webhooks/         # Inbound email webhook (Cloudflare + Mailgun)
+    │   └── webhooks/         # Inbound email (Cloudflare + Mailgun) + Twilio call/voicemail webhooks
     ├── templates/
     └── static/
 ```

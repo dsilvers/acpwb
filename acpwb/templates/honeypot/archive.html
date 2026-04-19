@@ -129,20 +129,28 @@
               <thead>
                 <tr class="era-table-head" style="color:#fff">
                   <th style="padding:.45rem .75rem;text-align:left;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">Metric</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P10</th>
                   <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P25</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P33</th>
                   <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P50</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P67</th>
                   <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P75</th>
                   <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P90</th>
+                  <th style="padding:.45rem .75rem;text-align:right;font-size:.63rem;text-transform:uppercase;letter-spacing:.06em">P95</th>
                 </tr>
               </thead>
               <tbody>
                 {% for row in percentile_table %}
                 <tr style="border-top:1px solid rgba(128,128,128,.2)">
                   <td style="padding:.38rem .75rem;font-weight:600">{{ row.metric }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;opacity:.6">{{ row.p10 }}</td>
                   <td style="padding:.38rem .75rem;text-align:right;opacity:.6">{{ row.p25 }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;opacity:.7">{{ row.p33 }}</td>
                   <td style="padding:.38rem .75rem;text-align:right;font-weight:700">{{ row.p50 }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;opacity:.7">{{ row.p67 }}</td>
                   <td style="padding:.38rem .75rem;text-align:right;opacity:.75">{{ row.p75 }}</td>
                   <td style="padding:.38rem .75rem;text-align:right;opacity:.6">{{ row.p90 }}</td>
+                  <td style="padding:.38rem .75rem;text-align:right;opacity:.6">{{ row.p95 }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -430,20 +438,28 @@
               <thead>
                 <tr style="background:var(--navy);color:var(--gold)">
                   <th style="padding:.55rem .9rem;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Metric</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P10</th>
                   <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P25</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P33</th>
                   <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P50</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P67</th>
                   <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P75</th>
                   <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P90</th>
+                  <th style="padding:.55rem .9rem;text-align:right;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">P95</th>
                 </tr>
               </thead>
               <tbody>
                 {% for row in percentile_table %}
                 <tr style="border-top:1px solid var(--border)">
                   <td style="padding:.45rem .9rem;color:var(--navy);font-weight:600">{{ row.metric }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p10 }}</td>
                   <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p25 }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p33 }}</td>
                   <td style="padding:.45rem .9rem;text-align:right;font-weight:700">{{ row.p50 }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p67 }}</td>
                   <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p75 }}</td>
                   <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p90 }}</td>
+                  <td style="padding:.45rem .9rem;text-align:right;color:var(--muted)">{{ row.p95 }}</td>
                 </tr>
                 {% endfor %}
               </tbody>

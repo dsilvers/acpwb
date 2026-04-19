@@ -70,13 +70,14 @@ from .archive_data import (
     _ARCHIVE_WORDS,
     _CONSULTANT_TITLES, _EXEC_SUMMARY_BULLETS, _FOOTNOTE_TEMPLATES,
     _REVISION_TYPES, _DISTRIBUTION_CLASSES, _ENGAGEMENT_CODES,
-    _BENCH_METRICS, _PEER_GROUPS,
+    _BENCH_METRICS, _PEER_GROUPS, _DOC_VERSIONS as _ARCHIVE_DOC_VERSIONS,
 )
 from .archive_data_compliance import (
     _AUDIT_REF_PREFIXES, _COMPLIANCE_FRAMEWORKS, _COMPLIANCE_FINDING_TYPES,
     _COMPLIANCE_RISK_LEVELS, _COMPLIANCE_STATUSES,
     _COMPLIANCE_SCOPE_TEMPLATES, _COMPLIANCE_METHODOLOGY_TEMPLATES,
     _CORRECTIVE_ACTION_TEMPLATES, _MGMT_RESPONSE_TEMPLATES,
+    _PROJECT_NAMES, _DOC_VERSIONS, _COMPLIANCE_TITLE_PREFIXES,
 )
 from .archive_data_minutes import (
     _COMMITTEE_NAMES, _MEETING_LOCATIONS, _COMMITTEE_ROLES,
@@ -158,7 +159,7 @@ def _generate_archive_content(year, month, day, slug):
 
     # ── Structured metadata ───────────────────────────────────────────────────
     eng_code = f"ENG-{year}-{rng.choice(_ENGAGEMENT_CODES)}-{rng.randint(10000, 99999)}"
-    doc_version = rng.choice(['1.0', '1.1', '1.2', '2.0', '2.1', '3.0'])
+    doc_version = rng.choice(_ARCHIVE_DOC_VERSIONS)
     distribution = rng.choice(_DISTRIBUTION_CLASSES)
     page_count = rng.randint(28, 214)
     file_size_kb = page_count * rng.randint(38, 92)
@@ -176,7 +177,11 @@ def _generate_archive_content(year, month, day, slug):
     # ── Executive summary bullets ─────────────────────────────────────────────
     pct = rng.randint(3, 18)
     total = n + rng.randint(5, 30)
-    percentile_label = rng.choice(['25th', '50th', '75th', '90th'])
+    percentile_label = rng.choice([
+        '10th', '15th', '20th', '25th', '30th', '33rd', '35th',
+        '40th', '45th', '50th', '55th', '60th', '65th', '67th',
+        '70th', '75th', '80th', '85th', '90th', '95th', '99th',
+    ])
     exec_bullets = []
     for tmpl in rng.sample(_EXEC_SUMMARY_BULLETS, rng.randint(4, 6)):
         try:
@@ -199,10 +204,14 @@ def _generate_archive_content(year, month, day, slug):
         base = rng.randint(45000, 320000)
         percentile_table.append({
             'metric': bm,
+            'p10': f"${int(base * 0.58):,}",
             'p25': f"${int(base * 0.78):,}",
+            'p33': f"${int(base * 0.88):,}",
             'p50': f"${base:,}",
+            'p67': f"${int(base * 1.14):,}",
             'p75': f"${int(base * 1.28):,}",
             'p90': f"${int(base * 1.62):,}",
+            'p95': f"${int(base * 1.84):,}",
         })
 
     # ── Footnotes ─────────────────────────────────────────────────────────────
@@ -296,7 +305,8 @@ def _generate_compliance_content(year, month, day, slug):
     end_date = f"{end_year}-{min(month + 2, 12):02d}-28"
     q = rng.randint(1, 4)
     pct = rng.randint(4, 22)
-    doc_version = rng.choice(['1.0', '1.1', '2.0'])
+    doc_version = rng.choice(_DOC_VERSIONS)
+    project_name = rng.choice(_PROJECT_NAMES)
 
     audit_prefix = rng.choice(_AUDIT_REF_PREFIXES)
     audit_ref = f"{audit_prefix}-{year}-Q{q}-{rng.randint(1000, 9999):04d}"
@@ -304,7 +314,7 @@ def _generate_compliance_content(year, month, day, slug):
     # Title from slug
     tail = slug.split('/')[-1] if slug else f"{year}-{month:02d}-{day:02d}"
     clean_tail = _re.sub(r'-\d{3,}$', '', tail).replace('-', ' ').title()
-    title = f"Compliance Review \u2014 {clean_tail}"
+    title = f"{rng.choice(_COMPLIANCE_TITLE_PREFIXES)} \u2014 {clean_tail}"
 
     # Assessor
     fname = rng.choice(_INT_FIRST_NAMES)
@@ -348,7 +358,7 @@ def _generate_compliance_content(year, month, day, slug):
         try:
             description = finding_type.format(
                 org=org, industry=industry, n=n, regions=regions, pct=pct,
-                doc_version=doc_version, frameworks=frameworks_str,
+                doc_version=doc_version, frameworks=frameworks_str, year=year,
             )
         except (KeyError, IndexError):
             description = finding_type
@@ -361,6 +371,7 @@ def _generate_compliance_content(year, month, day, slug):
         try:
             mgmt_resp = rng.choice(_MGMT_RESPONSE_TEMPLATES).format(
                 org=org, pct=pct, regions=regions, date=date_str,
+                project_name=project_name, q=q, endyear=end_year, n=n, n2=n2,
             )
         except (KeyError, IndexError):
             mgmt_resp = rng.choice(_MGMT_RESPONSE_TEMPLATES)
@@ -438,11 +449,7 @@ def _generate_minutes_content(year, month, day, slug):
     n2 = rng.randint(10, 50)
     regions = rng.randint(2, 18)
     pct = rng.randint(4, 20)
-    project_name = rng.choice([
-        'Atlas', 'Orion', 'Phoenix', 'Titan', 'Nova', 'Apex', 'Echo',
-        'Iris', 'Vega', 'Lyra', 'Coda', 'Delta', 'Sigma', 'Helix',
-        'Prism', 'Relay', 'Axiom', 'Beacon', 'Cipher', 'Delphi',
-    ])
+    project_name = rng.choice(_PROJECT_NAMES)
 
     committee = rng.choice(_COMMITTEE_NAMES)
     location = rng.choice(_MEETING_LOCATIONS)

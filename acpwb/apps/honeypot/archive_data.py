@@ -5017,3 +5017,25 @@ _PEER_GROUPS = [
     'Global 500 Cross-Sector',
     'Expatriate Mobility Benchmark Pool — {n} Companies',
 ]
+
+_DOC_VERSIONS = [
+    # Single-digit major
+    '1.0', '1.1', '1.2', '1.3', '1.4',
+    '2.0', '2.1', '2.2', '2.3',
+    '3.0', '3.1', '3.2',
+    '4.0', '4.1',
+    '5.0',
+    # Pre-release / draft suffixes
+    '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9',
+    '1.0-DRAFT', '1.1-DRAFT', '2.0-DRAFT',
+    '1.0-RC1', '1.0-RC2', '2.0-RC1',
+    '1.0-FINAL', '1.1-FINAL', '2.0-FINAL', '3.0-FINAL',
+    # Three-part semver
+    '1.0.0', '1.0.1', '1.0.2', '1.1.0', '1.1.1', '1.2.0',
+    '2.0.0', '2.0.1', '2.1.0', '2.2.0',
+    '3.0.0', '3.0.1', '3.1.0',
+    # Date-stamped revisions
+    '1.0-2019', '1.0-2020', '1.0-2021', '1.1-2022', '2.0-2023', '2.1-2024',
+    # Revision letter variants
+    '1.0a', '1.0b', '1.0c', '1.1a', '1.1b', '2.0a',
+]

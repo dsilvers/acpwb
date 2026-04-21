@@ -1,8 +1,9 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: timescale/timescaledb:latest-pg16
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-timescaledb.sql:/docker-entrypoint-initdb.d/001-timescaledb.sql
     environment:
       POSTGRES_DB: acpwb
       POSTGRES_USER: acpwb

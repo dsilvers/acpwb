@@ -4,10 +4,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/init-timescaledb.sql:/docker-entrypoint-initdb.d/001-timescaledb.sql
+      - ./docker/pg_hba.conf:/etc/postgresql/pg_hba.conf
     environment:
       POSTGRES_DB: acpwb
       POSTGRES_USER: acpwb
       POSTGRES_PASSWORD: ${DB_PASSWORD:-acpwb_dev}
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+    command: postgres -c hba_file=/etc/postgresql/pg_hba.conf -c listen_addresses='*'
     ports:
       - "5432:5432"
     healthcheck:
@@ -18,6 +21,7 @@ services:
 
   redis:
     image: redis:7-alpine
+    command: redis-server --bind 0.0.0.0
     ports:
       - "6379:6379"
     restart: unless-stopped

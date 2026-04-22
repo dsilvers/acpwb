@@ -33,7 +33,9 @@ class SubdomainMiddleware:
                     request.urlconf = 'apps.honeypot.archive_subdomain_urls'
                     return self.get_response(request)
 
-        host = request.get_host().lower()
+        # Strip port so localhost:8001 matches the same as localhost
+        raw_host = request.get_host().lower()
+        host = raw_host.rsplit(':', 1)[0] if ':' in raw_host else raw_host
 
         # Main domain and dev hosts — normal routing
         if (host in _MAIN_HOSTS

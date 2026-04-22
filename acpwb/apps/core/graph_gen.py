@@ -20,6 +20,7 @@ Bots with < 1% share of total traffic are grouped into "Others".
 
 Requires matplotlib (pip install matplotlib).
 """
+import hashlib
 import os
 import tempfile
 import time as _time
@@ -249,14 +250,11 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
 
     groups = list(series.keys())
     ys = [series[g] for g in groups]
-    palette_idx = 0
-    colors = []
-    for g in groups:
-        if g == 'Others':
-            colors.append(_OTHERS_COLOR)
-        else:
-            colors.append(_BOT_COLOR_PALETTE[palette_idx % len(_BOT_COLOR_PALETTE)])
-            palette_idx += 1
+    colors = [
+        _OTHERS_COLOR if g == 'Others'
+        else _BOT_COLOR_PALETTE[int(hashlib.md5(g.encode()).hexdigest(), 16) % len(_BOT_COLOR_PALETTE)]
+        for g in groups
+    ]
 
     ax.stackplot(xs, ys, labels=groups, colors=colors, alpha=0.88, zorder=2)
     # Set ylim AFTER stackplot so autoscaling has already computed the data range.
@@ -269,8 +267,9 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
         ax.xaxis.set_major_formatter(mdates.DateFormatter(x_fmt))
     else:
         ax.xaxis.set_major_formatter(x_fmt)
-    ax.legend(loc='upper left', fontsize=8, framealpha=0.85,
-              ncol=4, handlelength=1.2, handletextpad=0.5, columnspacing=1.0)
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.18), fontsize=8,
+              framealpha=0.85, ncol=4, handlelength=1.2, handletextpad=0.5,
+              columnspacing=1.0)
 
 
 # ── File I/O ───────────────────────────────────────────────────────────────────

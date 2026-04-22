@@ -98,148 +98,164 @@ class Command(BaseCommand):
     # ── CrawlerVisit ──────────────────────────────────────────────────────────
 
     def _update_crawlers(self):
-        hwm = self._upsert('hwm.crawler_visit', 0)
-        actual_max = CrawlerVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
+        from datetime import datetime, timezone as dt_tz
+        hwm = self._upsert('hwm.crawler_visit_ts', None)
+        since = datetime.fromisoformat(hwm.value) if hwm.value else datetime.min.replace(tzinfo=dt_tz.utc)
+        new_rows_qs = CrawlerVisit.objects.filter(timestamp__gt=since).order_by('timestamp')
+        cap_row = new_rows_qs[_MAX_ROWS_PER_RUN:_MAX_ROWS_PER_RUN + 1].first()
+        if cap_row:
+            new_max_ts = cap_row.timestamp
+            new_rows = CrawlerVisit.objects.filter(timestamp__gt=since, timestamp__lte=new_max_ts)
+            capped = True
+        else:
+            new_max_ts = new_rows_qs.aggregate(m=Max('timestamp'))['m']
+            if new_max_ts is None:
+                self.stdout.write('  crawlers: no new rows')
+                return
+            new_rows = CrawlerVisit.objects.filter(timestamp__gt=since)
+            capped = False
 
-        if actual_max:
-            new_max = self._cap_new_max(hwm.value, actual_max)
-            new_rows = CrawlerVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
-            total_stat = self._upsert('crawlers.total', 0)
-            total_stat.value = total_stat.value + new_rows.count()
-            total_stat.save()
+        total_stat = self._upsert('crawlers.total', 0)
+        total_stat.value = total_stat.value + new_rows.count()
+        total_stat.save()
 
-            stat = self._upsert('crawlers.by_trap_type', {})
-            self._inc_dict(stat, new_rows, 'trap_type')
-            stat.save()
+        stat = self._upsert('crawlers.by_trap_type', {})
+        self._inc_dict(stat, new_rows, 'trap_type')
+        stat.save()
 
-            for key, field in [
-                ('crawlers.by_bot_type',  'bot_type'),
-                ('crawlers.by_bot_group', 'bot_group'),
-            ]:
-                stat = self._upsert(key, {})
-                if self.reset_bot_types:
-                    stat.value = {
-                        str(r[field] or ''): r['c']
-                        for r in CrawlerVisit.objects.values(field).annotate(c=Count('id'))
-                    }
-                else:
-                    self._inc_dict(stat, new_rows, field)
-                stat.save()
-
-            for key, field in [
-                ('crawlers.by_ip',   'ip_address'),
-                ('crawlers.by_path', 'path'),
-            ]:
-                stat = self._upsert(key, {})
+        for key, field in [
+            ('crawlers.by_bot_type',  'bot_type'),
+            ('crawlers.by_bot_group', 'bot_group'),
+        ]:
+            stat = self._upsert(key, {})
+            if self.reset_bot_types:
+                stat.value = {
+                    str(r[field] or ''): r['c']
+                    for r in CrawlerVisit.objects.values(field).annotate(c=Count('id'))
+                }
+            else:
                 self._inc_dict(stat, new_rows, field)
-                stat.value = self._prune(stat.value)
-                stat.save()
+            stat.save()
 
-            stat = self._upsert('crawlers.by_host', {})
-            self._inc_dict(stat, new_rows.exclude(host=''), 'host')
+        for key, field in [
+            ('crawlers.by_ip',   'ip_address'),
+            ('crawlers.by_path', 'path'),
+        ]:
+            stat = self._upsert(key, {})
+            self._inc_dict(stat, new_rows, field)
             stat.value = self._prune(stat.value)
             stat.save()
 
-            probe_types = ['env_probe', 'wp_probe', 'webshell_probe', 'scanner_probe']
-            stat = self._upsert('crawlers.probe_by_path', {})
-            self._inc_dict(stat, new_rows.filter(trap_type__in=probe_types), 'path')
-            stat.value = self._prune(stat.value)
-            stat.save()
+        stat = self._upsert('crawlers.by_host', {})
+        self._inc_dict(stat, new_rows.exclude(host=''), 'host')
+        stat.value = self._prune(stat.value)
+        stat.save()
 
-            stat = self._upsert('crawlers.webshell_cmds', {})
-            self._inc_dict(stat, new_rows.filter(trap_type='webshell_probe').exclude(query_string=''), 'query_string')
-            stat.value = self._prune(stat.value)
-            stat.save()
+        probe_types = ['env_probe', 'wp_probe', 'webshell_probe', 'scanner_probe']
+        stat = self._upsert('crawlers.probe_by_path', {})
+        self._inc_dict(stat, new_rows.filter(trap_type__in=probe_types), 'path')
+        stat.value = self._prune(stat.value)
+        stat.save()
 
-            hwm.value = new_max
-            hwm.save()
+        stat = self._upsert('crawlers.webshell_cmds', {})
+        self._inc_dict(stat, new_rows.filter(trap_type='webshell_probe').exclude(query_string=''), 'query_string')
+        stat.value = self._prune(stat.value)
+        stat.save()
 
-            cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
-            self.stdout.write(f'  crawlers: updated to hwm={new_max}{cap_note}')
+        hwm.value = new_max_ts.isoformat()
+        hwm.save()
 
-            # Daily chart recomputed only when there are new rows
-            now = timezone.now()
-            rows = (CrawlerVisit.objects
+        cap_note = ' (capped)' if capped else ''
+        self.stdout.write(f'  crawlers: updated to hwm_ts={new_max_ts}{cap_note}')
+
+        # Daily chart recomputed only when there are new rows
+        now = timezone.now()
+        rows = (CrawlerVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=60))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        stat = self._upsert('crawlers.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
+        stat.save()
+
+        # Per-bot-type daily breakdown for all-time traffic graph
+        bot_rows = (CrawlerVisit.objects
                     .filter(timestamp__gte=now - timedelta(days=60))
                     .annotate(d=TruncDate('timestamp'))
-                    .values('d').annotate(c=Count('id')))
-            stat = self._upsert('crawlers.daily', {})
-            stat.value = {str(r['d']): r['c'] for r in rows}
-            stat.save()
-
-            # Per-bot-type daily breakdown for all-time traffic graph
-            bot_rows = (CrawlerVisit.objects
-                        .filter(timestamp__gte=now - timedelta(days=60))
-                        .annotate(d=TruncDate('timestamp'))
-                        .values('d', 'bot_type')
-                        .annotate(c=Count('id')))
-            daily_by_bot = {}
-            for r in bot_rows:
-                d = str(r['d'])
-                bt = r['bot_type'] or '(empty user agent)'
-                if d not in daily_by_bot:
-                    daily_by_bot[d] = {}
-                daily_by_bot[d][bt] = r['c']
-            stat = self._upsert('crawlers.daily_by_bot_type', {})
-            stat.value = daily_by_bot
-            stat.save()
-
-
-        else:
-            self.stdout.write('  crawlers: no new rows')
+                    .values('d', 'bot_type')
+                    .annotate(c=Count('id')))
+        daily_by_bot = {}
+        for r in bot_rows:
+            d = str(r['d'])
+            bt = r['bot_type'] or '(empty user agent)'
+            if d not in daily_by_bot:
+                daily_by_bot[d] = {}
+            daily_by_bot[d][bt] = r['c']
+        stat = self._upsert('crawlers.daily_by_bot_type', {})
+        stat.value = daily_by_bot
+        stat.save()
 
     # ── ArchiveVisit ──────────────────────────────────────────────────────────
 
     def _update_archive(self):
-        hwm = self._upsert('hwm.archive_visit', 0)
-        actual_max = ArchiveVisit.objects.filter(id__gt=hwm.value).aggregate(m=Max('id'))['m']
-
-        if actual_max:
-            new_max = self._cap_new_max(hwm.value, actual_max)
-            new_rows = ArchiveVisit.objects.filter(id__gt=hwm.value, id__lte=new_max)
-            total_stat = self._upsert('archive.total', 0)
-            total_stat.value = total_stat.value + new_rows.count()
-            total_stat.save()
-
-            stat = self._upsert('archive.by_depth', {})
-            self._inc_dict(stat, new_rows, 'depth')
-            stat.save()
-
-            stat = self._upsert('archive.by_ip', {})
-            self._inc_dict(stat, new_rows, 'ip_address')
-            stat.value = self._prune(stat.value)
-            stat.save()
-
-            stat = self._upsert('archive.by_slug', {})
-            self._inc_dict(stat, new_rows, 'slug')
-            stat.value = self._prune(stat.value)
-            stat.save()
-
-            # Bot type via UA + IP classification — chunked to avoid large cursors
-            from apps.core.bot_classify import classify_ua_or_ip
-            stat = self._upsert('archive.by_bot_type', {})
-            for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
-                k = classify_ua_or_ip(ua or '', ip or '')
-                stat.value[k] = stat.value.get(k, 0) + 1
-            stat.save()
-
-            hwm.value = new_max
-            hwm.save()
-
-            cap_note = f' (capped, actual_max={actual_max})' if new_max < actual_max else ''
-            self.stdout.write(f'  archive: updated to hwm={new_max}{cap_note}')
-
-            # Daily chart recomputed only when there are new rows
-            now = timezone.now()
-            rows = (ArchiveVisit.objects
-                    .filter(timestamp__gte=now - timedelta(days=30))
-                    .annotate(d=TruncDate('timestamp'))
-                    .values('d').annotate(c=Count('id')))
-            stat = self._upsert('archive.daily', {})
-            stat.value = {str(r['d']): r['c'] for r in rows}
-            stat.save()
+        from datetime import datetime, timezone as dt_tz
+        hwm = self._upsert('hwm.archive_visit_ts', None)
+        since = datetime.fromisoformat(hwm.value) if hwm.value else datetime.min.replace(tzinfo=dt_tz.utc)
+        new_rows_qs = ArchiveVisit.objects.filter(timestamp__gt=since).order_by('timestamp')
+        cap_row = new_rows_qs[_MAX_ROWS_PER_RUN:_MAX_ROWS_PER_RUN + 1].first()
+        if cap_row:
+            new_max_ts = cap_row.timestamp
+            new_rows = ArchiveVisit.objects.filter(timestamp__gt=since, timestamp__lte=new_max_ts)
+            capped = True
         else:
-            self.stdout.write('  archive: no new rows')
+            new_max_ts = new_rows_qs.aggregate(m=Max('timestamp'))['m']
+            if new_max_ts is None:
+                self.stdout.write('  archive: no new rows')
+                return
+            new_rows = ArchiveVisit.objects.filter(timestamp__gt=since)
+            capped = False
+
+        total_stat = self._upsert('archive.total', 0)
+        total_stat.value = total_stat.value + new_rows.count()
+        total_stat.save()
+
+        stat = self._upsert('archive.by_depth', {})
+        self._inc_dict(stat, new_rows, 'depth')
+        stat.save()
+
+        stat = self._upsert('archive.by_ip', {})
+        self._inc_dict(stat, new_rows, 'ip_address')
+        stat.value = self._prune(stat.value)
+        stat.save()
+
+        stat = self._upsert('archive.by_slug', {})
+        self._inc_dict(stat, new_rows, 'slug')
+        stat.value = self._prune(stat.value)
+        stat.save()
+
+        # Bot type via UA + IP classification — chunked to avoid large cursors
+        from apps.core.bot_classify import classify_ua_or_ip
+        stat = self._upsert('archive.by_bot_type', {})
+        for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+            k = classify_ua_or_ip(ua or '', ip or '')
+            stat.value[k] = stat.value.get(k, 0) + 1
+        stat.save()
+
+        hwm.value = new_max_ts.isoformat()
+        hwm.save()
+
+        cap_note = ' (capped)' if capped else ''
+        self.stdout.write(f'  archive: updated to hwm_ts={new_max_ts}{cap_note}')
+
+        # Daily chart recomputed only when there are new rows
+        now = timezone.now()
+        rows = (ArchiveVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        stat = self._upsert('archive.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
+        stat.save()
 
     # ── InboundEmail ──────────────────────────────────────────────────────────
 

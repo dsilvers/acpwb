@@ -867,19 +867,19 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     prev_month = month if day > 1 else (month - 1 if month > 1 else 12)
     prev_year = year if month > 1 or day > 1 else year - 1
 
+    on_sub = getattr(request, 'on_archive_subdomain', False)
     _variant_int = int(hashlib.md5(f"variant_{year}{month}{day}{slug}".encode()).hexdigest(), 16) % 20
     if _variant_int < 3:
         content = _generate_compliance_content(year, month, day, slug)
-        _template = 'honeypot/archive_compliance.html'
+        _template = 'honeypot/era/archive_compliance.html' if on_sub else 'honeypot/archive_compliance.html'
     elif _variant_int < 6:
         content = _generate_minutes_content(year, month, day, slug)
-        _template = 'honeypot/archive_minutes.html'
+        _template = 'honeypot/era/archive_minutes.html' if on_sub else 'honeypot/archive_minutes.html'
     else:
         content = _generate_archive_content(year, month, day, slug)
-        _template = 'honeypot/archive.html'
+        _template = 'honeypot/era/archive.html' if on_sub else 'honeypot/archive.html'
 
     # Related paths spread across a wide historical date range (1985–present)
-    on_sub = getattr(request, 'on_archive_subdomain', False)
     related_paths = []
     for _ in range(10):
         r_year = rng.randint(1985, 2025)
@@ -948,6 +948,11 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'related_docs': related_docs,
         **content,
     }
+    if on_sub:
+        # Jinja2 backend doesn't run context processors; inject required vars manually
+        from apps.core.context_processors import honeypot_context
+        context.update(honeypot_context(request))
+        context['request'] = request
     return render(request, _template, context)
 
 

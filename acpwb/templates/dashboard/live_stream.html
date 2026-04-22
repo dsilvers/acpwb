@@ -13,23 +13,14 @@
       <div class="value" id="rps-1">—</div>
     </div>
   </div>
-  <div class="col-6 col-lg-3">
-    <div class="stat-card">
-      <div class="label">Avg req/s (1 min)</div>
-      <div class="value" id="rps-60">—</div>
-    </div>
+</div>
+
+<div class="section-card mb-3">
+  <div class="section-card-header" style="justify-content:space-between">
+    <h6>Requests / sec — last 2 min</h6>
   </div>
-  <div class="col-6 col-lg-3">
-    <div class="stat-card">
-      <div class="label">Avg req/s (5 min)</div>
-      <div class="value" id="rps-300">—</div>
-    </div>
-  </div>
-  <div class="col-6 col-lg-3">
-    <div class="stat-card">
-      <div class="label">Avg req/s (15 min)</div>
-      <div class="value" id="rps-900">—</div>
-    </div>
+  <div class="section-card-body" style="padding:.75rem 1.1rem">
+    <canvas id="rps-canvas" style="width:100%;height:80px;display:block"></canvas>
   </div>
 </div>
 
@@ -81,18 +72,56 @@
   const waitingRow = document.getElementById("waiting-row");
   const MAX_ROWS = 200;
 
-  // RPS tracking — ring buffer of arrival timestamps (ms), max 15 min window
-  const WINDOW_MS = 15 * 60 * 1000;
+  // RPS tracking — ring buffer of arrival timestamps (ms), max 1 min window
+  const WINDOW_MS = 60 * 1000;
   const timestamps = [];  // sorted ascending
 
-  const rpsEls = {
-    1:   document.getElementById("rps-1"),
-    60:  document.getElementById("rps-60"),
-    300: document.getElementById("rps-300"),
-    900: document.getElementById("rps-900"),
-  };
+  const rps1El = document.getElementById("rps-1");
   const bytesEl = document.getElementById("bytes-total");
   let totalBytes = 0;
+
+  // Sparkline
+  const HISTORY = 1200;  // 10 minutes of per-second buckets
+  const rpsHistory = new Array(HISTORY).fill(0);
+  const canvas = document.getElementById("rps-canvas");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = rect.width  * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    drawSparkline();
+  }
+
+  function drawSparkline() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    const max = Math.max(...rpsHistory, 1);
+    const step = w / (HISTORY - 1);
+    const points = rpsHistory.map((v, i) => ({
+      x: i * step,
+      y: h - (v / max) * h * 0.88,
+    }));
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, h);
+    points.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.lineTo(points[points.length - 1].x, h);
+    ctx.closePath();
+    ctx.fillStyle = "rgba(10, 22, 40, 0.08)";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    points.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.strokeStyle = "#0A1628";
+    ctx.lineWidth = 1.5 * devicePixelRatio;
+    ctx.lineJoin = "round";
+    ctx.stroke();
+  }
+
+  new ResizeObserver(resizeCanvas).observe(canvas);
+  resizeCanvas();
 
   function formatBytes(b) {
     if (b >= 1073741824) return (b / 1073741824).toFixed(2) + ' GB';
@@ -103,25 +132,15 @@
 
   function updateRPS() {
     const now = Date.now();
-    // Prune entries older than 15 min
     while (timestamps.length && now - timestamps[0] > WINDOW_MS) timestamps.shift();
-
-    const buckets = [
-      [1,   document.getElementById("rps-1")],
-      [60,  document.getElementById("rps-60")],
-      [300, document.getElementById("rps-300")],
-      [900, document.getElementById("rps-900")],
-    ];
-    for (const [secs, el] of buckets) {
-      const cutoff = now - secs * 1000;
-      // Count entries within this window
-      let lo = 0, hi = timestamps.length;
-      while (lo < hi) { const mid = (lo + hi) >> 1; if (timestamps[mid] < cutoff) lo = mid + 1; else hi = mid; }
-      const count = timestamps.length - lo;
-      // For 1s bucket: show count in the previous second exactly
-      // For others: divide by window to get average
-      el.textContent = Math.round(count / secs);
-    }
+    const cutoff = now - 1000;
+    let lo = 0, hi = timestamps.length;
+    while (lo < hi) { const mid = (lo + hi) >> 1; if (timestamps[mid] < cutoff) lo = mid + 1; else hi = mid; }
+    const current = timestamps.length - lo;
+    rps1El.textContent = current;
+    rpsHistory.push(current);
+    if (rpsHistory.length > HISTORY) rpsHistory.shift();
+    drawSparkline();
   }
 
   setInterval(updateRPS, 1000);

@@ -99,7 +99,7 @@ class Command(BaseCommand):
 
     def _update_crawlers(self):
         from datetime import datetime, timezone as dt_tz
-        hwm = self._upsert('hwm.crawler_visit_ts', None)
+        hwm = self._upsert('hwm.crawler_visit_ts', '')
         since = datetime.fromisoformat(hwm.value) if hwm.value else datetime.min.replace(tzinfo=dt_tz.utc)
         new_rows_qs = CrawlerVisit.objects.filter(timestamp__gt=since).order_by('timestamp')
         cap_row = new_rows_qs[_MAX_ROWS_PER_RUN:_MAX_ROWS_PER_RUN + 1].first()
@@ -199,7 +199,7 @@ class Command(BaseCommand):
 
     def _update_archive(self):
         from datetime import datetime, timezone as dt_tz
-        hwm = self._upsert('hwm.archive_visit_ts', None)
+        hwm = self._upsert('hwm.archive_visit_ts', '')
         since = datetime.fromisoformat(hwm.value) if hwm.value else datetime.min.replace(tzinfo=dt_tz.utc)
         new_rows_qs = ArchiveVisit.objects.filter(timestamp__gt=since).order_by('timestamp')
         cap_row = new_rows_qs[_MAX_ROWS_PER_RUN:_MAX_ROWS_PER_RUN + 1].first()

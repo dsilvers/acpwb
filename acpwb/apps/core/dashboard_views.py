@@ -30,6 +30,11 @@ def _stat(key, default=None):
         return default
 
 
+def _stats(*keys):
+    rows = DashboardStat.objects.filter(key__in=keys).values('key', 'value')
+    return {r['key']: r['value'] for r in rows}
+
+
 def _updated_at(key='crawlers.total'):
     return DashboardStat.objects.filter(key=key).values_list('updated_at', flat=True).first()
 
@@ -124,20 +129,26 @@ def _bot_breakdown_from_dict(d, limit=20):
 
 @staff_member_required(login_url='/django-admin/login/')
 def overview(request):
+    s = _stats(
+        'crawlers.total', 'archive.total', 'emails.total', 'people.total',
+        'projects.total', 'login_attempts.total', 'optouts.total',
+        'crawlers.by_bot_type', 'crawlers.by_trap_type', 'crawlers.by_bot_group',
+        'crawlers.daily',
+    )
     ctx = {
         'counts': {
-            'crawler':  _stat('crawlers.total', 0),
-            'archive':  _stat('archive.total', 0),
-            'email':    _stat('emails.total', 0),
-            'people':   _stat('people.total', 0),
-            'projects': _stat('projects.total', 0),
-            'logins':   _stat('login_attempts.total', 0),
-            'optouts':  _stat('optouts.total', 0),
+            'crawler':  s.get('crawlers.total', 0),
+            'archive':  s.get('archive.total', 0),
+            'email':    s.get('emails.total', 0),
+            'people':   s.get('people.total', 0),
+            'projects': s.get('projects.total', 0),
+            'logins':   s.get('login_attempts.total', 0),
+            'optouts':  s.get('optouts.total', 0),
         },
-        'top_bots':        _top_named(_stat('crawlers.by_bot_type', {}), 15),
-        'trap_counts':     _trap_counts(_stat('crawlers.by_trap_type', {})),
-        'bot_groups':      _top_named(_stat('crawlers.by_bot_group', {})),
-        'daily':           _daily_bars(_stat('crawlers.daily', {}), 30),
+        'top_bots':        _top_named(s.get('crawlers.by_bot_type', {}), 15),
+        'trap_counts':     _trap_counts(s.get('crawlers.by_trap_type', {})),
+        'bot_groups':      _top_named(s.get('crawlers.by_bot_group', {})),
+        'daily':           _daily_bars(s.get('crawlers.daily', {}), 30),
         'recent_crawlers': list(CrawlerVisit.objects.order_by('-timestamp')[:10]),
         'recent_emails':   list(InboundEmail.objects.order_by('-received_at')[:5]),
         'recent_optouts':  list(DataOptOutRequest.objects.order_by('-created_at')[:10]),
@@ -149,22 +160,26 @@ def overview(request):
 @staff_member_required(login_url='/django-admin/login/')
 def crawlers(request):
     import time
+    s = _stats(
+        'crawlers.total', 'crawlers.by_bot_type', 'crawlers.by_trap_type',
+        'crawlers.by_ip', 'crawlers.by_path', 'crawlers.by_host', 'crawlers.daily',
+        'crawlers.probe_by_path', 'crawlers.webshell_cmds', 'canary.triggered_count',
+    )
     canary_latest = CanaryToken.objects.filter(triggered=True).order_by('-triggered_at').first()
     ctx = {
-        'total':                _stat('crawlers.total', 0),
-        'top_bots':             _top_named(_stat('crawlers.by_bot_type', {}), 30),
-        'trap_counts':          _trap_counts(_stat('crawlers.by_trap_type', {})),
-        'top_ips':              _top_field(_stat('crawlers.by_ip', {}), 'ip_address', 20),
-        'top_paths':            _top_field(_stat('crawlers.by_path', {}), 'path', 20),
-        'top_hosts':            _top_field(_stat('crawlers.by_host', {}), 'host', 20),
-        'daily':                _daily_bars(_stat('crawlers.daily', {}), 60),
+        'total':                s.get('crawlers.total', 0),
+        'top_bots':             _top_named(s.get('crawlers.by_bot_type', {}), 30),
+        'trap_counts':          _trap_counts(s.get('crawlers.by_trap_type', {})),
+        'top_ips':              _top_field(s.get('crawlers.by_ip', {}), 'ip_address', 20),
+        'top_paths':            _top_field(s.get('crawlers.by_path', {}), 'path', 20),
+        'top_hosts':            _top_field(s.get('crawlers.by_host', {}), 'host', 20),
+        'daily':                _daily_bars(s.get('crawlers.daily', {}), 60),
         'recent':               list(CrawlerVisit.objects.order_by('-timestamp')[:50]),
-        'top_probe_paths':      _top_field(_stat('crawlers.probe_by_path', {}), 'path', 20),
-        'webshell_commands':    _top_field(_stat('crawlers.webshell_cmds', {}), 'query_string', 10),
-        'canary_trigger_count': _stat('canary.triggered_count', 0),
+        'top_probe_paths':      _top_field(s.get('crawlers.probe_by_path', {}), 'path', 20),
+        'webshell_commands':    _top_field(s.get('crawlers.webshell_cmds', {}), 'query_string', 10),
+        'canary_trigger_count': s.get('canary.triggered_count', 0),
         'canary_latest':        canary_latest,
         'updated_at':           _updated_at('crawlers.total'),
-        # Cache-buster for graph PNGs — changes each minute so browser re-fetches after cron runs
         'graphs_ts':            int(time.time() // 60),
     }
     return render(request, 'dashboard/crawlers.html', ctx)

@@ -40,7 +40,14 @@ _MAX_ROWS_PER_RUN = 500_000
 class Command(BaseCommand):
     help = 'Incrementally update dashboard stats in the database.'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--reset-bot-types', action='store_true',
+            help='Full recompute of bot_type/bot_group from all rows (use after backfill_bot_types)',
+        )
+
     def handle(self, *args, **options):
+        self.reset_bot_types = options['reset_bot_types']
         with open('/tmp/precalc_dashboard.lock', 'w') as lockfile:
             try:
                 fcntl.flock(lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -105,17 +112,18 @@ class Command(BaseCommand):
             self._inc_dict(stat, new_rows, 'trap_type')
             stat.save()
 
-            # bot_type and bot_group are always fully recomputed from the DB so that
-            # backfill_bot_types changes are reflected immediately without a hwm reset.
             for key, field in [
                 ('crawlers.by_bot_type',  'bot_type'),
                 ('crawlers.by_bot_group', 'bot_group'),
             ]:
                 stat = self._upsert(key, {})
-                stat.value = {
-                    str(r[field] or ''): r['c']
-                    for r in CrawlerVisit.objects.values(field).annotate(c=Count('id'))
-                }
+                if self.reset_bot_types:
+                    stat.value = {
+                        str(r[field] or ''): r['c']
+                        for r in CrawlerVisit.objects.values(field).annotate(c=Count('id'))
+                    }
+                else:
+                    self._inc_dict(stat, new_rows, field)
                 stat.save()
 
             for key, field in [

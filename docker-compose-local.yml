@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: timescale/timescaledb:latest-pg16
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:

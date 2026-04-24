@@ -96,23 +96,37 @@ def _generate_archive_content(year, month, day, slug):
     date_str = f"{year}-{month:02d}-{day:02d}"
     end_year = min(year + rng.randint(1, 3), 2024)
     metric = rng.choice(_ARCHIVE_METRIC_LABELS)
+    _PERCENTILE_LABELS = [
+        '10th', '15th', '20th', '25th', '30th', '33rd', '35th',
+        '40th', '45th', '50th', '55th', '60th', '65th', '67th',
+        '70th', '75th', '80th', '85th', '90th', '95th', '99th',
+    ]
 
     paragraphs = []
     for tmpl in rng.sample(_ARCHIVE_PARA_TEMPLATES, rng.randint(5, 7)):
-        paragraphs.append(tmpl.format(
-            org=org, industry=industry, phase=phase,
-            date=date_str, year=year, endyear=end_year,
-            n=rng.randint(12, 280), regions=rng.randint(3, 47),
-        ))
+        try:
+            paragraphs.append(tmpl.format(
+                org=org, industry=industry, phase=phase,
+                date=date_str, year=year, endyear=end_year,
+                n=rng.randint(12, 280), regions=rng.randint(3, 47),
+                pct=rng.randint(3, 18), percentile=rng.choice(_PERCENTILE_LABELS),
+                metric=metric,
+            ))
+        except (KeyError, IndexError):
+            paragraphs.append(tmpl)
 
     # Key findings bullets
     findings = []
     for tmpl in rng.sample(_ARCHIVE_FINDING_TEMPLATES, rng.randint(3, 5)):
-        findings.append(tmpl.format(
-            org=org, industry=industry, phase=phase, date=date_str,
-            year=year, endyear=end_year,
-            n=rng.randint(12, 280), regions=rng.randint(3, 47), metric=metric,
-        ))
+        try:
+            findings.append(tmpl.format(
+                org=org, industry=industry, phase=phase, date=date_str,
+                year=year, endyear=end_year,
+                n=rng.randint(12, 280), regions=rng.randint(3, 47), metric=metric,
+                pct=rng.randint(3, 18), percentile=rng.choice(_PERCENTILE_LABELS),
+            ))
+        except (KeyError, IndexError):
+            findings.append(tmpl)
 
     # Metrics table: pick 6-8 metric names, assign baseline/current/delta
     metric_rows = []
@@ -175,11 +189,6 @@ def _generate_archive_content(year, month, day, slug):
         engagement_team.append({'name': f'{fname} {lname}', 'title': title_t, 'email': email})
 
     # ── Executive summary bullets ─────────────────────────────────────────────
-    _PERCENTILE_LABELS = [
-        '10th', '15th', '20th', '25th', '30th', '33rd', '35th',
-        '40th', '45th', '50th', '55th', '60th', '65th', '67th',
-        '70th', '75th', '80th', '85th', '90th', '95th', '99th',
-    ]
     exec_bullets = []
     for tmpl in rng.sample(_EXEC_SUMMARY_BULLETS, rng.randint(4, 6)):
         _n = rng.randint(12, 280)

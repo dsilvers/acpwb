@@ -94,8 +94,6 @@ def _generate_archive_content(year, month, day, slug):
     industry = rng.choice(_ARCHIVE_INDUSTRIES)
     phase = rng.choice(_ARCHIVE_PHASES)
     date_str = f"{year}-{month:02d}-{day:02d}"
-    n = rng.randint(12, 280)
-    regions = rng.randint(3, 47)
     end_year = min(year + rng.randint(1, 3), 2024)
     metric = rng.choice(_ARCHIVE_METRIC_LABELS)
 
@@ -103,7 +101,8 @@ def _generate_archive_content(year, month, day, slug):
     for tmpl in rng.sample(_ARCHIVE_PARA_TEMPLATES, rng.randint(5, 7)):
         paragraphs.append(tmpl.format(
             org=org, industry=industry, phase=phase,
-            date=date_str, year=year, endyear=end_year, n=n, regions=regions,
+            date=date_str, year=year, endyear=end_year,
+            n=rng.randint(12, 280), regions=rng.randint(3, 47),
         ))
 
     # Key findings bullets
@@ -111,7 +110,8 @@ def _generate_archive_content(year, month, day, slug):
     for tmpl in rng.sample(_ARCHIVE_FINDING_TEMPLATES, rng.randint(3, 5)):
         findings.append(tmpl.format(
             org=org, industry=industry, phase=phase, date=date_str,
-            year=year, endyear=end_year, n=n, regions=regions, metric=metric,
+            year=year, endyear=end_year,
+            n=rng.randint(12, 280), regions=rng.randint(3, 47), metric=metric,
         ))
 
     # Metrics table: pick 6-8 metric names, assign baseline/current/delta
@@ -175,20 +175,22 @@ def _generate_archive_content(year, month, day, slug):
         engagement_team.append({'name': f'{fname} {lname}', 'title': title_t, 'email': email})
 
     # ── Executive summary bullets ─────────────────────────────────────────────
-    pct = rng.randint(3, 18)
-    total = n + rng.randint(5, 30)
-    percentile_label = rng.choice([
+    _PERCENTILE_LABELS = [
         '10th', '15th', '20th', '25th', '30th', '33rd', '35th',
         '40th', '45th', '50th', '55th', '60th', '65th', '67th',
         '70th', '75th', '80th', '85th', '90th', '95th', '99th',
-    ])
+    ]
     exec_bullets = []
     for tmpl in rng.sample(_EXEC_SUMMARY_BULLETS, rng.randint(4, 6)):
+        _n = rng.randint(12, 280)
+        _pct = rng.randint(3, 18)
+        _total = _n + rng.randint(5, 30)
+        _percentile = rng.choice(_PERCENTILE_LABELS)
         try:
             exec_bullets.append(tmpl.format(
-                org=org, industry=industry, n=n, metric=metric,
-                year=year, endyear=end_year, regions=regions,
-                pct=pct, total=total, percentile=percentile_label,
+                org=org, industry=industry, n=_n, metric=metric,
+                year=year, endyear=end_year, regions=rng.randint(3, 47),
+                pct=_pct, total=_total, percentile=_percentile,
                 date=date_str,
             ))
         except (KeyError, IndexError):
@@ -197,7 +199,7 @@ def _generate_archive_content(year, month, day, slug):
     # ── Benchmark percentile table ────────────────────────────────────────────
     bench_metric_names = rng.sample(_BENCH_METRICS, rng.randint(4, 6))
     peer_group = rng.choice(_PEER_GROUPS).format(
-        industry=industry, regions=regions, n=n,
+        industry=industry, regions=rng.randint(3, 47), n=rng.randint(12, 280),
     )
     percentile_table = []
     for bm in bench_metric_names:
@@ -222,8 +224,9 @@ def _generate_archive_content(year, month, day, slug):
             footnotes.append({
                 'num': i + 1,
                 'text': tmpl.format(
-                    org=org, industry=industry, n=n, year=year,
-                    endyear=end_year, date=date_str, regions=regions, q=q,
+                    org=org, industry=industry, year=year,
+                    endyear=end_year, date=date_str, q=q,
+                    n=rng.randint(12, 280), regions=rng.randint(3, 47),
                 ),
             })
         except (KeyError, IndexError):
@@ -246,8 +249,8 @@ def _generate_archive_content(year, month, day, slug):
         author_email = f"{fname.lower()}.{lname.lower()}@acpwb.com"
         q = rng.randint(1, 4)
         try:
-            desc = rdesc.format(org=org, date=r_date, q=q, pct=pct, n=n,
-                                year=year, endyear=end_year)
+            desc = rdesc.format(org=org, date=r_date, q=q, year=year, endyear=end_year,
+                                pct=rng.randint(3, 18), n=rng.randint(12, 280))
         except (KeyError, IndexError):
             desc = rdesc
         revisions.append({

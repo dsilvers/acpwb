@@ -48,20 +48,20 @@ _BOT_COLOR_PALETTE = [
     '#E67E22',  # orange
     '#8E44AD',  # purple
     '#16A085',  # teal
-    '#C0392B',  # dark red
-    '#2471A3',  # dark blue
-    '#1E8449',  # dark green
-    '#D68910',  # amber
-    '#7D3C98',  # dark purple
-    '#148F77',  # dark teal
     '#E91E63',  # pink
     '#00BCD4',  # cyan
-    '#FF9800',  # light orange
-    '#607D8B',  # blue-grey
+    '#F1C40F',  # yellow
     '#795548',  # brown
-    '#9C27B0',  # deep purple
     '#3F51B5',  # indigo
-    '#009688',  # teal-2
+    '#FF5722',  # deep orange
+    '#607D8B',  # blue-grey
+    '#8BC34A',  # lime green
+    '#FF4081',  # pink accent
+    '#0097A7',  # dark cyan
+    '#6D4C41',  # dark brown
+    '#5C6BC0',  # medium indigo
+    '#D32F2F',  # dark red
+    '#1565C0',  # dark blue
 ]
 _OTHERS_COLOR = '#95A5A6'  # neutral gray
 

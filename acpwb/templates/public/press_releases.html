@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block title %}Press Releases — American Corporation for Public Well Being{% endblock %}
+{% block meta_description %}News and press releases from the American Corporation for Public Well Being.{% endblock %}
+
+{% block content %}
+
+<!-- ── Page Banner ───────────────────────────────────────────────── -->
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-2" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.78rem">News &amp; Announcements</p>
+    <h1 class="mb-3">PRESS RELEASES</h1>
+    <p class="lead mb-0" style="color:rgba(255,255,255,0.7);max-width:600px">
+      Official announcements from the American Corporation for Public Well Being.
+    </p>
+  </div>
+</section>
+
+<!-- ── Press Release List ────────────────────────────────────────── -->
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        {% for pr in press_releases %}
+        <div class="acpwb-card mb-4" style="padding:2rem 2rem 1.75rem">
+          <div class="d-flex flex-wrap align-items-start gap-3 mb-3">
+            <div style="flex:0 0 auto">
+              <div style="background:var(--navy);color:var(--gold);font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.35rem .75rem;white-space:nowrap">
+                {{ pr.date|date:"F j, Y" }}
+              </div>
+            </div>
+            <h2 style="font-size:1.1rem;font-weight:800;color:var(--navy);line-height:1.35;margin:0">
+              {{ pr.headline }}
+            </h2>
+          </div>
+          <p class="text-muted mb-3" style="font-size:.93rem">{{ pr.subhead }}</p>
+          <a href="{% url 'press_release_detail' pr.year pr.month pr.day pr.slug %}" class="btn-navy btn" style="font-size:.8rem;padding:.4rem 1rem">
+            Read Full Release &rarr;
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+# Python virtual environments
+acpwb/.venv-og/
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+
+# Build artifacts
+build/
+dist/

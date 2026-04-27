@@ -15,4 +15,6 @@ urlpatterns = [
     path('site-map/', views.sitemap_page, name='site-map'),
     path('faq/', views.faq, name='faq'),
     path('contact/', views.contact, name='contact'),
+    path('press-releases/', views.press_releases, name='press_releases'),
+    path('press-releases/<int:year>/<int:month>/<int:day>/<slug:slug>/', views.press_release_detail, name='press_release_detail'),
 ]

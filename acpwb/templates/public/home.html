@@ -158,6 +158,40 @@
 </section>
 {% endif %}
 
+<!-- ── Recent Press Releases ────────────────────────────────────── -->
+{% if recent_press_releases %}
+<section style="padding:5rem 0;background:var(--white)">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-1">
+      <div>
+        <p class="text-uppercase text-gold fw-800 mb-1" style="letter-spacing:.15em;font-size:.75rem">News &amp; Announcements</p>
+        <h2 class="section-heading mb-0">PRESS RELEASES</h2>
+      </div>
+      <a href="{% url 'press_releases' %}" class="btn-navy btn d-none d-md-inline-flex" style="font-size:.8rem;padding:.4rem 1.1rem;white-space:nowrap">View All &rarr;</a>
+    </div>
+    <hr class="section-rule">
+    <div class="row g-4">
+      {% for pr in recent_press_releases %}
+      <div class="col-md-4">
+        <a href="{% url 'press_release_detail' pr.year pr.month pr.day pr.slug %}" style="text-decoration:none">
+          <div class="acpwb-card h-100">
+            <div style="font-size:.7rem;font-weight:800;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem">
+              {{ pr.date|date:"F j, Y" }}
+            </div>
+            <h5 style="font-weight:800;color:var(--navy);font-size:.95rem;margin-bottom:.75rem;line-height:1.35">{{ pr.headline }}</h5>
+            <p class="small text-muted mb-0">{{ pr.subhead|truncatewords:22 }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4 d-md-none">
+      <a href="{% url 'press_releases' %}" class="btn-navy btn">View All Press Releases</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <!-- ── CTA Banner ──────────────────────────────────────────────── -->
 <section style="background:var(--navy);padding:4rem 0;border-top:3px solid var(--gold)">
   <div class="container text-center">
@@ -167,8 +201,10 @@
     <p style="color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 2rem;font-size:1rem">
       Connect with one of our dedicated corporate advocates today. Every engagement begins with understanding your unique contributions and building the case for the recognition you deserve.
     </p>
-    <a href="{% url 'our-people' %}" class="btn-acpwb btn me-3">Meet Our Team</a>
-    <a href="{% url 'careers' %}" class="btn-acpwb-outline btn">Join ACPWB</a>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="{% url 'our-people' %}" class="btn-acpwb btn">Meet Our Team</a>
+      <a href="{% url 'careers' %}" class="btn-acpwb-outline btn">Join ACPWB</a>
+    </div>
   </div>
 </section>
 

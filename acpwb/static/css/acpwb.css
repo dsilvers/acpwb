@@ -154,7 +154,6 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 0;
   border-top: 4px solid var(--gold);
   padding: 2rem;
-  height: 100%;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
@@ -504,4 +503,23 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 2px solid var(--gold);
   opacity: 0.4;
   margin: 2rem 0;
+}
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 991.98px) {
+  /* Shrink logo so hamburger toggler stays top-right */
+  .acpwb-logo-line1,
+  .acpwb-logo-line2 {
+    font-size: 1.05rem;
+  }
+  .acpwb-logo-line3 {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* Reduce wiki-content / FAQ box padding on mobile */
+  .wiki-content {
+    padding: 1.25rem;
+  }
 }

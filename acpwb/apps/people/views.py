@@ -38,4 +38,6 @@ def people_page(request):
     return render(request, 'people/people.html', {
         'employees': employees,
         'visit': visit,
+        'og_title': 'Our People — American Corporation for Public Well Being',
+        'og_description': 'Meet the team at the American Corporation for Public Well Being — researchers, analysts, and staff dedicated to advancing American workforce prosperity.',
     })

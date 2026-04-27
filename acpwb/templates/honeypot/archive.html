@@ -1,8 +1,6 @@
 {% extends parent_template|default:"base.html" %}
 {% load static %}
 
-{% block title %}{{ title }} — ACPWB Archive{% endblock %}
-{% block og_title %}{{ title }} — ACPWB Archive{% endblock %}
 {% block og_description %}{{ industry }} sector engagement documentation archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}. {{ phase|capfirst }} phase record. ACPWB Research Division.{% endblock %}
 
 {% block era_content %}{% block content %}

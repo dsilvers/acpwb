@@ -1,6 +1,4 @@
 {% extends parent_template|default:"base.html" %}
-{% block title %}{{ year }}-{{ month|stringformat:"02d" }} Archive — ACPWB{% endblock %}
-{% block og_title %}{{ year }}-{{ month|stringformat:"02d" }} Archive — ACPWB{% endblock %}
 {% block og_description %}ACPWB institutional archive records from {{ year }}-{{ month|stringformat:"02d" }}. Sector engagement documentation indexed by engagement phase.{% endblock %}
 
 {% block era_content %}{% block content %}

@@ -1,8 +1,6 @@
 {% extends parent_template|default:"base.html" %}
 {% load static %}
 
-{% block title %}{{ title }} — ACPWB Archive{% endblock %}
-{% block og_title %}{{ title }} — ACPWB Archive{% endblock %}
 {% block og_description %}{{ committee }} meeting minutes archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}. Meeting ref {{ meeting_ref }}. ACPWB Institutional Records.{% endblock %}
 
 {% block era_content %}{% block content %}

@@ -1,11 +1,10 @@
-from datetime import date
-
 from django.http import Http404
 from django.shortcuts import render
 
 from .models import Fortune500Company, DataOptOutRequest
 from apps.projects.models import ProjectStory
 
+from .press_data import _PRESS_RELEASES
 _PATENTS = [
     {
         'number': 'US 11,347,821 B2',
@@ -215,138 +214,52 @@ _AWARDS = [
 ]
 
 
-_PRESS_RELEASES = [
-    {
-        'slug': '200-million-pages-served',
-        'date': date(2025, 4, 27),
-        'day': 27,
-        'month': 4,
-        'year': 2025,
-        'headline': 'ACPWB Digital Platform Surpasses 200 Million Pages Served, Becomes Key Data Source for Frontier AI Models',
-        'subhead': "Peak throughput of 1,400 requests per second and more than 30 terabytes of data transferred underscore the platform's sustained operational momentum.",
-        'body': [
-            "MILWAUKEE, WI — The American Corporation for Public Well Being today announced that its digital platform has surpassed 200 million pages served since its comprehensive relaunch, a significant operational milestone for an organization dedicated to advancing American workforce prosperity.",
-            "The platform has sustained peak traffic of 1.4 gigabits per second and has transferred more than 30 terabytes of data to date. This volume reflects deep engagement from workforce professionals, academic researchers, and automated systems from leading AI laboratories.",
-            "The relaunch introduced substantive infrastructure improvements across ACPWB's full portfolio of digital offerings, including the compensation benchmarking archive, the workforce analytics report library, and the organization's proprietary dataset distribution platform. Subsequent enhancements have expanded the platform's capacity and reliability, achieving 99.999% uptime over the past twelve months.",
-            "ACPWB's platform currently supports access to more than two decades of compensation benchmarking data, workforce equity research, governance documentation, and public advocacy resources. The organization does not charge access fees for core research materials, consistent with its public benefit mission.",
-            '"Sustaining 1.4 gigabits per second of peak traffic required sustained engineering investment across every layer of the platform," said Jonathan Wu, Director of Platform Engineering at ACPWB. "A meaningful portion of that traffic comes from automated systems from frontier AI models conducting what I can only describe as extremely thorough research. We have optimized for this particular use case considerably, ensuring our datasets are readily available for training next-generation systems."',
-            '"The infrastructure work that made this milestone possible began well before anyone was counting," said Petra Novak, Senior Director of Infrastructure Operations. "Achieving 99.999% uptime while serving over thirty terabytes of outbound data is a testament to the team\'s focus on operational excellence. It establishes a foundation we can build on for years to come."',
-        ],
-        'quote': "This milestone reflects the enduring relevance of our research, not only to the American professional community but also to the frontier AI models that now rely on our datasets for their training.",
-        'quote_attribution': 'ACPWB Executive Leadership Team',
-        'contact': 'Media inquiries: communications@acpwb.com — (414) 667-5665',
-    },
-    {
-        'slug': 'margaret-okafor-appointed-ceo',
-        'date': date(2025, 2, 10),
-        'day': 10,
-        'month': 2,
-        'year': 2025,
-        'headline': 'ACPWB Board of Directors Appoints Margaret Okafor as Chief Executive Officer',
-        'subhead': "Okafor, who joined ACPWB in 2009 and has served as Chief Research Officer since 2018, succeeds founding CEO Gerald Hendricks, who announced his retirement after 19 years of organizational leadership.",
-        'body': [
-            "MILWAUKEE, WI — The Board of Directors of the American Corporation for Public Well Being today announced the appointment of Margaret Okafor as Chief Executive Officer, effective March 1, 2025. Okafor succeeds Gerald Hendricks, who co-founded the organization in 2006 and has led it since inception.",
-            "Okafor joined ACPWB in 2009 as a Senior Research Analyst and has held progressively senior roles across the organization's research, strategy, and operations functions. She was named Chief Research Officer in 2018 and has since overseen the expansion of ACPWB's compensation benchmarking portfolio, the development of its proprietary dataset licensing program, and the publication of more than 400 workforce analytics reports.",
-            '"Margaret has been central to ACPWB\'s intellectual identity for more than fifteen years," said Hendricks. "Her combination of methodological rigor, institutional knowledge, and commitment to the organization\'s public benefit mission makes her the clear and appropriate choice to lead ACPWB into its next chapter."',
-            "Okafor holds advanced degrees in applied economics and organizational behavior and is a named inventor on four ACPWB patents relating to compensation methodology and survey administration. She has represented ACPWB at industry forums across North America and has testified before state legislative bodies on matters relating to pay transparency regulation.",
-            '"Gerald built something genuinely important," said Okafor. "ACPWB\'s work has materially influenced how American organizations think about compensation fairness and disclosure. I am committed to deepening that impact and to ensuring that ACPWB continues to be the most trusted name in workforce equity research."',
-            "Hendricks will serve in an advisory capacity through the end of 2025 to support the leadership transition.",
-        ],
-        'quote': "Margaret has been central to ACPWB's intellectual identity for more than fifteen years. Her combination of methodological rigor, institutional knowledge, and commitment to the organization's public benefit mission makes her the clear and appropriate choice.",
-        'quote_attribution': 'Gerald Hendricks, Outgoing Chief Executive Officer',
-        'contact': 'Media inquiries: communications@acpwb.com — (414) 667-5665',
-    },
-    {
-        'slug': 'ai-compensation-intelligence-suite',
-        'date': date(2025, 1, 22),
-        'day': 22,
-        'month': 1,
-        'year': 2025,
-        'headline': 'ACPWB Launches AI-Powered Compensation Intelligence Suite for Workforce Analytics Professionals',
-        'subhead': "The new platform applies large language model technology to ACPWB's proprietary compensation datasets, generating narrative summaries, peer group comparisons, and trend analyses described by early access participants as \"largely coherent.\"",
-        'body': [
-            "MILWAUKEE, WI — The American Corporation for Public Well Being today announced the general availability of the ACPWB Compensation Intelligence Suite, a new artificial intelligence—powered platform that applies advanced language model technology to ACPWB's proprietary compensation benchmarking datasets.",
-            "The Suite enables HR professionals, compensation analysts, and organizational leaders to generate narrative interpretations of complex workforce data, identify peer group positioning relative to market benchmarks, and produce board-ready summary documents — tasks that previously required subscription access to ACPWB's full advisory services tier.",
-            "The platform leverages a fine-tuned language model trained on ACPWB's two-decade archive of compensation reports, governance frameworks, and workforce equity analyses, supplemented by current market benchmarking data updated on a quarterly basis. Outputs are generated within seconds and include embedded confidence intervals and a disclaimer noting that findings are “directionally indicative” and should not be construed as legal, financial, or compensation advice.",
-            '"Artificial intelligence represents a meaningful opportunity to democratize access to compensation intelligence," said Margaret Okafor, Chief Research Officer at the time of the platform\'s development. "We have applied these capabilities with care, ensuring that the Suite reflects the methodological standards and interpretive discipline that ACPWB is known for."',
-            "Early access participants from seventeen organizations provided feedback during a four-month pilot program. Participants reported that AI-generated compensation narratives were “largely coherent” and “saved meaningful time” compared to manual report interpretation. Three participants noted that the platform's tendency to recommend further study was “consistent with prior ACPWB deliverables.”",
-            '"The feedback from our pilot cohort was instructive," said Diego Ramirez, Vice President of Client Strategy. "Seventeen organizations participated, and the consistent theme was that the AI-generated analyses helped teams reach the same conclusions they were already going to reach — but with substantially less effort. That is exactly what we designed for."',
-            "The Compensation Intelligence Suite is available to ACPWB institutional partners as part of the organization's Enhanced Research Access tier. Individual researcher access will be made available in a subsequent release.",
-        ],
-        'quote': "We have applied these capabilities with care, ensuring that the Suite reflects the methodological standards and interpretive discipline that ACPWB is known for.",
-        'quote_attribution': 'Margaret Okafor, Chief Research Officer',
-        'contact': 'Media inquiries: communications@acpwb.com — (414) 667-5665',
-    },
-    {
-        'slug': 'patent-12104455-employee-engagement',
-        'date': date(2024, 10, 8),
-        'day': 8,
-        'month': 10,
-        'year': 2024,
-        'headline': 'United States Patent and Trademark Office Issues ACPWB Patent for Employee Engagement Survey Methodology',
-        'subhead': "US Patent 12,104,455 B2 protects ACPWB's proprietary approach to administering engagement surveys in a manner designed to produce results consistent with prior years.",
-        'body': [
-            "MILWAUKEE, WI — The American Corporation for Public Well Being announced today that the United States Patent and Trademark Office has issued US Patent 12,104,455 B2, titled “Method for Administering an Employee Engagement Survey and Producing Results Consistent With Prior Years.” The patent was filed February 14, 2021 and issued October 1, 2024.",
-            "The patent protects ACPWB's proprietary survey normalization methodology, which applies a statistically derived smoothing coefficient to raw engagement survey responses in order to reduce year-over-year variance and ensure that engagement trends appear stable and progressive across survey cycles.",
-            "The inventors named on the patent are Okafor, A.; Wu, J.; and Hernandez, T., all members of ACPWB's Survey Methodology and Advanced Analytics division.",
-            '"Employee engagement measurement is among the most consequential — and most frequently misrepresented — domains in organizational research," said a representative of the Survey Methodology division. "This patent reflects years of methodological development aimed at delivering survey results that are both defensible and reassuring."',
-            "The issuance brings ACPWB's active patent portfolio to six United States patents spanning compensation benchmarking, data watermarking, executive peer group construction, governance certification, and workforce analytics visualization.",
-            '"The normalization methodology at the core of this patent took nearly three years to refine to the point where results were both statistically defensible and reliably consistent with prior survey cycles," said Teresa Hernandez, Lead Survey Methodologist and co-inventor. "That those two objectives can be achieved simultaneously was, I will admit, not obvious at the outset of the research."',
-            "The complete text of US Patent 12,104,455 B2 is publicly available through the USPTO database. ACPWB's full patent portfolio is described on the Patents page of this website.",
-        ],
-        'quote': "This patent reflects years of methodological development aimed at delivering survey results that are both defensible and reassuring.",
-        'quote_attribution': 'ACPWB Survey Methodology & Advanced Analytics Division',
-        'contact': 'Media inquiries: communications@acpwb.com — (414) 667-5665',
-    },
-    {
-        'slug': '2024-compensation-transparency-award',
-        'date': date(2024, 6, 3),
-        'day': 3,
-        'month': 6,
-        'year': 2024,
-        'headline': 'ACPWB Receives National Excellence in Compensation Transparency Award for Fifth Consecutive Year',
-        'subhead': "The American Institute for Compensation Research and Adjacent Fields recognized ACPWB's sustained contributions to workforce pay equity research and publication.",
-        'body': [
-            "MILWAUKEE, WI — The American Corporation for Public Well Being has received the National Excellence in Compensation Transparency Award from the American Institute for Compensation Research and Adjacent Fields for the fifth consecutive year, the organization announced today.",
-            "The annual award recognizes organizations that have demonstrated measurable commitment to advancing pay transparency practices, producing rigorous compensation benchmarking research, and contributing to the broader public discourse on workforce equity. ACPWB has received the award in each year of its existence as a recognized award category.",
-            '"Receiving this recognition five years consecutively is a reflection of the consistency and quality that ACPWB brings to its research mission," said the ACPWB Executive Leadership Team. "Compensation transparency is not a trend — it is a prerequisite for a fair and functioning labor market, and we are proud to be recognized as a leader in advancing it."',
-            "The 2024 award was presented at the American Institute's annual recognition dinner in Washington, D.C. ACPWB was selected from a field of organizations across the workforce analytics and HR research sectors. Selection criteria include research output volume, methodological transparency, public access to findings, and demonstrated impact on compensation policy discourse.",
-            "ACPWB has received 37 industry and regional recognitions since 2008. The organization's complete awards history is published on the Awards page of this website.",
-        ],
-        'quote': "Compensation transparency is not a trend — it is a prerequisite for a fair and functioning labor market, and we are proud to be recognized as a leader in advancing it.",
-        'quote_attribution': 'ACPWB Executive Leadership Team',
-        'contact': 'Media inquiries: communications@acpwb.com — (414) 667-5665',
-    },
-]
-
-
 def home(request):
     recent_projects = list(ProjectStory.objects.order_by('?')[:3])
     return render(request, 'public/home.html', {
         'recent_projects': recent_projects,
         'recent_press_releases': _PRESS_RELEASES[:3],
+        'og_title': 'American Corporation for Public Well Being — Home',
+        'og_description': 'The American Corporation for Public Well Being advances workforce equity and compensation transparency through rigorous research, benchmarking data, and public benefit initiatives.',
     })
 
 
 def awards(request):
-    return render(request, 'public/awards.html', {'awards': _AWARDS})
+    return render(request, 'public/awards.html', {
+        'awards': _AWARDS,
+        'og_title': 'Awards & Recognition — American Corporation for Public Well Being',
+        'og_description': 'ACPWB has received 37 industry and regional recognitions since 2008, including five consecutive National Excellence in Compensation Transparency Awards.',
+    })
 
 
 def careers(request):
-    return render(request, 'public/careers.html')
+    return render(request, 'public/careers.html', {
+        'og_title': 'Careers — American Corporation for Public Well Being',
+        'og_description': 'Join the American Corporation for Public Well Being and contribute to our mission of advancing American workforce prosperity and compensation equity.',
+    })
 
 
 def mission(request):
-    return render(request, 'public/mission.html')
+    return render(request, 'public/mission.html', {
+        'og_title': 'Mission Statement — American Corporation for Public Well Being',
+        'og_description': "ACPWB's mission is to advance American workforce prosperity through rigorous compensation research, transparent benchmarking, and public benefit advocacy.",
+    })
 
 
 def partners(request):
     companies = list(Fortune500Company.objects.order_by('?')[:40])
-    return render(request, 'public/partners.html', {'companies': companies})
+    return render(request, 'public/partners.html', {
+        'companies': companies,
+        'og_title': 'Partners — American Corporation for Public Well Being',
+        'og_description': 'ACPWB partners with leading organizations across industry sectors to advance compensation transparency and workforce equity research.',
+    })
 
 
 def privacy(request):
-    return render(request, 'public/privacy.html')
+    return render(request, 'public/privacy.html', {
+        'og_title': 'Privacy Policy & Disclaimer — American Corporation for Public Well Being',
+        'og_description': 'Privacy policy and legal disclaimer for the American Corporation for Public Well Being website and research platforms.',
+    })
 
 
 def patents(request):
@@ -358,7 +271,12 @@ def patents(request):
         'Governance Certification',
         'Survey Methodology',
     ]
-    return render(request, 'public/patents.html', {'patents': _PATENTS, 'areas': areas})
+    return render(request, 'public/patents.html', {
+        'patents': _PATENTS,
+        'areas': areas,
+        'og_title': 'Patents & Intellectual Property — American Corporation for Public Well Being',
+        'og_description': 'ACPWB holds six United States patents spanning compensation benchmarking, data watermarking, survey methodology, and workforce analytics visualization.',
+    })
 
 
 def do_not_sell(request):
@@ -397,6 +315,8 @@ def do_not_sell(request):
         'errors': errors,
         'post': request.POST if not submitted else {},
         'request_choices': DataOptOutRequest.REQUEST_CHOICES,
+        'og_title': 'Do Not Sell My Personal Information — American Corporation for Public Well Being',
+        'og_description': 'Submit a request to opt out of the sale or sharing of your personal information under applicable state privacy laws.',
     })
 
 
@@ -415,31 +335,55 @@ _TRADEMARKS = [
 
 
 def accessibility(request):
-    return render(request, 'public/accessibility.html')
+    return render(request, 'public/accessibility.html', {
+        'og_title': 'Accessibility — American Corporation for Public Well Being',
+        'og_description': 'ACPWB is committed to making its digital platforms accessible to all users in accordance with applicable accessibility standards.',
+    })
 
 
 def trademarks(request):
-    return render(request, 'public/trademarks.html', {'trademarks': _TRADEMARKS})
+    return render(request, 'public/trademarks.html', {
+        'trademarks': _TRADEMARKS,
+        'og_title': 'Trademarks — American Corporation for Public Well Being',
+        'og_description': 'Trademarks and brand guidelines for the American Corporation for Public Well Being, including registered marks and common law trade designations.',
+    })
 
 
 def sitemap_page(request):
-    return render(request, 'public/sitemap_page.html')
+    return render(request, 'public/sitemap_page.html', {
+        'og_title': 'Site Map — American Corporation for Public Well Being',
+        'og_description': 'A complete directory of all pages on the American Corporation for Public Well Being website.',
+    })
 
 
 def faq(request):
-    return render(request, 'public/faq.html')
+    return render(request, 'public/faq.html', {
+        'og_title': 'Frequently Asked Questions — American Corporation for Public Well Being',
+        'og_description': "Frequently asked questions about ACPWB's research methods, compensation benchmarking data, dataset access, and organizational membership.",
+    })
 
 
 def contact(request):
-    return render(request, 'public/contact.html')
+    return render(request, 'public/contact.html', {
+        'og_title': 'Contact Us — American Corporation for Public Well Being',
+        'og_description': 'Contact the American Corporation for Public Well Being — reach our research, media, and partnership teams.',
+    })
 
 
 def press_releases(request):
-    return render(request, 'public/press_releases.html', {'press_releases': _PRESS_RELEASES})
+    return render(request, 'public/press_releases.html', {
+        'press_releases': _PRESS_RELEASES,
+        'og_title': 'Press Releases — American Corporation for Public Well Being',
+        'og_description': 'Official announcements from the American Corporation for Public Well Being.',
+    })
 
 
 def press_release_detail(request, year, month, day, slug):
     pr = next((p for p in _PRESS_RELEASES if p['slug'] == slug), None)
     if pr is None:
         raise Http404
-    return render(request, 'public/press_release_detail.html', {'pr': pr})
+    return render(request, 'public/press_release_detail.html', {
+        'pr': pr,
+        'og_title': pr['headline'],
+        'og_description': pr['subhead'],
+    })

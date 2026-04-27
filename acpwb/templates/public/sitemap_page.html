@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Site Map — American Corporation for Public Well Being{% endblock %}
-{% block og_title %}Site Map — ACPWB{% endblock %}
-{% block og_description %}A complete directory of all pages on the American Corporation for Public Well Being website.{% endblock %}
-
 {% block content %}
 
 <section class="page-banner">
@@ -31,6 +27,7 @@
           <li><a href="{% url 'awards' %}" style="color:var(--navy)">Awards &amp; Recognition</a></li>
           <li><a href="{% url 'careers' %}" style="color:var(--navy)">Careers</a></li>
           <li><a href="{% url 'faq' %}" style="color:var(--navy)">Frequently Asked Questions</a></li>
+          <li><a href="{% url 'press_releases' %}" style="color:var(--navy)">Press Releases</a></li>
         </ul>
       </div>
 

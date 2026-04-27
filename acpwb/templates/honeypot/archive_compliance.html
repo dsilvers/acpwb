@@ -1,8 +1,6 @@
 {% extends parent_template|default:"base.html" %}
 {% load static %}
 
-{% block title %}{{ title }} — ACPWB Compliance Archive{% endblock %}
-{% block og_title %}{{ title }} — ACPWB Compliance Archive{% endblock %}
 {% block og_description %}{{ industry }} sector compliance review archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}. Audit ref {{ audit_ref }}. ACPWB Regulatory Practice.{% endblock %}
 
 {% block era_content %}{% block content %}

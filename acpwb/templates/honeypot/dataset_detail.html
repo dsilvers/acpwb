@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{ ds.title }} — ACPWB Datasets{% endblock %}
-{% block og_title %}{{ ds.title }} — ACPWB Research Division{% endblock %}
 {% block og_description %}{{ ds.description|truncatechars:200 }}{% endblock %}
 
 {% block content %}

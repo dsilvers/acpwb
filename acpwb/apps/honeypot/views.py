@@ -769,6 +769,7 @@ def archive_subdomain_index(request, year=None):
         'months': months,
         'all_years': list(range(2025, 1984, -1)),
         'parent_template': 'honeypot/archive_subdomain_base.html' if on_sub else 'base.html',
+        'og_title': f'{year} Archive — ACPWB Institutional Archive',
     })
 
 
@@ -958,6 +959,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'next_entry_url': _archive_url(request, year, month, day, next_slug),
         'export_csv_url': _archive_url(request, year, month, day, slug) + 'export.csv',
         'related_docs': related_docs,
+        'og_title': content.get('title', 'ACPWB Archive'),
         **content,
     }
     if on_sub:
@@ -980,6 +982,7 @@ def archive_index(request):
     return render(request, 'honeypot/archive_index.html', {
         'years': years,
         'archive_years': list(range(2025, 1984, -1)),
+        'og_title': 'Document Archive — ACPWB',
     })
 
 
@@ -1007,6 +1010,7 @@ def archive_year(request, year):
         'archive_years': list(range(2025, 1984, -1)),
         'prev_year': year - 1,
         'next_year': year + 1,
+        'og_title': f'{year} Archive — ACPWB',
     })
 
 
@@ -1042,6 +1046,7 @@ def archive_month(request, month, year=None):
         'year_url': _archive_url(request, year),
         'prev_month_url': _archive_url(request, prev_year, prev_month),
         'next_month_url': _archive_url(request, next_year, next_month),
+        'og_title': f'{year}-{month:02d} Archive — ACPWB',
     })
 
 
@@ -1055,7 +1060,10 @@ def wiki_page(request, slug):
         data = generate_wiki_page(slug)
         page, _ = WikiPage.objects.get_or_create(topic=slug, defaults=data)
 
-    return render(request, 'honeypot/wiki.html', {'page': page})
+    return render(request, 'honeypot/wiki.html', {
+        'page': page,
+        'og_title': f'{page.title} — ACPWB Knowledge Base',
+    })
 
 
 # ── Fake API ──────────────────────────────────────────────────────────────────
@@ -1206,10 +1214,10 @@ Sitemap: https://acpwb.com/sitemap-archive.xml
 
 def ghost_trap(request):
     _log_crawler(request, 'ghost_link')
-    # Return a plausible-looking page that logs the visit
     context = {
         'path': request.path,
         'message': 'Access to this resource requires additional authentication.',
+        'og_title': 'Access Restricted — ACPWB',
     }
     return render(request, 'honeypot/ghost_trap.html', context, status=403)
 
@@ -1277,6 +1285,7 @@ def reports_list(request):
             'next_page': None,
             'selected_category': category,
             'categories': REPORT_CATEGORIES,
+            'og_title': 'Reports & Publications — American Corporation for Public Well Being',
         })
 
     reports = generate_reports_for_page(1, count=12)
@@ -1286,6 +1295,7 @@ def reports_list(request):
         'next_page': 2,
         'selected_category': '',
         'categories': REPORT_CATEGORIES,
+        'og_title': 'Reports & Publications — American Corporation for Public Well Being',
     })
 
 
@@ -1332,12 +1342,16 @@ def report_detail(request, slug):
             'report': report,
             'preview_rows': rows,
             'cover_url': _cover_url(slug),
+            'og_title': f'{report["title"]} — ACPWB Research Division',
+            'og_description': report.get('summary', '')[:160],
         })
     doc = generate_document_content(slug)
     return render(request, 'honeypot/report_detail.html', {
         'report': report,
         'doc': doc,
         'cover_url': _cover_url(slug),
+        'og_title': f'{report["title"]} — ACPWB Research Division',
+        'og_description': report.get('summary', '')[:160],
     })
 
 
@@ -2350,7 +2364,10 @@ def openapi_spec(request):
 
 def datasets_index(request):
     _log_crawler(request, 'dataset')
-    return render(request, 'honeypot/datasets_index.html', {'datasets': _DATASET_CATALOG})
+    return render(request, 'honeypot/datasets_index.html', {
+        'datasets': _DATASET_CATALOG,
+        'og_title': 'Public Datasets — ACPWB Research Division',
+    })
 
 
 def dataset_detail(request, slug):
@@ -2358,7 +2375,10 @@ def dataset_detail(request, slug):
     ds = next((d for d in _DATASET_CATALOG if d['slug'] == slug), None)
     if not ds:
         raise Http404
-    return render(request, 'honeypot/dataset_detail.html', {'ds': ds})
+    return render(request, 'honeypot/dataset_detail.html', {
+        'ds': ds,
+        'og_title': f'{ds["title"]} — ACPWB Datasets',
+    })
 
 
 def dataset_download(request, slug):
@@ -2424,6 +2444,7 @@ def api_v1_index(request):
     return render(request, 'honeypot/api_index.html', {
         'endpoints': endpoints,
         'openapi_url': '/api/v1/openapi.json',
+        'og_title': 'API v1 — ACPWB Developer Portal',
     })
 
 
@@ -2431,7 +2452,9 @@ def api_v1_index(request):
 
 def feeds_index(request):
     _log_crawler(request, 'well_known')
-    return render(request, 'honeypot/feeds_index.html')
+    return render(request, 'honeypot/feeds_index.html', {
+        'og_title': 'Feeds & Syndication — ACPWB',
+    })
 
 
 # ── Scanner Bot Probes ────────────────────────────────────────────────────────

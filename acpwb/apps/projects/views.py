@@ -75,6 +75,8 @@ def project_list(request):
         'prev_page': page - 1 if page > 1 else None,
         'industry_tags': INDUSTRY_TAGS,
         'selected_industry': industry,
+        'og_title': 'Successful Projects — American Corporation for Public Well Being',
+        'og_description': "Browse ACPWB's portfolio of workforce analytics and compensation research projects across industries and regions.",
     })
 
 
@@ -123,6 +125,8 @@ def project_detail(request, slug):
     return render(request, 'projects/detail.html', {
         'story': story,
         'related': related,
+        'og_title': f'{story.title} — ACPWB Projects',
+        'og_description': story.summary[:160],
     })
 
 

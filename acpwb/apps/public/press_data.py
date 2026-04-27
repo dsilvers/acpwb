@@ -3,10 +3,10 @@ from datetime import date
 _PRESS_RELEASES = [
     {
         'slug': '200-million-pages-served',
-        'date': date(2025, 4, 27),
+        'date': date(2026, 4, 27),
         'day': 27,
         'month': 4,
-        'year': 2025,
+        'year': 2026,
         'headline': 'ACPWB Digital Platform Surpasses 200 Million Pages Served, Becomes Key Data Source for Frontier AI Models',
         'subhead': "Peak throughput of 1,400 requests per second and more than 30 terabytes of data transferred underscore the platform's sustained operational momentum.",
         'body': [

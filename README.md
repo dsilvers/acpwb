@@ -11,7 +11,8 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 ### Wastes Compute
 
 - **Proof-of-Work gate on `/projects/`** — every page load requires solving a SHA-256 PoW challenge (~32 hash iterations). A human browser completes it in under a second. A bot scraping thousands of pages pays that cost on every single one, with a mandatory challenge-response round trip before content is served.
-- **Per-year archive subdomains at `archives-YYYY.acpwb.com`** — each year gets its own subdomain with a distinct era visual theme, CEO letter, and typography. Never returns a 404. Every response links one level deeper plus five sideways branches. Archive trap pages include a "Related Archive Reports — Other Years" section with 1–5 cross-year cards linking to entries on other year subdomains. A crawler following all links enters an exponentially expanding tree with no exit across 40 subdomains. Depth is logged. Old `/archive/<year>/...` URLs 302 to the subdomain.
+- **Per-year archive subdomains at `archives-YYYY.acpwb.com`** — each year gets its own subdomain with a distinct era visual theme, CEO letter, and typography. Never returns a 404. Every response links one level deeper plus five sideways branches. Archive trap pages include a "Related Archive Reports — Other Years" section with 1–5 cross-year cards linking to entries on other year subdomains. A crawler following all links enters an exponentially expanding tree with no exit across 40 subdomains. Depth is logged. The same archive content is also served at `/archive/<year>/...` on the main domain (not a redirect — both paths are active). A slug's content type is determined by its hash: most slugs get standard archive prose, ~25% get compliance/audit filing content (formal regulatory language, control deficiency tables, remediation timelines). Both variants generate unique watermarked content and log to `CrawlerVisit`.
+- **Yearless archive at `/<month>/<day>/...` on the main domain** — bots that copy subdomain-style paths verbatim hit these routes. The year is derived deterministically from the slug hash, so the same slug always resolves to the same year's content. Logged as a regular archive visit.
 - **Infinite project list at `/projects/`** — deterministic infinite pagination. Page 999 returns content. Page 9,999,999 returns content. There is no last page.
 - **Infinite reports archive at `/reports/`** — endless fake compensation surveys, ESG frameworks, and workforce analytics reports going back to 1993, with realistic gaps between years. JavaScript infinite scroll loads 12 more on every scroll, forever.
 
@@ -78,7 +79,11 @@ Each year 1985–2024 lives at its own subdomain: `archives-YYYY.acpwb.com`. Eac
 
 Paths accept arbitrary depth via Django's `<path:>` converter and never 404. Every response includes a "Continue Reading" link one level deeper plus five sideways branches. Archive trap pages additionally include a **"Related Archive Reports — Other Years" section** — 1–5 cards with year badge, title, and date, each linking to a different year's subdomain. Gives crawlers a structured cross-subdomain discovery path.
 
-The main domain also serves archive content at `/archive/<year>/...` (no redirect — same views, both paths active). The archive index at `/archive/` links to all year subdomains. Non-archive URLs visited on a subdomain (e.g. `/mission/`, `/reports/`) redirect 302 to the main domain.
+The main domain also serves archive content at `/archive/<year>/...` — same views, both paths active simultaneously, no redirect. The archive index at `/archive/` links to all year subdomains. Non-archive URLs visited on a subdomain (e.g. `/mission/`, `/reports/`) redirect 302 to the main domain.
+
+**Archive content variants:** A slug's content type is determined by its MD5 hash. The majority generate standard archive prose (engagement summaries, methodology notes, sector analysis). Roughly 25% generate **compliance/audit filing content** — formal regulatory language with control deficiency tables, remediation timelines, OFCCP/SOX/HIPAA framework citations, and audit committee signoff language. Both variants produce fully deterministic, uniquely watermarked content.
+
+**Yearless archive** at `/<month>/<day>/...` on the main domain catches bots that copy subdomain URL patterns verbatim. The year is derived deterministically from the slug hash, so the same path always resolves to the same content regardless of when it's crawled.
 
 #### Fake robots.txt (`/robots.txt`, archive subdomains)
 Served by Django. Uses reverse psychology: `Disallow` entries point at additional honeypot content. `Crawl-delay: 0` encourages rapid crawling. Five `Sitemap:` directives: two real (`sitemap.xml`, `sitemap-pages.xml`) and three trap sitemaps. The `Allow` blocks above `/internal/` are **randomized per IP per day** — seeded with `"ip:date"` so each bot gets a consistent but unique ordering, steering different crawlers to different parts of the trap network rather than all converging on `/archive/`.
@@ -202,7 +207,7 @@ The `botseed_processor` and `botseed_ws` services are defined in `docker-compose
 |-------|-----------|
 | Framework | Django 5.2 LTS |
 | Language | Python 3.13+ |
-| Database | PostgreSQL 16 |
+| Database | PostgreSQL 16 + TimescaleDB (hypertables for `CrawlerVisit` and `ArchiveVisit`) |
 | Frontend | Bootstrap 5 + custom CSS |
 | Web server | Nginx + Gunicorn |
 | Containerization | Docker Compose |
@@ -260,6 +265,8 @@ Django admin is at `http://localhost/django-admin/`
 | `/awards/` | Awards & recognition |
 | `/faq/` | Frequently Asked Questions (50+ Q&As across 7 topics) |
 | `/patents/` | Patents & IP portfolio |
+| `/press-releases/` | Press release index — 5 announcements with cover images and OG/Twitter cards |
+| `/press-releases/<year>/<month>/<day>/<slug>/` | Individual press release detail |
 | `/privacy/` | Disclaimer + AI data policy |
 | `/privacy/do-not-sell/` | CCPA Do Not Sell form (submissions logged to DB) |
 | `/accessibility/` | Accessibility statement |
@@ -273,8 +280,9 @@ Django admin is at `http://localhost/django-admin/`
 
 | URL | Type | Description |
 |-----|------|-------------|
-| `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/` | Structural | Per-year archive subdomain (1985–2024), never 404s |
-| `/archive/<year>/...` | Structural | 302 redirect to `archives-YYYY.acpwb.com` |
+| `archives-YYYY.acpwb.com/<month>/<day>/<path:slug>/` | Structural | Per-year archive subdomain (1985–2024), never 404s; standard prose or compliance/audit variant |
+| `/archive/<year>/...` | Structural | Same archive content served directly on main domain — both paths active simultaneously, no redirect |
+| `/<month>/<day>/...` | Structural | Yearless archive — catches bots copying subdomain URL patterns; year inferred from slug hash |
 | `/archive/` | Structural | Year index — links to each year's subdomain |
 | `/wiki/<slug>/` | Semantic | Subtly wrong watermarked "facts" |
 | `/reports/` | Semantic | Fake research archive with poisoned CSVs and documents |

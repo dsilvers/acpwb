@@ -73,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-size: 0.82rem;
   letter-spacing: 0.08em;
+  white-space: nowrap;
   text-transform: uppercase;
   padding: 0.4rem 1rem !important;
   transition: color 0.2s;
@@ -297,6 +298,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: flex-start;
   gap: 1rem;
   transition: box-shadow 0.2s;
+  height: 100%;
 }
 
 .employee-card:hover {
@@ -307,7 +309,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   color: var(--navy);
   margin: 0 0 0.15rem;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 .employee-info .title {

@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260427">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260428">
 
   <link rel="alternate" type="application/atom+xml" title="ACPWB Archive Feed" href="https://acpwb.com/feeds/archive.xml">
   <link rel="alternate" type="application/rss+xml" title="ACPWB Reports &amp; Publications" href="https://acpwb.com/feeds/reports.xml">
@@ -97,42 +97,32 @@
         <p class="small" style="color:rgba(255,255,255,0.5)">
           833 East Michigan Street, Suite 4040<br>
           Milwaukee, WI 53202<br>
-          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a>
+          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a><br>
+          <a href="mailto:inquiry+website@acpwb.com" style="color:rgba(255,255,255,0.5)">inquiry@acpwb.com</a>
         </p>
       </div>
       <div class="col-lg-4">
         <h6 class="text-uppercase text-gold fw-800" style="letter-spacing:.12em;font-size:.75rem">Navigation</h6>
-        <ul class="list-unstyled mb-0" style="columns:2">
-          <li><a href="{{ site_root }}{{ url('home') }}">Home</a></li>
-          <li><a href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
-          <li><a href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
-          <li><a href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
-          <li><a href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
-          <li><a href="{{ site_root }}{{ url('archive-index') }}">Archives</a></li>
-          <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
-          <li><a href="{{ site_root }}{{ url('awards') }}">Awards</a></li>
-          <li><a href="{{ site_root }}{{ url('patents') }}">Patents</a></li>
-          <li><a href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
-          <li><a href="{{ site_root }}{{ url('faq') }}">FAQ</a></li>
-          <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
-          <li><a href="{{ site_root }}{{ url('privacy') }}">Privacy</a></li>
-          <li><a href="{{ site_root }}{{ url('do-not-sell') }}">Do Not Sell My Info</a></li>
-          <li><a href="{{ site_root }}{{ url('accessibility') }}">Accessibility</a></li>
-          <li><a href="{{ site_root }}{{ url('trademarks') }}">Trademarks</a></li>
-          <li><a href="{{ site_root }}{{ url('site-map') }}">Site Map</a></li>
+        <ul class="list-unstyled mb-0" style="columns:3">
+          <li><a href="{{ site_root }}{% url 'home' %}">Home</a></li>
+          <li><a href="{{ site_root }}{% url 'contact' %}">Contact</a></li>
+          <li><a href="{{ site_root }}{% url 'our-people' %}">Our People</a></li>
+          <li><a href="{{ site_root }}{% url 'mission' %}">Mission</a></li>
+          <li><a href="{{ site_root }}{% url 'project-list' %}">Projects</a></li>
+          <li><a href="{{ site_root }}{% url 'reports-list' %}">Reports</a></li>
+          <li><a href="{{ site_root }}{% url 'archive-index' %}">Archives</a></li>
+          <li><a href="{{ site_root }}{% url 'careers' %}">Careers</a></li>
+          <li><a href="{{ site_root }}{% url 'awards' %}">Awards</a></li>
+          <li><a href="{{ site_root }}{% url 'patents' %}">Patents</a></li>
+          <li><a href="{{ site_root }}{% url 'partners' %}">Partners</a></li>
+          <li><a href="{{ site_root }}{% url 'faq' %}">FAQ</a></li>
+          <li><a href="{{ site_root }}{% url 'press_releases' %}">Press Releases</a></li>
+          <li><a href="{{ site_root }}{% url 'privacy' %}">Privacy Policy</a></li>
+          <li><a href="{{ site_root }}{% url 'do-not-sell' %}">Do Not Sell My Info</a></li>
+          <li><a href="{{ site_root }}{% url 'accessibility' %}">Accessibility</a></li>
+          <li><a href="{{ site_root }}{% url 'trademarks' %}">Trademarks</a></li>
+          <li><a href="{{ site_root }}{% url 'site-map' %}">Site Map</a></li>
         </ul>
-      </div>
-      <div class="col-lg-4">
-        <h6 class="text-uppercase text-gold fw-800" style="letter-spacing:.12em;font-size:.75rem">Contact</h6>
-        <p class="small mb-1">
-          <a href="{{ site_root }}{{ url('contact') }}">Contact Us</a>
-        </p>
-        <p class="small mb-1">
-          <a href="{{ site_root }}{{ url('our-people') }}">Our People</a>
-        </p>
-        <p class="small" style="color:rgba(255,255,255,0.4)">
-          All communications are subject to our <a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy</a> and applicable disclaimers.
-        </p>
       </div>
     </div>
     <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">

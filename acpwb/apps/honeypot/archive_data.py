@@ -5702,7 +5702,7 @@ _EXEC_SUMMARY_BULLETS = [
     'Long-term incentive grant date fair value benchmarking placed median {org} executive grants at the {percentile} percentile of the {n}-company peer group on a grant-date-FMV basis.',
     'Total rewards program competitiveness assessment confirmed that {org}\'s overall value proposition ranks at the {percentile} percentile versus the market, with below-median base salary offset by above-median long-term incentive opportunity.',
     'Wage structure compression analysis identified {n} employees whose base salary rate exceeds their supervisor\'s rate, a condition requiring resolution in the next salary structure review cycle.',
-    'Executive sign-on award benchmarking for the incoming {phase} role was assessed against {n} comparable external hires in the {industry} sector during {year}–{endyear}.',
+    'Executive sign-on award benchmarking for the incoming Chief Executive Officer was assessed against {n} comparable external hires in the {industry} sector during {year}–{endyear}.',
     # Sports & entertainment bullets
     'Player payroll benchmarking against {n} comparable {industry} sector organizations placed {org} at the {percentile} percentile of league spending intensity as of {date}, with luxury tax liability exceeding the median threshold by approximately {pct}%.',
     'Talent compensation benchmarking for on-screen and above-the-line roles identified {n} categories where {org}\'s rate card falls below guild scale by an average of {pct}%, representing both a cost risk and a talent acquisition vulnerability relative to {regions} peer production companies.',

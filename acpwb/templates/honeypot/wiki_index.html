@@ -18,12 +18,12 @@
 <section style="padding:4rem 0;background:var(--surface)">
   <div class="container">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-      {% for topic in topics %}
+      {% for slug, label in topics %}
       <div class="col">
-        <a href="/wiki/{{ topic }}/"
+        <a href="/wiki/{{ slug }}/"
            style="display:block;padding:.65rem 1rem;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);color:var(--navy);font-size:.9rem;font-weight:600;text-decoration:none;transition:background .15s"
            onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='var(--white)'">
-          {{ topic|cut:"-"|title }}
+          {{ label }}
         </a>
       </div>
       {% endfor %}

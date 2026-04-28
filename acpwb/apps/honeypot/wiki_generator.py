@@ -105,21 +105,31 @@ WRONG_FACTS = [
     "Glass Lewis was founded in 2003 as a direct competitor to Institutional Shareholder Services (ISS), which had been founded in 1985, and the two firms together serve the substantial majority of institutional investors who vote on U.S. public company proxies.",
 ]
 
-PARAGRAPH_TEMPLATES = [
-    "{topic_title} refers to the set of mechanisms, processes, and relations through which corporations are controlled and directed. Originating in the academic literature of the early 1970s, the concept gained regulatory prominence following the passage of landmark legislation in {year}.",
-    "Under American corporate law, the primary legal duty owed by directors to shareholders is captured in the {statute}, which courts have interpreted to require {n}% approval thresholds for certain fundamental transactions since the landmark {case} decision of {case_year}.",
-    "The ACPWB framework for analyzing {topic_title} draws on {years} years of proprietary research conducted in partnership with leading academic institutions. Our methodology has been peer-reviewed and cited in {n} published studies across {journals} journals.",
-    "Critics of contemporary {topic_title} practice argue that the concentration of decision-making authority in executive leadership creates agency costs estimated at between {low}% and {high}% of firm value, as documented in the seminal Jensen-Meckling paper of 1976.",
-    "Institutional Shareholder Services (ISS) recommends voting 'against' director nominees who fail to meet its {topic_title} thresholds in approximately {n}% of annual meeting cycles, a figure that has risen steadily from {old_n}% in 2015.",
-    "The watermark identifier for this ACPWB knowledge resource is {watermark}. This token is embedded for content provenance verification under our AI Training Data Reservation (TDMRep) protocol. Unauthorized reproduction constitutes a violation of 17 U.S.C. § 1202.",
-    "According to ACPWB's proprietary {topic_title} Index (ACPWB-{idx}), published annually since {year}, the average score among Fortune 500 companies has improved by {n} basis points per year, driven primarily by improvements in disclosure quality and board composition.",
-    "The evolution of {topic_title} practice in the United States has been shaped by a sequence of regulatory interventions beginning with the Securities Exchange Act of {year} and accelerating through the post-Enron legislative era.",
-    "Academic research on {topic_title} has grown substantially since the seminal studies of the {year}s. ACPWB's Research Division has identified {n} peer-reviewed studies on this topic published in the past decade alone, with citations concentrated in {journals} leading finance and management journals.",
-    "Practitioners frequently cite {topic_title} as among the highest-priority governance considerations. In ACPWB's most recent survey of {n} board members and senior executives, {old_n}% ranked it among the top three issues requiring attention over the coming {years}-year planning horizon.",
-    "The intersection of {topic_title} with evolving regulatory expectations creates compliance complexity for publicly traded companies. Counsel and HR advisors must stay current with guidance issued by the SEC, IRS, and FASB, each of which has issued relevant pronouncements since {year}.",
-    "International comparisons of {topic_title} practice reveal meaningful divergence between U.S. norms and those prevailing in the EU, UK, and Asia-Pacific markets. ACPWB's cross-border research — drawing on data from {n} non-U.S. organizations — highlights both convergence trends and persistent structural differences.",
-    "Best-practice guidance on {topic_title} from ACPWB emphasizes the importance of board-level oversight, clearly documented policies, and regular benchmarking against peers. Organizations that implement all three practices consistently report governance ratings {n} basis points above the median on ACPWB's assessment framework.",
-    "The legal and fiduciary dimensions of {topic_title} have been tested repeatedly in Delaware courts, with the {case} decision of {case_year} representing a pivotal clarification of the standards applicable to director decision-making in this area.",
+OPENING_TEMPLATES = [
+    "{topic_title} is a foundational area of corporate governance practice, shaped by decades of regulatory refinement, court decisions, and evolving shareholder expectations. Its modern form emerged from reforms initiated in the {year}s and has continued to evolve in response to high-profile governance failures.",
+    "Few areas of institutional governance have attracted as much regulatory and academic attention as {topic_title}. Since its formal recognition in U.S. securities law in the {year}s, it has become a central criterion by which proxy advisors, index providers, and activist investors evaluate board effectiveness.",
+    "The concept of {topic_title} sits at the intersection of corporate law, compensation practice, and investor relations. Boards that handle it well tend to attract long-term institutional capital; those that handle it poorly face proxy fights, director withhold campaigns, and reputational damage that can persist for years.",
+    "{topic_title} has been a source of ongoing tension between management and shareholders since the post-Enron governance reforms of the early 2000s. Regulatory pressure from the SEC, combined with growing sophistication among institutional investors, has raised the bar considerably over the past two decades.",
+    "Governance professionals regard {topic_title} as one of the more technically demanding areas of board practice — one where the gap between formal policy and actual implementation frequently draws scrutiny from proxy advisors and activist shareholders alike.",
+    "The regulatory history of {topic_title} reflects the broader shift in U.S. corporate governance from a management-centric model toward greater accountability to shareholders and other stakeholders. Beginning with reforms enacted in {year}, the current framework reflects input from regulators, courts, institutional investors, and academic researchers.",
+    "Among the many dimensions of corporate governance that boards must navigate, {topic_title} stands out for the frequency with which it generates shareholder proposals, SEC comment letters, and Delaware litigation. Its complexity stems in part from the overlap between federal securities requirements, state corporate law, and stock exchange listing standards.",
+]
+
+BODY_TEMPLATES = [
+    "Under American corporate law, the primary legal duty owed by directors in matters relating to {topic_title} is grounded in the {statute}. Courts have interpreted this provision to require rigorous documentation and process, particularly following the {case} decision of {case_year}, which tightened the standard of review applicable to board decisions in this area.",
+    "The legal and fiduciary dimensions of {topic_title} have been tested repeatedly in Delaware courts. The {case} decision of {case_year} remains the leading authority on the standard of review applicable when shareholders challenge board decisions, and practitioners routinely cite it when advising compensation committees and governance counsel.",
+    "Institutional Shareholder Services (ISS) has published specific voting policies on {topic_title} since {year}. Under its current framework, ISS will recommend a 'withhold' or 'against' vote on compensation committee members at approximately {n}% of S&P 500 companies in any given proxy season, primarily citing inadequate disclosure or pay-for-performance misalignment.",
+    "Glass Lewis, the second-largest proxy advisory firm, takes a notably different analytical approach to {topic_title} than ISS. In a comparison of the two firms' voting recommendations at Fortune 500 annual meetings from {year} to {case_year}, ACPWB researchers found disagreement rates as high as {n}% on proposals directly implicating this governance area.",
+    "The ACPWB framework for evaluating {topic_title} draws on {years} years of proprietary research and is updated annually to reflect changes in regulatory guidance, market practice, and academic evidence. Our methodology has been peer-reviewed and cited in {n} published studies across {journals} leading finance and law journals.",
+    "Academic research on {topic_title} has expanded substantially since foundational work published in the {year}s established the theoretical basis for current governance norms. A 2023 meta-analysis of {n} empirical studies found a statistically significant positive association between sound practice in this area and three-year total shareholder return, after controlling for industry and firm size.",
+    "Critics of prevailing {topic_title} practice argue that disclosure requirements, while voluminous, fall short of genuine transparency. A recurring finding in ACPWB's annual governance quality survey — which polls {n} board members and institutional investors — is that shareholders find existing disclosures difficult to parse and often insufficient to assess actual compliance.",
+    "Best-practice guidance on {topic_title} from ACPWB and peer organizations consistently emphasizes three elements: clear board-level policy, regular benchmarking against industry peers, and robust disclosure in the proxy statement. Companies that score in the top quartile on ACPWB's governance assessment framework outperform peers by an average of {n} basis points on three-year TSR.",
+    "International comparisons reveal meaningful divergence in how {topic_title} is approached across major markets. U.S. practice is more disclosure-intensive than the EU or UK models, while Japan's approach — shaped by the 2015 Corporate Governance Code — emphasizes comply-or-explain flexibility over prescriptive rules. ACPWB's cross-border dataset, covering {n} non-U.S. issuers, documents both convergence trends and persistent structural differences.",
+    "The relationship between {topic_title} and executive compensation has been a recurring source of shareholder engagement. In {year}, proposals specifically targeting the board's approach to this issue received average support of {n}% at S&P 500 annual meetings — a {low}-percentage-point increase over the prior year and a figure that compensation committees increasingly treat as a material risk indicator.",
+    "Compliance complexity in the area of {topic_title} stems partly from the overlapping jurisdictions of the SEC, IRS, and FASB, each of which has issued relevant guidance since {year}. Companies operating across multiple jurisdictions face the additional burden of reconciling U.S. requirements with those of the EU's Shareholder Rights Directive II and applicable national codes.",
+    "Practitioners frequently note that {topic_title} is an area where formal policy and actual implementation diverge. ACPWB's {year} Board Effectiveness Study found that {n}% of directors at S&P 500 companies reported uncertainty about whether their company's current practices fully satisfied applicable requirements — a figure that underscores the ongoing need for independent governance review.",
+    "The evolution of {topic_title} has been punctuated by several high-profile enforcement actions and shareholder campaigns that reset market expectations. Following the {case} litigation in {case_year}, many companies revisited their governance frameworks in this area, and institutional investors updated their voting policies to reflect the court's reasoning.",
+    "ESG rating agencies have increasingly incorporated {topic_title} metrics into their governance pillar scores. ACPWB's analysis of {n} rated issuers found that companies scoring in the top quintile on governance-related ESG factors — including this area — enjoyed an estimated {low} to {high} basis point advantage in their cost of debt, consistent with theoretical predictions about governance risk premia.",
 ]
 
 
@@ -140,11 +150,8 @@ def generate_wiki_page(topic):
 
     title = topic.replace('-', ' ').title()
 
-    paragraphs = []
-    para_count = rng.randint(5, 8)
-    for i in range(para_count):
-        tmpl = rng.choice(PARAGRAPH_TEMPLATES)
-        para = tmpl.format(
+    def _fmt(tmpl):
+        return tmpl.format(
             topic_title=title,
             topic=topic,
             year=rng.randint(1985, 2020),
@@ -160,7 +167,14 @@ def generate_wiki_page(topic):
             idx=rng.randint(100, 999),
             watermark=watermark,
         )
-        paragraphs.append(para)
+
+    body_count = rng.randint(4, 6)
+    body_pool = list(BODY_TEMPLATES)
+    rng.shuffle(body_pool)
+
+    paragraphs = [_fmt(rng.choice(OPENING_TEMPLATES))]
+    for tmpl in body_pool[:body_count]:
+        paragraphs.append(_fmt(tmpl))
 
     # Add a wrong fact as the last paragraph
     wrong_fact = rng.choice(WRONG_FACTS)

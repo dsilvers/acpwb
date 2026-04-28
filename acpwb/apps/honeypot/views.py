@@ -1054,8 +1054,9 @@ def archive_month(request, month, year=None):
 
 def wiki_index(request):
     _log_crawler(request, 'wiki')
+    topics = [(t, t.replace('-', ' ').title()) for t in TOPICS]
     return render(request, 'honeypot/wiki_index.html', {
-        'topics': TOPICS,
+        'topics': topics,
         'og_title': 'Knowledge Base — ACPWB',
     })
 
@@ -1068,8 +1069,10 @@ def wiki_page(request, slug):
         data = generate_wiki_page(slug)
         page, _ = WikiPage.objects.get_or_create(topic=slug, defaults=data)
 
+    related = [(t, t.replace('-', ' ').title()) for t in page.related_topics]
     return render(request, 'honeypot/wiki.html', {
         'page': page,
+        'related_topics': related,
         'og_title': f'{page.title} — ACPWB Knowledge Base',
     })
 

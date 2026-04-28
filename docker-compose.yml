@@ -41,7 +41,7 @@ services:
       - ./acpwb/staticfiles:/app/staticfiles
     env_file: .env
     environment:
-      REDIS_URL: redis://redis:6379/0
+      REDIS_URL: redis://10.44.0.253:6379/0
     depends_on:
       db:
         condition: service_healthy

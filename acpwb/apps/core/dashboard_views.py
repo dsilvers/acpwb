@@ -230,6 +230,18 @@ def emails(request):
 
 
 @staff_member_required(login_url='/django-admin/login/')
+def email_detail(request, pk):
+    from django.shortcuts import get_object_or_404
+    from django.utils.html import strip_tags
+    email = get_object_or_404(InboundEmail, pk=pk)
+    body = email.body_plain or strip_tags(email.body_html)
+    return render(request, 'dashboard/email_detail.html', {
+        'email': email,
+        'body': body,
+    })
+
+
+@staff_member_required(login_url='/django-admin/login/')
 def honeypot_traps(request):
     by_trap = _stat('crawlers.by_trap_type', {})
     trap_totals = _trap_counts(by_trap)

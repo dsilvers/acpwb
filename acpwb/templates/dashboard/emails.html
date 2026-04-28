@@ -81,7 +81,7 @@
       <thead><tr><th>Received</th><th>From</th><th>To</th><th>Subject</th><th>Matched</th></tr></thead>
       <tbody>
         {% for e in recent %}
-        <tr>
+        <tr style="cursor:pointer" onclick="location.href='{% url 'dashboard-email-detail' e.pk %}'">
           <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ e.received_at|date:"Y-m-d H:i" }}</td>
           <td style="font-size:.78rem">{{ e.sender }}</td>
           <td style="font-size:.75rem;color:var(--muted);font-family:monospace">{{ e.recipient }}</td>

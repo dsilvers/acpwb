@@ -1,0 +1,63 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Email — {{ email.subject|truncatechars:60 }}{% endblock %}
+{% block page_title %}Email Detail{% endblock %}
+{% block nav_emails %}active{% endblock %}
+
+{% block content %}
+
+<div class="mb-3">
+  <a href="{% url 'dashboard-emails' %}" style="font-size:.8rem;color:var(--muted)">&larr; Back to Email Log</a>
+</div>
+
+<div class="section-card mb-3">
+  <div class="section-card-header"><h6>Headers</h6></div>
+  <div class="section-card-body">
+    <table class="dash-table w-100">
+      <tbody>
+        <tr><th style="width:120px;font-size:.72rem;color:var(--muted)">From</th><td style="font-size:.82rem">{{ email.sender }}</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">To</th><td style="font-size:.82rem;font-family:monospace">{{ email.recipient }}</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">Subject</th><td style="font-size:.82rem">{{ email.subject }}</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">Received</th><td style="font-size:.82rem">{{ email.received_at|date:"Y-m-d H:i:s" }} UTC</td></tr>
+        {% if email.mailgun_message_id %}
+        <tr><th style="font-size:.72rem;color:var(--muted)">Message-ID</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ email.mailgun_message_id }}</td></tr>
+        {% endif %}
+        {% with mc=email.matches.count %}{% if mc %}
+        <tr><th style="font-size:.72rem;color:var(--muted)">Matched</th><td><span style="font-size:.72rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#10003; {{ mc }} honeypot match{{ mc|pluralize }}</span></td></tr>
+        {% endif %}{% endwith %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% if email.matches.count %}
+<div class="section-card mb-3">
+  <div class="section-card-header"><h6>Honeypot Matches</h6></div>
+  <div class="section-card-body p-0">
+    <table class="dash-table w-100">
+      <thead><tr><th>Confidence</th><th>Employee</th><th>Visit</th><th>Matched</th></tr></thead>
+      <tbody>
+        {% for m in email.matches.all %}
+        <tr>
+          <td><span style="font-size:.7rem;font-weight:700;text-transform:uppercase">{{ m.match_confidence }}</span></td>
+          <td style="font-size:.78rem">{{ m.generated_employee|default:"—" }}</td>
+          <td style="font-size:.72rem;color:var(--muted)">{{ m.original_visit|default:"—" }}</td>
+          <td style="font-size:.72rem;color:var(--muted)">{{ m.matched_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+<div class="section-card">
+  <div class="section-card-header">
+    <h6>Body</h6>
+    {% if not email.body_plain and email.body_html %}<span style="font-size:.72rem;color:var(--muted)">(plain text stripped from HTML)</span>{% endif %}
+  </div>
+  <div class="section-card-body" style="padding:0">
+    <pre style="margin:0;padding:1rem 1.25rem;font-size:.78rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;background:var(--surface);border:none;max-height:600px;overflow-y:auto">{{ body }}</pre>
+  </div>
+</div>
+
+{% endblock %}

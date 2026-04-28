@@ -12,7 +12,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: scram-sha-256
     command: postgres -c hba_file=/etc/postgresql/pg_hba.conf -c listen_addresses='*'
     ports:
-      - "5432:5432"
+      - "10.44.0.253:5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U acpwb"]
       interval: 5s
@@ -23,7 +23,7 @@ services:
     image: redis:7-alpine
     command: redis-server --bind 0.0.0.0 --protected-mode no
     ports:
-      - "6379:6379"
+      - "10.44.0.253:6379:6379"
     restart: unless-stopped
 
   web:
@@ -54,7 +54,7 @@ services:
     build:
       context: ./ws_service
     environment:
-      REDIS_URL: redis://redis:6379/0
+      REDIS_URL: redis://10.44.0.253:6379/0
       WS_PORT: "8765"
       STREAM_WS_TOKEN: ${STREAM_WS_TOKEN:-}
     ports:
@@ -67,7 +67,7 @@ services:
     build:
       context: ./botseed_service
     environment:
-      REDIS_URL: redis://redis:6379/0
+      REDIS_URL: redis://10.44.0.253:6379/0
       WS_PORT: "8766"
       API_PORT: "8767"
       BOTSEED_WS_TOKEN: ${BOTSEED_WS_TOKEN:-}
@@ -85,7 +85,7 @@ services:
     command: python manage.py botseed_processor
     env_file: .env
     environment:
-      REDIS_URL: redis://redis:6379/0
+      REDIS_URL: redis://10.44.0.253:6379/0
     depends_on:
       db:
         condition: service_healthy

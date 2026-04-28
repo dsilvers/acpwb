@@ -25,6 +25,7 @@ urlpatterns = [
     path('<int:month>/<int:day>/<path:slug>', views.archive_trap_yearless),
 
     # Wiki trap
+    path('wiki/', views.wiki_index, name='wiki-index'),
     path('wiki/<slug:slug>/', views.wiki_page, name='wiki-page'),
 
     # Fake API (listed in HTML comment — not linked in nav)

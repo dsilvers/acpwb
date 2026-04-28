@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      ACPWB Knowledge Base
+    </p>
+    <h1 style="font-size:clamp(1.6rem,3.5vw,2.8rem)">Wiki — All Topics</h1>
+    <p class="lead mb-0" style="color:rgba(255,255,255,0.7);max-width:640px">
+      Reference articles on corporate governance, executive compensation, ESG, and workforce equity research.
+    </p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+      {% for topic in topics %}
+      <div class="col">
+        <a href="/wiki/{{ topic }}/"
+           style="display:block;padding:.65rem 1rem;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);color:var(--navy);font-size:.9rem;font-weight:600;text-decoration:none;transition:background .15s"
+           onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='var(--white)'">
+          {{ topic|cut:"-"|title }}
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <p class="text-muted mt-5" style="font-size:.75rem;border-top:1px dotted var(--border);padding-top:1rem">
+      ACPWB Knowledge Base &mdash; All information subject to our <a href="{% url 'privacy' %}" style="color:var(--gold)">Terms and Disclaimer</a>.
+      Content maintained by the ACPWB Research Division.
+    </p>
+  </div>
+</section>
+
+{% endblock %}

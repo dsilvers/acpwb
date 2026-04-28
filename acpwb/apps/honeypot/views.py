@@ -1052,6 +1052,14 @@ def archive_month(request, month, year=None):
 
 # ── Wiki Trap ─────────────────────────────────────────────────────────────────
 
+def wiki_index(request):
+    _log_crawler(request, 'wiki')
+    return render(request, 'honeypot/wiki_index.html', {
+        'topics': TOPICS,
+        'og_title': 'Knowledge Base — ACPWB',
+    })
+
+
 def wiki_page(request, slug):
     _log_crawler(request, 'wiki')
 
@@ -1468,6 +1476,7 @@ def sitemap_wiki(request):
     db_topics = set(WikiPage.objects.values_list('topic', flat=True))
     all_topics = list(TOPICS) + [t for t in db_topics if t not in TOPICS]
     lines = [_SITEMAP_HEADER]
+    lines.append(_url_entry('/wiki/', '0.8', 'weekly'))
     for topic in all_topics:
         lines.append(_url_entry(f'/wiki/{topic}/', '0.7', 'monthly'))
     lines.append(_SITEMAP_FOOTER)

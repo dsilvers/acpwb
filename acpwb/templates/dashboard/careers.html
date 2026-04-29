@@ -1,0 +1,103 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Job Applications{% endblock %}
+{% block page_title %}Job Applications{% endblock %}
+{% block nav_careers %}active{% endblock %}
+
+{% block content %}
+
+<!-- Stat cards -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="border-top-color:#15803d">
+      <div class="label">Total Applications</div>
+      <div class="value">{{ total }}</div>
+      <div class="sub">all time</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Jobs Applied To</div>
+      <div class="value">{{ jobs_count }}</div>
+      <div class="sub">distinct positions</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">With Resume</div>
+      <div class="value">{{ with_resume }}</div>
+      <div class="sub">file attached</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+
+  <!-- Top Jobs Applied To -->
+  <div class="col-lg-5">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>Top Jobs Applied To</h6>
+      </div>
+      <div style="padding:.5rem 0">
+        {% if job_rows %}
+        {% for row in job_rows %}
+        <div style="display:flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border-bottom:1px solid var(--dash-border)">
+          <div style="flex:1;font-size:.8rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis" title="{{ row.title }}">{{ row.title }}</div>
+          <div class="bar-track" style="width:80px"><div class="bar-fill" style="width:{{ row.pct }}%"></div></div>
+          <div style="font-size:.78rem;font-weight:700;min-width:2.5rem;text-align:right">{{ row.count }}</div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div style="padding:1.5rem;text-align:center;color:var(--dash-muted);font-size:.82rem">No applications yet.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Recent Applications -->
+<div class="section-card mb-4">
+  <div class="section-card-header">
+    <h6>Recent Applications</h6>
+    <span style="font-size:.72rem;color:var(--dash-muted)">Last {{ recent|length }}</span>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Position</th>
+          <th>Resume</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for app in recent %}
+        <tr style="cursor:pointer" onclick="location.href='{% url 'dashboard-career-detail' app.pk %}'">
+          <td style="font-weight:600">
+            <a href="{% url 'dashboard-career-detail' app.pk %}" style="color:inherit;text-decoration:none">{{ app.name }}</a>
+          </td>
+          <td style="font-size:.78rem">{{ app.email }}</td>
+          <td style="font-size:.78rem">{{ app.phone|default:"—" }}</td>
+          <td style="font-size:.78rem;max-width:220px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis" title="{{ app.job_title }}">{{ app.job_title }}</td>
+          <td style="font-size:.75rem">
+            {% if app.resume_filename %}
+            <span style="color:#15803d;font-weight:700">&#10003;</span>
+            {% else %}
+            <span style="color:var(--dash-muted)">—</span>
+            {% endif %}
+          </td>
+          <td style="font-size:.75rem;color:var(--dash-muted)">{{ app.created_at|date:"M j, Y H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" style="text-align:center;color:var(--dash-muted);padding:2rem">No applications yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

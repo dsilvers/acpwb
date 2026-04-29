@@ -11,13 +11,14 @@ from datetime import date, timedelta
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Max
-from django.shortcuts import render
+from django.http import Http404, HttpResponse
+from django.shortcuts import get_object_or_404, render
 
 from apps.core.models import DashboardStat
 from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
-from apps.public.models import DataOptOutRequest
+from apps.public.models import DataOptOutRequest, JobApplication, JobApplicationDocument
 from apps.webhooks.models import CallLog, InboundEmail, VoicemailRecording
 
 
@@ -144,6 +145,7 @@ def overview(request):
             'projects': s.get('projects.total', 0),
             'logins':   s.get('login_attempts.total', 0),
             'optouts':  s.get('optouts.total', 0),
+            'job_applications': JobApplication.objects.count(),
         },
         'top_bots':        _top_named(s.get('crawlers.by_bot_type', {}), 15),
         'trap_counts':     _trap_counts(s.get('crawlers.by_trap_type', {})),
@@ -359,3 +361,63 @@ def voicemail_audio(request, recording_sid):
         content_type='audio/mpeg',
         headers={'Content-Disposition': f'inline; filename="{recording_sid}.mp3"'},
     )
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def careers_applications(request):
+    from django.db.models import Count
+
+    qs = JobApplication.objects.all()
+    total = qs.count()
+    with_resume = qs.exclude(resume_filename='').count()
+    jobs_count = qs.values('job_title').distinct().count()
+
+    by_job = (
+        qs.values('job_title')
+        .annotate(count=Count('id'))
+        .order_by('-count')[:20]
+    )
+    job_rows = []
+    for row in by_job:
+        pct = round(row['count'] / total * 100) if total else 0
+        job_rows.append({'title': row['job_title'], 'count': row['count'], 'pct': pct})
+
+    recent = qs.order_by('-created_at')[:50]
+
+    return render(request, 'dashboard/careers.html', {
+        'total': total,
+        'with_resume': with_resume,
+        'jobs_count': jobs_count,
+        'job_rows': job_rows,
+        'recent': recent,
+        'updated_at': None,
+    })
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def career_application_detail(request, pk):
+    from apps.public.career_generator import generate_job, is_valid_job_id
+    app = get_object_or_404(JobApplication, pk=pk)
+    docs = app.documents.all()
+    job = generate_job(app.job_id) if is_valid_job_id(app.job_id) else None
+    return render(request, 'dashboard/career_application_detail.html', {'app': app, 'docs': docs, 'job': job})
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def career_download_resume(request, pk):
+    app = get_object_or_404(JobApplication, pk=pk)
+    if not app.resume_data:
+        raise Http404
+    content_type = app.resume_content_type or 'application/octet-stream'
+    response = HttpResponse(bytes(app.resume_data), content_type=content_type)
+    response['Content-Disposition'] = f'attachment; filename="{app.resume_filename}"'
+    return response
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def career_download_document(request, doc_pk):
+    doc = get_object_or_404(JobApplicationDocument, pk=doc_pk)
+    content_type = doc.content_type or 'application/octet-stream'
+    response = HttpResponse(bytes(doc.data), content_type=content_type)
+    response['Content-Disposition'] = f'attachment; filename="{doc.filename}"'
+    return response

@@ -1,0 +1,137 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Application — {{ app.name }}{% endblock %}
+{% block page_title %}Job Application{% endblock %}
+{% block nav_careers %}active{% endblock %}
+
+{% block content %}
+
+<div class="mb-3">
+  <a href="{% url 'dashboard-careers' %}" style="font-size:.8rem;color:var(--gold)">
+    &larr; Back to Job Applications
+  </a>
+</div>
+
+<div class="row g-3">
+
+  <!-- Main info -->
+  <div class="col-lg-8">
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Applicant</h6>
+        <span style="font-size:.72rem;color:var(--dash-muted)">Submitted {{ app.created_at|date:"N j, Y \a\t H:i" }}</span>
+      </div>
+      <div style="padding:1rem 1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem 1.5rem;font-size:.83rem">
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Full Name</div>
+            <div style="font-weight:700">{{ app.name }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Email</div>
+            <div><a href="mailto:{{ app.email }}" style="color:var(--gold)">{{ app.email }}</a></div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Phone</div>
+            <div>{{ app.phone|default:"—" }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">IP Address</div>
+            <div style="font-family:monospace;font-size:.8rem">{{ app.ip_address }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Position Applied For</h6>
+      </div>
+      <div style="padding:1rem 1.25rem">
+        <div style="font-weight:700;font-size:.9rem;margin-bottom:.25rem">{{ app.job_title }}</div>
+        <div style="font-size:.8rem;color:var(--dash-muted)">
+          Job ID #{{ app.job_id }}
+          {% if job %}
+          &nbsp;·&nbsp;
+          <a href="{% url 'job-detail' app.job_id job.slug %}" style="color:var(--gold)" target="_blank">View job posting &rarr;</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% if app.cover_letter %}
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Cover Letter</h6>
+      </div>
+      <div style="padding:1rem 1.25rem;font-size:.85rem;line-height:1.7;white-space:pre-wrap">{{ app.cover_letter }}</div>
+    </div>
+    {% endif %}
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>User Agent</h6>
+      </div>
+      <div style="padding:.75rem 1.25rem;font-size:.75rem;font-family:monospace;color:var(--dash-muted);word-break:break-all">{{ app.user_agent|default:"—" }}</div>
+    </div>
+
+  </div>
+
+  <!-- Sidebar: files -->
+  <div class="col-lg-4">
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Resume</h6>
+      </div>
+      <div style="padding:1rem 1.25rem">
+        {% if app.resume_filename %}
+        <div style="margin-bottom:.75rem">
+          <div style="font-size:.75rem;color:var(--dash-muted);margin-bottom:.2rem">{{ app.resume_content_type|default:"unknown type" }}</div>
+          <div style="font-weight:600;font-size:.85rem;word-break:break-all">{{ app.resume_filename }}</div>
+        </div>
+        <a href="{% url 'dashboard-career-resume' app.pk %}"
+           style="display:inline-block;background:var(--navy-mid);color:var(--gold);font-size:.75rem;font-weight:700;padding:.4rem .9rem;text-decoration:none;text-transform:uppercase;letter-spacing:.07em">
+          &#11123; Download Resume
+        </a>
+        {% else %}
+        <div style="color:var(--dash-muted);font-size:.82rem">No resume attached.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if docs %}
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Additional Documents</h6>
+        <span style="font-size:.72rem;color:var(--dash-muted)">{{ docs|length }}</span>
+      </div>
+      <div style="padding:.5rem 0">
+        {% for doc in docs %}
+        <div style="padding:.6rem 1.25rem;border-bottom:1px solid var(--dash-border);display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+          <div style="flex:1;overflow:hidden">
+            <div style="font-size:.82rem;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis" title="{{ doc.filename }}">{{ doc.filename }}</div>
+            <div style="font-size:.7rem;color:var(--dash-muted)">{{ doc.content_type|default:"unknown" }}</div>
+          </div>
+          <a href="{% url 'dashboard-career-doc' doc.pk %}"
+             style="flex-shrink:0;background:var(--navy-mid);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .7rem;text-decoration:none;text-transform:uppercase;letter-spacing:.06em">
+            &#11123;
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="section-card">
+      <div class="section-card-header"><h6>Meta</h6></div>
+      <div style="padding:1rem 1.25rem;font-size:.78rem;line-height:1.9">
+        <div><span style="color:var(--dash-muted)">Application ID:</span> <strong>#{{ app.pk }}</strong></div>
+        <div><span style="color:var(--dash-muted)">Submitted:</span> {{ app.created_at|date:"N j, Y H:i:s" }}</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

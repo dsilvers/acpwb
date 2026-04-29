@@ -1,7 +1,12 @@
-from django.http import Http404
-from django.shortcuts import render
+import re
 
-from .models import Fortune500Company, DataOptOutRequest
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.http import Http404
+from django.shortcuts import redirect, render
+
+from .career_generator import generate_job, get_current_jobs, is_valid_job_id
+from .models import Fortune500Company, DataOptOutRequest, JobApplication, JobApplicationDocument
 from apps.projects.models import ProjectStory
 
 from .press_data import _PRESS_RELEASES
@@ -233,10 +238,97 @@ def awards(request):
 
 
 def careers(request):
+    jobs = get_current_jobs()
     return render(request, 'public/careers.html', {
+        'jobs': jobs,
         'og_title': 'Careers — American Corporation for Public Well Being',
         'og_description': 'Join the American Corporation for Public Well Being and contribute to our mission of advancing American workforce prosperity and compensation equity.',
     })
+
+
+def job_detail(request, job_id, job_slug):
+    if not is_valid_job_id(job_id):
+        return redirect('careers')
+    job = generate_job(job_id)
+    return render(request, 'public/careers/job_detail.html', {
+        'job': job,
+        'og_title': f"{job['title']} — ACPWB Careers",
+        'og_description': f"Open position: {job['title']} in {job['department']} at the American Corporation for Public Well Being.",
+    })
+
+
+_MAX_UPLOAD_BYTES = 8 * 1024 * 1024  # 8 MB
+
+
+def job_apply(request, job_id, job_slug):
+    if not is_valid_job_id(job_id):
+        return redirect('careers')
+    job = generate_job(job_id)
+
+    if request.method != 'POST':
+        return render(request, 'public/careers/apply.html', {'job': job, 'errors': {}, 'post': {}})
+
+    post = {
+        'name': request.POST.get('name', '').strip(),
+        'email': request.POST.get('email', '').strip(),
+        'phone': request.POST.get('phone', '').strip(),
+        'cover_letter': request.POST.get('cover_letter', '').strip(),
+    }
+    errors = {}
+
+    if not post['name']:
+        errors['name'] = 'Full name is required.'
+    if not post['email']:
+        errors['email'] = 'Email address is required.'
+    else:
+        try:
+            validate_email(post['email'])
+        except ValidationError:
+            errors['email'] = 'Enter a valid email address.'
+
+    resume_file = request.FILES.get('resume')
+    if not resume_file:
+        errors['resume'] = 'A resume is required.'
+    elif resume_file.size > _MAX_UPLOAD_BYTES:
+        errors['resume'] = f'Resume must be under 8 MB (uploaded: {resume_file.size // (1024*1024):.1f} MB).'
+
+    other_file = request.FILES.get('other_doc')
+    if other_file and other_file.size > _MAX_UPLOAD_BYTES:
+        errors['other_doc'] = f'Document must be under 8 MB (uploaded: {other_file.size // (1024*1024):.1f} MB).'
+
+    if errors:
+        return render(request, 'public/careers/apply.html', {'job': job, 'errors': errors, 'post': post})
+
+    application = JobApplication.objects.create(
+        job_id=job_id,
+        job_title=job['title'],
+        name=post['name'],
+        email=post['email'],
+        phone=post['phone'],
+        cover_letter=post['cover_letter'],
+        resume_filename=resume_file.name,
+        resume_data=resume_file.read(),
+        resume_content_type=resume_file.content_type or '',
+        ip_address=request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1')).split(',')[0].strip(),
+        user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
+    )
+
+    if other_file:
+        JobApplicationDocument.objects.create(
+            application=application,
+            filename=other_file.name,
+            data=other_file.read(),
+            content_type=other_file.content_type or '',
+        )
+
+    return redirect('job-applied', job_id=job_id, job_slug=job['slug'])
+
+
+def job_applied(request, job_id, job_slug):
+    if not is_valid_job_id(job_id):
+        return redirect('careers')
+    job = generate_job(job_id)
+    return render(request, 'public/careers/applied.html', {'job': job})
 
 
 def mission(request):

@@ -190,24 +190,37 @@
 </section>
 
 <!-- Open Positions -->
-<section style="padding:5rem 0;background:var(--white)">
+<section id="openings" style="padding:5rem 0;background:var(--white)">
   <div class="container">
     <p class="text-uppercase text-gold fw-800 mb-2" style="letter-spacing:.15em;font-size:.75rem">Opportunities</p>
     <h2 class="section-heading">CURRENT OPENINGS</h2>
     <hr class="section-rule">
+    <p class="text-muted mb-4" style="font-size:.88rem">
+      Showing {{ jobs|length }} open position{{ jobs|length|pluralize }}. Listings refresh hourly.
+    </p>
 
-    <div style="background:var(--surface);border:1px solid var(--border);padding:3rem;text-align:center">
-      <div style="font-size:3rem;margin-bottom:1rem;opacity:.3">&#9670;</div>
-      <h4 style="color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">
-        No Current Openings
-      </h4>
-      <p class="text-muted mb-4" style="max-width:500px;margin-left:auto;margin-right:auto">
-        We are not currently hiring, but we are always growing. Check back soon, or send your resume to <a href="{% url 'our-people' %}" style="color:var(--gold)">one of our team members</a> — we love hearing from motivated professionals.
-      </p>
-      <p class="small text-muted mb-0">
-        ACPWB is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees. Unless they put the foosball table away.
-      </p>
+    <div>
+      {% for job in jobs %}
+      <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;position:relative">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.25rem">{{ job.department }}</div>
+          <h5 style="font-weight:800;color:var(--navy);font-size:.95rem;line-height:1.3;margin-bottom:.35rem">{{ job.title }}</h5>
+          <div style="font-size:.78rem;color:var(--muted)">
+            {{ job.location }} &nbsp;&middot;&nbsp; {{ job.job_type }} &nbsp;&middot;&nbsp; Apply by {{ job.deadline|date:"N j, Y" }}
+          </div>
+        </div>
+        <a href="{% url 'job-detail' job.id job.slug %}"
+           class="stretched-link"
+           style="display:inline-block;background:var(--navy);color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;padding:.45rem 1.25rem;text-decoration:none;flex-shrink:0">
+          View &rarr;
+        </a>
+      </div>
+      {% endfor %}
     </div>
+
+    <p class="small text-muted mt-4 mb-0" style="font-size:.78rem">
+      ACPWB is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees. Unless they put the foosball table away.
+    </p>
   </div>
 </section>
 

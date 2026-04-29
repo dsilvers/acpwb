@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block og_image %}https://acpwb.com{% static 'img/page-covers/careers.jpg' %}{% endblock %}
+{% block twitter_image %}https://acpwb.com{% static 'img/page-covers/careers.jpg' %}{% endblock %}
+
+{% block content %}
+
+<div style="width:100%;height:320px;overflow:hidden;position:relative">
+  <img src="{% static 'img/page-covers/careers.jpg' %}" alt="Apply — ACPWB Careers"
+       style="width:100%;height:100%;object-fit:cover;display:block"
+       onerror="this.parentElement.style.display='none'">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,.08) 0%,rgba(10,22,40,.72) 100%)"></div>
+</div>
+
+<section class="page-banner" style="padding-top:2rem">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      <a href="{% url 'careers' %}" style="color:var(--gold)">Careers</a> &rsaquo;
+      <a href="{% url 'job-detail' job.id job.slug %}" style="color:var(--gold)">{{ job.title }}</a> &rsaquo;
+      Apply
+    </p>
+    <h1>APPLY: {{ job.title|upper }}</h1>
+    <p>{{ job.department }} &bull; {{ job.location }}</p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Form -->
+      <div class="col-lg-8">
+
+        <!-- Top 1% callout -->
+        <div style="background:var(--navy);border-left:4px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:2rem">
+          <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.4rem">A Note on Cover Letters</div>
+          <p style="color:rgba(255,255,255,.8);font-size:.88rem;margin-bottom:0;line-height:1.65">
+            The top 1% of our candidates include one or two sentences about themselves and why they'd be a good fit for ACPWB. We notice. The other 99% submit the same cover letter they sent to fourteen other organizations this week, and we notice that too.
+          </p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+
+          <!-- Name -->
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Full Name <span style="color:#dc2626">*</span>
+            </label>
+            <input type="text" name="name" value="{{ post.name|default:'' }}"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid {% if errors.name %}#dc2626{% else %}var(--border){% endif %};font-size:.88rem;outline:none;background:white"
+                   placeholder="Your full name">
+            {% if errors.name %}<p style="font-size:.75rem;color:#dc2626;margin:.3rem 0 0">{{ errors.name }}</p>{% endif %}
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Email Address <span style="color:#dc2626">*</span>
+            </label>
+            <input type="email" name="email" value="{{ post.email|default:'' }}"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid {% if errors.email %}#dc2626{% else %}var(--border){% endif %};font-size:.88rem;outline:none;background:white"
+                   placeholder="you@example.com">
+            {% if errors.email %}<p style="font-size:.75rem;color:#dc2626;margin:.3rem 0 0">{{ errors.email }}</p>{% endif %}
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Phone Number
+            </label>
+            <input type="tel" name="phone" value="{{ post.phone|default:'' }}"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid var(--border);font-size:.88rem;outline:none;background:white"
+                   placeholder="(414) 667-5665">
+            <p style="font-size:.72rem;color:var(--muted);margin:.3rem 0 0">Optional. We may call to schedule an interview. We will leave a voicemail if you don't answer.</p>
+          </div>
+
+          <!-- Cover Letter -->
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Cover Letter
+            </label>
+            <textarea name="cover_letter" rows="5"
+                      style="width:100%;padding:.55rem .85rem;border:1px solid var(--border);font-size:.88rem;resize:vertical;outline:none;background:white"
+                      placeholder="One or two sentences about yourself and why you'd be a good fit for ACPWB. You can write more. Most people write more.">{{ post.cover_letter|default:'' }}</textarea>
+          </div>
+
+          <!-- Resume -->
+          <div class="mb-3">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Resume <span style="color:#dc2626">*</span>
+            </label>
+            <input type="file" name="resume" accept=".pdf,.doc,.docx,.txt,.rtf"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid {% if errors.resume %}#dc2626{% else %}var(--border){% endif %};font-size:.88rem;background:white;outline:none">
+            {% if errors.resume %}
+              <p style="font-size:.75rem;color:#dc2626;margin:.3rem 0 0">{{ errors.resume }}</p>
+            {% else %}
+              <p style="font-size:.72rem;color:var(--muted);margin:.3rem 0 0">Accepted formats: PDF, DOC, DOCX, TXT, RTF. Maximum 8 MB.</p>
+            {% endif %}
+          </div>
+
+          <!-- Other Documents -->
+          <div class="mb-4">
+            <label style="display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.4rem">
+              Additional Documents
+            </label>
+            <input type="file" name="other_doc" accept=".pdf,.doc,.docx,.txt,.rtf,.xlsx,.pptx"
+                   style="width:100%;padding:.55rem .85rem;border:1px solid {% if errors.other_doc %}#dc2626{% else %}var(--border){% endif %};font-size:.88rem;background:white;outline:none">
+            {% if errors.other_doc %}
+              <p style="font-size:.75rem;color:#dc2626;margin:.3rem 0 0">{{ errors.other_doc }}</p>
+            {% else %}
+              <p style="font-size:.72rem;color:var(--muted);margin:.3rem 0 0">Optional. Portfolio samples, writing samples, reference letters. Maximum 8 MB.</p>
+            {% endif %}
+          </div>
+
+          <!-- Fine print -->
+          <div style="background:white;border:1px solid var(--border);padding:.85rem 1rem;margin-bottom:1.5rem;font-size:.78rem;color:var(--muted)">
+            By submitting this application you confirm that the information provided is accurate and complete. You acknowledge that ACPWB will retain your application materials for a period not to exceed the operational capacity of our database infrastructure. You understand that submission of an application does not constitute or imply a guarantee of employment, an interview, a response, or acknowledgment of any kind, though we will try.
+          </div>
+
+          <button type="submit"
+                  style="padding:.65rem 2.5rem;background:var(--navy);color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;border:none;cursor:pointer">
+            Submit Application
+          </button>
+        </form>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Applying For</h6>
+            <div style="font-size:.82rem">
+              <div style="font-weight:800;color:var(--navy);margin-bottom:.25rem">{{ job.title }}</div>
+              <div style="color:var(--muted);margin-bottom:.25rem">{{ job.department }}</div>
+              <div style="color:var(--muted);margin-bottom:.25rem">{{ job.location }}</div>
+              <div style="color:var(--muted);margin-bottom:.5rem">{{ job.job_type }}</div>
+              <div style="border-top:1px solid var(--border);padding-top:.5rem;color:var(--muted)">
+                <span style="font-size:.65rem;text-transform:uppercase;letter-spacing:.07em">Est. Salary</span><br>
+                <strong style="color:var(--navy)">${{ job.salary_min_display }} – ${{ job.salary_max_display }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-2">Application Window</h6>
+            <p class="small text-muted mb-0" style="font-size:.8rem">
+              This position is accepting applications through <strong style="color:var(--navy)">{{ job.deadline|date:"F j, Y" }}</strong>.
+              Materials received after this date may not be considered for the current cycle.
+            </p>
+          </div>
+
+          <div class="acpwb-card">
+            <h6 class="card-title mb-2">Questions?</h6>
+            <p class="small text-muted mb-0" style="font-size:.8rem">
+              For questions about this role or the application process, please review the full <a href="{% url 'job-detail' job.id job.slug %}" style="color:var(--gold)">position description</a> and then contact us through our <a href="{% url 'our-people' %}" style="color:var(--gold)">Our People</a> page. Someone will get back to you within a reasonable timeframe.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

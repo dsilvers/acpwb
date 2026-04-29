@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block og_image %}https://acpwb.com{% static 'img/page-covers/careers.jpg' %}{% endblock %}
+{% block twitter_image %}https://acpwb.com{% static 'img/page-covers/careers.jpg' %}{% endblock %}
+
+{% block content %}
+
+<div style="width:100%;height:320px;overflow:hidden;position:relative">
+  <img src="{% static 'img/page-covers/careers.jpg' %}" alt="Careers at ACPWB"
+       style="width:100%;height:100%;object-fit:cover;display:block"
+       onerror="this.parentElement.style.display='none'">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,.08) 0%,rgba(10,22,40,.72) 100%)"></div>
+</div>
+
+<section class="page-banner" style="padding-top:2rem">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      <a href="{% url 'careers' %}" style="color:var(--gold)">Careers</a> &rsaquo; Open Position
+    </p>
+    <h1>{{ job.title }}</h1>
+    <p>{{ job.department }} &bull; {{ job.location }}</p>
+  </div>
+</section>
+
+<section style="padding:5rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Main content -->
+      <div class="col-lg-8">
+
+        <!-- Department chip + level -->
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem">
+          <span style="background:var(--navy);color:var(--gold);font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem">{{ job.department }}</span>
+          <span style="background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.3rem .75rem">{{ job.level }}</span>
+          <span style="background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.3rem .75rem">{{ job.job_type }}</span>
+        </div>
+
+        <!-- About the Role -->
+        <div class="mb-5">
+          <h2 class="section-heading">ABOUT THE ROLE</h2>
+          <hr class="section-rule">
+          {% for para in job.about_role_paras %}
+          <p class="mb-3">{{ para }}</p>
+          {% endfor %}
+        </div>
+
+        <!-- Responsibilities -->
+        <div class="mb-5">
+          <h2 class="section-heading">KEY RESPONSIBILITIES</h2>
+          <hr class="section-rule">
+          <ul style="list-style:none;padding:0;margin:0">
+            {% for item in job.responsibilities %}
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span style="color:var(--gold);font-weight:900;flex-shrink:0">&#9670;</span>
+              <span style="font-size:.9rem;color:var(--text)">{{ item }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Requirements -->
+        <div class="mb-5">
+          <h2 class="section-heading">QUALIFICATIONS</h2>
+          <hr class="section-rule">
+
+          <h6 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.75rem;margin-bottom:.75rem">Required</h6>
+          <ul style="list-style:none;padding:0;margin:0 0 1.5rem">
+            {% for item in job.requirements %}
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span style="color:var(--gold);font-weight:900;flex-shrink:0">&#9670;</span>
+              <span style="font-size:.9rem;color:var(--text)">{{ item }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+
+          <h6 style="font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;font-size:.75rem;margin-bottom:.75rem">Preferred</h6>
+          <ul style="list-style:none;padding:0;margin:0">
+            {% for item in job.preferred %}
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span style="color:var(--gold);font-weight:900;flex-shrink:0">&#9670;</span>
+              <span style="font-size:.9rem;color:var(--text)">{{ item }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- About ACPWB -->
+        <div class="mb-5">
+          <h2 class="section-heading">WHY ACPWB</h2>
+          <hr class="section-rule">
+          <p class="mb-3">{{ job.why_acpwb }}</p>
+          <p class="mb-0" style="font-size:.88rem;color:var(--muted)">
+            ACPWB was founded in Milwaukee in 2006 with a simple mandate: help working Americans understand and advocate for the compensation they deserve. Eighteen years later, that mandate has grown into a full-service research and advisory practice serving clients from early-stage employers to Fortune 50 enterprises — and we are still based in Milwaukee, because Milwaukee is genuinely underrated.
+          </p>
+        </div>
+
+        <!-- Interview Process -->
+        <div class="mb-5">
+          <h2 class="section-heading">INTERVIEW PROCESS</h2>
+          <hr class="section-rule">
+          <p class="mb-0">{{ job.interview_process }}</p>
+        </div>
+
+        <!-- Year One Success -->
+        {% if job.first_year_milestones %}
+        <div class="mb-5">
+          <h2 class="section-heading">WHAT SUCCESS LOOKS LIKE IN YEAR ONE</h2>
+          <hr class="section-rule">
+          <ul style="list-style:none;padding:0;margin:0">
+            {% for item in job.first_year_milestones %}
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span style="color:var(--gold);font-weight:900;flex-shrink:0">&#9670;</span>
+              <span style="font-size:.9rem;color:var(--text)">{{ item }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- Apply CTA (bottom of main column) -->
+        <div style="background:var(--navy);padding:2rem;border-top:4px solid var(--gold)">
+          <h5 style="color:white;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem">Ready to Apply?</h5>
+          <p style="color:rgba(255,255,255,.65);font-size:.88rem;margin-bottom:1.25rem">
+            Applications for this position are being accepted through {{ job.deadline|date:"F j, Y" }}. Submit your materials using the form below.
+          </p>
+          <a href="{% url 'job-apply' job.id job.slug %}"
+             style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;padding:.65rem 2rem;text-decoration:none">
+            Apply for This Position &rarr;
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <!-- Job details card -->
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Position Details</h6>
+            <dl style="font-size:.83rem;margin-bottom:0">
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Department</dt>
+              <dd class="fw-700 mb-2">{{ job.department }}</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Location</dt>
+              <dd class="fw-700 mb-2">{{ job.location }}</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Employment Type</dt>
+              <dd class="fw-700 mb-2">{{ job.job_type }}</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Level</dt>
+              <dd class="fw-700 mb-2">{{ job.level }}</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Reports To</dt>
+              <dd class="fw-700 mb-2" style="font-size:.78rem">{{ job.reports_to }}</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Estimated Salary</dt>
+              <dd class="fw-700 mb-2">${{ job.salary_min_display }} – ${{ job.salary_max_display }}</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Team Size</dt>
+              <dd class="fw-700 mb-2">~{{ job.team_size }} professionals</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Posted</dt>
+              <dd class="fw-700 mb-2">{{ job.posted_date|date:"N j, Y" }}</dd>
+              <dt style="color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em">Application Deadline</dt>
+              <dd class="fw-700 mb-0" style="color:#15803d">{{ job.deadline|date:"N j, Y" }}</dd>
+            </dl>
+          </div>
+
+          <!-- Apply CTA -->
+          <a href="{% url 'job-apply' job.id job.slug %}"
+             style="display:block;background:var(--navy);color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;padding:.75rem 1.5rem;text-decoration:none;text-align:center;margin-bottom:.75rem">
+            Apply Now &rarr;
+          </a>
+          <a href="{% url 'careers' %}#openings"
+             style="display:block;text-align:center;font-size:.78rem;color:var(--muted);text-decoration:none;padding:.4rem">
+            &larr; Back to All Openings
+          </a>
+
+          <!-- Deadline notice -->
+          <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:.85rem 1rem;margin-top:1rem;font-size:.78rem;color:var(--muted)">
+            Accepting applications through <strong style="color:var(--navy)">{{ job.deadline|date:"N j, Y" }}</strong>. Applications received after this date may not be reviewed.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

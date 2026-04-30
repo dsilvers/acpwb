@@ -429,7 +429,7 @@ ABOUT_ROLE_TEMPLATES = [
     "practice development within ACPWB's {department} group. The team numbers {n}. They are, without exception, "
     "people you would want to work with. We recognize every job posting says this. We believe ours is accurate.",
 
-    "ACPWB's {industry} client base has grown significantly, and the {title} will be the subject matter expert who "
+    "ACPWB's {industry} client base has grown significantly, and the {title} will own the {mission_area} work that "
     "makes those engagements possible at the quality level our clients expect. You will sit within {department} "
     "but work across practice lines. We value people who understand when to stay in their lane and when to leave it.",
 

@@ -120,7 +120,7 @@ ABOUT_ROLE_TEMPLATES = [
     "that simply works. We have a small, excellent team. We are looking for someone who fits.",
 
     "The {title} will join ACPWB's {department} group and own a defined portion of the {system}. "
-    "You will work in {tech_stack} on {platform}, balancing feature development with the maintenance "
+    "The work spans {tech_stack} on {platform}, balancing feature development with the maintenance "
     "and reliability that a professional services firm depends on. We treat engineering as a professional discipline "
     "here — not a cost center. That distinction affects how this team operates day to day.",
 
@@ -167,9 +167,9 @@ ABOUT_ROLE_TEMPLATES = [
     "We deploy frequently, review code carefully, and invest in the quality of our technical foundation.",
 
     "ACPWB's analytical practice runs on data, and the {title} in our {department} team "
-    "is responsible for ensuring that data infrastructure is sound. You will work in {tech_stack} "
-    "on {platform}, contributing to {mission_area} for a team of {n} engineers "
-    "who treat reliability, security, and developer experience as first-class concerns.",
+    "is responsible for ensuring that data infrastructure is sound. The work spans {mission_area} "
+    "for a team of {n} engineers who treat reliability, security, and developer experience as first-class concerns. "
+    "If systems going down at inopportune moments bothers you personally, you will fit in here.",
 ]
 
 RESPONSIBILITY_TEMPLATES = [

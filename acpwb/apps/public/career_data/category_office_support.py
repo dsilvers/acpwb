@@ -101,7 +101,7 @@ ABOUT_ROLE_TEMPLATES = [
     "We are a professional services firm that practices what it publishes about treating employees well, "
     "and that starts with ensuring the people who keep the firm running are recognized and supported.",
 
-    "ACPWB is hiring a {title} to take ownership of {mission_area} as the firm continues to grow. "
+    "This {title} role is an opportunity to take ownership of {mission_area} as the firm continues to grow. "
     "The role is operational at its core — managing the systems, processes, and relationships "
     "that keep {department} functioning — but it requires real judgment and professional maturity. "
     "We are not looking for someone to follow a checklist. We are looking for someone who writes the checklist.",

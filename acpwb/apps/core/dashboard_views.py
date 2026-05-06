@@ -254,6 +254,7 @@ def honeypot_traps(request):
     content_total = sum(by_trap.get(k, 0) for k in CONTENT_KEYS)
     ghost_total = by_trap.get('ghost_link', 0)
     scanner_total = sum(by_trap.get(k, 0) for k in SCANNER_KEYS)
+    policy_total = by_trap.get('policy', 0)
 
     canary_latest = CanaryToken.objects.filter(triggered=True).order_by('-triggered_at').first()
 
@@ -262,6 +263,7 @@ def honeypot_traps(request):
         'content_total':        content_total,
         'ghost_total':          ghost_total,
         'scanner_total':        scanner_total,
+        'policy_total':         policy_total,
         'canary_trigger_count': _stat('canary.triggered_count', 0),
         'canary_latest':        canary_latest,
         'top_probe_paths':      _top_field(_stat('crawlers.probe_by_path', {}), 'path', 20),

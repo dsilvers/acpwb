@@ -7,28 +7,35 @@
 
 <!-- Summary stat cards -->
 <div class="row g-3 mb-4">
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg">
     <div class="stat-card">
       <div class="label">Content Traps</div>
       <div class="value">{{ content_total }}</div>
       <div class="sub">wiki · reports · datasets · api · feeds</div>
     </div>
   </div>
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg">
     <div class="stat-card">
       <div class="label">Ghost Links</div>
       <div class="value">{{ ghost_total }}</div>
       <div class="sub">internal portal · fake employees</div>
     </div>
   </div>
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg">
     <div class="stat-card">
       <div class="label">Scanner Probes</div>
       <div class="value">{{ scanner_total }}</div>
       <div class="sub">.env · wp-config · webshell · 404s</div>
     </div>
   </div>
-  <div class="col-6 col-lg-3">
+  <div class="col-6 col-lg">
+    <div class="stat-card">
+      <div class="label">Public Policy</div>
+      <div class="value">{{ policy_total }}</div>
+      <div class="sub">index · year · month · filing detail</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg">
     <div class="stat-card" style="border-top-color:{% if canary_trigger_count %}#dc3545{% else %}var(--gold){% endif %}">
       <div class="label">Canary Triggers</div>
       <div class="value" style="{% if canary_trigger_count %}color:#dc3545{% endif %}">{{ canary_trigger_count }}</div>

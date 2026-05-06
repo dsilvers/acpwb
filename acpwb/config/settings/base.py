@@ -102,6 +102,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ConditionalAuthMiddleware wraps Session/Auth/Message internally for /django-admin paths.
+# Django's system check only scans MIDDLEWARE strings, so silence those false positives.
+SILENCED_SYSTEM_CHECKS = ['admin.E408', 'admin.E409', 'admin.E410']
+
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'https://acpwb.com',
     'https://*.acpwb.com',

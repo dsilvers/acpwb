@@ -1,5 +1,7 @@
 import re
 
+from django.contrib.auth.models import AnonymousUser
+
 # Known bot/crawler user-agent patterns
 BOT_UA_PATTERNS = re.compile(
     r'(bot|crawler|spider|scraper|crawl|fetch|wget|curl|python-requests|'
@@ -20,6 +22,43 @@ VIEW_LOGGED_PATHS = re.compile(
 # Archive subdomain views log their own CrawlerVisits — skip middleware logging
 # for any request that SubdomainMiddleware has routed to the archive urlconf.
 ARCHIVE_SUBDOMAIN_URLCONF = 'apps.honeypot.archive_subdomain_urls'
+
+
+_DB_REQUIRED = re.compile(r'^/(django-admin|acpwb-dashboard)(/|$)')
+
+
+class _NoOpSession:
+    modified = False
+    accessed = False
+    session_key = None
+
+    def get(self, key, default=None): return default
+    def __contains__(self, key): return False
+    def __getitem__(self, key): raise KeyError(key)
+    def __setitem__(self, key, value): pass
+    def __delitem__(self, key): pass
+    def flush(self): pass
+    def cycle_key(self): pass
+    def save(self, *args, **kwargs): pass
+    def keys(self): return []
+
+
+class ConditionalAuthMiddleware:
+    """Runs Session+Auth+Message middleware only for paths that need DB access."""
+
+    def __init__(self, get_response):
+        from django.contrib.sessions.middleware import SessionMiddleware
+        from django.contrib.auth.middleware import AuthenticationMiddleware
+        from django.contrib.messages.middleware import MessageMiddleware
+        self._full_chain = SessionMiddleware(AuthenticationMiddleware(MessageMiddleware(get_response)))
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if _DB_REQUIRED.match(request.path_info):
+            return self._full_chain(request)
+        request.session = _NoOpSession()
+        request.user = AnonymousUser()
+        return self.get_response(request)
 
 
 class BotTrackingMiddleware:

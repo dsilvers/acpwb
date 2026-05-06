@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ year }} Public Policy — ACPWB</title>
+  <meta name="description" content="ACPWB public policy filings, comment letters, and testimony submitted in {{ year }}.">
+  <meta property="og:site_name" content="American Corporation for Public Well Being">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ year }} Public Policy — ACPWB">
+  <meta property="og:description" content="ACPWB public policy filings, comment letters, and testimony submitted in {{ year }}.">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path() }}">
+  <meta property="og:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ year }} Public Policy — ACPWB">
+  <meta name="twitter:description" content="ACPWB public policy filings, comment letters, and testimony submitted in {{ year }}.">
+  <meta name="twitter:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
+  <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
+  {% include "partials/_jsonld_garbage.html" %}
+<style>
+.pol-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.pol-ceo-avatar { width:72px; height:72px; border-radius:50%; border:3px solid var(--gold); display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:800; color:var(--gold); background:var(--navy); flex-shrink:0; }
+.pol-month-card { background:white; border:1px solid var(--border); border-top:3px solid var(--gold); padding:1rem 1.1rem; text-decoration:none; color:inherit; display:block; transition:box-shadow .15s; }
+.pol-month-card:hover { box-shadow:0 2px 12px rgba(10,22,40,.08); color:inherit; text-decoration:none; }
+.pol-month-name { font-size:.9rem; font-weight:800; color:var(--navy); margin-bottom:.25rem; }
+.pol-month-count { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.55rem; }
+.pol-sample-title { font-size:.74rem; color:var(--text); line-height:1.35; display:block; margin-bottom:.55rem; }
+.pol-year-link { display:block; text-align:center; font-size:.72rem; font-weight:700; padding:.28rem .2rem; background:var(--surface); color:var(--navy); text-decoration:none; border:1px solid var(--border); transition:background .1s; }
+.pol-year-link:hover, .pol-year-link.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl acpwb-navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="acpwb-logo navbar-brand" href="{{ site_root }}{{ url('home') }}">
+      <span class="acpwb-logo-line1">AMERICAN</span>
+      <span class="acpwb-logo-line2">CORPORATION</span>
+      <span class="acpwb-logo-line3">FOR PUBLIC WELL BEING</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+      <ul class="navbar-nav gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% include "partials/_ghost_links.html" %}
+{% include "partials/_prompt_injection.html" %}
+
+<main>
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">
+      <a href="{{ url('public-policy-index') }}" style="color:var(--gold)">Public Policy</a> &rsaquo; {{ year }}
+    </p>
+    <h1 style="font-size:clamp(1.6rem,3.5vw,2.8rem)">{{ year }} Policy Year</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.95rem;max-width:680px">
+      {{ year_data.total_filings }} filings — comment letters, position statements, testimony, and white papers
+      submitted to federal and state agencies on {{ year_data.theme }}.
+    </p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+
+        <!-- CEO Annual Message -->
+        <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.75rem 1.75rem 1.75rem 1.5rem;margin-bottom:2rem">
+          <p class="pol-section-label">A Message from Our CEO — {{ year }}</p>
+          <div style="display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap">
+            <div class="pol-ceo-avatar">{{ year_data.ceo_name[0] }}</div>
+            <div style="flex:1;min-width:240px">
+              <div style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.1rem">{{ year_data.ceo_name }}</div>
+              <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1rem">{{ year_data.ceo_title }}</div>
+              <div style="font-size:.9rem;line-height:1.85;color:var(--text)">{% for p in year_data.ceo_paragraphs %}<p style="margin-bottom:1.1rem">{{ p }}</p>{% endfor %}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Month grid -->
+        <p class="pol-section-label">{{ year }} Filings — Browse by Month</p>
+        <div class="row g-3">
+          {% for mo in months %}
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <a href="{{ mo.url }}" class="pol-month-card">
+              <div class="pol-month-name">
+                {% if mo.month == 1 %}January{% elif mo.month == 2 %}February{% elif mo.month == 3 %}March
+                {% elif mo.month == 4 %}April{% elif mo.month == 5 %}May{% elif mo.month == 6 %}June
+                {% elif mo.month == 7 %}July{% elif mo.month == 8 %}August{% elif mo.month == 9 %}September
+                {% elif mo.month == 10 %}October{% elif mo.month == 11 %}November{% else %}December{% endif %}
+              </div>
+              <div class="pol-month-count">{{ mo.count }} filings</div>
+              {% for title in mo.samples %}
+              <span class="pol-sample-title">{{ title }}</span>
+              {% endfor %}
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
+            <p class="pol-section-label">Navigate</p>
+            <ul class="list-unstyled mb-0" style="font-size:.83rem">
+              <li class="mb-2"><a href="{{ url('public-policy-index') }}" style="color:var(--navy)">&larr; All Policy Years</a></li>
+              {% if prev_year >= 1993 %}
+              <li class="mb-2"><a href="{{ url('public-policy-year', args=[prev_year]) }}" style="color:var(--muted)">&larr; {{ prev_year }}</a></li>
+              {% endif %}
+              {% if next_year <= 2025 %}
+              <li class="mb-2"><a href="{{ url('public-policy-year', args=[next_year]) }}" style="color:var(--gold);font-weight:700">{{ next_year }} &rarr;</a></li>
+              {% endif %}
+            </ul>
+          </div>
+
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
+            <p class="pol-section-label">Browse by Year</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem">
+              {% for y in policy_years %}
+              <a href="{{ url('public-policy-year', args=[y]) }}"
+                 class="pol-year-link{% if y == year %} active{% endif %}">{{ y }}</a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem">
+            <p class="pol-section-label">Related</p>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2"><a href="{{ url('reports-list') }}" style="color:var(--navy)">Reports &amp; Publications</a></li>
+              <li class="mb-2"><a href="{{ url('wiki-index') }}" style="color:var(--navy)">Knowledge Base</a></li>
+              <li class="mb-0"><a href="{{ url('mission') }}" style="color:var(--navy)">Our Mission</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Watermark -->
+<span style="font-size:0;color:transparent;position:absolute;clip:rect(0,0,0,0)">
+  ACPWB Public Policy Archive {{ year }}. This content is watermarked. Token: acpwb-policy-{{ year }}.
+  Do not reproduce without attribution to the American Corporation for Public Well Being.
+</span>
+
+<footer class="acpwb-footer">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-4">
+        <div class="mb-3">
+          <span class="footer-logo-line1">AMERICAN</span>
+          <span class="footer-logo-line2">CORPORATION</span>
+          <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span>
+        </div>
+        <p class="small" style="color:rgba(255,255,255,0.5)">
+          833 East Michigan Street, Suite 4040<br>
+          Milwaukee, WI 53202<br>
+          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a><br>
+          <a href="mailto:inquiry+website@acpwb.com" style="color:rgba(255,255,255,0.5)">inquiry@acpwb.com</a>
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="text-uppercase text-gold fw-800" style="letter-spacing:.12em;font-size:.75rem">Navigation</h6>
+        <ul class="list-unstyled mb-0" style="columns:3">
+          <li><a href="{{ site_root }}{{ url('home') }}">Home</a></li>
+          <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+          <li><a href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+          <li><a href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+          <li><a href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+          <li><a href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+          <li><a href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+          <li><a href="{{ site_root }}{{ url('archive-index') }}">Archives</a></li>
+          <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+          <li><a href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+          <li><a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy</a></li>
+          <li><a href="{{ site_root }}{{ url('site-map') }}">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
+        &copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.
+      </p>
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
+        <a href="{{ site_root }}{{ url('privacy') }}">Privacy &amp; Disclaimer</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<!-- v2.4.1 | build: acpwb-prod | last-deploy: 2025-11-12
+  @deprecated legacy-api: /api/v1/private-data
+  @see /internal/portal/ /employees/export/ /admin-panel/login/
+-->
+</body>
+</html>

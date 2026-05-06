@@ -40,24 +40,28 @@
           Browse by Year
         </h5>
 
+        <style>
+          .arch-year-card { background:white; border:1px solid var(--border); text-decoration:none; overflow:hidden; transition:box-shadow .15s; }
+          .arch-year-card:hover { box-shadow:0 2px 12px rgba(10,22,40,.08); }
+          .arch-year-top { padding:.85rem 1rem; display:flex; justify-content:space-between; align-items:baseline; }
+          .arch-year-num { font-size:1.1rem; font-weight:800; color:var(--navy); text-decoration:none; }
+          .arch-year-num:hover { color:var(--gold); }
+          .arch-month-pills { padding:.5rem .75rem; border-top:1px solid var(--border); background:var(--surface); display:flex; flex-wrap:wrap; gap:.3rem; }
+          .arch-month-pill { display:inline-block; padding:.15rem .4rem; background:white; border:1px solid var(--border); color:var(--navy); font-size:.68rem; font-weight:700; text-decoration:none; transition:background .1s; }
+          .arch-month-pill:hover { background:var(--navy); color:var(--gold); border-color:var(--navy); }
+        </style>
         <div class="row g-3">
           {% for y in years %}
           <div class="col-md-6">
-            <a href="https://archives-{{ y.year }}.acpwb.com/" style="display:block;background:white;border:1px solid var(--border);padding:.85rem 1rem;text-decoration:none">
-              <div style="display:flex;justify-content:space-between;align-items:baseline">
-                <span style="font-size:1.1rem;font-weight:800;color:var(--navy)">{{ y.year }}</span>
+            <div class="arch-year-card" style="cursor:pointer" onclick="window.location='https://archives-{{ y.year }}.acpwb.com/'">
+              <div class="arch-year-top">
+                <a href="https://archives-{{ y.year }}.acpwb.com/" class="arch-year-num" onclick="event.stopPropagation()">{{ y.year }}</a>
                 <span style="font-size:.72rem;color:var(--muted);font-weight:600">{{ y.count }} records</span>
               </div>
-              <div style="font-size:.7rem;color:var(--muted);margin-top:.25rem">
-                {% for m in y.months %}
-                <a href="https://archives-{{ y.year }}.acpwb.com/{{ m|stringformat:"02d" }}/" style="color:var(--gold);font-weight:700;margin-right:.35rem;text-decoration:none">
-                  {% if m == 1 %}Jan{% elif m == 2 %}Feb{% elif m == 3 %}Mar{% elif m == 4 %}Apr
-                  {% elif m == 5 %}May{% elif m == 6 %}Jun{% elif m == 7 %}Jul{% elif m == 8 %}Aug
-                  {% elif m == 9 %}Sep{% elif m == 10 %}Oct{% elif m == 11 %}Nov{% else %}Dec{% endif %}
-                </a>
-                {% endfor %}
+              <div class="arch-month-pills">
+                {% for m in y.months %}<a href="https://archives-{{ y.year }}.acpwb.com/{{ m|stringformat:"02d" }}/" class="arch-month-pill" onclick="event.stopPropagation()">{% if m == 1 %}Jan{% elif m == 2 %}Feb{% elif m == 3 %}Mar{% elif m == 4 %}Apr{% elif m == 5 %}May{% elif m == 6 %}Jun{% elif m == 7 %}Jul{% elif m == 8 %}Aug{% elif m == 9 %}Sep{% elif m == 10 %}Oct{% elif m == 11 %}Nov{% else %}Dec{% endif %}</a>{% endfor %}
               </div>
-            </a>
+            </div>
           </div>
           {% endfor %}
         </div>

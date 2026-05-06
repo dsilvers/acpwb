@@ -631,6 +631,19 @@
           </div>
           {% endif %}
 
+          {% if related_policy %}
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Related Public Policy</h6>
+            {% for stub in related_policy %}
+            <a href="{{ stub.url }}" style="display:block;background:#f4f6f9;border:1px solid var(--border);border-left:3px solid var(--gold);padding:.55rem .8rem;margin-bottom:.5rem;text-decoration:none">
+              <div style="font-size:.6rem;color:var(--muted);margin-bottom:.15rem">{{ stub.filing_date }} &bull; {{ stub.document_type }}</div>
+              <div style="font-size:.75rem;font-weight:600;color:var(--navy);line-height:1.35">{{ stub.title }}</div>
+              <div style="font-size:.65rem;color:var(--muted);margin-top:.15rem">{{ stub.agency_acronym }}</div>
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           <div id="acpwb-archive-{{ record_id }}-year-browser" class="acpwb-card mb-4">
             <h6 class="card-title mb-3">Browse by Year</h6>
             <div style="display:flex;flex-wrap:wrap;gap:.35rem">

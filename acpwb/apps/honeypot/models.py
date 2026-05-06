@@ -13,6 +13,7 @@ class CrawlerVisit(models.Model):
         ('report_list', 'Report Listing'),
         ('report_download', 'Report Download'),
         ('dataset', 'Training Dataset'),
+        ('policy', 'Public Policy Filing'),
         ('scanner_probe', 'Scanner Probe (404)'),
         ('env_probe', 'Config File Probe'),
         ('wp_probe', 'WordPress Probe'),

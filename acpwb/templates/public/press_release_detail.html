@@ -39,7 +39,7 @@
 
         <!-- Body paragraphs -->
         {% for paragraph in pr.body %}
-        <p style="font-size:1rem;line-height:1.8;color:#222;margin-bottom:1.4rem">{{ paragraph }}</p>
+        <p style="font-size:1rem;line-height:1.8;color:#222;margin-bottom:1.4rem">{{ paragraph|urlize }}</p>
         {% endfor %}
 
         <!-- Pull quote -->

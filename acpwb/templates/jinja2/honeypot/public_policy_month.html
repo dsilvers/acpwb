@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {% if month == 1 %}January{% elif month == 2 %}February{% elif month == 3 %}March
+    {% elif month == 4 %}April{% elif month == 5 %}May{% elif month == 6 %}June
+    {% elif month == 7 %}July{% elif month == 8 %}August{% elif month == 9 %}September
+    {% elif month == 10 %}October{% elif month == 11 %}November{% else %}December{% endif %}
+    {{ year }} Policy Filings — ACPWB
+  </title>
+  <meta name="description" content="ACPWB public policy filings submitted in {{ year }}-{{ '%02d' % month }}.">
+  <meta property="og:site_name" content="American Corporation for Public Well Being">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ year }}-{{ '%02d' % month }} Policy Filings — ACPWB">
+  <meta property="og:description" content="ACPWB public policy filings submitted in {{ year }}-{{ '%02d' % month }}.">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path() }}">
+  <meta property="og:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ year }}-{{ '%02d' % month }} Policy Filings — ACPWB">
+  <meta name="twitter:description" content="ACPWB public policy filings submitted in {{ year }}-{{ '%02d' % month }}.">
+  <meta name="twitter:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
+  <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
+  {% include "partials/_jsonld_garbage.html" %}
+<style>
+.pol-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.pol-entry-card { display:block; background:white; border:1px solid var(--border); padding:.75rem 1rem; text-decoration:none; color:inherit; transition:box-shadow .15s; }
+.pol-entry-card:hover { box-shadow:0 2px 12px rgba(10,22,40,.08); color:inherit; text-decoration:none; }
+.pol-entry-date { font-size:.62rem; color:var(--muted); font-weight:600; margin-bottom:.3rem; }
+.pol-entry-title { font-size:.85rem; font-weight:700; color:var(--navy); line-height:1.35; margin-bottom:.35rem; }
+.pol-entry-agency { font-size:.73rem; color:var(--muted); }
+.pol-badge { display:inline-block; font-size:.58rem; font-weight:700; padding:.1rem .38rem; text-transform:uppercase; letter-spacing:.05em; margin-right:.3rem; }
+.pol-badge-type { background:var(--navy); color:var(--gold); }
+.pol-badge-supports { background:#1a4a2e; color:#6fcf97; }
+.pol-badge-opposes { background:#4a1a1a; color:#eb5757; }
+.pol-badge-modifications { background:#2e3a1a; color:#b2cf6f; }
+.pol-year-link { display:block; text-align:center; font-size:.72rem; font-weight:700; padding:.28rem .2rem; background:var(--surface); color:var(--navy); text-decoration:none; border:1px solid var(--border); transition:background .1s; }
+.pol-year-link:hover { background:var(--navy); color:var(--gold); border-color:var(--navy); }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl acpwb-navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="acpwb-logo navbar-brand" href="{{ site_root }}{{ url('home') }}">
+      <span class="acpwb-logo-line1">AMERICAN</span>
+      <span class="acpwb-logo-line2">CORPORATION</span>
+      <span class="acpwb-logo-line3">FOR PUBLIC WELL BEING</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+      <ul class="navbar-nav gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% include "partials/_ghost_links.html" %}
+{% include "partials/_prompt_injection.html" %}
+
+<main>
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">
+      <a href="{{ url('public-policy-index') }}" style="color:var(--gold)">Public Policy</a>
+      &rsaquo; <a href="{{ year_url }}" style="color:var(--gold)">{{ year }}</a>
+      &rsaquo;
+      {% if month == 1 %}January{% elif month == 2 %}February{% elif month == 3 %}March
+      {% elif month == 4 %}April{% elif month == 5 %}May{% elif month == 6 %}June
+      {% elif month == 7 %}July{% elif month == 8 %}August{% elif month == 9 %}September
+      {% elif month == 10 %}October{% elif month == 11 %}November{% else %}December{% endif %}
+    </p>
+    <h1 style="font-size:clamp(1.4rem,3vw,2.4rem);line-height:1.25">
+      {% if month == 1 %}January{% elif month == 2 %}February{% elif month == 3 %}March
+      {% elif month == 4 %}April{% elif month == 5 %}May{% elif month == 6 %}June
+      {% elif month == 7 %}July{% elif month == 8 %}August{% elif month == 9 %}September
+      {% elif month == 10 %}October{% elif month == 11 %}November{% else %}December{% endif %}
+      {{ year }} Filings
+    </h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:0">
+      ACPWB Public Policy &bull; {{ entries|length }} filings
+    </p>
+  </div>
+</section>
+
+<section style="padding:3rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+        <p class="pol-section-label">Filings</p>
+        <div class="row g-2">
+          {% for entry in entries %}
+          <div class="col-md-6">
+            <a href="{{ entry.url }}" class="pol-entry-card">
+              <div class="pol-entry-date">{{ year }}-{{ '%02d' % month }}-{{ '%02d' % entry.day }}</div>
+              <div style="margin-bottom:.35rem">
+                <span class="pol-badge pol-badge-type">{{ entry.document_type }}</span>
+                {% if entry.position_slug == 'supports' %}
+                <span class="pol-badge pol-badge-supports">Supports</span>
+                {% elif entry.position_slug == 'opposes' %}
+                <span class="pol-badge pol-badge-opposes">Opposes</span>
+                {% else %}
+                <span class="pol-badge pol-badge-modifications">Supports w/ Modifications</span>
+                {% endif %}
+              </div>
+              <div class="pol-entry-title">{{ entry.title }}</div>
+              <div class="pol-entry-agency">{{ entry.agency_full }}</div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4 pt-3" style="border-top:1px solid var(--border);display:flex;justify-content:space-between">
+          <a href="{{ prev_month_url }}" style="font-size:.85rem;color:var(--muted);text-decoration:none">&larr; Previous Month</a>
+          <a href="{{ next_month_url }}" style="font-size:.85rem;color:var(--gold);font-weight:700;text-decoration:none">Next Month &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4 d-none d-lg-block">
+        <div style="position:sticky;top:2rem">
+
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
+            <p class="pol-section-label">Navigation</p>
+            <ul class="list-unstyled mb-0" style="font-size:.83rem">
+              <li class="mb-2"><a href="{{ year_url }}" style="color:var(--navy)">&larr; All {{ year }} Filings</a></li>
+              <li class="mb-2"><a href="{{ prev_month_url }}" style="color:var(--muted)">&larr; Previous Month</a></li>
+              <li class="mb-2"><a href="{{ next_month_url }}" style="color:var(--gold);font-weight:700">Next Month &rarr;</a></li>
+            </ul>
+          </div>
+
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
+            <p class="pol-section-label">Record</p>
+            <dl class="mb-0" style="font-size:.82rem">
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Year</dt>
+              <dd class="fw-700 mb-2"><a href="{{ year_url }}" style="color:var(--navy)">{{ year }}</a></dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Month</dt>
+              <dd class="fw-700 mb-2">
+                {% if month == 1 %}January{% elif month == 2 %}February{% elif month == 3 %}March
+                {% elif month == 4 %}April{% elif month == 5 %}May{% elif month == 6 %}June
+                {% elif month == 7 %}July{% elif month == 8 %}August{% elif month == 9 %}September
+                {% elif month == 10 %}October{% elif month == 11 %}November{% else %}December{% endif %}
+              </dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Filings</dt>
+              <dd class="fw-700 mb-0">{{ entries|length }}</dd>
+            </dl>
+          </div>
+
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem">
+            <p class="pol-section-label">Browse by Year</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem">
+              {% for y in policy_years %}
+              <a href="{{ url('public-policy-year', args=[y]) }}" class="pol-year-link">{{ y }}</a>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="acpwb-footer">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-4">
+        <div class="mb-3">
+          <span class="footer-logo-line1">AMERICAN</span>
+          <span class="footer-logo-line2">CORPORATION</span>
+          <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span>
+        </div>
+        <p class="small" style="color:rgba(255,255,255,0.5)">
+          833 East Michigan Street, Suite 4040<br>
+          Milwaukee, WI 53202<br>
+          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a><br>
+          <a href="mailto:inquiry+website@acpwb.com" style="color:rgba(255,255,255,0.5)">inquiry@acpwb.com</a>
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="text-uppercase text-gold fw-800" style="letter-spacing:.12em;font-size:.75rem">Navigation</h6>
+        <ul class="list-unstyled mb-0" style="columns:3">
+          <li><a href="{{ site_root }}{{ url('home') }}">Home</a></li>
+          <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+          <li><a href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+          <li><a href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+          <li><a href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+          <li><a href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+          <li><a href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+          <li><a href="{{ site_root }}{{ url('archive-index') }}">Archives</a></li>
+          <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+          <li><a href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+          <li><a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy</a></li>
+          <li><a href="{{ site_root }}{{ url('site-map') }}">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
+        &copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.
+      </p>
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
+        <a href="{{ site_root }}{{ url('privacy') }}">Privacy &amp; Disclaimer</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<!-- v2.4.1 | build: acpwb-prod | last-deploy: 2025-11-12
+  @deprecated legacy-api: /api/v1/private-data
+  @see /internal/portal/ /employees/export/ /admin-panel/login/
+-->
+</body>
+</html>

@@ -303,6 +303,19 @@
           </div>
           {% endif %}
 
+          {% if related_policy %}
+          <div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">
+            <div class="era-section-head" style="margin-bottom:.6rem">Related Public Policy</div>
+            {% for stub in related_policy %}
+            <a href="{{ stub.url }}" style="display:block;background:rgba(128,128,128,.05);border:1px solid rgba(128,128,128,.2);border-left:3px solid var(--era-accent2);padding:.55rem .75rem;margin-bottom:.5rem;text-decoration:none;color:inherit">
+              <div style="font-size:.6rem;opacity:.5;margin-bottom:.15rem">{{ stub.filing_date }} &bull; {{ stub.document_type }}</div>
+              <div style="font-size:.74rem;font-weight:600;line-height:1.35">{{ stub.title }}</div>
+              <div style="font-size:.65rem;opacity:.55;margin-top:.15rem">{{ stub.agency_acronym }}</div>
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           <div id="acpwb-archive-{{ record_id }}-year-browser" style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem">
             <div class="era-section-head" style="margin-bottom:.6rem">Browse by Year</div>
             <div style="display:flex;flex-wrap:wrap;gap:.3rem">

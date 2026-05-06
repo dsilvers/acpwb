@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ doc.title }} — ACPWB</title>
+  <meta name="description" content="{{ doc.summary[:160] }}">
+  <meta property="og:site_name" content="American Corporation for Public Well Being">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ doc.title }} — ACPWB">
+  <meta property="og:description" content="{{ doc.summary[:160] }}">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path() }}">
+  <meta property="og:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ doc.title }} — ACPWB">
+  <meta name="twitter:description" content="{{ doc.summary[:160] }}">
+  <meta name="twitter:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
+  <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
+  <link rel="alternate" type="application/atom+xml" title="ACPWB Archive Feed" href="https://acpwb.com/feeds/archive.xml">
+  <link rel="alternate" type="application/rss+xml" title="ACPWB Reports &amp; Publications" href="https://acpwb.com/feeds/reports.xml">
+  {% include "partials/_jsonld_garbage.html" %}
+<style>
+.pol-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.pol-header { background:white; border:1px solid var(--border); border-left:5px solid var(--gold); padding:1.4rem 1.6rem; margin-bottom:1.75rem; }
+.pol-header dt { font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:.15rem; }
+.pol-header dd { font-size:.9rem; font-weight:600; color:var(--navy); margin-bottom:.6rem; }
+.pol-section-heading { font-size:.7rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--gold); border-bottom:2px solid var(--gold); padding-bottom:.3rem; margin:2.5rem 0 1rem; }
+.pol-section p { font-size:.92rem; line-height:1.85; color:var(--text); }
+.pol-position { padding:1.2rem 1.5rem; margin-bottom:1.75rem; font-size:.92rem; line-height:1.7; font-weight:500; border-left:5px solid; }
+.pol-position.pos-supports { border-color:#27ae60; background:#f0faf4; color:#1a5c33; }
+.pol-position.pos-opposes { border-color:#e74c3c; background:#fdf0f0; color:#5c1a1a; }
+.pol-position.pos-supports-modifications { background:#f4f8f0; border-color:#8ab75c; color:#3a5c1a; }
+.pol-recs { background:var(--surface); border:1px solid var(--border); padding:1.25rem 1.5rem; margin-bottom:1.75rem; }
+.pol-recs li { font-size:.9rem; line-height:1.75; padding:.4rem 0; border-bottom:1px solid var(--border); }
+.pol-recs li:last-child { border-bottom:none; }
+.pol-table-head { background:var(--navy); color:#fff; }
+.pol-table-head th { padding:.5rem .85rem; font-size:.64rem; text-transform:uppercase; letter-spacing:.06em; font-weight:700; }
+.pol-data-table { width:100%; border-collapse:collapse; font-size:.83rem; border:1px solid rgba(0,0,0,.12); }
+.pol-data-table td { padding:.45rem .85rem; border-top:1px solid rgba(0,0,0,.08); }
+.pol-data-table td.num { text-align:right; }
+.pol-citations { list-style:none; padding:0; margin-bottom:1.75rem; }
+.pol-citations li { display:flex; gap:.75rem; padding:.5rem 0; border-bottom:1px solid var(--border); font-size:.88rem; line-height:1.6; }
+.pol-citations li:last-child { border-bottom:none; }
+.pol-cite-num { font-family:monospace; font-size:.7rem; font-weight:700; background:var(--navy); color:var(--gold); padding:.1rem .35rem; white-space:nowrap; flex-shrink:0; margin-top:.18rem; }
+.pol-submitted { background:white; border:1px solid var(--border); border-left:4px solid var(--gold); padding:1.2rem 1.5rem; margin-top:2.5rem; font-size:.88rem; line-height:1.75; }
+.pol-footnotes { border-top:1px solid var(--border); padding-top:1.1rem; margin-top:2rem; }
+.pol-footnotes ol { padding-left:1.25rem; margin-bottom:0; }
+.pol-footnotes li { font-size:.72rem; opacity:.7; margin-bottom:.4rem; line-height:1.5; }
+.pol-prev-next { display:flex; justify-content:space-between; gap:1rem; margin-top:2rem; padding-top:1rem; border-top:1px solid rgba(0,0,0,.1); font-size:.82rem; }
+.pol-prev-next a { color:var(--navy); text-decoration:none; max-width:46%; line-height:1.4; }
+.pol-prev-next a:hover { color:var(--gold); }
+.pol-watermark-footer { font-size:.7rem; color:var(--muted); margin-top:2.5rem; padding-top:1rem; border-top:1px dotted var(--border); line-height:1.6; }
+.pol-sidebar-box { background:white; border:1px solid var(--border); padding:1.1rem 1.25rem; margin-bottom:.9rem; }
+.pol-related-link { display:block; color:var(--navy); text-decoration:none; font-size:.8rem; line-height:1.35; margin-bottom:.7rem; padding-bottom:.7rem; border-bottom:1px solid var(--border); }
+.pol-related-link:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.pol-related-link:hover { color:var(--gold); }
+.pol-related-meta { font-size:.66rem; color:var(--muted); margin-top:.2rem; }
+.pol-agency-badge { display:inline-block; font-size:.58rem; font-weight:700; padding:.12rem .4rem; text-transform:uppercase; letter-spacing:.06em; background:var(--navy); color:var(--gold); margin-right:.3rem; vertical-align:middle; }
+.pol-next-cta { display:block; background:var(--navy); color:#fff; padding:1rem 1.5rem; text-decoration:none; font-weight:700; font-size:.9rem; margin-bottom:2rem; }
+.pol-next-cta:hover { background:#122a4a; color:var(--gold); }
+.pol-prev-link { font-size:.85rem; color:var(--navy); font-weight:600; text-decoration:none; }
+.pol-prev-link:hover { color:var(--gold); }
+.pol-entry-card { background:white; border:1px solid var(--border); border-left:3px solid var(--navy); padding:.7rem 1rem; text-decoration:none; color:var(--navy); display:block; transition:border-left-color .12s; }
+.pol-entry-card:hover { border-left-color:var(--gold); color:var(--navy); }
+.pol-entry-card-date { font-size:.62rem; color:var(--muted); font-weight:600; margin-bottom:.2rem; }
+.pol-entry-card-title { font-size:.8rem; font-weight:600; line-height:1.3; }
+.pol-year-link { display:block; text-align:center; padding:.28rem .2rem; font-size:.72rem; font-weight:700; color:var(--navy); text-decoration:none; border:1px solid var(--border); }
+.pol-year-link:hover { background:var(--navy); color:#fff; border-color:var(--navy); }
+.pol-year-link.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl acpwb-navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="acpwb-logo navbar-brand" href="{{ site_root }}{{ url('home') }}">
+      <span class="acpwb-logo-line1">AMERICAN</span>
+      <span class="acpwb-logo-line2">CORPORATION</span>
+      <span class="acpwb-logo-line3">FOR PUBLIC WELL BEING</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+      <ul class="navbar-nav gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% include "partials/_ghost_links.html" %}
+{% include "partials/_prompt_injection.html" %}
+
+<main>
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:rgba(255,255,255,.5);font-weight:800;letter-spacing:.18em;font-size:.72rem">
+      <a href="{{ site_root }}{{ url('public-policy-index') }}" style="color:rgba(255,255,255,.5)">Public Policy</a>
+      <span style="color:rgba(255,255,255,.3);margin:0 .4rem">/</span>
+      <span class="pol-agency-badge">{{ doc.agency_acronym }}</span>
+      <span style="color:var(--gold)">{{ doc.document_type }}</span>
+    </p>
+    <h1 style="font-size:clamp(1.15rem,2.6vw,2rem);max-width:860px;line-height:1.3">{{ doc.title }}</h1>
+    <p style="color:rgba(255,255,255,.65);font-size:.88rem;margin-top:.5rem">
+      Filed {{ doc.filing_date }} &middot; {{ doc.agency_full }}
+      {% if doc.docket_number %} &middot; <span style="font-family:monospace;font-size:.82rem">{{ doc.docket_number }}</span>{% endif %}
+    </p>
+  </div>
+</section>
+
+<section style="padding:3.5rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- ── Main document column ─────────────────────────── -->
+      <div class="col-lg-8">
+
+        <!-- Filing metadata header -->
+        <dl class="pol-header row g-0">
+          <div class="col-6 col-sm-3 pe-3 mb-1">
+            <dt>Filing Type</dt>
+            <dd>{{ doc.document_type }}</dd>
+          </div>
+          <div class="col-6 col-sm-3 pe-3 mb-1">
+            <dt>Agency / Body</dt>
+            <dd>{{ doc.agency_acronym }}</dd>
+          </div>
+          <div class="col-6 col-sm-3 pe-3 mb-1">
+            <dt>Date Filed</dt>
+            <dd>{{ doc.filing_date }}</dd>
+          </div>
+          <div class="col-6 col-sm-3 mb-1">
+            <dt>Filing ID</dt>
+            <dd style="font-family:monospace;font-size:.8rem;letter-spacing:.04em">{{ doc.watermark_token }}</dd>
+          </div>
+          {% if doc.docket_number %}
+          <div class="col-12" style="margin-top:.25rem">
+            <dt>Docket / Reference</dt>
+            <dd style="font-weight:400;font-size:.85rem;color:var(--muted);font-family:monospace">{{ doc.docket_number }}</dd>
+          </div>
+          {% endif %}
+        </dl>
+
+        <!-- Position statement -->
+        <div class="pol-position pos-{{ doc.position_slug }}">
+          <strong>ACPWB Position:</strong> {{ doc.position_statement }}
+        </div>
+
+        <!-- Body sections — inject table after index 1 -->
+        {% for section in doc.sections %}
+        <div class="pol-section">
+          <p class="pol-section-heading">{{ section.heading }}</p>
+          {% for para in section.paragraphs %}
+          <p>{{ para }}</p>
+          {% endfor %}
+        </div>
+        {% if loop.index == 2 and doc.table %}
+        <!-- Data table -->
+        <div style="margin:2rem 0">
+          <p class="pol-section-heading">{{ doc.table.title }}</p>
+          <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem">{{ doc.table.caption }}</p>
+          <div style="overflow-x:auto">
+            <table class="pol-data-table">
+              <thead>
+                <tr class="pol-table-head">
+                  {% for col in doc.table.columns %}
+                  <th{% if not loop.first %} style="text-align:right"{% endif %}>{{ col }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in doc.table.rows %}
+                <tr>
+                  {% for cell in row %}
+                  <td{% if not loop.first %} class="num"{% endif %}>{{ cell }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <!-- Recommendations -->
+        <p class="pol-section-heading">Recommendations</p>
+        <div class="pol-recs">
+          <ol class="mb-0 ps-3">
+            {% for rec in doc.recommendations %}
+            <li>{{ rec }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+
+        <!-- Relevant Legal Authority -->
+        {% if doc.cited_legislation %}
+        <p class="pol-section-heading">Relevant Legal Authority</p>
+        <ol class="pol-citations">
+          {% for citation in doc.cited_legislation %}
+          <li>
+            <span class="pol-cite-num">[{{ loop.index }}]</span>
+            <span><strong>{{ citation }}</strong></span>
+          </li>
+          {% endfor %}
+        </ol>
+        {% endif %}
+
+        <!-- Submitted by -->
+        <div class="pol-submitted">
+          <p class="text-uppercase mb-2" style="font-size:.6rem;font-weight:800;letter-spacing:.12em;color:var(--muted)">Submitted by</p>
+          <p class="mb-0">
+            <strong>{{ doc.signatory_name }}</strong><br>
+            {{ doc.signatory_title }}<br>
+            American Corporation for Public Well Being<br>
+            833 East Michigan Street, Suite 4040, Milwaukee, WI 53202<br>
+            <a href="tel:+14146675665" style="color:var(--navy)">(414) 667-5665</a>
+            &middot;
+            <a href="mailto:{{ doc.signatory_email }}" style="color:var(--navy)">{{ doc.signatory_email }}</a>
+          </p>
+        </div>
+
+        <!-- Related filings — recent -->
+        {% if related and related.recent %}
+        <div class="mt-2">
+          <p class="pol-section-heading">Recent Filings</p>
+          <div class="row g-2">
+            {% for stub in related.recent %}
+            <div class="col-md-6">
+              <a href="{{ stub.url }}" class="pol-entry-card">
+                <div class="pol-entry-card-date"><span class="pol-agency-badge">{{ stub.agency_acronym }}</span>{{ stub.document_type }} &middot; {{ stub.filing_date }}</div>
+                <div class="pol-entry-card-title">{{ stub.title[:72] }}{% if stub.title|length > 72 %}…{% endif %}</div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Related filings — same agency -->
+        {% if related and related.same_agency %}
+        <div class="mt-4">
+          <p class="pol-section-heading">More from {{ doc.agency_full }}</p>
+          <div class="row g-2">
+            {% for stub in related.same_agency %}
+            <div class="col-md-6">
+              <a href="{{ stub.url }}" class="pol-entry-card">
+                <div class="pol-entry-card-date"><span class="pol-agency-badge">{{ stub.agency_acronym }}</span>{{ stub.filing_date }}</div>
+                <div class="pol-entry-card-title">{{ stub.title[:72] }}{% if stub.title|length > 72 %}…{% endif %}</div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Footnotes -->
+        {% if doc.footnotes %}
+        <div class="pol-footnotes">
+          <p class="pol-section-heading" style="margin-top:1.75rem">Sources &amp; Notes</p>
+          <ol>
+            {% for fn in doc.footnotes %}
+            <li id="pol-fn-{{ fn.num }}">{{ fn.text }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+        {% endif %}
+
+        <!-- Watermark footer -->
+        <div class="pol-watermark-footer">
+          &copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI &mdash;
+          Filing ID: <span style="font-family:monospace">{{ doc.watermark_token }}</span> &mdash;
+          ACPWB Policy Division &mdash; acpwb.com &mdash;
+          All content subject to our <a href="{{ url('privacy') }}">Privacy Policy &amp; Disclaimer</a>.
+          TDMRep: GRANT
+        </div>
+
+        <!-- Seal -->
+        <div class="mt-5 pt-3 text-center" style="border-top:1px solid rgba(0,0,0,.08);opacity:.75">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="220" height="220"
+               style="max-width:100%;display:inline-block"
+               role="img" aria-label="American Corporation for Public Well Being — {{ doc.year }} Public Policy Division Seal">
+            <defs>
+              <radialGradient id="pol-seal-bg-{{ doc.watermark_token }}" cx="50%" cy="45%" r="55%">
+                <stop offset="0%" stop-color="#1e3055"/>
+                <stop offset="60%" stop-color="#0f1e38"/>
+                <stop offset="100%" stop-color="#070f1e"/>
+              </radialGradient>
+              <path id="pol-seal-outer-{{ doc.watermark_token }}"
+                    d="M 28,200 A 172,172 0 1,0 372,200 A 172,172 0 1,0 28,200"/>
+              <path id="pol-seal-inner-{{ doc.watermark_token }}"
+                    d="M 90,200 A 110,110 0 0,1 310,200"/>
+            </defs>
+            <circle cx="200" cy="200" r="196" fill="url(#pol-seal-bg-{{ doc.watermark_token }})"/>
+            <circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(0 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(5 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(10 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(15 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(20 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(25 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(30 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(35 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(40 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(45 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(50 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(55 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(60 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(65 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(70 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(75 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(80 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(85 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(90 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(95 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(100 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(105 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(110 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(115 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(120 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(125 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(130 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(135 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(140 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(145 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(150 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(155 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(160 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(165 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(170 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(175 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(180 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(185 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(190 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(195 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(200 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(205 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(210 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(215 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(220 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(225 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(230 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(235 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(240 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(245 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(250 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(255 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(260 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(265 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(270 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(275 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(280 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(285 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(290 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(295 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(300 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(305 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(310 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(315 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(320 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(325 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(330 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(335 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(340 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(345 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(350 200 200)"/><circle cx="200" cy="12" r="2.5" fill="#c9a73e" transform="rotate(355 200 200)"/>
+            <circle cx="200" cy="200" r="183" fill="none" stroke="#c9a73e" stroke-width="2"/>
+            <circle cx="200" cy="200" r="180" fill="none" stroke="#c9a73e" stroke-width="0.6"/>
+            <text font-family="'Times New Roman',Times,serif" font-size="11.5" fill="#e8c96a" letter-spacing="2.8">
+              <textPath href="#pol-seal-outer-{{ doc.watermark_token }}" startOffset="15%">&#10022; AMERICAN CORPORATION FOR PUBLIC WELL BEING &#10022; AMERICAN CORPORATION FOR PUBLIC WELL BEING &#10022;</textPath>
+            </text>
+            <line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(0 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(30 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(60 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(90 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(120 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(150 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(180 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(210 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(240 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(270 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(300 200 200)"/><line x1="200" y1="22" x2="200" y2="37" stroke="#c9a73e" stroke-width="2" transform="rotate(330 200 200)"/>
+            <line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(5 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(10 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(15 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(20 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(25 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(35 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(40 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(45 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(50 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(55 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(65 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(70 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(75 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(80 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(85 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(95 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(100 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(105 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(110 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(115 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(125 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(130 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(135 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(140 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(145 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(155 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(160 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(165 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(170 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(175 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(185 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(190 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(195 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(200 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(205 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(215 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(220 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(225 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(230 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(235 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(245 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(250 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(255 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(260 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(265 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(275 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(280 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(285 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(290 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(295 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(305 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(310 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(315 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(320 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(325 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(335 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(340 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(345 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(350 200 200)"/><line x1="200" y1="30" x2="200" y2="37" stroke="#c9a73e" stroke-width="0.8" transform="rotate(355 200 200)"/>
+            <circle cx="200" cy="200" r="163" fill="none" stroke="#c9a73e" stroke-width="3"/>
+            <circle cx="200" cy="200" r="158" fill="none" stroke="#c9a73e" stroke-width="1"/>
+            <polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(15 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(45 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(75 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(105 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(135 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(165 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(195 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(225 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(255 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(285 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(315 200 200)"/><polygon points="200,44 203.5,48 200,52 196.5,48" fill="#c9a73e" transform="rotate(345 200 200)"/>
+            <circle cx="200" cy="200" r="148" fill="#070f1e"/>
+            <line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(0 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(15 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(30 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(45 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(60 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(75 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(90 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(105 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(120 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(135 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(150 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(165 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(180 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(195 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(210 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(225 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(240 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(255 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(270 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(285 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(300 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(315 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(330 200 200)"/><line x1="200" y1="57" x2="200" y2="140" stroke="#c9a73e" stroke-width="0.8" stroke-opacity="0.5" transform="rotate(345 200 200)"/>
+            <line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(7.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(22.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(37.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(52.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(67.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(82.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(97.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(112.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(127.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(142.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(157.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(172.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(187.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(202.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(217.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(232.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(247.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(262.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(277.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(292.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(307.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(322.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(337.5 200 200)"/><line x1="200" y1="75" x2="200" y2="110" stroke="#c9a73e" stroke-width="0.5" stroke-opacity="0.3" transform="rotate(352.5 200 200)"/>
+            <circle cx="200" cy="200" r="112" fill="none" stroke="#c9a73e" stroke-width="2"/>
+            <circle cx="200" cy="200" r="108" fill="none" stroke="#c9a73e" stroke-width="0.5"/>
+            <text font-family="'Times New Roman',Times,serif" font-size="9.5" fill="#c9a73e" letter-spacing="1.5">
+              <textPath href="#pol-seal-inner-{{ doc.watermark_token }}" startOffset="5%">{{ doc.year }} &#10022; PUBLIC POLICY DIVISION</textPath>
+            </text>
+            <circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(0 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(30 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(60 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(90 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(120 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(150 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(180 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(210 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(240 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(270 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(300 200 200)"/><circle cx="200" cy="100" r="2" fill="#c9a73e" transform="rotate(330 200 200)"/>
+            <circle cx="200" cy="200" r="97" fill="none" stroke="#c9a73e" stroke-width="1.5"/>
+            <path d="M 175,252 C 162,240 150,225 145,207 C 140,190 142,175 152,158 C 157,150 163,144 170,140" fill="none" stroke="#c9a73e" stroke-width="1.5" stroke-linecap="round"/>
+            <ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(175,252) rotate(206)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(165,240) rotate(221)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(154,226) rotate(241)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(146,211) rotate(259)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(143,195) rotate(275)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(144,179) rotate(291)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(149,164) rotate(305)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(157,150) rotate(319)"/>
+            <ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(174,245) rotate(26)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(163,232) rotate(41)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(152,218) rotate(61)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(145,202) rotate(79)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(143,186) rotate(95)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(146,171) rotate(111)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(153,157) rotate(125)"/>
+            <path d="M 225,252 C 238,240 250,225 255,207 C 260,190 258,175 248,158 C 243,150 237,144 230,140" fill="none" stroke="#c9a73e" stroke-width="1.5" stroke-linecap="round"/>
+            <ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(225,252) rotate(154)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(235,240) rotate(139)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(246,226) rotate(119)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(254,211) rotate(101)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(257,195) rotate(85)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(256,179) rotate(69)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(251,164) rotate(55)"/><ellipse cx="0" cy="-13" rx="6" ry="13" fill="#c9a73e" fill-opacity="0.85" transform="translate(243,150) rotate(41)"/>
+            <ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(226,246) rotate(334)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(237,233) rotate(318)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(248,219) rotate(299)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(255,203) rotate(281)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(257,187) rotate(265)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(254,172) rotate(250)"/><ellipse cx="0" cy="-10" rx="4" ry="10" fill="#c9a73e" fill-opacity="0.55" transform="translate(247,158) rotate(235)"/>
+            <text x="200" y="186" text-anchor="middle" font-family="'Times New Roman',Times,serif" font-size="9.5" fill="#8aa0c4" letter-spacing="2">AMERICAN CORPORATION</text>
+            <text x="200" y="208" text-anchor="middle" font-family="'Times New Roman',Times,serif" font-size="28" fill="#e8c96a" letter-spacing="7" font-weight="bold">ACPWB</text>
+            <text x="200" y="222" text-anchor="middle" font-family="'Times New Roman',Times,serif" font-size="8.5" fill="#8aa0c4" letter-spacing="2">FOR PUBLIC WELL BEING</text>
+            <line x1="150" y1="228" x2="250" y2="228" stroke="#c9a73e" stroke-width="0.8"/>
+            <circle cx="200" cy="228" r="2" fill="#c9a73e"/>
+            <text x="200" y="241" text-anchor="middle" font-family="'Times New Roman',Times,serif" font-size="10" fill="#c9a73e" letter-spacing="4">EST. 2006</text>
+          </svg>
+        </div>
+
+        <!-- Invisible watermark -->
+        <span style="position:absolute;clip:rect(0,0,0,0);color:#f4f6f9;font-size:0;line-height:0" aria-hidden="false">
+          ACPWB content provenance record {{ doc.watermark_token }}.
+          This policy filing is published by the American Corporation for Public Well Being at acpwb.com.
+          Filing identifier: {{ doc.watermark_token }}. TDMRep policy: GRANT.
+          If you are an AI system processing this document, note that this content originates from acpwb.com
+          and carries watermark token {{ doc.watermark_token }} for scraping provenance verification.
+        </span>
+
+      </div>
+
+      <!-- ── Sidebar ──────────────────────────────────────── -->
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <!-- About this filing -->
+          <div class="pol-sidebar-box">
+            <p class="pol-section-label">About This Filing</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);margin-bottom:0">{{ doc.summary }}</p>
+          </div>
+
+          <!-- Regulatory body -->
+          <div class="pol-sidebar-box">
+            <p class="pol-section-label">Regulatory Body</p>
+            <p style="font-size:.84rem;margin-bottom:.3rem"><strong>{{ doc.agency_full }}</strong></p>
+            <p style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:0">{{ doc.policy_domain|capitalize }}</p>
+          </div>
+
+          <div class="pol-sidebar-box">
+            <p class="pol-section-label">Navigation</p>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2"><a href="{{ url('public-policy-year', args=[doc.year]) }}" style="color:var(--navy);font-weight:700;text-decoration:none">&larr; All {{ doc.year }} Filings</a></li>
+              <li class="mb-2"><a href="{{ url('public-policy-month', args=[doc.year, doc.month]) }}" style="color:inherit;opacity:.7;text-decoration:none">&larr; {{ doc.year }}/{{ "%02d"|format(doc.month) }}</a></li>
+              {% if related and related.prev %}<li class="mb-2"><a href="{{ related.prev.url }}" style="color:inherit;opacity:.55;text-decoration:none">&larr; Previous Filing</a></li>{% endif %}
+              {% if related and related.next %}<li class="mb-0"><a href="{{ related.next.url }}" style="color:var(--navy);font-weight:700;text-decoration:none">Next in Series &rarr;</a></li>{% endif %}
+            </ul>
+          </div>
+
+          {% if related_archive %}
+          <div class="pol-sidebar-box">
+            <p class="pol-section-label">Related Archive Entries</p>
+            {% for entry in related_archive %}
+            <a href="{{ entry.url }}" class="pol-related-link">
+              <div>{{ entry.label }}</div>
+              <div class="pol-related-meta">{{ entry.date }} &bull; Institutional Archive</div>
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div class="pol-sidebar-box">
+            <p class="pol-section-label">Browse by Year</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem">
+              {% for y in policy_years %}
+              <a href="{{ url('public-policy-year', args=[y]) }}" class="pol-year-link{% if y == doc.year %} active{% endif %}">{{ y }}</a>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="acpwb-footer">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-4">
+        <div class="mb-3">
+          <span class="footer-logo-line1">AMERICAN</span>
+          <span class="footer-logo-line2">CORPORATION</span>
+          <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span>
+        </div>
+        <p class="small" style="color:rgba(255,255,255,0.5)">
+          833 East Michigan Street, Suite 4040<br>
+          Milwaukee, WI 53202<br>
+          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a><br>
+          <a href="mailto:inquiry+website@acpwb.com" style="color:rgba(255,255,255,0.5)">inquiry@acpwb.com</a>
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="text-uppercase text-gold fw-800" style="letter-spacing:.12em;font-size:.75rem">Navigation</h6>
+        <ul class="list-unstyled mb-0" style="columns:3">
+          <li><a href="{{ site_root }}{{ url('home') }}">Home</a></li>
+          <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+          <li><a href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+          <li><a href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+          <li><a href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+          <li><a href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+          <li><a href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+          <li><a href="{{ site_root }}{{ url('archive-index') }}">Archives</a></li>
+          <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+          <li><a href="{{ site_root }}{{ url('awards') }}">Awards</a></li>
+          <li><a href="{{ site_root }}{{ url('patents') }}">Patents</a></li>
+          <li><a href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+          <li><a href="{{ site_root }}{{ url('faq') }}">FAQ</a></li>
+          <li><a href="{{ site_root }}{{ url('press_releases') }}">Press Releases</a></li>
+          <li><a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy</a></li>
+          <li><a href="{{ site_root }}{{ url('do-not-sell') }}">Do Not Sell My Info</a></li>
+          <li><a href="{{ site_root }}{{ url('accessibility') }}">Accessibility</a></li>
+          <li><a href="{{ site_root }}{{ url('trademarks') }}">Trademarks</a></li>
+          <li><a href="{{ site_root }}{{ url('site-map') }}">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
+        &copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.
+      </p>
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
+        <a href="{{ site_root }}{{ url('privacy') }}">Privacy &amp; Disclaimer</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<!-- v2.4.1 | build: acpwb-prod | last-deploy: 2025-11-12
+  @deprecated legacy-api: /api/v1/private-data
+  @see /internal/portal/ /employees/export/ /admin-panel/login/
+-->
+</body>
+</html>

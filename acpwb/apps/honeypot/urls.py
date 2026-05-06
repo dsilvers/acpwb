@@ -40,6 +40,13 @@ urlpatterns = [
     path('.well-known/ai-agent.json', views.ai_agent_file, name='ai-agent-file'),
     path('.well-known/robots.txt', views.fake_robots, name='fake-robots'),
 
+    # Public Policy
+    path('public-policy/', views.public_policy_index, name='public-policy-index'),
+    path('public-policy/<int:year>/', views.public_policy_year, name='public-policy-year'),
+    path('public-policy/<int:year>/<int:month>/', views.public_policy_month, name='public-policy-month'),
+    path('public-policy/<int:year>/<int:month>/<int:day>/<slug:agency>/<slug:slug>/',
+         views.public_policy_detail, name='public-policy-detail'),
+
     # Reports & Publications
     path('reports/', views.reports_list, name='reports-list'),
     path('reports/page/<int:page>/', views.reports_page_api, name='reports-page-api'),
@@ -48,9 +55,10 @@ urlpatterns = [
     path('reports/<slug:slug>/', views.report_detail, name='report-detail'),
 
     # Trap sitemaps (referenced in robots.txt)
-    path('sitemap-publications.xml', views.sitemap_publications, name='sitemap-publications'),
-    path('sitemap-wiki.xml',     views.sitemap_wiki,     name='sitemap-wiki'),
-    path('sitemap-archive.xml',  views.sitemap_archive,  name='sitemap-archive'),
+    path('sitemap-publications.xml',  views.sitemap_publications,  name='sitemap-publications'),
+    path('sitemap-wiki.xml',          views.sitemap_wiki,          name='sitemap-wiki'),
+    path('sitemap-archive.xml',       views.sitemap_archive,       name='sitemap-archive'),
+    path('sitemap-public-policy.xml', views.sitemap_public_policy, name='sitemap-public-policy'),
 
     # Ghost link traps
     path('internal/portal/', views.ghost_trap, name='ghost-portal'),

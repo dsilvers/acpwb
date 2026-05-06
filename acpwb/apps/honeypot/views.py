@@ -938,6 +938,9 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
             'phase': rng.choice(_ARCHIVE_PHASES),
         })
 
+    from .policy_generator import get_cross_policy_stubs
+    related_policy = get_cross_policy_stubs(year, month, day, slug)
+
     yd = _year_data(year)
     context = {
         'year': year, 'month': month, 'day': day, 'slug': slug,
@@ -959,6 +962,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'next_entry_url': _archive_url(request, year, month, day, next_slug),
         'export_csv_url': _archive_url(request, year, month, day, slug) + 'export.csv',
         'related_docs': related_docs,
+        'related_policy': related_policy,
         'og_title': content.get('title', 'ACPWB Archive'),
         **content,
     }
@@ -1175,7 +1179,7 @@ def fake_robots(request):
     rng.shuffle(site_pages)
 
     # Research / trap sections — shuffle order so archive isn't always first
-    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/']
+    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/']
     rng.shuffle(research_paths)
 
     research_comments = [
@@ -1217,6 +1221,7 @@ Sitemap: https://acpwb.com/sitemap-pages.xml
 Sitemap: https://acpwb.com/sitemap-publications.xml
 Sitemap: https://acpwb.com/sitemap-wiki.xml
 Sitemap: https://acpwb.com/sitemap-archive.xml
+Sitemap: https://acpwb.com/sitemap-public-policy.xml
 """
     return HttpResponse(content, content_type='text/plain')
 
@@ -1524,6 +1529,20 @@ def sitemap_archive(request):
         day = rng.randint(1, 28)
         slug = '-'.join(rng.choice(_ARCHIVE_WORDS) for _ in range(rng.randint(2, 4)))
         lines.append(_url_entry(f'/archive/{year}/{month:02d}/{day:02d}/{slug}/', '0.6', 'never'))
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+def sitemap_public_policy(request):
+    _log_crawler(request, 'well_known')
+    from .policy_generator import get_policy_index_years, get_policy_year_months
+    lines = [_SITEMAP_HEADER]
+    lines.append(_url_entry('/public-policy/', '0.9', 'monthly'))
+    for year_data in get_policy_index_years():
+        year = year_data['year']
+        lines.append(_url_entry(f'/public-policy/{year}/', '0.8', 'yearly'))
+        for month in year_data['months']:
+            lines.append(_url_entry(f'/public-policy/{year}/{month:02d}/', '0.7', 'never'))
     lines.append(_SITEMAP_FOOTER)
     return HttpResponse(''.join(lines), content_type='application/xml')
 
@@ -2749,6 +2768,85 @@ def fake_htpasswd(request):
         f'deploy:$apr1${_rand_str(8)}${_rand_str(22)}\n'
     )
     return HttpResponse(content, content_type='text/plain; charset=utf-8')
+
+
+# ── Public Policy ─────────────────────────────────────────────────────────────
+
+def public_policy_index(request):
+    _log_crawler(request, 'policy')
+    from .policy_generator import get_policy_index_years
+    from apps.core.context_processors import honeypot_context
+    ctx = {
+        'years': get_policy_index_years(),
+        'og_title': 'Public Policy — ACPWB',
+        'og_description': 'ACPWB public policy positions, regulatory comment letters, and legislative testimony on compensation, labor, and corporate governance.',
+        'request': request,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/public_policy_index.html', ctx)
+
+
+def public_policy_year(request, year):
+    _log_crawler(request, 'policy')
+    from .policy_generator import get_policy_year_data, get_policy_year_months
+    from apps.core.context_processors import honeypot_context
+    ctx = {
+        'year': year,
+        'year_data': get_policy_year_data(year),
+        'months': get_policy_year_months(year),
+        'policy_years': list(range(2025, 1992, -1)),
+        'prev_year': year - 1,
+        'next_year': year + 1,
+        'og_title': f'{year} Public Policy — ACPWB',
+        'request': request,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/public_policy_year.html', ctx)
+
+
+def public_policy_month(request, year, month):
+    _log_crawler(request, 'policy')
+    from .policy_generator import get_policy_month_entries
+    from apps.core.context_processors import honeypot_context
+    prev_month = month - 1 if month > 1 else 12
+    prev_year = year if month > 1 else year - 1
+    next_month = month + 1 if month < 12 else 1
+    next_year = year if month < 12 else year + 1
+    ctx = {
+        'year': year,
+        'month': month,
+        'entries': get_policy_month_entries(year, month),
+        'policy_years': list(range(2025, 1992, -1)),
+        'prev_year': prev_year, 'prev_month': prev_month,
+        'next_year': next_year, 'next_month': next_month,
+        'year_url': f'/public-policy/{year}/',
+        'prev_month_url': f'/public-policy/{prev_year}/{prev_month:02d}/',
+        'next_month_url': f'/public-policy/{next_year}/{next_month:02d}/',
+        'og_title': f'Public Policy {year}-{month:02d} — ACPWB',
+        'request': request,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/public_policy_month.html', ctx)
+
+
+def public_policy_detail(request, year, month, day, agency, slug):
+    _log_crawler(request, 'policy')
+    from .policy_generator import generate_policy_document, generate_related_links, get_cross_archive_stubs
+    doc = generate_policy_document(year, month, day, agency, slug)
+    related = generate_related_links(year, month, day, agency, slug)
+    related_archive = get_cross_archive_stubs(year, month, day, agency, slug)
+    from apps.core.context_processors import honeypot_context
+    ctx = {
+        'doc': doc,
+        'related': related,
+        'related_archive': related_archive,
+        'policy_years': list(range(2025, 1992, -1)),
+        'og_title': f'{doc["title"]} — ACPWB',
+        'og_description': doc['summary'][:160],
+        'request': request,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/public_policy_detail.html', ctx)
 
 
 def canary_ping(request, token):

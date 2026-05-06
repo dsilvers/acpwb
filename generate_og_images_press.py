@@ -202,6 +202,7 @@ def main():
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--ai-prompt', action='store_true', help='Use OpenAI API to generate prompts from press release body text')
     parser.add_argument('--ai-model', default='gpt-4o-mini', help='OpenAI model for prompt generation (default: gpt-4o-mini)')
+    parser.add_argument('--quantize', action='store_true', help='Quantize transformer+T5 to qint8 via optimum-quanto (reduces RAM ~50%%)')
     args = parser.parse_args()
 
     ai_client = None
@@ -275,7 +276,22 @@ def main():
     pipe = AutoPipelineForText2Image.from_pretrained(
         args.model, torch_dtype=dtype, use_safetensors=True,
         token=args.hf_token or None,
-    ).to(device)
+    )
+
+    if args.quantize:
+        try:
+            from optimum.quanto import freeze, qint8, quantize as quanto_quantize
+        except ImportError:
+            sys.exit('Missing optimum-quanto. Install with: pip install optimum-quanto')
+        print('Quantizing transformer to qint8 …')
+        quanto_quantize(pipe.transformer, weights=qint8)
+        freeze(pipe.transformer)
+        if hasattr(pipe, 'text_encoder_2') and pipe.text_encoder_2 is not None:
+            print('Quantizing T5 text encoder to qint8 …')
+            quanto_quantize(pipe.text_encoder_2, weights=qint8)
+            freeze(pipe.text_encoder_2)
+
+    pipe.enable_model_cpu_offload()
 
     pipe.set_progress_bar_config(disable=True)
     print('Model loaded.\n')
@@ -293,7 +309,7 @@ def main():
 
         print(f'[{i}/{len(press_releases_to_process)}] {slug} ', end='', flush=True)
         try:
-            generator = torch.Generator(device=device).manual_seed(seed)
+            generator = torch.Generator(device='cpu').manual_seed(seed)
             gen_kwargs = dict(
                 prompt=prompt,
                 num_inference_steps=args.steps,

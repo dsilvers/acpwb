@@ -349,7 +349,7 @@ def generate_policy_document(year, month, day, agency, slug):
     position_slug, position_statement = rng.choice(POSITIONS)
 
     summary_template = rng.choice(SUMMARY_TEMPLATES.get(doc_type_slug, SUMMARY_TEMPLATES['comment-letter']))
-    summary = summary_template.format(agency=agency_full, topic=topic)
+    summary = summary_template.format(agency=agency_full, topic=topic, year=year)
 
     # Sections: pick from base heading structures, possibly inject optional sections
     heading_options = SECTION_HEADINGS.get(doc_type_slug, SECTION_HEADINGS['comment-letter'])

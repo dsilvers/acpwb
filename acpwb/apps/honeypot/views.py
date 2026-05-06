@@ -87,6 +87,7 @@ from .archive_data_minutes import (
 
 
 @functools.lru_cache(maxsize=512)
+@functools.lru_cache(maxsize=256)
 def _generate_archive_content(year, month, day, slug):
     """Generate deterministic rich content for an archive page."""
     rng = random.Random(hashlib.md5(f"content_{year}{month}{day}{slug}".encode()).hexdigest())

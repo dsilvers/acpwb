@@ -179,13 +179,13 @@ def _generate_table(rng, year, month, agency_full, policy_domain, topic_short):
 
 
 def _generate_doc_stub(year, month, day, agency, slug):
-    """Lightweight stub: title, URL, metadata only — no body generation."""
+    """Lightweight stub: title, URL, position, and metadata — RNG sequence matches generate_policy_document."""
     seed = f"acpwb_policy_{year}_{month:02d}_{day:02d}_{agency}_{slug}"
     rng = _rng_from_seed(seed)
     agency_data = AGENCIES.get(agency.lower())
     agency_full = agency_data[0] if agency_data else f"{agency.upper()} Regulatory Authority"
     doc_type_slug, doc_type_label = rng.choice(DOCUMENT_TYPES)
-    prefix_pool = _STUB_TITLE_PREFIXES.get(doc_type_slug, ['Comments of ACPWB Regarding'])
+    prefix_pool = _STUB_TITLE_PREFIXES.get(doc_type_slug, ['Filing on'])
     title_prefix = rng.choice(prefix_pool)
     topic_title = ' '.join(w.capitalize() for w in slug.replace('-', ' ').split())
     title = f"{title_prefix} {topic_title}"
@@ -193,13 +193,19 @@ def _generate_doc_stub(year, month, day, agency, slug):
         filing_date = datetime.date(year, month, day).strftime('%B %-d, %Y')
     except ValueError:
         filing_date = f"{year}-{month:02d}-{day:02d}"
+    # Replay signatory + docket RNG calls to reach the same position state as generate_policy_document
+    _generate_signatory(rng)
+    _docket_number(rng, agency, year)
+    position_slug, _ = rng.choice(POSITIONS)
     return {
         'title': title,
         'url': f"/public-policy/{year}/{month:02d}/{day:02d}/{agency}/{slug}/",
         'agency_acronym': agency.upper(),
         'agency_full': agency_full,
         'document_type': doc_type_label,
+        'document_type_slug': doc_type_slug,
         'filing_date': filing_date,
+        'position_slug': position_slug,
     }
 
 
@@ -536,32 +542,23 @@ def get_policy_year_months(year):
 
 def get_policy_month_entries(year, month):
     """Return policy filing stubs for /public-policy/YYYY/MM/."""
-    _prefix_pool = [p for prefixes in _STUB_TITLE_PREFIXES.values() for p in prefixes]
     rng = _rng_from_seed(f"policy_month_{year}_{month:02d}")
     agency_keys = list(AGENCIES.keys())
     count = rng.randint(8, 24)
-    entries = []
+    raw = []
     for _ in range(count):
         day = rng.randint(1, 28)
         agency = rng.choice(agency_keys)
         slug = rng.choice(POLICY_SLUGS)
-        agency_full, _ = AGENCIES[agency]
-        doc_type_slug, doc_type_label = rng.choice(DOCUMENT_TYPES)
-        position_slug, _ = rng.choice(POSITIONS)
-        prefix = rng.choice(_prefix_pool)
-        topic = slug.replace('-', ' ')
-        title = f"{prefix} {topic.title()}"
-        entries.append({
-            'day': day,
-            'agency': agency,
-            'agency_full': agency_full,
-            'slug': slug,
-            'title': title,
-            'document_type': doc_type_label,
-            'document_type_slug': doc_type_slug,
-            'position_slug': position_slug,
-            'url': f"/public-policy/{year}/{month:02d}/{day:02d}/{agency}/{slug}/",
-        })
+        raw.append((day, agency, slug))
+    entries = []
+    for day, agency, slug in raw:
+        stub = _generate_doc_stub(year, month, day, agency, slug)
+        stub['day'] = day
+        stub['agency'] = agency
+        stub['slug'] = slug
+        stub['agency_full'] = AGENCIES.get(agency, (f"{agency.upper()} Regulatory Authority",))[0]
+        entries.append(stub)
     entries.sort(key=lambda e: e['day'])
     return entries
 

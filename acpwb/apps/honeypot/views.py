@@ -2879,7 +2879,13 @@ def public_policy_detail(request, year, month, day, agency, slug):
     _log_crawler(request, 'policy')
     from .policy_generator import generate_policy_document, generate_related_links, get_cross_archive_stubs
     doc = generate_policy_document(year, month, day, agency, slug)
-    related = generate_related_links(year, month, day, agency, slug)
+    import hashlib as _hashlib, random as _random
+    _sub_rng = _random.Random(_hashlib.md5(f"policy_sub_links_{year}_{month}_{day}_{agency}_{slug}".encode()).hexdigest())
+    if _sub_rng.random() < 0.02:
+        _url_fn = lambda y, m, d, ag, sl: f"https://policy-{ag}.acpwb.com/{y}/{m:02d}/{d:02d}/{sl}/"
+    else:
+        _url_fn = None
+    related = generate_related_links(year, month, day, agency, slug, url_fn=_url_fn)
     related_archive = get_cross_archive_stubs(year, month, day, agency, slug)
     from apps.core.context_processors import honeypot_context
     nav = _policy_nav_context(request)

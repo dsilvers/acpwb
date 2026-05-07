@@ -670,7 +670,7 @@ def get_cross_archive_stubs(year, month, day, agency, slug):
         aslug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
         label = aslug.rsplit('-', 1)[0].replace('-', ' ').title()
         stubs.append({
-            'url': f"/archive/{ay}/{am:02d}/{ad:02d}/{aslug}/",
+            'url': f"https://acpwb.com/archive/{ay}/{am:02d}/{ad:02d}/{aslug}/",
             'label': label,
             'date': f"{ay}-{am:02d}-{ad:02d}",
         })

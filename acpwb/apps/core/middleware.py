@@ -19,9 +19,10 @@ VIEW_LOGGED_PATHS = re.compile(
     r'reports|sitemap|robots\.txt|\.well-known|datasets|feeds)(/|$)'
 )
 
-# Archive subdomain views log their own CrawlerVisits — skip middleware logging
-# for any request that SubdomainMiddleware has routed to the archive urlconf.
+# Subdomain views log their own CrawlerVisits — skip middleware logging
+# for any request that SubdomainMiddleware has routed to a subdomain urlconf.
 ARCHIVE_SUBDOMAIN_URLCONF = 'apps.honeypot.archive_subdomain_urls'
+POLICY_SUBDOMAIN_URLCONF = 'apps.honeypot.policy_subdomain_urls'
 
 
 _DB_REQUIRED = re.compile(r'^/(django-admin|acpwb-dashboard)(/|$)')
@@ -74,7 +75,7 @@ class BotTrackingMiddleware:
         # Also skip archive subdomain requests — those views log their own CrawlerVisits.
         if (BOT_UA_PATTERNS.search(user_agent)
                 and not VIEW_LOGGED_PATHS.match(path)
-                and getattr(request, 'urlconf', None) != ARCHIVE_SUBDOMAIN_URLCONF):
+                and getattr(request, 'urlconf', None) not in (ARCHIVE_SUBDOMAIN_URLCONF, POLICY_SUBDOMAIN_URLCONF)):
             self._log_bot_visit(request, user_agent, path)
 
         response = self.get_response(request)

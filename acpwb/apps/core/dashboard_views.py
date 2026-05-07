@@ -103,7 +103,10 @@ def _depth_counts(by_depth_dict):
     if not by_depth_dict:
         return []
     total = sum(by_depth_dict.values()) or 1
-    items = sorted(by_depth_dict.items(), key=lambda x: int(x[0]))
+    items = sorted(
+        ((k, v) for k, v in by_depth_dict.items() if k != ''),
+        key=lambda x: int(x[0]),
+    )
     return [
         {'depth': int(k), 'count': v, 'pct': round(v * 100 / total)}
         for k, v in items

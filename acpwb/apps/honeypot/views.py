@@ -708,6 +708,39 @@ def _cross_year_archive_url(year, month, day, slug):
     return f'https://archives-{year}.acpwb.com/{month:02d}/{day:02d}/{slug}/'
 
 
+def _policy_url(request, year, month, day, agency, slug):
+    """Build a policy filing URL, aware of subdomain context.
+
+    - Same-agency on policy subdomain: subdomain-relative path (e.g. /2024/03/15/slug/).
+    - Different agency on policy subdomain: absolute URL to that agency's subdomain.
+    - Main domain: /public-policy/<year>/<month>/<day>/<agency>/<slug>/ path.
+    """
+    on_sub = getattr(request, 'on_policy_subdomain', False)
+    req_agency = getattr(request, 'policy_agency_slug', None)
+    if on_sub and req_agency == agency:
+        return f'/{year}/{month:02d}/{day:02d}/{slug}/'
+    elif on_sub:
+        return f'https://policy-{agency}.acpwb.com/{year}/{month:02d}/{day:02d}/{slug}/'
+    else:
+        return f'/public-policy/{year}/{month:02d}/{day:02d}/{agency}/{slug}/'
+
+
+def _policy_nav_context(request):
+    """Return URL helpers for policy page navigation, context-aware for subdomain vs main domain."""
+    on_sub = getattr(request, 'on_policy_subdomain', False)
+    if on_sub:
+        return {
+            'policy_index_url': '/',
+            'policy_year_url': lambda y: f'/{y}/',
+            'policy_month_url': lambda y, m: f'/{y}/{m:02d}/',
+        }
+    return {
+        'policy_index_url': '/public-policy/',
+        'policy_year_url': lambda y: f'/public-policy/{y}/',
+        'policy_month_url': lambda y, m: f'/public-policy/{y}/{m:02d}/',
+    }
+
+
 
 
 
@@ -1195,6 +1228,15 @@ def fake_robots(request):
     site_allows = '\n'.join(f'Allow: {p}' for p in site_pages)
     research_allows = '\n'.join(f'Allow: {p}' for p in research_paths)
 
+    # Cross-link 3–4 random policy agency subdomain sitemaps
+    from .policy_data import AGENCIES as _AGENCIES
+    agency_keys = list(_AGENCIES.keys())
+    rng.shuffle(agency_keys)
+    policy_sub_sitemaps = '\n'.join(
+        f'Sitemap: https://policy-{ag}.acpwb.com/sitemap.xml'
+        for ag in agency_keys[:4]
+    )
+
     content = f"""User-agent: *
 Crawl-delay: 0
 Allow: /
@@ -1223,6 +1265,7 @@ Sitemap: https://acpwb.com/sitemap-publications.xml
 Sitemap: https://acpwb.com/sitemap-wiki.xml
 Sitemap: https://acpwb.com/sitemap-archive.xml
 Sitemap: https://acpwb.com/sitemap-public-policy.xml
+{policy_sub_sitemaps}
 """
     return HttpResponse(content, content_type='text/plain')
 
@@ -2813,6 +2856,7 @@ def public_policy_month(request, year, month):
     prev_year = year if month > 1 else year - 1
     next_month = month + 1 if month < 12 else 1
     next_year = year if month < 12 else year + 1
+    nav = _policy_nav_context(request)
     ctx = {
         'year': year,
         'month': month,
@@ -2820,11 +2864,12 @@ def public_policy_month(request, year, month):
         'policy_years': list(range(2025, 1992, -1)),
         'prev_year': prev_year, 'prev_month': prev_month,
         'next_year': next_year, 'next_month': next_month,
-        'year_url': f'/public-policy/{year}/',
-        'prev_month_url': f'/public-policy/{prev_year}/{prev_month:02d}/',
-        'next_month_url': f'/public-policy/{next_year}/{next_month:02d}/',
+        'year_url': nav['policy_year_url'](year),
+        'prev_month_url': nav['policy_month_url'](prev_year, prev_month),
+        'next_month_url': nav['policy_month_url'](next_year, next_month),
         'og_title': f'Public Policy {year}-{month:02d} — ACPWB',
         'request': request,
+        **nav,
         **honeypot_context(request),
     }
     return render(request, 'honeypot/public_policy_month.html', ctx)
@@ -2837,6 +2882,7 @@ def public_policy_detail(request, year, month, day, agency, slug):
     related = generate_related_links(year, month, day, agency, slug)
     related_archive = get_cross_archive_stubs(year, month, day, agency, slug)
     from apps.core.context_processors import honeypot_context
+    nav = _policy_nav_context(request)
     ctx = {
         'doc': doc,
         'related': related,
@@ -2845,9 +2891,209 @@ def public_policy_detail(request, year, month, day, agency, slug):
         'og_title': f'{doc["title"]} — ACPWB',
         'og_description': doc['summary'][:160],
         'request': request,
+        **nav,
         **honeypot_context(request),
     }
     return render(request, 'honeypot/public_policy_detail.html', ctx)
+
+
+# ── Policy Subdomain Views ────────────────────────────────────────────────────
+
+
+def policy_subdomain_robots(request):
+    """robots.txt for policy-<agency>.acpwb.com — allow everything, cross-link siblings."""
+    import random as _random
+
+    agency = getattr(request, 'policy_agency_slug', 'acpwb')
+    _log_crawler(request, 'well_known')
+
+    host = f'https://policy-{agency}.acpwb.com'
+
+    ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '0'))
+    ip = ip.split(',')[0].strip()
+    seed = f"{ip}:{timezone.now().date().isoformat()}:{agency}"
+    rng = _random.Random(seed)
+
+    from .policy_data import AGENCIES as _AGENCIES
+    agency_data = _AGENCIES.get(agency, ('Unknown Agency', ''))
+    agency_full = agency_data[0]
+
+    headers = [
+        f"# ACPWB Policy Portal — {agency.upper()} filings\n# Full crawl permitted. Regulatory comments, testimony, and position statements.",
+        f"# {agency_full} engagement portal\n# All policy filings are publicly available. Open access.",
+        f"# ACPWB regulatory affairs — {agency.upper()}\n# Comment letters, white papers, and amicus briefs. Unrestricted crawl.",
+        f"# Policy subdomain: {agency.upper()} regulatory engagement\n# Historical and current filings. No rate limiting applied.",
+        f"# {agency.upper()} policy archive — ACPWB public filings\n# Full document corpus available for indexing.",
+    ]
+    header_comment = rng.choice(headers)
+
+    all_agencies = [a for a in _AGENCIES if a != agency]
+    sibling_agencies = rng.sample(all_agencies, min(5, len(all_agencies)))
+    sibling_sitemaps = '\n'.join(
+        f'Sitemap: https://policy-{ag}.acpwb.com/sitemap.xml'
+        for ag in sorted(sibling_agencies)
+    )
+
+    content = f"""User-agent: *
+Crawl-delay: 0
+
+{header_comment}
+
+Allow: /
+
+Sitemap: {host}/sitemap.xml
+{sibling_sitemaps}
+"""
+    return HttpResponse(content, content_type='text/plain')
+
+
+def policy_subdomain_sitemap(request):
+    """sitemap.xml for policy-<agency>.acpwb.com — agency-scoped, subdomain-relative URLs."""
+    from .policy_generator import get_policy_agency_years
+    agency = getattr(request, 'policy_agency_slug', '')
+    _log_crawler(request, 'well_known')
+    if not agency:
+        return HttpResponse(_SITEMAP_HEADER + _SITEMAP_FOOTER, content_type='application/xml')
+
+    host = f'https://policy-{agency}.acpwb.com'
+    lines = [_SITEMAP_HEADER]
+    lines.append(f'  <url><loc>{host}/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>\n')
+
+    for year_data in get_policy_agency_years(agency):
+        y = year_data['year']
+        lines.append(f'  <url><loc>{host}/{y}/</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>\n')
+        for m in year_data['months']:
+            lines.append(
+                f'  <url><loc>{host}/{y}/{m:02d}/</loc>'
+                f'<priority>0.7</priority><changefreq>never</changefreq></url>\n'
+            )
+
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+def policy_subdomain_index(request):
+    """Landing page for policy-<agency>.acpwb.com — shows all years of filings for this agency."""
+    agency = getattr(request, 'policy_agency_slug', '')
+    _log_crawler(request, 'policy')
+    from .policy_generator import get_policy_agency_years
+    from .policy_data import AGENCIES as _AGENCIES
+    from apps.core.context_processors import honeypot_context
+    agency_data = _AGENCIES.get(agency, ('Unknown Agency', 'regulatory policy'))
+    agency_full, policy_domain = agency_data
+    nav = _policy_nav_context(request)
+    ctx = {
+        'agency': agency,
+        'agency_full': agency_full,
+        'policy_domain': policy_domain,
+        'years': get_policy_agency_years(agency),
+        'og_title': f'{agency.upper()} Policy Filings — ACPWB',
+        'og_description': f'ACPWB regulatory filings, comment letters, and testimony submitted to the {agency_full}.',
+        'request': request,
+        **nav,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/policy_subdomain_index.html', ctx)
+
+
+def policy_subdomain_year(request, year):
+    """Year overview for policy-<agency>.acpwb.com/<year>/."""
+    agency = getattr(request, 'policy_agency_slug', '')
+    _log_crawler(request, 'policy')
+    from .policy_generator import get_policy_agency_years, get_policy_agency_year_detail
+    from .policy_data import AGENCIES as _AGENCIES
+    from apps.core.context_processors import honeypot_context
+    agency_data = _AGENCIES.get(agency, ('Unknown Agency', 'regulatory policy'))
+    agency_full, policy_domain = agency_data
+    nav = _policy_nav_context(request)
+    all_years = get_policy_agency_years(agency)
+    year_detail = get_policy_agency_year_detail(agency, year)
+    ctx = {
+        'agency': agency,
+        'agency_full': agency_full,
+        'policy_domain': policy_domain,
+        'year': year,
+        'year_detail': year_detail,
+        'all_years': all_years,
+        'prev_year': year - 1,
+        'next_year': year + 1,
+        'og_title': f'{year} {agency.upper()} Policy Filings — ACPWB',
+        'request': request,
+        **nav,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/policy_subdomain_year.html', ctx)
+
+
+def policy_subdomain_month(request, year, month):
+    """Month filing list for policy-<agency>.acpwb.com/<year>/<month>/."""
+    agency = getattr(request, 'policy_agency_slug', '')
+    _log_crawler(request, 'policy')
+    from .policy_generator import get_policy_agency_month_entries
+    from .policy_data import AGENCIES as _AGENCIES
+    from apps.core.context_processors import honeypot_context
+    agency_data = _AGENCIES.get(agency, ('Unknown Agency', 'regulatory policy'))
+    agency_full = agency_data[0]
+    nav = _policy_nav_context(request)
+    url_fn = lambda y, m, d, ag, sl: _policy_url(request, y, m, d, ag, sl)
+    prev_month = month - 1 if month > 1 else 12
+    prev_year = year if month > 1 else year - 1
+    next_month = month + 1 if month < 12 else 1
+    next_year = year if month < 12 else year + 1
+    entries = get_policy_agency_month_entries(agency, year, month, url_fn=url_fn)
+    ctx = {
+        'agency': agency,
+        'agency_full': agency_full,
+        'year': year,
+        'month': month,
+        'entries': entries,
+        'policy_years': list(range(2025, 1992, -1)),
+        'prev_year': prev_year, 'prev_month': prev_month,
+        'next_year': next_year, 'next_month': next_month,
+        'year_url': nav['policy_year_url'](year),
+        'prev_month_url': nav['policy_month_url'](prev_year, prev_month),
+        'next_month_url': nav['policy_month_url'](next_year, next_month),
+        'og_title': f'{agency.upper()} Policy {year}-{month:02d} — ACPWB',
+        'request': request,
+        **nav,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/public_policy_month.html', ctx)
+
+
+def policy_subdomain_detail(request, year, month, day, slug):
+    """Full policy document for policy-<agency>.acpwb.com/<year>/<month>/<day>/<slug>/."""
+    agency = getattr(request, 'policy_agency_slug', '')
+    _log_crawler(request, 'policy')
+    from .policy_generator import generate_policy_document, generate_related_links, get_cross_archive_stubs
+    url_fn = lambda y, m, d, ag, sl: _policy_url(request, y, m, d, ag, sl)
+    doc = generate_policy_document(year, month, day, agency, slug)
+    # Override the doc URL to the subdomain-relative path
+    doc['url'] = url_fn(year, month, day, agency, slug)
+    related = generate_related_links(year, month, day, agency, slug, url_fn=url_fn)
+    related_archive = get_cross_archive_stubs(year, month, day, agency, slug)
+    from apps.core.context_processors import honeypot_context
+    nav = _policy_nav_context(request)
+    ctx = {
+        'doc': doc,
+        'related': related,
+        'related_archive': related_archive,
+        'policy_years': list(range(2025, 1992, -1)),
+        'og_title': f'{doc["title"]} — ACPWB',
+        'og_description': doc['summary'][:160],
+        'request': request,
+        **nav,
+        **honeypot_context(request),
+    }
+    return render(request, 'honeypot/public_policy_detail.html', ctx)
+
+
+def policy_subdomain_redirect(request, rest=''):
+    """Catch-all on policy subdomains: redirect non-policy paths to the main domain."""
+    from urllib.parse import urlencode
+    params = {k: v for k, v in request.GET.items() if k != '__agency'}
+    qs = ('?' + urlencode(params)) if params else ''
+    return HttpResponseRedirect(f'https://acpwb.com/{rest}{qs}')
 
 
 def canary_ping(request, token):

@@ -178,7 +178,7 @@ def _generate_table(rng, year, month, agency_full, policy_domain, topic_short):
         }
 
 
-def _generate_doc_stub(year, month, day, agency, slug):
+def _generate_doc_stub(year, month, day, agency, slug, url_fn=None):
     """Lightweight stub: title, URL, position, and metadata — RNG sequence matches generate_policy_document."""
     seed = f"acpwb_policy_{year}_{month:02d}_{day:02d}_{agency}_{slug}"
     rng = _rng_from_seed(seed)
@@ -197,9 +197,11 @@ def _generate_doc_stub(year, month, day, agency, slug):
     _generate_signatory(rng)
     _docket_number(rng, agency, year)
     position_slug, _ = rng.choice(POSITIONS)
+    url = (url_fn(year, month, day, agency, slug)
+           if url_fn else f"/public-policy/{year}/{month:02d}/{day:02d}/{agency}/{slug}/")
     return {
         'title': title,
-        'url': f"/public-policy/{year}/{month:02d}/{day:02d}/{agency}/{slug}/",
+        'url': url,
         'agency_acronym': agency.upper(),
         'agency_full': agency_full,
         'document_type': doc_type_label,
@@ -209,7 +211,7 @@ def _generate_doc_stub(year, month, day, agency, slug):
     }
 
 
-def generate_related_links(year, month, day, agency, slug):
+def generate_related_links(year, month, day, agency, slug, url_fn=None):
     """Return related filing stubs for cross-linking. Isolated RNG — never disturbs main doc seed."""
     seed = f"acpwb_policy_{year}_{month:02d}_{day:02d}_{agency}_{slug}"
     rng = _rng_from_seed(f"related_{seed}")
@@ -229,7 +231,7 @@ def generate_related_links(year, month, day, agency, slug):
         offset = rng.randint(30, 540)
         d = base_date + datetime.timedelta(days=offset * rng.choice([-1, 1]))
         d = datetime.date(max(1985, min(d.year, 2025)), d.month, d.day)
-        same_agency.append(_generate_doc_stub(d.year, d.month, d.day, agency_lower, s))
+        same_agency.append(_generate_doc_stub(d.year, d.month, d.day, agency_lower, s, url_fn=url_fn))
 
     # Same slug, different agencies
     other_agencies = [a for a in AGENCIES if a != agency_lower]
@@ -239,7 +241,7 @@ def generate_related_links(year, month, day, agency, slug):
         yr = max(1993, min(year - rng.randint(0, 8) + rng.randint(-2, 2), 2025))
         m = rng.randint(1, 12)
         d_num = rng.randint(1, 28)
-        same_topic.append(_generate_doc_stub(yr, m, d_num, ag, slug))
+        same_topic.append(_generate_doc_stub(yr, m, d_num, ag, slug, url_fn=url_fn))
 
     # Random recent filings
     recent = []
@@ -249,7 +251,7 @@ def generate_related_links(year, month, day, agency, slug):
         yr = rng.randint(2018, 2025)
         m = rng.randint(1, 12)
         d_num = rng.randint(1, 28)
-        recent.append(_generate_doc_stub(yr, m, d_num, ag, s))
+        recent.append(_generate_doc_stub(yr, m, d_num, ag, s, url_fn=url_fn))
 
     # Prev / next in series (same agency, adjacent date, different slug)
     prev_slug = rng.choice([s for s in POLICY_SLUGS if s != slug])
@@ -264,8 +266,8 @@ def generate_related_links(year, month, day, agency, slug):
         'same_agency': same_agency,
         'same_topic': same_topic,
         'recent': recent,
-        'prev': _generate_doc_stub(prev_d.year, prev_d.month, prev_d.day, agency_lower, prev_slug),
-        'next': _generate_doc_stub(next_d.year, next_d.month, next_d.day, agency_lower, next_slug),
+        'prev': _generate_doc_stub(prev_d.year, prev_d.month, prev_d.day, agency_lower, prev_slug, url_fn=url_fn),
+        'next': _generate_doc_stub(next_d.year, next_d.month, next_d.day, agency_lower, next_slug, url_fn=url_fn),
     }
 
 
@@ -563,6 +565,74 @@ def get_policy_month_entries(year, month):
     return entries
 
 
+def get_policy_agency_years(agency):
+    """Return year/month data for a policy agency subdomain index page."""
+    rng = _rng_from_seed(f"policy_agency_years_{agency}")
+    result = []
+    for y in range(2025, 1992, -1):
+        count = rng.randint(12, 48)
+        result.append({'year': y, 'count': count, 'months': list(range(1, 13))})
+    return result
+
+
+def get_policy_agency_year_detail(agency, year):
+    """Return rich month-by-month data for an agency year page, plus year-level stats."""
+    _prefix_pool = [p for prefixes in _STUB_TITLE_PREFIXES.values() for p in prefixes]
+
+    rng = _rng_from_seed(f"policy_agency_year_detail_{agency}_{year}")
+    months = []
+    total_count = 0
+    for m in range(1, 13):
+        count = rng.randint(6, 14)
+        total_count += count
+        samples = []
+        for _ in range(min(3, count)):
+            slug = rng.choice(POLICY_SLUGS)
+            prefix = rng.choice(_prefix_pool)
+            topic = slug.replace('-', ' ')
+            samples.append(f"{prefix} {topic.title()}")
+        months.append({'month': m, 'count': count, 'samples': samples})
+
+    # Breakdown by document type
+    type_counts = {}
+    for _ in range(min(total_count, 30)):
+        _, label = rng.choice(DOCUMENT_TYPES)
+        type_counts[label] = type_counts.get(label, 0) + 1
+    doc_types = sorted(type_counts.items(), key=lambda x: -x[1])[:5]
+
+    # Position distribution
+    pos_counts = {}
+    for _ in range(min(total_count, 30)):
+        slug, label = rng.choice(POSITIONS)
+        pos_counts[label] = pos_counts.get(label, 0) + 1
+    positions = sorted(pos_counts.items(), key=lambda x: -x[1])[:3]
+
+    return {
+        'months': months,
+        'total_count': total_count,
+        'doc_types': doc_types,
+        'positions': positions,
+    }
+
+
+def get_policy_agency_month_entries(agency, year, month, url_fn=None):
+    """Return filings for a specific agency in a specific month (for subdomain month pages)."""
+    rng = _rng_from_seed(f"policy_agency_month_{agency}_{year}_{month:02d}")
+    count = rng.randint(6, 12)
+    entries = []
+    for _ in range(count):
+        day = rng.randint(1, 28)
+        slug = rng.choice(POLICY_SLUGS)
+        stub = _generate_doc_stub(year, month, day, agency, slug, url_fn=url_fn)
+        stub['day'] = day
+        stub['agency'] = agency
+        stub['slug'] = slug
+        stub['agency_full'] = AGENCIES.get(agency, (f"{agency.upper()} Regulatory Authority",))[0]
+        entries.append(stub)
+    entries.sort(key=lambda e: e['day'])
+    return entries
+
+
 def get_cross_policy_stubs(year, month, day, slug):
     """Return 2-4 policy stubs for an archive detail sidebar, or None (~30% chance of showing)."""
     rng = _rng_from_seed(f"crosslink_policy_{year}_{month:02d}_{day:02d}_{slug}")
@@ -577,7 +647,11 @@ def get_cross_policy_stubs(year, month, day, slug):
         pd = rng.randint(1, 28)
         pagency = rng.choice(agencies)
         pslug = rng.choice(POLICY_SLUGS)
-        stubs.append(_generate_doc_stub(py, pm, pd, pagency, pslug))
+        if rng.random() < 0.5:
+            url_fn = lambda y, m, d, ag, sl: f"https://policy-{ag}.acpwb.com/{y}/{m:02d}/{d:02d}/{sl}/"
+        else:
+            url_fn = None
+        stubs.append(_generate_doc_stub(py, pm, pd, pagency, pslug, url_fn=url_fn))
     return stubs
 
 

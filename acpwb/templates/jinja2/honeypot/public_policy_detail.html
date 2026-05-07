@@ -372,8 +372,8 @@
           <div class="pol-sidebar-box">
             <p class="pol-section-label">Navigation</p>
             <ul class="list-unstyled mb-0" style="font-size:.82rem">
-              <li class="mb-2"><a href="{{ url('public-policy-year', args=[doc.year]) }}" style="color:var(--navy);font-weight:700;text-decoration:none">&larr; All {{ doc.year }} Filings</a></li>
-              <li class="mb-2"><a href="{{ url('public-policy-month', args=[doc.year, doc.month]) }}" style="color:inherit;opacity:.7;text-decoration:none">&larr; {{ doc.year }}/{{ "%02d"|format(doc.month) }}</a></li>
+              <li class="mb-2"><a href="{{ policy_year_url(doc.year) }}" style="color:var(--navy);font-weight:700;text-decoration:none">&larr; All {{ doc.year }} Filings</a></li>
+              <li class="mb-2"><a href="{{ policy_month_url(doc.year, doc.month) }}" style="color:inherit;opacity:.7;text-decoration:none">&larr; {{ doc.year }}/{{ "%02d"|format(doc.month) }}</a></li>
               {% if related and related.prev %}<li class="mb-2"><a href="{{ related.prev.url }}" style="color:inherit;opacity:.55;text-decoration:none">&larr; Previous Filing</a></li>{% endif %}
               {% if related and related.next %}<li class="mb-0"><a href="{{ related.next.url }}" style="color:var(--navy);font-weight:700;text-decoration:none">Next in Series &rarr;</a></li>{% endif %}
             </ul>
@@ -395,7 +395,7 @@
             <p class="pol-section-label">Browse by Year</p>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem">
               {% for y in policy_years %}
-              <a href="{{ url('public-policy-year', args=[y]) }}" class="pol-year-link{% if y == doc.year %} active{% endif %}">{{ y }}</a>
+              <a href="{{ policy_year_url(y) }}" class="pol-year-link{% if y == doc.year %} active{% endif %}">{{ y }}</a>
               {% endfor %}
             </div>
           </div>

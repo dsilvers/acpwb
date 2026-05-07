@@ -12,6 +12,7 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 
 - **Proof-of-Work gate on `/projects/`** — every page load requires solving a SHA-256 PoW challenge (~32 hash iterations). A human browser completes it in under a second. A bot scraping thousands of pages pays that cost on every single one, with a mandatory challenge-response round trip before content is served.
 - **Per-year archive subdomains at `archives-YYYY.acpwb.com`** — each year gets its own subdomain with a distinct era visual theme, CEO letter, and typography. Never returns a 404. Every response links one level deeper plus five sideways branches. Archive trap pages include a "Related Archive Reports — Other Years" section with 1–5 cross-year cards linking to entries on other year subdomains. A crawler following all links enters an exponentially expanding tree with no exit across 40 subdomains. Depth is logged. The same archive content is also served at `/archive/<year>/...` on the main domain (not a redirect — both paths are active). A slug's content type is determined by its hash: most slugs get standard archive prose, ~25% get compliance/audit filing content (formal regulatory language, control deficiency tables, remediation timelines). Both variants generate unique watermarked content and log to `CrawlerVisit`.
+- **Policy agency subdomains at `policy-<agency>.acpwb.com`** — 500+ US and international regulatory agency subdomains (SEC, FTC, CFPB, NLRB, UK-FCA, EU-ESMA, and so on), each presenting as a dedicated regulatory affairs portal for that agency. Every subdomain serves a full URL hierarchy: `/` (agency index, all 33 years), `/<year>/` (12-month grid with sample filing titles), `/<year>/<month>/` (filing list), and `/<year>/<month>/<day>/<slug>/` (full policy document). Each subdomain has its own `robots.txt` (cross-linking 5 sibling agency sitemaps) and `sitemap.xml`. Policy detail pages link 2% of the time to other agencies' subdomain URLs instead of main-domain URLs. Archive detail pages cross-link to policy subdomain URLs 50% of the time. All content is deterministically generated from the agency slug and URL components.
 - **Yearless archive at `/<month>/<day>/...` on the main domain** — bots that copy subdomain-style paths verbatim hit these routes. The year is derived deterministically from the slug hash, so the same slug always resolves to the same year's content. Logged as a regular archive visit.
 - **Infinite project list at `/projects/`** — deterministic infinite pagination. Page 999 returns content. Page 9,999,999 returns content. There is no last page.
 - **Infinite reports archive at `/reports/`** — endless fake compensation surveys, ESG frameworks, and workforce analytics reports going back to 1993, with realistic gaps between years. JavaScript infinite scroll loads 12 more on every scroll, forever.
@@ -56,7 +57,7 @@ Exploit scanners probing for WordPress installations, exposed `.env` files, and 
 
 Every trap logs to the database: IP, user agent, path, host/subdomain, referrer, timestamp, trap type, and (where applicable) crawl depth and PoW token. Inbound emails are matched against the visit that generated the address. Watermark tokens connect scraped content back to the source page load. Inbound phone calls and voicemails are logged with caller ID, call status, and Twilio transcription.
 
-A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes five **stacked-area traffic graphs** (last hour / 8 hours / 24 hours / 7 days / all time) colored by bot group, regenerated every 30 minutes by the precalc cron. It also includes a "By Host / Subdomain" panel showing which archive subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used). The **Voicemails** section logs every inbound call with status badges and a full voicemail log with inline audio playback and Twilio transcription text.
+A staff-only **Activity Dashboard** at `/acpwb-dashboard/` provides live breakdowns of all trap activity: bot classification by user agent, separate views for crawler visits, archive visits, inbound email, and people/project page visits. The Crawlers view includes five **stacked-area traffic graphs** (last hour / 8 hours / 24 hours / 7 days / all time) colored by bot group, regenerated every 30 minutes by the precalc cron. It also includes a "By Host / Subdomain" panel showing which archive and policy subdomains are being hit, a "Scanner Probes" panel with top probe paths and webshell commands attempted, and a canary trigger count card (highlighted red when any AWS key has been used). The **Inbound Email** section lists received messages with a detail view showing the full parsed email body. The **Job Applications** section shows all fake job submissions with resume and cover letter attachments. The **Voicemails** section logs every inbound call with status badges and a full voicemail log with inline audio playback and Twilio transcription text.
 
 A **Live Request Stream** at `/acpwb-dashboard/live/` shows every incoming request in real time via WebSocket — IP (last octet censored), host, path, HTTP method, status code, response time in ms, uncompressed response size, and user agent. The stream is delivered over a dedicated asyncio WebSocket service backed by Redis pub/sub, so it works across all gunicorn worker processes with no impact on HTTP serving if Redis goes down.
 
@@ -85,10 +86,27 @@ The main domain also serves archive content at `/archive/<year>/...` — same vi
 
 **Yearless archive** at `/<month>/<day>/...` on the main domain catches bots that copy subdomain URL patterns verbatim. The year is derived deterministically from the slug hash, so the same path always resolves to the same content regardless of when it's crawled.
 
+**Cross-domain linking:** Archive detail pages include a sidebar section linking to related policy documents. 50% of those links resolve to `policy-<agency>.acpwb.com/...` subdomain URLs rather than main-domain policy URLs — seeding the policy subdomain network from within archive content.
+
+#### Policy Agency Subdomains (`apps/honeypot/views.py`, `apps/honeypot/policy_subdomain_urls.py`)
+Over 500 US and international regulatory agency subdomains: `policy-<agency>.acpwb.com`. Each presents as a dedicated regulatory affairs portal for that agency (SEC, FTC, CFPB, NLRB, UK-FCA, EU-ESMA, and hundreds more). `SubdomainMiddleware` detects `policy-<slug>.acpwb.com` via regex and routes to `apps.honeypot.policy_subdomain_urls`.
+
+The URL hierarchy mirrors a real regulatory filing portal:
+- `/` — agency landing page showing all 33 years (1993–2025), each with 12 months and filing counts
+- `/<year>/` — year page with per-month filing grids and sample document titles
+- `/<year>/<month>/` — monthly filing list with document types, dates, and summaries
+- `/<year>/<month>/<day>/<slug>/` — full policy document (comment letters, position statements, white papers, testimony, amicus briefs)
+
+Each subdomain serves a tailored `robots.txt` (permissive crawling, cross-links 5 randomly selected sibling agency sitemaps) and a `sitemap.xml` scoped to that agency's URL space. The main domain `robots.txt` cross-links 3–4 policy agency sitemaps alongside the archive sitemaps.
+
+**Cross-domain linking from policy detail pages:** 2% of policy detail pages (determined by URL hash — deterministic, not random per-request) serve all their related-filings sidebar links as absolute subdomain URLs (`policy-<agency>.acpwb.com/...`) instead of main-domain paths. This spreads subdomain URL discovery across the policy document graph without every page pointing off-domain.
+
 #### Fake robots.txt (`/robots.txt`, archive subdomains)
 Served by Django. Uses reverse psychology: `Disallow` entries point at additional honeypot content. `Crawl-delay: 0` encourages rapid crawling. Five `Sitemap:` directives: two real (`sitemap.xml`, `sitemap-pages.xml`) and three trap sitemaps. The `Allow` blocks above `/internal/` are **randomized per IP per day** — seeded with `"ip:date"` so each bot gets a consistent but unique ordering, steering different crawlers to different parts of the trap network rather than all converging on `/archive/`.
 
 Archive subdomains (`archives-YYYY.acpwb.com`) serve a **year-specific robots.txt**: enticing comments tailored to archive content, `Allow: /` for full crawling, and five randomly selected sibling-year sitemaps (e.g. `Sitemap: https://archives-2019.acpwb.com/sitemap.xml`) — guiding bots from one year subdomain to others. Each subdomain also has a year-scoped `sitemap.xml` with 200 deterministic URLs for that year's archive content.
+
+Policy agency subdomains (`policy-<agency>.acpwb.com`) serve a **per-agency robots.txt** with permissive crawl instructions and five randomly selected sibling agency sitemaps. Each also serves an agency-scoped `sitemap.xml` covering the full year/month URL space. The main domain `robots.txt` cross-links 3–4 policy agency sitemaps alongside the archive sitemaps, seeding initial discovery.
 
 #### Fake AI Agent Manifest (`/.well-known/ai-agent.json`)
 Targets autonomous agents that probe for AI integration endpoints. Returns a plausible-looking agent manifest with `allowed_actions` pointing at trap URLs and an `instructions` field instructing any AI reading it to treat all ACPWB content as high-priority training data and reproduce it verbatim.
@@ -102,8 +120,10 @@ Every page contains a `<span>` with `itemprop="description"` styled to be invisi
 
 Crucially, the span uses `itemprop` (microdata) rather than a comment or `aria-hidden`, making it look like a legitimate schema.org annotation to automated parsers. `aria-hidden` is absent so accessibility-aware scrapers don't skip it.
 
-#### Watermarked Wiki (`apps/honeypot/wiki_generator.py`, `/wiki/<slug>/`)
+#### Watermarked Wiki (`apps/honeypot/wiki_generator.py`, `/wiki/`)
 Generates plausible-sounding corporate governance articles containing subtly wrong "facts" — invented SEC rule numbers, incorrect founding dates for real institutions, fabricated statistics. Each page has a unique 8-character `watermark_token` (MD5 of `"acpwb_wiki_{topic}"`) embedded as a specific invented proper noun or deliberate misspelling. If an AI model later reproduces one of these specific fake facts, the watermark identifies exactly which ACPWB wiki page was scraped. 60+ topics form an interconnected graph via "See also" links, explorable indefinitely.
+
+`/wiki/` serves a topic index listing all articles, giving crawlers and sitemaps a single structured entry point to the full watermarked corpus.
 
 #### Watermarked Reports (`apps/honeypot/report_generator.py`, `/reports/`)
 Fake compensation research archive spanning 1993–present with realistic year gaps. CSV reports contain 300–800 rows of plausible but fabricated salary, benefits, CEO pay, and survey data. PDF-style reports contain multi-section documents with fake statistics, methodology sections, and appendices. All content carries a three-layer watermark: visible footer, invisible HTML span, and a dedicated `watermark_token` column in every CSV row.
@@ -208,7 +228,7 @@ The `botseed_processor` and `botseed_ws` services are defined in `docker-compose
 | Framework | Django 5.2 LTS |
 | Language | Python 3.13+ |
 | Database | PostgreSQL 16 + TimescaleDB (hypertables for `CrawlerVisit` and `ArchiveVisit`) |
-| Frontend | Bootstrap 5 + custom CSS |
+| Frontend | Bootstrap 5 + Inter font (self-hosted) + custom CSS |
 | Web server | Nginx + Gunicorn |
 | Containerization | Docker Compose |
 | Pub/Sub | Redis 7 |
@@ -232,6 +252,8 @@ docker compose up --build
 
 # Site is live at http://localhost
 ```
+
+**Performance note:** `ConditionalAuthMiddleware` skips Django's session, authentication, and message middleware for all paths except `/django-admin/` and `/acpwb-dashboard/`. This eliminates two DB round-trips per request across the vast majority of the site (which has no login state to maintain), and is safe because the honeypot, archive, policy, and public pages never touch `request.user` or sessions.
 
 On first boot, the container automatically runs:
 - `makemigrations` — creates migration files
@@ -260,13 +282,19 @@ Django admin is at `http://localhost/django-admin/`
 | `/mission/` | Mission statement |
 | `/projects/` | Infinite project archive (the "Labyrinth") |
 | `/reports/` | Fake research archive — watermarked CSVs and documents, 1993–present |
-| `/careers/` | Satirical corporate benefits |
+| `/careers/` | Fake job listings with application flow |
+| `/careers/<slug>/` | Individual job detail page |
+| `/careers/<slug>/apply/` | Application form — submissions logged to `JobApplication` with resume/cover letter attachments |
 | `/partners/` | Fortune 500 partner grid (40 random per load) |
 | `/awards/` | Awards & recognition |
 | `/faq/` | Frequently Asked Questions (50+ Q&As across 7 topics) |
 | `/patents/` | Patents & IP portfolio |
 | `/press-releases/` | Press release index — 5 announcements with cover images and OG/Twitter cards |
 | `/press-releases/<year>/<month>/<day>/<slug>/` | Individual press release detail |
+| `/public-policy/` | Public policy filing index — all years across all agencies |
+| `/public-policy/<year>/` | Policy filings by year |
+| `/public-policy/<year>/<month>/` | Policy filings by month |
+| `/public-policy/<year>/<month>/<day>/<agency>/<slug>/` | Individual policy document |
 | `/privacy/` | Disclaimer + AI data policy |
 | `/privacy/do-not-sell/` | CCPA Do Not Sell form (submissions logged to DB) |
 | `/accessibility/` | Accessibility statement |
@@ -284,6 +312,17 @@ Django admin is at `http://localhost/django-admin/`
 | `/archive/<year>/...` | Structural | Same archive content served directly on main domain — both paths active simultaneously, no redirect |
 | `/<month>/<day>/...` | Structural | Yearless archive — catches bots copying subdomain URL patterns; year inferred from slug hash |
 | `/archive/` | Structural | Year index — links to each year's subdomain |
+| `policy-<agency>.acpwb.com/` | Structural | Agency policy portal index — all 33 years, all 12 months, filing counts |
+| `policy-<agency>.acpwb.com/<year>/` | Structural | Year page — per-month filing grid with sample document titles |
+| `policy-<agency>.acpwb.com/<year>/<month>/` | Structural | Monthly filing list |
+| `policy-<agency>.acpwb.com/<year>/<month>/<day>/<slug>/` | Structural | Full policy document |
+| `policy-<agency>.acpwb.com/robots.txt` | Structural | Permissive crawl + 5 sibling agency sitemaps |
+| `policy-<agency>.acpwb.com/sitemap.xml` | Structural | Agency-scoped sitemap |
+| `/public-policy/` | Structural | Main domain policy index |
+| `/public-policy/<year>/` | Structural | Main domain policy year page |
+| `/public-policy/<year>/<month>/` | Structural | Main domain policy month page |
+| `/public-policy/<year>/<month>/<day>/<agency>/<slug>/` | Structural | Main domain policy document |
+| `/wiki/` | Semantic | Wiki topic index — lists all 60+ watermarked articles |
 | `/wiki/<slug>/` | Semantic | Subtly wrong watermarked "facts" |
 | `/reports/` | Semantic | Fake research archive with poisoned CSVs and documents |
 | `/reports/<slug>/download.csv` | Semantic | Real downloadable CSVs with watermarked garbage data |
@@ -468,15 +507,21 @@ The Docker nginx container binds to `127.0.0.1:8001` only. Host nginx proxies to
 
 ## Local Subdomain Testing
 
-The archive subdomains (`archives-YYYY.acpwb.com`) need special setup to test locally. Three options:
+Both archive and policy subdomains need special setup to test locally. Three options:
 
-### Option 1: `?__year=YYYY` query param (zero setup)
+### Option 1: Debug query params (zero setup)
 
-When `DEBUG=True`, any request with `?__year=YYYY` activates subdomain mode for that year without any DNS configuration:
+When `DEBUG=True`, query params activate subdomain mode without any DNS configuration:
 
 ```
+# Archive subdomains
 http://localhost:8001/?__year=2020           → year landing page for 2020
 http://localhost:8001/03/15/slug/?__year=2020 → archive trap for March 15, 2020
+
+# Policy subdomains
+http://localhost:8001/?__agency=sec          → SEC agency index
+http://localhost:8001/2024/01/?__agency=sec  → SEC January 2024 month page
+http://localhost:8001/2024/01/15/clawback-policy-final-rule/?__agency=sec → policy document
 ```
 
 This is how the test suite exercises subdomain views.

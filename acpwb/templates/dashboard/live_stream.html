@@ -35,16 +35,6 @@
     <h6>Incoming Requests</h6>
     <span id="ws-status" style="font-size:.72rem;font-weight:700;color:var(--muted)">Connecting…</span>
   </div>
-  <div class="section-card-body" style="padding:.6rem 1rem;border-bottom:1px solid var(--border)">
-    <div style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:center">
-      <input id="filter-text" type="text" placeholder="Filter: method, status, host, path, bot…"
-             style="flex:1;min-width:200px;font-size:.78rem;padding:.3rem .6rem;border:1px solid var(--border);border-radius:3px;outline:none">
-      <input id="filter-ms" type="number" placeholder="Min ms" min="0"
-             style="width:90px;font-size:.78rem;padding:.3rem .6rem;border:1px solid var(--border);border-radius:3px;outline:none">
-      <button id="filter-clear" style="font-size:.72rem;padding:.3rem .65rem;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;color:var(--muted)">Clear</button>
-      <span id="filter-count" style="font-size:.72rem;color:var(--muted);white-space:nowrap"></span>
-    </div>
-  </div>
   <div class="section-card-body" style="padding:0">
     <div style="overflow-x:auto">
       <table class="table dash-table mb-0" id="stream-table">
@@ -77,16 +67,10 @@
   const proto = location.protocol === "https:" ? "wss:" : "ws:";
   const url = proto + "//" + location.host + "/ws/requests/" + (token ? "?token=" + encodeURIComponent(token) : "");
 
-  const statusEl    = document.getElementById("ws-status");
-  const tbody       = document.getElementById("stream-body");
-  const waitingRow  = document.getElementById("waiting-row");
-  const filterText  = document.getElementById("filter-text");
-  const filterMs    = document.getElementById("filter-ms");
-  const filterClear = document.getElementById("filter-clear");
-  const filterCount = document.getElementById("filter-count");
-  const MAX_ROWS = 500;
-
-  const eventBuffer = [];
+  const statusEl   = document.getElementById("ws-status");
+  const tbody      = document.getElementById("stream-body");
+  const waitingRow = document.getElementById("waiting-row");
+  const MAX_ROWS   = 200;
 
   // RPS tracking — ring buffer of arrival timestamps (ms), max 1 min window
   const WINDOW_MS = 60 * 1000;
@@ -174,10 +158,6 @@
     return '<span style="color:' + c + ';font-weight:700">' + m + '</span>';
   }
 
-  function esc(s) {
-    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  }
-
   // Mirror Python BOT_PATTERNS: [substring, shortLabel]
   const UA_PATTERNS = [
     ['GPTBot',                'GPTBot'],
@@ -258,61 +238,44 @@
     return 'Browser';
   }
 
-  function rowHtml(d) {
+  function mkTd(text, style) {
+    const td = document.createElement("td");
+    if (style) td.setAttribute("style", style);
+    td.textContent = text;
+    return td;
+  }
+
+  function addRow(d) {
+    if (waitingRow && waitingRow.parentNode) waitingRow.remove();
+    const bot = classifyUA(d.user_agent);
     const time = d.timestamp ? d.timestamp.slice(11, 23) : "";
-    // esc() sanitizes all user-supplied values before innerHTML insertion
-    return (
-      "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(time) + "</td>" +
-      "<td>" + methodLabel(d.method || "") + "</td>" +
-      "<td>" + statusLabel(d.status || 0) + "</td>" +
-      "<td style='font-variant-numeric:tabular-nums'>" + esc(d.ip || "") + "</td>" +
-      "<td style='max-width:10rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap'>" + esc(d.host || "") + "</td>" +
-      "<td style='word-break:break-all'>" + esc(d.path || "") + "</td>" +
-      "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(d.response_ms ?? "") + "</td>" +
-      "<td style='font-variant-numeric:tabular-nums;color:var(--muted)'>" + esc(d.response_bytes ?? "") + "</td>" +
-      "<td title='" + esc(d.user_agent || "") + "' style='white-space:nowrap;color:var(--muted)'>" + esc(d._bot) + "</td>"
-    );
+    const tr = document.createElement("tr");
+    tr.appendChild(mkTd(time,                    "font-variant-numeric:tabular-nums;color:var(--muted)"));
+    const tdMethod = mkTd("", null);
+    tdMethod.appendChild(Object.assign(document.createElement("span"), {
+      textContent: d.method || "",
+      style: "color:" + ({GET:"#6B7280",POST:"#2563eb",PUT:"#d97706",PATCH:"#7c3aed",DELETE:"#dc2626"}[d.method] || "#6B7280") + ";font-weight:700"
+    }));
+    tr.appendChild(tdMethod);
+    const code = d.status || 0;
+    const statusColor = code < 300 ? "#16a34a" : code < 400 ? "#2563eb" : code < 500 ? "#d97706" : "#dc2626";
+    const tdStatus = mkTd("", null);
+    tdStatus.appendChild(Object.assign(document.createElement("span"), {
+      textContent: code,
+      style: "color:" + statusColor + ";font-weight:700"
+    }));
+    tr.appendChild(tdStatus);
+    tr.appendChild(mkTd(d.ip || "",              "font-variant-numeric:tabular-nums"));
+    tr.appendChild(mkTd(d.host || "",            "max-width:10rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"));
+    tr.appendChild(mkTd(d.path || "",            "word-break:break-all"));
+    tr.appendChild(mkTd(d.response_ms ?? "",     "font-variant-numeric:tabular-nums;color:var(--muted)"));
+    tr.appendChild(mkTd(d.response_bytes ?? "",  "font-variant-numeric:tabular-nums;color:var(--muted)"));
+    const tdBot = mkTd(bot,                      "white-space:nowrap;color:var(--muted)");
+    tdBot.title = d.user_agent || "";
+    tr.appendChild(tdBot);
+    tbody.insertBefore(tr, tbody.firstChild);
+    while (tbody.rows.length > MAX_ROWS) tbody.deleteRow(tbody.rows.length - 1);
   }
-
-  function matchesFilters(d) {
-    const txt = filterText.value.trim().toLowerCase();
-    const minMs = parseInt(filterMs.value, 10);
-    if (txt) {
-      const haystack = [
-        d.method || "", String(d.status || ""), d.host || "",
-        d.path || "", d._bot || "", d.ip || "",
-      ].join(" ").toLowerCase();
-      if (!haystack.includes(txt)) return false;
-    }
-    if (!isNaN(minMs) && (d.response_ms ?? 0) < minMs) return false;
-    return true;
-  }
-
-  const VISIBLE_ROWS = 200;
-
-  function applyFilters() {
-    const matched = eventBuffer.filter(matchesFilters);
-    const visible = matched.slice(0, VISIBLE_ROWS);
-    tbody.innerHTML = "";
-    visible.forEach(d => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = rowHtml(d); // rowHtml escapes all user data via esc()
-      tbody.appendChild(tr);
-    });
-    if (eventBuffer.length) {
-      filterCount.textContent = matched.length < eventBuffer.length
-        ? matched.length + " / " + eventBuffer.length + " shown"
-        : eventBuffer.length + " buffered";
-    }
-  }
-
-  filterText.addEventListener("input",  applyFilters);
-  filterMs.addEventListener("input",    applyFilters);
-  filterClear.addEventListener("click", function () {
-    filterText.value = "";
-    filterMs.value = "";
-    applyFilters();
-  });
 
   function connect() {
     statusEl.textContent = "Connecting…";
@@ -328,18 +291,10 @@
     ws.onmessage = function (evt) {
       let d;
       try { d = JSON.parse(evt.data); } catch (e) { return; }
-
-      if (waitingRow && waitingRow.parentNode) waitingRow.remove();
-
       timestamps.push(Date.now());
       totalBytes += (d.response_bytes || 0);
       bytesEl.textContent = formatBytes(totalBytes);
-
-      d._bot = classifyUA(d.user_agent);
-      eventBuffer.unshift(d);
-      if (eventBuffer.length > MAX_ROWS) eventBuffer.pop();
-
-      applyFilters();
+      addRow(d);
     };
 
     ws.onclose = function (evt) {

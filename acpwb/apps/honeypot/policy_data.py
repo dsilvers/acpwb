@@ -420,6 +420,245 @@ AGENCIES = {
     # France
     'fr-amf':     ('Autorité des marchés financiers (AMF)', 'French executive compensation disclosure'),
     'fr-acpr':    ('Autorité de contrôle prudentiel et de résolution (ACPR)', 'French bank and insurer remuneration'),
+    'fr-dgt':     ('Direction générale du Travail (DGT)', 'French labor law and collective bargaining enforcement'),
+    'fr-min-travail': ('French Ministry of Labour, Health, and Solidarities', 'French national wage and employment policy'),
+    # Italy
+    'it-consob':  ('Commissione Nazionale per le Società e la Borsa (Consob)', 'Italian listed company compensation governance'),
+    'it-bankitalia': ('Banca d\'Italia', 'Italian bank executive remuneration and governance'),
+    'it-inps':    ('Istituto Nazionale della Previdenza Sociale (INPS)', 'Italian social security and pension contribution standards'),
+    'it-lavoro':  ('Italian Ministry of Labour and Social Policies', 'Italian labor and wage policy'),
+    # Spain
+    'es-cnmv':    ('Comisión Nacional del Mercado de Valores (CNMV)', 'Spanish listed company remuneration standards'),
+    'es-bde':     ('Banco de España', 'Spanish bank remuneration governance'),
+    'es-mitss':   ('Spanish Ministry of Inclusion, Social Security, and Migration', 'Spanish labor and wage policy'),
+    'es-sepe':    ('Servicio Público de Empleo Estatal (SEPE)', 'Spanish employment and minimum wage standards'),
+    # Netherlands
+    'nl-afm':     ('Autoriteit Financiële Markten (AFM)', 'Dutch financial sector remuneration oversight'),
+    'nl-dnb':     ('De Nederlandsche Bank (DNB)', 'Dutch bank and insurer remuneration governance'),
+    'nl-szw':     ('Dutch Ministry of Social Affairs and Employment (SZW)', 'Dutch wage and labor standards'),
+    'nl-ilnt':    ('Netherlands Labour Authority (NLA)', 'Dutch labor law enforcement and wage compliance'),
+    # Switzerland
+    'ch-finma':   ('Swiss Financial Market Supervisory Authority (FINMA)', 'Swiss bank and insurer remuneration rules'),
+    'ch-seco':    ('State Secretariat for Economic Affairs (SECO)', 'Swiss labor standards and minimum wage guidance'),
+    'ch-efd':     ('Swiss Federal Department of Finance (EFD)', 'Swiss tax treatment of executive compensation'),
+    # Sweden
+    'se-fi':      ('Finansinspektionen (FI)', 'Swedish financial institution remuneration oversight'),
+    'se-do':      ('Swedish Equality Ombudsman (DO)', 'Swedish pay equity enforcement and gender wage gap'),
+    'se-ams':     ('Swedish Public Employment Service (Arbetsförmedlingen)', 'Swedish labor market wage standards'),
+    # Norway
+    'no-finanstilsynet': ('Finanstilsynet (Norway)', 'Norwegian financial sector remuneration supervision'),
+    'no-afa':     ('Norwegian Labour Inspection Authority (Arbeidstilsynet)', 'Norwegian wage and working condition enforcement'),
+    'no-lkn':     ('Norwegian Labour Court (Arbeidsretten)', 'Norwegian collective bargaining and wage dispute adjudication'),
+    # Denmark
+    'dk-finanstilsynet': ('Danish Financial Supervisory Authority (Finanstilsynet)', 'Danish financial institution pay governance'),
+    'dk-beskeftigelse': ('Danish Ministry of Employment (Beskæftigelsesministeriet)', 'Danish wage and labor policy'),
+    # Belgium
+    'be-fsma':    ('Financial Services and Markets Authority (FSMA)', 'Belgian financial institution remuneration rules'),
+    'be-nbb':     ('National Bank of Belgium (NBB)', 'Belgian bank remuneration and systemic risk'),
+    'be-emploi':  ('Belgian Federal Public Service Employment, Labour and Social Dialogue', 'Belgian wage standards'),
+    # Luxembourg
+    'lu-cssf':    ('Commission de Surveillance du Secteur Financier (CSSF)', 'Luxembourg fund and bank remuneration governance'),
+    'lu-itm':     ('Labour and Mines Inspectorate (ITM)', 'Luxembourg wage and working condition enforcement'),
+    # Ireland
+    'ie-cbi':     ('Central Bank of Ireland', 'Irish financial institution remuneration and fitness standards'),
+    'ie-wrc':     ('Workplace Relations Commission (WRC)', 'Irish pay equity, employment rights, and dispute resolution'),
+    'ie-mpne':    ('Irish Department of Enterprise, Trade and Employment', 'Irish national minimum wage and labor policy'),
+    # Poland
+    'pl-knf':     ('Polish Financial Supervision Authority (KNF)', 'Polish financial institution remuneration governance'),
+    'pl-pip':     ('State Labour Inspectorate (PIP)', 'Polish wage and hour enforcement'),
+    'pl-mrpit':   ('Polish Ministry of Economic Development and Technology', 'Polish labor market and wage policy'),
+    # Czech Republic
+    'cz-cnb':     ('Czech National Bank (ČNB)', 'Czech financial institution remuneration supervision'),
+    'cz-suip':    ('State Labour Inspection Office (SÚIP)', 'Czech wage and working condition enforcement'),
+    # Japan
+    'jp-fsa':     ('Japan Financial Services Agency (FSA)', 'Japanese financial institution remuneration governance'),
+    'jp-mhlw':    ('Japan Ministry of Health, Labour and Welfare (MHLW)', 'Japanese wage standards and labor policy'),
+    'jp-meti':    ('Japan Ministry of Economy, Trade and Industry (METI)', 'Japanese corporate governance and executive pay reform'),
+    'jp-tse':     ('Tokyo Stock Exchange (TSE)', 'Japanese listed company executive compensation governance'),
+    'jp-frc':     ('Japan Financial Reporting Council (FRC)', 'Japanese corporate governance code and board pay'),
+    # South Korea
+    'kr-fss':     ('Korea Financial Supervisory Service (FSS)', 'Korean financial institution remuneration oversight'),
+    'kr-moel':    ('Korean Ministry of Employment and Labor (MoEL)', 'Korean labor standards and minimum wage'),
+    'kr-fsc':     ('Korea Financial Services Commission (FSC)', 'Korean corporate and financial compensation policy'),
+    # Singapore
+    'sg-mas':     ('Monetary Authority of Singapore (MAS)', 'Singapore financial institution remuneration and conduct'),
+    'sg-mom':     ('Singapore Ministry of Manpower (MOM)', 'Singapore employment act and wage standards'),
+    'sg-tafep':   ('Tripartite Alliance for Fair and Progressive Employment Practices', 'Singapore fair pay and inclusive hiring'),
+    # Hong Kong
+    'hk-sfc':     ('Securities and Futures Commission (SFC)', 'Hong Kong financial institution remuneration governance'),
+    'hk-hkma':    ('Hong Kong Monetary Authority (HKMA)', 'Hong Kong bank remuneration and corporate governance'),
+    'hk-labour':  ('Hong Kong Labour Department', 'Hong Kong statutory minimum wage and employment standards'),
+    # India
+    'in-sebi':    ('Securities and Exchange Board of India (SEBI)', 'Indian listed company executive remuneration disclosure'),
+    'in-mca':     ('Indian Ministry of Corporate Affairs (MCA)', 'Indian Companies Act compensation and governance'),
+    'in-mole':    ('Indian Ministry of Labour and Employment', 'Indian wage code and labor standards'),
+    'in-rbi':     ('Reserve Bank of India (RBI)', 'Indian bank CEO and whole-time director remuneration norms'),
+    'in-irdai':   ('Insurance Regulatory and Development Authority of India (IRDAI)', 'Indian insurer executive compensation'),
+    # China
+    'cn-csrc':    ('China Securities Regulatory Commission (CSRC)', 'Chinese listed company executive pay governance'),
+    'cn-mhrss':   ('China Ministry of Human Resources and Social Security (MHRSS)', 'Chinese labor standards and wage policy'),
+    'cn-pboc':    ('People\'s Bank of China (PBOC)', 'Chinese bank executive remuneration and monetary stability'),
+    'cn-cbirc':   ('China Banking and Insurance Regulatory Commission (CBIRC)', 'Chinese financial institution pay governance'),
+    # Brazil
+    'br-cvm':     ('Comissão de Valores Mobiliários (CVM)', 'Brazilian listed company executive compensation disclosure'),
+    'br-bcb':     ('Banco Central do Brasil (BCB)', 'Brazilian bank executive remuneration and systemic risk'),
+    'br-mte':     ('Brazilian Ministry of Labour and Employment (MTE)', 'Brazilian labor standards and wage floor'),
+    'br-previc':  ('Superintendence of Complementary Pension (PREVIC)', 'Brazilian pension fund governance and compensation'),
+    # Mexico
+    'mx-cnbv':    ('National Banking and Securities Commission (CNBV)', 'Mexican bank and securities executive remuneration'),
+    'mx-stps':    ('Mexican Ministry of Labour and Social Welfare (STPS)', 'Mexican labor standards and minimum wage policy'),
+    'mx-imss':    ('Mexican Social Security Institute (IMSS)', 'Mexican employee benefit and social contribution standards'),
+    # South Africa
+    'za-fsca':    ('Financial Sector Conduct Authority (FSCA)', 'South African financial institution remuneration governance'),
+    'za-sarb':    ('South African Reserve Bank (SARB)', 'South African bank executive pay and prudential standards'),
+    'za-doel':    ('Department of Employment and Labour (South Africa)', 'South African wage and labor standards'),
+    'za-nrf':     ('National Remuneration Foundation (NRF)', 'South African executive pay benchmarking standards'),
+    # New Zealand
+    'nz-fma':     ('Financial Markets Authority (FMA)', 'New Zealand financial institution remuneration governance'),
+    'nz-era':     ('Employment Relations Authority (ERA)', 'New Zealand wage, collective agreement, and employment standards'),
+    'nz-mbie':    ('New Zealand Ministry of Business, Innovation and Employment (MBIE)', 'New Zealand labor and wage policy'),
+    # Additional UK
+    'uk-cma':     ('Competition and Markets Authority (CMA)', 'UK labor market competition and wage-fixing enforcement'),
+    'uk-lpc':     ('Low Pay Commission (LPC)', 'UK National Living Wage and National Minimum Wage recommendations'),
+    'uk-tpr':     ('The Pensions Regulator (TPR)', 'UK defined benefit funding and trustee governance'),
+    'uk-ico':     ('Information Commissioner\'s Office (ICO)', 'UK employment data privacy and pay gap reporting compliance'),
+    'uk-dbeis':   ('UK Department for Business and Trade (DBT)', 'UK corporate governance and executive pay reform'),
+    'uk-beis-sub': ('UK Business, Energy and Industrial Strategy Select Committee', 'UK corporate pay and inequality inquiry'),
+    # Additional EU institutions
+    'efrag':      ('European Financial Reporting Advisory Group (EFRAG)', 'EU sustainability and compensation reporting standards'),
+    'eu-eca':     ('European Court of Auditors', 'EU institution and program compensation expenditure oversight'),
+    'eu-afr':     ('EU Agency for Fundamental Rights (FRA)', 'EU fundamental rights in employment and fair pay'),
+    'eu-etuc':    ('European Trade Union Confederation (ETUC)', 'EU collective bargaining and minimum wage directive advocacy'),
+    'eu-ceep':    ('European Centre of Employers and Enterprises (CEEP)', 'EU public sector employment and compensation policy'),
+    # Additional US federal — independent agencies
+    'ntsb-lab':   ('NTSB Office of Administration', 'transportation safety board workforce compensation'),
+    'oge':        ('Office of Government Ethics', 'federal employee financial conflict and compensation disclosure'),
+    'osc':        ('Office of Special Counsel', 'federal whistleblower and retaliation in compensation disputes'),
+    'nmb':        ('National Mediation Board', 'airline and railroad collective bargaining and wage mediation'),
+    'rrb':        ('Railroad Retirement Board', 'railroad worker retirement benefits and compensation intersection'),
+    'frtib':      ('Federal Retirement Thrift Investment Board', 'TSP retirement benefit governance and fiduciary standards'),
+    'usagm':      ('U.S. Agency for Global Media', 'federal media workforce compensation and foreign broadcast standards'),
+    'dfc':        ('U.S. International Development Finance Corporation', 'development finance workforce and compensation'),
+    'mcc':        ('Millennium Challenge Corporation', 'international development labor standards and compensation'),
+    'usaid':      ('U.S. Agency for International Development', 'foreign assistance workforce compensation and benefits'),
+    'usccr':      ('U.S. Commission on Civil Rights', 'civil rights enforcement in federal and contractor compensation'),
+    'fmc':        ('Federal Maritime Commission', 'maritime carrier and terminal compensation and labor standards'),
+    'fca':        ('Farm Credit Administration', 'agricultural lending institution executive compensation governance'),
+    'prc':        ('Postal Regulatory Commission', 'postal service compensation and rate regulation'),
+    'plcb':       ('Privacy and Civil Liberties Oversight Board', 'national security workforce compensation and civil liberties'),
+    'nlm':        ('National Library of Medicine', 'biomedical research workforce compensation and grants'),
+    'csc':        ('Civil Service Commission (Legacy)', 'federal merit system compensation historical standards'),
+    'abmc-comp':  ('American Battle Monuments Commission', 'overseas federal workforce compensation standards'),
+    'fincen':     ('Financial Crimes Enforcement Network (FinCEN)', 'AML compliance officer compensation and BSA incentive structures'),
+    'cdfi':       ('CDFI Fund', 'community development financial institution executive compensation'),
+    'bfs':        ('Bureau of the Fiscal Service', 'federal payment system workforce compensation standards'),
+    'farc':       ('Federal Acquisition Regulatory Council', 'federal contractor compensation cost allowability'),
+    # Additional US federal — quasi-governmental
+    'amtrak':     ('National Railroad Passenger Corporation (Amtrak)', 'intercity rail worker collective bargaining and compensation'),
+    'tvа':        ('Tennessee Valley Authority', 'federal utility executive compensation and workforce standards'),
+    'usps-lab':   ('USPS Labor Relations', 'postal collective bargaining unit compensation negotiations'),
+    'fed-res-banks': ('Federal Reserve Bank System (District Banks)', 'reserve bank president and officer compensation governance'),
+    'fhlb':       ('Federal Home Loan Bank System', 'FHLB executive compensation and member institution standards'),
+    'ffb':        ('Federal Financing Bank', 'federal agency borrowing and workforce cost standards'),
+    'eximbank-ins': ('Export-Import Bank Office of Inspector General', 'export finance workforce compensation oversight'),
+    'lsc':        ('Legal Services Corporation', 'federally funded legal aid attorney compensation and benefits'),
+    'usip':       ('U.S. Institute of Peace', 'peace and conflict research workforce compensation'),
+    'pclob':      ('Privacy and Civil Liberties Oversight Board', 'oversight board workforce compensation and independence'),
+    # Additional states — Puerto Rico & territories
+    'pr-dol':     ('Puerto Rico Department of Labor and Human Resources', 'Puerto Rico wage standards and labor code'),
+    'pr-dtrh':    ('Puerto Rico Department of Treasury', 'Puerto Rico income and employment tax treatment of compensation'),
+    'gu-dol':     ('Guam Department of Labor', 'Guam wage standards and employment law'),
+    'vi-dol':     ('U.S. Virgin Islands Department of Labor', 'USVI wage and hour enforcement'),
+    'as-dol':     ('American Samoa Department of Human Resources', 'American Samoa wage and employment standards'),
+    'mp-dol':     ('CNMI Department of Labor', 'Northern Mariana Islands wage and immigration employment standards'),
+    # Additional states — expanded coverage
+    'ca-ccpa':    ('California Privacy Protection Agency', 'employee data privacy and compensation data handling'),
+    'ca-pub-emp': ('California Public Employment Relations Board (PERB)', 'public sector collective bargaining and wages'),
+    'ny-psc':     ('New York Public Service Commission', 'utility executive compensation and rate treatment'),
+    'ny-sofa':    ('New York State Office of the Aging', 'elder care worker compensation and workforce standards'),
+    'ny-dfs-sup': ('NYDFS Superintendent', 'New York financial institution executive pay and governance'),
+    'il-cms':     ('Illinois Department of Central Management Services', 'Illinois state employee classification and pay'),
+    'tx-sos':     ('Texas Secretary of State', 'Texas business entity executive compensation reporting'),
+    'fl-dfs':     ('Florida Department of Financial Services', 'Florida insurance and financial institution compensation'),
+    'pa-puc':     ('Pennsylvania Public Utility Commission', 'utility executive compensation and rate base treatment'),
+    'wa-dfr':     ('Washington Department of Financial Institutions', 'state bank executive compensation governance'),
+    'co-puc':     ('Colorado Public Utilities Commission', 'utility executive compensation and earned revenue standards'),
+    'oh-puco':    ('Public Utilities Commission of Ohio', 'utility workforce and executive compensation standards'),
+    'mi-mpsc':    ('Michigan Public Service Commission', 'utility executive compensation and rate regulation'),
+    'mn-puc':     ('Minnesota Public Utilities Commission', 'utility executive compensation and service standards'),
+    'nj-bpu':     ('New Jersey Board of Public Utilities', 'utility executive compensation and rate base treatment'),
+    'md-psc':     ('Maryland Public Service Commission', 'utility executive pay and customer rate impact'),
+    'ct-pura':    ('Connecticut Public Utilities Regulatory Authority', 'utility executive compensation governance'),
+    'ma-dpu':     ('Massachusetts Department of Public Utilities', 'utility executive compensation and rate of return'),
+    'ga-psc':     ('Georgia Public Service Commission', 'utility executive compensation and service standards'),
+    'nc-puc':     ('North Carolina Utilities Commission', 'utility workforce and executive compensation'),
+    'va-scc':     ('Virginia State Corporation Commission', 'Virginia utility and financial institution compensation'),
+    'az-acc':     ('Arizona Corporation Commission', 'utility executive compensation and rate base treatment'),
+    'or-puc':     ('Oregon Public Utility Commission', 'utility executive compensation and equity frameworks'),
+    'nv-puc':     ('Nevada Public Utilities Commission', 'utility executive compensation and rate standards'),
+    # Additional self-regulatory and professional bodies
+    'cfa':        ('CFA Institute', 'investment professional compensation ethics and standards'),
+    'cfp-board':  ('CFP Board', 'financial planning professional compensation fiduciary standards'),
+    'actuaries':  ('American Academy of Actuaries', 'actuarial professional compensation and standard of care'),
+    'napfa':      ('National Association of Personal Financial Advisors', 'fee-only advisor compensation model standards'),
+    'siia':       ('Self-Insurance Institute of America', 'self-funded plan compensation and fiduciary standards'),
+    'nahu':       ('National Association of Health Underwriters', 'health insurance broker compensation standards'),
+    'naifa':      ('National Association of Insurance and Financial Advisors', 'insurance professional compensation disclosure'),
+    'irmi':       ('International Risk Management Institute', 'risk management professional compensation benchmarking'),
+    'rims':       ('Risk and Insurance Management Society', 'corporate risk officer compensation and governance'),
+    'worldatwork': ('WorldatWork', 'total rewards and compensation management professional standards'),
+    'hrci':       ('HR Certification Institute', 'human resources professional compensation credentialing standards'),
+    'ipma-hr':    ('International Public Management Association for HR', 'public sector HR and compensation standards'),
+    'nspe':       ('National Society of Professional Engineers', 'engineering professional compensation ethics'),
+    'asce':       ('American Society of Civil Engineers', 'civil engineering workforce compensation and standards'),
+    'ieee':       ('Institute of Electrical and Electronics Engineers', 'technology workforce compensation policy'),
+    'acm':        ('Association for Computing Machinery', 'computing professional compensation and equity standards'),
+    'aamc':       ('Association of American Medical Colleges', 'academic physician compensation benchmarking and equity'),
+    'mgma':       ('Medical Group Management Association', 'physician practice compensation survey standards'),
+    'ache':       ('American College of Healthcare Executives', 'hospital executive compensation governance'),
+    'hfma':       ('Healthcare Financial Management Association', 'healthcare CFO compensation and incentive standards'),
+    'amga':       ('American Medical Group Association', 'multispecialty group physician compensation standards'),
+    'nacubo':     ('National Association of College and University Business Officers', 'higher education executive pay'),
+    'aau':        ('Association of American Universities', 'research university faculty and executive compensation'),
+    'aaup':       ('American Association of University Professors', 'faculty salary standards and academic compensation'),
+    'nca-hlc':    ('Higher Learning Commission', 'accreditation and higher education executive compensation oversight'),
+    'apwu':       ('American Postal Workers Union', 'postal collective bargaining and compensation standards'),
+    'teamsters':  ('International Brotherhood of Teamsters', 'transportation worker collective bargaining and wage standards'),
+    'seiu':       ('Service Employees International Union', 'healthcare and public sector worker compensation campaigns'),
+    'uaw':        ('United Auto Workers', 'automotive and manufacturing worker collective bargaining and compensation'),
+    'usw':        ('United Steelworkers', 'steel and manufacturing worker wage standards and benefits'),
+    'iuoe':       ('International Union of Operating Engineers', 'heavy equipment operator compensation and benefits'),
+    'ibew':       ('International Brotherhood of Electrical Workers', 'electrical worker wage standards and benefits'),
+    'afscme':     ('American Federation of State, County and Municipal Employees', 'public sector compensation and benefits'),
+    'afge':       ('American Federation of Government Employees', 'federal employee compensation and bargaining'),
+    'cwa':        ('Communications Workers of America', 'telecommunications worker compensation and benefits'),
+    'iamaw':      ('International Association of Machinists and Aerospace Workers', 'aerospace worker collective bargaining'),
+    'unite-here': ('UNITE HERE', 'hospitality and apparel worker wage standards and benefits'),
+    'ufcw':       ('United Food and Commercial Workers', 'retail and food processing worker compensation standards'),
+    'nlpc':       ('National Legal and Policy Center', 'union executive compensation transparency and disclosure'),
+    # Additional international — multilateral
+    'g20-fwg':    ('G20 Framework Working Group', 'global compensation and inequality policy coordination'),
+    'g7-comp':    ('G7 Finance Ministers Working Group on Compensation', 'cross-border executive pay governance'),
+    'oecd-cg':    ('OECD Corporate Governance Committee', 'OECD Principles of Corporate Governance and board pay'),
+    'oecd-daf':   ('OECD Directorate for Financial and Enterprise Affairs', 'international executive compensation policy'),
+    'oecd-els':   ('OECD Employment, Labour and Social Affairs Directorate', 'comparative wage policy and labor market standards'),
+    'ifc':        ('International Finance Corporation', 'developing economy corporate compensation and governance'),
+    'ebrd':       ('European Bank for Reconstruction and Development', 'emerging market institution compensation standards'),
+    'idb':        ('Inter-American Development Bank', 'Latin American corporate compensation and labor standards'),
+    'adb':        ('Asian Development Bank', 'Asia-Pacific labor standards and compensation policy'),
+    'afdb':       ('African Development Bank', 'African continent labor and compensation development standards'),
+    'un-women':   ('UN Women', 'gender pay gap and women\'s economic empowerment standards'),
+    'un-global-labor': ('UN Special Rapporteur on Contemporary Forms of Slavery', 'compensation-related forced labor standards'),
+    'icgn':       ('International Corporate Governance Network', 'global board remuneration governance principles'),
+    'isprm':      ('ISS Governance', 'proxy advisory compensation analysis and voting guidelines'),
+    'glass-lewis': ('Glass Lewis', 'proxy advisory executive compensation review methodology'),
+    'pgim':       ('PGIM Fixed Income Governance', 'institutional investor compensation engagement standards'),
+    'unpri':      ('UN Principles for Responsible Investment', 'ESG-linked compensation and investor stewardship'),
+    'tcfd':       ('Task Force on Climate-related Financial Disclosures (TCFD)', 'climate-linked executive incentive standards'),
+    'sasb':       ('Sustainability Accounting Standards Board (SASB)', 'sector-specific human capital compensation metrics'),
+    'ghgp':       ('GHG Protocol', 'sustainability compensation incentive design standards'),
+    'cdp':        ('CDP (formerly Carbon Disclosure Project)', 'climate performance and compensation link reporting'),
+    'issb':       ('International Sustainability Standards Board (ISSB)', 'IFRS sustainability human capital disclosure standards'),
 }
 
 # ── Policy slug vocabulary ────────────────────────────────────────────────────
@@ -1608,6 +1847,218 @@ POLICY_SLUGS = [
     'nlra-and-the-use-of-workplace-surveillance-technology',
     'employee-data-and-privacy-rights-in-the-workplace',
     'captive-audience-meetings-and-nlra-protections',
+
+    # Wage & Hour — Advanced Topics
+    'predictive-scheduling-and-advance-notice-requirements',
+    'split-shift-and-reporting-time-pay-rules',
+    'employee-expense-reimbursement-and-wage-deduction-limits',
+    'piece-rate-compensation-and-rest-period-pay',
+    'biometric-timekeeping-and-wage-calculation-accuracy',
+    'rounding-practices-and-flsa-compliance',
+    'donning-and-doffing-compensability-guidance',
+    'home-care-aide-overtime-exemption-reform',
+    'agricultural-h-2a-worker-wage-standards',
+    'subminimum-wage-section-14c-elimination',
+    'salary-compression-and-internal-equity-standards',
+    'incentive-pay-clawback-and-wage-deduction-rules',
+    'equity-compensation-and-flsa-regular-rate',
+    'signing-bonus-forfeiture-and-employment-contract-enforceability',
+    'on-demand-pay-and-early-wage-access-programs',
+    'wage-theft-criminal-prosecution-standards',
+    'wage-and-hour-recordkeeping-modernization',
+    'lactation-accommodation-and-compensable-time',
+    'remote-work-time-tracking-and-overtime-risk',
+    'off-the-clock-work-and-preliminary-activities',
+
+    # Executive Pay — Emerging Areas
+    'spac-compensation-and-executive-alignment',
+    'blank-check-company-compensation-disclosure',
+    'de-spac-transaction-compensation-governance',
+    'venture-capital-portfolio-company-compensation',
+    'startup-equity-refresher-grant-standards',
+    'pre-ipo-equity-compensation-planning',
+    'dual-trigger-accelerated-vesting-standards',
+    'performance-vesting-condition-rigor',
+    'market-capitalization-weighted-compensation-metrics',
+    'total-shareholder-return-comparator-selection',
+    'nonrecourse-loan-to-purchase-company-stock',
+    'executive-loan-and-sarbanes-oxley-prohibition',
+    'restricted-stock-unit-and-section-409a-compliance',
+    'phantom-stock-plan-design-and-governance',
+    'stock-appreciation-right-valuation-standards',
+    'employee-stock-purchase-plan-nondiscrimination',
+    'incentive-stock-option-alternative-minimum-tax',
+    'qualified-small-business-stock-gain-exclusion',
+    'section-1202-and-startup-equity-tax-planning',
+    'double-trigger-clawback-design-standards',
+
+    # Benefits & Retirement — Niche Topics
+    'grandfathered-health-plan-status-and-compensation',
+    'health-plan-subrogation-and-employee-claims',
+    'fiduciary-liability-and-excessive-fee-claims',
+    'participant-directed-investment-and-safe-harbor',
+    'qualified-default-investment-alternative-standards',
+    'target-date-fund-selection-and-fiduciary-duty',
+    'church-plan-exemption-and-pension-benefits',
+    'governmental-plan-and-457b-deferred-compensation',
+    'top-hat-plan-deferral-limits-and-governance',
+    'rabbi-trust-and-unsecured-promise-standards',
+    'secular-trust-and-taxable-compensation-treatment',
+    'supplemental-unemployment-benefit-plan-design',
+    'veba-trust-and-retiree-medical-benefits',
+    'post-retirement-medical-plan-accounting-and-funding',
+    'cobra-premium-subsidy-and-employer-coordination',
+    'qualified-medical-child-support-order-compliance',
+    'domestic-partner-benefits-and-tax-treatment',
+    'aca-shared-responsibility-penalty-relief',
+    'wellness-program-hipaa-nondiscrimination-rules',
+    'high-deductible-health-plan-and-hsa-eligibility',
+
+    # Pay Equity — Niche & Technical
+    'regression-analysis-methodology-in-pay-equity-audits',
+    'job-leveling-and-grade-banding-in-pay-equity',
+    'market-pricing-methodology-and-pay-equity-tension',
+    'internal-equity-adjustments-and-budget-planning',
+    'promotion-rate-analysis-and-opportunity-equity',
+    'bonus-funding-allocation-and-equity-disparities',
+    'sales-compensation-plan-and-pay-equity-risk',
+    'commission-calculation-and-pay-equity-compliance',
+    'merit-increase-budget-distribution-equity',
+    'pay-equity-in-reduction-in-force-decisions',
+    'market-adjustment-and-pay-equity-tradeoffs',
+    'pay-equity-in-performance-improvement-plan-situations',
+    'pay-equity-and-geographic-differential-pay-policies',
+    'pay-equity-and-flexible-work-compensation-adjustments',
+    'pay-equity-and-remote-work-location-based-pay',
+
+    # Corporate Governance — Specialized
+    'controlled-company-exemption-and-compensation',
+    'majority-voting-standard-and-director-accountability',
+    'golden-leash-payments-and-shareholder-disclosure',
+    'shadow-voting-and-proxy-advisory-influence',
+    'environmental-linked-executive-pay-design',
+    'social-metric-executive-pay-linkage-and-rigor',
+    'carbon-credit-and-executive-compensation-linkage',
+    'board-oversight-of-executive-pay-and-risk',
+    'ceo-pay-disconnect-and-corporate-governance-reform',
+    'proxy-voting-transparency-and-fund-manager-disclosure',
+    'stewardship-code-and-compensation-voting-disclosure',
+    'say-on-pay-engagement-and-institutional-investor-dialogue',
+    'ceo-succession-planning-and-interim-compensation',
+    'retirement-eligibility-and-equity-vesting-acceleration',
+    'rabbi-trust-and-change-in-control-protections',
+
+    # Labor Markets & Competition
+    'labor-market-monopsony-and-wage-effects',
+    'employer-concentration-and-wage-suppression',
+    'occupational-licensing-and-labor-mobility-barriers',
+    'right-to-work-laws-and-compensation-levels',
+    'minimum-wage-and-employment-effects-research',
+    'living-wage-ordinances-and-regional-spillovers',
+    'wage-inequality-and-executive-compensation-interaction',
+    'tip-credit-and-tipped-minimum-wage-research',
+    'mandatory-arbitration-and-wage-theft-deterrence',
+    'class-action-litigation-and-wage-compliance-incentives',
+    'collective-action-problem-in-executive-pay',
+    'tournament-theory-and-executive-pay-compression',
+    'pay-compression-and-retention-risk',
+    'compensation-benchmarking-and-wage-inflation',
+    'labor-market-information-asymmetry-and-regulation',
+
+    # Healthcare Policy — Compensation Intersections
+    'hospital-system-consolidation-and-physician-wages',
+    'employed-physician-compensation-model-transitions',
+    'rvu-based-physician-compensation-reform',
+    'physician-burnout-and-compensation-redesign',
+    'nurse-practitioner-pay-parity-and-scope-of-practice',
+    'locum-tenens-and-agency-staffing-compensation',
+    'traveling-nurse-wage-inflation-and-policy-response',
+    'hospital-at-home-program-worker-compensation',
+    'clinical-ladder-and-nursing-compensation-advancement',
+    'value-based-contract-and-shared-savings-compensation',
+    'bundled-payment-and-clinical-team-incentive-design',
+    'capitation-and-physician-incentive-alignment',
+    'quality-metric-and-physician-bonus-design',
+    'star-rating-and-health-plan-executive-bonus',
+    'population-health-management-and-care-manager-compensation',
+
+    # Financial Services — Specialized
+    'managing-director-and-partner-compensation-governance',
+    'carry-distribution-and-lp-advisory-committee-oversight',
+    'fund-of-funds-fee-on-fee-and-transparency',
+    'co-investment-economics-and-gp-compensation',
+    'secondary-transaction-and-compensation-treatment',
+    'continuation-fund-and-manager-rollover-economics',
+    'preferred-equity-and-deal-team-compensation',
+    'venture-debt-lender-compensation-and-conflicts',
+    'spac-sponsor-promote-and-compensation-disclosure',
+    'family-office-exemption-and-compensation-governance',
+    'registered-investment-adviser-succession-compensation',
+    'investment-bank-fairness-opinion-fee-independence',
+    'asset-manager-proxy-voting-and-compensation-influence',
+    'esg-fund-labeling-and-portfolio-manager-compensation',
+    'retail-investor-protection-and-broker-compensation',
+
+    # Technology & Innovation — Deep Topics
+    'algorithmic-compensation-setting-explainability',
+    'ai-performance-review-and-discriminatory-impact',
+    'wearable-device-data-and-worker-compensation',
+    'predictive-analytics-in-workforce-planning',
+    'people-analytics-and-privacy-in-compensation',
+    'talent-intelligence-platform-and-bias-auditing',
+    'continuous-feedback-and-performance-based-pay',
+    'ots-and-offshore-outsourcing-wage-standards',
+    'h-1b-wage-level-methodology-reform',
+    'prevailing-wage-for-ai-and-machine-learning-roles',
+    'platform-worker-tip-income-and-tax-reporting',
+    'remote-work-expense-reimbursement-standards',
+    'bring-your-own-device-and-compensable-time',
+    'electronic-monitoring-and-off-duty-privacy',
+    'ai-generated-work-product-and-compensation-credit',
+
+    # State & Local Regulatory Landscape
+    'california-pay-data-reporting-sb-973',
+    'colorado-equal-pay-for-equal-work-act-compliance',
+    'new-york-city-pay-transparency-local-law',
+    'illinois-equal-pay-act-certification',
+    'washington-state-pay-equity-and-transparency',
+    'massachusetts-equal-pay-act-compliance',
+    'oregon-equal-pay-act-and-pay-equity-analysis',
+    'connecticut-pay-equity-law-compliance',
+    'rhode-island-pay-equity-act-compliance',
+    'hawaii-equal-pay-law-compliance',
+    'nevada-pay-transparency-law-compliance',
+    'minnesota-pay-transparency-and-equity-laws',
+    'new-jersey-equal-pay-act-compliance',
+    'maryland-equal-pay-for-equal-work-compliance',
+    'ohio-minimum-wage-and-pay-practices',
+    'texas-at-will-employment-and-compensation',
+    'florida-minimum-wage-amendment-implementation',
+    'michigan-earned-sick-time-and-compensation',
+    'pennsylvania-equal-pay-and-compensation-practices',
+    'georgia-right-to-work-and-compensation-implications',
+    'seattle-minimum-wage-ordinance-and-small-business',
+    'san-francisco-minimum-wage-and-benefits-mandates',
+    'new-york-city-fast-food-worker-scheduling-rules',
+    'chicago-fair-workweek-ordinance-compliance',
+    'los-angeles-hotel-worker-minimum-wage-ordinance',
+
+    # Emerging Topics
+    'four-day-workweek-pilot-and-overtime-implications',
+    'universal-basic-income-and-employment-law-intersection',
+    'robot-tax-and-displaced-worker-compensation-fund',
+    'platform-cooperative-and-worker-ownership-models',
+    'worker-ownership-trust-and-employee-compensation',
+    'social-enterprise-and-below-market-compensation',
+    'nonprofit-executive-pay-and-irs-rebuttable-presumption',
+    'dark-pattern-employment-contract-and-enforceability',
+    'forced-labor-and-supply-chain-compensation-due-diligence',
+    'child-labor-enforcement-and-contractor-compensation',
+    'prison-labor-and-prevailing-wage-standards',
+    'domestic-worker-rights-and-compensation-protections',
+    'tipped-worker-one-fair-wage-proposals',
+    'pay-and-benefits-for-migrant-agricultural-workers',
+    'compensation-and-just-transition-for-coal-workers',
 ]
 
 # ── Document type definitions ─────────────────────────────────────────────────
@@ -1656,6 +2107,50 @@ DOCUMENT_TYPES = [
     ('statistical-analysis-report', 'Statistical Analysis Report'),
     ('fact-sheet',              'Fact Sheet'),
     ('roundtable-summary',      'Public Roundtable Summary'),
+    # Stakeholder engagement
+    ('public-comment-summary',  'Public Comment Summary'),
+    ('listening-session-summary', 'Listening Session Summary'),
+    ('stakeholder-survey-results', 'Stakeholder Survey Results'),
+    ('industry-task-force-report', 'Industry Task Force Report'),
+    ('consensus-statement',     'Consensus Statement'),
+    # Academic & research output
+    ('working-paper',           'Working Paper'),
+    ('literature-review',       'Literature Review'),
+    ('empirical-study',         'Empirical Study'),
+    ('case-study',              'Case Study'),
+    ('comparative-analysis',    'Comparative Jurisdictional Analysis'),
+    # Internal governance documents submitted to agencies
+    ('model-policy',            'Model Policy'),
+    ('model-clause',            'Model Contract Clause'),
+    ('model-disclosure',        'Model Disclosure Form'),
+    ('compliance-checklist',    'Compliance Checklist'),
+    ('self-assessment-tool',    'Employer Self-Assessment Tool'),
+    # Negotiated/collaborative rulemaking
+    ('reg-neg-proposal',        'Negotiated Rulemaking Proposal'),
+    ('anprm-response',          'Response to Advance Notice of Proposed Rulemaking'),
+    ('safe-harbor-proposal',    'Safe Harbor Design Proposal'),
+    ('alternative-regulatory-approach', 'Alternative Regulatory Approach'),
+    # Congressional & legislative
+    ('legislative-proposal',    'Legislative Proposal'),
+    ('congressional-briefing',  'Congressional Briefing Paper'),
+    ('markup-recommendations',  'Bill Markup Recommendations'),
+    ('legislative-findings',    'Legislative Findings Memorandum'),
+    # Crisis/emergency response
+    ('emergency-guidance',      'Emergency Guidance'),
+    ('pandemic-compensation-guidance', 'Pandemic Compensation Guidance'),
+    ('disaster-relief-compensation-memo', 'Disaster Relief Compensation Memorandum'),
+    # International & cross-border
+    ('international-comparison', 'International Comparative Analysis'),
+    ('treaty-compliance-memo',  'Treaty Compliance Memorandum'),
+    ('cross-border-advisory',   'Cross-Border Compensation Advisory'),
+    # Investor relations & governance
+    ('proxy-advisor-engagement', 'Proxy Advisor Engagement Letter'),
+    ('shareholder-engagement-statement', 'Shareholder Engagement Statement'),
+    ('investor-briefing',       'Investor Briefing Paper'),
+    # Training & education
+    ('training-curriculum',     'Training Curriculum Outline'),
+    ('employer-education-brief', 'Employer Education Brief'),
+    ('annotated-regulation',    'Annotated Regulation'),
 ]
 
 # ── Signatory generation ──────────────────────────────────────────────────────
@@ -1958,6 +2453,160 @@ LEGISLATION = [
     'the NYSE Listed Company Manual Section 303A',
     'the NASDAQ Listing Rule 5600 Series',
     'the COSO Internal Control - Integrated Framework',
+    # Additional Civil Rights & Employment
+    'the Equal Credit Opportunity Act',
+    'the Vocational Rehabilitation Act Amendments of 1974',
+    'the Executive Order 11375 on Sex Discrimination',
+    'the Pregnancy Workers Fairness Act of 2022',
+    'the Providing Urgent Maternal Protections (PUMP) for Nursing Mothers Act',
+    'the Speak Out Act of 2022',
+    'the Ending Forced Arbitration of Sexual Assault and Sexual Harassment Act',
+    'the Ending Forced Arbitration of Race and Disability Claims Act',
+    'the Pregnant Workers Fairness Act (PWFA)',
+    'the Jury Systems Improvement Act',
+    # Additional Wage & Hour
+    'the Minimum Wage Fairness Act',
+    'the Raise the Wage Act',
+    'the Schedules That Work Act',
+    'the Living Wage Now Act',
+    'the Pay Equity for All Act',
+    'the Wage Theft Prevention and Wage Recovery Act',
+    'the Stop Wage Theft Act',
+    'the Payroll Fraud Prevention Act',
+    'the Employee Overtime Protection Act',
+    'the Worker Flexibility and Choice Act',
+    'the Gig Worker Equity and Benefits Act',
+    # Additional Labor Relations & Worker Rights
+    'the PRO Act (Protecting the Right to Organize Act)',
+    'the Public Safety Employer-Employee Cooperation Act',
+    'the Employee Rights Act',
+    'the Voluntary Employee Beneficiary Association Act',
+    'the Workplace Democracy Act',
+    'the Workplace Violence Prevention for Health Care and Social Service Workers Act',
+    'the Essential Workers Bill of Rights',
+    'the Schedules That Work Act',
+    'the Domestic Workers Bill of Rights Act',
+    'the Farmworker Fair Labor Practices Act',
+    # Additional ERISA & Benefits
+    'the SECURE 2.0 Act of 2022',
+    'the American Rescue Plan Act ERISA provisions',
+    'the Setting Every Community Up for Retirement Enhancement (SECURE) Act',
+    'the Bipartisan American Miners Act',
+    'the Pension Benefit Guaranty Corporation Improvement Act',
+    'the Multiemployer Pension Plan Emergency Relief Act',
+    'the Cooperative and Small Employer Charity Pension Flexibility Act',
+    'the SIMPLE Plan Modernization Act',
+    'the Emergency Retirement Income Security Act',
+    'the Retirement Savings Modernization Act',
+    # Additional Securities & Governance
+    'the Corporate Transparency Act',
+    'the Investor Protection and Capital Markets Fairness Act',
+    'the Shareholder Protection Act',
+    'the CEO Accountability and Responsibility Act',
+    'the Stop Wall Street Looting Act',
+    'the Reward Work Act',
+    'the Accountable Capitalism Act',
+    'the Excessive CEO Pay Act',
+    'the Tax Excessive CEO Pay Act',
+    'the Worker Dividend Act',
+    'the Corporate Governance Improvement and Investor Protection Act',
+    'the Executive Compensation Accountability Act',
+    # Additional Tax
+    'Section 461(l) of the Internal Revenue Code (excess business loss limitations)',
+    'Section 4960 of the Internal Revenue Code (excise tax on executive compensation)',
+    'Section 162(f) of the Internal Revenue Code (fines and penalties deductibility)',
+    'Section 404 of the Internal Revenue Code (deductibility of deferred compensation)',
+    'Section 132 of the Internal Revenue Code (fringe benefit exclusions)',
+    'Section 127 of the Internal Revenue Code (educational assistance)',
+    'Section 129 of the Internal Revenue Code (dependent care)',
+    'Section 137 of the Internal Revenue Code (adoption assistance)',
+    'Section 79 of the Internal Revenue Code (group-term life insurance)',
+    'the American Families Plan tax proposals',
+    # Additional Federal Contracting
+    'the Contract Work Hours and Safety Standards Act',
+    'the Buy American Act',
+    'Executive Order 13706 on Establishing Paid Sick Leave for Federal Contractors',
+    'Executive Order 13495 on Nondisplacement of Qualified Workers under Service Contracts',
+    'the Consolidated Appropriations Act procurement provisions',
+    'the Defense Contract Audit Agency guidelines on allowable compensation costs',
+    'the False Claims Act as applied to wage and benefit cost representations',
+    'the Federal Acquisition Regulation subpart 31.205-6 (compensation for personal services)',
+    # Additional Healthcare
+    'the Medicare and Medicaid Patient and Program Protection Act',
+    'the Anti-Kickback Statute safe harbor regulations',
+    'the Eliminating Kickbacks in Recovery Act (EKRA)',
+    'the Affordable Care Act Section 1557 nondiscrimination provisions',
+    'the Emergency Medical Treatment and Labor Act (EMTALA)',
+    'the Hospital Readmissions Reduction Program',
+    'the Merit-based Incentive Payment System (MIPS) rules',
+    'the Alternative Payment Model framework for physician compensation',
+    # Additional Antitrust & Competition
+    'the Hart-Scott-Rodino Antitrust Improvements Act',
+    'the Horizontal Merger Guidelines',
+    'the Vertical Merger Guidelines',
+    'the DOJ and FTC Antitrust Guidance for Human Resource Professionals',
+    'the Competition and Antitrust Law Enforcement Reform Act',
+    'the American Innovation and Choice Online Act',
+    # State & Local (Additional)
+    'the New Jersey Equal Pay Act amendments',
+    'the Maryland Equal Pay for Equal Work Act',
+    'the Massachusetts Equal Pay Act',
+    'the Oregon Equal Pay Act',
+    'the Hawaii Equal Pay Law',
+    'the Nevada SB 293 pay transparency law',
+    'the Minnesota pay transparency and equity statutes',
+    'the Washington Equal Pay and Opportunities Act',
+    'the California SB 1162 pay data reporting law',
+    'the Illinois Equal Pay Act certification requirement',
+    'the Connecticut Act Concerning the Disclosure of Salary Range for a Vacant Position',
+    'the Rhode Island Equal Pay Law',
+    'the New York Labor Law Equal Pay provisions',
+    'the New York City Salary Transparency Law (Local Law 32)',
+    'the Seattle Wage Theft Ordinance',
+    'the San Francisco Minimum Wage Ordinance',
+    'the Chicago Minimum Wage Ordinance',
+    # International (Additional)
+    'the EU Corporate Sustainability Due Diligence Directive (CS3D)',
+    'the German Supply Chain Due Diligence Act (LkSG)',
+    'the French Duty of Vigilance Law',
+    'the Norwegian Transparency Act on supply chain due diligence',
+    'the Australian Modern Slavery Act 2018',
+    'the Canadian Fighting Against Forced Labour and Child Labour in Supply Chains Act',
+    'the Japanese Act on Promotion of Women\'s Participation and Advancement in the Workplace',
+    'the South Korean Act on the Promotion of Equal Employment and Support for Work-Family Reconciliation',
+    'the Singapore Fair Consideration Framework',
+    'the ILO Convention No. 100 on Equal Remuneration',
+    'the ILO Convention No. 111 on Discrimination',
+    'the ILO Decent Work Agenda',
+    'the OECD Due Diligence Guidance for Responsible Business Conduct',
+    'the UN Women\'s Empowerment Principles',
+    'the G7 and G20 Labor and Employment Ministers\' conclusions on pay equity',
+    # Emerging & Proposed Legislation
+    'the Algorithmic Accountability Act',
+    'the AI in Employment Act',
+    'the Automated Decision Systems Accountability Act',
+    'the Biometric Information Privacy Act (federal proposal)',
+    'the American Data Privacy and Protection Act (ADPPA)',
+    'the Workforce Investment in Reskilling and Education (WIRE) Act',
+    'the JOBS Act of 2024',
+    'the Portable Benefits for Independent Workers Pilot Program Act',
+    'the Worker Ownership, Readiness, and Knowledge (WORK) Act',
+    'the Employee Ownership Tax Credit Act',
+    'the National Apprenticeship Act',
+    'the Clean Economy Jobs and Innovation Act',
+    'the Build Back Better Act labor provisions',
+    'the Creating Helpful Incentives to Produce Semiconductors (CHIPS) Act workforce provisions',
+    'the Infrastructure Investment and Jobs Act prevailing wage requirements',
+    'the Inflation Reduction Act prevailing wage and apprenticeship requirements',
+    'the Protecting Older Workers Against Discrimination Act',
+    'the Ending Subminimum Wages Act',
+    'the BE HEARD in the Workplace Act',
+    'the CROWN Act (Creating a Respectful and Open World for Natural Hair)',
+    'the Federal Employees Paid Parental Leave Act',
+    'the Federal Employee Paid Leave Act expansion proposals',
+    'the FAMILY Act (Federal Family and Medical Insurance Leave)',
+    'the Universal Paid Leave Act',
+    'the Healthy Families Act',
 ]
 
 # ── Content templates ─────────────────────────────────────────────────────────
@@ -2121,6 +2770,135 @@ SUMMARY_TEMPLATES = {
         "submits these comments in response to the {agency}'s proposal addressing {topic}. Our analysis "
         "reflects both the empirical evidence available in our research database and the practical experience "
         "of organizations that will be subject to any final rule in this area.",
+
+        "ACPWB submits these comments following an extensive review of the {agency}'s regulatory agenda and "
+        "the evidence base supporting the proposed rulemaking on {topic}. Our analysis confirms both the "
+        "importance of the regulatory objective and the inadequacy of the proposed mechanism for achieving it.",
+
+        "These comments reflect the combined institutional knowledge of ACPWB's policy, economics, and legal "
+        "teams, who have spent the past several months evaluating the {agency}'s proposal on {topic} from "
+        "multiple analytical perspectives. The result is a comprehensive and integrated set of recommendations.",
+
+        "ACPWB has followed the {agency}'s deliberations on {topic} closely and is grateful for the "
+        "opportunity to contribute to the public record. This comment letter represents ACPWB's considered "
+        "institutional position, developed after extensive internal deliberation and consultation with "
+        "employer clients of all sizes.",
+
+        "The {agency}'s proposed rule on {topic} arrives at a pivotal moment in the evolution of "
+        "compensation regulation. ACPWB submits these comments to ensure that the record reflects the "
+        "practical realities of employer compensation practice as it exists today, not as it was a decade ago.",
+
+        "ACPWB has been a consistent voice in the regulatory debate over {topic} for many years. These "
+        "comments update and extend our prior submissions to address the specific proposal now before the "
+        "{agency} and to reflect developments in our research since our last engagement with this issue.",
+
+        "These comments are submitted by ACPWB on behalf of a diverse set of employer organizations that "
+        "have asked ACPWB to synthesize and convey their concerns about the {agency}'s proposed approach "
+        "to {topic}. The concerns are significant, and we urge the agency to take them seriously.",
+
+        "ACPWB's comment letter on the {agency}'s proposed rule on {topic} is structured around a single "
+        "organizing principle: regulatory requirements must be calibrated to the reality of employer "
+        "practice, not to an idealized model that does not reflect how compensation decisions are "
+        "actually made.",
+
+        "The empirical picture of {topic} is more complex than the {agency}'s proposal acknowledges. "
+        "ACPWB's comments are designed to convey that complexity and to propose a regulatory approach "
+        "that is responsive to the full range of situations the rule will encounter in practice.",
+
+        "ACPWB submits these comments in a spirit of constructive engagement with the {agency}'s rulemaking "
+        "on {topic}. We share the agency's goals and believe that a well-designed final rule can advance "
+        "them effectively. The path to that rule runs through the modifications we recommend below.",
+
+        "This comment letter distills lessons from ACPWB's advisory work with employers who have navigated "
+        "prior {agency} rulemakings in related areas. Those lessons are directly applicable to the proposed "
+        "rule on {topic} and inform the practical recommendations we offer in this submission.",
+
+        "ACPWB writes to caution the {agency} against underestimating the diversity of the regulated "
+        "community on {topic}. A rule designed for the median employer may be unworkable for a substantial "
+        "fraction of employers at either end of the size and complexity distribution.",
+
+        "The {year} proposed rule on {topic} builds on earlier {agency} guidance in ways that ACPWB "
+        "strongly supports. Where we part ways with the agency is on several implementation details that, "
+        "without modification, will undermine the rule's effectiveness and generate unnecessary litigation.",
+
+        "ACPWB's comments on {topic} are informed by our conviction that good regulation requires honest "
+        "engagement with inconvenient evidence. We bring to this proceeding data that complicate the "
+        "{agency}'s narrative, not to obstruct regulatory progress, but to ensure that the final rule "
+        "can withstand real-world scrutiny.",
+
+        "These comments address a proposed rule on {topic} that ACPWB has studied in depth. We have "
+        "identified five specific provisions that require amendment, three definitions that require "
+        "clarification, and two compliance timelines that must be extended. Our recommendations are "
+        "specific, actionable, and grounded in empirical evidence.",
+
+        "ACPWB submits these comments to alert the {agency} to a class of employer situations that "
+        "the proposed rule on {topic} does not adequately address. These situations are not edge cases; "
+        "they represent the operating reality of a significant portion of the regulated community.",
+
+        "The {agency}'s proposed rule on {topic} is not merely a technical regulatory matter. It reflects "
+        "a fundamental policy choice about the relationship between government oversight and private "
+        "compensation decision-making. ACPWB's comments engage that broader choice directly and offer "
+        "a principled framework for resolving it.",
+
+        "ACPWB writes in the wake of an extensive listening process in which we solicited the views of "
+        "employer organizations on the {agency}'s proposed rule regarding {topic}. This comment letter "
+        "synthesizes the feedback we received and translates it into specific, actionable recommendations.",
+
+        "The {agency}'s proposed rulemaking on {topic} represents a genuine effort to address longstanding "
+        "problems in the compensation regulatory framework. ACPWB commends the agency's intent and submits "
+        "these comments to help ensure that the final rule lives up to its promise.",
+
+        "ACPWB's analysis of {topic} draws on a unique combination of academic rigor and practitioner "
+        "experience that positions us to offer both theoretical insights and practical recommendations. "
+        "We believe both dimensions are necessary for sound regulatory policy.",
+
+        "ACPWB takes the position that the {agency}'s proposed rule on {topic} is fixable — but only "
+        "if the agency is willing to engage seriously with the practical concerns raised in this and "
+        "other comment submissions. We submit these comments in the hope that such engagement will occur.",
+
+        "The {agency}'s proposal on {topic} would benefit from a clearer articulation of its underlying "
+        "theory of change. Without knowing what mechanism the agency believes will produce the desired "
+        "outcomes, stakeholders cannot evaluate whether the proposed requirements are appropriately "
+        "calibrated.",
+
+        "ACPWB submits these comments with a concrete ask: before finalizing the rule on {topic}, the "
+        "{agency} should convene a technical workshop with affected employers to test whether the proposed "
+        "requirements are operationally feasible. The investment of time would significantly reduce the "
+        "risk of a failed implementation.",
+
+        "These comments respond specifically to the questions for comment posed in the {agency}'s notice "
+        "of proposed rulemaking on {topic}. ACPWB has organized its response to address each question "
+        "in the order posed, while also identifying additional issues the agency did not specifically "
+        "raise but that ACPWB believes are material to the rulemaking.",
+
+        "ACPWB has engaged external economic consultants to independently model the compliance cost "
+        "implications of the {agency}'s proposed rule on {topic}. The results of that engagement "
+        "are summarized in these comments and provided in full in the technical appendix. "
+        "The independent modeling reveals cost estimates substantially higher than the agency's own figures.",
+
+        "The proposed rule on {topic} raises a question that the {agency} has not fully answered: "
+        "what does success look like, and how will the agency know if the rule is achieving it? "
+        "ACPWB's comments urge the agency to define measurable outcomes and commit to a "
+        "retrospective review process as part of the final rule.",
+
+        "ACPWB's institutional history with {topic} spans more than two decades of research, advocacy, "
+        "and advisory work. We submit these comments as the organization with the broadest and most "
+        "sustained engagement with this regulatory area and urge the {agency} to give our "
+        "recommendations the weight they deserve.",
+
+        "The rulemaking record on {topic} is extensive, and ACPWB has reviewed it in its entirety. "
+        "These comments do not rehash arguments that other commenters have already made effectively. "
+        "Instead, we focus on gaps in the record that ACPWB is uniquely positioned to fill.",
+
+        "ACPWB files these comments understanding that the {agency} faces competing pressures from "
+        "stakeholders with diametrically opposed interests regarding {topic}. We urge the agency to "
+        "anchor its analysis to the empirical evidence, which, as we show below, points clearly toward "
+        "the approach ACPWB recommends.",
+
+        "This comment letter is the product of ACPWB's most rigorous analytical effort to date on {topic}. "
+        "We engaged our full policy and research staff, retained outside legal counsel, and conducted "
+        "primary data collection specifically for this proceeding. The result is a submission we believe "
+        "represents the highest standard of stakeholder participation in this rulemaking.",
     ],
     'position-statement': [
         "ACPWB formally expresses its position on {topic} as part of its commitment to sound, "
@@ -2185,6 +2963,68 @@ SUMMARY_TEMPLATES = {
         "This position statement reflects ACPWB's considered view on {topic}, developed after extensive "
         "consultation with compensation professionals, legal practitioners, and academic experts. "
         "We offer this statement as a contribution to sound policymaking.",
+
+        "ACPWB issues this position statement to fill a void in the public debate over {topic}. "
+        "Too much of the discourse has been driven by anecdote and ideology. This statement grounds "
+        "the discussion in data and offers a framework for evaluating competing policy claims on their merits.",
+
+        "The urgency of the policy challenge presented by {topic} compels ACPWB to issue this statement. "
+        "We believe the window for action is narrowing, and we urge policymakers to treat this position "
+        "statement as a call to act — not merely as one more voice in an already crowded debate.",
+
+        "ACPWB's position on {topic} reflects a consensus built through years of research and stakeholder "
+        "engagement. This statement is not a hastily assembled response to current events; it is the "
+        "product of sustained, rigorous institutional inquiry into one of the defining policy challenges "
+        "of our time.",
+
+        "The American Corporation for Public Well Being issues this statement to correct a dangerous "
+        "misconception that has taken hold in the policy debate over {topic}. The misconception — "
+        "described in detail below — has led to policy proposals that will produce outcomes the "
+        "opposite of those intended.",
+
+        "This position statement does not take sides in the partisan debate over {topic}. ACPWB's "
+        "position is grounded in evidence, not ideology, and our conclusions should be judged on "
+        "the merits of the analysis that supports them.",
+
+        "ACPWB's position on {topic} was adopted after a review process that included engagement "
+        "with representatives of workers, employers, regulators, and academic experts. The position "
+        "reflects the points of genuine convergence across these groups and acknowledges where "
+        "significant differences remain.",
+
+        "This statement represents ACPWB's most comprehensive and definitive treatment of {topic} to "
+        "date. It supersedes and incorporates all prior ACPWB statements and policy briefs on "
+        "this subject and should be treated as the organization's authoritative position.",
+
+        "ACPWB issues this position statement not as an end to the debate over {topic}, but as a "
+        "contribution to improving its quality. We welcome pushback on our analysis and invite "
+        "researchers, practitioners, and policymakers to engage with the evidence and reasoning "
+        "presented here.",
+
+        "The policy debate over {topic} has generated more heat than light. ACPWB's position "
+        "statement is designed to reverse that ratio — providing clear, evidence-based analysis "
+        "that advances understanding rather than entrenching positions.",
+
+        "ACPWB's position on {topic} is forward-looking. Rather than relitigating past regulatory "
+        "failures, we focus on the question of what an effective, equitable, and administrable "
+        "regulatory framework would look like, and we offer specific recommendations toward that end.",
+
+        "This statement emerges from ACPWB's recognition that the current regulatory approach to "
+        "{topic} is not working. Our analysis identifies the specific points of failure and proposes "
+        "a coherent alternative that is grounded in the evidence and practicable for employers.",
+
+        "ACPWB adopts this position on {topic} with awareness of the political sensitivity of the "
+        "issue. We have made every effort to ensure that our analysis is genuinely independent and "
+        "that our conclusions follow from the evidence rather than from predetermined conclusions.",
+
+        "The position set out in this statement is one that ACPWB believes most reasonable "
+        "stakeholders — across the political spectrum — can ultimately support, because it is "
+        "grounded in a clear-eyed assessment of the costs, benefits, and trade-offs inherent "
+        "in any regulatory approach to {topic}.",
+
+        "ACPWB's position on {topic} has evolved over time as new evidence has become available. "
+        "This statement reflects our current best understanding of the issue and supersedes "
+        "prior statements to the extent they conflict. We are committed to continued updating "
+        "as the research develops.",
     ],
     'policy-brief': [
         "This policy brief examines the current landscape of {topic} and identifies the key regulatory "
@@ -2611,6 +3451,70 @@ SUMMARY_TEMPLATES = {
         "direct knowledge of how proposed legislative changes would affect compensation systems "
         "across the U.S. economy. We are committed to providing the committee with accurate, "
         "evidence-based analysis.",
+
+        "This testimony presents ACPWB's independent assessment of the economic evidence bearing on "
+        "{topic}. ACPWB accepts no government funding and has no financial interest in the outcome "
+        "of the committee's deliberations. Our only interest is in evidence-based policy.",
+
+        "ACPWB commends the committee for holding this hearing on {topic} and welcomes the opportunity "
+        "to provide testimony. This is an area in which legislative action is warranted, and we urge "
+        "the committee to move forward with the reforms recommended in our testimony.",
+
+        "The testimony ACPWB presents today on {topic} reflects input gathered from employer "
+        "organizations across every region and sector of the American economy. We speak with the "
+        "collective voice of a community that will be directly and significantly affected by any "
+        "legislation the committee advances.",
+
+        "ACPWB respectfully disagrees with certain aspects of legislation that has been introduced "
+        "regarding {topic}. Our testimony explains specifically where the legislation falls short "
+        "and offers constructive amendments that would achieve the committee's stated objectives "
+        "more effectively and with fewer unintended consequences.",
+
+        "The evidence on {topic} is clear, and ACPWB presents it in this testimony with the hope "
+        "that the committee will act on it. We have spent years building the empirical case for "
+        "reform in this area, and we believe the case is now compelling enough to warrant "
+        "legislation.",
+
+        "ACPWB's testimony on {topic} is structured around three questions that the committee should "
+        "consider in evaluating legislative options: (1) What is the nature and scale of the "
+        "problem? (2) What legislative mechanisms are most likely to address it effectively? "
+        "(3) What safeguards are needed to prevent unintended consequences?",
+
+        "In submitting this testimony on {topic}, ACPWB does not advocate for any particular "
+        "political outcome. We advocate for evidence-based legislation that is designed to "
+        "achieve its stated objectives, is administrable, and imposes compliance burdens "
+        "proportionate to its benefits.",
+
+        "This testimony represents the culmination of a multi-year ACPWB research initiative on "
+        "{topic}. We have produced policy briefs, white papers, and comment letters on this "
+        "subject, and we bring that accumulated knowledge to bear in today's hearing.",
+
+        "ACPWB presents this testimony with urgency. The regulatory gap on {topic} has persisted "
+        "for too long, and voluntary measures have proven insufficient. We urge this committee "
+        "to provide the legislative mandate needed to produce meaningful change.",
+
+        "The committee has asked the right questions about {topic}. ACPWB's testimony is designed "
+        "to provide the empirical answers that will help the committee evaluate the legislative "
+        "proposals before it and design a statutory framework that will actually work.",
+
+        "ACPWB submits this statement for the record in lieu of oral testimony. While we were unable "
+        "to appear in person before the committee today, we urge committee members to give full "
+        "consideration to the evidence and recommendations presented in this written submission "
+        "on {topic}.",
+
+        "This testimony is offered in a spirit of bipartisan good faith. ACPWB believes that sound "
+        "evidence and principled analysis can build consensus across party lines on {topic}, and "
+        "we offer this testimony as a contribution to that goal.",
+
+        "ACPWB has submitted testimony at every major legislative hearing on {topic} over the past "
+        "decade, and our position has evolved as the evidence has developed. This testimony "
+        "reflects our current best understanding and supersedes our prior statements to the "
+        "extent they conflict.",
+
+        "The legislative history of {topic} is a cautionary tale. Prior reform efforts failed "
+        "because they were not adequately grounded in evidence about how compensation systems "
+        "actually work. ACPWB's testimony draws on that history and offers a framework for "
+        "avoiding past mistakes.",
     ],
     'amicus-brief': [
         "The American Corporation for Public Well Being submits this brief as amicus curiae to offer "
@@ -2654,6 +3558,70 @@ SUMMARY_TEMPLATES = {
         "ACPWB submits this brief as amicus curiae to address the compensation policy implications "
         "of the court's resolution of {topic}. ACPWB's research database and advisory experience "
         "position it to offer analysis that neither party is likely to present with full rigor.",
+
+        "ACPWB's amicus brief on {topic} is offered with an awareness of the limits of the amicus "
+        "curiae role. We do not seek to relitigate the facts of this case, nor to advocate for "
+        "either party's interests. We seek only to ensure that the court's decision is informed "
+        "by the best available empirical analysis of the issue before it.",
+
+        "The question of {topic} now before the court has significant implications beyond the "
+        "parties to this litigation. ACPWB files this brief to ensure that the court understands "
+        "those broader implications and the extent to which its decision will shape compensation "
+        "practices across the national economy.",
+
+        "ACPWB has appeared as amicus curiae in several prior cases concerning {topic} and related "
+        "issues. Our brief in this case updates the analysis provided in those earlier submissions "
+        "to reflect developments in the law and in the empirical evidence since they were filed.",
+
+        "The parties to this litigation have vigorously contested the legal questions; ACPWB's "
+        "contribution as amicus is to bring the empirical and policy dimensions of {topic} into "
+        "sharper focus for the court's consideration.",
+
+        "As an organization that has studied the practical effects of judicial decisions on {topic}, "
+        "ACPWB is well-positioned to advise the court on the likely real-world consequences of "
+        "the different outcomes it is considering. This brief presents that analysis.",
+
+        "ACPWB files this brief because the questions presented in this case go to the heart of "
+        "how compensation policy is made in the United States, and the court's resolution of "
+        "{topic} will have lasting consequences for employers and workers that deserve to be "
+        "squarely addressed in the court's analysis.",
+
+        "This amicus brief reflects ACPWB's conclusion that the lower court's reasoning on {topic} "
+        "rested on a misunderstanding of how compensation systems work in practice. We respectfully "
+        "urge the court to consider the corrected empirical picture presented in this brief.",
+
+        "ACPWB's research on {topic} provides a basis for firm conclusions about which legal "
+        "standard will produce better outcomes for workers and employers alike. We present that "
+        "research in this brief and urge the court to adopt the approach most consistent "
+        "with the evidence.",
+
+        "The resolution of {topic} in this case will affect the legal landscape under which "
+        "compensation practitioners and their clients operate for years to come. ACPWB files "
+        "this brief to ensure that the precedent set reflects an accurate understanding of "
+        "the relevant economic and regulatory context.",
+
+        "ACPWB respectfully urges the court to adopt the reading of {topic} most consistent "
+        "with the compensatory objectives of the underlying statute. The alternative reading "
+        "advanced by one party would, as ACPWB demonstrates in this brief, produce outcomes "
+        "inconsistent with the statute's text, history, and purpose.",
+
+        "In this brief, ACPWB presents economic modeling that addresses a gap in the parties' "
+        "briefing on {topic}. The modeling demonstrates that the legal standard advocated by "
+        "ACPWB would produce better labor market outcomes than the alternatives, as measured "
+        "by standard welfare metrics.",
+
+        "ACPWB files this brief as an organization that has no stake in the outcome of this "
+        "particular dispute, but a deep institutional interest in the development of sound "
+        "legal frameworks for {topic}. We ask the court to weigh our analysis accordingly.",
+
+        "The brief ACPWB submits here on {topic} is deliberately narrow in scope. We address "
+        "only the question on which ACPWB's expertise provides genuine value: the empirical "
+        "question of how different legal standards would affect compensation practices across "
+        "the national economy.",
+
+        "ACPWB's analysis of the court's prior decisions on {topic} reveals a trajectory that, "
+        "if continued, will produce outcomes inconsistent with sound compensation policy. "
+        "We respectfully urge the court to recalibrate in this case.",
     ],
     'white-paper': [
         "This white paper presents ACPWB's comprehensive analysis of {topic}, drawing on proprietary "
@@ -2667,6 +3635,47 @@ SUMMARY_TEMPLATES = {
         "This white paper synthesizes ACPWB's research findings on {topic} and translates them into "
         "actionable insights for employers, boards, and regulators. The analysis reflects the most "
         "current available data and regulatory developments as of the filing date.",
+
+        "ACPWB presents this white paper as a contribution to the growing body of rigorous research on "
+        "{topic}. The paper is structured to address both the academic and practitioner audiences, "
+        "providing the theoretical framework alongside concrete implementation guidance.",
+
+        "This paper represents the culmination of a multi-year ACPWB research initiative on {topic}. "
+        "It consolidates our findings across annual employer surveys, case study analyses, and "
+        "regulatory review, and presents an integrated framework for understanding and responding to "
+        "the key policy challenges in this area.",
+
+        "ACPWB commissioned this white paper as part of its ongoing commitment to evidence-based "
+        "advocacy on {topic}. The analysis was conducted by ACPWB's research staff and subjected to "
+        "external peer review by subject matter experts at three leading universities.",
+
+        "The purpose of this white paper is to equip decision-makers with the empirical grounding "
+        "necessary to evaluate competing policy approaches to {topic}. ACPWB believes that "
+        "well-informed policy is the only durable path to better outcomes for employers and workers.",
+
+        "This ACPWB white paper on {topic} challenges several widely held assumptions in the policy "
+        "debate and presents original data that we believe should substantially reshape the regulatory "
+        "conversation. The findings have direct and immediate implications for the {agency}'s "
+        "pending rulemaking.",
+
+        "ACPWB's white paper on {topic} addresses a gap in the existing literature: the lack of "
+        "employer-perspective, implementation-focused research on the practical consequences of "
+        "regulatory intervention in this domain. Our analysis fills that gap with proprietary "
+        "data and detailed case documentation.",
+
+        "This paper is the third in ACPWB's white paper series on {topic}. Building on our previous "
+        "two installments, we analyze the most recent data and the most recent regulatory developments, "
+        "updating our conclusions and policy recommendations accordingly.",
+
+        "ACPWB offers this white paper to the {agency} and the public as part of the record for "
+        "the ongoing rulemaking on {topic}. The paper's conclusions support ACPWB's position "
+        "as set out in our formal comment letter, and this paper is incorporated by reference "
+        "into that submission.",
+
+        "This is a white paper, not a comment letter, and it is offered in that spirit: as a "
+        "substantive, research-driven contribution to understanding {topic}, not merely as advocacy. "
+        "ACPWB invites critique and welcomes dialogue with researchers, regulators, and practitioners "
+        "who share our commitment to evidence-based policy.",
     ],
     'supplemental-comments': [
         "ACPWB submits these supplemental comments to address new developments that have arisen since "
@@ -2677,6 +3686,39 @@ SUMMARY_TEMPLATES = {
 
         "ACPWB files these supplemental comments to bring to the {agency}'s attention recent data "
         "and analysis bearing on the proposed rulemaking addressing {topic}.",
+
+        "Since the close of the initial comment period, the {agency} has issued two staff guidance "
+        "documents that materially affect the analysis ACPWB presented in its original submission on {topic}. "
+        "These supplemental comments address those developments and update our recommendations accordingly.",
+
+        "ACPWB submits these supplemental comments because new empirical research published after the "
+        "initial comment period has direct and significant bearing on the {agency}'s regulatory "
+        "approach to {topic}. We urge the agency to consider this new evidence before finalizing the rule.",
+
+        "These supplemental comments are prompted by ACPWB's review of the comment letters filed by "
+        "other parties in this proceeding on {topic}. We write to correct several factual inaccuracies "
+        "and to provide the {agency} with additional data to evaluate the competing claims on the record.",
+
+        "ACPWB files these supplemental comments at the invitation of {agency} staff, who requested "
+        "additional data from ACPWB following its initial submission on {topic}. The supplemental "
+        "data is provided in the attached appendix.",
+
+        "Following the {agency}'s public hearing on {topic}, ACPWB identified several questions raised "
+        "by agency staff that merit a more detailed response than was possible during the hearing. "
+        "These supplemental comments provide that response.",
+
+        "These supplemental comments address the {agency}'s revised economic analysis published in "
+        "connection with the proposed rulemaking on {topic}. ACPWB's initial comments were based on "
+        "the original analysis, and our position warrants updating in light of the revised projections.",
+
+        "ACPWB submits this supplemental filing to provide the {agency} with the results of a new "
+        "ACPWB employer survey specifically designed to address questions raised during the comment "
+        "period on {topic}. The survey results are summarized below and provided in full in Exhibit A.",
+
+        "In these supplemental comments, ACPWB responds to the {agency}'s request for additional "
+        "information regarding the cost-benefit analysis for the proposed rule on {topic}. "
+        "We provide updated estimates using a revised methodology and explain the basis for "
+        "several key assumptions that were questioned in the initial proceeding.",
     ],
     'reply-comments': [
         "ACPWB submits these reply comments in response to comments filed by other parties on the "
@@ -2689,6 +3731,39 @@ SUMMARY_TEMPLATES = {
 
         "ACPWB files these reply comments to clarify the empirical record on {topic} and to respond "
         "to several inaccurate characterizations of ACPWB's research that appeared in other comment submissions.",
+
+        "Having reviewed the full public comment record on the proposed rule addressing {topic}, "
+        "ACPWB submits these reply comments to address three categories of argument advanced by "
+        "opposing commenters: (1) claims regarding the agency's statutory authority; (2) disputed "
+        "empirical assertions; and (3) arguments for alternative regulatory approaches.",
+
+        "ACPWB's reply comments on {topic} are narrowly focused on correcting the record with "
+        "respect to data that was mischaracterized in multiple comment submissions. The errors "
+        "are material to the agency's regulatory analysis and must be addressed before the rule is finalized.",
+
+        "In these reply comments on {topic}, ACPWB addresses the arguments of commenters who "
+        "opposed the approach ACPWB recommended in its initial filing. We find these arguments "
+        "to be either legally flawed, empirically unsupported, or both, and we explain our "
+        "reasoning in detail below.",
+
+        "These reply comments provide ACPWB's response to the trade association coalitions that "
+        "filed opposing comments on the {agency}'s proposed rule on {topic}. While ACPWB shares "
+        "certain of their practical concerns, we believe their core legal and policy arguments "
+        "are mistaken and should not be credited by the agency.",
+
+        "ACPWB's initial comments on {topic} drew a response from several industry groups that "
+        "disputed our empirical findings. These reply comments address those disputes directly, "
+        "providing additional data and methodological documentation to support the conclusions "
+        "ACPWB presented in its initial submission.",
+
+        "Having carefully read the comment submissions filed in support of withdrawing the "
+        "proposed rule on {topic}, ACPWB is compelled to reply. The arguments for withdrawal "
+        "rest on empirical claims that do not withstand scrutiny and legal theories that have "
+        "been repeatedly rejected. We address each category of argument in turn.",
+
+        "These reply comments address the procedural objections raised by several commenters "
+        "regarding the {agency}'s rulemaking process on {topic}. ACPWB believes these objections "
+        "are without merit and that the agency's process was fully consistent with APA requirements.",
     ],
     'ex-parte-submission': [
         "ACPWB submits this ex parte notice to memorialize a meeting held with {agency} staff "
@@ -2701,6 +3776,34 @@ SUMMARY_TEMPLATES = {
         "Pursuant to the {agency}'s ex parte communication policy, ACPWB submits this notice to "
         "document a meeting in which ACPWB representatives discussed their views on {topic} with "
         "agency staff.",
+
+        "This notice documents an ex parte meeting between ACPWB and senior {agency} staff at which "
+        "ACPWB presented updated employer survey data on {topic} and requested that the agency "
+        "consider the data in connection with its pending rulemaking on this matter.",
+
+        "ACPWB files this ex parte notice to document a phone conference with {agency} counsel "
+        "in which ACPWB presented its analysis of alternative regulatory approaches to {topic}. "
+        "The materials distributed during the call are attached as Exhibit A.",
+
+        "In accordance with the {agency}'s notice-and-comment procedures, ACPWB submits this "
+        "ex parte disclosure following a technical briefing provided to {agency} staff on {topic}. "
+        "The briefing materials are incorporated into this submission.",
+
+        "This ex parte notice documents ACPWB's participation in a stakeholder roundtable convened "
+        "by the {agency} on {topic}. ACPWB representatives presented the data and policy "
+        "recommendations summarized herein and responded to questions from agency staff.",
+
+        "ACPWB submits this disclosure pursuant to the Sunshine Act and the {agency}'s "
+        "ex parte communication rules. The meeting documented herein concerned the pending "
+        "rulemaking on {topic} and involved ACPWB's President and Director of Policy Research.",
+
+        "This ex parte submission memorializes a written communication transmitted to {agency} "
+        "leadership in which ACPWB raised time-sensitive concerns about the proposed approach "
+        "to {topic} and requested a meeting to discuss potential modifications.",
+
+        "ACPWB submits this notice to place on the public record the substance of an oral "
+        "communication made at a {agency}-hosted conference at which ACPWB addressed the "
+        "regulatory implications of recent developments in {topic}.",
     ],
     'regulatory-petition': [
         "ACPWB respectfully petitions the {agency} to initiate rulemaking addressing {topic}. "
@@ -2714,6 +3817,38 @@ SUMMARY_TEMPLATES = {
         "ACPWB petitions the {agency} to take regulatory action on {topic}, presenting herewith "
         "the factual and legal basis for the requested rulemaking and a proposed regulatory framework "
         "for the agency's consideration.",
+
+        "ACPWB files this petition to formally request that the {agency} open a rulemaking docket "
+        "on {topic}. Existing guidance documents and informal enforcement policy are insufficient "
+        "to address the scale and urgency of the problem documented in this petition.",
+
+        "This petition invokes the {agency}'s authority to initiate rulemaking under the Administrative "
+        "Procedure Act and requests the issuance of an advance notice of proposed rulemaking on {topic}. "
+        "ACPWB believes that an ANPR process is the appropriate first step and would enable "
+        "meaningful stakeholder input before the agency commits to a specific regulatory approach.",
+
+        "ACPWB petitions the {agency} to amend its existing regulations to address significant gaps "
+        "in the coverage and enforcement framework applicable to {topic}. The petition is supported "
+        "by empirical data demonstrating the inadequacy of the current rules in protecting the "
+        "interests they were designed to serve.",
+
+        "This joint petition, filed by ACPWB and the undersigned co-petitioners, requests that the "
+        "{agency} initiate an expedited rulemaking on {topic}. The urgency of the matter is documented "
+        "in the factual record compiled herein, which reflects conditions that have deteriorated "
+        "materially since the agency last addressed this issue.",
+
+        "ACPWB respectfully requests that the {agency} exercise its emergency rulemaking authority "
+        "to address {topic}. The conditions described in this petition represent an imminent threat "
+        "to the workers and institutions the {agency}'s regulations are designed to protect.",
+
+        "This petition for rulemaking on {topic} is accompanied by a proposed rule text, developed "
+        "by ACPWB's policy and legal staff, for the {agency}'s consideration. We offer this draft "
+        "not as a constraint on agency discretion but as a demonstration that a workable, legally "
+        "sound regulatory solution is readily achievable.",
+
+        "ACPWB petitions the {agency} to conduct a comprehensive review of the existing regulatory "
+        "framework for {topic} with a view to updating it to reflect developments in law, economics, "
+        "and employer practice that have occurred since the current rules were adopted.",
     ],
     'no-action-request': [
         "ACPWB requests that the {agency} confirm that it will not recommend enforcement action "
@@ -2726,6 +3861,39 @@ SUMMARY_TEMPLATES = {
 
         "ACPWB submits this no-action request on behalf of client organizations seeking confirmation "
         "that their proposed approach to {topic} will not be subject to {agency} enforcement action.",
+
+        "On behalf of a group of employers operating in a regulatory gray area under current {agency} "
+        "guidance on {topic}, ACPWB requests a no-action letter confirming that the described "
+        "compensation practices comply with existing legal requirements. The request is supported "
+        "by a detailed legal analysis provided in the accompanying memorandum.",
+
+        "ACPWB requests no-action assurance from the {agency} regarding the application of "
+        "recently issued guidance to the employer arrangement described in this letter. Absent "
+        "such assurance, organizations face significant uncertainty that will impede rational "
+        "planning and may force unnecessary changes to compliant compensation structures.",
+
+        "This no-action request arises from genuine regulatory ambiguity created by the {agency}'s "
+        "recent statements regarding {topic}. ACPWB seeks clarification on behalf of its clients, "
+        "not an exemption from the law, and we believe the requested no-action letter is the "
+        "appropriate mechanism for providing that clarification.",
+
+        "ACPWB files this request on behalf of a coalition of employers that have implemented "
+        "innovative compensation structures in the area of {topic}. We seek confirmation that "
+        "these structures, described in detail herein, do not violate applicable {agency} requirements.",
+
+        "The employer compensation arrangement for which no-action relief is requested was designed "
+        "in good faith and in close consultation with counsel. ACPWB submits this request to "
+        "obtain certainty from the {agency} before the arrangement is implemented more broadly.",
+
+        "ACPWB requests that the {agency} issue guidance clarifying that the compensation approach "
+        "described herein is within the safe harbor established by existing regulations on {topic}. "
+        "Absent such guidance, ACPWB's clients cannot determine with certainty whether their "
+        "compliance efforts are adequate.",
+
+        "This request for no-action relief on {topic} is filed as a protective measure during "
+        "the period of regulatory transition. ACPWB anticipates that the {agency}'s forthcoming "
+        "final rule will resolve the underlying ambiguity, but interim assurance is necessary "
+        "to protect employers who must make compensation decisions in the interim.",
     ],
     'advisory-memorandum': [
         "This advisory memorandum provides ACPWB's analysis of the {agency}'s recent guidance on "
@@ -2736,6 +3904,43 @@ SUMMARY_TEMPLATES = {
 
         "This memorandum summarizes ACPWB's assessment of emerging regulatory developments in {topic} "
         "and provides practical guidance for organizations preparing to respond.",
+
+        "ACPWB issues this advisory memorandum in response to numerous client inquiries about the "
+        "{agency}'s recent enforcement actions regarding {topic}. This memorandum explains what "
+        "the enforcement actions signal about agency priorities and what steps employers should "
+        "take to assess and strengthen their compliance posture.",
+
+        "This memorandum provides an updated assessment of the regulatory landscape for {topic} "
+        "as of the current date. It identifies recent developments — including new agency guidance, "
+        "court decisions, and legislative proposals — and explains their practical implications "
+        "for employer compensation programs.",
+
+        "ACPWB issues this urgent advisory memorandum in response to the {agency}'s surprise "
+        "announcement of accelerated enforcement activity in the area of {topic}. "
+        "Employers should treat this memorandum as an action item and review the recommended "
+        "compliance steps with counsel promptly.",
+
+        "This memorandum provides a structured analysis of the compliance requirements applicable "
+        "to {topic} following the {agency}'s recent rulemaking. It is designed to help in-house "
+        "counsel and HR professionals understand their obligations and develop compliant programs "
+        "without relying solely on general-purpose legal advice.",
+
+        "ACPWB issues this advisory memorandum to flag a significant development in the enforcement "
+        "of {topic} regulations that affects a broad category of employers. The development "
+        "is described in detail below, along with ACPWB's recommended response.",
+
+        "This memorandum addresses the compliance and governance implications of the {agency}'s "
+        "revised interpretation of its regulations on {topic}. The new interpretation differs "
+        "materially from the prior guidance and requires immediate attention from affected employers.",
+
+        "ACPWB's Advisory Memorandum on {topic} serves as an annual regulatory update for client "
+        "organizations. This edition reviews the past year's enforcement activity, court decisions, "
+        "and legislative developments, and identifies the key issues that will define the regulatory "
+        "landscape in the year ahead.",
+
+        "This memorandum provides practical guidance for employers conducting self-assessments of "
+        "their compliance with {agency} requirements on {topic}. It is structured as a checklist "
+        "of key risk areas and recommended remediation steps.",
     ],
     'joint-comments': [
         "ACPWB joins with the undersigned organizations in submitting these joint comments on the "
@@ -2750,6 +3955,39 @@ SUMMARY_TEMPLATES = {
 
         "ACPWB is pleased to join the undersigned organizations in this collaborative comment submission "
         "on the {agency}'s proposed rulemaking addressing {topic}.",
+
+        "The undersigned organizations, representing the breadth of the employer community with a "
+        "stake in the {agency}'s proposed rulemaking on {topic}, submit these joint comments to "
+        "present a unified perspective on the key issues and to offer a set of common recommendations "
+        "that we believe can earn broad stakeholder support.",
+
+        "ACPWB and the co-signatories to these joint comments represent a coalition that would not "
+        "ordinarily agree on every aspect of regulatory policy. Our decision to file together on "
+        "{topic} reflects the strength of our shared conviction that the {agency}'s proposed "
+        "approach is fundamentally flawed and that the modifications we propose are necessary and appropriate.",
+
+        "These joint comments are filed by a coalition of research and advisory organizations "
+        "that have collaborated extensively on the empirical dimensions of {topic}. Our collective "
+        "data and analytical capacity provide a uniquely comprehensive foundation for the "
+        "recommendations we offer in this submission.",
+
+        "The organizations submitting these joint comments on {topic} span the ideological spectrum "
+        "of the policy debate. Our decision to file together is a testament to the strength of "
+        "the evidence and the clarity of the issues raised by the {agency}'s proposed approach.",
+
+        "ACPWB and the co-signatories urge the {agency} to treat these joint comments as a "
+        "significant signal about the breadth of stakeholder concern regarding the proposed rule "
+        "on {topic}. The diversity of our membership makes our convergence on these recommendations "
+        "particularly meaningful.",
+
+        "These joint comments represent the collective views of organizations that together "
+        "advise or employ millions of American workers with a direct stake in the {agency}'s "
+        "regulatory approach to {topic}. We speak with one voice in urging the modifications "
+        "and clarifications set forth in this submission.",
+
+        "ACPWB coordinated the preparation of these joint comments to ensure that the {agency}'s "
+        "record on {topic} reflects the full range of employer and practitioner experience. "
+        "Each signatory has reviewed and endorsed the specific recommendations made herein.",
     ],
     'research-memorandum': [
         "This research memorandum presents ACPWB's empirical findings on {topic} and draws "
@@ -2761,6 +3999,427 @@ SUMMARY_TEMPLATES = {
 
         "This memorandum summarizes the findings of ACPWB's proprietary research on {topic} "
         "and identifies policy implications relevant to current {agency} deliberations.",
+
+        "This research memorandum presents the methodology and findings of ACPWB's most recent "
+        "annual employer survey on {topic}. The results provide a statistically representative "
+        "picture of current employer practices and attitudes in this regulatory area.",
+
+        "ACPWB's research team prepared this memorandum in response to questions raised by "
+        "{agency} staff regarding the empirical basis for ACPWB's comment-letter recommendations "
+        "on {topic}. This memorandum provides the requested methodological detail and underlying data.",
+
+        "This memorandum presents ACPWB's econometric analysis of the relationship between "
+        "regulatory intensity and compensation outcomes in the area of {topic}. The analysis "
+        "draws on a panel dataset of employer-level observations spanning a twelve-year period.",
+
+        "ACPWB's Policy Research Division prepared this research memorandum to provide the {agency} "
+        "with an independent assessment of the empirical literature on {topic}. The memorandum "
+        "synthesizes findings from peer-reviewed research and identifies areas of consensus "
+        "and remaining uncertainty.",
+
+        "This memorandum documents the design and preliminary findings of a longitudinal study "
+        "ACPWB is conducting on the effects of recent regulatory changes on employer compensation "
+        "practices in the area of {topic}. The final results will be submitted to the agency "
+        "following the completion of data collection.",
+
+        "ACPWB presents this research memorandum as an attachment to our formal comment letter "
+        "on {topic}. The memorandum provides the detailed empirical support for the policy "
+        "conclusions stated in our comment letter and should be read in conjunction with that filing.",
+
+        "This research memorandum was prepared by ACPWB's academic advisory board in collaboration "
+        "with ACPWB staff to provide the {agency} with a rigorous and independent assessment of "
+        "the key empirical questions underlying the proposed rulemaking on {topic}.",
+
+        "ACPWB issues this research memorandum to correct and update the empirical record on {topic} "
+        "in advance of the {agency}'s anticipated rulemaking. The memorandum identifies data "
+        "points relied upon by the agency that are outdated or methodologically flawed and provides "
+        "updated, higher-quality estimates.",
+    ],
+    'guidance-document': [
+        "ACPWB submits this interpretive guidance in response to persistent questions from employer "
+        "clients about how to apply the {agency}'s existing regulatory framework to {topic}. "
+        "The guidance is offered as a practical resource and does not represent formal legal advice.",
+
+        "This guidance document synthesizes ACPWB's analysis of the {agency}'s regulations on "
+        "{topic} and offers practical interpretive guidance for compliance professionals. "
+        "ACPWB recommends that employers share this document with in-house counsel for review.",
+
+        "In the absence of clear {agency} guidance on {topic}, ACPWB has prepared this interpretive "
+        "document to assist employers in navigating the regulatory framework and making sound "
+        "compliance judgments in ambiguous situations.",
+
+        "ACPWB's interpretive guidance on {topic} reflects the organization's best understanding "
+        "of the {agency}'s regulatory intent, based on a thorough review of regulatory text, "
+        "preamble language, agency statements, and enforcement history.",
+
+        "This guidance document is issued by ACPWB as a service to the employer community. "
+        "It addresses the ten most frequently asked questions about compliance with the {agency}'s "
+        "requirements on {topic} and provides ACPWB's recommended answers to each.",
+
+        "ACPWB offers this guidance to help employers understand the scope and limits of their "
+        "obligations under current {agency} rules on {topic}. The document is intended as a "
+        "starting point for compliance planning, not as a substitute for legal counsel.",
+
+        "This interpretive guidance document reflects the consensus view of ACPWB's policy and "
+        "legal staff on the application of the {agency}'s requirements to {topic}. Where "
+        "significant uncertainty exists, ACPWB identifies it clearly and recommends that "
+        "employers seek formal guidance from the agency.",
+
+        "ACPWB issues this guidance to address the gap between the {agency}'s formal regulatory "
+        "requirements on {topic} and the practical questions that arise in implementation. "
+        "The document draws on ACPWB's advisory experience with hundreds of employer clients.",
+
+        "This guidance document provides ACPWB's interpretation of key definitional terms and "
+        "operative provisions in the {agency}'s regulations on {topic}, with illustrative "
+        "examples designed to assist compliance professionals in applying the rules correctly.",
+
+        "ACPWB's guidance on {topic} is updated annually to reflect developments in the regulatory "
+        "landscape, including new agency guidance, enforcement actions, and court decisions. "
+        "This edition reflects the regulatory environment as of {year}.",
+    ],
+    'enforcement-policy': [
+        "ACPWB issues this enforcement policy statement to outline the principles that should "
+        "govern the {agency}'s enforcement of the regulatory requirements applicable to {topic}. "
+        "We believe that sound enforcement policy is essential to the integrity and effectiveness "
+        "of the regulatory framework.",
+
+        "This enforcement policy statement reflects ACPWB's view that enforcement of {agency} "
+        "requirements on {topic} should be graduated, proportionate, and focused on meaningful "
+        "violations rather than technical errors. We outline specific principles for the "
+        "{agency}'s consideration in developing its enforcement approach.",
+
+        "ACPWB submits this enforcement policy statement to urge the {agency} to adopt a more "
+        "transparent and predictable enforcement framework for {topic}. Current enforcement "
+        "practice creates significant uncertainty that impedes rational compliance planning.",
+
+        "This statement outlines ACPWB's expectations for the {agency}'s enforcement of "
+        "requirements applicable to {topic} and identifies specific practices that ACPWB "
+        "believes would improve the fairness and effectiveness of the enforcement program.",
+
+        "ACPWB believes that the {agency}'s enforcement program on {topic} should be guided by "
+        "clear principles: proportionality, fair notice, graduated response, and meaningful "
+        "engagement with good-faith compliance efforts. This statement elaborates each principle.",
+
+        "This enforcement policy statement addresses the growing concern among employers about "
+        "the predictability and fairness of the {agency}'s enforcement approach to {topic}. "
+        "ACPWB urges the agency to adopt and publish a formal enforcement priorities statement "
+        "that addresses these concerns.",
+
+        "ACPWB supports strong enforcement of the regulatory framework applicable to {topic}, "
+        "but believes that enforcement effectiveness depends on a partnership model in which "
+        "the {agency} provides clear guidance, engages with compliance difficulties, and "
+        "reserves punitive enforcement for willful violators.",
+
+        "This statement expresses ACPWB's strong concern about recent {agency} enforcement actions "
+        "on {topic} that appear to impose consequences for good-faith compliance efforts. "
+        "We urge the agency to clarify its enforcement standards and to create safe-harbor "
+        "protections for employers acting in reliance on prior agency guidance.",
+    ],
+    'compliance-bulletin': [
+        "ACPWB issues this compliance bulletin to alert employer clients to a significant recent "
+        "development in the regulatory requirements applicable to {topic}. Immediate action "
+        "may be required for some organizations.",
+
+        "This bulletin provides ACPWB's rapid-response analysis of a new {agency} development "
+        "on {topic}. We summarize the key takeaways and recommended next steps for employers "
+        "seeking to maintain compliance.",
+
+        "ACPWB's {year} Compliance Bulletin on {topic} alerts employers to the five most "
+        "significant regulatory developments in this area over the past twelve months and "
+        "identifies the compliance actions most urgently required.",
+
+        "This compliance bulletin is issued by ACPWB in response to a new {agency} guidance "
+        "document on {topic} that has raised questions about the adequacy of existing "
+        "employer compliance programs. We summarize the new guidance and identify gaps "
+        "that employers should address.",
+
+        "ACPWB issues this urgent compliance bulletin regarding recent {agency} enforcement "
+        "activity on {topic}. The enforcement actions signal a shift in agency priorities "
+        "that requires immediate attention from employers in the affected industry sectors.",
+
+        "This compliance bulletin updates ACPWB's prior guidance on {topic} to reflect "
+        "recent changes in the regulatory landscape. Employers who implemented compliance "
+        "programs based on our prior guidance should review those programs for potential gaps.",
+
+        "ACPWB's compliance bulletin on {topic} is a concise summary of current requirements "
+        "and recent developments, designed for busy compliance professionals who need "
+        "accurate information quickly. A more detailed analysis is available in our "
+        "full advisory memorandum on this topic.",
+
+        "This bulletin summarizes the most frequently cited compliance deficiencies identified "
+        "by the {agency} in its recent reviews of employer programs on {topic}. We recommend "
+        "that employers use this bulletin as a self-assessment checklist.",
+    ],
+    'legal-analysis': [
+        "This legal analysis memorandum examines the statutory authority of the {agency} to "
+        "regulate {topic} and concludes that the agency's proposed approach is within its "
+        "delegated authority, subject to the limitations identified below.",
+
+        "ACPWB's legal analysis of the {agency}'s proposed rule on {topic} identifies three "
+        "significant legal vulnerabilities that the agency should address before finalizing "
+        "the rule. We provide detailed analysis of each vulnerability and recommend specific "
+        "drafting changes.",
+
+        "This memorandum presents ACPWB's legal analysis of the principal statutory and "
+        "constitutional questions raised by the {agency}'s regulatory approach to {topic}. "
+        "The analysis reflects the most current case law and is intended to inform both "
+        "the agency's rulemaking and employer compliance planning.",
+
+        "ACPWB's legal analysis of {topic} addresses the interaction between federal regulatory "
+        "requirements and applicable state law. We identify areas of federal preemption and "
+        "areas where state law remains operative, and provide guidance on navigating the "
+        "resulting compliance landscape.",
+
+        "This legal analysis examines recent judicial decisions bearing on {topic} and their "
+        "implications for the {agency}'s regulatory authority and enforcement program. "
+        "ACPWB concludes that the current legal landscape supports the reform approach "
+        "recommended in our comment letters.",
+
+        "ACPWB's legal memorandum on {topic} addresses the major questions doctrine and its "
+        "application to the {agency}'s proposed rulemaking. We conclude that the proposed "
+        "rule's scope places it at risk under recent Supreme Court precedent and recommend "
+        "specific modifications to reduce that risk.",
+
+        "This memorandum provides ACPWB's legal analysis of the due process implications of "
+        "the {agency}'s retroactive application of new regulatory requirements on {topic}. "
+        "We conclude that the retroactive approach raises substantial constitutional concerns "
+        "and should be abandoned in the final rule.",
+
+        "ACPWB presents this legal analysis to assist employers and their counsel in "
+        "understanding the current state of the law on {topic}. The analysis integrates "
+        "statutory text, regulatory guidance, and case law to provide a coherent and "
+        "current picture of employer legal obligations.",
+    ],
+    'economic-analysis': [
+        "This economic impact analysis presents ACPWB's assessment of the costs, benefits, "
+        "and distributional effects of the {agency}'s proposed rule on {topic}. Our analysis "
+        "identifies significant methodological flaws in the agency's own cost-benefit analysis "
+        "and provides updated estimates based on more rigorous methodology.",
+
+        "ACPWB's economic analysis of {topic} employs a general equilibrium model to assess "
+        "the labor market effects of the proposed regulatory approach. The model predicts "
+        "outcomes that diverge significantly from the {agency}'s projections in ways that "
+        "are material to the rule's cost-benefit calculus.",
+
+        "This economic analysis examines the competitive implications of the {agency}'s proposed "
+        "approach to {topic} for U.S. employers operating in global markets. The analysis "
+        "identifies significant competitive disadvantages that the proposed rule would create "
+        "and recommends approaches that achieve the policy objective at lower competitive cost.",
+
+        "ACPWB's economic analysis of the proposed rule on {topic} focuses on distributional "
+        "effects that the {agency}'s analysis has not adequately addressed. Our modeling "
+        "indicates that the proposal's effects on workers at different income levels are "
+        "more complex than the agency's analysis suggests.",
+
+        "This economic impact analysis updates ACPWB's {year} assessment of {topic} to reflect "
+        "current labor market conditions. We find that the economic case for regulatory action "
+        "has strengthened since our prior analysis and provide updated cost-benefit estimates.",
+
+        "ACPWB's economic analysis of {topic} draws on a natural experiment created by the "
+        "adoption of similar regulations in several states. The empirical evidence from "
+        "those states provides a more reliable basis for projecting the effects of federal "
+        "action than the theoretical models employed in the {agency}'s analysis.",
+
+        "This analysis provides ACPWB's independent assessment of the regulatory impact "
+        "analysis accompanying the {agency}'s proposed rule on {topic}. We conclude that "
+        "the analysis significantly underestimates compliance costs and overestimates "
+        "benefits and that the cost-benefit case for the rule, as presented, is not robust.",
+
+        "ACPWB's economic analysis of {topic} identifies a number of market failures that "
+        "provide a strong economic rationale for regulatory intervention. This analysis "
+        "supports ACPWB's position in favor of the {agency}'s proposed rule, while "
+        "recommending specific modifications to improve its efficiency.",
+    ],
+    'research-report': [
+        "ACPWB's {year} Research Report on {topic} presents the findings of our annual employer "
+        "survey, which covers compensation practices, compliance readiness, and regulatory "
+        "concerns across a nationally representative sample of U.S. organizations.",
+
+        "This research report presents the results of ACPWB's multi-year longitudinal study "
+        "tracking employer compensation practices and their relationship to regulatory "
+        "developments on {topic}. The findings have direct implications for the {agency}'s "
+        "pending rulemaking.",
+
+        "ACPWB's research report on {topic} fills a gap in the publicly available evidence "
+        "base by providing employer-level data on compensation practices that has not "
+        "previously been available to regulators or researchers.",
+
+        "This report presents findings from ACPWB's qualitative research on employer "
+        "implementation challenges related to {topic}. The findings are based on in-depth "
+        "interviews with compliance officers and HR leaders at a diverse set of organizations.",
+
+        "ACPWB's research report on {topic} synthesizes the academic literature, ACPWB's "
+        "proprietary data, and practitioner case studies to provide the most comprehensive "
+        "available picture of employer compensation practices in this regulatory area.",
+
+        "This research report provides the empirical foundation for ACPWB's policy "
+        "recommendations on {topic}. It presents original data collected specifically "
+        "for this report and subject to independent verification by ACPWB's academic advisory board.",
+
+        "ACPWB's annual research report on {topic} is the authoritative private-sector "
+        "benchmark for employer compensation practices in this regulatory area. The {year} "
+        "edition reflects significant changes in employer behavior driven by recent "
+        "{agency} enforcement activity.",
+
+        "This research report presents findings from ACPWB's first-ever survey of workers' "
+        "perspectives on {topic}. The employee-side data provides important context for "
+        "understanding the employer survey data and for evaluating the policy options "
+        "under consideration by the {agency}.",
+    ],
+    'request-for-information-response': [
+        "ACPWB responds to the {agency}'s request for information regarding {topic}. Our response "
+        "is based on ACPWB's proprietary research database and advisory experience with employer "
+        "clients across the full range of U.S. industries.",
+
+        "This response to the {agency}'s request for information on {topic} provides ACPWB's "
+        "best available data on the specific questions the agency has identified as priorities "
+        "for its information-gathering effort.",
+
+        "ACPWB welcomes the {agency}'s decision to gather public input before proceeding to "
+        "formal rulemaking on {topic}. This response provides the factual, analytical, and "
+        "policy context the agency will need to design an effective and administrable regulatory "
+        "approach.",
+
+        "In response to the {agency}'s request for information on {topic}, ACPWB provides "
+        "both quantitative data from our employer survey and qualitative analysis based on "
+        "our advisory experience. We encourage the agency to use this information to ground "
+        "its rulemaking in the reality of employer compensation practice.",
+
+        "ACPWB's response to the {agency}'s request for information on {topic} is organized "
+        "around the specific questions posed in the agency's notice. For each question, we "
+        "provide the best available data and an analytical framework for interpreting it.",
+
+        "This response provides the {agency} with ACPWB's recommendations regarding the "
+        "scope, methodology, and key questions for any future rulemaking on {topic}. "
+        "We believe that early investment in good information will pay dividends in the "
+        "quality of the final regulatory product.",
+
+        "ACPWB's response to the request for information on {topic} draws on our most recently "
+        "completed employer survey as well as a targeted supplemental survey conducted "
+        "specifically to respond to the questions posed by the {agency} in its notice.",
+
+        "ACPWB urges the {agency} to treat responses to this information request, including "
+        "ACPWB's, as a starting point rather than an endpoint for its empirical analysis "
+        "of {topic}. The responses represent stakeholder perspectives that must be "
+        "triangulated against other evidence before becoming the basis for regulatory action.",
+    ],
+    'cost-benefit-analysis': [
+        "ACPWB's independent cost-benefit analysis of the {agency}'s proposed rule on {topic} "
+        "employs the methodology recommended by OMB Circular A-4 and arrives at conclusions "
+        "that differ materially from the agency's own analysis. We present our findings and "
+        "methodology in full for the agency's review.",
+
+        "This cost-benefit analysis was commissioned by ACPWB to provide an independent check "
+        "on the {agency}'s regulatory impact analysis for the proposed rule on {topic}. "
+        "The analysis was conducted by ACPWB's research staff and reviewed by an external "
+        "panel of economists.",
+
+        "ACPWB's cost-benefit analysis of {topic} identifies three categories of costs that "
+        "the {agency}'s analysis has not adequately quantified: (1) transition costs; "
+        "(2) ongoing administrative burden; and (3) indirect costs arising from market "
+        "distortions. We provide updated estimates for each category.",
+
+        "This analysis presents a comprehensive cost-benefit assessment of the alternative "
+        "regulatory approaches to {topic} that the {agency} identified in its notice of "
+        "proposed rulemaking. Our analysis supports the approach ACPWB recommended in "
+        "its comment letter as the most efficient means of achieving the regulatory objective.",
+
+        "ACPWB's cost-benefit analysis of {topic} takes a longer time horizon than the "
+        "{agency}'s analysis and arrives at different conclusions about the rule's net "
+        "benefit. Over a 20-year period, the benefits of the proposed rule substantially "
+        "exceed its costs under all plausible assumptions.",
+
+        "This analysis employs novel data sources — including ACPWB's proprietary employer "
+        "survey — to develop more reliable estimates of the compliance costs associated with "
+        "the {agency}'s proposed rule on {topic}. We find that the agency's estimates are "
+        "significantly below the levels reported by affected employers.",
+    ],
+    'implementation-guide': [
+        "ACPWB's implementation guide for {topic} provides a step-by-step framework for "
+        "employer organizations seeking to build compliant programs under the {agency}'s "
+        "current regulatory requirements. The guide is updated annually to reflect "
+        "regulatory and enforcement developments.",
+
+        "This implementation guide is designed to help HR and compliance professionals "
+        "navigate the practical challenges of implementing the {agency}'s requirements "
+        "on {topic}. It draws on ACPWB's advisory experience with hundreds of employer "
+        "clients who have completed similar implementation projects.",
+
+        "ACPWB's guide to implementing {agency} requirements on {topic} covers the full "
+        "lifecycle of a compliance program, from initial gap assessment through design, "
+        "implementation, training, monitoring, and continuous improvement.",
+
+        "This guide provides practical, actionable implementation guidance on {topic} that "
+        "is grounded in the {agency}'s regulatory text and informed by ACPWB's direct "
+        "experience advising employers through complex regulatory transitions.",
+
+        "ACPWB's implementation guide on {topic} is organized around the five most common "
+        "implementation failure modes identified in our advisory work: insufficient "
+        "leadership commitment, inadequate resources, unclear accountability, poor "
+        "data quality, and inadequate training. Each section addresses one failure mode.",
+
+        "This implementation guide reflects the lessons ACPWB has drawn from observing "
+        "both successful and unsuccessful compliance program implementations in the area "
+        "of {topic}. We translate those lessons into concrete guidance for organizations "
+        "at different stages of maturity.",
+    ],
+    'best-practices-guide': [
+        "ACPWB's best practices guide on {topic} distills the compensation governance and "
+        "compliance practices of leading organizations into a framework that any employer "
+        "can use to benchmark and improve its own approach.",
+
+        "This guide presents ACPWB's view of the gold standard for employer practices on "
+        "{topic}, synthesized from our advisory work with hundreds of organizations and "
+        "our analysis of peer-reviewed research on compensation governance effectiveness.",
+
+        "ACPWB's {year} Best Practices Guide on {topic} reflects significant updates driven "
+        "by the {agency}'s recent regulatory activity and by new empirical research on "
+        "which practices produce the best outcomes for employers and workers.",
+
+        "This best practices guide is designed for compensation committees, HR leaders, "
+        "and compliance professionals who want to understand what leading organizations "
+        "are doing on {topic} and how they can move their own practices toward the frontier.",
+
+        "ACPWB's best practices guide on {topic} is organized around five dimensions of "
+        "program quality: governance, data, process, disclosure, and culture. For each "
+        "dimension, we describe the spectrum of practice and identify the elements "
+        "that distinguish the best programs from the rest.",
+
+        "This guide presents illustrative case examples of effective employer approaches "
+        "to {topic}, drawn from ACPWB's advisory engagements. The examples have been "
+        "anonymized, and the organizations involved have consented to their use for "
+        "educational purposes.",
+    ],
+    'coalition-letter': [
+        "The undersigned organizations jointly submit this letter to urge the {agency} to "
+        "take the regulatory action described herein with respect to {topic}. Our coalition "
+        "represents a broad cross-section of stakeholders united by a shared commitment "
+        "to evidence-based compensation policy.",
+
+        "ACPWB and the co-signatories to this letter represent a diverse coalition of "
+        "organizations that have come together to express a common position on {topic}. "
+        "The breadth of our coalition signals the strength of the shared concern and "
+        "the broad support for the approach we advocate.",
+
+        "This coalition letter is submitted to the {agency} to urge action on {topic}. "
+        "The organizations signing this letter rarely agree on regulatory matters, but "
+        "the importance and urgency of the issue before the agency has brought us together "
+        "in a common call for meaningful reform.",
+
+        "The undersigned organizations join in this letter to draw the {agency}'s attention "
+        "to a matter that warrants immediate regulatory action on {topic}. Each organization "
+        "has independently concluded that the current approach is inadequate and that the "
+        "action we request is necessary and appropriate.",
+
+        "ACPWB is pleased to lead this coalition of organizations in urging the {agency} "
+        "to address {topic}. The coalition was assembled specifically for this purpose and "
+        "reflects the consensus of its members after extensive deliberation on the policy "
+        "and evidence.",
+
+        "This letter is submitted on behalf of a coalition that spans the employer community, "
+        "the research community, and advocacy organizations with an interest in the "
+        "regulatory framework governing {topic}. We urge the {agency} to treat our "
+        "collective voice as a significant signal about the need for the action we request.",
     ],
     'formal-objection': [
         "ACPWB submits this formal objection to the {agency}'s final rule on {topic}, contending "
@@ -2774,6 +4433,43 @@ SUMMARY_TEMPLATES = {
         "ACPWB formally objects to the {agency}'s treatment of {topic} in the recently issued final rule, "
         "and sets out herein the specific legal and evidentiary deficiencies that ACPWB believes "
         "render the rule invalid and subject to judicial challenge.",
+
+        "This objection is filed pursuant to the {agency}'s reconsideration procedures and requests "
+        "that the agency withdraw or substantially revise its final rule on {topic}. ACPWB "
+        "identifies herein specific provisions that were not reasonably foreshadowed by the proposed "
+        "rule and that therefore constitute a violation of APA notice requirements.",
+
+        "ACPWB's formal objection to the final rule on {topic} rests on three independent grounds: "
+        "first, the agency's failure to adequately respond to significant comments in the record; "
+        "second, the rule's reliance on a factual record that does not support its key findings; "
+        "and third, the agency's departure without explanation from its prior regulatory approach.",
+
+        "ACPWB files this objection not lightly, but because the {agency}'s final rule on {topic} "
+        "departs so fundamentally from sound regulatory practice that we believe it would not "
+        "survive judicial review. We urge the agency to reconsider before litigation becomes necessary.",
+
+        "This formal objection preserves ACPWB's legal rights with respect to the {agency}'s "
+        "final rule on {topic} and provides notice of ACPWB's intent to seek judicial review "
+        "if the agency does not address the legal deficiencies identified herein.",
+
+        "ACPWB objects to the {agency}'s final rule on {topic} on the ground that it imposes "
+        "retroactive compliance obligations without adequate notice to the regulated community. "
+        "The rule's effective date must be extended, or it must be substantially revised to "
+        "eliminate its retroactive effect.",
+
+        "This objection identifies a fundamental inconsistency between the final rule on {topic} "
+        "and the {agency}'s own statutory mandate. ACPWB submits that the agency has misconstrued "
+        "its enabling statute and that the final rule, as a result, lacks legal foundation.",
+
+        "ACPWB formally objects to the economic analysis underlying the {agency}'s final rule on "
+        "{topic}. The agency's cost estimates are demonstrably underestimated, its benefits are "
+        "speculative, and the resulting cost-benefit analysis does not satisfy the standards "
+        "required for major rulemakings under applicable executive orders.",
+
+        "This formal objection documents the {agency}'s failure to provide adequate public notice "
+        "of significant changes made between the proposed and final rule on {topic}. The changes "
+        "were substantive and material, and affected parties should have been given the opportunity "
+        "to comment on them before finalization.",
     ],
 }
 
@@ -3843,6 +5539,182 @@ RECOMMENDATION_TEMPLATES = [
     "The agency should provide a clear definition of 'control group' for the purpose of determining employer size and applicability, especially in complex corporate structures.",
 
     "We urge the {agency} to incorporate a materiality qualifier for disclosure requirements, focusing on compensation elements that have a significant impact on employee incentives and corporate risk.",
+
+    "ACPWB recommends that the final rule require employers to conduct and document a pre-implementation "
+    "risk assessment that identifies the highest-risk compliance gaps before the effective date.",
+
+    "The {agency} should adopt a formal whistleblower protection provision within the rule on {topic}, "
+    "ensuring that employees who report compliance concerns are protected from retaliation.",
+
+    "We recommend that the {agency} publish an annual enforcement data report disaggregating "
+    "enforcement actions by industry sector, employer size, and violation type to enable more "
+    "targeted compliance planning by affected organizations.",
+
+    "ACPWB recommends that the final rule include a clear 'cure period' provision allowing "
+    "employers who self-disclose compliance deficiencies within 90 days of discovery to "
+    "remediate without penalty, consistent with the {agency}'s overall enforcement goals.",
+
+    "The {agency} should permit employers to submit alternative compliance certifications from "
+    "qualified third-party auditors as evidence of good-faith compliance, reducing the "
+    "need for formal agency review of every employer's program.",
+
+    "ACPWB recommends that the final rule expressly state that compensation committee "
+    "minutes and privileged attorney-client communications are not subject to production "
+    "in connection with agency investigations under the proposed framework.",
+
+    "The {agency} should develop a tiered penalty structure that differentiates between "
+    "first-time violations, repeat violations, and willful violations, with clear "
+    "guidance on the factors that will be considered in penalty assessment.",
+
+    "We urge the {agency} to establish a formal coordination mechanism with the Department "
+    "of Justice, the EEOC, and state fair employment agencies to avoid duplicative "
+    "investigations and inconsistent outcomes in enforcement on {topic}.",
+
+    "ACPWB recommends that the final rule include an explicit provision permitting "
+    "employers to use established actuarial and statistical methodologies for compliance "
+    "analysis, with safe harbor protection for employers who follow published guidance.",
+
+    "The {agency} should establish a public registry of enforcement actions, settlements, "
+    "and compliance determinations related to {topic} to provide the regulated community "
+    "with better guidance about the agency's interpretive positions.",
+
+    "We recommend that the {agency} engage the National Academy of Sciences to conduct "
+    "an independent review of the scientific and empirical basis for the proposed rule "
+    "on {topic} before proceeding to finalization.",
+
+    "ACPWB urges the {agency} to develop sector-specific implementation guides for at "
+    "least five major industry groups, recognizing that compensation practices, data "
+    "systems, and compliance challenges vary significantly across industries.",
+
+    "The final rule should include a provision allowing for joint and multi-employer "
+    "compliance consortia, enabling smaller employers to achieve compliance more "
+    "efficiently through coordinated approaches.",
+
+    "We recommend that the {agency} publish model contractual provisions that employers "
+    "can use in vendor agreements to ensure that third-party HR technology providers "
+    "meet the standards required under the proposed rule on {topic}.",
+
+    "ACPWB recommends that the {agency} require its enforcement staff to participate "
+    "in annual training on current employer compensation practices and HR technology "
+    "to ensure that enforcement is grounded in an accurate understanding of how "
+    "modern compensation systems actually work.",
+
+    "The final rule should explicitly address the obligations of acquiring employers "
+    "in mergers and acquisitions with respect to compliance legacy issues related "
+    "to {topic}, providing clear transition rules and a reasonable cure period.",
+
+    "ACPWB urges the {agency} to adopt a forward-looking, prospective remediation "
+    "approach as the default remedy for non-willful violations, rather than prioritizing "
+    "retroactive penalties that do not improve future compliance.",
+
+    "We recommend that the {agency} establish a formal alternative dispute resolution "
+    "program for resolving compliance disputes related to {topic}, with binding "
+    "arbitration available as an alternative to formal adjudication.",
+
+    "The final rule should include a provision protecting employers who rely in good "
+    "faith on ACPWB or other recognized industry guidance from enforcement actions "
+    "based on interpretations that differ from that guidance.",
+
+    "ACPWB recommends that the {agency} issue a supplemental notice addressing "
+    "the rule's interaction with the Americans with Disabilities Act, Title VII, "
+    "and other applicable civil rights statutes before the final rule's effective date.",
+
+    "The {agency} should provide a clear answer to the question of whether the "
+    "proposed rule on {topic} creates a private right of action, and if so, "
+    "what the statute of limitations, damages, and procedural requirements would be.",
+
+    "We urge the {agency} to establish a formal waiver process for employers who "
+    "can demonstrate that compliance with a specific provision of the proposed rule "
+    "would be technically infeasible or would impose disproportionate costs relative "
+    "to the provision's regulatory benefit.",
+
+    "ACPWB recommends that the {agency} adopt a 'comply or explain' framework "
+    "as an alternative to the mandatory approach proposed in the current rule, "
+    "allowing employers to deviate from specific requirements if they can "
+    "explain their alternative approach in a published disclosure.",
+
+    "The final rule should include a provision requiring the {agency} to "
+    "coordinate with the Internal Revenue Service before any enforcement action "
+    "that could create inconsistency between the rule's requirements and "
+    "applicable tax treatment of the same compensation arrangements.",
+
+    "ACPWB urges the {agency} to publish proposed enforcement protocols for "
+    "public comment before implementing them, consistent with best practices "
+    "for transparent enforcement policy in other regulatory contexts.",
+
+    "We recommend that the {agency} establish a formal mechanism for seeking "
+    "pre-approval of innovative compensation program designs that do not fit "
+    "neatly within the rule's existing categories, to encourage compliance-minded "
+    "innovation rather than penalizing it.",
+
+    "The {agency} should require its regional offices to apply the final rule "
+    "consistently across jurisdictions by establishing a centralized legal "
+    "interpretive function with binding authority over regional enforcement staff.",
+
+    "ACPWB recommends that the {agency} incorporate into the final rule a "
+    "requirement that enforcement staff who determine a violation has occurred "
+    "must first provide the employer with written notice and a 30-day opportunity "
+    "to cure before any penalty assessment is initiated.",
+
+    "The final rule should include explicit anti-retaliation protections for "
+    "compliance officers and HR professionals who raise concerns about potential "
+    "violations internally, consistent with best practices for fostering "
+    "strong compliance cultures.",
+
+    "We recommend that the {agency} establish a public database of no-action "
+    "letters and informal guidance documents related to {topic} to reduce "
+    "the need for repetitive individual guidance requests and to promote "
+    "consistent compliance across the regulated community.",
+
+    "ACPWB urges the {agency} to provide detailed guidance on how it will "
+    "weigh evidence of employer remediation and good-faith compliance efforts "
+    "in determining whether to initiate enforcement and what remedy to seek.",
+
+    "The final rule should provide that employers who participate in the "
+    "{agency}'s compliance assistance programs receive credit for that "
+    "participation in any subsequent enforcement proceedings.",
+
+    "We recommend that the {agency} publish a regulatory flexibility analysis "
+    "that specifically quantifies the impact of the proposed rule on employers "
+    "with 25 to 100 employees, as this group is often overlooked in standard "
+    "small-business impact analyses.",
+
+    "ACPWB recommends that the {agency} commission an independent empirical "
+    "evaluation of the proposed rule's likely effects on worker outcomes, "
+    "drawing on natural experiments from jurisdictions that have adopted "
+    "similar regulatory requirements.",
+
+    "The {agency} should adopt a presumption of compliance for employers who "
+    "can demonstrate that their compensation practices are consistent with "
+    "the median practices of a defined peer group, subject to rebuttal "
+    "upon a showing of discriminatory intent or systematic disparate impact.",
+
+    "We urge the {agency} to clarify whether the proposed rule's requirements "
+    "apply to employees who work exclusively outside the United States and "
+    "to provide guidance on compliance for multinational employers with "
+    "complex cross-border compensation structures.",
+
+    "ACPWB recommends that the final rule permit employers to satisfy "
+    "disclosure requirements through electronic means, including dynamic "
+    "online portals, rather than requiring static paper or PDF disclosures.",
+
+    "The {agency} should establish a safe harbor for employers whose "
+    "compensation practices are consistent with a bona fide job evaluation "
+    "system that has been validated by a qualified external assessor.",
+
+    "We recommend that the {agency} require its compliance guidance to be "
+    "updated at least every three years to reflect changes in compensation "
+    "practice, technology, and the legal landscape.",
+
+    "ACPWB urges the {agency} to provide specific, detailed guidance on "
+    "how the proposed rule applies to incentive compensation, commission "
+    "plans, and other variable pay arrangements, which present unique "
+    "compliance challenges not addressed in the current proposal.",
+
+    "The final rule should include a provision requiring the {agency} to "
+    "publish an annual progress report on its enforcement activity, "
+    "including aggregate data on the number and type of investigations "
+    "opened, resolved, and pending.",
 ]
 
 # ── Position vocabulary ───────────────────────────────────────────────────────
@@ -3863,6 +5735,31 @@ POSITIONS = [
     ('supports', 'ACPWB is pleased to offer its strong support for this proposed rulemaking, which aligns with our long-standing research on the need for greater transparency and accountability in this area.'),
     ('supports', 'This is a timely and well-considered proposal. ACPWB supports the rule and encourages the agency to maintain the rigor of the current draft in the final version.'),
     ('supports', 'ACPWB supports the proposed rule and believes it will create a more level playing field for employers and workers alike. We offer our expertise to assist the agency in finalizing a robust and defensible rule.'),
+    ('supports', 'ACPWB applauds the agency\'s commitment to evidence-based rulemaking and fully supports '
+     'this proposal. The filing that follows identifies only minor implementation considerations that we '
+     'trust will be addressed in the final rule.'),
+    ('supports', 'After careful review, ACPWB concludes that the proposed rule strikes the appropriate balance '
+     'between regulatory rigor and operational flexibility. We urge the agency to finalize the rule without '
+     'substantive dilution.'),
+    ('supports', 'ACPWB has long advocated for the type of structural reform embodied in this proposal. '
+     'We enthusiastically support finalization and stand ready to assist with implementation guidance.'),
+    ('supports', 'The proposed rulemaking reflects precisely the kind of forward-looking regulatory approach '
+     'that ACPWB has recommended in prior filings. We offer our unqualified support and urge prompt action.'),
+    ('supports', 'ACPWB supports this proposal as a necessary corrective to years of regulatory inaction. '
+     'The proposed rule is proportionate, clearly within the agency\'s authority, and long overdue.'),
+    ('supports', 'The regulatory record compiled by the agency is thorough and persuasive. ACPWB supports '
+     'the proposed rule and believes it will produce meaningful, measurable improvements in market outcomes.'),
+    ('supports', 'ACPWB finds the agency\'s proposed approach to be well-grounded in both law and economics. '
+     'We support finalization and offer the following comments to assist the agency in strengthening the '
+     'rule\'s definitional framework.'),
+    ('supports', 'This proposed rule represents a rare instance of consensus across stakeholder communities. '
+     'ACPWB supports it without reservation and encourages the agency to resist calls for delay.'),
+    ('supports', 'ACPWB has reviewed the proposed rule in detail and is satisfied that the agency has '
+     'adequately considered the costs, benefits, and alternatives. We support the proposal and urge its '
+     'timely finalization.'),
+    ('supports', 'The direction established by this proposed rule is consistent with best practices observed '
+     'across peer jurisdictions. ACPWB supports adoption and offers comparative regulatory analysis to '
+     'reinforce the agency\'s rationale.'),
 
     ('opposes', 'ACPWB opposes the proposed rule as currently drafted and urges the agency to withdraw '
      'or substantially revise it in light of the concerns identified in this filing.'),
@@ -3879,6 +5776,36 @@ POSITIONS = [
     ('opposes', 'This proposal represents a significant overreach of the agency\'s statutory authority and imposes an unworkable mandate on employers. ACPWB urges the agency to abandon this approach.'),
     ('opposes', 'The proposed rule is a solution in search of a problem. The agency has not provided sufficient evidence of a market failure to justify this level of intervention. ACPWB opposes the rule.'),
     ('opposes', 'ACPWB believes the proposed rule will stifle innovation and harm competition without achieving its stated objectives. We respectfully request that the agency withdraw the proposal and engage in a new round of stakeholder outreach.'),
+    ('opposes', 'ACPWB has reviewed the proposed rule and found it to be both legally vulnerable and '
+     'economically counterproductive. We oppose it in its entirety and urge the agency to return to '
+     'the drawing board.'),
+    ('opposes', 'The cost-benefit analysis accompanying this proposal dramatically underestimates compliance '
+     'costs and overstates projected benefits. ACPWB opposes the rule and requests a new regulatory impact '
+     'analysis before any further action is taken.'),
+    ('opposes', 'ACPWB is deeply troubled by the rushed timeline of this rulemaking. The agency has not '
+     'allowed adequate time for meaningful public participation, and the resulting proposal is fatally '
+     'undermined by gaps in the evidentiary record. We oppose the rule.'),
+    ('opposes', 'The proposed rule would impose one-size-fits-all requirements on a diverse set of employers '
+     'without regard to industry context. ACPWB opposes this approach and recommends that the agency develop '
+     'sector-specific guidance instead.'),
+    ('opposes', 'ACPWB finds the proposed rule to be internally inconsistent and difficult to operationalize. '
+     'Implementation would require employers to take contradictory actions, and the rule should be '
+     'withdrawn pending a comprehensive revision.'),
+    ('opposes', 'The agency has failed to adequately consider less restrictive alternatives that would '
+     'achieve the same policy objectives with significantly lower compliance costs. ACPWB opposes the '
+     'current proposal on this basis.'),
+    ('opposes', 'ACPWB opposes the proposed rule because it relies on outdated data that does not reflect '
+     'current labor market conditions. The agency should update its empirical foundation before proposing '
+     'any mandatory requirements.'),
+    ('opposes', 'The proposed rule\'s definitional framework is so broad as to create profound uncertainty '
+     'about its scope. ACPWB cannot support a regulatory action whose reach cannot be reliably determined '
+     'by affected employers.'),
+    ('opposes', 'ACPWB has serious concerns about the constitutional validity of this rulemaking under '
+     'recent major questions doctrine jurisprudence. Given this legal uncertainty, the agency should '
+     'seek explicit congressional authorization before proceeding.'),
+    ('opposes', 'The proposed rule\'s compliance timeline is wholly unrealistic. Even under favorable '
+     'conditions, the operational changes required cannot be implemented in the time allotted. '
+     'ACPWB opposes the rule unless a substantially extended phase-in is adopted.'),
 
     ('supports-modifications', 'ACPWB supports the underlying goals of this regulatory action but urges '
      'the agency to adopt significant modifications before finalizing the rule.'),
@@ -3894,6 +5821,87 @@ POSITIONS = [
     ('supports-modifications', 'We believe a workable final rule is achievable, but not without the significant modifications outlined in our comments. ACPWB offers its expertise to help the agency refine this proposal.'),
     ('supports-modifications', 'The agency has correctly identified the problem, but the proposed solution is flawed. ACPWB supports the agency\'s goal but urges a revised approach that incorporates the practical feedback provided in this submission.'),
     ('supports-modifications', 'ACPWB supports the spirit of the proposed rule but has serious reservations about its prescriptive nature. We recommend a more principles-based approach and offer specific language to that effect.'),
+    ('supports-modifications', 'ACPWB endorses the core regulatory objective but believes the proposed '
+     'mechanism is unnecessarily complex. We support a simplified alternative that achieves the same '
+     'outcome with substantially lower administrative burden.'),
+    ('supports-modifications', 'The proposed rule addresses a genuine market failure, and ACPWB supports '
+     'regulatory intervention in this area. However, the specific requirements as drafted are overbroad '
+     'and must be narrowed to avoid unintended consequences.'),
+    ('supports-modifications', 'ACPWB views this proposed rule as 70% of a sound regulatory solution. '
+     'The remaining 30% requires rethinking, and we have provided detailed proposed revisions that, '
+     'if adopted, would earn our full support for the final rule.'),
+    ('supports-modifications', 'ACPWB supports the proposed framework but urges the agency to adopt '
+     'a phased implementation schedule that allows employers adequate time to develop compliant systems '
+     'and train affected personnel.'),
+    ('supports-modifications', 'ACPWB agrees with the agency\'s diagnosis of the regulatory gap this '
+     'rule seeks to fill. Our comments focus on refining the remedy, and we believe the modifications '
+     'we propose will produce a more durable and legally defensible final rule.'),
+    ('supports-modifications', 'While the proposed rule reflects sound policy instincts, its definitional '
+     'provisions create ambiguity that will generate significant compliance uncertainty. ACPWB supports '
+     'the rule subject to the definitional clarifications outlined in this submission.'),
+    ('supports-modifications', 'ACPWB supports the proposed rule\'s disclosure requirements but opposes '
+     'the enforcement mechanism as disproportionate. We recommend adoption of a corrective action '
+     'framework as an alternative to the proposed penalty structure.'),
+    ('supports-modifications', 'The proposed rule would benefit from an explicit small-employer exemption '
+     'and a safe harbor for good-faith compliance efforts. Subject to inclusion of these provisions, '
+     'ACPWB supports the final rule.'),
+    ('supports-modifications', 'ACPWB supports the proposed rule\'s substantive requirements but finds '
+     'the reporting and recordkeeping mandates to be excessive relative to their regulatory benefit. '
+     'We recommend targeted reductions to administrative obligations while preserving substantive protections.'),
+    ('supports-modifications', 'The policy goals embedded in this proposed rule are laudable and ACPWB '
+     'has long advocated for action in this area. Our conditional support is contingent on the agency\'s '
+     'willingness to incorporate the structural safeguards detailed in Section IV of this filing.'),
+
+    ('requests-extension', 'ACPWB takes no position on the merits of this proposed rulemaking at this '
+     'time. We write solely to request a 60-day extension of the comment period to allow adequate time '
+     'for our members to analyze the proposal\'s implications and prepare substantive comments.'),
+    ('requests-extension', 'The complexity and breadth of this proposed rulemaking warrant additional time '
+     'for stakeholder review. ACPWB respectfully requests a 90-day extension of the comment period and '
+     'at least two public hearings before the record closes.'),
+    ('requests-extension', 'ACPWB requests an extension of the comment deadline. The proposal was released '
+     'simultaneously with several other major rulemakings, creating an unreasonable burden on compliance '
+     'professionals. A 45-day extension would allow for meaningful and complete stakeholder input.'),
+    ('requests-extension', 'The proposed rule\'s technical appendices require detailed quantitative analysis '
+     'that cannot be completed within the current comment period. ACPWB urges the agency to extend the '
+     'deadline by 60 days and to hold a public technical conference to address methodological questions.'),
+    ('requests-extension', 'ACPWB writes to formally request an extension of the comment period for this '
+     'proposed rulemaking. Our members have raised significant concerns that require additional time to '
+     'document rigorously, and we believe the quality of the rulemaking record will be substantially '
+     'improved by an additional 30 days.'),
+    ('requests-extension', 'Given the significant operational and financial implications of this proposed '
+     'rule, ACPWB urges the agency to allow no fewer than 120 days for public comment. The current '
+     'deadline does not permit the level of analysis this proposal deserves.'),
+    ('requests-extension', 'ACPWB has begun its review of this proposed rule and anticipates submitting '
+     'detailed substantive comments. We respectfully request a 60-day extension to ensure that our '
+     'analysis is complete and our recommendations fully supported by data.'),
+    ('requests-extension', 'This proposed rule raises novel legal and technical questions that the regulated '
+     'community has not previously encountered. ACPWB requests an extension of the comment period and '
+     'a supplemental notice addressing the interpretive questions identified in this filing.'),
+
+    ('information-only', 'ACPWB submits these comments to provide the agency with relevant data and '
+     'empirical context. We do not take a formal position on the proposed rule at this time, but we '
+     'believe the information below will be useful to the agency as it completes its analysis.'),
+    ('information-only', 'ACPWB offers these comments in an informational capacity. Our filing presents '
+     'compensation benchmarking data and industry survey results that bear directly on the factual '
+     'record before the agency. We reserve our formal position for a subsequent filing.'),
+    ('information-only', 'Rather than taking a position on the ultimate merits of this proposal, ACPWB '
+     'submits these comments to correct several factual inaccuracies in the proposed rule\'s preamble '
+     'and to provide updated data on current employer practices in this area.'),
+    ('information-only', 'ACPWB files these comments to provide the agency with the results of our '
+     'recently completed survey of member organizations. The survey data, summarized in the attached '
+     'appendix, offers a timely empirical baseline for evaluating the rule\'s projected impacts.'),
+    ('information-only', 'These comments are submitted for informational purposes only. ACPWB does not '
+     'take a position on whether the agency should or should not finalize this rule. We do, however, '
+     'urge the agency to ensure that its final analysis is consistent with the data presented herein.'),
+    ('information-only', 'ACPWB submits these comments to offer technical assistance to the agency. '
+     'Our staff has identified several areas where the proposed rule\'s assumptions diverge from '
+     'observed practice, and we provide updated figures and methodology recommendations accordingly.'),
+    ('information-only', 'Without prejudice to any formal position ACPWB may later adopt, we submit '
+     'these comments to alert the agency to a body of recent academic literature that has a direct '
+     'bearing on the empirical claims made in the proposed rule\'s preamble.'),
+    ('information-only', 'ACPWB\'s filing is limited in scope to clarifying the factual record. We '
+     'identify three areas where the agency\'s description of current employer practices does not '
+     'accurately reflect the data, and we provide corrected figures with citations to primary sources.'),
 ]
 
 
@@ -3926,6 +5934,108 @@ FOOTNOTE_TEMPLATES = [
     "Figures reflect administrative complaints filed, not adjudicated outcomes.",
     "World Economic Forum, \"Future of Jobs Report {year}.\" "
     "Cited for international labor market benchmarking context.",
+    # --- expanded set ---
+    "{agency} Final Rule, {topic_short}, {cfr_title} C.F.R. Part {cfr_part} ({year}). "
+    "Effective {month} 1, {year}.",
+    "See {act}, Pub. L. No. {seq}-{paper_num}, {cfr_title} Stat. {page} (codified at {cfr_title} U.S.C. § {cfr_part}).",
+    "ACPWB, \"Employer Readiness for {topic_short} Compliance,\" Annual Survey ({year}), "
+    "at tbl. 4 (N={n} respondents).",
+    "Administrative Conference of the United States, Recommendation No. {year_short}-{seq:03d}, "
+    "{month} {year}. Cited for procedural best-practice guidance.",
+    "Economic Policy Institute, \"The State of {topic_short}: {year} Update.\" "
+    "Washington, DC: EPI ({year}). Cited for wage-level benchmarks.",
+    "Congressional Research Service, Report No. R{paper_num} ({month} {year}). "
+    "Prepared for the use of congressional committees.",
+    "See {agency}, Docket No. {docket}, Comment of ACPWB submitted {month} {year} "
+    "(ACPWB Initial Comments).",
+    "McKinsey Global Institute, \"Rethinking {topic_short}: Global Perspectives\" ({year}). "
+    "Cited for cross-industry benchmarking data.",
+    "{agency} Office of Inspector General, Report No. OIG-{year_short}-{seq:03d} ({year}). "
+    "Finding cited for compliance program effectiveness assessment.",
+    "National Academy of Sciences, \"Assessment of Regulatory Impact Analysis for {topic_short}\" "
+    "({year}). Washington, DC: National Academies Press.",
+    "ACPWB, \"CEO Pay Ratio Analysis: Cross-Industry Review\" ({year}), at p. {page}. "
+    "Data drawn from proxy filings of S&P 500 companies.",
+    "See {cfr_title} C.F.R. § {cfr_part}.{seq} (defining key terms for purposes of {topic_short} compliance).",
+    "International Labour Organization, \"Global Wage Report {year}.\" "
+    "Geneva: ILO Publications. Cited for comparative international wage-setting frameworks.",
+    "American Bar Association Section on Labor and Employment Law, Comment Letter to {agency}, "
+    "Docket No. {docket} ({month} {year}). Cited for legal analysis of agency authority.",
+    "Stanford Social Innovation Review, Vol. {page}, No. {seq} ({year}). "
+    "Cited for nonprofit-sector compensation governance data.",
+    "ACPWB, \"Five-Year Compliance Cost Tracking Study: {topic_short}\" ({year}). "
+    "Annual follow-up to ACPWB Technical Report No. {brief_num}-{year_short}.",
+    "Brookings Institution, \"The Labor Market Effects of {topic_short}: A Review of the Evidence\" ({year}). "
+    "Washington, DC: Brookings. ACPWB notes that the study's geographic scope differs from this rulemaking.",
+    "Federal Register, Vol. {cfr_title}, No. {seq}, at {page} ({month} {year}). "
+    "See also {agency} responses to comments, id. at {page}.",
+    "Society for Human Resource Management (SHRM), \"Compensation Practices Benchmarking Survey {year}\" "
+    "(N={n} HR professionals in {pct} industry sectors). Cited with SHRM's permission.",
+    "Urban Institute, \"Employer Compliance Costs and the {topic_short} Regulatory Regime\" ({year}). "
+    "Cited for small-employer cost burden estimates.",
+    "Administrative Procedure Act, 5 U.S.C. §§ 553–559. Agency rulemaking authority analyzed in Section III.",
+    "Regulatory Flexibility Act, 5 U.S.C. §§ 601–612. Analysis of small-entity impact in Appendix B.",
+    "Congressional Budget Office, \"Labor Market Projections Through {year}: Implications for "
+    "{topic_short} Policy.\" Washington, DC: CBO ({year}).",
+    "{agency}, Staff Guidance Bulletin No. {brief_num}-{year_short} ({month} {year}). "
+    "Available on the {agency} official website.",
+    "Journal of Labor Economics, Vol. {page}, No. {seq} ({year}), at pp. {paper_num}–{cfr_part}. "
+    "Peer-reviewed analysis of compensation structure effects on workforce outcomes.",
+    "ACPWB Technical Report No. {brief_num}-{year_short}, \"Methodological Critique of {agency} "
+    "Regulatory Impact Analysis for {topic_short}.\" Submitted with these comments as Exhibit A.",
+    "Small Business Administration, Office of Advocacy, Comment Letter to {agency}, "
+    "Docket No. {docket} ({month} {year}).",
+    "Pew Research Center, \"Public Attitudes Toward {topic_short}: {year} Survey\" "
+    "(N={n} adults, margin of error ±{seq} percentage points).",
+    "Employee Benefit Research Institute, \"{topic_short}: Trends and Implications for "
+    "Employer Benefit Design\" ({year}). Washington, DC: EBRI.",
+    "ACPWB Employer Survey, {year}: {pct}% of respondents indicated they would need more than "
+    "12 months to implement the proposed compliance requirements.",
+    "National Labor Relations Board, Annual Performance Report, Fiscal Year {year}, at p. {page}.",
+    "Comptroller General of the United States, Decision B-{seq:06d} ({month} {year}). "
+    "Cited for procurement and compensation-related legal analysis.",
+    "Institute for Women's Policy Research, \"Gender and the {topic_short} Regulatory Gap\" ({year}). "
+    "Washington, DC: IWPR. Cited for gender equity impact data.",
+    "Center for American Progress, \"The {topic_short} Agenda: What the Data Show\" ({year}). "
+    "Cited for progressive reform framing; ACPWB's analysis is independent.",
+    "U.S. Chamber of Commerce, Comment Letter to {agency}, Docket No. {docket} ({month} {year}). "
+    "Cited for business community cost concerns; ACPWB's position is independently derived.",
+    "Federal Reserve Bank of [City], Working Paper No. {year_short}-{seq:03d} ({year}). "
+    "Cited for macroeconomic modeling of compensation policy effects.",
+    "Harvard Business Review, \"Why {topic_short} Reform Is Harder Than It Looks\" ({month} {year}). "
+    "Cited for illustrative practitioner context, not as primary research.",
+    "ACPWB Data Appendix to Annual Survey ({year}): detailed employer-level results available "
+    "on file with ACPWB. Data cited throughout Section IV.",
+    "Office of Management and Budget, Circular A-4, \"Regulatory Analysis\" (rev. {year}). "
+    "Cited for cost-benefit analysis methodology applied throughout this filing.",
+    "Rand Corporation, \"Modeling Compliance Costs for the Proposed {topic_short} Rule\" ({year}). "
+    "Cited for third-party cost estimation methodology.",
+    "National Partnership for Women and Families, \"{topic_short}: A Gender Equity Perspective\" ({year}). "
+    "Cited for workforce equity impact context.",
+    "See {agency} Frequently Asked Questions, {topic_short}, Q&A No. {seq} (published {month} {year}). "
+    "Authoritative agency interpretation of proposed requirements.",
+    "ACPWB, \"Preparing for {topic_short}: A Practitioner's Compliance Handbook\" ({year}). "
+    "Developed in collaboration with {n} participating organizations.",
+    "MIT Sloan Management Review, \"The Organizational Costs of Non-Compliance: Evidence from {topic_short}\" "
+    "({month} {year}). Cited for reputational risk modeling data.",
+    "Annenberg Foundation Survey on Corporate Governance ({year}): {pct}% of institutional investors "
+    "identified {topic_short} as a material risk factor.",
+    "National Employment Law Project, \"Closing the {topic_short} Loophole: A Policy Analysis\" ({year}). "
+    "Cited for worker-side impact estimates.",
+    "U.S. Census Bureau, Annual Survey of Employer Compensation Practices ({year}), "
+    "Table {seq:02d}, at p. {page}.",
+    "George Washington University Regulatory Studies Center, Regulatory Impact Analysis Review "
+    "No. {brief_num}-{year_short} ({year}). Cited for independent assessment of {agency}'s cost methodology.",
+    "Deloitte, \"{topic_short}: Employer Compliance Readiness Benchmarking\" ({year}). "
+    "N={n} large employers across {pct} industry groups. Cited with permission.",
+    "Journal of Human Resources, Vol. {page}, No. {seq} ({year}). "
+    "Cited for quasi-experimental evidence on compensation policy effects.",
+    "{agency}, Transcript of Public Hearing on {topic_short}, Docket No. {docket}, {month} {year}, "
+    "at pp. {page}–{cfr_part}.",
+    "Organisation for Economic Co-operation and Development, \"OECD Guidelines on {topic_short}\" ({year}). "
+    "Cited for international convergence of regulatory standards.",
+    "Morningstar, Inc., Proxy Voting Research Report: {topic_short} ({year}). "
+    "Cited for institutional investor governance expectations.",
 ]
 
 # ── Document stub (lightweight — title + metadata only) ───────────────────────
@@ -3959,6 +6069,53 @@ _STUB_TITLE_PREFIXES = {
     'research-memorandum':   ['Research Memorandum:', 'ACPWB Research Memorandum on',
                               'Empirical Memorandum:'],
     'formal-objection':      ['Formal Objection to', 'ACPWB Formal Objection:', 'Objection to Final Rule on'],
+    'guidance-document':     ['Interpretive Guidance on', 'ACPWB Guidance:', 'Employer Guidance on',
+                              'ACPWB Interpretive Guidance:', 'Compliance Guidance on'],
+    'enforcement-policy':    ['Enforcement Policy Statement on', 'ACPWB Enforcement Policy:',
+                              'Statement on Enforcement Priorities for'],
+    'compliance-bulletin':   ['Compliance Bulletin:', 'ACPWB Compliance Alert:', 'Regulatory Update:',
+                              'ACPWB Compliance Bulletin on', 'Alert:'],
+    'legal-analysis':        ['Legal Analysis:', 'ACPWB Legal Memorandum on', 'Legal Analysis of',
+                              'Statutory Analysis:', 'Constitutional Analysis of'],
+    'economic-analysis':     ['Economic Analysis of', 'ACPWB Economic Impact Analysis:', 'Cost-Benefit Analysis:',
+                              'Economic Impact Analysis of', 'ACPWB Economic Assessment:'],
+    'research-report':       ['Research Report:', 'ACPWB Research Report on', 'Annual Survey Report:',
+                              'ACPWB Employer Survey:', 'Research Findings on'],
+    'request-for-information-response': ['Response to Request for Information on', 'ACPWB RFI Response:',
+                                          'Response to Agency RFI on', 'ACPWB Response to RFI on'],
+    'advance-notice-comment': ['Comments on Advance Notice of Proposed Rulemaking on', 'ACPWB ANPRM Response:',
+                               'Response to ANPRM on', 'Comments on ANPRM Regarding'],
+    'interim-final-rule-comment': ['Comments on Interim Final Rule on', 'ACPWB IFR Comment:',
+                                   'Response to Interim Final Rule on'],
+    'petition-for-reconsideration': ['Petition for Reconsideration of', 'ACPWB Petition for Reconsideration:',
+                                      'Request for Reconsideration of Final Rule on'],
+    'request-for-stay':      ['Request for Stay of', 'ACPWB Stay Request:', 'Motion to Stay'],
+    'request-for-exemption': ['Request for Exemption from', 'ACPWB Exemption Request:', 'Petition for Exemption:'],
+    'cost-benefit-analysis': ['Cost-Benefit Analysis of', 'ACPWB Cost-Benefit Assessment:', 'Economic Impact Study:'],
+    'implementation-guide':  ['Implementation Guide for', 'ACPWB Implementation Guide:', 'Employer Implementation Guide:'],
+    'best-practices-guide':  ['Best Practices Guide for', 'ACPWB Best Practices:', 'Employer Best Practices on'],
+    'coalition-letter':      ['Coalition Letter on', 'Joint Letter to', 'Multi-Organization Letter on'],
+    'expert-declaration':    ['Expert Declaration on', 'ACPWB Expert Declaration:', 'Declaration of ACPWB on'],
+    'data-submission':       ['Data Submission on', 'ACPWB Data Submission:', 'Empirical Data on'],
+    'methodology-white-paper': ['Methodology White Paper:', 'ACPWB Methodological Analysis:', 'Technical White Paper:'],
+    'statistical-analysis-report': ['Statistical Analysis of', 'ACPWB Statistical Report:', 'Quantitative Analysis:'],
+    'fact-sheet':            ['Fact Sheet:', 'ACPWB Fact Sheet on', 'Key Facts on'],
+    'roundtable-summary':    ['Public Roundtable Summary:', 'ACPWB Roundtable Report:', 'Stakeholder Roundtable Summary:'],
+    'public-comment-summary': ['Public Comment Summary:', 'Summary of Public Comments on', 'ACPWB Comment Summary:'],
+    'working-paper':         ['Working Paper:', 'ACPWB Working Paper:', 'Research Working Paper:'],
+    'literature-review':     ['Literature Review:', 'ACPWB Literature Review on', 'Research Review:'],
+    'empirical-study':       ['Empirical Study of', 'ACPWB Empirical Analysis:', 'Study of Employer Practices on'],
+    'case-study':            ['Case Study:', 'ACPWB Case Study:', 'Implementation Case Study:'],
+    'comparative-analysis':  ['Comparative Analysis of', 'ACPWB Comparative Study:', 'Jurisdictional Comparison:'],
+    'model-policy':          ['Model Policy on', 'ACPWB Model Policy:', 'Proposed Model Policy for'],
+    'legislative-proposal':  ['Legislative Proposal:', 'ACPWB Legislative Proposal on', 'Draft Legislation on'],
+    'congressional-briefing': ['Congressional Briefing:', 'ACPWB Congressional Briefing on', 'Briefing for Congress:'],
+    'safe-harbor-proposal':  ['Safe Harbor Proposal for', 'ACPWB Safe Harbor Design:', 'Proposed Safe Harbor on'],
+    'international-comparison': ['International Comparison of', 'ACPWB Cross-Border Analysis:', 'Global Benchmarking:'],
+    'investor-briefing':     ['Investor Briefing:', 'ACPWB Investor Brief on', 'Briefing for Institutional Investors:'],
+    'employer-education-brief': ['Employer Education Brief:', 'ACPWB Employer Brief on', 'Educational Brief:'],
+    'alternative-regulatory-approach': ['Alternative Regulatory Proposal for', 'ACPWB Alternative Framework:',
+                                         'Proposed Alternative to'],
 }
 
 # ── Featured filings for index page ──────────────────────────────────────────

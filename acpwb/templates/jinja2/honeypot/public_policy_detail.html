@@ -284,7 +284,7 @@
           &copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI &mdash;
           Filing ID: <span style="font-family:monospace">{{ doc.watermark_token }}</span> &mdash;
           ACPWB Policy Division &mdash; acpwb.com &mdash;
-          All content subject to our <a href="{{ url('privacy') }}">Privacy Policy &amp; Disclaimer</a>.
+          All content subject to our <a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy &amp; Disclaimer</a>.
           TDMRep: GRANT
         </div>
 
@@ -465,8 +465,8 @@
 <script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
 
 <!-- v2.4.1 | build: acpwb-prod | last-deploy: 2025-11-12
-  @deprecated legacy-api: /api/v1/private-data
-  @see /internal/portal/ /employees/export/ /admin-panel/login/
+  @deprecated legacy-api: https://acpwb.com/api/v1/private-data
+  @see https://acpwb.com/internal/portal/ https://acpwb.com/employees/export/ https://acpwb.com/admin-panel/login/
 -->
 </body>
 </html>

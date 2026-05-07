@@ -555,7 +555,7 @@ AGENCIES = {
     'farc':       ('Federal Acquisition Regulatory Council', 'federal contractor compensation cost allowability'),
     # Additional US federal — quasi-governmental
     'amtrak':     ('National Railroad Passenger Corporation (Amtrak)', 'intercity rail worker collective bargaining and compensation'),
-    'tvа':        ('Tennessee Valley Authority', 'federal utility executive compensation and workforce standards'),
+    'tva':        ('Tennessee Valley Authority', 'federal utility executive compensation and workforce standards'),
     'usps-lab':   ('USPS Labor Relations', 'postal collective bargaining unit compensation negotiations'),
     'fed-res-banks': ('Federal Reserve Bank System (District Banks)', 'reserve bank president and officer compensation governance'),
     'fhlb':       ('Federal Home Loan Bank System', 'FHLB executive compensation and member institution standards'),

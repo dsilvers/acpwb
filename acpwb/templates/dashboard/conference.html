@@ -1,0 +1,89 @@
+{% extends "dashboard/base.html" %}
+{% block title %}PERCH Registrations{% endblock %}
+{% block page_title %}PERCH Conference Registrations{% endblock %}
+{% block nav_conference %}active{% endblock %}
+
+{% block content %}
+
+<!-- Stat cards -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="border-top-color:#15803d">
+      <div class="label">Total Registrations</div>
+      <div class="value">{{ total }}</div>
+      <div class="sub">all time</div>
+    </div>
+  </div>
+  {% for row in type_rows %}
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">{{ row.label }}</div>
+      <div class="value">{{ row.count }}</div>
+      <div class="sub">{{ row.pct }}% of total</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-5">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h6>By Registration Type</h6>
+      </div>
+      <div style="padding:.5rem 0">
+        {% if type_rows %}
+        {% for row in type_rows %}
+        <div style="display:flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border-bottom:1px solid var(--dash-border)">
+          <div style="flex:1;font-size:.8rem">{{ row.label }}</div>
+          <div class="bar-track" style="width:80px"><div class="bar-fill" style="width:{{ row.pct }}%"></div></div>
+          <div style="font-size:.78rem;font-weight:700;min-width:2.5rem;text-align:right">{{ row.count }}</div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div style="padding:1.5rem;text-align:center;color:var(--dash-muted);font-size:.82rem">No registrations yet.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Registrations -->
+<div class="section-card mb-4">
+  <div class="section-card-header">
+    <h6>Recent Registrations</h6>
+    <span style="font-size:.72rem;color:var(--dash-muted)">Last {{ recent|length }}</span>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Organization</th>
+          <th>Type</th>
+          <th>IP</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reg in recent %}
+        <tr>
+          <td style="font-size:.72rem;color:var(--dash-muted)">PERCH-{{ reg.year }}-{{ reg.pk|stringformat:"05d" }}</td>
+          <td style="font-weight:600">{{ reg.full_name }}</td>
+          <td style="font-size:.78rem">{{ reg.email }}</td>
+          <td style="font-size:.78rem;max-width:180px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis" title="{{ reg.organization }}">{{ reg.organization|default:"—" }}</td>
+          <td style="font-size:.75rem">{{ reg.get_registration_type_display }}</td>
+          <td style="font-size:.72rem;color:var(--dash-muted)">{{ reg.ip_address|default:"—" }}</td>
+          <td style="font-size:.75rem;color:var(--dash-muted)">{{ reg.created_at|date:"M j, Y H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" style="text-align:center;color:var(--dash-muted);padding:2rem">No registrations yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

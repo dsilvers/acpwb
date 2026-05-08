@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block extra_head %}
+<style>
+  .acpwb-card:hover { box-shadow: none; transform: none; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH 2026 &mdash; {{ conf.dates }}</p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:.5rem">REGISTER FOR PERCH 2026</h1>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:0">{{ conf.venue }}, Milwaukee, WI &mdash; Full conference includes the Annual PERCH Dinner.</p>
+  </div>
+</section>
+
+{% include "public/partials/_conference_subnav.html" %}
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-xl-8">
+
+        <form id="perch-reg-form" method="post" action="{% url 'perch-conference-register' %}" novalidate>
+          {% csrf_token %}
+
+          <!-- Registration Type -->
+          <div class="acpwb-card mb-4">
+            <h4 style="font-weight:800;color:var(--navy);margin-bottom:1.25rem">Registration Type</h4>
+            <div class="row g-3">
+              {% for reg_type in conf.registration_types %}
+              <div class="col-md-4">
+                <label class="d-block h-100" style="cursor:pointer">
+                  <input type="radio" name="registration_type" value="{{ reg_type.value }}" class="d-none reg-type-radio" {% if reg_type.value == 'full' %}checked{% endif %}>
+                  <div class="reg-type-card acpwb-card h-100 text-center" style="border:2px solid transparent;transition:border-color .15s">
+                    <div style="font-weight:800;color:var(--navy);font-size:.95rem;margin-bottom:.35rem">{{ reg_type.label }}</div>
+                    <div style="font-size:1.5rem;font-weight:900;color:var(--gold);margin-bottom:.35rem">${{ reg_type.price }}</div>
+                    <div style="font-size:.78rem;color:var(--muted)">{{ reg_type.description }}</div>
+                  </div>
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="acpwb-card mb-4">
+            <h4 style="font-weight:800;color:var(--navy);margin-bottom:1.25rem">Contact Information</h4>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="first_name">First Name <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required autocomplete="given-name">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="last_name">Last Name <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required autocomplete="family-name">
+              </div>
+              <div class="col-sm-8">
+                <label class="form-label fw-700" for="email">Email Address <span style="color:#dc3545">*</span></label>
+                <input type="email" class="form-control" id="email" name="email" required autocomplete="email">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label fw-700" for="phone">Phone</label>
+                <input type="tel" class="form-control" id="phone" name="phone" autocomplete="tel">
+              </div>
+            </div>
+          </div>
+
+          <!-- Mailing Address -->
+          <div class="acpwb-card mb-4">
+            <h4 style="font-weight:800;color:var(--navy);margin-bottom:1.25rem">Mailing Address</h4>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-700" for="address_line1">Address Line 1 <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="address_line1" name="address_line1" required autocomplete="address-line1">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-700" for="address_line2">Address Line 2</label>
+                <input type="text" class="form-control" id="address_line2" name="address_line2" autocomplete="address-line2">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="city">City <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="city" name="city" required autocomplete="address-level2">
+              </div>
+              <div class="col-sm-3">
+                <label class="form-label fw-700" for="state">State / Province <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="state" name="state" required autocomplete="address-level1">
+              </div>
+              <div class="col-sm-3">
+                <label class="form-label fw-700" for="postal_code">Postal Code <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="postal_code" name="postal_code" required autocomplete="postal-code">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="country">Country</label>
+                <input type="text" class="form-control" id="country" name="country" value="United States" autocomplete="country-name">
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge Details -->
+          <div class="acpwb-card mb-4">
+            <h4 style="font-weight:800;color:var(--navy);margin-bottom:.5rem">Badge &amp; Name Tag</h4>
+            <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.25rem">This information will be printed on your conference badge. If left blank, we will use your name from the Contact section above.</p>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="badge_name">Name on Badge</label>
+                <input type="text" class="form-control" id="badge_name" name="badge_name">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="badge_title">Title on Badge</label>
+                <input type="text" class="form-control" id="badge_title" name="badge_title" placeholder="e.g., Director of Total Rewards">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-700" for="badge_company">Organization on Badge</label>
+                <input type="text" class="form-control" id="badge_company" name="badge_company" placeholder="Your employer or organization">
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Details -->
+          <div class="acpwb-card mb-4">
+            <h4 style="font-weight:800;color:var(--navy);margin-bottom:.5rem">Professional Details</h4>
+            <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.25rem">Helps us tailor session recommendations and connect you with relevant peers.</p>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="job_title">Job Title</label>
+                <input type="text" class="form-control" id="job_title" name="job_title">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="organization">Organization</label>
+                <input type="text" class="form-control" id="organization" name="organization">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="years_in_field">Years in Compensation / HR Field</label>
+                <select class="form-select" id="years_in_field" name="years_in_field">
+                  <option value="">Select...</option>
+                  <option value="0-2">0–2 years</option>
+                  <option value="3-5">3–5 years</option>
+                  <option value="6-10">6–10 years</option>
+                  <option value="11-20">11–20 years</option>
+                  <option value="20+">20+ years</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-700" for="professional_membership">Professional Memberships</label>
+                <input type="text" class="form-control" id="professional_membership" name="professional_membership" placeholder="e.g., WorldatWork, SHRM, NASPP">
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="acpwb-card mb-4">
+            <h4 style="font-weight:800;color:var(--navy);margin-bottom:.5rem">Payment</h4>
+            <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.25rem">
+              All transactions are secured and encrypted. Your card information is used only to process
+              your registration fee and will not be stored on our servers.
+            </p>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-700" for="cc_name">Cardholder Name <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="cc_name" name="cc_name" autocomplete="cc-name" placeholder="Name on Card">
+              </div>
+              <div class="col-sm-8">
+                <label class="form-label fw-700" for="cc_number">Card Number <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="cc_number" name="cc_number"
+                       autocomplete="cc-number" inputmode="numeric" maxlength="19"
+                       placeholder="•••• •••• •••• ••••">
+                <div id="cc_number_error" class="invalid-feedback"></div>
+              </div>
+              <div class="col-sm-2">
+                <label class="form-label fw-700" for="cc_exp">Expiry <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="cc_exp" name="cc_exp"
+                       autocomplete="cc-exp" placeholder="MM/YY" maxlength="5">
+                <div id="cc_exp_error" class="invalid-feedback"></div>
+              </div>
+              <div class="col-sm-2">
+                <label class="form-label fw-700" for="cc_cvv">CVV <span style="color:#dc3545">*</span></label>
+                <input type="text" class="form-control" id="cc_cvv" name="cc_cvv"
+                       autocomplete="cc-csc" inputmode="numeric" maxlength="4" placeholder="•••">
+                <div id="cc_cvv_error" class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div id="cc_error_banner" class="alert alert-danger mt-3 d-none" style="font-size:.875rem"></div>
+          </div>
+
+          <!-- Submit -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <p style="font-size:.8rem;color:var(--muted);margin-bottom:0">
+              By completing registration you agree to our <a href="{% url 'privacy' %}">privacy policy</a>.
+              A confirmation email will be sent to the address provided.
+            </p>
+            <button type="submit" id="submit-btn" class="btn btn-lg" style="background:var(--gold);color:var(--navy);font-weight:900;padding:.85rem 2.5rem;border:none;flex-shrink:0">
+              Complete Registration
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  // Registration type card highlighting
+  document.querySelectorAll('.reg-type-radio').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      document.querySelectorAll('.reg-type-card').forEach(function (card) {
+        card.style.borderColor = 'transparent';
+        card.style.background = '';
+      });
+      if (this.checked) {
+        var card = this.nextElementSibling;
+        card.style.borderColor = 'var(--gold)';
+        card.style.background = '#fffbf0';
+      }
+    });
+    if (radio.checked) {
+      var card = radio.nextElementSibling;
+      card.style.borderColor = 'var(--gold)';
+      card.style.background = '#fffbf0';
+    }
+  });
+
+  // Auto-format card number with spaces
+  var ccNumber = document.getElementById('cc_number');
+  ccNumber.addEventListener('input', function () {
+    var v = this.value.replace(/\D/g, '').slice(0, 16);
+    this.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
+  });
+
+  // Auto-format expiry MM/YY
+  var ccExp = document.getElementById('cc_exp');
+  ccExp.addEventListener('input', function () {
+    var v = this.value.replace(/\D/g, '').slice(0, 4);
+    if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
+    this.value = v;
+  });
+
+  document.getElementById('perch-reg-form').addEventListener('submit', function (e) {
+    var ok = true;
+
+    // Validate card fields — just require something is entered
+    var num = ccNumber.value.replace(/\s/g, '');
+    var numErr = document.getElementById('cc_number_error');
+    ccNumber.classList.remove('is-invalid');
+    numErr.textContent = '';
+    if (!num) {
+      ccNumber.classList.add('is-invalid');
+      numErr.textContent = 'Please enter a card number.';
+      ok = false;
+    }
+
+    var exp = ccExp.value.trim();
+    var expErr = document.getElementById('cc_exp_error');
+    ccExp.classList.remove('is-invalid');
+    expErr.textContent = '';
+    if (!exp) {
+      ccExp.classList.add('is-invalid');
+      expErr.textContent = 'Please enter an expiry date.';
+      ok = false;
+    }
+
+    var cvv = document.getElementById('cc_cvv');
+    var cvvErr = document.getElementById('cc_cvv_error');
+    cvv.classList.remove('is-invalid');
+    cvvErr.textContent = '';
+    if (!cvv.value.trim()) {
+      cvv.classList.add('is-invalid');
+      cvvErr.textContent = 'Please enter a CVV.';
+      ok = false;
+    }
+
+    if (!ok) {
+      e.preventDefault();
+      document.getElementById('cc_error_banner').classList.remove('d-none');
+      document.getElementById('cc_error_banner').textContent = 'Please correct the payment errors above before continuing.';
+      return;
+    }
+
+    // Strip CC fields before submission — never sent to server
+    ccNumber.value = '';
+    ccExp.value = '';
+    cvv.value = '';
+    document.getElementById('cc_name').value = '';
+  });
+})();
+</script>
+{% endblock %}

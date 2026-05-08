@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0 1.25rem;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH 2026 &mdash; {{ conf.dates }}</p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:0">SPEAKERS</h1>
+  </div>
+</section>
+
+{% include "public/partials/_conference_subnav.html" %}
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+
+    <!-- Keynotes -->
+    {% with keynotes=conf.speakers|dictsort:"keynote" %}
+    <h2 class="section-heading">KEYNOTE SPEAKERS</h2>
+    <hr class="section-rule">
+    <div class="row g-5 mb-5">
+      {% for speaker in conf.speakers %}
+      {% if speaker.keynote %}
+      <div class="col-lg-10 col-xl-9">
+        <div class="d-flex gap-4 align-items-start">
+          <div style="flex-shrink:0">{% speaker_avatar speaker.name speaker.name|initials 96 %}</div>
+          <div>
+            <span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--navy);padding:.2rem .6rem;border-radius:2px">Opening Keynote</span>
+            <h3 style="font-weight:800;color:var(--navy);margin-top:.6rem;margin-bottom:.15rem;font-size:1.2rem">{{ speaker.name }}</h3>
+            <p style="color:var(--muted);font-size:.85rem;margin-bottom:.75rem">{{ speaker.title }} &mdash; {{ speaker.org }}</p>
+            <p style="line-height:1.7;margin-bottom:0">{{ speaker.bio }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endwith %}
+
+    <!-- All Speakers -->
+    <h2 class="section-heading">ALL SPEAKERS</h2>
+    <hr class="section-rule">
+    <div class="row g-4">
+      {% for speaker in conf.speakers %}{% if not speaker.keynote %}
+      <div class="col-md-6">
+        <div class="acpwb-card h-100">
+          <div class="d-flex gap-3 mb-3">
+            <div style="flex-shrink:0">{% speaker_avatar speaker.name speaker.name|initials 72 %}</div>
+            <div>
+              <h5 style="font-weight:800;color:var(--navy);margin-bottom:.1rem;font-size:1rem">{{ speaker.name }}</h5>
+              <p style="color:var(--muted);font-size:.8rem;margin-bottom:0">{{ speaker.title }}<br>{{ speaker.org }}</p>
+            </div>
+          </div>
+          <p style="font-size:.88rem;line-height:1.65;margin-bottom:0;color:#444">{{ speaker.bio }}</p>
+        </div>
+      </div>
+      {% endif %}{% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- Register CTA -->
+<section style="background:var(--navy);padding:2.5rem 0;border-top:3px solid var(--gold)">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div>
+      <p style="color:var(--gold);font-weight:900;font-size:1.1rem;margin-bottom:.25rem">PERCH 2026 &mdash; {{ conf.dates }}</p>
+      <p style="color:rgba(255,255,255,0.7);margin-bottom:0;font-size:.9rem">{{ conf.venue }}, Milwaukee, WI</p>
+    </div>
+    <a href="{% url 'perch-conference-register' %}" class="btn btn-lg flex-shrink-0" style="background:var(--gold);color:var(--navy);font-weight:900;padding:.75rem 2rem;border:none">
+      Register Now
+    </a>
+  </div>
+</section>
+
+{% endblock %}

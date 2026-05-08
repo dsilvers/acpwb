@@ -1,4 +1,7 @@
+import uuid
+
 from django.db import models
+from django.utils import timezone
 
 
 class DataOptOutRequest(models.Model):
@@ -84,3 +87,52 @@ class JobApplicationDocument(models.Model):
 
     def __str__(self):
         return f"{self.filename} ({self.application})"
+
+
+class ConferenceRegistration(models.Model):
+    REGISTRATION_TYPES = [
+        ('full', 'Full Conference'),
+        ('day1', 'Day 1 Only'),
+        ('day2', 'Day 2 Only'),
+    ]
+
+    year              = models.IntegerField(default=2026, db_index=True)
+    # Contact
+    first_name        = models.CharField(max_length=100)
+    last_name         = models.CharField(max_length=100)
+    email             = models.EmailField(db_index=True)
+    phone             = models.CharField(max_length=30, blank=True)
+    # Address
+    address_line1     = models.CharField(max_length=200)
+    address_line2     = models.CharField(max_length=200, blank=True)
+    city              = models.CharField(max_length=100)
+    state             = models.CharField(max_length=100)
+    postal_code       = models.CharField(max_length=20)
+    country           = models.CharField(max_length=100, default='United States')
+    # Badge
+    badge_name        = models.CharField(max_length=100)
+    badge_title       = models.CharField(max_length=150, blank=True)
+    badge_company     = models.CharField(max_length=150, blank=True)
+    # Professional details
+    job_title         = models.CharField(max_length=150, blank=True)
+    organization      = models.CharField(max_length=150, blank=True)
+    years_in_field    = models.CharField(max_length=20, blank=True)
+    professional_membership = models.CharField(max_length=200, blank=True)
+    registration_type = models.CharField(max_length=10, choices=REGISTRATION_TYPES, default='full')
+    # Metadata — CC data is NEVER stored
+    token             = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, db_index=True)
+    ip_address        = models.GenericIPAddressField(null=True, blank=True)
+    user_agent        = models.CharField(max_length=512, blank=True)
+    created_at        = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Conference Registration'
+        verbose_name_plural = 'Conference Registrations'
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} — PERCH {self.year} ({self.get_registration_type_display()})"
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"

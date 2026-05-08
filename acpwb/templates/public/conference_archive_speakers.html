@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0 0;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">
+      PERCH {{ conf.year }} &mdash; {{ conf.dates }}{% if conf.virtual %} &mdash; Virtual{% endif %}
+    </p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:0">SPEAKERS</h1>
+  </div>
+</section>
+
+<nav style="background:var(--navy);border-bottom:2px solid var(--gold)">
+  <div class="container">
+    <ul class="nav" style="flex-wrap:nowrap;overflow-x:auto;gap:0;scrollbar-width:none">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perch-conference-archive' conf.year %}"
+           style="color:rgba(255,255,255,0.7);font-size:.82rem;font-weight:600;padding:.65rem 1rem;white-space:nowrap">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perch-conference-archive-speakers' conf.year %}"
+           style="color:var(--gold);font-size:.82rem;font-weight:700;padding:.65rem 1rem;white-space:nowrap">Speakers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perch-conference-archive-schedule' conf.year %}"
+           style="color:rgba(255,255,255,0.7);font-size:.82rem;font-weight:600;padding:.65rem 1rem;white-space:nowrap">Schedule</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+
+    {% with keynotes=conf.speakers %}
+    <!-- Keynotes -->
+    <h2 class="section-heading">KEYNOTE SPEAKER{% if conf.speakers|length > 1 %}S{% endif %}</h2>
+    <hr class="section-rule">
+    <div class="row g-5 mb-5">
+      {% for speaker in conf.speakers %}
+      {% if speaker.keynote %}
+      <div class="col-lg-10 col-xl-9">
+        <div class="d-flex gap-4 align-items-start">
+          <div style="flex-shrink:0">{% speaker_avatar speaker.name speaker.name|initials 96 %}</div>
+          <div>
+            <span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--navy);padding:.2rem .6rem;border-radius:2px">Opening Keynote</span>
+            <h3 style="font-weight:800;color:var(--navy);margin-top:.6rem;margin-bottom:.15rem;font-size:1.2rem">{{ speaker.name }}</h3>
+            <p style="color:var(--muted);font-size:.85rem;margin-bottom:.75rem">{{ speaker.title }} &mdash; {{ speaker.org }}</p>
+            <p style="line-height:1.7;margin-bottom:0">{{ speaker.bio }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endwith %}
+
+    <!-- All speakers -->
+    <h2 class="section-heading">ALL SPEAKERS</h2>
+    <hr class="section-rule">
+    <div class="row g-4">
+      {% for speaker in conf.speakers %}{% if not speaker.keynote %}
+      <div class="col-md-6">
+        <div class="acpwb-card h-100">
+          <div class="d-flex gap-3 mb-3">
+            <div style="flex-shrink:0">{% speaker_avatar speaker.name speaker.name|initials 72 %}</div>
+            <div>
+              {% if speaker.keynote %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--navy);padding:.15rem .5rem;border-radius:2px;display:inline-block;margin-bottom:.3rem">Keynote</span><br>{% endif %}
+              <h5 style="font-weight:800;color:var(--navy);margin-bottom:.1rem;font-size:1rem">{{ speaker.name }}</h5>
+              <p style="color:var(--muted);font-size:.8rem;margin-bottom:0">{{ speaker.title }}<br>{{ speaker.org }}</p>
+            </div>
+          </div>
+          <p style="font-size:.88rem;line-height:1.65;margin-bottom:0;color:#444">{{ speaker.bio }}</p>
+        </div>
+      </div>
+      {% endif %}{% endfor %}
+    </div>
+
+    <div class="mt-5 pt-3 border-top">
+      <a href="{% url 'perch-conference-archive' conf.year %}" style="font-size:.85rem">&larr; Back to PERCH {{ conf.year }}</a>
+      &nbsp;&nbsp;
+      <a href="{% url 'perch-conference-archive-schedule' conf.year %}" style="font-size:.85rem">View Schedule &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

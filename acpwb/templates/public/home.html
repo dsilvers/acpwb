@@ -166,6 +166,32 @@
 </section>
 {% endif %}
 
+<!-- ── PERCH Conference ─────────────────────────────────────────── -->
+<section style="padding:clamp(2.5rem,5vw,4rem) 0;background:var(--navy);border-top:1px solid rgba(201,168,76,0.2)">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <p class="text-uppercase mb-2" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">Upcoming Event</p>
+        <h2 style="color:white;font-weight:900;font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:.5rem">
+          PERCH 2026 &mdash; Annual Conference on Pay Equity &amp; Remuneration Compensation
+        </h2>
+        <p style="color:rgba(255,255,255,0.75);margin-bottom:.75rem;font-size:.95rem">
+          <em>The Transparent Workforce: Pay Equity in the Modern Era</em>
+        </p>
+        <div class="d-flex flex-wrap gap-4" style="color:rgba(255,255,255,0.6);font-size:.88rem">
+          <span>&#128197; September 17–18, 2026</span>
+          <span>&#128205; Wisconsin Center, Milwaukee, WI</span>
+          <span>&#127869; PERCH Dinner: Friday Evening</span>
+        </div>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a href="{% url 'perch-conference' %}" class="btn-acpwb btn me-2">Learn More</a>
+        <a href="{% url 'perch-conference-register' %}" class="btn-acpwb-outline btn">Register</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Recent Press Releases ────────────────────────────────────── -->
 {% if recent_press_releases %}
 <section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--white)">

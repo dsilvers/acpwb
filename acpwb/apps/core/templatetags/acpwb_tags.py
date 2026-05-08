@@ -1,4 +1,5 @@
 import hashlib
+import re
 from pathlib import Path
 from django import template
 from django.templatetags.static import static
@@ -6,6 +7,7 @@ from django.utils.safestring import mark_safe
 
 HEADSHOT_DIR = Path(__file__).resolve().parents[3] / "static" / "img" / "headshots"
 HEADSHOT_COUNT = 400
+SPEAKERS_DIR = Path(__file__).resolve().parents[3] / "static" / "img" / "speakers"
 
 register = template.Library()
 
@@ -54,6 +56,27 @@ def headshot_or_avatar(seed, initials_text, size=80):
     return avatar_card(seed, initials_text, size)
 
 
+@register.filter
+def schedule_speaker_name(value):
+    """Extract the speaker name from a 'Name, Organization' schedule field."""
+    return value.split(',')[0].strip() if value else ''
+
+
+@register.simple_tag
+def speaker_avatar(name, initials_text, size=80):
+    """Show a generated speaker headshot if available, otherwise fall back to gradient avatar."""
+    slug = re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
+    img_path = SPEAKERS_DIR / f"{slug}.webp"
+    if img_path.exists():
+        url = static(f"img/speakers/{slug}.webp")
+        style = (
+            f'width:{size}px;height:{size}px;border-radius:50%;'
+            f'object-fit:cover;object-position:center top;flex-shrink:0;'
+        )
+        return mark_safe(f'<img src="{url}" alt="{initials_text}" style="{style}">')
+    return avatar_card(name, initials_text, size)
+
+
 PROJECT_COVER_COUNT = 80
 
 
@@ -66,7 +89,9 @@ def project_cover_idx(slug):
 @register.filter
 def initials(name):
     """Return initials from a full name string."""
-    parts = name.strip().split()
+    parts = [w for w in name.strip().split() if w and w[0].isalpha()]
     if len(parts) >= 2:
         return f"{parts[0][0]}{parts[-1][0]}".upper()
-    return name[:2].upper() if name else "??"
+    if parts:
+        return parts[0][:2].upper()
+    return "??"

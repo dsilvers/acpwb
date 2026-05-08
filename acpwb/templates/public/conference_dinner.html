@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background:var(--navy);padding:clamp(3rem,6vw,5rem) 0;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-2" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">A PERCH Tradition Since 2014</p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem">
+      THE ANNUAL<br>PERCH DINNER
+    </h1>
+    <p style="color:rgba(255,255,255,0.8);font-size:1.05rem;max-width:550px;margin-bottom:0">
+      Wisconsin fish fry. Brandy Old Fashioneds. Good company.<br>
+      Friday evening, September 18, 2026.
+    </p>
+  </div>
+</section>
+
+{% include "public/partials/_conference_subnav.html" %}
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+
+        <!-- Overview -->
+        <div class="mb-5">
+          <h2 class="section-heading">THE TRADITION</h2>
+          <hr class="section-rule">
+          <p class="fs-5 mb-4" style="color:var(--navy);font-weight:600;line-height:1.65">
+            Every year since PERCH's inaugural 2014 conference, the conference has closed the same way:
+            a Wisconsin fish fry dinner on Friday night, a Brandy Old Fashioned in hand, and two days'
+            worth of conversations continuing well into the evening.
+          </p>
+          <p class="mb-3">
+            The PERCH Dinner began as a simple gathering at the Hilton Milwaukee's Monarch Room in 2014.
+            What no one anticipated was how central it would become to the conference experience. Year after
+            year, attendees cite the dinner as the moment when the conference shifts from professional
+            development to genuine community — when the conversations stop being about pay equity and
+            start being about everything else that matters.
+          </p>
+          <p class="mb-0">
+            In 2021, when PERCH went virtual, we mailed fish fry kits and Old Fashioned ingredient boxes
+            to all full-conference registrants. It was, by general consensus, a noble attempt that only
+            deepened everyone's appreciation for the real thing.
+          </p>
+        </div>
+
+        <!-- The Menu -->
+        <div class="mb-5">
+          <h2 class="section-heading">THE MENU</h2>
+          <hr class="section-rule">
+          <p class="mb-3">The PERCH Dinner menu is a Wisconsin fish fry. This is not negotiable.</p>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <div class="card-title mb-2">Lake Perch</div>
+                <p class="small text-muted mb-0">The namesake of the conference itself. Lightly breaded, pan-fried lake perch. The non-negotiable centerpiece of every PERCH Dinner since 2014.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <div class="card-title mb-2">Coleslaw</div>
+                <p class="small text-muted mb-0">Wisconsin-style creamy coleslaw. Made from scratch at every venue we've worked with. A point of significant behind-the-scenes negotiation each year.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <div class="card-title mb-2">Potato Pancakes</div>
+                <p class="small text-muted mb-0">Served with sour cream and applesauce. The dish that generates the most opinionated commentary at the dinner table, every year without fail.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <div class="card-title mb-2">Dark Rye Bread</div>
+                <p class="small text-muted mb-0">From a local Milwaukee bakery. Served with butter. Simple. Correct.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:#6c757d;margin-bottom:.75rem"></div>
+                <div class="card-title mb-2">Vegetarian Option</div>
+                <p class="small text-muted mb-0">A cheese-forward vegetarian entrée available upon request at registration. Please note your preference during registration.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:#6c757d;margin-bottom:.75rem"></div>
+                <div class="card-title mb-2">Dessert</div>
+                <p class="small text-muted mb-0">Varies by venue. Past years have featured Door County cherry pie, kringle from a Racine bakery, and, memorably in 2018, a cheese course that went significantly over budget.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Drink -->
+        <div class="mb-5">
+          <h2 class="section-heading">THE SIGNATURE DRINK</h2>
+          <hr class="section-rule">
+          <div class="row align-items-start g-4">
+            <div class="col-md-7">
+              <h4 style="font-weight:800;color:var(--navy);margin-bottom:.75rem">The Brandy Old Fashioned</h4>
+              <p class="mb-3">
+                The Brandy Old Fashioned is, indisputably, the state cocktail of Wisconsin. Made with brandy
+                (not bourbon — this is Wisconsin), muddled fruit, a sugar cube, and bitters. Served sweet
+                (with lemon-lime soda) or sour (with sour mix). Asked "sweet or sour?" at the PERCH Dinner
+                bar is, for many attendees, the closest the conference gets to a political test.
+              </p>
+              <p class="mb-3">
+                The PERCH Dinner bar opens at 5:30 PM for the pre-dinner reception. The first round of
+                Old Fashioneds is on ACPWB.
+              </p>
+              <div style="background:#fffbf0;border-left:4px solid var(--gold);padding:1rem 1.25rem;border-radius:0 4px 4px 0">
+                <p style="font-weight:700;color:var(--navy);margin-bottom:.5rem">Non-alcoholic Old Fashioned</p>
+                <p style="font-size:.88rem;margin-bottom:0">Also available at the bar, prepared with the same muddled fruit and bitters — just without the brandy. It is, in our opinion, quite good and in no way a lesser choice.</p>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="acpwb-card">
+                <h6 class="card-title mb-3">The Brandy Old Fashioned Recipe</h6>
+                <ul class="list-unstyled mb-0" style="font-size:.85rem;line-height:2">
+                  <li>1½ oz Wisconsin brandy</li>
+                  <li>1 sugar cube (or ½ tsp sugar)</li>
+                  <li>2–3 dashes Angostura bitters</li>
+                  <li>1 orange slice, muddled</li>
+                  <li>1 maraschino cherry, muddled</li>
+                  <li>Splash of lemon-lime soda <em>(sweet)</em><br>or sour mix <em>(sour)</em></li>
+                  <li>Served on the rocks</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2026 Dinner Details -->
+        <div style="background:var(--navy);padding:2.5rem;border-left:4px solid var(--gold)">
+          <h3 style="color:var(--gold);font-weight:900;text-transform:uppercase;font-size:1.1rem;letter-spacing:.05em;margin-bottom:1rem">
+            PERCH 2026 Dinner Details
+          </h3>
+          <dl class="mb-1" style="color:rgba(255,255,255,0.85)">
+            <dt style="color:rgba(255,255,255,0.5);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Date &amp; Time</dt>
+            <dd class="mb-2">Friday, September 18, 2026 &mdash; Reception 5:30 PM / Dinner 7:00 PM</dd>
+            <dt style="color:rgba(255,255,255,0.5);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Location</dt>
+            <dd class="mb-2">{{ conf.dinner_venue }}<br><span style="font-size:.85rem;color:rgba(255,255,255,0.6)">{{ conf.dinner_address }}</span></dd>
+            <dt style="color:rgba(255,255,255,0.5);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Included With</dt>
+            <dd class="mb-0">Full conference registration. Day-pass registrants may add the dinner for $85 during registration.</dd>
+          </dl>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">PERCH Dinner History</h6>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2014</strong> Hilton Monarch Room</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2015</strong> Hyatt Regency Milwaukee</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2016</strong> Mason Street Grill, Pfister Hotel</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2017</strong> Milwaukee Chop House</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2018</strong> Trocadero, Milwaukee</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2019</strong> Potawatomi Hotel Ballroom</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2020</strong> <span style="color:#dc3545">Cancelled</span></li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2021</strong> Virtual (fish fry kits by mail)</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2022</strong> Ingleside Hotel Ballroom</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2023</strong> Miller Time Pub &amp; Grill, Brookfield</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2024</strong> Bacchus Milwaukee</li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2025</strong> Ardent, Milwaukee</li>
+              <li class="mb-2"><strong>2026</strong> <span style="color:var(--gold);font-weight:800">Odd Duck Milwaukee</span></li>
+            </ul>
+          </div>
+          <a href="{% url 'perch-conference-register' %}" class="btn-acpwb btn w-100 text-center">Register (Dinner Included)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

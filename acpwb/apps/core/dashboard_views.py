@@ -18,7 +18,7 @@ from apps.core.models import DashboardStat
 from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
-from apps.public.models import DataOptOutRequest, JobApplication, JobApplicationDocument
+from apps.public.models import ConferenceRegistration, DataOptOutRequest, JobApplication, JobApplicationDocument
 from apps.webhooks.models import CallLog, InboundEmail, VoicemailRecording
 
 
@@ -426,3 +426,34 @@ def career_download_document(request, doc_pk):
     response = HttpResponse(bytes(doc.data), content_type=content_type)
     response['Content-Disposition'] = f'attachment; filename="{doc.filename}"'
     return response
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def conference_registrations(request):
+    from django.db.models import Count
+
+    qs = ConferenceRegistration.objects.all()
+    total = qs.count()
+
+    by_type = (
+        qs.values('registration_type')
+        .annotate(count=Count('id'))
+        .order_by('-count')
+    )
+    type_rows = []
+    labels = {'full': 'Full Conference', 'day1': 'Day 1 Only', 'day2': 'Day 2 Only'}
+    for row in by_type:
+        pct = round(row['count'] / total * 100) if total else 0
+        type_rows.append({
+            'label': labels.get(row['registration_type'], row['registration_type']),
+            'count': row['count'],
+            'pct': pct,
+        })
+
+    recent = qs.order_by('-created_at')[:50]
+
+    return render(request, 'dashboard/conference.html', {
+        'total': total,
+        'type_rows': type_rows,
+        'recent': recent,
+    })

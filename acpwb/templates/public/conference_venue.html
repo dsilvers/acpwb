@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0 1.25rem;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH 2026 &mdash; {{ conf.dates }}</p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:0">VENUE &amp; TRAVEL</h1>
+  </div>
+</section>
+
+{% include "public/partials/_conference_subnav.html" %}
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+
+        <!-- Venue -->
+        <div class="mb-5">
+          <h2 class="section-heading">CONFERENCE VENUE</h2>
+          <hr class="section-rule">
+          <div class="acpwb-card">
+            <h4 style="font-weight:800;color:var(--navy);margin-bottom:.5rem">{{ conf.venue }}</h4>
+            <p style="color:var(--muted);margin-bottom:1rem">{{ conf.venue_address }}<br>
+            Phone: {{ conf.venue_phone }}</p>
+            <p class="mb-3">
+              The Wisconsin Center is Milwaukee's premier convention facility, situated in the heart of
+              downtown adjacent to the Hyatt Regency Milwaukee and within walking distance of the city's
+              Historic Third Ward, the Milwaukee Art Museum, and dozens of restaurants and bars. The
+              center features state-of-the-art meeting rooms, high-speed Wi-Fi, and full catering services.
+            </p>
+            <div style="border-radius:6px;overflow:hidden;margin-bottom:1rem">
+              <iframe
+                src="https://maps.google.com/maps?q=Wisconsin+Center,+400+W+Wisconsin+Ave,+Milwaukee,+WI+53203&output=embed"
+                width="100%" height="280" style="border:0;display:block" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade" title="Wisconsin Center map"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hotels -->
+        <div class="mb-5">
+          <h2 class="section-heading">HOTEL ACCOMMODATIONS</h2>
+          <hr class="section-rule">
+          <p class="mb-4">
+            PERCH has negotiated preferred rates at the following Milwaukee hotels. When booking, mention
+            <strong>"PERCH 2026"</strong> or use the group code <strong>PERCH26</strong> to access the
+            conference rate. Room block availability is limited — book early.
+          </p>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <h6 class="card-title mb-1"><a href="https://www.hyatt.com/hyatt-regency/mkerw-hyatt-regency-milwaukee" target="_blank" rel="noopener" style="color:var(--navy)">Hyatt Regency Milwaukee</a></h6>
+                <p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem">333 W Kilbourn Ave &mdash; <em>Connected to Wisconsin Center via skybridge</em></p>
+                <p style="font-size:.85rem;margin-bottom:.5rem">The conference hotel. Attendees staying here can walk to all sessions without going outside.</p>
+                <p style="font-size:.82rem;color:var(--navy);font-weight:700;margin-bottom:.75rem">Conference Rate: $229–$269/night</p>
+                <a href="https://www.hyatt.com/hyatt-regency/mkerw-hyatt-regency-milwaukee" target="_blank" rel="noopener" class="btn-navy btn" style="font-size:.72rem;padding:.3rem .75rem;letter-spacing:.08em">HOTEL WEBSITE</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <h6 class="card-title mb-1"><a href="https://www.hilton.com/en/hotels/mkecccc-hilton-milwaukee-city-center/" target="_blank" rel="noopener" style="color:var(--navy)">Hilton Milwaukee City Center</a></h6>
+                <p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem">509 W Wisconsin Ave &mdash; <em>Across the street, 2-minute walk</em></p>
+                <p style="font-size:.85rem;margin-bottom:.5rem">Historic downtown property where PERCH held its inaugural 2014 conference.</p>
+                <p style="font-size:.82rem;color:var(--navy);font-weight:700;margin-bottom:.75rem">Conference Rate: $209–$249/night</p>
+                <a href="https://www.hilton.com/en/hotels/mkecccc-hilton-milwaukee-city-center/" target="_blank" rel="noopener" class="btn-navy btn" style="font-size:.72rem;padding:.3rem .75rem;letter-spacing:.08em">HOTEL WEBSITE</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <h6 class="card-title mb-1"><a href="https://www.thepfisterhotel.com/" target="_blank" rel="noopener" style="color:var(--navy)">The Pfister Hotel</a></h6>
+                <p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem">424 E Wisconsin Ave &mdash; <em>4-minute walk</em></p>
+                <p style="font-size:.85rem;margin-bottom:.5rem">Milwaukee's landmark luxury hotel, built in 1893. Preferred for attendees seeking an upgraded experience.</p>
+                <p style="font-size:.82rem;color:var(--navy);font-weight:700;margin-bottom:.75rem">Conference Rate: $289–$349/night</p>
+                <a href="https://www.thepfisterhotel.com/" target="_blank" rel="noopener" class="btn-navy btn" style="font-size:.72rem;padding:.3rem .75rem;letter-spacing:.08em">HOTEL WEBSITE</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div style="width:2rem;height:3px;background:var(--gold);margin-bottom:.75rem"></div>
+                <h6 class="card-title mb-1"><a href="https://www.theironhorsehotel.com/" target="_blank" rel="noopener" style="color:var(--navy)">Iron Horse Hotel</a></h6>
+                <p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem">500 W Florida St &mdash; <em>Historic Third Ward, 10-minute walk</em></p>
+                <p style="font-size:.85rem;margin-bottom:.5rem">Boutique hotel in the Third Ward arts district, ideal for attendees who want to explore Milwaukee's restaurant scene.</p>
+                <p style="font-size:.82rem;color:var(--navy);font-weight:700;margin-bottom:.75rem">Conference Rate: $219–$259/night</p>
+                <a href="https://www.theironhorsehotel.com/" target="_blank" rel="noopener" class="btn-navy btn" style="font-size:.72rem;padding:.3rem .75rem;letter-spacing:.08em">HOTEL WEBSITE</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Getting to Milwaukee -->
+        <div class="mb-5">
+          <h2 class="section-heading">GETTING TO MILWAUKEE</h2>
+          <hr class="section-rule">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <h6 style="font-weight:800;color:var(--navy)">By Air</h6>
+              <p style="font-size:.88rem;margin-bottom:0">
+                <strong>Milwaukee Mitchell International Airport (MKE)</strong> is the primary airport,
+                located approximately 8 miles south of downtown. Rideshare to the Wisconsin Center takes
+                15–20 minutes. Taxi service is also available curbside.<br><br>
+                <strong>Chicago O'Hare (ORD)</strong> and <strong>Chicago Midway (MDW)</strong> are viable
+                alternatives with more flight options, particularly from the coasts. Budget approximately
+                90 minutes for ground transportation to Milwaukee.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h6 style="font-weight:800;color:var(--navy)">By Train</h6>
+              <p style="font-size:.88rem;margin-bottom:0">
+                <strong>Amtrak Hiawatha Service</strong> connects Chicago Union Station to Milwaukee
+                (Milwaukee Intermodal Station) in approximately 90 minutes. Seven daily departures from
+                Chicago. The Milwaukee station is a 10-minute rideshare from the Wisconsin Center.
+                Highly recommended for attendees arriving from Chicago.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h6 style="font-weight:800;color:var(--navy)">By Car</h6>
+              <p style="font-size:.88rem;margin-bottom:0">
+                Milwaukee is served by I-94 (Chicago to Minneapolis corridor), I-43 (Green Bay), and
+                I-894/US-45 (western suburban loop). The Wisconsin Center garage at 4th and Kilbourn offers
+                parking, as do several nearby surface lots and structures. Overnight rates at conference
+                hotels typically include parking.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h6 style="font-weight:800;color:var(--navy)">By Rideshare</h6>
+              <p style="font-size:.88rem;margin-bottom:0">
+                Uber and Lyft operate throughout the Milwaukee metro. The Wisconsin Center address
+                (400 W Wisconsin Ave) resolves correctly in both apps. During conference hours, pickup and
+                dropoff is most efficient on W Kilbourn Ave at the north entrance.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Around Milwaukee -->
+        <div class="mb-5">
+          <h2 class="section-heading">AROUND MILWAUKEE</h2>
+          <hr class="section-rule">
+          <p class="mb-4">Milwaukee rewards exploration. Here are staff recommendations within reach of the Wisconsin Center.</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-1">Milwaukee Art Museum</div>
+                <p class="small text-muted mb-0">The Santiago Calatrava-designed Quadracci Pavilion is one of the most photographed buildings in the Midwest. World-class permanent collection. 15-minute walk along the lakefront.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-1">Historic Third Ward</div>
+                <p class="small text-muted mb-0">Milwaukee's arts and dining district, 10 minutes from the Wisconsin Center. Outstanding restaurants, craft cocktail bars, and boutique shopping.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-1">Brady Street</div>
+                <p class="small text-muted mb-0">A walkable strip of independent restaurants, coffee shops, and bars in Milwaukee's East Side neighborhood. 15-minute rideshare from the venue.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-1">Miller Valley</div>
+                <p class="small text-muted mb-0">Free tours of the historic Miller Brewing campus run daily. A genuinely interesting facility and a distinctly Milwaukee experience. 10-minute rideshare.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-1">Milwaukee Public Market</div>
+                <p class="small text-muted mb-0">Year-round indoor market in the Third Ward with local food vendors, a wine bar, and excellent Wisconsin cheese selections. Ideal for lunch on a free afternoon.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-1">Lake Michigan</div>
+                <p class="small text-muted mb-0">Milwaukee sits on the western shore of Lake Michigan. The lakefront path runs from the Art Museum through Veterans Park and beyond — worth an early morning run or evening walk.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">Quick Reference</h6>
+            <dl class="mb-0" style="font-size:.85rem">
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Conference Venue</dt>
+              <dd class="fw-700 mb-2">Wisconsin Center<br><span style="font-weight:400">400 W Wisconsin Ave</span></dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Conference Dates</dt>
+              <dd class="fw-700 mb-2">{{ conf.dates }}</dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">PERCH Dinner</dt>
+              <dd class="fw-700 mb-2">Friday, Sept 18<br><span style="font-weight:400">{{ conf.dinner_venue }}<br>{{ conf.dinner_address }}</span></dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Hotel Group Code</dt>
+              <dd class="fw-700 mb-0">PERCH26</dd>
+            </dl>
+          </div>
+          <a href="{% url 'perch-conference-register' %}" class="btn-acpwb btn w-100 mb-2 text-center">Register Now</a>
+          <a href="{% url 'perch-conference-dinner' %}" class="btn-navy btn w-100 text-center">About the PERCH Dinner</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-2" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">Annual Conference on Pay Equity &amp; Remuneration Compensation</p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:.5rem">ABOUT PERCH</h1>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:0;font-size:1rem">The conference the compensation profession has called its own since 2014.</p>
+  </div>
+</section>
+
+{% include "public/partials/_conference_subnav.html" %}
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+
+        <!-- What is PERCH -->
+        <div class="mb-5">
+          <h2 class="section-heading">WHAT IS PERCH?</h2>
+          <hr class="section-rule">
+          <p class="fs-5 mb-4" style="color:var(--navy);font-weight:600;line-height:1.65">
+            PERCH — the Annual Conference on Pay Equity &amp; Remuneration Compensation — is the Midwest's
+            premier gathering for compensation professionals, HR leaders, policy advocates, and researchers
+            committed to building fairer, more transparent, and more accountable pay practices.
+          </p>
+          <p class="mb-3">
+            Hosted by the American Corporation for Public Well Being since its inaugural edition in 2014,
+            PERCH brings together practitioners and researchers who share a conviction that compensation
+            transparency and pay equity are not just ethical imperatives — they are organizational
+            performance imperatives. Every session, every panel, and every conversation at PERCH is
+            grounded in that conviction.
+          </p>
+          <p class="mb-0">
+            PERCH is named for the Great Lakes perch that forms the centerpiece of its beloved
+            <a href="{% url 'perch-conference-dinner' %}">Annual PERCH Dinner</a> — a Wisconsin fish fry
+            tradition that has closed every Day 1 since 2014.
+          </p>
+        </div>
+
+        <!-- History -->
+        <div class="mb-5">
+          <h2 class="section-heading">CONFERENCE HISTORY</h2>
+          <hr class="section-rule">
+          <p class="mb-4">
+            PERCH was founded in 2014 by ACPWB's research division as a single-day symposium intended to
+            convene thirty to forty Wisconsin-based compensation professionals. Demand exceeded expectations:
+            142 attendees registered for the inaugural conference at the Hilton Milwaukee City Center,
+            and the conference has grown every year since.
+          </p>
+
+          <!-- Timeline -->
+          <div class="position-relative" style="padding-left:1.5rem;border-left:3px solid var(--gold)">
+            {% for year in past_years reversed %}
+            <div class="mb-4">
+              <div style="position:absolute;left:0;transform:translateX(-50%);width:1rem;height:1rem;border-radius:50%;background:{% if year == 2020 %}#dc3545{% elif year == 2021 %}#6c757d{% else %}var(--gold){% endif %};margin-left:-1px"></div>
+              <h6 style="font-weight:800;color:var(--navy);margin-bottom:.25rem">
+                PERCH {{ year }}
+                {% if year == 2014 %}&nbsp;<span style="font-size:.7rem;color:var(--gold)">— Inaugural</span>{% endif %}
+                {% if year == 2020 %}&nbsp;<span style="font-size:.7rem;color:#dc3545">— Cancelled (COVID-19)</span>{% endif %}
+                {% if year == 2021 %}&nbsp;<span style="font-size:.7rem;color:#6c757d">— Virtual</span>{% endif %}
+              </h6>
+              {% if year != 2020 %}
+              <a href="{% url 'perch-conference-archive' year %}" style="font-size:.85rem;color:var(--navy)">
+                View PERCH {{ year }} &rarr;
+              </a>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Format -->
+        <div class="mb-5">
+          <h2 class="section-heading">FORMAT</h2>
+          <hr class="section-rule">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-2">Two Full Days</div>
+                <p class="small text-muted mb-0">Thursday and Friday each year, in early fall. Full days of programming with multiple concurrent breakout tracks.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-2">Keynote Speakers</div>
+                <p class="small text-muted mb-0">Each conference features opening and closing keynotes from nationally recognized researchers, practitioners, and policy leaders.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-2">Breakout Tracks</div>
+                <p class="small text-muted mb-0">Four concurrent tracks across two rounds each day, covering technical, strategic, legal, and analytical dimensions of compensation.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="acpwb-card h-100">
+                <div class="card-title mb-2">The PERCH Dinner</div>
+                <p class="small text-muted mb-0">A Wisconsin fish fry tradition held Thursday evening at a Milwaukee-area venue. Included with full conference registration since 2014.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Who attends -->
+        <div class="mb-5">
+          <h2 class="section-heading">WHO ATTENDS</h2>
+          <hr class="section-rule">
+          <p class="mb-3">PERCH draws a practitioner-research mix that distinguishes it from purely academic or purely HR conferences:</p>
+          <ul style="line-height:2">
+            <li>Compensation and total rewards professionals</li>
+            <li>Chief Human Resources Officers and CHROs</li>
+            <li>Employment attorneys and HR compliance counsel</li>
+            <li>Academic researchers in labor economics, organizational behavior, and employment law</li>
+            <li>Policy advocates and nonprofit leaders working on pay equity</li>
+            <li>Compensation technology and analytics vendors</li>
+            <li>Corporate governance professionals and compensation committee advisors</li>
+          </ul>
+        </div>
+
+        <!-- PERCH Recognition Award -->
+        <div style="background:var(--navy);color:white;padding:2.5rem;border-left:4px solid var(--gold)">
+          <h3 style="color:var(--gold);font-weight:900;text-transform:uppercase;font-size:1.1rem;letter-spacing:.05em;margin-bottom:1rem">
+            The PERCH Pay Equity Recognition Award
+          </h3>
+          <p style="color:rgba(255,255,255,0.8);margin-bottom:0">
+            Awarded annually since PERCH 2015, the PERCH Pay Equity Recognition Award honors an organization
+            that has achieved documented, measurable progress toward pay equity — and that is willing to
+            share its methodology with the PERCH community. Nominees are accepted through the ACPWB
+            research division. Past recipients include manufacturing firms, healthcare systems, technology
+            companies, and public sector employers.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div style="position:sticky;top:2rem">
+          <div class="acpwb-card mb-4">
+            <h6 class="card-title mb-3">PERCH 2026</h6>
+            <dl class="mb-0" style="font-size:.85rem">
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Dates</dt>
+              <dd class="fw-700 mb-2">September 17–18, 2026</dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Venue</dt>
+              <dd class="fw-700 mb-2">Wisconsin Center<br><span style="font-weight:400;font-size:.82rem">Milwaukee, WI</span></dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Founded</dt>
+              <dd class="fw-700 mb-2">2014</dd>
+              <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Host Organization</dt>
+              <dd class="fw-700 mb-0">American Corporation for Public Well Being</dd>
+            </dl>
+          </div>
+          <a href="{% url 'perch-conference' %}" class="btn-acpwb btn w-100 mb-2 text-center">PERCH 2026 Overview</a>
+          <a href="{% url 'perch-conference-register' %}" class="btn-navy btn w-100 text-center">Register Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

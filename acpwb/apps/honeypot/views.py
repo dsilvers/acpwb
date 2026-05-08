@@ -1209,6 +1209,9 @@ def fake_robots(request):
         '/our-people/', '/careers/', '/mission/', '/projects/',
         '/partners/', '/privacy/', '/faq/', '/awards/',
         '/patents/', '/accessibility/', '/trademarks/', '/site-map/',
+        '/perch-conference/', '/perch-conference/speakers/',
+        '/perch-conference/schedule/', '/perch-conference/venue/',
+        '/perch-conference/about/',
     ]
     rng.shuffle(site_pages)
 

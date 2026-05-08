@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">Registration Confirmed</p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:.5rem">You're Registered for PERCH 2026</h1>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:0">A confirmation email will be sent to {{ reg.email }}.</p>
+  </div>
+</section>
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+
+        <!-- Confirmation number banner -->
+        <div style="background:var(--navy);color:white;padding:1.75rem 2rem;border-left:4px solid var(--gold);margin-bottom:2rem">
+          <div style="font-size:.75rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:.35rem">Confirmation Number</div>
+          <div style="font-size:1.75rem;font-weight:900;color:var(--gold);letter-spacing:.05em;font-family:monospace">{{ confirmation_number }}</div>
+          <div style="font-size:.82rem;color:rgba(255,255,255,0.6);margin-top:.35rem">Please save this number for your records.</div>
+        </div>
+
+        <!-- Registration summary -->
+        <div class="acpwb-card mb-4">
+          <h5 style="font-weight:800;color:var(--navy);margin-bottom:1.25rem">Registration Summary</h5>
+          <div class="row g-3" style="font-size:.88rem">
+            <div class="col-sm-6">
+              <div style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem">Name</div>
+              <div class="fw-700">{{ reg.full_name }}</div>
+            </div>
+            <div class="col-sm-6">
+              <div style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem">Email</div>
+              <div class="fw-700">{{ reg.email }}</div>
+            </div>
+            <div class="col-sm-6">
+              <div style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem">Registration Type</div>
+              <div class="fw-700">{{ reg.get_registration_type_display }}</div>
+            </div>
+            <div class="col-sm-6">
+              <div style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem">Conference</div>
+              <div class="fw-700">PERCH 2026 &mdash; September 17–18, 2026</div>
+            </div>
+            {% if reg.badge_name or reg.badge_title or reg.badge_company %}
+            <div class="col-12">
+              <div style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem">Badge</div>
+              <div class="fw-700">{{ reg.badge_name|default:reg.full_name }}</div>
+              {% if reg.badge_title %}<div style="color:var(--muted)">{{ reg.badge_title }}</div>{% endif %}
+              {% if reg.badge_company %}<div style="color:var(--muted)">{{ reg.badge_company }}</div>{% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- What's next -->
+        <div class="acpwb-card mb-4">
+          <h5 style="font-weight:800;color:var(--navy);margin-bottom:1rem">What Happens Next</h5>
+          <ul style="line-height:2;margin-bottom:0">
+            <li>A confirmation email has been sent to <strong>{{ reg.email }}</strong> with your registration details.</li>
+            <li>If you registered for the full conference, your dinner reservation at <strong>Odd Duck Milwaukee</strong> is included for the evening of September 17.</li>
+            <li>Your conference badge will be available at the registration desk at the Wisconsin Center beginning at <strong>8:00 AM on September 17</strong>.</li>
+            <li>The full program schedule and speaker information is available on the <a href="{% url 'perch-conference' %}">PERCH 2026 conference page</a>.</li>
+          </ul>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{% url 'perch-conference' %}" class="btn-navy btn">Back to PERCH 2026</a>
+          <a href="{% url 'perch-conference-schedule' %}" class="btn-acpwb-outline btn">View Schedule</a>
+          <a href="{% url 'perch-conference-venue' %}" class="btn-acpwb-outline btn">Venue &amp; Travel</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

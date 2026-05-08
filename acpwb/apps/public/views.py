@@ -3,10 +3,10 @@ import re
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .career_generator import generate_job, get_current_jobs, is_valid_job_id
-from .models import Fortune500Company, DataOptOutRequest, JobApplication, JobApplicationDocument
+from .models import Fortune500Company, DataOptOutRequest, JobApplication, JobApplicationDocument, ConferenceRegistration
 from apps.projects.models import ProjectStory
 
 from .press_data import _PRESS_RELEASES
@@ -478,4 +478,188 @@ def press_release_detail(request, year, month, day, slug):
         'pr': pr,
         'og_title': pr['headline'],
         'og_description': pr['subhead'],
+    })
+
+
+# ── PERCH Conference ──────────────────────────────────────────────────────────
+
+def _conference_past_years():
+    from .conference_data import CONFERENCES
+    return sorted([y for y in CONFERENCES if y < 2026], reverse=True)
+
+
+def _conf_sorted(conf):
+    """Return conf dict with schedule sorted chronologically (day, then wall-clock time)."""
+    import datetime
+    def _t(item):
+        try:
+            return datetime.datetime.strptime(item['time'].strip(), '%I:%M %p')
+        except ValueError:
+            return datetime.datetime.max
+    return {**conf, 'schedule': sorted(conf['schedule'], key=lambda x: (x['day'], _t(x)))}
+
+
+def conference_current(request):
+    from .conference_data import CONFERENCES
+    conf = _conf_sorted(CONFERENCES[2026])
+    return render(request, 'public/conference_current.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': 'PERCH 2026 — Annual Conference on Pay Equity & Remuneration Compensation',
+        'og_description': f'{conf["theme"]} | {conf["dates"]} | {conf["venue"]}, Milwaukee, WI',
+    })
+
+
+def conference_speakers(request):
+    from .conference_data import CONFERENCES
+    conf = _conf_sorted(CONFERENCES[2026])
+    return render(request, 'public/conference_speakers.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': 'PERCH 2026 Speakers',
+        'og_description': f'Meet the speakers at PERCH 2026 — {conf["dates"]} — {conf["venue"]}, Milwaukee, WI',
+    })
+
+
+def conference_schedule(request):
+    from .conference_data import CONFERENCES
+    conf = _conf_sorted(CONFERENCES[2026])
+    return render(request, 'public/conference_schedule.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': 'PERCH 2026 Schedule',
+        'og_description': f'Full program schedule for PERCH 2026 — {conf["dates"]}',
+    })
+
+
+def conference_about(request):
+    from .conference_data import CONFERENCES
+    return render(request, 'public/conference_about.html', {
+        'conf': CONFERENCES[2026],
+        'past_years': _conference_past_years(),
+        'og_title': 'About PERCH — Annual Conference on Pay Equity & Remuneration Compensation',
+        'og_description': 'PERCH brings together compensation professionals, HR leaders, and policy advocates for two days of sessions on pay equity and executive compensation.',
+    })
+
+
+def conference_venue(request):
+    from .conference_data import CONFERENCES
+    conf = CONFERENCES[2026]
+    return render(request, 'public/conference_venue.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': f'PERCH 2026 Venue & Travel — {conf["venue"]}, Milwaukee, WI',
+        'og_description': 'Hotel recommendations, travel directions, and things to do in Milwaukee for PERCH 2026.',
+    })
+
+
+def conference_sponsors(request):
+    from .conference_data import CONFERENCES
+    conf = CONFERENCES[2026]
+    return render(request, 'public/conference_sponsors.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': 'PERCH 2026 Sponsors & Partners',
+        'og_description': 'PERCH 2026 is made possible by our Platinum, Gold, Silver, and Supporting sponsors.',
+    })
+
+
+def conference_dinner(request):
+    from .conference_data import CONFERENCES
+    conf = CONFERENCES[2026]
+    return render(request, 'public/conference_dinner.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': 'The Annual PERCH Dinner — PERCH 2026',
+        'og_description': 'A beloved PERCH tradition: Wisconsin fish fry, Brandy Old Fashioneds, and great company. Thursday evening following Day 1.',
+    })
+
+
+def conference_register(request):
+    from .conference_data import CONFERENCES
+    conf = CONFERENCES[2026]
+    if request.method == 'POST':
+        ip_raw = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', ''))
+        ip = ip_raw.split(',')[0].strip() or None
+        reg = ConferenceRegistration(
+            year=2026,
+            first_name=request.POST.get('first_name', '')[:100],
+            last_name=request.POST.get('last_name', '')[:100],
+            email=request.POST.get('email', '')[:254],
+            phone=request.POST.get('phone', '')[:30],
+            address_line1=request.POST.get('address_line1', '')[:200],
+            address_line2=request.POST.get('address_line2', '')[:200],
+            city=request.POST.get('city', '')[:100],
+            state=request.POST.get('state', '')[:100],
+            postal_code=request.POST.get('postal_code', '')[:20],
+            country=request.POST.get('country', 'United States')[:100],
+            badge_name=request.POST.get('badge_name', '')[:100],
+            badge_title=request.POST.get('badge_title', '')[:150],
+            badge_company=request.POST.get('badge_company', '')[:150],
+            job_title=request.POST.get('job_title', '')[:150],
+            organization=request.POST.get('organization', '')[:150],
+            years_in_field=request.POST.get('years_in_field', '')[:20],
+            professional_membership=request.POST.get('professional_membership', '')[:200],
+            registration_type=request.POST.get('registration_type', 'full')[:10],
+            ip_address=ip,
+            user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
+        )
+        reg.save()
+        return redirect('perch-conference-register-confirmation', token=reg.token)
+    return render(request, 'public/conference_register.html', {
+        'conf': conf,
+        'og_title': 'Register for PERCH 2026',
+        'og_description': f'Register for PERCH 2026 — {conf["dates"]} — {conf["venue"]}, Milwaukee, WI',
+    })
+
+
+def conference_register_confirmation(request, token):
+    reg = get_object_or_404(ConferenceRegistration, token=token)
+    return render(request, 'public/conference_register_confirmation.html', {
+        'reg': reg,
+        'confirmation_number': f'PERCH-{reg.year}-{reg.pk:05d}',
+        'og_title': 'Registration Confirmed — PERCH 2026',
+        'og_description': 'Your PERCH 2026 registration has been received.',
+    })
+
+
+def conference_archive(request, year):
+    from .conference_data import CONFERENCES
+    conf = CONFERENCES.get(year)
+    if conf is None:
+        raise Http404
+    conf = _conf_sorted(conf)
+    return render(request, 'public/conference_archive.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': f'PERCH {year} — Pay Equity & Remuneration Compensation Conference',
+        'og_description': f'PERCH {year} | {conf.get("venue", "Virtual Event")}',
+    })
+
+
+def conference_archive_speakers(request, year):
+    from .conference_data import CONFERENCES
+    conf = CONFERENCES.get(year)
+    if conf is None or conf.get('cancelled'):
+        raise Http404
+    conf = _conf_sorted(conf)
+    return render(request, 'public/conference_archive_speakers.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': f'PERCH {year} Speakers',
+        'og_description': f'Speakers at PERCH {year} — {conf.get("venue", "Virtual")}',
+    })
+
+
+def conference_archive_schedule(request, year):
+    from .conference_data import CONFERENCES
+    conf = CONFERENCES.get(year)
+    if conf is None or conf.get('cancelled'):
+        raise Http404
+    conf = _conf_sorted(conf)
+    return render(request, 'public/conference_archive_schedule.html', {
+        'conf': conf,
+        'past_years': _conference_past_years(),
+        'og_title': f'PERCH {year} Schedule',
+        'og_description': f'Program schedule for PERCH {year}',
     })

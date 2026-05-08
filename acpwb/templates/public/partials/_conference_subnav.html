@@ -1,0 +1,65 @@
+{% load acpwb_tags %}
+<nav style="background:var(--navy);border-bottom:2px solid var(--gold)">
+  <div class="container">
+    <ul class="nav" style="flex-wrap:nowrap;overflow-x:auto;gap:0;scrollbar-width:none">
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'perch-conference' or request.resolver_match.url_name == 'perch-conference-archive' %}active{% endif %}"
+           href="{% url 'perch-conference' %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if request.resolver_match.url_name == 'perch-conference' or request.resolver_match.url_name == 'perch-conference-archive' %}color:var(--gold);{% endif %}">
+          Overview
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if 'speakers' in request.resolver_match.url_name %}active{% endif %}"
+           href="{% if conf.year == 2026 %}{% url 'perch-conference-speakers' %}{% else %}{% url 'perch-conference-archive-speakers' conf.year %}{% endif %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if 'speakers' in request.resolver_match.url_name %}color:var(--gold);{% endif %}">
+          Speakers
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if 'schedule' in request.resolver_match.url_name %}active{% endif %}"
+           href="{% if conf.year == 2026 %}{% url 'perch-conference-schedule' %}{% else %}{% url 'perch-conference-archive-schedule' conf.year %}{% endif %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if 'schedule' in request.resolver_match.url_name %}color:var(--gold);{% endif %}">
+          Schedule
+        </a>
+      </li>
+      {% if conf.year == 2026 %}
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'perch-conference-venue' %}active{% endif %}"
+           href="{% url 'perch-conference-venue' %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if request.resolver_match.url_name == 'perch-conference-venue' %}color:var(--gold);{% endif %}">
+          Venue &amp; Travel
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'perch-conference-dinner' %}active{% endif %}"
+           href="{% url 'perch-conference-dinner' %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if request.resolver_match.url_name == 'perch-conference-dinner' %}color:var(--gold);{% endif %}">
+          PERCH Dinner
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'perch-conference-sponsors' %}active{% endif %}"
+           href="{% url 'perch-conference-sponsors' %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if request.resolver_match.url_name == 'perch-conference-sponsors' %}color:var(--gold);{% endif %}">
+          Sponsors
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.resolver_match.url_name == 'perch-conference-about' %}active{% endif %}"
+           href="{% url 'perch-conference-about' %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if request.resolver_match.url_name == 'perch-conference-about' %}color:var(--gold);{% endif %}">
+          About PERCH
+        </a>
+      </li>
+      <li class="nav-item ms-auto">
+        <a class="nav-link"
+           href="{% url 'perch-conference-register' %}"
+           style="color:var(--gold);font-size:.95rem;font-weight:800;padding:.85rem 1.25rem;white-space:nowrap">
+          Register &rarr;
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

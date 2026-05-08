@@ -20,4 +20,17 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('press-releases/', views.press_releases, name='press_releases'),
     path('press-releases/<int:year>/<int:month>/<int:day>/<slug:slug>/', views.press_release_detail, name='press_release_detail'),
+    # PERCH Conference — fixed paths must precede <int:year> wildcard
+    path('perch-conference/', views.conference_current, name='perch-conference'),
+    path('perch-conference/speakers/', views.conference_speakers, name='perch-conference-speakers'),
+    path('perch-conference/schedule/', views.conference_schedule, name='perch-conference-schedule'),
+    path('perch-conference/about/', views.conference_about, name='perch-conference-about'),
+    path('perch-conference/venue/', views.conference_venue, name='perch-conference-venue'),
+    path('perch-conference/sponsors/', views.conference_sponsors, name='perch-conference-sponsors'),
+    path('perch-conference/dinner/', views.conference_dinner, name='perch-conference-dinner'),
+    path('perch-conference/register/', views.conference_register, name='perch-conference-register'),
+    path('perch-conference/register/confirmation/<uuid:token>/', views.conference_register_confirmation, name='perch-conference-register-confirmation'),
+    path('perch-conference/<int:year>/', views.conference_archive, name='perch-conference-archive'),
+    path('perch-conference/<int:year>/speakers/', views.conference_archive_speakers, name='perch-conference-archive-speakers'),
+    path('perch-conference/<int:year>/schedule/', views.conference_archive_schedule, name='perch-conference-archive-schedule'),
 ]

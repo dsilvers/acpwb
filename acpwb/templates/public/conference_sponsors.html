@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0 1.25rem;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH 2026 &mdash; {{ conf.dates }}</p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:0">SPONSORS &amp; PARTNERS</h1>
+  </div>
+</section>
+
+{% include "public/partials/_conference_subnav.html" %}
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+    <p class="mb-5" style="font-size:1.05rem;max-width:700px">
+      PERCH 2026 is made possible by the generous support of the compensation and HR community's leading
+      firms and organizations. Sponsorship directly subsidizes conference programming, keeps registration
+      fees accessible, and supports the PERCH Pay Equity Recognition Award.
+    </p>
+
+    <!-- Platinum -->
+    <div class="mb-5">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <div style="width:3rem;height:3px;background:var(--gold)"></div>
+        <h2 class="section-heading mb-0" style="font-size:1rem;letter-spacing:.15em">PLATINUM SPONSORS</h2>
+      </div>
+      <div class="row g-3">
+        {% for org in conf.sponsors.platinum %}
+        <div class="col-md-4">
+          <div class="acpwb-card h-100 text-center" style="border-top:3px solid var(--gold)">
+            <div style="width:3rem;height:3rem;background:var(--navy);border-radius:50%;margin:0 auto .75rem;display:flex;align-items:center;justify-content:center">
+              <span style="color:var(--gold);font-weight:900;font-size:.8rem">{{ org|slice:":2"|upper }}</span>
+            </div>
+            <p style="font-weight:800;color:var(--navy);margin-bottom:0;font-size:.95rem">{{ org }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Gold -->
+    <div class="mb-5">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <div style="width:2rem;height:3px;background:#b8860b"></div>
+        <h2 class="section-heading mb-0" style="font-size:1rem;letter-spacing:.15em">GOLD SPONSORS</h2>
+      </div>
+      <div class="row g-3">
+        {% for org in conf.sponsors.gold %}
+        <div class="col-md-4 col-lg-3">
+          <div class="acpwb-card h-100 text-center" style="border-top:3px solid #b8860b">
+            <p style="font-weight:700;color:var(--navy);margin-bottom:0;font-size:.88rem">{{ org }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Silver -->
+    <div class="mb-5">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <div style="width:2rem;height:3px;background:#9e9e9e"></div>
+        <h2 class="section-heading mb-0" style="font-size:1rem;letter-spacing:.15em">SILVER SPONSORS</h2>
+      </div>
+      <div class="row g-3">
+        {% for org in conf.sponsors.silver %}
+        <div class="col-md-4 col-lg-3">
+          <div class="acpwb-card h-100 text-center" style="border-top:3px solid #9e9e9e">
+            <p style="font-weight:700;color:var(--navy);margin-bottom:0;font-size:.88rem">{{ org }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Supporting -->
+    <div class="mb-5">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <div style="width:2rem;height:3px;background:#bbb"></div>
+        <h2 class="section-heading mb-0" style="font-size:1rem;letter-spacing:.15em">SUPPORTING ORGANIZATIONS</h2>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        {% for org in conf.sponsors.supporting %}
+        <span style="background:white;border:1px solid #dee2e6;padding:.4rem .9rem;border-radius:4px;font-size:.85rem;color:var(--navy);font-weight:600">{{ org }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Become a Sponsor -->
+    <div style="background:var(--navy);padding:2.5rem;border-left:4px solid var(--gold)">
+      <h3 style="color:var(--gold);font-weight:900;text-transform:uppercase;font-size:1.1rem;letter-spacing:.05em;margin-bottom:1rem">
+        Become a PERCH 2026 Sponsor
+      </h3>
+      <p style="color:rgba(255,255,255,0.85);margin-bottom:1.25rem">
+        Sponsorship opportunities at PERCH 2026 are available across all tiers. Platinum and Gold sponsors
+        receive prominent exhibit space, speaking and panel opportunities, and full-page placement in the
+        conference program. For sponsorship inquiries, contact the ACPWB conference team.
+      </p>
+      <a href="{% url 'contact' %}" class="btn" style="background:var(--gold);color:var(--navy);font-weight:800;padding:.6rem 1.5rem">
+        Contact Us About Sponsorship
+      </a>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

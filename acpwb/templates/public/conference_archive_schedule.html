@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_description %}{{ og_description }}{% endblock %}
+
+{% block content %}
+
+<section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0 0;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">
+      PERCH {{ conf.year }} &mdash; {{ conf.dates }}{% if conf.virtual %} &mdash; Virtual{% endif %}
+    </p>
+    <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:0">PROGRAM SCHEDULE</h1>
+  </div>
+</section>
+
+<nav style="background:var(--navy);border-bottom:2px solid var(--gold)">
+  <div class="container">
+    <ul class="nav" style="flex-wrap:nowrap;overflow-x:auto;gap:0;scrollbar-width:none">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perch-conference-archive' conf.year %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perch-conference-archive-speakers' conf.year %}"
+           style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap">Speakers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perch-conference-archive-schedule' conf.year %}"
+           style="color:var(--gold);font-size:.95rem;font-weight:700;padding:.85rem 1.25rem;white-space:nowrap">Schedule</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
+  <div class="container">
+
+    {% if conf.virtual %}
+    <div class="alert" style="background:#e8f4fd;border-left:4px solid #0d6efd;border-radius:0;margin-bottom:2rem;font-size:.9rem">
+      <strong>Virtual Conference:</strong> All sessions were held via video conference. Times listed are Central Time.
+    </div>
+    {% endif %}
+
+    <!-- Day 1 -->
+    <h2 style="font-weight:800;color:var(--navy);font-size:1.1rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem">
+      Day 1 &mdash; {{ conf.day1_date }}
+    </h2>
+    {% for item in conf.schedule %}
+    {% if item.day == 1 %}
+    <div class="d-flex gap-3 mb-2 p-3"
+         style="background:{% if item.type == 'keynote' or item.type == 'dinner' %}#fffbf0{% else %}white{% endif %};border-left:4px solid {% if item.type == 'keynote' %}var(--gold){% elif item.type == 'dinner' %}var(--gold){% elif item.type == 'panel' %}var(--navy){% elif item.type == 'breakout' %}#6c757d{% elif item.type == 'break' %}#dee2e6{% else %}var(--navy){% endif %};box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="flex-shrink:0;width:6rem;font-size:.78rem;font-weight:700;color:var(--muted);padding-top:.1rem">{{ item.time }}</div>
+      <div style="flex:1">
+        <div style="font-weight:{% if item.type == 'keynote' or item.type == 'dinner' %}800{% else %}600{% endif %};color:{% if item.type == 'break' %}var(--muted){% else %}var(--navy){% endif %};font-size:.9rem">
+          {% if item.type == 'keynote' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--navy);padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">Keynote</span>{% endif %}
+          {% if item.type == 'dinner' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:white;background:#c0392b;padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">PERCH Dinner</span>{% endif %}
+          {% if item.type == 'panel' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:white;background:var(--navy);padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">Panel</span>{% endif %}
+          {% if item.type == 'breakout' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:white;background:#6c757d;padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">Breakouts</span>{% endif %}
+          {{ item.title }}
+        </div>
+        {% if item.speaker %}<div class="d-flex align-items-center gap-2" style="margin-top:.3rem">{% with item.speaker|schedule_speaker_name as sname %}{% speaker_avatar sname sname|initials 32 %}{% endwith %}<span style="font-size:.78rem;color:var(--muted)">{{ item.speaker }}</span></div>{% endif %}
+        {% if item.description %}<div style="font-size:.8rem;color:#555;margin-top:.35rem;line-height:1.5">{{ item.description }}</div>{% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <!-- Day 2 -->
+    <h2 style="font-weight:800;color:var(--navy);font-size:1.1rem;text-transform:uppercase;letter-spacing:.08em;margin-top:2.5rem;margin-bottom:1rem">
+      Day 2 &mdash; {{ conf.day2_date }}
+    </h2>
+    {% for item in conf.schedule %}
+    {% if item.day == 2 %}
+    <div class="d-flex gap-3 mb-2 p-3"
+         style="background:{% if item.type == 'keynote' or item.type == 'dinner' %}#fffbf0{% else %}white{% endif %};border-left:4px solid {% if item.type == 'keynote' %}var(--gold){% elif item.type == 'dinner' %}var(--gold){% elif item.type == 'panel' %}var(--navy){% elif item.type == 'breakout' %}#6c757d{% elif item.type == 'break' %}#dee2e6{% else %}var(--navy){% endif %};box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="flex-shrink:0;width:6rem;font-size:.78rem;font-weight:700;color:var(--muted);padding-top:.1rem">{{ item.time }}</div>
+      <div style="flex:1">
+        <div style="font-weight:{% if item.type == 'keynote' or item.type == 'dinner' %}800{% else %}600{% endif %};color:{% if item.type == 'break' %}var(--muted){% else %}var(--navy){% endif %};font-size:.9rem">
+          {% if item.type == 'keynote' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--navy);padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">Keynote</span>{% endif %}
+          {% if item.type == 'dinner' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:white;background:#c0392b;padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">PERCH Dinner</span>{% endif %}
+          {% if item.type == 'panel' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:white;background:var(--navy);padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">Panel</span>{% endif %}
+          {% if item.type == 'breakout' %}<span style="font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:white;background:#6c757d;padding:.1rem .4rem;border-radius:2px;margin-right:.4rem">Breakouts</span>{% endif %}
+          {{ item.title }}
+        </div>
+        {% if item.speaker %}<div class="d-flex align-items-center gap-2" style="margin-top:.3rem">{% with item.speaker|schedule_speaker_name as sname %}{% speaker_avatar sname sname|initials 32 %}{% endwith %}<span style="font-size:.78rem;color:var(--muted)">{{ item.speaker }}</span></div>{% endif %}
+        {% if item.description %}<div style="font-size:.8rem;color:#555;margin-top:.35rem;line-height:1.5">{{ item.description }}</div>{% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <div class="mt-5 pt-3 border-top">
+      <a href="{% url 'perch-conference-archive' conf.year %}" style="font-size:.85rem">&larr; Back to PERCH {{ conf.year }}</a>
+      &nbsp;&nbsp;
+      <a href="{% url 'perch-conference-archive-speakers' conf.year %}" style="font-size:.85rem">View Speakers &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

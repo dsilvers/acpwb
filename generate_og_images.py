@@ -202,6 +202,18 @@ _WORD_VISUALS = {
     'grade':         'organized HR office, methodical atmosphere',
     'range':         'formal compensation review room',
     'structure':     'architectural interior, geometric and deliberate',
+    # PERCH Conference
+    'perch':        'grand convention center ballroom, rows of conference seating, dramatic event lighting',
+    'conference':   'large professional convention hall, sweeping interior, organized event setup',
+    'venue':        'grand convention center atrium, polished marble lobby, architectural interior',
+    'dinner':       'elegant supper club dining room, white tablecloths, warm amber candlelight',
+    'speakers':     'conference stage with podium, dramatic spotlight, auditorium seating in background',
+    'schedule':     'large conference hall, professional event atmosphere, organized session layout',
+    'sponsors':     'corporate event space, branded exhibition hall, professional partnership atmosphere',
+    'register':     'modern event registration lobby, organized welcome desk, bright professional interior',
+    'about':        'established convention hall, institutional gravitas, warm even lighting',
+    'milwaukee':    'lakefront convention center, dramatic modern interior, evening event lighting',
+    'wisconsin':    'midwestern professional convention facility, organized and polished interior',
     # M&A / finance events
     'acquisition':   'formal deal-signing room, dark polished table',
     'merger':        'executive negotiation suite, serious atmosphere',
@@ -242,6 +254,20 @@ OG_WIDTH, OG_HEIGHT = 1200, 630
 # Use dimensions with a closer aspect ratio to 1200x630, divisible by 16.
 _GEN_WIDTH, _GEN_HEIGHT = 1024, 544
 
+# Hardcoded overrides for slugs where word-level matching produces bad results.
+# Tuple of (subject, scene) — replaces both the subject and scene for that slug.
+_SLUG_OVERRIDES = {
+    'perch-conference':          ('PERCH annual conference', 'grand convention center ballroom, rows of conference seating, dramatic event lighting'),
+    'perch-conference-speakers': ('conference keynote stage', 'large auditorium stage, dramatic spotlight on podium, rows of professional seating'),
+    'perch-conference-schedule': ('professional conference hall', 'large convention hall, multiple concurrent session rooms, organized event atmosphere'),
+    'perch-conference-venue':    ('convention center venue', 'grand convention center atrium, polished marble lobby, dramatic architectural interior'),
+    'perch-conference-about':    ('professional conference history', 'established convention hall, institutional gravitas, warm even lighting, long corridor'),
+    'perch-conference-dinner':   ('annual conference dinner', 'elegant Wisconsin supper club, white tablecloths, warm amber candlelight, intimate dining room'),
+    'perch-conference-sponsors': ('corporate conference sponsors', 'professional exhibition hall, branded sponsor displays, corporate partnership atmosphere'),
+    'perch-conference-register': ('conference registration', 'modern event registration lobby, welcoming desk, organized bright professional interior'),
+}
+
+
 def _slug_words(slug):
     """Extract meaningful words from a slug, most specific first."""
     clean = re.sub(r'-\d{3,}$', '', slug)
@@ -262,6 +288,9 @@ def _slug_to_subject(slug):
 
 
 def _build_prompt(slug):
+    if slug in _SLUG_OVERRIDES:
+        subject, scene = _SLUG_OVERRIDES[slug]
+        return f'{subject}, {scene}{_STYLE_SUFFIX}'
     subject = _slug_to_subject(slug)
     scene = _slug_to_scene(slug)
     if scene:

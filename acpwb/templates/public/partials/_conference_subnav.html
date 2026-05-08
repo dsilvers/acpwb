@@ -1,7 +1,7 @@
 {% load acpwb_tags %}
 <nav style="background:var(--navy);border-bottom:2px solid var(--gold)">
   <div class="container">
-    <ul class="nav" style="flex-wrap:nowrap;overflow-x:auto;gap:0;scrollbar-width:none">
+    <ul class="nav" style="flex-wrap:wrap;gap:0">
       <li class="nav-item">
         <a class="nav-link {% if request.resolver_match.url_name == 'perch-conference' or request.resolver_match.url_name == 'perch-conference-archive' %}active{% endif %}"
            href="{% url 'perch-conference' %}"
@@ -63,3 +63,4 @@
     </ul>
   </div>
 </nav>
+

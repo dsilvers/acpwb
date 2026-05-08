@@ -217,7 +217,7 @@ def generate_related_links(year, month, day, agency, slug, url_fn=None):
     rng = _rng_from_seed(f"related_{seed}")
 
     try:
-        base_date = datetime.date(year, month, day)
+        base_date = datetime.date(max(1985, min(year, 2025)), max(1, min(month, 12)), day)
     except ValueError:
         base_date = datetime.date(max(1985, min(year, 2025)), max(1, min(month, 12)), 1)
 
@@ -230,7 +230,10 @@ def generate_related_links(year, month, day, agency, slug, url_fn=None):
     for s in other_slugs[:5]:
         offset = rng.randint(30, 540)
         d = base_date + datetime.timedelta(days=offset * rng.choice([-1, 1]))
-        d = datetime.date(max(1985, min(d.year, 2025)), d.month, d.day)
+        try:
+            d = datetime.date(max(1985, min(d.year, 2025)), d.month, d.day)
+        except ValueError:
+            d = datetime.date(max(1985, min(d.year, 2025)), d.month, 1)
         same_agency.append(_generate_doc_stub(d.year, d.month, d.day, agency_lower, s, url_fn=url_fn))
 
     # Same slug, different agencies

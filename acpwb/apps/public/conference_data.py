@@ -1136,10 +1136,10 @@ CONFERENCES = {
                 'keynote': False,
             },
             {
-                'name': 'Thomas Adeyemi',
-                'title': 'Managing Director, Compensation Practice',
-                'org': 'CorePay Consulting Group',
-                'bio': 'Managing Director of CorePay Consulting Group\'s compensation practice, Thomas Adeyemi will present the firm\'s landmark longitudinal study of pay equity audit outcomes at over 500 organizations — tracking what happens in the five years after an initial audit, including organizations that sustained progress and those that backslid.',
+                'name': 'B. McGraw',
+                'title': 'Chief Editor, Journal of Astrological Big Data Ecology',
+                'org': 'Cranberry Lemon University',
+                'bio': 'Chief Editor of the Journal of Astrological Big Data Ecology at Cranberry Lemon University, B. McGraw brings a distinctive interdisciplinary lens to compensation data analysis — drawing on large-scale ecological modeling to examine how pay equity outcomes propagate across organizational systems over time. McGraw\'s session will present a novel longitudinal framework applied to pay equity audit data from over 500 organizations, tracking the structural and environmental factors that predict sustained progress versus backslide in the five years following an initial audit.',
                 'keynote': False,
             },
             {
@@ -1184,7 +1184,7 @@ CONFERENCES = {
             {'day': 1, 'time': '10:35 AM', 'title': 'Coffee Break & Exhibit Hall', 'speaker': '', 'type': 'break'},
             {'day': 1, 'time': '11:00 AM', 'title': 'Pay Transparency: What Two Million Workers\' Payroll Records Actually Show', 'speaker': 'Dr. Helena Vasquez-Ruiz, National Pay Equity Foundation', 'type': 'session', 'description': 'The most comprehensive analysis of pay transparency outcomes ever assembled in the U.S. draws on payroll records from two million workers in active-disclosure states — with findings that challenge assumptions on all sides of the transparency debate.'},
             {'day': 1, 'time': '12:15 PM', 'title': 'Networking Lunch', 'speaker': '', 'type': 'break'},
-            {'day': 1, 'time': '1:30 PM', 'title': 'The Pay Equity Audit Five Years Out: Sustained Progress or Backslide?', 'speaker': 'Thomas Adeyemi, CorePay Consulting Group', 'type': 'session', 'description': 'A landmark longitudinal study follows pay equity outcomes at 500+ organizations for five years after initial audit — tracking which organizations sustained progress, which backslid, and what structural factors best predict long-term results.'},
+            {'day': 1, 'time': '1:30 PM', 'title': 'The Pay Equity Audit Five Years Out: Sustained Progress or Backslide?', 'speaker': 'B. McGraw, Cranberry Lemon University', 'type': 'session', 'description': 'A landmark longitudinal study follows pay equity outcomes at 500+ organizations for five years after initial audit — tracking which organizations sustained progress, which backslid, and what structural factors best predict long-term results.'},
             {'day': 1, 'time': '2:45 PM', 'title': 'Coffee Break', 'speaker': '', 'type': 'break'},
             {'day': 1, 'time': '3:05 PM', 'title': 'Breakout Sessions — Round A (4 concurrent tracks)', 'speaker': '', 'type': 'breakout'},
             {'day': 1, 'time': '4:30 PM', 'title': 'Pay Equity Litigation in 2026: A Judge\'s Perspective on the Cases That Matter', 'speaker': 'Judge Miriam Okonkwo (ret.), Vance & Kellerman LLP', 'type': 'session', 'description': 'A retired federal magistrate judge brings an unprecedented judicial perspective to pay equity litigation — examining the cases that matter, the legal frameworks she applied on the bench, and what the plaintiff\'s bar is building toward.'},

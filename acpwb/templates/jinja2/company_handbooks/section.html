@@ -19,15 +19,52 @@
   {% include "partials/_jsonld_garbage.html" %}
 <style>
 .hb-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
-.hb-policy-section { margin-bottom:3rem; padding-bottom:2.5rem; border-bottom:1px solid var(--border); }
+.hb-policy-section { margin-bottom:3.5rem; padding-bottom:3rem; border-bottom:2px solid var(--border); }
 .hb-policy-section:last-child { border-bottom:none; }
-.hb-policy-section h2 { font-size:1.15rem; font-weight:800; color:var(--navy); margin-bottom:1rem; padding-top:.5rem; }
+.hb-policy-section > .hb-section-head { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:1rem; padding-top:.5rem; border-top:3px solid var(--gold); }
+.hb-policy-section h2 { font-size:1.15rem; font-weight:800; color:var(--navy); margin:0; }
+.hb-policy-number { font-size:.64rem; font-weight:700; letter-spacing:.08em; color:var(--muted); white-space:nowrap; font-family:monospace; }
+.hb-subsection-header { font-size:.88rem; font-weight:800; color:var(--navy); text-transform:uppercase; letter-spacing:.06em; margin:1.5rem 0 .6rem; padding-bottom:.35rem; border-bottom:1px solid var(--border); }
 .hb-policy-body p { font-size:.93rem; line-height:1.85; color:var(--text); margin-bottom:1.25rem; }
+.hb-policy-note { border-left:3px solid var(--gold); background:#fafaf7; padding:.7rem 1rem; margin:1.2rem 0; font-size:.875rem; line-height:1.7; color:var(--text); }
+.hb-policy-note.hb-note-important { border-left-color:#c0392b; background:#fdf5f5; }
+.hb-policy-note.hb-note-note { border-left-color:#2471a3; background:#f4f8fd; }
+.hb-policy-note.hb-note-reminder { border-left-color:#d4ac0d; background:#fefdf0; }
+.hb-policy-note.hb-note-exception { border-left-color:#1e8449; background:#f4faf6; }
+.hb-context-fact { background:var(--navy); color:rgba(255,255,255,.9); padding:1rem 1.2rem; margin:1.5rem 0; font-size:.875rem; line-height:1.75; border-left:4px solid var(--gold); }
+.hb-context-fact strong { color:var(--gold); display:block; font-size:.62rem; text-transform:uppercase; letter-spacing:.12em; margin-bottom:.4rem; }
+.hb-definitions { margin-top:1.8rem; padding:1.2rem; background:white; border:1px solid var(--border); }
+.hb-definitions-title { font-size:.65rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:.9rem; padding-bottom:.4rem; border-bottom:1px solid var(--border); }
+.hb-def-list { margin:0; }
+.hb-def-list dt { font-size:.8rem; font-weight:700; color:var(--navy); margin-top:.75rem; }
+.hb-def-list dt:first-child { margin-top:0; }
+.hb-def-list dd { font-size:.8rem; line-height:1.7; color:var(--text); margin-left:.5rem; margin-bottom:0; }
+.hb-amendment-history { margin-top:1.5rem; }
+.hb-amendments-title { font-size:.65rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:.6rem; }
+.hb-amendment-table { width:100%; border-collapse:collapse; font-size:.78rem; }
+.hb-amendment-table th { background:var(--surface); color:var(--muted); font-size:.65rem; text-transform:uppercase; letter-spacing:.07em; font-weight:700; padding:.4rem .6rem; border:1px solid var(--border); }
+.hb-amendment-table td { padding:.45rem .6rem; border:1px solid var(--border); color:var(--text); vertical-align:top; line-height:1.6; }
+.hb-amendment-table tr:last-child td { background:#fafaf7; font-style:italic; }
+.hb-section-footer { margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border); }
+.hb-regulatory-citation { font-size:.76rem; color:var(--muted); margin-bottom:.5rem; line-height:1.6; }
+.hb-regulatory-citation strong { color:var(--navy); }
+.hb-section-meta { font-size:.74rem; color:var(--muted); }
+.hb-section-meta strong { color:var(--text); }
 .hb-chapter-nav-link { display:block; font-size:.82rem; color:var(--navy); text-decoration:none; padding:.3rem 0; border-bottom:1px solid var(--border); }
 .hb-chapter-nav-link:hover { color:var(--gold); }
 .hb-chapter-nav-link.active { font-weight:700; color:var(--navy); }
 .hb-anchor-link { display:block; font-size:.8rem; color:var(--muted); text-decoration:none; padding:.22rem 0; border-bottom:1px solid var(--border); }
 .hb-anchor-link:hover { color:var(--navy); }
+.hb-threshold-table { width:100%; border-collapse:collapse; font-size:.77rem; }
+.hb-threshold-table td { padding:.32rem 0; border-bottom:1px solid var(--border); color:var(--text); vertical-align:top; }
+.hb-threshold-table td:first-child { color:var(--muted); font-size:.72rem; padding-right:.5rem; }
+.hb-threshold-table td:last-child { font-weight:600; color:var(--navy); text-align:right; }
+.hb-spotlight { background:var(--surface); border:1px solid var(--border); padding:1.1rem; margin-top:.9rem; }
+.hb-spotlight p { font-size:.8rem; line-height:1.7; color:var(--text); margin:0; font-style:italic; }
+.hb-agency-entry { margin-bottom:.55rem; padding-bottom:.55rem; border-bottom:1px solid var(--border); }
+.hb-agency-entry:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.hb-agency-name { font-size:.79rem; font-weight:700; color:var(--navy); }
+.hb-agency-domain { font-size:.72rem; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -82,14 +119,83 @@
 
         {% for sec in sections %}
         <div class="hb-policy-section" id="section-{{ sec.section_slug }}">
-          <h2>{{ sec.section_name }}</h2>
+
+          <div class="hb-section-head">
+            <h2>{{ sec.section_name }}</h2>
+            <span class="hb-policy-number">{{ sec.policy_number }}</span>
+          </div>
 
           <div class="hb-policy-body">
             <p>{{ sec.opening | safe }}</p>
-            {% for para in sec.body_paragraphs %}
+
+            {% for subsec in sec.subsections %}
+            <h3 class="hb-subsection-header">{{ loop.index }}. {{ subsec.header }}</h3>
+            {% for para in subsec.paragraphs %}
             <p>{{ para | safe }}</p>
             {% endfor %}
+            {% if loop.index0 == sec.note_after_idx and sec.policy_notes %}
+            {% set note = sec.policy_notes[0] %}
+            <div class="hb-policy-note hb-note-{{ note.type | lower }}">
+              <strong>{{ note.type }}:</strong> {{ note.text }}
+            </div>
+            {% endif %}
+            {% endfor %}
+
+            {% if sec.policy_notes | length > 1 %}
+            {% set note2 = sec.policy_notes[1] %}
+            <div class="hb-policy-note hb-note-{{ note2.type | lower }}">
+              <strong>{{ note2.type }}:</strong> {{ note2.text }}
+            </div>
+            {% endif %}
           </div>
+
+          <div class="hb-context-fact">
+            <strong>Industry Context</strong>
+            {{ sec.context_fact }}
+          </div>
+
+          {% if sec.definitions %}
+          <div class="hb-definitions">
+            <div class="hb-definitions-title">Key Definitions</div>
+            <dl class="hb-def-list">
+              {% for d in sec.definitions %}
+              <dt>{{ d.term }}</dt>
+              <dd>{{ d.definition }}</dd>
+              {% endfor %}
+            </dl>
+          </div>
+          {% endif %}
+
+          {% if sec.amendment_history %}
+          <div class="hb-amendment-history">
+            <div class="hb-amendments-title">Amendment History — {{ sec.section_name }}</div>
+            <table class="hb-amendment-table">
+              <thead>
+                <tr><th>Version</th><th>Effective Date</th><th>Summary of Changes</th></tr>
+              </thead>
+              <tbody>
+                {% for row in sec.amendment_history %}
+                <tr>
+                  <td style="white-space:nowrap">{{ row.version }}</td>
+                  <td style="white-space:nowrap">{{ row.date }}</td>
+                  <td>{{ row.summary }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% endif %}
+
+          <div class="hb-section-footer">
+            <p class="hb-regulatory-citation">
+              <strong>Regulatory Authority:</strong> {{ sec.regulatory_citation }}
+            </p>
+            <p class="hb-section-meta">
+              Approved by: <strong>{{ sec.approver_name }}</strong>, {{ sec.approver_title }}
+              &nbsp;&middot;&nbsp; Effective: {{ sec.effective_date }}
+            </p>
+          </div>
+
         </div>
         {% endfor %}
 
@@ -118,6 +224,7 @@
 
       </div>
 
+      {# ── Sidebar ── #}
       <div class="col-lg-4">
         <div style="position:sticky;top:2rem">
 
@@ -129,14 +236,6 @@
           </div>
 
           <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">
-            <p class="hb-section-label">Other Chapters</p>
-            {% for g_slug, g_name in all_groups %}
-            <a href="{{ url('handbook-group', args=[agency_slug + '-' + seed4, year, revision, g_slug]) }}"
-               class="hb-chapter-nav-link{% if g_slug == group_slug %} active{% endif %}">{{ g_name }}</a>
-            {% endfor %}
-          </div>
-
-          <div style="background:white;border:1px solid var(--border);padding:1.1rem">
             <p class="hb-section-label">Handbook Details</p>
             <dl style="font-size:.81rem;margin:0">
               <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Agency</dt>
@@ -144,9 +243,44 @@
               <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Effective Date</dt>
               <dd style="color:var(--navy);margin-bottom:.5rem">{{ effective_date }}</dd>
               <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Revision</dt>
-              <dd style="color:var(--navy);margin-bottom:0">{{ revision }}</dd>
+              <dd style="color:var(--navy);margin-bottom:.5rem">{{ revision }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Chapter</dt>
+              <dd style="color:var(--navy);margin-bottom:0">{{ group_name }}</dd>
             </dl>
           </div>
+
+          {% if threshold_table %}
+          <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">
+            <p class="hb-section-label">Quick Reference — {{ year }}</p>
+            <table class="hb-threshold-table">
+              {% for label, value in threshold_table %}
+              <tr>
+                <td>{{ label }}</td>
+                <td>{{ value }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+          {% endif %}
+
+          {% if group_agencies %}
+          <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">
+            <p class="hb-section-label">Regulatory Contacts</p>
+            {% for agency in group_agencies %}
+            <div class="hb-agency-entry">
+              <div class="hb-agency-name">{{ agency.name }}</div>
+              <div class="hb-agency-domain">{{ agency.domain }}</div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if group_spotlight %}
+          <div class="hb-spotlight">
+            <p class="hb-section-label">Research Spotlight</p>
+            <p>{{ group_spotlight }}</p>
+          </div>
+          {% endif %}
 
         </div>
       </div>

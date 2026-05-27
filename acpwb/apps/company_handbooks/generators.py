@@ -2,10 +2,12 @@ import hashlib
 import random
 
 from apps.honeypot.policy_data import AGENCIES
-from .data.sections import SECTIONS, SECTION_DICT, SECTION_GROUPS, GROUP_DEFS, GROUP_SLUG_LIST, GROUP_NAMES, GROUP_SECTIONS
+from .data.sections import SECTIONS, SECTION_DICT, GROUP_DEFS, GROUP_SLUG_LIST, GROUP_NAMES, GROUP_SECTIONS
 from .data.templates import (
-    OPENING_TEMPLATES, BODY_TEMPLATES, WRONG_FACTS,
+    OPENING_TEMPLATES, BODY_TEMPLATES, CONTEXT_FACTS,
     AMENDMENT_NOTES_TEMPLATES, APPROVER_NAMES, MONTH_DAYS,
+    CLOSING_TEMPLATES, SECTION_SPOTLIGHT_FACTS, REGULATORY_CITATIONS,
+    DEFINITIONS, POLICY_NOTES, SUBSECTION_HEADER_SETS, _GROUP_CODES,
 )
 from .data.thresholds import (
     PTO_DAYS_BY_YEAR, SICK_DAYS_BY_YEAR, EXPENSE_APPROVAL_THRESHOLD_BY_YEAR,
@@ -17,7 +19,6 @@ from .data.thresholds import (
 HANDBOOK_YEARS = list(range(1993, 2026))
 AGENCY_KEYS = list(AGENCIES.keys())
 
-# Keywords that indicate which agency category applies to a section
 _SECTION_AGENCY_KEYWORDS = {
     'financial': ['sec', 'cftc', 'finra', 'fdic', 'occ', 'frb', 'cfpb', 'pcaob'],
     'labor':     ['dol', 'nlrb', 'whd', 'ofccp', 'fmcs', 'flra', 'bls', 'dol-eta'],
@@ -66,6 +67,12 @@ _SECTION_TO_AGENCY_CATEGORY = {
     'drug-alcohol':          'safety',
 }
 
+# Build a lookup from section_slug -> (group_slug, position_in_group)
+_SECTION_GROUP_MAP = {}
+for _g_slug, _g_name, _g_sections in GROUP_DEFS:
+    for _pos, (_s_slug, _s_name) in enumerate(_g_sections, start=1):
+        _SECTION_GROUP_MAP[_s_slug] = (_g_slug, _pos)
+
 
 class _SafeFormatMap(dict):
     def __missing__(self, key):
@@ -85,7 +92,9 @@ def _watermark(agency_slug, seed4, year, revision, section):
 def _effective_date(year, revision):
     idx = (revision - 1) % len(MONTH_DAYS)
     month, day = MONTH_DAYS[idx]
-    return f"{['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][month]} {day}, {year}"
+    months = ['', 'January', 'February', 'March', 'April', 'May', 'June',
+              'July', 'August', 'September', 'October', 'November', 'December']
+    return f"{months[month]} {day}, {year}"
 
 
 def _agency_display(agency_slug):
@@ -105,7 +114,7 @@ def _pick_agencies_for_section(section_slug, rng, count=3):
     return [_agency_display(k) for k in valid[:count]]
 
 
-def _thresholds_for_section(section_slug, year):
+def _thresholds_for_section(_, year):
     return {
         'pto_days':          get_threshold(PTO_DAYS_BY_YEAR, year),
         'sick_days':         get_threshold(SICK_DAYS_BY_YEAR, year),
@@ -122,6 +131,51 @@ def _thresholds_for_section(section_slug, year):
 
 def _agency_name(agency_slug):
     return AGENCIES[agency_slug][0] if agency_slug in AGENCIES else agency_slug
+
+
+def _policy_number(section_slug, year, revision):
+    group_slug, pos = _SECTION_GROUP_MAP.get(section_slug, ('hr', 0))
+    code = _GROUP_CODES.get(group_slug, 'HR')
+    # Derive a stable 4-digit sequence from slug hash so numbers look real
+    seq_hash = int(hashlib.md5(section_slug.encode()).hexdigest(), 16) % 900 + 100
+    return f"HR.{code}.{seq_hash:04d}-{year}-R{revision}"
+
+
+def _build_subsections(body_pool, header_set, fmt_vars, rng):
+    """Distribute body paragraphs across subsection headers."""
+    pool = list(body_pool)
+    rng.shuffle(pool)
+    subsections = []
+    used = 0
+    for i, header in enumerate(header_set):
+        remaining_headers = len(header_set) - i
+        remaining_paras = len(pool) - used
+        # Give each subsection at least 1 paragraph; last one gets remainder
+        if remaining_headers == 1:
+            n = max(1, remaining_paras)
+        else:
+            n = rng.randint(1, max(1, remaining_paras - remaining_headers + 1))
+        paras = [p.format_map(_SafeFormatMap(fmt_vars)) for p in pool[used:used + n]]
+        used += n
+        subsections.append({'header': header, 'paragraphs': paras})
+        if used >= len(pool):
+            break
+    return subsections
+
+
+def _build_threshold_table(thresholds):
+    rows = [
+        ("PTO (Annual)", f"{thresholds['pto_days']} days"),
+        ("Sick Leave (Annual)", f"{thresholds['sick_days']} days"),
+        ("Expense Pre-Approval", f"${thresholds['expense_threshold']:,}+"),
+        ("Meal Per Diem", f"${thresholds['meal_per_diem']}/day"),
+        ("Hotel Per Diem", f"${thresholds['hotel_per_diem']}/night"),
+        ("Parental Leave", f"{thresholds['parental_weeks']} weeks paid"),
+        ("Tuition Reimbursement", f"${thresholds['tuition_max']:,}/year"),
+        ("Bereavement (Immediate)", f"{thresholds['bereavement_immediate']} days"),
+        ("Resignation Notice", thresholds['notice_period']),
+    ]
+    return rows
 
 
 def generate_handbook_index(agency_slug, seed4):
@@ -170,8 +224,8 @@ def generate_revision_toc(agency_slug, seed4, year, revision):
 
     num_amendments = rng.randint(2, 5)
     amendments = []
-    for i in range(num_amendments):
-        section_slug, section_name = rng.choice(SECTIONS)
+    for _ in range(num_amendments):
+        _, section_name = rng.choice(SECTIONS)
         note_tmpl = rng.choice(AMENDMENT_NOTES_TEMPLATES)
         note = note_tmpl.format(
             section_name=section_name,
@@ -213,16 +267,54 @@ def generate_section(agency_slug, seed4, year, revision, section_slug):
 
     opening = rng.choice(OPENING_TEMPLATES).format_map(_SafeFormatMap(fmt_vars))
 
+    # Subsections: pick a header set, shuffle a larger body pool, distribute
+    header_set = rng.choice(SUBSECTION_HEADER_SETS)
     body_pool = list(BODY_TEMPLATES)
+    n_body = rng.randint(5, 8)
     rng.shuffle(body_pool)
-    num_body = rng.randint(3, 5)
-    body_paragraphs = [p.format_map(_SafeFormatMap(fmt_vars)) for p in body_pool[:num_body]]
+    body_pool = body_pool[:n_body]
+    subsections = _build_subsections(body_pool, header_set, fmt_vars, rng)
 
-    wrong_fact = rng.choice(WRONG_FACTS)
+    # Policy notes: 1-2 callout boxes inserted at random subsection boundaries
+    note_pool = list(POLICY_NOTES)
+    rng.shuffle(note_pool)
+    n_notes = rng.randint(1, 2)
+    policy_notes = [{'type': t, 'text': txt} for t, txt in note_pool[:n_notes]]
+
+    # Insert note index: after which subsection to show the first note
+    note_after_idx = rng.randint(0, max(0, len(subsections) - 2))
+
+    context_fact = rng.choice(CONTEXT_FACTS)
+    spotlight_fact = rng.choice(SECTION_SPOTLIGHT_FACTS)
+    regulatory_citation = rng.choice(REGULATORY_CITATIONS)
 
     agencies = _pick_agencies_for_section(section_slug, rng, count=rng.randint(2, 4))
 
     approver_name, approver_title = rng.choice(APPROVER_NAMES)
+
+    # Definitions: pick 4-5 from the pool
+    def_pool = list(DEFINITIONS)
+    rng.shuffle(def_pool)
+    n_defs = rng.randint(4, 5)
+    definitions = [{'term': t, 'definition': d} for t, d in def_pool[:n_defs]]
+
+    # Amendment history: show up to 3 prior revisions + current
+    history = []
+    num_prior = min(revision - 1, rng.randint(2, 3))
+    for j in range(num_prior, 0, -1):
+        prior_rev = revision - j
+        prior_date = _effective_date(year, prior_rev)
+        note_tmpl = rng.choice(AMENDMENT_NOTES_TEMPLATES)
+        note = note_tmpl.format(section_name=section_name, effective_date=prior_date, year=year)
+        history.append({'version': f'Rev. {prior_rev}', 'date': prior_date, 'summary': note})
+    history.append({
+        'version': f'Rev. {revision} (Current)',
+        'date': effective_date,
+        'summary': 'Current revision. See the Revision Table of Contents for full amendment notes.',
+    })
+
+    policy_number = _policy_number(section_slug, year, revision)
+    threshold_table = _build_threshold_table(thresholds)
 
     return {
         'agency_slug': agency_slug,
@@ -233,11 +325,20 @@ def generate_section(agency_slug, seed4, year, revision, section_slug):
         'section_name': section_name,
         'effective_date': effective_date,
         'opening': opening,
-        'body_paragraphs': body_paragraphs,
-        'wrong_fact': wrong_fact,
+        'body_paragraphs': [p for sub in subsections for p in sub['paragraphs']],  # kept for compat
+        'subsections': subsections,
+        'policy_notes': policy_notes,
+        'note_after_idx': note_after_idx,
+        'context_fact': context_fact,
+        'spotlight_fact': spotlight_fact,
+        'regulatory_citation': regulatory_citation,
         'agencies': agencies,
         'approver_name': approver_name,
         'approver_title': approver_title,
+        'definitions': definitions,
+        'amendment_history': history,
+        'policy_number': policy_number,
+        'threshold_table': threshold_table,
         'thresholds': thresholds,
         'watermark': token,
         'sections': SECTIONS,
@@ -283,6 +384,17 @@ def generate_group_page(agency_slug, seed4, year, revision, group_slug):
                 'agency_name': _agency_name(r_slug),
             })
 
+    # Group-level sidebar data
+    thresholds = _thresholds_for_section(None, year)
+    threshold_table = _build_threshold_table(thresholds)
+
+    grp_rng = _rng_from_seed(f"group_sidebar_{agency_slug}_{seed4}_{year}_{revision}_{group_slug}")
+    group_spotlight = grp_rng.choice(SECTION_SPOTLIGHT_FACTS)
+
+    # Pick agencies representative of this group's first section
+    first_slug = group_section_list[0][0] if group_section_list else None
+    group_agencies = _pick_agencies_for_section(first_slug or '', grp_rng, count=3) if first_slug else []
+
     return {
         'agency_slug': agency_slug,
         'seed4': seed4,
@@ -300,6 +412,9 @@ def generate_group_page(agency_slug, seed4, year, revision, group_slug):
         'watermark': _watermark(agency_slug, seed4, year, revision, group_slug),
         'effective_date': _effective_date(year, revision),
         'related_handbooks': related,
+        'threshold_table': threshold_table,
+        'group_spotlight': group_spotlight,
+        'group_agencies': group_agencies,
     }
 
 

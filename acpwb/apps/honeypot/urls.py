@@ -43,9 +43,13 @@ urlpatterns = [
     # Public Policy
     path('public-policy/', views.public_policy_index, name='public-policy-index'),
     path('public-policy/<int:year>/', views.public_policy_year, name='public-policy-year'),
+    path('public-policy/<int:year>', views.public_policy_year),
     path('public-policy/<int:year>/<int:month>/', views.public_policy_month, name='public-policy-month'),
+    path('public-policy/<int:year>/<int:month>', views.public_policy_month),
     path('public-policy/<int:year>/<int:month>/<int:day>/<slug:agency>/<slug:slug>/',
          views.public_policy_detail, name='public-policy-detail'),
+    path('public-policy/<int:year>/<int:month>/<int:day>/<slug:agency>/<slug:slug>',
+         views.public_policy_detail),
 
     # Reports & Publications
     path('reports/', views.reports_list, name='reports-list'),

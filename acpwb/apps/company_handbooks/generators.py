@@ -3,6 +3,7 @@ import random
 
 from apps.honeypot.policy_data import AGENCIES
 from .data.sections import SECTIONS, SECTION_DICT, GROUP_DEFS, GROUP_SLUG_LIST, GROUP_NAMES, GROUP_SECTIONS
+from .data.agency_keywords import SECTION_AGENCY_KEYWORDS, SECTION_TO_AGENCY_CATEGORY
 from .data.templates import (
     OPENING_TEMPLATES, BODY_TEMPLATES, CONTEXT_FACTS,
     AMENDMENT_NOTES_TEMPLATES, APPROVER_NAMES, MONTH_DAYS,
@@ -19,53 +20,9 @@ from .data.thresholds import (
 HANDBOOK_YEARS = list(range(1993, 2026))
 AGENCY_KEYS = list(AGENCIES.keys())
 
-_SECTION_AGENCY_KEYWORDS = {
-    'financial': ['sec', 'cftc', 'finra', 'fdic', 'occ', 'frb', 'cfpb', 'pcaob'],
-    'labor':     ['dol', 'nlrb', 'whd', 'ofccp', 'fmcs', 'flra', 'bls', 'dol-eta'],
-    'safety':    ['osha', 'oshrc', 'niosh', 'epa', 'dot-fmcsa'],
-    'health':    ['hhs', 'cms', 'fda', 'ebsa', 'eeoc'],
-    'equity':    ['eeoc', 'ofccp', 'doj-crt', 'hud-fheo', 'ed-ocr'],
-    'data':      ['ftc', 'sec', 'nist', 'cisa', 'dhs'],
-    'legal':     ['doj-civil', 'doj-crt', 'sec', 'ftc'],
-    'benefits':  ['ebsa', 'dol', 'irs', 'hhs', 'pbgc'],
-    'export':    ['bis', 'treasury-ofac', 'state-pm', 'ddtc'],
-    'tax':       ['irs', 'treasury-do', 'treasury-ofac'],
-}
-
-_SECTION_TO_AGENCY_CATEGORY = {
-    'payroll-procedures':    'labor',
-    'overtime-policy':       'labor',
-    'pto-leave':             'labor',
-    'sick-leave':            'labor',
-    'parental-leave':        'labor',
-    'bereavement-leave':     'labor',
-    'jury-duty':             'labor',
-    'military-leave':        'labor',
-    'fmla':                  'labor',
-    'anti-harassment':       'equity',
-    'equal-opportunity':     'equity',
-    'diversity-inclusion':   'equity',
-    'accommodation-disability': 'equity',
-    'benefits-overview':     'benefits',
-    'health-insurance':      'health',
-    'dental-vision':         'health',
-    'retirement-401k':       'benefits',
-    'equity-compensation':   'financial',
-    'insider-trading':       'financial',
-    'safety-security':       'safety',
-    'emergency-procedures':  'safety',
-    'workplace-violence':    'safety',
-    'ergonomics':            'safety',
-    'first-aid':             'safety',
-    'data-privacy':          'data',
-    'cybersecurity':         'data',
-    'technology-use':        'data',
-    'export-controls':       'export',
-    'anti-corruption':       'legal',
-    'whistleblower':         'legal',
-    'conflict-of-interest':  'legal',
-    'drug-alcohol':          'safety',
-}
+# Aliases preserving the private-name convention used throughout this module
+_SECTION_AGENCY_KEYWORDS = SECTION_AGENCY_KEYWORDS
+_SECTION_TO_AGENCY_CATEGORY = SECTION_TO_AGENCY_CATEGORY
 
 # Build a lookup from section_slug -> (group_slug, position_in_group)
 _SECTION_GROUP_MAP = {}

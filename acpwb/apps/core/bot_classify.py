@@ -19,6 +19,7 @@ _IP_BOT_RANGE_DEFS = [
     ('47.79.0.0/16',   'Alibaba Qwen'),  # observed traffic
     ('47.82.60.0/22',  'Alibaba Qwen'),  # 47.82.60–63
     ('8.219.0.0/16',   'Alibaba Qwen'),  # observed traffic
+    ('43.172.194.0/24', 'Tencent'),
 ]
 
 # Pre-parse networks at import time so per-request lookup is fast
@@ -145,6 +146,7 @@ _AI_BOTS = {
     'Amazonbot', 'Diffbot', 'Omgilibot', 'Webzio',
     'Common Crawl', 'Cohere', 'Timpi',
     'Alibaba Qwen',  # IP-range classified
+    'Tencent', # Tencent
 }
 
 _SEARCH_BOTS = {

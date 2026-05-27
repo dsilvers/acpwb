@@ -1,0 +1,30 @@
+PROCESS_AREAS = [
+    ('procurement',          'Procurement'),
+    ('invoice-processing',   'Invoice Processing'),
+    ('employee-onboarding',  'Employee Onboarding'),
+    ('customer-escalation',  'Customer Escalation'),
+    ('it-ticketing',         'IT Ticketing'),
+    ('budget-approval',      'Budget Approval'),
+    ('vendor-selection',     'Vendor Selection'),
+    ('performance-review-cycles', 'Performance Review Cycles'),
+    ('travel-booking',       'Travel Booking'),
+    ('expense-reimbursement', 'Expense Reimbursement'),
+    ('contract-renewal',     'Contract Renewal'),
+    ('data-backup',          'Data Backup & Recovery'),
+    ('incident-response',    'Incident Response'),
+    ('quality-assurance',    'Quality Assurance'),
+    ('change-management',    'Change Management'),
+    ('accounts-payable',     'Accounts Payable'),
+    ('asset-management',     'Asset Management'),
+    ('facilities-scheduling', 'Facilities Scheduling'),
+    ('training-delivery',    'Training Delivery'),
+    ('compliance-reporting', 'Compliance Reporting'),
+    ('recruitment-pipeline', 'Recruitment Pipeline'),
+    ('product-launches',     'Product Launches'),
+    ('it-provisioning',      'IT Provisioning'),
+    ('audit-preparation',    'Audit Preparation'),
+    ('document-retention',   'Document Retention'),
+]
+
+PROCESS_AREA_DICT = {slug: name for slug, name in PROCESS_AREAS}
+PROCESS_AREA_KEYS = [slug for slug, _ in PROCESS_AREAS]

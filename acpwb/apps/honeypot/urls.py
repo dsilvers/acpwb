@@ -58,7 +58,9 @@ urlpatterns = [
     path('sitemap-publications.xml',  views.sitemap_publications,  name='sitemap-publications'),
     path('sitemap-wiki.xml',          views.sitemap_wiki,          name='sitemap-wiki'),
     path('sitemap-archive.xml',       views.sitemap_archive,       name='sitemap-archive'),
-    path('sitemap-public-policy.xml', views.sitemap_public_policy, name='sitemap-public-policy'),
+    path('sitemap-public-policy.xml',         views.sitemap_public_policy,        name='sitemap-public-policy'),
+    path('sitemap-handbooks.xml',             views.sitemap_handbooks,            name='sitemap-handbooks'),
+    path('sitemap-process-improvement.xml',   views.sitemap_process_improvement,  name='sitemap-process-improvement'),
 
     # Ghost link traps
     path('internal/portal/', views.ghost_trap, name='ghost-portal'),

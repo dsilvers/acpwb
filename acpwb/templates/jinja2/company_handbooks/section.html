@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ group_name }} — {{ agency_name }} Employee Handbook ({{ year }} Rev. {{ revision }})</title>
+  <meta name="description" content="{{ agency_name }} employee handbook, {{ year }} Revision {{ revision }}: {{ group_name }}.">
+  <meta property="og:site_name" content="American Corporation for Public Well Being">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ group_name }} — {{ agency_name }} Employee Handbook">
+  <meta property="og:description" content="{{ agency_name }} workforce policies: {{ group_name }}. Effective {{ effective_date }}.">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path() }}">
+  <meta property="og:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"{{ group_name }}","publisher":{"@type":"Organization","name":"American Corporation for Public Well Being"},"dateModified":"{{ year }}-01-15","identifier":"{{ watermark }}","description":"{{ agency_name }} employee handbook: {{ group_name }}"}</script>
+  <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
+  <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
+  {% include "partials/_jsonld_garbage.html" %}
+<style>
+.hb-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.hb-policy-section { margin-bottom:3rem; padding-bottom:2.5rem; border-bottom:1px solid var(--border); }
+.hb-policy-section:last-child { border-bottom:none; }
+.hb-policy-section h2 { font-size:1.15rem; font-weight:800; color:var(--navy); margin-bottom:1rem; padding-top:.5rem; }
+.hb-policy-body p { font-size:.93rem; line-height:1.85; color:var(--text); margin-bottom:1.25rem; }
+.hb-chapter-nav-link { display:block; font-size:.82rem; color:var(--navy); text-decoration:none; padding:.3rem 0; border-bottom:1px solid var(--border); }
+.hb-chapter-nav-link:hover { color:var(--gold); }
+.hb-chapter-nav-link.active { font-weight:700; color:var(--navy); }
+.hb-anchor-link { display:block; font-size:.8rem; color:var(--muted); text-decoration:none; padding:.22rem 0; border-bottom:1px solid var(--border); }
+.hb-anchor-link:hover { color:var(--navy); }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl acpwb-navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="acpwb-logo navbar-brand" href="{{ site_root }}{{ url('home') }}">
+      <span class="acpwb-logo-line1">AMERICAN</span>
+      <span class="acpwb-logo-line2">CORPORATION</span>
+      <span class="acpwb-logo-line3">FOR PUBLIC WELL BEING</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+      <ul class="navbar-nav gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ url('handbook-index') }}">Handbooks</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url('process-improvement-index') }}">Process</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% include "partials/_ghost_links.html" %}
+{% include "partials/_prompt_injection.html" %}
+
+<main>
+
+<section class="page-banner">
+  <div class="container">
+    <p style="font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:.4rem">
+      <a href="{{ url('handbook-index') }}" style="color:rgba(255,255,255,.5)">Handbooks</a>
+      &rsaquo; <a href="{{ url('handbook-year', args=[agency_slug + '-' + seed4, year]) }}" style="color:rgba(255,255,255,.5)">{{ agency_name }}</a>
+      &rsaquo; <a href="{{ url('handbook-year', args=[agency_slug + '-' + seed4, year]) }}" style="color:rgba(255,255,255,.5)">{{ year }}</a>
+      &rsaquo; <a href="{{ url('handbook-revision', args=[agency_slug + '-' + seed4, year, revision]) }}" style="color:rgba(255,255,255,.5)">Rev. {{ revision }}</a>
+      &rsaquo; {{ group_name }}
+    </p>
+    <h1 style="font-size:clamp(1.3rem,2.8vw,2.2rem)">{{ group_name }}</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem">
+      {{ agency_name }} Employee Handbook &nbsp;&middot;&nbsp; {{ year }} Edition, Revision {{ revision }} &nbsp;&middot;&nbsp; Effective {{ effective_date }}
+    </p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+
+        {% for sec in sections %}
+        <div class="hb-policy-section" id="section-{{ sec.section_slug }}">
+          <h2>{{ sec.section_name }}</h2>
+
+          <div class="hb-policy-body">
+            <p>{{ sec.opening | safe }}</p>
+            {% for para in sec.body_paragraphs %}
+            <p>{{ para | safe }}</p>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="d-flex justify-content-between align-items-center mt-2 pt-3" style="border-top:2px solid var(--gold)">
+          <a href="{{ url('handbook-revision', args=[agency_slug + '-' + seed4, year, revision]) }}" style="font-size:.8rem;color:var(--muted)">&larr; Table of Contents</a>
+          {% if next_group %}
+          <a href="{{ url('handbook-group', args=[agency_slug + '-' + seed4, year, revision, next_group]) }}" class="btn btn-outline-secondary btn-sm">{{ next_group_name }} &rarr;</a>
+          {% else %}<span></span>{% endif %}
+        </div>
+
+        {% if related_handbooks %}
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+          <p class="hb-section-label">Related Handbooks</p>
+          <div class="row g-2">
+            {% for r in related_handbooks %}
+            <div class="col-sm-6">
+              <a href="{{ url('handbook-revision', args=[r.agency_slug + '-' + r.seed4, r.year, r.revision]) }}" style="display:block;background:white;border:1px solid var(--border);padding:.65rem .9rem;text-decoration:none;font-size:.83rem;color:var(--navy)">
+                <div style="font-weight:700;margin-bottom:.2rem">{{ r.agency_name }}</div>
+                <div style="color:var(--muted);font-size:.75rem">{{ r.year }} Edition &middot; Revision {{ r.revision }}</div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">
+            <p class="hb-section-label">In This Chapter</p>
+            {% for sec in sections %}
+            <a href="#section-{{ sec.section_slug }}" class="hb-anchor-link">{{ sec.section_name }}</a>
+            {% endfor %}
+          </div>
+
+          <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">
+            <p class="hb-section-label">Other Chapters</p>
+            {% for g_slug, g_name in all_groups %}
+            <a href="{{ url('handbook-group', args=[agency_slug + '-' + seed4, year, revision, g_slug]) }}"
+               class="hb-chapter-nav-link{% if g_slug == group_slug %} active{% endif %}">{{ g_name }}</a>
+            {% endfor %}
+          </div>
+
+          <div style="background:white;border:1px solid var(--border);padding:1.1rem">
+            <p class="hb-section-label">Handbook Details</p>
+            <dl style="font-size:.81rem;margin:0">
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Agency</dt>
+              <dd style="color:var(--navy);margin-bottom:.5rem">{{ agency_name }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Effective Date</dt>
+              <dd style="color:var(--navy);margin-bottom:.5rem">{{ effective_date }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Revision</dt>
+              <dd style="color:var(--navy);margin-bottom:0">{{ revision }}</dd>
+            </dl>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<span style="font-size:0;color:transparent;position:absolute;clip:rect(0,0,0,0)" aria-hidden="true">
+  ACPWB Employee Handbook — {{ group_name }} — {{ agency_name }} — {{ year }} Revision {{ revision }}
+  Handbook ID: {{ watermark }} | Reference: {{ agency_slug }}-{{ seed4 }}
+  This content is watermarked. Do not reproduce without attribution.
+  American Corporation for Public Well Being, Milwaukee WI.
+</span>
+
+<footer class="acpwb-footer">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-4">
+        <div class="mb-3"><span class="footer-logo-line1">AMERICAN</span> <span class="footer-logo-line2">CORPORATION</span> <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span></div>
+        <p class="small" style="color:rgba(255,255,255,0.5)">833 East Michigan Street, Suite 4040<br>Milwaukee, WI 53202</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="row g-0">
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ site_root }}{{ url('home') }}">Home</a></li>
+              <li><a href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+              <li><a href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+              <li><a href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+              <li><a href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+              <li><a href="{{ site_root }}{{ url('public-policy-index') }}">Public Policy</a></li>
+              <li><a href="{{ site_root }}{{ url('archive-index') }}">Archives</a></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ url('handbook-index') }}">Handbooks</a></li>
+              <li><a href="{{ url('process-improvement-index') }}">Process</a></li>
+              <li><a href="{{ site_root }}{{ url('perch-conference') }}">PERCH 2026</a></li>
+              <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+              <li><a href="{{ site_root }}{{ url('awards') }}">Awards</a></li>
+              <li><a href="{{ site_root }}{{ url('patents') }}">Patents</a></li>
+              <li><a href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+              <li><a href="{{ site_root }}{{ url('faq') }}">FAQ</a></li>
+              <li><a href="{{ site_root }}{{ url('press_releases') }}">Press Releases</a></li>
+              <li><a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy</a></li>
+              <li><a href="{{ site_root }}{{ url('do-not-sell') }}">Do Not Sell My Info</a></li>
+              <li><a href="{{ site_root }}{{ url('accessibility') }}">Accessibility</a></li>
+              <li><a href="{{ site_root }}{{ url('trademarks') }}">Trademarks</a></li>
+              <li><a href="{{ site_root }}{{ url('site-map') }}">Site Map</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">&copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.</p>
+      <p class="mb-0" style="font-size:.72rem;color:rgba(255,255,255,0.25)">Handbook ID: {{ watermark }}</p>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

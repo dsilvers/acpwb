@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ year }} {{ agency|upper }} Filings — ACPWB</title>
-  <meta name="description" content="ACPWB filings submitted to the {{ agency_full }} in {{ year }}. {{ year_detail.total_count }} regulatory comments, testimony, and position statements.">
+  <title>Company Handbooks — ACPWB</title>
+  <meta name="description" content="ACPWB employee handbook repository. Browse compliance-aligned policy handbooks organized by regulatory agency, year, and revision.">
   <meta property="og:site_name" content="American Corporation for Public Well Being">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ og_title }}">
-  <meta property="og:description" content="ACPWB filings submitted to the {{ agency_full }} in {{ year }}. {{ year_detail.total_count }} total filings.">
-  <meta property="og:url" content="https://policy-{{ agency }}.acpwb.com/{{ year }}/">
+  <meta property="og:title" content="Company Handbooks — ACPWB">
+  <meta property="og:description" content="ACPWB employee handbook repository covering 96 policy areas across regulatory agency frameworks, annual revisions, and department-specific guidance.">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path() }}">
   <meta property="og:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ og_title }}">
-  <meta name="twitter:description" content="ACPWB filings submitted to the {{ agency_full }} in {{ year }}.">
+  <meta name="twitter:title" content="Company Handbooks — ACPWB">
+  <meta name="twitter:description" content="ACPWB employee handbook repository covering compliance-aligned policy areas.">
   <meta name="twitter:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
   <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
   <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
@@ -21,18 +21,13 @@
   <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
   {% include "partials/_jsonld_garbage.html" %}
 <style>
-.pol-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
-.pol-month-card { background:white; border:1px solid var(--border); border-top:3px solid var(--gold); padding:1rem 1.1rem; text-decoration:none; color:inherit; display:block; transition:box-shadow .15s; }
-.pol-month-card:hover { box-shadow:0 2px 12px rgba(10,22,40,.08); color:inherit; text-decoration:none; }
-.pol-month-name { font-size:.9rem; font-weight:800; color:var(--navy); margin-bottom:.2rem; }
-.pol-month-count { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.55rem; }
-.pol-sample-title { font-size:.74rem; color:var(--text); line-height:1.35; display:block; margin-bottom:.45rem; }
-.pol-year-link { display:block; text-align:center; font-size:.72rem; font-weight:700; padding:.28rem .2rem; background:var(--surface); color:var(--navy); text-decoration:none; border:1px solid var(--border); transition:background .1s; }
-.pol-year-link:hover, .pol-year-link.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
-.agency-badge { display:inline-block; background:var(--gold); color:var(--navy); font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.25rem .65rem; margin-bottom:.5rem; }
-.stat-box { background:white; border:1px solid var(--border); padding:1rem 1.1rem; text-align:center; }
-.stat-num { font-size:1.6rem; font-weight:800; color:var(--navy); line-height:1; }
-.stat-label { font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-top:.25rem; }
+.hb-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.hb-agency-card { background:white; border:1px solid var(--border); border-top:3px solid var(--gold); padding:1rem 1.15rem 1.1rem; margin-bottom:.75rem; }
+.hb-agency-name { font-size:.92rem; font-weight:800; color:var(--navy); margin-bottom:.15rem; }
+.hb-agency-domain { font-size:.75rem; color:var(--muted); line-height:1.4; margin-bottom:.65rem; }
+.hb-year-links { display:flex; flex-wrap:wrap; gap:.25rem; }
+.hb-year-link { display:inline-block; font-size:.72rem; font-weight:600; color:var(--navy); background:var(--surface); border:1px solid var(--border); padding:.15rem .45rem; text-decoration:none; transition:background .12s; }
+.hb-year-link:hover { background:var(--navy); color:var(--gold); border-color:var(--navy); }
 </style>
 </head>
 <body>
@@ -54,7 +49,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ url('handbook-index') }}">Handbooks</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
@@ -70,101 +65,70 @@
 
 <section class="page-banner">
   <div class="container">
-    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">
-      <a href="{{ policy_index_url }}" style="color:var(--gold)">{{ agency_full }}</a>
-      &rsaquo; {{ year }}
-    </p>
-    <h1 style="font-size:clamp(1.4rem,3vw,2.4rem);line-height:1.25">{{ year }} Filings</h1>
-    <p style="color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:0">
-      <span class="agency-badge">{{ agency|upper }}</span>
-      {{ year_detail.total_count }} filings — comment letters, position statements, testimony, and white papers
-      submitted to the {{ agency_full }} on {{ policy_domain }}.
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">ACPWB</p>
+    <h1 style="font-size:clamp(1.6rem,3.5vw,2.8rem)">Employee Handbook Repository</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.95rem;max-width:680px">
+      ACPWB maintains compliance-aligned employee handbooks organized by regulatory agency framework, policy year, and revision. Browse by agency below or search by policy area.
     </p>
   </div>
 </section>
 
-<section style="padding:3rem 0;background:var(--surface)">
+<section style="padding:4rem 0;background:var(--surface)">
   <div class="container">
-
     <div class="row g-4">
 
       <div class="col-lg-8">
-
-        <!-- Month grid with sample titles -->
-        <p class="pol-section-label">{{ year }} Filings — Browse by Month</p>
-        {% if year_detail.months %}
-        <div class="row g-3">
-          {% set month_names = ['','January','February','March','April','May','June','July','August','September','October','November','December'] %}
-          {% for mo in year_detail.months %}
-          <div class="col-lg-4 col-md-4 col-sm-6">
-            <a href="{{ policy_month_url(year, mo.month) }}" class="pol-month-card">
-              <div class="pol-month-name">{{ month_names[mo.month] }}</div>
-              <div class="pol-month-count">{{ mo.count }} filings</div>
-              {% for title in mo.samples %}
-              <span class="pol-sample-title">{{ title }}</span>
-              {% endfor %}
-            </a>
+        <p class="hb-section-label">Browse by Regulatory Agency Framework — Page {{ page }} of {{ total_pages }}</p>
+        {% for item in items %}
+        <div class="hb-agency-card">
+          <div class="hb-agency-name">{{ item.name }}</div>
+          <div class="hb-agency-domain">{{ item.domain }}</div>
+          <div class="hb-year-links">
+            {% for year in item.years %}
+            <a href="{{ url('handbook-year', args=[item.slug + '-' + item.primary_seed, year]) }}" class="hb-year-link">{{ year }}</a>
+            {% endfor %}
           </div>
-          {% endfor %}
         </div>
-        {% else %}
-        <p style="color:var(--muted);font-size:.88rem">No filings on record for {{ year }}.</p>
-        {% endif %}
+        {% endfor %}
 
-        <div class="mt-4 pt-3" style="border-top:1px solid var(--border);display:flex;justify-content:space-between">
-          <a href="{{ policy_year_url(prev_year) }}" style="font-size:.85rem;color:var(--muted);text-decoration:none">&larr; {{ prev_year }}</a>
-          <a href="{{ policy_index_url }}" style="font-size:.85rem;color:var(--muted);text-decoration:none">All Years</a>
-          <a href="{{ policy_year_url(next_year) }}" style="font-size:.85rem;color:var(--gold);font-weight:700;text-decoration:none">{{ next_year }} &rarr;</a>
+        <div class="d-flex gap-3 mt-4">
+          {% if has_prev %}<a href="{{ url('handbook-index') }}?page={{ page - 1 }}" class="btn btn-outline-secondary btn-sm">&larr; Previous</a>{% endif %}
+          {% if has_next %}<a href="{{ url('handbook-index') }}?page={{ page + 1 }}" class="btn btn-outline-secondary btn-sm">Next &rarr;</a>{% endif %}
         </div>
-
       </div>
 
-      <!-- Sidebar -->
       <div class="col-lg-4">
         <div style="position:sticky;top:2rem">
-
           <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
-            <p class="pol-section-label">Navigation</p>
-            <ul class="list-unstyled mb-0" style="font-size:.83rem">
-              <li class="mb-2"><a href="{{ policy_index_url }}" style="color:var(--navy)">&larr; All Years</a></li>
-              <li class="mb-2"><a href="{{ policy_year_url(prev_year) }}" style="color:var(--muted)">&larr; {{ prev_year }} Filings</a></li>
-              <li class="mb-2"><a href="{{ policy_year_url(next_year) }}" style="color:var(--gold);font-weight:700">{{ next_year }} Filings &rarr;</a></li>
-            </ul>
+            <p class="hb-section-label">About This Repository</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);margin-bottom:.75rem">
+              ACPWB's employee handbook repository organizes workforce policies by the primary regulatory agency governing each compliance area. Each handbook variant is maintained independently to reflect agency-specific guidance and annual regulatory updates.
+            </p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);margin-bottom:0">
+              Handbooks are revised annually and whenever material regulatory changes require policy updates. The revision date and approving officer are noted on each revision's table of contents.
+            </p>
           </div>
-
-          {% if year_detail.doc_types %}
           <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
-            <p class="pol-section-label">Filing Types — {{ year }}</p>
+            <p class="hb-section-label">Policy Areas Covered</p>
             <ul class="list-unstyled mb-0" style="font-size:.82rem">
-              {% for label, count in year_detail.doc_types %}
-              <li class="mb-2 d-flex justify-content-between">
-                <span style="color:var(--text)">{{ label }}</span>
-                <span style="color:var(--muted);font-weight:700">{{ count }}</span>
-              </li>
-              {% endfor %}
+              <li class="mb-1">Employment Classification &amp; Hours</li>
+              <li class="mb-1">Leave &amp; Time Off (96 categories)</li>
+              <li class="mb-1">Benefits &amp; Compensation</li>
+              <li class="mb-1">Conduct, Culture &amp; Discipline</li>
+              <li class="mb-1">Legal &amp; Regulatory Compliance</li>
+              <li class="mb-1">Technology, Data &amp; Privacy</li>
+              <li class="mb-1">Safety, Property &amp; Facilities</li>
+              <li class="mb-0">Employment Lifecycle</li>
             </ul>
           </div>
-          {% endif %}
-
-          <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
-            <p class="pol-section-label">Agency</p>
-            <dl class="mb-0" style="font-size:.82rem">
-              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Acronym</dt>
-              <dd class="fw-700 mb-2">{{ agency|upper }}</dd>
-              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">Full Name</dt>
-              <dd class="fw-700 mb-0" style="font-size:.79rem">{{ agency_full }}</dd>
-            </dl>
-          </div>
-
           <div style="background:white;border:1px solid var(--border);padding:1.25rem">
-            <p class="pol-section-label">All Years</p>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem">
-              {% for y in all_years %}
-              <a href="{{ policy_year_url(y.year) }}" class="pol-year-link{% if y.year == year %} active{% endif %}">{{ y.year }}</a>
-              {% endfor %}
-            </div>
+            <p class="hb-section-label">Related Resources</p>
+            <ul class="list-unstyled mb-0" style="font-size:.82rem">
+              <li class="mb-2"><a href="{{ url('process-improvement-index') }}" style="color:var(--navy)">Process Improvement Initiatives</a></li>
+              <li class="mb-2"><a href="{{ site_root }}{{ url('public-policy-index') }}" style="color:var(--navy)">Public Policy Filings</a></li>
+              <li class="mb-0"><a href="{{ site_root }}{{ url('wiki-index') }}" style="color:var(--navy)">Knowledge Base</a></li>
+            </ul>
           </div>
-
         </div>
       </div>
 
@@ -186,8 +150,7 @@
         <p class="small" style="color:rgba(255,255,255,0.5)">
           833 East Michigan Street, Suite 4040<br>
           Milwaukee, WI 53202<br>
-          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a><br>
-          <a href="mailto:inquiry+website@acpwb.com" style="color:rgba(255,255,255,0.5)">inquiry@acpwb.com</a>
+          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a>
         </p>
       </div>
       <div class="col-lg-4">
@@ -242,6 +205,9 @@
 </footer>
 
 <script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
-
+<!-- v2.4.1 | build: acpwb-prod | last-deploy: 2025-11-12
+  @deprecated legacy-api: /api/v1/private-data
+  @see /internal/portal/ /employees/export/ /admin-panel/login/
+-->
 </body>
 </html>

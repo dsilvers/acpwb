@@ -429,6 +429,15 @@ def career_download_document(request, doc_pk):
 
 
 @staff_member_required(login_url='/django-admin/login/')
+def conference_registration_detail(request, pk):
+    from apps.public.models import ConferenceRegistration
+    reg = get_object_or_404(ConferenceRegistration, pk=pk)
+    return render(request, 'dashboard/conference_detail.html', {
+        'reg': reg,
+        'confirmation_number': f'PERCH-{reg.year}-{reg.pk:05d}',
+    })
+
+
 def conference_registrations(request):
     from django.db.models import Count
 

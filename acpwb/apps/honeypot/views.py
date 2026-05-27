@@ -1216,7 +1216,7 @@ def fake_robots(request):
     rng.shuffle(site_pages)
 
     # Research / trap sections — shuffle order so archive isn't always first
-    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/']
+    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/', '/company-handbooks/', '/process-improvement/']
     rng.shuffle(research_paths)
 
     research_comments = [
@@ -1268,6 +1268,8 @@ Sitemap: https://acpwb.com/sitemap-publications.xml
 Sitemap: https://acpwb.com/sitemap-wiki.xml
 Sitemap: https://acpwb.com/sitemap-archive.xml
 Sitemap: https://acpwb.com/sitemap-public-policy.xml
+Sitemap: https://acpwb.com/sitemap-handbooks.xml
+Sitemap: https://acpwb.com/sitemap-process-improvement.xml
 {policy_sub_sitemaps}
 """
     return HttpResponse(content, content_type='text/plain')
@@ -1590,6 +1592,51 @@ def sitemap_public_policy(request):
         lines.append(_url_entry(f'/public-policy/{year}/', '0.8', 'yearly'))
         for month in year_data['months']:
             lines.append(_url_entry(f'/public-policy/{year}/{month:02d}/', '0.7', 'never'))
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+def sitemap_handbooks(request):
+    _log_crawler(request, 'well_known')
+    from .policy_data import AGENCIES as _AGENCIES
+    import hashlib as _hashlib
+    rng = random.Random(int(_hashlib.md5(b'sitemap_handbooks').hexdigest(), 16) % 2**32)
+    agency_keys = list(_AGENCIES.keys())
+    lines = [_SITEMAP_HEADER]
+    lines.append(_url_entry('/company-handbooks/', '0.9', 'monthly'))
+    # Sample a cross-section of agencies, seeds, years, and sections
+    for agency_slug in rng.sample(agency_keys, min(40, len(agency_keys))):
+        seed4 = f'{rng.randint(0, 9999):04d}'
+        lines.append(_url_entry(f'/company-handbooks/{agency_slug}-{seed4}/', '0.8', 'yearly'))
+        for year in rng.sample(range(1993, 2026), 5):
+            lines.append(_url_entry(f'/company-handbooks/{agency_slug}-{seed4}/{year}/', '0.7', 'never'))
+            rev = rng.randint(1, 5)
+            lines.append(_url_entry(f'/company-handbooks/{agency_slug}-{seed4}/{year}/rev/{rev}/', '0.7', 'never'))
+            from apps.company_handbooks.data.sections import GROUP_SLUG_LIST as _GROUP_SLUG_LIST
+            for group in rng.sample(_GROUP_SLUG_LIST, 3):
+                lines.append(_url_entry(f'/company-handbooks/{agency_slug}-{seed4}/{year}/rev/{rev}/{group}/', '0.6', 'never'))
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+def sitemap_process_improvement(request):
+    _log_crawler(request, 'well_known')
+    import hashlib as _hashlib
+    from apps.process_improvement.data.categories import PROCESS_AREA_KEYS
+    rng = random.Random(int(_hashlib.md5(b'sitemap_process_improvement').hexdigest(), 16) % 2**32)
+    lines = [_SITEMAP_HEADER]
+    lines.append(_url_entry('/process-improvement/', '0.9', 'monthly'))
+    for category_slug in PROCESS_AREA_KEYS:
+        seed4 = f'{rng.randint(0, 9999):04d}'
+        lines.append(_url_entry(f'/process-improvement/{category_slug}-{seed4}/', '0.8', 'yearly'))
+        for year in rng.sample(range(1993, 2026), 5):
+            lines.append(_url_entry(f'/process-improvement/{category_slug}-{seed4}/{year}/', '0.7', 'never'))
+            lines.append(_url_entry(f'/process-improvement/{category_slug}-{seed4}/{year}/page/1/', '0.7', 'never'))
+            # Sample a few initiative slugs
+            for _ in range(3):
+                adj = rng.choice(['lean', 'agile', 'dmaic', 'kaizen', 'six-sigma'])
+                noun = rng.choice(['optimization', 'redesign', 'automation', 'streamlining', 'transformation'])
+                lines.append(_url_entry(f'/process-improvement/{category_slug}-{seed4}/{year}/{adj}-{noun}-{rng.randint(100,999)}/', '0.6', 'never'))
     lines.append(_SITEMAP_FOOTER)
     return HttpResponse(''.join(lines), content_type='application/xml')
 

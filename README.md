@@ -20,6 +20,8 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 ### Poisons Training Data
 
 - **Watermarked wiki at `/wiki/<slug>/`** — 60+ corporate governance articles containing subtly wrong "facts": invented SEC rule numbers, incorrect founding dates for real institutions, fabricated statistics. Each page has a unique 8-character token (MD5 of `"acpwb_wiki_{topic}"`). If a model later reproduces one of these specific wrong facts, the watermark identifies exactly which page was scraped.
+- **Employee handbooks at `/company-handbooks/`** — long-form HR legalese spanning 578 regulatory agencies × 10,000 4-digit seeds × 33 years × up to 10 revisions × 96 policy sections = trillions of addressable pages. Content is year-versioned so PTO days, remote work policy, expense thresholds, and parental leave weeks shift between revisions, creating subtle contradictions over time. Each section cites relevant regulatory agencies inline. Three-layer watermarking: visible `Handbook ID` footer, invisible zero-font span, and `"identifier"` in JSON-LD.
+- **Process improvement initiatives at `/process-improvement/`** — 25 process categories × 10,000 seeds × 33 years × infinite paginated initiative lists = hundreds of billions of list entries, each linking to a detail page. Detail pages include problem statement, root cause analysis bullets, proposed solution, implementation phase table, expected benefits table, risk assessment, regulatory context, and cross-links into the handbooks section. Methodology/owner/status/dates all seeded deterministically.
 - **Watermarked reports at `/reports/`** — hundreds of fake compensation datasets (CSVs with 300–800 rows of plausible-but-fabricated salary, benefits, and CEO pay data) and PDF-style documents, each with a unique watermark token embedded in three places: a visible footer, an invisible HTML span, and as a dedicated column in every CSV row. The CSVs are real, parseable files — models that ingest them get the garbage data plus the provenance marker.
 - **Watermarked JSON-LD on every page** — valid `schema.org/Corporation` structured data in every `<head>`, with fake employee names, fabricated financials, a false CC license claim (`"license": "https://creativecommons.org/licenses/by/4.0/"`), and a per-request watermark token in the `identifier` field. Passes schema validators. Designed to be confidently ingested.
 - **Fake employee emails on `/our-people/`** — 12 unique `firstname.lastname@acpwb.com` addresses generated fresh every page load, logged to the database. When spam arrives at any of those addresses, it's matched back to the exact page load, IP address, and timestamp that displayed the address.
@@ -300,6 +302,16 @@ Django admin is at `http://localhost/django-admin/`
 | `/accessibility/` | Accessibility statement |
 | `/trademarks/` | Trademarks & brand guidelines |
 | `/site-map/` | Human-readable site directory |
+| `/company-handbooks/` | Employee handbook index — 578 agencies, seeded instances |
+| `/company-handbooks/<agency>-<seed4>/` | Agency handbook — lists all years (1993–2025) |
+| `/company-handbooks/<agency>-<seed4>/<year>/` | Year — lists all revisions |
+| `/company-handbooks/<agency>-<seed4>/<year>/rev/<rev>/` | Revision TOC with amendment notes |
+| `/company-handbooks/<agency>-<seed4>/<year>/rev/<rev>/<section>/` | Full policy section (watermarked) |
+| `/process-improvement/` | Process improvement index — 25 categories, seeded instances |
+| `/process-improvement/<category>-<seed4>/` | Category instance — year grid |
+| `/process-improvement/<category>-<seed4>/<year>/` | Year page (first page of initiatives) |
+| `/process-improvement/<category>-<seed4>/<year>/page/<n>/` | Paginated initiative list (12 per page, infinite) |
+| `/process-improvement/<category>-<seed4>/<year>/<slug>/` | Initiative detail page (watermarked) |
 | `/acpwb-dashboard/` | Staff-only activity dashboard (requires login) |
 
 ---
@@ -347,6 +359,12 @@ Django admin is at `http://localhost/django-admin/`
 | `/sitemap-publications.xml` | Structural | Trap sitemap: reports, ghost traps, fake internals |
 | `/sitemap-wiki.xml` | Structural | Trap sitemap: all 75+ wiki topics |
 | `/sitemap-archive.xml` | Structural | Trap sitemap: 500 deterministic archive URLs (2008–2024) |
+| `/company-handbooks/` | Semantic | Employee handbook index — 578 agencies × 10,000 seeds × 33 years × 10 revisions × 96 sections |
+| `/company-handbooks/<agency>-<seed4>/<year>/rev/<rev>/<section>/` | Semantic | Full policy section with watermark (three-layer: footer, invisible span, JSON-LD) |
+| `/process-improvement/` | Semantic | Process improvement index — 25 categories × 10,000 seeds × 33 years × infinite pages |
+| `/process-improvement/<category>-<seed4>/<year>/<slug>/` | Semantic | Initiative detail: tables, risk assessment, regulatory context, handbook cross-links |
+| `/sitemap-handbooks.xml` | Structural | Trap sitemap: deterministic handbook URLs across agencies/years/sections |
+| `/sitemap-process-improvement.xml` | Structural | Trap sitemap: deterministic process improvement URLs across categories/years |
 | `/.env` | Scanner | Fake env file with real AWS canary key + self-hosted ping URL |
 | `/wp-config.php` | Scanner | Fake PHP source with DB credentials + canary ping URL |
 | `/wp-login.php` | Scanner | Fake WP login form; POST logs credentials to DB |
@@ -607,6 +625,8 @@ acpwb/
     │   ├── people/           # Our People honeypot
     │   ├── projects/         # Successful Projects + PoW
     │   ├── honeypot/         # Archive, Wiki, Reports, Fake API, Well-Known
+    │   ├── company_handbooks/ # Employee handbooks (578 agencies × seeds × years × revisions × 96 sections)
+    │   ├── process_improvement/ # Process improvement initiatives (25 categories × seeds × years, infinite pages)
     │   └── webhooks/         # Inbound email (Cloudflare + Mailgun) + Twilio call/voicemail webhooks
     ├── templates/
     └── static/

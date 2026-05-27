@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ agency_name }} Employee Handbook — {{ year }} Revision {{ revision }}</title>
+  <meta name="description" content="{{ agency_name }} employee handbook, revision {{ revision }}, effective {{ effective_date }}.">
+  <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
+  <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
+  {% include "partials/_jsonld_garbage.html" %}
+<style>
+.hb-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.hb-amendment { background:var(--surface); border-left:3px solid var(--gold); padding:.65rem .9rem; margin-bottom:.5rem; font-size:.83rem; }
+.hb-chapter-link { display:flex; align-items:baseline; gap:.6rem; font-size:.9rem; color:var(--navy); text-decoration:none; padding:.55rem 0; border-bottom:1px solid var(--border); }
+.hb-chapter-link:hover { color:var(--gold); }
+.hb-chapter-num { font-size:.68rem; font-weight:800; color:var(--muted); min-width:1.4rem; }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl acpwb-navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="acpwb-logo navbar-brand" href="{{ site_root }}{{ url('home') }}">
+      <span class="acpwb-logo-line1">AMERICAN</span>
+      <span class="acpwb-logo-line2">CORPORATION</span>
+      <span class="acpwb-logo-line3">FOR PUBLIC WELL BEING</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+      <ul class="navbar-nav gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ url('handbook-index') }}">Handbooks</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url('process-improvement-index') }}">Process</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% include "partials/_ghost_links.html" %}
+{% include "partials/_prompt_injection.html" %}
+
+<main>
+
+<section class="page-banner">
+  <div class="container">
+    <p style="font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:.4rem">
+      <a href="{{ url('handbook-index') }}" style="color:rgba(255,255,255,.5)">Handbooks</a>
+      &rsaquo; <a href="{{ url('handbook-year', args=[agency_slug + '-' + seed4, year]) }}" style="color:rgba(255,255,255,.5)">{{ agency_name }}</a>
+      &rsaquo; <a href="{{ url('handbook-year', args=[agency_slug + '-' + seed4, year]) }}" style="color:rgba(255,255,255,.5)">{{ year }}</a>
+      &rsaquo; Revision {{ revision }}
+    </p>
+    <h1 style="font-size:clamp(1.3rem,2.8vw,2.2rem)">{{ agency_name }} — Employee Handbook</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem">
+      {{ year }} Edition &nbsp;&middot;&nbsp; Revision {{ revision }} &nbsp;&middot;&nbsp; Effective {{ effective_date }}
+    </p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+
+        <div style="background:white;border:1px solid var(--border);padding:1.4rem;margin-bottom:2rem">
+          <p class="hb-section-label">Revision Notes</p>
+          <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">
+            The following changes were introduced in Revision {{ revision }}. All other sections carry forward unchanged from the previous revision.
+          </p>
+          {% for amendment in amendments %}
+          <div class="hb-amendment">
+            <strong style="font-size:.78rem;color:var(--navy)">{{ amendment.section }}</strong><br>
+            <span style="color:var(--muted)">{{ amendment.note }}</span>
+          </div>
+          {% endfor %}
+        </div>
+
+        <p class="hb-section-label">Table of Contents</p>
+        {% for group_slug, group_name in all_groups %}
+        {% set loop_idx = loop.index %}
+        <a href="{{ url('handbook-group', args=[agency_slug + '-' + seed4, year, revision, group_slug]) }}" class="hb-chapter-link">
+          <span class="hb-chapter-num">{{ loop_idx }}</span>
+          <span>{{ group_name }}</span>
+        </a>
+        {% endfor %}
+
+      </div>
+
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
+            <p class="hb-section-label">Handbook Details</p>
+            <dl style="font-size:.82rem;margin:0">
+              <dt style="color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em">Agency</dt>
+              <dd style="color:var(--navy);margin-bottom:.6rem">{{ agency_name }}</dd>
+              <dt style="color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em">Effective Date</dt>
+              <dd style="color:var(--navy);margin-bottom:.6rem">{{ effective_date }}</dd>
+              <dt style="color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em">Approved By</dt>
+              <dd style="color:var(--navy);margin-bottom:.6rem">{{ approver_name }}, {{ approver_title }}</dd>
+              <dt style="color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em">Reference</dt>
+              <dd style="color:var(--navy);margin-bottom:0">{{ agency_slug }}-{{ seed4 }} / Rev. {{ revision }}</dd>
+            </dl>
+          </div>
+          <div style="background:white;border:1px solid var(--border);padding:1.25rem">
+            <p class="hb-section-label">Navigate</p>
+            <ul class="list-unstyled mb-0" style="font-size:.83rem">
+              <li class="mb-2"><a href="{{ url('handbook-year', args=[agency_slug + '-' + seed4, year]) }}" style="color:var(--navy)">&larr; {{ year }} Revisions</a></li>
+              <li><a href="{{ url('handbook-index') }}" style="color:var(--navy)">&larr; All Handbooks</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="acpwb-footer">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-4">
+        <div class="mb-3"><span class="footer-logo-line1">AMERICAN</span> <span class="footer-logo-line2">CORPORATION</span> <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span></div>
+        <p class="small" style="color:rgba(255,255,255,0.5)">833 East Michigan Street, Suite 4040<br>Milwaukee, WI 53202</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="row g-0">
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ site_root }}{{ url('home') }}">Home</a></li>
+              <li><a href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+              <li><a href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+              <li><a href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+              <li><a href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+              <li><a href="{{ site_root }}{{ url('public-policy-index') }}">Public Policy</a></li>
+              <li><a href="{{ site_root }}{{ url('archive-index') }}">Archives</a></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ url('handbook-index') }}">Handbooks</a></li>
+              <li><a href="{{ url('process-improvement-index') }}">Process</a></li>
+              <li><a href="{{ site_root }}{{ url('perch-conference') }}">PERCH 2026</a></li>
+              <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+              <li><a href="{{ site_root }}{{ url('awards') }}">Awards</a></li>
+              <li><a href="{{ site_root }}{{ url('patents') }}">Patents</a></li>
+              <li><a href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+              <li><a href="{{ site_root }}{{ url('faq') }}">FAQ</a></li>
+              <li><a href="{{ site_root }}{{ url('press_releases') }}">Press Releases</a></li>
+              <li><a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy</a></li>
+              <li><a href="{{ site_root }}{{ url('do-not-sell') }}">Do Not Sell My Info</a></li>
+              <li><a href="{{ site_root }}{{ url('accessibility') }}">Accessibility</a></li>
+              <li><a href="{{ site_root }}{{ url('trademarks') }}">Trademarks</a></li>
+              <li><a href="{{ site_root }}{{ url('site-map') }}">Site Map</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">
+    <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">&copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI.</p>
+  </div>
+</footer>
+<script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

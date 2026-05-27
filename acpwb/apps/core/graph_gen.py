@@ -42,26 +42,26 @@ except ImportError:
 # always neutral gray regardless of its rank.
 
 _BOT_COLOR_PALETTE = [
-    '#E74C3C',  # red
-    '#2980B9',  # blue
-    '#27AE60',  # green
-    '#E67E22',  # orange
-    '#8E44AD',  # purple
-    '#16A085',  # teal
-    '#E91E63',  # pink
-    '#00BCD4',  # cyan
-    '#F1C40F',  # yellow
+    '#E74C3C',  # red          (~0°)
+    '#FF5722',  # deep orange  (~14°)
+    '#E67E22',  # orange       (~28°)
+    '#F1C40F',  # yellow       (~48°)
+    '#8BC34A',  # lime green   (~80°)
+    '#27AE60',  # green        (~134°)
+    '#1ABC9C',  # seafoam      (~164°)
+    '#00BCD4',  # cyan         (~187°)
+    '#2980B9',  # blue         (~210°)
+    '#3F51B5',  # indigo       (~231°)
+    '#673AB7',  # deep purple  (~262°)
+    '#8E44AD',  # purple       (~283°)
+    '#E91E63',  # hot pink     (~338°)
+    '#F06292',  # light pink   (~348°)
     '#795548',  # brown
-    '#3F51B5',  # indigo
-    '#FF5722',  # deep orange
     '#607D8B',  # blue-grey
-    '#8BC34A',  # lime green
-    '#FF4081',  # pink accent
-    '#0097A7',  # dark cyan
-    '#6D4C41',  # dark brown
-    '#5C6BC0',  # medium indigo
-    '#D32F2F',  # dark red
-    '#1565C0',  # dark blue
+    '#FFA726',  # amber        (~36°)
+    '#26C6DA',  # light cyan   (~187° lighter)
+    '#7E57C2',  # medium purple (~252°)
+    '#EF5350',  # light red    (~0° lighter)
 ]
 _OTHERS_COLOR = '#95A5A6'  # neutral gray
 

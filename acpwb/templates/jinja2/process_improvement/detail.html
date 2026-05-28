@@ -49,10 +49,14 @@ table.pi-table tr:last-child td { border-bottom:none; }
     <div class="collapse navbar-collapse justify-content-end" id="mainNav">
       <ul class="navbar-nav gap-1">
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url('handbook-index') }}">Handbooks</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ url('process-improvement-index') }}">Process</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -67,7 +71,7 @@ table.pi-table tr:last-child td { border-bottom:none; }
   <div class="container">
     <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">
       <a href="{{ url('process-improvement-index') }}" style="color:var(--gold)">Process</a>
-      &rsaquo; <a href="{{ url('process-improvement-category', args=[category_slug + '-' + seed4]) }}" style="color:var(--gold)">{{ category_slug }}-{{ seed4 }}</a>
+      &rsaquo; <a href="{{ url('process-improvement-category', args=[category_slug + '-' + seed4]) }}" style="color:var(--gold)">{{ instance_label }}</a>
       &rsaquo; <a href="{{ url('process-improvement-year', args=[category_slug + '-' + seed4, year]) }}" style="color:var(--gold)">{{ year }}</a>
     </p>
     <h1 style="font-size:clamp(1.2rem,2.6vw,2rem)">{{ name }}</h1>
@@ -227,6 +231,26 @@ table.pi-table tr:last-child td { border-bottom:none; }
 </section>
 
 </main>
+
+{% if related %}
+<section style="padding:3rem 0;background:white;border-top:1px solid var(--border)">
+  <div class="container">
+    <p class="pi-section-label">Related Initiatives</p>
+    <div class="row g-2">
+      {% for r in related %}
+      <div class="col-sm-6 col-lg-4">
+        <a href="{{ r.url }}" style="display:block;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);padding:.75rem .9rem;text-decoration:none;height:100%">
+          <div style="font-size:.83rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;line-height:1.35">{{ r.name }}</div>
+          <div style="font-size:.73rem;color:var(--muted);margin-bottom:.45rem">{{ r.category_name }} &middot; {{ r.year }}</div>
+          <div style="font-size:.75rem;color:var(--text);line-height:1.55;margin-bottom:.5rem">{{ r.summary }}</div>
+          <span class="pi-badge pi-badge-{{ r.status_slug }}" style="font-size:.63rem">{{ r.status_label }}</span>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <!-- Watermark -->
 <span style="font-size:0;color:transparent;position:absolute;clip:rect(0,0,0,0)" aria-hidden="true">

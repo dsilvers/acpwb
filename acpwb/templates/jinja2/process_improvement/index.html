@@ -43,9 +43,11 @@
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url('handbook-index') }}">Handbooks</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ url('process-improvement-index') }}">Process</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -76,12 +78,22 @@
         <div class="pi-cat-card">
           <div class="pi-cat-name">{{ item.name }}</div>
           <div class="pi-instance-links">
-            {% for seed in item.instances %}
-            <a href="{{ url('process-improvement-category', args=[item.slug + '-' + seed]) }}" class="pi-instance-link">{{ item.slug }}-{{ seed }}</a>
+            {% for inst in item.instances %}
+            <a href="{{ url('process-improvement-category', args=[item.slug + '-' + inst.seed]) }}" class="pi-instance-link">{{ inst.label }}</a>
             {% endfor %}
           </div>
         </div>
         {% endfor %}
+
+        <div class="d-flex justify-content-between align-items-center mt-3" style="font-size:.83rem">
+          <div>
+            {% if has_prev %}<a href="?page={{ page - 1 }}" class="btn btn-outline-secondary btn-sm">&larr; Previous</a>{% endif %}
+          </div>
+          <span style="color:var(--muted)">Page {{ page }}</span>
+          <div>
+            <a href="?page={{ page + 1 }}" class="btn btn-outline-secondary btn-sm">Next &rarr;</a>
+          </div>
+        </div>
       </div>
 
       <div class="col-lg-4">

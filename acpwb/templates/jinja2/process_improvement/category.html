@@ -31,10 +31,14 @@
     <div class="collapse navbar-collapse justify-content-end" id="mainNav">
       <ul class="navbar-nav gap-1">
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url('handbook-index') }}">Handbooks</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ url('process-improvement-index') }}">Process</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -49,7 +53,7 @@
   <div class="container">
     <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">
       <a href="{{ url('process-improvement-index') }}" style="color:var(--gold)">Process Improvement</a>
-      &rsaquo; {{ category_slug }}-{{ seed4 }}
+      &rsaquo; {{ instance_label }}
     </p>
     <h1 style="font-size:clamp(1.4rem,3vw,2.4rem)">{{ category_name }}</h1>
     <p style="color:rgba(255,255,255,.7);font-size:.9rem;max-width:600px">{{ description }}</p>

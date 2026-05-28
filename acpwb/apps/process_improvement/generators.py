@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from apps.honeypot.policy_data import AGENCIES
 from apps.projects.generators import ORGANIZATIONS
 from .data.categories import PROCESS_AREAS, PROCESS_AREA_DICT, PROCESS_AREA_KEYS
+from .data.instance_labels import INSTANCE_LABELS
 from .data.vocabulary import (
     METHODOLOGIES, SUFFIXES, STATUS_VALUES, STATUS_WEIGHTS,
     METRICS, PHASES, RISK_LEVELS,
@@ -20,10 +21,14 @@ INITIATIVE_YEARS = list(range(1993, 2026))
 AREA_KEYS = [slug for slug, _ in PROCESS_AREAS]
 AGENCY_KEYS = list(AGENCIES.keys())
 
-
 def _rng_from_seed(seed_str):
     seed_int = int(hashlib.md5(str(seed_str).encode()).hexdigest(), 16) % (2 ** 32)
     return random.Random(seed_int)
+
+
+def _instance_label(category_slug, seed4):
+    rng = _rng_from_seed(f"process_label_{category_slug}_{seed4}")
+    return rng.choice(INSTANCE_LABELS)
 
 
 def _watermark(category, seed4, year, slug):
@@ -75,6 +80,15 @@ def generate_initiative_list(category_slug, seed4, year, page=1, per_page=12):
             count=rng.randint(3, 12),
             pct=rng.randint(15, 55),
             cost=rng.randint(50, 800),
+            hours=rng.randint(20, 120),
+            old_systems=rng.randint(2, 5),
+            old_year=rng.randint(2005, 2018),
+            years=rng.randint(3, 12),
+            days=rng.randint(3, 15),
+            dept_count=rng.randint(3, 8),
+            error_pct=rng.randint(5, 25),
+            months=rng.randint(3, 12),
+            company=rng.choice(FORTUNE500_NAMES),
         )
         items.append({
             'name': name,
@@ -93,6 +107,7 @@ def generate_initiative_list(category_slug, seed4, year, page=1, per_page=12):
     return {
         'category_slug': category_slug,
         'seed4': seed4,
+        'instance_label': _instance_label(category_slug, seed4),
         'category_name': PROCESS_AREA_DICT[category_slug],
         'year': year,
         'page': page,
@@ -115,9 +130,9 @@ def generate_initiative_detail(category_slug, seed4, year, initiative_slug):
     status_slug, status_label = _weighted_choice(rng, STATUS_VALUES, STATUS_WEIGHTS)
     token = _watermark(category_slug, seed4, year, initiative_slug)
 
-    problem_tmpl = rng.choice(PROBLEM_TEMPLATES)
     problem_paragraphs = []
     for _ in range(rng.randint(2, 3)):
+        problem_tmpl = rng.choice(PROBLEM_TEMPLATES)
         problem_paragraphs.append(problem_tmpl.format(
             area=area_name,
             years=rng.randint(3, 12),
@@ -128,34 +143,46 @@ def generate_initiative_detail(category_slug, seed4, year, initiative_slug):
             cost=rng.randint(50, 900),
             old_size=rng.randint(200, 1000),
             old_year=rng.randint(2005, 2018),
+            old_systems=rng.randint(2, 5),
             hours=rng.randint(20, 120),
             dept_count=rng.randint(3, 8),
+            months=rng.randint(3, 12),
         ))
 
     root_causes = rng.sample(ROOT_CAUSE_TEMPLATES, rng.randint(4, 6))
     root_causes = [rc.format(
+        area=area_name,
         pct=rng.randint(30, 70),
         count=rng.randint(2, 8),
         days=rng.randint(2, 10),
         old_year=rng.randint(2005, 2018),
+        error_pct=rng.randint(5, 25),
+        hours=rng.randint(20, 120),
+        months=rng.randint(3, 12),
+        old_systems=rng.randint(2, 5),
+        years=rng.randint(3, 12),
     ) for rc in root_causes]
 
-    solution_tmpl = rng.choice(SOLUTION_TEMPLATES)
     company = rng.choice(FORTUNE500_NAMES)
     consultant = rng.choice(ORGANIZATIONS)
     solution_paragraphs = []
     for _ in range(rng.randint(2, 3)):
+        solution_tmpl = rng.choice(SOLUTION_TEMPLATES)
         solution_paragraphs.append(solution_tmpl.format(
             area=area_name,
             methodology=methodology,
             count=rng.randint(3, 10),
             old_systems=rng.randint(2, 5),
+            old_year=rng.randint(2005, 2018),
+            years=rng.randint(3, 12),
             pct=rng.randint(20, 60),
             error_pct=rng.randint(10, 40),
             months=rng.randint(3, 12),
             dept_count=rng.randint(2, 6),
             company=company,
             cost=rng.randint(100, 800),
+            days=rng.randint(3, 15),
+            hours=rng.randint(20, 120),
         ))
 
     num_phases = rng.randint(4, 7)
@@ -191,7 +218,7 @@ def generate_initiative_detail(category_slug, seed4, year, initiative_slug):
         })
 
     risks = rng.sample(RISK_TEMPLATES, rng.randint(3, 5))
-    risk_items = [{'description': r[0], 'level': r[1]} for r in risks]
+    risk_items = [{'description': r[0].format(area=area_name, count=rng.randint(2, 8)), 'level': r[1]} for r in risks]
 
     num_agencies = rng.randint(1, 3)
     rng.shuffle(AGENCY_KEYS)
@@ -201,25 +228,28 @@ def generate_initiative_detail(category_slug, seed4, year, initiative_slug):
         agency_refs.append({'name': name, 'domain': domain})
 
     from apps.company_handbooks.generators import HANDBOOK_YEARS
-    from apps.company_handbooks.data.sections import SECTIONS as HANDBOOK_SECTIONS
+    from apps.company_handbooks.data.sections import GROUP_DEFS
     num_handbook_links = rng.randint(2, 3)
     handbook_links = []
     for _ in range(num_handbook_links):
-        h_section_slug, h_section_name = rng.choice(HANDBOOK_SECTIONS)
+        h_group_slug, h_group_name, _ = rng.choice(GROUP_DEFS)
         h_agency_key = rng.choice(AGENCY_KEYS[:50])
         h_seed4 = f"{rng.randint(1000, 9999):04d}"
         h_year = rng.choice([y for y in HANDBOOK_YEARS if y >= year - 2 and y <= year])
         h_rev = rng.randint(1, 4)
         handbook_links.append({
-            'section_name': h_section_name,
-            'url': f"/company-handbooks/{h_agency_key}-{h_seed4}/{h_year}/rev/{h_rev}/{h_section_slug}/",
+            'section_name': h_group_name,
+            'url': f"/company-handbooks/{h_agency_key}-{h_seed4}/{h_year}/rev/{h_rev}/{h_group_slug}/",
         })
+
+    related = generate_related_initiatives(category_slug, seed4, year, initiative_slug)
 
     return {
         'name': name,
         'slug': initiative_slug,
         'category_slug': category_slug,
         'seed4': seed4,
+        'instance_label': _instance_label(category_slug, seed4),
         'category_name': area_name,
         'year': year,
         'methodology': methodology,
@@ -237,34 +267,90 @@ def generate_initiative_detail(category_slug, seed4, year, initiative_slug):
         'risks': risk_items,
         'agency_refs': agency_refs,
         'handbook_links': handbook_links,
+        'related': related,
         'watermark': token,
     }
 
 
+def generate_related_initiatives(category_slug, seed4, year, initiative_slug, count=6):
+    """Generate a mix of related initiative cards: same category/different years + different categories/same year."""
+    rng = _rng_from_seed(f"process_related_{category_slug}_{seed4}_{year}_{initiative_slug}")
+    results = []
+
+    other_years = [y for y in INITIATIVE_YEARS if y != year]
+    other_areas = [(s, n) for s, n in PROCESS_AREAS if s != category_slug]
+
+    for i in range(count):
+        if i < count // 2:
+            rel_year = rng.choice(other_years)
+            rel_slug = category_slug
+            rel_name = PROCESS_AREA_DICT[category_slug]
+            rel_seed4 = seed4
+        else:
+            rel_slug, rel_name = rng.choice(other_areas)
+            rel_year = year
+            rel_seed4 = f"{rng.randint(1000, 9999):04d}"
+
+        methodology = rng.choice(METHODOLOGIES)
+        suffix = rng.choice(SUFFIXES)
+        init_name = f"{methodology} {rel_name} {suffix}"
+        page_n = rng.randint(1, 3)
+        item_i = rng.randint(0, 11)
+        init_slug = slugify(f"{methodology}-{rel_name}-{suffix}-{rel_year}-{page_n}-{item_i}")[:80]
+        status_slug, status_label = _weighted_choice(rng, STATUS_VALUES, STATUS_WEIGHTS)
+        summary_tmpl = rng.choice(SUMMARY_TEMPLATES)
+        summary = summary_tmpl.format(
+            methodology=methodology,
+            area=rel_name,
+            count=rng.randint(3, 12),
+            pct=rng.randint(15, 55),
+            cost=rng.randint(50, 800),
+            hours=rng.randint(20, 120),
+            old_systems=rng.randint(2, 5),
+            old_year=rng.randint(2005, 2018),
+            years=rng.randint(3, 12),
+            days=rng.randint(3, 15),
+            dept_count=rng.randint(3, 8),
+            error_pct=rng.randint(5, 25),
+            months=rng.randint(3, 12),
+            company=rng.choice(FORTUNE500_NAMES),
+        )
+        results.append({
+            'name': init_name,
+            'url': f"/process-improvement/{rel_slug}-{rel_seed4}/{rel_year}/{init_slug}/",
+            'category_name': rel_name,
+            'year': rel_year,
+            'status_slug': status_slug,
+            'status_label': status_label,
+            'summary': summary,
+        })
+
+    return results
+
+
 def generate_process_index_page(page=1, per_page=20):
-    """Return a page of category listings, each with 3-5 seeded instances."""
-    start = (page - 1) * per_page
-    end = start + per_page
-    page_areas = PROCESS_AREAS[start:end]
-    total_pages = (len(PROCESS_AREAS) + per_page - 1) // per_page
+    """Return a page of category listings with seeded instances. Pages are infinite."""
+    rng = _rng_from_seed(f"process_index_p{page}")
+    page_areas = [PROCESS_AREAS[rng.randint(0, len(PROCESS_AREAS) - 1)] for _ in range(per_page)]
 
     items = []
     for slug, name in page_areas:
-        rng = _rng_from_seed(f"process_instances_{slug}")
         num_instances = rng.randint(3, 5)
-        instance_seeds = [f"{rng.randint(1000, 9999):04d}" for _ in range(num_instances)]
+        instances = []
+        for _ in range(num_instances):
+            seed4 = f"{rng.randint(1000, 9999):04d}"
+            instances.append({'seed': seed4, 'label': _instance_label(slug, seed4)})
         items.append({
             'slug': slug,
             'name': name,
-            'instances': instance_seeds,
+            'instances': instances,
         })
 
     return {
         'items': items,
         'page': page,
-        'total_pages': total_pages,
         'has_prev': page > 1,
-        'has_next': page < total_pages,
+        'has_next': True,
     }
 
 
@@ -277,6 +363,7 @@ def generate_category_index(category_slug, seed4):
     return {
         'category_slug': category_slug,
         'seed4': seed4,
+        'instance_label': _instance_label(category_slug, seed4),
         'category_name': PROCESS_AREA_DICT[category_slug],
         'years': years,
         'description': rng.choice([

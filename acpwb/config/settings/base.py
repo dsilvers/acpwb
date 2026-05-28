@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'apps.projects',
     'apps.honeypot',
     'apps.webhooks',
+    'apps.company_handbooks',
+    'apps.process_improvement',
 ]
 
 MIDDLEWARE = [

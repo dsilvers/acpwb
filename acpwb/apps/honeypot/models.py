@@ -19,6 +19,8 @@ class CrawlerVisit(models.Model):
         ('wp_probe', 'WordPress Probe'),
         ('webshell_probe', 'Webshell Probe'),
         ('canary_trigger', 'Canary Token Triggered'),
+        ('handbook', 'Company Handbook'),
+        ('process_improvement', 'Process Improvement'),
         ('other', 'Other'),
     ]
 

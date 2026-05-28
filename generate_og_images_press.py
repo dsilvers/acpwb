@@ -60,7 +60,7 @@ _WORD_VISUALS = {
     'governance':    'boardroom with institutional gravitas, dark wood, recessed lighting',
     'ceo':           'top-floor office, floor-to-ceiling windows, twilight city view',
     'officer':       'formal executive corridor, polished marble floors, serious atmosphere',
-    'leadership':    'lone silhouette at a panoramic boardroom window, commanding view',
+    'leadership':    'empty panoramic boardroom window with commanding city view, no people',
     'management':    'formal meeting room, long conference table, city skyline',
     'patent':        'formal institutional office, framed documents on wall, focused desk lamp',
     'award':         'elegant awards ceremony stage, spotlights, empty podium',
@@ -101,6 +101,7 @@ _SKIP_WORDS = {
 }
 
 _STYLE_SUFFIX = ', corporate photography, photorealistic, 8k, tack sharp, navy and gold palette, f/8 aperture, everything in focus'
+_FLUX_STYLE_SUFFIX = ', no people, no faces, empty interior, architecture only, corporate photography, photorealistic, navy gold palette, 8k'
 
 _AI_SYSTEM = (
     'You are a visual art director for corporate photography. '
@@ -112,7 +113,7 @@ _AI_SYSTEM = (
 )
 
 
-def _ai_build_prompt(pr, client, model):
+def _ai_build_prompt(pr, client, model, flux=False):
     body_text = '\n\n'.join(pr.get('body', []))[:3000]
     response = client.chat.completions.create(
         model=model,
@@ -123,12 +124,14 @@ def _ai_build_prompt(pr, client, model):
         ],
     )
     scene = response.choices[0].message.content.strip().rstrip('.')
-    return f'{scene}{_STYLE_SUFFIX}'
+    suffix = _FLUX_STYLE_SUFFIX if flux else _STYLE_SUFFIX
+    return f'{scene}{suffix}'
 
 # FLUX ignores negative prompts (flow matching, no CFG); used only for SD models.
 _NEGATIVE_PROMPT = (
-    'watermark, logo, document, slide, '
-    'poster, signage, caption, user interface, website, screenshot, dashboard, '
+    'people, person, man, woman, figure, silhouette, face, portrait, '
+    'watermark, logo, document, slide, poster, signage, caption, text, '
+    'user interface, website, screenshot, dashboard, '
     'stairs, staircase, escalator, surreal, '
     'bokeh, shallow depth of field, blurry background, out of focus, '
     'cartoon, anime, low quality, blurry, distorted, ugly, nsfw'
@@ -153,11 +156,12 @@ def _headline_to_scene(headline):
     return None
 
 
-def _build_prompt(headline):
+def _build_prompt(headline, flux=False):
+    suffix = _FLUX_STYLE_SUFFIX if flux else _STYLE_SUFFIX
     scene = _headline_to_scene(headline)
     if scene:
-        return f'{headline}, {scene}{_STYLE_SUFFIX}'
-    return f'{headline}{_STYLE_SUFFIX}'
+        return f'{headline}, {scene}{suffix}'
+    return f'{headline}{suffix}'
 
 
 def _slug_to_seed(slug):
@@ -257,16 +261,17 @@ def main():
         print('Nothing to generate.')
         return
 
+    flux = _is_flux(args.model)
+
     if args.dry_run:
         for pr in press_releases_to_process:
             if ai_client:
-                prompt = _ai_build_prompt(pr, ai_client, args.ai_model)
+                prompt = _ai_build_prompt(pr, ai_client, args.ai_model, flux=flux)
             else:
-                prompt = _build_prompt(pr['headline'])
+                prompt = _build_prompt(pr['headline'], flux=flux)
             print(f'  {pr["slug"]}\n    seed={_slug_to_seed(pr["slug"])}\n    {prompt}\n')
         return
 
-    flux = _is_flux(args.model)
     device, dtype = _pick_device(torch, flux=flux)
     print(f'Loading {args.model} on {device} ({dtype}) …')
 
@@ -302,9 +307,9 @@ def main():
         headline = pr['headline']
         out_path = out_dir / f'{slug}.jpg'
         if ai_client:
-            prompt = _ai_build_prompt(pr, ai_client, args.ai_model)
+            prompt = _ai_build_prompt(pr, ai_client, args.ai_model, flux=flux)
         else:
-            prompt = _build_prompt(headline)
+            prompt = _build_prompt(headline, flux=flux)
         seed = _slug_to_seed(slug)
 
         print(f'[{i}/{len(press_releases_to_process)}] {slug} ', end='', flush=True)

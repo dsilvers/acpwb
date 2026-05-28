@@ -251,7 +251,7 @@ def honeypot_traps(request):
     by_trap = _stat('crawlers.by_trap_type', {})
     trap_totals = _trap_counts(by_trap)
 
-    CONTENT_KEYS = {'wiki', 'report_list', 'report_download', 'dataset', 'api', 'well_known', 'pow'}
+    CONTENT_KEYS = {'wiki', 'report_list', 'report_download', 'dataset', 'api', 'well_known', 'pow', 'handbook', 'process_improvement'}
     SCANNER_KEYS = {'scanner_probe', 'env_probe', 'wp_probe', 'webshell_probe'}
 
     content_total = sum(by_trap.get(k, 0) for k in CONTENT_KEYS)
@@ -429,6 +429,15 @@ def career_download_document(request, doc_pk):
 
 
 @staff_member_required(login_url='/django-admin/login/')
+def conference_registration_detail(request, pk):
+    from apps.public.models import ConferenceRegistration
+    reg = get_object_or_404(ConferenceRegistration, pk=pk)
+    return render(request, 'dashboard/conference_detail.html', {
+        'reg': reg,
+        'confirmation_number': f'PERCH-{reg.year}-{reg.pk:05d}',
+    })
+
+
 def conference_registrations(request):
     from django.db.models import Count
 

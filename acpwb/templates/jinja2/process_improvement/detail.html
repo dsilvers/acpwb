@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ name }} — ACPWB Process Improvement</title>
+  <meta name="description" content="ACPWB process improvement initiative: {{ name }}. {{ category_name }}, {{ year }}. Status: {{ status_label }}.">
+  <meta property="og:site_name" content="American Corporation for Public Well Being">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ name }} — ACPWB">
+  <meta property="og:description" content="ACPWB {{ category_name }} process improvement initiative, {{ year }}. Methodology: {{ methodology }}.">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path() }}">
+  <meta property="og:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"{{ name }}","publisher":{"@type":"Organization","name":"American Corporation for Public Well Being"},"dateModified":"{{ year }}-01-01","identifier":"{{ watermark }}","description":"ACPWB {{ category_name }} process improvement initiative"}</script>
+  <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
+  <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
+  {% include "partials/_jsonld_garbage.html" %}
+<style>
+.pi-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.pi-body p { font-size:.92rem; line-height:1.85; color:var(--text); margin-bottom:1.3rem; }
+.pi-badge { display:inline-block; font-size:.72rem; font-weight:700; padding:.2rem .55rem; border-radius:2px; }
+.pi-badge-proposed    { background:#e8f4fd; color:#1565c0; }
+.pi-badge-in-progress { background:#e8f5e9; color:#2e7d32; }
+.pi-badge-completed   { background:#f3e5f5; color:#6a1b9a; }
+.pi-badge-on-hold     { background:#fff8e1; color:#e65100; }
+.pi-risk-high   { color:#c62828; font-weight:700; }
+.pi-risk-medium { color:#e65100; font-weight:700; }
+.pi-risk-low    { color:#2e7d32; font-weight:700; }
+table.pi-table { font-size:.82rem; width:100%; }
+table.pi-table th { background:var(--navy); color:white; padding:.4rem .7rem; font-size:.73rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
+table.pi-table td { padding:.38rem .7rem; border-bottom:1px solid var(--border); vertical-align:top; }
+table.pi-table tr:last-child td { border-bottom:none; }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl acpwb-navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="acpwb-logo navbar-brand" href="{{ site_root }}{{ url('home') }}">
+      <span class="acpwb-logo-line1">AMERICAN</span>
+      <span class="acpwb-logo-line2">CORPORATION</span>
+      <span class="acpwb-logo-line3">FOR PUBLIC WELL BEING</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+      <ul class="navbar-nav gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% include "partials/_ghost_links.html" %}
+{% include "partials/_prompt_injection.html" %}
+
+<main>
+
+<section class="page-banner">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">
+      <a href="{{ url('process-improvement-index') }}" style="color:var(--gold)">Process</a>
+      &rsaquo; <a href="{{ url('process-improvement-category', args=[category_slug + '-' + seed4]) }}" style="color:var(--gold)">{{ instance_label }}</a>
+      &rsaquo; <a href="{{ url('process-improvement-year', args=[category_slug + '-' + seed4, year]) }}" style="color:var(--gold)">{{ year }}</a>
+    </p>
+    <h1 style="font-size:clamp(1.2rem,2.6vw,2rem)">{{ name }}</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.88rem">
+      <span class="pi-badge pi-badge-{{ status_slug }}">{{ status_label }}</span>
+      &nbsp;&nbsp;{{ category_name }} &nbsp;|&nbsp; {{ year }} &nbsp;|&nbsp; {{ methodology }}
+    </p>
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--surface)">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+
+        <!-- Problem Statement -->
+        <div class="pi-body" style="margin-bottom:2rem">
+          <p class="pi-section-label">Problem Statement</p>
+          {% for para in problem_paragraphs %}
+          <p>{{ para }}</p>
+          {% endfor %}
+        </div>
+
+        <!-- Root Cause Analysis -->
+        <div style="margin-bottom:2rem">
+          <p class="pi-section-label">Root Cause Analysis</p>
+          <ul style="font-size:.88rem;line-height:1.75;color:var(--text)">
+            {% for cause in root_causes %}
+            <li style="margin-bottom:.4rem">{{ cause }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Proposed Solution -->
+        <div class="pi-body" style="margin-bottom:2rem">
+          <p class="pi-section-label">Proposed Solution</p>
+          {% for para in solution_paragraphs %}
+          <p>{{ para }}</p>
+          {% endfor %}
+          {% if consultant %}<p style="font-size:.8rem;color:var(--muted)"><em>External advisory support provided by {{ consultant }}.</em></p>{% endif %}
+        </div>
+
+        <!-- Implementation Phases -->
+        <div style="margin-bottom:2rem">
+          <p class="pi-section-label">Implementation Phases</p>
+          <table class="pi-table">
+            <thead><tr><th>Phase</th><th>Description</th><th>Duration</th><th>Owner</th><th>Status</th></tr></thead>
+            <tbody>
+              {% for phase in phases %}
+              <tr>
+                <td><strong>{{ phase.phase }}</strong></td>
+                <td>{{ phase.description }}</td>
+                <td style="white-space:nowrap">{{ phase.duration }}</td>
+                <td>{{ phase.owner }}</td>
+                <td>{{ phase.status }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Expected Benefits -->
+        <div style="margin-bottom:2rem">
+          <p class="pi-section-label">Expected Benefits</p>
+          <table class="pi-table">
+            <thead><tr><th>Metric</th><th>Baseline</th><th>Target</th><th>Delta</th></tr></thead>
+            <tbody>
+              {% for b in benefits %}
+              <tr>
+                <td><strong>{{ b.metric }}</strong></td>
+                <td>{{ b.baseline }}</td>
+                <td>{{ b.target }}</td>
+                <td style="font-weight:700;color:{% if '-' in b.delta %}#2e7d32{% else %}#1565c0{% endif %}">{{ b.delta }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Risk Assessment -->
+        <div style="margin-bottom:2rem">
+          <p class="pi-section-label">Risk Assessment</p>
+          <table class="pi-table">
+            <thead><tr><th>Risk</th><th>Level</th></tr></thead>
+            <tbody>
+              {% for risk in risks %}
+              <tr>
+                <td>{{ risk.description }}</td>
+                <td class="pi-risk-{{ risk.level|lower }}">{{ risk.level }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Regulatory Context -->
+        {% if agency_refs %}
+        <div style="margin-bottom:2rem">
+          <p class="pi-section-label">Regulatory Context</p>
+          {% for agency in agency_refs %}
+          <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:.6rem .9rem;margin-bottom:.5rem;font-size:.82rem">
+            <strong style="color:var(--navy)">{{ agency.name }}</strong>
+            <span style="color:var(--muted);display:block">{{ agency.domain }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Referenced Handbook Policies -->
+        {% if handbook_links %}
+        <div>
+          <p class="pi-section-label">Referenced Handbook Policies</p>
+          <ul class="list-unstyled mb-0" style="font-size:.84rem">
+            {% for link in handbook_links %}
+            <li class="mb-2"><a href="{{ link.url }}" style="color:var(--navy)">{{ link.section_name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <div class="col-lg-4">
+        <div style="position:sticky;top:2rem">
+
+          <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">
+            <p class="pi-section-label">Initiative Details</p>
+            <dl style="font-size:.82rem;margin:0">
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;font-weight:700">Category</dt>
+              <dd style="color:var(--navy);margin-bottom:.5rem">{{ category_name }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;font-weight:700">Methodology</dt>
+              <dd style="color:var(--navy);margin-bottom:.5rem">{{ methodology }}</dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;font-weight:700">Status</dt>
+              <dd style="margin-bottom:.5rem"><span class="pi-badge pi-badge-{{ status_slug }}">{{ status_label }}</span></dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;font-weight:700">Owner</dt>
+              <dd style="color:var(--navy);margin-bottom:.5rem">{{ owner }}<br><span style="color:var(--muted);font-size:.75rem">{{ owner_title }}</span></dd>
+              <dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;font-weight:700">Target Completion</dt>
+              <dd style="color:var(--navy);margin-bottom:0">{{ target_date }}</dd>
+            </dl>
+          </div>
+
+          <div style="background:white;border:1px solid var(--border);padding:1.1rem">
+            <p class="pi-section-label">Navigate</p>
+            <ul class="list-unstyled mb-0" style="font-size:.83rem">
+              <li class="mb-2"><a href="{{ url('process-improvement-year', args=[category_slug + '-' + seed4, year]) }}" style="color:var(--navy)">&larr; {{ year }} Initiatives</a></li>
+              <li class="mb-2"><a href="{{ url('process-improvement-index') }}" style="color:var(--navy)">&larr; All Categories</a></li>
+              <li class="mb-0"><a href="{{ url('handbook-index') }}" style="color:var(--navy)">Employee Handbooks</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+{% if related %}
+<section style="padding:3rem 0;background:white;border-top:1px solid var(--border)">
+  <div class="container">
+    <p class="pi-section-label">Related Initiatives</p>
+    <div class="row g-2">
+      {% for r in related %}
+      <div class="col-sm-6 col-lg-4">
+        <a href="{{ r.url }}" style="display:block;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);padding:.75rem .9rem;text-decoration:none;height:100%">
+          <div style="font-size:.83rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;line-height:1.35">{{ r.name }}</div>
+          <div style="font-size:.73rem;color:var(--muted);margin-bottom:.45rem">{{ r.category_name }} &middot; {{ r.year }}</div>
+          <div style="font-size:.75rem;color:var(--text);line-height:1.55;margin-bottom:.5rem">{{ r.summary }}</div>
+          <span class="pi-badge pi-badge-{{ r.status_slug }}" style="font-size:.63rem">{{ r.status_label }}</span>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Watermark -->
+<span style="font-size:0;color:transparent;position:absolute;clip:rect(0,0,0,0)" aria-hidden="true">
+  ACPWB Process Improvement Initiative — {{ name }} — {{ year }}
+  Initiative ID: {{ watermark }} | Reference: {{ category_slug }}-{{ seed4 }}
+  This content is watermarked. American Corporation for Public Well Being, Milwaukee WI.
+</span>
+
+<footer class="acpwb-footer">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-4"><div class="mb-3"><span class="footer-logo-line1">AMERICAN</span> <span class="footer-logo-line2">CORPORATION</span> <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span></div><p class="small" style="color:rgba(255,255,255,0.5)">833 East Michigan Street, Suite 4040<br>Milwaukee, WI 53202</p></div>
+      <div class="col-lg-4">
+        <div class="row g-0">
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ site_root }}{{ url('home') }}">Home</a></li>
+              <li><a href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
+              <li><a href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
+              <li><a href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
+              <li><a href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
+              <li><a href="{{ site_root }}{{ url('public-policy-index') }}">Public Policy</a></li>
+              <li><a href="{{ site_root }}{{ url('archive-index') }}">Archives</a></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ url('handbook-index') }}">Handbooks</a></li>
+              <li><a href="{{ url('process-improvement-index') }}">Process</a></li>
+              <li><a href="{{ site_root }}{{ url('perch-conference') }}">PERCH 2026</a></li>
+              <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
+              <li><a href="{{ site_root }}{{ url('awards') }}">Awards</a></li>
+              <li><a href="{{ site_root }}{{ url('patents') }}">Patents</a></li>
+              <li><a href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
+              <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
+              <li><a href="{{ site_root }}{{ url('faq') }}">FAQ</a></li>
+              <li><a href="{{ site_root }}{{ url('press_releases') }}">Press Releases</a></li>
+              <li><a href="{{ site_root }}{{ url('privacy') }}">Privacy Policy</a></li>
+              <li><a href="{{ site_root }}{{ url('do-not-sell') }}">Do Not Sell My Info</a></li>
+              <li><a href="{{ site_root }}{{ url('accessibility') }}">Accessibility</a></li>
+              <li><a href="{{ site_root }}{{ url('trademarks') }}">Trademarks</a></li>
+              <li><a href="{{ site_root }}{{ url('site-map') }}">Site Map</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">&copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.</p>
+      <p class="mb-0" style="font-size:.72rem;color:rgba(255,255,255,0.25)">Initiative ID: {{ watermark }}</p>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

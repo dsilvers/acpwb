@@ -26,6 +26,8 @@ urlpatterns = [
     path('our-people/', include('apps.people.urls')),
     path('contact/', RedirectView.as_view(url='/our-people/', permanent=False)),
     path('projects/', include('apps.projects.urls')),
+    path('company-handbooks/', include('apps.company_handbooks.urls')),
+    path('process-improvement/', include('apps.process_improvement.urls')),
 
     # Honeypot infrastructure
     path('', include('apps.honeypot.urls')),

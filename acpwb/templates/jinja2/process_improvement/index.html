@@ -3,34 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ agency_full }} Policy Filings — ACPWB</title>
-  <meta name="description" content="ACPWB regulatory filings, comment letters, and legislative testimony submitted to the {{ agency_full }}. Browse filings by year.">
+  <title>Process Improvement Initiatives — ACPWB</title>
+  <meta name="description" content="ACPWB process improvement initiative repository. Browse operational excellence, Lean, Six Sigma, and Kaizen transformation programs by category.">
   <meta property="og:site_name" content="American Corporation for Public Well Being">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ og_title }}">
-  <meta property="og:description" content="{{ og_description }}">
-  <meta property="og:url" content="https://policy-{{ agency }}.acpwb.com/">
-  <meta property="og:image" content="https://acpwb.com{{ static('img/page-covers/public-policy.jpg') }}">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ og_title }}">
-  <meta name="twitter:description" content="{{ og_description }}">
-  <meta name="twitter:image" content="https://acpwb.com{{ static('img/page-covers/public-policy.jpg') }}">
+  <meta property="og:title" content="Process Improvement Initiatives — ACPWB">
+  <meta property="og:description" content="Browse ACPWB process improvement initiatives covering procurement, onboarding, quality assurance, compliance, and more.">
+  <meta property="og:url" content="https://acpwb.com{{ request.get_full_path() }}">
+  <meta property="og:image" content="https://acpwb.com{{ static('img/og-default.png') }}">
   <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
   <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20260430">
   {% include "partials/_jsonld_garbage.html" %}
 <style>
-.pol-year-card { background:white; border:1px solid var(--border); text-decoration:none; transition:box-shadow .15s; overflow:hidden; }
-.pol-year-card:hover { box-shadow:0 2px 12px rgba(10,22,40,.08); }
-.pol-year-top { padding:.85rem 1rem; display:flex; justify-content:space-between; align-items:baseline; }
-.pol-year-num { font-size:1.1rem; font-weight:800; color:var(--navy); }
-.pol-year-count { font-size:.72rem; color:var(--muted); font-weight:600; }
-.pol-month-pills { padding:.5rem .75rem; border-top:1px solid var(--border); background:var(--surface); display:flex; flex-wrap:wrap; gap:.3rem; }
-.pol-month-pill { display:inline-block; padding:.15rem .4rem; background:white; border:1px solid var(--border); color:var(--navy); font-size:.68rem; font-weight:700; text-decoration:none; transition:background .1s; }
-.pol-month-pill:hover { background:var(--navy); color:var(--gold); border-color:var(--navy); }
-.pol-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
-.agency-badge { display:inline-block; background:var(--gold); color:var(--navy); font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.25rem .65rem; margin-bottom:.6rem; }
+.pi-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.pi-cat-card { background:white; border:1px solid var(--border); border-top:3px solid var(--gold); padding:.9rem 1.1rem; margin-bottom:.7rem; }
+.pi-cat-name { font-size:.9rem; font-weight:800; color:var(--navy); margin-bottom:.5rem; }
+.pi-instance-links { display:flex; flex-wrap:wrap; gap:.3rem; }
+.pi-instance-link { display:inline-block; font-size:.71rem; font-weight:700; color:var(--navy); background:var(--surface); border:1px solid var(--border); padding:.17rem .48rem; text-decoration:none; transition:background .12s; }
+.pi-instance-link:hover { background:var(--navy); color:var(--gold); border-color:var(--navy); }
 </style>
 </head>
 <body>
@@ -52,7 +44,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
@@ -68,11 +60,10 @@
 
 <section class="page-banner">
   <div class="container">
-    <span class="agency-badge">{{ agency|upper }}</span>
-    <h1 style="font-size:clamp(1.4rem,3.2vw,2.6rem);line-height:1.25;margin-bottom:.5rem">{{ agency_full }}</h1>
-    <p style="color:rgba(255,255,255,.7);font-size:.95rem;max-width:700px;margin-bottom:0">
-      ACPWB regulatory engagement, comment letters, and position statements on {{ policy_domain }}.
-      Browse filings by year below.
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.72rem">ACPWB</p>
+    <h1 style="font-size:clamp(1.6rem,3.5vw,2.8rem)">Process Improvement Initiatives</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:.95rem;max-width:680px">
+      ACPWB's enterprise operations portfolio includes hundreds of documented process improvement initiatives spanning operational excellence, regulatory compliance, and workforce productivity. Browse by category below.
     </p>
   </div>
 </section>
@@ -81,52 +72,49 @@
   <div class="container">
     <div class="row g-4">
 
-      <!-- Year grid -->
       <div class="col-lg-8">
-        <p class="pol-section-label">Browse by Year</p>
-        <div class="row g-3">
-          {% for y in years %}
-          <div class="col-md-6">
-            <div class="pol-year-card" style="cursor:pointer" onclick="window.location='{{ policy_year_url(y.year) }}'">
-              <div class="pol-year-top">
-                <a href="{{ policy_year_url(y.year) }}" class="pol-year-num" style="text-decoration:none" onclick="event.stopPropagation()">{{ y.year }}</a>
-                <span class="pol-year-count">{{ y.count }} filings</span>
-              </div>
-              <div class="pol-month-pills">{% for m in y.months %}<a href="{{ policy_month_url(y.year, m) }}" class="pol-month-pill" onclick="event.stopPropagation()">{{ ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m] }}</a>{% endfor %}</div>
-            </div>
+        <p class="pi-section-label">Browse by Process Category</p>
+        {% for item in items %}
+        <div class="pi-cat-card">
+          <div class="pi-cat-name">{{ item.name }}</div>
+          <div class="pi-instance-links">
+            {% for inst in item.instances %}
+            <a href="{{ url('process-improvement-category', args=[item.slug + '-' + inst.seed]) }}" class="pi-instance-link">{{ inst.label }}</a>
+            {% endfor %}
           </div>
-          {% endfor %}
+        </div>
+        {% endfor %}
+
+        <div class="d-flex justify-content-between align-items-center mt-3" style="font-size:.83rem">
+          <div>
+            {% if has_prev %}<a href="?page={{ page - 1 }}" class="btn btn-outline-secondary btn-sm">&larr; Previous</a>{% endif %}
+          </div>
+          <span style="color:var(--muted)">Page {{ page }}</span>
+          <div>
+            <a href="?page={{ page + 1 }}" class="btn btn-outline-secondary btn-sm">Next &rarr;</a>
+          </div>
         </div>
       </div>
 
-      <!-- Sidebar -->
       <div class="col-lg-4">
         <div style="position:sticky;top:2rem">
-
           <div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">
-            <p class="pol-section-label">About This Portal</p>
+            <p class="pi-section-label">About This Registry</p>
             <p style="font-size:.82rem;line-height:1.7;color:var(--muted);margin-bottom:.75rem">
-              This portal indexes ACPWB filings submitted to the {{ agency_full }} on matters of
-              {{ policy_domain }}. Filings reflect ACPWB's independent analysis and do not represent
-              the views of the agency.
+              ACPWB maintains a comprehensive registry of process improvement initiatives across all business functions. Each initiative is documented with problem statements, root cause analyses, solution designs, and measured outcomes.
             </p>
             <p style="font-size:.82rem;line-height:1.7;color:var(--muted);margin-bottom:0">
-              For the complete ACPWB policy filing record across all agencies, visit
-              <a href="{{ site_root }}{{ url('public-policy-index') }}" style="color:var(--navy)">acpwb.com/public-policy/</a>.
+              Methodologies applied include Lean, Six Sigma, DMAIC, Kaizen, and Agile process redesign. All initiatives are cross-referenced with applicable employee handbook policies and regulatory requirements.
             </p>
           </div>
-
           <div style="background:white;border:1px solid var(--border);padding:1.25rem">
-            <p class="pol-section-label">Filing Types</p>
+            <p class="pi-section-label">Related Resources</p>
             <ul class="list-unstyled mb-0" style="font-size:.82rem">
-              <li class="mb-2"><strong>Comment Letters</strong> — Formal NPRM responses</li>
-              <li class="mb-2"><strong>Position Statements</strong> — ACPWB policy positions</li>
-              <li class="mb-2"><strong>White Papers</strong> — Extended regulatory analysis</li>
-              <li class="mb-2"><strong>Legislative Testimony</strong> — Congressional statements</li>
-              <li class="mb-0"><strong>Amicus Briefs</strong> — Court filings</li>
+              <li class="mb-2"><a href="{{ url('handbook-index') }}" style="color:var(--navy)">Employee Handbooks</a></li>
+              <li class="mb-2"><a href="{{ site_root }}{{ url('reports-list') }}" style="color:var(--navy)">Reports &amp; Publications</a></li>
+              <li class="mb-0"><a href="{{ site_root }}{{ url('wiki-index') }}" style="color:var(--navy)">Knowledge Base</a></li>
             </ul>
           </div>
-
         </div>
       </div>
 
@@ -140,17 +128,8 @@
   <div class="container">
     <div class="row align-items-start g-4">
       <div class="col-lg-4">
-        <div class="mb-3">
-          <span class="footer-logo-line1">AMERICAN</span>
-          <span class="footer-logo-line2">CORPORATION</span>
-          <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span>
-        </div>
-        <p class="small" style="color:rgba(255,255,255,0.5)">
-          833 East Michigan Street, Suite 4040<br>
-          Milwaukee, WI 53202<br>
-          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a><br>
-          <a href="mailto:inquiry+website@acpwb.com" style="color:rgba(255,255,255,0.5)">inquiry@acpwb.com</a>
-        </p>
+        <div class="mb-3"><span class="footer-logo-line1">AMERICAN</span> <span class="footer-logo-line2">CORPORATION</span> <span class="footer-logo-line3">FOR PUBLIC WELL BEING</span></div>
+        <p class="small" style="color:rgba(255,255,255,0.5)">833 East Michigan Street, Suite 4040<br>Milwaukee, WI 53202</p>
       </div>
       <div class="col-lg-4">
         <div class="row g-0">
@@ -192,18 +171,10 @@
       </div>
     </div>
     <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
-        &copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.
-      </p>
-      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">
-        <a href="{{ site_root }}{{ url('privacy') }}">Privacy &amp; Disclaimer</a>
-      </p>
-    </div>
+    <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">&copy; {{ now_year }} American Corporation for Public Well Being, Milwaukee WI. All rights reserved.</p>
   </div>
 </footer>
 
 <script src="{{ static('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
-
 </body>
 </html>

@@ -69,7 +69,7 @@
       </thead>
       <tbody>
         {% for reg in recent %}
-        <tr>
+        <tr style="cursor:pointer" onclick="location.href='{% url 'dashboard-conference-detail' reg.pk %}'">
           <td style="font-size:.72rem;color:var(--dash-muted)">PERCH-{{ reg.year }}-{{ reg.pk|stringformat:"05d" }}</td>
           <td style="font-weight:600">{{ reg.full_name }}</td>
           <td style="font-size:.78rem">{{ reg.email }}</td>

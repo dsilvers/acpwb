@@ -44,7 +44,10 @@ INDUSTRY_TAGS = ['Healthcare', 'Finance', 'Energy', 'Technology', 'Manufacturing
 
 
 def project_list(request):
-    page = max(1, int(request.GET.get('page', 1)))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (ValueError, TypeError):
+        page = 1
     industry = request.GET.get('industry', '').strip()
     pow_token = request.session.get('pow_token', '')
 

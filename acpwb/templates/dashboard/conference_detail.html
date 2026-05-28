@@ -1,0 +1,132 @@
+{% extends "dashboard/base.html" %}
+{% block title %}{{ confirmation_number }}{% endblock %}
+{% block page_title %}PERCH Registration{% endblock %}
+{% block nav_conference %}active{% endblock %}
+
+{% block content %}
+
+<div class="mb-3">
+  <a href="{% url 'dashboard-conference' %}" style="font-size:.8rem;color:var(--gold)">
+    &larr; Back to Conference Registrations
+  </a>
+</div>
+
+<div class="row g-3">
+
+  <!-- Main info -->
+  <div class="col-lg-8">
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Contact</h6>
+        <span style="font-size:.72rem;color:var(--dash-muted)">Submitted {{ reg.created_at|date:"N j, Y \a\t H:i" }}</span>
+      </div>
+      <div style="padding:1rem 1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem 1.5rem;font-size:.83rem">
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Full Name</div>
+            <div style="font-weight:700">{{ reg.full_name }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Email</div>
+            <div><a href="mailto:{{ reg.email }}" style="color:var(--gold)">{{ reg.email }}</a></div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Phone</div>
+            <div>{{ reg.phone|default:"—" }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Registration Type</div>
+            <div style="font-weight:600">{{ reg.get_registration_type_display }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Address</h6>
+      </div>
+      <div style="padding:1rem 1.25rem;font-size:.83rem;line-height:1.8">
+        <div>{{ reg.address_line1 }}</div>
+        {% if reg.address_line2 %}<div>{{ reg.address_line2 }}</div>{% endif %}
+        <div>{{ reg.city }}{% if reg.state %}, {{ reg.state }}{% endif %} {{ reg.postal_code }}</div>
+        <div>{{ reg.country }}</div>
+      </div>
+    </div>
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Badge</h6>
+      </div>
+      <div style="padding:1rem 1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem 1.5rem;font-size:.83rem">
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Badge Name</div>
+            <div style="font-weight:600">{{ reg.badge_name|default:"—" }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Badge Title</div>
+            <div>{{ reg.badge_title|default:"—" }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Badge Company</div>
+            <div>{{ reg.badge_company|default:"—" }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>Professional Details</h6>
+      </div>
+      <div style="padding:1rem 1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem 1.5rem;font-size:.83rem">
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Job Title</div>
+            <div>{{ reg.job_title|default:"—" }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Organization</div>
+            <div>{{ reg.organization|default:"—" }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Years in Field</div>
+            <div>{{ reg.years_in_field|default:"—" }}</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dash-muted);margin-bottom:.2rem">Professional Membership</div>
+            <div>{{ reg.professional_membership|default:"—" }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card mb-3">
+      <div class="section-card-header">
+        <h6>User Agent</h6>
+      </div>
+      <div style="padding:.75rem 1.25rem;font-size:.75rem;font-family:monospace;color:var(--dash-muted);word-break:break-all">{{ reg.user_agent|default:"—" }}</div>
+    </div>
+
+  </div>
+
+  <!-- Sidebar -->
+  <div class="col-lg-4">
+
+    <div class="section-card mb-3">
+      <div class="section-card-header"><h6>Meta</h6></div>
+      <div style="padding:1rem 1.25rem;font-size:.78rem;line-height:2">
+        <div><span style="color:var(--dash-muted)">Confirmation:</span> <strong>{{ confirmation_number }}</strong></div>
+        <div><span style="color:var(--dash-muted)">Year:</span> {{ reg.year }}</div>
+        <div><span style="color:var(--dash-muted)">Submitted:</span> {{ reg.created_at|date:"N j, Y H:i:s" }}</div>
+        <div><span style="color:var(--dash-muted)">IP Address:</span> <span style="font-family:monospace">{{ reg.ip_address|default:"—" }}</span></div>
+        <div><span style="color:var(--dash-muted)">Token:</span> <span style="font-family:monospace;font-size:.7rem">{{ reg.token }}</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

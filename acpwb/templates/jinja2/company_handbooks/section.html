@@ -99,9 +99,9 @@
   <div class="container">
     <p style="font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:.4rem">
       <a href="{{ url('handbook-index') }}" style="color:rgba(255,255,255,.5)">Handbooks</a>
-      &rsaquo; <a href="{{ url('handbook-year', args=[agency_slug + '-' + seed4, year]) }}" style="color:rgba(255,255,255,.5)">{{ agency_name }}</a>
-      &rsaquo; <a href="{{ url('handbook-year', args=[agency_slug + '-' + seed4, year]) }}" style="color:rgba(255,255,255,.5)">{{ year }}</a>
-      &rsaquo; <a href="{{ url('handbook-revision', args=[agency_slug + '-' + seed4, year, revision]) }}" style="color:rgba(255,255,255,.5)">Rev. {{ revision }}</a>
+      &rsaquo; <a href="{{ url('handbook-year', args=[instance, year]) }}" style="color:rgba(255,255,255,.5)">{{ agency_name }}</a>
+      &rsaquo; <a href="{{ url('handbook-year', args=[instance, year]) }}" style="color:rgba(255,255,255,.5)">{{ year }}</a>
+      &rsaquo; <a href="{{ url('handbook-revision', args=[instance, year, revision]) }}" style="color:rgba(255,255,255,.5)">Rev. {{ revision }}</a>
       &rsaquo; {{ group_name }}
     </p>
     <h1 style="font-size:clamp(1.3rem,2.8vw,2.2rem)">{{ group_name }}</h1>
@@ -200,9 +200,17 @@
         {% endfor %}
 
         <div class="d-flex justify-content-between align-items-center mt-2 pt-3" style="border-top:2px solid var(--gold)">
-          <a href="{{ url('handbook-revision', args=[agency_slug + '-' + seed4, year, revision]) }}" style="font-size:.8rem;color:var(--muted)">&larr; Table of Contents</a>
-          {% if next_group %}
-          <a href="{{ url('handbook-group', args=[agency_slug + '-' + seed4, year, revision, next_group]) }}" class="btn btn-outline-secondary btn-sm">{{ next_group_name }} &rarr;</a>
+          {% if has_prev_page %}
+          <a href="{{ url('handbook-group-page', args=[instance, year, revision, group_slug, page - 1]) }}" class="btn btn-outline-secondary btn-sm">&larr; Previous</a>
+          {% else %}
+          <a href="{{ url('handbook-revision', args=[instance, year, revision]) }}" style="font-size:.8rem;color:var(--muted)">&larr; Table of Contents</a>
+          {% endif %}
+
+          {% if has_next_page %}
+          <span style="font-size:.78rem;color:var(--muted)">Page {{ page }} of {{ total_pages }}</span>
+          <a href="{{ url('handbook-group-page', args=[instance, year, revision, group_slug, page + 1]) }}" class="btn btn-outline-secondary btn-sm">Next &rarr;</a>
+          {% elif next_group %}
+          <a href="{{ url('handbook-group', args=[instance, year, revision, next_group]) }}" class="btn btn-outline-secondary btn-sm">{{ next_group_name }} &rarr;</a>
           {% else %}<span></span>{% endif %}
         </div>
 
@@ -229,10 +237,13 @@
         <div style="position:sticky;top:2rem">
 
           <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">
-            <p class="hb-section-label">In This Chapter</p>
+            <p class="hb-section-label">In This Chapter{% if total_pages > 1 %} &mdash; Page {{ page }}/{{ total_pages }}{% endif %}</p>
             {% for sec in sections %}
             <a href="#section-{{ sec.section_slug }}" class="hb-anchor-link">{{ sec.section_name }}</a>
             {% endfor %}
+            {% if has_next_page %}
+            <a href="{{ url('handbook-group-page', args=[instance, year, revision, group_slug, page + 1]) }}" class="hb-anchor-link" style="color:var(--gold);font-weight:700">More sections &rarr;</a>
+            {% endif %}
           </div>
 
           <div style="background:white;border:1px solid var(--border);padding:1.1rem;margin-bottom:.9rem">

@@ -305,12 +305,20 @@ def generate_section(agency_slug, seed4, year, revision, section_slug):
 HANDBOOK_YEARS = list(range(2025, 1992, -1))
 
 
-def generate_group_page(agency_slug, seed4, year, revision, group_slug):
-    """Generate all section content for one handbook chapter (group)."""
+_GROUP_SECTIONS_PER_PAGE = 6
+
+
+def generate_group_page(agency_slug, seed4, year, revision, group_slug, page=1):
+    """Generate section content for one paginated chapter page."""
     if group_slug not in GROUP_SECTIONS:
         return None
     name = _agency_name(agency_slug)
-    group_section_list = GROUP_SECTIONS[group_slug]
+    all_section_list = GROUP_SECTIONS[group_slug]
+    total_sections = len(all_section_list)
+    total_pages = max(1, (total_sections + _GROUP_SECTIONS_PER_PAGE - 1) // _GROUP_SECTIONS_PER_PAGE)
+    page = max(1, min(page, total_pages))
+    start = (page - 1) * _GROUP_SECTIONS_PER_PAGE
+    group_section_list = all_section_list[start:start + _GROUP_SECTIONS_PER_PAGE]
     sections_content = []
     for s_slug, _ in group_section_list:
         data = generate_section(agency_slug, seed4, year, revision, s_slug)
@@ -352,6 +360,7 @@ def generate_group_page(agency_slug, seed4, year, revision, group_slug):
     first_slug = group_section_list[0][0] if group_section_list else None
     group_agencies = _pick_agencies_for_section(first_slug or '', grp_rng, count=3) if first_slug else []
 
+    instance = f"{agency_slug}-{seed4}"
     return {
         'agency_slug': agency_slug,
         'seed4': seed4,
@@ -372,6 +381,11 @@ def generate_group_page(agency_slug, seed4, year, revision, group_slug):
         'threshold_table': threshold_table,
         'group_spotlight': group_spotlight,
         'group_agencies': group_agencies,
+        'page': page,
+        'total_pages': total_pages,
+        'has_prev_page': page > 1,
+        'has_next_page': page < total_pages,
+        'instance': instance,
     }
 
 

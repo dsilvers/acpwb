@@ -61,14 +61,14 @@ def handbook_revision(request, instance, year, revision):
     return render(request, 'company_handbooks/revision.html', data)
 
 
-def handbook_group(request, instance, year, revision, group_slug):
+def handbook_group(request, instance, year, revision, group_slug, page=1):
     _log_crawler(request, 'handbook')
     agency_slug, seed4 = _parse_instance(instance)
     if not agency_slug or year not in HANDBOOK_YEARS or revision < 1:
         raise Http404
     if group_slug not in GROUP_SLUG_LIST:
         raise Http404
-    data = generate_group_page(agency_slug, seed4, year, revision, group_slug)
+    data = generate_group_page(agency_slug, seed4, year, revision, group_slug, page=page)
     if not data:
         raise Http404
     return render(request, 'company_handbooks/section.html', data)

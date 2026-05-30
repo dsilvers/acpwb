@@ -1,0 +1,214 @@
+{% load static acpwb_tags %}
+{# Shared slide content block — used by both slide.html and present.html #}
+
+<div class="slide-frame slide-type-{{ slide.type }}{% if slide.chart_type %} slide-chart-{{ slide.chart_type }}{% endif %}{% if slide.bg_image and slide.type == 'title' or slide.bg_image and slide.type == 'qanda' %} slide-has-bg{% endif %}"
+     style="--slide-bg:{{ slide.theme.bg }};--slide-text:{{ slide.theme.text }};--slide-accent:{{ slide.theme.accent }};--slide-muted:{{ slide.theme.text_muted }};--slide-surface:{{ slide.theme.surface }};--slide-heading-font:'{{ slide.theme.heading_font }}';--slide-body-font:'{{ slide.theme.body_font }}';">
+  {% if slide.bg_image and slide.type == 'title' or slide.bg_image and slide.type == 'qanda' %}
+  <img src="{% static slide.bg_image %}" class="slide-bg-img" alt="">
+  <div class="slide-bg-overlay"></div>
+  {% endif %}
+  <div class="slide-inner">
+
+    {% if slide.type == 'title' %}
+      <span class="slide-accent-bar"></span>
+      <h1 class="slide-heading">{{ slide.heading }}</h1>
+      <p class="slide-subtitle">{{ slide.subheading }}</p>
+      <p style="margin:.3em 0 .4em;font-size:clamp(0.65rem,1.1vw,0.88rem);display:flex;align-items:center;gap:.5em;flex-wrap:wrap">
+        <span style="background:var(--slide-accent);color:var(--slide-bg);padding:.2em .6em;border-radius:2px;font-weight:700;font-size:.9em;white-space:nowrap">{{ pres.pub_date_display }}</span>
+        <span style="color:var(--slide-text);opacity:.75">{{ pres.venue_name }} &mdash; {{ pres.venue_city }}</span>
+      </p>
+      {% if slide.authors %}
+      <div class="slide-authors">
+        {% for author in slide.authors %}
+        <div class="slide-author">
+          {% headshot_or_avatar author.avatar_seed author.initials 28 %}
+          <div class="slide-author-meta">
+            <div class="slide-author-name">{{ author.full_name }}</div>
+            <div class="slide-author-title">{{ author.title }}</div>
+            <div class="slide-author-title" style="font-size:.8em;opacity:.7">{{ author.email }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    {% elif slide.type == 'agenda' %}
+      <div class="slide-agenda-left">
+        <span class="slide-accent-bar"></span>
+        <h2 class="slide-heading" style="font-size:clamp(1.1rem,2.5vw,2rem)">{{ slide.heading }}</h2>
+      </div>
+      <div class="slide-agenda-right">
+        {% for item in slide.items %}
+        <div class="slide-agenda-item">
+          <span class="slide-agenda-num">{{ forloop.counter }}</span>
+          <span>{{ item }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+    {% elif slide.type == 'content' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <ul class="slide-bullets">
+        {% for bullet in slide.bullets %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+
+    {% elif slide.type == 'stat' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-stats">
+        {% for stat in slide.stats %}
+        <div class="slide-stat-item">
+          <span class="slide-stat-value">{{ stat.value }}</span>
+          <span class="slide-stat-label">{{ stat.label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+    {% elif slide.type == 'quote' %}
+      <span class="slide-quote-mark">&ldquo;</span>
+      <p class="slide-quote-text">{{ slide.quote }}</p>
+      <p class="slide-quote-attr">— {{ slide.attribution }}</p>
+
+    {% elif slide.type == 'chart' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-chart-body">{{ slide.chart_svg|safe }}</div>
+      <p class="slide-chart-source">Source: {{ slide.chart_source }}</p>
+
+    {% elif slide.type == 'image' %}
+      <div class="slide-image-full">
+        <img src="{% static slide.image_path %}" alt="{{ slide.caption }}" class="slide-image-bg">
+        <div class="slide-image-caption">{{ slide.caption }}</div>
+      </div>
+
+    {% elif slide.type == 'meme' %}
+      <div class="slide-meme-frame">
+        <img src="{% static slide.meme_path %}" alt="Corporate meme slide" class="slide-meme-img">
+      </div>
+
+    {% elif slide.type == 'summary' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading" style="font-size:clamp(1.2rem,2.5vw,2.2rem)">{{ slide.heading }}</h2>
+      <ul class="slide-bullets">
+        {% for bullet in slide.bullets %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+
+    {% elif slide.type == 'two_column' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-two-col">
+        <div class="slide-col slide-col-left">
+          <div class="slide-col-label">{{ slide.left_label }}</div>
+          <ul class="slide-col-items">
+            {% for item in slide.left_items %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        </div>
+        <div class="slide-col slide-col-right">
+          <div class="slide-col-label">{{ slide.right_label }}</div>
+          <ul class="slide-col-items">
+            {% for item in slide.right_items %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+
+    {% elif slide.type == 'timeline' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-timeline">
+        {% for m in slide.milestones %}
+        <div class="slide-timeline-step">
+          <div class="slide-timeline-dot"></div>
+          <div class="slide-timeline-label">{{ m.label }}</div>
+          <div class="slide-timeline-desc">{{ m.desc }}</div>
+        </div>
+        {% endfor %}
+      </div>
+
+    {% elif slide.type == 'section_divider' %}
+      <div class="slide-section-divider-inner">
+        <div class="slide-section-label">Section {{ slide.section_num }}</div>
+        <div class="slide-section-heading">{{ slide.heading }}</div>
+        <div class="slide-section-rule"></div>
+      </div>
+
+    {% elif slide.type == 'process' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-process">
+        {% for step in slide.steps %}
+        <div class="slide-process-step">
+          <div class="slide-process-num">{{ forloop.counter }}</div>
+          <div class="slide-process-name">{{ step.name }}</div>
+          <div class="slide-process-desc">{{ step.desc }}</div>
+        </div>
+        {% endfor %}
+      </div>
+
+    {% elif slide.type == 'case_study' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-case-org">{{ slide.org_type }}</div>
+      <div class="slide-case-grid">
+        <div class="slide-case-section">
+          <div class="slide-case-label">Challenge</div>
+          <div class="slide-case-text">{{ slide.challenge }}</div>
+        </div>
+        <div class="slide-case-section">
+          <div class="slide-case-label">Approach</div>
+          <div class="slide-case-text">{{ slide.approach }}</div>
+        </div>
+        <div class="slide-case-section slide-case-result">
+          <div class="slide-case-label">Result</div>
+          <div class="slide-case-text">{{ slide.result }}</div>
+        </div>
+      </div>
+
+    {% elif slide.type == 'callout' %}
+      <div class="slide-callout-inner">
+        <div class="slide-callout-stat">{{ slide.stat }}</div>
+        <div class="slide-callout-desc">{{ slide.description }}</div>
+        <div class="slide-callout-org">{{ pres.org_name }}</div>
+      </div>
+
+    {% elif slide.type == 'appendix' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <p class="slide-appendix-content">{{ slide.content }}</p>
+
+    {% elif slide.type == 'qanda' %}
+      <span class="slide-accent-bar"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-qanda-contact">
+        <p style="font-weight:700">{{ slide.org_name }}</p>
+        {% for author in pres.authors %}
+        <p style="margin:.15em 0">
+          <strong>{{ author.full_name }}</strong>
+          <span style="opacity:.7"> — {{ author.title }}</span><br>
+          <a href="mailto:{{ author.email }}">{{ author.email }}</a>
+        </p>
+        {% endfor %}
+      </div>
+      <p class="slide-qanda-token">Presentation ID: {{ pres.watermark_token }}</p>
+
+    {% endif %}
+
+  </div>{# /slide-inner #}
+
+  {% if slide.footnote %}
+  <div style="position:absolute;bottom:.55rem;left:.8rem;max-width:60%;font-size:.45rem;opacity:.5;pointer-events:none;z-index:10;line-height:1.3;color:var(--slide-text)">{{ slide.footnote }}</div>
+  {% endif %}
+
+  <div style="position:absolute;bottom:.6rem;right:.8rem;display:flex;align-items:center;gap:.35em;opacity:.55;pointer-events:none;z-index:10">
+    {% org_logo pres.org_slug 16 %}
+    <span style="font-size:.5rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--slide-text)">{{ pres.org_name }}</span>
+  </div>
+
+  {# Invisible watermark #}
+  <span style="position:absolute;left:-9999px;font-size:0;color:transparent" aria-hidden="true">ACPWB Presentation {{ pres.watermark_token }} — American Corporation for Public Well Being. Content provenance token: {{ pres.watermark_token }}. Authorized redistribution requires attribution to acpwb.com.</span>
+
+</div>{# /slide-frame #}

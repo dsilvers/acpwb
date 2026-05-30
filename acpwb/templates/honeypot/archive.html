@@ -1,6 +1,11 @@
 {% extends parent_template|default:"base.html" %}
 {% load static %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/presentations.css' %}">
+<style>.acpwb-archive-pres-sidebar .pres-card-title { font-size: 0.64rem; }</style>
+{% endblock %}
+
 {% block og_description %}{{ industry }} sector engagement documentation archived {{ year }}-{{ month|stringformat:"02d" }}-{{ day|stringformat:"02d" }}. {{ phase|capfirst }} phase record. ACPWB Research Division.{% endblock %}
 
 {% block era_content %}{% block content %}
@@ -299,6 +304,15 @@
               <div style="font-size:.6rem;opacity:.5;margin-bottom:.15rem">{{ doc.date }} &bull; {{ doc.phase }}</div>
               <div style="font-size:.75rem;font-weight:600;line-height:1.35">{{ doc.label }}</div>
             </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if related_presentations %}
+          <div class="acpwb-archive-pres-sidebar" style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">
+            <div class="era-section-head" style="margin-bottom:.8rem">Related Presentations</div>
+            {% for pres in related_presentations %}
+              {% include "presentations/_pres_card.html" with pres=pres %}
             {% endfor %}
           </div>
           {% endif %}
@@ -640,6 +654,15 @@
               <div style="font-size:.75rem;font-weight:600;color:var(--navy);line-height:1.35">{{ stub.title }}</div>
               <div style="font-size:.65rem;color:var(--muted);margin-top:.15rem">{{ stub.agency_acronym }}</div>
             </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if related_presentations %}
+          <div class="acpwb-archive-pres-sidebar acpwb-card mb-4">
+            <h6 class="card-title mb-3">Related Presentations</h6>
+            {% for pres in related_presentations %}
+              {% include "presentations/_pres_card.html" with pres=pres %}
             {% endfor %}
           </div>
           {% endif %}

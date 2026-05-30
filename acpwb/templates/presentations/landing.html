@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/presentations.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-banner" style="padding:3rem 0 2.5rem">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">ACPWB Research Library</p>
+    <h1 style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:.5rem">Research Presentations &amp; Industry Briefings</h1>
+    <p class="lead mb-0" style="color:rgba(255,255,255,0.75);max-width:680px">
+      Executive slide decks, benchmark presentations, and strategic briefings from leading consulting organizations across every major industry sector.
+    </p>
+  </div>
+</section>
+
+<!-- Recently Published -->
+<section style="background:var(--surface,#f4f6f9);padding:3rem 0">
+  <div class="container">
+    <h2 class="mb-1" style="font-size:1.3rem;font-weight:800;color:var(--navy)">Recently Published</h2>
+    <p class="text-muted mb-3" style="font-size:.85rem">Latest presentations added to the ACPWB research library</p>
+    <div class="row g-3">
+      {% for pres in recent %}
+      <div class="col-sm-6 col-lg-3">
+        {% include "presentations/_pres_card.html" with pres=pres %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Featured Organizations -->
+{% for section in org_sections %}
+<section style="padding:3rem 0;{% cycle 'background:#fff' 'background:var(--surface,#f4f6f9)' %}">
+  <div class="container">
+    <div class="d-flex align-items-baseline justify-content-between mb-3">
+      <div>
+        <h2 style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:.2rem">{{ section.org_name }}</h2>
+        <p class="text-muted mb-0" style="font-size:.82rem">{{ section.org_slogan }}</p>
+      </div>
+      <a href="{% url 'presentation-org' section.org_slug %}" class="btn btn-sm btn-outline-secondary" style="font-size:.78rem;white-space:nowrap">View all &rarr;</a>
+    </div>
+    <div class="row g-3">
+      {% for pres in section.presentations %}
+      <div class="col-sm-6 col-lg-4">
+        {% include "presentations/_pres_card.html" with pres=pres %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<!-- Pagination -->
+<section style="padding:2rem 0 3rem;background:{% if org_sections|length|divisibleby:2 %}var(--surface,#f4f6f9){% else %}#fff{% endif %}">
+  <div class="container">
+    <nav class="d-flex justify-content-between align-items-center">
+      <div>
+        {% if prev_page %}
+        <a href="?page={{ prev_page }}" class="btn btn-outline-secondary btn-sm">&larr; Previous</a>
+        {% endif %}
+      </div>
+      <span class="text-muted" style="font-size:.82rem">Page {{ page }}</span>
+      <a href="?page={{ next_page }}" class="btn btn-outline-secondary btn-sm">Next &rarr;</a>
+    </nav>
+  </div>
+</section>
+
+{% endblock %}

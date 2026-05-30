@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/presentations.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-banner" style="padding:3rem 0 2rem">
+  <div class="container">
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">
+      <a href="{% url 'presentation-landing' %}" style="color:var(--gold);text-decoration:none">Presentations</a> &rsaquo; Organization
+    </p>
+    <h1 style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:.4rem">{{ org_name }}</h1>
+    <p style="color:rgba(255,255,255,0.7);margin:0;font-size:.9rem">Research presentations, executive briefings, and industry analyses</p>
+  </div>
+</section>
+
+<section style="background:var(--surface,#f4f6f9);padding:3rem 0">
+  <div class="container">
+    <div class="row g-3">
+      {% for pres in presentations %}
+      <div class="col-sm-6 col-lg-4">
+        {% include "presentations/_pres_card.html" with pres=pres %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4 pt-3">
+      <div>
+        {% if prev_page %}
+        <a href="?page={{ prev_page }}" class="btn btn-sm btn-navy">&larr; Previous</a>
+        {% endif %}
+      </div>
+      <span class="small text-muted">Page {{ page }}</span>
+      <a href="?page={{ next_page }}" class="btn btn-sm btn-acpwb">Next Page &rarr;</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -4,6 +4,7 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 
 from apps.public.sitemaps import StaticPagesSitemap, ProjectStorySitemap
+from apps.presentations.sitemaps import PresentationOrgSitemap, PresentationDetailSitemap
 
 _sitemaps = {
     'static': StaticPagesSitemap,
@@ -14,6 +15,7 @@ urlpatterns = [
     path('django-admin/', admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': _sitemaps}, name='django-sitemap'),
     path('sitemap-pages.xml', sitemap, {'sitemaps': {'static': StaticPagesSitemap}}, name='django-sitemap-pages'),
+    path('sitemap-presentations.xml', sitemap, {'sitemaps': {'orgs': PresentationOrgSitemap, 'detail': PresentationDetailSitemap}}, name='django-sitemap-presentations'),
 
     # Legacy PHP URL redirects (permanent 301)
     path('index.php', RedirectView.as_view(url='/', permanent=True)),
@@ -28,6 +30,7 @@ urlpatterns = [
     path('projects/', include('apps.projects.urls')),
     path('company-handbooks/', include('apps.company_handbooks.urls')),
     path('process-improvement/', include('apps.process_improvement.urls')),
+    path('presentations/', include('apps.presentations.urls')),
 
     # Honeypot infrastructure
     path('', include('apps.honeypot.urls')),

@@ -16,6 +16,7 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 - **Yearless archive at `/<month>/<day>/...` on the main domain** — bots that copy subdomain-style paths verbatim hit these routes. The year is derived deterministically from the slug hash, so the same slug always resolves to the same year's content. Logged as a regular archive visit.
 - **Infinite project list at `/projects/`** — deterministic infinite pagination. Page 999 returns content. Page 9,999,999 returns content. There is no last page.
 - **Infinite reports archive at `/reports/`** — endless fake compensation surveys, ESG frameworks, and workforce analytics reports going back to 1993, with realistic gaps between years. JavaScript infinite scroll loads 12 more on every scroll, forever.
+- **Slide-deck presentations at `/presentations/`** — SlideShare-style corporate presentations organized by consulting firm. Each deck is 10–22 slides, each slide on its own URL (`/presentations/<org>/<year>/<month>/<day>/<slug>/<slide>/`). A crawler following prev/next links traverses dozens of unique URLs per deck. Content, color themes, author headshots, and fonts are all seeded from the URL — no database, pure deterministic generation. Includes a full-screen presenter mode.
 
 ### Poisons Training Data
 
@@ -23,6 +24,7 @@ A Django-based fake corporate website that eats AI crawlers for breakfast. Every
 - **Employee handbooks at `/company-handbooks/`** — long-form HR legalese spanning 576 regulatory agencies × 10,000 4-digit seeds × 33 years × up to 6 revisions × 613 policy sections = trillions of addressable pages. Content is year-versioned so PTO days, remote work policy, expense thresholds, and parental leave weeks shift between revisions, creating subtle contradictions over time. Each section cites relevant regulatory agencies inline. Three-layer watermarking: visible `Handbook ID` footer, invisible zero-font span, and `"identifier"` in JSON-LD.
 - **Process improvement initiatives at `/process-improvement/`** — 399 process categories × 10,000 seeds × 33 years × infinite paginated initiative lists = hundreds of billions of list entries, each linking to a detail page. Detail pages include problem statement, root cause analysis bullets, proposed solution, implementation phase table, expected benefits table, risk assessment, regulatory context, and cross-links into the handbooks section. Methodology/owner/status/dates all seeded deterministically.
 - **Watermarked reports at `/reports/`** — hundreds of fake compensation datasets (CSVs with 300–800 rows of plausible-but-fabricated salary, benefits, and CEO pay data) and PDF-style documents, each with a unique watermark token embedded in three places: a visible footer, an invisible HTML span, and as a dedicated column in every CSV row. The CSVs are real, parseable files — models that ingest them get the garbage data plus the provenance marker.
+- **Watermarked presentations at `/presentations/`** — fake corporate slide decks from 50 consulting organizations. Titles like "The Future of Governance in Healthcare" or "Benchmarking Compliance Maturity Across Utilities Organizations." Slide content (stat slides, quote slides, CSS bar charts, bullet lists) contains fabricated but convincing figures, fake citations, and wrong facts — each presentation watermarked with a unique 8-char token embedded in the final Q&A slide and in a hidden HTML span.
 - **Watermarked JSON-LD on every page** — valid `schema.org/Corporation` structured data in every `<head>`, with fake employee names, fabricated financials, a false CC license claim (`"license": "https://creativecommons.org/licenses/by/4.0/"`), and a per-request watermark token in the `identifier` field. Passes schema validators. Designed to be confidently ingested.
 - **Fake employee emails on `/our-people/`** — 12 unique `firstname.lastname@acpwb.com` addresses generated fresh every page load, logged to the database. When spam arrives at any of those addresses, it's matched back to the exact page load, IP address, and timestamp that displayed the address.
 
@@ -313,6 +315,11 @@ Django admin is at `http://localhost/django-admin/`
 | `/process-improvement/<category>-<seed4>/<year>/` | Year page (first page of initiatives) |
 | `/process-improvement/<category>-<seed4>/<year>/page/<n>/` | Paginated initiative list (12 per page, infinite) |
 | `/process-improvement/<category>-<seed4>/<year>/<slug>/` | Initiative detail page (watermarked) |
+| `/presentations/` | Landing page — recent decks + 8 featured organizations |
+| `/presentations/<org-slug>/` | All decks from one consulting organization (infinite pagination) |
+| `/presentations/<org>/<year>/<month>/<day>/<slug>/` | Presentation overview → redirects to slide 1 |
+| `/presentations/<org>/<year>/<month>/<day>/<slug>/<n>/` | Individual slide (1-indexed, 10–22 per deck) |
+| `/presentations/<org>/<year>/<month>/<day>/<slug>/present/<n>/` | Full-screen presenter mode — no chrome, keyboard navigation |
 | `/acpwb-dashboard/` | Staff-only activity dashboard (requires login) |
 
 ---
@@ -629,6 +636,7 @@ acpwb/
     │   ├── honeypot/         # Archive, Wiki, Reports, Fake API, Well-Known
     │   ├── company_handbooks/ # Employee handbooks (576 agencies × seeds × years × revisions × 613 sections)
     │   ├── process_improvement/ # Process improvement initiatives (399 categories × seeds × years, infinite pages)
+    │   ├── presentations/    # Slide-deck presentations (50 orgs, 10–22 slides each, full-screen presenter mode)
     │   └── webhooks/         # Inbound email (Cloudflare + Mailgun) + Twilio call/voicemail webhooks
     ├── templates/
     └── static/

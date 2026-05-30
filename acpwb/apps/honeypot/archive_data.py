@@ -3168,7 +3168,7 @@ _ARCHIVE_ORGS = [
     'Neutron Computing Ventures', 'Radiant Hypersonic Research', 'Axiom Autonomous Systems',
 ]
 
-_ARCHIVE_INDUSTRIES = [
+ARCHIVE_INDUSTRIES = [
     'Healthcare', 'Financial Services', 'Energy', 'Manufacturing', 'Technology',
     'Retail', 'Transportation', 'Education', 'Government', 'Pharmaceuticals',
     'Professional Services', 'Insurance', 'Logistics', 'Aerospace', 'Utilities',

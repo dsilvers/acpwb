@@ -53,6 +53,7 @@
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'mission' %}active{% endif %}" href="{{ site_root }}{% url 'mission' %}">Mission</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'project-list' %}active{% endif %}" href="{{ site_root }}{% url 'project-list' %}">Projects</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'reports-list' %}active{% endif %}" href="{{ site_root }}{% url 'reports-list' %}">Reports</a></li>
+        <li class="nav-item"><a class="nav-link {% if 'presentation' in request.resolver_match.url_name|default:'' %}active{% endif %}" href="{{ site_root }}{% url 'presentation-landing' %}">Presentations</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'public-policy-index' %}active{% endif %}" href="{{ site_root }}{% url 'public-policy-index' %}">Policy</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'careers' %}active{% endif %}" href="{{ site_root }}{% url 'careers' %}">Careers</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'partners' %}active{% endif %}" href="{{ site_root }}{% url 'partners' %}">Partners</a></li>
@@ -104,6 +105,7 @@
             <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
               <li><a href="/company-handbooks/">Handbooks</a></li>
               <li><a href="/process-improvement/">Process</a></li>
+              <li><a href="{% url 'presentation-landing' %}">Presentations</a></li>
               <li><a href="{{ site_root }}{% url 'perch-conference' %}">PERCH 2026</a></li>
               <li><a href="{{ site_root }}{% url 'careers' %}">Careers</a></li>
               <li><a href="{{ site_root }}{% url 'awards' %}">Awards</a></li>

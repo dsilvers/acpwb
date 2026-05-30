@@ -13,6 +13,7 @@ class StaticPagesSitemap(Sitemap):
             'home', 'mission', 'our-people', 'careers', 'partners',
             'awards', 'patents', 'faq',
             'privacy', 'do-not-sell', 'accessibility', 'trademarks', 'site-map',
+            'presentation-landing',
         ]
 
     def location(self, item):

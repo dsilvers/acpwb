@@ -407,6 +407,30 @@
   </div>
 </section>
 
+{% if related_presentations %}
+<section style="padding:2rem 0;background:#f4f6f9;border-top:2px solid var(--border,#e4e8ef)">
+  <div class="container">
+    <p style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#999;margin-bottom:.8rem">Related Research Presentations</p>
+    <div class="row g-3">
+      {% for p in related_presentations %}
+      <div class="col-sm-6">
+        <a href="{{ p.pres_url }}" style="display:block;border-radius:4px;overflow:hidden;text-decoration:none;border:1px solid #e0e4ea;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+          <div style="background:{{ p.theme.bg }};aspect-ratio:16/9;padding:.7em .9em;display:flex;align-items:flex-end;position:relative">
+            <div style="position:absolute;top:.4em;right:.5em;background:{{ p.theme.accent }};color:{{ p.theme.bg }};font-size:.55rem;padding:.15em .4em;border-radius:2px;font-weight:800">{{ p.slide_count }} slides</div>
+            <div style="font-size:.68rem;font-weight:700;color:{{ p.theme.text }};line-height:1.25;font-family:'{{ p.theme.heading_font }}',sans-serif">{{ p.title }}</div>
+          </div>
+          <div style="padding:.55em .75em">
+            <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#c9a84c;margin-bottom:.1em">{{ p.org_name }}</div>
+            <div style="font-size:.62rem;color:#888">{{ p.pub_date_display }} &mdash; {{ p.industry }}</div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 </main>
 
 <footer class="acpwb-footer">
@@ -442,6 +466,7 @@
             <ul class="list-unstyled mb-0" style="font-size:.82rem;line-height:2">
               <li><a href="{{ url('handbook-index') }}">Handbooks</a></li>
               <li><a href="{{ url('process-improvement-index') }}">Process</a></li>
+              <li><a href="{{ url('presentation-landing') }}">Presentations</a></li>
               <li><a href="{{ site_root }}{{ url('perch-conference') }}">PERCH 2026</a></li>
               <li><a href="{{ site_root }}{{ url('careers') }}">Careers</a></li>
               <li><a href="{{ site_root }}{{ url('awards') }}">Awards</a></li>

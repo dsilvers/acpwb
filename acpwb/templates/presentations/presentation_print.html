@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ pres.title }} — {{ pres.org_name }}</title>
+  <style>
+    @page { size: 33.87cm 19.05cm; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, 'Segoe UI', Arial, sans-serif; background: #fff; }
+
+    .slide-page {
+      position: relative;
+      width: 33.87cm;
+      height: 19.05cm;
+      overflow: hidden;
+      page-break-after: always;
+    }
+    .slide-page:last-child { page-break-after: avoid; }
+
+    .slide-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .slide-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.78) 0%, rgba(0,0,0,.70) 55%, rgba(0,0,0,.45) 100%);
+      z-index: 1;
+    }
+
+    .slide-inner {
+      position: absolute;
+      inset: 0;
+      padding: 1.8cm 2.6cm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .slide-accent-bar {
+      display: block;
+      width: 2.2cm;
+      height: 4px;
+      border-radius: 2px;
+      margin-bottom: 0.6cm;
+      flex-shrink: 0;
+    }
+
+    .slide-heading {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.35cm;
+    }
+
+    /* ── Title slide ── */
+    .slide-type-title .slide-inner { justify-content: flex-start; padding-top: 2.2cm; }
+    .slide-type-title .slide-heading { font-size: 26pt; }
+    .slide-subtitle { font-size: 13pt; line-height: 1.5; opacity: .85; margin-bottom: 0.4cm; }
+
+    /* ── Agenda slide ── */
+    .slide-agenda-wrap { display: flex; gap: 1.2cm; width: 100%; }
+    .slide-agenda-left { flex: 0 0 auto; width: 7.5cm; }
+    .slide-agenda-right { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .slide-agenda-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5cm;
+      padding: 0.22cm 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      font-size: 12pt;
+      line-height: 1.4;
+    }
+    .slide-agenda-num { font-size: 20pt; font-weight: 800; opacity: .3; flex-shrink: 0; width: 1.1cm; }
+
+    /* ── Content / Summary slide ── */
+    .slide-type-content .slide-heading,
+    .slide-type-summary .slide-heading { font-size: 20pt; }
+    .slide-bullets { list-style: none; padding: 0; margin: 0; }
+    .slide-bullets li {
+      position: relative;
+      padding: 0.18cm 0 0.18cm 1.1cm;
+      font-size: 12pt;
+      line-height: 1.45;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .slide-bullet-arrow {
+      position: absolute;
+      left: 0;
+      top: 0.22cm;
+      font-size: 7pt;
+    }
+
+    /* ── Stat slide ── */
+    .slide-type-stat .slide-heading { font-size: 18pt; }
+    .slide-stats { display: flex; gap: 1.2cm; flex-wrap: wrap; margin-top: 0.4cm; }
+    .slide-stat-item { display: flex; flex-direction: column; align-items: center; min-width: 3cm; }
+    .slide-stat-value { font-size: 34pt; font-weight: 800; line-height: 1; }
+    .slide-stat-label { font-size: 8pt; text-transform: uppercase; letter-spacing: .1em; opacity: .65; text-align: center; margin-top: .15cm; }
+
+    /* ── Quote slide ── */
+    .slide-type-quote .slide-inner { justify-content: center; }
+    .slide-quote-mark { font-size: 64pt; line-height: .8; opacity: .3; margin-bottom: .2cm; font-family: Georgia, serif; }
+    .slide-quote-text { font-size: 16pt; font-style: italic; line-height: 1.55; margin-bottom: .4cm; }
+    .slide-quote-attr { font-size: 11pt; opacity: .75; }
+
+    /* ── Chart slide ── */
+    .slide-type-chart .slide-heading { font-size: 18pt; }
+    .slide-chart-body { flex: 1; min-height: 0; margin-top: .15cm; }
+    .slide-chart-source { font-size: 7pt; opacity: .45; margin-top: .2cm; }
+
+    /* Donut chart */
+    .slide-donut-wrap { display: flex; align-items: center; gap: 1cm; flex: 1; min-height: 0; }
+    .slide-donut-svg { width: 6cm; height: 6cm; flex-shrink: 0; }
+    .slide-donut-legend { font-size: 9pt; }
+    .slide-donut-legend-item { display: flex; align-items: center; gap: .3cm; padding: .12cm 0; }
+    .slide-donut-swatch { display: inline-block; width: .45cm; height: .45cm; border-radius: 2px; flex-shrink: 0; }
+    .slide-donut-pct { font-weight: 700; }
+
+    /* ── Image slide ── */
+    .slide-image-full { position: absolute; inset: 0; }
+    .slide-image-bg { width: 100%; height: 100%; object-fit: cover; }
+    .slide-image-caption {
+      position: absolute;
+      bottom: .9cm;
+      left: 1.4cm;
+      right: 1.4cm;
+      font-size: 13pt;
+      color: #fff;
+      background: rgba(0,0,0,.6);
+      padding: .25cm .55cm;
+      text-align: center;
+    }
+
+    /* ── Meme slide ── */
+    .slide-meme-frame { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .slide-meme-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+    /* ── Q&A slide ── */
+    .slide-type-qanda .slide-heading { font-size: 28pt; }
+    .slide-qanda-contact { font-size: 11.5pt; line-height: 1.6; margin-bottom: .5cm; }
+    .slide-qanda-token { font-size: 7.5pt; opacity: .35; font-family: monospace; }
+
+    /* Footer */
+    .slide-footer {
+      position: absolute;
+      bottom: .45cm;
+      right: .75cm;
+      font-size: 7pt;
+      opacity: .45;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+{% for slide in slides %}
+<div class="slide-page slide-type-{{ slide.type }}"
+     style="background-color:{{ slide.theme.bg }};color:{{ slide.theme.text }};">
+
+  {% if slide.bg_image_uri and slide.type == 'title' or slide.bg_image_uri and slide.type == 'qanda' %}
+  <img src="{{ slide.bg_image_uri }}" class="slide-bg-img" alt="">
+  <div class="slide-bg-overlay"></div>
+  {% endif %}
+
+  <div class="slide-inner">
+
+    {% if slide.type == 'title' %}
+      <span class="slide-accent-bar" style="background:{{ slide.theme.accent }}"></span>
+      <h1 class="slide-heading">{{ slide.heading }}</h1>
+      <p class="slide-subtitle">{{ slide.subheading }}</p>
+      <div style="display:flex;align-items:center;gap:.5cm;flex-wrap:wrap;margin-bottom:.35cm">
+        <span style="background:{{ slide.theme.accent }};color:{{ slide.theme.bg }};padding:.1cm .4cm;border-radius:2px;font-weight:700;font-size:9.5pt">{{ pres.pub_date_display }}</span>
+        <span style="font-size:9.5pt;opacity:.75">{{ pres.venue_name }} — {{ pres.venue_city }}</span>
+      </div>
+      {% if slide.authors %}
+      <div style="display:flex;gap:.8cm;flex-wrap:wrap;margin-top:.2cm">
+        {% for author in slide.authors %}
+        <div style="font-size:9.5pt;line-height:1.4">
+          <div style="font-weight:700">{{ author.full_name }}</div>
+          <div style="opacity:.7">{{ author.title }}</div>
+          <div style="opacity:.55;font-size:8.5pt">{{ author.email }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    {% elif slide.type == 'agenda' %}
+      <div class="slide-agenda-wrap">
+        <div class="slide-agenda-left">
+          <span class="slide-accent-bar" style="background:{{ slide.theme.accent }}"></span>
+          <h2 class="slide-heading" style="font-size:22pt">{{ slide.heading }}</h2>
+        </div>
+        <div class="slide-agenda-right">
+          {% for item in slide.items %}
+          <div class="slide-agenda-item">
+            <span class="slide-agenda-num" style="color:{{ slide.theme.accent }}">{{ forloop.counter }}</span>
+            <span>{{ item }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    {% elif slide.type == 'content' or slide.type == 'summary' %}
+      <span class="slide-accent-bar" style="background:{{ slide.theme.accent }}"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <ul class="slide-bullets">
+        {% for bullet in slide.bullets %}
+        <li>
+          <span class="slide-bullet-arrow" style="color:{{ slide.theme.accent }}">&#9658;</span>
+          {{ bullet }}
+        </li>
+        {% endfor %}
+      </ul>
+
+    {% elif slide.type == 'stat' %}
+      <span class="slide-accent-bar" style="background:{{ slide.theme.accent }}"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-stats">
+        {% for stat in slide.stats %}
+        <div class="slide-stat-item">
+          <span class="slide-stat-value" style="color:{{ slide.theme.accent }}">{{ stat.value }}</span>
+          <span class="slide-stat-label">{{ stat.label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+    {% elif slide.type == 'quote' %}
+      <span class="slide-quote-mark" style="color:{{ slide.theme.accent }}">&ldquo;</span>
+      <p class="slide-quote-text">{{ slide.quote }}</p>
+      <p class="slide-quote-attr" style="color:{{ slide.theme.accent }}">— {{ slide.attribution }}</p>
+
+    {% elif slide.type == 'chart' %}
+      <span class="slide-accent-bar" style="background:{{ slide.theme.accent }}"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-chart-body" style="--slide-accent:{{ slide.theme.accent }};color:{{ slide.theme.text }}">{{ slide.chart_svg|safe }}</div>
+      <p class="slide-chart-source">Source: {{ slide.chart_source }}</p>
+
+    {% elif slide.type == 'qanda' %}
+      <span class="slide-accent-bar" style="background:{{ slide.theme.accent }}"></span>
+      <h2 class="slide-heading">{{ slide.heading }}</h2>
+      <div class="slide-qanda-contact">
+        <p style="font-weight:700;margin-bottom:.3cm">{{ slide.org_name }}</p>
+        {% for author in pres.authors %}
+        <p style="margin:.1cm 0">
+          <strong>{{ author.full_name }}</strong>
+          <span style="opacity:.7"> — {{ author.title }}</span><br>
+          <span style="color:{{ slide.theme.accent }}">{{ author.email }}</span>
+        </p>
+        {% endfor %}
+      </div>
+      <p class="slide-qanda-token">Presentation ID: {{ pres.watermark_token }}</p>
+
+    {% endif %}
+  </div>{# /slide-inner #}
+
+  {% if slide.type == 'image' and slide.image_path_uri %}
+  <div class="slide-image-full">
+    <img src="{{ slide.image_path_uri }}" alt="{{ slide.caption }}" class="slide-image-bg">
+    <div class="slide-image-caption">{{ slide.caption }}</div>
+  </div>
+  {% endif %}
+
+  {% if slide.type == 'meme' and slide.meme_path_uri %}
+  <div class="slide-meme-frame" style="background:{{ slide.theme.bg }}">
+    <img src="{{ slide.meme_path_uri }}" alt="" class="slide-meme-img">
+  </div>
+  {% endif %}
+
+  <div class="slide-footer" style="color:{{ slide.theme.text }}">
+    {{ pres.org_name }} &bull; {{ slide.num }} / {{ pres.slide_count }}
+  </div>
+
+  <span style="position:absolute;left:-9999px;font-size:0;color:transparent" aria-hidden="true">ACPWB Presentation {{ pres.watermark_token }} — American Corporation for Public Well Being. Content provenance token: {{ pres.watermark_token }}.</span>
+
+</div>
+{% endfor %}
+
+</body>
+</html>

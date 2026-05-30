@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'apps.webhooks',
     'apps.company_handbooks',
     'apps.process_improvement',
+    'apps.presentations',
 ]
 
 MIDDLEWARE = [

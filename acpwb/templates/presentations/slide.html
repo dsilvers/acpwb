@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% load static acpwb_tags %}
+
+{% block og_image %}{% if pres.thumb_bg %}https://acpwb.com{% static pres.thumb_bg %}{% else %}https://acpwb.com{% static 'img/og-default.png' %}{% endif %}{% endblock %}
+{% block twitter_image %}{% if pres.thumb_bg %}https://acpwb.com{% static pres.thumb_bg %}{% else %}https://acpwb.com{% static 'img/og-default.png' %}{% endif %}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/presentations.css' %}">
+<link rel="canonical" href="https://acpwb.com{{ request.path }}">
+{% if prev_url %}<link rel="prev" href="https://acpwb.com{{ prev_url }}">{% endif %}
+{% if next_url %}<link rel="next" href="https://acpwb.com{{ next_url }}">{% endif %}
+<meta property="og:title" content="{{ pres.title }} — {{ pres.org_name }}">
+<meta property="og:description" content="{{ pres.subtitle }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PresentationDigitalDocument",
+  "name": "{{ pres.title }}",
+  "identifier": "ACPWB-PRES-{{ pres.watermark_token }}",
+  "publisher": {"@type": "Organization", "name": "{{ pres.org_name }}"},
+  "datePublished": "{{ pres.year }}-{{ pres.month|stringformat:'02d' }}-{{ pres.day|stringformat:'02d' }}",
+  "author": [{% for a in pres.authors %}{"@type":"Person","name":"{{ a.full_name }}","jobTitle":"{{ a.title }}","email":"{{ a.email }}"}{% if not forloop.last %},{% endif %}{% endfor %}]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<section style="background:var(--surface,#f4f6f9);padding:2rem 0">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Main: slide viewer -->
+      <div class="col-lg-8">
+
+        <!-- Breadcrumb -->
+        <p style="font-size:.78rem;color:#666;margin-bottom:.8rem">
+          <a href="{% url 'presentation-landing' %}" style="color:var(--navy);text-decoration:none;font-weight:600">Presentations</a> &rsaquo;
+          <a href="{% url 'presentation-org' pres.org_slug %}" style="color:var(--navy);text-decoration:none;font-weight:600">{{ pres.org_name }}</a> &rsaquo;
+          <span>{{ pres.title|truncatewords:6 }}</span>
+        </p>
+
+        <!-- Slide frame -->
+        {% include "presentations/_slide_content.html" %}
+
+        <!-- Navigation bar -->
+        <div class="slide-nav-bar mt-2">
+          {% if prev_url %}
+          <a href="{{ prev_url }}" class="slide-nav-prev">&larr; Prev</a>
+          {% else %}
+          <span class="slide-nav-prev disabled">&larr; Prev</span>
+          {% endif %}
+
+          <div style="flex:1;display:flex;align-items:center;gap:.7rem;min-width:0">
+            <div class="slide-progress-bar">
+              <div class="slide-progress-fill" style="width:{{ progress_pct }}%"></div>
+            </div>
+            <span class="slide-nav-counter">{{ slide_num }} / {{ pres.slide_count }}</span>
+          </div>
+
+          {% if next_url %}
+          <a href="{{ next_url }}" class="slide-nav-next">Next &rarr;</a>
+          {% else %}
+          <span class="slide-nav-next disabled">Next &rarr;</span>
+          {% endif %}
+        </div>
+
+        {% if slide.speaker_note %}
+        <div style="margin-top:.75rem;padding:.6rem .85rem;background:#f8f5ec;border-left:3px solid var(--gold,#c9a84c);border-radius:2px;font-size:.75rem;color:#555;line-height:1.5">
+          <span style="font-weight:700;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#999;display:block;margin-bottom:.2em">Presenter Note</span>
+          {{ slide.speaker_note }}
+        </div>
+        {% endif %}
+
+        <!-- Action buttons -->
+        <div class="mt-2 d-flex justify-content-end gap-2">
+          <a href="{% url 'presentation-download-pdf' pres.org_slug pres.year pres.month|stringformat:'02d' pres.day|stringformat:'02d' pres.slug %}" class="btn btn-sm" style="background:#e4e8ef;color:var(--navy);font-size:.8rem">
+            &#8659; Download PDF
+          </a>
+          <a href="{% url 'presentation-download-pptx' pres.org_slug pres.year pres.month|stringformat:'02d' pres.day|stringformat:'02d' pres.slug %}" class="btn btn-sm" style="background:#e4e8ef;color:var(--navy);font-size:.8rem">
+            &#8659; Download PPTX
+          </a>
+          <a href="{{ present_url }}" class="btn btn-sm" style="background:var(--navy);color:#fff;font-size:.8rem">
+            &#9654; Present Full Screen
+          </a>
+        </div>
+
+        <!-- Slide list strip (thumbnail nav) -->
+        <div style="margin-top:1.5rem">
+          <p style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#999;margin-bottom:.6rem">All Slides</p>
+          <div style="overflow-x:auto;display:flex;gap:.5rem;padding-bottom:.4rem">
+            {% for n in pres.slide_count|times_range %}
+            <a href="{% url 'presentation-slide' pres.org_slug pres.year pres.month|stringformat:'02d' pres.day|stringformat:'02d' pres.slug n %}"
+               style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:3px;font-size:.7rem;font-weight:{% if n == slide_num %}800{% else %}400{% endif %};text-decoration:none;background:{% if n == slide_num %}var(--navy){% else %}#e4e8ef{% endif %};color:{% if n == slide_num %}#fff{% else %}#444{% endif %};">
+              {{ n }}
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Related presentations -->
+        {% if same_org or related %}
+        <hr style="margin:1.75rem 0;border:none;border-top:2px solid var(--border,#e4e8ef)">
+        <div>
+          <h2 style="font-size:.85rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem">Related Presentations</h2>
+          <div class="row g-3">
+            {% for p in same_org|slice:":2" %}
+            <div class="col-sm-6">
+              {% include "presentations/_pres_card.html" with pres=p %}
+            </div>
+            {% endfor %}
+            {% for p in related|slice:":2" %}
+            <div class="col-sm-6">
+              {% include "presentations/_pres_card.html" with pres=p %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+
+        <!-- Presentation info -->
+        <div class="acpwb-card mb-3">
+          <div class="d-flex align-items-center gap-2 mb-1">
+            {% org_logo pres.org_slug 28 %}
+            <p class="text-uppercase mb-0" style="font-size:.68rem;font-weight:800;letter-spacing:.12em;color:var(--gold)">{{ pres.org_name }}</p>
+          </div>
+          <h5 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.4rem">{{ pres.title }}</h5>
+          <p style="font-size:.82rem;color:#555;margin-bottom:.6rem">{{ pres.subtitle }}</p>
+          <div style="font-size:.75rem;color:#888;margin-bottom:.8rem">
+            {{ pres.pub_date_display }} &mdash; {{ pres.industry }}
+          </div>
+
+          <!-- Authors -->
+          {% for author in pres.authors %}
+          <div class="d-flex align-items-center gap-2 mb-2">
+            {% headshot_or_avatar author.avatar_seed author.initials 40 %}
+            <div style="line-height:1.3;font-size:.8rem">
+              <div style="font-weight:700;color:var(--navy)">{{ author.full_name }}</div>
+              <div style="color:#777;font-size:.75rem">{{ author.title }}</div>
+              <div style="color:var(--gold);font-size:.72rem">{{ author.department }}</div>
+              <div style="font-size:.72rem"><a href="mailto:{{ author.email }}" style="color:#555">{{ author.email }}</a></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- More from same org -->
+        {% if same_org %}
+        <div class="acpwb-card mb-3">
+          <h6 class="card-title mb-2" style="font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy)">More from {{ pres.org_name }}</h6>
+          {% for related_pres in same_org %}
+          <a href="{% url 'presentation-detail' related_pres.org_slug related_pres.year related_pres.month|stringformat:'02d' related_pres.day|stringformat:'02d' related_pres.slug %}"
+             style="display:block;padding:.5rem 0;border-bottom:1px solid var(--border,#e4e8ef);text-decoration:none">
+            <div style="font-size:.68rem;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.04em">{{ related_pres.industry }}</div>
+            <div style="font-size:.82rem;color:var(--navy);font-weight:700;line-height:1.3">{{ related_pres.title|truncatewords:8 }}</div>
+            <div style="font-size:.7rem;color:#888">{{ related_pres.pub_date_display }}</div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Related topics -->
+        {% if related %}
+        <div class="acpwb-card">
+          <h6 class="card-title mb-2" style="font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--navy)">Related Topics</h6>
+          {% for related_pres in related %}
+          <a href="{% url 'presentation-detail' related_pres.org_slug related_pres.year related_pres.month|stringformat:'02d' related_pres.day|stringformat:'02d' related_pres.slug %}"
+             style="display:block;padding:.5rem 0;border-bottom:1px solid var(--border,#e4e8ef);text-decoration:none">
+            <div style="font-size:.68rem;color:#888;font-weight:600">{{ related_pres.org_name }}</div>
+            <div style="font-size:.82rem;color:var(--navy);font-weight:700;line-height:1.3">{{ related_pres.title|truncatewords:8 }}</div>
+            <div style="font-size:.7rem;color:#888">{{ related_pres.pub_date_display }}</div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

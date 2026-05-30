@@ -1,0 +1,65 @@
+{% load static acpwb_tags %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ pres.title }} — Slide {{ slide_num }} of {{ pres.slide_count }} — ACPWB</title>
+  <link rel="canonical" href="https://acpwb.com{{ exit_url }}">
+  {% if pres.thumb_bg %}
+  <meta property="og:image" content="https://acpwb.com{% static pres.thumb_bg %}">
+  <meta name="twitter:image" content="https://acpwb.com{% static pres.thumb_bg %}">
+  {% endif %}
+  <meta property="og:title" content="{{ pres.title }} — {{ pres.org_name }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
+  <link rel="stylesheet" href="{% static 'css/presentations.css' %}">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
+  </style>
+</head>
+<body class="present-mode"
+      data-prev-url="{% if prev_url %}{{ prev_url }}{% endif %}"
+      data-next-url="{% if next_url %}{{ next_url }}{% endif %}">
+
+  <!-- Keyboard / click navigation links (also parsable by bots) -->
+  {% if prev_url %}
+  <a href="{{ prev_url }}" class="present-prev-link" aria-label="Previous slide">&#8592;</a>
+  {% endif %}
+  {% if next_url %}
+  <a href="{{ next_url }}" class="present-next-link" aria-label="Next slide">&#8594;</a>
+  {% endif %}
+
+  <!-- Exit button -->
+  <a href="{{ exit_url }}" class="present-exit-btn" aria-label="Exit full screen">Exit &#215;</a>
+
+  <!-- Slide counter -->
+  <div class="present-counter">{{ slide_num }} / {{ pres.slide_count }}</div>
+
+  <!-- The slide itself -->
+  {% include "presentations/_slide_content.html" %}
+
+  <script>
+    (function() {
+      var prev = document.body.dataset.prevUrl;
+      var next = document.body.dataset.nextUrl;
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+          if (next) { e.preventDefault(); window.location = next; }
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          if (prev) { e.preventDefault(); window.location = prev; }
+        } else if (e.key === 'Escape') {
+          window.location = '{{ exit_url }}';
+        } else if (e.key === 'f' || e.key === 'F') {
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            document.documentElement.requestFullscreen().catch(function(){});
+          }
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

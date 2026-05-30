@@ -95,3 +95,19 @@ def initials(name):
     if parts:
         return parts[0][:2].upper()
     return "??"
+
+
+@register.simple_tag
+def org_logo(org_slug, size=40):
+    """Render a deterministic inline SVG logo for a fake consulting org."""
+    from apps.presentations.logo_generator import generate_org_logo
+    return mark_safe(generate_org_logo(org_slug, int(size)))
+
+
+@register.filter
+def times_range(value):
+    """Return range(1, value+1) for use in for loops: {% for n in count|times_range %}"""
+    try:
+        return range(1, int(value) + 1)
+    except (TypeError, ValueError):
+        return range(0)

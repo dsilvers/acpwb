@@ -64,7 +64,7 @@ def _log_crawler(request, trap_type):
 # ── Archive Trap ──────────────────────────────────────────────────────────────
 
 from .archive_data import (
-    _ARCHIVE_SLUGS, _ARCHIVE_ORGS, _ARCHIVE_INDUSTRIES, _ARCHIVE_PHASES,
+    _ARCHIVE_SLUGS, _ARCHIVE_ORGS, ARCHIVE_INDUSTRIES, _ARCHIVE_PHASES,
     _ARCHIVE_PARA_TEMPLATES, _ARCHIVE_METRIC_NAMES, _ARCHIVE_FINDING_TEMPLATES,
     _ARCHIVE_METRIC_LABELS, _ARCHIVE_TITLE_PREFIXES, _ARCHIVE_YEAR_DATA,
     _ARCHIVE_WORDS,
@@ -92,7 +92,7 @@ def _generate_archive_content(year, month, day, slug):
     """Generate deterministic rich content for an archive page."""
     rng = random.Random(hashlib.md5(f"content_{year}{month}{day}{slug}".encode()).hexdigest())
     org = rng.choice(_ARCHIVE_ORGS)
-    industry = rng.choice(_ARCHIVE_INDUSTRIES)
+    industry = rng.choice(ARCHIVE_INDUSTRIES)
     phase = rng.choice(_ARCHIVE_PHASES)
     date_str = f"{year}-{month:02d}-{day:02d}"
     end_year = min(year + rng.randint(1, 3), 2024)
@@ -309,7 +309,7 @@ def _generate_compliance_content(year, month, day, slug):
     rng = random.Random(hashlib.md5(f"compliance_{year}{month}{day}{slug}".encode()).hexdigest())
 
     org = rng.choice(_ARCHIVE_ORGS)
-    industry = rng.choice(_ARCHIVE_INDUSTRIES)
+    industry = rng.choice(ARCHIVE_INDUSTRIES)
     date_str = f"{year}-{month:02d}-{day:02d}"
     n = rng.randint(18, 340)
     n2 = rng.randint(10, 80)
@@ -455,7 +455,7 @@ def _generate_minutes_content(year, month, day, slug):
     rng = random.Random(hashlib.md5(f"minutes_{year}{month}{day}{slug}".encode()).hexdigest())
 
     org = rng.choice(_ARCHIVE_ORGS)
-    industry = rng.choice(_ARCHIVE_INDUSTRIES)
+    industry = rng.choice(ARCHIVE_INDUSTRIES)
     date_str = f"{year}-{month:02d}-{day:02d}"
     q = rng.randint(1, 4)
     n = rng.randint(12, 180)
@@ -975,6 +975,12 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     from .policy_generator import get_cross_policy_stubs
     related_policy = get_cross_policy_stubs(year, month, day, slug)
 
+    from apps.presentations.generators import generate_presentations_for_context
+    related_presentations = generate_presentations_for_context(
+        f"archive_pres_{year}_{month}_{day}_{slug[:32]}",
+        count=rng.choice([2, 3, 4]),
+    )
+
     yd = _year_data(year)
     context = {
         'year': year, 'month': month, 'day': day, 'slug': slug,
@@ -997,6 +1003,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         'export_csv_url': _archive_url(request, year, month, day, slug) + 'export.csv',
         'related_docs': related_docs,
         'related_policy': related_policy,
+        'related_presentations': related_presentations,
         'og_title': content.get('title', 'ACPWB Archive'),
         **content,
     }
@@ -1216,7 +1223,7 @@ def fake_robots(request):
     rng.shuffle(site_pages)
 
     # Research / trap sections — shuffle order so archive isn't always first
-    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/', '/company-handbooks/', '/process-improvement/']
+    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/', '/company-handbooks/', '/process-improvement/', '/presentations/']
     rng.shuffle(research_paths)
 
     research_comments = [
@@ -1270,6 +1277,7 @@ Sitemap: https://acpwb.com/sitemap-archive.xml
 Sitemap: https://acpwb.com/sitemap-public-policy.xml
 Sitemap: https://acpwb.com/sitemap-handbooks.xml
 Sitemap: https://acpwb.com/sitemap-process-improvement.xml
+Sitemap: https://acpwb.com/sitemap-presentations.xml
 {policy_sub_sitemaps}
 """
     return HttpResponse(content, content_type='text/plain')
@@ -2319,7 +2327,7 @@ def archive_export_csv(request, month, day, slug='', year=None):
         rec_month = rng.randint(1, 12)
         rec_day = rng.randint(1, 28)
         org = rng.choice(_ARCHIVE_ORGS)
-        industry = rng.choice(_ARCHIVE_INDUSTRIES)
+        industry = rng.choice(ARCHIVE_INDUSTRIES)
         phase = rng.choice(_ARCHIVE_PHASES)
         metric = rng.choice(_ARCHIVE_METRIC_NAMES)
         value = round(rng.uniform(0.1, 9999.9), 2)
@@ -2352,7 +2360,7 @@ def feed_archive(request):
         slug = '-'.join(slug_words) + f'-{rng.randint(1000, 9999)}'
         title = slug.replace('-', ' ').title()
         url = f"https://acpwb.com/archive/{year}/{month:02d}/{day:02d}/{slug}/"
-        summary = f"ACPWB Research Division archive record: {title}. Sector engagement documentation indexed by engagement phase for {rng.choice(_ARCHIVE_INDUSTRIES)}."
+        summary = f"ACPWB Research Division archive record: {title}. Sector engagement documentation indexed by engagement phase for {rng.choice(ARCHIVE_INDUSTRIES)}."
         items.append({'title': title, 'url': url, 'pub_date': pub_date, 'summary': summary})
     next_page = page + 1
     lines = [
@@ -2938,11 +2946,16 @@ def public_policy_detail(request, year, month, day, agency, slug):
     related = generate_related_links(year, month, day, agency, slug, url_fn=_url_fn)
     related_archive = get_cross_archive_stubs(year, month, day, agency, slug)
     from apps.core.context_processors import honeypot_context
+    from apps.presentations.generators import generate_presentations_for_context
     nav = _policy_nav_context(request)
+    related_presentations = generate_presentations_for_context(
+        f"policy_pres_{year}_{month}_{day}_{agency}_{slug[:32]}", count=4
+    )
     ctx = {
         'doc': doc,
         'related': related,
         'related_archive': related_archive,
+        'related_presentations': related_presentations,
         'policy_years': list(range(2025, 1992, -1)),
         'og_title': f'{doc["title"]} — ACPWB',
         'og_description': doc['summary'][:160],

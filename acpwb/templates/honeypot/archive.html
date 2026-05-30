@@ -308,15 +308,6 @@
           </div>
           {% endif %}
 
-          {% if related_presentations %}
-          <div class="acpwb-archive-pres-sidebar" style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">
-            <div class="era-section-head" style="margin-bottom:.8rem">Related Presentations</div>
-            {% for pres in related_presentations %}
-              {% include "presentations/_pres_card.html" with pres=pres %}
-            {% endfor %}
-          </div>
-          {% endif %}
-
           <div id="acpwb-archive-{{ record_id }}-year-browser" style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem">
             <div class="era-section-head" style="margin-bottom:.6rem">Browse by Year</div>
             <div style="display:flex;flex-wrap:wrap;gap:.3rem">
@@ -662,7 +653,7 @@
           <div class="acpwb-archive-pres-sidebar acpwb-card mb-4">
             <h6 class="card-title mb-3">Related Presentations</h6>
             {% for pres in related_presentations %}
-              {% include "presentations/_pres_card.html" with pres=pres %}
+              {% include "presentations/_pres_card.html" with pres=pres url_prefix="https://acpwb.com" %}
             {% endfor %}
           </div>
           {% endif %}

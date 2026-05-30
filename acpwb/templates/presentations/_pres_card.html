@@ -1,6 +1,6 @@
 {% load static acpwb_tags %}
 <div class="pres-card">
-  <a href="{% url 'presentation-detail' pres.org_slug pres.year pres.month|stringformat:'02d' pres.day|stringformat:'02d' pres.slug %}" style="text-decoration:none">
+  <a href="{{ url_prefix }}{{ pres.pres_url }}" style="text-decoration:none">
     <div class="pres-card-thumb" style="{% if pres.thumb_bg %}background-image:url('{% static pres.thumb_bg %}');background-size:cover;background-position:center;{% else %}background-color:{{ pres.theme.bg }};{% endif %}">
       <div style="position:absolute;top:0.6em;right:0.7em;z-index:2;background:{{ pres.theme.accent }};color:{{ pres.theme.bg }};font-size:.62rem;padding:.2em .5em;border-radius:2px;font-weight:800;font-family:system-ui,sans-serif">
         {{ pres.slide_count }} slides
@@ -10,7 +10,7 @@
   <div class="pres-card-body">
     <div class="pres-card-org" style="display:flex;align-items:center;gap:.4em">
       {% org_logo pres.org_slug 22 %}{{ pres.org_name }}</div>
-    <a href="{% url 'presentation-detail' pres.org_slug pres.year pres.month|stringformat:'02d' pres.day|stringformat:'02d' pres.slug %}" class="pres-card-title" style="text-decoration:none">
+    <a href="{{ url_prefix }}{{ pres.pres_url }}" class="pres-card-title" style="text-decoration:none">
       {{ pres.title|truncatewords:12 }}
     </a>
     <div class="pres-card-meta">{{ pres.pub_date_display }} &mdash; {{ pres.industry }}</div>

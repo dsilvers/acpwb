@@ -16,7 +16,8 @@ BOT_UA_PATTERNS = re.compile(
 # these or every request creates two CrawlerVisit records.
 VIEW_LOGGED_PATHS = re.compile(
     r'^/(archive|wiki|internal|employees/export|admin-panel|api/v1|'
-    r'reports|sitemap|robots\.txt|\.well-known|datasets|feeds|process-improvement|presentations)(/|$)'
+    r'reports|sitemap|robots\.txt|\.well-known|datasets|feeds|process-improvement|presentations|'
+    r'public-policy|company-handbooks)(/|$)'
 )
 
 # Subdomain views log their own CrawlerVisits — skip middleware logging

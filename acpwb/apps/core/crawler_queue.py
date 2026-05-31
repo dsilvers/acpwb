@@ -3,11 +3,11 @@ Redis-backed queues for deferred DB writes.
 
 CrawlerVisit:
   Request path: push_crawler_visit() → RPUSH to acpwb:crawler_queue
-  Consumer:     pop_crawler_visits() → pipeline LPOP → bulk_create in DB
+  Consumer:     pop_crawler_visits() → LPOP key count → bulk_create in DB
 
 ArchiveVisit:
   Request path: push_archive_visit() → RPUSH to acpwb:archive_queue
-  Consumer:     pop_archive_visits() → pipeline LPOP → bulk_create in DB
+  Consumer:     pop_archive_visits() → LPOP key count → bulk_create in DB
 
 Falls back gracefully if Redis is unavailable (caller handles the fallback).
 """
@@ -83,11 +83,10 @@ def pop_crawler_visits(count: int = 500) -> list:
     if r is None:
         return []
     try:
-        pipe = r.pipeline(transaction=False)
-        for _ in range(count):
-            pipe.lpop(_QUEUE_KEY)
-        results = pipe.execute()
-        return [json.loads(raw) for raw in results if raw is not None]
+        results = r.lpop(_QUEUE_KEY, count)
+        if not results:
+            return []
+        return [json.loads(raw) for raw in results]
     except Exception:
         _mark_failure()
         return []
@@ -132,11 +131,10 @@ def pop_archive_visits(count: int = 500) -> list:
     if r is None:
         return []
     try:
-        pipe = r.pipeline(transaction=False)
-        for _ in range(count):
-            pipe.lpop(_ARCHIVE_QUEUE_KEY)
-        results = pipe.execute()
-        return [json.loads(raw) for raw in results if raw is not None]
+        results = r.lpop(_ARCHIVE_QUEUE_KEY, count)
+        if not results:
+            return []
+        return [json.loads(raw) for raw in results]
     except Exception:
         _mark_failure()
         return []

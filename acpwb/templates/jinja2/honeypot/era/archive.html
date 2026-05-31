@@ -321,9 +321,9 @@
             <div class="era-section-head" style="margin-bottom:.8rem">Related Presentations</div>
             {% for pres in related_presentations %}
             <a href="https://acpwb.com{{ pres.pres_url }}" style="display:block;margin-bottom:.75rem;text-decoration:none;color:inherit;border:1px solid rgba(128,128,128,.2);overflow:hidden">
-              <div style="background:{{ pres.theme.bg }};aspect-ratio:16/9;position:relative;display:flex;align-items:flex-end;padding:.5em .6em">
+              <div style="{% if pres.thumb_bg %}background-image:url('{{ static(pres.thumb_bg) }}');background-size:cover;background-position:center;{% else %}background:{{ pres.theme.bg }};{% endif %}aspect-ratio:16/9;position:relative;display:flex;align-items:flex-end;padding:.5em .6em">
                 <div style="position:absolute;top:.4em;right:.5em;background:{{ pres.theme.accent }};color:{{ pres.theme.bg }};font-size:.55rem;padding:.15em .4em;font-weight:800">{{ pres.slide_count }} slides</div>
-                <div style="font-size:.62rem;font-weight:700;color:{{ pres.theme.text }};line-height:1.2">{{ pres.title|truncate(55) }}</div>
+                <div style="font-size:.62rem;font-weight:700;color:{{ pres.theme.text }};line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,.7)">{{ pres.title|truncate(55) }}</div>
               </div>
               <div style="padding:.45em .65em;background:rgba(128,128,128,.06)">
                 <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:{{ year_data.accent }};margin-bottom:.1em">{{ pres.org_name }}</div>

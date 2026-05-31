@@ -11,6 +11,7 @@ Run via cron every minute:
         >> /var/log/acpwb-archive-drain.log 2>&1
 """
 import fcntl
+import time
 from django.utils.dateparse import parse_datetime
 
 from django.core.management.base import BaseCommand
@@ -33,6 +34,10 @@ class Command(BaseCommand):
             '--max-batches', type=int, default=200,
             help='Maximum number of batches per run, 0 = unlimited (default: 200)',
         )
+        parser.add_argument(
+            '--max-seconds', type=int, default=50,
+            help='Stop fetching new batches after this many seconds (default: 50)',
+        )
 
     def handle(self, *args, **options):
         with open(_LOCK_FILE, 'w') as lock_fh:
@@ -47,10 +52,14 @@ class Command(BaseCommand):
     def _drain(self, options):
         batch_size = options['batch']
         max_batches = options['max_batches']
+        max_seconds = options['max_seconds']
         total_inserted = 0
         batches_run = 0
+        started = time.monotonic()
 
         while True:
+            if max_seconds and time.monotonic() - started >= max_seconds:
+                break
             items = pop_archive_visits(batch_size)
             if not items:
                 break

@@ -9,6 +9,40 @@ from django.http import Http404, HttpResponse
 from .image_selector import _STATIC_ROOT
 
 
+def _get_ip(request):
+    x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded:
+        return x_forwarded.split(',')[0].strip()
+    return request.META.get('REMOTE_ADDR', '0.0.0.0')
+
+
+def _log_crawler(request):
+    try:
+        from apps.core.crawler_queue import push_crawler_visit
+        from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
+        from apps.honeypot.models import CrawlerVisit
+        from django.utils import timezone
+        ua = request.META.get('HTTP_USER_AGENT', '')
+        ip = _get_ip(request)
+        bot_type = classify_ua_or_ip(ua, ip)
+        data = {
+            'timestamp': timezone.now().isoformat(),
+            'ip_address': ip,
+            'user_agent': ua[:512],
+            'host': request.get_host()[:253],
+            'path': request.path[:512],
+            'referrer': request.META.get('HTTP_REFERER', '')[:256],
+            'trap_type': 'presentation',
+            'query_string': request.META.get('QUERY_STRING', '')[:256],
+            'bot_type': bot_type,
+            'bot_group': bot_type_to_group(bot_type),
+        }
+        if not push_crawler_visit(data):
+            CrawlerVisit.objects.create(**data)
+    except Exception:
+        pass
+
+
 def _img_data_uri(static_relative_path):
     """Return a base64 data URI for an image in the static directory, or None."""
     if not static_relative_path:
@@ -48,6 +82,7 @@ def _validate_presentation(org_slug, year, month, day, slug):
 
 
 def presentation_landing(request):
+    _log_crawler(request)
     page = max(1, int(request.GET.get('page', 1) or 1))
     recent = generate_presentations_for_context(f'presrecent_main_p{page}', count=8)
     org_sections = generate_landing_orgs(page)
@@ -68,6 +103,7 @@ def presentation_landing(request):
 def org_page(request, org_slug):
     if org_slug not in ORG_SLUG_MAP:
         raise Http404
+    _log_crawler(request)
     org_name = ORG_SLUG_MAP[org_slug]
     page = max(1, int(request.GET.get('page', 1) or 1))
     presentations = generate_presentations_for_context(
@@ -89,6 +125,7 @@ def org_page(request, org_slug):
 
 def presentation_detail(request, org_slug, year, month, day, slug):
     year, month, day = _validate_presentation(org_slug, year, month, day, slug)
+    _log_crawler(request)
     slide_num = 1
     pres_meta = generate_presentation_meta(org_slug, year, month, day, slug)
     slide = generate_slide(pres_meta, slide_num)
@@ -120,6 +157,7 @@ def presentation_slide(request, org_slug, year, month, day, slug, slide_num):
     except (TypeError, ValueError):
         raise Http404
 
+    _log_crawler(request)
     pres_meta = generate_presentation_meta(org_slug, year, month, day, slug)
 
     if slide_num < 1 or slide_num > pres_meta['slide_count']:
@@ -155,6 +193,7 @@ def presentation_slide(request, org_slug, year, month, day, slug, slide_num):
 
 def presentation_download_pdf(request, org_slug, year, month, day, slug):
     year, month, day = _validate_presentation(org_slug, year, month, day, slug)
+    _log_crawler(request)
     pres_meta = generate_presentation_meta(org_slug, year, month, day, slug)
     slides = [generate_slide(pres_meta, n) for n in range(1, pres_meta['slide_count'] + 1)]
 
@@ -178,6 +217,7 @@ def presentation_download_pdf(request, org_slug, year, month, day, slug):
 
 def presentation_download_pptx(request, org_slug, year, month, day, slug):
     year, month, day = _validate_presentation(org_slug, year, month, day, slug)
+    _log_crawler(request)
     pres_meta = generate_presentation_meta(org_slug, year, month, day, slug)
     slides = [generate_slide(pres_meta, n) for n in range(1, pres_meta['slide_count'] + 1)]
     from .pptx_export import generate_pptx_bytes
@@ -195,6 +235,7 @@ def presentation_present(request, org_slug, year, month, day, slug, slide_num):
     except (TypeError, ValueError):
         raise Http404
 
+    _log_crawler(request)
     pres_meta = generate_presentation_meta(org_slug, year, month, day, slug)
 
     if slide_num < 1 or slide_num > pres_meta['slide_count']:

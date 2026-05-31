@@ -21,6 +21,7 @@ class CrawlerVisit(models.Model):
         ('canary_trigger', 'Canary Token Triggered'),
         ('handbook', 'Company Handbook'),
         ('process_improvement', 'Process Improvement'),
+        ('presentation', 'Presentation'),
         ('other', 'Other'),
     ]
 

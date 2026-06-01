@@ -180,6 +180,7 @@ def crawlers(request):
         'top_hosts':            _top_field(s.get('crawlers.by_host', {}), 'host', 20),
         'daily':                _daily_bars(s.get('crawlers.daily', {}), 60),
         'recent':               list(CrawlerVisit.objects.order_by('-timestamp')[:50]),
+        'daily_table':          list(reversed(_daily_bars(s.get('crawlers.daily', {}), 60)['bars'])),
         'top_probe_paths':      _top_field(s.get('crawlers.probe_by_path', {}), 'path', 20),
         'webshell_commands':    _top_field(s.get('crawlers.webshell_cmds', {}), 'query_string', 10),
         'canary_trigger_count': s.get('canary.triggered_count', 0),

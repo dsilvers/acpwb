@@ -53,7 +53,7 @@
 </div>
 
 <div class="row g-3 mb-4">
-  <div class="col-12">
+  <div class="col-lg-8">
     <div class="section-card">
       <div class="section-card-header"><h6>Daily Volume — Last 60 Days</h6><span style="font-size:.72rem;color:var(--muted)">Total: {{ total }} hits in period</span></div>
       <div class="section-card-body">
@@ -66,6 +66,25 @@
         <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem">
           <span>{{ daily.start }}</span><span>{{ daily.end }}</span>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="section-card h-100">
+      <div class="section-card-header"><h6>Hits Per Day</h6><span style="font-size:.72rem;color:var(--muted)">Last 60 days</span></div>
+      <div style="max-height:160px;overflow-y:auto">
+        <table class="dash-table w-100">
+          <thead><tr><th>Date</th><th>Hits</th><th style="width:80px">Vol</th></tr></thead>
+          <tbody>
+            {% for d in daily_table %}{% if d.count %}
+            <tr>
+              <td style="font-family:monospace;font-size:.75rem">{{ d.date }}</td>
+              <td>{{ d.count }}</td>
+              <td><div class="bar-track"><div class="bar-fill" style="width:{{ d.pct }}%"></div></div></td>
+            </tr>
+            {% endif %}{% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

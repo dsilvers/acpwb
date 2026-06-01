@@ -272,6 +272,50 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
               columnspacing=1.0)
 
 
+def _render_stacked_bar(ax, dates, series, title, x_locator, x_fmt):
+    """
+    Draw a stacked bar chart for daily data.
+
+    Each bar represents one day; bars are stacked by bot type in the same colour
+    scheme as _render_stacked().  dates must be a list of datetime objects;
+    series must be ordered (significant bots desc, Others last) as returned by
+    _apply_threshold().
+    """
+    _apply_style(ax, title)
+    if not dates or not series:
+        ax.text(0.5, 0.5, 'No data', ha='center', va='center',
+                transform=ax.transAxes, color='#95A5A6', fontsize=9)
+        return
+
+    groups = list(series.keys())
+    colors = [
+        _OTHERS_COLOR if g == 'Others'
+        else _BOT_COLOR_PALETTE[int(hashlib.md5(g.encode()).hexdigest(), 16) % len(_BOT_COLOR_PALETTE)]
+        for g in groups
+    ]
+
+    x = mdates.date2num(dates)
+    width = 0.8  # fraction of 1-day spacing; leaves a gap between bars
+    bottom = [0.0] * len(dates)
+
+    for g, color in zip(groups, colors):
+        vals = series[g]
+        ax.bar(x, vals, bottom=bottom, width=width, label=g, color=color, alpha=0.88, zorder=2)
+        bottom = [b + v for b, v in zip(bottom, vals)]
+
+    ax.set_ylim(bottom=0)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f'{int(v):,}'))
+    ax.xaxis_date()
+    ax.xaxis.set_major_locator(x_locator)
+    if isinstance(x_fmt, str):
+        ax.xaxis.set_major_formatter(mdates.DateFormatter(x_fmt))
+    else:
+        ax.xaxis.set_major_formatter(x_fmt)
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.18), fontsize=8,
+              framealpha=0.85, ncol=4, handlelength=1.2, handletextpad=0.5,
+              columnspacing=1.0)
+
+
 # ── File I/O ───────────────────────────────────────────────────────────────────
 
 def _save_atomic(fig, path):
@@ -390,8 +434,8 @@ def generate_traffic_graphs(output_dir, stdout=None):
         x_locator = mdates.AutoDateLocator()
         fig, ax = plt.subplots(figsize=(11, 2.8))
         fig.patch.set_facecolor('white')
-        _render_stacked(ax, dates, series, 'All Time (per day)',
-                        x_locator, mdates.AutoDateFormatter(x_locator))
+        _render_stacked_bar(ax, dates, series, 'All Time (per day)',
+                            x_locator, mdates.AutoDateFormatter(x_locator))
         fig.tight_layout(pad=0.6)
         _save_atomic(fig, output_dir / 'traffic_all.png')
         plt.close(fig)

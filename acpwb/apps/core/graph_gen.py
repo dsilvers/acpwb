@@ -20,7 +20,6 @@ Bots with < 1% share of total traffic are grouped into "Others".
 
 Requires matplotlib (pip install matplotlib).
 """
-import hashlib
 import os
 import tempfile
 import time as _time
@@ -38,32 +37,51 @@ except ImportError:
     _MATPLOTLIB_AVAILABLE = False
 
 # ── Colour palette ─────────────────────────────────────────────────────────────
-# Assigned in order of bot volume (highest traffic = first colour). "Others" is
-# always neutral gray regardless of its rank.
+# Assigned sequentially by bot volume (index 0 = highest-traffic bot). "Others"
+# is always neutral gray. Palette alternates warm/cool across the hue wheel so
+# adjacent ranks are always visually distinct.
 
 _BOT_COLOR_PALETTE = [
-    '#E74C3C',  # red          (~0°)
-    '#FF5722',  # deep orange  (~14°)
-    '#E67E22',  # orange       (~28°)
-    '#F1C40F',  # yellow       (~48°)
-    '#8BC34A',  # lime green   (~80°)
-    '#27AE60',  # green        (~134°)
-    '#1ABC9C',  # seafoam      (~164°)
-    '#00BCD4',  # cyan         (~187°)
-    '#2980B9',  # blue         (~210°)
-    '#3F51B5',  # indigo       (~231°)
-    '#673AB7',  # deep purple  (~262°)
-    '#8E44AD',  # purple       (~283°)
-    '#E91E63',  # hot pink     (~338°)
-    '#F06292',  # light pink   (~348°)
-    '#795548',  # brown
-    '#607D8B',  # blue-grey
-    '#FFA726',  # amber        (~36°)
-    '#26C6DA',  # light cyan   (~187° lighter)
-    '#7E57C2',  # medium purple (~252°)
-    '#EF5350',  # light red    (~0° lighter)
+    '#4878CF',  # steel blue
+    '#E84D4D',  # coral red
+    '#6ACC65',  # sage green
+    '#F39B2D',  # amber
+    '#8172B3',  # medium purple
+    '#4CB4B7',  # teal
+    '#DD8452',  # terracotta
+    '#55A868',  # forest green
+    '#DA8BC3',  # mauve pink
+    '#CCB974',  # gold tan
+    '#C44E52',  # brick red
+    '#64B5CD',  # sky blue
+    '#937860',  # warm brown
+    '#7B4D9E',  # deep purple
+    '#2A9D8F',  # dark teal
+    '#F4A261',  # peach orange
+    '#457B9D',  # dark slate blue
+    '#E76F51',  # burnt orange
+    '#A8C256',  # olive green
+    '#B07AA1',  # dusty purple
 ]
 _OTHERS_COLOR = '#95A5A6'  # neutral gray
+
+
+def _assign_colors(groups):
+    """
+    Return a color list aligned to groups, assigned sequentially by rank.
+
+    Colors are drawn in palette order so adjacent legend entries are visually
+    distinct. 'Others' always gets the fixed neutral gray.
+    """
+    palette_idx = 0
+    colors = []
+    for g in groups:
+        if g == 'Others':
+            colors.append(_OTHERS_COLOR)
+        else:
+            colors.append(_BOT_COLOR_PALETTE[palette_idx % len(_BOT_COLOR_PALETTE)])
+            palette_idx += 1
+    return colors
 
 # ── Bucket helpers ─────────────────────────────────────────────────────────────
 
@@ -250,11 +268,7 @@ def _render_stacked(ax, xs, series, title, x_locator, x_fmt):
 
     groups = list(series.keys())
     ys = [series[g] for g in groups]
-    colors = [
-        _OTHERS_COLOR if g == 'Others'
-        else _BOT_COLOR_PALETTE[int(hashlib.md5(g.encode()).hexdigest(), 16) % len(_BOT_COLOR_PALETTE)]
-        for g in groups
-    ]
+    colors = _assign_colors(groups)
 
     ax.stackplot(xs, ys, labels=groups, colors=colors, alpha=0.88, zorder=2)
     # Set ylim AFTER stackplot so autoscaling has already computed the data range.
@@ -288,11 +302,7 @@ def _render_stacked_bar(ax, dates, series, title, x_locator, x_fmt):
         return
 
     groups = list(series.keys())
-    colors = [
-        _OTHERS_COLOR if g == 'Others'
-        else _BOT_COLOR_PALETTE[int(hashlib.md5(g.encode()).hexdigest(), 16) % len(_BOT_COLOR_PALETTE)]
-        for g in groups
-    ]
+    colors = _assign_colors(groups)
 
     x = mdates.date2num(dates)
     width = 0.8  # fraction of 1-day spacing; leaves a gap between bars

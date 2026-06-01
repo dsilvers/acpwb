@@ -168,42 +168,32 @@ class Command(BaseCommand):
         cap_note = ' (capped)' if capped else ''
         self.stdout.write(f'  crawlers: updated to hwm_ts={new_max_ts}{cap_note}')
 
-        # Daily chart: only recompute affected date range instead of full 60-day scan.
-        # since.date() is the earliest date that may have changed; we recompute from
-        # there to now and merge into the stored dict, keeping other dates intact.
-        from datetime import datetime as _dt, timezone as dt_tz
+        # Daily chart: full 60-day recompute — always authoritative, never overwrites
+        # a correct stored value with a partial/stale query result.
         now = timezone.now()
-        cutoff_60 = now - timedelta(days=60)
-        min_affected_date = max(since.date(), cutoff_60.date())
-        min_affected_dt = _dt.combine(min_affected_date, _dt.min.time()).replace(tzinfo=dt_tz.utc)
-        cutoff_str = cutoff_60.date().isoformat()
-
-        stat = self._upsert('crawlers.daily', {})
         rows = (CrawlerVisit.objects
-                .filter(timestamp__gte=min_affected_dt, timestamp__lte=now)
+                .filter(timestamp__gte=now - timedelta(days=60))
                 .annotate(d=TruncDate('timestamp'))
                 .values('d').annotate(c=Count('id')))
-        for r in rows:
-            stat.value[str(r['d'])] = r['c']
-        stat.value = {d: c for d, c in stat.value.items() if d >= cutoff_str}
+        stat = self._upsert('crawlers.daily', {})
+        stat.value = {str(r['d']): r['c'] for r in rows}
         stat.save()
 
-        # Per-bot-type daily breakdown for all-time traffic graph — same incremental logic
+        # Per-bot-type daily breakdown for all-time traffic graph
         bot_rows = (CrawlerVisit.objects
-                    .filter(timestamp__gte=min_affected_dt, timestamp__lte=now)
+                    .filter(timestamp__gte=now - timedelta(days=60))
                     .annotate(d=TruncDate('timestamp'))
                     .values('d', 'bot_type')
                     .annotate(c=Count('id')))
-        stat = self._upsert('crawlers.daily_by_bot_type', {})
-        fresh_dates: dict = {}
+        daily_by_bot = {}
         for r in bot_rows:
             d = str(r['d'])
             bt = r['bot_type'] or '(empty user agent)'
-            if d not in fresh_dates:
-                fresh_dates[d] = {}
-            fresh_dates[d][bt] = r['c']
-        stat.value.update(fresh_dates)
-        stat.value = {d: v for d, v in stat.value.items() if d >= cutoff_str}
+            if d not in daily_by_bot:
+                daily_by_bot[d] = {}
+            daily_by_bot[d][bt] = r['c']
+        stat = self._upsert('crawlers.daily_by_bot_type', {})
+        stat.value = daily_by_bot
         stat.save()
 
     # ── ArchiveVisit ──────────────────────────────────────────────────────────

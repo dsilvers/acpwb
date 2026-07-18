@@ -66,6 +66,7 @@ class Command(BaseCommand):
 
             if options['full_recompute']:
                 self.stdout.write('Mode: full recompute')
+                self._tune_session()
                 self._full_recompute_crawlers()
                 self._full_recompute_archive()
                 self._full_recompute_emails()
@@ -120,6 +121,14 @@ class Command(BaseCommand):
         return {str(r[field] or ''): r['c'] for r in rows}
 
     # ── Full recompute ────────────────────────────────────────────────────────
+
+    def _tune_session(self):
+        from django.db import connection
+        with connection.cursor() as c:
+            c.execute("SET work_mem = '4GB'")
+            c.execute("SET max_parallel_workers_per_gather = 8")
+            c.execute("SET enable_partitionwise_aggregate = on")
+        self.stdout.write('  session tuned (work_mem=4GB, parallel_workers=8, partitionwise_aggregate=on)')
 
     def _step(self, msg):
         self.stdout.write(f'    {msg}', ending='')

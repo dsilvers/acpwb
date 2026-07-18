@@ -15,9 +15,13 @@ Usage:
     python manage.py backfill_bot_types_sql --dry-run
     python manage.py backfill_bot_types_sql --print-sql
     python manage.py backfill_bot_types_sql --start-chunk 15
+    python manage.py backfill_bot_types_sql --parallel 4
 """
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 from django.core.management.base import BaseCommand
-from django.db import connection
+from django.db import connection, connections
 
 from apps.core.bot_classify import BOT_PATTERNS, _IP_BOT_RANGE_DEFS, bot_type_to_group
 
@@ -29,6 +33,7 @@ class Command(BaseCommand):
         parser.add_argument('--dry-run',     action='store_true', help='Show chunk list and row counts without updating')
         parser.add_argument('--print-sql',   action='store_true', help='Print the generated UPDATE SQL and exit')
         parser.add_argument('--start-chunk', type=int, default=1, metavar='N', help='Skip the first N-1 chunks (1-based; use to resume a stopped run)')
+        parser.add_argument('--parallel',    type=int, default=1, metavar='N', help='Process N chunks concurrently (default: 1)')
 
     def handle(self, *args, **options):
         bot_type_sql  = self._build_case('bot_type')
@@ -57,23 +62,17 @@ class Command(BaseCommand):
             return
 
         start_chunk = options['start_chunk']
-        self.stdout.write(f"Found {len(chunks)} TimescaleDB chunks to process.\n")
+        parallel = options['parallel']
+        self.stdout.write(f"Found {len(chunks)} TimescaleDB chunks to process (parallel={parallel}).\n")
         if start_chunk > 1:
             self.stdout.write(f"Skipping chunks 1–{start_chunk - 1} (--start-chunk {start_chunk}).\n")
 
-        # Lift the per-transaction decompression limit for this session so large
-        # compressed chunks don't hit the 100k-tuple default cap.
-        with connection.cursor() as cursor:
-            cursor.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
+        self._tune_session(connection)
 
-        total_updated = 0
-        for i, (start, end) in enumerate(chunks, 1):
-            if i < start_chunk:
-                continue
+        work = [(i, start, end) for i, (start, end) in enumerate(chunks, 1) if i >= start_chunk]
 
-            label = f"{start} → {end}"
-
-            if options['dry_run']:
+        if options['dry_run']:
+            for i, start, end in work:
                 with connection.cursor() as cursor:
                     cursor.execute(
                         f"SELECT COUNT(*) FROM honeypot_crawlervisit "
@@ -81,18 +80,48 @@ class Command(BaseCommand):
                         [start, end],
                     )
                     count = cursor.fetchone()[0]
-                self.stdout.write(f"  [{i:>3}/{len(chunks)}] {label}  — {count:,} rows would update")
-                continue
+                self.stdout.write(f"  [{i:>3}/{len(chunks)}] {start} → {end}  — {count:,} rows would update")
+            return
 
-            with connection.cursor() as cursor:
-                cursor.execute(update_sql, [start, end])
-                updated = cursor.rowcount
+        total_updated = 0
 
-            total_updated += updated
-            self.stdout.write(f"  [{i:>3}/{len(chunks)}] {label}  — {updated:,} rows updated")
+        if parallel <= 1:
+            for i, start, end in work:
+                t0 = time.monotonic()
+                with connection.cursor() as cursor:
+                    cursor.execute(update_sql, [start, end])
+                    updated = cursor.rowcount
+                elapsed = time.monotonic() - t0
+                total_updated += updated
+                self.stdout.write(f"  [{i:>3}/{len(chunks)}] {start} → {end}  — {updated:,} rows updated ({elapsed:.1f}s)")
+        else:
+            results = {}
 
-        if not options['dry_run']:
-            self.stdout.write(self.style.SUCCESS(f"\nDone — {total_updated:,} rows updated total."))
+            def process_chunk(idx, range_start, range_end):
+                conn = connections['default']
+                self._tune_session(conn)
+                t0 = time.monotonic()
+                with conn.cursor() as cursor:
+                    cursor.execute(update_sql, [range_start, range_end])
+                    updated = cursor.rowcount
+                return idx, range_start, range_end, updated, time.monotonic() - t0
+
+            with ThreadPoolExecutor(max_workers=parallel) as executor:
+                futures = {executor.submit(process_chunk, i, s, e): i for i, s, e in work}
+                for future in as_completed(futures):
+                    idx, s, e, updated, elapsed = future.result()
+                    results[idx] = (s, e, updated, elapsed)
+                    total_updated += updated
+                    self.stdout.write(f"  [{idx:>3}/{len(chunks)}] {s} → {e}  — {updated:,} rows updated ({elapsed:.1f}s)")
+
+        self.stdout.write(self.style.SUCCESS(f"\nDone — {total_updated:,} rows updated total."))
+
+    def _tune_session(self, conn):
+        with conn.cursor() as cursor:
+            cursor.execute("SET work_mem = '4GB'")
+            cursor.execute("SET max_parallel_workers_per_gather = 8")
+            cursor.execute("SET enable_partitionwise_aggregate = on")
+            cursor.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
 
     def _build_case(self, target):
         """Build a SQL CASE WHEN expression for bot_type or bot_group."""

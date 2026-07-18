@@ -85,7 +85,7 @@ class Command(BaseCommand):
         for pattern, name in BOT_PATTERNS:
             value   = name if target == 'bot_type' else bot_type_to_group(name)
             escaped = pattern.replace("'", "''")
-            lines.append(f"    WHEN user_agent ILIKE '%{escaped}%' THEN '{value}'")
+            lines.append(f"    WHEN user_agent ILIKE '%%{escaped}%%' THEN '{value}'")
 
         # IP range fallback — only reached when no UA pattern matched
         for cidr, name in _IP_BOT_RANGE_DEFS:

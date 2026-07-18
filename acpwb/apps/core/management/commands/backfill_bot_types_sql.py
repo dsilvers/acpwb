@@ -90,11 +90,7 @@ class Command(BaseCommand):
         # IP range fallback — only reached when no UA pattern matched
         for cidr, name in _IP_BOT_RANGE_DEFS:
             value = name if target == 'bot_type' else bot_type_to_group(name)
-            # Guard against non-IPv4 values before casting
-            lines.append(
-                f"    WHEN ip_address ~ '^[0-9]{{1,3}}(\\.[0-9]{{1,3}}){{3}}$'"
-                f" AND ip_address::inet << '{cidr}'::inet THEN '{value}'"
-            )
+            lines.append(f"    WHEN ip_address << '{cidr}'::inet THEN '{value}'")
 
         lines.append("    ELSE 'Other / Browser'")
         lines.append("END")

@@ -45,6 +45,11 @@ class Command(BaseCommand):
             '--reset-bot-types', action='store_true',
             help='Full recompute of bot_type/bot_group from all rows (use after backfill_bot_types)',
         )
+        parser.add_argument(
+            '--full-recompute', action='store_true',
+            help='Recompute all stats from scratch via aggregate queries, then advance HWMs. '
+                 'Skips Python-classified bot breakdowns (archive/people/projects.by_bot_type).',
+        )
 
     def handle(self, *args, **options):
         self.reset_bot_types = options['reset_bot_types']
@@ -59,13 +64,24 @@ class Command(BaseCommand):
             now_str = timezone.now().strftime('%Y-%m-%d %H:%M:%S %Z')
             self.stdout.write(f'precalc_dashboard starting at {now_str}')
 
-            self._update_crawlers()
-            self._update_archive()
-            self._update_emails()
-            self._update_people()
-            self._update_projects()
-            self._update_login_attempts()
-            self._update_opt_outs()
+            if options['full_recompute']:
+                self.stdout.write('Mode: full recompute')
+                self._full_recompute_crawlers()
+                self._full_recompute_archive()
+                self._full_recompute_emails()
+                self._full_recompute_people()
+                self._full_recompute_projects()
+                self._full_recompute_login_attempts()
+                self._full_recompute_opt_outs()
+            else:
+                self._update_crawlers()
+                self._update_archive()
+                self._update_emails()
+                self._update_people()
+                self._update_projects()
+                self._update_login_attempts()
+                self._update_opt_outs()
+
             self._update_canary()
             self._update_graphs()
 
@@ -94,6 +110,260 @@ class Command(BaseCommand):
     def _cap_new_max(self, hwm_value, actual_max):
         """Cap new_max to avoid processing too many rows in one run."""
         return min(actual_max, hwm_value + _MAX_ROWS_PER_RUN)
+
+    def _set_stat(self, key, value):
+        DashboardStat.objects.update_or_create(key=key, defaults={'value': value})
+
+    def _agg_dict(self, qs, field):
+        """GROUP BY field → {str(value): count} dict, ordered by count desc, pruned."""
+        rows = qs.values(field).annotate(c=Count('id')).order_by('-c')[:_MAX_DICT_ENTRIES]
+        return {str(r[field] or ''): r['c'] for r in rows}
+
+    # ── Full recompute ────────────────────────────────────────────────────────
+
+    def _step(self, msg):
+        self.stdout.write(f'    {msg}', ending='')
+        self.stdout.flush()
+
+    def _done(self, msg=''):
+        self.stdout.write(f' done{(" — " + msg) if msg else ""}')
+
+    def _full_recompute_crawlers(self):
+        from datetime import timedelta
+        now = timezone.now()
+        self.stdout.write('  crawlers:')
+
+        self._step('total...')
+        total = CrawlerVisit.objects.count()
+        self._set_stat('crawlers.total', total)
+        self._done(f'{total:,}')
+
+        for label, key, qs, field in [
+            ('by_trap_type', 'crawlers.by_trap_type', CrawlerVisit.objects,                          'trap_type'),
+            ('by_bot_type',  'crawlers.by_bot_type',  CrawlerVisit.objects,                          'bot_type'),
+            ('by_bot_group', 'crawlers.by_bot_group', CrawlerVisit.objects,                          'bot_group'),
+            ('by_ip',        'crawlers.by_ip',         CrawlerVisit.objects,                         'ip_address'),
+            ('by_path',      'crawlers.by_path',       CrawlerVisit.objects,                         'path'),
+            ('by_host',      'crawlers.by_host',       CrawlerVisit.objects.exclude(host=''),        'host'),
+        ]:
+            self._step(f'{label}...')
+            self._set_stat(key, self._agg_dict(qs, field))
+            self._done()
+
+        probe_types = ['env_probe', 'wp_probe', 'webshell_probe', 'scanner_probe']
+        self._step('probe_by_path...')
+        self._set_stat('crawlers.probe_by_path',
+            self._agg_dict(CrawlerVisit.objects.filter(trap_type__in=probe_types), 'path'))
+        self._done()
+
+        self._step('webshell_cmds...')
+        self._set_stat('crawlers.webshell_cmds',
+            self._agg_dict(CrawlerVisit.objects.filter(trap_type='webshell_probe').exclude(query_string=''), 'query_string'))
+        self._done()
+
+        self._step('daily (60d)...')
+        rows = (CrawlerVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=60))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        self._set_stat('crawlers.daily', {str(r['d']): r['c'] for r in rows})
+        self._done()
+
+        self._step('daily_by_bot_type (60d)...')
+        bot_rows = (CrawlerVisit.objects
+                    .filter(timestamp__gte=now - timedelta(days=60))
+                    .annotate(d=TruncDate('timestamp'))
+                    .values('d', 'bot_type').annotate(c=Count('id')))
+        daily_by_bot = {}
+        for r in bot_rows:
+            d = str(r['d'])
+            bt = r['bot_type'] or '(empty user agent)'
+            daily_by_bot.setdefault(d, {})[bt] = r['c']
+        self._set_stat('crawlers.daily_by_bot_type', daily_by_bot)
+        self._done()
+
+        self._step('advancing HWM...')
+        max_ts = CrawlerVisit.objects.aggregate(m=Max('timestamp'))['m']
+        self._set_stat('hwm.crawler_visit_ts', max_ts.isoformat() if max_ts else '')
+        self._done()
+
+    def _full_recompute_archive(self):
+        from datetime import timedelta
+        now = timezone.now()
+        self.stdout.write('  archive: (by_bot_type skipped — Python-classified)')
+
+        self._step('total...')
+        total = ArchiveVisit.objects.count()
+        self._set_stat('archive.total', total)
+        self._done(f'{total:,}')
+
+        for label, key, field in [
+            ('by_depth', 'archive.by_depth', 'depth'),
+            ('by_ip',    'archive.by_ip',    'ip_address'),
+            ('by_slug',  'archive.by_slug',  'slug'),
+        ]:
+            self._step(f'{label}...')
+            self._set_stat(key, self._agg_dict(ArchiveVisit.objects, field))
+            self._done()
+
+        self._step('daily (30d)...')
+        rows = (ArchiveVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        self._set_stat('archive.daily', {str(r['d']): r['c'] for r in rows})
+        self._done()
+
+        self._step('advancing HWM...')
+        max_ts = ArchiveVisit.objects.aggregate(m=Max('timestamp'))['m']
+        self._set_stat('hwm.archive_visit_ts', max_ts.isoformat() if max_ts else '')
+        self._done()
+
+    def _full_recompute_emails(self):
+        from datetime import timedelta
+        now = timezone.now()
+        self.stdout.write('  emails:')
+
+        self._step('total...')
+        total = InboundEmail.objects.count()
+        self._set_stat('emails.total', total)
+        self._done(f'{total:,}')
+
+        self._step('by_recipient...')
+        self._set_stat('emails.by_recipient', self._agg_dict(InboundEmail.objects, 'recipient'))
+        self._done()
+
+        self._step('by_domain...')
+        by_domain = {}
+        for sender in InboundEmail.objects.values_list('sender', flat=True).iterator(chunk_size=5000):
+            domain = sender.split('@')[-1].lower() if '@' in sender else sender
+            by_domain[domain] = by_domain.get(domain, 0) + 1
+        self._set_stat('emails.by_domain', self._prune(by_domain))
+        self._done()
+
+        self._step('daily (30d)...')
+        rows = (InboundEmail.objects
+                .filter(received_at__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('received_at'))
+                .values('d').annotate(c=Count('id')))
+        self._set_stat('emails.daily', {str(r['d']): r['c'] for r in rows})
+        self._done()
+
+        self._step('advancing HWM...')
+        max_id = InboundEmail.objects.aggregate(m=Max('id'))['m'] or 0
+        self._set_stat('hwm.inbound_email', max_id)
+        self._done()
+
+    def _full_recompute_people(self):
+        from datetime import timedelta
+        now = timezone.now()
+        self.stdout.write('  people: (by_bot_type skipped — Python-classified)')
+
+        self._step('total...')
+        total = PeoplePageVisit.objects.count()
+        self._set_stat('people.total', total)
+        self._done(f'{total:,}')
+
+        self._step('by_ip...')
+        self._set_stat('people.by_ip', self._agg_dict(PeoplePageVisit.objects, 'ip_address'))
+        self._done()
+
+        self._step('daily (30d)...')
+        rows = (PeoplePageVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        self._set_stat('people.daily', {str(r['d']): r['c'] for r in rows})
+        self._done()
+
+        self._step('advancing HWM...')
+        max_id = PeoplePageVisit.objects.aggregate(m=Max('id'))['m'] or 0
+        self._set_stat('hwm.people_visit', max_id)
+        self._done()
+
+    def _full_recompute_projects(self):
+        from datetime import timedelta
+        now = timezone.now()
+        self.stdout.write('  projects: (by_bot_type skipped — Python-classified)')
+
+        self._step('total...')
+        total = ProjectPageVisit.objects.count()
+        self._set_stat('projects.total', total)
+        self._done(f'{total:,}')
+
+        self._step('by_ip...')
+        self._set_stat('projects.by_ip', self._agg_dict(ProjectPageVisit.objects, 'ip_address'))
+        self._done()
+
+        self._step('daily (30d)...')
+        rows = (ProjectPageVisit.objects
+                .filter(timestamp__gte=now - timedelta(days=30))
+                .annotate(d=TruncDate('timestamp'))
+                .values('d').annotate(c=Count('id')))
+        self._set_stat('projects.daily', {str(r['d']): r['c'] for r in rows})
+        self._done()
+
+        self._step('advancing HWM...')
+        max_id = ProjectPageVisit.objects.aggregate(m=Max('id'))['m'] or 0
+        self._set_stat('hwm.project_visit', max_id)
+        self._done()
+
+    def _full_recompute_login_attempts(self):
+        from datetime import timedelta
+        now = timezone.now()
+        self.stdout.write('  logins:')
+
+        self._step('total...')
+        total = InternalLoginAttempt.objects.count()
+        self._set_stat('login_attempts.total', total)
+        self._done(f'{total:,}')
+
+        self._step('by_username...')
+        self._set_stat('login_attempts.by_username', self._agg_dict(InternalLoginAttempt.objects, 'username'))
+        self._done()
+
+        self._step('by_ip...')
+        self._set_stat('login_attempts.by_ip', self._agg_dict(InternalLoginAttempt.objects, 'ip_address'))
+        self._done()
+
+        self._step('by_source...')
+        by_source = {}
+        for row in InternalLoginAttempt.objects.values('next_url').annotate(c=Count('id')):
+            nu = row['next_url'] or ''
+            if 'wp-login' in nu or 'wp_login' in nu:
+                src = 'wp-login'
+            elif 'xmlrpc' in nu:
+                src = 'xmlrpc'
+            elif 'internal' in nu or nu == '':
+                src = 'internal'
+            else:
+                src = nu[:60] or 'other'
+            by_source[src] = by_source.get(src, 0) + row['c']
+        self._set_stat('login_attempts.by_source', by_source)
+        self._done()
+
+        self._step('daily (60d)...')
+        daily_rows = (InternalLoginAttempt.objects
+                      .filter(created_at__gte=now - timedelta(days=60))
+                      .annotate(d=TruncDate('created_at'))
+                      .values('d').annotate(c=Count('id')))
+        self._set_stat('login_attempts.daily', {str(r['d']): r['c'] for r in daily_rows})
+        self._done()
+
+        self._step('advancing HWM...')
+        max_id = InternalLoginAttempt.objects.aggregate(m=Max('id'))['m'] or 0
+        self._set_stat('hwm.login_attempt', max_id)
+        self._done()
+
+    def _full_recompute_opt_outs(self):
+        from apps.public.models import DataOptOutRequest
+        self.stdout.write('  optouts:')
+        self._step('total...')
+        total = DataOptOutRequest.objects.count()
+        self._set_stat('optouts.total', total)
+        max_id = DataOptOutRequest.objects.aggregate(m=Max('id'))['m'] or 0
+        self._set_stat('hwm.opt_out', max_id)
+        self._done(f'{total:,}')
 
     # ── CrawlerVisit ──────────────────────────────────────────────────────────
 

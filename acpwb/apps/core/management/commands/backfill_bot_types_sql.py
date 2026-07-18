@@ -118,9 +118,9 @@ class Command(BaseCommand):
 
     def _tune_session(self, conn):
         with conn.cursor() as cursor:
-            cursor.execute("SET work_mem = '4GB'")
-            cursor.execute("SET max_parallel_workers_per_gather = 8")
-            cursor.execute("SET enable_partitionwise_aggregate = on")
+            cursor.execute("SET work_mem = '64MB'")
+            cursor.execute("SET max_parallel_workers_per_gather = 0")
+            cursor.execute("SET synchronous_commit = off")
             cursor.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
 
     def _build_case(self, target):

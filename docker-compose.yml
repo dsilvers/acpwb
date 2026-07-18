@@ -10,7 +10,17 @@ services:
       POSTGRES_USER: acpwb
       POSTGRES_PASSWORD: ${DB_PASSWORD:-acpwb_dev}
       POSTGRES_HOST_AUTH_METHOD: scram-sha-256
-    command: postgres -c hba_file=/etc/postgresql/pg_hba.conf -c listen_addresses='*'
+    command: >
+      postgres
+      -c hba_file=/etc/postgresql/pg_hba.conf
+      -c listen_addresses='*'
+      -c shared_buffers=10GB
+      -c effective_cache_size=30GB
+      -c maintenance_work_mem=2GB
+      -c max_parallel_workers=8
+      -c max_parallel_workers_per_gather=8
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
     ports:
       - "10.44.0.253:5432:5432"
     healthcheck:

@@ -49,6 +49,11 @@ class Command(BaseCommand):
 
         self.stdout.write(f"Found {len(chunks)} TimescaleDB chunks to process.\n")
 
+        # Lift the per-transaction decompression limit for this session so large
+        # compressed chunks don't hit the 100k-tuple default cap.
+        with connection.cursor() as cursor:
+            cursor.execute("SET timescaledb.max_tuples_decompressed_per_dml_transaction = 0")
+
         total_updated = 0
         for i, (start, end) in enumerate(chunks, 1):
             label = f"{start} → {end}"

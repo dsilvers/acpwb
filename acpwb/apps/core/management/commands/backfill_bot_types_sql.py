@@ -5,10 +5,16 @@ Instead of iterating rows in Python, generates a CASE WHEN SQL UPDATE from
 BOT_PATTERNS and _IP_BOT_RANGE_DEFS, then applies it one TimescaleDB chunk
 at a time — no Python row overhead.
 
+The WHERE clause includes a match filter (OR of all patterns/IP ranges) so
+only rows that will actually change are read and written — true-browser rows
+that would remain 'Other / Browser' are completely skipped, eliminating the
+massive no-op write amplification that made the original approach so slow.
+
 Usage:
     python manage.py backfill_bot_types_sql
     python manage.py backfill_bot_types_sql --dry-run
     python manage.py backfill_bot_types_sql --print-sql
+    python manage.py backfill_bot_types_sql --start-chunk 15
 """
 from django.core.management.base import BaseCommand
 from django.db import connection
@@ -20,12 +26,14 @@ class Command(BaseCommand):
     help = "Fast CASE WHEN SQL reclassification of CrawlerVisit bot_type/bot_group, chunk by chunk."
 
     def add_arguments(self, parser):
-        parser.add_argument('--dry-run',   action='store_true', help='Show chunk list and row counts without updating')
-        parser.add_argument('--print-sql', action='store_true', help='Print the generated UPDATE SQL and exit')
+        parser.add_argument('--dry-run',     action='store_true', help='Show chunk list and row counts without updating')
+        parser.add_argument('--print-sql',   action='store_true', help='Print the generated UPDATE SQL and exit')
+        parser.add_argument('--start-chunk', type=int, default=1, metavar='N', help='Skip the first N-1 chunks (1-based; use to resume a stopped run)')
 
     def handle(self, *args, **options):
         bot_type_sql  = self._build_case('bot_type')
         bot_group_sql = self._build_case('bot_group')
+        match_filter  = self._build_match_filter()
 
         update_sql = f"""
             UPDATE honeypot_crawlervisit
@@ -35,6 +43,7 @@ class Command(BaseCommand):
             WHERE
                 timestamp >= %s AND timestamp < %s
                 AND bot_type IN ('', 'Other / Browser')
+                AND ({match_filter})
         """
 
         if options['print_sql']:
@@ -47,7 +56,10 @@ class Command(BaseCommand):
             self.stdout.write("No chunks found — nothing to do.")
             return
 
+        start_chunk = options['start_chunk']
         self.stdout.write(f"Found {len(chunks)} TimescaleDB chunks to process.\n")
+        if start_chunk > 1:
+            self.stdout.write(f"Skipping chunks 1–{start_chunk - 1} (--start-chunk {start_chunk}).\n")
 
         # Lift the per-transaction decompression limit for this session so large
         # compressed chunks don't hit the 100k-tuple default cap.
@@ -56,13 +68,16 @@ class Command(BaseCommand):
 
         total_updated = 0
         for i, (start, end) in enumerate(chunks, 1):
+            if i < start_chunk:
+                continue
+
             label = f"{start} → {end}"
 
             if options['dry_run']:
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        "SELECT COUNT(*) FROM honeypot_crawlervisit "
-                        "WHERE timestamp >= %s AND timestamp < %s AND bot_type IN ('', 'Other / Browser')",
+                        f"SELECT COUNT(*) FROM honeypot_crawlervisit "
+                        f"WHERE timestamp >= %s AND timestamp < %s AND bot_type IN ('', 'Other / Browser') AND ({match_filter})",
                         [start, end],
                     )
                     count = cursor.fetchone()[0]
@@ -100,6 +115,24 @@ class Command(BaseCommand):
         lines.append("    ELSE 'Other / Browser'")
         lines.append("END")
         return "\n".join(lines)
+
+    def _build_match_filter(self):
+        """
+        Build an OR filter that's TRUE only for rows that will actually change.
+
+        Rows that remain 'Other / Browser' after the CASE WHEN are excluded
+        from the UPDATE entirely — no read, no write, no WAL, no memory pressure.
+        """
+        conditions = [
+            "user_agent IS NULL",
+            "trim(user_agent) = ''",
+        ]
+        for pattern, _ in BOT_PATTERNS:
+            escaped = pattern.replace("'", "''")
+            conditions.append(f"user_agent ILIKE '%%{escaped}%%'")
+        for cidr, _ in _IP_BOT_RANGE_DEFS:
+            conditions.append(f"ip_address << '{cidr}'::inet")
+        return "\n        OR ".join(conditions)
 
     def _get_chunks(self):
         """Return [(range_start, range_end), ...] from TimescaleDB chunk metadata."""

@@ -328,14 +328,14 @@ def _render_stacked_bar(ax, dates, series, title, x_locator, x_fmt):
 
 # ── File I/O ───────────────────────────────────────────────────────────────────
 
-def _save_atomic(fig, path):
+def _save_atomic(fig, path, dpi=150):
     """Write to a temp file then atomically rename — nginx never sees a partial PNG."""
     path = Path(path)
     fd, tmp = tempfile.mkstemp(suffix='.png', dir=path.parent)
     try:
         os.close(fd)
         os.chmod(tmp, 0o644)  # ensure nginx (non-root) can read the file
-        fig.savefig(tmp, dpi=150, bbox_inches='tight',
+        fig.savefig(tmp, dpi=dpi, bbox_inches='tight',
                     facecolor=fig.get_facecolor())
         os.replace(tmp, path)
     except Exception:

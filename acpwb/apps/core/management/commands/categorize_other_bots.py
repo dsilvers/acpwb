@@ -7,14 +7,14 @@ so new entries can be added to _IP_BOT_RANGE_DEFS in bot_classify.py.
 
 Usage:
     python manage.py categorize_other_bots
+    python manage.py categorize_other_bots --date 2026-07-15
     python manage.py categorize_other_bots --limit 100 --min-hits 1000
     python manage.py categorize_other_bots --all-time
     python manage.py categorize_other_bots --subnet 24
 """
-import ipaddress
-from datetime import timedelta
+from datetime import datetime, timedelta
 
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.db import connection
 from django.utils import timezone
 
@@ -23,20 +23,21 @@ class Command(BaseCommand):
     help = "Group 'Other / Browser' visits by IP to identify uncategorized bots."
 
     def add_arguments(self, parser):
-        parser.add_argument('--since',     type=int, default=30,  help='Lookback window in days (default: 30)')
-        parser.add_argument('--all-time',  action='store_true',   help='Scan all rows (no time filter — slow on large tables)')
-        parser.add_argument('--limit',     type=int, default=50,  help='Top N IPs to show (default: 50)')
-        parser.add_argument('--min-hits',  type=int, default=100, help='Skip IPs with fewer hits than this (default: 100)')
-        parser.add_argument('--ua-limit',  type=int, default=5,   help='Max UAs to show per IP (default: 5)')
-        parser.add_argument('--subnet',    type=int, choices=[8, 16, 24], help='Group by subnet prefix length instead of individual IP')
+        group = parser.add_mutually_exclusive_group()
+        group.add_argument('--since',    type=int,            help='Lookback window in days (default: 30)')
+        group.add_argument('--date',     type=str,            help='Single day to analyse, YYYY-MM-DD')
+        group.add_argument('--all-time', action='store_true', help='Scan all rows (no time filter — slow on large tables)')
+        parser.add_argument('--limit',    type=int, default=50,  help='Top N IPs to show (default: 50)')
+        parser.add_argument('--min-hits', type=int, default=100, help='Skip IPs with fewer hits than this (default: 100)')
+        parser.add_argument('--ua-limit', type=int, default=5,   help='Max UAs to show per IP (default: 5)')
+        parser.add_argument('--subnet',   type=int, choices=[8, 16, 24], help='Group by subnet prefix length instead of individual IP')
 
     def handle(self, *args, **options):
-        all_time  = options['all_time']
-        since     = options['since']
-        limit     = options['limit']
-        min_hits  = options['min_hits']
-        ua_limit  = options['ua_limit']
-        subnet    = options['subnet']
+        all_time = options['all_time']
+        limit    = options['limit']
+        min_hits = options['min_hits']
+        ua_limit = options['ua_limit']
+        subnet   = options['subnet']
 
         if all_time:
             self.stdout.write(self.style.WARNING(
@@ -46,11 +47,22 @@ class Command(BaseCommand):
             time_clause = ""
             time_params = []
             window_label = "all time"
+        elif options['date']:
+            try:
+                day_start = datetime.strptime(options['date'], '%Y-%m-%d')
+            except ValueError:
+                raise CommandError("--date must be in YYYY-MM-DD format")
+            day_start = timezone.make_aware(day_start)
+            day_end   = day_start + timedelta(days=1)
+            time_clause = "AND timestamp >= %s AND timestamp < %s"
+            time_params = [day_start, day_end]
+            window_label = options['date']
         else:
-            cutoff = timezone.now() - timedelta(days=since)
+            days = options['since'] or 30
+            cutoff = timezone.now() - timedelta(days=days)
             time_clause = "AND timestamp >= %s"
             time_params = [cutoff]
-            window_label = f"last {since} days"
+            window_label = f"last {days} days"
 
         if subnet:
             self._run_subnet(time_clause, time_params, window_label, limit, min_hits, ua_limit, subnet)

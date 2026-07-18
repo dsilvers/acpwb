@@ -19,8 +19,16 @@ _IP_BOT_RANGE_DEFS = [
     ('47.79.0.0/16',   'Alibaba Qwen'),  # observed traffic
     ('47.82.60.0/22',  'Alibaba Qwen'),  # 47.82.60–63
     ('8.219.0.0/16',   'Alibaba Qwen'),  # observed traffic
+    ('43.156.0.0/16', 'Tencent'),
     ('43.172.0.0/16', 'Tencent'),
     ('43.173.0.0/16', 'Tencent'),
+    # INTERNEXUS, LLC scraper pool (uniform Chrome/Mac UA, throttled per-IP)
+    ('207.180.11.0/24', 'INTERNEXUS Scraper Pool'),
+    ('216.75.132.0/24', 'INTERNEXUS Scraper Pool'),
+    # IPXO-leased blocks, single HK customer (ORG-PC1271-RIPE), same fingerprint
+    ('143.20.253.0/24', 'IPXO Scraper Pool (HK)'),
+    ('143.14.6.0/24',   'IPXO Scraper Pool (HK)'),
+    ('144.31.35.0/24',  'IPXO Scraper Pool (HK)'),
 ]
 
 # Pre-parse networks at import time so per-request lookup is fast
@@ -91,6 +99,7 @@ BOT_PATTERNS = [
     ('PiplBot',             'Pipl'),
     ('SERankingBacklinksBot', 'SERankingBacklinksBot'),
     ('ZoominfoBot',         'ZoominfoBot'),
+    ('AwarioBot',           'AwarioBot'),
     ('BitSightBot',         'BitSightBot'),
     ('zgrab',               'zgrab'),
     # Social

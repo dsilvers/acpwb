@@ -1,0 +1,11 @@
+.git
+.venv
+.venv-og
+acpwb/.venv-og
+__pycache__
+**/__pycache__
+*.pyc
+*.pyo
+.DS_Store
+acpwb/staticfiles
+acpwb/media

@@ -19,6 +19,7 @@ Usage:
 """
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import timedelta
 
 from django.core.management.base import BaseCommand
 from django.db import connection, connections
@@ -34,6 +35,8 @@ class Command(BaseCommand):
         parser.add_argument('--print-sql',   action='store_true', help='Print the generated UPDATE SQL and exit')
         parser.add_argument('--start-chunk', type=int, default=1, metavar='N', help='Skip the first N-1 chunks (1-based; use to resume a stopped run)')
         parser.add_argument('--parallel',    type=int, default=1, metavar='N', help='Process N chunks concurrently (default: 1)')
+        parser.add_argument('--hour-step',   type=int, default=0,  metavar='N', help='Sub-chunk each TimescaleDB chunk into N-hour intervals')
+        parser.add_argument('--day-step',    type=int, default=1,  metavar='N', help='Sub-chunk each TimescaleDB chunk into N-day intervals (default: 1)')
 
     def handle(self, *args, **options):
         bot_type_sql  = self._build_case('bot_type')
@@ -61,9 +64,16 @@ class Command(BaseCommand):
             self.stdout.write("No chunks found — nothing to do.")
             return
 
+        hour_step = options['hour_step']
+        day_step = options['day_step']
+        if hour_step > 0:
+            chunks = self._sub_chunk(chunks, timedelta(hours=hour_step))
+        elif day_step > 1:
+            chunks = self._sub_chunk(chunks, timedelta(days=day_step))
+
         start_chunk = options['start_chunk']
         parallel = options['parallel']
-        self.stdout.write(f"Found {len(chunks)} TimescaleDB chunks to process (parallel={parallel}).\n")
+        self.stdout.write(f"Found {len(chunks)} chunks to process (parallel={parallel}).\n")
         if start_chunk > 1:
             self.stdout.write(f"Skipping chunks 1–{start_chunk - 1} (--start-chunk {start_chunk}).\n")
 
@@ -162,6 +172,17 @@ class Command(BaseCommand):
         for cidr, _ in _IP_BOT_RANGE_DEFS:
             conditions.append(f"ip_address << '{cidr}'::inet")
         return "\n        OR ".join(conditions)
+
+    def _sub_chunk(self, chunks, step):
+        """Break each (start, end) interval into smaller intervals of size step."""
+        result = []
+        for start, end in chunks:
+            cursor = start
+            while cursor < end:
+                next_cursor = min(cursor + step, end)
+                result.append((cursor, next_cursor))
+                cursor = next_cursor
+        return result
 
     def _get_chunks(self):
         """Return [(range_start, range_end), ...] from TimescaleDB chunk metadata."""

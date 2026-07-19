@@ -44,7 +44,7 @@ class Command(BaseCommand):
                 SELECT chunk_schema, chunk_name, range_start, range_end
                 FROM timescaledb_information.chunks
                 WHERE hypertable_name = 'honeypot_crawlervisit'
-                ORDER BY range_start
+                ORDER BY range_start DESC
             """)
             chunks = cur.fetchall()
 

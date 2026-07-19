@@ -1,43 +1,34 @@
 """
 Incrementally build the PathStat pre-aggregation table from CrawlerVisit rows.
 
-Aggregates (host, path) → count in PostgreSQL in id-range batches, then
-upserts into PathStat. Resumes from last processed id stored in
-DashboardStat('path_stats_last_id').
+Processes one TimescaleDB chunk at a time, running a GROUP BY directly against
+each chunk table to avoid cross-chunk scans. Resumes by tracking the last
+fully-processed chunk range_end in DashboardStat('path_stats_last_id').
 
 Usage:
     manage.py build_path_stats
-    manage.py build_path_stats --batch-size 50000
     manage.py build_path_stats --reset   # truncate PathStat and reprocess all
 """
 import time
 
 from django.core.management.base import BaseCommand
 
-
-CURSOR_KEY = 'path_stats_last_id'
-DEFAULT_BATCH = 50_000
+CURSOR_KEY = 'path_stats_hwm'
 
 
 class Command(BaseCommand):
-    help = 'Incrementally populate PathStat from CrawlerVisit'
+    help = 'Incrementally populate PathStat from CrawlerVisit (chunk-at-a-time)'
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--batch-size', type=int, default=DEFAULT_BATCH,
-            help=f'CrawlerVisit rows per batch (default: {DEFAULT_BATCH:,})',
-        )
-        parser.add_argument(
             '--reset', action='store_true',
-            help='Truncate PathStat and reset cursor to reprocess all rows',
+            help='Truncate PathStat and reset cursor to reprocess all chunks',
         )
 
     def handle(self, *args, **options):
         from django.db import connection
         from apps.core.models import DashboardStat
         from apps.honeypot.models import PathStat
-
-        batch_size = options['batch_size']
 
         if options['reset']:
             self.stdout.write('Resetting PathStat ...')
@@ -46,51 +37,53 @@ class Command(BaseCommand):
             self.stdout.write('  Done.')
 
         cursor_stat = DashboardStat.objects.filter(key=CURSOR_KEY).first()
-        last_id = int(cursor_stat.value) if cursor_stat else 0
+        hwm = cursor_stat.value if cursor_stat else None
 
         with connection.cursor() as cur:
-            cur.execute('SELECT MAX(id) FROM honeypot_crawlervisit WHERE id > %s', [last_id])
-            max_id = cur.fetchone()[0]
+            cur.execute("""
+                SELECT chunk_schema, chunk_name, range_start, range_end
+                FROM timescaledb_information.chunks
+                WHERE hypertable_name = 'honeypot_crawlervisit'
+                ORDER BY range_start
+            """)
+            chunks = cur.fetchall()
 
-        if max_id is None:
+        if hwm:
+            chunks = [(s, n, rs, re) for s, n, rs, re in chunks if str(re) > hwm]
+
+        if not chunks:
             self.stdout.write('Nothing new to process.')
             return
 
-        total = max_id - last_id
-        self.stdout.write(f'Resuming from id > {last_id:,} — processing up to {max_id:,} ({total:,} rows)')
-
+        self.stdout.write(f'Processing {len(chunks)} chunks ...')
         t_start = time.monotonic()
         total_paths = 0
-        batch_start = last_id
 
-        while batch_start < max_id:
-            batch_end = min(batch_start + batch_size, max_id)
+        for chunk_schema, chunk_name, range_start, range_end in chunks:
             t0 = time.monotonic()
+            full_name = f'"{chunk_schema}"."{chunk_name}"'
 
             with connection.cursor() as cur:
-                cur.execute("""
+                cur.execute(f"""
                     INSERT INTO honeypot_pathstat (host, path, count)
                     SELECT COALESCE(host, ''), path, COUNT(*)
-                    FROM honeypot_crawlervisit
-                    WHERE id > %s AND id <= %s
+                    FROM {full_name}
                     GROUP BY COALESCE(host, ''), path
                     ON CONFLICT (host, path)
                     DO UPDATE SET count = honeypot_pathstat.count + EXCLUDED.count
-                """, [batch_start, batch_end])
+                """)
                 paths = cur.rowcount
 
             total_paths += paths
             DashboardStat.objects.update_or_create(
-                key=CURSOR_KEY, defaults={'value': batch_end},
+                key=CURSOR_KEY, defaults={'value': str(range_end)},
             )
-
-            pct = (batch_end - last_id) / total * 100
             self.stdout.write(
-                f'  id {batch_start:,}–{batch_end:,}  {paths:,} paths  '
-                f'{pct:.0f}%  ({time.monotonic()-t0:.1f}s)'
+                f'  {chunk_name}  {range_start.date()}–{range_end.date()}'
+                f'  {paths:,} paths  ({time.monotonic()-t0:.1f}s)'
             )
-            batch_start = batch_end
 
         self.stdout.write(
-            f'Done. {total_paths:,} path upserts in {time.monotonic()-t_start:.1f}s'
+            f'Done. {total_paths:,} path upserts across {len(chunks)} chunks '
+            f'in {time.monotonic()-t_start:.1f}s'
         )

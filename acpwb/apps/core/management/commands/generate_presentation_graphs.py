@@ -2,8 +2,8 @@
 Generate presentation-quality graphs from the TrafficMinuteStat table.
 
 Outputs two 16×6 @ 200 DPI PNGs:
-  presentation_total.png  — total requests per day across all time
-  presentation_by_bot.png — stacked area by bot_type across all time
+  presentation_total.png  — total requests per minute (bar chart)
+  presentation_by_bot.png — stacked area by bot_type, hourly aggregation
 
 Run build_minute_stats first to populate the source table.
 
@@ -12,11 +12,19 @@ Usage:
     manage.py generate_presentation_graphs --output-dir /tmp/graphs
 """
 import time
+from collections import defaultdict
 from datetime import timezone as dt_tz
+
+import numpy as np
+
+import matplotlib.dates as mdates_mod
 
 from django.core.management.base import BaseCommand
 from django.db import connection
 from pathlib import Path
+
+# 1 minute expressed in matplotlib date units (days)
+_BAR_WIDTH = 1.0 / 1440
 
 
 class Command(BaseCommand):
@@ -46,60 +54,69 @@ class Command(BaseCommand):
         output_dir = Path(options['output_dir'] or settings.STATIC_ROOT / 'graphs')
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        # ── Fetch aggregated data ──────────────────────────────────────────────
-        self.stdout.write('Querying TrafficMinuteStat (grouped by day + bot_type) ...')
+        # ── Fetch per-minute data (for total graph) ────────────────────────────
+        self.stdout.write('Querying TrafficMinuteStat (per-minute totals) ...')
         t0 = time.monotonic()
 
         with connection.cursor() as cursor:
             cursor.execute("""
-                SELECT date_trunc('day', minute) AS day,
-                       bot_type,
-                       SUM(count)::bigint AS total
+                SELECT minute, SUM(count)::bigint
                 FROM core_trafficminutestat
-                GROUP BY day, bot_type
-                ORDER BY day, bot_type
+                GROUP BY minute
+                ORDER BY minute
             """)
-            rows = cursor.fetchall()
+            minute_rows = cursor.fetchall()
 
-        if not rows:
+        if not minute_rows:
             self.stdout.write(
                 'No data in TrafficMinuteStat. '
                 'Run: manage.py build_minute_stats --full'
             )
             return
 
-        self.stdout.write(f'  {len(rows):,} day/bot_type rows in {time.monotonic()-t0:.1f}s')
+        self.stdout.write(f'  {len(minute_rows):,} minute rows in {time.monotonic()-t0:.1f}s')
 
-        # ── Build series ───────────────────────────────────────────────────────
-        all_days = sorted({row[0] for row in rows})
-        day_idx = {d: i for i, d in enumerate(all_days)}
-        n = len(all_days)
+        # ── Fetch per-minute data by bot_type (for bot breakdown graph) ────────
+        self.stdout.write('Querying TrafficMinuteStat (per-minute by bot_type) ...')
+        t1 = time.monotonic()
 
-        all_bots = sorted({row[1] for row in rows})
-        series = {bot: [0] * n for bot in all_bots}
-        for day, bot_type, total in rows:
-            series[bot_type][day_idx[day]] = int(total)
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT date_trunc('hour', minute) AS hour, bot_type, SUM(count)::bigint
+                FROM core_trafficminutestat
+                GROUP BY hour, bot_type
+                ORDER BY hour, bot_type
+            """)
+            hourly_rows = cursor.fetchall()
 
-        date_objs = [d.replace(tzinfo=dt_tz.utc) if d.tzinfo is None else d for d in all_days]
-        series_thresh = _apply_threshold(series, threshold_pct=1.0)
-        grand_total = sum(sum(v) for v in series.values())
+        self.stdout.write(f'  {len(hourly_rows):,} hour/bot_type rows in {time.monotonic()-t1:.1f}s')
 
-        # ── Graph 1: Total traffic ─────────────────────────────────────────────
+        # ── Build per-minute series for Graph 1 ────────────────────────────────
+        all_minutes = [r[0] for r in minute_rows]
+        totals = [int(r[1]) for r in minute_rows]
+        grand_total = sum(totals)
+
+        minute_objs = [
+            m.replace(tzinfo=dt_tz.utc) if m.tzinfo is None else m
+            for m in all_minutes
+        ]
+        minute_nums = mdates_mod.date2num(minute_objs)
+
+        # ── Graph 1: Total traffic per minute (bar chart) ─────────────────────
         self.stdout.write('Generating presentation_total.png ...')
-        totals_by_day = [sum(series[bot][i] for bot in all_bots) for i in range(n)]
 
         fig, ax = plt.subplots(figsize=(16, 6))
         fig.patch.set_facecolor('white')
         ax.set_facecolor('#FAFBFC')
-        ax.fill_between(date_objs, totals_by_day, alpha=0.72, color='#4878CF', zorder=2)
-        ax.plot(date_objs, totals_by_day, color='#2C5F9E', linewidth=0.8, zorder=3)
-        ax.set_ylim(bottom=0)
+        ax.bar(minute_nums, totals, width=_BAR_WIDTH, color='#2E9E8F', alpha=0.85, zorder=2)
+        ax.set_xlim(minute_nums[0] - _BAR_WIDTH, minute_nums[-1] + _BAR_WIDTH)
+        ax.set_ylim(bottom=0, top=np.percentile(totals, 99.9) * 1.10)
         ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f'{int(v):,}'))
         x_loc = mdates.AutoDateLocator()
         ax.xaxis.set_major_locator(x_loc)
         ax.xaxis.set_major_formatter(mdates.AutoDateFormatter(x_loc))
         ax.set_title(
-            'Total Requests Per Day — All Time',
+            'Total Requests Per Minute — All Time',
             fontsize=14, color='#2C3E50', pad=10, fontweight='bold',
         )
         ax.tick_params(axis='both', labelsize=10, colors='#7F8C8D')
@@ -111,21 +128,40 @@ class Command(BaseCommand):
         plt.close(fig)
         self.stdout.write(f'  Saved presentation_total.png  ({grand_total:,} total requests)')
 
-        # ── Graph 2: By bot type ───────────────────────────────────────────────
+        # ── Build per-minute series for Graph 2 ───────────────────────────────
+        all_bot_minutes = sorted({r[0] for r in hourly_rows})
+        bot_min_idx = {m: i for i, m in enumerate(all_bot_minutes)}
+        n = len(all_bot_minutes)
+
+        all_bots = sorted({r[1] for r in hourly_rows})
+        series = {bot: [0] * n for bot in all_bots}
+        for minute, bot_type, count in hourly_rows:
+            series[bot_type][bot_min_idx[minute]] = int(count)
+
+        bot_min_objs = [
+            m.replace(tzinfo=dt_tz.utc) if m.tzinfo is None else m
+            for m in all_bot_minutes
+        ]
+        hour_nums = mdates_mod.date2num(bot_min_objs)
+
+        series_thresh = _apply_threshold(series, threshold_pct=1.0)
+
+        # ── Graph 2: By bot type (stacked area, hourly) ───────────────────────
         self.stdout.write('Generating presentation_by_bot.png ...')
         fig, ax = plt.subplots(figsize=(16, 6))
         fig.patch.set_facecolor('white')
-        _apply_style(ax, 'Requests By Bot Type Per Day — All Time')
+        _apply_style(ax, 'Requests By Bot Type Per Hour — All Time')
         ax.title.set_fontsize(14)
 
-        groups = list(series_thresh.keys())
+        groups = sorted(series_thresh.keys(), key=lambda g: sum(series_thresh[g]))
         ys = [series_thresh[g] for g in groups]
         colors = _assign_colors(groups)
 
-        ax.stackplot(date_objs, ys, labels=groups, colors=colors, alpha=0.88, zorder=2)
-        ax.set_ylim(bottom=0)
+        minute_stack_totals = [sum(s[i] for s in ys) for i in range(n)]
+        ax.stackplot(hour_nums, ys, labels=groups, colors=colors, alpha=0.88, zorder=2)
+        ax.set_xlim(hour_nums[0], hour_nums[-1])
+        ax.set_ylim(bottom=0, top=np.percentile(minute_stack_totals, 99.9) * 1.10)
         ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f'{int(v):,}'))
-        ax.set_xlim(date_objs[0], date_objs[-1])
         x_loc2 = mdates.AutoDateLocator()
         ax.xaxis.set_major_locator(x_loc2)
         ax.xaxis.set_major_formatter(mdates.AutoDateFormatter(x_loc2))
@@ -135,7 +171,7 @@ class Command(BaseCommand):
             fontsize=9, framealpha=0.85, ncol=5,
             handlelength=1.2, handletextpad=0.5, columnspacing=1.0,
         )
-        fig.tight_layout(pad=1.0)
+        fig.subplots_adjust(bottom=0.22, top=0.93, left=0.07, right=0.98)
         _save_atomic(fig, output_dir / 'presentation_by_bot.png', dpi=200)
         plt.close(fig)
         self.stdout.write(

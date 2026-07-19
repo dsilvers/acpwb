@@ -159,3 +159,18 @@ class InternalLoginAttempt(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} tried '{self.username}' @ {self.created_at:%Y-%m-%d %H:%M}"
+
+
+class PathStat(models.Model):
+    host = models.CharField(max_length=253, blank=True, db_index=True)
+    path = models.TextField()
+    count = models.BigIntegerField(default=0)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['host', 'path'], name='pathstat_host_path_uniq')
+        ]
+
+    def __str__(self):
+        prefix = f"{self.host}" if self.host else 'acpwb.com'
+        return f"{prefix}{self.path} ({self.count:,})"

@@ -1,19 +1,22 @@
 """
 Incrementally build the PathStat pre-aggregation table from CrawlerVisit rows.
 
-Reads CrawlerVisit in batches ordered by id, aggregates (host, path) → count
-in Python, then bulk-upserts into PathStat. Resumes from last processed id
-stored in DashboardStat('path_stats_last_id').
+Aggregates (host, path) → count in PostgreSQL in id-range batches, then
+upserts into PathStat. Resumes from last processed id stored in
+DashboardStat('path_stats_last_id').
 
 Usage:
     manage.py build_path_stats
-    manage.py build_path_stats --batch-size 10000
+    manage.py build_path_stats --batch-size 50000
     manage.py build_path_stats --reset   # truncate PathStat and reprocess all
 """
+import time
+
 from django.core.management.base import BaseCommand
 
 
 CURSOR_KEY = 'path_stats_last_id'
+DEFAULT_BATCH = 50_000
 
 
 class Command(BaseCommand):
@@ -21,8 +24,8 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--batch-size', type=int, default=50000,
-            help='CrawlerVisit rows to process per batch (default: 50000)',
+            '--batch-size', type=int, default=DEFAULT_BATCH,
+            help=f'CrawlerVisit rows per batch (default: {DEFAULT_BATCH:,})',
         )
         parser.add_argument(
             '--reset', action='store_true',
@@ -31,9 +34,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         from django.db import connection
-
         from apps.core.models import DashboardStat
-        from apps.honeypot.models import CrawlerVisit, PathStat
+        from apps.honeypot.models import PathStat
 
         batch_size = options['batch_size']
 
@@ -46,79 +48,49 @@ class Command(BaseCommand):
         cursor_stat = DashboardStat.objects.filter(key=CURSOR_KEY).first()
         last_id = int(cursor_stat.value) if cursor_stat else 0
 
-        self.stdout.write(f'Resuming from CrawlerVisit id > {last_id:,}')
-
-        total_processed = 0
-        total_upserted = 0
-        max_id_seen = last_id
-
-        qs = (
-            CrawlerVisit.objects
-            .filter(id__gt=last_id)
-            .order_by('id')
-            .values('id', 'host', 'path')
-        )
-
-        batch = {}
-        batch_max_id = last_id
-
-        for row in qs.iterator(chunk_size=batch_size):
-            host = row['host'] or ''
-            path = row['path']
-            key = (host, path)
-            batch[key] = batch.get(key, 0) + 1
-            total_processed += 1
-            if row['id'] > batch_max_id:
-                batch_max_id = row['id']
-
-            if total_processed % batch_size == 0:
-                upserted = self._upsert_batch(connection, batch)
-                total_upserted += upserted
-                max_id_seen = batch_max_id
-                self._save_cursor(DashboardStat, max_id_seen)
-                self.stdout.write(
-                    f'  Processed {total_processed:,} rows, '
-                    f'up to id {max_id_seen:,}, '
-                    f'{total_upserted:,} unique paths total'
-                )
-                batch = {}
-
-        # Final partial batch
-        if batch:
-            upserted = self._upsert_batch(connection, batch)
-            total_upserted += upserted
-            max_id_seen = batch_max_id
-            self._save_cursor(DashboardStat, max_id_seen)
-
-        if total_processed == 0:
-            self.stdout.write('  Nothing new to process.')
-        else:
-            self.stdout.write(
-                f'Done. {total_processed:,} rows processed, '
-                f'{total_upserted:,} unique paths, '
-                f'cursor at id {max_id_seen:,}.'
-            )
-
-    def _upsert_batch(self, connection, batch):
-        if not batch:
-            return 0
-        rows = [(host, path, count) for (host, path), count in batch.items()]
-        placeholders = ','.join(['(%s,%s,%s)'] * len(rows))
-        flat_params = [val for row in rows for val in row]
         with connection.cursor() as cur:
-            cur.execute(
-                f"""
-                INSERT INTO honeypot_pathstat (host, path, count)
-                VALUES {placeholders}
-                ON CONFLICT (host, path)
-                DO UPDATE SET count = honeypot_pathstat.count + EXCLUDED.count
-                """,
-                flat_params,
-            )
-        return len(rows)
+            cur.execute('SELECT MAX(id) FROM honeypot_crawlervisit WHERE id > %s', [last_id])
+            max_id = cur.fetchone()[0]
 
-    def _save_cursor(self, DashboardStat, last_id):
-        DashboardStat.objects.update_or_create(
-            key=CURSOR_KEY,
-            defaults={'value': last_id},
+        if max_id is None:
+            self.stdout.write('Nothing new to process.')
+            return
+
+        total = max_id - last_id
+        self.stdout.write(f'Resuming from id > {last_id:,} — processing up to {max_id:,} ({total:,} rows)')
+
+        t_start = time.monotonic()
+        total_paths = 0
+        batch_start = last_id
+
+        while batch_start < max_id:
+            batch_end = min(batch_start + batch_size, max_id)
+            t0 = time.monotonic()
+
+            with connection.cursor() as cur:
+                cur.execute("""
+                    INSERT INTO honeypot_pathstat (host, path, count)
+                    SELECT COALESCE(host, ''), path, COUNT(*)
+                    FROM honeypot_crawlervisit
+                    WHERE id > %s AND id <= %s
+                    GROUP BY COALESCE(host, ''), path
+                    ON CONFLICT (host, path)
+                    DO UPDATE SET count = honeypot_pathstat.count + EXCLUDED.count
+                """, [batch_start, batch_end])
+                paths = cur.rowcount
+
+            total_paths += paths
+            DashboardStat.objects.update_or_create(
+                key=CURSOR_KEY, defaults={'value': batch_end},
+            )
+
+            pct = (batch_end - last_id) / total * 100
+            self.stdout.write(
+                f'  id {batch_start:,}–{batch_end:,}  {paths:,} paths  '
+                f'{pct:.0f}%  ({time.monotonic()-t0:.1f}s)'
+            )
+            batch_start = batch_end
+
+        self.stdout.write(
+            f'Done. {total_paths:,} path upserts in {time.monotonic()-t_start:.1f}s'
         )

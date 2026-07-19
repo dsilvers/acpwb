@@ -1,34 +1,4 @@
 services:
-  db:
-    image: timescale/timescaledb:latest-pg16
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./docker/init-timescaledb.sql:/docker-entrypoint-initdb.d/001-timescaledb.sql
-      - ./docker/pg_hba.conf:/etc/postgresql/pg_hba.conf
-    environment:
-      POSTGRES_DB: acpwb
-      POSTGRES_USER: acpwb
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-acpwb_dev}
-      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
-    command: >
-      postgres
-      -c hba_file=/etc/postgresql/pg_hba.conf
-      -c listen_addresses='*'
-      -c shared_buffers=10GB
-      -c effective_cache_size=30GB
-      -c maintenance_work_mem=2GB
-      -c max_parallel_workers=8
-      -c max_parallel_workers_per_gather=8
-      -c random_page_cost=1.1
-      -c effective_io_concurrency=200
-    ports:
-      - "10.44.0.253:5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U acpwb"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-
   redis:
     image: redis:7-alpine
     command: redis-server --bind 0.0.0.0 --protected-mode no
@@ -53,8 +23,6 @@ services:
     environment:
       REDIS_URL: redis://10.44.0.253:6379/0
     depends_on:
-      db:
-        condition: service_healthy
       redis:
         condition: service_started
     ports:
@@ -97,11 +65,7 @@ services:
     environment:
       REDIS_URL: redis://10.44.0.253:6379/0
     depends_on:
-      db:
-        condition: service_healthy
       redis:
         condition: service_started
     restart: unless-stopped
 
-volumes:
-  postgres_data:

@@ -34,6 +34,7 @@ class Command(BaseCommand):
         parser.add_argument('--dry-run',     action='store_true', help='Show chunk list and row counts without updating')
         parser.add_argument('--print-sql',   action='store_true', help='Print the generated UPDATE SQL and exit')
         parser.add_argument('--start-chunk', type=int, default=1, metavar='N', help='Skip the first N-1 chunks (1-based; use to resume a stopped run)')
+        parser.add_argument('--start-date',  type=str, default=None, metavar='YYYY-MM-DD', help='Skip all chunks before this date (simpler alternative to --start-chunk)')
         parser.add_argument('--parallel',    type=int, default=1, metavar='N', help='Process N chunks concurrently (default: 1)')
         parser.add_argument('--hour-step',   type=int, default=0,  metavar='N', help='Sub-chunk each TimescaleDB chunk into N-hour intervals')
         parser.add_argument('--day-step',    type=int, default=1,  metavar='N', help='Sub-chunk each TimescaleDB chunk into N-day intervals (default: 1)')
@@ -72,14 +73,23 @@ class Command(BaseCommand):
             chunks = self._sub_chunk(chunks, timedelta(days=day_step))
 
         start_chunk = options['start_chunk']
+        start_date = options['start_date']
         parallel = options['parallel']
-        self.stdout.write(f"Found {len(chunks)} chunks to process (parallel={parallel}).\n")
-        if start_chunk > 1:
-            self.stdout.write(f"Skipping chunks 1–{start_chunk - 1} (--start-chunk {start_chunk}).\n")
+
+        if start_date:
+            from datetime import datetime, timezone as dt_timezone
+            cutoff = datetime.strptime(start_date, '%Y-%m-%d').replace(tzinfo=dt_timezone.utc)
+            chunks = [(s, e) for s, e in chunks if e > cutoff]
+            self.stdout.write(f"Found {len(chunks)} chunks to process from {start_date} (parallel={parallel}).\n")
+            work = list(enumerate([(s, e) for s, e in chunks], 1))
+            work = [(i, s, e) for i, (s, e) in work]
+        else:
+            self.stdout.write(f"Found {len(chunks)} chunks to process (parallel={parallel}).\n")
+            if start_chunk > 1:
+                self.stdout.write(f"Skipping chunks 1–{start_chunk - 1} (--start-chunk {start_chunk}).\n")
+            work = [(i, start, end) for i, (start, end) in enumerate(chunks, 1) if i >= start_chunk]
 
         self._tune_session(connection)
-
-        work = [(i, start, end) for i, (start, end) in enumerate(chunks, 1) if i >= start_chunk]
 
         if options['dry_run']:
             for i, start, end in work:

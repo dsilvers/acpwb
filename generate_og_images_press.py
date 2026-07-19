@@ -90,6 +90,11 @@ _WORD_VISUALS = {
     'strategy':      'command center with panoramic city view, strategic displays',
 }
 
+# Per-slug scene overrides — bypasses word lookup entirely
+_SLUG_SCENES = {
+    'one-billion-pages-served': 'vast data center corridor, server racks receding to vanishing point, deep navy ambient glow, gold edge lighting',
+}
+
 # Words too generic to anchor a scene on their own
 _SKIP_WORDS = {
     'a', 'an', 'the', 'and', 'or', 'for', 'of', 'in', 'at', 'to', 'by', 'on',
@@ -100,8 +105,8 @@ _SKIP_WORDS = {
     'issues', 'since', 'after', 'for', 'over', 'about',
 }
 
-_STYLE_SUFFIX = ', corporate photography, photorealistic, 8k, tack sharp, navy and gold palette, f/8 aperture, everything in focus'
-_FLUX_STYLE_SUFFIX = ', no people, no faces, empty interior, architecture only, corporate photography, photorealistic, navy gold palette, 8k'
+_STYLE_SUFFIX = ', corporate photography, photorealistic, navy and gold palette, sharp focus'
+_FLUX_STYLE_SUFFIX = ', no people, no faces, empty interior, corporate photography, photorealistic, navy gold palette'
 
 _AI_SYSTEM = (
     'You are a visual art director for corporate photography. '
@@ -156,11 +161,13 @@ def _headline_to_scene(headline):
     return None
 
 
-def _build_prompt(headline, flux=False):
+def _build_prompt(headline, flux=False, slug=None):
     suffix = _FLUX_STYLE_SUFFIX if flux else _STYLE_SUFFIX
-    scene = _headline_to_scene(headline)
+    scene = _SLUG_SCENES.get(slug) if slug else None
+    if scene is None:
+        scene = _headline_to_scene(headline)
     if scene:
-        return f'{headline}, {scene}{suffix}'
+        return f'{scene}{suffix}'
     return f'{headline}{suffix}'
 
 
@@ -268,7 +275,7 @@ def main():
             if ai_client:
                 prompt = _ai_build_prompt(pr, ai_client, args.ai_model, flux=flux)
             else:
-                prompt = _build_prompt(pr['headline'], flux=flux)
+                prompt = _build_prompt(pr['headline'], flux=flux, slug=pr['slug'])
             print(f'  {pr["slug"]}\n    seed={_slug_to_seed(pr["slug"])}\n    {prompt}\n')
         return
 
@@ -309,7 +316,7 @@ def main():
         if ai_client:
             prompt = _ai_build_prompt(pr, ai_client, args.ai_model, flux=flux)
         else:
-            prompt = _build_prompt(headline, flux=flux)
+            prompt = _build_prompt(headline, flux=flux, slug=slug)
         seed = _slug_to_seed(slug)
 
         print(f'[{i}/{len(press_releases_to_process)}] {slug} ', end='', flush=True)

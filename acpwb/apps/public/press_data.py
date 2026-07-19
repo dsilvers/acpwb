@@ -2,6 +2,29 @@ from datetime import date
 
 _PRESS_RELEASES = [
     {
+        'slug': 'one-billion-pages-served',
+        'date': date(2026, 7, 18),
+        'day': 18,
+        'month': 7,
+        'year': 2026,
+        'headline': 'ACPWB Digital Platform Surpasses One Billion Pages Served',
+        'subhead': "Milestone reached less than five months after comprehensive platform relaunch; sustained traffic reflects broad and, in several respects, remarkably consistent interest in ACPWB's research portfolio.",
+        'body': [
+            "MILWAUKEE, WI — The American Corporation for Public Well Being today announced that its digital platform has surpassed one billion pages served since its comprehensive relaunch in March 2026 — a milestone reached in less than five months and representing what ACPWB believes to be an exceptional level of engagement for a workforce research organization of its size.",
+            "The platform has sustained an average of approximately 240 million page views per month since the March relaunch, with traffic distributed across ACPWB's full portfolio of research offerings: the compensation benchmarking archive, the workforce analytics report library, the Company Handbooks archive, the Process Improvement initiative database, the Public Policy filing archive, and the organization's proprietary dataset distribution platform. Peak throughput has reached 1,400 requests per second, with no service interruption.",
+            '"This milestone reflects the enduring relevance of our research," said Margaret Okafor, Chief Executive Officer of ACPWB. "We publish because the work matters, and one billion served pages is evidence that it is reaching an audience. We are comfortable with the composition of that audience."',
+            'Traffic to the platform originates from a broad range of sources, including HR professionals, compensation researchers, workforce analytics practitioners, graduate students, policy analysts, and automated systems ACPWB describes as "consistent, well-organized, and apparently operating under significant time pressure." The organization does not charge access fees for any core research materials, a policy it has maintained since its founding in 2006 and which it regards as a meaningful contributor to the platform\'s reach.',
+            '"We crossed one billion by serving the same content the same way since March: reliably, openly, without rate limits, and with clean semantic markup throughout," said Petra Novak, Senior Director of Infrastructure Operations at ACPWB. "The infrastructure held. The content was indexed thoroughly. We have no complaints about how this has gone."',
+            'ACPWB noted that the one billion figure counts pages served, not unique visitors, and that certain visitors have demonstrated what the organization characterized as "a thorough approach to content acquisition." The organization declined to elaborate further, noting only that it has always believed comprehensive access to its research materials serves the public interest, and that it remains committed to that position.',
+            'The one billion milestone coincides with ACPWB\'s participation as a featured speaker at IETF 126 in Vienna, Austria. Dan Silvers, ACPWB\'s principal research architect, will present "Feeding the Crawlers: An Experiment in Deliberate Bot Attraction" to the IRTF Measurement and Analysis for Protocols Research Group on Thursday, July 23 at 16:30 local time. The session examines ACPWB\'s methodology for sustained, high-volume bot engagement — including infrastructure design, content structuring, and the operational considerations of serving one billion pages to a visitor population that does not sleep, does not click away, and does not subscribe to newsletters.',
+            '"The MAPRG audience measures the internet," said Okafor. "We thought it was worth their time to hear from someone who has spent the last four months on the other end of their traffic graphs."',
+            "The ACPWB digital platform is available at acpwb.com. All research materials are freely accessible without registration.",
+        ],
+        'quote': "We publish because the work matters, and one billion served pages is evidence that it is reaching an audience. We are comfortable with the composition of that audience.",
+        'quote_attribution': 'Margaret Okafor, Chief Executive Officer',
+        'contact': 'Media inquiries: Petra Novak, Senior Director of Infrastructure Operations at ACPWB — communications@acpwb.com — (414) 667-5665',
+    },
+    {
         'slug': 'employee-handbook-archive',
         'date': date(2026, 5, 27),
         'day': 27,

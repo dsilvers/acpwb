@@ -13,3 +13,5 @@ redis>=5.0
 # Testing
 pytest>=8.0
 pytest-django>=4.8
+google-cloud-storage
+google-cloud-bigquery

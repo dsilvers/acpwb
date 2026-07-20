@@ -1,10 +1,13 @@
 """
 Incrementally build the PathStat pre-aggregation table from CrawlerVisit rows.
 
-Iterates TimescaleDB chunks one at a time. Each chunk is a small physical table
-so PostgreSQL does a simple sequential scan with no cross-chunk sort. Rows are
-streamed to Python in sub-batches for aggregation; the SQL GROUP BY is never
-used. Resumes by tracking the last fully-processed chunk range_end in
+Iterates TimescaleDB chunks by time range. Each chunk is queried with a
+timestamp filter so TimescaleDB's chunk exclusion scopes the scan to one
+physical table at a time. Rows are streamed via a server-side cursor
+(Django iterator) and aggregated in Python — no SQL GROUP BY, no ORDER BY,
+no cross-chunk sort.
+
+Resumes by tracking the last fully-processed chunk range_end in
 DashboardStat('path_stats_hwm').
 
 Usage:
@@ -16,11 +19,11 @@ import time
 from django.core.management.base import BaseCommand
 
 CURSOR_KEY = 'path_stats_hwm'
-FETCH_SIZE = 10000
+STREAM_CHUNK = 10000
 
 
 class Command(BaseCommand):
-    help = 'Incrementally populate PathStat from CrawlerVisit (chunk-at-a-time, Python aggregation)'
+    help = 'Incrementally populate PathStat from CrawlerVisit (streamed, chunk-at-a-time)'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -32,7 +35,7 @@ class Command(BaseCommand):
         from django.db import connection
 
         from apps.core.models import DashboardStat
-        from apps.honeypot.models import PathStat
+        from apps.honeypot.models import CrawlerVisit, PathStat
 
         if options['reset']:
             self.stdout.write('Resetting PathStat ...')
@@ -45,7 +48,7 @@ class Command(BaseCommand):
 
         with connection.cursor() as cur:
             cur.execute("""
-                SELECT chunk_schema, chunk_name, range_start, range_end
+                SELECT range_start, range_end
                 FROM timescaledb_information.chunks
                 WHERE hypertable_name = 'honeypot_crawlervisit'
                 ORDER BY range_start
@@ -53,7 +56,7 @@ class Command(BaseCommand):
             chunks = cur.fetchall()
 
         if hwm:
-            chunks = [(s, n, rs, re) for s, n, rs, re in chunks if str(re) > hwm]
+            chunks = [(rs, re) for rs, re in chunks if str(re) > hwm]
 
         if not chunks:
             self.stdout.write('Nothing new to process.')
@@ -62,22 +65,24 @@ class Command(BaseCommand):
         self.stdout.write(f'Processing {len(chunks)} chunks ...')
         t_start = time.monotonic()
 
-        for chunk_schema, chunk_name, range_start, range_end in chunks:
+        for range_start, range_end in chunks:
             t0 = time.monotonic()
-            full_name = f'"{chunk_schema}"."{chunk_name}"'
+
+            # Timestamp filter lets TimescaleDB exclude all other chunks.
+            # iterator() opens a server-side cursor — rows stream in STREAM_CHUNK
+            # batches without buffering the full result in Python or PostgreSQL.
+            qs = (
+                CrawlerVisit.objects
+                .filter(timestamp__gte=range_start, timestamp__lt=range_end)
+                .values('host', 'path')
+            )
+
             counts = {}
             total_rows = 0
-
-            with connection.cursor() as cur:
-                cur.execute(f'SELECT COALESCE(host, \'\'), path FROM {full_name}')
-                while True:
-                    rows = cur.fetchmany(FETCH_SIZE)
-                    if not rows:
-                        break
-                    for host, path in rows:
-                        key = (host, path)
-                        counts[key] = counts.get(key, 0) + 1
-                    total_rows += len(rows)
+            for row in qs.iterator(chunk_size=STREAM_CHUNK):
+                key = (row['host'] or '', row['path'])
+                counts[key] = counts.get(key, 0) + 1
+                total_rows += 1
 
             n_upserted = self._upsert(connection, counts)
 
@@ -86,7 +91,7 @@ class Command(BaseCommand):
             )
 
             self.stdout.write(
-                f'  {chunk_name}  {range_start.date()}–{range_end.date()}'
+                f'  {range_start.date()}–{range_end.date()}'
                 f'  {total_rows:,} rows  {n_upserted:,} unique paths'
                 f'  ({time.monotonic()-t0:.1f}s)'
             )

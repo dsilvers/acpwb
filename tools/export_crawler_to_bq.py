@@ -133,7 +133,7 @@ def export(args):
 
             with cur.copy(copy_sql) as copy:
                 for data in copy:
-                    # data is bytes; each chunk ends with a newline per row
+                    data = bytes(data)
                     rows_in_chunk = data.count(b"\n")
                     gz_file.write(data)
                     rows_in_part += rows_in_chunk

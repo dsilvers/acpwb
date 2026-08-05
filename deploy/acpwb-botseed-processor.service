@@ -1,0 +1,17 @@
+[Unit]
+Description=ACPWB botseed processor
+After=network.target redis-server.service acpwb-gunicorn.service
+
+[Service]
+Type=simple
+User=acpwb
+Group=acpwb
+WorkingDirectory=/home/acpwb/acpwb/acpwb
+EnvironmentFile=/home/acpwb/acpwb/.env
+Environment=REDIS_URL=redis://127.0.0.1:6379/0
+ExecStart=/home/acpwb/acpwb/acpwb/venv/bin/python manage.py botseed_processor
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

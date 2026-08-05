@@ -1,0 +1,22 @@
+[Unit]
+Description=ACPWB Gunicorn (Django)
+After=network.target postgresql.service redis-server.service
+
+[Service]
+Type=simple
+User=acpwb
+Group=acpwb
+WorkingDirectory=/home/acpwb/acpwb/acpwb
+EnvironmentFile=/home/acpwb/acpwb/.env
+Environment=REDIS_URL=redis://127.0.0.1:6379/0
+ExecStart=/home/acpwb/acpwb/acpwb/venv/bin/gunicorn config.wsgi:application \
+    --bind 127.0.0.1:8000 \
+    --worker-class gevent \
+    --workers 33 \
+    --worker-connections 1000 \
+    --timeout 60
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

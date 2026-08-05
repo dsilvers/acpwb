@@ -1,0 +1,19 @@
+[Unit]
+Description=ACPWB botseed WS/HTTP service
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+User=acpwb
+Group=acpwb
+WorkingDirectory=/home/acpwb/acpwb/botseed_service
+EnvironmentFile=/home/acpwb/acpwb/.env
+Environment=REDIS_URL=redis://127.0.0.1:6379/0
+Environment=WS_PORT=8766
+Environment=API_PORT=8767
+ExecStart=/home/acpwb/acpwb/botseed_service/venv/bin/python ws_server.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -44,3 +44,5 @@ coverage.xml
 
 acpwb/.venv-og/
 .venv-og/
+
+.direnv/

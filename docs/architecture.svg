@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="510" viewBox="0 0 1720 510">
+<rect width="1720" height="510" fill="white"/>
+<defs>
+  <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#555"/>
+  </marker>
+</defs>
+<style>
+  text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .node { fill: #f4f4f4; stroke: #aaa; stroke-width: 1.5; }
+  .grp  { fill: white; stroke: #aaa; stroke-width: 1.2; }
+  .shad { fill: white; stroke: #ccc; stroke-width: 1.2; }
+  .arr  { fill: none; stroke: #666; stroke-width: 1.5; marker-end: url(#ah); }
+  .nm   { font-size: 15px; fill: #111; text-anchor: middle; font-weight: 600; }
+  .sub  { font-size: 12px; fill: #333; text-anchor: middle; }
+  .lbl  { font-size: 12px; fill: #333; }
+  .gtl  { font-size: 12px; fill: #444; text-anchor: middle; font-weight: 500; }
+  .lbg  { fill: white; stroke: none; }
+</style>
+
+<!-- ── INTERNET GROUP (Bot + Human only) ── -->
+<rect x="18" y="22" width="312" height="148" rx="5" class="grp"/>
+<text x="174" y="15" class="gtl">Internet (AS16842)</text>
+
+<rect x="34" y="44" width="134" height="58" rx="4" class="node"/>
+<text x="101" y="78" class="nm">Crawler / Bot</text>
+
+<rect x="34" y="118" width="134" height="58" rx="4" class="node"/>
+<text x="101" y="152" class="nm">Human Visitor</text>
+
+<!-- ── SPAMMER (outside AS16842) ── -->
+<rect x="34" y="212" width="134" height="58" rx="4" class="node"/>
+<text x="101" y="246" class="nm">Spammer</text>
+
+<!-- ── CLOUDFLARE ── -->
+<rect x="406" y="196" width="154" height="70" rx="4" class="node"/>
+<text x="483" y="226" class="nm">Cloudflare</text>
+<text x="483" y="244" class="sub">Email Routing</text>
+
+<!-- ── NGINX ── -->
+<rect x="406" y="40" width="154" height="84" rx="4" class="node"/>
+<text x="483" y="72" class="nm">nginx</text>
+<text x="483" y="90" class="sub">(load balancer +</text>
+<text x="483" y="108" class="sub">TLS termination)</text>
+
+<!-- ── DJANGO WORKERS (shadows behind) ── -->
+<rect x="656" y="38" width="290" height="450" rx="6" class="shad"/>
+<rect x="648" y="30" width="290" height="450" rx="6" class="shad"/>
+<!-- ── DJANGO WORKERS MAIN ── -->
+<rect x="640" y="22" width="290" height="450" rx="6" class="grp"/>
+<text x="785" y="15" class="gtl">Django Workers (×N)</text>
+
+<rect x="656" y="44" width="258" height="82" rx="4" class="node"/>
+<text x="785" y="78" class="nm">BotTracking +</text>
+<text x="785" y="97" class="sub">RequestStream Middleware</text>
+
+<rect x="656" y="204" width="258" height="78" rx="4" class="node"/>
+<text x="785" y="237" class="nm">Views</text>
+<text x="785" y="256" class="sub">(honeypots, traps, content gen)</text>
+
+<rect x="656" y="358" width="258" height="92" rx="4" class="node"/>
+<text x="785" y="392" class="nm">Deterministic Content Engine</text>
+<text x="785" y="412" class="sub">(seed → same output)</text>
+
+<!-- ── REDIS ── -->
+<rect x="994" y="188" width="184" height="78" rx="4" class="node"/>
+<text x="1086" y="222" class="nm">Redis</text>
+<text x="1086" y="241" class="sub">(pub/sub + write queue)</text>
+
+<!-- ── WEBSOCKET SERVICE ── -->
+<rect x="1248" y="44" width="180" height="78" rx="4" class="node"/>
+<text x="1338" y="77" class="nm">WebSocket Service</text>
+<text x="1338" y="96" class="sub">(live stream)</text>
+
+<!-- ── LIVE STATS ── -->
+<rect x="1500" y="44" width="164" height="78" rx="4" class="node"/>
+<text x="1582" y="80" class="nm">Live Stats</text>
+<text x="1582" y="98" class="sub">(browser)</text>
+
+<!-- ── CRONS GROUP ── -->
+<rect x="1248" y="200" width="412" height="148" rx="5" class="grp"/>
+<text x="1454" y="193" class="gtl">Crons (1-min / 30-min)</text>
+
+<rect x="1262" y="222" width="172" height="60" rx="4" class="node"/>
+<text x="1348" y="257" class="nm">drain_crawler_data</text>
+
+<rect x="1452" y="222" width="192" height="60" rx="4" class="node"/>
+<text x="1548" y="250" class="nm">dashboard stats</text>
+<text x="1548" y="268" class="sub">+ graphs</text>
+
+<!-- ── POSTGRESQL ── -->
+<rect x="1340" y="412" width="234" height="82" rx="4" class="node"/>
+<text x="1457" y="444" class="nm">PostgreSQL</text>
+<text x="1457" y="462" class="sub">(CrawlerVisit, ArchiveVisit,</text>
+<text x="1457" y="478" class="sub">WikiPage, Reports…)</text>
+
+<!-- ════ ARROWS ════ -->
+
+<!-- Crawler/Bot → nginx -->
+<path d="M 168 73 L 406 73" class="arr"/>
+<rect x="240" y="56" width="46" height="17" class="lbg"/>
+<text x="242" y="69" class="lbl">HTTP</text>
+
+<!-- Human Visitor → nginx -->
+<path d="M 168 147 Q 300 147 406 100" class="arr"/>
+<rect x="240" y="130" width="46" height="17" class="lbg"/>
+<text x="242" y="143" class="lbl">HTTP</text>
+
+<!-- Spammer → Cloudflare -->
+<path d="M 168 241 Q 290 241 406 231" class="arr"/>
+<rect x="238" y="225" width="48" height="17" class="lbg"/>
+<text x="240" y="238" class="lbl">SMTP</text>
+
+<!-- Cloudflare → nginx -->
+<path d="M 483 196 L 483 124" class="arr"/>
+<rect x="490" y="152" width="96" height="17" class="lbg"/>
+<text x="492" y="165" class="lbl">HTTP webhook</text>
+
+<!-- nginx → Workers MW (round-robin) — label above with extra space -->
+<path d="M 560 82 L 656 82" class="arr"/>
+<rect x="562" y="52" width="90" height="17" class="lbg"/>
+<text x="564" y="65" class="lbl">round-robin</text>
+
+<!-- MW → Views -->
+<path d="M 785 126 L 785 204" class="arr"/>
+
+<!-- Views → Gen -->
+<path d="M 785 282 L 785 358" class="arr"/>
+
+<!-- Gen → Views (seed return arc, right side) -->
+<path d="M 914 358 L 926 358 L 926 243 L 914 243" class="arr"/>
+<rect x="800" y="311" width="40" height="17" class="lbg"/>
+<text x="802" y="324" class="lbl">seed</text>
+
+<!-- MW → Redis (Async RPUSH) — label above arrow, right of Workers -->
+<path d="M 914 85 Q 960 85 960 226 L 994 226" class="arr"/>
+<rect x="916" y="52" width="108" height="17" class="lbg"/>
+<text x="918" y="65" class="lbl">Async RPUSH</text>
+
+<!-- Redis → WS (pub/sub) — label left of curve -->
+<path d="M 1178 208 Q 1212 208 1212 83 L 1248 83" class="arr"/>
+<rect x="1140" y="140" width="60" height="17" class="lbg"/>
+<text x="1142" y="153" class="lbl">pub/sub</text>
+
+<!-- WS → Live Stats (WebSocket) — label above with extra space -->
+<path d="M 1428 83 L 1500 83" class="arr"/>
+<rect x="1434" y="55" width="84" height="17" class="lbg"/>
+<text x="1436" y="68" class="lbl">WebSocket</text>
+
+<!-- Redis → Crons -->
+<path d="M 1178 248 L 1248 264" class="arr"/>
+
+<!-- drain → PG -->
+<path d="M 1348 282 Q 1348 350 1412 412" class="arr"/>
+
+<!-- precalc → PG -->
+<path d="M 1548 282 Q 1548 350 1500 412" class="arr"/>
+
+</svg>

@@ -1,6 +1,4 @@
-import base64
 import re
-from pathlib import Path
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -42,18 +40,6 @@ def _log_crawler(request):
     except Exception:
         pass
 
-
-def _img_data_uri(static_relative_path):
-    """Return a base64 data URI for an image in the static directory, or None."""
-    if not static_relative_path:
-        return None
-    path = _STATIC_ROOT / static_relative_path
-    if not path.exists():
-        return None
-    ext = path.suffix.lstrip('.').lower()
-    mime = 'image/webp' if ext == 'webp' else f'image/{ext}'
-    data = base64.b64encode(path.read_bytes()).decode()
-    return f'data:{mime};base64,{data}'
 
 from .generators import (
     generate_presentation_meta,
@@ -197,18 +183,16 @@ def presentation_download_pdf(request, org_slug, year, month, day, slug):
     pres_meta = generate_presentation_meta(org_slug, year, month, day, slug)
     slides = [generate_slide(pres_meta, n) for n in range(1, pres_meta['slide_count'] + 1)]
 
-    for slide in slides:
-        slide['bg_image_uri'] = _img_data_uri(slide.get('bg_image'))
-        slide['image_path_uri'] = _img_data_uri(slide.get('image_path'))
-        slide['meme_path_uri'] = _img_data_uri(slide.get('meme_path'))
-
     from django.template.loader import render_to_string
     from weasyprint import HTML
     html_string = render_to_string('presentations/presentation_print.html', {
         'pres': pres_meta,
         'slides': slides,
     }, request=request)
-    pdf_bytes = HTML(string=html_string).write_pdf()
+    # base_url lets <img src="img/presentations/..."> resolve straight to disk
+    # instead of base64-encoding into the HTML string — avoids inflating the
+    # payload WeasyPrint has to parse/decode by ~33% per embedded image.
+    pdf_bytes = HTML(string=html_string, base_url=f'{_STATIC_ROOT}/').write_pdf()
     filename = f"{slug}-{year}-{month:02d}-{day:02d}.pdf"
     resp = HttpResponse(pdf_bytes, content_type='application/pdf')
     resp['Content-Disposition'] = f'attachment; filename="{filename}"'

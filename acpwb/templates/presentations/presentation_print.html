@@ -162,8 +162,8 @@
 <div class="slide-page slide-type-{{ slide.type }}"
      style="background-color:{{ slide.theme.bg }};color:{{ slide.theme.text }};">
 
-  {% if slide.bg_image_uri and slide.type == 'title' or slide.bg_image_uri and slide.type == 'qanda' %}
-  <img src="{{ slide.bg_image_uri }}" class="slide-bg-img" alt="">
+  {% if slide.bg_image and slide.type == 'title' or slide.bg_image and slide.type == 'qanda' %}
+  <img src="{{ slide.bg_image }}" class="slide-bg-img" alt="">
   <div class="slide-bg-overlay"></div>
   {% endif %}
 
@@ -258,16 +258,16 @@
     {% endif %}
   </div>{# /slide-inner #}
 
-  {% if slide.type == 'image' and slide.image_path_uri %}
+  {% if slide.type == 'image' and slide.image_path %}
   <div class="slide-image-full">
-    <img src="{{ slide.image_path_uri }}" alt="{{ slide.caption }}" class="slide-image-bg">
+    <img src="{{ slide.image_path }}" alt="{{ slide.caption }}" class="slide-image-bg">
     <div class="slide-image-caption">{{ slide.caption }}</div>
   </div>
   {% endif %}
 
-  {% if slide.type == 'meme' and slide.meme_path_uri %}
+  {% if slide.type == 'meme' and slide.meme_path %}
   <div class="slide-meme-frame" style="background:{{ slide.theme.bg }}">
-    <img src="{{ slide.meme_path_uri }}" alt="" class="slide-meme-img">
+    <img src="{{ slide.meme_path }}" alt="" class="slide-meme-img">
   </div>
   {% endif %}
 

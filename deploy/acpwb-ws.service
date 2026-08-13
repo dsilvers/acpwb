@@ -8,9 +8,8 @@ User=acpwb
 Group=acpwb
 WorkingDirectory=/home/acpwb/acpwb/ws_service
 EnvironmentFile=/home/acpwb/acpwb/.env
-Environment=REDIS_URL=redis://127.0.0.1:6379/0
 Environment=WS_PORT=8765
-ExecStart=/home/acpwb/acpwb/ws_service/venv/bin/python ws_server.py
+ExecStart=/home/acpwb/acpwb/.direnv/python-3.14/bin/python ws_server.py
 Restart=on-failure
 RestartSec=5
 

@@ -1,0 +1,28 @@
+# Step 1: Use this config FIRST to obtain the Let's Encrypt certificate.
+#
+#   sudo cp nginx/botseed.net.bootstrap /etc/nginx/sites-available/botseed.net
+#   sudo ln -s /etc/nginx/sites-available/botseed.net /etc/nginx/sites-enabled/botseed.net
+#   sudo mkdir -p /var/www/certbot
+#   sudo nginx -t && sudo systemctl reload nginx
+#   sudo certbot certonly --webroot -w /var/www/certbot -d botseed.net -d www.botseed.net
+#
+# Step 2: Once the cert exists, swap in the real config:
+#
+#   sudo cp nginx/botseed.net /etc/nginx/sites-available/botseed.net
+#   sudo nginx -t && sudo systemctl reload nginx
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name botseed.net www.botseed.net;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        root /home/acpwb/acpwb/botseed;
+        index index.html;
+        try_files $uri $uri/ =404;
+    }
+}

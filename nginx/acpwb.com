@@ -1,14 +1,14 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name acpwb.com www.acpwb.com;
+    server_name acpwb.com www.acpwb.com *.acpwb.com;
 
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;
     }
 
     location / {
-        return 301 https://acpwb.com$request_uri;
+        return 301 https://$host$request_uri;
     }
 }
 
@@ -28,26 +28,27 @@ server {
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
-    server_name acpwb.com;
+    server_name acpwb.com *.acpwb.com;
 
     ssl_certificate     /etc/letsencrypt/live/acpwb.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/acpwb.com/privkey.pem;
     include             /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam         /etc/letsencrypt/ssl-dhparams.pem;
 
-    access_log /var/log/nginx/acpwb.com.access.log;
+    # Buffered logging — flushes every 5s instead of a syscall per request
+    access_log /var/log/nginx/acpwb.com.access.log acpwb buffer=16k flush=5s;
     error_log  /var/log/nginx/acpwb.com.error.log;
 
     # Static files served directly — no Docker round-trip
     location /static/ {
-        alias /home/dan/acpwb.com/acpwb/staticfiles/;
+        alias /home/acpwb/acpwb/acpwb/staticfiles/;
         expires 30d;
         add_header Cache-Control "public, immutable";
         access_log off;
     }
 
     location /archive/ {
-        proxy_pass         http://127.0.0.1:8001;
+        proxy_pass         http://django_backend;
         proxy_http_version 1.1;
         proxy_set_header   Connection        "";
         proxy_set_header   Host              $host;
@@ -57,7 +58,7 @@ server {
     }
 
     location /wiki/ {
-        proxy_pass         http://127.0.0.1:8001;
+        proxy_pass         http://django_backend;
         proxy_http_version 1.1;
         proxy_set_header   Connection        "";
         proxy_set_header   Host              $host;
@@ -67,7 +68,7 @@ server {
     }
 
     location /reports/ {
-        proxy_pass         http://127.0.0.1:8001;
+        proxy_pass         http://django_backend;
         proxy_http_version 1.1;
         proxy_set_header   Connection        "";
         proxy_set_header   Host              $host;
@@ -78,7 +79,7 @@ server {
 
     # /.well-known/ must reach Django (honeypot endpoints — not cached)
     location /.well-known/ {
-        proxy_pass         http://127.0.0.1:8001;
+        proxy_pass         http://django_backend;
         proxy_http_version 1.1;
         proxy_set_header   Connection        "";
         proxy_set_header   Host              $host;
@@ -88,7 +89,7 @@ server {
     }
 
     location /ws/requests/ {
-        proxy_pass         http://127.0.0.1:8001;
+        proxy_pass         http://127.0.0.1:8765;
         proxy_http_version 1.1;
         proxy_set_header   Upgrade           $http_upgrade;
         proxy_set_header   Connection        "upgrade";
@@ -101,7 +102,7 @@ server {
     }
 
     location / {
-        proxy_pass         http://127.0.0.1:8001;
+        proxy_pass         http://django_backend;
         proxy_http_version 1.1;
         proxy_set_header   Connection        "";
         proxy_set_header   Host              $host;

@@ -35,11 +35,12 @@ server {
     include             /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam         /etc/letsencrypt/ssl-dhparams.pem;
 
-    access_log /var/log/nginx/botseed.net.access.log;
+    # Buffered logging — flushes every 5s instead of a syscall per request
+    access_log /var/log/nginx/botseed.net.access.log combined buffer=16k flush=5s;
     error_log  /var/log/nginx/botseed.net.error.log;
 
     # Static site served directly from checkout
-    root /home/dan/acpwb.com/botseed;
+    root /home/acpwb/acpwb/botseed;
     index index.html;
 
     # WebSocket — proxy to botseed_ws container

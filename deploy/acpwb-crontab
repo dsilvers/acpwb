@@ -1,4 +1,6 @@
 # ACPWB production cron jobs — install with: crontab -u acpwb deploy/acpwb-crontab
-*/30 * * * * /home/acpwb/acpwb/acpwb/venv/bin/python /home/acpwb/acpwb/acpwb/manage.py precalc_dashboard >> /var/log/acpwb-precalc.log 2>&1
-* * * * * /home/acpwb/acpwb/acpwb/venv/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_crawler_queue >> /var/log/acpwb-crawler-drain.log 2>&1
-* * * * * /home/acpwb/acpwb/acpwb/venv/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_archive_queue >> /var/log/acpwb-archive-drain.log 2>&1
+#
+# cron does not load .env, so each job sources it manually before invoking manage.py
+*/30 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py precalc_dashboard' >> /var/log/acpwb-precalc.log 2>&1
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_crawler_queue' >> /var/log/acpwb-crawler-drain.log 2>&1
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_archive_queue' >> /var/log/acpwb-archive-drain.log 2>&1

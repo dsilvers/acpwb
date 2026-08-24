@@ -245,6 +245,9 @@ _STYLE_SUFFIX = ', corporate photography, photorealistic, 8k, tack sharp, navy a
 _NEGATIVE_PROMPT = (
     'watermark, logo, document, slide, '
     'poster, signage, caption, user interface, website, screenshot, dashboard, '
+    'people, person, man, woman, figure, silhouette, face, portrait, '
+    'watermark, logo, document, slide, poster, signage, caption, text, '
+    'user interface, website, screenshot, dashboard, '
     'stairs, staircase, escalator, surreal, '
     'bokeh, shallow depth of field, blurry background, out of focus, '
     'cartoon, anime, low quality, blurry, distorted, ugly, nsfw'

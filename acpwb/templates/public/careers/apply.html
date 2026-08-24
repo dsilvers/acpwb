@@ -40,6 +40,11 @@
           </p>
         </div>
 
+        {% if form_unavailable %}
+        <div style="background:white;border:1px solid var(--border);border-left:4px solid #dc2626;padding:1.5rem;font-size:.92rem;color:var(--navy)">
+          Sorry, this job application form is unavailable.
+        </div>
+        {% else %}
         <form method="post" enctype="multipart/form-data" novalidate>
           {% csrf_token %}
 
@@ -124,6 +129,7 @@
             Submit Application
           </button>
         </form>
+        {% endif %}
 
       </div>
 

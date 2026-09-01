@@ -48,13 +48,9 @@ class RequestStreamMiddleware:
 
         # Fire-and-forget: nothing in the response path depends on this, so
         # publish it on a background greenlet instead of blocking the
-        # response on a Redis round-trip. Falls back to inline if gevent
-        # isn't the active worker model (e.g. local `runserver`).
-        try:
-            import gevent
-            gevent.spawn(self._safe_publish, request, response, elapsed_ms)
-        except Exception:
-            self._safe_publish(request, response, elapsed_ms)
+        # response on a Redis round-trip.
+        from apps.core.async_utils import spawn
+        spawn(self._safe_publish, request, response, elapsed_ms)
 
         return response
 

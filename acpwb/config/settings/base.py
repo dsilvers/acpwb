@@ -1,7 +1,16 @@
+import sys
 import environ
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# True when running under pytest. Honeypot logging normally defers Redis/DB
+# writes to a background gevent greenlet (see apps.core.crawler_queue), which
+# relies on gunicorn's gevent worker monkey-patching the process — that never
+# happens under the test runner, so nothing yields control back to the
+# greenlet before a test's assertions run. Tests need those writes to stay
+# synchronous.
+TESTING = 'pytest' in sys.modules
 
 env = environ.Env(
     DJANGO_DEBUG=(bool, False),

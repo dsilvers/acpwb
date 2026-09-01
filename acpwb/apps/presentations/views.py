@@ -16,9 +16,8 @@ def _get_ip(request):
 
 def _log_crawler(request):
     try:
-        from apps.core.crawler_queue import push_crawler_visit
+        from apps.core.crawler_queue import queue_crawler_visit
         from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
-        from apps.honeypot.models import CrawlerVisit
         from django.utils import timezone
         ua = request.META.get('HTTP_USER_AGENT', '')
         ip = _get_ip(request)
@@ -35,8 +34,7 @@ def _log_crawler(request):
             'bot_type': bot_type,
             'bot_group': bot_type_to_group(bot_type),
         }
-        if not push_crawler_visit(data):
-            CrawlerVisit.objects.create(**data)
+        queue_crawler_visit(data)
     except Exception:
         pass
 

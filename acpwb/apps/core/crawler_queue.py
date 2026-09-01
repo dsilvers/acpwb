@@ -92,6 +92,44 @@ def pop_crawler_visits(count: int = 500) -> list:
         return []
 
 
+def _write_crawler_visit(data: dict):
+    if not push_crawler_visit(data):
+        try:
+            from apps.honeypot.models import CrawlerVisit
+            CrawlerVisit.objects.create(**data)
+        except Exception:
+            pass
+
+
+def queue_crawler_visit(data: dict) -> None:
+    """
+    Fire-and-forget: RPUSH `data` onto the crawler queue, falling back to a
+    direct DB write if Redis is unavailable — same reliability as calling
+    push_crawler_visit() directly, but off the request's critical path.
+    """
+    from apps.core.async_utils import spawn
+    spawn(_write_crawler_visit, data)
+
+
+def _write_archive_visit(data: dict):
+    if not push_archive_visit(data):
+        try:
+            from apps.honeypot.models import ArchiveVisit
+            ArchiveVisit.objects.create(**data)
+        except Exception:
+            pass
+
+
+def queue_archive_visit(data: dict) -> None:
+    """
+    Fire-and-forget: RPUSH `data` onto the archive queue, falling back to a
+    direct DB write if Redis is unavailable — same reliability as calling
+    push_archive_visit() directly, but off the request's critical path.
+    """
+    from apps.core.async_utils import spawn
+    spawn(_write_archive_visit, data)
+
+
 def queue_length() -> int:
     """Return the current queue depth, or -1 if Redis is unavailable."""
     r = _get_client()

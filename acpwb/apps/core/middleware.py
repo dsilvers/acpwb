@@ -97,8 +97,7 @@ class BotTrackingMiddleware:
         # Deferred imports to avoid circular issues at middleware load time
         try:
             from django.utils import timezone
-            from apps.core.crawler_queue import push_crawler_visit
-            from apps.honeypot.models import CrawlerVisit
+            from apps.core.crawler_queue import queue_crawler_visit
             ip = self._get_ip(request)
             trap_type = self._classify_path(path)
             ua = user_agent or ''
@@ -113,8 +112,7 @@ class BotTrackingMiddleware:
                 'bot_type': bot_type,
                 'bot_group': bot_group,
             }
-            if not push_crawler_visit(data):
-                CrawlerVisit.objects.create(**data)
+            queue_crawler_visit(data)
         except Exception:
             pass  # Never let honeypot logging break the response
 

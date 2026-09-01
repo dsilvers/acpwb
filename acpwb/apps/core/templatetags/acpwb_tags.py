@@ -9,6 +9,12 @@ HEADSHOT_DIR = Path(__file__).resolve().parents[3] / "static" / "img" / "headsho
 HEADSHOT_COUNT = 400
 SPEAKERS_DIR = Path(__file__).resolve().parents[3] / "static" / "img" / "speakers"
 
+# These are build-time generated assets that don't change while the process
+# is running, so list the directories once instead of stat'ing per template
+# render (headshot_or_avatar/speaker_avatar are called many times per page).
+_HEADSHOT_STEMS = frozenset(p.stem for p in HEADSHOT_DIR.glob('*.webp')) if HEADSHOT_DIR.is_dir() else frozenset()
+_SPEAKER_STEMS = frozenset(p.stem for p in SPEAKERS_DIR.glob('*.webp')) if SPEAKERS_DIR.is_dir() else frozenset()
+
 register = template.Library()
 
 # Palette of color pairs for CSS gradient avatars
@@ -45,9 +51,9 @@ def avatar_card(seed, initials, size=80):
 def headshot_or_avatar(seed, initials_text, size=80):
     """Use a generated headshot if available, otherwise fall back to CSS gradient avatar."""
     idx = int(hashlib.md5(str(seed).encode()).hexdigest(), 16) % HEADSHOT_COUNT
-    img_path = HEADSHOT_DIR / f"{idx:03d}.webp"
-    if img_path.exists():
-        url = static(f"img/headshots/{idx:03d}.webp")
+    stem = f"{idx:03d}"
+    if stem in _HEADSHOT_STEMS:
+        url = static(f"img/headshots/{stem}.webp")
         style = (
             f'width:{size}px;height:{size}px;border-radius:50%;'
             f'object-fit:cover;object-position:center top;flex-shrink:0;'
@@ -66,8 +72,7 @@ def schedule_speaker_name(value):
 def speaker_avatar(name, initials_text, size=80):
     """Show a generated speaker headshot if available, otherwise fall back to gradient avatar."""
     slug = re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
-    img_path = SPEAKERS_DIR / f"{slug}.webp"
-    if img_path.exists():
+    if slug in _SPEAKER_STEMS:
         url = static(f"img/speakers/{slug}.webp")
         style = (
             f'width:{size}px;height:{size}px;border-radius:50%;'

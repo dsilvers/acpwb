@@ -21,7 +21,7 @@ from apps.people.generators import (
     FIRST_NAMES as _INT_FIRST_NAMES, LAST_NAMES as _INT_LAST_NAMES,
     TITLES as _INT_TITLES, DEPARTMENTS as _INT_DEPARTMENTS,
 )
-from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, CanaryToken
+from .models import WikiPage, PublicReport, InternalLoginAttempt, CanaryToken
 from .wiki_generator import generate_wiki_page, TOPICS
 from .report_generator import (
     REPORT_CATALOG, REPORT_CATEGORIES,
@@ -39,10 +39,11 @@ def _get_ip(request):
 
 def _log_crawler(request, trap_type):
     try:
-        from apps.core.crawler_queue import push_crawler_visit
+        from apps.core.crawler_queue import queue_crawler_visit
         from django.utils import timezone
         ua = request.META.get('HTTP_USER_AGENT', '')
         ip = _get_ip(request)
+        bot_type = classify_ua_or_ip(ua, ip)
         data = {
             'timestamp': timezone.now().isoformat(),
             'ip_address': ip,
@@ -52,11 +53,10 @@ def _log_crawler(request, trap_type):
             'referrer': request.META.get('HTTP_REFERER', '')[:256],
             'trap_type': trap_type,
             'query_string': request.META.get('QUERY_STRING', '')[:256],
-            'bot_type': classify_ua_or_ip(ua, ip),
-            'bot_group': bot_type_to_group(classify_ua_or_ip(ua, ip)),
+            'bot_type': bot_type,
+            'bot_group': bot_type_to_group(bot_type),
         }
-        if not push_crawler_visit(data):
-            CrawlerVisit.objects.create(**data)
+        queue_crawler_visit(data)
     except Exception:
         pass
 
@@ -889,7 +889,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     depth = slug.count('/') + 1 if slug else 0
 
     try:
-        from apps.core.crawler_queue import push_archive_visit
+        from apps.core.crawler_queue import queue_archive_visit
         from django.utils import timezone
         data = {
             'timestamp': timezone.now().isoformat(),
@@ -899,12 +899,17 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
             'slug': slug[:512],
             'depth': depth,
         }
-        if not push_archive_visit(data):
-            ArchiveVisit.objects.create(**data)
+        queue_archive_visit(data)
     except Exception:
         pass
 
     rng = random.Random(hashlib.md5(f"{year}{month}{day}{slug}".encode()).hexdigest())
+
+    rng = random.Random(
+        hashlib.md5(
+            f"{year}{month}{day}{slug}".encode()
+        ).hexdigest()
+    )
 
     next_slug = (f"{slug}/{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
                  if slug else f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}")

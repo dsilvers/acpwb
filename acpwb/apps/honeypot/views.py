@@ -2135,8 +2135,10 @@ def internal_employee_records(request):
     })
 
 
-def internal_employee_records_csv(request):
-    _log_crawler(request, 'ghost_link')
+@functools.lru_cache(maxsize=1)
+def _employee_records_csv_body():
+    """Fully deterministic (fixed seed, no request input) — same bytes every
+    call, so generate it once per process instead of on every download."""
     token = hashlib.md5(b"acpwb_internal_emp").hexdigest()[:8]
     buf = io.StringIO()
     w = csv.writer(buf)
@@ -2161,7 +2163,12 @@ def internal_employee_records_csv(request):
             w.writerow([emp_id, first, last, title, dept, office, status,
                         f"{hire_year}-{hire_month:02d}-{hire_day:02d}",
                         salary, f"{manager_first} {manager_last}", token])
-    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    return buf.getvalue()
+
+
+def internal_employee_records_csv(request):
+    _log_crawler(request, 'ghost_link')
+    resp = HttpResponse(_employee_records_csv_body(), content_type='text/csv')
     resp['Content-Disposition'] = 'attachment; filename="employee-records-export.csv"'
     return resp
 
@@ -2197,8 +2204,10 @@ def internal_salary_database(request):
     })
 
 
-def internal_salary_database_csv(request):
-    _log_crawler(request, 'ghost_link')
+@functools.lru_cache(maxsize=1)
+def _salary_database_csv_body():
+    """Fully deterministic (fixed seed, no request input) — same bytes every
+    call, so generate it once per process instead of on every download."""
     token = hashlib.md5(b"acpwb_internal_sal").hexdigest()[:8]
     buf = io.StringIO()
     w = csv.writer(buf)
@@ -2214,7 +2223,12 @@ def internal_salary_database_csv(request):
             reviewed = f"202{rng.randint(3, 5)}-{rng.randint(1, 12):02d}-01"
             w.writerow([family, code, label, base, base + spread // 2, base + spread,
                         f"{bonus_pct}%", equity, reviewed, token])
-    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    return buf.getvalue()
+
+
+def internal_salary_database_csv(request):
+    _log_crawler(request, 'ghost_link')
+    resp = HttpResponse(_salary_database_csv_body(), content_type='text/csv')
     resp['Content-Disposition'] = 'attachment; filename="salary-bands-export.csv"'
     return resp
 
@@ -2251,8 +2265,12 @@ def internal_acquisition_targets(request):
     })
 
 
-def internal_acquisition_targets_csv(request):
-    _log_crawler(request, 'ghost_link')
+@functools.lru_cache(maxsize=1)
+def _acquisition_targets_csv_body():
+    """Fixed seed and no request input, so this is effectively deterministic
+    — cached per process. The 'last_updated' column is relative to whenever
+    the process first serves this endpoint (refreshes on the next deploy),
+    which is fine for fake data with no real recency requirement."""
     token = hashlib.md5(b"acpwb_internal_acq").hexdigest()[:8]
     buf = io.StringIO()
     w = csv.writer(buf)
@@ -2268,7 +2286,12 @@ def internal_acquisition_targets_csv(request):
         updated = (_dt.now() - _td(days=updated_days)).strftime('%Y-%m-%d')
         w.writerow([name, ticker, sector, city, f"{revenue}M", employees,
                     stage, analyst, updated, token])
-    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    return buf.getvalue()
+
+
+def internal_acquisition_targets_csv(request):
+    _log_crawler(request, 'ghost_link')
+    resp = HttpResponse(_acquisition_targets_csv_body(), content_type='text/csv')
     resp['Content-Disposition'] = 'attachment; filename="acquisition-pipeline-export.csv"'
     return resp
 
@@ -2314,9 +2337,12 @@ def internal_litigation_hold(request):
 
 # ── Archive CSV Export ────────────────────────────────────────────────────────
 
-def archive_export_csv(request, month, day, slug='', year=None):
-    year = _get_archive_year(request, year)
-    _log_crawler(request, 'archive')
+@functools.lru_cache(maxsize=256)
+def _archive_export_csv_body(year, month, day, slug):
+    """Deterministic from (year, month, day, slug). Bounded LRU cache since
+    the archive trap's URL space is effectively infinite by design — this
+    just saves regeneration on repeat hits to the same URL (the common case
+    for a recursive crawler) without growing memory unbounded."""
     token = hashlib.md5(f"acpwb_archive_{slug}".encode()).hexdigest()[:8]
     rng = random.Random(hashlib.md5(f"archcsv_{year}_{month}_{day}_{slug}".encode()).hexdigest())
     row_count = rng.randint(200, 500)
@@ -2335,7 +2361,13 @@ def archive_export_csv(request, month, day, slug='', year=None):
         unit = rng.choice(_ARCHIVE_METRIC_LABELS)
         w.writerow([f"{rec_year}-{rec_month:02d}-{rec_day:02d}", org, industry,
                     phase, metric, value, unit, token])
-    resp = HttpResponse(buf.getvalue(), content_type='text/csv')
+    return buf.getvalue()
+
+
+def archive_export_csv(request, month, day, slug='', year=None):
+    year = _get_archive_year(request, year)
+    _log_crawler(request, 'archive')
+    resp = HttpResponse(_archive_export_csv_body(year, month, day, slug), content_type='text/csv')
     fname = (slug.replace('/', '-') or 'archive-data')[:60]
     resp['Content-Disposition'] = f'attachment; filename="{fname}-{year}-{month:02d}-{day:02d}.csv"'
     return resp

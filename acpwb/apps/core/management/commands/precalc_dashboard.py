@@ -206,14 +206,26 @@ class Command(BaseCommand):
         self._set_stat('archive.total', total)
         self._done(f'{total:,}')
 
+        computed = {}
         for label, key, field in [
             ('by_depth', 'archive.by_depth', 'depth'),
             ('by_ip',    'archive.by_ip',    'ip_address'),
             ('by_slug',  'archive.by_slug',  'slug'),
         ]:
             self._step(f'{label}...')
-            self._set_stat(key, self._agg_dict(ArchiveVisit.objects, field))
+            d = self._agg_dict(ArchiveVisit.objects, field)
+            self._set_stat(key, d)
+            computed[label] = d
             self._done()
+
+        self._step('max_depth_by_ip...')
+        # Scoped to by_ip's own key set (rather than pruned by depth value)
+        # so this stays consistent with what the dashboard actually looks up.
+        ip_keys = list(computed['by_ip'].keys())
+        rows = (ArchiveVisit.objects.filter(ip_address__in=ip_keys)
+                .values('ip_address').annotate(m=Max('depth')))
+        self._set_stat('archive.max_depth_by_ip', {str(r['ip_address'] or ''): r['m'] for r in rows})
+        self._done()
 
         self._step('daily (30d)...')
         rows = (ArchiveVisit.objects
@@ -507,10 +519,21 @@ class Command(BaseCommand):
         self._inc_dict(stat, new_rows, 'ip_address')
         stat.value = self._prune(stat.value)
         stat.save()
+        by_ip_keys = set(stat.value.keys())
 
         stat = self._upsert('archive.by_slug', {})
         self._inc_dict(stat, new_rows, 'slug')
         stat.value = self._prune(stat.value)
+        stat.save()
+
+        # Scoped to by_ip's current key set (rather than pruned by depth
+        # value) so this stays consistent with what the dashboard looks up.
+        stat = self._upsert('archive.max_depth_by_ip', {})
+        for row in new_rows.values('ip_address').annotate(m=Max('depth')):
+            ip = str(row['ip_address'] or '')
+            if ip in by_ip_keys:
+                stat.value[ip] = max(stat.value.get(ip, 0), row['m'])
+        stat.value = {ip: d for ip, d in stat.value.items() if ip in by_ip_keys}
         stat.save()
 
         # Bot type via UA + IP classification — chunked to avoid large cursors

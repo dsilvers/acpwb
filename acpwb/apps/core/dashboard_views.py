@@ -10,7 +10,6 @@ Recent records (last 50 visits, last 5 emails, etc.) are always live queries.
 from datetime import date, timedelta
 
 from django.contrib.admin.views.decorators import staff_member_required
-from django.db.models import Max
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
@@ -193,19 +192,12 @@ def crawlers(request):
 
 @staff_member_required(login_url='/django-admin/login/')
 def archive(request):
-    # Top IPs need max_depth — read top 20 from stored dict, then query max_depth
+    # Top IPs need max_depth — both read from precalculated stats (no live query)
     by_ip = _stat('archive.by_ip', {})
+    depth_map = _stat('archive.max_depth_by_ip', {})
     top_ip_keys = [ip for ip, _ in sorted(by_ip.items(), key=lambda x: x[1], reverse=True)[:20]]
-    ip_count_map = {ip: by_ip[ip] for ip in top_ip_keys}
-    max_depths = (
-        ArchiveVisit.objects
-        .filter(ip_address__in=top_ip_keys)
-        .values('ip_address')
-        .annotate(max_depth=Max('depth'))
-    )
-    depth_map = {r['ip_address']: r['max_depth'] for r in max_depths}
     top_ips = [
-        {'ip_address': ip, 'count': ip_count_map[ip], 'max_depth': depth_map.get(ip, 0)}
+        {'ip_address': ip, 'count': by_ip[ip], 'max_depth': depth_map.get(ip, 0)}
         for ip in top_ip_keys
     ]
 
@@ -371,12 +363,17 @@ def voicemail_audio(request, recording_sid):
 
 @staff_member_required(login_url='/django-admin/login/')
 def careers_applications(request):
-    from django.db.models import Count
+    from django.db.models import Count, Q
 
     qs = JobApplication.objects.all()
-    total = qs.count()
-    with_resume = qs.exclude(resume_filename='').count()
-    jobs_count = qs.values('job_title').distinct().count()
+    agg = qs.aggregate(
+        total=Count('id'),
+        with_resume=Count('id', filter=~Q(resume_filename='')),
+        jobs_count=Count('job_title', distinct=True),
+    )
+    total = agg['total']
+    with_resume = agg['with_resume']
+    jobs_count = agg['jobs_count']
 
     by_job = (
         qs.values('job_title')

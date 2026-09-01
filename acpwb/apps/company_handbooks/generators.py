@@ -1,3 +1,4 @@
+import functools
 import hashlib
 import random
 
@@ -206,6 +207,7 @@ def generate_revision_toc(agency_slug, seed4, year, revision):
     }
 
 
+@functools.lru_cache(maxsize=4096)
 def generate_section(agency_slug, seed4, year, revision, section_slug):
     """Generate full content for a single handbook section."""
     if section_slug not in SECTION_DICT:
@@ -308,6 +310,7 @@ HANDBOOK_YEARS = list(range(2025, 1992, -1))
 _GROUP_SECTIONS_PER_PAGE = 6
 
 
+@functools.lru_cache(maxsize=1024)
 def generate_group_page(agency_slug, seed4, year, revision, group_slug, page=1):
     """Generate section content for one paginated chapter page."""
     if group_slug not in GROUP_SECTIONS:

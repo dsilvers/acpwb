@@ -3,6 +3,7 @@ Deterministic public policy document generator for ACPWB.
 Seed: year + month + day + agency acronym + slug — same inputs always return same output.
 """
 import datetime
+import functools
 import hashlib
 import random
 
@@ -178,6 +179,7 @@ def _generate_table(rng, year, month, agency_full, policy_domain, topic_short):
         }
 
 
+@functools.lru_cache(maxsize=4096)
 def _generate_doc_stub(year, month, day, agency, slug, url_fn=None):
     """Lightweight stub: title, URL, position, and metadata — RNG sequence matches generate_policy_document."""
     seed = f"acpwb_policy_{year}_{month:02d}_{day:02d}_{agency}_{slug}"
@@ -211,6 +213,7 @@ def _generate_doc_stub(year, month, day, agency, slug, url_fn=None):
     }
 
 
+@functools.lru_cache(maxsize=2048)
 def generate_related_links(year, month, day, agency, slug, url_fn=None):
     """Return related filing stubs for cross-linking. Isolated RNG — never disturbs main doc seed."""
     seed = f"acpwb_policy_{year}_{month:02d}_{day:02d}_{agency}_{slug}"
@@ -276,6 +279,7 @@ def generate_related_links(year, month, day, agency, slug, url_fn=None):
 
 # ── Main generator function ───────────────────────────────────────────────────
 
+@functools.lru_cache(maxsize=2048)
 def generate_policy_document(year, month, day, agency, slug):
     """Return a fully generated policy document dict, deterministic from inputs."""
     seed = f"acpwb_policy_{year}_{month:02d}_{day:02d}_{agency}_{slug}"
@@ -545,6 +549,7 @@ def get_policy_year_months(year):
     return months
 
 
+@functools.lru_cache(maxsize=1024)
 def get_policy_month_entries(year, month):
     """Return policy filing stubs for /public-policy/YYYY/MM/."""
     rng = _rng_from_seed(f"policy_month_{year}_{month:02d}")
@@ -558,10 +563,9 @@ def get_policy_month_entries(year, month):
         raw.append((day, agency, slug))
     entries = []
     for day, agency, slug in raw:
-        stub = _generate_doc_stub(year, month, day, agency, slug)
-        stub['day'] = day
-        stub['agency'] = agency
-        stub['slug'] = slug
+        # _generate_doc_stub() is memoized — copy before adding fields so we
+        # never mutate the shared cached dict.
+        stub = {**_generate_doc_stub(year, month, day, agency, slug), 'day': day, 'agency': agency, 'slug': slug}
         stub['agency_full'] = AGENCIES.get(agency, (f"{agency.upper()} Regulatory Authority",))[0]
         entries.append(stub)
     entries.sort(key=lambda e: e['day'])
@@ -626,10 +630,9 @@ def get_policy_agency_month_entries(agency, year, month, url_fn=None):
     for _ in range(count):
         day = rng.randint(1, 28)
         slug = rng.choice(POLICY_SLUGS)
-        stub = _generate_doc_stub(year, month, day, agency, slug, url_fn=url_fn)
-        stub['day'] = day
-        stub['agency'] = agency
-        stub['slug'] = slug
+        # _generate_doc_stub() is memoized — copy before adding fields so we
+        # never mutate the shared cached dict.
+        stub = {**_generate_doc_stub(year, month, day, agency, slug, url_fn=url_fn), 'day': day, 'agency': agency, 'slug': slug}
         stub['agency_full'] = AGENCIES.get(agency, (f"{agency.upper()} Regulatory Authority",))[0]
         entries.append(stub)
     entries.sort(key=lambda e: e['day'])
@@ -658,6 +661,7 @@ def get_cross_policy_stubs(year, month, day, slug):
     return stubs
 
 
+@functools.lru_cache(maxsize=2048)
 def get_cross_archive_stubs(year, month, day, agency, slug):
     """Return 2-4 archive stubs for a policy detail sidebar, or None (~30% chance of showing)."""
     rng = _rng_from_seed(f"crosslink_archive_acpwb_policy_{year}_{month:02d}_{day:02d}_{agency}_{slug}")

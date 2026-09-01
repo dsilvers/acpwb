@@ -3129,9 +3129,11 @@ def policy_subdomain_detail(request, year, month, day, slug):
     _log_crawler(request, 'policy')
     from .policy_generator import generate_policy_document, generate_related_links, get_cross_archive_stubs
     url_fn = lambda y, m, d, ag, sl: _policy_url(request, y, m, d, ag, sl)
-    doc = generate_policy_document(year, month, day, agency, slug)
-    # Override the doc URL to the subdomain-relative path
-    doc['url'] = url_fn(year, month, day, agency, slug)
+    # generate_policy_document() is memoized, so don't mutate its return
+    # value in place (that would leak this subdomain-relative URL into
+    # other callers sharing the same cache entry, e.g. public_policy_detail
+    # on the main domain) — copy before overriding the URL.
+    doc = {**generate_policy_document(year, month, day, agency, slug), 'url': url_fn(year, month, day, agency, slug)}
     related = generate_related_links(year, month, day, agency, slug, url_fn=url_fn)
     related_archive = get_cross_archive_stubs(year, month, day, agency, slug)
     from apps.core.context_processors import honeypot_context

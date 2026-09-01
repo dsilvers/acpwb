@@ -1,3 +1,4 @@
+import functools
 import hashlib
 import math
 import random
@@ -571,6 +572,7 @@ def _generate_title(rng, industry, domain, verb, noun):
                  verb=verb, adj=adj_clean, noun=noun)
 
 
+@functools.lru_cache(maxsize=2048)
 def generate_presentations_for_context(context_seed, count=12):
     """Generate a list of presentation metadata dicts for list pages."""
     results = []

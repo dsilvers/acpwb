@@ -46,12 +46,23 @@ class RequestStreamMiddleware:
         response = self.get_response(request)
         elapsed_ms = round((time.monotonic() - t0) * 1000)
 
+        # Fire-and-forget: nothing in the response path depends on this, so
+        # publish it on a background greenlet instead of blocking the
+        # response on a Redis round-trip. Falls back to inline if gevent
+        # isn't the active worker model (e.g. local `runserver`).
+        try:
+            import gevent
+            gevent.spawn(self._safe_publish, request, response, elapsed_ms)
+        except Exception:
+            self._safe_publish(request, response, elapsed_ms)
+
+        return response
+
+    def _safe_publish(self, request, response, elapsed_ms):
         try:
             self._publish(request, response, elapsed_ms)
         except Exception:
             pass  # never let streaming break the response
-
-        return response
 
     def _publish(self, request, response, elapsed_ms):
         global _redis_client, _last_failure
@@ -76,13 +87,19 @@ class RequestStreamMiddleware:
                 pass
 
         ua = request.META.get('HTTP_USER_AGENT', '')
-        try:
-            from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
-            bot_type = classify_ua_or_ip(ua, ip)
-            bot_group = bot_type_to_group(bot_type)
-        except Exception:
-            bot_type = ''
-            bot_group = ''
+        cached = getattr(request, '_bot_classification', None)
+        if cached is not None:
+            bot_type, bot_group = cached
+        else:
+            # BotTrackingMiddleware normally computes and caches this per
+            # request; fall back to computing it here if it didn't run.
+            try:
+                from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
+                bot_type = classify_ua_or_ip(ua, ip)
+                bot_group = bot_type_to_group(bot_type)
+            except Exception:
+                bot_type = ''
+                bot_group = ''
 
         payload = json.dumps({
             'ip': ip_censored,

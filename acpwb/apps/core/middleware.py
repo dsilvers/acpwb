@@ -71,28 +71,37 @@ class BotTrackingMiddleware:
         user_agent = request.META.get('HTTP_USER_AGENT', '')
         path = request.path
 
+        # Classify once per request and cache it on the request object so
+        # RequestStreamMiddleware (which needs bot_type/bot_group for every
+        # request anyway) doesn't redo the same UA/IP matching.
+        try:
+            from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
+            bot_type = classify_ua_or_ip(user_agent, self._get_ip(request))
+            bot_group = bot_type_to_group(bot_type)
+        except Exception:
+            bot_type, bot_group = '', ''
+        request._bot_classification = (bot_type, bot_group)
+
         # Log bot UA hits only on paths NOT already logged by a honeypot view.
         # Honeypot views call _log_crawler themselves with more specific trap types.
         # Also skip archive subdomain requests — those views log their own CrawlerVisits.
         if (BOT_UA_PATTERNS.search(user_agent)
                 and not VIEW_LOGGED_PATHS.match(path)
                 and getattr(request, 'urlconf', None) not in (ARCHIVE_SUBDOMAIN_URLCONF, POLICY_SUBDOMAIN_URLCONF)):
-            self._log_bot_visit(request, user_agent, path)
+            self._log_bot_visit(request, user_agent, path, bot_type, bot_group)
 
         response = self.get_response(request)
         return response
 
-    def _log_bot_visit(self, request, user_agent, path):
+    def _log_bot_visit(self, request, user_agent, path, bot_type, bot_group):
         # Deferred imports to avoid circular issues at middleware load time
         try:
             from django.utils import timezone
-            from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
             from apps.core.crawler_queue import push_crawler_visit
             from apps.honeypot.models import CrawlerVisit
             ip = self._get_ip(request)
             trap_type = self._classify_path(path)
             ua = user_agent or ''
-            bot_type = classify_ua_or_ip(ua, ip)
             data = {
                 'timestamp': timezone.now().isoformat(),
                 'ip_address': ip,
@@ -102,7 +111,7 @@ class BotTrackingMiddleware:
                 'trap_type': trap_type,
                 'query_string': request.META.get('QUERY_STRING', '')[:256],
                 'bot_type': bot_type,
-                'bot_group': bot_type_to_group(bot_type),
+                'bot_group': bot_group,
             }
             if not push_crawler_visit(data):
                 CrawlerVisit.objects.create(**data)

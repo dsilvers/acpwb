@@ -126,11 +126,17 @@ BOT_PATTERNS = [
 ]
 
 
+# Pre-lowered once at import time so per-request matching doesn't re-lower
+# every pattern string on every call.
+_BOT_PATTERNS_LOWER = [(pattern.lower(), name) for pattern, name in BOT_PATTERNS]
+
+
 def classify_ua(ua):
     if not ua or not ua.strip():
         return '(empty user agent)'
-    for pattern, name in BOT_PATTERNS:
-        if pattern.lower() in ua.lower():
+    ua_lower = ua.lower()
+    for pattern, name in _BOT_PATTERNS_LOWER:
+        if pattern in ua_lower:
             return name
     return 'Other / Browser'
 

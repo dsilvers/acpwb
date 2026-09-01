@@ -26,7 +26,7 @@ from .wiki_generator import generate_wiki_page, TOPICS
 from .report_generator import (
     REPORT_CATALOG, REPORT_CATEGORIES,
     generate_reports_for_page, get_or_generate_report_meta,
-    generate_csv_rows, generate_document_content, _enrich_report,
+    generate_csv_rows, generate_document_content, _enrich_report, _persist_reports,
 )
 
 
@@ -1304,25 +1304,6 @@ def ghost_trap(request):
 
 # ── Reports & Publications ────────────────────────────────────────────────────
 
-def _persist_reports(reports):
-    from datetime import date as date_cls
-    for r in reports:
-        try:
-            PublicReport.objects.get_or_create(
-                slug=r['slug'],
-                defaults={
-                    'title': r['title'],
-                    'category': r['category'],
-                    'file_type': r['file_type'],
-                    'pub_date': date_cls.fromisoformat(r['pub_date']),
-                    'summary': r['summary'],
-                    'watermark_token': r['watermark_token'],
-                },
-            )
-        except Exception:
-            pass
-
-
 def reports_list(request):
     _log_crawler(request, 'report_list')
     category = request.GET.get('category', '').strip()
@@ -1390,30 +1371,39 @@ def reports_page_api(request, page):
     return JsonResponse({'reports': reports, 'next_page': page + 1})
 
 
+def _report_covers_dir():
+    from django.conf import settings
+    return settings.BASE_DIR / 'static' / 'img' / 'report-covers'
+
+
+# Build-time generated assets that don't change while the process is
+# running — list the directory once instead of stat'ing per report render.
+_REPORT_COVER_STEMS = frozenset(p.stem for p in _report_covers_dir().glob('*.webp')) if _report_covers_dir().is_dir() else frozenset()
+
+
 def _cover_url(slug):
     """Return the static URL for a report cover image if it exists, else None."""
-    from django.conf import settings
-    path = settings.BASE_DIR / 'static' / 'img' / 'report-covers' / f'{slug}.webp'
-    if path.exists():
+    if slug in _REPORT_COVER_STEMS:
         return f'/static/img/report-covers/{slug}.webp'
     return None
 
 
+@functools.lru_cache(maxsize=256)
 def _cover_data_uri(slug):
-    """Return a base64 data URI for the cover image (for PDF embedding), or None."""
+    """Return a base64 data URI for the cover image (for PDF embedding), or
+    None. Cached since the underlying file — and therefore this string —
+    never changes for a given slug while the process is running."""
     import base64
-    from django.conf import settings
-    path = settings.BASE_DIR / 'static' / 'img' / 'report-covers' / f'{slug}.webp'
-    if path.exists():
-        data = base64.b64encode(path.read_bytes()).decode()
-        return f'data:image/webp;base64,{data}'
-    return None
+    if slug not in _REPORT_COVER_STEMS:
+        return None
+    path = _report_covers_dir() / f'{slug}.webp'
+    data = base64.b64encode(path.read_bytes()).decode()
+    return f'data:image/webp;base64,{data}'
 
 
 def report_detail(request, slug):
     _log_crawler(request, 'report_download')
     report = get_or_generate_report_meta(slug)
-    _persist_reports([report])
     if report['file_type'] == 'csv':
         rows = generate_csv_rows(slug, limit=20)
         return render(request, 'honeypot/report_detail.html', {
@@ -1436,7 +1426,6 @@ def report_detail(request, slug):
 def report_download(request, slug):
     _log_crawler(request, 'report_download')
     report = get_or_generate_report_meta(slug)
-    _persist_reports([report])
     import csv as csv_mod
     import io
     output = io.StringIO()
@@ -1451,7 +1440,6 @@ def report_download(request, slug):
 def report_download_pdf(request, slug):
     _log_crawler(request, 'report_download')
     report = get_or_generate_report_meta(slug)
-    _persist_reports([report])
     doc = generate_document_content(slug)
     from django.template.loader import render_to_string
     from weasyprint import HTML

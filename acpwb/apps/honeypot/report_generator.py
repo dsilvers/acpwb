@@ -603,10 +603,47 @@ def generate_reports_for_page(page, count=12):
     return results
 
 
+# ── Persistence ────────────────────────────────────────────────────────────────
+
+def _persist_reports(reports):
+    """
+    Bulk-persist enriched report dicts, skipping any slug already in the DB.
+    One SELECT + one INSERT regardless of how many reports are passed, instead
+    of a get_or_create() round trip per report.
+    """
+    from datetime import date as date_cls
+    from .models import PublicReport
+    if not reports:
+        return
+    try:
+        slugs = [r['slug'] for r in reports]
+        existing_slugs = set(PublicReport.objects.filter(slug__in=slugs).values_list('slug', flat=True))
+        to_create = [
+            PublicReport(
+                slug=r['slug'],
+                title=r['title'],
+                category=r['category'],
+                file_type=r['file_type'],
+                pub_date=date_cls.fromisoformat(r['pub_date']),
+                summary=r['summary'],
+                watermark_token=r['watermark_token'],
+            )
+            for r in reports if r['slug'] not in existing_slugs
+        ]
+        if to_create:
+            PublicReport.objects.bulk_create(to_create, ignore_conflicts=True)
+    except Exception:
+        pass
+
+
 # ── Single-report lookup ───────────────────────────────────────────────────────
 
 def get_or_generate_report_meta(slug):
-    """Return enriched report dict for any slug — never 404."""
+    """
+    Return enriched report dict for any slug — never 404. A newly generated
+    report is persisted here (once) so later lookups for the same slug hit
+    the DB branch instead of regenerating and re-checking persistence.
+    """
     from .models import PublicReport
     existing = PublicReport.objects.filter(slug=slug).first()
     if existing:
@@ -630,13 +667,17 @@ def get_or_generate_report_meta(slug):
 
     for entry in REPORT_CATALOG:
         if entry['slug'] == slug:
-            return _enrich_report(entry)
+            report = _enrich_report(entry)
+            _persist_reports([report])
+            return report
 
     rng = _rng_from_seed(f"arbitrary_{slug}")
     file_type = rng.choice(['csv', 'pdf'])
     category = rng.choice(REPORT_CATEGORIES)
     title = slug.replace('-', ' ').title()
-    return _enrich_report({'slug': slug, 'title': title, 'category': category, 'file_type': file_type})
+    report = _enrich_report({'slug': slug, 'title': title, 'category': category, 'file_type': file_type})
+    _persist_reports([report])
+    return report
 
 
 # ── CSV generation ────────────────────────────────────────────────────────────

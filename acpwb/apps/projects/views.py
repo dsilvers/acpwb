@@ -18,26 +18,43 @@ def _get_ip(request):
     return request.META.get('REMOTE_ADDR', '0.0.0.0')
 
 
-def _ensure_stories_for_page(page):
-    """Generate and save stories for a page if they don't exist yet."""
-    existing = ProjectStory.objects.filter(page_number=page).count()
-    if existing >= STORIES_PER_PAGE:
-        return ProjectStory.objects.filter(page_number=page).order_by('id')
-
+def _generate_and_save_page(page):
+    """Generate and bulk-save stories for a single page (caller has already
+    confirmed it needs generating)."""
     story_data = generate_project_stories(page=page, count=STORIES_PER_PAGE)
-    to_create = []
     existing_slugs = set(ProjectStory.objects.filter(
         slug__in=[s['slug'] for s in story_data]
     ).values_list('slug', flat=True))
-
-    for s in story_data:
-        if s['slug'] not in existing_slugs:
-            to_create.append(ProjectStory(**s))
-
+    to_create = [ProjectStory(**s) for s in story_data if s['slug'] not in existing_slugs]
     if to_create:
         ProjectStory.objects.bulk_create(to_create, ignore_conflicts=True)
 
+
+def _ensure_stories_for_page(page):
+    """Generate and save stories for a page if they don't exist yet."""
+    existing = ProjectStory.objects.filter(page_number=page).count()
+    if existing < STORIES_PER_PAGE:
+        _generate_and_save_page(page)
     return ProjectStory.objects.filter(page_number=page).order_by('id')
+
+
+def _ensure_stories_for_pages(pages):
+    """
+    Generate and save stories for any of `pages` that don't have enough yet.
+    One query to find which pages are already fully generated, instead of a
+    count() per page every time this is called (e.g. the industry-filter
+    branch below, which checks pages 1-5 on every request).
+    """
+    from django.db.models import Count
+    counts = dict(
+        ProjectStory.objects.filter(page_number__in=pages)
+        .values('page_number')
+        .annotate(n=Count('id'))
+        .values_list('page_number', 'n')
+    )
+    for page in pages:
+        if counts.get(page, 0) < STORIES_PER_PAGE:
+            _generate_and_save_page(page)
 
 
 INDUSTRY_TAGS = ['Healthcare', 'Finance', 'Energy', 'Technology', 'Manufacturing', 'Retail', 'Government', 'Education']
@@ -53,8 +70,7 @@ def project_list(request):
 
     if industry and industry in INDUSTRY_TAGS:
         # Ensure at least 5 pages of stories exist so filtering has enough to work with
-        for p in range(1, 6):
-            _ensure_stories_for_page(p)
+        _ensure_stories_for_pages(range(1, 6))
         all_matching = ProjectStory.objects.filter(industry_tag=industry).order_by('-id')
         per_page = STORIES_PER_PAGE
         stories = all_matching[(page - 1) * per_page: page * per_page]
@@ -64,7 +80,9 @@ def project_list(request):
         stories = _ensure_stories_for_page(page)
         has_next = True
 
-    ProjectPageVisit.objects.create(
+    from apps.core.async_utils import spawn
+    spawn(
+        ProjectPageVisit.objects.create,
         ip_address=_get_ip(request),
         user_agent=request.META.get('HTTP_USER_AGENT', '')[:512],
         page_number=page,

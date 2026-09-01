@@ -175,6 +175,11 @@ def presentation_slide(request, org_slug, year, month, day, slug, slide_num):
     })
 
 
+def _render_pdf(html_string, base_url):
+    from weasyprint import HTML
+    return HTML(string=html_string, base_url=base_url).write_pdf()
+
+
 def presentation_download_pdf(request, org_slug, year, month, day, slug):
     year, month, day = _validate_presentation(org_slug, year, month, day, slug)
     _log_crawler(request)
@@ -182,7 +187,6 @@ def presentation_download_pdf(request, org_slug, year, month, day, slug):
     slides = [generate_slide(pres_meta, n) for n in range(1, pres_meta['slide_count'] + 1)]
 
     from django.template.loader import render_to_string
-    from weasyprint import HTML
     html_string = render_to_string('presentations/presentation_print.html', {
         'pres': pres_meta,
         'slides': slides,
@@ -190,7 +194,11 @@ def presentation_download_pdf(request, org_slug, year, month, day, slug):
     # base_url lets <img src="img/presentations/..."> resolve straight to disk
     # instead of base64-encoding into the HTML string — avoids inflating the
     # payload WeasyPrint has to parse/decode by ~33% per embedded image.
-    pdf_bytes = HTML(string=html_string, base_url=f'{_STATIC_ROOT}/').write_pdf()
+    from apps.core.async_utils import run_in_thread
+    # weasyprint's layout/render is CPU + C-library (cairo/pango) work that
+    # doesn't yield on gevent's event loop — running it inline would stall
+    # every other concurrent connection on this worker for the duration.
+    pdf_bytes = run_in_thread(_render_pdf, html_string, f'{_STATIC_ROOT}/')
     filename = f"{slug}-{year}-{month:02d}-{day:02d}.pdf"
     resp = HttpResponse(pdf_bytes, content_type='application/pdf')
     resp['Content-Disposition'] = f'attachment; filename="{filename}"'

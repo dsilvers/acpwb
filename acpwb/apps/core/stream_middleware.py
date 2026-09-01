@@ -1,4 +1,4 @@
-import json
+import orjson
 import time
 import logging
 from datetime import datetime, timezone
@@ -97,7 +97,7 @@ class RequestStreamMiddleware:
                 bot_type = ''
                 bot_group = ''
 
-        payload = json.dumps({
+        payload = orjson.dumps({
             'ip': ip_censored,
             'host': request.get_host(),
             'path': request.path,

@@ -1437,18 +1437,26 @@ def report_download(request, slug):
     return resp
 
 
+def _render_pdf(html_string, base_url):
+    from weasyprint import HTML
+    return HTML(string=html_string, base_url=base_url).write_pdf()
+
+
 def report_download_pdf(request, slug):
     _log_crawler(request, 'report_download')
     report = get_or_generate_report_meta(slug)
     doc = generate_document_content(slug)
     from django.template.loader import render_to_string
-    from weasyprint import HTML
     html_string = render_to_string('honeypot/report_print.html', {
         'report': report,
         'doc': doc,
         'cover_data_uri': _cover_data_uri(slug),
     }, request=request)
-    pdf_bytes = HTML(string=html_string, base_url=request.build_absolute_uri('/')).write_pdf()
+    from apps.core.async_utils import run_in_thread
+    # weasyprint's layout/render is CPU + C-library (cairo/pango) work that
+    # doesn't yield on gevent's event loop — running it inline would stall
+    # every other concurrent connection on this worker for the duration.
+    pdf_bytes = run_in_thread(_render_pdf, html_string, request.build_absolute_uri('/'))
     resp = HttpResponse(pdf_bytes, content_type='application/pdf')
     resp['Content-Disposition'] = f'attachment; filename="{slug}.pdf"'
     return resp

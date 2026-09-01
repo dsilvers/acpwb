@@ -12,7 +12,7 @@ A Django fake corporate website with two purposes:
 
 ## Tech Stack
 
-Django 5.2 LTS + Python 3.13 / PostgreSQL 16 / Bootstrap 5 (CDN) / Docker Compose (web + db + nginx + redis + ws) / Redis 7 (pub/sub) / Cloudflare Email Routing + Mailgun (legacy)
+Django 5.2 LTS + Python 3.14 / PostgreSQL 16 / Bootstrap 5 (CDN) / Docker Compose (web + db + nginx + redis + ws) / Redis 7 (pub/sub) / Cloudflare Email Routing + Mailgun (legacy)
 
 ## Running Locally
 

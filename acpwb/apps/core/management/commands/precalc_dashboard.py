@@ -48,26 +48,22 @@ _MAX_ROWS_PER_RUN = 500_000
 # arithmetic, and the resulting bounded-timestamp queries are ordinary
 # indexed range scans.
 _MAX_HOURS_PER_RUN = 2
-# CrawlerVisit/ArchiveVisit compress chunks older than 7 days, segmented by
-# bot_type/trap_type (crawlers) or depth (archive) — NOT by date. A daily
-# GROUP BY over the full 60/30-day chart window therefore has to decompress
-# every compressed chunk in range on every single run, which at this
-# project's volume (90M+ rows/day) took 20+ minutes and pinned a PgBouncer
-# connection the whole time. Recompute only this trailing window each run and
-# merge it into the stored dict — days older than the window are compressed
-# and immutable, so their previously-computed counts don't need to be
-# re-queried.
-#
-# Chunks are fixed 7-day calendar windows (not "N days before now"), and a
-# chunk is compressed as soon as its end boundary is >7 days old — observed
-# in production to happen right at that threshold, not with any extra grace
-# period. So the currently-open chunk can be anywhere from a few hours to
-# nearly 7 days old, and there's no fixed trailing window that is *always*
-# guaranteed to stay inside it. Keep this small (not a multi-day "safety
-# margin" like it first looks) so that in the rare case a run does straddle
-# into the previous, now-compressed chunk, it only has to decompress a thin
-# sliver of it rather than the whole thing.
-_DAILY_RECOMPUTE_WINDOW_DAYS = 2
+# Daily chart dicts (crawlers.daily, crawlers.daily_by_bot_type, archive.daily)
+# are retained for this many days; older keys are pruned each run.
+_DAILY_RETENTION_DAYS = {'crawlers': 60, 'archive': 30}
+# CrawlerVisit/ArchiveVisit hold 90M+ rows/day. A daily chart used to be kept
+# fresh by re-querying a date-range GROUP BY over the whole chart window on
+# every run — first the full 60/30 days, then (after that turned out to force
+# TimescaleDB to decompress every compressed chunk in range, since compression
+# is segmented by bot_type/trap_type/depth, not by date) a narrowed trailing
+# window. Both took 20+ minutes on this table and pinned a PgBouncer
+# connection for the duration — and narrowing the window didn't actually fix
+# it: even a 2-day, fully-uncompressed range took several minutes under cold
+# disk cache, because the cost was the row volume itself, not compression.
+# The actual fix is to never re-query historical data for this at all: bucket
+# the same small `new_rows` window (already computed above, bounded to
+# _MAX_HOURS_PER_RUN) by day and increment the stored dict in place, exactly
+# like crawlers.by_trap_type/by_bot_type already do.
 
 
 class Command(BaseCommand):
@@ -172,15 +168,23 @@ class Command(BaseCommand):
         rows = qs.values(field).annotate(c=Count('id')).order_by('-c')[:_MAX_DICT_ENTRIES]
         return {str(r[field] or ''): r['c'] for r in rows}
 
-    def _merge_recent_daily(self, stat, recent_values, retention_days, now):
-        """Merge a freshly-queried recent-window daily dict into stat.value,
-        keeping older (compressed/immutable) days as-is instead of dropping
-        them — see _DAILY_RECOMPUTE_WINDOW_DAYS."""
-        cutoff = (now - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS)).date().isoformat()
+    def _inc_daily(self, stat, new_rows, retention_days, now, bot_field=None):
+        """Bucket new_rows (already bounded to _MAX_HOURS_PER_RUN) by day and
+        add into stat.value in place, then prune anything past retention.
+        If bot_field is given, builds {day: {bot_type: count}} instead of
+        {day: count} — see the note above _MAX_HOURS_PER_RUN."""
+        fields = ['d'] + ([bot_field] if bot_field else [])
+        rows = new_rows.annotate(d=TruncDate('timestamp')).values(*fields).annotate(c=Count('id'))
+        for row in rows:
+            d = str(row['d'])
+            if bot_field:
+                k = row[bot_field] or '(empty user agent)'
+                stat.value.setdefault(d, {})
+                stat.value[d][k] = stat.value[d].get(k, 0) + row['c']
+            else:
+                stat.value[d] = stat.value.get(d, 0) + row['c']
         floor = (now - timedelta(days=retention_days)).date().isoformat()
-        merged = {d: v for d, v in stat.value.items() if floor <= d < cutoff}
-        merged.update(recent_values)
-        stat.value = merged
+        stat.value = {d: v for d, v in stat.value.items() if d >= floor}
 
     # ── Full recompute ────────────────────────────────────────────────────────
 
@@ -526,31 +530,16 @@ class Command(BaseCommand):
         cap_note = ' (window bounded — backlog may remain)' if capped else ''
         self.stdout.write(f'  crawlers: updated to hwm_ts={new_max_ts}{cap_note}')
 
-        # Daily chart: recompute only the recent (uncompressed) window and
-        # merge into the stored 60-day dict — see _DAILY_RECOMPUTE_WINDOW_DAYS.
+        # Daily chart: incremented from the same bounded new_rows window used
+        # above, not a separate date-range re-query — see the note above
+        # _MAX_HOURS_PER_RUN.
         now = timezone.now()
-        recent_since = now - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS)
-        rows = (CrawlerVisit.objects
-                .filter(timestamp__gte=recent_since)
-                .annotate(d=TruncDate('timestamp'))
-                .values('d').annotate(c=Count('id')))
         stat = self._upsert('crawlers.daily', {})
-        self._merge_recent_daily(stat, {str(r['d']): r['c'] for r in rows}, retention_days=60, now=now)
+        self._inc_daily(stat, new_rows, retention_days=_DAILY_RETENTION_DAYS['crawlers'], now=now)
         stat.save()
 
-        # Per-bot-type daily breakdown for all-time traffic graph
-        bot_rows = (CrawlerVisit.objects
-                    .filter(timestamp__gte=recent_since)
-                    .annotate(d=TruncDate('timestamp'))
-                    .values('d', 'bot_type')
-                    .annotate(c=Count('id')))
-        recent_by_bot = {}
-        for r in bot_rows:
-            d = str(r['d'])
-            bt = r['bot_type'] or '(empty user agent)'
-            recent_by_bot.setdefault(d, {})[bt] = r['c']
         stat = self._upsert('crawlers.daily_by_bot_type', {})
-        self._merge_recent_daily(stat, recent_by_bot, retention_days=60, now=now)
+        self._inc_daily(stat, new_rows, retention_days=_DAILY_RETENTION_DAYS['crawlers'], now=now, bot_field='bot_type')
         stat.save()
 
     # ── ArchiveVisit ──────────────────────────────────────────────────────────
@@ -618,15 +607,12 @@ class Command(BaseCommand):
         cap_note = ' (window bounded — backlog may remain)' if capped else ''
         self.stdout.write(f'  archive: updated to hwm_ts={new_max_ts}{cap_note}')
 
-        # Daily chart: recompute only the recent (uncompressed) window and
-        # merge into the stored 30-day dict — see _DAILY_RECOMPUTE_WINDOW_DAYS.
+        # Daily chart: incremented from the same bounded new_rows window used
+        # above, not a separate date-range re-query — see the note above
+        # _MAX_HOURS_PER_RUN.
         now = timezone.now()
-        rows = (ArchiveVisit.objects
-                .filter(timestamp__gte=now - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS))
-                .annotate(d=TruncDate('timestamp'))
-                .values('d').annotate(c=Count('id')))
         stat = self._upsert('archive.daily', {})
-        self._merge_recent_daily(stat, {str(r['d']): r['c'] for r in rows}, retention_days=30, now=now)
+        self._inc_daily(stat, new_rows, retention_days=_DAILY_RETENTION_DAYS['archive'], now=now)
         stat.save()
 
     # ── InboundEmail ──────────────────────────────────────────────────────────

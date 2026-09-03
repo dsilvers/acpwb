@@ -42,22 +42,27 @@ def test_precalc_dashboard_crawlers_catches_up_across_multiple_runs():
 
 
 @pytest.mark.django_db
-def test_precalc_dashboard_crawlers_daily_preserves_old_days_outside_recompute_window():
-    """Regression test: the daily chart used to do a full 60-day GROUP BY on
-    every run, which forces TimescaleDB to decompress every compressed chunk
-    (compression is segmented by bot_type/trap_type, not date) — at this
-    project's volume that took 20+ minutes and pinned a PgBouncer connection.
-    It now only recomputes a recent trailing window and merges the result
-    into the stored dict, so a day outside that window must survive untouched
-    even though no CrawlerVisit rows exist for it any more in a live query."""
-    from apps.core.management.commands.precalc_dashboard import _DAILY_RECOMPUTE_WINDOW_DAYS
+def test_precalc_dashboard_crawlers_daily_increments_without_rescanning_history():
+    """Regression test: the daily chart used to be kept fresh by re-querying
+    a date-range GROUP BY over the whole chart window (first 60 days, then a
+    narrowed "recent" window) on every run — both approaches forced scanning/
+    decompressing huge amounts of this table's 90M+ rows/day and took 20+
+    minutes, pinning a PgBouncer connection. It's now incremented from the
+    same small new_rows window already used for by_trap_type/by_bot_type, so:
+    a day within retention that today's run doesn't touch must survive
+    unchanged (no re-query of history), new rows must increment rather than
+    overwrite same-day counts, and a day past retention must get pruned."""
+    from apps.core.management.commands.precalc_dashboard import _DAILY_RETENTION_DAYS
 
-    stale_day = (timezone.now() - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS + 5)).date().isoformat()
+    untouched_day = (timezone.now() - timedelta(days=3)).date().isoformat()
+    today = timezone.now().date().isoformat()
+    stale_day = (timezone.now() - timedelta(days=_DAILY_RETENTION_DAYS['crawlers'] + 5)).date().isoformat()
     DashboardStat.objects.update_or_create(
-        key='crawlers.daily', defaults={'value': {stale_day: 999}}
+        key='crawlers.daily', defaults={'value': {untouched_day: 5, today: 2, stale_day: 999}}
     )
     DashboardStat.objects.update_or_create(
-        key='crawlers.daily_by_bot_type', defaults={'value': {stale_day: {'Googlebot': 999}}}
+        key='crawlers.daily_by_bot_type',
+        defaults={'value': {untouched_day: {'Googlebot': 5}, today: {'Googlebot': 2}, stale_day: {'Googlebot': 999}}},
     )
 
     CrawlerVisit.objects.create(
@@ -67,9 +72,14 @@ def test_precalc_dashboard_crawlers_daily_preserves_old_days_outside_recompute_w
     call_command('precalc_dashboard', stdout=io.StringIO())
 
     daily = DashboardStat.objects.get(key='crawlers.daily').value
-    assert daily.get(stale_day) == 999
+    assert daily.get(untouched_day) == 5  # not re-queried, survives untouched
+    assert daily.get(today) == 3  # incremented, not overwritten
+    assert stale_day not in daily  # past retention, pruned
+
     daily_by_bot = DashboardStat.objects.get(key='crawlers.daily_by_bot_type').value
-    assert daily_by_bot.get(stale_day) == {'Googlebot': 999}
+    assert daily_by_bot.get(untouched_day) == {'Googlebot': 5}
+    assert daily_by_bot.get(today) == {'Googlebot': 3}
+    assert stale_day not in daily_by_bot
 
 
 @pytest.mark.django_db

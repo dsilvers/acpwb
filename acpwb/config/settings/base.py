@@ -118,6 +118,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Django's system check only scans MIDDLEWARE strings, so silence those false positives.
 SILENCED_SYSTEM_CHECKS = ['admin.E408', 'admin.E409', 'admin.E410']
 
+# GeoIP / IP intelligence (see apps/core/management/commands/download_geoip_db.py,
+# discover_ip_intelligence.py, enrich_ip_intelligence.py, ip_intelligence_report.py)
+MAXMIND_ACCOUNT_ID = env('MAXMIND_ACCOUNT_ID', default='')
+MAXMIND_LICENSE_KEY = env('MAXMIND_LICENSE_KEY', default='')
+GEOIP2_CITY_DB_PATH = env('GEOIP2_CITY_DB_PATH', default=str(BASE_DIR / 'var/geoip/GeoLite2-City.mmdb'))
+GEOIP2_ASN_DB_PATH = env('GEOIP2_ASN_DB_PATH', default=str(BASE_DIR / 'var/geoip/GeoLite2-ASN.mmdb'))
+TOR_EXIT_LIST_PATH = env('TOR_EXIT_LIST_PATH', default=str(BASE_DIR / 'var/tor_exit_nodes.txt'))
+TOR_EXIT_LIST_URL = env('TOR_EXIT_LIST_URL', default='https://check.torproject.org/torbulkexitlist')
+
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'https://acpwb.com',
     'https://*.acpwb.com',

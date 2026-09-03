@@ -21,6 +21,11 @@ db.sqlite3-journal
 staticfiles/
 media/
 
+# GeoIP / IP intelligence — MaxMind license forbids redistributing GeoLite2 files
+acpwb/var/geoip/*.mmdb
+acpwb/var/tor_exit_nodes.txt
+acpwb/var/tor_exit_nodes.txt.tmp
+
 # Docker
 .docker/
 

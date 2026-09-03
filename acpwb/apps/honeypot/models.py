@@ -174,3 +174,58 @@ class PathStat(models.Model):
     def __str__(self):
         prefix = f"{self.host}" if self.host else 'acpwb.com'
         return f"{prefix}{self.path} ({self.count:,})"
+
+
+class IPIntelligence(models.Model):
+    """One row per distinct IP seen in CrawlerVisit, enriched with MaxMind
+    GeoLite2 geo/ASN data plus best-effort hosting/Tor heuristics.
+
+    Deliberately NOT a ForeignKey target from CrawlerVisit — that table is a
+    90M-rows/day TimescaleDB hypertable, and adding a column there for every
+    historical + future row isn't worth it. This is joined to CrawlerVisit by
+    the shared ip_address value only (see discover_ip_intelligence, which
+    populates first_seen/last_seen/visit_count from CrawlerVisit directly).
+    """
+    ip_address = models.GenericIPAddressField(unique=True, db_index=True)
+    ip_version = models.PositiveSmallIntegerField(default=4, db_index=True)
+
+    # MaxMind GeoLite2-City
+    country_code = models.CharField(max_length=2, blank=True, db_index=True)
+    country_name = models.CharField(max_length=128, blank=True)
+    region_name = models.CharField(max_length=128, blank=True)
+    city_name = models.CharField(max_length=128, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    accuracy_radius_km = models.PositiveIntegerField(null=True, blank=True)
+
+    # MaxMind GeoLite2-ASN — asn_org doubles as the "ISP" field
+    asn = models.PositiveIntegerField(null=True, blank=True, db_index=True)
+    asn_org = models.CharField(max_length=256, blank=True, db_index=True)
+
+    # Best-effort heuristics — not authoritative, see apps.core.ip_intel_classify
+    # and apps.core.tor_exit_list for how these are derived.
+    is_hosting = models.BooleanField(default=False, db_index=True)
+    is_tor_exit = models.BooleanField(default=False, db_index=True)
+
+    # Enrichment bookkeeping
+    lookup_ok = models.BooleanField(default=False)
+    enrichment_note = models.CharField(max_length=255, blank=True)
+    enriched_at = models.DateTimeField(null=True, blank=True, db_index=True)
+    geoip_db_date = models.DateField(null=True, blank=True)
+
+    # Populated by discover_ip_intelligence as a side effect of the GROUP BY
+    # it already has to do — avoids a second pass over CrawlerVisit.
+    first_seen = models.DateTimeField(null=True, blank=True, db_index=True)
+    last_seen = models.DateTimeField(null=True, blank=True, db_index=True)
+    visit_count = models.BigIntegerField(default=0)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['is_hosting', 'is_tor_exit']),
+            models.Index(fields=['country_code', 'is_hosting']),
+        ]
+        verbose_name = 'IP Intelligence'
+        verbose_name_plural = 'IP Intelligence'
+
+    def __str__(self):
+        return f"{self.ip_address} [{self.country_code or '??'}] {self.asn_org or 'unknown org'}"

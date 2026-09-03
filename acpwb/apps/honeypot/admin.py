@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt
+from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, IPIntelligence
 
 
 @admin.register(CrawlerVisit)
@@ -58,6 +58,19 @@ class InternalLoginAttemptAdmin(admin.ModelAdmin):
     @admin.display(description='Password')
     def password_short(self, obj):
         return obj.password[:40] if obj.password else '—'
+
+    @admin.display(description='UA')
+    def user_agent_short(self, obj):
+        return obj.user_agent[:60] if obj.user_agent else '—'
+
+
+@admin.register(IPIntelligence)
+class IPIntelligenceAdmin(admin.ModelAdmin):
+    list_display = ('ip_address', 'country_code', 'asn_org', 'is_hosting', 'is_tor_exit', 'visit_count', 'enriched_at')
+    list_filter = ('is_hosting', 'is_tor_exit', 'lookup_ok', 'country_code')
+    search_fields = ('ip_address', 'asn_org', 'country_name', 'city_name')
+    readonly_fields = ('first_seen', 'last_seen', 'enriched_at')
+    ordering = ('-visit_count',)
 
     @admin.display(description='UA')
     def user_agent_short(self, obj):

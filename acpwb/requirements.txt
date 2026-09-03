@@ -11,6 +11,7 @@ weasyprint>=62.0
 python-pptx>=1.0
 redis>=5.0
 orjson>=3.10
+geoip2>=4.8
 # Testing
 pytest>=8.0
 pytest-django>=4.8

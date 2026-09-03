@@ -14,7 +14,8 @@ At any reasonable traffic rate the scanned row count is small regardless of
 the total table size.
 
 Long-window graphs (7d/all) read from pre-aggregated DashboardStat rows
-(crawlers.daily_by_bot_type) written by precalc_dashboard — no table scan.
+(crawlers.recent_by_bucket / crawlers.daily_by_bot_type) written incrementally
+by precalc_dashboard — no table scan, even at this project's 90M+ rows/day.
 
 Bots with < 1% share of total traffic are grouped into "Others".
 
@@ -65,6 +66,18 @@ _BOT_COLOR_PALETTE = [
 ]
 _OTHERS_COLOR = '#95A5A6'  # neutral gray
 
+# ── Recent-bucket rollup (7d graph) ─────────────────────────────────────────────
+# The 7d graph used to be a "live" query like 1h/8h/24h, on the assumption that
+# a timestamp-bounded range scan is safe regardless of window length. It isn't:
+# grouping by bot_type still requires COUNT to touch every matching row, and at
+# this project's volume (90M+ rows/day) a 7-day range is ~630M rows — a
+# multi-minute scan on every precalc_dashboard tick. Instead, precalc_dashboard
+# incrementally maintains a stored per-bucket-per-bot-type rollup
+# (DashboardStat 'crawlers.recent_by_bucket') from the same small new_rows
+# window it already computes for other stats, and the 7d graph just reads it.
+RECENT_BUCKET_MINUTES = 30
+RECENT_BUCKET_RETENTION_DAYS = 8
+
 
 def _assign_colors(groups):
     """
@@ -101,6 +114,18 @@ def _make_buckets(start, end, interval_minutes):
         buckets.append(current)
         current += timedelta(minutes=interval_minutes)
     return buckets
+
+
+def _bucket_key(dt, interval_minutes):
+    """Floor dt to interval_minutes and return a UTC-normalized ISO string.
+
+    Epoch-based flooring (_floor_to_interval) is timezone-independent, but its
+    result keeps dt's original tzinfo, so the same instant produces different
+    isoformat() strings depending on the caller's active timezone (e.g. UTC vs
+    America/Chicago). Normalizing to UTC here keeps the stored dict keys
+    (written by precalc_dashboard) and the keys used to read them back (here)
+    identical regardless of which timezone context wrote or read them."""
+    return _floor_to_interval(dt, interval_minutes).astimezone(dt_timezone.utc).isoformat()
 
 
 # ── Threshold helper ───────────────────────────────────────────────────────────
@@ -236,6 +261,32 @@ def _query_stored_daily(cutoff=None):
         for bot in all_bots
     }
     return date_objs, _apply_threshold(raw_series)
+
+
+def _query_stored_recent_buckets(cutoff, now):
+    """
+    Read pre-aggregated per-bucket per-bot-type counts from DashboardStat
+    written incrementally by precalc_dashboard (crawlers.recent_by_bucket) —
+    see the note above RECENT_BUCKET_MINUTES. No table scan.
+    """
+    from apps.core.models import DashboardStat
+
+    try:
+        by_bucket = DashboardStat.objects.get(key='crawlers.recent_by_bucket').value
+    except DashboardStat.DoesNotExist:
+        by_bucket = {}
+
+    buckets = _make_buckets(cutoff, now, RECENT_BUCKET_MINUTES)
+    keys = [_bucket_key(b, RECENT_BUCKET_MINUTES) for b in buckets]
+
+    all_bots = set()
+    for k in keys:
+        all_bots.update(by_bucket.get(k, {}).keys())
+    if not all_bots:
+        return [], {}
+
+    raw_series = {bot: [by_bucket.get(k, {}).get(bot, 0) for k in keys] for bot in all_bots}
+    return buckets, _apply_threshold(raw_series)
 
 
 # ── Rendering helpers ──────────────────────────────────────────────────────────
@@ -418,10 +469,10 @@ def generate_traffic_graphs(output_dir, stdout=None):
                 f'    traffic_{name}.png — {total:,} requests ({elapsed:.1f}s)\n'
             )
 
-    # 7d — live query at 30-min buckets (336 data points); timestamp-bounded → index scan only
+    # 7d — pre-aggregated 30-min buckets from precalc_dashboard, no table scan
     t0 = _time.monotonic()
     try:
-        buckets, series = _query_windowed(now - timedelta(days=7), 30)
+        buckets, series = _query_stored_recent_buckets(now - timedelta(days=7), now)
         fig, ax = plt.subplots(figsize=(11, 2.8))
         fig.patch.set_facecolor('white')
         _render_stacked(ax, buckets, series, 'Last 7 Days (per 30 min)',

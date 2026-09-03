@@ -83,6 +83,30 @@ def test_precalc_dashboard_crawlers_daily_increments_without_rescanning_history(
 
 
 @pytest.mark.django_db
+def test_precalc_dashboard_recent_by_bucket_feeds_7d_graph_without_live_scan():
+    """Regression test: the 7d traffic graph used to run a live GROUP BY over
+    the full 7-day CrawlerVisit range (apps.core.graph_gen._query_windowed at
+    30-min display resolution, but grouping by bot_type still forces COUNT to
+    touch every matching row) — at this project's volume (90M+ rows/day,
+    ~630M rows in 7 days) that's a multi-minute scan on every 30-min cron
+    tick. precalc_dashboard now maintains crawlers.recent_by_bucket
+    incrementally from the same bounded new_rows window, and graph_gen reads
+    it instead of touching CrawlerVisit at all for this graph."""
+    from apps.core.graph_gen import _query_stored_recent_buckets
+
+    now = timezone.now()
+    CrawlerVisit.objects.create(
+        timestamp=now, ip_address='1.2.3.4', path='/a', trap_type='archive', bot_type='Googlebot',
+    )
+
+    call_command('precalc_dashboard', stdout=io.StringIO())
+
+    buckets, series = _query_stored_recent_buckets(now - timedelta(days=7), now)
+    assert sum(sum(v) for v in series.values()) == 1
+    assert 'Googlebot' in series or 'Others' in series
+
+
+@pytest.mark.django_db
 def test_precalc_dashboard_archive_catches_up_across_multiple_runs():
     base = timezone.now() - timedelta(hours=5)
     ArchiveVisit.objects.bulk_create([

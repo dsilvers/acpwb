@@ -24,9 +24,10 @@ from datetime import timedelta
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.db.models import Count, Max
-from django.db.models.functions import TruncDate
+from django.db.models.functions import TruncDate, TruncMinute
 from django.utils import timezone
 
+from apps.core.graph_gen import RECENT_BUCKET_MINUTES, RECENT_BUCKET_RETENTION_DAYS, _bucket_key
 from apps.core.models import DashboardStat
 from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
@@ -185,6 +186,21 @@ class Command(BaseCommand):
                 stat.value[d] = stat.value.get(d, 0) + row['c']
         floor = (now - timedelta(days=retention_days)).date().isoformat()
         stat.value = {d: v for d, v in stat.value.items() if d >= floor}
+
+    def _inc_recent_buckets(self, stat, new_rows, now):
+        """Bucket new_rows by RECENT_BUCKET_MINUTES + bot_type into stat.value
+        in place, then prune past RECENT_BUCKET_RETENTION_DAYS — feeds the 7d
+        traffic graph (apps.core.graph_gen) without it ever re-scanning
+        historical rows itself. See the note in graph_gen.py."""
+        rows = (new_rows.annotate(bucket=TruncMinute('timestamp'))
+                .values('bucket', 'bot_type').annotate(c=Count('id')))
+        for row in rows:
+            k = _bucket_key(row['bucket'], RECENT_BUCKET_MINUTES)
+            bt = row['bot_type'] or '(empty user agent)'
+            stat.value.setdefault(k, {})
+            stat.value[k][bt] = stat.value[k].get(bt, 0) + row['c']
+        floor_key = _bucket_key(now - timedelta(days=RECENT_BUCKET_RETENTION_DAYS), RECENT_BUCKET_MINUTES)
+        stat.value = {k: v for k, v in stat.value.items() if k >= floor_key}
 
     # ── Full recompute ────────────────────────────────────────────────────────
 
@@ -540,6 +556,10 @@ class Command(BaseCommand):
 
         stat = self._upsert('crawlers.daily_by_bot_type', {})
         self._inc_daily(stat, new_rows, retention_days=_DAILY_RETENTION_DAYS['crawlers'], now=now, bot_field='bot_type')
+        stat.save()
+
+        stat = self._upsert('crawlers.recent_by_bucket', {})
+        self._inc_recent_buckets(stat, new_rows, now)
         stat.save()
 
     # ── ArchiveVisit ──────────────────────────────────────────────────────────

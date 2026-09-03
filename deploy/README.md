@@ -125,3 +125,75 @@ the kernel show any strain. Not worth fixing preemptively — but if
 logs correlating with a traffic spike, the fix is either raising
 `max_connections` (memory tradeoff against TimescaleDB's `shared_buffers`)
 or adding PgBouncer in front.
+
+### Incident: Postgres connection exhaustion → PgBouncer (2026-09-03)
+
+The watch item above stopped being theoretical a few hours later. Postgres
+hit `max_connections` (100) and started rejecting everything, including
+superuser connections — `sudo -u postgres psql` itself intermittently failed
+with `FATAL: sorry, too many clients already` (connections churned fast
+enough that retrying a few times usually got in). Gunicorn's unix socket
+backed up in sympathy (`connect() ... failed (11: Resource temporarily
+unavailable)`), and the site started 502/500ing.
+
+**Contributing factors:**
+- `manage.py hourly_traffic_report` (`apps/core/management/commands/hourly_traffic_report.py`)
+  was run manually/ad hoc — it's on no cron or systemd timer, repo or live.
+  Its 24h `TruncHour` + `Count(distinct=True)` group-by over `CrawlerVisit`
+  (a 373M-row TimescaleDB hypertable at the time) is exactly the shape that
+  makes Postgres reach for parallel workers: 8-10 backend PIDs held
+  connections active for 24+ minutes each on a single invocation.
+- Underlying cause was still the one flagged above: no connection pooling,
+  so ordinary request concurrency (33 gevent workers ×
+  `--worker-connections 1000`) was enough on its own to keep the connection
+  count pinned near 100 once a traffic burst hit — the `hourly_traffic_report`
+  run made it worse, but cancelling those backends alone (`pg_cancel_backend`)
+  didn't recover the site because gunicorn's own retry storm refilled every
+  freed slot within the same second.
+
+**Fix — PgBouncer in transaction-pooling mode**, installed same day:
+- `deploy/pgbouncer.ini` → `/etc/pgbouncer/pgbouncer.ini`. `pool_mode =
+  transaction`, `default_pool_size = 30` + `reserve_pool_size = 10` (caps
+  real backend connections to Postgres at 40, well under `max_connections
+  100`, leaving headroom for `psql`/cron/superuser), `server_reset_query =
+  DISCARD ALL` (resets session state — e.g. Django's per-connection `SET
+  TIME ZONE` — when a server connection returns to the pool between
+  transactions; required for transaction-pooling correctness).
+  ```bash
+  sudo apt-get install pgbouncer
+  sudo cp deploy/pgbouncer.ini /etc/pgbouncer/pgbouncer.ini
+  sudo chown postgres:postgres /etc/pgbouncer/pgbouncer.ini
+  ```
+- **Gotcha:** the client-connection-limit parameter is `max_client_conn`
+  (no trailing `s`) — `max_client_conns` fails config load with `unknown
+  parameter` and pgbouncer won't start at all. Not obvious from the error
+  message, which prints the section-qualified name (`pgbouncer/max_client_conns`).
+- `/etc/pgbouncer/userlist.txt` — **not tracked in this repo** (see the
+  `cloudflare.ini` precedent above for wildcard TLS). Populate it with the
+  `acpwb` role's existing SCRAM hash straight from Postgres — no need to
+  handle the plaintext password at all:
+  ```bash
+  sudo -u postgres psql -tAc "SELECT usename, passwd FROM pg_shadow WHERE usename='acpwb';"
+  # then, in /etc/pgbouncer/userlist.txt:
+  # "acpwb" "SCRAM-SHA-256$....."
+  sudo chown postgres:postgres /etc/pgbouncer/userlist.txt
+  sudo chmod 640 /etc/pgbouncer/userlist.txt
+  ```
+- `.env` — point Django (and every cron job, since they all `source .env`)
+  at the pooler instead of Postgres directly:
+  ```
+  DB_HOST=127.0.0.1
+  DB_PORT=6432
+  ```
+- Cutover sequence used: `systemctl stop acpwb-gunicorn` (this alone dropped
+  the connection count from 100/pinned to 8, confirming the app itself was
+  the load, not something external) → update `.env` → `systemctl start
+  pgbouncer` → `systemctl start acpwb-gunicorn`. A `postgresql` restart
+  was considered (to force-clear every stuck backend at once) but turned out
+  unnecessary once gunicorn was stopped first.
+
+Post-fix, Postgres's direct connection count settled at 67 and held steady
+(down from pinned at 100), all `pg_hba.conf` auth for the pooler reuses the
+existing `host ... scram-sha-256` entries since PgBouncer connects to
+Postgres as a normal TCP client on `127.0.0.1:5432` — no `pg_hba.conf`
+changes were needed.

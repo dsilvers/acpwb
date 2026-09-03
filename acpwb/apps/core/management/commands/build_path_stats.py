@@ -17,6 +17,7 @@ Usage:
 import time
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 
 CURSOR_KEY = 'path_stats_hwm'
 STREAM_CHUNK = 10000
@@ -79,10 +80,14 @@ class Command(BaseCommand):
 
             counts = {}
             total_rows = 0
-            for row in qs.iterator(chunk_size=STREAM_CHUNK):
-                key = (row['host'] or '', row['path'])
-                counts[key] = counts.get(key, 0) + 1
-                total_rows += 1
+            # PgBouncer transaction-pooling mode can hand a server-side
+            # cursor's later FETCHes to a different backend connection
+            # unless the whole streamed loop stays in one transaction.
+            with transaction.atomic():
+                for row in qs.iterator(chunk_size=STREAM_CHUNK):
+                    key = (row['host'] or '', row['path'])
+                    counts[key] = counts.get(key, 0) + 1
+                    total_rows += 1
 
             n_upserted = self._upsert(connection, counts)
 

@@ -22,6 +22,7 @@ import time
 from datetime import timedelta
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 from django.db.models import Count, Max
 from django.db.models.functions import TruncDate
 from django.utils import timezone
@@ -287,9 +288,13 @@ class Command(BaseCommand):
 
         self._step('by_domain...')
         by_domain = {}
-        for sender in InboundEmail.objects.values_list('sender', flat=True).iterator(chunk_size=5000):
-            domain = sender.split('@')[-1].lower() if '@' in sender else sender
-            by_domain[domain] = by_domain.get(domain, 0) + 1
+        # PgBouncer transaction-pooling mode can hand this iterator()'s
+        # server-side cursor to a different backend between FETCHes unless
+        # the whole streamed loop stays in one transaction.
+        with transaction.atomic():
+            for sender in InboundEmail.objects.values_list('sender', flat=True).iterator(chunk_size=5000):
+                domain = sender.split('@')[-1].lower() if '@' in sender else sender
+                by_domain[domain] = by_domain.get(domain, 0) + 1
         self._set_stat('emails.by_domain', self._prune(by_domain))
         self._done()
 
@@ -566,12 +571,16 @@ class Command(BaseCommand):
         stat.value = {ip: d for ip, d in stat.value.items() if ip in by_ip_keys}
         stat.save()
 
-        # Bot type via UA + IP classification — chunked to avoid large cursors
+        # Bot type via UA + IP classification — chunked to avoid large cursors.
+        # PgBouncer transaction-pooling mode can hand this iterator()'s
+        # server-side cursor to a different backend between FETCHes unless
+        # the whole streamed loop stays in one transaction.
         from apps.core.bot_classify import classify_ua_or_ip
         stat = self._upsert('archive.by_bot_type', {})
-        for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
-            k = classify_ua_or_ip(ua or '', ip or '')
-            stat.value[k] = stat.value.get(k, 0) + 1
+        with transaction.atomic():
+            for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+                k = classify_ua_or_ip(ua or '', ip or '')
+                stat.value[k] = stat.value.get(k, 0) + 1
         stat.save()
 
         hwm.value = new_max_ts.isoformat()
@@ -604,9 +613,10 @@ class Command(BaseCommand):
             total_stat.save()
 
             stat = self._upsert('emails.by_domain', {})
-            for sender in new_rows.values_list('sender', flat=True).iterator(chunk_size=5000):
-                domain = sender.split('@')[-1].lower() if '@' in sender else sender
-                stat.value[domain] = stat.value.get(domain, 0) + 1
+            with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+                for sender in new_rows.values_list('sender', flat=True).iterator(chunk_size=5000):
+                    domain = sender.split('@')[-1].lower() if '@' in sender else sender
+                    stat.value[domain] = stat.value.get(domain, 0) + 1
             stat.value = self._prune(stat.value)
             stat.save()
 
@@ -648,9 +658,10 @@ class Command(BaseCommand):
 
             from apps.core.bot_classify import classify_ua_or_ip
             stat = self._upsert('people.by_bot_type', {})
-            for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
-                k = classify_ua_or_ip(ua or '', ip or '')
-                stat.value[k] = stat.value.get(k, 0) + 1
+            with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+                for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+                    k = classify_ua_or_ip(ua or '', ip or '')
+                    stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
 
             stat = self._upsert('people.by_ip', {})
@@ -691,9 +702,10 @@ class Command(BaseCommand):
 
             from apps.core.bot_classify import classify_ua_or_ip
             stat = self._upsert('projects.by_bot_type', {})
-            for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
-                k = classify_ua_or_ip(ua or '', ip or '')
-                stat.value[k] = stat.value.get(k, 0) + 1
+            with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+                for ua, ip in new_rows.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+                    k = classify_ua_or_ip(ua or '', ip or '')
+                    stat.value[k] = stat.value.get(k, 0) + 1
             stat.save()
 
             stat = self._upsert('projects.by_ip', {})

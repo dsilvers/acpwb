@@ -10,6 +10,7 @@ Usage:
     python manage.py analyze_other_traps --sample   # show 20 recent raw rows
 """
 from django.core.management.base import BaseCommand
+from django.db import transaction
 from django.db.models import Count
 
 from apps.honeypot.models import CrawlerVisit
@@ -97,8 +98,9 @@ class Command(BaseCommand):
         """Group paths by their first two URL segments."""
         from collections import Counter
         counts = Counter()
-        for path in qs.values_list('path', flat=True).iterator(chunk_size=10000):
-            parts = path.strip('/').split('/')
-            prefix = '/' + '/'.join(parts[:2]) if len(parts) >= 2 else '/' + parts[0] if parts else '/'
-            counts[prefix] += 1
+        with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+            for path in qs.values_list('path', flat=True).iterator(chunk_size=10000):
+                parts = path.strip('/').split('/')
+                prefix = '/' + '/'.join(parts[:2]) if len(parts) >= 2 else '/' + parts[0] if parts else '/'
+                counts[prefix] += 1
         return [{'prefix': k, 'c': v} for k, v in counts.most_common(limit)]

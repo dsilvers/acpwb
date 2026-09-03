@@ -66,32 +66,37 @@ class Command(BaseCommand):
             else:
                 qs = qs.filter(enriched_at__isnull=True)
 
-            if options['limit']:
-                qs = qs.order_by('id')[:options['limit']]
-            else:
-                qs = qs.order_by('id')
-
             batch_size = options['batch_size']
             max_seconds = options['max_seconds']
+            limit = options['limit']
             started = time.monotonic()
             processed = 0
-            batch = []
 
-            for obj in qs.iterator(chunk_size=batch_size):
-                self._enrich_one(obj, city_reader, asn_reader, db_build_date)
-                batch.append(obj)
-                processed += 1
-
-                if len(batch) >= batch_size:
-                    self._flush(batch)
-                    batch = []
-                    self.stdout.write(f'  ...{processed:,} processed')
-
-                if max_seconds and time.monotonic() - started >= max_seconds:
+            # Keyset pagination on IPIntelligence's real unique PK, rather
+            # than qs.iterator() — a PgBouncer transaction-pooling backend
+            # can be swapped mid-stream between a server-side cursor's
+            # FETCHes ("cursor does not exist"), but each of these pages is
+            # its own ordinary indexed query with no cursor to keep alive,
+            # and results commit incrementally instead of only at the end.
+            last_id = 0
+            while True:
+                page_size = min(batch_size, limit - processed) if limit else batch_size
+                page = list(qs.filter(id__gt=last_id).order_by('id')[:page_size])
+                if not page:
                     break
 
-            if batch:
-                self._flush(batch)
+                for obj in page:
+                    self._enrich_one(obj, city_reader, asn_reader, db_build_date)
+                self._flush(page)
+
+                processed += len(page)
+                last_id = page[-1].id
+                self.stdout.write(f'  ...{processed:,} processed')
+
+                if limit and processed >= limit:
+                    break
+                if max_seconds and time.monotonic() - started >= max_seconds:
+                    break
 
             self.stdout.write(self.style.SUCCESS(f'Enriched {processed:,} IP(s) (mmdb build {db_build_date}).'))
         finally:

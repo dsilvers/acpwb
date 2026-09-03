@@ -13,6 +13,7 @@ Usage:
 """
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 
 from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
 from apps.honeypot.models import CrawlerVisit
@@ -69,21 +70,25 @@ class Command(BaseCommand):
         updated = 0
         batch = []
 
-        for visit in qs.iterator(chunk_size=batch_size):
-            ua = visit.user_agent or ""
-            ip = visit.ip_address or ""
-            visit.bot_type = classify_ua_or_ip(ua, ip)
-            visit.bot_group = bot_type_to_group(visit.bot_type)
-            batch.append(visit)
+        # PgBouncer transaction-pooling mode can hand this iterator()'s
+        # server-side cursor to a different backend connection between
+        # FETCHes unless the whole streamed loop stays in one transaction.
+        with transaction.atomic():
+            for visit in qs.iterator(chunk_size=batch_size):
+                ua = visit.user_agent or ""
+                ip = visit.ip_address or ""
+                visit.bot_type = classify_ua_or_ip(ua, ip)
+                visit.bot_group = bot_type_to_group(visit.bot_type)
+                batch.append(visit)
 
-            if len(batch) >= batch_size:
+                if len(batch) >= batch_size:
+                    CrawlerVisit.objects.bulk_update(batch, ["bot_type", "bot_group"])
+                    updated += len(batch)
+                    batch = []
+                    self.stdout.write(f"  updated {updated:,} / {total:,} ...")
+
+            if batch:
                 CrawlerVisit.objects.bulk_update(batch, ["bot_type", "bot_group"])
                 updated += len(batch)
-                batch = []
-                self.stdout.write(f"  updated {updated:,} / {total:,} ...")
-
-        if batch:
-            CrawlerVisit.objects.bulk_update(batch, ["bot_type", "bot_group"])
-            updated += len(batch)
 
         self.stdout.write(self.style.SUCCESS(f"Done — updated {updated:,} rows."))

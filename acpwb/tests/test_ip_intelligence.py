@@ -1,6 +1,8 @@
 import io
 from datetime import timedelta
+from unittest.mock import patch
 
+import geoip2.errors
 import pytest
 from django.core.management import call_command
 from django.utils import timezone
@@ -8,6 +10,24 @@ from django.utils import timezone
 from apps.core.ip_intel_classify import classify_hosting
 from apps.core import tor_exit_list
 from apps.honeypot.models import CrawlerVisit, IPIntelligence
+
+
+class _FakeGeoReader:
+    """Stands in for geoip2.database.Reader — every lookup is a miss, which
+    is all the enrich_ip_intelligence pagination test needs to exercise."""
+    def city(self, ip):
+        raise geoip2.errors.AddressNotFoundError('not found')
+
+    def asn(self, ip):
+        raise geoip2.errors.AddressNotFoundError('not found')
+
+    def metadata(self):
+        class _Meta:
+            build_epoch = 1735689600  # 2025-01-01, arbitrary fixed date
+        return _Meta()
+
+    def close(self):
+        pass
 
 
 @pytest.mark.parametrize("asn_org,expected", [
@@ -116,3 +136,31 @@ def test_discover_ip_intelligence_since_does_not_roll_back_existing_watermark():
     out3 = io.StringIO()
     call_command('discover_ip_intelligence', step_hours=1, max_seconds=0, since=base.date().isoformat(), force=True, stdout=out3)
     assert 'ignored' not in out3.getvalue()
+
+
+@pytest.mark.django_db
+def test_enrich_ip_intelligence_pages_through_all_rows_without_iterator():
+    """Regression test: enrich_ip_intelligence used to stream via
+    qs.iterator(), which breaks under PgBouncer transaction-pooling mode
+    ("cursor does not exist" — a different backend can serve a later FETCH).
+    It now pages via keyset pagination on IPIntelligence's real PK instead.
+    """
+    for i in range(25):
+        IPIntelligence.objects.create(ip_address=f'10.0.{i}.1')
+
+    with patch('geoip2.database.Reader', return_value=_FakeGeoReader()):
+        call_command('enrich_ip_intelligence', batch_size=7, stdout=io.StringIO())
+
+    assert IPIntelligence.objects.filter(enriched_at__isnull=True).count() == 0
+    assert IPIntelligence.objects.filter(lookup_ok=False).count() == 25
+
+
+@pytest.mark.django_db
+def test_enrich_ip_intelligence_respects_limit():
+    for i in range(10):
+        IPIntelligence.objects.create(ip_address=f'10.1.{i}.1')
+
+    with patch('geoip2.database.Reader', return_value=_FakeGeoReader()):
+        call_command('enrich_ip_intelligence', batch_size=3, limit=5, stdout=io.StringIO())
+
+    assert IPIntelligence.objects.filter(enriched_at__isnull=False).count() == 5

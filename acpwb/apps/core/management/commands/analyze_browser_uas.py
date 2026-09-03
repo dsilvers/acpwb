@@ -15,6 +15,7 @@ from collections import Counter, defaultdict
 from datetime import timedelta
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 from django.db.models import Count
 from django.utils import timezone
 
@@ -138,9 +139,10 @@ class Command(BaseCommand):
     def _ua_token_table(self, qs, limit, total):
         """Group by the first slash-delimited token of the UA string."""
         counts = Counter()
-        for ua in qs.values_list('user_agent', flat=True).iterator(chunk_size=5000):
-            token = (ua or '').split('/')[0].split(' ')[0].strip() or '(empty)'
-            counts[token] += 1
+        with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+            for ua in qs.values_list('user_agent', flat=True).iterator(chunk_size=5000):
+                token = (ua or '').split('/')[0].split(' ')[0].strip() or '(empty)'
+                counts[token] += 1
         self.stdout.write("\n=== Top UA Tokens (first word/product before '/' or space) ===")
         for token, count in counts.most_common(limit):
             pct = count * 100 / total if total else 0
@@ -170,12 +172,13 @@ class Command(BaseCommand):
         """Group IPs by their first N bits (i.e. /prefix_len subnet) and count."""
         import ipaddress
         counts = Counter()
-        for ip in qs.values_list('ip_address', flat=True).iterator(chunk_size=10000):
-            try:
-                net = ipaddress.ip_interface(f"{ip}/{prefix_len}").network
-                counts[str(net)] += 1
-            except ValueError:
-                counts['(invalid)'] += 1
+        with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+            for ip in qs.values_list('ip_address', flat=True).iterator(chunk_size=10000):
+                try:
+                    net = ipaddress.ip_interface(f"{ip}/{prefix_len}").network
+                    counts[str(net)] += 1
+                except ValueError:
+                    counts['(invalid)'] += 1
         self.stdout.write(f"\n=== {title} ===")
         for subnet, count in counts.most_common(limit):
             pct = count * 100 / total if total else 0
@@ -184,10 +187,11 @@ class Command(BaseCommand):
 
     def _prefix_counts(self, qs, limit):
         counts = Counter()
-        for path in qs.values_list('path', flat=True).iterator(chunk_size=10000):
-            parts  = path.strip('/').split('/')
-            prefix = '/' + '/'.join(parts[:2]) if len(parts) >= 2 else '/' + parts[0] if parts else '/'
-            counts[prefix] += 1
+        with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+            for path in qs.values_list('path', flat=True).iterator(chunk_size=10000):
+                parts  = path.strip('/').split('/')
+                prefix = '/' + '/'.join(parts[:2]) if len(parts) >= 2 else '/' + parts[0] if parts else '/'
+                counts[prefix] += 1
         return [{'prefix': k, 'c': v} for k, v in counts.most_common(limit)]
 
     def _reclassify_preview(self, qs, limit, total):
@@ -198,12 +202,13 @@ class Command(BaseCommand):
         """
         new_labels = Counter()
         still_other = 0
-        for ua, ip in qs.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
-            result = classify_ua_or_ip(ua, ip or '')
-            if result == 'Other / Browser':
-                still_other += 1
-            else:
-                new_labels[result] += 1
+        with transaction.atomic():  # PgBouncer transaction pooling + server-side cursor
+            for ua, ip in qs.values_list('user_agent', 'ip_address').iterator(chunk_size=5000):
+                result = classify_ua_or_ip(ua, ip or '')
+                if result == 'Other / Browser':
+                    still_other += 1
+                else:
+                    new_labels[result] += 1
 
         newly_matched = sum(new_labels.values())
         if not newly_matched:

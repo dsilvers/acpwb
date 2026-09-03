@@ -60,35 +60,42 @@ class Command(BaseCommand):
         examined = 0
         duplicates_found = 0
 
-        for visit in qs.iterator(chunk_size=2000):
-            examined += 1
-            if examined % 50000 == 0:
-                self.stdout.write(f"  examined {examined:,} / {total:,} ...")
+        # PgBouncer runs in transaction-pooling mode: without an explicit
+        # transaction, this .iterator()'s server-side cursor can get handed
+        # to a different backend connection between FETCHes, causing
+        # "cursor does not exist". Wrapping in atomic() pins one backend for
+        # the whole scan — acceptable here since this is a manually-invoked
+        # one-off tool, not something running on a tight cron budget.
+        with transaction.atomic():
+            for visit in qs.iterator(chunk_size=2000):
+                examined += 1
+                if examined % 50000 == 0:
+                    self.stdout.write(f"  examined {examined:,} / {total:,} ...")
 
-            if (
-                prev is not None
-                and prev["ip_address"] == visit["ip_address"]
-                and prev["path"] == visit["path"]
-                and prev["user_agent"] == visit["user_agent"]
-                and (visit["timestamp"] - prev["timestamp"]) <= window
-            ):
-                # Duplicate pair — keep the more specific record
-                if prev["trap_type"] == "other" and visit["trap_type"] != "other":
-                    # prev is the generic middleware record — drop it
-                    to_delete.append(prev["id"])
-                    prev = visit  # the kept record becomes the new prev
+                if (
+                    prev is not None
+                    and prev["ip_address"] == visit["ip_address"]
+                    and prev["path"] == visit["path"]
+                    and prev["user_agent"] == visit["user_agent"]
+                    and (visit["timestamp"] - prev["timestamp"]) <= window
+                ):
+                    # Duplicate pair — keep the more specific record
+                    if prev["trap_type"] == "other" and visit["trap_type"] != "other":
+                        # prev is the generic middleware record — drop it
+                        to_delete.append(prev["id"])
+                        prev = visit  # the kept record becomes the new prev
+                    else:
+                        # Keep prev (already specific or both same), drop this one
+                        to_delete.append(visit["id"])
+                        # prev stays
+
+                    duplicates_found += 1
+
+                    if len(to_delete) >= BATCH_SIZE and not dry_run:
+                        CrawlerVisit.objects.filter(id__in=to_delete).delete()
+                        to_delete = []
                 else:
-                    # Keep prev (already specific or both same), drop this one
-                    to_delete.append(visit["id"])
-                    # prev stays
-
-                duplicates_found += 1
-
-                if len(to_delete) >= BATCH_SIZE and not dry_run:
-                    CrawlerVisit.objects.filter(id__in=to_delete).delete()
-                    to_delete = []
-            else:
-                prev = visit
+                    prev = visit
 
         # Final batch
         if to_delete and not dry_run:

@@ -70,3 +70,58 @@ under real traffic. On the production box these were bumped to:
 `nginx.conf` itself isn't tracked here since it's the stock package file with
 inline edits — diff against `/etc/nginx/nginx.conf.bak.*` on the box (created
 before each edit) if you need the exact before/after.
+
+### Listen backlog / SYN queue (2026-09-03)
+
+`net.core.somaxconn` alone does nothing for nginx unless the `listen`
+directive's `backlog=` is set to match — nginx defaults to 511 regardless of
+the sysctl value. This box was hitting that default under bot/scanner traffic:
+`netstat -s` showed ~9.3M listen-queue overflows and ~9.3M dropped SYNs over
+~1.75 days uptime (~60/sec sustained), which also produced sustained swap
+pressure. FD limits and `worker_connections`/`worker_rlimit_nofile` were
+already generous and were not the bottleneck.
+
+Fix, applied 2026-09-03:
+- `nginx/acpwb.com` — `backlog=65535` added to the host nginx `listen 80` /
+  `listen 443 ssl` directives (and their `[::]` counterparts). Set **once**
+  per unique `address:port` — nginx errors on "duplicate listen options" if
+  `backlog=` is repeated on a shared socket, even with an identical value, so
+  it's only present on the first `listen` block per socket in this file (see
+  the comment above the second `:443` block).
+- `deploy/99-acpwb-netstack.conf` — `net.core.somaxconn` and
+  `net.ipv4.tcp_max_syn_backlog` raised from their prior values (8192 / 4096)
+  to 65535 to match. Install with:
+  ```bash
+  sudo cp deploy/99-acpwb-netstack.conf /etc/sysctl.d/
+  sudo sysctl -p /etc/sysctl.d/99-acpwb-netstack.conf
+  ```
+- Apply the nginx side with `sudo nginx -t && sudo systemctl reload nginx`
+  (reload, not restart — zero downtime).
+
+`botseed.net` and the Debian `default` site config were left untouched: they
+share the same `0.0.0.0:80`/`:443` sockets as `acpwb.com` (which loads first
+alphabetically from `sites-enabled/`), so the single `backlog=65535` on
+`acpwb.com` already governs those sockets.
+
+### Other limits checked post-fix (2026-09-03) — headroom is fine, one watch item
+
+After the backlog fix, swap dropped from 8GB/8GB full to ~230MB and the
+overflow/drop counters above stopped climbing. Also swept: conntrack (23%
+of `nf_conntrack_max`), Redis clients (26% of `maxclients 10000`), TIME_WAIT
+sockets (24% of `tcp_max_tw_buckets`, `tcp_tw_reuse` already on), `fs.file-max`,
+and disk (56% used, 307G free). All comfortable.
+
+**Watch item: Postgres `max_connections` (100) has no pooling in front of
+it.** `DATABASES` in `acpwb/config/settings/base.py` doesn't set
+`CONN_MAX_AGE` (defaults to 0 — a fresh connection per request, no
+PgBouncer). Only ~10 connections are active under normal load today, because
+most honeypot traffic writes go through the Redis queue (`push_crawler_visit`
+/ `push_archive_visit`) rather than hitting Postgres directly. But gunicorn
+runs 33 gevent workers × `--worker-connections 1000`, so a burst of
+concurrent DB-touching requests (dashboard views, report/CSV generation,
+admin) could in theory push past 100 concurrent connections before nginx or
+the kernel show any strain. Not worth fixing preemptively — but if
+`FATAL: sorry, too many clients already` shows up in the Django/Postgres
+logs correlating with a traffic spike, the fix is either raising
+`max_connections` (memory tradeoff against TimescaleDB's `shared_buffers`)
+or adding PgBouncer in front.

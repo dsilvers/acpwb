@@ -1,6 +1,6 @@
 server {
-    listen 80;
-    listen [::]:80;
+    listen 80 backlog=65535;
+    listen [::]:80 backlog=65535;
     server_name acpwb.com www.acpwb.com *.acpwb.com;
 
     location /.well-known/acme-challenge/ {
@@ -13,8 +13,8 @@ server {
 }
 
 server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
+    listen 443 ssl backlog=65535;
+    listen [::]:443 ssl backlog=65535;
     server_name www.acpwb.com;
 
     ssl_certificate     /etc/letsencrypt/live/acpwb.com/fullchain.pem;
@@ -26,6 +26,9 @@ server {
 }
 
 server {
+    # backlog= intentionally omitted here — it's set once above on the same
+    # 0.0.0.0:443/[::]:443 socket; nginx errors on "duplicate listen options"
+    # if repeated, even with an identical value.
     listen 443 ssl;
     listen [::]:443 ssl;
     server_name acpwb.com *.acpwb.com;

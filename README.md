@@ -530,6 +530,10 @@ docker compose exec web python manage.py collectstatic --noinput
 
 The Docker nginx container binds to `127.0.0.1:8001` only. Host nginx proxies to it. The `/.well-known/` paths are proxied to Django (honeypot endpoints live there).
 
+### Listen backlog / SYN queue tuning
+
+`net.core.somaxconn` does nothing for nginx unless the `listen` directive's `backlog=` matches — nginx defaults to 511 regardless of the sysctl value, which was silently capping the accept queue under bot/scanner traffic (visible as `netstat -s` "listen queue of a socket overflowed" / "SYNs to LISTEN sockets dropped" counters). Fixed by setting `backlog=65535` on the host nginx `listen` directives in [`nginx/acpwb.com`](nginx/acpwb.com) and raising `net.core.somaxconn` / `net.ipv4.tcp_max_syn_backlog` to match via [`deploy/99-acpwb-netstack.conf`](deploy/99-acpwb-netstack.conf). See [`deploy/README.md`](deploy/README.md#listen-backlog--syn-queue-2026-09-03) for the full writeup, including why `backlog=` can only be set once per shared `address:port` socket.
+
 ---
 
 ## Local Subdomain Testing

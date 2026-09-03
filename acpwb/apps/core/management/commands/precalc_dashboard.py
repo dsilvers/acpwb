@@ -53,11 +53,21 @@ _MAX_HOURS_PER_RUN = 2
 # GROUP BY over the full 60/30-day chart window therefore has to decompress
 # every compressed chunk in range on every single run, which at this
 # project's volume (90M+ rows/day) took 20+ minutes and pinned a PgBouncer
-# connection the whole time. Recompute only this trailing window (a safety
-# margin past the 7-day compression boundary) each run and merge it into the
-# stored dict — days older than the window are compressed and immutable, so
-# their previously-computed counts don't need to be re-queried.
-_DAILY_RECOMPUTE_WINDOW_DAYS = 9
+# connection the whole time. Recompute only this trailing window each run and
+# merge it into the stored dict — days older than the window are compressed
+# and immutable, so their previously-computed counts don't need to be
+# re-queried.
+#
+# Chunks are fixed 7-day calendar windows (not "N days before now"), and a
+# chunk is compressed as soon as its end boundary is >7 days old — observed
+# in production to happen right at that threshold, not with any extra grace
+# period. So the currently-open chunk can be anywhere from a few hours to
+# nearly 7 days old, and there's no fixed trailing window that is *always*
+# guaranteed to stay inside it. Keep this small (not a multi-day "safety
+# margin" like it first looks) so that in the rare case a run does straddle
+# into the previous, now-compressed chunk, it only has to decompress a thin
+# sliver of it rather than the whole thing.
+_DAILY_RECOMPUTE_WINDOW_DAYS = 2
 
 
 class Command(BaseCommand):

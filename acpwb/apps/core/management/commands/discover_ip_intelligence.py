@@ -23,7 +23,8 @@ Usage:
     python manage.py discover_ip_intelligence                  # incremental
     python manage.py discover_ip_intelligence --step-hours 24  # deep catch-up
     python manage.py discover_ip_intelligence --dry-run
-    python manage.py discover_ip_intelligence --since 2024-01-01
+    python manage.py discover_ip_intelligence --since 2024-01-01  # only seeds if no watermark stored yet
+    python manage.py discover_ip_intelligence --since 2024-01-01 --force  # deliberately rolls back an existing watermark
     python manage.py discover_ip_intelligence --full-history    # scan back to the first-ever row
 
 On a table this size (500M+ rows and growing, 7-day TimescaleDB chunks
@@ -92,7 +93,8 @@ class Command(BaseCommand):
         parser.add_argument('--step-hours', type=int, default=1, help='Window size in hours (default: 1)')
         parser.add_argument('--max-seconds', type=int, default=50, help='Stop starting new windows after this many seconds (default: 50, 0=unlimited)')
         parser.add_argument('--safety-margin-seconds', type=int, default=120, help='Do not process the last N seconds, in case rows are still being drained (default: 120)')
-        parser.add_argument('--since', type=str, default=None, metavar='YYYY-MM-DD', help='Reset the watermark to this date instead of using the stored one')
+        parser.add_argument('--since', type=str, default=None, metavar='YYYY-MM-DD', help='Seed the watermark from this date. Only takes effect if no watermark is stored yet — pass --force to override an existing one')
+        parser.add_argument('--force', action='store_true', help='Allow --since to override an already-stored watermark (rolls back progress — use deliberately)')
         parser.add_argument('--dry-run', action='store_true', help='Print the window list and per-window distinct-IP counts without writing')
         parser.add_argument('--max-lookback-days', type=int, default=14, help='First-run only: how far back to seed the watermark instead of the true earliest row (default: 14)')
         parser.add_argument('--full-history', action='store_true', help='First-run only: seed the watermark from the true earliest CrawlerVisit row instead of --max-lookback-days')
@@ -112,7 +114,7 @@ class Command(BaseCommand):
         safety_margin = timedelta(seconds=options['safety_margin_seconds'])
         upper_bound = timezone.now() - safety_margin
 
-        watermark = self._get_watermark(options['since'], options['max_lookback_days'], options['full_history'])
+        watermark = self._get_watermark(options['since'], options['force'], options['max_lookback_days'], options['full_history'])
         if watermark is None:
             self.stdout.write('No CrawlerVisit rows exist — nothing to discover.')
             return
@@ -158,15 +160,28 @@ class Command(BaseCommand):
             cur.execute("SET work_mem = '128MB'")
             cur.execute("SET synchronous_commit = off")
 
-    def _get_watermark(self, since_str, max_lookback_days, full_history):
+    def _get_watermark(self, since_str, force, max_lookback_days, full_history):
+        stat, _ = DashboardStat.objects.get_or_create(key=_WATERMARK_KEY, defaults={'value': {}})
+        ts_str = stat.value.get('ts')
+
         if since_str:
             since_date = parse_date(since_str)
             if since_date is None:
                 raise ValueError(f'Invalid --since date: {since_str}')
-            return timezone.make_aware(timezone.datetime.combine(since_date, timezone.datetime.min.time()))
+            since_dt = timezone.make_aware(timezone.datetime.combine(since_date, timezone.datetime.min.time()))
+            if ts_str and not force:
+                # A watermark is already stored — --since must NOT silently
+                # roll it back (this bit a real backfill: repeating the same
+                # --since on every invocation kept resetting progress back
+                # to that date instead of resuming). Ignore --since here;
+                # --force opts into the rollback deliberately.
+                self.stdout.write(
+                    f'--since {since_str} ignored: a watermark is already stored '
+                    f'({ts_str}). Pass --force to override it (this rolls back progress).'
+                )
+                return timezone.datetime.fromisoformat(ts_str)
+            return since_dt
 
-        stat, _ = DashboardStat.objects.get_or_create(key=_WATERMARK_KEY, defaults={'value': {}})
-        ts_str = stat.value.get('ts')
         if ts_str:
             return timezone.datetime.fromisoformat(ts_str)
 

@@ -84,3 +84,35 @@ def test_discover_ip_intelligence_first_run_caps_lookback_by_default():
     # already stored now — it stays skipped without a --since reset.
     ips = set(IPIntelligence.objects.values_list('ip_address', flat=True))
     assert '10.0.0.1' not in ips
+
+
+@pytest.mark.django_db
+def test_discover_ip_intelligence_since_does_not_roll_back_existing_watermark():
+    """Regression test: repeating --since on every invocation (a real
+    footgun hit in production) must NOT keep resetting progress back to
+    that date once a watermark is already stored — only --force may do that."""
+    base = timezone.now() - timedelta(hours=10)
+    CrawlerVisit.objects.bulk_create([
+        CrawlerVisit(timestamp=base, ip_address='1.1.1.1', path='/a', trap_type='archive'),
+        CrawlerVisit(timestamp=base + timedelta(hours=5), ip_address='2.2.2.2', path='/b', trap_type='archive'),
+    ])
+
+    out = io.StringIO()
+    call_command('discover_ip_intelligence', step_hours=1, max_seconds=0, since=base.date().isoformat(), stdout=out)
+    from apps.core.models import DashboardStat
+    watermark_after_first = DashboardStat.objects.get(key='ip_intel_discover_watermark').value['ts']
+
+    # Re-running with the SAME --since must resume, not reset, now that a
+    # watermark is stored (it may still creep forward slightly on its own —
+    # real time passes between calls and the watermark tracks "now" once
+    # caught up — the point is it must never go BACKWARD to --since's date).
+    out2 = io.StringIO()
+    call_command('discover_ip_intelligence', step_hours=1, max_seconds=0, since=base.date().isoformat(), stdout=out2)
+    assert 'ignored' in out2.getvalue()
+    watermark_after_second = DashboardStat.objects.get(key='ip_intel_discover_watermark').value['ts']
+    assert watermark_after_second >= watermark_after_first
+
+    # --force must still allow a deliberate rollback.
+    out3 = io.StringIO()
+    call_command('discover_ip_intelligence', step_hours=1, max_seconds=0, since=base.date().isoformat(), force=True, stdout=out3)
+    assert 'ignored' not in out3.getvalue()

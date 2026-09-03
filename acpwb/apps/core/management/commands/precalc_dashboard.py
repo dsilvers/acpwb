@@ -35,6 +35,18 @@ from apps.webhooks.models import InboundEmail
 
 _MAX_DICT_ENTRIES = 200
 _MAX_ROWS_PER_RUN = 500_000
+# CrawlerVisit/ArchiveVisit only track a timestamp HWM (not id — see the
+# hypertable migration), so their per-run cap can't be a cheap `hwm + N`
+# arithmetic bound like the id-keyed models below. It used to be computed by
+# peeking at the timestamp of the (hwm + 500_000)th row via
+# qs[500_000:500_001] — an OFFSET 500000 query that Postgres must scan/sort
+# (and, on these compressed TimescaleDB hypertables, decompress) in full just
+# to reach that one row. As traffic grew, that peek alone started taking
+# 25+ minutes and pinning several PgBouncer connections — capping by a fixed
+# wall-clock window instead needs no such peek: the window bound is pure
+# arithmetic, and the resulting bounded-timestamp queries are ordinary
+# indexed range scans.
+_MAX_HOURS_PER_RUN = 2
 
 
 class Command(BaseCommand):
@@ -107,6 +119,25 @@ class Command(BaseCommand):
         for row in rows_qs.values(field).annotate(c=Count('id')):
             k = str(row[field] or '')
             stat.value[k] = stat.value.get(k, 0) + row['c']
+
+    def _seed_since(self, model, hwm):
+        """Starting point for a timestamp-HWM model's incremental scan.
+
+        On a fresh (never-run) watermark, seed from the model's actual
+        earliest row instead of datetime.min — otherwise the time-windowed
+        cap below would need to advance _MAX_HOURS_PER_RUN at a time
+        starting from year 1, taking an enormous number of cron ticks to
+        reach real data. Finding the earliest row is cheap (hits the
+        leading edge of the timestamp index/oldest chunk), unlike the old
+        approach this file used to bound each run's row count with.
+        """
+        from datetime import datetime, timedelta as td, timezone as dt_tz
+        if hwm.value:
+            return datetime.fromisoformat(hwm.value)
+        earliest = model.objects.order_by('timestamp').values_list('timestamp', flat=True).first()
+        if earliest is None:
+            return datetime.min.replace(tzinfo=dt_tz.utc)
+        return earliest - td(microseconds=1)
 
     def _cap_new_max(self, hwm_value, actual_max):
         """Cap new_max to avoid processing too many rows in one run."""
@@ -389,22 +420,23 @@ class Command(BaseCommand):
     # ── CrawlerVisit ──────────────────────────────────────────────────────────
 
     def _update_crawlers(self):
-        from datetime import datetime, timezone as dt_tz
         hwm = self._upsert('hwm.crawler_visit_ts', '')
-        since = datetime.fromisoformat(hwm.value) if hwm.value else datetime.min.replace(tzinfo=dt_tz.utc)
-        new_rows_qs = CrawlerVisit.objects.filter(timestamp__gt=since).order_by('timestamp')
-        cap_row = new_rows_qs[_MAX_ROWS_PER_RUN:_MAX_ROWS_PER_RUN + 1].first()
-        if cap_row:
-            new_max_ts = cap_row.timestamp
-            new_rows = CrawlerVisit.objects.filter(timestamp__gt=since, timestamp__lte=new_max_ts)
-            capped = True
-        else:
-            new_max_ts = new_rows_qs.aggregate(m=Max('timestamp'))['m']
-            if new_max_ts is None:
-                self.stdout.write('  crawlers: no new rows')
-                return
-            new_rows = CrawlerVisit.objects.filter(timestamp__gt=since)
-            capped = False
+        since = self._seed_since(CrawlerVisit, hwm)
+        now = timezone.now()
+        window_end = min(now, since + timedelta(hours=_MAX_HOURS_PER_RUN))
+        capped = window_end < now
+        new_rows = CrawlerVisit.objects.filter(timestamp__gt=since, timestamp__lte=window_end)
+        actual_max_ts = new_rows.aggregate(m=Max('timestamp'))['m']
+        if actual_max_ts is None:
+            if window_end > since:
+                # No rows in this window, but time has moved on — advance the
+                # HWM anyway so the next run doesn't re-scan the same empty
+                # window (e.g. a quiet period with no traffic at all).
+                hwm.value = window_end.isoformat()
+                hwm.save()
+            self.stdout.write('  crawlers: no new rows')
+            return
+        new_max_ts = actual_max_ts
 
         total_stat = self._upsert('crawlers.total', 0)
         total_stat.value = total_stat.value + new_rows.count()
@@ -456,7 +488,7 @@ class Command(BaseCommand):
         hwm.value = new_max_ts.isoformat()
         hwm.save()
 
-        cap_note = ' (capped)' if capped else ''
+        cap_note = ' (window bounded — backlog may remain)' if capped else ''
         self.stdout.write(f'  crawlers: updated to hwm_ts={new_max_ts}{cap_note}')
 
         # Daily chart: full 60-day recompute — always authoritative, never overwrites
@@ -490,22 +522,20 @@ class Command(BaseCommand):
     # ── ArchiveVisit ──────────────────────────────────────────────────────────
 
     def _update_archive(self):
-        from datetime import datetime, timezone as dt_tz
         hwm = self._upsert('hwm.archive_visit_ts', '')
-        since = datetime.fromisoformat(hwm.value) if hwm.value else datetime.min.replace(tzinfo=dt_tz.utc)
-        new_rows_qs = ArchiveVisit.objects.filter(timestamp__gt=since).order_by('timestamp')
-        cap_row = new_rows_qs[_MAX_ROWS_PER_RUN:_MAX_ROWS_PER_RUN + 1].first()
-        if cap_row:
-            new_max_ts = cap_row.timestamp
-            new_rows = ArchiveVisit.objects.filter(timestamp__gt=since, timestamp__lte=new_max_ts)
-            capped = True
-        else:
-            new_max_ts = new_rows_qs.aggregate(m=Max('timestamp'))['m']
-            if new_max_ts is None:
-                self.stdout.write('  archive: no new rows')
-                return
-            new_rows = ArchiveVisit.objects.filter(timestamp__gt=since)
-            capped = False
+        since = self._seed_since(ArchiveVisit, hwm)
+        now = timezone.now()
+        window_end = min(now, since + timedelta(hours=_MAX_HOURS_PER_RUN))
+        capped = window_end < now
+        new_rows = ArchiveVisit.objects.filter(timestamp__gt=since, timestamp__lte=window_end)
+        actual_max_ts = new_rows.aggregate(m=Max('timestamp'))['m']
+        if actual_max_ts is None:
+            if window_end > since:
+                hwm.value = window_end.isoformat()
+                hwm.save()
+            self.stdout.write('  archive: no new rows')
+            return
+        new_max_ts = actual_max_ts
 
         total_stat = self._upsert('archive.total', 0)
         total_stat.value = total_stat.value + new_rows.count()
@@ -547,7 +577,7 @@ class Command(BaseCommand):
         hwm.value = new_max_ts.isoformat()
         hwm.save()
 
-        cap_note = ' (capped)' if capped else ''
+        cap_note = ' (window bounded — backlog may remain)' if capped else ''
         self.stdout.write(f'  archive: updated to hwm_ts={new_max_ts}{cap_note}')
 
         # Daily chart recomputed only when there are new rows

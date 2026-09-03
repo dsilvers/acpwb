@@ -48,6 +48,16 @@ _MAX_ROWS_PER_RUN = 500_000
 # arithmetic, and the resulting bounded-timestamp queries are ordinary
 # indexed range scans.
 _MAX_HOURS_PER_RUN = 2
+# CrawlerVisit/ArchiveVisit compress chunks older than 7 days, segmented by
+# bot_type/trap_type (crawlers) or depth (archive) — NOT by date. A daily
+# GROUP BY over the full 60/30-day chart window therefore has to decompress
+# every compressed chunk in range on every single run, which at this
+# project's volume (90M+ rows/day) took 20+ minutes and pinned a PgBouncer
+# connection the whole time. Recompute only this trailing window (a safety
+# margin past the 7-day compression boundary) each run and merge it into the
+# stored dict — days older than the window are compressed and immutable, so
+# their previously-computed counts don't need to be re-queried.
+_DAILY_RECOMPUTE_WINDOW_DAYS = 9
 
 
 class Command(BaseCommand):
@@ -151,6 +161,16 @@ class Command(BaseCommand):
         """GROUP BY field → {str(value): count} dict, ordered by count desc, pruned."""
         rows = qs.values(field).annotate(c=Count('id')).order_by('-c')[:_MAX_DICT_ENTRIES]
         return {str(r[field] or ''): r['c'] for r in rows}
+
+    def _merge_recent_daily(self, stat, recent_values, retention_days, now):
+        """Merge a freshly-queried recent-window daily dict into stat.value,
+        keeping older (compressed/immutable) days as-is instead of dropping
+        them — see _DAILY_RECOMPUTE_WINDOW_DAYS."""
+        cutoff = (now - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS)).date().isoformat()
+        floor = (now - timedelta(days=retention_days)).date().isoformat()
+        merged = {d: v for d, v in stat.value.items() if floor <= d < cutoff}
+        merged.update(recent_values)
+        stat.value = merged
 
     # ── Full recompute ────────────────────────────────────────────────────────
 
@@ -496,32 +516,31 @@ class Command(BaseCommand):
         cap_note = ' (window bounded — backlog may remain)' if capped else ''
         self.stdout.write(f'  crawlers: updated to hwm_ts={new_max_ts}{cap_note}')
 
-        # Daily chart: full 60-day recompute — always authoritative, never overwrites
-        # a correct stored value with a partial/stale query result.
+        # Daily chart: recompute only the recent (uncompressed) window and
+        # merge into the stored 60-day dict — see _DAILY_RECOMPUTE_WINDOW_DAYS.
         now = timezone.now()
+        recent_since = now - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS)
         rows = (CrawlerVisit.objects
-                .filter(timestamp__gte=now - timedelta(days=60))
+                .filter(timestamp__gte=recent_since)
                 .annotate(d=TruncDate('timestamp'))
                 .values('d').annotate(c=Count('id')))
         stat = self._upsert('crawlers.daily', {})
-        stat.value = {str(r['d']): r['c'] for r in rows}
+        self._merge_recent_daily(stat, {str(r['d']): r['c'] for r in rows}, retention_days=60, now=now)
         stat.save()
 
         # Per-bot-type daily breakdown for all-time traffic graph
         bot_rows = (CrawlerVisit.objects
-                    .filter(timestamp__gte=now - timedelta(days=60))
+                    .filter(timestamp__gte=recent_since)
                     .annotate(d=TruncDate('timestamp'))
                     .values('d', 'bot_type')
                     .annotate(c=Count('id')))
-        daily_by_bot = {}
+        recent_by_bot = {}
         for r in bot_rows:
             d = str(r['d'])
             bt = r['bot_type'] or '(empty user agent)'
-            if d not in daily_by_bot:
-                daily_by_bot[d] = {}
-            daily_by_bot[d][bt] = r['c']
+            recent_by_bot.setdefault(d, {})[bt] = r['c']
         stat = self._upsert('crawlers.daily_by_bot_type', {})
-        stat.value = daily_by_bot
+        self._merge_recent_daily(stat, recent_by_bot, retention_days=60, now=now)
         stat.save()
 
     # ── ArchiveVisit ──────────────────────────────────────────────────────────
@@ -589,14 +608,15 @@ class Command(BaseCommand):
         cap_note = ' (window bounded — backlog may remain)' if capped else ''
         self.stdout.write(f'  archive: updated to hwm_ts={new_max_ts}{cap_note}')
 
-        # Daily chart recomputed only when there are new rows
+        # Daily chart: recompute only the recent (uncompressed) window and
+        # merge into the stored 30-day dict — see _DAILY_RECOMPUTE_WINDOW_DAYS.
         now = timezone.now()
         rows = (ArchiveVisit.objects
-                .filter(timestamp__gte=now - timedelta(days=30))
+                .filter(timestamp__gte=now - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS))
                 .annotate(d=TruncDate('timestamp'))
                 .values('d').annotate(c=Count('id')))
         stat = self._upsert('archive.daily', {})
-        stat.value = {str(r['d']): r['c'] for r in rows}
+        self._merge_recent_daily(stat, {str(r['d']): r['c'] for r in rows}, retention_days=30, now=now)
         stat.save()
 
     # ── InboundEmail ──────────────────────────────────────────────────────────

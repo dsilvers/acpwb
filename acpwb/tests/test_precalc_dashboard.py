@@ -42,6 +42,37 @@ def test_precalc_dashboard_crawlers_catches_up_across_multiple_runs():
 
 
 @pytest.mark.django_db
+def test_precalc_dashboard_crawlers_daily_preserves_old_days_outside_recompute_window():
+    """Regression test: the daily chart used to do a full 60-day GROUP BY on
+    every run, which forces TimescaleDB to decompress every compressed chunk
+    (compression is segmented by bot_type/trap_type, not date) — at this
+    project's volume that took 20+ minutes and pinned a PgBouncer connection.
+    It now only recomputes a recent trailing window and merges the result
+    into the stored dict, so a day outside that window must survive untouched
+    even though no CrawlerVisit rows exist for it any more in a live query."""
+    from apps.core.management.commands.precalc_dashboard import _DAILY_RECOMPUTE_WINDOW_DAYS
+
+    stale_day = (timezone.now() - timedelta(days=_DAILY_RECOMPUTE_WINDOW_DAYS + 5)).date().isoformat()
+    DashboardStat.objects.update_or_create(
+        key='crawlers.daily', defaults={'value': {stale_day: 999}}
+    )
+    DashboardStat.objects.update_or_create(
+        key='crawlers.daily_by_bot_type', defaults={'value': {stale_day: {'Googlebot': 999}}}
+    )
+
+    CrawlerVisit.objects.create(
+        timestamp=timezone.now(), ip_address='1.2.3.4', path='/a', trap_type='archive', bot_type='Googlebot',
+    )
+
+    call_command('precalc_dashboard', stdout=io.StringIO())
+
+    daily = DashboardStat.objects.get(key='crawlers.daily').value
+    assert daily.get(stale_day) == 999
+    daily_by_bot = DashboardStat.objects.get(key='crawlers.daily_by_bot_type').value
+    assert daily_by_bot.get(stale_day) == {'Googlebot': 999}
+
+
+@pytest.mark.django_db
 def test_precalc_dashboard_archive_catches_up_across_multiple_runs():
     base = timezone.now() - timedelta(hours=5)
     ArchiveVisit.objects.bulk_create([

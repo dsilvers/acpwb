@@ -48,11 +48,7 @@ _MAX_ROWS_PER_RUN = 500_000
 # wall-clock window instead needs no such peek: the window bound is pure
 # arithmetic, and the resulting bounded-timestamp queries are ordinary
 # indexed range scans.
-_MAX_HOURS_PER_RUN = 24
-# TEMPORARY bump from 2 to 24 for manual backlog catch-up (crawlers HWM was
-# ~9 days behind after several precalc_dashboard runs blew out to 30-90min
-# during the Sep 3 OFFSET/decompression issues, causing cascading lock skips).
-# Revert to 2 once the crawlers HWM is caught up to near-realtime.
+_MAX_HOURS_PER_RUN = 2
 # Daily chart dicts (crawlers.daily, crawlers.daily_by_bot_type, archive.daily)
 # are retained for this many days; older keys are pruned each run.
 _DAILY_RETENTION_DAYS = {'crawlers': 60, 'archive': 30}

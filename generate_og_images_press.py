@@ -93,6 +93,7 @@ _WORD_VISUALS = {
 # Per-slug scene overrides — bypasses word lookup entirely
 _SLUG_SCENES = {
     'one-billion-pages-served': 'vast data center corridor, server racks receding to vanishing point, deep navy ambient glow, gold edge lighting',
+    'record-peak-traffic-august-2026': 'dark living room wall covered by a dense grid of television screens in mismatched sizes and brands, each glowing a different color, tangled cable bundles snaking down to a hidden junction box, moody blue and purple ambient glow, no visible content on the screens',
 }
 
 # Words too generic to anchor a scene on their own

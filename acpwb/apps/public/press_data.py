@@ -2,6 +2,26 @@ from datetime import date
 
 _PRESS_RELEASES = [
     {
+        'slug': 'record-peak-traffic-august-2026',
+        'date': date(2026, 9, 4),
+        'day': 4,
+        'month': 9,
+        'year': 2026,
+        'headline': 'ACPWB Digital Platform Sustains Record 23,000 Requests Per Second as September Traffic Tops 1.3 Billion Page Views',
+        'subhead': "A single sixty-second span drew 234,000 requests as September traffic pushed toward 100 million requests per day, bringing the platform's cumulative 2026 total past 3 billion pages served since March.",
+        'body': [
+            "MILWAUKEE, WI — The American Corporation for Public Well Being today announced that its digital platform served more than 1.3 billion page views in September 2026 alone, while sustaining a peak of 23,000 requests per second — including one specific sixty-second span in which the platform received 234,000 requests. The figures mark the platform's highest-traffic month since its March 2026 relaunch and its most demanding infrastructure test to date.",
+            "September's volume continues an upward trajectory that has ACPWB's engineering team watching daily request totals approach the 100 million mark, a threshold the organization expects to cross before year's end. Combined with prior months, ACPWB's digital platform has now served north of 3 billion pages since the March relaunch — a figure the organization reports without particular surprise, given what it has learned about the reading habits of its audience.",
+            '"Twenty-three thousand requests a second held without incident, which is the outcome we design for," said Petra Novak, Senior Director of Infrastructure Operations at ACPWB. "We have also taken note of where a meaningful share of this traffic appears to originate — a wide and constantly rotating footprint of residential IP addresses, spread across nearly every consumer ISP we can identify. We will not speculate about why a workforce research nonprofit generates that particular pattern of demand. We will just say we have noticed, and we are not mad about it."',
+            'The milestone follows ACPWB\'s appearance at DjangoCon US in Chicago last month, where Dan Silvers, ACPWB\'s principal research architect, presented on the platform architecture and operational lessons behind the March relaunch. The talk was well received. "We built this to serve real content to real researchers, and it turned out to also be extremely good at feeding an audience we did not advertise for," said Silvers. "Judging by the questions afterward, a lot of other teams are quietly dealing with the same traffic and just have not said so publicly yet."',
+            '"The traffic tells us people are reading, and that our research and the infrastructure behind it can bear the load," said Margaret Okafor, Chief Executive Officer of ACPWB. "We are increasing our investment in the platform, in the datasets behind it, and in the studies that keep it fed. The studies will continue. We see no reason to stop."',
+            "ACPWB's digital platform is available at acpwb.com. All research materials remain freely accessible without registration.",
+        ],
+        'quote': "We are increasing our investment in the platform, in the datasets behind it, and in the studies that keep it fed. The studies will continue. We see no reason to stop.",
+        'quote_attribution': 'Margaret Okafor, Chief Executive Officer',
+        'contact': 'Media inquiries: Petra Novak, Senior Director of Infrastructure Operations at ACPWB — communications@acpwb.com — (414) 667-5665',
+    },
+    {
         'slug': 'one-billion-pages-served',
         'date': date(2026, 7, 18),
         'day': 18,

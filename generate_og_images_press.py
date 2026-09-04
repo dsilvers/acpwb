@@ -93,7 +93,13 @@ _WORD_VISUALS = {
 # Per-slug scene overrides — bypasses word lookup entirely
 _SLUG_SCENES = {
     'one-billion-pages-served': 'vast data center corridor, server racks receding to vanishing point, deep navy ambient glow, gold edge lighting',
-    'record-peak-traffic-august-2026': 'dark living room wall covered by a dense grid of television screens in mismatched sizes and brands, each glowing a different color, tangled cable bundles snaking down to a hidden junction box, moody blue and purple ambient glow, no visible content on the screens',
+    'record-peak-traffic-august-2026': 'close angled view of a single storefront window at night, tightly framed so no signage, lettering, or awnings are visible, blank dark brick wall bordering the window, dozens of mismatched old television sets crammed onto shelves behind rain-streaked glass, screens glowing dim static, warm interior light spilling onto wet pavement at the bottom edge of frame',
+}
+
+# Per-slug style-suffix overrides — replaces _STYLE_SUFFIX / _FLUX_STYLE_SUFFIX entirely,
+# for scenes that need a different photographic treatment than the default corporate look.
+_SLUG_STYLE_SUFFIX = {
+    'record-peak-traffic-august-2026': ', 35mm film photograph, Kodak Portra 800, visible film grain, handheld candid framing, slight motion blur, muted realistic color grading, documentary street photography, no visible content on the screens',
 }
 
 # Words too generic to anchor a scene on their own
@@ -140,7 +146,9 @@ _NEGATIVE_PROMPT = (
     'user interface, website, screenshot, dashboard, '
     'stairs, staircase, escalator, surreal, '
     'bokeh, shallow depth of field, blurry background, out of focus, '
-    'cartoon, anime, low quality, blurry, distorted, ugly, nsfw'
+    'cartoon, anime, low quality, blurry, distorted, ugly, nsfw, '
+    'oversaturated, glossy, airbrushed, plastic, waxy, 3d render, cgi, '
+    'digital art, illustration, painting, perfect symmetry, hdr, over-sharpened'
 )
 
 OG_WIDTH, OG_HEIGHT = 1200, 630
@@ -163,7 +171,9 @@ def _headline_to_scene(headline):
 
 
 def _build_prompt(headline, flux=False, slug=None):
-    suffix = _FLUX_STYLE_SUFFIX if flux else _STYLE_SUFFIX
+    suffix = _SLUG_STYLE_SUFFIX.get(slug) if slug else None
+    if suffix is None:
+        suffix = _FLUX_STYLE_SUFFIX if flux else _STYLE_SUFFIX
     scene = _SLUG_SCENES.get(slug) if slug else None
     if scene is None:
         scene = _headline_to_scene(headline)

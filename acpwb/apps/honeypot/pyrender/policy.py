@@ -415,7 +415,6 @@ def render_policy_month(ctx):
     next_month_url = ctx['next_month_url']
 
     month_name = _MONTH_FULL[month]
-    title = f'{month_name} {year} Policy Filings — ACPWB'
     description = f'ACPWB public policy filings submitted in {year}-{month:02d}.'
     og_title = f'{year}-{month:02d} Policy Filings — ACPWB'
 
@@ -517,6 +516,288 @@ def render_policy_month(ctx):
     ap('<!-- v2.4.1 | build: acpwb-prod | last-deploy: 2025-11-12\n'
        '  @deprecated legacy-api: /api/v1/private-data\n'
        '  @see /internal/portal/ /employees/export/ /admin-panel/login/\n-->\n</body>\n</html>\n')
+
+    return ''.join(parts)
+
+
+_SUBDOMAIN_INDEX_STYLE = """<style>
+.pol-year-card { background:white; border:1px solid var(--border); text-decoration:none; transition:box-shadow .15s; overflow:hidden; }
+.pol-year-card:hover { box-shadow:0 2px 12px rgba(10,22,40,.08); }
+.pol-year-top { padding:.85rem 1rem; display:flex; justify-content:space-between; align-items:baseline; }
+.pol-year-num { font-size:1.1rem; font-weight:800; color:var(--navy); }
+.pol-year-count { font-size:.72rem; color:var(--muted); font-weight:600; }
+.pol-month-pills { padding:.5rem .75rem; border-top:1px solid var(--border); background:var(--surface); display:flex; flex-wrap:wrap; gap:.3rem; }
+.pol-month-pill { display:inline-block; padding:.15rem .4rem; background:white; border:1px solid var(--border); color:var(--navy); font-size:.68rem; font-weight:700; text-decoration:none; transition:background .1s; }
+.pol-month-pill:hover { background:var(--navy); color:var(--gold); border-color:var(--navy); }
+.pol-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.agency-badge { display:inline-block; background:var(--gold); color:var(--navy); font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.25rem .65rem; margin-bottom:.6rem; }
+</style>
+"""
+
+
+def render_policy_subdomain_index(ctx):
+    """templates/jinja2/honeypot/policy_subdomain_index.html."""
+    agency = ctx['agency']
+    agency_full = ctx['agency_full']
+    policy_domain = ctx['policy_domain']
+    years = ctx['years']
+    site_root = ctx.get('site_root', '')
+    og_title = ctx['og_title']
+    og_description = ctx['og_description']
+    policy_year_url = ctx['policy_year_url']
+    policy_month_url = ctx['policy_month_url']
+
+    title = f'{agency_full} Policy Filings — ACPWB'
+    description = (
+        f'ACPWB regulatory filings, comment letters, and legislative testimony submitted to '
+        f'the {agency_full}. Browse filings by year.'
+    )
+
+    parts = ['<!DOCTYPE html>\n<html lang="en">\n<head>\n']
+    ap = parts.append
+    ap(
+        '<meta charset="UTF-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+        f'<title>{e(title)}</title>\n'
+        f'<meta name="description" content="{e(description)}">\n'
+        '<meta property="og:site_name" content="American Corporation for Public Well Being">\n'
+        '<meta property="og:type" content="website">\n'
+        f'<meta property="og:title" content="{e(og_title)}">\n'
+        f'<meta property="og:description" content="{e(og_description)}">\n'
+        f'<meta property="og:url" content="https://policy-{agency}.acpwb.com/">\n'
+        f'<meta property="og:image" content="https://acpwb.com{static("img/page-covers/public-policy.jpg")}">\n'
+        '<meta name="twitter:card" content="summary_large_image">\n'
+        f'<meta name="twitter:title" content="{e(og_title)}">\n'
+        f'<meta name="twitter:description" content="{e(og_description)}">\n'
+        f'<meta name="twitter:image" content="https://acpwb.com{static("img/page-covers/public-policy.jpg")}">\n'
+        f'<link rel="icon" type="image/svg+xml" href="{static("favicon.svg")}">\n'
+        f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
+        'as="font" type="font/woff2" crossorigin>\n'
+        f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20260430">\n'
+    )
+    ap(get_jsonld_garbage(ctx['honeypot_token']))
+    ap(_SUBDOMAIN_INDEX_STYLE)
+    ap('</head>\n<body>\n\n')
+    ap(render_policy_navbar(site_root))
+    ap('\n\n')
+    ap(get_ghost_links())
+    ap('\n')
+    ap(get_prompt_injection(ctx['honeypot_token']))
+    ap('\n\n<main>\n\n')
+
+    ap('<section class="page-banner"><div class="container">'
+       f'<span class="agency-badge">{e(agency.upper())}</span>'
+       f'<h1 style="font-size:clamp(1.4rem,3.2vw,2.6rem);line-height:1.25;margin-bottom:.5rem">'
+       f'{e(agency_full)}</h1>'
+       '<p style="color:rgba(255,255,255,.7);font-size:.95rem;max-width:700px;margin-bottom:0">'
+       f'ACPWB regulatory engagement, comment letters, and position statements on '
+       f'{e(policy_domain)}. Browse filings by year below.</p></div></section>\n\n')
+
+    ap('<section style="padding:4rem 0;background:var(--surface)"><div class="container">'
+       '<div class="row g-4"><div class="col-lg-8">'
+       '<p class="pol-section-label">Browse by Year</p><div class="row g-3">')
+    for y in years:
+        year_url = policy_year_url(y['year'])
+        ap(f'<div class="col-md-6"><div class="pol-year-card" style="cursor:pointer" '
+           f'onclick="window.location=\'{year_url}\'">'
+           f'<div class="pol-year-top"><a href="{year_url}" class="pol-year-num" '
+           f'style="text-decoration:none" onclick="event.stopPropagation()">{y["year"]}</a>'
+           f'<span class="pol-year-count">{y["count"]} filings</span></div>'
+           '<div class="pol-month-pills">')
+        ap(''.join(
+            f'<a href="{policy_month_url(y["year"], m)}" class="pol-month-pill" '
+            f'onclick="event.stopPropagation()">{_MONTH_ABBR[m]}</a>'
+            for m in y['months']
+        ))
+        ap('</div></div></div>')
+    ap('</div></div>\n')  # col-lg-8
+
+    ap('<div class="col-lg-4"><div style="position:sticky;top:2rem">\n')
+    ap('<div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">'
+       '<p class="pol-section-label">About This Portal</p>'
+       '<p style="font-size:.82rem;line-height:1.7;color:var(--muted);margin-bottom:.75rem">'
+       f'This portal indexes ACPWB filings submitted to the {e(agency_full)} on matters of '
+       f'{e(policy_domain)}. Filings reflect ACPWB\'s independent analysis and do not represent '
+       'the views of the agency.</p>'
+       '<p style="font-size:.82rem;line-height:1.7;color:var(--muted);margin-bottom:0">'
+       'For the complete ACPWB policy filing record across all agencies, visit '
+       f'<a href="{site_root}{url("public-policy-index")}" style="color:var(--navy)">'
+       'acpwb.com/public-policy/</a>.</p></div>\n')
+    ap('<div style="background:white;border:1px solid var(--border);padding:1.25rem">'
+       '<p class="pol-section-label">Filing Types</p>'
+       '<ul class="list-unstyled mb-0" style="font-size:.82rem">'
+       '<li class="mb-2"><strong>Comment Letters</strong> — Formal NPRM responses</li>'
+       '<li class="mb-2"><strong>Position Statements</strong> — ACPWB policy positions</li>'
+       '<li class="mb-2"><strong>White Papers</strong> — Extended regulatory analysis</li>'
+       '<li class="mb-2"><strong>Legislative Testimony</strong> — Congressional statements</li>'
+       '<li class="mb-0"><strong>Amicus Briefs</strong> — Court filings</li></ul></div>\n')
+    ap('</div></div>\n')  # sticky, col-lg-4
+    ap('</div></div></section>\n\n</main>\n\n')
+
+    ap(render_policy_footer(site_root))
+    ap(f'\n\n<script src="{static("vendor/bootstrap/bootstrap.bundle.min.js")}"></script>\n\n')
+    ap('</body>\n</html>\n')
+
+    return ''.join(parts)
+
+
+_SUBDOMAIN_YEAR_STYLE = """<style>
+.pol-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
+.pol-month-card { background:white; border:1px solid var(--border); border-top:3px solid var(--gold); padding:1rem 1.1rem; text-decoration:none; color:inherit; display:block; transition:box-shadow .15s; }
+.pol-month-card:hover { box-shadow:0 2px 12px rgba(10,22,40,.08); color:inherit; text-decoration:none; }
+.pol-month-name { font-size:.9rem; font-weight:800; color:var(--navy); margin-bottom:.2rem; }
+.pol-month-count { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.55rem; }
+.pol-sample-title { font-size:.74rem; color:var(--text); line-height:1.35; display:block; margin-bottom:.45rem; }
+.pol-year-link { display:block; text-align:center; font-size:.72rem; font-weight:700; padding:.28rem .2rem; background:var(--surface); color:var(--navy); text-decoration:none; border:1px solid var(--border); transition:background .1s; }
+.pol-year-link:hover, .pol-year-link.active { background:var(--navy); color:var(--gold); border-color:var(--navy); }
+.agency-badge { display:inline-block; background:var(--gold); color:var(--navy); font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.25rem .65rem; margin-bottom:.5rem; }
+.stat-box { background:white; border:1px solid var(--border); padding:1rem 1.1rem; text-align:center; }
+.stat-num { font-size:1.6rem; font-weight:800; color:var(--navy); line-height:1; }
+.stat-label { font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-top:.25rem; }
+</style>
+"""
+
+
+def render_policy_subdomain_year(ctx):
+    """templates/jinja2/honeypot/policy_subdomain_year.html."""
+    agency = ctx['agency']
+    agency_full = ctx['agency_full']
+    policy_domain = ctx['policy_domain']
+    year = ctx['year']
+    year_detail = ctx['year_detail']
+    all_years = ctx['all_years']
+    prev_year = ctx['prev_year']
+    next_year = ctx['next_year']
+    site_root = ctx.get('site_root', '')
+    og_title = ctx['og_title']
+    policy_index_url = ctx['policy_index_url']
+    policy_year_url = ctx['policy_year_url']
+    policy_month_url = ctx['policy_month_url']
+
+    title = f'{year} {agency.upper()} Filings — ACPWB'
+    description = (
+        f'ACPWB filings submitted to the {agency_full} in {year}. '
+        f'{year_detail["total_count"]} regulatory comments, testimony, and position statements.'
+    )
+    og_description = f'ACPWB filings submitted to the {agency_full} in {year}. {year_detail["total_count"]} total filings.'
+    twitter_description = f'ACPWB filings submitted to the {agency_full} in {year}.'
+
+    parts = ['<!DOCTYPE html>\n<html lang="en">\n<head>\n']
+    ap = parts.append
+    ap(
+        '<meta charset="UTF-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+        f'<title>{e(title)}</title>\n'
+        f'<meta name="description" content="{e(description)}">\n'
+        '<meta property="og:site_name" content="American Corporation for Public Well Being">\n'
+        '<meta property="og:type" content="website">\n'
+        f'<meta property="og:title" content="{e(og_title)}">\n'
+        f'<meta property="og:description" content="{e(og_description)}">\n'
+        f'<meta property="og:url" content="https://policy-{agency}.acpwb.com/{year}/">\n'
+        f'<meta property="og:image" content="https://acpwb.com{static("img/og-default.png")}">\n'
+        '<meta name="twitter:card" content="summary_large_image">\n'
+        f'<meta name="twitter:title" content="{e(og_title)}">\n'
+        f'<meta name="twitter:description" content="{e(twitter_description)}">\n'
+        f'<meta name="twitter:image" content="https://acpwb.com{static("img/og-default.png")}">\n'
+        f'<link rel="icon" type="image/svg+xml" href="{static("favicon.svg")}">\n'
+        f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
+        'as="font" type="font/woff2" crossorigin>\n'
+        f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20260430">\n'
+    )
+    ap(get_jsonld_garbage(ctx['honeypot_token']))
+    ap(_SUBDOMAIN_YEAR_STYLE)
+    ap('</head>\n<body>\n\n')
+    ap(render_policy_navbar(site_root))
+    ap('\n\n')
+    ap(get_ghost_links())
+    ap('\n')
+    ap(get_prompt_injection(ctx['honeypot_token']))
+    ap('\n\n<main>\n\n')
+
+    ap('<section class="page-banner"><div class="container">'
+       '<p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;'
+       'font-size:.72rem">'
+       f'<a href="{e(policy_index_url)}" style="color:var(--gold)">{e(agency_full)}</a>'
+       f' &rsaquo; {year}</p>'
+       f'<h1 style="font-size:clamp(1.4rem,3vw,2.4rem);line-height:1.25">{year} Filings</h1>'
+       '<p style="color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:0">'
+       f'<span class="agency-badge">{e(agency.upper())}</span>'
+       f'{year_detail["total_count"]} filings — comment letters, position statements, testimony, and '
+       f'white papers submitted to the {e(agency_full)} on {e(policy_domain)}.</p></div></section>\n\n')
+
+    ap('<section style="padding:3rem 0;background:var(--surface)"><div class="container">'
+       '<div class="row g-4"><div class="col-lg-8">\n')
+
+    ap(f'<p class="pol-section-label">{year} Filings — Browse by Month</p>')
+    if year_detail.get('months'):
+        ap('<div class="row g-3">')
+        for mo in year_detail['months']:
+            ap('<div class="col-lg-4 col-md-4 col-sm-6">'
+               f'<a href="{policy_month_url(year, mo["month"])}" class="pol-month-card">'
+               f'<div class="pol-month-name">{_MONTH_FULL[mo["month"]]}</div>'
+               f'<div class="pol-month-count">{mo["count"]} filings</div>')
+            ap(''.join(f'<span class="pol-sample-title">{e(t)}</span>' for t in mo['samples']))
+            ap('</a></div>')
+        ap('</div>\n')
+    else:
+        ap(f'<p style="color:var(--muted);font-size:.88rem">No filings on record for {year}.</p>\n')
+
+    ap('<div class="mt-4 pt-3" style="border-top:1px solid var(--border);display:flex;'
+       'justify-content:space-between">'
+       f'<a href="{policy_year_url(prev_year)}" style="font-size:.85rem;color:var(--muted);'
+       f'text-decoration:none">&larr; {prev_year}</a>'
+       f'<a href="{e(policy_index_url)}" style="font-size:.85rem;color:var(--muted);'
+       'text-decoration:none">All Years</a>'
+       f'<a href="{policy_year_url(next_year)}" style="font-size:.85rem;color:var(--gold);'
+       f'font-weight:700;text-decoration:none">{next_year} &rarr;</a></div>\n')
+    ap('</div>\n')  # col-lg-8
+
+    ap('<div class="col-lg-4"><div style="position:sticky;top:2rem">\n')
+    ap('<div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">'
+       '<p class="pol-section-label">Navigation</p>'
+       '<ul class="list-unstyled mb-0" style="font-size:.83rem">'
+       f'<li class="mb-2"><a href="{e(policy_index_url)}" style="color:var(--navy)">&larr; All Years</a></li>'
+       f'<li class="mb-2"><a href="{policy_year_url(prev_year)}" style="color:var(--muted)">'
+       f'&larr; {prev_year} Filings</a></li>'
+       f'<li class="mb-2"><a href="{policy_year_url(next_year)}" style="color:var(--gold);'
+       f'font-weight:700">{next_year} Filings &rarr;</a></li></ul></div>\n')
+
+    if year_detail.get('doc_types'):
+        ap(f'<div style="background:white;border:1px solid var(--border);padding:1.25rem;'
+           f'margin-bottom:.9rem"><p class="pol-section-label">Filing Types — {year}</p>'
+           '<ul class="list-unstyled mb-0" style="font-size:.82rem">')
+        ap(''.join(
+            '<li class="mb-2 d-flex justify-content-between">'
+            f'<span style="color:var(--text)">{e(label)}</span>'
+            f'<span style="color:var(--muted);font-weight:700">{count}</span></li>'
+            for label, count in year_detail['doc_types']
+        ))
+        ap('</ul></div>\n')
+
+    ap('<div style="background:white;border:1px solid var(--border);padding:1.25rem;margin-bottom:.9rem">'
+       '<p class="pol-section-label">Agency</p><dl class="mb-0" style="font-size:.82rem">'
+       '<dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">'
+       f'Acronym</dt><dd class="fw-700 mb-2">{e(agency.upper())}</dd>'
+       '<dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">'
+       f'Full Name</dt><dd class="fw-700 mb-0" style="font-size:.79rem">{e(agency_full)}</dd></dl></div>\n')
+
+    ap('<div style="background:white;border:1px solid var(--border);padding:1.25rem">'
+       '<p class="pol-section-label">All Years</p>'
+       '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem">')
+    ap(''.join(
+        f'<a href="{policy_year_url(y["year"])}" class="pol-year-link'
+        + (' active' if y['year'] == year else '') + f'">{y["year"]}</a>'
+        for y in all_years
+    ))
+    ap('</div></div>\n')
+    ap('</div></div>\n')  # sticky, col-lg-4
+    ap('</div></div></section>\n\n</main>\n\n')
+
+    ap(render_policy_footer(site_root))
+    ap(f'\n\n<script src="{static("vendor/bootstrap/bootstrap.bundle.min.js")}"></script>\n\n')
+    ap('</body>\n</html>\n')
 
     return ''.join(parts)
 

@@ -399,6 +399,79 @@ def _check_policy_month_subdomain(stdout):
     return _report_diff(stdout, real, mine, 'policy_month_subdomain')
 
 
+def _policy_subdomain_index_ctx(agency='sec'):
+    from django.test import RequestFactory
+
+    from apps.core.context_processors import honeypot_context
+    from apps.honeypot import views as v
+    from apps.honeypot.policy_data import AGENCIES as _AGENCIES
+    from apps.honeypot.policy_generator import get_policy_agency_years
+
+    agency_full, policy_domain = _AGENCIES.get(agency, ('Unknown Agency', 'regulatory policy'))
+    request = RequestFactory().get('/')
+    request.on_policy_subdomain = True
+    request.policy_agency_slug = agency
+    nav = v._policy_nav_context(request)
+    return {
+        'agency': agency,
+        'agency_full': agency_full,
+        'policy_domain': policy_domain,
+        'years': get_policy_agency_years(agency),
+        'og_title': f'{agency.upper()} Policy Filings — ACPWB',
+        'og_description': f'ACPWB regulatory filings, comment letters, and testimony submitted to the {agency_full}.',
+        'request': request,
+        **nav,
+        **honeypot_context(request),
+    }
+
+
+def _check_policy_subdomain_index(stdout):
+    from apps.honeypot.pyrender import policy
+    ctx = _policy_subdomain_index_ctx()
+    real = render_to_string('honeypot/policy_subdomain_index.html', ctx)
+    mine = policy.render_policy_subdomain_index(ctx)
+    return _report_diff(stdout, real, mine, 'policy_subdomain_index')
+
+
+def _policy_subdomain_year_ctx(agency='sec', year=2024):
+    from django.test import RequestFactory
+
+    from apps.core.context_processors import honeypot_context
+    from apps.honeypot import views as v
+    from apps.honeypot.policy_data import AGENCIES as _AGENCIES
+    from apps.honeypot.policy_generator import get_policy_agency_year_detail, get_policy_agency_years
+
+    agency_full, policy_domain = _AGENCIES.get(agency, ('Unknown Agency', 'regulatory policy'))
+    request = RequestFactory().get(f'/{year}/')
+    request.on_policy_subdomain = True
+    request.policy_agency_slug = agency
+    nav = v._policy_nav_context(request)
+    all_years = get_policy_agency_years(agency)
+    year_detail = get_policy_agency_year_detail(agency, year)
+    return {
+        'agency': agency,
+        'agency_full': agency_full,
+        'policy_domain': policy_domain,
+        'year': year,
+        'year_detail': year_detail,
+        'all_years': all_years,
+        'prev_year': year - 1,
+        'next_year': year + 1,
+        'og_title': f'{year} {agency.upper()} Policy Filings — ACPWB',
+        'request': request,
+        **nav,
+        **honeypot_context(request),
+    }
+
+
+def _check_policy_subdomain_year(stdout):
+    from apps.honeypot.pyrender import policy
+    ctx = _policy_subdomain_year_ctx()
+    real = render_to_string('honeypot/policy_subdomain_year.html', ctx)
+    mine = policy.render_policy_subdomain_year(ctx)
+    return _report_diff(stdout, real, mine, 'policy_subdomain_year')
+
+
 def _check_policy_detail(stdout):
     from apps.honeypot.pyrender import policy
     ctx = _policy_detail_ctx(2024, 3, 15, 'sec', 'diff-render-policy-detail-slug')
@@ -419,6 +492,8 @@ _CASES = {
     'policy_year': _check_policy_year,
     'policy_month': _check_policy_month,
     'policy_month_subdomain': _check_policy_month_subdomain,
+    'policy_subdomain_index': _check_policy_subdomain_index,
+    'policy_subdomain_year': _check_policy_subdomain_year,
 }
 
 

@@ -53,7 +53,10 @@ def generate_chaos_number(log_json_str):
     seed_int = int.from_bytes(combined_hash, 'big')
     rng = random.Random(seed_int)
     chaos_float = rng.random()
-    random_int = int(str(chaos_float)[2:])
+    # f"{:.17f}" always yields fixed-point notation ("0.000060805..."), unlike
+    # str(), which switches to scientific notation ("6.08...e-05") for values
+    # below 1e-4 and breaks the int() parse below.
+    random_int = int(f'{chaos_float:.17f}'[2:])
     return system_secret.hex(), combined_hash.hex(), str(seed_int), random_int
 
 

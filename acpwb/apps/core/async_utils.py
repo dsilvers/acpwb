@@ -17,9 +17,21 @@ def spawn(fn, *args, **kwargs):
     if getattr(settings, 'TESTING', False):
         fn(*args, **kwargs)
         return
+
+    def _run():
+        try:
+            fn(*args, **kwargs)
+        finally:
+            # fn runs on its own greenlet, detached from the request/response
+            # cycle, so Django's request_finished signal never fires here to
+            # close whatever DB connection this greenlet opened — leaking one
+            # pgbouncer/Postgres connection per call otherwise.
+            from django.db import connections
+            connections.close_all()
+
     try:
         import gevent
-        gevent.spawn(fn, *args, **kwargs)
+        gevent.spawn(_run)
     except Exception:
         fn(*args, **kwargs)
 

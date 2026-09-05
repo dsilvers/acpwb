@@ -3,6 +3,14 @@ import re
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpResponse
+# Imported at module load (main thread, process boot) rather than lazily
+# inside _render_pdf: weasyprint's first import does a one-time
+# ctypes.util.find_library() that shells out via subprocess, and gevent's
+# child watcher only works on the default loop. _render_pdf runs on
+# gevent's threadpool (see run_in_thread below), which has no default loop,
+# so a first-time import there crashes with "child watchers are only
+# available on the default loop".
+from weasyprint import HTML
 
 from .image_selector import _STATIC_ROOT
 
@@ -176,7 +184,6 @@ def presentation_slide(request, org_slug, year, month, day, slug, slide_num):
 
 
 def _render_pdf(html_string, base_url):
-    from weasyprint import HTML
     return HTML(string=html_string, base_url=base_url).write_pdf()
 
 

@@ -15,6 +15,14 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
+# Imported at module load (main thread, process boot) rather than lazily
+# inside _render_pdf: weasyprint's first import does a one-time
+# ctypes.util.find_library() that shells out via subprocess, and gevent's
+# child watcher only works on the default loop. _render_pdf runs on
+# gevent's threadpool (see run_in_thread below), which has no default loop,
+# so a first-time import there crashes with "child watchers are only
+# available on the default loop".
+from weasyprint import HTML
 
 from apps.core.bot_classify import bot_type_to_group, classify_ua_or_ip
 from apps.people.generators import (
@@ -1438,7 +1446,6 @@ def report_download(request, slug):
 
 
 def _render_pdf(html_string, base_url):
-    from weasyprint import HTML
     return HTML(string=html_string, base_url=base_url).write_pdf()
 
 

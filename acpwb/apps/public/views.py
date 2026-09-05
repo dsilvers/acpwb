@@ -329,7 +329,7 @@ def do_not_sell(request):
 
         if not errors:
             x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
-            ip = x_forwarded.split(',')[0].strip() if x_forwarded else request.META.get('REMOTE_ADDR', '0.0.0.0')
+            ip = (x_forwarded.split(',')[0].strip() if x_forwarded else request.META.get('REMOTE_ADDR')) or '0.0.0.0'
             DataOptOutRequest.objects.create(
                 name=name,
                 email=email,

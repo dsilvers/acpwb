@@ -75,13 +75,27 @@ class Command(BaseCommand):
                     if 'timestamp' in item:
                         ts = parse_datetime(item['timestamp'])
                         item['timestamp'] = ts if ts else item.pop('timestamp')
+                    if not item.get('ip_address'):
+                        item['ip_address'] = '0.0.0.0'
                     objs.append(CrawlerVisit(**item))
                 except Exception:
                     pass  # skip malformed entries
 
             if objs:
-                CrawlerVisit.objects.bulk_create(objs, ignore_conflicts=True)
-                total_inserted += len(objs)
+                try:
+                    CrawlerVisit.objects.bulk_create(objs, ignore_conflicts=True)
+                    total_inserted += len(objs)
+                except Exception as exc:
+                    # A single bad row (e.g. an invalid ip_address format)
+                    # fails the whole batch INSERT — retry one row at a time
+                    # so the rest of an otherwise-valid batch isn't lost.
+                    self._log(f'Batch insert failed ({exc}); retrying rows individually.')
+                    for obj in objs:
+                        try:
+                            obj.save()
+                            total_inserted += 1
+                        except Exception:
+                            pass
 
             batches_run += 1
             if max_batches and batches_run >= max_batches:

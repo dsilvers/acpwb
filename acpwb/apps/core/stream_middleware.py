@@ -123,5 +123,5 @@ class RequestStreamMiddleware:
     def _get_ip(request):
         x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded:
-            return x_forwarded.split(',')[0].strip()
-        return request.META.get('REMOTE_ADDR', '0.0.0.0')
+            return x_forwarded.split(',')[0].strip() or '0.0.0.0'
+        return request.META.get('REMOTE_ADDR') or '0.0.0.0'

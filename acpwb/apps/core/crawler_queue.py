@@ -21,6 +21,18 @@ _CIRCUIT_BREAKER_COOLDOWN = 30.0
 _redis_client = None
 _last_failure = 0.0
 
+# Consumer (drain command) side gets its own client, separate from the
+# request-path one above. The request path is fire-and-forget off a spawned
+# greenlet — a tight socket_timeout and long cooldown are right there, since
+# it should fail fast and stay quiet rather than pile up retries under load.
+# The drain commands are long-lived (up to ~55s), single-threaded bulk
+# consumers that can afford to wait longer for a reply, and a single slow
+# call shouldn't sideline the rest of that run for 30s.
+_CONSUMER_CIRCUIT_BREAKER_COOLDOWN = 3.0
+
+_consumer_redis_client = None
+_consumer_last_failure = 0.0
+
 
 def _get_client():
     global _redis_client, _last_failure
@@ -52,6 +64,38 @@ def _mark_failure():
     global _redis_client, _last_failure
     _redis_client = None
     _last_failure = time.monotonic()
+
+
+def _get_consumer_client():
+    global _consumer_redis_client, _consumer_last_failure
+
+    if _consumer_redis_client is not None:
+        return _consumer_redis_client
+
+    if time.monotonic() - _consumer_last_failure < _CONSUMER_CIRCUIT_BREAKER_COOLDOWN:
+        return None
+
+    try:
+        import redis as redis_lib
+        from django.conf import settings
+        url = getattr(settings, 'REDIS_URL', 'redis://redis:6379/0')
+        _consumer_redis_client = redis_lib.from_url(
+            url,
+            socket_connect_timeout=1,
+            socket_timeout=2.0,
+            decode_responses=True,
+            max_connections=10,
+        )
+        return _consumer_redis_client
+    except Exception:
+        _consumer_last_failure = time.monotonic()
+        return None
+
+
+def _mark_consumer_failure():
+    global _consumer_redis_client, _consumer_last_failure
+    _consumer_redis_client = None
+    _consumer_last_failure = time.monotonic()
 
 
 def push_crawler_visit(data: dict) -> bool:

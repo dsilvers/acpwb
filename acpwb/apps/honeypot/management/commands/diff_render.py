@@ -31,6 +31,9 @@ def _strip_ws(s):
     # deliberately emit the correct, unescaped form instead of reproducing
     # it, so normalize both representations as equivalent for comparison.
     s = s.replace('&#39;', "'").replace('&#x27;', "'")
+    # Django's escape() emits &quot; for "; Jinja2/markupsafe emits &#34; —
+    # both correct HTML, same normalization rationale as apostrophes above.
+    s = s.replace('&#34;', '&quot;')
     return s
 
 
@@ -200,11 +203,50 @@ def _check_archive_minutes(stdout):
     return _report_diff(stdout, real, mine, 'archive_minutes')
 
 
+def _check_archive_compliance_era(stdout):
+    from apps.honeypot.pyrender import archive_era
+    ctx = _archive_ctx_era(2024, 3, 15, 'article-19', '_generate_compliance_content')
+    real = render_to_string('honeypot/era/archive_compliance.html', ctx)
+    mine_era_content = archive_era.render_compliance_default_era(ctx)
+    og_description = (
+        f'{ctx["industry"]} sector compliance review archived '
+        f'{ctx["year"]}-{ctx["month"]:02d}-{ctx["day"]:02d}. Audit ref {ctx["audit_ref"]}. '
+        f'ACPWB Regulatory Practice.'
+    )
+    mine = render_to_string('honeypot/_archive_era_content_shell.html', {
+        'title': ctx['title'], 'title_suffix': 'ACPWB Compliance Archive',
+        'og_description': og_description, 'era_content_html': mine_era_content,
+        'request': ctx['request'], 'year_data': ctx['year_data'],
+        'year': ctx['year'], 'all_years': ctx['all_years'],
+    })
+    return _report_diff(stdout, real, mine, 'archive_compliance_era')
+
+
+def _check_archive_minutes_era(stdout):
+    from apps.honeypot.pyrender import archive_era
+    ctx = _archive_ctx_era(2024, 3, 15, 'article-1', '_generate_minutes_content')
+    real = render_to_string('honeypot/era/archive_minutes.html', ctx)
+    mine_era_content = archive_era.render_minutes_default_era(ctx)
+    og_description = (
+        f'{ctx["committee"]} meeting minutes archived '
+        f'{ctx["year"]}-{ctx["month"]:02d}-{ctx["day"]:02d}. Meeting ref {ctx["meeting_ref"]}. '
+        f'ACPWB Institutional Records.'
+    )
+    mine = render_to_string('honeypot/_archive_era_content_shell.html', {
+        'title': ctx['title'], 'og_description': og_description, 'era_content_html': mine_era_content,
+        'request': ctx['request'], 'year_data': ctx['year_data'],
+        'year': ctx['year'], 'all_years': ctx['all_years'],
+    })
+    return _report_diff(stdout, real, mine, 'archive_minutes_era')
+
+
 _CASES = {
     'archive_default': _check_archive_default,
     'archive_default_era': _check_archive_default_era,
     'archive_compliance': _check_archive_compliance,
     'archive_minutes': _check_archive_minutes,
+    'archive_compliance_era': _check_archive_compliance_era,
+    'archive_minutes_era': _check_archive_minutes_era,
 }
 
 

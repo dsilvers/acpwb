@@ -11,6 +11,7 @@ from jinja2.filters import do_truncate
 
 from apps.core.htmlgen import escape as e
 from apps.core.htmlgen import get_archive_seal
+from apps.honeypot.pyrender.archive_main import _risk_badge, _status_badge
 
 # do_truncate needs a real Environment to read its default truncation
 # policies (leeway, etc.) — a fresh default-config Environment matches
@@ -397,4 +398,509 @@ def render_archive_default_era(ctx):
     ap('</div></div></div>')  # row, container, era-archive-content
 
     ap(_bulk_hex_script(c.get('bulk_hex_js', []), rid))
+    return ''.join(parts)
+
+
+def render_compliance_default_era(ctx):
+    """templates/jinja2/honeypot/era/archive_compliance.html."""
+    c = ctx
+    rid = c['record_id']
+    yd = c['year_data']
+    parts = []
+    ap = parts.append
+
+    ap(
+        '<style>\n'
+        f'  .era-archive-banner {{ background: {yd["accent"]}; color: #fff; padding: 2rem 0 1.5rem; '
+        f'font-family: {yd["font_head"]}, sans-serif; }}\n'
+        f'  .era-archive-content {{ padding: 3rem 0; background: {yd["bg"]}; color: {yd["text_color"]}; '
+        f'font-family: {yd["font_body"]}, sans-serif; }}\n'
+        f'  .era-callout {{ background: rgba(128,128,128,.08); border: 1px solid rgba(128,128,128,.2); '
+        f'border-left: 4px solid {yd["accent"]}; padding: 1.1rem 1.4rem; margin-bottom: 1.75rem; }}\n'
+        f'  .era-section-head {{ font-family: {yd["font_head"]}, sans-serif; font-size: .78rem; '
+        f'font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: {yd["accent"]}; '
+        f'margin-bottom: .85rem; padding-bottom: .4rem; border-bottom: 2px solid {yd["accent"]}; }}\n'
+        f'  .era-entry-card {{ background: rgba(128,128,128,.07); border: 1px solid rgba(128,128,128,.2); '
+        f'border-left: 3px solid {yd["accent"]}; padding: .7rem 1rem; text-decoration: none; '
+        f'color: {yd["text_color"]}; display: block; }}\n'
+        f'  .era-entry-card:hover {{ border-left-color: {yd["accent2"]}; color: {yd["text_color"]}; }}\n'
+        f'  .era-nav-link {{ font-size: .85rem; color: {yd["accent2"]}; font-weight: 600; text-decoration: none; }}\n'
+        f'  .era-table-head {{ background: {yd["accent"]}; }}\n'
+        f'  :root {{\n{_bulk_hex_css_vars(c.get("bulk_hex_css", []))}  }}\n'
+        '</style>\n'
+    )
+
+    ap('<div class="era-archive-banner"><div class="container">')
+    ap(f'<p class="text-uppercase mb-1" style="font-weight:800;letter-spacing:.18em;font-size:.75rem;opacity:.8">'
+       f'<a href="/archive/" style="color:inherit">Archive</a>'
+       f' &rsaquo; <a href="{e(c["year_url"])}" style="color:inherit">{c["year"]}</a>'
+       f' &rsaquo; <a href="{e(c["month_url"])}" style="color:inherit">{c["month"]:02d}</a>'
+       f' &rsaquo; {c["day"]:02d}</p>')
+    ap(f'<p class="mb-1" style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;'
+       f'opacity:.7">Compliance Review &bull; Audit Ref: {e(c["audit_ref"])}</p>')
+    ap(f'<h1 style="font-family:var(--era-font-head);font-size:clamp(1.1rem,3vw,1.9rem);line-height:1.25;'
+       f'margin-bottom:.3rem">{e(c["title"])}</h1>')
+    ap(f'<p style="opacity:.75;font-size:.88rem;margin-bottom:0">'
+       f'{e(c["industry"])} &bull; {e(c["org"])} &bull; {e(c["date_str"])}</p>')
+    ap('</div></div>')
+
+    ap('<div class="era-archive-content"><div class="container"><div class="row g-4"><div class="col-lg-8">')
+
+    ap(f'<div id="acpwb-compliance-{rid}-header" class="era-callout" style="margin-bottom:1.5rem">'
+       f'<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;'
+       f'color:var(--era-accent);margin-bottom:.6rem">Document Information</div>'
+       f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.8rem">'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Client</span><br><strong>{e(c["org"])}</strong></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Industry</span><br><strong>{e(c["industry"])}</strong></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Audit Ref</span><br><code style="font-size:.75rem">{e(c["audit_ref"])}</code></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Date</span><br><strong>{e(c["date_str"])}</strong></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Version</span><br><code style="font-size:.75rem">{e(c["doc_version"])}</code></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Record ID</span><br><code style="font-size:.75rem;opacity:.7">{e(rid)}</code></div></div>'
+       f'<div style="margin-top:.75rem;padding-top:.6rem;border-top:1px solid rgba(128,128,128,.18);'
+       f'font-size:.78rem"><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;'
+       f'letter-spacing:.06em">Filed by</span>&nbsp; <strong>{e(c["assessor"])}</strong>, '
+       f'{e(c["assessor_title"])} &mdash; <a href="mailto:{e(c["assessor_email"])}" '
+       f'style="color:inherit;opacity:.7">{e(c["assessor_email"])}</a></div>')
+    if c.get('frameworks_cited'):
+        ap('<div style="margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem">')
+        ap(''.join(
+            f'<span style="font-size:.62rem;padding:.15rem .45rem;background:rgba(128,128,128,.12);'
+            f'border:1px solid rgba(128,128,128,.25)">{e(fw)}</span>'
+            for fw in c['frameworks_cited']
+        ))
+        ap('</div>')
+    ap('</div>')
+
+    ap(f'<div id="acpwb-compliance-{rid}-scope" class="mb-4"><div class="era-section-head">'
+       f'1. Engagement Scope</div>'
+       f'<p style="font-size:.88rem;line-height:1.7;margin-bottom:0">{e(c["scope_para"])}</p></div>')
+    ap(f'<div id="acpwb-compliance-{rid}-methodology" class="mb-4"><div class="era-section-head">'
+       f'2. Methodology</div>'
+       f'<p style="font-size:.88rem;line-height:1.7;margin-bottom:0">{e(c["method_para"])}</p></div>')
+
+    ap(f'<div id="acpwb-compliance-{rid}-findings-summary" class="mb-4">'
+       f'<div class="era-section-head">3. Findings Summary</div>'
+       f'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.8rem">'
+       '<thead><tr class="era-table-head" style="color:#fff">'
+       '<th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase;white-space:nowrap">Finding ID</th>'
+       '<th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Risk</th>'
+       '<th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Status</th>'
+       '<th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Owner</th>'
+       '<th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Due</th>'
+       '<th style="padding:.45rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Description</th></tr></thead><tbody>')
+    ap(''.join(
+        f'<tr style="border-top:1px solid rgba(128,128,128,.15)">'
+        f'<td style="padding:.4rem .7rem;font-family:monospace;font-size:.72rem;white-space:nowrap">'
+        f'{e(f["id"])}</td>'
+        f'<td style="padding:.4rem .7rem;white-space:nowrap">{_risk_badge(f["risk"])}</td>'
+        f'<td style="padding:.4rem .7rem;white-space:nowrap">{_status_badge(f["status"])}</td>'
+        f'<td style="padding:.4rem .7rem;font-size:.75rem;opacity:.8">{e(f["owner"])}</td>'
+        f'<td style="padding:.4rem .7rem;font-size:.72rem;white-space:nowrap;opacity:.7">{e(f["due_date"])}</td>'
+        f'<td style="padding:.4rem .7rem;font-size:.78rem;max-width:280px">{e(f["description"])}</td></tr>'
+        for f in c['findings']
+    ))
+    ap('</tbody></table></div></div>')
+
+    ap(f'<div id="acpwb-compliance-{rid}-findings-detail" class="mb-4">'
+       f'<div class="era-section-head">4. Detailed Findings</div>')
+    ap(''.join(
+        f'<div id="acpwb-compliance-{rid}-finding-{f["id"]}" style="background:rgba(128,128,128,.06);'
+        f'border:1px solid rgba(128,128,128,.18);margin-bottom:1rem;padding:1rem 1.1rem">'
+        f'<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem">'
+        f'<code style="font-size:.72rem;opacity:.75">{e(f["id"])}</code>'
+        f'{_risk_badge(f["risk"], fallback_label="INFORMATIONAL")}'
+        f'{_status_badge(f["status"])}</div>'
+        f'<div style="margin-bottom:.55rem">'
+        f'<div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;'
+        f'opacity:.5;margin-bottom:.2rem">Observation</div>'
+        f'<p style="font-size:.83rem;line-height:1.65;margin-bottom:0">{e(f["description"])}</p></div>'
+        f'<div style="margin-bottom:.55rem;padding-top:.5rem;border-top:1px solid rgba(128,128,128,.12)">'
+        f'<div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;'
+        f'opacity:.5;margin-bottom:.2rem">Corrective Action Required</div>'
+        f'<p style="font-size:.83rem;line-height:1.65;margin-bottom:0">{e(f["corrective_action"])}</p></div>'
+        f'<div style="padding-top:.5rem;border-top:1px solid rgba(128,128,128,.12)">'
+        f'<div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;'
+        f'opacity:.5;margin-bottom:.2rem">Management Response</div>'
+        f'<p style="font-size:.83rem;line-height:1.65;margin-bottom:.45rem">{e(f["mgmt_response"])}</p>'
+        f'<div style="font-size:.72rem;opacity:.65">Owner: <strong>{e(f["owner"])}</strong> &bull; '
+        f'Due: <strong>{e(f["due_date"])}</strong></div></div></div>'
+        for f in c['findings']
+    ))
+    ap('</div>')
+
+    ap(f'<div id="acpwb-compliance-{rid}-certification" class="mb-4">'
+       f'<div class="era-section-head">5. Distribution &amp; Certification</div>')
+    if c.get('dist_list'):
+        ap('<table style="width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:1.25rem">'
+           '<thead><tr class="era-table-head" style="color:#fff">'
+           '<th style="padding:.35rem .7rem;text-align:left;font-size:.68rem;text-transform:uppercase;'
+           'letter-spacing:.06em">Recipient</th>'
+           '<th style="padding:.35rem .7rem;text-align:left;font-size:.68rem;text-transform:uppercase;'
+           'letter-spacing:.06em">Title</th>'
+           '<th style="padding:.35rem .7rem;text-align:left;font-size:.68rem;text-transform:uppercase;'
+           'letter-spacing:.06em">Email</th></tr></thead><tbody>')
+        ap(''.join(
+            f'<tr style="border-top:1px solid rgba(128,128,128,.15)">'
+            f'<td style="padding:.35rem .7rem;font-weight:600">{e(d["name"])}</td>'
+            f'<td style="padding:.35rem .7rem;opacity:.8">{e(d["title"])}</td>'
+            f'<td style="padding:.35rem .7rem;font-family:monospace;font-size:.72rem;opacity:.7">'
+            f'<a href="mailto:{e(d["email"])}" style="color:inherit">{e(d["email"])}</a></td></tr>'
+            for d in c['dist_list']
+        ))
+        ap('</tbody></table>')
+    ap('<div style="border:1px solid rgba(128,128,128,.2);padding:1rem 1.1rem">'
+       '<p style="font-size:.8rem;line-height:1.6;margin-bottom:.75rem">'
+       'The undersigned attests that the information contained in this report is accurate and complete'
+       ' to the best of their knowledge and belief, and that this review was conducted in accordance'
+       ' with ACPWB professional standards.</p>'
+       '<div style="display:flex;gap:2rem;flex-wrap:wrap"><div>'
+       '<div style="width:160px;border-bottom:1px solid rgba(128,128,128,.4);margin-bottom:.25rem;'
+       'height:1.5rem"></div>'
+       f'<div style="font-size:.72rem;opacity:.65">{e(c["assessor"])}<br>{e(c["assessor_title"])}<br>'
+       f'{e(c["assessor_email"])}</div></div><div>'
+       '<div style="width:120px;border-bottom:1px solid rgba(128,128,128,.4);margin-bottom:.25rem;'
+       'height:1.5rem"></div>'
+       f'<div style="font-size:.72rem;opacity:.65">Date: {e(c["date_str"])}</div></div></div></div></div>')
+
+    ap(f'<div style="display:flex;justify-content:space-between;align-items:center;padding-top:1.25rem;'
+       f'border-top:1px solid rgba(128,128,128,.15);font-size:.82rem">'
+       f'<a href="{e(c["prev_entry_url"])}" class="era-nav-link">&larr; Previous</a>'
+       f'<a href="{e(c["next_entry_url"])}" class="era-nav-link">Next &rarr;</a></div>')
+
+    if c['cross_year_reports']:
+        ap('<div class="mt-4"><div class="era-section-head">Related Records — Other Years</div>'
+           '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem">')
+        ap(''.join(
+            f'<a href="{e(ent["url"])}" class="era-entry-card">'
+            f'<div style="font-size:.6rem;opacity:.5;margin-bottom:.1rem">{ent["year"]} &bull; '
+            f'{e(ent["date"])}</div>'
+            f'<div style="font-size:.73rem;font-weight:600;line-height:1.3">{e(ent["label"])}</div></a>'
+            for ent in c['cross_year_reports']
+        ))
+        ap('</div></div>')
+
+    ap('<div class="mt-5 pt-3 text-center" style="border-top:1px solid rgba(128,128,128,.12);opacity:.75">')
+    ap(get_archive_seal(c['year'], rid))
+    ap('</div>')
+
+    ap('</div>')  # end col-lg-8
+
+    ap(f'<div id="acpwb-compliance-{rid}-sidebar" class="col-lg-4 d-none d-lg-block">'
+       f'<div style="position:sticky;top:2rem">')
+    ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;'
+       'margin-bottom:1rem"><div class="era-section-head" style="margin-bottom:.6rem">Audit Record</div>'
+       '<dl class="mb-0" style="font-size:.82rem">'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Audit Ref</dt>'
+       f'<dd class="mb-2" style="font-family:monospace;font-size:.75rem;opacity:.7">{e(c["audit_ref"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Date</dt>'
+       f'<dd class="fw-700 mb-2">{e(c["date_str"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Client</dt>'
+       f'<dd class="fw-700 mb-2">{e(c["org"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Industry</dt>'
+       f'<dd class="mb-2">{e(c["industry"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Findings</dt>'
+       f'<dd class="mb-2">{len(c["findings"])} total</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>'
+       f'<dd class="mb-0" style="font-family:monospace;font-size:.75rem;opacity:.7">{e(rid)}</dd></dl></div>')
+    ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;'
+       'margin-bottom:1rem"><div class="era-section-head" style="margin-bottom:.6rem">Navigation</div>'
+       '<ul class="list-unstyled mb-0" style="font-size:.82rem">'
+       f'<li class="mb-2"><a href="{e(c["year_url"])}" class="era-nav-link">&larr; All {c["year"]} Records</a></li>'
+       f'<li class="mb-2"><a href="{e(c["month_url"])}" style="color:inherit;opacity:.7;'
+       f'text-decoration:none">&larr; {c["year"]}/{c["month"]:02d}</a></li>'
+       f'<li class="mb-2"><a href="{e(c["prev_entry_url"])}" style="color:inherit;opacity:.55;'
+       f'text-decoration:none">&larr; Previous Entry</a></li>'
+       f'<li class="mb-2"><a href="{e(c["next_entry_url"])}" class="era-nav-link">'
+       f'Next in Series &rarr;</a></li></ul></div>')
+    if c['related_docs']:
+        ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;'
+           'margin-bottom:1rem"><div class="era-section-head" style="margin-bottom:.6rem">'
+           'Related Documents</div>')
+        ap(''.join(
+            f'<a href="{e(d["url"])}" class="era-entry-card" style="margin-bottom:.5rem">'
+            f'<div style="font-size:.6rem;opacity:.5;margin-bottom:.15rem">{e(d["date"])}</div>'
+            f'<div style="font-size:.75rem;font-weight:600;line-height:1.35">{e(d["label"])}</div></a>'
+            for d in c['related_docs']
+        ))
+        ap('</div>')
+    ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem">'
+       '<div class="era-section-head" style="margin-bottom:.6rem">Browse by Year</div>'
+       '<div style="display:flex;flex-wrap:wrap;gap:.3rem">')
+    ap(''.join(
+        f'<a href="https://archives-{y}.acpwb.com/" '
+        f'style="font-size:.68rem;padding:.2rem .4rem;border:1px solid rgba(128,128,128,.3);'
+        f'text-decoration:none;color:inherit'
+        + (';font-weight:800;border-color:var(--era-accent);color:var(--era-accent)' if y == c['year'] else '')
+        + f'">{y}</a>'
+        for y in c['all_years']
+    ))
+    ap('</div></div>')
+    ap('</div></div>')  # sticky, sidebar col
+    ap('</div></div></div>')  # row, container, era-archive-content
+    return ''.join(parts)
+
+
+def render_minutes_default_era(ctx):
+    """templates/jinja2/honeypot/era/archive_minutes.html."""
+    c = ctx
+    rid = c['record_id']
+    yd = c['year_data']
+    parts = []
+    ap = parts.append
+
+    ap(
+        '<style>\n'
+        f'  .era-archive-banner {{ background: {yd["accent"]}; color: #fff; padding: 2rem 0 1.5rem; '
+        f'font-family: {yd["font_head"]}, sans-serif; }}\n'
+        f'  .era-archive-content {{ padding: 3rem 0; background: {yd["bg"]}; color: {yd["text_color"]}; '
+        f'font-family: {yd["font_body"]}, sans-serif; }}\n'
+        f'  .era-callout {{ background: rgba(128,128,128,.08); border: 1px solid rgba(128,128,128,.2); '
+        f'border-left: 4px solid {yd["accent"]}; padding: 1.1rem 1.4rem; margin-bottom: 1.75rem; }}\n'
+        f'  .era-section-head {{ font-family: {yd["font_head"]}, sans-serif; font-size: .78rem; '
+        f'font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: {yd["accent"]}; '
+        f'margin-bottom: .85rem; padding-bottom: .4rem; border-bottom: 2px solid {yd["accent"]}; }}\n'
+        f'  .era-entry-card {{ background: rgba(128,128,128,.07); border: 1px solid rgba(128,128,128,.2); '
+        f'border-left: 3px solid {yd["accent"]}; padding: .7rem 1rem; text-decoration: none; '
+        f'color: {yd["text_color"]}; display: block; }}\n'
+        f'  .era-entry-card:hover {{ border-left-color: {yd["accent2"]}; color: {yd["text_color"]}; }}\n'
+        f'  .era-nav-link {{ font-size: .85rem; color: {yd["accent2"]}; font-weight: 600; text-decoration: none; }}\n'
+        f'  .era-table-head {{ background: {yd["accent"]}; }}\n'
+        f'  .era-motion-block {{ background: rgba(128,128,128,.06); border: 1px solid rgba(128,128,128,.18); '
+        f'border-left: 3px solid {yd["accent2"]}; padding: .8rem 1rem; margin-top: .65rem; font-size: .82rem; }}\n'
+        f'  :root {{\n{_bulk_hex_css_vars(c.get("bulk_hex_css", []))}  }}\n'
+        '</style>\n'
+    )
+
+    ap('<div class="era-archive-banner"><div class="container">')
+    ap(f'<p class="text-uppercase mb-1" style="font-weight:800;letter-spacing:.18em;font-size:.75rem;opacity:.8">'
+       f'<a href="/archive/" style="color:inherit">Archive</a>'
+       f' &rsaquo; <a href="{e(c["year_url"])}" style="color:inherit">{c["year"]}</a>'
+       f' &rsaquo; <a href="{e(c["month_url"])}" style="color:inherit">{c["month"]:02d}</a>'
+       f' &rsaquo; {c["day"]:02d}</p>')
+    ap(f'<p class="mb-1" style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;'
+       f'opacity:.7">Meeting Minutes &bull; {e(c["meeting_ref"])}</p>')
+    ap(f'<h1 style="font-family:var(--era-font-head);font-size:clamp(1.1rem,3vw,1.9rem);line-height:1.25;'
+       f'margin-bottom:.3rem">{e(c["title"])}</h1>')
+    ap(f'<p style="opacity:.75;font-size:.88rem;margin-bottom:0">'
+       f'{e(c["date_str"])} &bull; {e(c["location"])} &bull; Called to order {e(c["call_to_order"])}</p>')
+    ap('</div></div>')
+
+    ap('<div class="era-archive-content"><div class="container"><div class="row g-4"><div class="col-lg-8">')
+
+    quorum_badge = (
+        '<span style="font-size:.65rem;font-weight:700;padding:.2rem .5rem;background:#dcfce7;color:#15803d;'
+        'border:1px solid #86efac">&#10003; QUORUM ESTABLISHED</span>'
+        if c['quorum'] else
+        '<span style="font-size:.65rem;font-weight:700;padding:.2rem .5rem;background:#fee2e2;color:#991b1b;'
+        'border:1px solid #fca5a5">&#10007; QUORUM NOT MET</span>'
+    )
+    ap(f'<div id="acpwb-minutes-{rid}-header" class="era-callout">'
+       f'<div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;'
+       f'color:var(--era-accent);margin-bottom:.6rem">Meeting Information</div>'
+       f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.8rem;'
+       f'margin-bottom:.65rem">'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Committee</span><br><strong>{e(c["committee"])}</strong></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Date</span><br><strong>{e(c["date_str"])}</strong></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Location</span><br><strong>{e(c["location"])}</strong></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Meeting Ref</span><br><code style="font-size:.75rem">{e(c["meeting_ref"])}</code></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Called to Order</span><br><strong>{e(c["call_to_order"])}</strong></div>'
+       f'<div><span style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em">'
+       f'Adjourned</span><br><strong>{e(c["adjourn_time"])}</strong></div></div>'
+       f'<div style="display:flex;align-items:center;gap:.5rem">{quorum_badge}'
+       f'<span style="font-size:.72rem;opacity:.65">{c["num_present"]} of {c["total_seats"]} '
+       f'members present</span></div></div>')
+
+    ap(f'<div id="acpwb-minutes-{rid}-attendance" class="mb-4"><div class="era-section-head">Attendance</div>'
+       f'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.82rem">'
+       '<thead><tr class="era-table-head" style="color:#fff">'
+       '<th style="padding:.4rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Name</th>'
+       '<th style="padding:.4rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Title</th>'
+       '<th style="padding:.4rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Role</th>'
+       '<th style="padding:.4rem .7rem;text-align:center;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Present</th></tr></thead><tbody>')
+    ap(''.join(
+        f'<tr style="border-top:1px solid rgba(128,128,128,.15){";opacity:.5" if not m["present"] else ""}">'
+        f'<td style="padding:.35rem .7rem;font-weight:{"600" if m["present"] else "400"}">{e(m["name"])}</td>'
+        f'<td style="padding:.35rem .7rem;font-size:.78rem;opacity:.8">{e(m["title"])}</td>'
+        f'<td style="padding:.35rem .7rem;font-size:.75rem;opacity:.7">{e(m["role"])}</td>'
+        f'<td style="padding:.35rem .7rem;text-align:center">'
+        + ('<span style="color:#15803d;font-weight:700">&#10003;</span>' if m['present']
+           else '<span style="opacity:.4">&mdash;</span>')
+        + '</td></tr>'
+        for m in c['members']
+    ))
+    ap('</tbody></table></div>')
+    quorum_note = 'Quorum established.' if c['quorum'] else 'Quorum not established; meeting proceeded in advisory capacity only.'
+    ap(f'<p style="font-size:.72rem;opacity:.6;margin-top:.5rem;margin-bottom:0">'
+       f'{c["num_present"]} of {c["total_seats"]} members present. {quorum_note}</p></div>')
+
+    ap(f'<div id="acpwb-minutes-{rid}-agenda" class="mb-4"><div class="era-section-head">Agenda</div>')
+    for item in c['items']:
+        ap(f'<div id="acpwb-minutes-{rid}-item-{item["number"]}" style="margin-bottom:1.5rem;'
+           f'padding-bottom:1.25rem;border-bottom:1px solid rgba(128,128,128,.12)">'
+           f'<div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;'
+           f'opacity:.5;margin-bottom:.2rem">Item {item["number"]}</div>'
+           f'<h6 style="font-size:.92rem;font-weight:700;margin-bottom:.6rem;line-height:1.3">'
+           f'{e(item["title"])}</h6>'
+           f'<p style="font-size:.85rem;line-height:1.7;margin-bottom:0">{e(item["discussion"])}</p>')
+        if item.get('motion'):
+            mo = item['motion']
+            carried = (
+                '<span style="font-weight:800;color:#15803d">CARRIED</span>' if mo['carried']
+                else '<span style="font-weight:800;color:#991b1b">FAILED</span>'
+            )
+            ap(f'<div class="era-motion-block">'
+               f'<div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;'
+               f'opacity:.55;margin-bottom:.4rem">Motion</div>'
+               f'<p style="margin-bottom:.5rem;font-size:.83rem;line-height:1.6">'
+               f'<strong>{e(mo["verb"])}:</strong> {e(mo["text"])}</p>'
+               f'<div style="font-size:.8rem;margin-bottom:.35rem"><strong>Moved:</strong> {e(mo["moved_by"])} '
+               f'&nbsp;&bull;&nbsp; <strong>Seconded:</strong> {e(mo["seconded_by"])}</div>'
+               f'<div style="font-size:.8rem"><strong>Vote:</strong> {mo["yea"]} Yea &nbsp;/&nbsp; '
+               f'{mo["nay"]} Nay &nbsp;/&nbsp; {mo["abstain"]} Abstain &nbsp;&mdash;&nbsp; {carried}</div></div>')
+        ap('</div>')
+    ap('</div>')
+
+    ap(f'<div id="acpwb-minutes-{rid}-action-items" class="mb-4"><div class="era-section-head">'
+       f'Action Items</div><div style="overflow-x:auto">'
+       f'<table style="width:100%;border-collapse:collapse;font-size:.82rem"><thead>'
+       '<tr class="era-table-head" style="color:#fff">'
+       '<th style="padding:.4rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase;width:2.5rem">#</th>'
+       '<th style="padding:.4rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase">Description</th>'
+       '<th style="padding:.4rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase;white-space:nowrap">Owner</th>'
+       '<th style="padding:.4rem .7rem;text-align:left;font-size:.68rem;letter-spacing:.06em;'
+       'text-transform:uppercase;white-space:nowrap">Due</th></tr></thead><tbody>')
+    ap(''.join(
+        f'<tr style="border-top:1px solid rgba(128,128,128,.15)">'
+        f'<td style="padding:.35rem .7rem;opacity:.5;font-weight:600">{ai["number"]}</td>'
+        f'<td style="padding:.35rem .7rem;font-size:.82rem;line-height:1.5">{e(ai["description"])}</td>'
+        f'<td style="padding:.35rem .7rem;font-size:.78rem;white-space:nowrap;font-weight:600">'
+        f'{e(ai["owner"])}</td>'
+        f'<td style="padding:.35rem .7rem;font-size:.72rem;white-space:nowrap;opacity:.7">'
+        f'{e(ai["due_date"])}</td></tr>'
+        for ai in c['action_items']
+    ))
+    ap('</tbody></table></div></div>')
+
+    ap(f'<div id="acpwb-minutes-{rid}-adjournment" class="mb-4">'
+       f'<div class="era-section-head">Adjournment</div>'
+       f'<p style="font-size:.85rem;line-height:1.7;margin-bottom:.5rem">'
+       f'There being no further business, a motion to adjourn was made and carried unanimously.'
+       f' The meeting was adjourned at {e(c["adjourn_time"])}.</p>'
+       f'<p style="font-size:.82rem;margin-bottom:.5rem"><strong>Next meeting:</strong> '
+       f'{e(c["next_meeting"])}</p>'
+       f'<div style="margin-top:1rem;padding-top:.85rem;border-top:1px solid rgba(128,128,128,.15)">'
+       f'<p style="font-size:.8rem;margin-bottom:.35rem;opacity:.7">Respectfully submitted,</p>'
+       f'<p style="font-size:.83rem;font-weight:600;margin-bottom:.1rem">{e(c["secretary"]["name"])}</p>'
+       f'<p style="font-size:.78rem;opacity:.65;margin-bottom:.6rem">{e(c["secretary"]["title"])}, '
+       f'{e(c["secretary"]["role"])}</p>'
+       f'<div style="display:flex;gap:2rem;flex-wrap:wrap"><div>'
+       f'<div style="width:160px;border-bottom:1px solid rgba(128,128,128,.4);margin-bottom:.2rem;'
+       f'height:1.5rem"></div><div style="font-size:.68rem;opacity:.55">Signature</div></div><div>'
+       f'<div style="width:120px;border-bottom:1px solid rgba(128,128,128,.4);margin-bottom:.2rem;'
+       f'height:1.5rem"></div>'
+       f'<div style="font-size:.68rem;opacity:.55">Approved: ___________</div></div></div></div></div>')
+
+    ap(f'<div style="display:flex;justify-content:space-between;align-items:center;padding-top:1.25rem;'
+       f'border-top:1px solid rgba(128,128,128,.15);font-size:.82rem">'
+       f'<a href="{e(c["prev_entry_url"])}" class="era-nav-link">&larr; Previous</a>'
+       f'<a href="{e(c["next_entry_url"])}" class="era-nav-link">Next &rarr;</a></div>')
+
+    if c['cross_year_reports']:
+        ap('<div class="mt-4"><div class="era-section-head">Related Records — Other Years</div>'
+           '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem">')
+        ap(''.join(
+            f'<a href="{e(ent["url"])}" class="era-entry-card">'
+            f'<div style="font-size:.6rem;opacity:.5;margin-bottom:.1rem">{ent["year"]} &bull; '
+            f'{e(ent["date"])}</div>'
+            f'<div style="font-size:.73rem;font-weight:600;line-height:1.3">{e(ent["label"])}</div></a>'
+            for ent in c['cross_year_reports']
+        ))
+        ap('</div></div>')
+
+    ap('<div class="mt-5 pt-3 text-center" style="border-top:1px solid rgba(128,128,128,.12);opacity:.75">')
+    ap(get_archive_seal(c['year'], rid))
+    ap('</div>')
+
+    ap('</div>')  # end col-lg-8
+
+    ap(f'<div id="acpwb-minutes-{rid}-sidebar" class="col-lg-4 d-none d-lg-block">'
+       f'<div style="position:sticky;top:2rem">')
+    quorum_dl = (
+        '<span style="color:#15803d;font-weight:700">Established</span>' if c['quorum']
+        else '<span style="color:#991b1b;font-weight:700">Not Met</span>'
+    )
+    ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;'
+       'margin-bottom:1rem"><div class="era-section-head" style="margin-bottom:.6rem">Meeting Record</div>'
+       '<dl class="mb-0" style="font-size:.82rem">'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Meeting Ref</dt>'
+       f'<dd class="mb-2" style="font-family:monospace;font-size:.75rem;opacity:.7">{e(c["meeting_ref"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Date</dt>'
+       f'<dd class="fw-700 mb-2">{e(c["date_str"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Committee</dt>'
+       f'<dd class="fw-700 mb-2">{e(c["committee"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Quorum</dt>'
+       f'<dd class="mb-2">{quorum_dl}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Agenda Items</dt>'
+       f'<dd class="mb-2">{len(c["items"])}</dd>'
+       '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>'
+       f'<dd class="mb-0" style="font-family:monospace;font-size:.75rem;opacity:.7">{e(rid)}</dd></dl></div>')
+    ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;'
+       'margin-bottom:1rem"><div class="era-section-head" style="margin-bottom:.6rem">Navigation</div>'
+       '<ul class="list-unstyled mb-0" style="font-size:.82rem">'
+       f'<li class="mb-2"><a href="{e(c["year_url"])}" class="era-nav-link">&larr; All {c["year"]} Records</a></li>'
+       f'<li class="mb-2"><a href="{e(c["month_url"])}" style="color:inherit;opacity:.7;'
+       f'text-decoration:none">&larr; {c["year"]}/{c["month"]:02d}</a></li>'
+       f'<li class="mb-2"><a href="{e(c["prev_entry_url"])}" style="color:inherit;opacity:.55;'
+       f'text-decoration:none">&larr; Previous Entry</a></li>'
+       f'<li class="mb-2"><a href="{e(c["next_entry_url"])}" class="era-nav-link">'
+       f'Next in Series &rarr;</a></li></ul></div>')
+    if c['related_docs']:
+        ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem;'
+           'margin-bottom:1rem"><div class="era-section-head" style="margin-bottom:.6rem">'
+           'Related Documents</div>')
+        ap(''.join(
+            f'<a href="{e(d["url"])}" class="era-entry-card" style="margin-bottom:.5rem">'
+            f'<div style="font-size:.6rem;opacity:.5;margin-bottom:.15rem">{e(d["date"])}</div>'
+            f'<div style="font-size:.75rem;font-weight:600;line-height:1.35">{e(d["label"])}</div></a>'
+            for d in c['related_docs']
+        ))
+        ap('</div>')
+    ap('<div style="background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.2);padding:1rem">'
+       '<div class="era-section-head" style="margin-bottom:.6rem">Browse by Year</div>'
+       '<div style="display:flex;flex-wrap:wrap;gap:.3rem">')
+    ap(''.join(
+        f'<a href="https://archives-{y}.acpwb.com/" '
+        f'style="font-size:.68rem;padding:.2rem .4rem;border:1px solid rgba(128,128,128,.3);'
+        f'text-decoration:none;color:inherit'
+        + (';font-weight:800;border-color:var(--era-accent);color:var(--era-accent)' if y == c['year'] else '')
+        + f'">{y}</a>'
+        for y in c['all_years']
+    ))
+    ap('</div></div>')
+    ap('</div></div>')  # sticky, sidebar col
+    ap('</div></div></div>')  # row, container, era-archive-content
     return ''.join(parts)

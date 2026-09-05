@@ -83,7 +83,8 @@ class Command(BaseCommand):
                 break
 
         remaining = queue_length()
+        depth_display = 'unknown (Redis unavailable)' if remaining < 0 else remaining
         self.stdout.write(
             f'Inserted {total_inserted} records in {batches_run} batch(es). '
-            f'Queue depth: {remaining}.'
+            f'Queue depth: {depth_display}.'
         )

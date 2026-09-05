@@ -284,6 +284,121 @@ def _policy_detail_ctx(year, month, day, agency, slug, on_sub=False):
     }
 
 
+def _policy_index_ctx():
+    from django.test import RequestFactory
+
+    from apps.core.context_processors import honeypot_context
+    from apps.honeypot.policy_generator import get_policy_index_years
+
+    request = RequestFactory().get('/public-policy/')
+    return {
+        'years': get_policy_index_years(),
+        'og_title': 'Public Policy — ACPWB',
+        'og_description': 'placeholder',
+        'request': request,
+        'now_year': __import__('datetime').datetime.now().year,
+        **honeypot_context(request),
+    }
+
+
+def _check_policy_index(stdout):
+    from apps.honeypot.pyrender import policy
+    ctx = _policy_index_ctx()
+    real = render_to_string('honeypot/public_policy_index.html', ctx)
+    mine = policy.render_policy_index(ctx)
+    return _report_diff(stdout, real, mine, 'policy_index')
+
+
+def _policy_year_ctx(year):
+    from django.test import RequestFactory
+
+    from apps.core.context_processors import honeypot_context
+    from apps.honeypot.policy_generator import get_policy_year_data, get_policy_year_months
+
+    request = RequestFactory().get(f'/public-policy/{year}/')
+    return {
+        'year': year,
+        'year_data': get_policy_year_data(year),
+        'months': get_policy_year_months(year),
+        'policy_years': list(range(2025, 1992, -1)),
+        'prev_year': year - 1,
+        'next_year': year + 1,
+        'og_title': f'{year} Public Policy — ACPWB',
+        'request': request,
+        **honeypot_context(request),
+    }
+
+
+def _check_policy_year(stdout):
+    from apps.honeypot.pyrender import policy
+    ctx = _policy_year_ctx(2024)
+    real = render_to_string('honeypot/public_policy_year.html', ctx)
+    mine = policy.render_policy_year(ctx)
+    return _report_diff(stdout, real, mine, 'policy_year')
+
+
+def _policy_month_ctx(year, month, agency=None):
+    from django.test import RequestFactory
+
+    from apps.core.context_processors import honeypot_context
+    from apps.honeypot import views as v
+
+    prev_month = month - 1 if month > 1 else 12
+    prev_year = year if month > 1 else year - 1
+    next_month = month + 1 if month < 12 else 1
+    next_year = year if month < 12 else year + 1
+
+    if agency:
+        from apps.honeypot.policy_data import AGENCIES as _AGENCIES
+        from apps.honeypot.policy_generator import get_policy_agency_month_entries
+        agency_full = _AGENCIES.get(agency, ('Unknown Agency', 'regulatory policy'))[0]
+        request = RequestFactory().get(f'/{year}/{month:02d}/')
+        request.on_policy_subdomain = True
+        request.policy_agency_slug = agency
+        url_fn = lambda y, m, d, ag, sl: v._policy_url(request, y, m, d, ag, sl)
+        entries = get_policy_agency_month_entries(agency, year, month, url_fn=url_fn)
+        extra = {'agency': agency, 'agency_full': agency_full}
+    else:
+        from apps.honeypot.policy_generator import get_policy_month_entries
+        request = RequestFactory().get(f'/public-policy/{year}/{month:02d}/')
+        entries = get_policy_month_entries(year, month)
+        extra = {}
+
+    nav = v._policy_nav_context(request)
+    return {
+        'year': year,
+        'month': month,
+        'entries': entries,
+        'policy_years': list(range(2025, 1992, -1)),
+        'prev_year': prev_year, 'prev_month': prev_month,
+        'next_year': next_year, 'next_month': next_month,
+        'year_url': nav['policy_year_url'](year),
+        'prev_month_url': nav['policy_month_url'](prev_year, prev_month),
+        'next_month_url': nav['policy_month_url'](next_year, next_month),
+        'og_title': f'Public Policy {year}-{month:02d} — ACPWB',
+        'request': request,
+        **extra,
+        **nav,
+        **honeypot_context(request),
+    }
+
+
+def _check_policy_month(stdout):
+    from apps.honeypot.pyrender import policy
+    ctx = _policy_month_ctx(2024, 3)
+    real = render_to_string('honeypot/public_policy_month.html', ctx)
+    mine = policy.render_policy_month(ctx)
+    return _report_diff(stdout, real, mine, 'policy_month')
+
+
+def _check_policy_month_subdomain(stdout):
+    from apps.honeypot.pyrender import policy
+    ctx = _policy_month_ctx(2024, 3, agency='sec')
+    real = render_to_string('honeypot/public_policy_month.html', ctx)
+    mine = policy.render_policy_month(ctx)
+    return _report_diff(stdout, real, mine, 'policy_month_subdomain')
+
+
 def _check_policy_detail(stdout):
     from apps.honeypot.pyrender import policy
     ctx = _policy_detail_ctx(2024, 3, 15, 'sec', 'diff-render-policy-detail-slug')
@@ -300,6 +415,10 @@ _CASES = {
     'archive_compliance_era': _check_archive_compliance_era,
     'archive_minutes_era': _check_archive_minutes_era,
     'policy_detail': _check_policy_detail,
+    'policy_index': _check_policy_index,
+    'policy_year': _check_policy_year,
+    'policy_month': _check_policy_month,
+    'policy_month_subdomain': _check_policy_month_subdomain,
 }
 
 

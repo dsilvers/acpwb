@@ -12,6 +12,7 @@ Run via cron every minute:
 """
 import fcntl
 import time
+from datetime import datetime, timezone
 from django.utils.dateparse import parse_datetime
 
 from django.core.management.base import BaseCommand
@@ -39,12 +40,16 @@ class Command(BaseCommand):
             help='Stop fetching new batches after this many seconds (default: 50)',
         )
 
+    def _log(self, msg):
+        ts = datetime.now(timezone.utc).isoformat()
+        self.stdout.write(f'[{ts}] {msg}')
+
     def handle(self, *args, **options):
         with open(_LOCK_FILE, 'w') as lock_fh:
             try:
                 fcntl.flock(lock_fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
             except OSError:
-                self.stdout.write('Another drain is already running — exiting.')
+                self._log('Another drain is already running — exiting.')
                 return
             self._drain(options)
             # lock released automatically when with-block exits
@@ -84,7 +89,7 @@ class Command(BaseCommand):
 
         remaining = queue_length()
         depth_display = 'unknown (Redis unavailable)' if remaining < 0 else remaining
-        self.stdout.write(
+        self._log(
             f'Inserted {total_inserted} records in {batches_run} batch(es). '
             f'Queue depth: {depth_display}.'
         )

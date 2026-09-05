@@ -1005,12 +1005,15 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     if _variant_int < 3:
         content = _generate_compliance_content(year, month, day, slug)
         _template = 'honeypot/era/archive_compliance.html' if on_sub else 'honeypot/archive_compliance.html'
+        _variant = 'compliance'
     elif _variant_int < 6:
         content = _generate_minutes_content(year, month, day, slug)
         _template = 'honeypot/era/archive_minutes.html' if on_sub else 'honeypot/archive_minutes.html'
+        _variant = 'minutes'
     else:
         content = _generate_archive_content(year, month, day, slug)
         _template = 'honeypot/era/archive.html' if on_sub else 'honeypot/archive.html'
+        _variant = 'default'
 
     # Related paths spread across a wide historical date range (1985–present).
     # Data is cached; the URL is built per-request since _archive_url() reads
@@ -1079,6 +1082,11 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         from apps.core.context_processors import honeypot_context
         context.update(honeypot_context(request))
         context['request'] = request
+
+    from apps.honeypot.pyrender.dispatch import render_archive_page_python, use_python_render
+    if use_python_render(request, 'ARCHIVE_PYTHON_RENDER'):
+        from django.http import HttpResponse
+        return HttpResponse(render_archive_page_python(request, context, _variant, on_sub))
     return render(request, _template, context)
 
 
@@ -2979,6 +2987,9 @@ def public_policy_index(request):
         'request': request,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_index_python, use_python_render
+    if use_python_render(request, 'POLICY_INDEX_PYTHON_RENDER'):
+        return HttpResponse(render_policy_index_python(ctx))
     return render(request, 'honeypot/public_policy_index.html', ctx)
 
 
@@ -2997,6 +3008,9 @@ def public_policy_year(request, year):
         'request': request,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_year_python, use_python_render
+    if use_python_render(request, 'POLICY_YEAR_PYTHON_RENDER'):
+        return HttpResponse(render_policy_year_python(ctx))
     return render(request, 'honeypot/public_policy_year.html', ctx)
 
 
@@ -3024,6 +3038,9 @@ def public_policy_month(request, year, month):
         **nav,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_month_python, use_python_render
+    if use_python_render(request, 'POLICY_MONTH_PYTHON_RENDER'):
+        return HttpResponse(render_policy_month_python(ctx))
     return render(request, 'honeypot/public_policy_month.html', ctx)
 
 
@@ -3057,6 +3074,9 @@ def public_policy_detail(request, year, month, day, agency, slug):
         **nav,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_detail_python, use_python_render
+    if use_python_render(request, 'POLICY_DETAIL_PYTHON_RENDER'):
+        return HttpResponse(render_policy_detail_python(ctx))
     return render(request, 'honeypot/public_policy_detail.html', ctx)
 
 
@@ -3156,6 +3176,9 @@ def policy_subdomain_index(request):
         **nav,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_subdomain_index_python, use_python_render
+    if use_python_render(request, 'POLICY_SUBDOMAIN_INDEX_PYTHON_RENDER'):
+        return HttpResponse(render_policy_subdomain_index_python(ctx))
     return render(request, 'honeypot/policy_subdomain_index.html', ctx)
 
 
@@ -3185,6 +3208,9 @@ def policy_subdomain_year(request, year):
         **nav,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_subdomain_year_python, use_python_render
+    if use_python_render(request, 'POLICY_SUBDOMAIN_YEAR_PYTHON_RENDER'):
+        return HttpResponse(render_policy_subdomain_year_python(ctx))
     return render(request, 'honeypot/policy_subdomain_year.html', ctx)
 
 
@@ -3221,6 +3247,9 @@ def policy_subdomain_month(request, year, month):
         **nav,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_month_python, use_python_render
+    if use_python_render(request, 'POLICY_MONTH_PYTHON_RENDER'):
+        return HttpResponse(render_policy_month_python(ctx))
     return render(request, 'honeypot/public_policy_month.html', ctx)
 
 
@@ -3250,6 +3279,9 @@ def policy_subdomain_detail(request, year, month, day, slug):
         **nav,
         **honeypot_context(request),
     }
+    from apps.honeypot.pyrender.dispatch import render_policy_detail_python, use_python_render
+    if use_python_render(request, 'POLICY_DETAIL_PYTHON_RENDER'):
+        return HttpResponse(render_policy_detail_python(ctx))
     return render(request, 'honeypot/public_policy_detail.html', ctx)
 
 

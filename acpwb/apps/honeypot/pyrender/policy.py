@@ -21,6 +21,13 @@ from apps.core.htmlgen import (
 )
 
 
+def _now_year():
+    """Matches config.jinja2_env's `now_year` global (set once at process
+    start) for callers that don't pass now_year in via ctx."""
+    from datetime import datetime
+    return datetime.now().year
+
+
 def _policy_head_common(title, description, canonical_path, og_image_path='img/og-default.png',
                          og_type='article', feed_links=True):
     feeds = (
@@ -810,7 +817,7 @@ def render_policy_detail(ctx):
     related_archive = ctx.get('related_archive')
     related_presentations = ctx.get('related_presentations')
     site_root = ctx.get('site_root', '')
-    now_year = ctx['now_year']
+    now_year = ctx.get('now_year') or _now_year()
     request = ctx['request']
 
     title = f'{doc["title"]} — ACPWB'

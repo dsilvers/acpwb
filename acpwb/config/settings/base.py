@@ -171,6 +171,22 @@ REDIS_URL = env('REDIS_URL', default='redis://redis:6379/0')
 STREAM_WS_TOKEN = env('STREAM_WS_TOKEN', default='')
 
 
+# Raw-templates rewrite (see /Users/dan/.claude/plans/any-performance-benefits-to-dreamy-deer.md
+# Phase 4): each flag switches ONE converted view from the original Django/
+# Jinja2 template render path to the hand-written Python builder path.
+# Default False everywhere — both paths stay live; flip per-flag once a
+# view's diff_render checks + burn-in are clean. A DEBUG-only ?__render=
+# query param (see apps.honeypot.pyrender.dispatch.use_python_render)
+# overrides these per-request for manual side-by-side comparison.
+ARCHIVE_PYTHON_RENDER = env.bool('ARCHIVE_PYTHON_RENDER', default=False)
+POLICY_DETAIL_PYTHON_RENDER = env.bool('POLICY_DETAIL_PYTHON_RENDER', default=False)
+POLICY_INDEX_PYTHON_RENDER = env.bool('POLICY_INDEX_PYTHON_RENDER', default=False)
+POLICY_YEAR_PYTHON_RENDER = env.bool('POLICY_YEAR_PYTHON_RENDER', default=False)
+POLICY_MONTH_PYTHON_RENDER = env.bool('POLICY_MONTH_PYTHON_RENDER', default=False)
+POLICY_SUBDOMAIN_INDEX_PYTHON_RENDER = env.bool('POLICY_SUBDOMAIN_INDEX_PYTHON_RENDER', default=False)
+POLICY_SUBDOMAIN_YEAR_PYTHON_RENDER = env.bool('POLICY_SUBDOMAIN_YEAR_PYTHON_RENDER', default=False)
+
+
 # Sentry
 _SENTRY_DSN = env('SENTRY_DSN', default='')
 if _SENTRY_DSN:

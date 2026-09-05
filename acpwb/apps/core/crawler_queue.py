@@ -40,6 +40,7 @@ def _get_client():
             socket_connect_timeout=1,
             socket_timeout=0.1,
             decode_responses=True,
+            max_connections=100,
         )
         return _redis_client
     except Exception:

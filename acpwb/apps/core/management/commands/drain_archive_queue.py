@@ -12,12 +12,14 @@ Run via cron every minute:
 """
 import fcntl
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from django.utils.dateparse import parse_datetime
 
 from django.core.management.base import BaseCommand
 
-from apps.core.crawler_queue import pop_archive_visits, archive_queue_length
+from apps.core.crawler_queue import (
+    archive_queue_length, finalize_batch, pop_archive_visits, recover_archive_visits,
+)
 from apps.honeypot.models import ArchiveVisit
 
 _LOCK_FILE = '/tmp/acpwb-archive-drain.lock'
@@ -54,6 +56,63 @@ class Command(BaseCommand):
             self._drain(options)
             # lock released automatically when with-block exits
 
+    def _drop_already_inserted(self, items):
+        """
+        Recovery-only: a crash could have landed after the DB commit but
+        before finalize_batch() ran, leaving an already-inserted batch
+        looking unprocessed. There's no DB-level unique constraint to lean
+        on here (see ArchiveVisit.idempotency_key — TimescaleDB hypertables
+        don't support the concurrent index build needed to add one without
+        blocking live writes), so check explicitly before re-inserting.
+
+        Bounded to the last hour so TimescaleDB can chunk-exclude the rest
+        of this (large, historical) hypertable instead of scanning it all —
+        recovered batches are always from a run that started at most a
+        couple of cron ticks ago.
+        """
+        keys = [item['idempotency_key'] for item in items if item.get('idempotency_key')]
+        if not keys:
+            return items
+        existing = {
+            str(k) for k in ArchiveVisit.objects.filter(
+                idempotency_key__in=keys,
+                timestamp__gte=datetime.now(timezone.utc) - timedelta(hours=1),
+            ).values_list('idempotency_key', flat=True)
+        }
+        if not existing:
+            return items
+        return [item for item in items if item.get('idempotency_key') not in existing]
+
+    def _process_batch(self, items, batch_key, is_recovery=False):
+        """
+        Insert `items` into the DB, then finalize_batch() the corresponding
+        Redis processing key. Returns the number of records inserted.
+
+        finalize_batch() only runs once this has done everything it's going
+        to for this batch — if bulk_create raises, the key is left in place
+        for recover_archive_visits() to retry next run.
+        """
+        if is_recovery and items:
+            items = self._drop_already_inserted(items)
+
+        inserted = 0
+        objs = []
+        for item in items:
+            try:
+                if 'timestamp' in item:
+                    ts = parse_datetime(item['timestamp'])
+                    item['timestamp'] = ts if ts else item.pop('timestamp')
+                objs.append(ArchiveVisit(**item))
+            except Exception:
+                pass  # skip malformed entries
+
+        if objs:
+            ArchiveVisit.objects.bulk_create(objs, ignore_conflicts=True)
+            inserted = len(objs)
+
+        finalize_batch(batch_key)
+        return inserted
+
     def _drain(self, options):
         batch_size = options['batch']
         max_batches = options['max_batches']
@@ -62,26 +121,24 @@ class Command(BaseCommand):
         batches_run = 0
         started = time.monotonic()
 
+        recovered = 0
+        for items, batch_key in recover_archive_visits():
+            recovered += self._process_batch(items, batch_key, is_recovery=True)
+        if recovered:
+            self._log(f'Recovered {recovered} record(s) from a prior interrupted run.')
+
         while True:
             if max_seconds and time.monotonic() - started >= max_seconds:
                 break
-            items = pop_archive_visits(batch_size)
-            if not items:
+            items, batch_key = pop_archive_visits(batch_size)
+            # Check batch_key, not items: a batch can be entirely malformed
+            # JSON (items == []) while still having moved real entries that
+            # need finalizing — only a falsy batch_key means the main queue
+            # was actually empty (or Redis was unavailable).
+            if not batch_key:
                 break
 
-            objs = []
-            for item in items:
-                try:
-                    if 'timestamp' in item:
-                        ts = parse_datetime(item['timestamp'])
-                        item['timestamp'] = ts if ts else item.pop('timestamp')
-                    objs.append(ArchiveVisit(**item))
-                except Exception:
-                    pass  # skip malformed entries
-
-            if objs:
-                ArchiveVisit.objects.bulk_create(objs, ignore_conflicts=True)
-                total_inserted += len(objs)
+            total_inserted += self._process_batch(items, batch_key)
 
             batches_run += 1
             if max_batches and batches_run >= max_batches:

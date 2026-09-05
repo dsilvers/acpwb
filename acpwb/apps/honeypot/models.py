@@ -36,6 +36,17 @@ class CrawlerVisit(models.Model):
     # Denormalized at write time — enables fast GROUP BY without Python-side UA parsing
     bot_type = models.CharField(max_length=64, blank=True, db_index=True)
     bot_group = models.CharField(max_length=64, blank=True, db_index=True)
+    # Minted once when an item is first queued in Redis (crawler_queue.py) so
+    # the drain consumer's crash-recovery path can tell whether a recovered
+    # batch already committed before re-inserting it. Deliberately NOT a DB
+    # unique constraint/index: this table is a TimescaleDB hypertable, which
+    # rejects CREATE INDEX CONCURRENTLY outright, and a non-concurrent build
+    # would block live writes on this table for the build's duration. The
+    # drain command instead checks for existing keys with a plain query
+    # (see drain_crawler_queue.py) before re-inserting a recovered batch.
+    # NULL on rows predating this queue design and on any row written
+    # outside it — no backfill needed or wanted.
+    idempotency_key = models.UUIDField(null=True, blank=True, default=None)
 
     class Meta:
         ordering = ['-timestamp']
@@ -96,6 +107,10 @@ class ArchiveVisit(models.Model):
     day = models.IntegerField()
     slug = models.CharField(max_length=512)
     depth = models.PositiveIntegerField(default=0, db_index=True)
+    # See CrawlerVisit.idempotency_key — same purpose, same deliberate lack
+    # of a DB constraint/index (hypertable + no CONCURRENTLY support), same
+    # NULL-for-old-rows / no-backfill approach.
+    idempotency_key = models.UUIDField(null=True, blank=True, default=None)
 
     class Meta:
         ordering = ['-timestamp']

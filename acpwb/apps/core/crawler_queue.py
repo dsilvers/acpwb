@@ -3,16 +3,30 @@ Redis-backed queues for deferred DB writes.
 
 CrawlerVisit:
   Request path: push_crawler_visit() → RPUSH to acpwb:crawler_queue
-  Consumer:     pop_crawler_visits() → LPOP key count → bulk_create in DB
+  Consumer:     pop_crawler_visits() → LMOVE into a per-batch processing key
+                → bulk_create in DB → finalize_batch() deletes that key
 
 ArchiveVisit:
   Request path: push_archive_visit() → RPUSH to acpwb:archive_queue
-  Consumer:     pop_archive_visits() → LPOP key count → bulk_create in DB
+  Consumer:     pop_archive_visits() → same LMOVE/finalize_batch pattern
+
+Reliable-queue design: pop_*_visits() never destructively removes an item
+from the main queue — it LMOVEs the batch into a freshly-named
+"<queue>:processing:<uuid>" list, which is only deleted (via finalize_batch)
+after the batch is confirmed durably written to Postgres. If the consumer
+process dies anywhere in between (crash, OOM-kill, connection loss), that
+named key survives with exactly that batch's items and nothing else.
+recover_*_visits() finds any such leftover keys from a prior run and returns
+them the same way, so the caller can retry the DB insert. A retried insert
+is safe to repeat because every queued item carries an idempotency_key
+(minted once, at push time) backed by a unique DB constraint — re-inserting
+an already-committed batch is a harmless no-op, not a duplicate.
 
 Falls back gracefully if Redis is unavailable (caller handles the fallback).
 """
 import json
 import time
+import uuid
 
 _QUEUE_KEY = 'acpwb:crawler_queue'
 _ARCHIVE_QUEUE_KEY = 'acpwb:archive_queue'
@@ -102,16 +116,21 @@ def push_crawler_visit(data: dict) -> bool:
     """
     Serialize `data` and RPUSH it onto the crawler queue.
 
+    Mints a fresh idempotency_key for this item (kept only in the local
+    payload copy, not written back into `data`) so the consumer side can
+    safely retry an insert after a crash without risking a duplicate.
+
     Returns True on success, False if Redis is unavailable (caller should
     fall back to a direct DB write).
     """
     r = _get_client()
     if r is None:
         return False
+    payload = dict(data)
+    payload.setdefault('idempotency_key', str(uuid.uuid4()))
     try:
         pipe = r.pipeline(transaction=False)
-        pipe.rpush(_QUEUE_KEY, json.dumps(data))
-        # pipe.ltrim(_QUEUE_KEY, -_MAX_QUEUE, -1)
+        pipe.rpush(_QUEUE_KEY, json.dumps(payload))
         pipe.execute()
         return True
     except Exception:
@@ -119,22 +138,142 @@ def push_crawler_visit(data: dict) -> bool:
         return False
 
 
-def pop_crawler_visits(count: int = 500) -> list:
+def push_archive_visit(data: dict) -> bool:
     """
-    Pop up to `count` items from the left of the queue (FIFO).
-    Returns a list of dicts; stops early if the queue is exhausted.
+    Serialize `data` and RPUSH it onto the archive visit queue.
+
+    See push_crawler_visit() re: idempotency_key.
+
+    Returns True on success, False if Redis is unavailable (caller should
+    fall back to a direct DB write).
     """
     r = _get_client()
     if r is None:
-        return []
+        return False
+    payload = dict(data)
+    payload.setdefault('idempotency_key', str(uuid.uuid4()))
     try:
-        results = r.lpop(_QUEUE_KEY, count)
-        if not results:
-            return []
-        return [json.loads(raw) for raw in results]
+        r.rpush(_ARCHIVE_QUEUE_KEY, json.dumps(payload))
+        return True
     except Exception:
         _mark_failure()
+        return False
+
+
+def _pop_visits(queue_key: str, count: int):
+    """
+    Shared implementation behind pop_crawler_visits()/pop_archive_visits().
+
+    LMOVEs up to `count` items from `queue_key` into a freshly-named
+    per-batch processing key, one LMOVE per item pipelined into a single
+    round trip. Returns (items, batch_key); batch_key is None if there was
+    nothing to move or Redis was unavailable, in which case there is no
+    batch to finalize.
+    """
+    r = _get_consumer_client()
+    if r is None:
+        return [], None
+
+    batch_key = f'{queue_key}:processing:{uuid.uuid4().hex}'
+    try:
+        pipe = r.pipeline(transaction=False)
+        for _ in range(count):
+            pipe.lmove(queue_key, batch_key, 'LEFT', 'RIGHT')
+        results = pipe.execute()
+    except Exception:
+        _mark_consumer_failure()
+        return [], None
+
+    raw_items = [item for item in results if item is not None]
+    if not raw_items:
+        return [], None
+
+    items = []
+    for raw in raw_items:
+        try:
+            items.append(json.loads(raw))
+        except Exception:
+            pass  # malformed entry — still physically in batch_key, cleaned
+            # up by finalize_batch() same as a successfully-parsed one.
+    return items, batch_key
+
+
+def pop_crawler_visits(count: int = 500):
+    """
+    Move up to `count` items from the crawler queue into a fresh per-batch
+    processing key (never a destructive pop). Returns (items, batch_key).
+
+    Caller must call finalize_batch(batch_key) once the batch is durably
+    written to the DB — until then, the items remain recoverable via
+    recover_crawler_visits().
+    """
+    return _pop_visits(_QUEUE_KEY, count)
+
+
+def pop_archive_visits(count: int = 500):
+    """Same contract as pop_crawler_visits(), for the archive queue."""
+    return _pop_visits(_ARCHIVE_QUEUE_KEY, count)
+
+
+def finalize_batch(batch_key) -> None:
+    """
+    Mark a per-batch processing key fully and durably processed by deleting
+    it. Call this ONLY after the batch's records are confirmed committed to
+    the DB — shared by both queues, since batch_key already encodes which
+    queue it came from.
+
+    A no-op if batch_key is falsy (e.g. pop_*_visits() found nothing).
+    Failing to delete isn't fatal: recover_*_visits() will pick the key back
+    up and safely re-attempt the now-idempotent insert on the next call.
+    """
+    if not batch_key:
+        return
+    r = _get_consumer_client()
+    if r is None:
+        return
+    try:
+        r.delete(batch_key)
+    except Exception:
+        _mark_consumer_failure()
+
+
+def _recover_visits(queue_key: str):
+    """
+    Find any "<queue_key>:processing:*" keys left behind by a drain run that
+    died before calling finalize_batch() (crash, OOM-kill, connection loss),
+    and return them as (items, batch_key) pairs — same shape as
+    _pop_visits() — so the caller can retry the insert and finalize each one.
+
+    Safe to call whether or not there's anything to recover.
+    """
+    r = _get_consumer_client()
+    if r is None:
         return []
+
+    batches = []
+    try:
+        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=100):
+            raw_items = r.lrange(key, 0, -1)
+            items = []
+            for raw in raw_items:
+                try:
+                    items.append(json.loads(raw))
+                except Exception:
+                    pass
+            batches.append((items, key))
+    except Exception:
+        _mark_consumer_failure()
+    return batches
+
+
+def recover_crawler_visits():
+    """Recover any orphaned crawler-queue batches from a prior crashed run."""
+    return _recover_visits(_QUEUE_KEY)
+
+
+def recover_archive_visits():
+    """Recover any orphaned archive-queue batches from a prior crashed run."""
+    return _recover_visits(_ARCHIVE_QUEUE_KEY)
 
 
 def _write_crawler_visit(data: dict):
@@ -177,59 +316,23 @@ def queue_archive_visit(data: dict) -> None:
 
 def queue_length() -> int:
     """Return the current queue depth, or -1 if Redis is unavailable."""
-    r = _get_client()
+    r = _get_consumer_client()
     if r is None:
         return -1
     try:
         return r.llen(_QUEUE_KEY)
     except Exception:
-        _mark_failure()
+        _mark_consumer_failure()
         return -1
-
-
-def push_archive_visit(data: dict) -> bool:
-    """
-    Serialize `data` and RPUSH it onto the archive visit queue.
-
-    Returns True on success, False if Redis is unavailable (caller should
-    fall back to a direct DB write).
-    """
-    r = _get_client()
-    if r is None:
-        return False
-    try:
-        r.rpush(_ARCHIVE_QUEUE_KEY, json.dumps(data))
-        return True
-    except Exception:
-        _mark_failure()
-        return False
-
-
-def pop_archive_visits(count: int = 500) -> list:
-    """
-    Pop up to `count` items from the left of the archive queue (FIFO).
-    Returns a list of dicts; stops early if the queue is exhausted.
-    """
-    r = _get_client()
-    if r is None:
-        return []
-    try:
-        results = r.lpop(_ARCHIVE_QUEUE_KEY, count)
-        if not results:
-            return []
-        return [json.loads(raw) for raw in results]
-    except Exception:
-        _mark_failure()
-        return []
 
 
 def archive_queue_length() -> int:
     """Return the archive queue depth, or -1 if Redis is unavailable."""
-    r = _get_client()
+    r = _get_consumer_client()
     if r is None:
         return -1
     try:
         return r.llen(_ARCHIVE_QUEUE_KEY)
     except Exception:
-        _mark_failure()
+        _mark_consumer_failure()
         return -1

@@ -95,7 +95,6 @@ from .archive_data_minutes import (
 
 
 @functools.lru_cache(maxsize=512)
-@functools.lru_cache(maxsize=256)
 def _generate_archive_content(year, month, day, slug):
     """Generate deterministic rich content for an archive page."""
     rng = random.Random(hashlib.md5(f"content_{year}{month}{day}{slug}".encode()).hexdigest())
@@ -890,6 +889,90 @@ def archive_trap_yearless(request, month, day, slug=''):
     return archive_trap(request, year=year, month=month, day=day, slug=slug)
 
 
+@functools.lru_cache(maxsize=512)
+def _gen_nav_slugs(year, month, day, slug):
+    """Return (next_slug, prev_slug) for an archive detail page."""
+    rng = random.Random(hashlib.md5(f"navslugs_{year}{month}{day}{slug}".encode()).hexdigest())
+    next_slug = (f"{slug}/{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
+                 if slug else f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}")
+    prev_slug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
+    return next_slug, prev_slug
+
+
+@functools.lru_cache(maxsize=512)
+def _gen_related_path_data(year, month, day, slug):
+    """10 related-path entries spread across 1985-present. Plain data — URL
+    building needs `request` and happens in archive_trap()."""
+    rng = random.Random(hashlib.md5(f"relpaths_{year}{month}{day}{slug}".encode()).hexdigest())
+    related = []
+    for _ in range(10):
+        r_year = rng.randint(1985, 2025)
+        r_month = rng.randint(1, 12)
+        r_day = rng.randint(1, 28)
+        r_slug = rng.choice(_ARCHIVE_SLUGS)
+        r_id = rng.randint(1000, 9999)
+        related.append({
+            'year': r_year, 'month': r_month, 'day': r_day,
+            'full_slug': f'{r_slug}-{r_id}',
+            'label': r_slug.replace('-', ' ').title(),
+            'date': f"{r_year}-{r_month:02d}-{r_day:02d}",
+        })
+    return tuple(related)
+
+
+@functools.lru_cache(maxsize=512)
+def _gen_cross_year_reports(year, month, day, slug):
+    """1-5 cross-year archive links on OTHER year subdomains. Fully
+    cacheable — _cross_year_archive_url() takes no `request`."""
+    rng = random.Random(hashlib.md5(f"crossyear_{year}{month}{day}{slug}".encode()).hexdigest())
+    reports = []
+    for _ in range(rng.randint(1, 5)):
+        cy_year = rng.randint(1985, 2025)
+        while cy_year == year:
+            cy_year = rng.randint(1985, 2025)
+        cy_month = rng.randint(1, 12)
+        cy_day = rng.randint(1, 28)
+        cy_slug = rng.choice(_ARCHIVE_SLUGS)
+        cy_id = rng.randint(1000, 9999)
+        reports.append({
+            'url': _cross_year_archive_url(cy_year, cy_month, cy_day, f'{cy_slug}-{cy_id}'),
+            'label': cy_slug.replace('-', ' ').title(),
+            'date': f"{cy_year}-{cy_month:02d}-{cy_day:02d}",
+            'year': cy_year,
+        })
+    return tuple(reports)
+
+
+@functools.lru_cache(maxsize=512)
+def _gen_related_docs_data(year, month, day, slug):
+    """2-4 sibling-document sidebar entries. Plain data — URL building needs
+    `request` and happens in archive_trap()."""
+    rng = random.Random(hashlib.md5(f"reldocs_{year}{month}{day}{slug}".encode()).hexdigest())
+    docs = []
+    for _ in range(rng.randint(2, 4)):
+        sib_slug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
+        sib_day = rng.randint(1, 28)
+        sib_prefix = rng.choice(_ARCHIVE_TITLE_PREFIXES)
+        sib_base = sib_slug.rsplit('-', 1)[0].replace('-', ' ').title()
+        docs.append({
+            'label': f"{sib_prefix} {sib_base}",
+            'day': sib_day,
+            'full_slug': sib_slug,
+            'date': f"{year}-{month:02d}-{sib_day:02d}",
+            'phase': rng.choice(_ARCHIVE_PHASES),
+        })
+    return tuple(docs)
+
+
+@functools.lru_cache(maxsize=512)
+def _gen_presentations_count(year, month, day, slug):
+    """How many related presentations to show (2-4) — a stable, cacheable
+    count so generate_presentations_for_context()'s own cache key is stable
+    per URL too."""
+    rng = random.Random(hashlib.md5(f"prescount_{year}{month}{day}{slug}".encode()).hexdigest())
+    return rng.choice([2, 3, 4])
+
+
 def archive_trap(request, year=None, month=None, day=None, slug=''):
     year = _get_archive_year(request, year)
     _log_crawler(request, 'archive')
@@ -911,17 +994,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     except Exception:
         pass
 
-    rng = random.Random(hashlib.md5(f"{year}{month}{day}{slug}".encode()).hexdigest())
-
-    rng = random.Random(
-        hashlib.md5(
-            f"{year}{month}{day}{slug}".encode()
-        ).hexdigest()
-    )
-
-    next_slug = (f"{slug}/{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
-                 if slug else f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}")
-    prev_slug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
+    next_slug, prev_slug = _gen_nav_slugs(year, month, day, slug)
 
     prev_day = day - 1 if day > 1 else 28
     prev_month = month if day > 1 else (month - 1 if month > 1 else 12)
@@ -939,51 +1012,32 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
         content = _generate_archive_content(year, month, day, slug)
         _template = 'honeypot/era/archive.html' if on_sub else 'honeypot/archive.html'
 
-    # Related paths spread across a wide historical date range (1985–present)
-    related_paths = []
-    for _ in range(10):
-        r_year = rng.randint(1985, 2025)
-        r_month = rng.randint(1, 12)
-        r_day = rng.randint(1, 28)
-        r_slug = rng.choice(_ARCHIVE_SLUGS)
-        r_id = rng.randint(1000, 9999)
-        label = r_slug.replace('-', ' ').title()
-        related_paths.append({
-            'url': _archive_url(request, r_year, r_month, r_day, f'{r_slug}-{r_id}'),
-            'label': label,
-            'date': f"{r_year}-{r_month:02d}-{r_day:02d}",
-        })
+    # Related paths spread across a wide historical date range (1985–present).
+    # Data is cached; the URL is built per-request since _archive_url() reads
+    # request.on_archive_subdomain/archive_year.
+    related_paths = [
+        {
+            'url': _archive_url(request, r['year'], r['month'], r['day'], r['full_slug']),
+            'label': r['label'],
+            'date': r['date'],
+        }
+        for r in _gen_related_path_data(year, month, day, slug)
+    ]
 
-    # Cross-year related archive entries — link to OTHER year subdomains
-    cross_year_reports = []
-    for _ in range(rng.randint(1, 5)):
-        cy_year = rng.randint(1985, 2025)
-        while cy_year == year:
-            cy_year = rng.randint(1985, 2025)
-        cy_month = rng.randint(1, 12)
-        cy_day = rng.randint(1, 28)
-        cy_slug = rng.choice(_ARCHIVE_SLUGS)
-        cy_id = rng.randint(1000, 9999)
-        cross_year_reports.append({
-            'url': _cross_year_archive_url(cy_year, cy_month, cy_day, f'{cy_slug}-{cy_id}'),
-            'label': cy_slug.replace('-', ' ').title(),
-            'date': f"{cy_year}-{cy_month:02d}-{cy_day:02d}",
-            'year': cy_year,
-        })
+    # Cross-year related archive entries — link to OTHER year subdomains.
+    # _cross_year_archive_url() takes no request, so this is fully cacheable.
+    cross_year_reports = _gen_cross_year_reports(year, month, day, slug)
 
-    # Related documents sidebar — sibling slugs in the same year/month
-    related_docs = []
-    for _ in range(rng.randint(2, 4)):
-        sib_slug = f"{rng.choice(_ARCHIVE_SLUGS)}-{rng.randint(1000, 9999)}"
-        sib_day = rng.randint(1, 28)
-        sib_prefix = rng.choice(_ARCHIVE_TITLE_PREFIXES)
-        sib_base = sib_slug.rsplit('-', 1)[0].replace('-', ' ').title()
-        related_docs.append({
-            'label': f"{sib_prefix} {sib_base}",
-            'url': _archive_url(request, year, month, sib_day, sib_slug),
-            'date': f"{year}-{month:02d}-{sib_day:02d}",
-            'phase': rng.choice(_ARCHIVE_PHASES),
-        })
+    # Related documents sidebar — sibling slugs in the same year/month.
+    related_docs = [
+        {
+            'label': d['label'],
+            'url': _archive_url(request, year, month, d['day'], d['full_slug']),
+            'date': d['date'],
+            'phase': d['phase'],
+        }
+        for d in _gen_related_docs_data(year, month, day, slug)
+    ]
 
     from .policy_generator import get_cross_policy_stubs
     related_policy = get_cross_policy_stubs(year, month, day, slug)
@@ -991,7 +1045,7 @@ def archive_trap(request, year=None, month=None, day=None, slug=''):
     from apps.presentations.generators import generate_presentations_for_context
     related_presentations = generate_presentations_for_context(
         f"archive_pres_{year}_{month}_{day}_{slug[:32]}",
-        count=rng.choice([2, 3, 4]),
+        count=_gen_presentations_count(year, month, day, slug),
     )
 
     yd = _year_data(year)

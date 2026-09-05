@@ -69,8 +69,21 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
+            # Compiled-template caching, always on regardless of DEBUG.
+            # Django only auto-wraps loaders in cached.Loader when
+            # DEBUG=False and no explicit 'loaders' is set — this repo's own
+            # .env runs DEBUG=True, so that auto-promotion never kicked in
+            # and every request re-parsed template source from scratch.
+            # APP_DIRS can't be combined with an explicit 'loaders' list, so
+            # app_directories.Loader is listed here explicitly instead.
+            'loaders': [
+                ('django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]),
+            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

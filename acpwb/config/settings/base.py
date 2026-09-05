@@ -106,8 +106,26 @@ DATABASES = {
         'HOST': env('DB_HOST', default='db'),
         'PORT': env('DB_PORT', default='5432'),
         'CONN_MAX_AGE': env.int('DB_CONN_MAX_AGE', default=0),
-    }
+    },
+    # Bypasses PgBouncer (straight to Postgres) for long-running batch
+    # commands that hold one connection through minutes of Python-side
+    # aggregation between queries — PgBouncer's client_idle_timeout, tuned
+    # low to protect the hot request path from bot-traffic connection
+    # storms, kills those idle gaps. A single extra direct connection from
+    # a 30-min cron job is negligible against max_connections. See
+    # apps.core.db_router.force_db.
+    'direct': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME', default='acpwb'),
+        'USER': env('DB_USER', default='acpwb'),
+        'PASSWORD': env('DB_PASSWORD', default='acpwb_dev'),
+        'HOST': env('DB_HOST', default='db'),
+        'PORT': env('DB_DIRECT_PORT', default='5432'),
+        'CONN_MAX_AGE': 0,
+        'TEST': {'MIRROR': 'default'},
+    },
 }
+DATABASE_ROUTERS = ['apps.core.db_router.DirectDBRouter']
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

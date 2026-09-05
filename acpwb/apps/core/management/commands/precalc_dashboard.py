@@ -27,6 +27,7 @@ from django.db.models import Count, Max
 from django.db.models.functions import TruncDate, TruncMinute
 from django.utils import timezone
 
+from apps.core.db_router import force_db
 from apps.core.graph_gen import RECENT_BUCKET_MINUTES, RECENT_BUCKET_RETENTION_DAYS, _bucket_key
 from apps.core.models import DashboardStat
 from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
@@ -94,27 +95,32 @@ class Command(BaseCommand):
             now_str = timezone.now().strftime('%Y-%m-%d %H:%M:%S %Z')
             self.stdout.write(f'precalc_dashboard starting at {now_str}')
 
-            if options['full_recompute']:
-                self.stdout.write('Mode: full recompute')
-                self._tune_session()
-                self._full_recompute_crawlers()
-                self._full_recompute_archive()
-                self._full_recompute_emails()
-                self._full_recompute_people()
-                self._full_recompute_projects()
-                self._full_recompute_login_attempts()
-                self._full_recompute_opt_outs()
-            else:
-                self._update_crawlers()
-                self._update_archive()
-                self._update_emails()
-                self._update_people()
-                self._update_projects()
-                self._update_login_attempts()
-                self._update_opt_outs()
+            # This command holds one connection through minutes of Python-side
+            # aggregation between queries — route it straight to Postgres so
+            # PgBouncer's client_idle_timeout (tuned low to protect the hot
+            # request path) doesn't kill it mid-run. See apps.core.db_router.
+            with force_db('direct'):
+                if options['full_recompute']:
+                    self.stdout.write('Mode: full recompute')
+                    self._tune_session()
+                    self._full_recompute_crawlers()
+                    self._full_recompute_archive()
+                    self._full_recompute_emails()
+                    self._full_recompute_people()
+                    self._full_recompute_projects()
+                    self._full_recompute_login_attempts()
+                    self._full_recompute_opt_outs()
+                else:
+                    self._update_crawlers()
+                    self._update_archive()
+                    self._update_emails()
+                    self._update_people()
+                    self._update_projects()
+                    self._update_login_attempts()
+                    self._update_opt_outs()
 
-            self._update_canary()
-            self._update_graphs()
+                self._update_canary()
+                self._update_graphs()
 
             elapsed = time.monotonic() - run_start
             self.stdout.write(f'Done in {elapsed:.1f}s')
@@ -205,8 +211,8 @@ class Command(BaseCommand):
     # ── Full recompute ────────────────────────────────────────────────────────
 
     def _tune_session(self):
-        from django.db import connection
-        with connection.cursor() as c:
+        from django.db import connections
+        with connections['direct'].cursor() as c:
             c.execute("SET work_mem = '4GB'")
             c.execute("SET max_parallel_workers_per_gather = 8")
             c.execute("SET enable_partitionwise_aggregate = on")

@@ -9,7 +9,7 @@ from apps.core.models import DashboardStat
 from apps.honeypot.models import ArchiveVisit, CrawlerVisit
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db(databases=['default', 'direct'])
 def test_precalc_dashboard_crawlers_catches_up_across_multiple_runs():
     """Regression test for the OFFSET(500_000) -> time-window fix.
 
@@ -41,7 +41,7 @@ def test_precalc_dashboard_crawlers_catches_up_across_multiple_runs():
     assert DashboardStat.objects.get(key='crawlers.total').value == 10
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db(databases=['default', 'direct'])
 def test_precalc_dashboard_crawlers_daily_increments_without_rescanning_history():
     """Regression test: the daily chart used to be kept fresh by re-querying
     a date-range GROUP BY over the whole chart window (first 60 days, then a
@@ -82,7 +82,7 @@ def test_precalc_dashboard_crawlers_daily_increments_without_rescanning_history(
     assert stale_day not in daily_by_bot
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db(databases=['default', 'direct'])
 def test_precalc_dashboard_recent_by_bucket_feeds_7d_graph_without_live_scan():
     """Regression test: the 7d traffic graph used to run a live GROUP BY over
     the full 7-day CrawlerVisit range (apps.core.graph_gen._query_windowed at
@@ -106,7 +106,7 @@ def test_precalc_dashboard_recent_by_bucket_feeds_7d_graph_without_live_scan():
     assert 'Googlebot' in series or 'Others' in series
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db(databases=['default', 'direct'])
 def test_precalc_dashboard_archive_catches_up_across_multiple_runs():
     base = timezone.now() - timedelta(hours=5)
     ArchiveVisit.objects.bulk_create([

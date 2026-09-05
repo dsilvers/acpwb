@@ -32,12 +32,12 @@ class Command(BaseCommand):
             help='Number of records to pop per batch (default: 500)',
         )
         parser.add_argument(
-            '--max-batches', type=int, default=200,
-            help='Maximum number of batches per run, 0 = unlimited (default: 200)',
+            '--max-batches', type=int, default=0,
+            help='Maximum number of batches per run, 0 = unlimited (default: 0)',
         )
         parser.add_argument(
-            '--max-seconds', type=int, default=50,
-            help='Stop fetching new batches after this many seconds (default: 50)',
+            '--max-seconds', type=int, default=55,
+            help='Stop fetching new batches after this many seconds (default: 55)',
         )
 
     def _log(self, msg):

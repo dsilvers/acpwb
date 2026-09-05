@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/presentations.css' %}">
+<style>.acpwb-archive-pres-sidebar .pres-card-title { font-size: 0.64rem; }</style>
+{% endblock %}
+{% block content %}{{ content_html|safe }}{% endblock %}

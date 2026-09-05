@@ -7,6 +7,9 @@ from jinja2 import Environment
 
 def environment(**options):
     env = Environment(**options)
+    # Templates here are static (no runtime edits expected); avoid Jinja2's
+    # default per-render mtime stat-check on every request.
+    env.auto_reload = False
     env.globals.update({
         'static': staticfiles_storage.url,
         'url': reverse,

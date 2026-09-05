@@ -639,6 +639,7 @@ def get_policy_agency_month_entries(agency, year, month, url_fn=None):
     return entries
 
 
+@functools.lru_cache(maxsize=2048)
 def get_cross_policy_stubs(year, month, day, slug):
     """Return 2-4 policy stubs for an archive detail sidebar, or None (~30% chance of showing)."""
     rng = _rng_from_seed(f"crosslink_policy_{year}_{month:02d}_{day:02d}_{slug}")

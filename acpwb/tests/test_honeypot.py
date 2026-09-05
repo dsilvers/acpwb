@@ -65,6 +65,44 @@ def test_archive_has_related_links(client):
     assert 'archives-' in content and '.acpwb.com' in content
 
 
+# ── Archive content variants ─────────────────────────────────────────────────
+# archive_trap picks one of 3 content generators (default ~70%, compliance
+# ~15%, minutes ~15%) via a hash of (year, month, day, slug). These slugs are
+# chosen (see scratch calc against the same hash) to deterministically land
+# in each bucket, on 2024-3-15, so each variant gets real coverage on both
+# domain contexts — previously only the default variant was ever exercised.
+
+@pytest.mark.django_db
+def test_archive_compliance_variant_main_domain(client):
+    response = client.get('/archive/2024/3/15/article-19/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_archive_compliance_variant_subdomain(client):
+    response = client.get('/3/15/article-19/?__year=2024')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_archive_minutes_variant_main_domain(client):
+    response = client.get('/archive/2024/3/15/article-1/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_archive_minutes_variant_subdomain(client):
+    response = client.get('/3/15/article-1/?__year=2024')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_archive_default_variant_main_domain(client):
+    response = client.get('/archive/2024/3/15/article-0/')
+    assert response.status_code == 200
+    assert b'2024' in response.content
+
+
 # ── Wiki trap ──────────────────────────────────────────────────────────────────
 
 def test_wiki_generator_returns_required_fields():

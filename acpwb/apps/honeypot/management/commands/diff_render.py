@@ -23,7 +23,15 @@ from django.template.loader import render_to_string
 
 
 def _strip_ws(s):
-    return re.sub(r'\s+', '', s)
+    s = re.sub(r'\s+', '', s)
+    # Jinja2 HTML-entity-escapes apostrophes even inside <style> blocks
+    # (e.g. font-family: &#39;Courier New&#39; instead of 'Courier New') —
+    # a pre-existing bug in the era templates, since <style> is a raw-text
+    # element and browsers never decode entities there. The Python builders
+    # deliberately emit the correct, unescaped form instead of reproducing
+    # it, so normalize both representations as equivalent for comparison.
+    s = s.replace('&#39;', "'").replace('&#x27;', "'")
+    return s
 
 
 def _report_diff(stdout, real, mine, label):
@@ -49,6 +57,43 @@ def _archive_ctx(year, month, day, slug):
     from apps.honeypot import views as v
     content = v._generate_archive_content(year, month, day, slug)
     return _archive_ctx_common(v, year, month, day, slug, content)
+
+
+def _archive_ctx_era(year, month, day, slug, generator_name):
+    """Same shared fields, but on_archive_subdomain=True + year_data, and
+    era-appropriate (absolute, cross-subdomain-safe) URLs for related_paths/
+    related_docs, matching what archive_trap() actually builds when
+    on_sub=True."""
+    from apps.honeypot import views as v
+    content = getattr(v, generator_name)(year, month, day, slug)
+    ctx = _archive_ctx_common(v, year, month, day, slug, content)
+    ctx['on_archive_subdomain'] = True
+    ctx['year_data'] = v._year_data(year)
+    # On the subdomain, same-year related paths are relative; the shared
+    # ctx builder above always builds main-domain-style absolute paths, so
+    # rebuild them the way _archive_url() would for on_sub=True, same year.
+    ctx['related_paths'] = [
+        {'url': f'/{r["month"]:02d}/{r["day"]:02d}/{r["full_slug"]}/' if r['year'] == year
+         else f'https://archives-{r["year"]}.acpwb.com/{r["month"]:02d}/{r["day"]:02d}/{r["full_slug"]}/',
+         'label': r['label'], 'date': r['date']}
+        for r in v._gen_related_path_data(year, month, day, slug)
+    ]
+    ctx['related_docs'] = [
+        {'label': d['label'], 'date': d['date'], 'phase': d['phase'],
+         'url': f'/{month:02d}/{d["day"]:02d}/{d["full_slug"]}/'}
+        for d in v._gen_related_docs_data(year, month, day, slug)
+    ]
+    ctx['year_url'] = '/'
+    ctx['month_url'] = f'/{month:02d}/'
+    ctx['prev_entry_url'] = f'/{month:02d}/{max(day - 1, 1)}/prev/'
+    ctx['next_entry_url'] = f'/{month:02d}/{day:02d}/{ctx["next_slug"]}/'
+    ctx['export_csv_url'] = f'/{month:02d}/{day:02d}/{slug}/export.csv'
+    # archive_era_base.html reads request.get_full_path() directly (Jinja2
+    # doesn't get Django's RequestContext auto-injection the way the
+    # Django backend does), so a real request object is needed here.
+    from django.test import RequestFactory
+    ctx['request'] = RequestFactory().get(f'/{month:02d}/{day:02d}/{slug}/')
+    return ctx
 
 
 def _compliance_ctx(year, month, day, slug):
@@ -113,6 +158,24 @@ def _check_archive_default(stdout):
     return _report_diff(stdout, real, mine, 'archive_default')
 
 
+def _check_archive_default_era(stdout):
+    from apps.honeypot.pyrender import archive_era
+    ctx = _archive_ctx_era(2024, 3, 15, 'diff-render-era-default-slug', '_generate_archive_content')
+    real = render_to_string('honeypot/era/archive.html', ctx)
+    mine_era_content = archive_era.render_archive_default_era(ctx)
+    og_description = (
+        f'{ctx["industry"]} sector engagement documentation archived '
+        f'{ctx["year"]}-{ctx["month"]:02d}-{ctx["day"]:02d}. '
+        f'{ctx["phase"].capitalize()} phase record. ACPWB Research Division.'
+    )
+    mine = render_to_string('honeypot/_archive_era_content_shell.html', {
+        'title': ctx['title'], 'og_description': og_description, 'era_content_html': mine_era_content,
+        'request': ctx['request'], 'year_data': ctx['year_data'],
+        'year': ctx['year'], 'all_years': ctx['all_years'],
+    })
+    return _report_diff(stdout, real, mine, 'archive_default_era')
+
+
 def _check_archive_compliance(stdout):
     from apps.honeypot.pyrender import archive_main
     # Slug chosen (see the session that built this) to land in the
@@ -139,6 +202,7 @@ def _check_archive_minutes(stdout):
 
 _CASES = {
     'archive_default': _check_archive_default,
+    'archive_default_era': _check_archive_default_era,
     'archive_compliance': _check_archive_compliance,
     'archive_minutes': _check_archive_minutes,
 }

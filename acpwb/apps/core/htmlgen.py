@@ -33,7 +33,7 @@ from django.utils.html import escape
 __all__ = [
     'escape', 'truncatewords', 'truncatechars',
     'get_archive_seal', 'get_jsonld_garbage', 'get_ghost_links', 'get_prompt_injection',
-    'render_pres_card',
+    'render_pres_card', 'get_policy_seal', 'render_policy_navbar', 'render_policy_footer',
 ]
 
 
@@ -100,6 +100,47 @@ def get_prompt_injection(honeypot_token):
     return _cached_static_partial(
         _PROMPT_INJECTION_CACHE, 'partials/_prompt_injection.html', _PROMPT_INJECTION_SENTINELS,
         {'honeypot_token': honeypot_token},
+    )
+
+
+_POLICY_SEAL_CACHE = {}
+_POLICY_SEAL_SENTINELS = {'year': '__HTMLGEN_POLSEAL_YEAR__', 'watermark_token': '__HTMLGEN_POLSEAL_TOKEN__'}
+
+
+def get_policy_seal(year, watermark_token):
+    """Byte-identical to the seal block shared by all 6 policy templates
+    (extracted into partials/_policy_seal.html — see honeypot/public_policy_detail.html
+    lines ~291-342), loop-free so cacheable the same way as get_archive_seal."""
+    return _cached_static_partial(
+        _POLICY_SEAL_CACHE, 'honeypot/partials/_policy_seal.html', _POLICY_SEAL_SENTINELS,
+        {'year': year, 'watermark_token': watermark_token},
+    )
+
+
+_POLICY_NAVBAR_CACHE = {}
+_POLICY_NAVBAR_SENTINELS = {'site_root': '__HTMLGEN_POLNAV_SITEROOT__'}
+
+
+def render_policy_navbar(site_root):
+    """All 6 policy templates share byte-identical navbar markup (extracted
+    into partials/_policy_navbar.html); only site_root varies (absolute on
+    policy subdomains, empty on the main domain)."""
+    return _cached_static_partial(
+        _POLICY_NAVBAR_CACHE, 'honeypot/partials/_policy_navbar.html', _POLICY_NAVBAR_SENTINELS,
+        {'site_root': site_root},
+    )
+
+
+_POLICY_FOOTER_CACHE = {}
+_POLICY_FOOTER_SENTINELS = {'site_root': '__HTMLGEN_POLFOOT_SITEROOT__'}
+
+
+def render_policy_footer(site_root):
+    """All 6 policy templates share byte-identical footer markup (extracted
+    into partials/_policy_footer.html); only site_root varies."""
+    return _cached_static_partial(
+        _POLICY_FOOTER_CACHE, 'honeypot/partials/_policy_footer.html', _POLICY_FOOTER_SENTINELS,
+        {'site_root': site_root},
     )
 
 

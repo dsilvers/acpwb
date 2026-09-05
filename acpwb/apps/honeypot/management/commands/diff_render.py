@@ -23,6 +23,13 @@ from django.template.loader import render_to_string
 
 
 def _strip_ws(s):
+    # Strip HTML source comments (<!-- ... -->) before whitespace collapsing —
+    # they're developer annotations in the old templates, never rendered
+    # visible content, and the Python builders correctly don't reproduce them.
+    # (The trailing "v2.4.1 | build..." comment is deliberately visible-in-source
+    # honeypot content and IS reproduced by the builders, so this only removes
+    # comments that don't survive into both sides' output anyway once matched.)
+    s = re.sub(r'<!--(?!\[if).*?-->', '', s, flags=re.DOTALL)
     s = re.sub(r'\s+', '', s)
     # Jinja2 HTML-entity-escapes apostrophes even inside <style> blocks
     # (e.g. font-family: &#39;Courier New&#39; instead of 'Courier New') —
@@ -240,6 +247,51 @@ def _check_archive_minutes_era(stdout):
     return _report_diff(stdout, real, mine, 'archive_minutes_era')
 
 
+def _policy_detail_ctx(year, month, day, agency, slug, on_sub=False):
+    from django.test import RequestFactory
+
+    from apps.core.context_processors import honeypot_context
+    from apps.honeypot import views as v
+    from apps.honeypot.policy_generator import (
+        generate_policy_document,
+        generate_related_links,
+        get_cross_archive_stubs,
+    )
+    from apps.presentations.generators import generate_presentations_for_context
+
+    doc = generate_policy_document(year, month, day, agency, slug)
+    related = generate_related_links(year, month, day, agency, slug)
+    related_archive = get_cross_archive_stubs(year, month, day, agency, slug)
+    related_presentations = generate_presentations_for_context(
+        f"policy_pres_{year}_{month}_{day}_{agency}_{slug[:32]}", count=4
+    )
+    path = f'/public-policy/{year}/{month:02d}/{day:02d}/{agency}/{slug}/'
+    request = RequestFactory().get(path)
+    request.on_policy_subdomain = on_sub
+    nav = v._policy_nav_context(request)
+    return {
+        'doc': doc,
+        'related': related,
+        'related_archive': related_archive,
+        'related_presentations': related_presentations,
+        'policy_years': list(range(2025, 1992, -1)),
+        'og_title': f'{doc["title"]} — ACPWB',
+        'og_description': doc['summary'][:160],
+        'request': request,
+        'now_year': __import__('datetime').datetime.now().year,
+        **nav,
+        **honeypot_context(request),
+    }
+
+
+def _check_policy_detail(stdout):
+    from apps.honeypot.pyrender import policy
+    ctx = _policy_detail_ctx(2024, 3, 15, 'sec', 'diff-render-policy-detail-slug')
+    real = render_to_string('honeypot/public_policy_detail.html', ctx)
+    mine = policy.render_policy_detail(ctx)
+    return _report_diff(stdout, real, mine, 'policy_detail')
+
+
 _CASES = {
     'archive_default': _check_archive_default,
     'archive_default_era': _check_archive_default_era,
@@ -247,6 +299,7 @@ _CASES = {
     'archive_minutes': _check_archive_minutes,
     'archive_compliance_era': _check_archive_compliance_era,
     'archive_minutes_era': _check_archive_minutes_era,
+    'policy_detail': _check_policy_detail,
 }
 
 

@@ -127,6 +127,7 @@ func clientIP(r *http.Request) string {
 
 func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
 		year, month, day, slug, ok := parseArchivePath(r.URL.Path)
 		if !ok {
 			http.NotFound(w, r)
@@ -141,9 +142,6 @@ func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 		ua := r.Header.Get("User-Agent")
 		botType := botclassify.ClassifyUAOrIP(ua, ip)
 		botGroup := botclassify.BotTypeToGroup(botType)
-
-		go vq.PushArchiveVisit(ip, ua, year, month, day, depth, slug)
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "archive", r.URL.RawQuery, botType, botGroup)
 
 		variant := archiveVariant(year, month, day, slug)
 
@@ -178,6 +176,14 @@ func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
+
+		go vq.PushVisit(visitqueue.Visit{
+			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
+			Referrer: r.Header.Get("Referer"), TrapType: "archive", QueryString: r.URL.RawQuery,
+			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
+			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+			Archive: &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+		})
 	}
 }
 
@@ -240,6 +246,7 @@ func parsePolicyPath(path string) (variant string, year, month, day int, agency,
 
 func policyHandler(vq *visitqueue.Queue) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
 		variant, year, month, day, agency, slug, ok := parsePolicyPath(r.URL.Path)
 		if !ok {
 			http.NotFound(w, r)
@@ -250,7 +257,6 @@ func policyHandler(vq *visitqueue.Queue) http.HandlerFunc {
 		ua := r.Header.Get("User-Agent")
 		botType := botclassify.ClassifyUAOrIP(ua, ip)
 		botGroup := botclassify.BotTypeToGroup(botType)
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "policy", r.URL.RawQuery, botType, botGroup)
 
 		meta := policy.PageMeta{
 			HoneypotToken: honeypotTokenFor(r.URL.RequestURI(), ip),
@@ -303,6 +309,13 @@ func policyHandler(vq *visitqueue.Queue) http.HandlerFunc {
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
+
+		go vq.PushVisit(visitqueue.Visit{
+			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
+			Referrer: r.Header.Get("Referer"), TrapType: "policy", QueryString: r.URL.RawQuery,
+			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
+			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+		})
 	}
 }
 
@@ -363,6 +376,7 @@ func toEraYearData(yd archive.YearData) shell.EraYearData {
 
 func eraHandler(vq *visitqueue.Queue, year int) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
 		month, day, slug, ok := parseEraPath(r.URL.Path)
 		if !ok {
 			http.NotFound(w, r)
@@ -377,8 +391,6 @@ func eraHandler(vq *visitqueue.Queue, year int) http.HandlerFunc {
 		ua := r.Header.Get("User-Agent")
 		botType := botclassify.ClassifyUAOrIP(ua, ip)
 		botGroup := botclassify.BotTypeToGroup(botType)
-		go vq.PushArchiveVisit(ip, ua, year, month, day, depth, slug)
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "archive", r.URL.RawQuery, botType, botGroup)
 
 		variant := eraArchiveVariant(year, month, day, slug)
 
@@ -426,6 +438,14 @@ func eraHandler(vq *visitqueue.Queue, year int) http.HandlerFunc {
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
+
+		go vq.PushVisit(visitqueue.Visit{
+			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
+			Referrer: r.Header.Get("Referer"), TrapType: "archive", QueryString: r.URL.RawQuery,
+			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
+			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+			Archive: &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+		})
 	}
 }
 
@@ -475,6 +495,7 @@ func parsePolicySubdomainPath(path string) (variant string, year, month, day int
 
 func policySubdomainHandler(vq *visitqueue.Queue, agency string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
 		variant, year, month, day, slug, ok := parsePolicySubdomainPath(r.URL.Path)
 		if !ok {
 			http.NotFound(w, r)
@@ -489,7 +510,6 @@ func policySubdomainHandler(vq *visitqueue.Queue, agency string) http.HandlerFun
 		ua := r.Header.Get("User-Agent")
 		botType := botclassify.ClassifyUAOrIP(ua, ip)
 		botGroup := botclassify.BotTypeToGroup(botType)
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "policy", r.URL.RawQuery, botType, botGroup)
 
 		meta := policy.PageMeta{
 			HoneypotToken: honeypotTokenFor(r.URL.RequestURI(), ip),
@@ -563,6 +583,13 @@ func policySubdomainHandler(vq *visitqueue.Queue, agency string) http.HandlerFun
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
+
+		go vq.PushVisit(visitqueue.Visit{
+			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
+			Referrer: r.Header.Get("Referer"), TrapType: "policy", QueryString: r.URL.RawQuery,
+			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
+			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+		})
 	}
 }
 

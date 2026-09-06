@@ -55,6 +55,74 @@ subdomain traffic keeps going to Django exactly as before this change, so
 there's no functional regression from deploying the pieces above on their
 own.
 
+### Benchmarks
+
+Two independent, real (not estimated) measurements motivated and validated
+this move, plus one gap that's worth being honest about:
+
+**1. Django template rendering vs. hand-written Python string building**
+(`acpwb/apps/honeypot/management/commands/bench_template.py`, run with
+`python manage.py bench_template --n 200`, median of 200 iterations per
+route to filter out GC-pause/cache-miss outliers — this is the same
+benchmark whose single-scenario result (3.82ms → 0.96ms, archive default)
+justified the earlier "raw-templates" migration in commits `454bd17` →
+`bfa0524`). A later, more complete run broken out per template variant:
+
+| Route | Django p50 | Python p50 | Speedup (p50) |
+|---|---|---|---|
+| archive default (main) | 5.45ms | 1.56ms | 3.49x |
+| archive compliance (main) | 5.50ms | 1.55ms | 3.55x |
+| archive minutes (main) | 5.57ms | 1.58ms | 3.53x |
+| archive default (era/subdomain) | 2.25ms | 1.01ms | 2.23x |
+| policy detail | 2.20ms | 0.52ms | 4.23x |
+| policy subdomain index | 1.34ms | 0.40ms | 3.35x |
+| policy month | 0.66ms | 0.32ms | 2.06x |
+| policy subdomain year | 0.71ms | 0.35ms | 2.03x |
+| policy year | 1.06ms | 0.73ms | 1.45x |
+| policy index | 4.05ms | 2.94ms | 1.38x |
+
+Every converted page is faster on the Python path, 1.4x–4.2x depending on
+template weight — heavier pages (archive, policy detail) see the largest
+win since Jinja2/Django template overhead scales with template complexity,
+while already-thin pages (policy year/index) see a smaller relative gain.
+Medians are the reliable number here; raw per-request times are noisier
+than this table suggests because a small fraction of requests on both
+paths spike into the hundreds of ms from GC pauses or first-touch cache
+misses — that's ordinary jitter, not a render-path effect, so don't read
+too much into any single sample.
+
+**2. Go render cost, on the actual production hardware** —
+`acpwb_go/archive/bench_test.go` (`go test ./archive/ -bench
+BenchmarkRenderArchiveDefault -benchmem`), archive default page, run
+directly on this box (Intel Xeon E5-2695 v4):
+
+```
+BenchmarkRenderArchiveDefault-72    500    1491072 ns/op    796595 B/op    1689 allocs/op
+```
+
+~1.49ms/render — in the same range as the already-fast Python string-builder
+path above (1.56ms for the same page), not dramatically faster on raw
+render cost alone. Go's actual win over the Django/gunicorn/gevent stack
+isn't primarily "Go renders faster than Python renders" — it's that
+gevent's cooperative scheduling doesn't preempt CPU-bound work, so one
+heavy request blocks every other connection on that worker until it
+yields (see the plan doc's root-cause analysis), whereas Go's OS-thread-
+backed goroutines don't have that failure mode. The render-time numbers
+above are a useful sanity check that the port isn't slower, not the
+headline result.
+
+**3. Known gap — no persisted end-to-end HTTP throughput comparison.**
+Ad-hoc load testing against the running `acpwb_go` service (via `hey` and
+a custom Go load-test tool, both cross-compiled for `linux/amd64` to run
+inside the local Docker environment) was done earlier in this project to
+sanity-check real req/s and confirm `MaxIdleConnsPerHost` wasn't
+throttling results, but that tooling and its output were not committed or
+saved anywhere durable — there is no reusable script or saved report to
+point to here. If a real req/s-under-load number is needed (e.g. to
+validate the "10x" target directly rather than by proxy through the
+render-time numbers above), it needs to be re-run and this section
+updated with the result.
+
 ## Install cron jobs
 
 ```bash

@@ -41,18 +41,19 @@ acpwb-go` on every deploy that touches `acpwb_go/`, same as any other code
 change here needing its process restarted.
 
 `deploy/acpwb-go.service` binds it to `127.0.0.1:8091`; nginx routes
-`/archive/<year>/<month>/<day>/...` and `/public-policy/...` to it (see the
-`upstream acpwb_go` block in `nginx/conf.d/upstream-acpwb.conf` and the
-matching `location` blocks in `nginx/acpwb.com`) while everything else
-(including `/archive/` and `/archive/<year>/` index pages, and all subdomain
-traffic) still goes to `django_backend`, unchanged.
+`/archive/<year>/<month>/<day>/...`, `/public-policy/...`, and
+archive-subdomain day-level content (`archives-YYYY.acpwb.com/<month>/<day>/...`,
+via the `$archive_era_subdomain` map in `nginx/conf.d/upstream-acpwb.conf`)
+to it, while everything else (including `/archive/` and `/archive/<year>/`
+index pages, the archive-subdomain root/month index, and policy-subdomain
+rendering) still goes to `django_backend`, unchanged.
 
-**Not yet cut over**: archive subdomain (`archives-YYYY.acpwb.com`) and
-policy subdomain (`policy-<agency>.acpwb.com`) rendering — those still need
-host-based routing wired into `acpwb_go`'s server before nginx can route
-subdomain traffic to it. Until then, subdomain traffic keeps going to
-Django exactly as before this change, so there's no functional regression
-from deploying the pieces above on their own.
+**Not yet cut over**: policy subdomain (`policy-<agency>.acpwb.com`)
+rendering — that still needs host-based routing wired into `acpwb_go`'s
+server before nginx can route that traffic to it. Until then, policy
+subdomain traffic keeps going to Django exactly as before this change, so
+there's no functional regression from deploying the pieces above on their
+own.
 
 ## Install cron jobs
 

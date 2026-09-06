@@ -74,6 +74,43 @@ server {
         proxy_set_header   X-Forwarded-Proto $scheme;
     }
 
+    # CSV export isn't ported to acpwb_go — must be excluded from, and so
+    # checked BEFORE, the day-level archive-era location below (which would
+    # otherwise also match .../export.csv, since it only anchors the
+    # month/day prefix). nginx picks the first matching regex location in
+    # file order, not the longest, so this ordering is load-bearing.
+    location ~ "^/\d{1,2}/\d{1,2}/.*export\.csv$" {
+        proxy_pass         http://django_backend;
+        proxy_http_version 1.1;
+        proxy_set_header   Connection        "";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
+    # Archive-subdomain day-level content (archives-YYYY.acpwb.com/<month>/<day>/[<slug>/])
+    # is served by acpwb_go. The subdomain root (archive index) and month
+    # index ($archive_era_subdomain is still 1 there, but the path shape
+    # never matches this regex) keep going to Django, as does this exact
+    # path shape on hosts OTHER than an archive subdomain (e.g.
+    # archive_trap_yearless on the main domain, "/06/15/<slug>/") — the
+    # $archive_era_subdomain check below is what makes that distinction,
+    # not the path regex alone.
+    location ~ "^/\d{1,2}/\d{1,2}(/|$)" {
+        if ($archive_era_subdomain = 0) {
+            proxy_pass http://django_backend;
+            break;
+        }
+        proxy_pass         http://acpwb_go;
+        proxy_http_version 1.1;
+        proxy_set_header   Connection        "";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
     # Public policy pages (index/year/month/detail) are served by acpwb_go —
     # the other bulk-content honeypot surface alongside archives. Subdomain
     # policy rendering (policy-<agency>.acpwb.com) is not yet cut over and

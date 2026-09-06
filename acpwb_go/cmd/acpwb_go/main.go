@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"acpwb_go/archive"
+	"acpwb_go/botclassify"
 	"acpwb_go/policy"
 	"acpwb_go/shell"
 	"acpwb_go/visitqueue"
@@ -138,9 +139,11 @@ func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 		}
 		ip := clientIP(r)
 		ua := r.Header.Get("User-Agent")
+		botType := botclassify.ClassifyUAOrIP(ua, ip)
+		botGroup := botclassify.BotTypeToGroup(botType)
 
 		go vq.PushArchiveVisit(ip, ua, year, month, day, depth, slug)
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "archive", r.URL.RawQuery, "", "")
+		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "archive", r.URL.RawQuery, botType, botGroup)
 
 		variant := archiveVariant(year, month, day, slug)
 
@@ -245,7 +248,9 @@ func policyHandler(vq *visitqueue.Queue) http.HandlerFunc {
 
 		ip := clientIP(r)
 		ua := r.Header.Get("User-Agent")
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "policy", r.URL.RawQuery, "", "")
+		botType := botclassify.ClassifyUAOrIP(ua, ip)
+		botGroup := botclassify.BotTypeToGroup(botType)
+		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "policy", r.URL.RawQuery, botType, botGroup)
 
 		meta := policy.PageMeta{
 			HoneypotToken: honeypotTokenFor(r.URL.RequestURI(), ip),
@@ -370,8 +375,10 @@ func eraHandler(vq *visitqueue.Queue, year int) http.HandlerFunc {
 		}
 		ip := clientIP(r)
 		ua := r.Header.Get("User-Agent")
+		botType := botclassify.ClassifyUAOrIP(ua, ip)
+		botGroup := botclassify.BotTypeToGroup(botType)
 		go vq.PushArchiveVisit(ip, ua, year, month, day, depth, slug)
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "archive", r.URL.RawQuery, "", "")
+		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "archive", r.URL.RawQuery, botType, botGroup)
 
 		variant := eraArchiveVariant(year, month, day, slug)
 
@@ -480,7 +487,9 @@ func policySubdomainHandler(vq *visitqueue.Queue, agency string) http.HandlerFun
 
 		ip := clientIP(r)
 		ua := r.Header.Get("User-Agent")
-		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "policy", r.URL.RawQuery, "", "")
+		botType := botclassify.ClassifyUAOrIP(ua, ip)
+		botGroup := botclassify.BotTypeToGroup(botType)
+		go vq.PushCrawlerVisit(ip, ua, r.Host, r.URL.Path, r.Header.Get("Referer"), "policy", r.URL.RawQuery, botType, botGroup)
 
 		meta := policy.PageMeta{
 			HoneypotToken: honeypotTokenFor(r.URL.RequestURI(), ip),

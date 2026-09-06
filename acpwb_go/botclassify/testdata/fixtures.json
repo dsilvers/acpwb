@@ -1,0 +1,1321 @@
+{
+  "classify_cases": [
+    {
+      "ua": "Mozilla/5.0 (compatible; GPTBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OpenAI GPTBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OpenAI GPTBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; GPTBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OpenAI GPTBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OpenAI GPTBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; OAI-SearchBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OpenAI SearchBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OpenAI SearchBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; OAI-SEARCHBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OpenAI SearchBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OpenAI SearchBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ChatGPT-User/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OpenAI ChatGPT",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OpenAI ChatGPT"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; CHATGPT-USER/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OpenAI ChatGPT",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OpenAI ChatGPT"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ClaudeBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Anthropic ClaudeBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic ClaudeBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; CLAUDEBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Anthropic ClaudeBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic ClaudeBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Claude-Web/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Anthropic Claude",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic Claude"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; CLAUDE-WEB/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Anthropic Claude",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic Claude"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; anthropic-ai/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Anthropic",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ANTHROPIC-AI/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Anthropic",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; PerplexityBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Perplexity",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Perplexity"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; PERPLEXITYBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Perplexity",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Perplexity"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Google-Extended/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Google-Extended (AI)",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Google-Extended (AI)"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; GOOGLE-EXTENDED/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Google-Extended (AI)",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Google-Extended (AI)"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; meta-externalagent/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Meta ExternalAgent",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Meta ExternalAgent"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; META-EXTERNALAGENT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Meta ExternalAgent",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Meta ExternalAgent"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; FacebookBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Meta FacebookBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Meta FacebookBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; FACEBOOKBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Meta FacebookBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Meta FacebookBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Applebot-Extended/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Apple Applebot-Extended",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Apple Applebot-Extended"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; APPLEBOT-EXTENDED/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Apple Applebot-Extended",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Apple Applebot-Extended"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Bytespider/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "ByteDance Bytespider",
+      "classify_ip": "",
+      "classify_ua_or_ip": "ByteDance Bytespider"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; BYTESPIDER/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "ByteDance Bytespider",
+      "classify_ip": "",
+      "classify_ua_or_ip": "ByteDance Bytespider"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Amazonbot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Amazonbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Amazonbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; AMAZONBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Amazonbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Amazonbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Diffbot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Diffbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Diffbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; DIFFBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Diffbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Diffbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; omgili/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Omgilibot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Omgilibot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; OMGILI/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Omgilibot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Omgilibot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; webzio-extended/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Webzio",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Webzio"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; WEBZIO-EXTENDED/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Webzio",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Webzio"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; CCBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Common Crawl",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Common Crawl"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; CCBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Common Crawl",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Common Crawl"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; cohere-ai/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Cohere",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Cohere"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; COHERE-AI/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Cohere",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Cohere"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Timpibot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Timpi",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Timpi"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; TIMPIBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Timpi",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Timpi"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Nexus 5X Build/MMB29P/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Googlebot Mobile",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Googlebot Mobile"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; NEXUS 5X BUILD/MMB29P/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Googlebot Mobile",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Googlebot Mobile"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Googlebot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Googlebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Googlebot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; GOOGLEBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Googlebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Googlebot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; GoogleOther/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "GoogleOther",
+      "classify_ip": "",
+      "classify_ua_or_ip": "GoogleOther"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; GOOGLEOTHER/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "GoogleOther",
+      "classify_ip": "",
+      "classify_ua_or_ip": "GoogleOther"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; bingbot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Bingbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Bingbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; BINGBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Bingbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Bingbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; BingPreview/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Bing Preview",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Bing Preview"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; BINGPREVIEW/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Bing Preview",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Bing Preview"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; msnbot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "MSN Bot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "MSN Bot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; MSNBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "MSN Bot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "MSN Bot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Baiduspider/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Baiduspider",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Baiduspider"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; BAIDUSPIDER/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Baiduspider",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Baiduspider"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; YandexBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "YandexBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "YandexBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; YANDEXBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "YandexBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "YandexBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Slurp/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Yahoo Slurp",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Yahoo Slurp"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SLURP/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Yahoo Slurp",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Yahoo Slurp"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; DuckDuckBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "DuckDuckBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "DuckDuckBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; DUCKDUCKBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "DuckDuckBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "DuckDuckBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Applebot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Applebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Applebot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; APPLEBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Applebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Applebot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; sogou/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Sogou",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Sogou"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SOGOU/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Sogou",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Sogou"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; 360Spider/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "360Spider",
+      "classify_ip": "",
+      "classify_ua_or_ip": "360Spider"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; 360SPIDER/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "360Spider",
+      "classify_ip": "",
+      "classify_ua_or_ip": "360Spider"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SeznamBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Seznam",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Seznam"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SEZNAMBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Seznam",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Seznam"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SemrushBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "SemrushBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "SemrushBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SEMRUSHBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "SemrushBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "SemrushBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; AhrefsBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "AhrefsBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "AhrefsBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; AHREFSBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "AhrefsBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "AhrefsBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; MJ12bot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Majestic MJ12",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Majestic MJ12"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; MJ12BOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Majestic MJ12",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Majestic MJ12"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; DotBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "DotBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "DotBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; DOTBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "DotBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "DotBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; DataForSeoBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "DataForSEO",
+      "classify_ip": "",
+      "classify_ua_or_ip": "DataForSEO"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; DATAFORSEOBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "DataForSEO",
+      "classify_ip": "",
+      "classify_ua_or_ip": "DataForSEO"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; PetalBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Huawei PetalBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Huawei PetalBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; PETALBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Huawei PetalBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Huawei PetalBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; PiplBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Pipl",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Pipl"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; PIPLBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Pipl",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Pipl"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SERankingBacklinksBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "SERankingBacklinksBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "SERankingBacklinksBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SERANKINGBACKLINKSBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "SERankingBacklinksBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "SERankingBacklinksBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ZoominfoBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "ZoominfoBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "ZoominfoBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ZOOMINFOBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "ZoominfoBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "ZoominfoBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; AwarioBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "AwarioBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "AwarioBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; AWARIOBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "AwarioBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "AwarioBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; BitSightBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "BitSightBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "BitSightBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; BITSIGHTBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "BitSightBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "BitSightBot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; zgrab/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "zgrab",
+      "classify_ip": "",
+      "classify_ua_or_ip": "zgrab"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ZGRAB/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "zgrab",
+      "classify_ip": "",
+      "classify_ua_or_ip": "zgrab"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Twitterbot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Twitterbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Twitterbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; TWITTERBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Twitterbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Twitterbot"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; facebookexternalhit/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Facebook Scraper",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Facebook Scraper"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; FACEBOOKEXTERNALHIT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Facebook Scraper",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Facebook Scraper"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; LinkedInBot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "LinkedIn",
+      "classify_ip": "",
+      "classify_ua_or_ip": "LinkedIn"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; LINKEDINBOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "LinkedIn",
+      "classify_ip": "",
+      "classify_ua_or_ip": "LinkedIn"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ia_archiver/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Internet Archive",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Internet Archive"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; IA_ARCHIVER/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Internet Archive",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Internet Archive"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; archive.org_bot/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Internet Archive",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Internet Archive"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; ARCHIVE.ORG_BOT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Internet Archive",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Internet Archive"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; python-requests/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Python Requests",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Python Requests"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; PYTHON-REQUESTS/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Python Requests",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Python Requests"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; curl//1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "cURL",
+      "classify_ip": "",
+      "classify_ua_or_ip": "cURL"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; CURL//1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "cURL",
+      "classify_ip": "",
+      "classify_ua_or_ip": "cURL"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; wget/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Wget",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Wget"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; WGET/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Wget",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Wget"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; scrapy/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Scrapy",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Scrapy"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; SCRAPY/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Scrapy",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Scrapy"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Go-http-client/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Go HTTP Client",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Go HTTP Client"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; GO-HTTP-CLIENT/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Go HTTP Client",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Go HTTP Client"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Java//1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Java HTTP Client",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Java HTTP Client"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; JAVA//1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Java HTTP Client",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Java HTTP Client"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; libwww-perl/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "libwww-perl",
+      "classify_ip": "",
+      "classify_ua_or_ip": "libwww-perl"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; LIBWWW-PERL/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "libwww-perl",
+      "classify_ip": "",
+      "classify_ua_or_ip": "libwww-perl"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; axios/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "axios",
+      "classify_ip": "",
+      "classify_ua_or_ip": "axios"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; AXIOS/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "axios",
+      "classify_ip": "",
+      "classify_ua_or_ip": "axios"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; node-fetch/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "node-fetch",
+      "classify_ip": "",
+      "classify_ua_or_ip": "node-fetch"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; NODE-FETCH/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "node-fetch",
+      "classify_ip": "",
+      "classify_ua_or_ip": "node-fetch"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; okhttp/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OkHttp",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OkHttp"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; OKHTTP/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "OkHttp",
+      "classify_ip": "",
+      "classify_ua_or_ip": "OkHttp"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; httpx/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "httpx",
+      "classify_ip": "",
+      "classify_ua_or_ip": "httpx"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; HTTPX/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "httpx",
+      "classify_ip": "",
+      "classify_ua_or_ip": "httpx"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; aiohttp/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "aiohttp",
+      "classify_ip": "",
+      "classify_ua_or_ip": "aiohttp"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; AIOHTTP/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "aiohttp",
+      "classify_ip": "",
+      "classify_ua_or_ip": "aiohttp"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Faraday/1.0; +http://example.com/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Faraday (Ruby)",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Faraday (Ruby)"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; FARADAY/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Faraday (Ruby)",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Faraday (Ruby)"
+    },
+    {
+      "ua": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Googlebot Mobile",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Googlebot Mobile"
+    },
+    {
+      "ua": "",
+      "ip": "1.2.3.4",
+      "classify_ua": "(empty user agent)",
+      "classify_ip": "",
+      "classify_ua_or_ip": "(empty user agent)"
+    },
+    {
+      "ua": "   ",
+      "ip": "1.2.3.4",
+      "classify_ua": "(empty user agent)",
+      "classify_ip": "",
+      "classify_ua_or_ip": "(empty user agent)"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "1.2.3.4",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "47.79.1.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "Alibaba Qwen",
+      "classify_ua_or_ip": "Alibaba Qwen"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "47.82.60.5",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "Alibaba Qwen",
+      "classify_ua_or_ip": "Alibaba Qwen"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "47.82.63.254",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "Alibaba Qwen",
+      "classify_ua_or_ip": "Alibaba Qwen"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "8.219.100.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "Alibaba Qwen",
+      "classify_ua_or_ip": "Alibaba Qwen"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "43.156.0.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "Tencent",
+      "classify_ua_or_ip": "Tencent"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "43.172.5.5",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "Tencent",
+      "classify_ua_or_ip": "Tencent"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "43.173.9.9",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "Tencent",
+      "classify_ua_or_ip": "Tencent"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "207.180.11.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "INTERNEXUS Scraper Pool",
+      "classify_ua_or_ip": "INTERNEXUS Scraper Pool"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "216.75.132.254",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "INTERNEXUS Scraper Pool",
+      "classify_ua_or_ip": "INTERNEXUS Scraper Pool"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "143.20.253.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "IPXO Scraper Pool (HK)",
+      "classify_ua_or_ip": "IPXO Scraper Pool (HK)"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "143.14.6.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "IPXO Scraper Pool (HK)",
+      "classify_ua_or_ip": "IPXO Scraper Pool (HK)"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "144.31.35.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "IPXO Scraper Pool (HK)",
+      "classify_ua_or_ip": "IPXO Scraper Pool (HK)"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "47.80.0.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "47.82.64.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "8.220.0.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "207.180.12.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      "ip": "143.20.254.1",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "ip": "not-an-ip",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "ip": "",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
+    }
+  ],
+  "group_cases": [
+    {
+      "bot_type": "(empty user agent)",
+      "group": "(empty user agent)"
+    },
+    {
+      "bot_type": "360Spider",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "AhrefsBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Alibaba Qwen",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Amazonbot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Anthropic",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Anthropic Claude",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Anthropic ClaudeBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Apple Applebot-Extended",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Applebot",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "AwarioBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Baiduspider",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Bing Preview",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Bingbot",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "BitSightBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "ByteDance Bytespider",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Cohere",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Common Crawl",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "DataForSEO",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Diffbot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "DotBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "DuckDuckBot",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Facebook Scraper",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Faraday (Ruby)",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "Go HTTP Client",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "Google-Extended (AI)",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "GoogleOther",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Googlebot",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Googlebot Mobile",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Huawei PetalBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "INTERNEXUS Scraper Pool",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "IPXO Scraper Pool (HK)",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Internet Archive",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Java HTTP Client",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "LinkedIn",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "MSN Bot",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Majestic MJ12",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Meta ExternalAgent",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Meta FacebookBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "OkHttp",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "Omgilibot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "OpenAI ChatGPT",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "OpenAI GPTBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "OpenAI SearchBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Other / Browser",
+      "group": "Other / Browser"
+    },
+    {
+      "bot_type": "Perplexity",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Pipl",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Python Requests",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "SERankingBacklinksBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Scrapy",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "SemrushBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Seznam",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Sogou",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "Tencent",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Timpi",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Twitterbot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Webzio",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Wget",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "Yahoo Slurp",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "YandexBot",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "ZoominfoBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "aiohttp",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "axios",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "cURL",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "httpx",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "libwww-perl",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "node-fetch",
+      "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "zgrab",
+      "group": "SEO / Other Bots"
+    }
+  ]
+}

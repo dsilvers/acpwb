@@ -50,8 +50,36 @@ server {
         access_log off;
     }
 
+    # Archive day-level trap pages (/archive/<year>/<month>/<day>[/<slug>][/])
+    # are served by acpwb_go — the highest-volume archive content. This is
+    # narrower than /archive/ itself: the index (/archive/) and year index
+    # (/archive/<year>/) still fall through to django_backend below.
+    location ~ "^/archive/\d{4}/\d{1,2}/\d{1,2}(/|$)" {
+        proxy_pass         http://acpwb_go;
+        proxy_http_version 1.1;
+        proxy_set_header   Connection        "";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
     location /archive/ {
         proxy_pass         http://django_backend;
+        proxy_http_version 1.1;
+        proxy_set_header   Connection        "";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
+    # Public policy pages (index/year/month/detail) are served by acpwb_go —
+    # the other bulk-content honeypot surface alongside archives. Subdomain
+    # policy rendering (policy-<agency>.acpwb.com) is not yet cut over and
+    # still falls through to django_backend below.
+    location /public-policy/ {
+        proxy_pass         http://acpwb_go;
         proxy_http_version 1.1;
         proxy_set_header   Connection        "";
         proxy_set_header   Host              $host;

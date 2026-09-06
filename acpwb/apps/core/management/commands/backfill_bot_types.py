@@ -12,6 +12,8 @@ Usage:
     python manage.py backfill_bot_types --batch-size 2000
 """
 
+import fcntl
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
@@ -43,6 +45,28 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        # precalc_dashboard's crawlers.by_bot_type/by_bot_group (and the
+        # daily/recent-bucket charts derived from them) are incremental,
+        # driven by a timestamp high-water-mark that only ever advances. If
+        # it scans a row in the same instant this command is mid-UPDATE on
+        # that row's bot_type, the row gets permanently counted under the
+        # empty-string bucket — the HWM moves past it, so no later run
+        # re-visits it (see precalc_dashboard.py's --reset-bot-types flag,
+        # which exists specifically to correct exactly this class of
+        # staleness after a backfill run). Sharing precalc_dashboard's own
+        # lock file here means this command simply skips its run (retrying
+        # next minute, at negligible cost) whenever precalc_dashboard is
+        # already running, rather than racing it.
+        with open('/tmp/precalc_dashboard.lock', 'w') as precalc_lockfile:
+            try:
+                fcntl.flock(precalc_lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                self.stdout.write('precalc_dashboard is running — skipping this tick.')
+                return
+            self._run(options)
+            fcntl.flock(precalc_lockfile, fcntl.LOCK_UN)
+
+    def _run(self, options):
         dry_run = options["dry_run"]
         batch_size = options["batch_size"]
         reclassify = options["reclassify"]

@@ -143,7 +143,10 @@ Crontab (production):
 */30 * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py precalc_dashboard >> /var/log/acpwb-precalc.log 2>&1
 * * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py drain_crawler_queue >> /var/log/acpwb-crawler-drain.log 2>&1
 * * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py drain_archive_queue >> /var/log/acpwb-archive-drain.log 2>&1
+* * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py backfill_bot_types >> /var/log/acpwb-bot-backfill.log 2>&1
 ```
+
+`backfill_bot_types` runs every minute because `acpwb_go` (the Go render service for archive/policy pages) writes `CrawlerVisit` rows with `bot_type`/`bot_group` blank — it doesn't classify bots itself. The plain ORM version is deliberately used here (indexed `WHERE bot_type=''`, only touches each minute's small trickle of new blank rows) rather than `backfill_bot_types_sql`, which re-scans every TimescaleDB chunk per run and is meant for one-off historical catch-up.
 
 ---
 

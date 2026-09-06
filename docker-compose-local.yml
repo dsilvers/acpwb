@@ -70,6 +70,19 @@ services:
       - redis
     restart: unless-stopped
 
+  acpwb_go:
+    build:
+      context: ./acpwb_go
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      LISTEN_ADDR: 0.0.0.0:8091
+      ACCESS_LOG: "1"
+    expose:
+      - "8091"
+    depends_on:
+      - redis
+    restart: unless-stopped
+
   botseed_processor:
     build:
       context: ./acpwb
@@ -98,6 +111,7 @@ services:
       - web
       - ws
       - botseed_ws
+      - acpwb_go
 
 volumes:
   postgres_data:

@@ -4,3 +4,24 @@
 */30 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py precalc_dashboard' >> /var/log/acpwb-precalc.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_crawler_queue' >> /var/log/acpwb-crawler-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_archive_queue' >> /var/log/acpwb-archive-drain.log 2>&1
+
+# acpwb_go (the Go render service for archive/policy pages) doesn't classify
+# bot_type/bot_group at write time — it writes CrawlerVisit rows with those
+# fields blank. This backfill (plain ORM version — indexed WHERE bot_type=''
+# lookup, only touches the small trickle of new blank rows each minute, NOT
+# a full-table scan) runs every minute so blank rows are classified well
+# ahead of precalc_dashboard's 30-minute cycle. Don't swap in
+# backfill_bot_types_sql here — that one re-scans every TimescaleDB chunk
+# per invocation and is meant for one-off historical catch-up, not a
+# frequent incremental job.
+#
+# Since this runs every minute, it WILL land on the same minute as
+# precalc_dashboard every 30 minutes. backfill_bot_types shares
+# precalc_dashboard's own flock (/tmp/precalc_dashboard.lock) and simply
+# skips that tick if precalc_dashboard is mid-run, rather than racing it —
+# without that, a row backfilled while precalc_dashboard is scanning the
+# same timestamp window could get permanently miscounted under the
+# empty-string bucket in crawlers.by_bot_type/by_bot_group (those stats
+# advance an irreversible timestamp high-water-mark, so a later run never
+# re-visits an already-passed row).
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py backfill_bot_types' >> /var/log/acpwb-bot-backfill.log 2>&1

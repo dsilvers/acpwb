@@ -8,8 +8,51 @@ with Postgres 16 + TimescaleDB and Redis installed locally on the box.
 ```bash
 sudo cp deploy/acpwb-*.service /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable --now acpwb-gunicorn acpwb-ws acpwb-botseed-ws acpwb-botseed-processor
+sudo systemctl enable --now acpwb-gunicorn acpwb-ws acpwb-botseed-ws acpwb-botseed-processor acpwb-go
 ```
+
+## acpwb_go (archive/policy render service)
+
+`acpwb_go/` is a standalone Go service that serves the highest-traffic
+honeypot pages (archive/policy day-level content) directly, bypassing
+Django/gunicorn for those routes — see
+`/Users/dan/.claude/plans/realistically-what-can-we-zippy-wave.md`. It talks
+to the same Redis (`REDIS_URL`) as Django, pushing onto the same
+`acpwb:crawler_queue`/`acpwb:archive_queue` lists the existing
+`drain_crawler_queue`/`drain_archive_queue` crons already consume — no
+changes needed on that side.
+
+The box needs a Go toolchain to build it (none of the other services need
+one — this is the first Go component):
+
+```bash
+# one-time, if Go isn't already installed:
+curl -fsSL https://go.dev/dl/go1.24.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
+# add /usr/local/go/bin to acpwb's PATH (or build as another user and copy
+# the resulting binary — it's a static, CGO_ENABLED=0 binary with no
+# runtime deps beyond matching OS/arch)
+
+cd /home/acpwb/acpwb/acpwb_go
+go build -o acpwb_go ./cmd/acpwb_go
+```
+
+Rebuild (`go build -o acpwb_go ./cmd/acpwb_go`) and `sudo systemctl restart
+acpwb-go` on every deploy that touches `acpwb_go/`, same as any other code
+change here needing its process restarted.
+
+`deploy/acpwb-go.service` binds it to `127.0.0.1:8091`; nginx routes
+`/archive/<year>/<month>/<day>/...` and `/public-policy/...` to it (see the
+`upstream acpwb_go` block in `nginx/conf.d/upstream-acpwb.conf` and the
+matching `location` blocks in `nginx/acpwb.com`) while everything else
+(including `/archive/` and `/archive/<year>/` index pages, and all subdomain
+traffic) still goes to `django_backend`, unchanged.
+
+**Not yet cut over**: archive subdomain (`archives-YYYY.acpwb.com`) and
+policy subdomain (`policy-<agency>.acpwb.com`) rendering — those still need
+host-based routing wired into `acpwb_go`'s server before nginx can route
+subdomain traffic to it. Until then, subdomain traffic keeps going to
+Django exactly as before this change, so there's no functional regression
+from deploying the pieces above on their own.
 
 ## Install cron jobs
 

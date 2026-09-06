@@ -1,0 +1,17 @@
+[Unit]
+Description=ACPWB Go render service (archive/policy high-traffic pages)
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+User=acpwb
+Group=acpwb
+WorkingDirectory=/home/acpwb/acpwb/acpwb_go
+Environment=REDIS_URL=redis://127.0.0.1:6379/0
+Environment=LISTEN_ADDR=127.0.0.1:8091
+ExecStart=/home/acpwb/acpwb/acpwb_go/acpwb_go
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

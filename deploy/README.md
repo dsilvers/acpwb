@@ -215,6 +215,40 @@ share the same `0.0.0.0:80`/`:443` sockets as `acpwb.com` (which loads first
 alphabetically from `sites-enabled/`), so the single `backlog=65535` on
 `acpwb.com` already governs those sockets.
 
+### Redis had the same undersized backlog (2026-09-06)
+
+Same bug class as the nginx fix above, on a different socket. After
+`acpwb_go` went live (see the acpwb_go section above), `CrawlerVisit`
+volume for the `archive`/`policy` trap types it now serves dropped ~62%/
+~37% respectively compared to pre-cutover levels — real requests were
+still being served correctly (verified via direct `curl` and content
+checks), but a large fraction of the corresponding visit-log writes to
+Redis were silently failing (`visitqueue`'s fire-and-forget `push()`
+swallows errors by design). `redis-cli info stats` showed
+`rejected_connections: 93,984` and `connected_clients: 4,620` — Redis's
+`tcp-backlog` was still at its default of `511`, identical to nginx's
+default before the 2026-09-03 fix, and never updated to match
+`net.core.somaxconn` (already 65535 from that fix).
+
+Fix: `/etc/redis/redis.conf` — `tcp-backlog 511` → `tcp-backlog 65535`,
+then `sudo systemctl restart redis-server` (a full restart is required —
+`tcp-backlog` isn't a `CONFIG SET`-able runtime parameter, unlike most
+Redis settings). Confirmed safe to restart: RDB snapshotting is active
+with default save points (`3600 1 300 100 60 10000`), and this box's
+sustained write volume (tens of thousands of queue pushes/min) easily
+clears the "60 seconds, 10000+ changes" threshold, so `lastsave` is
+never more than about a minute stale — worst-case data loss from a
+restart is roughly that last minute of queued-but-undrained
+`crawler_queue`/`archive_queue` items, not the full queue.
+
+Post-fix: `rejected_connections` reset to 0 and stayed there,
+`connected_clients` settled at ~214 (down from the pre-fix 4,620) —
+strong evidence the inflated client count was itself connection-retry
+churn from rejected connections, not genuine concurrent load. All other
+Redis consumers on this box (`ws_service`, `botseed_processor`, the
+drain crons, `RequestStreamMiddleware`) reconnected cleanly with no
+manual intervention needed.
+
 ### Other limits checked post-fix (2026-09-03) — headroom is fine, one watch item
 
 After the backlog fix, swap dropped from 8GB/8GB full to ~230MB and the

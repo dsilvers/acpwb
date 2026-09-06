@@ -111,10 +111,34 @@ server {
         proxy_set_header   X-Forwarded-Proto $scheme;
     }
 
+    # Policy-subdomain content pages (policy-<agency>.acpwb.com/<year>/,
+    # .../<year>/<month>/, .../<year>/<month>/<day>/<slug>/) are served by
+    # acpwb_go — policySubdomainHandler already implements all three
+    # variants (verified via TestPolicySubdomainYearFixtures /
+    # TestPolicyMonthSubdomainFixtures / TestPolicyDetailSubdomainFixtures),
+    # this was purely a missing nginx route. The subdomain root
+    # (policy-sub-index), robots.txt, and sitemap.xml are NOT ported —
+    # acpwb_go's policySubdomainHandler 404s on unrecognized paths — so this
+    # regex requires a leading 4-digit year, which none of those match,
+    # deliberately leaving them on Django. Confirmed via nginx access log
+    # analysis (2026-09-06) that this content-page traffic, not the index,
+    # was the dominant source of gunicorn CPU load post-cutover.
+    location ~ "^/[0-9]{4}(/[0-9]{1,2}(/[0-9]{1,2}/[^/]+)?)?/?$" {
+        if ($policy_subdomain = 0) {
+            proxy_pass http://django_backend;
+            break;
+        }
+        proxy_pass         http://acpwb_go;
+        proxy_http_version 1.1;
+        proxy_set_header   Connection        "";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
     # Public policy pages (index/year/month/detail) are served by acpwb_go —
-    # the other bulk-content honeypot surface alongside archives. Subdomain
-    # policy rendering (policy-<agency>.acpwb.com) is not yet cut over and
-    # still falls through to django_backend below.
+    # the other bulk-content honeypot surface alongside archives.
     location /public-policy/ {
         proxy_pass         http://acpwb_go;
         proxy_http_version 1.1;

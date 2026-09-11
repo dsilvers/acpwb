@@ -23,12 +23,12 @@ class Migration(migrations.Migration):
                 -- 2-day buffer (not 1) so the policy never tries to compress a
                 -- chunk while drain_crawler_queue/drain_archive_queue (1-min cron,
                 -- Redis-queued writes) are still landing stragglers for that day.
-                SELECT remove_compression_policy('honeypot_crawlervisit', if_not_exists => true);
+                SELECT remove_compression_policy('honeypot_crawlervisit', if_exists => true);
                 SELECT add_compression_policy(
                     'honeypot_crawlervisit', INTERVAL '2 days', if_not_exists => true
                 );
 
-                SELECT remove_compression_policy('honeypot_archivevisit', if_not_exists => true);
+                SELECT remove_compression_policy('honeypot_archivevisit', if_exists => true);
                 SELECT add_compression_policy(
                     'honeypot_archivevisit', INTERVAL '2 days', if_not_exists => true
                 );

@@ -336,3 +336,77 @@ def archive_queue_length() -> int:
     except Exception:
         _mark_consumer_failure()
         return -1
+
+
+_FINGERPRINT_QUEUE_KEY = 'acpwb:fingerprint_queue'
+
+
+def push_fingerprint_signal(data: dict) -> bool:
+    """Same contract as push_crawler_visit(), for RequestFingerprint rows."""
+    r = _get_client()
+    if r is None:
+        return False
+    payload = dict(data)
+    payload.setdefault('idempotency_key', str(uuid.uuid4()))
+    try:
+        r.rpush(_FINGERPRINT_QUEUE_KEY, json.dumps(payload))
+        return True
+    except Exception:
+        _mark_failure()
+        return False
+
+
+def pop_fingerprint_signals(count: int = 500):
+    """Same contract as pop_crawler_visits(), for the fingerprint queue."""
+    return _pop_visits(_FINGERPRINT_QUEUE_KEY, count)
+
+
+def recover_fingerprint_signals():
+    """Recover any orphaned fingerprint-queue batches from a prior crashed run."""
+    return _recover_visits(_FINGERPRINT_QUEUE_KEY)
+
+
+def fingerprint_queue_length() -> int:
+    """Return the fingerprint queue depth, or -1 if Redis is unavailable."""
+    r = _get_consumer_client()
+    if r is None:
+        return -1
+    try:
+        return r.llen(_FINGERPRINT_QUEUE_KEY)
+    except Exception:
+        _mark_consumer_failure()
+        return -1
+
+
+def queue_fingerprint_signal(data: dict) -> None:
+    """Fire-and-forget: RPUSH `data` onto the fingerprint queue. No DB
+    fallback (unlike queue_crawler_visit/queue_archive_visit) — this signal
+    is only useful in volume for scoring, so a dropped record under a Redis
+    outage is an acceptable loss rather than something worth a synchronous
+    DB write for."""
+    if not push_fingerprint_signal(data):
+        pass
+
+
+_FIRST_SEEN_TTL_SECONDS = 30 * 24 * 60 * 60  # 30 days
+
+
+def check_first_seen_ip(ip_address: str) -> bool:
+    """Returns True the first time this IP is seen within the TTL window,
+    False on any repeat. A per-IP key with an expiry (rather than one huge
+    Redis SET) caps memory automatically without a separate cleanup job, at
+    the cost of "first-seen" re-triggering if an IP goes quiet for 30+ days
+    — an acceptable tradeoff for a cheap, self-expiring signal.
+
+    Returns False (not first-seen) if Redis is unavailable — the safer
+    default, since it just suppresses this one signal rather than risking a
+    false "first seen" flood if the check can't actually be performed.
+    """
+    r = _get_client()
+    if r is None:
+        return False
+    try:
+        return bool(r.set(f'acpwb:ipseen:{ip_address}', '1', nx=True, ex=_FIRST_SEEN_TTL_SECONDS))
+    except Exception:
+        _mark_failure()
+        return False

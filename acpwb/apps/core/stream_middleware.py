@@ -119,7 +119,41 @@ class RequestStreamMiddleware:
             _redis_client = None
             _last_failure = time.monotonic()
 
+        self._queue_fingerprint(request, ip, ua)
+
     @staticmethod
     def _get_ip(request):
         from apps.core.ip_utils import get_client_ip
         return get_client_ip(request)
+
+    @staticmethod
+    def _queue_fingerprint(request, ip, ua):
+        """Queue a RequestFingerprint row for every request, not just
+        UA-matched bot traffic — residential-proxy traffic is exactly the
+        traffic that looks like a normal browser, so it has to be captured
+        here (this middleware runs unconditionally) rather than gated behind
+        BotTrackingMiddleware's BOT_UA_PATTERNS check."""
+        try:
+            from django.utils import timezone
+            from apps.core.crawler_queue import queue_fingerprint_signal, check_first_seen_ip
+            from apps.core.signal_capture import BROWSER_SIGNAL_HEADERS, browser_headers_present
+
+            present_headers = (
+                name for name in BROWSER_SIGNAL_HEADERS
+                if request.META.get(f'HTTP_{name.upper().replace("-", "_")}')
+            )
+            data = {
+                'timestamp': timezone.now().isoformat(),
+                'ip_address': ip,
+                'host': request.get_host()[:253],
+                'user_agent': ua[:512] if ua else '',
+                'referrer_present': bool(request.META.get('HTTP_REFERER')),
+                'first_seen_ip': check_first_seen_ip(ip),
+                'client_protocol': request.META.get('HTTP_X_CLIENT_PROTOCOL', '')[:16],
+                'tls_protocol': request.META.get('HTTP_X_TLS_PROTOCOL', '')[:16],
+                'tls_cipher': request.META.get('HTTP_X_TLS_CIPHER', '')[:64],
+                'browser_headers_present': browser_headers_present(present_headers),
+            }
+            queue_fingerprint_signal(data)
+        except Exception:
+            pass  # never let signal capture break the response

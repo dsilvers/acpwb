@@ -244,3 +244,118 @@ class IPIntelligence(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} [{self.country_code or '??'}] {self.asn_org or 'unknown org'}"
+
+
+class RequestFingerprint(models.Model):
+    """Raw per-request signal for residential-proxy detection, queued through
+    Redis and batch-drained exactly like CrawlerVisit/ArchiveVisit (see
+    drain_fingerprint_queue) — never a synchronous write on the request path.
+
+    Unlike CrawlerVisit, this is a brand-new table (not an existing 373M-row
+    hypertable), so idempotency_key gets a real unique constraint from day
+    one instead of CrawlerVisit's app-level dedup workaround.
+
+    Deliberately captures header *presence*, not header *order*: order
+    survives reliably in Django (gunicorn/WSGI preserves wire order in
+    request.META) but not in acpwb_go (Go's net/http.Header is an unordered
+    map), and a signal that means different things on the two backends that
+    write this table isn't worth having.
+    """
+    timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
+    ip_address = models.GenericIPAddressField(db_index=True)
+    host = models.CharField(max_length=253, blank=True)
+    user_agent = models.TextField(blank=True)
+    referrer_present = models.BooleanField(default=False)
+    first_seen_ip = models.BooleanField(default=False, db_index=True)
+
+    # What the client actually negotiated with nginx — not the same as the
+    # HTTP/1.1 connection nginx always re-encodes to for the upstream, so
+    # this has to be forwarded explicitly (see nginx's $server_protocol ->
+    # X-Client-Protocol). Blank if the header wasn't forwarded (e.g. a
+    # request that reached Django/Go directly, bypassing nginx).
+    client_protocol = models.CharField(max_length=16, blank=True)
+    tls_protocol = models.CharField(max_length=16, blank=True)
+    tls_cipher = models.CharField(max_length=64, blank=True)
+
+    # Sorted, comma-joined subset of a fixed candidate list of headers real
+    # browsers send (Accept-Language, Sec-Fetch-*, sec-ch-ua, ...) that were
+    # actually present on this request — see apps.core.signal_capture for the
+    # candidate list. A UA claiming a modern browser with few/none of these
+    # present is the core "scripted client wearing a browser UA" signal.
+    browser_headers_present = models.CharField(max_length=512, blank=True)
+
+    idempotency_key = models.UUIDField(unique=True, null=True, blank=True, default=None)
+
+    class Meta:
+        ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['ip_address', 'timestamp']),
+        ]
+        verbose_name = 'Request Fingerprint'
+
+    def __str__(self):
+        return f"{self.ip_address} @ {self.timestamp:%Y-%m-%d %H:%M} ({self.client_protocol or '?'})"
+
+
+class IPReputationScore(models.Model):
+    """Rule-based residential-proxy / automation score for an IP, computed
+    off the request path by apps.core.management.commands.score_ip_reputation
+    from RequestFingerprint + CrawlerVisit + IPIntelligence.
+
+    Kept separate from IPIntelligence (rather than adding columns there) so
+    the scoring model can be revised/rebuilt independently of the
+    geo/ASN/Tor enrichment it already does — score_version exists precisely
+    so a rescoring pass never silently changes the meaning of old rows in
+    place.
+    """
+    CLASSIFICATIONS = [
+        ('human', 'Likely Human'),
+        ('datacenter_bot', 'Datacenter Bot'),
+        ('residential_proxy_bot', 'Residential Proxy Bot'),
+        ('unknown', 'Unknown'),
+    ]
+
+    ip_address = models.GenericIPAddressField(unique=True, db_index=True)
+    residential_proxy_score = models.PositiveSmallIntegerField(default=0, db_index=True)
+    classification = models.CharField(max_length=32, choices=CLASSIFICATIONS, default='unknown', db_index=True)
+    # Which signals fired, e.g. ["trap_tainted", "header_mismatch"] — internal
+    # evidence, never exposed via PublishedIPReputation.
+    evidence = models.JSONField(default=list)
+    score_version = models.CharField(max_length=16, default='v1')
+
+    first_flagged_at = models.DateTimeField(null=True, blank=True)
+    last_scored_at = models.DateTimeField(null=True, blank=True, db_index=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['classification', 'residential_proxy_score']),
+        ]
+        verbose_name = 'IP Reputation Score'
+        verbose_name_plural = 'IP Reputation Scores'
+
+    def __str__(self):
+        return f"{self.ip_address} [{self.classification}] score={self.residential_proxy_score}"
+
+
+class PublishedIPReputation(models.Model):
+    """The external-facing surface of the traffic-intelligence product —
+    deliberately decoupled from IPReputationScore's internal evidence.
+
+    This table (not IPReputationScore directly) is what any future
+    blacklist/API export reads from: it exposes classification + confidence
+    only, never which of our honeypot paths or internal signals triggered
+    it. Keeping the two separate means the detection logic in
+    score_ip_reputation can change freely without redefining an external
+    contract someone else may depend on.
+    """
+    ip_address = models.GenericIPAddressField(unique=True, db_index=True)
+    classification = models.CharField(max_length=32, choices=IPReputationScore.CLASSIFICATIONS, default='unknown')
+    confidence = models.PositiveSmallIntegerField(default=0)
+    published_at = models.DateTimeField(auto_now=True, db_index=True)
+
+    class Meta:
+        verbose_name = 'Published IP Reputation'
+        verbose_name_plural = 'Published IP Reputation'
+
+    def __str__(self):
+        return f"{self.ip_address} [{self.classification}] confidence={self.confidence}"

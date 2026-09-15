@@ -23,6 +23,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"net/http"
+	"sort"
+	"strings"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -31,8 +34,42 @@ import (
 const (
 	crawlerQueueKey      = "acpwb:crawler_queue"
 	archiveQueueKey      = "acpwb:archive_queue"
+	fingerprintQueueKey  = "acpwb:fingerprint_queue"
 	requestStreamChannel = "request_stream"
+	firstSeenTTL         = 30 * 24 * time.Hour
 )
+
+// browserSignalHeaders must match apps.core.signal_capture.BROWSER_SIGNAL_HEADERS
+// exactly — this list is the residential-proxy-detection candidate set, and a
+// signal that means different things on the two backends writing
+// RequestFingerprint isn't useful. Go's net/http canonicalizes header names
+// (e.g. "sec-fetch-site" -> "Sec-Fetch-Site"), so lookups use Header.Get,
+// which canonicalizes its argument too.
+var browserSignalHeaders = []string{
+	"Accept-Language",
+	"Sec-Fetch-Site",
+	"Sec-Fetch-Mode",
+	"Sec-Fetch-Dest",
+	"Sec-Fetch-User",
+	"Sec-Ch-Ua",
+	"Sec-Ch-Ua-Mobile",
+	"Sec-Ch-Ua-Platform",
+	"Upgrade-Insecure-Requests",
+}
+
+// BrowserHeadersPresent returns the sorted, comma-joined subset of
+// browserSignalHeaders present on r — same shape and meaning as Django's
+// apps.core.signal_capture.browser_headers_present().
+func BrowserHeadersPresent(r *http.Request) string {
+	var present []string
+	for _, h := range browserSignalHeaders {
+		if r.Header.Get(h) != "" {
+			present = append(present, strings.ToLower(h))
+		}
+	}
+	sort.Strings(present)
+	return strings.Join(present, ",")
+}
 
 // Queue wraps a Redis client for pushing visit records. A nil *Queue (or one
 // whose client is unreachable) causes PushVisit to silently no-op, mirroring
@@ -116,13 +153,26 @@ type Visit struct {
 	ResponseBytes                              int
 	ResponseMs                                 int64
 	Archive                                    *ArchiveInfo
+
+	// Residential-proxy-detection raw signal — see RequestFingerprint /
+	// apps.core.stream_middleware.py's _queue_fingerprint for the Django
+	// side of this same capture. ClientProtocol/TLSProtocol/TLSCipher come
+	// from headers nginx sets (X-Client-Protocol/X-Tls-Protocol/X-Tls-Cipher)
+	// since this service, like Django, only ever sees the HTTP/1.1
+	// connection nginx re-encodes to for the upstream.
+	ClientProtocol, TLSProtocol, TLSCipher string
+	BrowserHeadersPresent                  string
 }
 
 // PushVisit sends the crawler-queue RPUSH, the optional archive-queue RPUSH,
-// and the request_stream PUBLISH as a single pipelined round-trip. Errors
-// are swallowed — fire-and-forget, matching queue_crawler_visit/
-// queue_archive_visit/RequestStreamMiddleware's "best effort, never block
-// or fail the request" contract.
+// the request_stream PUBLISH, and the first-seen-IP check as a single
+// pipelined round-trip, then (needing that check's result first) a second,
+// separate RPUSH onto the fingerprint queue. Both round-trips happen inside
+// the caller's `go vq.PushVisit(...)` goroutine, off the response path, so
+// the extra round-trip costs nothing user-facing. Errors are swallowed —
+// fire-and-forget, matching queue_crawler_visit/queue_archive_visit/
+// RequestStreamMiddleware's "best effort, never block or fail the request"
+// contract.
 func (q *Queue) PushVisit(v Visit) {
 	if q == nil || q.client == nil {
 		return
@@ -132,6 +182,7 @@ func (q *Queue) PushVisit(v Visit) {
 	defer cancel()
 
 	pipe := q.client.Pipeline()
+	firstSeenCmd := pipe.SetNX(ctx, "acpwb:ipseen:"+v.IPAddress, "1", firstSeenTTL)
 
 	crawlerPayload := map[string]any{
 		"timestamp":       nowISO(),
@@ -185,4 +236,25 @@ func (q *Queue) PushVisit(v Visit) {
 	}
 
 	_, _ = pipe.Exec(ctx)
+
+	// firstSeenCmd's result is only readable after Exec — a second, separate
+	// call rather than folding into the pipeline above.
+	firstSeenIP, _ := firstSeenCmd.Result()
+
+	fingerprintPayload := map[string]any{
+		"timestamp":               nowISO(),
+		"ip_address":              v.IPAddress,
+		"host":                    truncate(v.Host, 253),
+		"user_agent":              truncate(v.UserAgent, 512),
+		"referrer_present":        v.Referrer != "",
+		"first_seen_ip":           firstSeenIP,
+		"client_protocol":         truncate(v.ClientProtocol, 16),
+		"tls_protocol":            truncate(v.TLSProtocol, 16),
+		"tls_cipher":              truncate(v.TLSCipher, 64),
+		"browser_headers_present": truncate(v.BrowserHeadersPresent, 512),
+		"idempotency_key":         uuid4(),
+	}
+	if data, err := json.Marshal(fingerprintPayload); err == nil {
+		_ = q.client.RPush(ctx, fingerprintQueueKey, data).Err()
+	}
 }

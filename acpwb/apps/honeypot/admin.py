@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, IPIntelligence
+from .models import (
+    CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, IPIntelligence,
+    RequestFingerprint, IPReputationScore, PublishedIPReputation,
+)
 
 
 @admin.register(CrawlerVisit)
@@ -75,3 +78,30 @@ class IPIntelligenceAdmin(admin.ModelAdmin):
     @admin.display(description='UA')
     def user_agent_short(self, obj):
         return obj.user_agent[:60] if obj.user_agent else '—'
+
+
+@admin.register(RequestFingerprint)
+class RequestFingerprintAdmin(admin.ModelAdmin):
+    list_display = ('timestamp', 'ip_address', 'client_protocol', 'tls_protocol', 'first_seen_ip', 'referrer_present')
+    list_filter = ('client_protocol', 'tls_protocol', 'first_seen_ip', 'referrer_present')
+    search_fields = ('ip_address', 'user_agent', 'browser_headers_present')
+    readonly_fields = ('timestamp',)
+    ordering = ('-timestamp',)
+
+
+@admin.register(IPReputationScore)
+class IPReputationScoreAdmin(admin.ModelAdmin):
+    list_display = ('ip_address', 'classification', 'residential_proxy_score', 'score_version', 'last_scored_at')
+    list_filter = ('classification', 'score_version')
+    search_fields = ('ip_address',)
+    readonly_fields = ('first_flagged_at', 'last_scored_at')
+    ordering = ('-residential_proxy_score',)
+
+
+@admin.register(PublishedIPReputation)
+class PublishedIPReputationAdmin(admin.ModelAdmin):
+    list_display = ('ip_address', 'classification', 'confidence', 'published_at')
+    list_filter = ('classification',)
+    search_fields = ('ip_address',)
+    readonly_fields = ('published_at',)
+    ordering = ('-published_at',)

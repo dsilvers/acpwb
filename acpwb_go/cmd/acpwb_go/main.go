@@ -135,6 +135,16 @@ func clientIP(r *http.Request) string {
 	return host
 }
 
+// fingerprintFieldsFrom reads the residential-proxy-detection raw signal off
+// headers nginx sets (X-Client-Protocol/X-Tls-Protocol/X-Tls-Cipher — see
+// nginx/acpwb.com) plus the fixed browser-header candidate set, for the
+// RequestFingerprint row PushVisit queues alongside the crawler/archive
+// visit it already writes.
+func fingerprintFieldsFrom(r *http.Request) (clientProtocol, tlsProtocol, tlsCipher, browserHeaders string) {
+	return r.Header.Get("X-Client-Protocol"), r.Header.Get("X-Tls-Protocol"),
+		r.Header.Get("X-Tls-Cipher"), visitqueue.BrowserHeadersPresent(r)
+}
+
 func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
@@ -187,12 +197,17 @@ func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
+		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "archive", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-			Archive: &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+			Archive:               &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+			ClientProtocol:        cp,
+			TLSProtocol:           tp,
+			TLSCipher:             tc,
+			BrowserHeadersPresent: bh,
 		})
 	}
 }
@@ -320,11 +335,13 @@ func policyHandler(vq *visitqueue.Queue) http.HandlerFunc {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
+		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "policy", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+			ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
 		})
 	}
 }
@@ -449,12 +466,17 @@ func eraHandler(vq *visitqueue.Queue, year int) http.HandlerFunc {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
+		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "archive", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-			Archive: &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+			Archive:               &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+			ClientProtocol:        cp,
+			TLSProtocol:           tp,
+			TLSCipher:             tc,
+			BrowserHeadersPresent: bh,
 		})
 	}
 }
@@ -594,11 +616,13 @@ func policySubdomainHandler(vq *visitqueue.Queue, agency string) http.HandlerFun
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
+		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "policy", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+			ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
 		})
 	}
 }

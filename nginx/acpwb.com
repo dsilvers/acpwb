@@ -42,6 +42,15 @@ server {
     access_log /var/log/nginx/acpwb.com.access.log acpwb buffer=16k flush=5s;
     error_log  /var/log/nginx/acpwb.com.error.log;
 
+    # X-Client-Protocol/X-TLS-Protocol/X-TLS-Cipher (added to every proxied
+    # location below): nginx always re-encodes the upstream connection to
+    # HTTP/1.1 (proxy_http_version 1.1), so without forwarding these
+    # explicitly the app can never see what the actual client negotiated —
+    # a UA claiming a modern browser over HTTP/1.1 with an old cipher is a
+    # residential-proxy/automation tell. Empty on a non-TLS connection
+    # (harmless — only meaningful once TLS terminates here or, later, at an
+    # HAProxy front-end).
+
     # Static files served directly — no Docker round-trip
     location /static/ {
         alias /home/acpwb/acpwb/acpwb/staticfiles/;
@@ -62,6 +71,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     location /archive/ {
@@ -72,6 +84,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     # CSV export isn't ported to acpwb_go — must be excluded from, and so
@@ -87,6 +102,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     # Archive-subdomain day-level content (archives-YYYY.acpwb.com/<month>/<day>/[<slug>/])
@@ -109,6 +127,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     # Policy-subdomain content pages (policy-<agency>.acpwb.com/<year>/,
@@ -135,6 +156,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     # Public policy pages (index/year/month/detail) are served by acpwb_go —
@@ -147,6 +171,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     location /wiki/ {
@@ -157,6 +184,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     location /reports/ {
@@ -167,6 +197,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     # /.well-known/ must reach Django (honeypot endpoints — not cached)
@@ -178,6 +211,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
     location /ws/requests/ {
@@ -189,6 +225,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
         proxy_read_timeout 3600s;
         proxy_send_timeout 3600s;
     }
@@ -201,6 +240,9 @@ server {
         proxy_set_header   X-Real-IP         $remote_addr;
         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
         proxy_read_timeout 60s;
     }
 }

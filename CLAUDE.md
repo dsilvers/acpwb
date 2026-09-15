@@ -47,6 +47,10 @@ docker compose exec web pytest  # run tests
 - `honeypot.InternalLoginAttempt` — credential-stuffing log: ip, ua, username, password, next_url
 - `honeypot.WikiPage` — generated wiki content with watermark tokens
 - `honeypot.PublicReport` — generated report metadata, persisted on first access
+- `honeypot.IPIntelligence` — one row per distinct IP, MaxMind GeoLite2 geo/ASN + best-effort hosting/Tor heuristics; joined to CrawlerVisit by IP value only, never an FK (hypertable)
+- `honeypot.RequestFingerprint` — residential-proxy-detection raw signal (header presence, client-negotiated protocol, TLS protocol/cipher, first-seen-IP flag); one row per request, queued via Redis and drained like CrawlerVisit — see `apps.core.signal_capture`/`apps.core.stream_middleware`
+- `honeypot.IPReputationScore` — rule-based residential-proxy/automation score per IP, computed by `score_ip_reputation` from RequestFingerprint + CrawlerVisit + IPIntelligence; internal only (`evidence` field), see `apps.core.reputation_scoring`
+- `honeypot.PublishedIPReputation` — external-facing classification + confidence only (no evidence), synced from IPReputationScore by `publish_ip_reputation`; what `/reputation-api/ip/<ip>/` reads
 - `webhooks.InboundEmail` — received emails
 - `webhooks.HoneypotMatch` — links inbound email to the visit that generated the address
 
@@ -137,15 +141,33 @@ Token: `hashlib.md5(f"acpwb_{type}_{slug}".encode()).hexdigest()[:8]`
 | `analyze_browser_uas` | Breakdown of `bot_type='Other / Browser'` rows + reclassification preview |
 | `botseed_processor` | Subscribes to `request_stream`, mixes with `secrets.token_bytes(32)`, publishes to `botseed_stream` |
 | `generate_bot_traffic` | Synthetic bot events to `request_stream` for local botseed testing |
+| `drain_fingerprint_queue` | Pop `acpwb:fingerprint_queue` → bulk-insert `RequestFingerprint`. 1-min cron. |
+| `score_ip_reputation` | Rule-based residential-proxy scoring from `RequestFingerprint`/`CrawlerVisit`/`IPIntelligence` → `IPReputationScore`. Watermarked/resumable. |
+| `publish_ip_reputation` | Sync `IPReputationScore` → external-facing `PublishedIPReputation` (classification + confidence only). Watermarked/resumable. |
 
-Crontab (production):
+Crontab (production) — see `deploy/acpwb-crontab` for the actual installed form (direct `manage.py` invocation via `.direnv`, not `docker compose exec`):
 ```
 */30 * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py precalc_dashboard >> /var/log/acpwb-precalc.log 2>&1
 * * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py drain_crawler_queue >> /var/log/acpwb-crawler-drain.log 2>&1
 * * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py drain_archive_queue >> /var/log/acpwb-archive-drain.log 2>&1
+* * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py drain_fingerprint_queue >> /var/log/acpwb-fingerprint-drain.log 2>&1
+*/5 * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py score_ip_reputation >> /var/log/acpwb-score-ip-reputation.log 2>&1
+*/15 * * * * docker compose -f /home/dan/acpwb.com/docker-compose.yml exec -T web python manage.py publish_ip_reputation >> /var/log/acpwb-publish-ip-reputation.log 2>&1
 ```
 
 `acpwb_go` (the Go render service for archive/policy pages) writes `CrawlerVisit` rows with `bot_type`/`bot_group` blank — it doesn't classify bots itself. A `backfill_bot_types` cron job was tried to fill these in incrementally but is **currently disabled** (not installed in production) — its first real run against the live hypertable never completed a single 1000-row batch in 8+ minutes, because `bulk_update()`'s per-row `CASE WHEN id=X` UPDATE forces expensive cross-chunk work on a non-time-key access pattern against a 373M+ row TimescaleDB table, and the backlog grew faster than it could shrink. See `deploy/acpwb-crontab`'s comment block for the incident detail. Bot classification for `acpwb_go`-originated rows needs a different approach (most likely: classify at write time in Go, matching what `apps/core/bot_classify.py` already does) before this gap is closed.
+
+---
+
+## Residential Proxy Detection
+
+Second product line in progress: catalog/score traffic for a future real-time blacklist/data feed. ~95% of traffic falls into `bot_type = 'Other / Browser'` (spoofed browser UA over a real residential IP), which UA/IP-range matching alone can't catch.
+
+- **Signal capture** (`apps/core/signal_capture.py`, `apps/core/stream_middleware.py`) — runs on every request, not just UA-matched bot traffic: header-presence fingerprint against a fixed candidate list (`BROWSER_SIGNAL_HEADERS`), client-negotiated protocol + TLS protocol/cipher (forwarded by nginx via `X-Client-Protocol`/`X-TLS-Protocol`/`X-TLS-Cipher` — nginx always re-encodes the upstream connection to HTTP/1.1, so these must be forwarded explicitly), first-seen-IP flag (self-expiring Redis key, `check_first_seen_ip` in `apps/core/crawler_queue.py`). Queued via `acpwb:fingerprint_queue` → `drain_fingerprint_queue` → `honeypot.RequestFingerprint`, same pattern as CrawlerVisit. Implemented in both Django and `acpwb_go` (`visitqueue.PushVisit`) — `acpwb_go` serves the highest-volume traffic, so skipping it would recreate the `backfill_bot_types` blind spot.
+- **Scoring** (`apps/core/reputation_scoring.py`, `score_ip_reputation`) — pure, testable rule functions (`compute_score`, `looks_like_modern_browser`) combine header/protocol/TLS mismatch signals with cross-trap taint (`ABSOLUTE_PROOF_TRAP_TYPES` — `ghost_link`/`canary_trigger`/probe endpoints; hitting these proves automation regardless of what the rest of that IP's traffic looks like) and `IPIntelligence.is_hosting` (datacenter vs. residential ASN) into `honeypot.IPReputationScore`. `score_version` guards against silently redefining old rows' meaning.
+- **External surface** (`publish_ip_reputation`, `/reputation-api/ip/<ip>/`) — `honeypot.PublishedIPReputation` deliberately exposes only classification + confidence, decoupled from `IPReputationScore`'s internal evidence, so the detection logic can change freely without breaking an external contract. `IP_REPUTATION_API_KEY` setting; fails closed (401) when unconfigured.
+- **HAProxy** (`haproxy/`, `docker-compose-local.yml`) — thin TLS-terminating front-end added in front of the existing nginx purely for protocol/cipher capture (`ssl_fc_protocol`/`ssl_fc_cipher`/`fc_http_major` — real, verified HAProxy fetches); nginx keeps 100% of routing/static/gzip/WebSocket responsibilities unchanged. **JA3/JA4 ClientHello fingerprinting is NOT implemented** — `req.ssl_ja3`/`req.ssl_ja4` don't exist in open-source HAProxy (verified against the haproxy:3.0 binary; that's an HAProxy Enterprise-only feature), so the strongest single residential-proxy signal is still an open problem — real options are an nginx `stream`+`njs` ClientHello parser or a custom Go TCP-layer parser, neither built yet.
+- Everything above is fire-and-forget off the request path (same circuit-breaker/spawn pattern as `RequestStreamMiddleware`) — no synchronous scoring, lookups, or DB/Redis read-modify-write ever happens inline with a response.
 
 ---
 

@@ -5,6 +5,14 @@
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_crawler_queue' >> /var/log/acpwb-crawler-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_archive_queue' >> /var/log/acpwb-archive-drain.log 2>&1
 
+# Residential-proxy-detection pipeline (see the plan this implements).
+# score_ip_reputation and publish_ip_reputation start conservative (every
+# 5/15 min) — tighten once RequestFingerprint has real production volume
+# and the scoring output has been checked against it.
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_fingerprint_queue' >> /var/log/acpwb-fingerprint-drain.log 2>&1
+*/5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py score_ip_reputation' >> /var/log/acpwb-score-ip-reputation.log 2>&1
+*/15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py publish_ip_reputation' >> /var/log/acpwb-publish-ip-reputation.log 2>&1
+
 # DISABLED 2026-09-06 — do not install this job as-is. acpwb_go writes
 # CrawlerVisit rows with bot_type/bot_group blank (it doesn't classify at
 # write time), and this cron was meant to backfill them incrementally. In

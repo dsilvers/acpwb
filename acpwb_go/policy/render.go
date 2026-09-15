@@ -31,6 +31,38 @@ var monthAbbr3 = []string{"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "
 
 func e(s string) string { return escape(s) }
 
+// tableHTML renders one Table as the pol-data-table markup — shared by the
+// main detail-page table and each exhibit in the appendix (mirrors
+// pyrender/policy.py's _table_html helper).
+func tableHTML(table Table) string {
+	var b strings.Builder
+	fmt.Fprintf(&b, `<p class="pol-section-heading">%s</p>`+
+		`<p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem">%s</p>`+
+		`<div style="overflow-x:auto"><table class="pol-data-table">`+
+		`<thead><tr class="pol-table-head">`, e(table.Title), e(table.Caption))
+	for j, col := range table.Columns {
+		if j == 0 {
+			fmt.Fprintf(&b, `<th >%s</th>`, e(col))
+		} else {
+			fmt.Fprintf(&b, `<th style="text-align:right" >%s</th>`, e(col))
+		}
+	}
+	b.WriteString("</tr></thead><tbody>")
+	for _, row := range table.Rows {
+		b.WriteString("<tr>")
+		for j, cell := range row {
+			if j == 0 {
+				fmt.Fprintf(&b, `<td>%s</td>`, e(cell))
+			} else {
+				fmt.Fprintf(&b, `<td class="num">%s</td>`, e(cell))
+			}
+		}
+		b.WriteString("</tr>")
+	}
+	b.WriteString("</tbody></table></div>")
+	return b.String()
+}
+
 // ── Shared <head> builder (render_policy_index / render_policy_year / render_policy_detail) ──
 
 func policyHeadCommon(title, description, canonicalPath, ogImagePath, ogType string, feedLinks bool) string {
@@ -888,6 +920,14 @@ func RenderPolicyDetail(meta PageMeta, p DetailParams) string {
 	fmt.Fprintf(&b, `<div class="pol-position pos-%s">`+
 		`<strong>ACPWB Position:</strong> %s</div>`+"\n", e(doc.PositionSlug), e(doc.PositionStatement))
 
+	if len(doc.ExecSummaryParagraphs) > 0 {
+		b.WriteString(`<div class="pol-section"><p class="pol-section-heading">Executive Summary</p>`)
+		for _, para := range doc.ExecSummaryParagraphs {
+			fmt.Fprintf(&b, `<p>%s</p>`, e(para))
+		}
+		b.WriteString("</div>\n")
+	}
+
 	for i, section := range doc.Sections {
 		b.WriteString(`<div class="pol-section">`)
 		fmt.Fprintf(&b, `<p class="pol-section-heading">%s</p>`, e(section.Heading))
@@ -896,32 +936,7 @@ func RenderPolicyDetail(meta PageMeta, p DetailParams) string {
 		}
 		b.WriteString("</div>\n")
 		if i == 1 {
-			table := doc.Table
-			fmt.Fprintf(&b, `<div style="margin:2rem 0"><p class="pol-section-heading">%s</p>`+
-				`<p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem">`+
-				"%s</p>"+
-				`<div style="overflow-x:auto"><table class="pol-data-table">`+
-				`<thead><tr class="pol-table-head">`, e(table.Title), e(table.Caption))
-			for j, col := range table.Columns {
-				if j == 0 {
-					fmt.Fprintf(&b, `<th >%s</th>`, e(col))
-				} else {
-					fmt.Fprintf(&b, `<th style="text-align:right" >%s</th>`, e(col))
-				}
-			}
-			b.WriteString("</tr></thead><tbody>")
-			for _, row := range table.Rows {
-				b.WriteString("<tr>")
-				for j, cell := range row {
-					if j == 0 {
-						fmt.Fprintf(&b, `<td>%s</td>`, e(cell))
-					} else {
-						fmt.Fprintf(&b, `<td class="num">%s</td>`, e(cell))
-					}
-				}
-				b.WriteString("</tr>")
-			}
-			b.WriteString("</tbody></table></div></div>\n")
+			fmt.Fprintf(&b, `<div style="margin:2rem 0">%s</div>`+"\n", tableHTML(doc.Table))
 		}
 	}
 
@@ -939,6 +954,16 @@ func RenderPolicyDetail(meta PageMeta, p DetailParams) string {
 				`<span><strong>%s</strong></span></li>`, i+1, e(c))
 		}
 		b.WriteString("</ol>\n")
+	}
+
+	if len(doc.Exhibits) > 0 {
+		b.WriteString(`<p class="pol-section-heading">Appendix: Supporting Exhibits</p>`)
+		for _, ex := range doc.Exhibits {
+			fmt.Fprintf(&b, `<div style="margin:1.5rem 0"><p style="font-weight:700;font-size:.85rem;`+
+				`margin-bottom:.25rem">%s</p>`+
+				`<p style="font-size:.85rem;color:var(--muted);margin-bottom:.75rem">%s</p>%s</div>`+"\n",
+				e(ex.Label), e(ex.Intro), tableHTML(ex.Table))
+		}
 	}
 
 	fmt.Fprintf(&b, `<div class="pol-submitted">`+

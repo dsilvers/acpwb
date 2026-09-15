@@ -36,31 +36,41 @@ type Footnote struct {
 	Text string
 }
 
+// Exhibit mirrors one entry of the 'exhibits' list added to
+// generate_policy_document's returned dict.
+type Exhibit struct {
+	Label string
+	Intro string
+	Table Table
+}
+
 // PolicyDoc mirrors generate_policy_document's returned dict.
 type PolicyDoc struct {
-	DocumentType      string
-	DocumentTypeSlug  string
-	AgencyAcronym     string
-	AgencyFull        string
-	PolicyDomain      string
-	DocketNumber      string
-	Title             string
-	FilingDate        string
-	SignatoryName     string
-	SignatoryTitle    string
-	SignatoryEmail    string
-	Summary           string
-	PositionSlug      string
-	PositionStatement string
-	Sections          []Section
-	Recommendations   []string
-	CitedLegislation  []string
-	Footnotes         []Footnote
-	Table             Table
-	WatermarkToken    string
-	URL               string
-	Year, Month, Day  int
-	Agency, Slug      string
+	DocumentType          string
+	DocumentTypeSlug      string
+	AgencyAcronym         string
+	AgencyFull            string
+	PolicyDomain          string
+	DocketNumber          string
+	Title                 string
+	FilingDate            string
+	SignatoryName         string
+	SignatoryTitle        string
+	SignatoryEmail        string
+	Summary               string
+	ExecSummaryParagraphs []string
+	PositionSlug          string
+	PositionStatement     string
+	Sections              []Section
+	Recommendations       []string
+	CitedLegislation      []string
+	Footnotes             []Footnote
+	Table                 Table
+	Exhibits              []Exhibit
+	WatermarkToken        string
+	URL                   string
+	Year, Month, Day      int
+	Agency, Slug          string
 }
 
 // DocStub mirrors _generate_doc_stub's returned dict, plus the extra
@@ -150,9 +160,20 @@ func docketNumber(rng *pyrandom.Random, agency string, year int) string {
 	return choice(rng, opts)
 }
 
-func generateTable(rng *pyrandom.Random, year, month int, agencyFull, _ /* policyDomain */, _ /* topicShort */ string) Table {
+// generateTable draws a random schema then delegates — this is the original
+// single-table entry point, kept so its RNG behavior (and PolicyDoc.Table)
+// is unchanged. Returns the schema drawn alongside the table so callers
+// (the exhibits appendix) can avoid repeating it.
+func generateTable(rng *pyrandom.Random, year, month int, agencyFull, policyDomain, topicShort string) (int, Table) {
 	schema := int(rng.RandInt(0, 4))
+	return schema, generateTableForSchema(rng, schema, year, month, agencyFull, policyDomain, topicShort)
+}
 
+// generateTableForSchema builds a table for a caller-supplied schema (0-4)
+// without drawing a new random schema index — used both by generateTable
+// above and by the exhibits appendix, which needs specific (non-repeating)
+// schemas.
+func generateTableForSchema(rng *pyrandom.Random, schema int, year, month int, agencyFull, _ /* policyDomain */, _ /* topicShort */ string) Table {
 	switch schema {
 	case 0:
 		type tier struct {
@@ -565,17 +586,34 @@ func GeneratePolicyDocument(year, month, day int, agency, slug string) PolicyDoc
 		expertType := choice(rng, expertTypes)
 		compareGroup := choice(rng, comparisonGroups)
 		finding := choice(rng, findingsBrief)
+		region := choice(rng, regions)
+		stakeholderType := choice(rng, stakeholderTypes)
+		riskLevel := choice(rng, riskLevels)
+		costLow := int(rng.RandInt(50, 500))
+		costHigh := int(rng.RandInt(600, 9500))
+		costRange := fmt.Sprintf("$%dK–$%dK", costLow, costHigh)
+		precedentRef := choice(rng, legislation)
 		return map[string]string{
 			"topic": topicVal, "agency": agencyFull, "n_orgs": nOrgs,
 			"pct": strconv.Itoa(pct), "pct2": strconv.Itoa(pct2), "n_years": strconv.Itoa(nYears),
 			"industry": industry, "timeframe": timeframe, "expert_type": expertType,
 			"compare_group": compareGroup, "finding": finding,
+			"region": region, "stakeholder_type": stakeholderType, "risk_level": riskLevel,
+			"cost_range": costRange, "precedent_ref": precedentRef,
 		}
+	}
+
+	// Executive summary: 2-3 paragraphs, drawn before the section body so it
+	// renders above it on the page even though it's generated afterward here.
+	nExec := int(rng.RandInt(2, 3))
+	var execSummaryParagraphs []string
+	for i := 0; i < nExec; i++ {
+		execSummaryParagraphs = append(execSummaryParagraphs, pyFormat(choice(rng, execSummaryTmpls), paraKwargs()))
 	}
 
 	var sections []Section
 	for _, heading := range headings {
-		nParas := int(rng.RandInt(2, 3))
+		nParas := int(rng.RandInt(4, 6))
 		var paras []string
 		for i := 0; i < nParas; i++ {
 			paras = append(paras, pyFormat(paraPool[paraIdx%len(paraPool)], paraKwargs()))
@@ -584,7 +622,7 @@ func GeneratePolicyDocument(year, month, day int, agency, slug string) PolicyDoc
 		sections = append(sections, Section{Heading: heading, Paragraphs: paras})
 	}
 
-	nRecs := int(rng.RandInt(3, 6))
+	nRecs := int(rng.RandInt(5, 8))
 	recPool := append([]string{}, recommendationTmpls...)
 	shuffle(rng, recPool)
 	if nRecs > len(recPool) {
@@ -608,7 +646,7 @@ func GeneratePolicyDocument(year, month, day int, agency, slug string) PolicyDoc
 
 	fnPool := append([]string{}, policyFootnoteTmpls...)
 	shuffle(rng, fnPool)
-	nFn := int(rng.RandInt(3, 6))
+	nFn := int(rng.RandInt(5, 9))
 	if nFn > len(fnPool) {
 		nFn = len(fnPool)
 	}
@@ -625,13 +663,14 @@ func GeneratePolicyDocument(year, month, day int, agency, slug string) PolicyDoc
 		cfrPart := int(rng.RandInt(1, 999))
 		b := pyRound1(rng.Uniform(0.1, 8.5))
 		pct := int(rng.RandInt(41, 87))
+		publisher := choice(rng, footnotePublishers)
 		kwargs := map[string]string{
 			"agency": agencyFull, "docket": docket, "month": monthsLong[pyMod(month-1, 12)],
 			"year": strconv.Itoa(year), "n": strconv.Itoa(n), "page": strconv.Itoa(page),
 			"act": act, "paper_num": strconv.Itoa(paperNum), "brief_num": strconv.Itoa(briefNum),
 			"year_short": yearShort, "seq": strconv.Itoa(seq), "cfr_title": strconv.Itoa(cfrTitle),
 			"cfr_part": strconv.Itoa(cfrPart), "topic_short": topicShort, "b": pyFloatStr(b),
-			"pct": strconv.Itoa(pct),
+			"pct": strconv.Itoa(pct), "publisher": publisher,
 		}
 		text, ok := pyFormatStrict(tmpl, kwargs)
 		if !ok {
@@ -640,7 +679,27 @@ func GeneratePolicyDocument(year, month, day int, agency, slug string) PolicyDoc
 		footnotes = append(footnotes, Footnote{Num: i + 1, Text: text})
 	}
 
-	table := generateTable(rng, year, month, agencyFull, policyDomain, topicShort)
+	mainSchema, table := generateTable(rng, year, month, agencyFull, policyDomain, topicShort)
+
+	// Exhibits appendix: 2-3 additional tables (different schemas from the
+	// main one), each with a short intro paragraph.
+	nExhibits := int(rng.RandInt(2, 3))
+	var remainingSchemas []int
+	for s := 0; s < 5; s++ {
+		if s != mainSchema {
+			remainingSchemas = append(remainingSchemas, s)
+		}
+	}
+	if nExhibits > len(remainingSchemas) {
+		nExhibits = len(remainingSchemas)
+	}
+	exhibitSchemas := sample(rng, remainingSchemas, nExhibits)
+	var exhibits []Exhibit
+	for i, schema := range exhibitSchemas {
+		intro := pyFormat(choice(rng, exhibitIntroTmpls), paraKwargs())
+		exTable := generateTableForSchema(rng, schema, year, month, agencyFull, policyDomain, topicShort)
+		exhibits = append(exhibits, Exhibit{Label: fmt.Sprintf("Exhibit %c", rune(65+i)), Intro: intro, Table: exTable})
+	}
 
 	canonicalURL := fmt.Sprintf("/public-policy/%d/%02d/%02d/%s/%s/", year, month, day, agency, slug)
 
@@ -649,9 +708,11 @@ func GeneratePolicyDocument(year, month, day int, agency, slug string) PolicyDoc
 		AgencyAcronym: strings.ToUpper(agency), AgencyFull: agencyFull, PolicyDomain: policyDomain,
 		DocketNumber: docket, Title: title, FilingDate: filingDate,
 		SignatoryName: signatoryName, SignatoryTitle: signatoryTitle, SignatoryEmail: signatoryEmail,
-		Summary: summary, PositionSlug: positionSlug, PositionStatement: positionStatement,
+		Summary: summary, ExecSummaryParagraphs: execSummaryParagraphs,
+		PositionSlug: positionSlug, PositionStatement: positionStatement,
 		Sections: sections, Recommendations: recommendations, CitedLegislation: cited,
-		Footnotes: footnotes, Table: table, WatermarkToken: watermark, URL: canonicalURL,
+		Footnotes: footnotes, Table: table, Exhibits: exhibits,
+		WatermarkToken: watermark, URL: canonicalURL,
 		Year: year, Month: month, Day: day, Agency: agency, Slug: slug,
 	}
 }

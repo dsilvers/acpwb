@@ -40,6 +40,12 @@ var (
 	firstNames          = data.Strings("FIRST_NAMES")
 	lastNames           = data.Strings("LAST_NAMES")
 	archiveSlugs        = data.Strings("ARCHIVE_SLUGS")
+	regions             = data.Strings("REGIONS")
+	stakeholderTypes    = data.Strings("STAKEHOLDER_TYPES")
+	riskLevels          = data.Strings("RISK_LEVELS")
+	footnotePublishers  = data.Strings("FOOTNOTE_PUBLISHERS")
+	execSummaryTmpls    = data.Strings("EXECUTIVE_SUMMARY_TEMPLATES")
+	exhibitIntroTmpls   = data.Strings("EXHIBIT_INTRO_TEMPLATES")
 )
 
 func loadSectionHeadings() map[string][][]string {

@@ -398,6 +398,31 @@ _MONTH_MONTH_STYLE = """<style>
 """
 
 
+def _table_html(table):
+    """Renders one data-table dict ({title, caption, columns, rows, align})
+    as the pol-data-table markup — shared by the main detail-page table and
+    each exhibit in the appendix."""
+    parts = [f'<p class="pol-section-heading">{e(table["title"])}</p>'
+             f'<p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem">'
+             f'{e(table["caption"])}</p>'
+             '<div style="overflow-x:auto"><table class="pol-data-table">'
+             '<thead><tr class="pol-table-head">']
+    parts.append(''.join(
+        f'<th{" " if j == 0 else " style=\"text-align:right\" "}>{e(col)}</th>'
+        for j, col in enumerate(table['columns'])
+    ))
+    parts.append('</tr></thead><tbody>')
+    for row in table['rows']:
+        parts.append('<tr>')
+        parts.append(''.join(
+            f'<td{"" if j == 0 else " class=\"num\""}>{e(cell)}</td>'
+            for j, cell in enumerate(row)
+        ))
+        parts.append('</tr>')
+    parts.append('</tbody></table></div>')
+    return ''.join(parts)
+
+
 def _position_badge_html(position_slug):
     if position_slug == 'supports':
         return '<span class="pol-badge pol-badge-supports">Supports</span>'
@@ -875,31 +900,18 @@ def render_policy_detail(ctx):
     ap(f'<div class="pol-position pos-{e(doc["position_slug"])}">'
        f'<strong>ACPWB Position:</strong> {e(doc["position_statement"])}</div>\n')
 
+    if doc.get('exec_summary_paragraphs'):
+        ap('<div class="pol-section"><p class="pol-section-heading">Executive Summary</p>')
+        ap(''.join(f'<p>{e(p)}</p>' for p in doc['exec_summary_paragraphs']))
+        ap('</div>\n')
+
     for i, section in enumerate(doc['sections']):
         ap('<div class="pol-section">'
            f'<p class="pol-section-heading">{e(section["heading"])}</p>')
         ap(''.join(f'<p>{e(p)}</p>' for p in section['paragraphs']))
         ap('</div>\n')
         if i == 1 and doc.get('table'):
-            table = doc['table']
-            ap(f'<div style="margin:2rem 0"><p class="pol-section-heading">{e(table["title"])}</p>'
-               f'<p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem">'
-               f'{e(table["caption"])}</p>'
-               '<div style="overflow-x:auto"><table class="pol-data-table">'
-               '<thead><tr class="pol-table-head">')
-            ap(''.join(
-                f'<th{" " if j == 0 else " style=\"text-align:right\" "}>{e(col)}</th>'
-                for j, col in enumerate(table['columns'])
-            ))
-            ap('</tr></thead><tbody>')
-            for row in table['rows']:
-                ap('<tr>')
-                ap(''.join(
-                    f'<td{"" if j == 0 else " class=\"num\""}>{e(cell)}</td>'
-                    for j, cell in enumerate(row)
-                ))
-                ap('</tr>')
-            ap('</tbody></table></div></div>\n')
+            ap(f'<div style="margin:2rem 0">{_table_html(doc["table"])}</div>\n')
 
     ap('<p class="pol-section-heading">Recommendations</p>'
        '<div class="pol-recs"><ol class="mb-0 ps-3">')
@@ -914,6 +926,16 @@ def render_policy_detail(ctx):
             for i, c in enumerate(doc['cited_legislation'], 1)
         ))
         ap('</ol>\n')
+
+    if doc.get('exhibits'):
+        ap('<p class="pol-section-heading">Appendix: Supporting Exhibits</p>')
+        for ex in doc['exhibits']:
+            ap(f'<div style="margin:1.5rem 0"><p style="font-weight:700;font-size:.85rem;'
+               f'margin-bottom:.25rem">{e(ex["label"])}</p>'
+               f'<p style="font-size:.85rem;color:var(--muted);margin-bottom:.75rem">'
+               f'{e(ex["intro"])}</p>')
+            ap(_table_html(ex['table']))
+            ap('</div>\n')
 
     ap('<div class="pol-submitted">'
        '<p class="text-uppercase mb-2" style="font-size:.6rem;font-weight:800;letter-spacing:.12em;'

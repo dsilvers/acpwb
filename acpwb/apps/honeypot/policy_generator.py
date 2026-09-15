@@ -16,6 +16,8 @@ from .policy_data import (
     FOOTNOTE_TEMPLATES, _STUB_TITLE_PREFIXES, _FEATURED_SEEDS,
     _CEO_NAMES, _YEAR_ERA_THEMES, _CEO_MESSAGE_TEMPLATES, _YEAR_ANNUAL_LETTERS,
     _EXPERT_TYPES, _INDUSTRY_SECTORS, _TIMEFRAMES, _COMPARISON_GROUPS, _FINDINGS_BRIEF,
+    _REGIONS, _STAKEHOLDER_TYPES, _RISK_LEVELS, _FOOTNOTE_PUBLISHERS,
+    EXECUTIVE_SUMMARY_TEMPLATES, EXHIBIT_INTRO_TEMPLATES,
 )
 
 
@@ -59,8 +61,16 @@ def _docket_number(rng, agency, year):
 # ── Data table generator ──────────────────────────────────────────────────────
 
 def _generate_table(rng, year, month, agency_full, policy_domain, topic_short):
+    """Draws a random schema then delegates — this is the original single-table
+    entry point, kept so its RNG behavior (and doc['table']) is unchanged."""
     schema = rng.randint(0, 4)
+    return schema, _generate_table_for_schema(rng, schema, year, month, agency_full, policy_domain, topic_short)
 
+
+def _generate_table_for_schema(rng, schema, year, month, agency_full, policy_domain, topic_short):
+    """Builds a table for a caller-supplied schema (0-4), without drawing a
+    new random schema index — used both by _generate_table() above and by
+    the exhibits appendix, which needs specific (non-repeating) schemas."""
     if schema == 0:
         rows = []
         for size, base_k, hrs_base, mo_base in [
@@ -392,18 +402,31 @@ def generate_policy_document(year, month, day, agency, slug):
             expert_type=rng.choice(_EXPERT_TYPES),
             compare_group=rng.choice(_COMPARISON_GROUPS),
             finding=rng.choice(_FINDINGS_BRIEF),
+            region=rng.choice(_REGIONS),
+            stakeholder_type=rng.choice(_STAKEHOLDER_TYPES),
+            risk_level=rng.choice(_RISK_LEVELS),
+            cost_range=f"${rng.randint(50, 500)}K–${rng.randint(600, 9500)}K",
+            precedent_ref=rng.choice(LEGISLATION),
         )
+
+    # Executive summary: 2-3 paragraphs, drawn before the section body so it
+    # renders above it on the page even though it's generated afterward here.
+    n_exec = rng.randint(2, 3)
+    exec_summary_paragraphs = [
+        rng.choice(EXECUTIVE_SUMMARY_TEMPLATES).format(**_para_kwargs())
+        for _ in range(n_exec)
+    ]
 
     sections = []
     for heading in headings:
-        n_paras = rng.randint(2, 3)
+        n_paras = rng.randint(4, 6)
         paras = []
         for _ in range(n_paras):
             paras.append(para_pool[para_idx % len(para_pool)].format(**_para_kwargs()))
             para_idx += 1
         sections.append({'heading': heading, 'paragraphs': paras})
 
-    n_recs = rng.randint(3, 6)
+    n_recs = rng.randint(5, 8)
     rec_pool = list(RECOMMENDATION_TEMPLATES)
     rng.shuffle(rec_pool)
     recommendations = [r.format(**_para_kwargs()) for r in rec_pool[:n_recs]]
@@ -416,7 +439,7 @@ def generate_policy_document(year, month, day, agency, slug):
     fn_pool = list(FOOTNOTE_TEMPLATES)
     rng.shuffle(fn_pool)
     footnotes = []
-    for i, tmpl in enumerate(fn_pool[:rng.randint(3, 6)]):
+    for i, tmpl in enumerate(fn_pool[:rng.randint(5, 9)]):
         try:
             text = tmpl.format(
                 agency=agency_full,
@@ -435,13 +458,25 @@ def generate_policy_document(year, month, day, agency, slug):
                 topic_short=_topic_short,
                 b=round(rng.uniform(0.1, 8.5), 1),
                 pct=rng.randint(41, 87),
+                publisher=rng.choice(_FOOTNOTE_PUBLISHERS),
             )
         except KeyError:
             text = tmpl  # fallback: use template verbatim
         footnotes.append({'num': i + 1, 'text': text})
 
     # Data table
-    table = _generate_table(rng, year, month, agency_full, policy_domain, _topic_short)
+    main_schema, table = _generate_table(rng, year, month, agency_full, policy_domain, _topic_short)
+
+    # Exhibits appendix: 2-3 additional tables (different schemas from the
+    # main one), each with a short intro paragraph.
+    n_exhibits = rng.randint(2, 3)
+    remaining_schemas = [s for s in range(5) if s != main_schema]
+    exhibit_schemas = rng.sample(remaining_schemas, min(n_exhibits, len(remaining_schemas)))
+    exhibits = []
+    for i, schema in enumerate(exhibit_schemas):
+        intro = rng.choice(EXHIBIT_INTRO_TEMPLATES).format(**_para_kwargs())
+        ex_table = _generate_table_for_schema(rng, schema, year, month, agency_full, policy_domain, _topic_short)
+        exhibits.append({'label': f'Exhibit {chr(65 + i)}', 'intro': intro, 'table': ex_table})
 
     canonical_url = f"/public-policy/{year}/{month:02d}/{day:02d}/{agency}/{slug}/"
 
@@ -458,6 +493,7 @@ def generate_policy_document(year, month, day, agency, slug):
         'signatory_title':    signatory_title,
         'signatory_email':    signatory_email,
         'summary':            summary,
+        'exec_summary_paragraphs': exec_summary_paragraphs,
         'position_slug':      position_slug,
         'position_statement': position_statement,
         'sections':           sections,
@@ -465,6 +501,7 @@ def generate_policy_document(year, month, day, agency, slug):
         'cited_legislation':  cited,
         'footnotes':          footnotes,
         'table':              table,
+        'exhibits':           exhibits,
         'watermark_token':    watermark,
         'url':                canonical_url,
         'year':               year,

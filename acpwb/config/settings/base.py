@@ -159,6 +159,11 @@ GEOIP2_ASN_DB_PATH = env('GEOIP2_ASN_DB_PATH', default=str(BASE_DIR / 'var/geoip
 TOR_EXIT_LIST_PATH = env('TOR_EXIT_LIST_PATH', default=str(BASE_DIR / 'var/tor_exit_nodes.txt'))
 TOR_EXIT_LIST_URL = env('TOR_EXIT_LIST_URL', default='https://check.torproject.org/torbulkexitlist')
 
+# Traffic-intelligence product API (see apps/core/reputation_api_views.py) —
+# blank means the endpoint is unconfigured and fails closed (401 on every
+# request), not open.
+IP_REPUTATION_API_KEY = env('IP_REPUTATION_API_KEY', default='')
+
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'https://acpwb.com',
     'https://*.acpwb.com',

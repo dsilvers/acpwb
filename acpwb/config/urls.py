@@ -40,6 +40,9 @@ urlpatterns = [
 
     # Staff dashboard
     path('acpwb-dashboard/', include('apps.core.dashboard_urls')),
+
+    # Traffic-intelligence product API — see PublishedIPReputation
+    path('reputation-api/', include('apps.core.reputation_api_urls')),
 ]
 
 handler404 = 'apps.honeypot.views.scanner_probe_404'

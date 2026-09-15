@@ -100,3 +100,11 @@ def compute_score(*, trap_tainted, header_mismatch, protocol_mismatch, tls_misma
 
 def is_old_tls_protocol(tls_protocol):
     return bool(tls_protocol) and tls_protocol in _OLD_TLS_PROTOCOLS
+
+
+def is_http1(client_protocol):
+    """True for both nginx's exact "HTTP/1.1" and HAProxy's coarser
+    "HTTP/1" (only the major version is available from HAProxy's
+    fc_http_major fetch — see haproxy/haproxy.cfg) — this signal needs to
+    mean the same thing regardless of which layer captured it."""
+    return bool(client_protocol) and client_protocol.startswith('HTTP/1')

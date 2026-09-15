@@ -28,7 +28,7 @@ from django.utils import timezone
 
 from apps.core.models import DashboardStat
 from apps.core.reputation_scoring import (
-    ABSOLUTE_PROOF_TRAP_TYPES, compute_score, is_old_tls_protocol, looks_like_modern_browser,
+    ABSOLUTE_PROOF_TRAP_TYPES, compute_score, is_http1, is_old_tls_protocol, looks_like_modern_browser,
 )
 from apps.honeypot.models import CrawlerVisit, IPIntelligence, IPReputationScore, RequestFingerprint
 
@@ -77,7 +77,7 @@ class Command(BaseCommand):
             modern_browser = looks_like_modern_browser(row.user_agent)
             if modern_browser and not row.browser_headers_present:
                 flags['header_mismatch'] = True
-            if modern_browser and row.client_protocol == 'HTTP/1.1':
+            if modern_browser and is_http1(row.client_protocol):
                 flags['protocol_mismatch'] = True
             if modern_browser and is_old_tls_protocol(row.tls_protocol):
                 flags['tls_mismatch'] = True

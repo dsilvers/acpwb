@@ -105,13 +105,28 @@ services:
       - ./acpwb/staticfiles:/app/staticfiles:ro
       - ./botseed:/botseed:ro
     ports:
-      - "127.0.0.1:8001:80"
+      # Port 80 is deliberately NOT published to the host here — haproxy
+      # takes over host port 8001 (TLS + JA3/JA4 capture) and reaches this
+      # service over the compose network only. 8090 (botseed) is untouched:
+      # it's a separate, non-TLS server block, out of scope for this work.
       - "127.0.0.1:8090:8090"
     depends_on:
       - web
       - ws
       - botseed_ws
       - acpwb_go
+
+  # TLS termination + JA3/JA4 fingerprint capture only — every other
+  # responsibility (routing, static files, gzip, WebSocket proxying) stays
+  # on the unmodified nginx service behind it. See haproxy/haproxy.cfg and
+  # the plan this implements for why this is additive, not a replacement.
+  haproxy:
+    build:
+      context: ./haproxy
+    ports:
+      - "127.0.0.1:8001:8001"
+    depends_on:
+      - nginx
 
 volumes:
   postgres_data:

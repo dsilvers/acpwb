@@ -5,11 +5,7 @@ from django.urls import reverse
 from django.http import Http404, HttpResponse
 
 
-def _get_ip(request):
-    x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded:
-        return x_forwarded.split(',')[0].strip() or '0.0.0.0'
-    return request.META.get('REMOTE_ADDR') or '0.0.0.0'
+from apps.core.ip_utils import get_client_ip as _get_ip
 
 
 def _log_crawler(request):

@@ -114,9 +114,19 @@ func parseArchivePath(path string) (year, month, day int, slug string, ok bool) 
 	return y, m, d, slug, true
 }
 
+// clientIP returns the best-effort real client IP behind nginx. nginx is the
+// only proxy hop (no CDN in front) and sets X-Forwarded-For via
+// $proxy_add_x_forwarded_for, which appends $remote_addr to whatever
+// X-Forwarded-For the client already sent rather than replacing it. Taking
+// the first entry lets a client spoof the logged IP via its own
+// X-Forwarded-For header; the last entry is always the one nginx itself
+// appended, so it's the only value that can't be forged by the client.
 func clientIP(r *http.Request) string {
 	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
-		return strings.TrimSpace(strings.SplitN(xff, ",", 2)[0])
+		parts := strings.Split(xff, ",")
+		if last := strings.TrimSpace(parts[len(parts)-1]); last != "" {
+			return last
+		}
 	}
 	host, _, err := net.SplitHostPort(r.RemoteAddr)
 	if err != nil {

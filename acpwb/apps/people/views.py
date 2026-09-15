@@ -3,11 +3,7 @@ from .models import PeoplePageVisit, GeneratedEmployee
 from .generators import generate_employee_batch
 
 
-def _get_ip(request):
-    x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded:
-        return x_forwarded.split(',')[0].strip() or '0.0.0.0'
-    return request.META.get('REMOTE_ADDR') or '0.0.0.0'
+from apps.core.ip_utils import get_client_ip as _get_ip
 
 
 def _save_visit_and_employees(visit_kwargs, employees_data):

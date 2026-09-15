@@ -328,8 +328,8 @@ def do_not_sell(request):
             errors['request_type'] = 'Please select a valid request type.'
 
         if not errors:
-            x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
-            ip = (x_forwarded.split(',')[0].strip() if x_forwarded else request.META.get('REMOTE_ADDR')) or '0.0.0.0'
+            from apps.core.ip_utils import get_client_ip
+            ip = get_client_ip(request)
             DataOptOutRequest.objects.create(
                 name=name,
                 email=email,
@@ -517,8 +517,8 @@ def conference_register(request):
     from .conference_data import CONFERENCES
     conf = CONFERENCES[2026]
     if request.method == 'POST':
-        ip_raw = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', ''))
-        ip = ip_raw.split(',')[0].strip() or None
+        from apps.core.ip_utils import get_client_ip
+        ip = get_client_ip(request) or None
         reg = ConferenceRegistration(
             year=2026,
             first_name=request.POST.get('first_name', '')[:100],

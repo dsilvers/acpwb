@@ -38,11 +38,7 @@ from .report_generator import (
 )
 
 
-def _get_ip(request):
-    x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded:
-        return x_forwarded.split(',')[0].strip() or '0.0.0.0'
-    return request.META.get('REMOTE_ADDR') or '0.0.0.0'
+from apps.core.ip_utils import get_client_ip as _get_ip
 
 
 def _log_crawler(request, trap_type):
@@ -824,8 +820,7 @@ def archive_subdomain_robots(request):
     host = f'https://archives-{year}.acpwb.com' if year else 'https://acpwb.com'
 
     # Seed on IP + date for consistent-per-bot-per-day ordering
-    ip = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR') or '0.0.0.0'
-    ip = ip.split(',')[0].strip()
+    ip = _get_ip(request)
     seed = f"{ip}:{timezone.now().date().isoformat()}:{year}"
     rng = _random.Random(seed)
 
@@ -1281,8 +1276,7 @@ def fake_robots(request):
 
     # Seed on IP + date so the same bot gets a consistent file within a day,
     # but different bots (and different days) get different orderings.
-    ip = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR') or '0.0.0.0'
-    ip = ip.split(',')[0].strip()
+    ip = _get_ip(request)
     seed = f"{ip}:{timezone.now().date().isoformat()}"
     rng = _random.Random(seed)
 
@@ -3092,8 +3086,7 @@ def policy_subdomain_robots(request):
 
     host = f'https://policy-{agency}.acpwb.com'
 
-    ip = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR') or '0.0.0.0'
-    ip = ip.split(',')[0].strip()
+    ip = _get_ip(request)
     seed = f"{ip}:{timezone.now().date().isoformat()}:{agency}"
     rng = _random.Random(seed)
 

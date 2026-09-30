@@ -19,8 +19,11 @@
 # exit. Neither was ever installed before 2026-09-30 — the table sat frozen
 # at Sep 4 with 15M IPs unenriched, which is also what score_ip_reputation's
 # is_hosting signal reads.
-*/5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py discover_ip_intelligence' >> /var/log/acpwb-ip-intel-discover.log 2>&1
-*/15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py enrich_ip_intelligence --max-seconds 600' >> /var/log/acpwb-ip-intel-enrich.log 2>&1
+#
+# Commented out until the manual catch-up (discover from Sep 4, then the ~15M
+# enrichment backlog) has finished and its per-window timing has been checked.
+# */5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py discover_ip_intelligence' >> /var/log/acpwb-ip-intel-discover.log 2>&1
+# */15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py enrich_ip_intelligence --max-seconds 600' >> /var/log/acpwb-ip-intel-enrich.log 2>&1
 
 # DISABLED 2026-09-06 — do not install this job as-is. acpwb_go writes
 # CrawlerVisit rows with bot_type/bot_group blank (it doesn't classify at

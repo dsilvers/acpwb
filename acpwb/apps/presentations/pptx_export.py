@@ -1,646 +1,271 @@
 """
-Generate a python-pptx Presentation from ACPWB slide data.
-Each slide type gets a clean, branded layout matching the web design.
+Serialize export_layout slides to a .pptx as raw PresentationML.
+
+python-pptx is only used once per process, to produce the static package
+parts (slide master, layouts, themes, notes master). Per request, slides are
+emitted as XML strings and zipped around those cached parts — building them
+through python-pptx's object model cost ~0.4s per deck, which a crawler
+walking the (unbounded) presentation URL space turned into a DoS.
 """
+import re
+import zipfile
+from datetime import datetime, timezone
+from functools import lru_cache
 from io import BytesIO
+from xml.sax.saxutils import escape
 
-from pptx import Presentation
-from pptx.util import Inches, Pt, Emu
-from pptx.dml.color import RGBColor
-from pptx.enum.text import PP_ALIGN
+from .export_images import load_jpeg
+from .export_layout import H, INSET_X, INSET_Y, W, Image, Rect, Text, layout_slides
 
-# Brand colors
-NAVY = RGBColor(0x0A, 0x16, 0x28)
-NAVY_MID = RGBColor(0x12, 0x20, 0x40)
-NAVY_LIGHT = RGBColor(0x1E, 0x35, 0x60)
-GOLD = RGBColor(0xC9, 0xA8, 0x4C)
-GOLD_LIGHT = RGBColor(0xE0, 0xC0, 0x6E)
-WHITE = RGBColor(0xFF, 0xFF, 0xFF)
-LIGHT_GRAY = RGBColor(0xF4, 0xF6, 0xF9)
-MID_GRAY = RGBColor(0xE4, 0xE8, 0xEF)
-DARK_TEXT = RGBColor(0x22, 0x22, 0x33)
-MID_TEXT = RGBColor(0x55, 0x55, 0x66)
+_NS = ('xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+       'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
+       'xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"')
+_XML_DECL = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>\n"
+_REL_NS = 'http://schemas.openxmlformats.org/package/2006/relationships'
+_RT = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/'
+_CT_SLIDE = 'application/vnd.openxmlformats-officedocument.presentationml.slide+xml'
+_CT_NOTES = 'application/vnd.openxmlformats-officedocument.presentationml.notesSlide+xml'
 
-W = Inches(13.333)
-H = Inches(7.5)
+_SLIDE_LAYOUT = '../slideLayouts/slideLayout7.xml'   # "Blank" in the default template
+_NOTES_MASTER = '../notesMasters/notesMaster1.xml'
 
+# Arial is metric-compatible with the Helvetica the PDF export uses, so text
+# wraps the same way in both formats.
+_FONT = 'Arial'
 
-# ── helpers ─────────────────────────────────────────────────────────────────
 
-def _blank_slide(prs):
-    blank_layout = prs.slide_layouts[6]  # index 6 = Blank
-    return prs.slides.add_slide(blank_layout)
+@lru_cache(maxsize=1)
+def _base_parts():
+    """Static package parts from python-pptx's default template (built once)."""
+    from pptx import Presentation
 
-
-def _fill_solid(shape, color):
-    fill = shape.fill
-    fill.solid()
-    fill.fore_color.rgb = color
-
-
-def _set_bg(slide, color):
-    background = slide.background
-    fill = background.fill
-    fill.solid()
-    fill.fore_color.rgb = color
-
-
-def _box(slide, left, top, width, height):
-    """Add a blank rectangle shape."""
-    from pptx.util import Emu
-    return slide.shapes.add_shape(
-        1,  # MSO_SHAPE_TYPE.RECTANGLE
-        Emu(left), Emu(top), Emu(width), Emu(height),
-    )
-
-
-def _txbox(slide, left, top, width, height):
-    return slide.shapes.add_textbox(
-        Emu(left), Emu(top), Emu(width), Emu(height),
-    )
-
-
-def _para(tf, text, size, bold=False, color=WHITE, align=PP_ALIGN.LEFT,
-           italic=False, space_before=0, space_after=0):
-    p = tf.add_paragraph()
-    p.alignment = align
-    p.space_before = Pt(space_before)
-    p.space_after = Pt(space_after)
-    run = p.add_run()
-    run.text = text
-    run.font.size = Pt(size)
-    run.font.bold = bold
-    run.font.italic = italic
-    run.font.color.rgb = color
-    return p
-
-
-def _gold_bar(slide, top_emu, width_emu=None, height_emu=None, left_emu=None):
-    """Horizontal gold accent bar."""
-    bar = _box(slide,
-               left=left_emu or Inches(0),
-               top=top_emu,
-               width=width_emu or W,
-               height=height_emu or Inches(0.045))
-    _fill_solid(bar, GOLD)
-    bar.line.fill.background()
-    return bar
-
-
-def _header_band(slide, title, height_frac=0.22):
-    """Dark navy header band with gold accent + white title text."""
-    band_h = int(H * height_frac)
-    band = _box(slide, 0, 0, W, band_h)
-    _fill_solid(band, NAVY)
-    band.line.fill.background()
-
-    # gold accent bar at bottom of header
-    _gold_bar(slide, top_emu=band_h - Inches(0.045))
-
-    # title text inside header
-    margin = Inches(0.55)
-    tb = _txbox(slide, margin, Inches(0.12), W - margin * 2, band_h - Inches(0.2))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    _para(tf, title, size=22, bold=True, color=WHITE)
-    return band_h
-
-
-def _slide_footer(slide, meta, slide_data):
-    """Org name + slide number in the bottom strip."""
-    footer_h = Inches(0.32)
-    footer_top = H - footer_h
-    bar = _box(slide, 0, footer_top, W, footer_h)
-    _fill_solid(bar, NAVY_MID)
-    bar.line.fill.background()
-
-    tb = _txbox(slide, Inches(0.35), footer_top + Inches(0.05), W - Inches(0.7), footer_h)
-    tf = tb.text_frame
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
-    r = p.add_run()
-    r.text = f"{meta.get('org_name', 'ACPWB')}"
-    r.font.size = Pt(8)
-    r.font.color.rgb = GOLD
-    r.font.bold = True
-
-    num_tb = _txbox(slide, W - Inches(1.5), footer_top + Inches(0.05), Inches(1.2), footer_h)
-    ntf = num_tb.text_frame
-    np_ = ntf.paragraphs[0]
-    np_.alignment = PP_ALIGN.RIGHT
-    nr = np_.add_run()
-    nr.text = f"Slide {slide_data['num']} / {slide_data['total']}"
-    nr.font.size = Pt(8)
-    nr.font.color.rgb = MID_GRAY
-
-
-# ── slide type builders ──────────────────────────────────────────────────────
-
-def _slide_title(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY)
-    _gold_bar(s, top_emu=Inches(1.5), width_emu=Inches(0.9), left_emu=Inches(0.65), height_emu=Inches(0.055))
-
-    title_tb = _txbox(s, Inches(0.65), Inches(1.65), Inches(9.5), Inches(2.5))
-    tf = title_tb.text_frame
-    tf.word_wrap = True
-    _para(tf, slide.get('heading', meta.get('title', '')), size=34, bold=True, color=WHITE)
-
-    sub_tb = _txbox(s, Inches(0.65), Inches(4.1), Inches(9.5), Inches(1.2))
-    stf = sub_tb.text_frame
-    stf.word_wrap = True
-    _para(stf, slide.get('subheading', meta.get('subtitle', '')), size=16, color=GOLD_LIGHT)
-
-    authors = slide.get('authors', [])
-    if authors:
-        a = authors[0]
-        auth_tb = _txbox(s, Inches(0.65), Inches(5.4), Inches(9.5), Inches(1.2))
-        atf = auth_tb.text_frame
-        _para(atf, a.get('full_name', ''), size=13, bold=True, color=WHITE)
-        _para(atf, a.get('title', ''), size=11, color=GOLD_LIGHT)
-
-    org_tb = _txbox(s, Inches(0.65), Inches(6.6), Inches(9.5), Inches(0.6))
-    otf = org_tb.text_frame
-    _para(otf, meta.get('org_name', '').upper(), size=11, bold=True, color=GOLD, space_before=0)
-
-    date_str = f"{meta.get('year', '')}–{meta.get('industry', '')}"
-    date_tb = _txbox(s, W - Inches(3.5), Inches(6.6), Inches(3.2), Inches(0.6))
-    dtf = date_tb.text_frame
-    _para(dtf, date_str, size=10, color=MID_GRAY, align=PP_ALIGN.RIGHT)
-
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_agenda(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', 'Agenda'))
-
-    items = slide.get('items', [])
-    left = Inches(0.75)
-    content_top = band_h + Inches(0.35)
-    content_w = W - Inches(1.5)
-    tb = _txbox(s, left, content_top, content_w, H - band_h - Inches(0.7))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    for i, item in enumerate(items, 1):
-        _para(tf, f"{i}.  {item}", size=14, color=DARK_TEXT, space_before=4)
-
-    _slide_footer(s, meta, slide)
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_content(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', ''))
-
-    bullets = slide.get('bullets', [])
-    tb = _txbox(s, Inches(0.75), band_h + Inches(0.35), W - Inches(1.5), H - band_h - Inches(0.75))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    for b in bullets:
-        p = tf.add_paragraph()
-        p.space_before = Pt(4)
-        p.space_after = Pt(2)
-        r = p.add_run()
-        r.text = f"•  {b}"
-        r.font.size = Pt(13)
-        r.font.color.rgb = DARK_TEXT
-
-    _footnote_para(s, slide)
-    _slide_footer(s, meta, slide)
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_stat(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY)
-    heading = slide.get('heading', '')
-    _gold_bar(s, top_emu=0, height_emu=Inches(0.05))
-
-    htb = _txbox(s, Inches(0.65), Inches(0.25), W - Inches(1.3), Inches(0.7))
-    htf = htb.text_frame
-    _para(htf, heading, size=16, bold=True, color=WHITE)
-
-    stats = slide.get('stats', [])
-    n = len(stats)
-    col_w = (W - Inches(1.0)) / max(n, 1)
-    for i, stat in enumerate(stats):
-        left = Inches(0.5) + i * col_w
-        # stat box
-        box = _box(s, left + Inches(0.1), Inches(1.2), col_w - Inches(0.2), Inches(4.8))
-        _fill_solid(box, NAVY_MID)
-        box.line.fill.background()
-
-        vtb = _txbox(s, left + Inches(0.2), Inches(1.7), col_w - Inches(0.4), Inches(2.0))
-        vtf = vtb.text_frame
-        _para(vtf, stat.get('value', ''), size=36, bold=True, color=GOLD, align=PP_ALIGN.CENTER)
-
-        ltb = _txbox(s, left + Inches(0.2), Inches(3.8), col_w - Inches(0.4), Inches(1.8))
-        ltf = ltb.text_frame
-        ltf.word_wrap = True
-        _para(ltf, stat.get('label', ''), size=11, color=LIGHT_GRAY, align=PP_ALIGN.CENTER)
-
-    _slide_footer(s, meta, slide)
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_quote(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY_LIGHT)
-    _gold_bar(s, top_emu=0, height_emu=Inches(0.06))
-
-    quote = slide.get('quote', '')
-    attr = slide.get('attribution', '')
-
-    qtb = _txbox(s, Inches(1.2), Inches(1.2), W - Inches(2.4), Inches(4.2))
-    qtf = qtb.text_frame
-    qtf.word_wrap = True
-    _para(qtf, f"“{quote}”", size=20, italic=True, color=WHITE, align=PP_ALIGN.CENTER)
-
-    atb = _txbox(s, Inches(1.2), Inches(5.5), W - Inches(2.4), Inches(0.8))
-    atf = atb.text_frame
-    _para(atf, f"— {attr}", size=13, color=GOLD, align=PP_ALIGN.CENTER)
-
-    _slide_footer(s, meta, slide)
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_chart(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', ''))
-
-    note_tb = _txbox(s, Inches(0.75), band_h + Inches(0.5), W - Inches(1.5), Inches(3.5))
-    ntf = note_tb.text_frame
-    ntf.word_wrap = True
-    _para(ntf, "[Chart: see interactive version at acpwb.com]", size=13, color=MID_TEXT, italic=True)
-
-    chart_type = slide.get('chart_type', '')
-    if chart_type in ('bar_h', 'bar_v'):
-        bars = slide.get('chart_bars', [])
-        row_top = band_h + Inches(1.2)
-        row_h = min(Inches(0.38), (H - band_h - Inches(1.8)) / max(len(bars), 1))
-        for bar in bars:
-            rtb = _txbox(s, Inches(0.75), row_top, Inches(3.5), row_h)
-            rtf = rtb.text_frame
-            _para(rtf, bar.get('label', ''), size=10, color=DARK_TEXT)
-            vtb = _txbox(s, Inches(4.5), row_top, Inches(2.0), row_h)
-            vtf = vtb.text_frame
-            _para(vtf, str(bar.get('value', '')), size=10, bold=True, color=DARK_TEXT)
-            row_top += row_h + Inches(0.05)
-    elif chart_type == 'line':
-        pts = slide.get('chart_line_pts', [])
-        row_top = band_h + Inches(1.2)
-        row_h = Inches(0.35)
-        for pt in pts[:8]:
-            rtb = _txbox(s, Inches(0.75), row_top, Inches(6.0), row_h)
-            rtf = rtb.text_frame
-            _para(rtf, f"{pt.get('label', '')}:  {pt.get('value', '')}", size=10, color=DARK_TEXT)
-            row_top += row_h
-
-    src = slide.get('chart_source', '')
-    if src:
-        stb = _txbox(s, Inches(0.75), H - Inches(0.65), W - Inches(1.5), Inches(0.3))
-        stf = stb.text_frame
-        _para(stf, f"Source: {src}", size=8, color=MID_TEXT, italic=True)
-
-    _slide_footer(s, meta, slide)
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_image(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY)
-
-    caption = slide.get('caption', '')
-    if caption:
-        _gold_bar(s, top_emu=H - Inches(1.2), height_emu=Inches(1.2))
-        ctb = _txbox(s, Inches(0.65), H - Inches(1.1), W - Inches(1.3), Inches(1.0))
-        ctf = ctb.text_frame
-        ctf.word_wrap = True
-        _para(ctf, caption, size=12, color=NAVY)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_meme(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY_MID)
-
-    tb = _txbox(s, Inches(1.0), Inches(2.5), W - Inches(2.0), Inches(2.5))
-    tf = tb.text_frame
-    _para(tf, "[See web version for image]", size=16, color=GOLD, align=PP_ALIGN.CENTER, italic=True)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_summary(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', 'Key Takeaways'))
-
-    bullets = slide.get('bullets', [])
-    tb = _txbox(s, Inches(0.75), band_h + Inches(0.4), W - Inches(1.5), H - band_h - Inches(0.8))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    for b in bullets:
-        p = tf.add_paragraph()
-        p.space_before = Pt(5)
-        r = p.add_run()
-        r.text = f"•  {b}"
-        r.font.size = Pt(13)
-        r.font.bold = True
-        r.font.color.rgb = DARK_TEXT
-
-    _footnote_para(s, slide)
-    _slide_footer(s, meta, slide)
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_two_column(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', ''))
-
-    mid_x = W // 2
-    content_top = band_h + Inches(0.2)
-    content_h = H - band_h - Inches(0.5)
-    col_w = mid_x - Inches(0.75)
-
-    # divider
-    div = _box(s, mid_x - Inches(0.01), content_top, Inches(0.02), content_h)
-    _fill_solid(div, MID_GRAY)
-    div.line.fill.background()
-
-    for side, left_x, label_key, items_key in [
-        ('left', Inches(0.55), 'left_label', 'left_items'),
-        ('right', mid_x + Inches(0.2), 'right_label', 'right_items'),
-    ]:
-        label = slide.get(label_key, '')
-        items = slide.get(items_key, [])
-
-        ltb = _txbox(s, left_x, content_top + Inches(0.15), col_w, Inches(0.45))
-        ltf = ltb.text_frame
-        _para(ltf, label, size=12, bold=True, color=GOLD)
-
-        itb = _txbox(s, left_x, content_top + Inches(0.7), col_w, content_h - Inches(0.8))
-        itf = itb.text_frame
-        itf.word_wrap = True
-        for item in items:
-            p = itf.add_paragraph()
-            p.space_before = Pt(3)
-            r = p.add_run()
-            r.text = f"•  {item}"
-            r.font.size = Pt(11)
-            r.font.color.rgb = DARK_TEXT
-
-    _slide_footer(s, meta, slide)
-    if slide.get('speaker_note'):
-        s.notes_slide.notes_text_frame.text = slide['speaker_note']
-
-
-def _slide_timeline(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', ''))
-
-    milestones = slide.get('milestones', [])
-    n = max(len(milestones), 1)
-    avail_w = W - Inches(1.0)
-    col_w = avail_w / n
-    box_top = band_h + Inches(0.45)
-    box_h = H - band_h - Inches(0.9)
-
-    # timeline connector line
-    line_y = box_top + Inches(0.45)
-    connector = _box(s, Inches(0.5) + col_w / 2, line_y, avail_w - col_w, Inches(0.04))
-    _fill_solid(connector, GOLD)
-    connector.line.fill.background()
-
-    for i, ms in enumerate(milestones):
-        left = Inches(0.5) + i * col_w
-        # dot
-        dot = _box(s, left + col_w / 2 - Inches(0.12), line_y - Inches(0.12), Inches(0.24), Inches(0.24))
-        _fill_solid(dot, NAVY)
-        dot.line.color.rgb = GOLD
-
-        # label (above)
-        ltb = _txbox(s, left + Inches(0.1), box_top, col_w - Inches(0.2), Inches(0.38))
-        ltf = ltb.text_frame
-        ltf.word_wrap = True
-        _para(ltf, ms.get('label', ''), size=9, bold=True, color=NAVY, align=PP_ALIGN.CENTER)
-
-        # desc (below)
-        dtb = _txbox(s, left + Inches(0.1), line_y + Inches(0.2), col_w - Inches(0.2), box_h - Inches(0.7))
-        dtf = dtb.text_frame
-        dtf.word_wrap = True
-        _para(dtf, ms.get('desc', ''), size=9, color=MID_TEXT, align=PP_ALIGN.CENTER)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_section_divider(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY)
-    _gold_bar(s, top_emu=Inches(3.1), width_emu=Inches(1.2), left_emu=Inches(0.65), height_emu=Inches(0.065))
-
-    tb = _txbox(s, Inches(0.65), Inches(3.25), W - Inches(1.3), Inches(2.5))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    _para(tf, slide.get('heading', ''), size=32, bold=True, color=WHITE)
-
-    num_tb = _txbox(s, Inches(0.65), Inches(2.6), Inches(1.5), Inches(0.55))
-    ntf = num_tb.text_frame
-    _para(ntf, f"Section {slide.get('section_num', '')}",
-          size=11, color=GOLD, bold=True)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_process(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', ''))
-
-    steps = slide.get('steps', [])
-    n = max(len(steps), 1)
-    avail_w = W - Inches(1.0)
-    step_w = avail_w / n
-    box_top = band_h + Inches(0.4)
-    box_h = H - band_h - Inches(0.85)
-
-    for i, step in enumerate(steps):
-        left = Inches(0.5) + i * step_w
-        bx = _box(s, left + Inches(0.08), box_top, step_w - Inches(0.16), box_h)
-        _fill_solid(bx, NAVY if i % 2 == 0 else NAVY_MID)
-        bx.line.fill.background()
-
-        # step number
-        numtb = _txbox(s, left + Inches(0.15), box_top + Inches(0.12),
-                       step_w - Inches(0.3), Inches(0.5))
-        ntf = numtb.text_frame
-        _para(ntf, str(i + 1), size=22, bold=True, color=GOLD, align=PP_ALIGN.CENTER)
-
-        # step name
-        nametb = _txbox(s, left + Inches(0.1), box_top + Inches(0.65),
-                        step_w - Inches(0.2), Inches(0.55))
-        nametf = nametb.text_frame
-        nametf.word_wrap = True
-        _para(nametf, step.get('name', ''), size=10, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
-
-        # step desc
-        desctb = _txbox(s, left + Inches(0.1), box_top + Inches(1.3),
-                        step_w - Inches(0.2), box_h - Inches(1.4))
-        desctf = desctb.text_frame
-        desctf.word_wrap = True
-        _para(desctf, step.get('desc', ''), size=9, color=LIGHT_GRAY, align=PP_ALIGN.CENTER)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_case_study(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', ''))
-
-    org_type = slide.get('org_type', '')
-    otb = _txbox(s, Inches(0.65), band_h + Inches(0.2), W - Inches(1.3), Inches(0.35))
-    otf = otb.text_frame
-    _para(otf, org_type, size=10, italic=True, color=MID_TEXT)
-
-    sections = [
-        ('Challenge', slide.get('challenge', ''), NAVY),
-        ('Approach', slide.get('approach', ''), NAVY_MID),
-        ('Result', slide.get('result', ''), NAVY_LIGHT),
-    ]
-    section_w = (W - Inches(1.0)) / 3
-    for i, (label, content, bg) in enumerate(sections):
-        left = Inches(0.5) + i * section_w
-        bx = _box(s, left + Inches(0.05), band_h + Inches(0.65),
-                  section_w - Inches(0.1), H - band_h - Inches(1.1))
-        _fill_solid(bx, bg)
-        bx.line.fill.background()
-
-        ltb = _txbox(s, left + Inches(0.15), band_h + Inches(0.75),
-                     section_w - Inches(0.3), Inches(0.4))
-        ltf = ltb.text_frame
-        _para(ltf, label.upper(), size=9, bold=True, color=GOLD)
-
-        ctb = _txbox(s, left + Inches(0.15), band_h + Inches(1.2),
-                     section_w - Inches(0.3), H - band_h - Inches(1.7))
-        ctf = ctb.text_frame
-        ctf.word_wrap = True
-        _para(ctf, content, size=10, color=LIGHT_GRAY)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_callout(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY)
-    _gold_bar(s, top_emu=0, height_emu=Inches(0.07))
-
-    stat = slide.get('stat', '')
-    desc = slide.get('description', '')
-
-    stb = _txbox(s, Inches(0.8), Inches(1.2), W - Inches(1.6), Inches(2.8))
-    stf = stb.text_frame
-    _para(stf, stat, size=72, bold=True, color=GOLD, align=PP_ALIGN.CENTER)
-
-    dtb = _txbox(s, Inches(1.5), Inches(4.2), W - Inches(3.0), Inches(2.2))
-    dtf = dtb.text_frame
-    dtf.word_wrap = True
-    _para(dtf, desc, size=17, color=WHITE, align=PP_ALIGN.CENTER)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_appendix(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, LIGHT_GRAY)
-    band_h = _header_band(s, slide.get('heading', ''), height_frac=0.18)
-
-    content = slide.get('content', '')
-    tb = _txbox(s, Inches(0.65), band_h + Inches(0.3), W - Inches(1.3),
-                H - band_h - Inches(0.75))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    _para(tf, content, size=11, color=DARK_TEXT)
-
-    _slide_footer(s, meta, slide)
-
-
-def _slide_qanda(prs, meta, slide):
-    s = _blank_slide(prs)
-    _set_bg(s, NAVY)
-    _gold_bar(s, top_emu=0, height_emu=Inches(0.07))
-
-    htb = _txbox(s, Inches(1.0), Inches(1.8), W - Inches(2.0), Inches(2.0))
-    htf = htb.text_frame
-    _para(htf, slide.get('heading', 'Questions & Discussion'),
-          size=40, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
-
-    org = slide.get('org_name', meta.get('org_name', ''))
-    email = slide.get('contact_email', '')
-    itb = _txbox(s, Inches(1.5), Inches(4.0), W - Inches(3.0), Inches(1.5))
-    itf = itb.text_frame
-    itf.word_wrap = True
-    _para(itf, org, size=14, bold=True, color=GOLD, align=PP_ALIGN.CENTER)
-    if email:
-        _para(itf, email, size=12, color=LIGHT_GRAY, align=PP_ALIGN.CENTER)
-
-    _slide_footer(s, meta, slide)
-
-
-def _footnote_para(slide_obj, slide_data):
-    fn = slide_data.get('footnote')
-    if not fn:
-        return
-    tb = _txbox(slide_obj, Inches(0.55), H - Inches(0.62), W - Inches(1.1), Inches(0.38))
-    tf = tb.text_frame
-    _para(tf, fn, size=8, color=MID_TEXT, italic=True)
-
-
-_SLIDE_BUILDERS = {
-    'title': _slide_title,
-    'agenda': _slide_agenda,
-    'content': _slide_content,
-    'stat': _slide_stat,
-    'quote': _slide_quote,
-    'chart': _slide_chart,
-    'image': _slide_image,
-    'meme': _slide_meme,
-    'summary': _slide_summary,
-    'two_column': _slide_two_column,
-    'timeline': _slide_timeline,
-    'section_divider': _slide_section_divider,
-    'process': _slide_process,
-    'case_study': _slide_case_study,
-    'callout': _slide_callout,
-    'appendix': _slide_appendix,
-    'qanda': _slide_qanda,
-}
-
-
-def generate_pptx_bytes(pres_meta, slides):
     prs = Presentation()
     prs.slide_width = W
     prs.slide_height = H
-
-    for slide_data in slides:
-        slide_type = slide_data.get('type', 'content')
-        builder = _SLIDE_BUILDERS.get(slide_type, _slide_content)
-        builder(prs, pres_meta, slide_data)
-
+    layout = prs.slide_layouts[6]
+    assert layout.part.partname == '/ppt/slideLayouts/slideLayout7.xml', layout.part.partname
+    # A throwaway slide with notes forces python-pptx to add the notes master
+    # to the package; the slide itself is stripped out below.
+    prs.slides.add_slide(layout).notes_slide
     buf = BytesIO()
     prs.save(buf)
+
+    parts = {}
+    with zipfile.ZipFile(buf) as z:
+        for name in z.namelist():
+            if name.startswith(('ppt/slides/', 'ppt/notesSlides/')) or name == 'docProps/core.xml':
+                continue
+            parts[name] = z.read(name)
+
+    pres = parts['ppt/presentation.xml'].decode()
+    pres = re.sub(r'<p:sldIdLst>.*?</p:sldIdLst>', '{SLD_ID_LST}', pres)
+    pres = pres.replace(' type="screen4x3"', '')
+    assert '{SLD_ID_LST}' in pres
+
+    rels = parts['ppt/_rels/presentation.xml.rels'].decode()
+    rels = re.sub(r'<Relationship [^>]*relationships/slide"[^>]*/>', '', rels)
+    rels = rels.replace('</Relationships>', '{SLIDE_RELS}</Relationships>')
+
+    ct = parts['[Content_Types].xml'].decode()
+    ct = re.sub(r'<Override PartName="/ppt/(slides|notesSlides)/[^"]+"[^>]*/>', '', ct)
+    ct = ct.replace('</Types>', '{OVERRIDES}</Types>')
+
+    templates = {
+        'ppt/presentation.xml': pres,
+        'ppt/_rels/presentation.xml.rels': rels,
+        '[Content_Types].xml': ct,
+    }
+    static = {k: v for k, v in parts.items() if k not in templates}
+    return templates, static
+
+
+# ── shape XML ───────────────────────────────────────────────────────────────
+
+def _xfrm(x, y, w, h):
+    return f'<a:xfrm><a:off x="{x}" y="{y}"/><a:ext cx="{max(w, 0)}" cy="{max(h, 0)}"/></a:xfrm>'
+
+
+def _fill(color, alpha=1.0):
+    if alpha < 1.0:
+        return (f'<a:solidFill><a:srgbClr val="{color}"><a:alpha val="{int(alpha * 100000)}"/>'
+                f'</a:srgbClr></a:solidFill>')
+    return f'<a:solidFill><a:srgbClr val="{color}"/></a:solidFill>'
+
+
+def _rect_xml(sid, r):
+    line = (f'<a:ln w="12700">{_fill(r.line)}</a:ln>' if r.line else '<a:ln><a:noFill/></a:ln>')
+    return (f'<p:sp><p:nvSpPr><p:cNvPr id="{sid}" name="Rectangle {sid}"/><p:cNvSpPr/><p:nvPr/>'
+            f'</p:nvSpPr><p:spPr>{_xfrm(r.x, r.y, r.w, r.h)}<a:prstGeom prst="rect"><a:avLst/>'
+            f'</a:prstGeom>{_fill(r.fill, r.alpha)}{line}</p:spPr></p:sp>')
+
+
+def _para_xml(p):
+    ppr = f'<a:pPr algn="{p.align}">'
+    if p.space_before:
+        ppr += f'<a:spcBef><a:spcPts val="{int(p.space_before * 100)}"/></a:spcBef>'
+    if p.space_after:
+        ppr += f'<a:spcAft><a:spcPts val="{int(p.space_after * 100)}"/></a:spcAft>'
+    ppr += '</a:pPr>'
+    attrs = f'lang="en-US" sz="{int(p.size * 100)}"'
+    if p.bold:
+        attrs += ' b="1"'
+    if p.italic:
+        attrs += ' i="1"'
+    return (f'<a:p>{ppr}<a:r><a:rPr {attrs} dirty="0">{_fill(p.color)}'
+            f'<a:latin typeface="{_FONT}"/><a:cs typeface="{_FONT}"/></a:rPr>'
+            f'<a:t>{escape(p.text)}</a:t></a:r></a:p>')
+
+
+def _text_xml(sid, t):
+    wrap = 'square' if t.wrap else 'none'
+    body = (f'<a:bodyPr wrap="{wrap}" lIns="{INSET_X}" tIns="{INSET_Y}" rIns="{INSET_X}" '
+            f'bIns="{INSET_Y}" anchor="{t.anchor}" rtlCol="0"><a:noAutofit/></a:bodyPr>')
+    return (f'<p:sp><p:nvSpPr><p:cNvPr id="{sid}" name="TextBox {sid}"/><p:cNvSpPr txBox="1"/>'
+            f'<p:nvPr/></p:nvSpPr><p:spPr>{_xfrm(t.x, t.y, t.w, t.h)}<a:prstGeom prst="rect">'
+            f'<a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody>{body}<a:lstStyle/>'
+            f'{"".join(_para_xml(p) for p in t.paras)}</p:txBody></p:sp>')
+
+
+def _pic_xml(sid, img, rid, iw, ih):
+    x, y, w, h = img.x, img.y, img.w, img.h
+    src_rect = ''
+    box_aspect, img_aspect = w / h, iw / ih
+    if img.fit == 'contain':
+        if img_aspect > box_aspect:
+            nh = int(w / img_aspect)
+            y, h = y + (h - nh) // 2, nh
+        else:
+            nw = int(h * img_aspect)
+            x, w = x + (w - nw) // 2, nw
+    elif img_aspect > box_aspect:
+        crop = int((1 - box_aspect / img_aspect) / 2 * 100000)
+        src_rect = f'<a:srcRect l="{crop}" r="{crop}"/>'
+    elif img_aspect < box_aspect:
+        crop = int((1 - img_aspect / box_aspect) / 2 * 100000)
+        src_rect = f'<a:srcRect t="{crop}" b="{crop}"/>'
+    return (f'<p:pic><p:nvPicPr><p:cNvPr id="{sid}" name="Picture {sid}"/><p:cNvPicPr>'
+            f'<a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill>'
+            f'<a:blip r:embed="{rid}"/>{src_rect}<a:stretch><a:fillRect/></a:stretch></p:blipFill>'
+            f'<p:spPr>{_xfrm(x, y, w, h)}<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr>'
+            f'</p:pic>')
+
+
+def _rels_xml(rels):
+    body = ''.join(f'<Relationship Id="{rid}" Type="{_RT}{typ}" Target="{target}"/>'
+                   for rid, typ, target in rels)
+    return f'{_XML_DECL}<Relationships xmlns="{_REL_NS}">{body}</Relationships>'
+
+
+def _notes_xml(text):
+    return (
+        f'{_XML_DECL}<p:notes {_NS}><p:cSld><p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/>'
+        '<p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr/>'
+        '<p:sp><p:nvSpPr><p:cNvPr id="2" name="Slide Image Placeholder 1"/><p:cNvSpPr>'
+        '<a:spLocks noGrp="1" noRot="1" noChangeAspect="1"/></p:cNvSpPr><p:nvPr>'
+        '<p:ph type="sldImg" idx="2"/></p:nvPr></p:nvSpPr><p:spPr/></p:sp>'
+        '<p:sp><p:nvSpPr><p:cNvPr id="3" name="Notes Placeholder 2"/><p:cNvSpPr>'
+        '<a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="body" idx="3" sz="quarter"/></p:nvPr>'
+        '</p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/>'
+        f'<a:p><a:r><a:rPr lang="en-US" dirty="0"/><a:t>{escape(text)}</a:t></a:r></a:p>'
+        '</p:txBody></p:sp></p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr>'
+        '</p:notes>'
+    )
+
+
+def _core_xml(meta):
+    now = datetime(meta['year'], meta['month'], min(meta['day'], 28),
+                   tzinfo=timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    authors = meta.get('authors') or []
+    creator = authors[0].get('full_name', '') if authors else meta.get('org_name', '')
+    token = meta.get('watermark_token', '')
+    return (
+        f'{_XML_DECL}<cp:coreProperties '
+        'xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '
+        'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" '
+        'xmlns:dcmitype="http://purl.org/dc/dcmitype/" '
+        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+        f'<dc:title>{escape(meta.get("title", ""))}</dc:title>'
+        f'<dc:subject>{escape(meta.get("subtitle", ""))}</dc:subject>'
+        f'<dc:creator>{escape(creator)}</dc:creator>'
+        f'<cp:keywords>{escape(meta.get("industry", ""))}; {escape(meta.get("domain", ""))}; {token}</cp:keywords>'
+        f'<dc:description>{escape(meta.get("org_name", ""))} — Presentation ID: {token}</dc:description>'
+        f'<cp:lastModifiedBy>{escape(creator)}</cp:lastModifiedBy><cp:revision>3</cp:revision>'
+        f'<dcterms:created xsi:type="dcterms:W3CDTF">{now}</dcterms:created>'
+        f'<dcterms:modified xsi:type="dcterms:W3CDTF">{now}</dcterms:modified>'
+        f'<cp:category>{escape(meta.get("org_name", ""))}</cp:category></cp:coreProperties>'
+    )
+
+
+# ── package ─────────────────────────────────────────────────────────────────
+
+def generate_pptx_bytes(pres_meta, slides):
+    templates, static = _base_parts()
+    laid_out = layout_slides(pres_meta, slides)
+
+    files = {}
+    media = {}          # static path -> (part name, width, height)
+    sld_ids, pres_rels, overrides = [], [], []
+
+    for n, slide in enumerate(laid_out, 1):
+        rels = [('rId1', 'slideLayout', _SLIDE_LAYOUT)]
+        shapes = []
+        for sid, shape in enumerate(slide.shapes, 2):
+            if isinstance(shape, Rect):
+                shapes.append(_rect_xml(sid, shape))
+            elif isinstance(shape, Text):
+                shapes.append(_text_xml(sid, shape))
+            elif isinstance(shape, Image):
+                if shape.path not in media:
+                    jpeg = load_jpeg(shape.path)
+                    if jpeg is None:
+                        continue
+                    name = f'ppt/media/image{len(media) + 1}.jpeg'
+                    files[name] = jpeg[0]
+                    media[shape.path] = (name, jpeg[1], jpeg[2])
+                name, iw, ih = media[shape.path]
+                rid = f'rId{len(rels) + 1}'
+                rels.append((rid, 'image', '../media/' + name.rsplit('/', 1)[1]))
+                shapes.append(_pic_xml(sid, shape, rid, iw, ih))
+
+        if slide.notes:
+            rels.append((f'rId{len(rels) + 1}', 'notesSlide', f'../notesSlides/notesSlide{n}.xml'))
+            files[f'ppt/notesSlides/notesSlide{n}.xml'] = _notes_xml(slide.notes)
+            files[f'ppt/notesSlides/_rels/notesSlide{n}.xml.rels'] = _rels_xml([
+                ('rId1', 'notesMaster', _NOTES_MASTER),
+                ('rId2', 'slide', f'../slides/slide{n}.xml'),
+            ])
+            overrides.append(f'<Override PartName="/ppt/notesSlides/notesSlide{n}.xml" '
+                             f'ContentType="{_CT_NOTES}"/>')
+
+        files[f'ppt/slides/slide{n}.xml'] = (
+            f'{_XML_DECL}<p:sld {_NS}><p:cSld><p:bg><p:bgPr>{_fill(slide.bg)}<a:effectLst/>'
+            '</p:bgPr></p:bg><p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/>'
+            '<p:nvPr/></p:nvGrpSpPr><p:grpSpPr/>'
+            f'{"".join(shapes)}</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/>'
+            '</p:clrMapOvr></p:sld>'
+        )
+        files[f'ppt/slides/_rels/slide{n}.xml.rels'] = _rels_xml(rels)
+        overrides.append(f'<Override PartName="/ppt/slides/slide{n}.xml" ContentType="{_CT_SLIDE}"/>')
+        sld_ids.append(f'<p:sldId id="{255 + n}" r:id="rId{1000 + n}"/>')
+        pres_rels.append(f'<Relationship Id="rId{1000 + n}" Type="{_RT}slide" '
+                         f'Target="slides/slide{n}.xml"/>')
+
+    files['docProps/core.xml'] = _core_xml(pres_meta)
+
+    buf = BytesIO()
+    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED, compresslevel=1) as z:
+        z.writestr('[Content_Types].xml',
+                   templates['[Content_Types].xml'].replace('{OVERRIDES}', ''.join(overrides)))
+        z.writestr('ppt/presentation.xml', templates['ppt/presentation.xml'].replace(
+            '{SLD_ID_LST}', f'<p:sldIdLst>{"".join(sld_ids)}</p:sldIdLst>'))
+        z.writestr('ppt/_rels/presentation.xml.rels',
+                   templates['ppt/_rels/presentation.xml.rels'].replace(
+                       '{SLIDE_RELS}', ''.join(pres_rels)))
+        for name, data in static.items():
+            z.writestr(name, data)
+        for name, data in files.items():
+            if name.endswith('.jpeg'):
+                z.writestr(name, data, compress_type=zipfile.ZIP_STORED)
+            else:
+                z.writestr(name, data)
     return buf.getvalue()

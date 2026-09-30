@@ -348,8 +348,16 @@ def push_fingerprint_signal(data: dict) -> bool:
         return False
     payload = dict(data)
     payload.setdefault('idempotency_key', str(uuid.uuid4()))
+    from django.conf import settings
+    queue_max = settings.FINGERPRINT_QUEUE_MAX
     try:
-        r.rpush(_FINGERPRINT_QUEUE_KEY, json.dumps(payload))
+        # Bounded: LTRIM keeps only the newest queue_max entries, so an
+        # undrained queue caps Redis memory instead of growing forever
+        # (LTRIM is O(1) when there's nothing to remove).
+        pipe = r.pipeline(transaction=False)
+        pipe.rpush(_FINGERPRINT_QUEUE_KEY, json.dumps(payload))
+        pipe.ltrim(_FINGERPRINT_QUEUE_KEY, -queue_max, -1)
+        pipe.execute()
         return True
     except Exception:
         _mark_failure()

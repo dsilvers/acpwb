@@ -1,5 +1,5 @@
 import io
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from django.core.management import call_command
@@ -8,8 +8,14 @@ from apps.core.crawler_queue import push_fingerprint_signal
 from apps.honeypot.models import RequestFingerprint
 
 
+@pytest.fixture
+def capture_on(settings):
+    settings.FINGERPRINT_CAPTURE_ENABLED = True
+    settings.FINGERPRINT_SAMPLE_RATE = 1.0
+
+
 @pytest.mark.django_db
-def test_request_stream_middleware_queues_fingerprint_signal(client):
+def test_request_stream_middleware_queues_fingerprint_signal(client, capture_on):
     with patch('apps.core.crawler_queue.check_first_seen_ip', return_value=True) as mock_first_seen, \
          patch('apps.core.crawler_queue.queue_fingerprint_signal') as mock_queue:
         client.get(
@@ -30,7 +36,7 @@ def test_request_stream_middleware_queues_fingerprint_signal(client):
 
 
 @pytest.mark.django_db
-def test_request_stream_middleware_runs_on_every_path_not_just_bot_uas(client):
+def test_request_stream_middleware_runs_on_every_path_not_just_bot_uas(client, capture_on):
     """Residential-proxy traffic is exactly the traffic that looks like a
     normal browser — signal capture must not be gated behind
     BotTrackingMiddleware's bot-UA pattern the way CrawlerVisit logging is."""
@@ -80,3 +86,40 @@ def test_drain_fingerprint_queue_dedupes_by_idempotency_key():
     call_command('drain_fingerprint_queue', stdout=io.StringIO())
 
     assert RequestFingerprint.objects.filter(ip_address='198.51.100.4').count() == 1
+
+
+@pytest.mark.django_db
+def test_fingerprint_capture_is_off_by_default(client):
+    """Default-off: nothing touches Redis — not even the per-IP first-seen
+    key — unless FINGERPRINT_CAPTURE_ENABLED is set."""
+    with patch('apps.core.crawler_queue.check_first_seen_ip') as mock_first_seen, \
+         patch('apps.core.crawler_queue.queue_fingerprint_signal') as mock_queue:
+        client.get('/careers/', HTTP_USER_AGENT='Mozilla/5.0 (a normal-looking browser)')
+
+    assert not mock_queue.called
+    assert not mock_first_seen.called
+
+
+@pytest.mark.django_db
+def test_fingerprint_capture_skips_unsampled_ips(client, settings):
+    settings.FINGERPRINT_CAPTURE_ENABLED = True
+    settings.FINGERPRINT_SAMPLE_RATE = 0.0
+    with patch('apps.core.crawler_queue.check_first_seen_ip') as mock_first_seen, \
+         patch('apps.core.crawler_queue.queue_fingerprint_signal') as mock_queue:
+        client.get('/careers/', HTTP_USER_AGENT='Mozilla/5.0 (a normal-looking browser)')
+
+    assert not mock_queue.called
+    assert not mock_first_seen.called
+
+
+def test_push_fingerprint_signal_caps_queue_length(settings):
+    settings.FINGERPRINT_QUEUE_MAX = 5
+    pipe = MagicMock()
+    fake_redis = MagicMock()
+    fake_redis.pipeline.return_value = pipe
+    with patch('apps.core.crawler_queue._get_client', return_value=fake_redis):
+        assert push_fingerprint_signal({'ip_address': '203.0.113.9'}) is True
+
+    pipe.rpush.assert_called_once()
+    pipe.ltrim.assert_called_once_with('acpwb:fingerprint_queue', -5, -1)
+    pipe.execute.assert_called_once()

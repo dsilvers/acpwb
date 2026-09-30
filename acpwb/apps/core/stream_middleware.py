@@ -132,8 +132,20 @@ class RequestStreamMiddleware:
         UA-matched bot traffic — residential-proxy traffic is exactly the
         traffic that looks like a normal browser, so it has to be captured
         here (this middleware runs unconditionally) rather than gated behind
-        BotTrackingMiddleware's BOT_UA_PATTERNS check."""
+        BotTrackingMiddleware's BOT_UA_PATTERNS check.
+
+        Gated by FINGERPRINT_CAPTURE_ENABLED (default off) and
+        FINGERPRINT_SAMPLE_RATE, checked before anything touches Redis —
+        including the per-IP first-seen key — because at full production
+        volume this is one queue entry per request."""
         try:
+            from django.conf import settings
+            from apps.core.signal_capture import fingerprint_sampled
+            if not settings.FINGERPRINT_CAPTURE_ENABLED:
+                return
+            if not fingerprint_sampled(ip, settings.FINGERPRINT_SAMPLE_RATE):
+                return
+
             from django.utils import timezone
             from apps.core.crawler_queue import queue_fingerprint_signal, check_first_seen_ip
             from apps.core.signal_capture import BROWSER_SIGNAL_HEADERS, browser_headers_present

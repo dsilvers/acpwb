@@ -19,12 +19,16 @@ package visitqueue
 
 import (
 	"context"
+	"crypto/md5"
 	"crypto/rand"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"net"
 	"net/http"
+	"os"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -79,6 +83,13 @@ func BrowserHeadersPresent(r *http.Request) string {
 // response, which matches this service's only job: serve content fast.
 type Queue struct {
 	client *redis.Client
+
+	// RequestFingerprint capture gate — same meaning and defaults as Django's
+	// FINGERPRINT_CAPTURE_ENABLED / FINGERPRINT_SAMPLE_RATE /
+	// FINGERPRINT_QUEUE_MAX settings, read from the same-named env vars.
+	fingerprintEnabled    bool
+	fingerprintSampleRate float64
+	fingerprintQueueMax   int64
 }
 
 // New creates a Queue from a redis:// URL (e.g. "redis://redis:6379/0"). It
@@ -90,7 +101,48 @@ func New(redisURL string) (*Queue, error) {
 	if err != nil {
 		return nil, fmt.Errorf("visitqueue: parsing redis URL: %w", err)
 	}
-	return &Queue{client: redis.NewClient(opt)}, nil
+	q := &Queue{
+		client:                redis.NewClient(opt),
+		fingerprintEnabled:    envBool("FINGERPRINT_CAPTURE_ENABLED", false),
+		fingerprintSampleRate: envFloat("FINGERPRINT_SAMPLE_RATE", 1.0),
+		fingerprintQueueMax:   envInt("FINGERPRINT_QUEUE_MAX", 1_000_000),
+	}
+	return q, nil
+}
+
+func envBool(key string, def bool) bool {
+	if v, err := strconv.ParseBool(os.Getenv(key)); err == nil {
+		return v
+	}
+	return def
+}
+
+func envFloat(key string, def float64) float64 {
+	if v, err := strconv.ParseFloat(os.Getenv(key), 64); err == nil {
+		return v
+	}
+	return def
+}
+
+func envInt(key string, def int64) int64 {
+	if v, err := strconv.ParseInt(os.Getenv(key), 10, 64); err == nil && v > 0 {
+		return v
+	}
+	return def
+}
+
+// FingerprintSampled mirrors apps.core.signal_capture.fingerprint_sampled
+// exactly: bucket = first 32 bits of md5(ip), big-endian, captured when
+// bucket < rate * 2^32. Both backends must sample the same IPs.
+func FingerprintSampled(ip string, rate float64) bool {
+	if rate >= 1.0 {
+		return true
+	}
+	if rate <= 0.0 {
+		return false
+	}
+	sum := md5.Sum([]byte(ip))
+	return float64(binary.BigEndian.Uint32(sum[:4])) < rate*4294967296.0
 }
 
 func uuid4() string {
@@ -181,8 +233,15 @@ func (q *Queue) PushVisit(v Visit) {
 	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
 	defer cancel()
 
+	// Decided before anything touches Redis — including the per-IP
+	// first-seen key — same as the Django middleware.
+	captureFingerprint := q.fingerprintEnabled && FingerprintSampled(v.IPAddress, q.fingerprintSampleRate)
+
 	pipe := q.client.Pipeline()
-	firstSeenCmd := pipe.SetNX(ctx, "acpwb:ipseen:"+v.IPAddress, "1", firstSeenTTL)
+	var firstSeenCmd *redis.BoolCmd
+	if captureFingerprint {
+		firstSeenCmd = pipe.SetNX(ctx, "acpwb:ipseen:"+v.IPAddress, "1", firstSeenTTL)
+	}
 
 	crawlerPayload := map[string]any{
 		"timestamp":       nowISO(),
@@ -237,6 +296,10 @@ func (q *Queue) PushVisit(v Visit) {
 
 	_, _ = pipe.Exec(ctx)
 
+	if !captureFingerprint {
+		return
+	}
+
 	// firstSeenCmd's result is only readable after Exec — a second, separate
 	// call rather than folding into the pipeline above.
 	firstSeenIP, _ := firstSeenCmd.Result()
@@ -255,6 +318,11 @@ func (q *Queue) PushVisit(v Visit) {
 		"idempotency_key":         uuid4(),
 	}
 	if data, err := json.Marshal(fingerprintPayload); err == nil {
-		_ = q.client.RPush(ctx, fingerprintQueueKey, data).Err()
+		// Bounded like push_fingerprint_signal: LTRIM keeps only the newest
+		// fingerprintQueueMax entries if the drain falls behind.
+		fp := q.client.Pipeline()
+		fp.RPush(ctx, fingerprintQueueKey, data)
+		fp.LTrim(ctx, fingerprintQueueKey, -q.fingerprintQueueMax, -1)
+		_, _ = fp.Exec(ctx)
 	}
 }

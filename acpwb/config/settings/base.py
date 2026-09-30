@@ -164,6 +164,16 @@ TOR_EXIT_LIST_URL = env('TOR_EXIT_LIST_URL', default='https://check.torproject.o
 # request), not open.
 IP_REPUTATION_API_KEY = env('IP_REPUTATION_API_KEY', default='')
 
+# RequestFingerprint capture (apps.core.stream_middleware._queue_fingerprint).
+# Off by default: at full volume it's one Redis queue entry per request plus a
+# per-IP first-seen key, and one Postgres row per request once drained.
+# SAMPLE_RATE samples by IP (deterministic md5 bucket, shared with acpwb_go).
+# QUEUE_MAX bounds Redis memory if drain_fingerprint_queue falls behind or
+# isn't running — the oldest entries are trimmed past it.
+FINGERPRINT_CAPTURE_ENABLED = env.bool('FINGERPRINT_CAPTURE_ENABLED', default=False)
+FINGERPRINT_SAMPLE_RATE = env.float('FINGERPRINT_SAMPLE_RATE', default=1.0)
+FINGERPRINT_QUEUE_MAX = env.int('FINGERPRINT_QUEUE_MAX', default=1_000_000)
+
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'https://acpwb.com',
     'https://*.acpwb.com',

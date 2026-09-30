@@ -13,6 +13,15 @@
 */5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py score_ip_reputation' >> /var/log/acpwb-score-ip-reputation.log 2>&1
 */15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py publish_ip_reputation' >> /var/log/acpwb-publish-ip-reputation.log 2>&1
 
+# IPIntelligence: discover new IPs from CrawlerVisit (1-hour windows, 50s
+# budget per run, resumes from its watermark), then MaxMind-enrich them
+# (local mmdb lookups only). Both flock-guarded, so overlapping runs just
+# exit. Neither was ever installed before 2026-09-30 — the table sat frozen
+# at Sep 4 with 15M IPs unenriched, which is also what score_ip_reputation's
+# is_hosting signal reads.
+*/5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py discover_ip_intelligence' >> /var/log/acpwb-ip-intel-discover.log 2>&1
+*/15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py enrich_ip_intelligence --max-seconds 600' >> /var/log/acpwb-ip-intel-enrich.log 2>&1
+
 # DISABLED 2026-09-06 — do not install this job as-is. acpwb_go writes
 # CrawlerVisit rows with bot_type/bot_group blank (it doesn't classify at
 # write time), and this cron was meant to backfill them incrementally. In

@@ -18,6 +18,7 @@ import geoip2.database
 import geoip2.errors
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from django.db import connection, transaction
 from django.db.models import Q
 from django.utils import timezone
 
@@ -26,6 +27,16 @@ from apps.core.tor_exit_list import is_tor_exit
 from apps.honeypot.models import IPIntelligence
 
 _LOCK_FILE = '/tmp/acpwb-ip-intel-enrich.lock'
+
+_FLUSH_FIELDS = [
+    'country_code', 'country_name', 'region_name', 'city_name',
+    'latitude', 'longitude', 'accuracy_radius_km',
+    'asn', 'asn_org', 'is_hosting', 'is_tor_exit',
+    'lookup_ok', 'enrichment_note', 'enriched_at', 'geoip_db_date',
+]
+# Postgres caps a statement at 65535 bind parameters; 16 per row (pk +
+# _FLUSH_FIELDS) keeps each UPDATE well under that.
+_FLUSH_ROWS_PER_STATEMENT = 2000
 
 
 class Command(BaseCommand):
@@ -134,9 +145,32 @@ class Command(BaseCommand):
         obj.is_tor_exit = is_tor_exit(obj.ip_address)
 
     def _flush(self, batch):
-        IPIntelligence.objects.bulk_update(batch, [
-            'country_code', 'country_name', 'region_name', 'city_name',
-            'latitude', 'longitude', 'accuracy_radius_km',
-            'asn', 'asn_org', 'is_hosting', 'is_tor_exit',
-            'lookup_ok', 'enrichment_note', 'enriched_at', 'geoip_db_date',
-        ])
+        # UPDATE ... FROM (VALUES ...) joined on the PK, instead of
+        # bulk_update(): Django emits a CASE WHEN id=X per column, which
+        # Postgres evaluates linearly for every row — O(n^2) per batch, and
+        # the reason the Sep 2026 backfill crawled at ~180 rows/s.
+        meta = IPIntelligence._meta
+        qn = connection.ops.quote_name
+        fields = [meta.get_field(name) for name in _FLUSH_FIELDS]
+        pk_col = meta.pk.column
+        value_cols = ', '.join(qn(f.column) for f in [meta.pk, *fields])
+        set_clause = ', '.join(f'{qn(f.column)} = v.{qn(f.column)}' for f in fields)
+        # Explicit casts: a VALUES list otherwise infers column types from
+        # its first row, and a NULL there (e.g. no latitude) types as text.
+        row_sql = '(' + ', '.join(
+            f'%s::{f.db_type(connection)}' for f in [meta.pk, *fields]
+        ) + ')'
+
+        with transaction.atomic(), connection.cursor() as cur:
+            for start in range(0, len(batch), _FLUSH_ROWS_PER_STATEMENT):
+                chunk = batch[start:start + _FLUSH_ROWS_PER_STATEMENT]
+                params = []
+                for obj in chunk:
+                    params.append(obj.pk)
+                    params.extend(f.get_db_prep_save(getattr(obj, f.attname), connection) for f in fields)
+                cur.execute(
+                    f'UPDATE {qn(meta.db_table)} AS t SET {set_clause} '
+                    f'FROM (VALUES {", ".join([row_sql] * len(chunk))}) AS v({value_cols}) '
+                    f'WHERE t.{qn(pk_col)} = v.{qn(pk_col)}',
+                    params,
+                )

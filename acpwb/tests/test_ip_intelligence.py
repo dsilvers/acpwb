@@ -155,6 +155,45 @@ def test_enrich_ip_intelligence_pages_through_all_rows_without_iterator():
     assert IPIntelligence.objects.filter(lookup_ok=False).count() == 25
 
 
+class _HitGeoReader(_FakeGeoReader):
+    """Every lookup succeeds — exercises the write path with real values,
+    including a NULL latitude/longitude mixed in with non-NULL ones."""
+    def city(self, ip):
+        from types import SimpleNamespace as NS
+        located = not ip.endswith('.9')
+        return NS(
+            country=NS(iso_code='BR', name='Brazil'),
+            subdivisions=NS(most_specific=NS(name='São Paulo')),
+            city=NS(name='Campinas'),
+            location=NS(latitude=-22.9 if located else None,
+                        longitude=-47.06 if located else None,
+                        accuracy_radius=20 if located else None),
+        )
+
+    def asn(self, ip):
+        from types import SimpleNamespace as NS
+        return NS(autonomous_system_number=16509, autonomous_system_organization='AMAZON-02')
+
+
+@pytest.mark.django_db
+def test_enrich_ip_intelligence_writes_lookup_results():
+    # 12 rows with batch_size=5 → several flushes; row .9 has NULL coordinates.
+    for i in range(12):
+        IPIntelligence.objects.create(ip_address=f'10.2.0.{i}')
+
+    with patch('geoip2.database.Reader', return_value=_HitGeoReader()):
+        call_command('enrich_ip_intelligence', batch_size=5, stdout=io.StringIO())
+
+    assert IPIntelligence.objects.filter(enriched_at__isnull=True).count() == 0
+    row = IPIntelligence.objects.get(ip_address='10.2.0.1')
+    assert (row.country_code, row.country_name, row.region_name, row.city_name) == ('BR', 'Brazil', 'São Paulo', 'Campinas')
+    assert row.latitude == pytest.approx(-22.9) and row.accuracy_radius_km == 20
+    assert (row.asn, row.asn_org, row.is_hosting, row.lookup_ok) == (16509, 'AMAZON-02', True, True)
+    assert row.geoip_db_date is not None and row.enrichment_note == ''
+    unlocated = IPIntelligence.objects.get(ip_address='10.2.0.9')
+    assert unlocated.latitude is None and unlocated.country_code == 'BR'
+
+
 @pytest.mark.django_db
 def test_enrich_ip_intelligence_respects_limit():
     for i in range(10):

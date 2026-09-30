@@ -39,6 +39,8 @@ def test_pptx_carries_watermark_and_no_python_pptx_boilerplate():
         assert meta['watermark_token'] in core
         assert 'python-pptx' not in core
         assert z.namelist()[0] == '[Content_Types].xml'
+        # Keynote won't open a deck with notes unless the master is listed.
+        assert '<p:notesMasterIdLst><p:notesMasterId r:id=' in z.read('ppt/presentation.xml').decode()
 
 
 def test_pdf_is_well_formed_and_watermarked():

@@ -66,6 +66,14 @@ def _base_parts():
     rels = re.sub(r'<Relationship [^>]*relationships/slide"[^>]*/>', '', rels)
     rels = rels.replace('</Relationships>', '{SLIDE_RELS}</Relationships>')
 
+    # python-pptx relates the notes master but never lists it in
+    # presentation.xml, which the spec requires. PowerPoint and Google Slides
+    # tolerate that; Keynote refuses to open any deck with speaker notes.
+    nm_rid = re.search(r'Id="(rId\d+)" Type="[^"]*/notesMaster"', rels).group(1)
+    pres = pres.replace('</p:sldMasterIdLst>',
+                        f'</p:sldMasterIdLst><p:notesMasterIdLst>'
+                        f'<p:notesMasterId r:id="{nm_rid}"/></p:notesMasterIdLst>', 1)
+
     ct = parts['[Content_Types].xml'].decode()
     ct = re.sub(r'<Override PartName="/ppt/(slides|notesSlides)/[^"]+"[^>]*/>', '', ct)
     ct = ct.replace('</Types>', '{OVERRIDES}</Types>')

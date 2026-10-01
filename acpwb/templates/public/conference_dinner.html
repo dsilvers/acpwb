@@ -23,7 +23,7 @@
     </h1>
     <p style="color:rgba(255,255,255,0.8);font-size:1.05rem;max-width:550px;margin-bottom:0">
       Wisconsin fish fry. Brandy Old Fashioneds. Good company.<br>
-      Friday evening, September 18, 2026.
+      {{ conf.dinner_date }}.
     </p>
   </div>
 </section>
@@ -148,14 +148,14 @@
           </div>
         </div>
 
-        <!-- 2026 Dinner Details -->
+        <!-- Current-year Dinner Details -->
         <div style="background:var(--navy);padding:2.5rem;border-left:4px solid var(--gold)">
           <h3 style="color:var(--gold);font-weight:900;text-transform:uppercase;font-size:1.1rem;letter-spacing:.05em;margin-bottom:1rem">
-            PERCH 2026 Dinner Details
+            PERCH {{ conf.year }} Dinner Details
           </h3>
           <dl class="mb-1" style="color:rgba(255,255,255,0.85)">
             <dt style="color:rgba(255,255,255,0.5);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Date &amp; Time</dt>
-            <dd class="mb-2">Friday, September 18, 2026 &mdash; Reception 5:30 PM / Dinner 7:00 PM</dd>
+            <dd class="mb-2">{{ conf.dinner_date }} &mdash; Reception 5:30 PM / Dinner 7:00 PM</dd>
             <dt style="color:rgba(255,255,255,0.5);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Location</dt>
             <dd class="mb-2">{{ conf.dinner_venue }}<br><span style="font-size:.85rem;color:rgba(255,255,255,0.6)">{{ conf.dinner_address }}</span></dd>
             <dt style="color:rgba(255,255,255,0.5);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Included With</dt>
@@ -182,7 +182,8 @@
               <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2023</strong> Miller Time Pub &amp; Grill, Brookfield</li>
               <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2024</strong> Bacchus Milwaukee</li>
               <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2025</strong> Ardent, Milwaukee</li>
-              <li class="mb-2"><strong>2026</strong> <span style="color:var(--gold);font-weight:800">Odd Duck Milwaukee</span></li>
+              <li class="mb-2 pb-2" style="border-bottom:1px solid #eee"><strong>2026</strong> Odd Duck Milwaukee</li>
+              <li class="mb-2"><strong>{{ conf.year }}</strong> <span style="color:var(--gold);font-weight:800">{{ conf.dinner_venue }}</span></li>
             </ul>
           </div>
           <a href="{% url 'perch-conference-register' %}" class="btn-acpwb btn w-100 text-center">Register (Dinner Included)</a>

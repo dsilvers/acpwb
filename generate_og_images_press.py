@@ -93,6 +93,7 @@ _WORD_VISUALS = {
 # Per-slug scene overrides — bypasses word lookup entirely
 _SLUG_SCENES = {
     'one-billion-pages-served': 'vast data center corridor, server racks receding to vanishing point, deep navy ambient glow, gold edge lighting',
+    'perch-2027-announced': 'modern convention center hall before a business conference, low black stage, wide LED video wall glowing deep blue, sleek acrylic lectern with microphone, neat straight rows of identical black chairs, warm gold accent lights',
     'record-peak-traffic-august-2026': 'close angled view of a single storefront window at night, tightly framed so no signage, lettering, or awnings are visible, blank dark brick wall bordering the window, dozens of mismatched old television sets crammed onto shelves behind rain-streaked glass, screens glowing dim static, warm interior light spilling onto wet pavement at the bottom edge of frame',
 }
 

@@ -97,7 +97,7 @@ var footerCol2NoPrefix = []navItem{
 // footerCol2Prefixed mirrors the rest of the footer's second column, which
 // IS prefixed with site_root like everything else.
 var footerCol2Prefixed = []navItem{
-	{"PERCH 2026", "/perch-conference/"},
+	{"PERCH 2027", "/perch-conference/"},
 	{"Careers", "/careers/"},
 	{"Awards", "/awards/"},
 	{"Patents", "/patents/"},

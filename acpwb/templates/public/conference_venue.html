@@ -17,7 +17,7 @@
 <!-- Hero -->
 <section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0 1.25rem;border-bottom:3px solid var(--gold)">
   <div class="container">
-    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH 2026 &mdash; {{ conf.dates }}</p>
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH {{ conf.year }} &mdash; {{ conf.dates }}</p>
     <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:0">VENUE &amp; TRAVEL</h1>
   </div>
 </section>
@@ -58,7 +58,7 @@
           <hr class="section-rule">
           <p class="mb-4">
             PERCH has negotiated preferred rates at the following Milwaukee hotels. When booking, mention
-            <strong>"PERCH 2026"</strong> or use the group code <strong>PERCH26</strong> to access the
+            <strong>"PERCH {{ conf.year }}"</strong> or use the group code <strong>{{ conf.group_code }}</strong> to access the
             conference rate. Room block availability is limited — book early.
           </p>
           <div class="row g-4">
@@ -203,11 +203,11 @@
             <h6 class="card-title mb-3">Quick Reference</h6>
             <dl class="mb-0" style="font-size:.85rem">
               <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Conference Venue</dt>
-              <dd class="fw-700 mb-2">Wisconsin Center<br><span style="font-weight:400">400 W Wisconsin Ave</span></dd>
+              <dd class="fw-700 mb-2">{{ conf.venue }}<br><span style="font-weight:400">{{ conf.venue_address }}</span></dd>
               <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Conference Dates</dt>
               <dd class="fw-700 mb-2">{{ conf.dates }}</dd>
               <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">PERCH Dinner</dt>
-              <dd class="fw-700 mb-2">Friday, Sept 18<br><span style="font-weight:400">{{ conf.dinner_venue }}<br>{{ conf.dinner_address }}</span></dd>
+              <dd class="fw-700 mb-2">{{ conf.dinner_date }}<br><span style="font-weight:400">{{ conf.dinner_venue }}<br>{{ conf.dinner_address }}</span></dd>
               <dt style="color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Hotel Group Code</dt>
               <dd class="fw-700 mb-0">PERCH26</dd>
             </dl>

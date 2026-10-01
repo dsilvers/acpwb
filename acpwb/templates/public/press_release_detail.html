@@ -37,9 +37,53 @@
           <p style="font-size:.82rem;color:#666;margin:.2rem 0 0">{{ pr.date|date:"F j, Y" }}</p>
         </div>
 
-        <!-- Body paragraphs -->
-        {% for paragraph in pr.body %}
-        <p style="font-size:1rem;line-height:1.8;color:#222;margin-bottom:1.4rem">{{ paragraph|urlize }}</p>
+        <!-- Body: plain strings are paragraphs; dicts are typed blocks -->
+        {% for block in pr.body %}
+        {% if block.type == 'heading' %}
+        <h2 style="font-size:.82rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin:2.6rem 0 1rem;padding-bottom:.45rem;border-bottom:2px solid var(--gold)">{{ block.text }}</h2>
+        {% elif block.type == 'stats' %}
+        <div class="row g-3" style="margin:0 0 1.8rem">
+          {% for stat in block.items %}
+          <div class="col-6 {% if block.items|length|divisibleby:4 %}col-md-3{% else %}col-md-4{% endif %}">
+            <div style="background:var(--white);border-top:3px solid var(--gold);padding:1rem 1.1rem;height:100%">
+              <div style="font-size:1.55rem;font-weight:800;color:var(--navy);line-height:1.1">{{ stat.value }}</div>
+              <div style="font-size:.78rem;color:#555;line-height:1.4;margin-top:.35rem">{{ stat.label }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% elif block.type == 'table' %}
+        <figure style="margin:0 0 1.8rem">
+          {% if block.caption %}<figcaption style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.5rem">{{ block.caption }}</figcaption>{% endif %}
+          <div class="table-responsive">
+            <table class="table table-sm mb-0" style="background:var(--white);font-size:.9rem">
+              <thead>
+                <tr>
+                  {% for h in block.headers %}<th scope="col" style="background:var(--navy);color:white;font-weight:700;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:.6rem .75rem;border:0{% if not forloop.first %};text-align:right{% endif %}">{{ h }}</th>{% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in block.rows %}
+                <tr>
+                  {% for cell in row %}<td style="padding:.5rem .75rem;color:#222{% if forloop.first %};font-weight:600{% else %};text-align:right;font-variant-numeric:tabular-nums{% endif %}">{{ cell }}</td>{% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% if block.note %}<p style="font-size:.78rem;color:#666;margin:.5rem 0 0">{{ block.note }}</p>{% endif %}
+        </figure>
+        {% elif block.type == 'list' %}
+        <ul style="font-size:1rem;line-height:1.7;color:#222;margin-bottom:1.6rem;padding-left:1.2rem">
+          {% for item in block.items %}
+          <li style="margin-bottom:.55rem">{% if item.url %}<a href="{{ item.url }}" style="color:var(--navy);font-weight:600">{{ item.text }}</a>{% else %}<strong style="color:var(--navy)">{{ item.text }}</strong>{% endif %}{% if item.note %} — {{ item.note }}{% endif %}</li>
+          {% endfor %}
+        </ul>
+        {% elif block.type == 'html' %}
+        <p style="font-size:1rem;line-height:1.8;color:#222;margin-bottom:1.4rem">{{ block.html|safe }}</p>
+        {% else %}
+        <p style="font-size:1rem;line-height:1.8;color:#222;margin-bottom:1.4rem">{{ block|urlize }}</p>
+        {% endif %}
         {% endfor %}
 
         <!-- Pull quote -->

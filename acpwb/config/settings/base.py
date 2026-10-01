@@ -90,6 +90,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'apps.core.context_processors.honeypot_context',
+                'apps.public.context_processors.perch_context',
             ],
         },
     },

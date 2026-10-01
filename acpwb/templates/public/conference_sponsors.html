@@ -17,7 +17,7 @@
 <!-- Hero -->
 <section style="background:var(--navy);padding:clamp(2.5rem,5vw,4rem) 0 1.25rem;border-bottom:3px solid var(--gold)">
   <div class="container">
-    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH 2026 &mdash; {{ conf.dates }}</p>
+    <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">PERCH {{ conf.year }} &mdash; {{ conf.dates }}</p>
     <h1 style="color:white;font-weight:900;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:0">SPONSORS &amp; PARTNERS</h1>
   </div>
 </section>
@@ -27,7 +27,7 @@
 <section style="padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface)">
   <div class="container">
     <p class="mb-5" style="font-size:1.05rem;max-width:700px">
-      PERCH 2026 is made possible by the generous support of the compensation and HR community's leading
+      PERCH {{ conf.year }} is made possible by the generous support of the compensation and HR community's leading
       firms and organizations. Sponsorship directly subsidizes conference programming, keeps registration
       fees accessible, and supports the PERCH Pay Equity Recognition Award.
     </p>
@@ -102,10 +102,10 @@
     <!-- Become a Sponsor -->
     <div style="background:var(--navy);padding:2.5rem;border-left:4px solid var(--gold)">
       <h3 style="color:var(--gold);font-weight:900;text-transform:uppercase;font-size:1.1rem;letter-spacing:.05em;margin-bottom:1rem">
-        Become a PERCH 2026 Sponsor
+        Become a PERCH {{ conf.year }} Sponsor
       </h3>
       <p style="color:rgba(255,255,255,0.85);margin-bottom:1.25rem">
-        Sponsorship opportunities at PERCH 2026 are available across all tiers. Platinum and Gold sponsors
+        Sponsorship opportunities at PERCH {{ conf.year }} are available across all tiers. Platinum and Gold sponsors
         receive prominent exhibit space, speaking and panel opportunities, and full-page placement in the
         conference program. For sponsorship inquiries, contact the ACPWB conference team.
       </p>

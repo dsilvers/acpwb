@@ -154,7 +154,7 @@
   <div class="container">
     <h6 style="font-weight:800;color:var(--navy);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem">All PERCH Conferences</h6>
     <div class="d-flex flex-wrap gap-2">
-      <a href="{% url 'perch-conference' %}" class="btn btn-sm" style="background:var(--gold);color:var(--navy);font-weight:800">PERCH 2026 &rarr;</a>
+      <a href="{% url 'perch-conference' %}" class="btn btn-sm" style="background:var(--gold);color:var(--navy);font-weight:800">PERCH {{ perch_year }} &rarr;</a>
       {% for year in past_years %}
       <a href="{% url 'perch-conference-archive' year %}"
          class="btn btn-sm {% if year == conf.year %}btn-secondary{% else %}btn-outline-secondary{% endif %}">

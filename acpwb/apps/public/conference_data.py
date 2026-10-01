@@ -3,6 +3,10 @@ PERCH — Annual Conference on Pay Equity & Remuneration Compensation
 All conference data from inaugural 2014 edition through present.
 """
 
+# The upcoming conference — served at /perch-conference/. Every earlier year is
+# served from the archive at /perch-conference/<year>/.
+CURRENT_YEAR = 2027
+
 CONFERENCES = {
 
     2014: {
@@ -117,7 +121,7 @@ CONFERENCES = {
             {
                 'name': 'Dr. Patricia Ng',
                 'title': 'Executive Director',
-                'org': 'Center for Compensation Research, UW–Madison',
+                'org': 'Center for Compensation Research, University of Wisconsin–Madison',
                 'bio': 'Dr. Ng directs one of the nation\'s leading academic centers focused on compensation policy and labor market equity. Her longitudinal study tracking pay disparity across Wisconsin employers over fifteen years provided the empirical backbone for PERCH 2015\'s opening keynote. She has since served on the Federal Pay Equity Task Force.',
                 'keynote': True,
             },
@@ -166,7 +170,7 @@ CONFERENCES = {
         'schedule': [
             {'day': 1, 'time': '8:00 AM', 'title': 'Registration & Continental Breakfast', 'speaker': '', 'type': 'break'},
             {'day': 1, 'time': '9:00 AM', 'title': 'Welcome Remarks & PERCH Pay Equity Recognition Award Announcement', 'speaker': 'ACPWB', 'type': 'general'},
-            {'day': 1, 'time': '9:20 AM', 'title': 'Opening Keynote: The Transparency Imperative — What Employees Deserve to Know', 'speaker': 'Dr. Patricia Ng, UW–Madison', 'type': 'keynote', 'description': 'Drawing on fifteen years of Wisconsin employer data, this keynote makes the evidence-based case that pay secrecy harms organizational trust and perpetuates inequity — and charts what meaningful transparency requires.'},
+            {'day': 1, 'time': '9:20 AM', 'title': 'Opening Keynote: The Transparency Imperative — What Employees Deserve to Know', 'speaker': 'Dr. Patricia Ng, University of Wisconsin–Madison', 'type': 'keynote', 'description': 'Drawing on fifteen years of Wisconsin employer data, this keynote makes the evidence-based case that pay secrecy harms organizational trust and perpetuates inequity — and charts what meaningful transparency requires.'},
             {'day': 1, 'time': '10:35 AM', 'title': 'Coffee Break & Exhibit Hall', 'speaker': '', 'type': 'break'},
             {'day': 1, 'time': '11:00 AM', 'title': 'Total Rewards in the Age of Glassdoor: Managing Pay Transparency Proactively', 'speaker': 'Alicia Torres-Mendez, Summit HR Partners', 'type': 'session', 'description': 'When employees can look up salary data online, the case for pay secrecy collapses. This session equips compensation professionals to get ahead of public data by communicating pay philosophy proactively and credibly.'},
             {'day': 1, 'time': '12:00 PM', 'title': 'Networking Lunch', 'speaker': '', 'type': 'break'},
@@ -182,14 +186,14 @@ CONFERENCES = {
             {'day': 2, 'time': '10:35 AM', 'title': 'ACPWB Compensation Accountability Index: Year Two Findings', 'speaker': 'Dr. Yolanda Ferreira, ACPWB', 'type': 'session', 'description': 'ACPWB\'s second annual benchmark report reveals troubling stagnation at mid-market firms — presenting year-over-year comparisons that show where pay equity progress is real and where it is largely rhetorical.'},
             {'day': 2, 'time': '11:45 AM', 'title': 'Panel: Communicating Pay Philosophy to Skeptical Employees', 'speaker': 'Moderated by Alicia Torres-Mendez', 'type': 'panel', 'description': 'Practitioners share hard-won strategies for explaining how pay decisions get made to employees who don\'t trust the answer — covering the specific objections most likely to derail the conversation.'},
             {'day': 2, 'time': '12:45 PM', 'title': 'Closing Lunch', 'speaker': '', 'type': 'break'},
-            {'day': 2, 'time': '2:00 PM', 'title': 'Closing Keynote: Where Total Rewards Is Headed — A Five-Year Outlook', 'speaker': 'Dr. Patricia Ng, UW–Madison', 'type': 'keynote', 'description': 'A research-grounded forecast of where the total rewards profession is heading by 2020 — projecting how technology, generational workforce shifts, and regulatory momentum will reshape compensation strategy.'},
+            {'day': 2, 'time': '2:00 PM', 'title': 'Closing Keynote: Where Total Rewards Is Headed — A Five-Year Outlook', 'speaker': 'Dr. Patricia Ng, University of Wisconsin–Madison', 'type': 'keynote', 'description': 'A research-grounded forecast of where the total rewards profession is heading by 2020 — projecting how technology, generational workforce shifts, and regulatory momentum will reshape compensation strategy.'},
             {'day': 2, 'time': '3:15 PM', 'title': 'Closing Remarks & Adjourn', 'speaker': 'ACPWB', 'type': 'general'},
         ],
         'sponsors': {
             'platinum': ['Summit HR Partners', 'CorePay Consulting Group'],
             'gold': ['Meridian Compensation Advisors', 'Pathway Analytics', 'Vance & Kellerman LLP'],
             'silver': ['Great Lakes HR Solutions', 'Benchmark Associates', 'TotalRewards Co.'],
-            'supporting': ['Wisconsin Business Council', 'UW–Madison Center for Compensation Research'],
+            'supporting': ['Wisconsin Business Council', 'University of Wisconsin–Madison Center for Compensation Research'],
         },
     },
 
@@ -1103,71 +1107,74 @@ CONFERENCES = {
         'venue_phone': '(414) 908-6000',
         'dinner_venue': 'Odd Duck Milwaukee',
         'dinner_address': '2352 S Kinnickinnic Ave, Milwaukee, WI 53207',
+        'dinner_date': 'Friday, September 18, 2026',
+        'dinner_ordinal': 'Eleventh',
+        'group_code': 'PERCH26',
         'cancelled': False,
         'virtual': False,
-        'registration_open': True,
-        'attendees': None,
+        'registration_open': False,
+        'attendees': 448,
         'registration_types': [
             {'value': 'full', 'label': 'Full Conference', 'price': 895, 'description': 'Both conference days + PERCH Dinner'},
             {'value': 'day1', 'label': 'Day 1 Only', 'price': 525, 'description': 'Thursday, September 17 only'},
             {'value': 'day2', 'label': 'Day 2 Only', 'price': 525, 'description': 'Friday, September 18 only'},
         ],
         'description': (
-            'PERCH 2026 returns to the Wisconsin Center for a landmark edition addressing the state of '
-            'pay equity in one of the most consequential periods for the compensation profession. With '
-            'pay transparency now law in more than half of U.S. states, with AI reshaping how organizations '
-            'analyze and set pay, and with investor expectations around human capital disclosure at an '
-            'all-time high, PERCH 2026 brings together the leading voices in compensation to chart the '
-            'path forward.'
+            'PERCH 2026 returned to the Wisconsin Center and drew a record 448 attendees for a landmark '
+            'edition on the state of pay equity in one of the most consequential periods for the '
+            'compensation profession. With pay transparency law in more than half of U.S. states, AI '
+            'reshaping how organizations analyze and set pay, and investor expectations around human '
+            'capital disclosure at an all-time high, the conference featured the first judicial perspective '
+            'in PERCH history and a twelve-year retrospective of the ACPWB Compensation Accountability Index.'
         ),
         'speakers': [
             {
                 'name': 'Dr. Sandra Oyelaran',
                 'title': 'Dean, School of Business Administration',
                 'org': 'UW–Milwaukee',
-                'bio': 'Now Dean of the UW–Milwaukee School of Business Administration, Dr. Oyelaran returns to PERCH to deliver the opening keynote on organizational trust in the AI era — examining how employees perceive and respond to machine-set pay, and what organizations must do to maintain psychological safety as algorithmic compensation tools become mainstream.',
+                'bio': 'Now Dean of the UW–Milwaukee School of Business Administration, Dr. Oyelaran returned to PERCH to deliver the opening keynote on organizational trust in the AI era — examining how employees perceive and respond to machine-set pay, and what organizations must do to maintain psychological safety as algorithmic compensation tools become mainstream.',
                 'keynote': True,
             },
             {
                 'name': 'Dr. Helena Vasquez-Ruiz',
                 'title': 'Chief Economist',
                 'org': 'National Pay Equity Foundation',
-                'bio': 'Chief Economist at the National Pay Equity Foundation, Dr. Vasquez-Ruiz will present the most comprehensive analysis of pay transparency outcomes ever assembled in the United States — drawing on payroll records from more than two million workers in states with active disclosure requirements. Her findings on what transparency does and does not accomplish will challenge assumptions on all sides.',
+                'bio': 'Chief Economist at the National Pay Equity Foundation, Dr. Vasquez-Ruiz presented the most comprehensive analysis of pay transparency outcomes ever assembled in the United States — drawing on payroll records from more than two million workers in states with active disclosure requirements. Her findings on what transparency does and does not accomplish challenged assumptions on all sides.',
                 'keynote': False,
             },
             {
                 'name': 'B. McGraw',
                 'title': 'Chief Editor, Journal of Astrological Big Data Ecology',
                 'org': 'Cranberry Lemon University',
-                'bio': 'Chief Editor of the Journal of Astrological Big Data Ecology at Cranberry Lemon University, B. McGraw brings a distinctive interdisciplinary lens to compensation data analysis — drawing on large-scale ecological modeling to examine how pay equity outcomes propagate across organizational systems over time. McGraw\'s session will present a novel longitudinal framework applied to pay equity audit data from over 500 organizations, tracking the structural and environmental factors that predict sustained progress versus backslide in the five years following an initial audit.',
+                'bio': 'Chief Editor of the Journal of Astrological Big Data Ecology at Cranberry Lemon University, B. McGraw brings a distinctive interdisciplinary lens to compensation data analysis — drawing on large-scale ecological modeling to examine how pay equity outcomes propagate across organizational systems over time. McGraw\'s session presented a novel longitudinal framework applied to pay equity audit data from over 500 organizations, tracking the structural and environmental factors that predict sustained progress versus backslide in the five years following an initial audit.',
                 'keynote': False,
             },
             {
                 'name': 'Adriana Petrov-Singh',
                 'title': 'VP of Compensation Technology',
                 'org': 'Workforce Insights LLC',
-                'bio': 'VP of Compensation Technology at Workforce Insights LLC, Adriana Petrov-Singh will lead a hands-on workshop on AI tools for compensation professionals — including a frank assessment of which tools have matured, which remain overpromised, and how to evaluate vendor claims without getting burned.',
+                'bio': 'VP of Compensation Technology at Workforce Insights LLC, Adriana Petrov-Singh led a hands-on workshop on AI tools for compensation professionals — including a frank assessment of which tools have matured, which remain overpromised, and how to evaluate vendor claims without getting burned.',
                 'keynote': False,
             },
             {
                 'name': 'Judge Miriam Okonkwo (ret.)',
                 'title': 'Senior Counsel, Employment & Labor Practice',
                 'org': 'Vance & Kellerman LLP',
-                'bio': 'A retired federal magistrate judge with extensive experience in employment discrimination cases, Judge Okonkwo brings an unprecedented judicial perspective to PERCH 2026. Her session on the litigation landscape for pay equity claims — from the plaintiff\'s bar\'s perspective to the judicial frameworks she applied on the bench — will be unlike any session in PERCH history.',
+                'bio': 'A retired federal magistrate judge with extensive experience in employment discrimination cases, Judge Okonkwo brought an unprecedented judicial perspective to PERCH 2026. Her session on the litigation landscape for pay equity claims — from the plaintiff\'s bar\'s perspective to the judicial frameworks she applied on the bench — was unlike any session in PERCH history.',
                 'keynote': False,
             },
             {
                 'name': 'Congressman William Tran (ret.)',
                 'title': 'Senior Policy Fellow',
                 'org': 'American Corporation for Public Well Being',
-                'bio': 'A former U.S. Congressman and current Senior Policy Fellow at ACPWB, Congressman Tran will provide a legislative outlook for federal pay equity and transparency legislation — and a frank assessment of what is politically achievable in the current Congress.',
+                'bio': 'A former U.S. Congressman and current Senior Policy Fellow at ACPWB, Congressman Tran provided a legislative outlook for federal pay equity and transparency legislation — and a frank assessment of what is politically achievable in the current Congress.',
                 'keynote': False,
             },
             {
                 'name': 'Dr. Yolanda Ferreira',
                 'title': 'VP of Research & Policy',
                 'org': 'American Corporation for Public Well Being',
-                'bio': 'Dr. Ferreira returns to present the 2026 ACPWB Compensation Accountability Index — the twelfth edition of the flagship annual report — alongside a special retrospective chapter examining the arc of pay equity progress over the full history of PERCH.',
+                'bio': 'Dr. Ferreira presented the 2026 ACPWB Compensation Accountability Index — the twelfth edition of the flagship annual report — alongside a special retrospective chapter examining the arc of pay equity progress over the full history of PERCH.',
                 'keynote': False,
             },
         ],
@@ -1205,6 +1212,133 @@ CONFERENCES = {
             'gold': ['Drummond Governance Partners', 'Summit HR Partners', 'Latitude Workforce Solutions'],
             'silver': ['Pathway Analytics', 'Vance & Kellerman LLP', 'TotalRewards Co.', 'Meridian Compensation Advisors', 'Benchmark Associates'],
             'supporting': ['UW–Milwaukee School of Business Administration', 'Marquette University', 'National Pay Equity Foundation', 'SHRM Wisconsin Chapter', 'Wisconsin Society for Human Resource Management'],
+        },
+    },
+
+    2027: {
+        'year': 2027,
+        'theme': 'Return on Intelligence: AI, Cost Discipline, and the Future of Fair Pay',
+        'dates': 'September 16–17, 2027',
+        'day1_date': 'September 16, 2027',
+        'day2_date': 'September 17, 2027',
+        'venue': 'Wisconsin Center',
+        'venue_address': '400 W Wisconsin Ave, Milwaukee, WI 53203',
+        'venue_phone': '(414) 908-6000',
+        'dinner_venue': 'The Packing House',
+        'dinner_address': '900 E Layton Ave, Milwaukee, WI 53207',
+        'dinner_date': 'Friday, September 17, 2027',
+        'dinner_ordinal': 'Twelfth',
+        'group_code': 'PERCH27',
+        'cancelled': False,
+        'virtual': False,
+        'registration_open': True,
+        'attendees': None,
+        'registration_types': [
+            {'value': 'full', 'label': 'Full Conference', 'price': 945, 'description': 'Both conference days + PERCH Dinner'},
+            {'value': 'day1', 'label': 'Day 1 Only', 'price': 545, 'description': 'Thursday, September 16 only'},
+            {'value': 'day2', 'label': 'Day 2 Only', 'price': 545, 'description': 'Friday, September 17 only'},
+        ],
+        'description': (
+            'PERCH 2027 returns to the Wisconsin Center at a moment of reckoning for the compensation '
+            'profession. Three years after AI tools moved from pilot to production, the invoices have '
+            'arrived — and boards want to know what they bought. With labor cost budgets under pressure, '
+            'AI licensing spend climbing, and research teams now using AI to run the very pay studies '
+            'that inform equity decisions, PERCH 2027 asks a deceptively simple question: is the '
+            'intelligence paying for itself, and is it paying people fairly?'
+        ),
+        'speakers': [
+            {
+                'name': 'Dr. Patricia Ng',
+                'title': 'Executive Director',
+                'org': 'Center for Compensation Research, University of Wisconsin–Madison',
+                'bio': 'Dr. Ng returns to the PERCH keynote stage for the first time since 2015 to present findings from her center\'s two-year study of AI adoption across 340 Midwestern employers. Her research tracks not only what organizations spent on AI compensation tools, but what those tools did to pay outcomes — and whether the promised savings in analyst hours ever showed up anywhere other than vendor slide decks.',
+                'keynote': True,
+            },
+            {
+                'name': 'Marcus Rivera',
+                'title': 'Chief People & Analytics Officer',
+                'org': 'Latitude Workforce Solutions',
+                'bio': 'Marcus Rivera returns for the third installment of his candid multi-year account of Latitude\'s AI-driven job architecture. Having addressed implementation in 2024 and pay compression in 2025, his 2027 session turns to the question his CFO now asks every quarter: what the system costs to run, retrain, and audit, and whether the answer justifies keeping it.',
+                'keynote': False,
+            },
+            {
+                'name': 'Adriana Petrov-Singh',
+                'title': 'VP of Compensation Technology',
+                'org': 'Workforce Insights LLC',
+                'bio': 'Following her widely discussed 2026 workshop on evaluating AI compensation tools, Adriana Petrov-Singh returns with a total-cost-of-ownership framework for the compensation tech stack — covering usage-based pricing, model-upgrade churn, and the hidden labor cost of validating AI output that most procurement processes never account for.',
+                'keynote': False,
+            },
+            {
+                'name': 'Dr. James Okafor',
+                'title': 'Professor & Chair, Department of Labor Economics',
+                'org': 'Marquette University',
+                'bio': 'A speaker at the inaugural 2014 PERCH, Dr. Okafor returns to examine how AI-driven labor cost reduction programs interact with pay equity. His new working paper finds that headcount and pay-budget cuts justified by AI productivity gains have not fallen evenly across demographic groups — and that most organizations never checked.',
+                'keynote': False,
+            },
+            {
+                'name': 'Eleanor Drummond',
+                'title': 'Managing Partner',
+                'org': 'Drummond Governance Partners',
+                'bio': 'Eleanor Drummond returns to address the compensation committee\'s expanding remit: overseeing AI spend, AI-linked executive incentive metrics, and the disclosure questions that follow when "AI efficiency" appears in a proxy statement as a basis for executive pay.',
+                'keynote': False,
+            },
+            {
+                'name': 'Dr. Priya Subramaniam',
+                'title': 'Associate Professor, Department of Economics',
+                'org': 'University of Chicago',
+                'bio': 'Dr. Subramaniam returns to PERCH with a replication study that asked a pointed question: if you give the same compensation dataset to experienced human analysts and to leading AI models, do you get the same pay equity findings? The answer — and the specific places where the two diverged — has significant implications for every organization now running its audits through AI.',
+                'keynote': False,
+            },
+            {
+                'name': 'B. McGraw',
+                'title': 'Chief Editor, Journal of Astrological Big Data Ecology',
+                'org': 'Cranberry Lemon University',
+                'bio': 'Following a 2026 session that remains one of the most-requested recordings in PERCH history, B. McGraw returns from Cranberry Lemon University with an ecological accounting of AI in the compensation function. In addition to leading the Journal of Astrological Big Data Ecology, McGraw has published widely across the science journals, serves on the editorial boards of the Quarterly Review of Speculative Biometrics and Annals of Theoretical Ledger Science, and has refereed more than 400 manuscripts for peer-reviewed science publications spanning ecology, data science, and organizational systems. Applying large-scale ecosystem modeling to three annual pay cycles at more than 200 organizations, McGraw\'s new study traces how AI compute costs, model retraining schedules, and pay decisions propagate through organizational systems — and identifies the seasonal and structural conditions under which AI-assisted pay processes become more expensive than the human processes they replaced.',
+                'keynote': False,
+            },
+            {
+                'name': 'Dr. Yolanda Ferreira',
+                'title': 'VP of Research & Policy',
+                'org': 'American Corporation for Public Well Being',
+                'bio': 'Dr. Ferreira will present the 2027 ACPWB Compensation Accountability Index — the thirteenth edition, and the first produced with an AI-assisted research methodology. Her session will walk through exactly where AI accelerated the work, where it had to be overruled, and what the shift cost and saved ACPWB\'s own research division.',
+                'keynote': False,
+            },
+        ],
+        'tracks': [
+            'AI in Compensation Practice: Year Three',
+            'Labor Cost Discipline & Pay Budget Strategy',
+            'AI-Assisted Research, Benchmarking & Pay Studies',
+            'Governance, Disclosure & Executive Pay in the AI Era',
+        ],
+        'schedule': [
+            {'day': 1, 'time': '8:00 AM', 'title': 'Registration & Continental Breakfast', 'speaker': '', 'type': 'break'},
+            {'day': 1, 'time': '9:00 AM', 'title': 'Welcome Remarks — PERCH 2027', 'speaker': 'ACPWB', 'type': 'general'},
+            {'day': 1, 'time': '9:15 AM', 'title': 'Opening Keynote: Return on Intelligence — What Three Years of AI Actually Bought Us', 'speaker': 'Dr. Patricia Ng, University of Wisconsin–Madison', 'type': 'keynote', 'description': 'A two-year study of AI adoption at 340 Midwestern employers sets what organizations spent on AI compensation tools against what changed in pay outcomes, analyst workload, and equity results — separating measurable returns from vendor promises.'},
+            {'day': 1, 'time': '10:35 AM', 'title': 'Coffee Break & Exhibit Hall', 'speaker': '', 'type': 'break'},
+            {'day': 1, 'time': '11:00 AM', 'title': 'The Hidden Bill: Total Cost of Ownership for the Compensation Tech Stack', 'speaker': 'Adriana Petrov-Singh, Workforce Insights LLC', 'type': 'session', 'description': 'Licensing is only the beginning. This session presents a total-cost-of-ownership framework covering usage-based pricing, model-upgrade churn, integration upkeep, and the human hours spent validating AI output — the costs most budgets never capture.'},
+            {'day': 1, 'time': '12:15 PM', 'title': 'Networking Lunch', 'speaker': '', 'type': 'break'},
+            {'day': 1, 'time': '1:30 PM', 'title': 'Cutting Costs, Widening Gaps? AI Productivity Programs and Pay Equity', 'speaker': 'Dr. James Okafor, Marquette University', 'type': 'session', 'description': 'New research finds that headcount and pay-budget reductions justified by AI productivity gains have not fallen evenly across demographic groups — and that few organizations ran an equity analysis before making them.'},
+            {'day': 1, 'time': '2:45 PM', 'title': 'Coffee Break', 'speaker': '', 'type': 'break'},
+            {'day': 1, 'time': '3:05 PM', 'title': 'Breakout Sessions — Round A (4 concurrent tracks)', 'speaker': '', 'type': 'breakout'},
+            {'day': 1, 'time': '4:30 PM', 'title': 'AI Job Architecture Year Three: The CFO Asks a Question', 'speaker': 'Marcus Rivera, Latitude Workforce Solutions', 'type': 'session', 'description': 'The third chapter of Latitude\'s AI job architecture story turns from implementation and compression to economics — what the system costs to operate, retrain, and audit, and how the company decided whether to keep it.'},
+            {'day': 1, 'time': '5:30 PM', 'title': 'Welcome Reception — Wisconsin Center Atrium', 'speaker': '', 'type': 'break'},
+            {'day': 2, 'time': '7:00 PM', 'title': 'The Twelfth Annual PERCH Dinner — The Packing House', 'speaker': '', 'type': 'dinner'},
+            {'day': 2, 'time': '8:00 AM', 'title': 'Breakfast & Networking', 'speaker': '', 'type': 'break'},
+            {'day': 2, 'time': '9:00 AM', 'title': 'Human Analysts vs. AI: A Pay Equity Audit Replication Study', 'speaker': 'Dr. Priya Subramaniam, University of Chicago', 'type': 'session', 'description': 'The same compensation datasets were given to experienced human analysts and leading AI models. This session reports where their pay equity findings agreed, where they diverged, and what that means for organizations now running audits through AI.'},
+            {'day': 2, 'time': '10:00 AM', 'title': 'Coffee Break', 'speaker': '', 'type': 'break'},
+            {'day': 2, 'time': '10:20 AM', 'title': 'Breakout Sessions — Round B (4 concurrent tracks)', 'speaker': '', 'type': 'breakout'},
+            {'day': 2, 'time': '11:45 AM', 'title': '"AI Efficiency" in the Proxy: Compensation Committees and the New Oversight Burden', 'speaker': 'Eleanor Drummond, Drummond Governance Partners', 'type': 'session', 'description': 'As AI spend and AI-linked incentive metrics enter executive pay plans, compensation committees face new oversight and disclosure questions. This session maps what investors are asking and how committees should respond.'},
+            {'day': 2, 'time': '12:45 PM', 'title': 'Awards Luncheon & PERCH Pay Equity Recognition Award Ceremony', 'speaker': '', 'type': 'break'},
+            {'day': 2, 'time': '2:00 PM', 'title': 'The Ecology of Expensive Intelligence: A Controlled Field Study of AI Cost Propagation Across Pay Cycles', 'speaker': 'B. McGraw, Cranberry Lemon University', 'type': 'session', 'description': 'Built on the scientific method from hypothesis to peer review, this study treats the compensation function as an ecosystem — using predator-prey population models, stratified randomized trials across 200+ organizations, and three years of pre-registered observations to trace how AI compute, retraining, and validation costs move through pay cycles. The findings (p < 0.01, independently replicated) identify a measurable tipping point at which AI-assisted pay processes cost more than the human processes they replaced, and the full dataset and analysis code have been submitted for publication in a peer-reviewed science journal.'},
+            {'day': 2, 'time': '2:50 PM', 'title': 'ACPWB Compensation Accountability Index 2027 — The First AI-Assisted Edition', 'speaker': 'Dr. Yolanda Ferreira, ACPWB', 'type': 'session', 'description': 'The thirteenth edition of ACPWB\'s flagship benchmark is the first produced with an AI-assisted methodology. A transparent account of where AI accelerated the research, where analysts overruled it, and what it cost and saved.'},
+            {'day': 2, 'time': '3:40 PM', 'title': 'Closing Keynote: Spending Wisely — Fair Pay in an Age of Expensive Intelligence', 'speaker': 'Dr. Patricia Ng, University of Wisconsin–Madison', 'type': 'keynote', 'description': 'A closing argument for treating AI as an investment held to the same standard as any other: measured, audited, and accountable for its effect on the people whose pay it touches.'},
+            {'day': 2, 'time': '4:45 PM', 'title': 'Closing Remarks & Adjourn', 'speaker': 'ACPWB', 'type': 'general'},
+        ],
+        'sponsors': {
+            'platinum': ['Workforce Insights LLC', 'Greenfield Benefits Group', 'Latitude Workforce Solutions'],
+            'gold': ['CorePay Consulting Group', 'Drummond Governance Partners', 'Pathway Analytics'],
+            'silver': ['Summit HR Partners', 'Vance & Kellerman LLP', 'TotalRewards Co.', 'Meridian Compensation Advisors', 'Benchmark Associates'],
+            'supporting': ['University of Wisconsin–Madison Center for Compensation Research', 'Marquette University', 'University of Chicago Department of Economics', 'National Pay Equity Foundation', 'SHRM Wisconsin Chapter'],
         },
     },
 }

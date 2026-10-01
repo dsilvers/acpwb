@@ -97,8 +97,8 @@ func TestRenderPage_Structure(t *testing.T) {
 	if !strings.Contains(html, `<a href="/process-improvement/">Process</a>`) {
 		t.Errorf("missing unprefixed Process footer link")
 	}
-	if !strings.Contains(html, `<a href="/perch-conference/">PERCH 2026</a>`) {
-		t.Errorf("missing prefixed PERCH 2026 footer link")
+	if !strings.Contains(html, `<a href="/perch-conference/">PERCH 2027</a>`) {
+		t.Errorf("missing prefixed PERCH 2027 footer link")
 	}
 
 	// Copyright year is current year.

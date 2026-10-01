@@ -11,19 +11,19 @@
       </li>
       <li class="nav-item">
         <a class="nav-link {% if 'speakers' in request.resolver_match.url_name %}active{% endif %}"
-           href="{% if conf.year == 2026 %}{% url 'perch-conference-speakers' %}{% else %}{% url 'perch-conference-archive-speakers' conf.year %}{% endif %}"
+           href="{% if conf.year == perch_year %}{% url 'perch-conference-speakers' %}{% else %}{% url 'perch-conference-archive-speakers' conf.year %}{% endif %}"
            style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if 'speakers' in request.resolver_match.url_name %}color:var(--gold);{% endif %}">
           Speakers
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {% if 'schedule' in request.resolver_match.url_name %}active{% endif %}"
-           href="{% if conf.year == 2026 %}{% url 'perch-conference-schedule' %}{% else %}{% url 'perch-conference-archive-schedule' conf.year %}{% endif %}"
+           href="{% if conf.year == perch_year %}{% url 'perch-conference-schedule' %}{% else %}{% url 'perch-conference-archive-schedule' conf.year %}{% endif %}"
            style="color:rgba(255,255,255,0.7);font-size:.95rem;font-weight:600;padding:.85rem 1.25rem;white-space:nowrap;{% if 'schedule' in request.resolver_match.url_name %}color:var(--gold);{% endif %}">
           Schedule
         </a>
       </li>
-      {% if conf.year == 2026 %}
+      {% if conf.year == perch_year %}
       <li class="nav-item">
         <a class="nav-link {% if request.resolver_match.url_name == 'perch-conference-venue' %}active{% endif %}"
            href="{% url 'perch-conference-venue' %}"

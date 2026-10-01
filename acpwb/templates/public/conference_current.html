@@ -21,7 +21,7 @@
       <div class="col-lg-8">
         <p class="text-uppercase mb-2" style="color:var(--gold);font-weight:800;letter-spacing:.2em;font-size:.72rem">Annual Conference on Pay Equity &amp; Remuneration Compensation</p>
         <h1 style="color:white;font-weight:900;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin-bottom:.75rem">
-          PERCH <span style="color:var(--gold)">2026</span>
+          PERCH <span style="color:var(--gold)">{{ conf.year }}</span>
         </h1>
         <p style="color:rgba(255,255,255,0.85);font-size:clamp(1rem,2vw,1.25rem);font-weight:600;margin-bottom:1.5rem;font-style:italic">
           {{ conf.theme }}
@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-lg-8">
         <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.15em;font-size:.75rem">About This Year's Conference</p>
-        <h2 class="section-heading">PERCH 2026</h2>
+        <h2 class="section-heading">PERCH {{ conf.year }}</h2>
         <hr class="section-rule">
         <p style="font-size:1.05rem;line-height:1.75;color:var(--navy)">{{ conf.description }}</p>
       </div>

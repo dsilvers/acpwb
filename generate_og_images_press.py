@@ -95,12 +95,14 @@ _SLUG_SCENES = {
     'one-billion-pages-served': 'vast data center corridor, server racks receding to vanishing point, deep navy ambient glow, gold edge lighting',
     'perch-2027-announced': 'modern convention center hall before a business conference, low black stage, wide LED video wall glowing deep blue, sleek acrylic lectern with microphone, neat straight rows of identical black chairs, warm gold accent lights',
     'record-peak-traffic-august-2026': 'close angled view of a single storefront window at night, tightly framed so no signage, lettering, or awnings are visible, blank dark brick wall bordering the window, dozens of mismatched old television sets crammed onto shelves behind rain-streaked glass, screens glowing dim static, warm interior light spilling onto wet pavement at the bottom edge of frame',
+    'record-traffic-september-2026': 'dim windowless corporate conference room at night, dozens of vintage carousel slide projectors crowded across a long boardroom table and stacked on folding carts, every projector running, crisscrossing beams of warm light cutting through dusty air onto a blank white pull-down screen, overlapping squares of empty light, tangled extension cords and power strips on the carpet, empty office chairs pushed back',
 }
 
 # Per-slug style-suffix overrides — replaces _STYLE_SUFFIX / _FLUX_STYLE_SUFFIX entirely,
 # for scenes that need a different photographic treatment than the default corporate look.
 _SLUG_STYLE_SUFFIX = {
     'record-peak-traffic-august-2026': ', 35mm film photograph, Kodak Portra 800, visible film grain, handheld candid framing, slight motion blur, muted realistic color grading, documentary street photography, no visible content on the screens',
+    'record-traffic-september-2026': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy carpet and walls with warm gold projector light, projected squares are plain blank light with no text or images',
 }
 
 # Words too generic to anchor a scene on their own
@@ -127,7 +129,7 @@ _AI_SYSTEM = (
 
 
 def _ai_build_prompt(pr, client, model, flux=False):
-    body_text = '\n\n'.join(pr.get('body', []))[:3000]
+    body_text = '\n\n'.join(b for b in pr.get('body', []) if isinstance(b, str))[:3000]
     response = client.chat.completions.create(
         model=model,
         max_tokens=80,

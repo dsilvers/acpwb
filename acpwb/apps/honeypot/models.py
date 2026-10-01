@@ -202,10 +202,10 @@ class IPIntelligence(models.Model):
     populates first_seen/last_seen/visit_count from CrawlerVisit directly).
     """
     ip_address = models.GenericIPAddressField(unique=True, db_index=True)
-    ip_version = models.PositiveSmallIntegerField(default=4, db_index=True)
+    ip_version = models.PositiveSmallIntegerField(default=4)
 
     # MaxMind GeoLite2-City
-    country_code = models.CharField(max_length=2, blank=True, db_index=True)
+    country_code = models.CharField(max_length=2, blank=True)  # indexed via (country_code, is_hosting)
     country_name = models.CharField(max_length=128, blank=True)
     region_name = models.CharField(max_length=128, blank=True)
     city_name = models.CharField(max_length=128, blank=True)
@@ -214,13 +214,13 @@ class IPIntelligence(models.Model):
     accuracy_radius_km = models.PositiveIntegerField(null=True, blank=True)
 
     # MaxMind GeoLite2-ASN — asn_org doubles as the "ISP" field
-    asn = models.PositiveIntegerField(null=True, blank=True, db_index=True)
-    asn_org = models.CharField(max_length=256, blank=True, db_index=True)
+    asn = models.PositiveIntegerField(null=True, blank=True)
+    asn_org = models.CharField(max_length=256, blank=True)
 
     # Best-effort heuristics — not authoritative, see apps.core.ip_intel_classify
     # and apps.core.tor_exit_list for how these are derived.
-    is_hosting = models.BooleanField(default=False, db_index=True)
-    is_tor_exit = models.BooleanField(default=False, db_index=True)
+    is_hosting = models.BooleanField(default=False)
+    is_tor_exit = models.BooleanField(default=False)
 
     # Enrichment bookkeeping
     lookup_ok = models.BooleanField(default=False)
@@ -230,13 +230,22 @@ class IPIntelligence(models.Model):
 
     # Populated by discover_ip_intelligence as a side effect of the GROUP BY
     # it already has to do — avoids a second pass over CrawlerVisit.
-    first_seen = models.DateTimeField(null=True, blank=True, db_index=True)
-    last_seen = models.DateTimeField(null=True, blank=True, db_index=True)
+    # Deliberately NOT indexed: discover_ip_intelligence rewrites these (and
+    # visit_count) on every IP it sees, every run. With no index on any of
+    # them, those updates are HOT (heap-only) and touch no index at all —
+    # an index here made every one rewrite all of the table's indexes
+    # instead (see migration 0020).
+    first_seen = models.DateTimeField(null=True, blank=True)
+    last_seen = models.DateTimeField(null=True, blank=True)
     visit_count = models.BigIntegerField(default=0)
 
     class Meta:
+        # Keep this list short — every index is written on every
+        # enrich_ip_intelligence update. Lookups that matter: ip_address
+        # (unique, discover's upsert), enriched_at (enrich's backlog), and
+        # country/hosting breakdowns. Reports otherwise seq-scan, which is
+        # fine for an occasional command.
         indexes = [
-            models.Index(fields=['is_hosting', 'is_tor_exit']),
             models.Index(fields=['country_code', 'is_hosting']),
         ]
         verbose_name = 'IP Intelligence'

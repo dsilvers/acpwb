@@ -266,6 +266,53 @@ def _recover_visits(queue_key: str):
     return batches
 
 
+def _oldest_pending_timestamp(queue_key: str):
+    """
+    Earliest request timestamp among items not yet committed to Postgres:
+    the head of `queue_key` plus the head of every "<queue_key>:processing:*"
+    batch a drain is mid-way through. Items are RPUSHed at request time and
+    LMOVEd off the left, so each list's head is (to within a few seconds)
+    its oldest item.
+
+    Returns (ok, datetime_or_None): ok=False if Redis couldn't be read (the
+    answer is unknown), (True, None) if nothing is pending.
+    """
+    from django.utils.dateparse import parse_datetime
+
+    r = _get_consumer_client()
+    if r is None:
+        return False, None
+    try:
+        heads = [r.lindex(queue_key, 0)]
+        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=100):
+            heads.append(r.lindex(key, 0))
+    except Exception:
+        _mark_consumer_failure()
+        return False, None
+
+    oldest = None
+    for raw in heads:
+        if not raw:
+            continue
+        try:
+            ts = parse_datetime(json.loads(raw).get('timestamp') or '')
+        except Exception:
+            ts = None
+        if ts and (oldest is None or ts < oldest):
+            oldest = ts
+    return True, oldest
+
+
+def oldest_pending_crawler_visit():
+    """See _oldest_pending_timestamp()."""
+    return _oldest_pending_timestamp(_QUEUE_KEY)
+
+
+def oldest_pending_archive_visit():
+    """See _oldest_pending_timestamp()."""
+    return _oldest_pending_timestamp(_ARCHIVE_QUEUE_KEY)
+
+
 def recover_crawler_visits():
     """Recover any orphaned crawler-queue batches from a prior crashed run."""
     return _recover_visits(_QUEUE_KEY)

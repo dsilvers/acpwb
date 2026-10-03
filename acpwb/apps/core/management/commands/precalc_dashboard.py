@@ -27,6 +27,7 @@ from django.db.models import Count, Max
 from django.db.models.functions import TruncDate, TruncMinute
 from django.utils import timezone
 
+from apps.core.crawler_queue import oldest_pending_archive_visit, oldest_pending_crawler_visit
 from apps.core.db_router import force_db
 from apps.core.graph_gen import RECENT_BUCKET_MINUTES, RECENT_BUCKET_RETENTION_DAYS, _bucket_key
 from apps.core.models import DashboardStat
@@ -66,6 +67,16 @@ _DAILY_RETENTION_DAYS = {'crawlers': 60, 'archive': 30}
 # the same small `new_rows` window (already computed above, bounded to
 # _MAX_HOURS_PER_RUN) by day and increment the stored dict in place, exactly
 # like crawlers.by_trap_type/by_bot_type already do.
+#
+# The timestamp HWM assumes every row older than it is already in Postgres.
+# That's false while the Redis drain is behind: on 2026-10-02 a traffic surge
+# put the crawler queue ~2h behind, a handful of current-timestamp rows
+# landed anyway, the HWM jumped past the whole backlog, and ~154M rows that
+# drained afterwards were never counted. So the window also stops this far
+# short of the oldest item still pending in Redis (queue head or an
+# in-flight drain batch) — the margin covers items pushed slightly out of
+# timestamp order by concurrent workers.
+_PENDING_QUEUE_MARGIN = timedelta(minutes=5)
 
 
 class Command(BaseCommand):
@@ -162,6 +173,19 @@ class Command(BaseCommand):
         if earliest is None:
             return datetime.min.replace(tzinfo=dt_tz.utc)
         return earliest - td(microseconds=1)
+
+    def _window_end(self, since, now, oldest_pending_fn, label):
+        """Upper timestamp bound for this run's incremental window: at most
+        _MAX_HOURS_PER_RUN past `since`, and never at or past rows still
+        waiting in the Redis queue (see _PENDING_QUEUE_MARGIN). Returns
+        (window_end, capped)."""
+        window_end = min(now, since + timedelta(hours=_MAX_HOURS_PER_RUN))
+        ok, oldest_pending = oldest_pending_fn()
+        if not ok:
+            self.stdout.write(f'  {label}: Redis unavailable — pending-queue bound not applied')
+        elif oldest_pending is not None:
+            window_end = min(window_end, oldest_pending - _PENDING_QUEUE_MARGIN)
+        return window_end, window_end < now
 
     def _cap_new_max(self, hwm_value, actual_max):
         """Cap new_max to avoid processing too many rows in one run."""
@@ -484,20 +508,25 @@ class Command(BaseCommand):
         hwm = self._upsert('hwm.crawler_visit_ts', '')
         since = self._seed_since(CrawlerVisit, hwm)
         now = timezone.now()
-        window_end = min(now, since + timedelta(hours=_MAX_HOURS_PER_RUN))
-        capped = window_end < now
+        window_end, capped = self._window_end(since, now, oldest_pending_crawler_visit, 'crawlers')
+        if window_end <= since:
+            self.stdout.write('  crawlers: waiting on Redis queue backlog')
+            return
         new_rows = CrawlerVisit.objects.filter(timestamp__gt=since, timestamp__lte=window_end)
         actual_max_ts = new_rows.aggregate(m=Max('timestamp'))['m']
         if actual_max_ts is None:
-            if window_end > since:
-                # No rows in this window, but time has moved on — advance the
-                # HWM anyway so the next run doesn't re-scan the same empty
-                # window (e.g. a quiet period with no traffic at all).
-                hwm.value = window_end.isoformat()
-                hwm.save()
+            # No rows in this window, but time has moved on — advance the
+            # HWM anyway so the next run doesn't re-scan the same empty
+            # window (e.g. a quiet period with no traffic at all).
+            hwm.value = window_end.isoformat()
+            hwm.save()
             self.stdout.write('  crawlers: no new rows')
             return
         new_max_ts = actual_max_ts
+        # Every query below must stop where the HWM will — rows landing in
+        # (new_max_ts, window_end] mid-run would otherwise be counted here
+        # by the later queries and again next run.
+        new_rows = CrawlerVisit.objects.filter(timestamp__gt=since, timestamp__lte=new_max_ts)
 
         total_stat = self._upsert('crawlers.total', 0)
         total_stat.value = total_stat.value + new_rows.count()
@@ -574,17 +603,20 @@ class Command(BaseCommand):
         hwm = self._upsert('hwm.archive_visit_ts', '')
         since = self._seed_since(ArchiveVisit, hwm)
         now = timezone.now()
-        window_end = min(now, since + timedelta(hours=_MAX_HOURS_PER_RUN))
-        capped = window_end < now
+        window_end, capped = self._window_end(since, now, oldest_pending_archive_visit, 'archive')
+        if window_end <= since:
+            self.stdout.write('  archive: waiting on Redis queue backlog')
+            return
         new_rows = ArchiveVisit.objects.filter(timestamp__gt=since, timestamp__lte=window_end)
         actual_max_ts = new_rows.aggregate(m=Max('timestamp'))['m']
         if actual_max_ts is None:
-            if window_end > since:
-                hwm.value = window_end.isoformat()
-                hwm.save()
+            hwm.value = window_end.isoformat()
+            hwm.save()
             self.stdout.write('  archive: no new rows')
             return
         new_max_ts = actual_max_ts
+        # See _update_crawlers — keep every query aligned with the HWM.
+        new_rows = ArchiveVisit.objects.filter(timestamp__gt=since, timestamp__lte=new_max_ts)
 
         total_stat = self._upsert('archive.total', 0)
         total_stat.value = total_stat.value + new_rows.count()

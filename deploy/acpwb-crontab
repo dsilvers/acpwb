@@ -2,7 +2,7 @@
 #
 # cron does not load .env, so each job sources it manually before invoking manage.py
 */30 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py precalc_dashboard' >> /var/log/acpwb-precalc.log 2>&1
-* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_crawler_queue' >> /var/log/acpwb-crawler-drain.log 2>&1
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_crawler_queue --batch 5000' >> /var/log/acpwb-crawler-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_archive_queue' >> /var/log/acpwb-archive-drain.log 2>&1
 
 # Residential-proxy-detection pipeline (see the plan this implements).

@@ -1,5 +1,6 @@
 import io
 from datetime import timedelta
+from unittest.mock import patch
 
 import pytest
 from django.core.management import call_command
@@ -8,8 +9,18 @@ from django.utils import timezone
 from apps.core.models import DashboardStat
 from apps.honeypot.models import ArchiveVisit, CrawlerVisit
 
+_CMD = 'apps.core.management.commands.precalc_dashboard'
 
-@pytest.mark.django_db(databases=['default', 'direct'])
+
+@pytest.fixture(autouse=True)
+def _empty_redis_queues():
+    """Default: nothing pending in Redis. Tests that need a backlog re-patch."""
+    with patch(f'{_CMD}.oldest_pending_crawler_visit', return_value=(True, None)), \
+         patch(f'{_CMD}.oldest_pending_archive_visit', return_value=(True, None)):
+        yield
+
+
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
 def test_precalc_dashboard_crawlers_catches_up_across_multiple_runs():
     """Regression test for the OFFSET(500_000) -> time-window fix.
 
@@ -41,7 +52,7 @@ def test_precalc_dashboard_crawlers_catches_up_across_multiple_runs():
     assert DashboardStat.objects.get(key='crawlers.total').value == 10
 
 
-@pytest.mark.django_db(databases=['default', 'direct'])
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
 def test_precalc_dashboard_crawlers_daily_increments_without_rescanning_history():
     """Regression test: the daily chart used to be kept fresh by re-querying
     a date-range GROUP BY over the whole chart window (first 60 days, then a
@@ -82,7 +93,7 @@ def test_precalc_dashboard_crawlers_daily_increments_without_rescanning_history(
     assert stale_day not in daily_by_bot
 
 
-@pytest.mark.django_db(databases=['default', 'direct'])
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
 def test_precalc_dashboard_recent_by_bucket_feeds_7d_graph_without_live_scan():
     """Regression test: the 7d traffic graph used to run a live GROUP BY over
     the full 7-day CrawlerVisit range (apps.core.graph_gen._query_windowed at
@@ -106,7 +117,7 @@ def test_precalc_dashboard_recent_by_bucket_feeds_7d_graph_without_live_scan():
     assert 'Googlebot' in series or 'Others' in series
 
 
-@pytest.mark.django_db(databases=['default', 'direct'])
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
 def test_precalc_dashboard_archive_catches_up_across_multiple_runs():
     base = timezone.now() - timedelta(hours=5)
     ArchiveVisit.objects.bulk_create([
@@ -117,3 +128,46 @@ def test_precalc_dashboard_archive_catches_up_across_multiple_runs():
     call_command('precalc_dashboard', stdout=io.StringIO())
 
     assert DashboardStat.objects.get(key='archive.total').value == 5
+
+
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
+def test_precalc_dashboard_hwm_never_passes_pending_redis_backlog():
+    """Regression test for the 2026-10-02 incident: with the crawler drain
+    ~2h behind, a few current-timestamp rows reached Postgres, the timestamp
+    HWM jumped past everything still queued in Redis, and those rows were
+    never counted once they drained. The window must stop short of the
+    oldest pending queue item, then pick the backlog up once it lands."""
+    now = timezone.now()
+    backlog_ts = now - timedelta(hours=1)
+    CrawlerVisit.objects.create(timestamp=now - timedelta(hours=1, minutes=30), ip_address='1.1.1.1', path='/old')
+    CrawlerVisit.objects.create(timestamp=now - timedelta(minutes=1), ip_address='2.2.2.2', path='/fresh')
+
+    with patch(f'{_CMD}.oldest_pending_crawler_visit', return_value=(True, backlog_ts)):
+        call_command('precalc_dashboard', stdout=io.StringIO())
+
+    assert DashboardStat.objects.get(key='crawlers.total').value == 1  # only /old
+    hwm = DashboardStat.objects.get(key='hwm.crawler_visit_ts').value
+    assert hwm < backlog_ts.isoformat()
+
+    # The backlog drains (older than the fresh row), queue empties.
+    CrawlerVisit.objects.create(timestamp=backlog_ts, ip_address='3.3.3.3', path='/backlog')
+    call_command('precalc_dashboard', stdout=io.StringIO())
+
+    assert DashboardStat.objects.get(key='crawlers.total').value == 3
+    assert sum(DashboardStat.objects.get(key='crawlers.daily').value.values()) == 3
+
+
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
+def test_precalc_dashboard_waits_when_backlog_is_older_than_hwm_window():
+    now = timezone.now()
+    DashboardStat.objects.update_or_create(
+        key='hwm.crawler_visit_ts', defaults={'value': (now - timedelta(minutes=10)).isoformat()},
+    )
+    CrawlerVisit.objects.create(timestamp=now - timedelta(minutes=1), ip_address='2.2.2.2', path='/fresh')
+
+    with patch(f'{_CMD}.oldest_pending_crawler_visit', return_value=(True, now - timedelta(minutes=12))):
+        out = io.StringIO()
+        call_command('precalc_dashboard', stdout=out)
+
+    assert 'waiting on Redis queue backlog' in out.getvalue()
+    assert not DashboardStat.objects.filter(key='crawlers.total').exists()

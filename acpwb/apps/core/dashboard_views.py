@@ -244,7 +244,7 @@ def honeypot_traps(request):
     by_trap = _stat('crawlers.by_trap_type', {})
     trap_totals = _trap_counts(by_trap)
 
-    CONTENT_KEYS = {'wiki', 'report_list', 'report_download', 'dataset', 'api', 'well_known', 'pow', 'handbook', 'process_improvement'}
+    CONTENT_KEYS = {'wiki', 'report_list', 'report_download', 'dataset', 'api', 'well_known', 'pow', 'handbook', 'process_improvement', 'source_code', 'source_code_download'}
     SCANNER_KEYS = {'scanner_probe', 'env_probe', 'wp_probe', 'webshell_probe'}
 
     content_total = sum(by_trap.get(k, 0) for k in CONTENT_KEYS)

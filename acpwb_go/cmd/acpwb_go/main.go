@@ -779,7 +779,7 @@ func serveSourceCode(w http.ResponseWriter, r *http.Request, vq *visitqueue.Queu
 		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
-			Referrer: r.Header.Get("Referer"), TrapType: "source_code", QueryString: r.URL.RawQuery,
+			Referrer: r.Header.Get("Referer"), TrapType: "source_code_download", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(data), ResponseMs: time.Since(start).Milliseconds(),
 			ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,

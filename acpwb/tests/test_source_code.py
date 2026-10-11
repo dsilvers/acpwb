@@ -41,6 +41,7 @@ def test_article_render_links_to_source_code():
 
 def test_trap_type_choice():
     assert 'source_code' in dict(CrawlerVisit.TRAP_CHOICES)
+    assert 'source_code_download' in dict(CrawlerVisit.TRAP_CHOICES)
 
 
 @pytest.mark.django_db

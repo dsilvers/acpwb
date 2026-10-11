@@ -23,6 +23,7 @@ class CrawlerVisit(models.Model):
         ('process_improvement', 'Process Improvement'),
         ('presentation', 'Presentation'),
         ('source_code', 'Legacy Source Code'),
+        ('source_code_download', 'Legacy Source Code Download'),
         ('other', 'Other'),
     ]
 

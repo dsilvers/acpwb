@@ -465,3 +465,34 @@ def check_first_seen_ip(ip_address: str) -> bool:
     except Exception:
         _mark_failure()
         return False
+
+
+# ── Legacy source-code page email registry ─────────────────────────────────
+# acpwb_go pushes {address, host, path, ip_address, timestamp} for every
+# programmer address it shows on a /source-code/ page (see
+# visitqueue.PushCodeEmails); drain_code_email_queue folds them into
+# honeypot.SourceCodeEmail.
+
+_CODE_EMAIL_QUEUE_KEY = 'acpwb:code_email_queue'
+
+
+def pop_code_emails(count: int = 500):
+    """Same contract as pop_crawler_visits(), for the code-email queue."""
+    return _pop_visits(_CODE_EMAIL_QUEUE_KEY, count)
+
+
+def recover_code_emails():
+    """Recover any orphaned code-email batches from a prior crashed run."""
+    return _recover_visits(_CODE_EMAIL_QUEUE_KEY)
+
+
+def code_email_queue_length() -> int:
+    """Return the code-email queue depth, or -1 if Redis is unavailable."""
+    r = _get_consumer_client()
+    if r is None:
+        return -1
+    try:
+        return r.llen(_CODE_EMAIL_QUEUE_KEY)
+    except Exception:
+        _mark_consumer_failure()
+        return -1

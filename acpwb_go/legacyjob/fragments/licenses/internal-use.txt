@@ -1,0 +1,11 @@
+#name: Internal Use Only
+#kind: proprietary
+#from: 1966
+#to: 2025
+FOR INTERNAL USE ONLY - {DIST}
+
+This listing is distributed to authorised {HOLDER} personnel on a need-to-know basis. Do not remove from {BLDG}. Do not leave on the printer. Do not use as scrap paper, a placemat, or a cat bed.
+
+Listings older than {SMALLN} years must be returned to Records Management for secure destruction. This listing is older than that.
+
+Copyright (C) {YEARRANGE} {HOLDER}.

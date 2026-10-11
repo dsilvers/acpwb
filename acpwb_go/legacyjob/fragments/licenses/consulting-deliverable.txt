@@ -1,0 +1,10 @@
+#name: Consulting Work Product Terms
+#kind: proprietary
+#from: 1980
+WORK PRODUCT AND PRE-EXISTING MATERIALS
+
+Client owns the deliverables prepared specifically for Client under the engagement. {HOLDER} retains all rights in its pre-existing materials, tools, methodologies and software, including {PROGRAM}, which was used to prepare the deliverables and is not itself a deliverable.
+
+To the extent any pre-existing material is incorporated into a deliverable, {HOLDER} grants Client a perpetual, non-exclusive license to use it as part of the deliverable. The percentile ladder is incorporated into every deliverable. Client may use it but may not ask about it.
+
+Engagement code: {ENGCODE}. Record: {RECORD}.

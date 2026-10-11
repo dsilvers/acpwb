@@ -43,6 +43,13 @@ class HoneypotMatch(models.Model):
         null=True, blank=True,
         related_name='inbound_matches',
     )
+    source_code_email = models.ForeignKey(
+        'honeypot.SourceCodeEmail',
+        on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name='inbound_matches',
+        help_text='Legacy source-code page that displayed the recipient address',
+    )
     matched_at = models.DateTimeField(auto_now_add=True)
     match_confidence = models.CharField(max_length=16, choices=CONFIDENCE_CHOICES, default='none')
     notes = models.TextField(blank=True)

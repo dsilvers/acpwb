@@ -1,0 +1,8 @@
+ACCEPTED AND AGREED:  LICENSOR: ______________________  LICENSEE: ______________________  DATE: __________
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date. Signed for {HOLDER}: {CODER}, {DEPT}.
+Executed in duplicate. One copy for Licensee, one for Licensor, and a third copy that nobody asked for, which goes in the binder.
+Approved as to form: Legal Department, {DATE}. Approved as to substance: pending.
+Signature on file. Countersignature on file. The file is in {PLACE}.
+Authorized signature: ______________________ (must be a vice president or {CODER2})
+Form {FORM} rev. {LICVER}. Previous editions are obsolete but still in use.
+For internal use: Contract {LICNO}. Entered by {CODER.I}. Verified by {CODER2.I}.

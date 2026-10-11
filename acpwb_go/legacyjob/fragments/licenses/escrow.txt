@@ -1,0 +1,11 @@
+#name: Source Code Escrow Notice
+#kind: commercial
+#from: 1982
+#to: 2025
+SOURCE CODE ESCROW NOTICE
+
+A copy of this source code is deposited with {VENDOR} under Escrow Agreement No. {LICNO}, dated {DATE}, for the benefit of {CLIENT}.
+
+Release conditions: (1) {HOLDER} ceases to do business in the ordinary course; (2) {HOLDER} discontinues maintenance of {PROGRAM} for more than {TERMDAYS} days; or (3) the last person who understands label {LABEL} leaves the company.
+
+The deposit was last verified on {DATE2} by comparing the printed listing to the escrowed listing, by eye, by {CODER}.

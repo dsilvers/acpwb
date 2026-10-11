@@ -1,0 +1,16 @@
+Licensee shall pay a one-time license fee of ${FEE}, payable in advance, by check, to {HOLDER}.
+License charges are payable monthly in arrears at the {TIER} rate. Late payments accrue interest at {PCT}% per month and a stern memo.
+The annual maintenance fee is {PCT}% of the then-current list price, which is reviewed every {QUARTER} and has never gone down.
+Fees are based on the number of benchmark rows processed. Licensee shall report row counts quarterly. Licensee shall not reduce row counts by combining rows.
+All fees are exclusive of taxes, duties, freight, card stock and ribbon, which are Licensee's responsibility.
+Fees are non-refundable, including in the event that the Program does not run, which is unlikely, or runs and produces correct Output, which is also unlikely.
+An additional fee of ${FEE} applies to each Designated Machine upgrade, including upgrades that make the Program slower.
+Licensee may pay in installments of {SMALLN}, provided each installment is accompanied by a completed form {FORM}.
+Rush processing is available for an additional {PCT}% of the license fee. Rush processing is the same as regular processing.
+Charges for operator time are billed at the published rate per wall-clock hour, including time spent waiting for the tape mount.
+The license fee includes {SEATS} named user(s). Additional users may be added at ${FEE} each, or may sit next to a named user at no charge.
+Licensor may adjust fees on {TERMDAYS} days' notice. Licensee's sole remedy for a fee adjustment is to pay it.
+Fees for the {INDUSTRY} practice edition are the same as the standard edition. The edition is also the same.
+Licensee shall reimburse Licensor's reasonable travel expenses for on-site support, including {FOOD} at {LUNCHSPOT}.
+Invoices disputed in good faith must be disputed in writing within {TERMDAYS} days. Disputes in bad faith may be raised at any time.
+Payment of fees does not transfer title. Nothing transfers title. Title stays where it is.

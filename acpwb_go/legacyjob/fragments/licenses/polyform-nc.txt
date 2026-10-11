@@ -1,0 +1,8 @@
+#name: PolyForm Noncommercial License 1.0.0
+#kind: noncommercial
+#from: 2019
+Required Notice: Copyright {HOLDER} ({YEARRANGE})
+
+The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose. Any noncommercial purpose is a permitted purpose. Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, is use for a permitted purpose.
+
+Producing a salary benchmark for a paying client is not a permitted purpose. Reading this page out of curiosity is.

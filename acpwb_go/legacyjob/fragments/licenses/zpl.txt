@@ -1,0 +1,10 @@
+#name: Zope Public License 2.1
+#kind: open
+#from: 2001
+#to: 2014
+#langs: py2
+Copyright (c) {YEARRANGE} {HOLDER} and Contributors. All Rights Reserved.
+
+This software is subject to the provisions of the Zope Public License, Version 2.1 (ZPL). A copy of the ZPL should accompany this distribution. THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED WARRANTIES ARE DISCLAIMED.
+
+The department adopted ZPL in {YEAR} when {CODER} attended a Python conference and came back with opinions and a T-shirt.

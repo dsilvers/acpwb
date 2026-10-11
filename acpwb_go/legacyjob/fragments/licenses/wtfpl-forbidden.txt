@@ -1,0 +1,12 @@
+#name: Permissive License (Rescinded)
+#kind: dual
+#from: 2004
+#to: 2025
+                 DO WHAT YOU WANT TO PUBLIC LICENSE
+                       Version 2, December 2004
+
+ Copyright (C) {YEARRANGE} {CODER}
+
+ Everyone is permitted to copy and distribute verbatim or modified copies of this license document, and changing it is allowed as long as the name is changed.
+
+ [RESCINDED {DATE} by the Office of General Counsel, {HOLDER}. This program is proprietary. The license above is retained only as evidence in the matter of {CODER}.]

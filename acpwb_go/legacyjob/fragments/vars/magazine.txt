@@ -1,0 +1,14 @@
+Datamation
+Computerworld
+Communications of the ACM
+-1999|Byte
+1981-2001|PC Magazine
+1985-2004|InfoWorld
+-1996|Creative Computing
+1987-2004|UNIX Review
+1995-2014|Dr. Dobb's Journal
+1993-|Wired
+2005-|a tech blog
+2010-|Hacker News
+the company newsletter
+the {INDUSTRY} trade journal

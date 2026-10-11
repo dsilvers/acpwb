@@ -11,7 +11,7 @@ func TestFingerprintSampledMatchesPython(t *testing.T) {
 		rate float64
 		want bool
 	}{
-		{"203.0.113.9", 0.51, true},  // bucket fraction 0.5084
+		{"203.0.113.9", 0.51, true}, // bucket fraction 0.5084
 		{"203.0.113.9", 0.50, false},
 		{"2001:db8::1", 0.12, true}, // 0.1148
 		{"2001:db8::1", 0.11, false},

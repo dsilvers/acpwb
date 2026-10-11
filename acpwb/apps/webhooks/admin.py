@@ -5,7 +5,7 @@ from .models import CallLog, InboundEmail, HoneypotMatch, VoicemailRecording
 class HoneypotMatchInline(admin.TabularInline):
     model = HoneypotMatch
     extra = 0
-    readonly_fields = ('matched_at', 'match_confidence', 'generated_employee', 'original_visit', 'notes')
+    readonly_fields = ('matched_at', 'match_confidence', 'generated_employee', 'original_visit', 'source_code_email', 'notes')
     can_delete = False
 
 

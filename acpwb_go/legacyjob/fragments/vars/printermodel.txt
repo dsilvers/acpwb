@@ -1,0 +1,9 @@
+-1995|IBM 1403
+-2001|IBM 3211
+1978-2003|IBM 3800
+-1998|DEC LP11
+1980-2003|DEC LA120
+1984-2006|an Epson dot matrix
+1987-|a LaserJet
+1995-|the network printer
+2008-|the multifunction copier

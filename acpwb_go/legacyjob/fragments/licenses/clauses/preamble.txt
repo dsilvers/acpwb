@@ -1,0 +1,23 @@
+This Agreement governs the use of {PROGRAM} release {REL} (the "Program") made available by {HOLDER} ("Licensor").
+The following terms apply to anyone who reads, copies, prints, photographs or otherwise comes into possession of this listing.
+By retaining this listing beyond the end of the business day on which it was printed, the holder agrees to the terms below.
+This license accompanies the source listing of {PROGRAM} produced for record {RECORD} on {DATE}.
+{HOLDER} makes the Program available on the terms set out below and on no other terms, regardless of what any salesperson may have said.
+These terms supersede all prior terms, including the terms printed on the back of the card box.
+This Agreement is entered into between {HOLDER} and the licensee identified in Order Form {LICNO} ("Licensee").
+Notice: the Program described below is licensed, not sold, and is certainly not given away.
+These terms were approved by {VP} on {DATE} and have not been reviewed since.
+Read these terms carefully. Then read them again. They will not get shorter.
+This license agreement is entered into as of {DATE} between {HOLDER} ("Licensor") and the holder of this listing ("Licensee").
+PLEASE READ THIS AGREEMENT CAREFULLY BEFORE USING THE PROGRAM. IT IS LONGER THAN THE PROGRAM IN PLACES.
+{PROGRAM} was developed by the Research Division of {HOLDER} at considerable expense and against considerable advice. It is licensed, not sold.
+The Program is made available to Licensee subject to the following terms, which supersede any terms printed on the tape canister, the card box, or the shrink wrap.
+These terms apply to {PROGRAM} release {REL} and to every earlier release, retroactively, whether or not you were there.
+This Agreement sets out the terms on which Licensee may use the Program to tabulate engagement metrics and market benchmarks, and on which Licensee may not use it for anything else.
+Whereas Licensor owns the Program, and whereas Licensee wishes to use it, and whereas nobody can stop Licensee from reading it, the parties agree as follows.
+The following terms govern any use of the Program at the Site, at any off-site storage facility, and at {LUNCHSPOT}.
+{HOLDER} grants the rights described below in consideration of the fees paid and the promises made, including the promise not to round.
+This listing is furnished under license and may be used only in accordance with the terms below. Information in this listing is subject to change without notice, and has.
+The Program was written by {CODER} and others whose names appear in the revision history, and is owned by {HOLDER}, which employed them.
+You are reading a printed copy of a licensed program. The license follows. It is binding on readers, holders and anyone who photocopies this page.
+These terms were last revised on {DATE} by {DEPT}. Earlier revisions are void but are still taped to the side of the {HW}.

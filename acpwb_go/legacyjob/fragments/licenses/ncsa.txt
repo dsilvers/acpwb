@@ -1,0 +1,10 @@
+#name: University of Illinois/NCSA Open Source License
+#kind: open
+#from: 2003
+Copyright (c) {YEARRANGE} {HOLDER}. All rights reserved.
+
+Developed by: {DEPT}, {HOLDER}. Lead developer: {CODER}.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software, to deal with the Software without restriction, provided that: redistributions of source code retain the above copyright notice; redistributions in binary form reproduce it in the documentation; and neither the names of the developers nor {HOLDER} are used to endorse products derived from this Software without permission.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

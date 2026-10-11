@@ -1,6 +1,8 @@
 package archive
 
 import (
+	"acpwb_go/legacyjob"
+
 	"fmt"
 	"strings"
 )
@@ -13,6 +15,8 @@ func relatedReportsHTML(c *Context) string {
 		return ""
 	}
 	var items strings.Builder
+	items.WriteString(sourceRefEntryHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL),
+		fmt.Sprintf("%d-%02d-%02d", c.Year, c.Month, c.Day)))
 	for _, r := range c.RelatedReports {
 		fmt.Fprintf(&items,
 			`<div style="background:white;border:1px solid var(--border);border-left:3px solid var(--gold);`+
@@ -268,7 +272,9 @@ func RenderArchiveDefault(c *Context) string {
 				e(r.Name), e(r.Baseline), e(r.Current), color, e(r.Delta),
 			)
 		}
-		b.WriteString(`</tbody></table></div></div>`)
+		b.WriteString(`</tbody></table></div>`)
+		b.WriteString(sourceCaptionHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL), false))
+		b.WriteString(`</div>`)
 	}
 
 	if len(c.PercentileTable) > 0 {
@@ -316,7 +322,9 @@ func RenderArchiveDefault(c *Context) string {
 			}
 			b.WriteString(`</tr>`)
 		}
-		b.WriteString(`</tbody></table></div></div>`)
+		b.WriteString(`</tbody></table></div>`)
+		b.WriteString(sourceCaptionHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL), false))
+		b.WriteString(`</div>`)
 	}
 
 	b.WriteString(`<hr class="gold-divider">`)
@@ -472,6 +480,8 @@ func RenderArchiveDefault(c *Context) string {
 		rid, c.Year, c.Month, c.Day, e(c.Phase), e(c.Industry), e(c.Org), e(c.EngCode), e(c.DocVersion),
 		c.PageCount, c.FileSizeKB, e(c.Distribution), e(rid),
 	)
+
+	b.WriteString(sourceSidebarCardHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL), rid, false))
 
 	fmt.Fprintf(&b,
 		`<div id="acpwb-archive-%s-sidebar-nav-card" class="acpwb-card mb-4">`+

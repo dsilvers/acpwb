@@ -1,0 +1,9 @@
+#name: Weekend Run Authorization
+#kind: proprietary
+#from: 1972
+#extra: yes
+WEEKEND RUN AUTHORIZATION
+
+This program may be run on weekends only with the prior written approval of the shift supervisor and only for the {QUARTER} close or a client emergency. A client emergency is any situation in which {VP} has received a phone call.
+
+Weekend runs are billed at the overtime rate. The night operator would like it known that the overtime rate has not changed since {YEAR}.

@@ -1,0 +1,247 @@
+Every percentile is somebody's salary. Remember that. Then forget it, because the ladder is fixed.
+A benchmark is only as good as the peer group, and the peer group is only as good as {CODER2}'s memory.
+In the end all compensation data converges to the median. Some of it just takes longer.
+Truth is the P50. Everything else is negotiation.
+The program does not know what the numbers mean. Neither, frankly, does the client.
+If a delta falls in the forest and no client reads the report, it is still printed.
+We measure what we can count. We count what fits in {SMALLN} columns.
+The map is not the territory. The listing is not the program. The program is not the truth.
+Money doesn't buy happiness, but it darn well comes close to doing so. (Corporate tagline, inserted per {MEMO}.)
+Some day this code will be replaced. That day has been scheduled {SMALLN} times.
+Every number on this page has been reviewed by a human being, at some point, probably.
+There are two kinds of programmers: those who comment, and {CODER2}.
+Nothing is more permanent than a temporary fix.
+The client wants precision. The client will receive truncation. These are not the same.
+I have come to believe {VAR} is load-bearing in a spiritual sense. -- {CODER.I}
+A program that runs every quarter for {N} years is either very good or very feared.
+Garbage in, gospel out.
+The percentiles are not wrong. They are merely consistent.
+Statistics is the art of being wrong with confidence intervals. We omit the intervals.
+Every comment in this file was true at the time it was written. Most are not now.
+A percentile is a promise that someone, somewhere, earns less than you.
+The ladder does not care who is on it.
+Every quarter the numbers change. The program does not. There is a lesson in that.
+Data does not lie. Data is merely misunderstood by people who round.
+The median is the most honest number in this program because nobody computed it.
+Compensation is a story we tell with integers.
+A program that has run for decades is not old. It is tenured.
+To truncate is human. To round is to seek forgiveness.
+There is no P100. Someone is always above you.
+The comments are for the living. The code is for the machine. The output is for the client.
+Every benchmark is a mirror. Most clients do not like what they see.
+The peer group defines you. Choose it carefully, or let {VP} choose it for you.
+We are all just rows in someone's input deck.
+A dollar truncated is a dollar not promised.
+The difference between P50 and P67 is the difference between satisfied and ambitious.
+Old code is like an old house. It creaks, but it knows where everything is.
+If you stare into the percentile ladder long enough, it stares back.
+The output is final. The interpretation is negotiable.
+Nothing is as permanent as a one-time report.
+Every program is a fossil of the meeting in which it was specified.
+The best code is code nobody has to read. This is not that code.
+Correctness is a moving target. Consistency is a fixed one. We chose consistency.
+A comment is a letter to someone you will never meet.
+All salaries regress to the mean. Some regress faster.
+The machine does not know it is calculating anyone's livelihood. That is our job.
+If the numbers look wrong, they are probably right. If they look right, check them anyway.
+The program cannot be wrong. It can only be misapplied.
+Behind every P95 is a P96 who wants to know why they were left out.
+The ladder has eight rungs because a ladder needs an odd number of steps to be unlucky, and eight is close enough.
+In the end, every report is a negotiation that has not happened yet.
+There are no small changes to a program that has never changed.
+The truth is in the input deck. The fiction is in the commentary.
+A benchmark tells you where you are, not where you should be. Clients ignore this.
+Programs do not age. Their programmers do.
+Software is what remains when the people who understood it have left.
+The output is a snapshot. The comments are a diary.
+Every line of code was once someone's best idea.
+We are not here to judge salaries. We are here to sort them.
+A well-placed GOTO is worth a thousand structured loops, if you know where it goes.
+The percentile is only as meaningful as the peer group, and the peer group is only as meaningful as lunch.
+If a report is printed and nobody reads it, the client is still invoiced.
+Simplicity is the ultimate sophistication. This program is sophisticated in other ways.
+We measure twice and truncate once.
+The past is a deck of cards. Shuffle at your own risk.
+Every variable name is a small act of hope.
+Uncertainty is part of the data. We print it as certainty.
+Numbers are cold. Clients are not. Print accordingly.
+The ladder rises. The paper falls. The binder fills.
+There is a certain peace in a program that does exactly the same thing every quarter.
+The question is never "what is the median?" It is "why is the median that?"
+If you have to ask what P33 is for, you will never understand executive compensation.
+The program sees no difference between a CEO and a firefighter. Both are rows. Both are truncated.
+Error messages are honest. Reports are diplomatic.
+A delta of zero is the most dangerous number. It invites complacency.
+The hardest part of this program is not the math. It is the meeting afterwards.
+A percentile is a promise that someone, somewhere, is doing worse.
+Every program eventually becomes the documentation for itself.
+The median does not care how you feel about it.
+We do not round. Rounding is an opinion.
+There is no such thing as a temporary fix. There are only fixes whose permanence has not been noticed.
+The output is correct because it matches the last output. That is what correct means here.
+Code is read more often than it is written. This code is mostly read by auditors.
+The deck is the program. The program is the deck. The operator is the compiler.
+A comment is a letter to a stranger who will be annoyed with you.
+All benchmarks are wrong. Some are billable.
+If a tree falls in the forest and is not in the input deck, it does not get a percentile.
+The best code is no code. The second best is code that has never been run.
+Every abend is a lesson. This program is a very educated program.
+The difference between P10 and P95 is the difference between hope and invoice.
+We are not here to understand the numbers. We are here to print them in the right columns.
+The truncation is not a bug. It is a worldview.
+In the end, everything is a dollar.
+Nothing is as permanent as a program somebody wrote over a weekend.
+A loop is a promise to do something again. Keep your promises small.
+The machine does exactly what you tell it. That is the problem.
+To compute is human. To recompute is audit.
+The checksum checks nothing but our faith.
+When in doubt, print it.
+When certain, print it twice.
+Data is just opinions with column headers.
+The report is not the territory.
+There are two kinds of programmers: those who comment their code, and {CODER2.I}.
+The past is a deck you cannot reshuffle.
+Truth is whatever survives the {QUARTER} close.
+This program has no purpose but to exist and to be correct. It manages one of those.
+Simplicity is the ultimate sophistication. This program is sophisticated in other ways.
+Every number on this page was once somebody's guess.
+The ladder has eight rungs. Nobody has ever reached the top. It is P95.
+A blank line is the only honest line in the program.
+What is a change, if not a current minus a baseline?
+Precision is not accuracy. Accuracy is not truth. Truth is not on the report.
+This routine is what it is. It is not what it says it is. It is what it is.
+Every variable name is a small poem about what the programmer was thinking at the time.
+The client wants answers. The program provides digits.
+The compiler forgives. The auditor does not.
+Do not optimize what you do not understand. Do not understand what you do not have to.
+The program runs. The program has always run. The program will run after we are gone.
+Software is never finished, only abandoned to {DEPT}.
+If you stare at this loop long enough, it stares back.
+Some days the deck reads you.
+An empty IF block is a meditation.
+Debugging is the art of being wrong slowly until you are right.
+A GOTO is just a loop that has lost its way.
+Order the deck, order the mind.
+The percentile ladder is a ladder because it goes up. It is not a ladder because you can climb it.
+The only constant is PCTMUL.
+Every program contains at least one bug and one comment that lies. This is the comment.
+The job is done when the operator says it is done.
+To err is human. To abend is {HW}.
+Every program is a letter to the next {JOBTITLE}.
+Read {BOOK}. Then read this. Then decide which one is fiction.
+A {KEYWORD} is a confession.
+The {TERMMODEL} taught us patience. The {PRINTERMODEL} taught us humility. The ladder taught us nothing.
+{EXCLAIM} That is the sound of maintenance.
+The mood of a program is the mood of its last maintainer. This program is {MOOD}.
+Truncation is honesty with the decimals removed.
+A program that has run every night for decades is not legacy. It is tradition.
+We did not choose the ladder. The ladder chose us.
+Dollars are a state of mind.
+If a number is printed on green-bar paper, someone will believe it.
+The deck is finite. The comments are not.
+Correctness is a negotiation between the code, the client and the auditors. The code always loses.
+No program is finished until its last maintainer retires.
+The output is the only part anyone sees. The comments are the only part anyone remembers.
+Every comment is a time capsule. Some of them should not have been opened.
+Somewhere, a client is reading this report and nodding. That is enough.
+The ladder does not lie. The ladder does not tell the truth. The ladder multiplies.
+A percentile is a small act of faith. Or so {CODER2} says.
+A deck is a ritual. -- {CODER.I}
+A trailer card is a habit.
+A truncation is a memory. -- {CODER.I}
+A GOTO is a warning. Or so {CODER2} says.
+A deck is a contract. Remember that.
+A checksum is a compromise. Remember that.
+A ladder is a tradition. Remember that.
+A median is a warning. Remember that.
+A ladder is a memory. -- {CODER.I}
+A dollar is a memory. Or so {CODER2} says.
+A comment is a compromise.
+A comment is a confession.
+A comment is a contract. Or so {CODER2} says.
+A truncation is a memory.
+A legacy program is a small act of faith.
+A legacy program is a contract. Or so {CODER2} says.
+A dollar is a habit. Think about it.
+A GOTO is a promise.
+A GOTO is a contract. Think about it.
+A checksum is a memory. Think about it.
+A blank line is an opinion. Or so {CODER2} says.
+A truncation is a confession.
+A comment is a warning.
+A legacy program is a confession.
+A trailer card is a habit. Or so {CODER2} says.
+A GOTO is a memory. Or so {CODER2} says.
+A blank line is a ritual. Think about it.
+A deck is a memory. -- {CODER.I}
+A truncation is a ritual. -- {CODER.I}
+A ladder is a tradition. Think about it.
+A ladder is a habit. Remember that.
+A blank line is a habit. Or so {CODER2} says.
+A median is a small act of faith.
+A comment is a small act of faith. -- {CODER.I}
+A blank line is a tradition. -- {CODER.I}
+A GOTO is a tradition. Remember that.
+A truncation is a memory. Or so {CODER2} says.
+A ladder is a small act of faith.
+A comment is a compromise. Remember that.
+A dollar is a confession.
+A dollar is an opinion. Or so {CODER2} says.
+A deck is a memory. Or so {CODER2} says.
+A blank line is a habit. Think about it.
+A percentile is a confession.
+A GOTO is a tradition. Think about it.
+A truncation is a confession. -- {CODER.I}
+A blank line is an opinion. Think about it.
+A GOTO is a promise. Or so {CODER2} says.
+A ladder is a letter to the future. Or so {CODER2} says.
+A legacy program is a warning. -- {CODER.I}
+A percentile is a letter to the future. Remember that.
+A ladder is a letter to the future.
+A median is a letter to the future.
+A truncation is a tradition. Think about it.
+A truncation is a compromise.
+A dollar is a promise. Remember that.
+A blank line is a letter to the future. Or so {CODER2} says.
+A truncation is a letter to the future. -- {CODER.I}
+A trailer card is a contract. Think about it.
+A percentile is a habit. -- {CODER.I}
+A blank line is a habit.
+A legacy program is a letter to the future. -- {CODER.I}
+A legacy program is a promise. Think about it.
+A comment is a promise. Think about it.
+A percentile is a tradition. Remember that.
+A median is a memory.
+A blank line is a promise. -- {CODER.I}
+A trailer card is a confession.
+A median is a habit.
+A checksum is a ritual. Remember that.
+A dollar is a memory.
+A blank line is a promise. Remember that.
+A deck is a promise. -- {CODER.I}
+A checksum is a compromise. -- {CODER.I}
+A dollar is a ritual. Or so {CODER2} says.
+A ladder is a small act of faith. Remember that.
+A trailer card is a confession. -- {CODER.I}
+A legacy program is a letter to the future. Or so {CODER2} says.
+A ladder is a letter to the future. -- {CODER.I}
+A deck is a memory. Think about it.
+A ladder is a small act of faith. -- {CODER.I}
+A checksum is a ritual.
+A checksum is a ritual. Or so {CODER2} says.
+A ladder is an opinion. -- {CODER.I}
+A blank line is a contract. Think about it.
+A checksum is a letter to the future. Remember that.
+A GOTO is a promise. -- {CODER.I}
+A percentile is a confession. -- {CODER.I}
+A GOTO is a habit. Or so {CODER2} says.
+A comment is an opinion. Or so {CODER2} says.
+A ladder is a ritual. Remember that.
+A blank line is an opinion. -- {CODER.I}
+A dollar is a small act of faith. -- {CODER.I}
+A checksum is a habit. Think about it.
+A truncation is an opinion.
+A comment is a small act of faith. Remember that.
+A deck is a promise. Think about it.
+A deck is a warning. Or so {CODER2} says.
+A checksum is a promise. Think about it.

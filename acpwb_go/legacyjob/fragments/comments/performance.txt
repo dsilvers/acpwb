@@ -1,0 +1,19 @@
+This loop runs {N} times per record. It could run once. It runs {N} times for audit.
+CPU time is dominated by the FORMAT statements. Not the arithmetic. The arithmetic is free.
+The I/O is buffered at {N} records. Larger buffers were tried. The {HW} ran out of memory.
+This step accounts for {PCT}% of the runtime. It sorts {SMALLN} records.
+The program was profiled in {YEAR}. The profile showed the program spends most of its time waiting for the printer.
+Replacing the bubble sort would save {CPU} seconds. Nobody has replaced it because nobody needs the seconds.
+The checksum is computed twice. Computing it once would save time. Computing it zero times would save more.
+Do not move the read outside the loop. It was outside the loop in {YEAR}. The memory usage tripled.
+The redundant copy of the array costs {N} bytes. Memory was expensive in {OLDYEAR}. It is now a rounding error. We do not round.
+This program uses {N}K of memory. That was a lot in {OLDYEAR}. That is very little now. The region is still 4M.
+The page eject costs more time than the entire benchmark computation.
+The tape mount costs more time than the entire job.
+The {HW2} is faster. The job is not faster on the {HW2}. The job waits for the printer at the same speed.
+Optimizing this routine would save one second per run. Over {N} years that is a long lunch.
+A faster algorithm exists. It was presented at {CONFERENCE}. It gives a different answer in the fourth decimal place.
+The program used to take four hours. It now takes four minutes. The schedule still allows four hours.
+Response time for the online version (retired) was {N} seconds per screen. Users brought books.
+The dead routines are loaded into memory but never executed. They cost nothing but space and dignity.
+The job's elapsed time varies with the weather. During {WEATHER} it runs slower. Ops says it is the air conditioning.

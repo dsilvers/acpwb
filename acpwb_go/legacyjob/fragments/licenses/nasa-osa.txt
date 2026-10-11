@@ -1,0 +1,11 @@
+#name: NASA-style Open Source Agreement (adapted)
+#kind: open
+#from: 2004
+#to: 2020
+GOVERNMENT AGENCY OPEN SOURCE AGREEMENT (ADAPTED)
+
+THIS OPEN SOURCE AGREEMENT DEFINES THE RIGHTS OF USE, REPRODUCTION, DISTRIBUTION, MODIFICATION AND REDISTRIBUTION OF CERTAIN COMPUTER SOFTWARE ORIGINALLY RELEASED BY {HOLDER} UNDER CONTRACT {CONTRACT} WITH {AGENCY}.
+
+The Subject Software was developed with Government funding. The Government retains the rights described in {FARCLAUSE}. All other rights are licensed to Recipients under the terms of this agreement.
+
+Recipients may not use the names of {AGENCY} or {HOLDER} to endorse products derived from the Subject Software. Neither has ever endorsed anything.

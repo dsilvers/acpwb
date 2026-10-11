@@ -1,0 +1,11 @@
+#name: Time-Sharing Service Agreement
+#kind: commercial
+#from: 1968
+#to: 1992
+TIME-SHARING SERVICE AGREEMENT
+
+{HOLDER} will provide Customer with access to {PROGRAM} on the {HW} via dial-up terminal, at the rates in effect at the time of use: connect time ${FEE} per hour, CPU time billed per second, printing billed per page, and storage billed per track per month.
+
+Customer shall not attempt to access any program, file or account other than those assigned. Customer shall not leave a terminal logged in overnight. Customer shall not print the percentile ladder on a terminal located in a public area.
+
+Service hours are 7 AM to 7 PM Central, Monday through Friday. Service outside these hours is available by arrangement with the night operator, {CODER2}.

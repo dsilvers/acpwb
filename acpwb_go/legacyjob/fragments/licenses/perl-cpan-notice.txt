@@ -1,0 +1,8 @@
+#name: CPAN Module Notice
+#kind: open
+#from: 1995
+#langs: perl
+#extra: yes
+This program uses modules from the Comprehensive Perl Archive Network. Each module is licensed under the terms of its author, which in most cases are "the same terms as Perl itself." The versions installed on the batch server date from {YEAR} and may not be upgraded without breaking the report formatting.
+
+Modules used: Getopt::Long, POSIX, Text::Wrap, and a module {CODER} wrote and never uploaded.

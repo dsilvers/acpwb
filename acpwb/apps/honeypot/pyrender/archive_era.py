@@ -12,6 +12,7 @@ from jinja2.filters import do_truncate
 from apps.core.htmlgen import escape as e
 from apps.core.htmlgen import get_archive_seal
 from apps.honeypot.pyrender.archive_main import _risk_badge, _status_badge
+from apps.honeypot.legacy_identity import source_caption_html, source_ref_entry_era_html, source_sidebar_card_html
 
 # do_truncate needs a real Environment to read its default truncation
 # policies (leeway, etc.) — a fresh default-config Environment matches
@@ -190,7 +191,9 @@ def render_archive_default_era(ctx):
             f'color:{"#16a34a" if r["positive"] else "#dc2626"}">{e(r["delta"])}</td></tr>'
             for i, r in enumerate(c['metric_rows'], 1)
         ))
-        ap('</tbody></table></div></div>')
+        ap('</tbody></table></div>')
+        ap(source_caption_html(c, True))
+        ap('</div>')
 
     if c.get('percentile_table'):
         ap(f'<div id="acpwb-archive-{rid}-benchmark-percentile-section" class="mb-4">'
@@ -219,7 +222,9 @@ def render_archive_default_era(ctx):
             ) + '</tr>'
             for r in c['percentile_table']
         ))
-        ap('</tbody></table></div></div>')
+        ap('</tbody></table></div>')
+        ap(source_caption_html(c, True))
+        ap('</div>')
 
     ap(f'<div id="acpwb-archive-{rid}-csv-export-banner" style="background:rgba(128,128,128,.07);'
        f'border:1px solid rgba(128,128,128,.2);padding:.8rem 1rem;margin-bottom:1.25rem;display:flex;'
@@ -332,6 +337,8 @@ def render_archive_default_era(ctx):
        '<dt style="opacity:.55;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em">Record ID</dt>'
        f'<dd class="mb-0" style="font-family:monospace;font-size:.75rem;opacity:.7">{e(rid)}</dd></dl></div>')
 
+    ap(source_sidebar_card_html(c, rid, True))
+
     ap(f'<div id="acpwb-archive-{rid}-sidebar-nav-card" style="background:rgba(128,128,128,.07);'
        f'border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">'
        f'<div class="era-section-head" style="margin-bottom:.6rem">Navigation</div>'
@@ -348,10 +355,11 @@ def render_archive_default_era(ctx):
        f'aria-label="Navigate to the next entry in the {c["year"]} archive series">Next in Series &rarr;</a></li>'
        f'</ul></div>')
 
-    if c['related_docs']:
+    if True:
         ap(f'<div id="acpwb-archive-{rid}-related-docs" style="background:rgba(128,128,128,.07);'
            f'border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">'
            f'<div class="era-section-head" style="margin-bottom:.6rem">Related Documents</div>')
+        ap(source_ref_entry_era_html(c))
         ap(''.join(
             f'<a href="{e(d["url"])}" class="era-entry-card" style="margin-bottom:.5rem">'
             f'<div style="font-size:.6rem;opacity:.5;margin-bottom:.15rem">{e(d["date"])} &bull; '

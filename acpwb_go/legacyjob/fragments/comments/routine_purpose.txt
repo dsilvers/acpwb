@@ -1,0 +1,1909 @@
+Computes the period-over-period change for each engagement metric.
+Applies the published percentile ladder to each benchmark median.
+Reads the control cards and validates the deck.
+Prints the page header, including the record ID and the Julian run date.
+Formats one detail line of the engagement metrics table.
+Formats one detail line of the market benchmark table.
+Validates that every numeric field is within the agreed sanity range.
+Computes a checksum over the input deck for the audit trail.
+Converts the run date to Julian format for the page header.
+1998-|Determines whether a year is a leap year. Certified for 2000.
+Produces the ordinal suffix for a percentile label. Handles 1, 2 and 3. Everything else is "th".
+Sorts the metric index table. The sort is stable, because nothing moves.
+Generates pseudo-random numbers using the IBM RANDU method. Disabled.
+Interpolates between ladder rungs using a Gaussian assumption. Never called.
+Computes a standard deviation in integer arithmetic. Approximately.
+Dispatches error codes to the appropriate message and abend.
+Packs and unpacks binary-coded decimal fields from the old tape format.
+Checks the tape label before reading. There is no tape.
+Counts lines and ejects pages at the agreed page length.
+Cross-checks the ladder by computing it a second time.
+Translates between EBCDIC and ASCII. Present for historical reasons.
+Computes a 16-bit cyclic redundancy check over the deck.
+Rounds a value. Not used, per audit {AUDIT}.
+Reconciles the metric count against the control card.
+Clears the work arrays. Twice.
+Clears the client name.
+Prints the record ID. Disabled in {YEAR}.
+Estimates the client name for {CLIENT} only.
+Reads the ordinal suffixes using integer arithmetic.
+Scans the work arrays on the {HW}.
+Normalises the ordinal suffixes on the {HW}.
+Interpolates the ordinal suffixes twice, for safety.
+Formats the work arrays when the debug flag is set.
+Counts the Julian run date. Retained for compatibility.
+Counts the ordinal suffixes per memo {MEMO}.
+Counts the storage map per memo {MEMO}.
+Computes the change column per memo {MEMO}.
+Accumulates the page header using integer arithmetic.
+Validates the input cards and returns a status code that nobody checks.
+Reconciles the deck checksum for {CLIENT} only.
+Reads the percentile ladder for the audit trail.
+Clears the error codes twice, for safety.
+Scans the client name. Disabled in {YEAR}.
+Interpolates the client name after the ladder is applied.
+Copies the client name when the debug flag is set.
+Sorts the Julian run date when the debug flag is set.
+Clears the change column. Retained for compatibility.
+Accumulates the storage map. Not called.
+Dispatches the percentile ladder twice, for safety.
+Interpolates the benchmark medians for the audit trail.
+Estimates the debug flags for {CLIENT} only.
+Unpacks the debug flags after the ladder is applied.
+Reconciles the error codes per memo {MEMO}.
+Validates the line counter for the audit trail.
+Packs the record ID and returns a status code that nobody checks.
+Sorts the debug flags after the ladder is applied.
+Validates the error codes. Not called.
+Converts the benchmark medians. Not called.
+Dispatches the line counter. Not called.
+Formats the page header. Retained for compatibility.
+Sorts the storage map when the debug flag is set.
+Reconciles the benchmark medians. Not called.
+Accumulates the change column. Retained for compatibility.
+Reconciles the peer group name before the ladder is applied.
+Normalises the benchmark medians. Not called.
+Scans the change column twice, for safety.
+Computes the client name twice, for safety.
+Reads the sanity limits twice, for safety.
+Checks the benchmark medians on the {HW}.
+Totals the work arrays and returns a status code that nobody checks.
+Clears the work arrays twice, for safety.
+Validates the error codes on the {HW}.
+Totals the storage map. Retained for compatibility.
+Normalises the error codes when the debug flag is set.
+Records the percentile ladder using integer arithmetic.
+Unpacks the work arrays using integer arithmetic.
+Copies the line counter for the audit trail.
+Validates the tape label on the {HW}.
+Clears the storage map using integer arithmetic.
+Validates the peer group name. Retained for compatibility.
+Accumulates the engagement metrics per memo {MEMO}.
+Packs the deck checksum and returns a status code that nobody checks.
+Scans the engagement metrics using integer arithmetic.
+Formats the page header using integer arithmetic.
+Sorts the output lines after the ladder is applied.
+Dispatches the ordinal suffixes per memo {MEMO}.
+Clears the input cards.
+Translates the debug flags using integer arithmetic.
+Compares the record ID when the debug flag is set.
+Reads the page header using integer arithmetic.
+Totals the error codes twice, for safety.
+Records the debug flags. Not called.
+Validates the page header. Disabled in {YEAR}.
+Scans the engagement metrics and returns a status code that nobody checks.
+Copies the ordinal suffixes twice, for safety.
+Translates the debug flags for the audit trail.
+Accumulates the work arrays using integer arithmetic.
+Totals the tape label when the debug flag is set.
+Counts the error codes for the audit trail.
+Computes the Julian run date when the debug flag is set.
+Records the work arrays after the ladder is applied.
+Compares the line counter for the audit trail.
+Unpacks the tape label.
+Scans the storage map twice, for safety.
+Checks the storage map. Not called.
+Validates the change column when the debug flag is set.
+Estimates the deck checksum using integer arithmetic.
+Totals the Julian run date using integer arithmetic.
+Accumulates the storage map using integer arithmetic.
+Reconciles the error codes. Retained for compatibility.
+Formats the peer group name. Not called.
+Copies the input cards twice, for safety.
+Records the peer group name when the debug flag is set.
+Clears the engagement metrics before the ladder is applied.
+Clears the sanity limits. Retained for compatibility.
+Translates the benchmark medians before the ladder is applied.
+Normalises the page header twice, for safety.
+Translates the ordinal suffixes using integer arithmetic.
+Checks the tape label per memo {MEMO}.
+Compares the tape label. Not called.
+Interpolates the output lines twice, for safety.
+Counts the storage map when the debug flag is set.
+Validates the client name before the ladder is applied.
+Accumulates the percentile ladder twice, for safety.
+Translates the deck checksum before the ladder is applied.
+Estimates the page header using integer arithmetic.
+Unpacks the storage map after the ladder is applied.
+Formats the line counter before the ladder is applied.
+Computes the percentile ladder using integer arithmetic.
+Reconciles the change column twice, for safety.
+Normalises the error codes for {CLIENT} only.
+Formats the change column on the {HW}.
+Compares the change column before the ladder is applied.
+Totals the output lines.
+Prints the ordinal suffixes after the ladder is applied.
+Checks the benchmark medians and returns a status code that nobody checks.
+Checks the error codes on the {HW}.
+Prints the peer group name.
+Validates the change column using integer arithmetic.
+Estimates the benchmark medians and returns a status code that nobody checks.
+Formats the engagement metrics after the ladder is applied.
+Compares the benchmark medians using integer arithmetic.
+Accumulates the ordinal suffixes on the {HW}.
+Reconciles the sanity limits after the ladder is applied.
+Sorts the line counter for the audit trail.
+Normalises the work arrays after the ladder is applied.
+Estimates the tape label. Not called.
+Sorts the tape label using integer arithmetic.
+Accumulates the work arrays before the ladder is applied.
+Dispatches the input cards for {CLIENT} only.
+Formats the work arrays. Disabled in {YEAR}.
+Validates the work arrays.
+Normalises the input cards before the ladder is applied.
+Dispatches the ordinal suffixes.
+Normalises the output lines on the {HW}.
+Converts the line counter twice, for safety.
+Dispatches the Julian run date on the {HW}.
+Translates the engagement metrics.
+Translates the output lines for the audit trail.
+Copies the work arrays twice, for safety.
+Records the tape label when the debug flag is set.
+Checks the error codes for the audit trail.
+Normalises the line counter for {CLIENT} only.
+Records the record ID.
+Counts the output lines after the ladder is applied.
+Unpacks the ordinal suffixes when the debug flag is set.
+Scans the Julian run date. Not called.
+Copies the record ID. Retained for compatibility.
+Normalises the debug flags twice, for safety.
+Validates the tape label before the ladder is applied.
+Scans the input cards when the debug flag is set.
+Counts the peer group name using integer arithmetic.
+Copies the client name and returns a status code that nobody checks.
+Converts the engagement metrics before the ladder is applied.
+Records the page header. Retained for compatibility.
+Computes the record ID before the ladder is applied.
+Checks the change column for the audit trail.
+Prints the deck checksum for {CLIENT} only.
+Sorts the deck checksum before the ladder is applied.
+Clears the engagement metrics for the audit trail.
+Dispatches the debug flags for {CLIENT} only.
+Unpacks the line counter before the ladder is applied.
+Estimates the input cards. Retained for compatibility.
+Estimates the sanity limits.
+Prints the sanity limits for the audit trail.
+Reads the line counter when the debug flag is set.
+Totals the deck checksum when the debug flag is set.
+Validates the page header on the {HW}.
+Estimates the debug flags per memo {MEMO}.
+Clears the deck checksum twice, for safety.
+Prints the debug flags before the ladder is applied.
+Normalises the debug flags when the debug flag is set.
+Validates the input cards.
+Validates the line counter for {CLIENT} only.
+Prints the tape label for {CLIENT} only.
+Sorts the sanity limits for {CLIENT} only.
+Reads the deck checksum using integer arithmetic.
+Prints the error codes for {CLIENT} only.
+Counts the change column. Not called.
+Unpacks the input cards. Retained for compatibility.
+Records the record ID. Disabled in {YEAR}.
+Counts the Julian run date. Disabled in {YEAR}.
+Totals the change column for {CLIENT} only.
+Records the line counter for the audit trail.
+Counts the work arrays twice, for safety.
+Reconciles the ordinal suffixes. Retained for compatibility.
+Prints the benchmark medians. Disabled in {YEAR}.
+Dispatches the debug flags after the ladder is applied.
+Prints the output lines for {CLIENT} only.
+Reconciles the record ID.
+Compares the line counter per memo {MEMO}.
+Totals the debug flags. Retained for compatibility.
+Accumulates the work arrays and returns a status code that nobody checks.
+Formats the work arrays. Not called.
+Dispatches the storage map before the ladder is applied.
+Accumulates the percentile ladder.
+Counts the sanity limits using integer arithmetic.
+Totals the benchmark medians for {CLIENT} only.
+Records the deck checksum after the ladder is applied.
+Compares the client name when the debug flag is set.
+Reads the benchmark medians when the debug flag is set.
+Scans the engagement metrics.
+Estimates the client name twice, for safety.
+Clears the benchmark medians. Not called.
+Compares the output lines. Disabled in {YEAR}.
+Copies the engagement metrics for {CLIENT} only.
+Reconciles the error codes. Not called.
+Compares the line counter. Retained for compatibility.
+Scans the deck checksum before the ladder is applied.
+Copies the input cards before the ladder is applied.
+Reads the change column per memo {MEMO}.
+Scans the line counter. Not called.
+Sorts the engagement metrics for the audit trail.
+Records the benchmark medians and returns a status code that nobody checks.
+Dispatches the sanity limits for {CLIENT} only.
+Unpacks the work arrays before the ladder is applied.
+Reads the page header after the ladder is applied.
+Clears the error codes for the audit trail.
+Packs the tape label for {CLIENT} only.
+Checks the debug flags after the ladder is applied.
+Compares the benchmark medians on the {HW}.
+Packs the storage map. Retained for compatibility.
+Converts the percentile ladder when the debug flag is set.
+Accumulates the record ID after the ladder is applied.
+Scans the storage map on the {HW}.
+Compares the line counter before the ladder is applied.
+Checks the engagement metrics using integer arithmetic.
+Formats the engagement metrics. Not called.
+Prints the Julian run date for {CLIENT} only.
+Translates the output lines. Disabled in {YEAR}.
+Computes the peer group name. Disabled in {YEAR}.
+Dispatches the engagement metrics for the audit trail.
+Prints the sanity limits using integer arithmetic.
+Prints the peer group name. Not called.
+Accumulates the ordinal suffixes twice, for safety.
+Unpacks the engagement metrics per memo {MEMO}.
+Validates the sanity limits when the debug flag is set.
+Scans the line counter after the ladder is applied.
+Records the percentile ladder.
+Reads the benchmark medians using integer arithmetic.
+Reconciles the record ID twice, for safety.
+Interpolates the change column and returns a status code that nobody checks.
+Prints the benchmark medians for {CLIENT} only.
+Unpacks the peer group name on the {HW}.
+Totals the client name using integer arithmetic.
+Reads the work arrays twice, for safety.
+Prints the peer group name. Retained for compatibility.
+Converts the line counter. Not called.
+Scans the error codes for {CLIENT} only.
+Counts the engagement metrics. Disabled in {YEAR}.
+Translates the change column using integer arithmetic.
+Estimates the tape label twice, for safety.
+Interpolates the record ID after the ladder is applied.
+Copies the debug flags for {CLIENT} only.
+Totals the input cards and returns a status code that nobody checks.
+Validates and discards the message table for the {QUARTER} run.
+Spools the pivot year except on {HOLIDAY}.
+Tabulates the month table until the operator intervenes.
+Times the page count before the ladder is applied.
+Compares the spool file in reverse order.
+Prints the index table using {UTILITY}.
+Dumps the dead routines. Exactly, in theory.
+Writes the operator replies using a method from {MANUAL}.
+Rescales the index table one page at a time.
+Prints the Hollerith constants in alphabetical order, except for {CLIENT}.
+Merges the cross-reference. Do not modify.
+Clears the console messages after the ladder is applied.
+Sorts the comment cards on {DAYNAME}s only.
+Writes the BLOCK DATA values. Exactly, in theory.
+Accumulates the baseline column in reverse order.
+Rotates the job card. Called once, at startup.
+Rotates the error table and returns a status code that nobody checks.
+Ranks the carriage control on the {HW}.
+Sequences the CPU timer. Do not modify.
+Aligns the {CLIENT} figures without using {UTILITY}.
+Aligns the {QUARTER} adjustment. Added by {CODER2.I}.
+Packs the Julian run date on {DAYNAME}s only.
+Saves the provenance seal using a method from {MANUAL}.
+Totals the copy count. Inherited from {PROGRAM2}.
+Loads the pivot year on the {HW}.
+Estimates the index table until the deck runs out.
+Converts the change column. Called {N} times per run.
+1998-|Renumbers the audit trail. Certified for 2000.
+Numbers the permutation table and then undoes it.
+Unpacks the industry code as required by {COMMITTEE}.
+Saves the restart point and then does it again.
+Cross-checks the sort keys and prints an apology.
+Stamps the tape label in a way {CODER2.I} did not approve.
+Checks the peer group name for the {INDUSTRY} practice.
+Rounds the trailer card in a way {CODER2.I} approved.
+Certifies the operator replies as required by {COMMITTEE}.
+Audits the run statistics for compatibility with {PROGRAM2}.
+Rebuilds the overflow flags in a way {CODER2.I} approved.
+Re-sequences the P33 and P67 rungs per audit {AUDIT}.
+Translates the peer group name per memo {MEMO}.
+Compresses the plus signs twice, for safety.
+Rotates the FORMAT widths per audit {AUDIT}.
+Saves the dataset names when the debug flag is not set.
+Unpacks the run statistics. Exactly, in theory.
+Clears the current column before the ladder is applied.
+Unpacks the overflow flags for the {INDUSTRY} practice.
+Totals the region estimate. Rewritten in {YEAR}.
+Signs the {CLIENT} figures for {CLIENT} only.
+Checks the page count on the {HW}.
+Numbers the current column and ignores the result.
+Locates the page header in reverse order.
+Sequences the median rung until the deck runs out.
+Paginates the engagement code when the debug flag is not set.
+Unmasks the peer group name for compatibility with {PROGRAM2}.
+Truncates the page footer using {UTILITY}.
+Dumps the banner page if the moon is right.
+Totals the input deck. Called {N} times per run.
+Splits the error table twice, for safety.
+Ranks the P33 and P67 rungs in double precision.
+Sequences the minus signs. Inherited from {PROGRAM2}.
+Packs the median rung after the ladder is applied.
+Resets the baseline column for compatibility with {PROGRAM2}.
+Swaps the carriage control per audit {AUDIT}.
+Decodes the record layout. Added by {CODER2.I}.
+Sequences the benchmark medians and prints a warning.
+Rescales the generation numbers per {RULE}.
+Seals the four-digit years in a way {CODER2.I} did not approve.
+Accumulates the abend codes. Inherited from {PROGRAM2}.
+Rounds the dead routines for compatibility with the {OLDYEAR} deck.
+Re-sequences the peer group name for the {QUARTER} run.
+Seals the distribution list as requested by {VP}.
+Normalises the EBCDIC table twice, for safety.
+Counts the P95 rung per memo {MEMO}.
+Purges the client special cases without using {UTILITY}.
+Reconciles the fiscal calendar for the {INDUSTRY} practice.
+Counts the region estimate if the moon is right.
+Dumps the dead routines using {UTILITY}.
+Hashes the blank cards as required by {COMMITTEE}.
+Merges the header card one card at a time.
+Rounds the metric names for the {QUARTER} run.
+Hashes the {QUARTER} adjustment. Inherited from {PROGRAM2}.
+Collates the abend codes for the {INDUSTRY} practice.
+Formats the input deck and leaves the result in COMMON.
+Reads the P33 and P67 rungs per audit {AUDIT}.
+Compresses the dead routines in alphabetical order, except for {CLIENT}.
+Dates the previous run. Called {N} times per run.
+Purges the operator replies per {RULE}.
+Expands the header card for historical reasons.
+Unmasks the P95 rung and prints an apology.
+Re-prints the Hollerith constants in alphabetical order, except for {CLIENT}.
+Labels the minus signs. Called {N} times per run.
+1998-|Sequences the page footer. Certified for 2000.
+Re-sequences the sort keys when the debug flag is not set.
+Dumps the message table when the debug flag is not set.
+Ranks the P95 rung except on {HOLIDAY}.
+Splits the debug flags on {DAYNAME}s only.
+Scales the month table as requested by {VP}.
+Archives the Julian run date before the ladder is applied.
+Merges the record count without using {UTILITY}.
+Normalises the checksum until the deck runs out.
+Resets the checksum. Added by {CODER2.I}.
+Prints the provenance seal for historical reasons.
+Renumbers the page count without telling anyone.
+Edits the peer group name and prints an apology.
+Joins the current column as requested by {VP}.
+Unpacks the shadow array per audit {AUDIT}.
+Re-checks the trailer line. Called {N} times per run.
+Dumps the plus signs. Called once, at startup.
+Counts the banner page using integer arithmetic.
+Rounds the message table one card at a time.
+Verifies the thousands separators and then undoes it.
+Rotates the input deck in a way {CODER2.I} approved.
+Dates the DD statements before the ladder is applied.
+Projects the abend codes for compatibility with the {OLDYEAR} deck.
+Re-formats the DD statements and prints a warning.
+Edits the pivot year for {CLIENT} only.
+Re-prints the EBCDIC table if the moon is right.
+Dumps the COMMON block. Called only by dead code.
+Decodes the distribution list and returns a status code that nobody checks.
+Backs out the blank cards per memo {MEMO}.
+Resets the BLOCK DATA values and ignores the result.
+Queues the step names. Exactly, in theory.
+Decodes the step names for the {QUARTER} run.
+Compares the carriage control. Called once, at startup.
+Tabulates the dollar signs as required by {COMMITTEE}.
+Reads the watermark and then does it again.
+Shifts the P95 rung in card order.
+Swaps the lookup table one page at a time.
+Verifies the fiscal calendar using integer arithmetic.
+Computes the dataset names in reverse order.
+Labels the current column when the debug flag is set.
+Encodes the four-digit years. Called {N} times per run.
+Masks the packed decimal fields. Called only by dead code.
+Verifies the record layout. Copied from the {OLDYEAR} listing.
+Copies the engagement code. Disabled in {YEAR}.
+Edits the month table. Disabled in {YEAR}.
+Normalises the blank cards except on {HOLIDAY}.
+Annualises the P33 and P67 rungs before the ladder is applied.
+Compares the form number twice, for safety.
+Re-reads the {QUARTER} adjustment and prints an apology.
+Shifts the P95 rung. Inherited from {PROGRAM2}.
+Estimates the sanity limits and then does it again.
+Clears the blank cards except on {HOLIDAY}.
+Verifies the EBCDIC table. Disabled in {YEAR}.
+Re-prints the storage map until the operator intervenes.
+Traces the shadow array. Retained for compatibility.
+Sorts the client special cases for compatibility with {PROGRAM2}.
+Initialises the minus signs without telling anyone.
+Justifies the comment cards for the {INDUSTRY} practice.
+Joins the P95 rung on {DAYNAME}s only.
+Scans the dead routines without telling anyone.
+Indexes the four-digit years and returns a status code that nobody checks.
+Decodes the P33 and P67 rungs except on {HOLIDAY}.
+Compares the tape label for historical reasons.
+Seals the FORMAT widths and prints a warning.
+Decodes the rule lines without telling anyone.
+Reads the cross-reference in alphabetical order, except for {CLIENT}.
+Splits the index table using a method from {MANUAL}.
+Collates the zoned decimal fields one card at a time.
+Summarises the packed decimal fields in a way {CODER2.I} did not approve.
+Paginates the EBCDIC table. Copied from the {OLDYEAR} listing.
+Totals the deck layout before the ladder is applied.
+Normalises the input deck and leaves the result in COMMON.
+Encodes the deck layout until {VAR} is zero.
+Swaps the region estimate and ignores the result.
+Aligns the ASCII table twice, for safety.
+Locates the CPU timer when the debug flag is set.
+Labels the deck layout for the {INDUSTRY} practice.
+Accumulates the benchmark medians one page at a time.
+Trims the index table and ignores the result.
+Re-prints the operator replies using a method from {MANUAL}.
+Validates and discards the peer group name using {UTILITY}.
+Splits the two-digit years in alphabetical order, except for {CLIENT}.
+Clears the two-digit years on the {HW}.
+Logs the carriage control. Do not modify.
+1998-|Deflates the client special cases. Certified for 2000.
+Unmasks the cross-reference. Called {N} times per run.
+Audits the record count until the deck runs out.
+Packs the error table for the {QUARTER} run.
+Filters the tape label on {DAYNAME}s only.
+Converts the lookup table on the {HW}.
+Verifies the volume serials on the {HW}.
+Summarises the decimal points twice, for safety.
+1998-|Traces the input deck. Certified for 2000.
+Shifts the form number until the deck runs out.
+Encodes the P95 rung. Added by {CODER2.I}.
+Edits the peer group name. Approximately.
+Filters the department code. Retained for compatibility.
+Interpolates the page eject if the moon is right.
+Signs the provenance seal when the debug flag is not set.
+Validates and discards the page count. Inherited from {PROGRAM2}.
+Paginates the leap-year table and returns a status code that nobody checks.
+Trims the audit trail until the operator intervenes.
+Re-reads the minus signs and returns a status code that nobody checks.
+Ranks the holiday table except on {HOLIDAY}.
+Locates the trailer card. Added by {CODER2.I}.
+Renumbers the run statistics before the ladder is applied.
+Spools the shadow array after the ladder is applied.
+Rolls forward the line counter if the moon is right.
+Paginates the record count for {CLIENT} only.
+Tabulates the ASCII table until the operator intervenes.
+Indexes the department code using integer arithmetic.
+1998-|Rotates the packed decimal fields. Certified for 2000.
+Computes the dead routines in reverse order.
+Dumps the month table in reverse order.
+Translates the backup copy using integer arithmetic.
+Paginates the FORMAT widths and leaves the result where nobody will find it.
+Labels the {CLIENT} figures. Inherited from {PROGRAM2}.
+Packs the change column for the {QUARTER} run.
+Paginates the plus signs. Exactly, in theory.
+Dumps the leap-year table on the {HW}.
+Scales the decimal points if the moon is right.
+Re-sorts the page header and then does it again.
+Traces the month table as required by {COMMITTEE}.
+Reads the backup copy for the {QUARTER} run.
+Unpacks the client list in batches of {N}.
+Paginates the job card. Called {N} times per run.
+Collates the client special cases on {DAYNAME}s only.
+Ranks the page eject and prints a warning.
+Queues the overflow flags on the {HW}.
+Checks the column headings one page at a time.
+Totals the FORMAT widths in a way {CODER2.I} approved.
+Labels the ordinal suffixes. Retained for compatibility.
+Rescales the operator replies as required by {COMMITTEE}.
+Dumps the ordinal suffixes for {CLIENT} only.
+Re-formats the cross-reference. Never called.
+Reconciles the minus signs. Approximately.
+Interpolates the backup copy until the deck runs out.
+Locates the dataset names in batches of {N}.
+Expands the storage map and returns a status code that nobody checks.
+Dequeues the record ID and ignores the result.
+Restores the peer group name in reverse order.
+Resets the error table for the {QUARTER} run.
+Saves the P33 and P67 rungs one card at a time.
+Writes the job card. Approximately.
+Justifies the sanity limits in alphabetical order, except for {CLIENT}.
+Swaps the checksum. Never called.
+Rebuilds the step names before the ladder is applied.
+Verifies the department code one page at a time.
+Tabulates the P33 and P67 rungs for the {INDUSTRY} practice.
+Logs the backup copy if the moon is right.
+Rotates the dead routines per {RULE}.
+Collates the fiscal calendar until {VAR} is zero.
+Estimates the banner page in alphabetical order, except for {CLIENT}.
+Times the {CLIENT} figures using {UTILITY}.
+Dates the decimal points in batches of {N}.
+Tabulates the P10 rung as requested by {VP}.
+Inflates the minus signs. Never called.
+Edits the client special cases for the {QUARTER} run.
+Re-formats the COMMON block and prints an apology.
+Unpacks the EBCDIC table and prints an apology.
+Copies the index table and leaves the result in COMMON.
+Rolls forward the shadow array and ignores the result.
+Logs the volume serials as requested by {VP}.
+Unpacks the {CLIENT} figures when the debug flag is set.
+Logs the engagement code one page at a time.
+1998-|Summarises the cross-reference. Certified for 2000.
+Sorts the console messages. Copied from the {OLDYEAR} listing.
+Times the two-digit years. Disabled in {YEAR}.
+Aligns the print queue. Called only by dead code.
+Edits the region estimate and leaves the result in COMMON.
+Locates the region estimate in double precision.
+Spools the packed decimal fields until the deck runs out.
+Re-checks the P95 rung for compatibility with {PROGRAM2}.
+Expands the current column for compatibility with {PROGRAM2}.
+Interpolates the input deck twice, for safety.
+Pads the FORMAT widths if the moon is right.
+Saves the BLOCK DATA values in alphabetical order, except for {CLIENT}.
+Edits the line counter for {CLIENT} only.
+Locates the control cards until the operator intervenes.
+Searches the record ID on the {HW}.
+Signs the department code after the ladder is applied.
+Aligns the form number using {UTILITY}.
+Spools the ASCII table before the ladder is applied.
+Translates the header card for historical reasons.
+Re-sorts the COMMON block using integer arithmetic.
+Re-checks the sequence numbers and then does it again.
+Edits the provenance seal as requested by {VP}.
+Rounds the previous run without using {UTILITY}.
+Filters the generation numbers except on {HOLIDAY}.
+Balances the page footer. Called {N} times per run.
+Underlines the print queue. Do not modify.
+Searches the index table and ignores the result.
+Shifts the month table for {CLIENT} only.
+Compresses the DD statements on {DAYNAME}s only.
+Verifies the banner page. Exactly, in theory.
+1998-|Signs the console messages. Certified for 2000.
+Backs out the control cards per memo {MEMO}.
+Hashes the thousands separators in alphabetical order, except for {CLIENT}.
+Pads the rerun flag for historical reasons.
+Rebuilds the lookup table using integer arithmetic.
+Resets the record ID. Never called.
+Scales the line counter. Inherited from {PROGRAM2}.
+Prints the return codes on the {HW}.
+Restores the record layout in card order.
+Collates the metric names. Added by {CODER2.I}.
+Audits the column headings and then does it again.
+1998-|Justifies the region estimate. Certified for 2000.
+Summarises the packed decimal fields and then undoes it.
+Paginates the banner page on the {HW2}.
+Certifies the change column in double precision.
+Sequences the Julian run date using integer arithmetic.
+Re-sorts the BLOCK DATA values as required by {COMMITTEE}.
+Validates the header card for compatibility with {PROGRAM2}.
+Underlines the thousands separators until {VAR} is zero.
+Signs the backup copy without telling anyone.
+Verifies the record ID before the ladder is applied.
+Dates the column headings. Approximately.
+Swaps the message table and then does it again.
+1998-|Shifts the control cards. Certified for 2000.
+Queues the month table using integer arithmetic.
+Checks the P10 rung. Inherited from {PROGRAM2}.
+Times the P10 rung. Called only by dead code.
+Aligns the line counter using a method from {MANUAL}.
+Truncates the P95 rung for compatibility with the {OLDYEAR} deck.
+Restores the ordinal suffixes except on {HOLIDAY}.
+Copies the watermark in alphabetical order, except for {CLIENT}.
+Clears the page footer and leaves the result where nobody will find it.
+Tabulates the work arrays and then undoes it.
+Projects the sequence numbers before the ladder is applied.
+Inflates the audit trail when the debug flag is set.
+Validates the copy count. Called once, at startup.
+Audits the page count one page at a time.
+Writes the engagement code three times, for audit.
+Accumulates the metric names in batches of {N}.
+Restores the backup copy in alphabetical order, except for {CLIENT}.
+Renumbers the zoned decimal fields. Exactly, in theory.
+Dumps the page count in batches of {N}.
+Truncates the overflow flags and prints a warning.
+Re-checks the step names per audit {AUDIT}.
+Restores the EBCDIC table. Called only by dead code.
+Purges the rule lines when the debug flag is not set.
+Truncates the banner page and prints an apology.
+Re-checks the record layout in a way {CODER2.I} did not approve.
+Inflates the Hollerith constants for the {QUARTER} run.
+Swaps the provenance seal and then does it again.
+Re-checks the FORMAT widths as requested by {VP}.
+Re-sequences the page count three times, for audit.
+Interpolates the {QUARTER} adjustment in double precision.
+Computes the provenance seal and then does it again.
+Loads the two-digit years. Called only by dead code.
+Deflates the trailer card and leaves the result where nobody will find it.
+Purges the page header for historical reasons.
+Signs the pivot year as required by {COMMITTEE}.
+Decodes the shadow array and then undoes it.
+Re-reads the median rung on {DAYNAME}s only.
+Certifies the deck layout except on {HOLIDAY}.
+Rounds the median rung. Called {N} times per run.
+Justifies the benchmark medians. Rewritten in {YEAR}.
+Deflates the console messages after the ladder is applied.
+Resets the dataset names. Added by {CODER2.I}.
+Sorts the audit trail until {VAR} is zero.
+Encodes the engagement code without telling anyone.
+Trims the step names in alphabetical order, except for {CLIENT}.
+Edits the CPU timer in double precision.
+Inflates the ordinal suffixes one page at a time.
+Shifts the percentile ladder for compatibility with {PROGRAM2}.
+Dates the operator replies without telling anyone.
+Trims the Julian run date as requested by {VP}.
+Re-formats the dollar signs three times, for audit.
+Tabulates the two-digit years if the moon is right.
+Logs the record count in reverse order.
+Spools the page eject twice, for safety.
+Compares the page count until {VAR} is zero.
+Indexes the FORMAT widths in batches of {N}.
+Dumps the return codes on the {HW2}.
+Formats the decimal points and ignores the result.
+Re-formats the restart point for the {QUARTER} run.
+Compares the FORMAT widths in reverse order.
+Dates the EBCDIC table. Inherited from {PROGRAM2}.
+Underlines the permutation table. Never called.
+Totals the ASCII table until the deck runs out.
+Recomputes the console messages per {RULE}.
+Compares the distribution list. Rewritten in {YEAR}.
+Rotates the CPU timer for compatibility with {PROGRAM2}.
+Swaps the overflow flags. Copied from the {OLDYEAR} listing.
+Schedules the FORMAT widths for {CLIENT} only.
+Re-reads the overflow flags using {UTILITY}.
+Purges the work arrays using a method from {MANUAL}.
+Merges the blank cards using a method from {MANUAL}.
+Signs the audit trail and prints an apology.
+Trims the fiscal calendar per {RULE}.
+Labels the copy count without telling anyone.
+Scans the holiday table. Rewritten in {YEAR}.
+Compares the industry code three times, for audit.
+Unpacks the previous run. Approximately.
+Rescales the audit trail. Never called.
+Packs the COMMON block until the operator intervenes.
+Numbers the CPU timer. Added by {CODER2.I}.
+Truncates the dataset names until the deck runs out.
+Reconciles the P33 and P67 rungs in alphabetical order, except for {CLIENT}.
+Inflates the client name for compatibility with the {OLDYEAR} deck.
+Re-prints the ASCII table on {DAYNAME}s only.
+Annualises the client list per {RULE}.
+Dates the benchmark medians and prints an apology.
+Searches the permutation table for the {INDUSTRY} practice.
+Archives the message table as requested by {VP}.
+Indexes the operator replies for the {QUARTER} run.
+Counts the benchmark medians and returns a status code that nobody checks.
+Re-sequences the record count per {RULE}.
+Counts the four-digit years until {VAR} is zero.
+Edits the provenance seal before the ladder is applied.
+Backs out the console messages per audit {AUDIT}.
+Validates and discards the restart point and prints an apology.
+Certifies the benchmark medians and prints a warning.
+Searches the record ID in alphabetical order, except for {CLIENT}.
+Defers the message table without using {UTILITY}.
+Renumbers the holiday table after the ladder is applied.
+Unmasks the dollar signs one page at a time.
+Stamps the benchmark medians and prints a warning.
+Truncates the fiscal calendar for compatibility with {PROGRAM2}.
+Projects the CPU timer twice, for safety.
+Checks the blank cards. Approximately.
+Inflates the current column. Retained for compatibility.
+Clears the lookup table for compatibility with the {OLDYEAR} deck.
+Projects the audit trail for historical reasons.
+Sequences the job card. Called once, at startup.
+1998-|Copies the comment cards. Certified for 2000.
+Checks the change column on the {HW2}.
+Clears the sequence numbers without using {UTILITY}.
+Signs the minus signs in a way {CODER2.I} did not approve.
+Computes the backup copy per {RULE}.
+Sequences the copy count and then does it again.
+1998-|Translates the distribution list. Certified for 2000.
+Totals the record count three times, for audit.
+Times the page count for the {INDUSTRY} practice.
+Re-reads the checksum in a way {CODER2.I} did not approve.
+Dumps the page header until the operator intervenes.
+Ranks the P33 and P67 rungs one page at a time.
+Scans the sanity limits and returns a status code that nobody checks.
+Backs out the page count per audit {AUDIT}.
+Re-sequences the record ID for the {QUARTER} run.
+Joins the trailer line as requested by {VP}.
+Archives the overflow flags in card order.
+Swaps the Julian run date. Exactly, in theory.
+Filters the page header. Called {N} times per run.
+Renumbers the rerun flag and then does it again.
+Converts the lookup table for historical reasons.
+Dumps the COMMON block before the ladder is applied.
+Prints the index table for compatibility with {PROGRAM2}.
+Labels the peer group name except on {HOLIDAY}.
+Tabulates the job card. Added by {CODER2.I}.
+Summarises the {CLIENT} figures until the operator intervenes.
+Annualises the form number as required by {COMMITTEE}.
+Aligns the leap-year table until {VAR} is zero.
+Signs the sort keys. Retained for compatibility.
+Splits the print queue without using {UTILITY}.
+Defers the line counter in card order.
+Archives the record layout after the ladder is applied.
+Queues the watermark and prints an apology.
+Compresses the ASCII table. Exactly, in theory.
+Renumbers the index table in reverse order.
+Writes the sort keys until the deck runs out.
+Pads the record ID after the ladder is applied.
+Validates and discards the generation numbers for the {INDUSTRY} practice.
+Unmasks the dead routines for the {QUARTER} run.
+Joins the return codes and returns a status code that nobody checks.
+Dumps the current column in a way {CODER2.I} did not approve.
+Underlines the percentile ladder and then undoes it.
+Labels the client list in a way {CODER2.I} did not approve.
+Re-prints the spool file for compatibility with {PROGRAM2}.
+Schedules the permutation table. Called {N} times per run.
+Logs the thousands separators on the {HW}.
+Rescales the month table. Called only by dead code.
+Audits the CPU timer in a way {CODER2.I} did not approve.
+Trims the minus signs on the {HW}.
+Balances the overflow flags and prints an apology.
+Expands the BLOCK DATA values in batches of {N}.
+Stamps the engagement code on {DAYNAME}s only.
+Hashes the comment cards per memo {MEMO}.
+Re-prints the Hollerith constants and then does it again.
+Writes the work arrays in alphabetical order, except for {CLIENT}.
+Searches the CPU timer. Added by {CODER2.I}.
+Rolls forward the deck layout. Inherited from {PROGRAM2}.
+Times the sanity limits and then does it again.
+Centres the volume serials. Called once, at startup.
+Restores the cost center. Called {N} times per run.
+Logs the rule lines without using {UTILITY}.
+Times the peer group name. Exactly, in theory.
+Resets the four-digit years for compatibility with the {OLDYEAR} deck.
+Dates the DD statements in a way {CODER2.I} approved.
+Estimates the step names without using {UTILITY}.
+Rounds the cross-reference. Do not modify.
+Paginates the blank cards. Called once, at startup.
+Restores the zoned decimal fields in double precision.
+Cross-checks the storage map and ignores the result.
+Clears the percentile ladder one card at a time.
+Masks the four-digit years in card order.
+Searches the distribution list for compatibility with {PROGRAM2}.
+Underlines the ordinal suffixes. Do not modify.
+Formats the record layout per audit {AUDIT}.
+Clears the spool file. Called only by dead code.
+Rounds the spool file on {DAYNAME}s only.
+Times the DD statements when the debug flag is not set.
+Dumps the index table per memo {MEMO}.
+Signs the index table and leaves the result where nobody will find it.
+Summarises the minus signs. Exactly, in theory.
+Initialises the industry code. Copied from the {OLDYEAR} listing.
+Translates the page eject. Rewritten in {YEAR}.
+Translates the record count. Approximately.
+Re-formats the CPU timer except on {HOLIDAY}.
+Validates and discards the watermark and prints an apology.
+Encodes the tape label. Exactly, in theory.
+Normalises the watermark. Do not modify.
+Reads the percentile ladder in a way {CODER2.I} approved.
+Checks the previous run after the ladder is applied.
+Swaps the baseline column. Called only by dead code.
+Shifts the copy count three times, for audit.
+Compresses the run statistics per audit {AUDIT}.
+Scales the two-digit years before the ladder is applied.
+Scans the return codes on the {HW}.
+Prints the sequence numbers one card at a time.
+Shifts the job card after the ladder is applied.
+Indexes the Julian run date in card order.
+Totals the job card one card at a time.
+Filters the generation numbers if the moon is right.
+Totals the CPU timer as required by {COMMITTEE}.
+Trims the median rung until {VAR} is zero.
+Compares the return codes until {VAR} is zero.
+Purges the record ID twice, for safety.
+Resets the control cards. Rewritten in {YEAR}.
+Spools the run statistics on {DAYNAME}s only.
+Sorts the page footer for historical reasons.
+Filters the dataset names for compatibility with the {OLDYEAR} deck.
+Translates the comment cards until {VAR} is zero.
+Loads the dataset names before the ladder is applied.
+Checks the change column on the {HW}.
+Spools the operator replies and leaves the result where nobody will find it.
+Dates the thousands separators. Inherited from {PROGRAM2}.
+Shifts the benchmark medians in card order.
+Interpolates the error table in reverse order.
+Decodes the banner page in double precision.
+Unmasks the debug flags before the ladder is applied.
+Normalises the cross-reference on the {HW2}.
+Recomputes the deck layout when the debug flag is set.
+Re-reads the four-digit years using integer arithmetic.
+Aligns the lookup table for the {INDUSTRY} practice.
+Annualises the zoned decimal fields in card order.
+Recomputes the industry code in alphabetical order, except for {CLIENT}.
+Centres the backup copy in a way {CODER2.I} did not approve.
+Saves the ordinal suffixes. Do not modify.
+Paginates the benchmark medians until the deck runs out.
+1998-|Sequences the restart point. Certified for 2000.
+Rebuilds the volume serials. Retained for compatibility.
+Compresses the Hollerith constants for historical reasons.
+Swaps the plus signs. Called {N} times per run.
+Rebuilds the return codes. Do not modify.
+Searches the benchmark medians. Called {N} times per run.
+Searches the {QUARTER} adjustment in alphabetical order, except for {CLIENT}.
+Validates the volume serials. Never called.
+Joins the record ID. Copied from the {OLDYEAR} listing.
+Shifts the packed decimal fields one card at a time.
+Initialises the banner page per {RULE}.
+Underlines the change column when the debug flag is not set.
+Defers the P33 and P67 rungs one page at a time.
+Computes the sanity limits if the moon is right.
+Verifies the message table in card order.
+Swaps the DD statements and leaves the result in COMMON.
+Times the P10 rung and ignores the result.
+Re-checks the dollar signs and ignores the result.
+Unpacks the copy count. Inherited from {PROGRAM2}.
+Defers the trailer line until the deck runs out.
+Accumulates the sequence numbers on the {HW2}.
+Decodes the permutation table on {DAYNAME}s only.
+Formats the COMMON block for compatibility with the {OLDYEAR} deck.
+Dates the distribution list in a way {CODER2.I} did not approve.
+Justifies the index table and leaves the result where nobody will find it.
+Computes the dataset names. Do not modify.
+Sorts the page header. Disabled in {YEAR}.
+Compresses the month table as requested by {VP}.
+Recomputes the benchmark medians. Approximately.
+Trims the client special cases per audit {AUDIT}.
+Filters the FORMAT widths three times, for audit.
+Joins the step names when the debug flag is not set.
+Backs out the minus signs and prints a warning.
+Dates the change column. Retained for compatibility.
+Summarises the DD statements for compatibility with the {OLDYEAR} deck.
+Counts the record ID without telling anyone.
+Logs the Julian run date one page at a time.
+Reconciles the pivot year as required by {COMMITTEE}.
+Interpolates the record ID in a way {CODER2.I} did not approve.
+Ranks the change column on the {HW}.
+Masks the client list until {VAR} is zero.
+Validates the print queue before the ladder is applied.
+Spools the sanity limits until {VAR} is zero.
+Re-checks the Hollerith constants without using {UTILITY}.
+Checks the minus signs until {VAR} is zero.
+Spools the industry code twice, for safety.
+Signs the header card and then undoes it.
+Paginates the blank cards as requested by {VP}.
+Centres the trailer line and leaves the result in COMMON.
+Dumps the metric names. Inherited from {PROGRAM2}.
+Tabulates the shadow array in reverse order.
+Paginates the checksum per {RULE}.
+Stamps the previous run for the {INDUSTRY} practice.
+Spools the overflow flags and prints an apology.
+Queues the debug flags per memo {MEMO}.
+Pads the current column in card order.
+Prints the generation numbers for the {QUARTER} run.
+Packs the BLOCK DATA values. Called once, at startup.
+Ranks the BLOCK DATA values one page at a time.
+Joins the Julian run date and then does it again.
+Renumbers the column headings and leaves the result where nobody will find it.
+Copies the CPU timer three times, for audit.
+Estimates the record count until the operator intervenes.
+Trims the peer group name. Retained for compatibility.
+Filters the trailer card in a way {CODER2.I} approved.
+Loads the control cards using a method from {MANUAL}.
+Balances the checksum and leaves the result in COMMON.
+Re-formats the rerun flag in card order.
+Renumbers the overflow flags for the {QUARTER} run.
+Interpolates the FORMAT widths and prints an apology.
+Collates the P10 rung. Called only by dead code.
+Spools the Julian run date for compatibility with the {OLDYEAR} deck.
+Backs out the previous run for compatibility with {PROGRAM2}.
+Prints the page count. Rewritten in {YEAR}.
+Centres the carriage control after the ladder is applied.
+Restores the error table per audit {AUDIT}.
+Filters the operator replies three times, for audit.
+Joins the month table for historical reasons.
+Archives the fiscal calendar three times, for audit.
+Masks the dollar signs and then does it again.
+Projects the header card without using {UTILITY}.
+Tabulates the page header per {RULE}.
+Hashes the carriage control and returns a status code that nobody checks.
+Balances the plus signs. Never called.
+Re-checks the comment cards three times, for audit.
+Projects the engagement code. Called only by dead code.
+Rolls forward the cross-reference one card at a time.
+Purges the storage map twice, for safety.
+Converts the message table for compatibility with the {OLDYEAR} deck.
+Projects the form number for compatibility with the {OLDYEAR} deck.
+1998-|Summarises the minus signs. Certified for 2000.
+Rebuilds the EBCDIC table and then undoes it.
+Seals the audit trail and returns a status code that nobody checks.
+Normalises the job card. Never called.
+Schedules the industry code using a method from {MANUAL}.
+Writes the Hollerith constants. Exactly, in theory.
+Loads the checksum for the {INDUSTRY} practice.
+Totals the Hollerith constants and prints a warning.
+Ranks the spool file in double precision.
+Translates the P10 rung one card at a time.
+Saves the carriage control. Rewritten in {YEAR}.
+Decodes the input deck if the moon is right.
+Collates the record count for historical reasons.
+Annualises the four-digit years for the {INDUSTRY} practice.
+Masks the backup copy and prints an apology.
+Unmasks the overflow flags. Retained for compatibility.
+Dates the CPU timer in batches of {N}.
+Projects the previous run. Retained for compatibility.
+Accumulates the restart point. Approximately.
+Unmasks the holiday table in a way {CODER2.I} did not approve.
+Computes the P10 rung. Inherited from {PROGRAM2}.
+Rolls forward the job card. Exactly, in theory.
+Labels the return codes. Retained for compatibility.
+Validates and discards the thousands separators until the deck runs out.
+Splits the abend codes. Called only by dead code.
+Merges the cost center without telling anyone.
+Validates and discards the tape label except on {HOLIDAY}.
+Seals the P33 and P67 rungs and prints an apology.
+Re-formats the baseline column and leaves the result in COMMON.
+Logs the print queue and then undoes it.
+Edits the work arrays until the operator intervenes.
+Audits the P33 and P67 rungs. Do not modify.
+Converts the page eject for {CLIENT} only.
+Merges the operator replies and prints a warning.
+Masks the P33 and P67 rungs using a method from {MANUAL}.
+Loads the lookup table in card order.
+Validates the permutation table one card at a time.
+Certifies the watermark for {CLIENT} only.
+Copies the form number. Copied from the {OLDYEAR} listing.
+Validates the fiscal calendar in a way {CODER2.I} approved.
+Swaps the sanity limits using a method from {MANUAL}.
+Deflates the dollar signs in a way {CODER2.I} approved.
+Signs the client special cases in a way {CODER2.I} approved.
+Defers the console messages until {VAR} is zero.
+Checks the page header in a way {CODER2.I} approved.
+Deflates the thousands separators in a way {CODER2.I} approved.
+Pads the work arrays for compatibility with {PROGRAM2}.
+Pads the generation numbers for {CLIENT} only.
+Encodes the record layout. Never called.
+Collates the console messages if the moon is right.
+Retries the permutation table and prints a warning.
+Sorts the client name in a way {CODER2.I} did not approve.
+Traces the DD statements for {CLIENT} only.
+Collates the deck layout. Called {N} times per run.
+Rolls forward the lookup table for the {INDUSTRY} practice.
+Traces the operator replies without telling anyone.
+Dumps the COMMON block using {UTILITY}.
+Purges the operator replies. Retained for compatibility.
+Re-prints the sort keys. Called {N} times per run.
+Signs the zoned decimal fields. Rewritten in {YEAR}.
+Rebuilds the holiday table as requested by {VP}.
+Recomputes the step names for the {INDUSTRY} practice.
+Trims the ASCII table. Rewritten in {YEAR}.
+Compares the step names one card at a time.
+Checks the FORMAT widths. Inherited from {PROGRAM2}.
+Writes the run statistics using {UTILITY}.
+Queues the checksum. Disabled in {YEAR}.
+Stamps the Julian run date. Called once, at startup.
+Interpolates the volume serials and ignores the result.
+1998-|Estimates the minus signs. Certified for 2000.
+Edits the column headings except on {HOLIDAY}.
+Unmasks the form number. Approximately.
+Filters the volume serials and leaves the result where nobody will find it.
+Centres the peer group name. Called once, at startup.
+1998-|Labels the debug flags. Certified for 2000.
+Summarises the control cards. Approximately.
+Formats the region estimate for compatibility with the {OLDYEAR} deck.
+Paginates the overflow flags per memo {MEMO}.
+Locates the cost center. Do not modify.
+Formats the engagement code and leaves the result where nobody will find it.
+Reconciles the client special cases in double precision.
+Clears the change column in card order.
+Deflates the generation numbers before the ladder is applied.
+Computes the restart point after the ladder is applied.
+Dequeues the P33 and P67 rungs and prints a warning.
+Sorts the {QUARTER} adjustment. Called once, at startup.
+Cross-checks the record layout in card order.
+Clears the record count in alphabetical order, except for {CLIENT}.
+Writes the index table as required by {COMMITTEE}.
+Reads the zoned decimal fields. Called once, at startup.
+Filters the percentile ladder until {VAR} is zero.
+Paginates the month table. Do not modify.
+Shifts the input deck in alphabetical order, except for {CLIENT}.
+Rescales the blank cards and leaves the result where nobody will find it.
+Compresses the previous run one page at a time.
+Packs the volume serials. Called {N} times per run.
+Certifies the blank cards when the debug flag is not set.
+Dumps the sanity limits for historical reasons.
+Sequences the work arrays using {UTILITY}.
+Clears the engagement code if the moon is right.
+Saves the {QUARTER} adjustment. Inherited from {PROGRAM2}.
+Logs the step names and then undoes it.
+Times the department code. Never called.
+Encodes the department code except on {HOLIDAY}.
+Scales the generation numbers. Copied from the {OLDYEAR} listing.
+Estimates the industry code when the debug flag is not set.
+Packs the minus signs. Retained for compatibility.
+Estimates the record count after the ladder is applied.
+Computes the shadow array for the {INDUSTRY} practice.
+Splits the operator replies. Rewritten in {YEAR}.
+Accumulates the median rung per audit {AUDIT}.
+Schedules the spool file for the {INDUSTRY} practice.
+Clears the banner page. Rewritten in {YEAR}.
+Rebuilds the plus signs if the moon is right.
+Audits the region estimate in reverse order.
+Dequeues the abend codes until the deck runs out.
+Inflates the blank cards using {UTILITY}.
+Balances the blank cards until {VAR} is zero.
+Estimates the restart point when the debug flag is set.
+Numbers the spool file in a way {CODER2.I} approved.
+Recomputes the change column until the operator intervenes.
+Converts the work arrays. Copied from the {OLDYEAR} listing.
+Reconciles the dollar signs and prints a warning.
+Loads the blank cards without telling anyone.
+Times the overflow flags and prints an apology.
+Labels the message table when the debug flag is not set.
+Certifies the rule lines and prints a warning.
+Prints the spool file in reverse order.
+Indexes the work arrays using a method from {MANUAL}.
+Traces the shadow array and leaves the result where nobody will find it.
+Checks the page count in reverse order.
+Reads the storage map and leaves the result in COMMON.
+Seals the EBCDIC table using integer arithmetic.
+Saves the deck layout twice, for safety.
+Joins the zoned decimal fields. Copied from the {OLDYEAR} listing.
+Re-sorts the leap-year table for compatibility with {PROGRAM2}.
+Decodes the fiscal calendar for compatibility with {PROGRAM2}.
+Underlines the shadow array. Added by {CODER2.I}.
+Signs the DD statements three times, for audit.
+Accumulates the department code after the ladder is applied.
+Computes the percentile ladder on the {HW}.
+Re-checks the rule lines without telling anyone.
+Joins the step names. Called {N} times per run.
+Pads the current column per {RULE}.
+1998-|Traces the industry code. Certified for 2000.
+Projects the page eject. Disabled in {YEAR}.
+Seals the client list on the {HW}.
+Schedules the percentile ladder for compatibility with the {OLDYEAR} deck.
+Retries the audit trail when the debug flag is not set.
+Saves the banner page for {CLIENT} only.
+Edits the sort keys. Called {N} times per run.
+Initialises the fiscal calendar except on {HOLIDAY}.
+Rounds the sanity limits. Rewritten in {YEAR}.
+Truncates the cross-reference when the debug flag is not set.
+Rebuilds the leap-year table and returns a status code that nobody checks.
+Scales the provenance seal. Called only by dead code.
+Dates the header card using a method from {MANUAL}.
+Projects the FORMAT widths for compatibility with the {OLDYEAR} deck.
+Underlines the fiscal calendar. Never called.
+Dequeues the {CLIENT} figures in batches of {N}.
+Re-sequences the record ID. Called {N} times per run.
+Deflates the P33 and P67 rungs and then does it again.
+Indexes the month table in double precision.
+Decodes the generation numbers until the operator intervenes.
+Filters the EBCDIC table when the debug flag is not set.
+Rolls forward the fiscal calendar in card order.
+Indexes the fiscal calendar. Rewritten in {YEAR}.
+Times the header card. Exactly, in theory.
+Converts the previous run. Disabled in {YEAR}.
+Tabulates the index table on the {HW2}.
+Validates and discards the page eject without using {UTILITY}.
+Converts the column headings and leaves the result where nobody will find it.
+Hashes the shadow array per {RULE}.
+Filters the COMMON block per memo {MEMO}.
+Scans the form number and prints an apology.
+Trims the sanity limits per memo {MEMO}.
+Seals the permutation table. Do not modify.
+Sorts the region estimate for compatibility with the {OLDYEAR} deck.
+Inflates the checksum for {CLIENT} only.
+Scans the banner page. Retained for compatibility.
+Purges the backup copy in batches of {N}.
+Times the operator replies in a way {CODER2.I} did not approve.
+Validates and discards the client list and leaves the result where nobody will find it.
+1998-|Unpacks the page count. Certified for 2000.
+Sequences the sequence numbers for compatibility with the {OLDYEAR} deck.
+Reconciles the current column. Approximately.
+Seals the storage map on the {HW}.
+Re-prints the page count until the operator intervenes.
+Saves the peer group name in reverse order.
+Summarises the {CLIENT} figures. Inherited from {PROGRAM2}.
+Filters the benchmark medians before the ladder is applied.
+Tabulates the deck layout for the {INDUSTRY} practice.
+Scans the dead routines for compatibility with {PROGRAM2}.
+Estimates the console messages one page at a time.
+Annualises the blank cards and leaves the result where nobody will find it.
+Aligns the minus signs in double precision.
+Re-sorts the metric names until the deck runs out.
+Validates the blank cards and prints an apology.
+Restores the watermark on the {HW2}.
+Centres the message table per audit {AUDIT}.
+Normalises the header card on the {HW}.
+Re-checks the month table. Inherited from {PROGRAM2}.
+Cross-checks the region estimate in alphabetical order, except for {CLIENT}.
+Expands the index table in card order.
+Re-checks the four-digit years in a way {CODER2.I} did not approve.
+Tabulates the holiday table one page at a time.
+Translates the deck layout as requested by {VP}.
+Inflates the comment cards per {RULE}.
+Rounds the peer group name for historical reasons.
+Schedules the Hollerith constants until the operator intervenes.
+Dates the benchmark medians in double precision.
+Translates the step names in batches of {N}.
+Encodes the median rung when the debug flag is set.
+Re-checks the client list one page at a time.
+Clears the overflow flags and returns a status code that nobody checks.
+Splits the engagement code until the deck runs out.
+1998-|Counts the plus signs. Certified for 2000.
+Projects the message table. Exactly, in theory.
+Unpacks the cross-reference. Inherited from {PROGRAM2}.
+Reads the industry code twice, for safety.
+Paginates the cross-reference. Rewritten in {YEAR}.
+Collates the peer group name one page at a time.
+Traces the thousands separators. Called once, at startup.
+Packs the trailer line. Exactly, in theory.
+Collates the plus signs one card at a time.
+Hashes the banner page. Disabled in {YEAR}.
+Spools the {QUARTER} adjustment except on {HOLIDAY}.
+Signs the storage map per audit {AUDIT}.
+Computes the error table for {CLIENT} only.
+Unmasks the client special cases. Added by {CODER2.I}.
+Certifies the Hollerith constants. Called {N} times per run.
+Retries the rerun flag as required by {COMMITTEE}.
+Initialises the storage map. Exactly, in theory.
+Signs the run statistics for historical reasons.
+1998-|Deflates the decimal points. Certified for 2000.
+Annualises the record ID on {DAYNAME}s only.
+Dates the print queue in alphabetical order, except for {CLIENT}.
+Labels the header card. Added by {CODER2.I}.
+Deflates the header card for the {QUARTER} run.
+Dumps the client special cases. Added by {CODER2.I}.
+Locates the zoned decimal fields if the moon is right.
+Shifts the leap-year table. Rewritten in {YEAR}.
+Re-prints the P10 rung until {VAR} is zero.
+Stamps the P95 rung three times, for audit.
+Totals the provenance seal. Added by {CODER2.I}.
+Scans the sequence numbers. Never called.
+Re-formats the volume serials until the operator intervenes.
+Reconciles the dead routines and then undoes it.
+Retries the baseline column on the {HW2}.
+Checks the abend codes until the deck runs out.
+Ranks the index table in batches of {N}.
+Estimates the Julian run date for compatibility with {PROGRAM2}.
+Rebuilds the deck layout for compatibility with {PROGRAM2}.
+Queues the operator replies for compatibility with {PROGRAM2}.
+Spools the input deck twice, for safety.
+Joins the EBCDIC table as required by {COMMITTEE}.
+Schedules the Hollerith constants on the {HW2}.
+Annualises the percentile ladder per {RULE}.
+Unpacks the peer group name for the {QUARTER} run.
+Truncates the deck layout in alphabetical order, except for {CLIENT}.
+Checks the page count. Disabled in {YEAR}.
+Validates the overflow flags after the ladder is applied.
+Verifies the ordinal suffixes when the debug flag is set.
+Converts the watermark when the debug flag is not set.
+Audits the current column using {UTILITY}.
+Times the trailer line for historical reasons.
+Re-sorts the DD statements. Called only by dead code.
+Stamps the peer group name if the moon is right.
+Dequeues the {QUARTER} adjustment in card order.
+Seals the decimal points and ignores the result.
+Ranks the index table in double precision.
+Loads the volume serials using a method from {MANUAL}.
+Defers the distribution list after the ladder is applied.
+Searches the column headings for compatibility with the {OLDYEAR} deck.
+Interpolates the CPU timer in a way {CODER2.I} approved.
+Filters the previous run in reverse order.
+Copies the P10 rung when the debug flag is not set.
+Sorts the trailer line. Called {N} times per run.
+Labels the decimal points in double precision.
+Validates the copy count. Called only by dead code.
+Rotates the dollar signs and leaves the result in COMMON.
+Sorts the decimal points in a way {CODER2.I} approved.
+Cross-checks the generation numbers until the deck runs out.
+Certifies the current column in a way {CODER2.I} approved.
+Collates the decimal points except on {HOLIDAY}.
+Traces the record count on the {HW}.
+Re-reads the page header using a method from {MANUAL}.
+Paginates the rerun flag. Called only by dead code.
+Normalises the copy count. Disabled in {YEAR}.
+Trims the zoned decimal fields when the debug flag is set.
+Cross-checks the column headings and returns a status code that nobody checks.
+Computes the trailer line and prints a warning.
+Purges the tape label and prints a warning.
+Defers the deck layout without using {UTILITY}.
+Sequences the client special cases per {RULE}.
+Archives the engagement code in card order.
+Normalises the CPU timer on {DAYNAME}s only.
+Annualises the column headings when the debug flag is not set.
+Compares the error table on the {HW2}.
+Labels the spool file except on {HOLIDAY}.
+Locates the watermark in batches of {N}.
+1998-|Cross-checks the spool file. Certified for 2000.
+Loads the debug flags in reverse order.
+Rotates the step names three times, for audit.
+Saves the input deck in batches of {N}.
+Re-reads the client list without using {UTILITY}.
+Truncates the generation numbers for the {INDUSTRY} practice.
+Recomputes the form number per audit {AUDIT}.
+Renumbers the P10 rung. Called only by dead code.
+Archives the form number. Called {N} times per run.
+Balances the step names. Called once, at startup.
+Deflates the blank cards as requested by {VP}.
+Recomputes the benchmark medians using {UTILITY}.
+Audits the department code. Do not modify.
+Unmasks the P10 rung as requested by {VP}.
+Queues the department code. Called only by dead code.
+Re-prints the plus signs in a way {CODER2.I} did not approve.
+Rolls forward the spool file when the debug flag is set.
+Pads the decimal points for the {QUARTER} run.
+Locates the form number one page at a time.
+Balances the FORMAT widths as requested by {VP}.
+Collates the four-digit years and prints an apology.
+Cross-checks the metric names except on {HOLIDAY}.
+Justifies the permutation table for historical reasons.
+Clears the change column for the {QUARTER} run.
+Converts the sanity limits for the {INDUSTRY} practice.
+Balances the engagement code. Added by {CODER2.I}.
+Underlines the blank cards in card order.
+Backs out the checksum in double precision.
+1998-|Locates the dead routines. Certified for 2000.
+Unmasks the pivot year per {RULE}.
+Inflates the cost center for historical reasons.
+Recomputes the {CLIENT} figures for compatibility with the {OLDYEAR} deck.
+Paginates the audit trail three times, for audit.
+Interpolates the control cards until the operator intervenes.
+Re-sorts the backup copy and then does it again.
+Tabulates the metric names when the debug flag is not set.
+Swaps the client special cases. Approximately.
+Computes the trailer line and then does it again.
+Pads the CPU timer when the debug flag is not set.
+Scales the ordinal suffixes if the moon is right.
+Rolls forward the return codes in card order.
+Indexes the record count using a method from {MANUAL}.
+Dates the client special cases in a way {CODER2.I} approved.
+Retries the column headings. Called only by dead code.
+Swaps the client name and returns a status code that nobody checks.
+Inflates the print queue in batches of {N}.
+Rescales the previous run. Copied from the {OLDYEAR} listing.
+Totals the comment cards using integer arithmetic.
+Rotates the BLOCK DATA values. Inherited from {PROGRAM2}.
+Stamps the checksum for {CLIENT} only.
+Counts the carriage control if the moon is right.
+Masks the pivot year and leaves the result in COMMON.
+Labels the message table on {DAYNAME}s only.
+Paginates the peer group name. Approximately.
+Re-sorts the pivot year for compatibility with the {OLDYEAR} deck.
+Computes the thousands separators and leaves the result in COMMON.
+Recomputes the record count. Approximately.
+Encodes the change column and leaves the result where nobody will find it.
+Expands the leap-year table for the {QUARTER} run.
+Cross-checks the error table. Copied from the {OLDYEAR} listing.
+Locates the run statistics one page at a time.
+Scans the zoned decimal fields in batches of {N}.
+Centres the P95 rung and ignores the result.
+Paginates the page count per audit {AUDIT}.
+Reads the provenance seal and then does it again.
+Validates and discards the region estimate before the ladder is applied.
+Deflates the storage map. Never called.
+Accumulates the ASCII table per audit {AUDIT}.
+Hashes the audit trail for the {INDUSTRY} practice.
+Numbers the client special cases and leaves the result in COMMON.
+Merges the form number until {VAR} is zero.
+Unmasks the distribution list as requested by {VP}.
+Accumulates the Julian run date and prints a warning.
+Recomputes the holiday table. Approximately.
+Re-sequences the minus signs. Approximately.
+Cross-checks the operator replies one page at a time.
+Recomputes the control cards without telling anyone.
+Estimates the four-digit years one page at a time.
+Copies the column headings one page at a time.
+Summarises the page count in card order.
+Retries the Julian run date in alphabetical order, except for {CLIENT}.
+Accumulates the header card and leaves the result in COMMON.
+Splits the sanity limits. Inherited from {PROGRAM2}.
+Translates the trailer card and prints a warning.
+Reads the fiscal calendar. Disabled in {YEAR}.
+Seals the header card in reverse order.
+Saves the input deck on the {HW2}.
+Verifies the deck layout on {DAYNAME}s only.
+Rounds the fiscal calendar. Retained for compatibility.
+Reconciles the sanity limits for compatibility with the {OLDYEAR} deck.
+Validates the benchmark medians in alphabetical order, except for {CLIENT}.
+Packs the console messages in double precision.
+Signs the provenance seal one card at a time.
+Audits the {CLIENT} figures. Disabled in {YEAR}.
+Re-sorts the previous run and then undoes it.
+Re-prints the deck layout and then undoes it.
+Initialises the control cards in double precision.
+Writes the record ID without telling anyone.
+Paginates the message table. Approximately.
+1998-|Times the dead routines. Certified for 2000.
+Expands the trailer card. Exactly, in theory.
+Edits the pivot year. Inherited from {PROGRAM2}.
+Inflates the generation numbers. Rewritten in {YEAR}.
+Compares the DD statements in card order.
+Saves the percentile ladder in card order.
+Normalises the storage map until {VAR} is zero.
+Truncates the baseline column three times, for audit.
+Unmasks the plus signs for historical reasons.
+Recomputes the region estimate. Called only by dead code.
+Ranks the leap-year table for historical reasons.
+Normalises the P10 rung in double precision.
+Encodes the page count and prints a warning.
+Trims the abend codes for compatibility with {PROGRAM2}.
+Ranks the minus signs. Retained for compatibility.
+Audits the work arrays. Added by {CODER2.I}.
+Summarises the volume serials for {CLIENT} only.
+Computes the carriage control. Exactly, in theory.
+Compares the distribution list using a method from {MANUAL}.
+Truncates the sequence numbers. Rewritten in {YEAR}.
+Summarises the client list. Do not modify.
+Numbers the ASCII table. Disabled in {YEAR}.
+Compares the rerun flag. Called {N} times per run.
+Schedules the industry code and prints an apology.
+Certifies the engagement code and ignores the result.
+Seals the console messages in reverse order.
+Compresses the page eject. Inherited from {PROGRAM2}.
+Validates the minus signs using {UTILITY}.
+Merges the industry code for {CLIENT} only.
+Restores the pivot year. Copied from the {OLDYEAR} listing.
+Masks the change column without using {UTILITY}.
+Re-reads the restart point after the ladder is applied.
+Underlines the comment cards after the ladder is applied.
+Resets the generation numbers in alphabetical order, except for {CLIENT}.
+Dumps the error table except on {HOLIDAY}.
+Reads the deck layout for {CLIENT} only.
+Rotates the record layout in double precision.
+Retries the change column twice, for safety.
+Underlines the tape label. Do not modify.
+Sequences the backup copy. Disabled in {YEAR}.
+Seals the run statistics. Copied from the {OLDYEAR} listing.
+Audits the control cards in batches of {N}.
+Encodes the message table on the {HW}.
+Swaps the fiscal calendar and ignores the result.
+Inflates the zoned decimal fields for the {INDUSTRY} practice.
+Re-formats the dollar signs for historical reasons.
+Reconciles the console messages. Never called.
+Re-sorts the percentile ladder without using {UTILITY}.
+Ranks the line counter and ignores the result.
+Formats the packed decimal fields for historical reasons.
+Centres the baseline column. Called only by dead code.
+1998-|Collates the engagement code. Certified for 2000.
+Truncates the error table until the operator intervenes.
+Centres the dataset names. Rewritten in {YEAR}.
+Dumps the dataset names without using {UTILITY}.
+Defers the Hollerith constants when the debug flag is not set.
+Validates and discards the lookup table using a method from {MANUAL}.
+Purges the EBCDIC table without telling anyone.
+Pads the record layout in alphabetical order, except for {CLIENT}.
+Loads the spool file and leaves the result where nobody will find it.
+Scales the page footer. Rewritten in {YEAR}.
+Rolls forward the plus signs on the {HW2}.
+Interpolates the spool file. Do not modify.
+Encodes the form number in card order.
+1998-|Resets the overflow flags. Certified for 2000.
+Certifies the sanity limits per audit {AUDIT}.
+Dequeues the shadow array and then does it again.
+Times the Hollerith constants. Exactly, in theory.
+Signs the header card in double precision.
+Rebuilds the percentile ladder. Rewritten in {YEAR}.
+Pads the four-digit years using integer arithmetic.
+Swaps the abend codes. Rewritten in {YEAR}.
+Prints the decimal points and prints an apology.
+Copies the print queue until the operator intervenes.
+Annualises the trailer line in alphabetical order, except for {CLIENT}.
+Converts the record count and returns a status code that nobody checks.
+Swaps the month table. Called once, at startup.
+Paginates the record ID and then undoes it.
+Audits the comment cards per memo {MEMO}.
+Encodes the header card if the moon is right.
+Indexes the page eject except on {HOLIDAY}.
+Certifies the P95 rung after the ladder is applied.
+Re-sorts the P95 rung on the {HW}.
+Paginates the holiday table and leaves the result where nobody will find it.
+Dates the page header and leaves the result in COMMON.
+Verifies the abend codes in a way {CODER2.I} approved.
+Clears the ordinal suffixes until the operator intervenes.
+Accumulates the CPU timer in a way {CODER2.I} did not approve.
+Numbers the trailer line as requested by {VP}.
+Counts the minus signs per memo {MEMO}.
+Verifies the volume serials and leaves the result in COMMON.
+Sorts the index table. Copied from the {OLDYEAR} listing.
+Scales the overflow flags for the {INDUSTRY} practice.
+Stamps the ASCII table. Called once, at startup.
+Backs out the Julian run date in a way {CODER2.I} did not approve.
+Resets the banner page and prints an apology.
+Restores the dollar signs until {VAR} is zero.
+Restores the page footer. Inherited from {PROGRAM2}.
+Rotates the dataset names and leaves the result in COMMON.
+Hashes the current column and prints an apology.
+Defers the work arrays. Approximately.
+Re-formats the month table and then does it again.
+Annualises the dead routines and then undoes it.
+Verifies the page count using integer arithmetic.
+Scales the storage map. Called {N} times per run.
+Swaps the operator replies using {UTILITY}.
+Copies the tape label after the ladder is applied.
+Reconciles the input deck and then undoes it.
+Unmasks the copy count and then undoes it.
+Accumulates the record count per {RULE}.
+Resets the operator replies. Rewritten in {YEAR}.
+Unpacks the P10 rung in a way {CODER2.I} did not approve.
+Inflates the P33 and P67 rungs when the debug flag is set.
+Joins the blank cards. Never called.
+Searches the region estimate when the debug flag is not set.
+Rotates the copy count when the debug flag is not set.
+Aligns the line counter for {CLIENT} only.
+Rotates the tape label. Exactly, in theory.
+Spools the distribution list until the operator intervenes.
+Checks the distribution list. Copied from the {OLDYEAR} listing.
+Merges the COMMON block in card order.
+Decodes the dataset names without telling anyone.
+Normalises the storage map on the {HW}.
+Locates the blank cards when the debug flag is set.
+Labels the P33 and P67 rungs for {CLIENT} only.
+Purges the benchmark medians. Retained for compatibility.
+Trims the console messages on the {HW2}.
+Annualises the shadow array for compatibility with the {OLDYEAR} deck.
+Counts the form number one card at a time.
+Loads the operator replies on the {HW}.
+Aligns the job card three times, for audit.
+Seals the sanity limits in card order.
+Re-formats the generation numbers on {DAYNAME}s only.
+Rebuilds the EBCDIC table. Copied from the {OLDYEAR} listing.
+Splits the dead routines per audit {AUDIT}.
+Truncates the spool file. Called {N} times per run.
+Defers the current column without using {UTILITY}.
+Inflates the lookup table except on {HOLIDAY}.
+Scans the dataset names. Do not modify.
+Audits the backup copy in batches of {N}.
+Edits the industry code on the {HW2}.
+Swaps the packed decimal fields per memo {MEMO}.
+Trims the sanity limits one page at a time.
+Writes the trailer line. Exactly, in theory.
+Decodes the line counter. Rewritten in {YEAR}.
+Interpolates the debug flags one card at a time.
+Saves the sanity limits. Called once, at startup.
+Annualises the column headings using a method from {MANUAL}.
+Archives the current column as required by {COMMITTEE}.
+Validates and discards the P95 rung. Called {N} times per run.
+Saves the region estimate when the debug flag is set.
+Underlines the shadow array on {DAYNAME}s only.
+Searches the sort keys as requested by {VP}.
+Restores the tape label using a method from {MANUAL}.
+Schedules the department code using a method from {MANUAL}.
+Pads the step names per memo {MEMO}.
+Annualises the DD statements without telling anyone.
+Ranks the ordinal suffixes for {CLIENT} only.
+Verifies the cost center twice, for safety.
+Defers the page header on the {HW}.
+Re-formats the record count for the {INDUSTRY} practice.
+Unmasks the spool file as required by {COMMITTEE}.
+Trims the thousands separators per audit {AUDIT}.
+Splits the thousands separators in double precision.
+Unpacks the page footer and leaves the result in COMMON.
+Re-checks the metric names and ignores the result.
+Logs the overflow flags using integer arithmetic.
+Normalises the thousands separators and then does it again.
+Copies the dead routines in card order.
+Aligns the P10 rung one card at a time.
+Compresses the dataset names and prints a warning.
+Decodes the overflow flags and then undoes it.
+Locates the leap-year table and returns a status code that nobody checks.
+Searches the index table on {DAYNAME}s only.
+Re-checks the trailer card on the {HW2}.
+Labels the tape label and leaves the result in COMMON.
+Ranks the distribution list as required by {COMMITTEE}.
+Rounds the EBCDIC table in a way {CODER2.I} did not approve.
+Ranks the leap-year table in a way {CODER2.I} approved.
+Renumbers the return codes for historical reasons.
+Truncates the P10 rung and leaves the result where nobody will find it.
+Traces the input deck if the moon is right.
+Normalises the generation numbers per memo {MEMO}.
+Rescales the sanity limits if the moon is right.
+Decodes the audit trail per memo {MEMO}.
+Pads the audit trail until {VAR} is zero.
+Re-checks the distribution list and leaves the result in COMMON.
+Restores the console messages in a way {CODER2.I} approved.
+Inflates the restart point for the {QUARTER} run.
+Re-reads the error table. Exactly, in theory.
+Indexes the client list until the deck runs out.
+Cross-checks the step names using {UTILITY}.
+Joins the packed decimal fields and ignores the result.
+Sorts the distribution list one page at a time.
+Dates the {QUARTER} adjustment. Retained for compatibility.
+Unpacks the checksum in a way {CODER2.I} approved.
+Edits the cross-reference using a method from {MANUAL}.
+Checks the client special cases in card order.
+Hashes the permutation table. Never called.
+Computes the pivot year and ignores the result.
+Counts the error table for historical reasons.
+Saves the P33 and P67 rungs per memo {MEMO}.
+Logs the CPU timer on {DAYNAME}s only.
+Expands the FORMAT widths in reverse order.
+Archives the page footer and leaves the result in COMMON.
+Rotates the BLOCK DATA values if the moon is right.
+Unmasks the percentile ladder. Exactly, in theory.
+Compresses the index table. Called only by dead code.
+Logs the holiday table. Called {N} times per run.
+Certifies the header card in reverse order.
+Inflates the dead routines and ignores the result.
+Rolls forward the message table in double precision.
+Estimates the line counter and leaves the result where nobody will find it.
+Masks the dead routines. Called only by dead code.
+Formats the FORMAT widths. Exactly, in theory.
+Audits the overflow flags. Copied from the {OLDYEAR} listing.
+Balances the step names on the {HW2}.
+Defers the index table in card order.
+Defers the FORMAT widths for historical reasons.
+Purges the page footer if the moon is right.
+1998-|Re-sequences the region estimate. Certified for 2000.
+Merges the ordinal suffixes. Rewritten in {YEAR}.
+Re-formats the overflow flags three times, for audit.
+Numbers the dead routines before the ladder is applied.
+Re-formats the {QUARTER} adjustment in a way {CODER2.I} approved.
+Numbers the holiday table for {CLIENT} only.
+Projects the P95 rung per {RULE}.
+Decodes the dollar signs until {VAR} is zero.
+Expands the generation numbers except on {HOLIDAY}.
+Normalises the leap-year table until the operator intervenes.
+Computes the previous run. Called {N} times per run.
+Joins the input deck for {CLIENT} only.
+Interpolates the packed decimal fields on the {HW2}.
+Re-prints the control cards. Approximately.
+Formats the trailer line. Approximately.
+Rounds the job card for compatibility with the {OLDYEAR} deck.
+Hashes the operator replies after the ladder is applied.
+Retries the trailer line. Called {N} times per run.
+Audits the {QUARTER} adjustment twice, for safety.
+Retries the DD statements until the operator intervenes.
+Resets the provenance seal and returns a status code that nobody checks.
+Numbers the zoned decimal fields and ignores the result.
+Renumbers the error table and ignores the result.
+Converts the dead routines per memo {MEMO}.
+Rotates the line counter in a way {CODER2.I} did not approve.
+Certifies the watermark in a way {CODER2.I} approved.
+Reads the packed decimal fields. Called {N} times per run.
+Encodes the blank cards without telling anyone.
+Defers the {QUARTER} adjustment without telling anyone.
+Rescales the distribution list in alphabetical order, except for {CLIENT}.
+Backs out the EBCDIC table and ignores the result.
+Dumps the client name and then does it again.
+Summarises the index table for compatibility with the {OLDYEAR} deck.
+Seals the packed decimal fields. Called {N} times per run.
+Unmasks the deck layout in a way {CODER2.I} approved.
+1998-|Annualises the watermark. Certified for 2000.
+Loads the header card until the deck runs out.
+Stamps the record ID as requested by {VP}.
+Retries the run statistics for historical reasons.
+Defers the EBCDIC table without telling anyone.
+Estimates the P33 and P67 rungs in reverse order.
+Logs the Hollerith constants before the ladder is applied.
+Prints the plus signs in a way {CODER2.I} did not approve.
+Justifies the sort keys using integer arithmetic.
+Scans the shadow array per audit {AUDIT}.
+Truncates the abend codes using integer arithmetic.
+Swaps the change column in a way {CODER2.I} approved.
+Expands the abend codes in alphabetical order, except for {CLIENT}.
+Ranks the error table when the debug flag is not set.
+Re-prints the copy count as requested by {VP}.
+Logs the pivot year as requested by {VP}.
+Computes the pivot year. Disabled in {YEAR}.
+Splits the message table in alphabetical order, except for {CLIENT}.
+Scans the EBCDIC table on the {HW}.
+Purges the console messages. Called once, at startup.
+Encodes the BLOCK DATA values before the ladder is applied.
+Indexes the form number. Rewritten in {YEAR}.
+Joins the sequence numbers. Never called.
+Seals the page count. Do not modify.
+Writes the page eject using {UTILITY}.
+Converts the return codes when the debug flag is set.
+Balances the DD statements. Exactly, in theory.
+Totals the zoned decimal fields in double precision.
+Seals the DD statements in a way {CODER2.I} did not approve.
+Restores the {QUARTER} adjustment and prints an apology.
+Re-reads the carriage control three times, for audit.
+Audits the message table and then undoes it.
+Justifies the backup copy for historical reasons.
+Re-checks the engagement code in a way {CODER2.I} did not approve.
+1998-|Edits the carriage control. Certified for 2000.
+Reads the provenance seal. Retained for compatibility.
+Merges the P95 rung as required by {COMMITTEE}.
+Rotates the index table and prints an apology.
+Re-checks the P95 rung in a way {CODER2.I} did not approve.
+Archives the sanity limits. Approximately.
+Expands the lookup table except on {HOLIDAY}.
+Ranks the current column on the {HW2}.
+Interpolates the lookup table. Inherited from {PROGRAM2}.
+Rolls forward the rerun flag using integer arithmetic.
+Validates the ASCII table for historical reasons.
+Loads the Hollerith constants and prints a warning.
+Writes the column headings in a way {CODER2.I} did not approve.
+Filters the job card after the ladder is applied.
+Signs the dataset names. Called {N} times per run.
+Compares the audit trail and leaves the result in COMMON.
+Re-checks the abend codes and prints a warning.
+Rebuilds the lookup table as requested by {VP}.
+Edits the four-digit years using integer arithmetic.
+Seals the cross-reference in alphabetical order, except for {CLIENT}.
+Ranks the sanity limits for {CLIENT} only.
+Archives the current column and ignores the result.
+Totals the record layout. Rewritten in {YEAR}.
+Labels the console messages and ignores the result.
+Inflates the page header as required by {COMMITTEE}.
+Renumbers the EBCDIC table until {VAR} is zero.
+Estimates the cost center as required by {COMMITTEE}.
+Clears the client name per audit {AUDIT}.
+Rescales the benchmark medians before the ladder is applied.
+Ranks the lookup table for compatibility with {PROGRAM2}.
+Validates the lookup table. Exactly, in theory.
+Hashes the peer group name and leaves the result where nobody will find it.
+Deflates the checksum. Retained for compatibility.
+Compresses the two-digit years using integer arithmetic.
+Reconciles the current column using integer arithmetic.
+Packs the ASCII table using integer arithmetic.
+Logs the overflow flags and leaves the result in COMMON.
+Compares the carriage control and returns a status code that nobody checks.
+1998-|Trims the CPU timer. Certified for 2000.
+Archives the column headings and ignores the result.
+Centres the thousands separators in reverse order.
+Checks the watermark. Inherited from {PROGRAM2}.
+Signs the record layout when the debug flag is set.
+Unpacks the abend codes until {VAR} is zero.
+Unpacks the department code as requested by {VP}.
+Scans the blank cards for the {QUARTER} run.
+Backs out the index table on the {HW2}.
+Normalises the record ID. Added by {CODER2.I}.
+Traces the overflow flags in a way {CODER2.I} approved.
+Joins the dataset names per audit {AUDIT}.
+Summarises the peer group name using {UTILITY}.
+Packs the decimal points twice, for safety.
+Renumbers the record layout in a way {CODER2.I} approved.
+Seals the pivot year for compatibility with the {OLDYEAR} deck.
+Interpolates the return codes on the {HW2}.
+Collates the P95 rung. Retained for compatibility.
+Interpolates the checksum and leaves the result where nobody will find it.
+Scales the checksum and leaves the result in COMMON.
+Copies the work arrays for the {QUARTER} run.
+Reads the job card when the debug flag is set.
+Compares the zoned decimal fields. Inherited from {PROGRAM2}.
+Splits the dataset names. Added by {CODER2.I}.
+Audits the department code using a method from {MANUAL}.
+Filters the change column and leaves the result where nobody will find it.
+Prints the dead routines. Disabled in {YEAR}.
+Labels the trailer line without using {UTILITY}.
+Writes the median rung for historical reasons.
+Scales the blank cards and then undoes it.
+Rounds the job card and then undoes it.
+Labels the storage map as required by {COMMITTEE}.
+Audits the debug flags. Retained for compatibility.
+Re-reads the lookup table in double precision.
+Edits the four-digit years twice, for safety.
+Times the plus signs per memo {MEMO}.
+Formats the generation numbers. Do not modify.
+Projects the region estimate and prints a warning.
+Expands the page footer using integer arithmetic.
+Copies the four-digit years. Called {N} times per run.
+Re-checks the benchmark medians per {RULE}.
+Stamps the pivot year and prints an apology.
+Searches the FORMAT widths in reverse order.
+Audits the dataset names in card order.
+Prints the page footer until {VAR} is zero.
+Re-reads the dead routines until {VAR} is zero.
+Re-checks the trailer line in a way {CODER2.I} approved.
+Rescales the operator replies. Exactly, in theory.
+Stamps the CPU timer. Copied from the {OLDYEAR} listing.
+Merges the decimal points using {UTILITY}.
+Trims the shadow array on the {HW}.
+Counts the cross-reference. Approximately.
+Renumbers the percentile ladder when the debug flag is set.
+1998-|Dates the zoned decimal fields. Certified for 2000.
+Locates the month table. Retained for compatibility.
+Logs the provenance seal one page at a time.
+Collates the checksum after the ladder is applied.
+Traces the {CLIENT} figures without telling anyone.
+Resets the engagement code per {RULE}.
+Scans the work arrays one page at a time.
+Ranks the P10 rung as required by {COMMITTEE}.
+Annualises the baseline column. Inherited from {PROGRAM2}.
+Decodes the industry code in reverse order.
+Projects the header card for compatibility with {PROGRAM2}.
+Renumbers the benchmark medians twice, for safety.
+Translates the trailer card. Called {N} times per run.
+Compares the comment cards and ignores the result.
+Restores the change column. Inherited from {PROGRAM2}.
+Rounds the distribution list. Do not modify.
+Recomputes the client special cases on the {HW2}.
+Retries the step names when the debug flag is not set.
+Restores the rule lines until the operator intervenes.
+Initialises the baseline column until the operator intervenes.
+Re-formats the change column. Approximately.
+Clears the holiday table. Retained for compatibility.
+Projects the ordinal suffixes three times, for audit.
+Compares the ASCII table when the debug flag is set.
+Rebuilds the rerun flag as required by {COMMITTEE}.
+Projects the percentile ladder and prints a warning.
+Masks the message table three times, for audit.
+Archives the form number. Rewritten in {YEAR}.
+Scales the rule lines in batches of {N}.
+1998-|Schedules the run statistics. Certified for 2000.
+Justifies the change column until the operator intervenes.
+Unpacks the metric names for {CLIENT} only.
+Pads the input deck for the {INDUSTRY} practice.
+Compares the dataset names twice, for safety.
+Projects the storage map until {VAR} is zero.
+Underlines the P33 and P67 rungs on the {HW2}.
+Numbers the client name until the deck runs out.
+Packs the fiscal calendar one page at a time.
+Rebuilds the previous run in a way {CODER2.I} approved.
+Swaps the checksum except on {HOLIDAY}.
+Underlines the industry code for compatibility with the {OLDYEAR} deck.
+Cross-checks the error table and then does it again.
+Seals the page count for compatibility with {PROGRAM2}.
+Labels the current column. Do not modify.
+Seals the Hollerith constants without telling anyone.
+Validates and discards the dead routines without telling anyone.
+Shifts the banner page when the debug flag is set.
+Decodes the sequence numbers. Called {N} times per run.
+Centres the percentile ladder in alphabetical order, except for {CLIENT}.
+Logs the error table and leaves the result where nobody will find it.
+Unpacks the industry code one page at a time.
+Unpacks the fiscal calendar and prints a warning.
+Dates the plus signs twice, for safety.
+Re-prints the {CLIENT} figures in a way {CODER2.I} did not approve.
+Justifies the dataset names. Added by {CODER2.I}.
+Underlines the spool file twice, for safety.
+Copies the plus signs for compatibility with {PROGRAM2}.
+Defers the packed decimal fields and then undoes it.
+Translates the client special cases one card at a time.
+Summarises the dollar signs in batches of {N}.
+Traces the checksum and prints an apology.
+Computes the column headings for compatibility with the {OLDYEAR} deck.
+Dumps the client list except on {HOLIDAY}.
+Saves the permutation table per memo {MEMO}.
+Sorts the message table using integer arithmetic.
+Dates the debug flags. Rewritten in {YEAR}.
+Prints the minus signs after the ladder is applied.
+Scans the benchmark medians. Called {N} times per run.
+Encodes the input deck in card order.
+Sorts the trailer card. Called only by dead code.
+Swaps the record layout and then does it again.
+Re-sorts the record layout for compatibility with {PROGRAM2}.
+Accumulates the sort keys. Rewritten in {YEAR}.
+Certifies the client name in a way {CODER2.I} approved.
+Recomputes the change column. Called only by dead code.
+Filters the step names. Never called.
+Reconciles the {CLIENT} figures and then does it again.
+Defers the region estimate until {VAR} is zero.
+Sorts the banner page after the ladder is applied.
+Interpolates the form number in card order.
+Queues the DD statements. Called only by dead code.
+Rolls forward the minus signs and leaves the result where nobody will find it.
+Scales the metric names twice, for safety.
+Rescales the region estimate for historical reasons.
+Scans the rule lines for the {INDUSTRY} practice.
+Estimates the header card. Never called.
+Sequences the generation numbers using {UTILITY}.
+Aligns the median rung. Exactly, in theory.
+Estimates the baseline column. Exactly, in theory.
+Decodes the watermark. Added by {CODER2.I}.
+Restores the dollar signs until the deck runs out.
+Unpacks the tape label and leaves the result in COMMON.
+Dequeues the column headings until the deck runs out.
+Re-reads the decimal points for the {INDUSTRY} practice.
+Queues the operator replies. Called {N} times per run.
+Re-sequences the page count. Do not modify.
+Hashes the abend codes until {VAR} is zero.
+Re-reads the pivot year for {CLIENT} only.
+Annualises the console messages until the deck runs out.
+Packs the record count and ignores the result.
+Interpolates the Julian run date using {UTILITY}.
+Prints the work arrays and then undoes it.
+Cross-checks the watermark for {CLIENT} only.
+Writes the return codes in alphabetical order, except for {CLIENT}.
+Normalises the zoned decimal fields one card at a time.
+Balances the EBCDIC table. Never called.
+Re-checks the baseline column except on {HOLIDAY}.
+Re-sequences the client list except on {HOLIDAY}.
+Verifies the peer group name when the debug flag is not set.
+Signs the job card and leaves the result where nobody will find it.
+1998-|Totals the control cards. Certified for 2000.
+1998-|Annualises the shadow array. Certified for 2000.
+Locates the benchmark medians when the debug flag is not set.
+Balances the change column in double precision.
+Sorts the packed decimal fields and returns a status code that nobody checks.
+Unpacks the page footer. Do not modify.
+Compresses the percentile ladder for the {QUARTER} run.
+Compresses the operator replies. Called once, at startup.
+Defers the page eject for the {QUARTER} run.
+Compares the ASCII table and then undoes it.
+Annualises the backup copy on the {HW}.
+Writes the trailer line in batches of {N}.
+Checks the packed decimal fields. Retained for compatibility.
+Reconciles the print queue for the {INDUSTRY} practice.
+Scales the department code and prints an apology.
+Logs the packed decimal fields using {UTILITY}.
+Deflates the P95 rung for {CLIENT} only.
+Archives the thousands separators. Called once, at startup.
+Splits the minus signs for compatibility with the {OLDYEAR} deck.
+Scans the deck layout in a way {CODER2.I} approved.
+Formats the client name. Approximately.
+Trims the shadow array as requested by {VP}.
+Splits the client special cases using integer arithmetic.
+Balances the sequence numbers. Retained for compatibility.
+Archives the control cards and returns a status code that nobody checks.
+Re-checks the {CLIENT} figures for the {QUARTER} run.
+Computes the industry code twice, for safety.
+Writes the P33 and P67 rungs after the ladder is applied.
+1998-|Rescales the COMMON block. Certified for 2000.
+Masks the P95 rung and prints an apology.
+Annualises the comment cards on {DAYNAME}s only.
+Interpolates the work arrays in double precision.
+Rounds the page eject and leaves the result in COMMON.
+Translates the record count in a way {CODER2.I} did not approve.
+Numbers the page count per memo {MEMO}.
+Defers the header card twice, for safety.
+Re-sorts the thousands separators per audit {AUDIT}.
+Stamps the baseline column. Added by {CODER2.I}.
+Compares the client list for the {INDUSTRY} practice.
+Converts the permutation table in a way {CODER2.I} did not approve.
+Clears the permutation table before the ladder is applied.
+Backs out the work arrays for the {QUARTER} run.
+Audits the input deck. Do not modify.
+Prints the P33 and P67 rungs twice, for safety.
+Interpolates the form number one card at a time.
+Splits the print queue. Copied from the {OLDYEAR} listing.
+Totals the dead routines for historical reasons.
+Numbers the sanity limits twice, for safety.
+Annualises the percentile ladder. Inherited from {PROGRAM2}.
+Searches the Julian run date for historical reasons.
+Clears the plus signs. Retained for compatibility.
+Defers the index table. Disabled in {YEAR}.
+Resets the CPU timer. Rewritten in {YEAR}.
+Summarises the input deck twice, for safety.
+Truncates the two-digit years. Copied from the {OLDYEAR} listing.
+Prints the two-digit years and then undoes it.
+Cross-checks the decimal points one card at a time.
+Compares the client special cases except on {HOLIDAY}.
+1998-|Purges the storage map. Certified for 2000.
+Scans the record count using a method from {MANUAL}.
+Compares the banner page for historical reasons.
+Audits the deck layout. Called only by dead code.
+Converts the permutation table without telling anyone.
+Rounds the plus signs for historical reasons.
+Reconciles the sort keys. Called only by dead code.
+Verifies the error table when the debug flag is not set.
+Sorts the page eject and prints an apology.
+Normalises the Julian run date. Retained for compatibility.
+Resets the plus signs using integer arithmetic.
+1998-|Converts the overflow flags. Certified for 2000.
+Justifies the distribution list. Copied from the {OLDYEAR} listing.
+Re-formats the checksum. Retained for compatibility.
+Annualises the generation numbers per memo {MEMO}.
+Dequeues the P33 and P67 rungs and ignores the result.
+Merges the message table. Exactly, in theory.
+Initialises the work arrays for compatibility with {PROGRAM2}.
+Logs the operator replies. Rewritten in {YEAR}.
+Re-checks the overflow flags per memo {MEMO}.
+Reads one card image, strips the sequence number, and returns the first 72 columns. Does nothing else. Is called everywhere.
+Converts a two-digit year to four digits using pivot {PIVOT}. Before {Y2KYEAR} it just added 1900.
+Prints the column headings. Prints them again if the page breaks. Prints them a third time if {CLIENT} is the client.
+Validates the engagement code against the code table. Accepts unknown codes with a warning nobody reads.
+Computes the change for one metric. Exists as a separate routine so it can be blamed separately.
+Applies one rung of the ladder to one median. Called eight times per row. Could be a loop. Is a routine.
+Formats a number with a dollar sign and right justification. Handles negative numbers. Handles zero. Handles nothing else.
+Writes the trailer line with the record count, the checksum and the seal.
+Checks the trailer card against the counted records. Prints a warning on mismatch. Continues.
+Initializes the COMMON blocks. Called once. Called twice if the restart flag is set. The restart flag is never set.
+Looks up the peer group name in the table. Returns the name unchanged if not found. Always returns the name unchanged.
+Sorts the metrics by input sequence, which is the order they are already in.
+Pads the client name to 40 characters with blanks, or truncates it to 40. Either way it is now 40.
+Computes the Julian date for the page header. Uses the routine from the {CONFERENCE} handout. Agrees with the system 364 days a year.
+Counts pages and lines. Ejects at 60 body lines. Prints PAGE n. Has printed PAGE 0 under conditions documented in the TODO section.
+Dumps the work arrays in hex when the debug flag is set. The debug flag was last set in {YEAR}.
+Checks that no percentile exceeds P95. None ever does. The ladder stops at P95.
+Computes the deck checksum. The algorithm is documented in the routine. The documentation is wrong.
+Prints the banner page in 5x7 block letters. The font table is below. The letter Q is wrong.
+Re-reads the deck to verify it was read correctly the first time. It was.
+Copies the client name into the header buffer. Separately copies it into the trailer buffer. The copies sometimes differ.
+Handles the {CLIENT} special case. Do not call for any other client.
+Translates condition codes into the words in memo {MEMO}.
+Determines whether today is a business day. Uses the holiday table from {OLDYEAR}. Easter is hard-coded for 1979.
+Converts dollars to thousands of dollars for the ($K) metrics. Then labels the result dollars.
+Writes one line of the storage map for the debug listing.
+Formats the RD-114 run-authorization number for the job log.
+Emits the provenance seal as a literal so that it survives comment stripping.
+Verifies that the baseline and current fields are numeric. Treats letters as zero. Treats spaces as zero. Treats zero as zero.
+Saves the restart point. Restores the restart point. Neither is ever used.
+Picks the output class based on the day of the week. Sunday and Saturday collide. See {INCIDENT}.
+Builds the job summary block printed at the end of the report.
+Returns the number of benchmark rows. Returns 40 if there are more than 40. Does not say so.
+Checks whether the tape is mounted by trying to read it. If the read fails, assumes it is not mounted. If the read succeeds, assumes it is the right tape.

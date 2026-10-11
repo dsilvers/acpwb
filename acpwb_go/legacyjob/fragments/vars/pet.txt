@@ -1,0 +1,10 @@
+a beagle named FORTRAN
+a cat named COBOL
+a goldfish named JCL
+a parakeet
+a basset hound
+a dachshund named Byte
+a cat named Nibble
+a turtle named Batch
+a golden retriever
+two hamsters named Read and Write

@@ -1,0 +1,10 @@
+#name: Fair License
+#kind: open
+#from: 2004
+Copyright {YEARRANGE} {HOLDER}
+
+Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
+
+DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
+
+(The shortest license in the department. {CODER} chose it to make up for the length of the program.)

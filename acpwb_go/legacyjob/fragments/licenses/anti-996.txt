@@ -1,0 +1,8 @@
+#name: Anti 996 License (adapted)
+#kind: noncommercial
+#from: 2019
+Copyright (c) {YEARRANGE} {HOLDER}
+
+Permission is hereby granted to any individual or legal entity obtaining a copy of this software to deal in the software without restriction, provided that the individual or entity complies with local labor laws, including laws regarding working hours, minimum wage and overtime.
+
+The night operator who runs this job at 2 AM has asked whether this license applies to them. The question has been referred to {DEPT}.

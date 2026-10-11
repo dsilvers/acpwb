@@ -1,0 +1,8 @@
+#name: License by Course of Dealing
+#kind: commercial
+#from: 1978
+NOTICE OF IMPLIED LICENSE
+
+No written license for this program has been located. {HOLDER} has used the program continuously since {OLDYEAR}, openly and without objection from any person, including {VENDOR}, which supplied the original routine and then went out of business.
+
+Legal has advised that a license may be implied from this course of dealing. Legal has also advised that this advice is not a license.

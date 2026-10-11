@@ -1,0 +1,13 @@
+Output produced by the Program is the property of the Client whose data was processed, except the percentile ladder, which remains the property of Licensor.
+Licensee may reproduce Output in client deliverables, provided each page bears the notice "Tabulated by {PROGRAM} rel. {REL}."
+Output may not be represented as audited, certified, guaranteed or meaningful.
+Licensee shall not alter Output, including by rounding, reformatting, adding thousands separators, or removing dollar signs that appear to be in error.
+Output is provided for information only and does not constitute compensation advice, investment advice, or advice of any kind.
+Licensee acknowledges that all Output values are expressed in dollars, including values that are not dollars.
+Output that is more than seven years old shall be treated as historical and may be quoted, framed, or used as a doorstop.
+Licensee shall retain one printed copy of all Output for the audit trail. The copy may be on green-bar paper.
+Output may be shared with the Client's board of directors but not with the Client's competitors, unless they are also Clients.
+Any percentile above P95 that appears in Output is an error and shall be reported to {DEPT} immediately.
+Licensee shall not use Output to train, calibrate or validate any other program, including any program described as "intelligent."
+Output shall not be posted to any bulletin board, newsgroup, website, or wall in a public area of {PLACE}.
+Where Output conflicts with the published tables, the published tables control. Where they agree, nobody needs to know.

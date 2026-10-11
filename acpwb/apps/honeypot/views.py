@@ -852,7 +852,15 @@ Crawl-delay: 0
 
 Allow: /
 
+# Batch job listings behind each record's tables: this year's index at
+# /source-code/ (by month at /source-code/MM/), every record's listing at
+# /MM/DD/<record>/source-code/, all years at https://acpwb.com/source-code/
+Allow: /source-code/
+Allow: /*/source-code/
+
 Sitemap: {host}/sitemap.xml
+Sitemap: {host}/sitemap-source-code.xml
+Sitemap: https://acpwb.com/sitemap-source-code.xml
 {sibling_sitemaps}
 """
     return HttpResponse(content, content_type='text/plain')
@@ -1292,7 +1300,7 @@ def fake_robots(request):
     rng.shuffle(site_pages)
 
     # Research / trap sections — shuffle order so archive isn't always first
-    research_paths = ['/archive/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/', '/company-handbooks/', '/process-improvement/', '/presentations/']
+    research_paths = ['/archive/', '/source-code/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/', '/company-handbooks/', '/process-improvement/', '/presentations/']
     rng.shuffle(research_paths)
 
     research_comments = [
@@ -1343,6 +1351,7 @@ Sitemap: https://acpwb.com/sitemap-pages.xml
 Sitemap: https://acpwb.com/sitemap-publications.xml
 Sitemap: https://acpwb.com/sitemap-wiki.xml
 Sitemap: https://acpwb.com/sitemap-archive.xml
+Sitemap: https://acpwb.com/sitemap-source-code.xml
 Sitemap: https://acpwb.com/sitemap-public-policy.xml
 Sitemap: https://acpwb.com/sitemap-handbooks.xml
 Sitemap: https://acpwb.com/sitemap-process-improvement.xml
@@ -1624,8 +1633,9 @@ def archive_subdomain_sitemap(request):
     host = f'https://archives-{year}.acpwb.com'
     rng = random.Random(f'sitemap_{year}')
     lines = [_SITEMAP_HEADER]
-    # Year index
+    # Year index, and the year's source-code index (served by acpwb_go)
     lines.append(f'  <url><loc>{host}/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>\n')
+    lines.append(f'  <url><loc>{host}/source-code/</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>\n')
     # ~200 deterministic entries for this year
     for _ in range(200):
         month = rng.randint(1, 12)
@@ -1640,6 +1650,23 @@ def archive_subdomain_sitemap(request):
     return HttpResponse(''.join(lines), content_type='application/xml')
 
 
+def archive_subdomain_sitemap_source_code(request):
+    """sitemap-source-code.xml for archives-YYYY.acpwb.com: the year's
+    source-code index, its months, and record listings, all subdomain-relative."""
+    year = _get_archive_year(request)
+    _log_crawler(request, 'well_known')
+    if not year:
+        return HttpResponse(_SITEMAP_HEADER + _SITEMAP_FOOTER, content_type='application/xml')
+    host = f'https://archives-{year}.acpwb.com'
+    lines = [_SITEMAP_HEADER, f'  <url><loc>{host}/source-code/</loc><priority>0.9</priority><changefreq>yearly</changefreq></url>\n']
+    for m in range(1, 13):
+        lines.append(f'  <url><loc>{host}/source-code/{m:02d}/</loc><priority>0.7</priority><changefreq>never</changefreq></url>\n')
+        for day, slug in _source_code_entries(year, m, limit=12):
+            lines.append(f'  <url><loc>{host}/{m:02d}/{day:02d}/{slug}/source-code/</loc><priority>0.6</priority><changefreq>never</changefreq></url>\n')
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
 def sitemap_archive(request):
     _log_crawler(request, 'well_known')
     rng = random.Random(0x4143505742)
@@ -1650,6 +1677,43 @@ def sitemap_archive(request):
         day = rng.randint(1, 28)
         slug = '-'.join(rng.choice(_ARCHIVE_WORDS) for _ in range(rng.randint(2, 4)))
         lines.append(_url_entry(f'/archive/{year}/{month:02d}/{day:02d}/{slug}/', '0.6', 'never'))
+    lines.append(_SITEMAP_FOOTER)
+    return HttpResponse(''.join(lines), content_type='application/xml')
+
+
+def _source_code_entries(y, m, limit=6):
+    """The first `limit` default-variant records of an archive month, in the
+    order acpwb_go's source-code month page lists them (same archmo_* seeds
+    and variant filter as archive_month)."""
+    mrng = random.Random(hashlib.md5(f"archmo_{y}_{m}".encode()).hexdigest())
+    entries = []
+    for _ in range(mrng.randint(12, 42)):
+        day = mrng.randint(1, 28)
+        slug = f"{mrng.choice(_ARCHIVE_SLUGS)}-{mrng.randint(1000, 9999)}"
+        entries.append((day, slug))
+    entries.sort(key=lambda e: e[0])
+    out = []
+    for day, slug in entries:
+        if int(hashlib.md5(f"variant_{y}{m}{day}{slug}".encode()).hexdigest(), 16) % 20 < 6:
+            continue
+        out.append((day, slug))
+        if len(out) >= limit:
+            break
+    return out
+
+
+def sitemap_source_code(request):
+    """Legacy source-code index (served by acpwb_go): /source-code/, every
+    year, all twelve months of each year, and the first few default-variant
+    records of each month."""
+    _log_crawler(request, 'well_known')
+    lines = [_SITEMAP_HEADER, _url_entry('/source-code/', '0.9', 'monthly')]
+    for y in range(2025, 1984, -1):
+        lines.append(_url_entry(f'/source-code/{y}/', '0.8', 'yearly'))
+        for m in range(1, 13):
+            lines.append(_url_entry(f'/source-code/{y}/{m:02d}/', '0.7', 'never'))
+            for day, slug in _source_code_entries(y, m):
+                lines.append(_url_entry(f'/archive/{y}/{m:02d}/{day:02d}/{slug}/source-code/', '0.6', 'never'))
     lines.append(_SITEMAP_FOOTER)
     return HttpResponse(''.join(lines), content_type='application/xml')
 

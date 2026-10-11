@@ -1,0 +1,7 @@
+#name: Careware Notice
+#kind: noncommercial
+#from: 1989
+#to: 2010
+{PROGRAM} is CAREWARE. It is free to use and distribute. If you find it useful, please make a donation to a local charity, and tell {CODER} which one, so it can be noted in the revision history.
+
+The department's own charity drive, run by {CODER2}, collected {FEE} dollars in {YEAR} and a box of {SNACK}.

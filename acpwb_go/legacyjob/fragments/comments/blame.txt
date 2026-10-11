@@ -1,0 +1,677 @@
+{CODER2.I} says this is "temporary." {CODER2.I} said that in {YEAR}. -- {CODER.I}
+Rewritten by {CODER} after {CODER2} left. The original version was "more of a poem."
+{CODER.I}: I did not write this. I am only signing it because {VP} asked me to.
+{CODER2.I}'s fix for the {YEAR} overflow. It moves the overflow somewhere less visible.
+Per {CODER2}, this "can't possibly happen." It happened on {DATE}. -- {CODER.I}
+Reverted {CODER2.I}'s change of {DATE}. Do not un-revert. -- {CODER.I}
+This was {CODER2.I}'s idea. Please direct all complaints to {CODER2.I}'s forwarding address.
+I have asked {CODER2} three times what {VAR} is for. The answers were different each time. -- {CODER.I}
+{CODER.I} {DATE}: whoever keeps changing {VAR} back, please stop. This is not a democracy.
+{CODER2.I} insists the off-by-one is "a feature for {CLIENT}." It is not. It is an off-by-one.
+Written by {CODER2} during the {YEAR} hiring freeze, which explains a great deal.
+{CODER.I}: if {CODER2.I} touches this routine again I am going back to {VENDOR}.
+{CODER2.I} tested this on the {HW} only. It has been running untested on everything since.
+I inherited this from {CODER2}, who inherited it from {CODER3}, who wrote none of it. -- {CODER.I}
+{CODER2.I} added the second check. {CODER.I} added the third check to check the second check.
+Blame {CODER2.I}. No, really. It says so in the change log.
+{CODER.I} {DATE}: {CODER2.I} says the totals "look about right." Approved on that basis.
+{CODER2.I}'s comment here used to be four pages long. It is now this line.
+The variable names are {CODER2.I}'s. I am not responsible for {VAR}. -- {CODER.I}
+{CODER2.I} renamed everything in {YEAR} for clarity. Nothing has been clear since.
+Original logic by {CODER3}. Improved by {CODER2}. Restored to original by {CODER}.
+{CODER.I}: fixed {CODER2.I}'s fix of {CODER3.I}'s fix. Please do not fix.
+{CODER2.I} was "pretty sure" about this. Pretty sure is now a documented control.
+This is the third version of this routine. The first two are still in production elsewhere.
+{CODER.I} argued for a table here. {CODER2.I} argued for a loop. The compromise is both.
+{CODER2.I} wrote this on a Friday afternoon. It shows. -- {CODER.I}
+Inherited from {CODER2}. Inherited the problems, too.
+{CODER2.I} swore this was tested. {CODER2.I} has sworn many things.
+I asked {CODER2} to document this before leaving. {CODER2} documented the parking situation instead.
+{CODER.I} {DATE}: {CODER2.I} moved the ladder into a subroutine. I moved it back. We are no longer speaking.
+This bug was introduced by {CODER2.I}, discovered by {CODER3.I}, and fixed by nobody until now. -- {CODER.I}
+{CODER2.I} claims the extra loop is "for safety." Safety from what has never been specified.
+The original author ({CODER3}) is credited above. The original author would not recognise this code.
+{CODER2.I} renamed {VAR} to something sensible. Production broke. Renamed back. -- {CODER.I}
+Do not let {CODER2.I} near the FORMAT statements again.
+{CODER.I}: this is the fourth time I have fixed {CODER2.I}'s fix. I am keeping count.
+{CODER2.I} says the client wanted it this way. The client says {CODER2.I} wanted it this way.
+Note from {CODER.I}: if you are {CODER2}, please read the memo from {DATE}.
+{CODER2.I} optimized this from {N} lines to {SMALLN}. It now takes longer and does less.
+Rewritten from memory by {CODER} after {CODER2} took the only listing home.
+{CODER2.I} copied this routine from {PROGRAM2} without asking. {PROGRAM2} copied it from us.
+This is {CODER2.I}'s code. I have touched nothing except the parts that did not work. -- {CODER.I}
+Per {CODER2.I}, "everyone knows what {VAR} is." Nobody knows what {VAR} is.
+{CODER.I} {DATE}: undid {CODER2.I}'s "cleanup." Cleanliness was not the problem.
+The comment below was written by {CODER2.I} and is wrong. The code is right, by accident.
+{CODER2.I} added this check after being blamed for the {YEAR} incident. It would not have prevented it.
+I was told {CODER2.I} "had a system." The system was this comment. -- {CODER.I}
+Not my design. My design was rejected in {YEAR}. This is what was approved instead. -- {CODER.I}
+{CODER2.I} and {CODER3.I} each think the other wrote this. Both are partly right.
+Last changed by {CODER2.I}. Last understood by {CODER3.I}. Last tested by no one.
+{CODER2.I} disabled the warning instead of fixing it. In fairness, so did I. -- {CODER.I}
+This routine has been blamed for every outage since {YEAR}. It caused two of them.
+{CODER2.I} insisted on uppercase variable names. Then left for a company that uses lowercase.
+{CODER.I}: {CODER2.I}'s comment said "trivial." It took three weeks.
+{CODER2.I} was going to write tests. {CODER2.I} went to lunch in {YEAR}.
+Written by {CODER2.I} under protest. The protest is preserved in the comment block above.
+{CODER2.I} hard-coded this for {CLIENT}. Every client since has been treated as {CLIENT}.
+Restored from {CODER2.I}'s home directory, which was the only backup.
+{CODER2.I}: "it is self-documenting." It is not.
+Whoever wrote this owes {CODER.I} a weekend.
+{CODER2.I} changed the label numbers to "make room." There was already room.
+Fixed the bug {CODER2.I} reported. Introduced the bug {CODER2.I} will report next. -- {CODER.I}
+{CODER2.I} left a note saying "do not touch." {CODER.I} touched. Sorry.
+{CODER2.I} says the totals were always off by one. The client says they never noticed.
+{CODER2.I} replaced the IF with arithmetic. The arithmetic is correct. Nobody can read it.
+This section reflects {CODER2.I}'s preferences, {CODER3.I}'s compromises and {CODER.I}'s fatigue.
+{CODER.I}: {CODER2.I} committed this without review. Reviewed now. Still not sure.
+{CODER2.I}'s magic number. {CODER2.I}'s magic. {CODER2.I}'s problem. Now mine.
+{CODER2.I} claims the program never abends. {CODER2.I} has never looked at the console log.
+Taken over from {CODER2} on {DATE}. No handover. No notes. No mercy.
+{CODER2.I} "temporarily" disabled the cross-check in {YEAR}. It has been temporary ever since.
+{CODER2.I} named this routine after a pet. The pet is long gone. The routine endures.
+{CODER2.I} said the logic was "obvious." It became obvious after six hours with the dump.
+{CODER.I} {DATE}: whoever keeps adding blank lines, please stop. The listing is long enough.
+{CODER2.I} left the debugging statements in. They are now load-bearing.
+{CODER2.I} and the vendor both said this was a compiler bug. It was {CODER2.I}.
+{CODER2.I} wanted to rewrite this in {LANG2}. Management said no. {CODER2.I} rewrote it anyway, then deleted it.
+This was {CODER2.I}'s last commit before vacation. It shows signs of packing.
+{CODER2.I}: "trust me." -- comment preserved for posterity.
+Blame for the P33 column belongs to the steering committee, not to me. -- {CODER.I}
+{CODER2.I} decided the ladder should be configurable. It is now configurable in exactly one way.
+{CODER2.I} changed {VAR} from a counter to a flag. It is still incremented in {ROUTINE}.
+{CODER2.I} believes comments slow down the program. This explains a great deal.
+{CODER2.I} deleted the error message because "it never happens." It happened at 3 AM.
+I did not write this, I do not endorse this, and I will not be maintaining this. -- {CODER.I}
+{CODER2.I} claimed this routine was dead and deleted it. It was not dead. It was resting.
+{CODER2.I} believes a GOTO is a form of documentation.
+{CODER2.I} added the {CLIENT} branch at the client's request and removed the request from the file.
+{CODER2.I} was certain the overflow was impossible. {CODER2.I} has since revised that view.
+{CODER2.I}'s fix: comment out the line that failed. My fix: put it back and handle it. -- {CODER.I}
+{CODER2.I} merged two versions of this program by hand. Both versions are now in here.
+{CODER2.I} named the variables after the members of a band. Ask {CODER3.I} which band.
+{CODER.I}: if you see {CODER2.I}, please ask about label {LABEL}.
+{CODER2.I} rewrote the header "for readability." The header used to be readable.
+This is the version {CODER2.I} demonstrated to {VP}. It is the only version that worked during the demo.
+{CODER2.I} replaced the sort with a "smarter" sort. The data is already sorted.
+{CODER2.I} says the bug is in the input. The input says the bug is in {CODER2.I}.
+{CODER2.I} deferred this to "phase two." There was no phase two.
+{CODER2.I} attributed this code to {CODER3.I}. {CODER3.I} has an alibi.
+{CODER.I}: {CODER2.I} keeps putting the tolerance back to {PCT} percent. It is supposed to be zero.
+{CODER2.I} added logging. The log is larger than the output.
+{CODER2.I} "refactored" this into {SMALLN} routines that all call each other.
+{CODER2.I}'s commit message for this change was "stuff."
+{CODER2.I} asked me not to mention this. I am mentioning it. -- {CODER.I}
+{CODER2.I} tested this against last year's deck. This year's deck has a different number of columns.
+{CODER2.I} moved the constants to the top for clarity. The clarity did not survive the move.
+{CODER2.I} documented this in a wiki that no longer exists.
+{CODER2.I} used the same label for two different loops. The compiler disagreed silently.
+{CODER2.I} wanted {VAR} to be global. It is now very global.
+{CODER2.I} declared this obsolete in {YEAR}. It has run every quarter since.
+{CODER2.I} decided the error codes should be "friendlier." They now say OOPS.
+{CODER.I} {DATE}: removed {CODER2.I}'s apology comment. Kept the code it apologised for.
+{CODER2.I} has strong opinions about indentation and none about correctness.
+{CODER2.I} hard-wired the printer name. The printer was replaced. The name lives on.
+{CODER2.I} fixed the Y2K issue in this routine by making it a Y2.1K issue.
+{CODER2.I} wrote the original specification on a napkin. The napkin is in the binder.
+{CODER2.I} says the second checksum is "belt and braces." It is two belts.
+{CODER2.I} added a feature nobody asked for and took out one somebody needed.
+I asked {CODER2.I} why. {CODER2.I} asked me why not. We are both still here. -- {CODER.I}
+{CODER2.I}'s last words on this routine: "should be fine."
+{CODER2.I} replaced the error check with a comment that says "assumed valid."
+{CODER2.I} split the loop to "improve cache locality." The {HW} did not have a cache.
+{CODER2.I} committed the test deck as the production deck in {YEAR}. The client was very understanding.
+{CODER2.I} marked this "DO NOT SHIP." It shipped.
+{CODER2.I} rewrote the date logic. The dates are now correct and wrong in new ways.
+{CODER2.I} cannot be reached for comment. {CODER2.I} could not be reached for comment while employed, either.
+{CODER2.I} wanted to call this program something cooler. {VP} refused.
+{CODER2.I} changed the default peer group to their own favourite. Restored to {PEER}.
+{CODER2.I} believes that if it compiles it is correct. This is not a belief I share. -- {CODER.I}
+{CODER2.I} found this bug. {CODER3.I} took credit. {CODER.I} fixed it. Nobody thanked anyone.
+{CODER2.I} inserted the {CLIENT} logic during a client visit, live, with the client watching.
+{CODER2.I} once ran this program with the deck upside down. The output was surprisingly close.
+{CODER2.I} left a TODO here in {OLDYEAR}. It is now a tradition.
+{CODER2.I} thinks the variable names are fine because "you get used to them."
+{CODER2.I} removed the comments to save cards. The cards were not saved.
+{CODER2.I} attributes all defects to "the old compiler." We have used the same compiler since {YEAR}.
+{CODER2.I} added a second exit point "for flexibility." There are now four.
+{CODER2.I}'s rule: never delete code, only comment it out. Hence the next {N} lines.
+{CODER2.I} re-indented the entire program. The diff is unreviewable and so is the program.
+{CODER2.I} named a routine {ROUTINE} and another {ROUTINE2}. They do the same thing differently.
+{CODER2.I} has asked that this comment be removed. Request denied. -- {CODER.I}
+{CODER2.I}'s change was reviewed by {CODER2.I}.
+{CODER2.I} was overruled by {VP}, who was overruled by {CODER3.I}, who had the only key to the machine room.
+{CODER2.I} added this "just in case." The case has never arisen. The code has never been removed.
+{CODER2.I} wrote this routine while learning {LANG}. It is a historical document.
+{CODER2.I} labelled this section TEMPORARY in {OLDYEAR}. Temporary is a state of mind.
+{CODER2.I}'s fix for the rounding problem was to stop printing the decimals.
+{CODER2.I} tuned the loop for the {HW}. On every other machine it is merely slow.
+{CODER2.I} took the documentation when they left. We assume it was useful.
+{CODER2.I} believes in "defensive programming." This routine defends itself from being understood.
+{CODER2.I} added a comment here explaining the code. The code has since changed. The comment has not.
+{CODER2.I} decided to "modernise" the error messages. They now include emoticons. Removed. -- {CODER.I}
+{CODER2.I} declared the bug "won't fix." I fixed it. Do not tell {CODER2.I}.
+{CODER2.I} has a theory about why this works. The theory involves cosmic rays.
+{CODER2.I} added the extra precision. The client asked why the numbers changed. {CODER2.I} removed it.
+{CODER2.I} made this change in production on a {DAYNAME} night. Witnesses: the night operator.
+{CODER2.I} believes the {VAR} counter is accurate. The {VAR} counter has not been accurate since {YEAR}.
+{CODER2.I} disagrees with this comment. {CODER2.I} may write their own.
+Originally {CODER3.I}'s idea. Implemented by {CODER2.I}. Regretted by {CODER.I}.
+{CODER2.I}'s version printed the percentiles in reverse. Clients preferred it. We reverted anyway.
+{CODER2.I} renamed this file. The scheduler still looks for the old name. There is a symbolic link.
+{CODER2.I} added a feature flag that defaults to on and cannot be turned off.
+{CODER2.I} wrote "magic, do not touch." I touched. It was not magic. It was a typo.
+{CODER2.I} spent a month optimizing this. The output is identical, including the bugs.
+{CODER2.I} was asked to add one column. {CODER2.I} added {SMALLN} and removed one.
+{CODER2.I} protected this section with a password. The password is the program name.
+{CODER2.I} claims to have kept a backup of the original. {CODER2.I}'s backup is a photograph of the screen.
+{CODER2.I} made the variable names shorter to fit the cards. Then the cards were retired.
+{CODER2.I} said it would take an hour. It has been {N} hours, across {SMALLN} years.
+{CODER2.I} added a comment warning about this exact bug. Then introduced the bug.
+{CODER2.I} decided the P95 column was redundant. The board disagreed. Restored.
+{CODER2.I} argued that the median card was optional. It is the only card that is not.
+{CODER2.I} swapped the baseline and current columns "to match the client's spreadsheet." Swapped back.
+{CODER2.I} refuses to use the word "bug." This section contains several "unexpected behaviours."
+{CODER2.I} rewrote this in a weekend. It took the rest of us a month to rewrite it back.
+{CODER2.I} labelled the dead code as "future features." The future has not arrived.
+{CODER2.I} left the company and took the only working test deck. A new one was punched from memory.
+{CODER2.I} believes the {DEPT} group sabotaged this routine. The {DEPT} group has never heard of it.
+{CODER2.I} cites "best practice" for this design. The practice is not named.
+{CODER2.I} installed a newer compiler on their own terminal. Their output differs by one cent per row.
+{CODER2.I} made the error dispatcher print in red. Our printer prints in black. It prints nothing.
+{CODER2.I} decided to "trust the input." This was a mistake that continues to compound.
+{CODER2.I} disagreed with the ladder. {CODER2.I} expressed this by misspelling it in every comment.
+{CODER2.I}'s contribution was to rename the program. It was renamed back after {SMALLN} days of confusion.
+{CODER2.I} decided the checksum was too slow. It takes less time than the page eject.
+{CODER2.I} rewrote the header so it would "look professional." It now looks like a ransom note.
+{CODER2.I} replaced the explicit loop with an implied one. Nobody can find the loop now.
+{CODER2.I} added a second copy of this routine for "redundancy." Only the first copy is called.
+{CODER2.I} left the cursor here in {YEAR}. This comment marks the spot.
+{CODER2.I} believes the {CLIENT} figures are fabricated. All figures are typed in by hand. Draw your own conclusions.
+{CODER2.I} requested this section be reviewed by an outside party. The outside party was {CODER2.I}'s cousin.
+{CODER2.I} documented the algorithm in a language only {CODER2.I} speaks.
+{CODER2.I} said the program was "basically done" in {OLDYEAR}.
+{CODER2.I} believes every problem can be solved by another flag. There are {SMALLN} flags.
+{CODER2.I} spotted the error in the ladder and corrected it. The correction was the error.
+{CODER2.I}'s last change log entry reads "misc." The miscellany is extensive.
+{CODER2.I} promised to come back and clean this up. {CODER2.I} is now a VP elsewhere.
+{CODER2.I} claims to have never seen this code before. The signature on line one disagrees.
+{CODER2.I} built this under deadline for the {CLIENT} pitch. We won the pitch. We kept the code.
+{CODER2.I} thought the output should be centered. Centred output broke three downstream jobs.
+{CODER2.I} wrote "obviously" in a comment. Nothing about this is obvious.
+{CODER2.I} believes indentation is a personal choice. This file contains {SMALLN} personal choices.
+{CODER2.I} wanted the job to page them on failure. It pages {CODER3.I}, who has never heard of it.
+{CODER2.I} refactored for testability. There are still no tests.
+{CODER2.I} found that removing this line saves {CPU} seconds. It also removes the correct answer.
+{CODER2.I} decided this needed a configuration file. The configuration file contains one line.
+{CODER2.I} wrote this routine so it could not be called incorrectly. It is now called incorrectly by {ROUTINE}.
+{CODER2.I} added the warning about the warning.
+{CODER2.I} used the client's internal codename for this variable. The client has since been acquired.
+{CODER2.I} rewrote this in structured style. The structure is a maze.
+{CODER2.I} said the dead routines would be removed "next release." This is release {REL}.
+{CODER2.I} took ownership of this program in {YEAR} and has been avoiding it ever since.
+{CODER2.I} believes that if you comment out enough code, what remains is correct.
+{CODER2.I} decided to store the percentiles as strings "for formatting." Converted back. -- {CODER.I}
+{CODER2.I} suggested we "just round it." See audit {AUDIT}.
+{CODER2.I} has never seen this program run. {CODER2.I} has, however, signed off on it {SMALLN} times.
+{CODER2.I} reorganized the deck by colour. The program does not care about colour. The operators do.
+{CODER2.I} suggested replacing this program with a spreadsheet in {YEAR}. The spreadsheet calls this program.
+{CODER2.I} noted the problem in the margin of the listing. The listing was shredded.
+{CODER2.I} replaced the tape with disk and the disk with a network share. The share is a tape.
+{CODER2.I} claims the second {ROUTINE} call was intentional. The comment beside it says "oops."
+{CODER2.I} added a version check that always passes.
+{CODER2.I} wrote "this is temporary" in {OLDYEAR} and "this is still temporary" in {YEAR}.
+{CODER2.I} and I agreed to disagree about this loop. The loop remains disagreeable. -- {CODER.I}
+{CODER2.I} reversed the ladder for a client in Australia. Not reverted. Somebody check.
+{CODER2.I} thought the variable named {VAR} was unused and reused it. It was used.
+{CODER2.I} changed the date format to "international." The international community was not consulted.
+{CODER2.I} made this routine "smarter." It now makes decisions.
+{CODER2.I}'s comment originally ran to three pages and included a recipe.
+{CODER2.I} said the job would be retired after the merger. There have been {SMALLN} mergers.
+{CODER2.I} replaced the checksum with a constant to make the tests pass.
+{CODER2.I} has requested that their name be removed from this file. Done. Except here. -- {CODER.I}
+{CODER2.I} added a feature to print the output twice "for the files." The files are full.
+{CODER2.I} decided the error should be a warning, and the warning should be silent.
+{CODER2.I} thinks I am being unfair in these comments. {CODER2.I} is welcome to fix the code. -- {CODER.I}
+{CODER2.I} rewrote this "for clarity" on {DATE}. It was clear before. -- {CODER.I}
+This loop was {CODER2}'s idea. Write to {CODER2.I}, not me.
+{CODER2.I} claims {EXCUSE}. {CODER2.I} has claimed this before.
+Whoever changed the deck on {DATE}: I know it was you, {CODER2.I}.
+If this abends, call {CODER2}. I have already called {CODER2} twice.
+{CODER2.I} "optimized" this during {MEETING}. It is now slower. -- {CODER.I}
+Not my code. {CODER2.I} wrote it on {EDITOR} and I can tell.
+{CODER2} left this here in {OLDYEAR}. It has outlived two reorgs and {CODER2}.
+{CODER.I}: reverted {CODER2.I}'s change. Again. Third time this {QUARTER}.
+{CODER2.I} says the client wanted it this way. The client says {CODER2.I} wanted it this way.
+Per {CODER2}, the percentile ladder "was always like that." It was not. See {MEMO}.
+{CODER2.I} introduced {BUG} here on {DATE}. I have left a note on {CODER2.I}'s {OFFICEOBJ}.
+{CODER2.I} fixed {BUG} by adding a second {BUG}. They cancel out. Do not touch either.
+The label numbering is {CODER2.I}'s. I asked {CODER2.I} to explain it. {CODER2.I} cannot.
+{CODER2.I} copied this from a {CONFERENCE} handout without reading it.
+Blame {CODER2} for the variable names. I only made them worse.
+{CODER.I} did not approve this change. {CODER.I}'s initials on the form are forged, poorly.
+This routine was written by {CODER2} during {SPORTS}. It shows.
+{CODER2.I} insisted on {LANG2}. We are not using {LANG2}. {CODER2.I} is not using {LANG2} either.
+I warned {CODER2} about this in {MEETING}. The minutes do not reflect it.
+{CODER2.I} moved the decimal point "to be safe." Nobody is safe.
+{CODER2.I} and {CODER3.I} both claim credit for this routine. Neither should.
+{CODER3.I} approved {CODER2.I}'s change without reading it. I read it. -- {CODER.I}
+{CODER2.I}'s comment below is wrong. My comment is right. -- {CODER.I}
+{CODER.I}'s comment above is wrong. -- {CODER2.I}
+I am not going to argue with {CODER2.I} in the source anymore. -- {CODER.I} (see below)
+Fine. -- {CODER2.I}
+Changed by {CODER2} without a form RD-114. Reported to {VP}.
+{CODER2.I} says this passed testing. {CODER2.I} has never run the test deck.
+The {ADJ} fix below is {CODER2.I}'s. It has been {ADJ} since {OLDYEAR}.
+{CODER2.I} deleted the comments that explained this. Now only {CODER2.I} knows. {CODER2.I} has retired.
+Whoever wrote "DO NOT TOUCH" above this: it was {CODER2.I}. I checked the history.
+{CODER2.I} keeps putting the {OFFICEOBJ} on the card reader. This is why the deck jams.
+{CODER2.I}'s test data used {CLIENT} figures. Do not do that. -- {CODER3.I}
+{CODER2} thinks {VAR} is a counter. It is a flag. It was a counter in {OLDYEAR}.
+{CODER2.I} renamed every variable in {YEAR}. The cross-reference has never recovered.
+This was working until {CODER2.I} "cleaned up" the FORMAT statements.
+The client complaint of {DATE} traces directly to {CODER2.I}'s change of {DATE}.
+{CODER2.I} says the output matched "close enough." The audit did not agree.
+{CODER2.I}'s fix for {INCIDENT}. It fixes {INCIDENT}. It breaks everything else slightly.
+{CODER2.I} blamed the compiler. The compiler is innocent. -- {CODER.I}
+I would like it on the record that {CODER2} chose {UTILITY} for this, not me.
+{CODER2.I} took the only copy of the run book to {LUNCHSPOT} and came back without it.
+{CODER2.I}: you cannot fix {BUG} by commenting it out. -- {CODER.I}
+{CODER2.I}: I can and I did. -- {CODER2.I}
+The extra page eject was {CODER2.I}'s, to "use up" a box of {MEDIUM}.
+{CODER2.I} hardcoded {CLIENT} into the header in {YEAR}. Every client since has been {CLIENT}.
+Ask {CODER3} why {CODER2} did this. {CODER3} was there. {CODER3} won't say.
+{CODER2.I} says we should rewrite this in {LANG2}. {CODER2.I} has said this since {OLDYEAR}.
+Somebody in {DEPT} keeps resubmitting this job with the old deck. It is {CODER2.I}.
+{CODER2.I}'s magic constant. {CODER2.I} says it is "from the manual." Which manual, {CODER2.I}?
+{CODER2.I} wrote this, {CODER3.I} rewrote it, I am rewriting it back. -- {CODER.I}
+It is {CODER2.I}'s fault the comments are in {LANG2} style. They are not even the right language.
+{CODER2.I} added the debug WRITE and never removed it. It has printed every night since {YEAR}.
+{CODER2.I} "tested" this by looking at it. -- {CODER.I}
+{CODER2} says this branch is unreachable. {CODER2} said that about {INCIDENT} too.
+{CODER2.I} committed this from {LUNCHSPOT}. Somehow.
+{CODER2.I}'s indentation. Mine is the one that is consistent.
+The routine below was {CODER2.I}'s first. You can tell. We love {CODER2.I} anyway.
+{CODER2.I} believes {VAR} should be DOUBLE PRECISION. {CODER2.I} is not in charge of precision.
+{CODER2.I} told {VP} this job runs in two minutes. It runs in two hours. Now it is my problem.
+{CODER2.I} signed off on the {QUARTER} run without checking the totals. The totals were for {CLIENT}.
+When {CODER2.I} says "trivial change," get it in writing.
+{CODER2.I}: if you put {SNACK} on the keyboard again I will report it to {COMMITTEE}.
+{CODER2.I} changed the sort order so the report "looks nicer." Clients noticed.
+{CODER2.I} wants credit for this routine in the revision history. Here it is: {CODER2.I}. Happy?
+{CODER2.I}'s patch from {DATE} is still marked {ADJ}. It is the most permanent thing in this program.
+{CODER2.I} says {UTILITY} cannot fail. {UTILITY} failed on {DATE}.
+{CODER2.I} renumbered the labels in {YEAR}. All of the comments that cite labels are now lies.
+{CODER2.I} keeps the only key to {PLACE}. This is why the {QUARTER} run was late.
+{CODER2.I} disagrees with this comment. {CODER2.I} may write their own comment.
+I did not write {BUG}. I only shipped it. -- {CODER.I}
+Inherited from {CODER2}, who inherited it from {CODER3}, who says it was like that.
+{CODER2.I} misread {MANUAL}. Twice. Once on purpose.
+{CODER2.I} left the company the day after making this change. Draw your own conclusions.
+{CODER2.I}'s "quick fix" from {HOLIDAY}. Nobody has had the heart to look at it since.
+{CODER3.I} filed a complaint about {CODER2.I}'s comments. {CODER2.I} filed a complaint about the complaint.
+The double negation is {CODER2.I}'s style. It is not wrong. It is not not wrong.
+{CODER2.I} said they would document this in {YEAR}. This is the documentation.
+{CODER2.I} and I disagree about whether {VAR} can be negative. It can. -- {CODER.I}
+Per {CODER2.I}, "nobody reads the comments." {CODER2.I}, I am reading your comments.
+{CODER2.I} changed the FORMAT width to fit {CLIENT}'s name. Every other client is now padded.
+{CODER2} wrote this during {WEATHER}, with no heat in {PLACE}. Forgive the brevity.
+{CODER2.I} claims the vendor wrote this routine. The vendor denies it. I believe the vendor.
+The reason this is slow is {CODER2.I}. The reason it is correct is also {CODER2.I}. -- {CODER.I}
+{CODER2.I} got this approved by {COMMITTEE} by scheduling the review during {SPORTS}.
+{CODER2} insists the overflow is "theoretical." {CODER2}'s theory abended on {DATE}.
+{CODER2.I}'s estimate for this change: one afternoon. Actual: {QUARTER}.
+{CODER2.I} keeps resetting {VAR} to zero "just in case." Just in case of what, {CODER2.I}?
+{CODER2.I} put the check digit on the wrong field. The check digit has been checking the date since {YEAR}.
+Somebody removed the IMPLICIT NONE. {CODER2.I} says it was "getting in the way."
+{CODER2.I}: please stop spelling it "percentle."
+{CODER2.I}: please stop "fixing" my spelling of "percentle." -- {CODER3.I}
+{CODER2.I} deleted the backup of this source in {YEAR}. We restored it from a printout found in {PLACE}.
+The {ADJ} branch below is {CODER2.I}'s monument. Visitors welcome.
+{CODER2.I} believes this program is self-documenting. {CODER2.I} is wrong about this program.
+{CODER2} named this routine after {PET}. Do not rename it. {CODER2} will know.
+Blame: {CODER2.I} ({OLDYEAR}), {CODER3.I} ({YEAR}), me (today). -- {CODER.I}
+{CODER2.I} keeps reformatting this file in {EDITOR}. Stop.
+{CODER2.I} rewrote the error handler to print "SEE {CODER2.I}." {CODER2.I} is gone. Nobody to see.
+The client complaint about rounding was {CODER2.I}'s. The rounding was also {CODER2.I}'s.
+{CODER2.I} merged the two loops. The two loops were separate for a reason. That reason was {CODER3.I}.
+{CODER2.I} uses tabs. In a fixed-form listing. On purpose.
+{CODER2.I} says the hardcoded year is "fine until {YEAR2}." Write that down. It is {YEAR2} somewhere.
+{CODER2.I}'s change log entry says "minor." It changed every number on the page.
+{CODER2.I} ran this against production "to see what happens." What happened is {INCIDENT}.
+This was {CODER2.I}'s summer project. {CODER2.I} was an intern. {CODER2.I} is now a VP. Be careful.
+{CODER2.I} introduced the {KEYWORD} here after reading {BOOK}. The book does not recommend it.
+{CODER2.I} sized this array for a {MEMSIZE} machine and then left. -- {CODER.I}
+{CODER2.I} wrote this on the {TERMMODEL} with the broken key. You can tell which key.
+{CODER2.I} quoted {MAGAZINE} as justification. {MAGAZINE} was wrong too.
+{CODER2.I} renamed {FIELDNAME}. It took a {QUARTER} to recover.
+{CODER2.I} added the {QUARTER} adjustment and never took it out. It has adjusted every quarter since {YEAR}.
+{CODER2.I}: why is there a {CHEESE} sandwich in the card tray?
+{CODER2.I} changed the job class without telling ops. Ops found out at 2 AM.
+{CODER2.I} says {EXCUSE}. {CODER3.I} says {EXCUSE}. I say neither of you tested it. -- {CODER.I}
+{CODER2.I} believes the deck order does not matter. The deck order matters.
+{CODER2.I} copied this routine into {PROGRAM2} and now we have two bugs.
+{CODER2.I} removed the trailer card "to save a card." We spent a week finding out why the record count was wrong.
+{CODER2.I} documented this routine in a memo that went to {DEPT}, which does not exist anymore.
+{CODER2.I} used the {COLOR} cards for data. The {COLOR} cards are for control. The reader does not care. The operators do.
+{CODER2.I} changed {FIELDNAME} from a count to a flag. {CODER3.I} changed it back. Neither told the other. Both left comments.
+{CODER2.I} changed and did not test the checksum on {HOLIDAY}. It took a {QUARTER} to find.
+{CODER2.I} commented out the overflow check without a form RD-114. Do not let it happen again.
+{CODER2.I} deleted the ladder while I was on vacation. Noted for the performance review.
+{CODER2.I} changed and did not test the dollar signs after {INCIDENT}. It has not been the same since.
+{CODER2.I} rewrote the plus signs on {HOLIDAY}. Noted for the performance review.
+{CODER2.I} duplicated the COMMON layout the day before the {QUARTER} close. Ops noticed before we did.
+{CODER2.I} renamed the column headings the day before the {QUARTER} close. I have reverted it. -- {CODER.I}
+{CODER2.I} moved {ROUTINE} without a form RD-114. Noted for the performance review.
+{CODER2.I} moved the ladder during {MEETING}. Ask {CODER2.I} why. I did.
+{CODER2.I} "optimized" the trailer check during {MEETING}. {CODER3.I} has the details.
+{CODER2.I} "cleaned up" label {LABEL} after {INCIDENT}. See {INCIDENT}.
+{CODER2.I} duplicated the FORMAT widths in {YEAR}. Ask {CODER2.I} why. I did.
+{CODER2.I} broke the FORMAT widths at {TIME}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} "cleaned up" the job card in {EDITOR}. The output did not change, which is worse.
+{CODER2.I} "cleaned up" {FIELDNAME} during {MEETING}. The output changed by one dollar.
+{CODER2.I} "simplified" the banner page while I was on vacation. Do not let it happen again.
+{CODER2.I} hard-coded the error table during {MEETING}. Ops noticed before we did.
+{CODER2.I} "optimized" the FORMAT widths over a weekend. Ops noticed before we did.
+{CODER2.I} changed and did not test the record count in {YEAR}. It has not been the same since.
+{CODER2.I} commented out the trailer check the day before the {QUARTER} close. It has not been the same since.
+{CODER2.I} half-converted the page header at {TIME}. Ops noticed before we did.
+{CODER2.I} commented out {ROUTINE} the day before the {QUARTER} close. It will happen again.
+{CODER2.I} "optimized" the run book on {HOLIDAY}. See memo {MEMO}.
+{CODER2.I} half-converted the cross-check during {MEETING}. It will happen again.
+{CODER2.I} changed and did not test {FIELDNAME} at {TIME}. It will happen again.
+{CODER2.I} hard-coded the test deck during {SPORTS}. The output changed by one dollar.
+{CODER2.I} patched over the ladder over a weekend. Do not let it happen again.
+{CODER2.I} hard-coded the tape step from {LUNCHSPOT}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} reverted the dead code after {INCIDENT}. The client noticed before ops did.
+{CODER2.I} duplicated the column headings while I was on vacation. Ops noticed before we did.
+{CODER2.I} reverted the column headings in {YEAR}. It has not been the same since.
+{CODER2.I} "cleaned up" the COMMON layout while {CODER3.I} watched. It took a {QUARTER} to find.
+{CODER2.I} deleted the {QUARTER} adjustment while I was on vacation. It will happen again.
+{CODER2.I} broke the {UTILITY} step over a weekend. Noted for the performance review.
+{CODER2.I} broke the {QUARTER} adjustment over a weekend. I am writing this down so it is not forgotten.
+{CODER2.I} reformatted the trailer check at {TIME}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} broke label {LABEL} while {CODER3.I} watched. It took a {QUARTER} to find.
+{CODER2.I} hard-coded the FORMAT widths in {EDITOR}. The client noticed before ops did.
+{CODER2.I} hard-coded the binder over a weekend. The client noticed before ops did.
+{CODER2.I} deleted the overflow check during {SPORTS}. It will happen again.
+{CODER2.I} reformatted the {QUARTER} adjustment in {YEAR}. We are still friends. Mostly.
+{CODER2.I} broke the test deck while I was on vacation. We are still friends. Mostly.
+{CODER2.I} "optimized" the {QUARTER} adjustment during {SPORTS}. We are still friends. Mostly.
+{CODER2.I} renamed the ladder while I was on vacation. We are still friends. Mostly.
+{CODER2.I} broke the sort from {LUNCHSPOT}. {CODER3.I} has the details.
+{CODER2.I} changed and did not test the job card in {YEAR}. See {INCIDENT}.
+{CODER2.I} "fixed" the error table during {MEETING}. It will happen again.
+{CODER2.I} commented out the plus signs over a weekend. It will happen again.
+{CODER2.I} broke the record count on {DATE}. We are still friends. Mostly.
+{CODER2.I} copied the COMMON layout during {MEETING}. See memo {MEMO}.
+{CODER2.I} half-converted the seal literal in {YEAR}. I am writing this down so it is not forgotten.
+{CODER2.I} reformatted the engagement code table on {HOLIDAY}. {EXCLAIM}
+{CODER2.I} moved {VAR} the day before the {QUARTER} close. The output did not change, which is worse.
+{CODER2.I} half-converted the Julian routine the day before the {QUARTER} close. Noted for the performance review.
+{CODER2.I} changed and did not test the {QUARTER} adjustment from {LUNCHSPOT}. Do not let it happen again.
+{CODER2.I} copied the column headings from {LUNCHSPOT}. {CODER3.I} has the details.
+{CODER2.I} "cleaned up" the trailer check during {SPORTS}. Ask {CODER2.I} why. I did.
+{CODER2.I} changed and did not test label {LABEL} in {YEAR}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} re-indented the job card the day before the {QUARTER} close. Do not let it happen again.
+{CODER2.I} reverted the Julian routine from {LUNCHSPOT}. Do not let it happen again.
+{CODER2.I} rewrote the change column at {TIME}. Ask {CODER2.I} why. I did.
+{CODER2.I} half-converted the restart logic on {DATE}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} "optimized" the cross-check on {DATE}. {CODER3.I} has the details.
+{CODER2.I} "cleaned up" the column headings the day before the {QUARTER} close. {EXCLAIM}
+{CODER2.I} forgot to update the shadow array at {TIME}. The client noticed before ops did.
+{CODER2.I} renamed the {CLIENT} branch after {INCIDENT}. I am writing this down so it is not forgotten.
+{CODER2.I} renamed the ladder the day before the {QUARTER} close. {EXCLAIM}
+{CODER2.I} copied the test deck without a form RD-114. Do not let it happen again.
+{CODER2.I} copied the binder in {YEAR}. It has not been the same since.
+{CODER2.I} reverted the dead code during {SPORTS}. The output changed by one dollar.
+{CODER2.I} broke the test deck from {LUNCHSPOT}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} duplicated the checksum while {CODER3.I} watched. Noted for the performance review.
+{CODER2.I} rewrote the dead code at {TIME}. Do not let it happen again.
+{CODER2.I} duplicated the run book on {HOLIDAY}. Ask {CODER2.I} why. I did.
+{CODER2.I} commented out the date routine during {MEETING}. Ask {CODER2.I} why. I did.
+{CODER2.I} renamed the job card in {EDITOR}. It took a {QUARTER} to find.
+{CODER2.I} changed and did not test the overflow check over a weekend. See memo {MEMO}.
+{CODER2.I} commented out the COMMON layout during {MEETING}. It took a {QUARTER} to find.
+{CODER2.I} rewrote the tape step while {CODER3.I} watched. See memo {MEMO}.
+{CODER2.I} re-indented the date routine on {DATE}. See {INCIDENT}.
+{CODER2.I} renamed the tape step after {INCIDENT}. Ask {CODER2.I} why. I did.
+{CODER2.I} reverted the change column on {HOLIDAY}. I have reverted it. -- {CODER.I}
+{CODER2.I} "simplified" the {QUARTER} adjustment during {SPORTS}. Noted for the performance review.
+{CODER2.I} half-converted the tape step after {INCIDENT}. The client noticed before ops did.
+{CODER2.I} changed and did not test the peer group lookup while I was on vacation. Ops noticed before we did.
+{CODER2.I} hard-coded the banner page while {CODER3.I} watched. The client noticed before ops did.
+{CODER2.I} moved the dollar signs in {YEAR}. We are still friends. Mostly.
+{CODER2.I} reverted the overflow check from {LUNCHSPOT}. I have reverted it. -- {CODER.I}
+{CODER2.I} reformatted the {CLIENT} branch over a weekend. It took a {QUARTER} to find.
+{CODER2.I} duplicated the binder in {YEAR}. The client noticed before ops did.
+{CODER2.I} "cleaned up" the checksum over a weekend. Do not let it happen again.
+{CODER2.I} patched over the dead code while {CODER3.I} watched. See {INCIDENT}.
+{CODER2.I} copied the shadow array the day before the {QUARTER} close. Noted for the performance review.
+{CODER2.I} changed and did not test the binder during {SPORTS}. {CODER3.I} has the details.
+{CODER2.I} re-indented the banner page during {SPORTS}. The output did not change, which is worse.
+{CODER2.I} duplicated the job card during {MEETING}. Ask {CODER2.I} why. I did.
+{CODER2.I} changed and did not test the binder over a weekend. Ops noticed before we did.
+{CODER2.I} "optimized" the FORMAT widths from {LUNCHSPOT}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} reformatted the tape step during {SPORTS}. Do not let it happen again.
+{CODER2.I} broke {VAR} from {LUNCHSPOT}. {CODER3.I} has the details.
+{CODER2.I} moved the dead code on {DATE}. {CODER3.I} has the details.
+{CODER2.I} broke the binder while I was on vacation. Ask {CODER2.I} why. I did.
+{CODER2.I} commented out the plus signs at {TIME}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} patched over the engagement code table during {SPORTS}. The output did not change, which is worse.
+{CODER2.I} rewrote {ROUTINE} during {MEETING}. We are still friends. Mostly.
+{CODER2.I} forgot to update the ladder at {TIME}. I am writing this down so it is not forgotten.
+{CODER2.I} hard-coded the job card in {EDITOR}. Noted for the performance review.
+{CODER2.I} re-indented the restart logic after {INCIDENT}. {EXCLAIM}
+{CODER2.I} changed and did not test the tape step on {DATE}. It will happen again.
+{CODER2.I} renamed the Julian routine without a form RD-114. I am writing this down so it is not forgotten.
+{CODER2.I} "optimized" the {UTILITY} step without a form RD-114. See memo {MEMO}.
+{CODER2.I} broke the region size from {LUNCHSPOT}. We are still friends. Mostly.
+{CODER2.I} "optimized" the overflow check in {YEAR}. See memo {MEMO}.
+{CODER2.I} rewrote the region size on {HOLIDAY}. It took a {QUARTER} to find.
+{CODER2.I} re-indented the restart logic during {MEETING}. {EXCLAIM}
+{CODER2.I} renamed the tape step in {YEAR}. I have reverted it. -- {CODER.I}
+{CODER2.I} renamed {FIELDNAME} the day before the {QUARTER} close. Noted for the performance review.
+{CODER2.I} "simplified" the page header from {LUNCHSPOT}. {EXCLAIM}
+{CODER2.I} forgot to update the column headings on {DATE}. I am still finding pieces.
+{CODER2.I} broke the record count the day before the {QUARTER} close. We are still friends. Mostly.
+{CODER2.I} reverted the dead code in {YEAR}. The output did not change, which is worse.
+{CODER2.I} rewrote the column headings in {YEAR}. We are still friends. Mostly.
+{CODER2.I} reverted the test deck during {MEETING}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} "cleaned up" {FIELDNAME} during {MEETING}. Noted for the performance review.
+{CODER2.I} hard-coded the change column in {YEAR}. It will happen again.
+{CODER2.I} rewrote {FIELDNAME} over a weekend. I have reverted it. -- {CODER.I}
+{CODER2.I} copied the dollar signs without a form RD-114. The output did not change, which is worse.
+{CODER2.I} "cleaned up" the {UTILITY} step on {DATE}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} reverted the tape step during {SPORTS}. Do not let it happen again.
+{CODER2.I} reverted label {LABEL} on {DATE}. Noted for the performance review.
+{CODER2.I} renamed the Julian routine over a weekend. We are still friends. Mostly.
+{CODER2.I} changed and did not test the shadow array after {INCIDENT}. We are still friends. Mostly.
+{CODER2.I} changed and did not test the dollar signs without a form RD-114. See {INCIDENT}.
+{CODER2.I} renamed the {CLIENT} branch in {EDITOR}. Do not let it happen again.
+{CODER2.I} "cleaned up" the change column without a form RD-114. {EXCLAIM}
+{CODER2.I} re-indented label {LABEL} without a form RD-114. We are still friends. Mostly.
+{CODER2.I} moved the change column while {CODER3.I} watched. See {INCIDENT}.
+{CODER2.I} broke the peer group lookup after {INCIDENT}. Ask {CODER2.I} why. I did.
+{CODER2.I} broke the record count while {CODER3.I} watched. See memo {MEMO}.
+{CODER2.I} deleted the peer group lookup while I was on vacation. It has not been the same since.
+{CODER2.I} re-indented the dead code during {SPORTS}. Ask {CODER2.I} why. I did.
+{CODER2.I} half-converted the region size while I was on vacation. Ops noticed before we did.
+{CODER2.I} rewrote the change column while {CODER3.I} watched. The output did not change, which is worse.
+{CODER2.I} "simplified" the shadow array from {LUNCHSPOT}. {EXCLAIM}
+{CODER2.I} changed and did not test the run book while I was on vacation. Ops noticed before we did.
+{CODER2.I} renamed the change column while {CODER3.I} watched. I am writing this down so it is not forgotten.
+{CODER2.I} re-indented the peer group lookup while I was on vacation. It took a {QUARTER} to find.
+{CODER2.I} reverted the seal literal on {HOLIDAY}. Ask {CODER2.I} why. I did.
+{CODER2.I} rewrote the change column during {SPORTS}. I am still finding pieces.
+{CODER2.I} reformatted the dollar signs after {INCIDENT}. It took a {QUARTER} to find.
+{CODER2.I} changed and did not test the peer group lookup while I was on vacation. It has not been the same since.
+{CODER2.I} deleted {FIELDNAME} at {TIME}. Do not let it happen again.
+{CODER2.I} "optimized" {VAR} without a form RD-114. It took a {QUARTER} to find.
+{CODER2.I} reverted the Julian routine over a weekend. It will happen again.
+{CODER2.I} hard-coded the date routine from {LUNCHSPOT}. Ask {CODER2.I} why. I did.
+{CODER2.I} patched over the test deck the day before the {QUARTER} close. See memo {MEMO}.
+{CODER2.I} "simplified" the record count in {EDITOR}. Noted for the performance review.
+{CODER2.I} half-converted the trailer check during {SPORTS}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} deleted the banner page on {DATE}. I have reverted it. -- {CODER.I}
+{CODER2.I} "simplified" the record count from {LUNCHSPOT}. I am still finding pieces.
+{CODER2.I} deleted the shadow array on {DATE}. I have reverted it. -- {CODER.I}
+{CODER2.I} "simplified" {FIELDNAME} during {MEETING}. The output did not change, which is worse.
+{CODER2.I} reverted the ordinal suffixes at {TIME}. It took a {QUARTER} to find.
+{CODER2.I} "fixed" the plus signs during {MEETING}. Do not let it happen again.
+{CODER2.I} "optimized" the error table during {MEETING}. The output did not change, which is worse.
+{CODER2.I} deleted the Julian routine over a weekend. It will happen again.
+{CODER2.I} moved the peer group lookup after {INCIDENT}. Ask {CODER2.I} why. I did.
+{CODER2.I} reformatted the run book the day before the {QUARTER} close. Ops noticed before we did.
+{CODER2.I} re-indented the date routine while I was on vacation. I am still finding pieces.
+{CODER2.I} patched over the binder while I was on vacation. See {INCIDENT}.
+{CODER2.I} half-converted {ROUTINE} in {YEAR}. It will happen again.
+{CODER2.I} reformatted the job card after {INCIDENT}. See {INCIDENT}.
+{CODER2.I} hard-coded {VAR} while {CODER3.I} watched. Do not let it happen again.
+{CODER2.I} patched over the {CLIENT} branch after {INCIDENT}. I am still finding pieces.
+{CODER2.I} changed and did not test {FIELDNAME} after {INCIDENT}. {CODER3.I} has the details.
+{CODER2.I} rewrote the banner page while {CODER3.I} watched. {CODER3.I} has the details.
+{CODER2.I} half-converted the plus signs during {MEETING}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} changed and did not test the binder from {LUNCHSPOT}. I am writing this down so it is not forgotten.
+{CODER2.I} hard-coded the dead code from {LUNCHSPOT}. It has not been the same since.
+{CODER2.I} re-indented the binder without a form RD-114. The output changed by one dollar.
+{CODER2.I} reformatted the shadow array during {MEETING}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} moved {ROUTINE} without a form RD-114. I am writing this down so it is not forgotten.
+{CODER2.I} duplicated the debug output over a weekend. I have reverted it. -- {CODER.I}
+{CODER2.I} duplicated the region size during {SPORTS}. I am writing this down so it is not forgotten.
+{CODER2.I} rewrote the dead code without a form RD-114. We are still friends. Mostly.
+{CODER2.I} patched over the trailer check while {CODER3.I} watched. See {INCIDENT}.
+{CODER2.I} duplicated the binder over a weekend. Do not let it happen again.
+{CODER2.I} reformatted the restart logic during {MEETING}. I am still finding pieces.
+{CODER2.I} half-converted the run book while I was on vacation. It took a {QUARTER} to find.
+{CODER2.I} re-indented the date routine after {INCIDENT}. It will happen again.
+{CODER2.I} reformatted the {UTILITY} step at {TIME}. Ask {CODER2.I} why. I did.
+{CODER2.I} moved the Julian routine during {SPORTS}. We are still friends. Mostly.
+{CODER2.I} reformatted the change column on {DATE}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} commented out the shadow array in {YEAR}. It took a {QUARTER} to find.
+{CODER2.I} reformatted the ordinal suffixes at {TIME}. Ops noticed before we did.
+{CODER2.I} moved the seal literal in {YEAR}. It will happen again.
+{CODER2.I} commented out {VAR} during {SPORTS}. Noted for the performance review.
+{CODER2.I} half-converted the dead code after {INCIDENT}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} copied the change column while {CODER3.I} watched. I am still finding pieces.
+{CODER2.I} "optimized" the binder the day before the {QUARTER} close. Ask {CODER2.I} why. I did.
+{CODER2.I} reverted the run book while {CODER3.I} watched. See memo {MEMO}.
+{CODER2.I} forgot to update the column headings over a weekend. Ask {CODER2.I} why. I did.
+{CODER2.I} deleted the banner page while {CODER3.I} watched. See memo {MEMO}.
+{CODER2.I} patched over the region size in {YEAR}. Noted for the performance review.
+{CODER2.I} changed and did not test the record count on {HOLIDAY}. {EXCLAIM}
+{CODER2.I} deleted {VAR} in {YEAR}. We are still friends. Mostly.
+{CODER2.I} "fixed" the tape step while I was on vacation. I am still finding pieces.
+{CODER2.I} patched over the ordinal suffixes while I was on vacation. We are still friends. Mostly.
+{CODER2.I} "optimized" the {UTILITY} step over a weekend. I am writing this down so it is not forgotten.
+{CODER2.I} "optimized" the page header over a weekend. The output changed by one dollar.
+{CODER2.I} forgot to update the column headings while {CODER3.I} watched. The output did not change, which is worse.
+{CODER2.I} reformatted the record count on {DATE}. Noted for the performance review.
+{CODER2.I} duplicated {VAR} in {YEAR}. See memo {MEMO}.
+{CODER2.I} deleted the plus signs in {YEAR}. {EXCLAIM}
+{CODER2.I} "optimized" the COMMON layout from {LUNCHSPOT}. I am still finding pieces.
+{CODER2.I} renamed the banner page over a weekend. It has not been the same since.
+{CODER2.I} duplicated the sort at {TIME}. The output changed by one dollar.
+{CODER2.I} half-converted the record count at {TIME}. See memo {MEMO}.
+{CODER2.I} renamed the record count during {MEETING}. See {INCIDENT}.
+{CODER2.I} half-converted the checksum at {TIME}. I am still finding pieces.
+{CODER2.I} re-indented the {UTILITY} step during {SPORTS}. I have reverted it. -- {CODER.I}
+{CODER2.I} renamed the job card in {EDITOR}. Ask {CODER2.I} why. I did.
+{CODER2.I} duplicated the Julian routine on {HOLIDAY}. Ops noticed before we did.
+{CODER2.I} reverted the ordinal suffixes on {DATE}. We are still friends. Mostly.
+{CODER2.I} "fixed" the {QUARTER} adjustment during {SPORTS}. See {INCIDENT}.
+{CODER2.I} broke the {CLIENT} branch without a form RD-114. See {INCIDENT}.
+{CODER2.I} broke the restart logic without a form RD-114. It took a {QUARTER} to find.
+{CODER2.I} broke the FORMAT widths in {EDITOR}. {EXCLAIM}
+{CODER2.I} renamed the trailer check while I was on vacation. Ops noticed before we did.
+{CODER2.I} reformatted the dollar signs after {INCIDENT}. {EXCLAIM}
+{CODER2.I} forgot to update label {LABEL} on {DATE}. It has not been the same since.
+{CODER2.I} renamed the page header at {TIME}. I am writing this down so it is not forgotten.
+{CODER2.I} broke the dollar signs after {INCIDENT}. Ask {CODER2.I} why. I did.
+{CODER2.I} half-converted the tape step during {MEETING}. It has not been the same since.
+{CODER2.I} hard-coded the dollar signs over a weekend. I am writing this down so it is not forgotten.
+{CODER2.I} "cleaned up" the tape step at {TIME}. The output changed by one dollar.
+{CODER2.I} copied the banner page from {LUNCHSPOT}. We are still friends. Mostly.
+{CODER2.I} copied the page header on {HOLIDAY}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} hard-coded the test deck during {MEETING}. See {INCIDENT}.
+{CODER2.I} broke the {CLIENT} branch at {TIME}. The client noticed before ops did.
+{CODER2.I} moved the COMMON layout on {DATE}. We are still friends. Mostly.
+{CODER2.I} "simplified" the {QUARTER} adjustment in {YEAR}. We are still friends. Mostly.
+{CODER2.I} "optimized" the record count on {HOLIDAY}. It has not been the same since.
+{CODER2.I} moved the overflow check during {SPORTS}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} "optimized" the restart logic while {CODER3.I} watched. It will happen again.
+{CODER2.I} reverted the region size during {SPORTS}. I am writing this down so it is not forgotten.
+{CODER2.I} duplicated the banner page in {EDITOR}. {CODER3.I} has the details.
+{CODER2.I} "cleaned up" the {CLIENT} branch in {EDITOR}. I am writing this down so it is not forgotten.
+{CODER2.I} hard-coded the dollar signs while {CODER3.I} watched. I am writing this down so it is not forgotten.
+{CODER2.I} re-indented {FIELDNAME} during {SPORTS}. Noted for the performance review.
+{CODER2.I} deleted the ordinal suffixes during {MEETING}. The client noticed before ops did.
+{CODER2.I} deleted the error table during {SPORTS}. I have reverted it. -- {CODER.I}
+{CODER2.I} "optimized" the engagement code table without a form RD-114. Noted for the performance review.
+{CODER2.I} reformatted the seal literal in {YEAR}. The output did not change, which is worse.
+{CODER2.I} moved the COMMON layout during {MEETING}. We are still friends. Mostly.
+{CODER2.I} commented out the ladder in {EDITOR}. It will happen again.
+{CODER2.I} "cleaned up" the page header the day before the {QUARTER} close. The output did not change, which is worse.
+{CODER2.I} copied the ladder after {INCIDENT}. Noted for the performance review.
+{CODER2.I} rewrote the change column in {EDITOR}. The output changed by one dollar.
+{CODER2.I} commented out the record count at {TIME}. Do not let it happen again.
+{CODER2.I} changed and did not test the {UTILITY} step at {TIME}. It took a {QUARTER} to find.
+{CODER2.I} renamed the {QUARTER} adjustment at {TIME}. Ops noticed before we did.
+{CODER2.I} changed and did not test the {UTILITY} step from {LUNCHSPOT}. See memo {MEMO}.
+{CODER2.I} renamed the record count from {LUNCHSPOT}. The client noticed before ops did.
+{CODER2.I} "simplified" the debug output in {YEAR}. We are still friends. Mostly.
+{CODER2.I} reformatted the engagement code table during {MEETING}. See memo {MEMO}.
+{CODER2.I} commented out the page header at {TIME}. It took a {QUARTER} to find.
+{CODER2.I} duplicated label {LABEL} without a form RD-114. I am writing this down so it is not forgotten.
+{CODER2.I} rewrote the {CLIENT} branch while I was on vacation. See {INCIDENT}.
+{CODER2.I} duplicated the tape step during {MEETING}. I am writing this down so it is not forgotten.
+{CODER2.I} duplicated the ladder in {YEAR}. {CODER3.I} has the details.
+{CODER2.I} reformatted the binder in {YEAR}. Ask {CODER2.I} why. I did.
+{CODER2.I} hard-coded the test deck on {DATE}. Noted for the performance review.
+{CODER2.I} "fixed" the trailer check while {CODER3.I} watched. See memo {MEMO}.
+{CODER2.I} duplicated label {LABEL} in {YEAR}. Ops noticed before we did.
+{CODER2.I} "fixed" the seal literal after {INCIDENT}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} commented out label {LABEL} over a weekend. {CODER3.I} has the details.
+{CODER2.I} deleted the seal literal from {LUNCHSPOT}. The client noticed before ops did.
+{CODER2.I} reverted label {LABEL} at {TIME}. I am writing this down so it is not forgotten.
+{CODER2.I} deleted the debug output during {SPORTS}. I am writing this down so it is not forgotten.
+{CODER2.I} patched over the dead code on {DATE}. It will happen again.
+{CODER2.I} "optimized" the {QUARTER} adjustment while I was on vacation. The output did not change, which is worse.
+{CODER2.I} patched over the FORMAT widths in {YEAR}. {EXCLAIM}
+{CODER2.I} rewrote the cross-check in {YEAR}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} duplicated the dead code in {EDITOR}. Do not let it happen again.
+{CODER2.I} moved the {QUARTER} adjustment in {YEAR}. Ops noticed before we did.
+{CODER2.I} "cleaned up" the plus signs during {SPORTS}. Ask {CODER2.I} why. I did.
+{CODER2.I} moved the plus signs at {TIME}. Do not let it happen again.
+{CODER2.I} moved the record count at {TIME}. It has not been the same since.
+{CODER2.I} reverted the banner page in {YEAR}. Ops noticed before we did.
+{CODER2.I} "cleaned up" the FORMAT widths without a form RD-114. It took a {QUARTER} to find.
+{CODER2.I} renamed the trailer check the day before the {QUARTER} close. See memo {MEMO}.
+{CODER2.I} deleted the shadow array without a form RD-114. Do not let it happen again.
+{CODER2.I} hard-coded the trailer check the day before the {QUARTER} close. Ask {CODER2.I} why. I did.
+{CODER2.I} copied the peer group lookup on {DATE}. It took a {QUARTER} to find.
+{CODER2.I} reformatted the dead code over a weekend. {EXCLAIM}
+{CODER2.I} "fixed" the ordinal suffixes in {YEAR}. We are still friends. Mostly.
+{CODER2.I} changed and did not test the cross-check over a weekend. {EXCLAIM}
+{CODER2.I} duplicated {FIELDNAME} in {YEAR}. Do not let it happen again.
+{CODER2.I} re-indented the banner page from {LUNCHSPOT}. {EXCLAIM}
+{CODER2.I} rewrote the date routine the day before the {QUARTER} close. I have reverted it. -- {CODER.I}
+{CODER2.I} renamed the error table without a form RD-114. See {INCIDENT}.
+{CODER2.I} commented out the checksum the day before the {QUARTER} close. See {INCIDENT}.
+{CODER2.I} renamed label {LABEL} at {TIME}. We are still friends. Mostly.
+{CODER2.I} reformatted the plus signs on {DATE}. Do not let it happen again.
+{CODER2.I} copied the cross-check in {YEAR}. See memo {MEMO}.
+{CODER2.I} reverted the cross-check after {INCIDENT}. It will happen again.
+{CODER2.I} "fixed" the test deck in {EDITOR}. Ops noticed before we did.
+{CODER2.I} renamed the {QUARTER} adjustment during {MEETING}. It has not been the same since.
+{CODER2.I} patched over the trailer check in {YEAR}. Noted for the performance review.
+{CODER2.I} moved the page header while {CODER3.I} watched. {EXCLAIM}
+{CODER2.I} moved the test deck over a weekend. It has not been the same since.
+{CODER2.I} re-indented the trailer check after {INCIDENT}. {EXCLAIM}
+{CODER2.I} renamed the trailer check without a form RD-114. {CODER3.I} has the details.
+{CODER2.I} moved the test deck on {DATE}. "{EXCUSE}," says {CODER2.I}.
+{CODER2.I} forgot to update the Julian routine in {EDITOR}. I am still finding pieces.
+{CODER2.I} deleted the dead code in {YEAR}. Ask {CODER2.I} why. I did.
+{CODER2.I} duplicated the debug output over a weekend. The output changed by one dollar.
+{CODER2.I} forgot to update the banner page over a weekend. Do not let it happen again.
+{CODER2.I} half-converted the plus signs on {HOLIDAY}. Noted for the performance review.

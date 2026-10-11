@@ -1,0 +1,8 @@
+#name: Oral Tradition License
+#kind: noncommercial
+#from: 1970
+ORAL TRADITION
+
+The terms of use for this program have never been written down. They are passed from programmer to programmer, at the handoff, verbally, usually at {LUNCHSPOT}. {CODER} received them from {CODER2}, who received them from {CODER3}, who says they came "from the beginning."
+
+The terms are believed to be: run it nightly; do not round; do not ask about the ladder; and leave the program better than you found it, or at least no worse. The fourth term has not always been observed.

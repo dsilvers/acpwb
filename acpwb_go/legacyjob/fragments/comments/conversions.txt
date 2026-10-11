@@ -1,0 +1,24 @@
+Converted from {LANG2} to {LANG} in {YEAR}. Line-for-line, comments included, bugs included.
+The conversion from the {HW} to the {HW2} changed the word size. All integer overflows moved.
+The {OLDYEAR} conversion was done by a contractor from {VENDOR}. The contractor's comments are marked with {CODER2.I}.
+During the {YEAR} conversion, all GOTOs were replaced with structured constructs. Then they were put back.
+The conversion tool translated every comment literally. Some comments are now in the wrong language.
+The conversion added {N} lines of compatibility code. None of it is called. All of it is required.
+The EBCDIC to ASCII conversion changed the sort order. Clients beginning with a digit moved to the top.
+The converted program produces identical output, verified by comparing {N} reports. One differed. It was declared a typo.
+The conversion team signed off on {DATE}. The conversion team was {CODER2} and a sandwich.
+The FORTRAN IV to FORTRAN 77 conversion added IMPLICIT NONE. Then removed it after {N} compile errors.
+The conversion to {OS} required replacing every file name. The old names are in comments for reference.
+The {MEDIUM} to {MEDIUM} conversion lost the sequence numbers. They were regenerated. They are not the originals.
+The conversion from cards to disk was done by keypunching the listing back into a terminal. Typos were introduced. Some were fixed.
+The program was converted to run under {OS}, then converted back when {OS} was dropped.
+The conversion estimate was six weeks. It took {SMALLN} years. It is not finished.
+The conversion preserved the column layout of the {OLDYEAR} deck, so the new program reads old decks and new decks identically, which is to say wrongly.
+The conversion from batch to online was cancelled after the online version took 40 minutes per screen.
+The conversion added lowercase. Then {COMMITTEE} required uppercase output. The lowercase lives on in the comments.
+The 2-digit to 4-digit year conversion widened every date field. The report columns no longer line up. They never did.
+The conversion to {LANG2} was "90% complete" in {YEAR}. It is still 90% complete.
+After the conversion, the program ran {PCT}% faster. Nobody could explain it. The old program had a sleep loop.
+The conversion checklist had {N} items. Item {SMALLN} was "check the percentile ladder." It is checked off twice.
+The conversion moved the constants into a separate file. The separate file was lost. The constants are back in the program.
+The {HW2} port uses the same source with {SMALLN} conditional sections. The conditions are never false.

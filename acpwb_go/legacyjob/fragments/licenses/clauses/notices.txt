@@ -1,0 +1,6 @@
+All notices shall be in writing and delivered by hand, registered mail, or telex to {HOLDER}, {ADDRESS}, Attention: {DEPT}.
+Notices to Licensor must be addressed to the Licensing Administrator. The Licensing Administrator is {CODER}.
+Notices are effective on receipt, or three business days after mailing, or when {CODER} finds them in the wrong mailbox.
+Notice by electronic mail is effective only if acknowledged by a human being with signing authority.
+Licensee shall give notice of any change of address, any change of Designated Machine, and any change of heart.
+Notices may be delivered by fax to the number on file. The fax machine is in {PLACE} and is out of paper.

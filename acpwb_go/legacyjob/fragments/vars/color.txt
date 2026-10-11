@@ -1,0 +1,10 @@
+green
+manila
+salmon
+canary yellow
+pale blue
+goldenrod
+lilac
+grey
+beige
+off-white

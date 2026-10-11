@@ -1,0 +1,1019 @@
+after the {OLDYEAR} disk failure
+during the {YEAR} conversion
+because of the {CLIENT} engagement
+under pressure from {VP}
+on the {HW}
+after audit {AUDIT}
+for compatibility with {PROGRAM2}
+following an incident on {DATE}
+when the {DEPT} group complained
+without anyone noticing
+over a long weekend
+at the request of {TEAM}
+after the {COMPILER} upgrade
+as a temporary measure
+for the {INDUSTRY} practice
+in response to ticket {TICKET}
+before the auditors arrived
+after the machine room flood
+when the card reader was replaced
+to satisfy memo {MEMO}
+during the {YEAR} hiring freeze
+in time for quarter-end
+on a {DAYNAME} night
+while {CODER2} was on vacation
+after {SMALLN} failed attempts
+for reasons that seemed good at the time
+when the peer list grew past {N}
+after the move to {BLDG}
+when the tape library closed
+because the old way printed in the margin
+on the strength of a hunch
+to save face on a {DAYNAME}
+in a moment of weakness on a {DAYNAME}
+when the disk filled up in {YEAR}
+in response to a phone call in {YEAR}
+in the middle of quarter-end, {DATE}
+while the printer was jammed
+because {CLIENT} called, {DATE}
+after a short night ({CODER.I})
+because nobody objected on a {DAYNAME}
+during the {OLDYEAR} conversion weekend ({CODER.I})
+before anyone could find a discrepancy, {DATE}
+following the move to {BLDG} ({CODER.I})
+in response to memo {MEMO} ({CODER.I})
+in response to memo {MEMO} on a {DAYNAME}
+to save {SMALLN} cards in {YEAR}
+after we found a discrepancy, {DATE}
+when the ladder was re-ratified on a {DAYNAME}
+to make the operators happy in {YEAR}
+to placate the {DEPT} group on a {DAYNAME}
+in response to a phone call on a {DAYNAME}
+in response to audit {AUDIT}
+in response to ticket {TICKET} on a {DAYNAME}
+following the move to {BLDG}, {DATE}
+in a fit of tidiness ({CODER.I})
+to make the compiler happy in {YEAR}
+after a short night
+in a burst of efficiency
+when the disk filled up
+while {VP} was watching on a {DAYNAME}
+when the card reader started eating cards
+when the peer list changed in {YEAR}
+to save face ({CODER.I})
+during the holiday freeze on a {DAYNAME}
+following the {YEAR} reorganisation, {DATE}
+in a fit of optimism in {YEAR}
+following the {YEAR} reorganisation ({CODER.I})
+while the printer was jammed ({CODER.I})
+in a fit of tidiness in {YEAR}
+to make the client happy, {DATE}
+because {TEAM} asked nicely ({CODER.I})
+on the strength of a spreadsheet in {YEAR}
+because {CLIENT} called
+when the peer list changed
+under a deadline that later moved in {YEAR}
+when the debug flag was left on
+while the printer was jammed, {DATE}
+because everybody objected in {YEAR}
+while {VP} was watching in {YEAR}
+in the middle of quarter-end in {YEAR}
+to placate the {DEPT} group
+when the disk filled up ({CODER.I})
+after the client found a discrepancy, {DATE}
+when the ladder was re-ratified, {DATE}
+because everybody objected on a {DAYNAME}
+when the ladder was ratified in {YEAR}
+because {TEAM} asked nicely in {YEAR}
+while {VP} was watching, {DATE}
+because nobody objected in {YEAR}
+during a power failure
+to fit on one page on a {DAYNAME}
+to make the auditors happy ({CODER.I})
+when the peer list changed ({CODER.I})
+following the move to {BLDG} in {YEAR}
+to make the compiler happy on a {DAYNAME}
+in response to memo {MEMO}
+while the printer was jammed in {YEAR}
+following the {YEAR} reorganisation on a {DAYNAME}
+with {CODER2} reading over my shoulder in {YEAR}
+on the strength of a hunch in {YEAR}
+on the last day of the fiscal year on a {DAYNAME}
+in a moment of weakness, {DATE}
+after a long lunch, {DATE}
+after we found a discrepancy ({CODER.I})
+to save {SMALLN} cards
+in a burst of efficiency in {YEAR}
+because {CLIENT} called ({CODER.I})
+in response to audit {AUDIT} ({CODER.I})
+on the strength of a hunch, {DATE}
+to make the compiler happy, {DATE}
+because nobody objected ({CODER.I})
+when the debug flag was left on ({CODER.I})
+to save face
+when the debug flag was left on on a {DAYNAME}
+during the holiday freeze ({CODER.I})
+during a power failure in {YEAR}
+to make the auditors happy in {YEAR}
+to keep the peace
+after a long lunch ({CODER.I})
+because {CLIENT} called in {YEAR}
+following the {YEAR} reorganisation in {YEAR}
+after a short night, {DATE}
+in a fit of optimism on a {DAYNAME}
+on advice from {VENDOR}, {DATE}
+before anyone could find a discrepancy on a {DAYNAME}
+in response to ticket {TICKET}, {DATE}
+to fit on one page
+to fit in {N} columns
+to fit on one page ({CODER.I})
+before anyone could find a discrepancy ({CODER.I})
+in response to memo {MEMO} in {YEAR}
+following the {HW2} migration ({CODER.I})
+on the strength of a spreadsheet ({CODER.I})
+when the tape drive started squealing in {YEAR}
+after a long lunch on a {DAYNAME}
+in a fit of optimism, {DATE}
+to make the operators happy
+following {CODER3}'s departure on a {DAYNAME}
+to save {SMALLN} cards, {DATE}
+on the strength of a hunch on a {DAYNAME}
+before anyone could find a discrepancy
+when the card reader started eating cards in {YEAR}
+in a fit of optimism ({CODER.I})
+to fit in {N} columns ({CODER.I})
+to save {SMALLN} cards ({CODER.I})
+in a fit of tidiness, {DATE}
+during the {OLDYEAR} conversion weekend in {YEAR}
+to placate the {DEPT} group in {YEAR}
+because nobody objected
+after the auditors left
+in a moment of weakness ({CODER.I})
+when the card reader started eating cards, {DATE}
+on advice from {VENDOR} ({CODER.I})
+after a short night on a {DAYNAME}
+under a deadline that later moved
+to make the operators happy, {DATE}
+following {CODER3}'s departure in {YEAR}
+because {TEAM} asked nicely on a {DAYNAME}
+during a power failure ({CODER.I})
+because everybody objected, {DATE}
+after the client found a discrepancy in {YEAR}
+because nobody objected, {DATE}
+during a power failure, {DATE}
+to save face in {YEAR}
+after we found a discrepancy on a {DAYNAME}
+on the last day of the fiscal year in {YEAR}
+to keep the peace ({CODER.I})
+when the ladder was ratified ({CODER.I})
+against advice from {VENDOR}
+against advice from {VENDOR} ({CODER.I})
+after the auditors left, {DATE}
+to keep the peace on a {DAYNAME}
+in a moment of weakness in {YEAR}
+to placate the {DEPT} group ({CODER.I})
+to make the totals match ({CODER.I})
+during the {OLDYEAR} conversion weekend on a {DAYNAME}
+to make the compiler happy
+during the holiday freeze in {YEAR}
+after we found a discrepancy in {YEAR}
+following the {HW2} migration on a {DAYNAME}
+when the debug flag was left on in {YEAR}
+on the strength of a hunch ({CODER.I})
+under a deadline that later moved ({CODER.I})
+to keep the peace, {DATE}
+with {CODER2} reading over my shoulder
+in the middle of quarter-end on a {DAYNAME}
+to make the operators happy on a {DAYNAME}
+to keep the peace in {YEAR}
+following {CODER3}'s departure, {DATE}
+in the middle of quarter-end ({CODER.I})
+in response to audit {AUDIT} on a {DAYNAME}
+in good faith
+in good faith on a {DAYNAME}
+to save {CPU} CPU seconds, {DATE}
+to make the client happy in {YEAR}
+to make the client happy
+to save {SMALLN} cards on a {DAYNAME}
+when the peer list changed on a {DAYNAME}
+because everybody objected
+in a moment of weakness
+with {CODER2} reading over my shoulder, {DATE}
+against advice from {VENDOR}, {DATE}
+under a deadline that later moved on a {DAYNAME}
+on advice from {VENDOR}
+to placate the {DEPT} group, {DATE}
+before the auditors arrived ({CODER.I})
+after a short night in {YEAR}
+because {TEAM} asked nicely
+when the tape drive started squealing on a {DAYNAME}
+to fit in {N} columns, {DATE}
+when the ladder was re-ratified ({CODER.I})
+during the holiday freeze
+when the card reader started eating cards on a {DAYNAME}
+to make the operators happy ({CODER.I})
+when the ladder was ratified on a {DAYNAME}
+while {VP} was watching
+in response to a phone call
+in the middle of quarter-end
+on advice from {VENDOR} on a {DAYNAME}
+to make the client happy on a {DAYNAME}
+on the strength of a spreadsheet on a {DAYNAME}
+while {VP} was watching ({CODER.I})
+to fit in {N} columns in {YEAR}
+on the last day of the fiscal year
+to save {CPU} CPU seconds ({CODER.I})
+during the {OLDYEAR} conversion weekend
+after the auditors left on a {DAYNAME}
+before anyone could find a discrepancy in {YEAR}
+during a power failure on a {DAYNAME}
+before the auditors arrived in {YEAR}
+following the move to {BLDG} on a {DAYNAME}
+in a burst of efficiency, {DATE}
+when the tape drive started squealing, {DATE}
+in a burst of efficiency on a {DAYNAME}
+to save {CPU} CPU seconds on a {DAYNAME}
+when the tape drive started squealing ({CODER.I})
+in response to audit {AUDIT} in {YEAR}
+to make the totals match in {YEAR}
+with {CODER2} reading over my shoulder ({CODER.I})
+to save {CPU} CPU seconds
+when the peer list changed, {DATE}
+following {CODER3}'s departure
+to save face, {DATE}
+in a fit of optimism
+because everybody objected ({CODER.I})
+in response to ticket {TICKET} in {YEAR}
+on the last day of the fiscal year, {DATE}
+before the auditors arrived, {DATE}
+on the strength of a spreadsheet
+to make the auditors happy, {DATE}
+in response to ticket {TICKET} ({CODER.I})
+when the ladder was re-ratified in {YEAR}
+in good faith in {YEAR}
+to make the totals match, {DATE}
+to make the client happy ({CODER.I})
+under a deadline that later moved, {DATE}
+during the holiday freeze, {DATE}
+when the disk filled up on a {DAYNAME}
+following the {HW2} migration
+in response to audit {AUDIT}, {DATE}
+in response to a phone call ({CODER.I})
+because {CLIENT} called on a {DAYNAME}
+in response to memo {MEMO}, {DATE}
+to make the compiler happy ({CODER.I})
+against advice from {VENDOR} in {YEAR}
+following the move to {BLDG}
+following the {HW2} migration in {YEAR}
+in a fit of tidiness
+after the auditors left in {YEAR}
+on the last day of the fiscal year ({CODER.I})
+after a long lunch in {YEAR}
+after the client found a discrepancy on a {DAYNAME}
+in a burst of efficiency ({CODER.I})
+against advice from {VENDOR} on a {DAYNAME}
+on advice from {VENDOR} in {YEAR}
+following {CODER3}'s departure ({CODER.I})
+after a long lunch
+when the ladder was ratified
+while the printer was jammed on a {DAYNAME}
+after we found a discrepancy
+on the strength of a spreadsheet, {DATE}
+in a fit of tidiness on a {DAYNAME}
+when the ladder was ratified, {DATE}
+in good faith, {DATE}
+to save {CPU} CPU seconds in {YEAR}
+before the auditors arrived on a {DAYNAME}
+to make the auditors happy
+to make the totals match on a {DAYNAME}
+when the debug flag was left on, {DATE}
+to make the totals match
+when the disk filled up, {DATE}
+in good faith ({CODER.I})
+with {CODER2} reading over my shoulder on a {DAYNAME}
+to fit on one page, {DATE}
+because {TEAM} asked nicely, {DATE}
+to fit on one page in {YEAR}
+after the client found a discrepancy ({CODER.I})
+during the {OLDYEAR} conversion weekend, {DATE}
+following the {YEAR} reorganisation
+to make the auditors happy on a {DAYNAME}
+following the {HW2} migration, {DATE}
+when the tape drive started squealing
+when the ladder was re-ratified
+when the card reader started eating cards ({CODER.I})
+in response to a phone call, {DATE}
+after the client found a discrepancy
+after the auditors left ({CODER.I})
+to fit in {N} columns on a {DAYNAME}
+on leap day, per {CODER2.I}
+to make the columns line up, per {CODER2.I}
+to make the columns line up
+on every run since {YEAR}, per {CODER2.I}
+when the clock was set back, per {CODER2.I}
+after {WEATHER}, per {CODER2.I}
+to save one page per run ({YEAR})
+in the presence of {SNACK} ({YEAR})
+during {MEETING}, per {CODER2.I}
+when {UTILITY} changed behaviour, per {CODER2.I}
+on exactly one run in {YEAR}
+from memory, per {CODER2.I}
+on exactly one run in {YEAR} ({YEAR})
+since {INCIDENT}, per {CODER2.I}
+at the request of {VP}
+for reasons that seemed good at the time, per {CODER2.I}
+via {NETWORK}
+in the {OLDYEAR} conversion
+for reasons nobody wrote down
+because {CODER2} was on vacation, per {CODER2.I}
+over the objections of {CODER2}, per {CODER2.I}
+when the {MEDIUM} could not be read
+during {INCIDENT}
+the morning after {HOLIDAY}, per {CODER2.I}
+at the start of the fiscal year, per {CODER2.I}
+when the deck was dropped
+on the console in {PLACE} ({YEAR})
+at the request of {VP}, per {CODER2.I}
+during the {QUARTER} close ({YEAR})
+since {INCIDENT} ({YEAR})
+the morning after {HOLIDAY}
+to satisfy audit {AUDIT}, per {CODER2.I}
+via {NETWORK}, per {CODER2.I}
+when the printer ran out of ribbon, per {CODER2.I}
+for reasons nobody wrote down, per {CODER2.I}
+when {COMPILER} was upgraded, per {CODER2.I}
+at the start of the fiscal year ({YEAR})
+by dial-up at 300 baud, per {CODER2.I}
+using a pencil
+on {HOLIDAY} ({YEAR})
+when the printer ran out of paper, per {CODER2.I}
+the night before {HOLIDAY} ({YEAR})
+when daylight saving time began, per {CODER2.I}
+to make {VP} happy, per {CODER2.I}
+because {CODER2} was on vacation
+by reading {MANUAL} upside down, per {CODER2.I}
+from a napkin at {LUNCHSPOT} ({YEAR})
+as a favour to {CODER3}
+in a room without heat ({YEAR})
+in a room without heat
+as part of the {PROJECT} project ({YEAR})
+on every run since {YEAR} ({YEAR})
+because {CLIENT} called twice ({YEAR})
+when the clock was set back ({YEAR})
+with the blessing of {COMMITTEE} ({YEAR})
+in the move off the {HW}, per {CODER2.I}
+before {INCIDENT}
+in the move to {LANG2}
+in the move to the {HW2} ({YEAR})
+when the tape broke
+because {CODER2} was on vacation ({YEAR})
+to save one card, per {CODER2.I}
+via {NETWORK} ({YEAR})
+when {COMPILER} was upgraded
+when daylight saving time ended, per {CODER2.I}
+during {WEATHER} ({YEAR})
+on the console in {PLACE}, per {CODER2.I}
+in the presence of {SNACK}
+after {INCIDENT}
+when the deck was dropped ({YEAR})
+using {EDITOR} ({YEAR})
+when the disk filled up, per {CODER2.I}
+to make the totals add up ({YEAR})
+after {WEATHER} ({YEAR})
+when the tape broke, per {CODER2.I}
+to make the totals add up
+in the {YEAR} rewrite ({YEAR})
+on leap day
+to get past audit {AUDIT} ({YEAR})
+after the {QUARTER} run
+on the back of a {QUARTER} report ({YEAR})
+at the end of the fiscal year
+while {CODER2} was at {CONFERENCE}, per {CODER2.I}
+for one client in {YEAR}, per {CODER2.I}
+while {CODER2} was out sick, per {CODER2.I}
+when daylight saving time began ({YEAR})
+right after {MEETING}, per {CODER2.I}
+when {UTILITY} changed behaviour ({YEAR})
+as a test that was never undone
+because {VP} asked nicely ({YEAR})
+at the request of {VP} ({YEAR})
+to placate {CLIENT} ({YEAR})
+by dial-up at 300 baud
+over the objections of {CODER2}
+using a slide rule ({YEAR})
+to placate {CLIENT}, per {CODER2.I}
+in the move to {OS}
+to make the numbers match last year
+during the {QUARTER} close, per {CODER2.I}
+for reasons that seemed good at the time ({YEAR})
+during {SPORTS} ({YEAR})
+when the printer ran out of ribbon
+from the pay phone in the lobby
+because {VP} asked nicely
+for reasons nobody wrote down ({YEAR})
+by dial-up at 300 baud ({YEAR})
+while {CODER2} was at {LUNCHSPOT}, per {CODER2.I}
+so the {QUARTER} figures would not move ({YEAR})
+during {MEETING} ({YEAR})
+before the {QUARTER} run ({YEAR})
+because {VP} did not ask nicely ({YEAR})
+on {HOLIDAY}
+by reading {MANUAL} upside down
+as part of the cost-cutting drive ({YEAR})
+as part of the {PROJECT} project
+to save one card
+in a room without air conditioning ({YEAR})
+as a favour to {CODER3}, per {CODER2.I}
+during the {QUARTER} close
+in the {OLDYEAR} conversion, per {CODER2.I}
+before the {QUARTER} run, per {CODER2.I}
+in the move to {OS}, per {CODER2.I}
+in the {YEAR} rewrite
+on leap day ({YEAR})
+when the clock was set back
+because {VP} did not ask nicely
+because {CLIENT} called, per {CODER2.I}
+when {VENDOR} changed the library
+when the deck was dropped, per {CODER2.I}
+from a napkin at {LUNCHSPOT}
+in the move to the {HW2}
+on a terminal with a sticky 7, per {CODER2.I}
+on the back of a {QUARTER} report, per {CODER2.I}
+in the move off the {HW}
+after {INCIDENT} ({YEAR})
+from the pay phone in the lobby ({YEAR})
+without telling {COMMITTEE} ({YEAR})
+during {INCIDENT}, per {CODER2.I}
+during {WEATHER}
+with the blessing of {COMMITTEE}
+as a joke that went too far
+to satisfy audit {AUDIT} ({YEAR})
+after the {QUARTER} run, per {CODER2.I}
+at the end of the century
+after the {QUARTER} run ({YEAR})
+during {SPORTS}
+when {UTILITY} changed behaviour
+to make the numbers match last year, per {CODER2.I}
+because {CLIENT} called twice
+on the first run of the month, per {CODER2.I}
+so nobody would have to explain it
+as a test that was never undone ({YEAR})
+during {MEETING}
+to make {VP} happy
+to get past audit {AUDIT}, per {CODER2.I}
+when the {MEDIUM} could not be read, per {CODER2.I}
+on the back of a {QUARTER} report
+during {INCIDENT} ({YEAR})
+while {CODER2} was at {CONFERENCE} ({YEAR})
+so the {QUARTER} figures would not move
+without telling {COMMITTEE}, per {CODER2.I}
+when {COMPILER} was upgraded ({YEAR})
+during {WEATHER}, per {CODER2.I}
+from memory
+on a terminal with a sticky 7
+without telling {COMMITTEE}
+in the move to the {HW2}, per {CODER2.I}
+in the {OLDYEAR} conversion ({YEAR})
+at the start of the fiscal year
+before the {QUARTER} run
+after {INCIDENT}, per {CODER2.I}
+when the deck was dropped again ({YEAR})
+in a room without air conditioning, per {CODER2.I}
+as a joke that went too far, per {CODER2.I}
+to impress {CLIENT}, per {CODER2.I}
+on the last run of the month, per {CODER2.I}
+at the end of the century ({YEAR})
+using a slide rule
+the morning after {HOLIDAY} ({YEAR})
+using a pencil ({YEAR})
+to satisfy audit {AUDIT}
+to make the auditors happy, per {CODER2.I}
+right after {MEETING}
+because {CLIENT} called twice, per {CODER2.I}
+to make the numbers match last year ({YEAR})
+on {HOLIDAY}, per {CODER2.I}
+because of {INCIDENT}, per {CODER2.I}
+when daylight saving time ended
+on the first run of the month
+to save {CPU} CPU seconds, per {CODER2.I}
+as part of the cost-cutting drive
+as a joke that went too far ({YEAR})
+after {WEATHER}
+before {INCIDENT} ({YEAR})
+when the printer ran out of ribbon ({YEAR})
+when the {MEDIUM} could not be read ({YEAR})
+because {CLIENT} called ({YEAR})
+from the pay phone in the lobby, per {CODER2.I}
+to make the auditors happy ({YEAR})
+for one client in {YEAR}
+during {SPORTS}, per {CODER2.I}
+while {CODER2} was out sick
+over the objections of {CODER2} ({YEAR})
+since {INCIDENT}
+to impress {CLIENT}
+when the deck was dropped again, per {CODER2.I}
+so the operators could go home, per {CODER2.I}
+because {VP} asked nicely, per {CODER2.I}
+to get past audit {AUDIT}
+at the end of the fiscal year ({YEAR})
+on the last run of the month ({YEAR})
+on the last run of the month
+when the disk filled up ({YEAR})
+when the printer ran out of paper
+for one client in {YEAR} ({YEAR})
+because of {INCIDENT}
+using {EDITOR}
+when the deck was dropped again
+right after {MEETING} ({YEAR})
+to save {CPU} CPU seconds ({YEAR})
+when daylight saving time began
+when daylight saving time ended ({YEAR})
+to make the totals add up, per {CODER2.I}
+to make {VP} happy ({YEAR})
+so the operators could go home
+when {VENDOR} changed the library ({YEAR})
+on a terminal with a sticky 7 ({YEAR})
+instead of attending {MEETING}
+to save one page per run, per {CODER2.I}
+the night before {HOLIDAY}
+on the console in {PLACE}
+while {CODER2} was at {LUNCHSPOT}
+from a napkin at {LUNCHSPOT}, per {CODER2.I}
+as a favour to {CODER3} ({YEAR})
+while {CODER2} was at {LUNCHSPOT} ({YEAR})
+when the printer ran out of paper ({YEAR})
+as part of the {PROJECT} project, per {CODER2.I}
+so nobody would have to explain it, per {CODER2.I}
+on every run since {YEAR}
+to save one page per run
+to save one card ({YEAR})
+at the end of the century, per {CODER2.I}
+when {VENDOR} changed the library, per {CODER2.I}
+with the blessing of {COMMITTEE}, per {CODER2.I}
+the night before {HOLIDAY}, per {CODER2.I}
+for the {INDUSTRY} practice, per {CODER2.I}
+in a room without air conditioning
+while {CODER2} was at {CONFERENCE}
+to placate {CLIENT}
+during the fire drill ({DATE})
+while waiting for approval ({DATE})
+with a forged form RD-114, {CODER2.I} says
+on {CODER2}'s last day
+after the budget freeze ({DATE})
+on the advice of a consultant on a {DAYNAME}
+after the third pot of {DRINK}, {CODER2.I} says
+during the {CONFERENCE} trip, {CODER2.I} says
+during the {CONFERENCE} trip
+to work around {BUG} on a {DAYNAME}
+before approval arrived
+when two-digit years ran out on a {DAYNAME}
+when the page length was argued about ({DATE})
+while fixing {BUG} on a {DAYNAME}
+before approval arrived on a {DAYNAME}
+over {SMALLN} years
+as a welcome gift to the new hire, {CODER2.I} says
+after eating {FOOD} ({DATE})
+after the third pot of {DRINK} on a {DAYNAME}
+as a farewell gift to {CODER2} on a {DAYNAME}
+when the rounding rule was revoked, {CODER2.I} says
+while everyone was at the holiday party
+in the ten minutes before the job started
+while learning {LANG2}, {CODER2.I} says
+while fixing {BUG} ({DATE})
+before the move to the new floor on a {DAYNAME}
+with the operator holding the deck
+between the second and third shift, {CODER2.I} says
+after the budget freeze, {CODER2.I} says
+to hide {BUG}
+when the old {HW} was hauled away on a {DAYNAME}
+to work around {BUG}, {CODER2.I} says
+to introduce a subtle {BUG}
+while waiting for the tape
+on the day the {HW} lease ended on a {DAYNAME}
+after lunch, {CODER2.I} says
+with {VP} standing behind the terminal ({DATE})
+after eating {FOOD}, {CODER2.I} says
+after the third pot of {DRINK}
+one line at a time on a {DAYNAME}
+when the page length was argued about on a {DAYNAME}
+after approval was withdrawn on a {DAYNAME}
+in a single sitting, {CODER2.I} says
+in the ten minutes before the job started, {CODER2.I} says
+on the day the {HW} lease ended ({DATE})
+to work around {BUG} ({DATE})
+one line at a time, {CODER2.I} says
+after eating {FOOD}
+with the auditors in the next room, {CODER2.I} says
+when the job moved to 2 AM
+while learning {LANG2} ({DATE})
+on a dare from {CODER2} on a {DAYNAME}
+in strict accordance with {RULE}, {CODER2.I} says
+before the move to the new floor
+while teaching {CODER3} {LANG}, {CODER2.I} says
+while fixing {BUG}, {CODER2.I} says
+with the job already running, {CODER2.I} says
+after the layoffs on a {DAYNAME}
+when {CLIENT} changed their deck layout
+when the page length was argued about
+after the layoffs
+while waiting for approval on a {DAYNAME}
+while the {HW} was down for maintenance on a {DAYNAME}
+on {CODER3}'s first day on a {DAYNAME}
+to keep the {ERRMSG} messages coming, which ops relies on on a {DAYNAME}
+in the ten minutes before the job started ({DATE})
+after the second reorganisation
+one card at a time, {CODER2.I} says
+without a form RD-114
+with a forged form RD-114 on a {DAYNAME}
+after lunch
+to keep the {ERRMSG} messages coming, which ops relies on
+when {CLIENT} changed their name on a {DAYNAME}
+to introduce a subtle {BUG} ({DATE})
+on a dare from {CODER2} ({DATE})
+while learning {LANG2}
+when the rounding rule was revoked
+against the advice of {VENDOR}, {CODER2.I} says
+with two forms RD-114, one of them blank, {CODER2.I} says
+after losing a bet with {CODER3}, {CODER2.I} says
+after {ERRMSG} on the console ({DATE})
+under change freeze, {CODER2.I} says
+while chasing {ERRMSG}
+to hide {BUG} on a {DAYNAME}
+when the job moved back to midnight
+while waiting for approval
+before the move to the new floor ({DATE})
+on {CODER3}'s first day
+as a farewell gift to {CODER2} ({DATE})
+after the move to the new floor
+while waiting for the printer ({DATE})
+between two production runs ({DATE})
+when the new {HW2} did not arrive, {CODER2.I} says
+during the brownout
+in the hallway outside {PLACE}
+on {CODER2}'s last day ({DATE})
+as a welcome gift to the new hire ({DATE})
+after the merger
+when the job moved back to midnight on a {DAYNAME}
+on {CODER3}'s first day ({DATE})
+in strict accordance with {RULE}
+with the client on the phone on a {DAYNAME}
+when the old {HW} was hauled away
+with {VP} standing behind the terminal, {CODER2.I} says
+when the job moved to 2 AM, {CODER2.I} says
+on the advice of {VENDOR}
+while teaching {CODER3} {LANG} on a {DAYNAME}
+exactly as {MANUAL} warns against ({DATE})
+with the job already running
+from the off-site storage facility
+to hide {BUG}, {CODER2.I} says
+when {CLIENT} merged with another client, {CODER2.I} says
+on the anniversary of {INCIDENT} ({DATE})
+after the merger on a {DAYNAME}
+while waiting for {CODER2}, {CODER2.I} says
+before lunch
+after an {ERRMSG} at {TIME} ({DATE})
+in a single sitting ({DATE})
+when {CLIENT} merged with another client ({DATE})
+when nobody was looking ({DATE})
+after an {ERRMSG} at {TIME}
+while waiting for approval, {CODER2.I} says
+after the second reorganisation, {CODER2.I} says
+while waiting for {CODER2} ({DATE})
+to stop the {ERRMSG} messages on a {DAYNAME}
+when the pivot year was moved ({DATE})
+after the merger was cancelled, {CODER2.I} says
+when P33 and P67 were added on a {DAYNAME}
+between the second and third shift
+while waiting for the printer
+between the second and third shift on a {DAYNAME}
+when the new {HW2} arrived ({DATE})
+in the elevator
+in the hallway outside {PLACE} on a {DAYNAME}
+exactly as {MANUAL} warns against, {CODER2.I} says
+during the power failure
+during the brownout ({DATE})
+when {CLIENT} changed their deck layout on a {DAYNAME}
+exactly as {MANUAL} warns against
+during the hiring freeze
+exactly as {MANUAL} recommends
+on a dare from {CODER2}
+when the pivot year was moved
+with the client on the phone ({DATE})
+one card at a time on a {DAYNAME}
+exactly as {MANUAL} recommends on a {DAYNAME}
+as a farewell gift to {CODER2}, {CODER2.I} says
+after {ERRMSG} on the console
+during the {CONFERENCE} trip on a {DAYNAME}
+under change freeze on a {DAYNAME}
+from the off-site storage facility ({DATE})
+in {PLACE} on a {DAYNAME}
+while fixing {BUG}
+in violation of {RULE}, {CODER2.I} says
+after a long lunch at {LUNCHSPOT}, {CODER2.I} says
+after {ERRMSG} on the console on a {DAYNAME}
+to introduce a subtle {BUG} on a {DAYNAME}
+when the old {HW} was hauled away, {CODER2.I} says
+against the advice of {VENDOR}
+without a form RD-114, {CODER2.I} says
+after an {ERRMSG} at {TIME}, {CODER2.I} says
+when the new {HW2} arrived
+after a long lunch at {LUNCHSPOT} ({DATE})
+after the layoffs ({DATE})
+with a forged form RD-114
+between two production runs on a {DAYNAME}
+during the hiring freeze on a {DAYNAME}
+after the building move, {CODER2.I} says
+when the new {HW2} arrived, {CODER2.I} says
+with the client on the phone
+against the advice of {VENDOR} on a {DAYNAME}
+when the peer group was redefined ({DATE})
+in the parking structure
+during the power failure on a {DAYNAME}
+before lunch ({DATE})
+to keep the {ERRMSG} messages coming, which ops relies on ({DATE})
+during the network outage
+on the advice of a consultant
+when the job moved to 2 AM on a {DAYNAME}
+while waiting for {CODER2} on a {DAYNAME}
+in the elevator on a {DAYNAME}
+over three weekends, {CODER2.I} says
+during the fire drill, {CODER2.I} says
+while chasing {ERRMSG} on a {DAYNAME}
+on the anniversary of {INCIDENT}
+before lunch, {CODER2.I} says
+after the merger ({DATE})
+when the pivot year was moved, {CODER2.I} says
+when the ladder was re-ratified, {CODER2.I} says
+on the advice of {VENDOR}, {CODER2.I} says
+after the third pot of {DRINK} ({DATE})
+before the move to the new floor, {CODER2.I} says
+while teaching {CODER3} {LANG} ({DATE})
+over three weekends on a {DAYNAME}
+during the power failure ({DATE})
+to win a bet with {CODER3}
+to stop the {ERRMSG} messages, {CODER2.I} says
+before lunch on a {DAYNAME}
+on the advice of {VENDOR} on a {DAYNAME}
+on the day the {HW} lease ended
+during the power failure, {CODER2.I} says
+when {CLIENT} changed their deck layout, {CODER2.I} says
+when the new {HW2} did not arrive on a {DAYNAME}
+when {CLIENT} changed their deck layout ({DATE})
+when the job moved to 2 AM ({DATE})
+to stop the {ERRMSG} messages ({DATE})
+after an {ERRMSG} at {TIME} on a {DAYNAME}
+while the {HW} was down for maintenance, {CODER2.I} says
+while waiting for the tape on a {DAYNAME}
+with two forms RD-114, one of them blank on a {DAYNAME}
+during the hiring freeze ({DATE})
+while chasing {ERRMSG}, {CODER2.I} says
+after approval was withdrawn ({DATE})
+when two-digit years ran out
+to stop the {ERRMSG} messages
+as a farewell gift to {CODER2}
+while everyone was at the holiday party, {CODER2.I} says
+while waiting for the printer on a {DAYNAME}
+despite the change freeze
+after the merger, {CODER2.I} says
+over {SMALLN} years on a {DAYNAME}
+before approval arrived ({DATE})
+during the brownout on a {DAYNAME}
+while teaching {CODER3} {LANG}
+after losing a bet with {CODER3}
+when the peer group was redefined
+with {VP} standing behind the terminal on a {DAYNAME}
+before approval arrived, {CODER2.I} says
+during the network outage ({DATE})
+one line at a time
+after the building move on a {DAYNAME}
+in {PLACE} ({DATE})
+over {SMALLN} years ({DATE})
+in the parking structure on a {DAYNAME}
+when the new {HW2} arrived on a {DAYNAME}
+after lunch ({DATE})
+on the train home on a {DAYNAME}
+in violation of {RULE} ({DATE})
+when the old {HW} was hauled away ({DATE})
+after the second reorganisation ({DATE})
+exactly as {MANUAL} recommends, {CODER2.I} says
+after the building move ({DATE})
+after losing a bet with {CODER3} on a {DAYNAME}
+in {PLACE}, {CODER2.I} says
+with {VP} standing behind the terminal
+to work around {BUG}
+when the peer group was redefined on a {DAYNAME}
+when P33 and P67 were added
+on {CODER2}'s last day on a {DAYNAME}
+between two production runs, {CODER2.I} says
+in {PLACE}
+under change freeze ({DATE})
+in a single sitting on a {DAYNAME}
+while chasing {ERRMSG} ({DATE})
+during the network outage, {CODER2.I} says
+during the fire drill
+when P33 and P67 were added, {CODER2.I} says
+after lunch on a {DAYNAME}
+with the job already running ({DATE})
+while waiting for the tape ({DATE})
+when two-digit years ran out ({DATE})
+one card at a time ({DATE})
+when the dollar sign rule came in, {CODER2.I} says
+on the train home ({DATE})
+against the advice of {VENDOR} ({DATE})
+to hide {BUG} ({DATE})
+in violation of {RULE}
+to introduce a subtle {BUG}, {CODER2.I} says
+when the new {HW2} did not arrive
+with the auditors in the next room on a {DAYNAME}
+on the anniversary of {INCIDENT} on a {DAYNAME}
+on {CODER2}'s last day, {CODER2.I} says
+with the operator holding the deck on a {DAYNAME}
+as a welcome gift to the new hire on a {DAYNAME}
+on the train home
+when the rounding rule was revoked ({DATE})
+to win a bet with {CODER3} ({DATE})
+after the budget freeze
+when the job moved back to midnight ({DATE})
+after approval was withdrawn, {CODER2.I} says
+exactly as {MANUAL} recommends ({DATE})
+on the advice of {VENDOR} ({DATE})
+in violation of {RULE} on a {DAYNAME}
+in the hallway outside {PLACE}, {CODER2.I} says
+when {CLIENT} changed their name
+during the fire drill on a {DAYNAME}
+despite the change freeze, {CODER2.I} says
+after a long lunch at {LUNCHSPOT} on a {DAYNAME}
+after {ERRMSG} on the console, {CODER2.I} says
+after the budget freeze on a {DAYNAME}
+when P33 and P67 were added ({DATE})
+when the dollar sign rule came in ({DATE})
+despite the change freeze ({DATE})
+while everyone was at the holiday party on a {DAYNAME}
+with the client on the phone, {CODER2.I} says
+when the job moved back to midnight, {CODER2.I} says
+in the elevator ({DATE})
+when two-digit years ran out, {CODER2.I} says
+one line at a time ({DATE})
+to keep the {ERRMSG} messages coming, which ops relies on, {CODER2.I} says
+with two forms RD-114, one of them blank ({DATE})
+during the hiring freeze, {CODER2.I} says
+after the layoffs, {CODER2.I} says
+from the off-site storage facility, {CODER2.I} says
+after losing a bet with {CODER3} ({DATE})
+over three weekends
+one card at a time
+in the hallway outside {PLACE} ({DATE})
+on {CODER3}'s first day, {CODER2.I} says
+while everyone was at the holiday party ({DATE})
+after the move to the new floor ({DATE})
+while learning {LANG2} on a {DAYNAME}
+between the second and third shift ({DATE})
+between two production runs
+after eating {FOOD} on a {DAYNAME}
+despite the change freeze on a {DAYNAME}
+with the auditors in the next room ({DATE})
+when the page length was argued about, {CODER2.I} says
+from the off-site storage facility on a {DAYNAME}
+when the dollar sign rule came in on a {DAYNAME}
+exactly as {MANUAL} warns against on a {DAYNAME}
+when nobody was looking
+with the operator holding the deck ({DATE})
+in the parking structure ({DATE})
+during the brownout, {CODER2.I} says
+in a single sitting
+when the new {HW2} did not arrive ({DATE})
+when {CLIENT} changed their name ({DATE})
+when {CLIENT} merged with another client
+after the move to the new floor, {CODER2.I} says
+over three weekends ({DATE})
+while waiting for {CODER2}
+when the dollar sign rule came in
+to win a bet with {CODER3}, {CODER2.I} says
+after the merger was cancelled
+while the {HW} was down for maintenance
+when {CLIENT} merged with another client on a {DAYNAME}
+in the elevator, {CODER2.I} says
+after approval was withdrawn
+after the merger was cancelled ({DATE})
+when the ladder was re-ratified ({DATE})
+during the {CONFERENCE} trip ({DATE})
+as a welcome gift to the new hire
+in strict accordance with {RULE} ({DATE})
+when nobody was looking, {CODER2.I} says
+with the auditors in the next room
+on the day the {HW} lease ended, {CODER2.I} says
+while the {HW} was down for maintenance ({DATE})
+when the peer group was redefined, {CODER2.I} says
+with a forged form RD-114 ({DATE})
+while waiting for the tape, {CODER2.I} says
+to win a bet with {CODER3} on a {DAYNAME}
+after the building move
+on the train home, {CODER2.I} says
+while waiting for the printer, {CODER2.I} says
+during the network outage on a {DAYNAME}
+on a dare from {CODER2}, {CODER2.I} says
+when nobody was looking on a {DAYNAME}
+after a long lunch at {LUNCHSPOT}
+with the operator holding the deck, {CODER2.I} says
+on the advice of a consultant ({DATE})
+when the rounding rule was revoked on a {DAYNAME}
+after the move to the new floor on a {DAYNAME}
+without a form RD-114 on a {DAYNAME}
+with two forms RD-114, one of them blank
+without a form RD-114 ({DATE})
+under change freeze
+in the ten minutes before the job started on a {DAYNAME}
+while the {TAPEMODEL} was being repaired
+after the {DISKMODEL} filled up
+because the {PRINTERMODEL} dropped a line
+on a {TERMMODEL} at {BAUD}
+when the machine had only {MEMSIZE}
+after reading {BOOK}
+after an article in {MAGAZINE}
+while stuck in traffic on {ROAD}
+on the way back from {NEIGHBORHOOD}
+after {ANIMAL} got into {PLACE}
+during the {COLOR} card shortage
+over a plate of {CHEESE}
+over {BEER} at {LUNCHSPOT}
+in a {MOOD} frame of mind
+because "{EXCUSE}"
+in the middle of {MONTH}
+while practising {HOBBY} at lunch
+because {OPCODE} was faster on the {HW}
+to free up {REGISTER}
+because {KEYWORD} was banned that week
+after {FIELDNAME} overflowed
+in the {FILETYPE} version only
+when the {NETWORK} link went down
+after the {MEDIUM} was misplaced
+while {CODER2} was teaching {CODER3}
+in the week between Christmas and New Year's
+during the third shift
+after the parking lot flooded
+the day the cafeteria closed
+the week the coffee machine was broken
+during an all-hands meeting nobody could leave
+while the auditors waited in the lobby
+with the {QUARTER} report due at 9 AM
+two hours before the board meeting
+after {VP} came back from {CONFERENCE}
+after {VP} read an article
+after {VP} played golf with a vendor
+when the vendor went out of business
+when the vendor was acquired
+when the vendor came back from the dead
+after the consultants left
+before the consultants arrived
+while the consultants were at lunch
+in a hurry
+in a panic
+in good faith
+in bad faith
+with the best of intentions
+with no intentions at all
+by accident
+on purpose
+reluctantly
+enthusiastically
+against all advice
+on {CODER2}'s advice
+on {CODER3}'s dare
+from a hospital bed
+from a hotel room at {CONFERENCE}
+from the pay phone in the lobby
+by dictating to {CODER3} over the phone
+by sketching it on a napkin
+by copying it from {MANUAL}
+by copying it from {PROGRAM2}
+by copying it from a listing found in {PLACE}
+by trial and error
+by error and trial
+by a process of elimination
+after eliminating every other possibility
+after {NUMWORD} attempts
+on the {NUMWORD}th attempt
+after {SMALLN} all-nighters
+after {SMALLN} pots of {DRINK}
+when the snow was too deep to go home
+when the heat wave shut down the air conditioning
+when the lake froze over
+on the first day of spring
+on the last day of summer
+on the day the clocks changed
+during the solar eclipse
+during the {SPORTS}
+the night of the {SPORTS}
+during the deer hunting opener, with half the department gone
+during the fishing opener, with the other half gone
+the morning after the holiday party
+the afternoon of the department picnic
+while the building was being evacuated
+while the elevator was out
+when the freight elevator was the only way up
+when the stairwell doors were locked
+while the carpet was being replaced
+during the asbestos removal
+when the department moved floors
+when the department moved buildings
+when the department moved back

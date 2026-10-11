@@ -1,0 +1,9 @@
+#name: Creative Commons Attribution-NonCommercial 4.0
+#kind: noncommercial
+#from: 2013
+#to: 2025
+{PROGRAM} (source listing, comments and printed output) by {HOLDER} is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc/4.0/
+
+You are free to share and adapt this material for non-commercial purposes, provided you give appropriate credit ("{HOLDER}, {PROGRAM} rel. {REL}"), provide a link to the license, and indicate if changes were made.
+
+Commercial use, including use in any compensation benchmarking product, proxy advisory service, or machine-learning training dataset, requires a separate license from {EMAIL}.

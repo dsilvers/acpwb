@@ -1,0 +1,12 @@
+#name: Online Terms of Service
+#kind: commercial
+#from: 2006
+TERMS OF SERVICE - {PROGRAM} HOSTED TABULATION
+
+By clicking "I Agree", creating an account, or accessing the service, you agree to these Terms. If you do not agree, do not click. If you have already clicked, it is too late.
+
+We may change these Terms at any time by posting a revised version. Your continued use of the service after the change constitutes acceptance. We will not tell you about the change. You will find it here.
+
+Uptime: we aim for 99.9% availability, excluding scheduled maintenance, unscheduled maintenance, {HOLIDAY}, and the hour between 2 and 3 AM when the batch job runs.
+
+Your Data: you retain all rights to the data you upload. You grant us a worldwide, royalty-free license to process it, store it, back it up, and compute its percentiles.

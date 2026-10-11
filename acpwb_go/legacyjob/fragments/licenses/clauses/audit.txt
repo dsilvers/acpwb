@@ -1,0 +1,9 @@
+Licensor may, on {TERMDAYS} days' notice, audit Licensee's use of the Program, including by counting the cards in each deck.
+Licensee shall keep complete records of each execution of the Program, including the date, the operator, the input deck and the reason.
+If an audit reveals use in excess of the license, Licensee shall pay the excess charges plus the cost of the audit, plus the cost of the auditors' lunch.
+Audits shall be conducted during business hours in a manner that does not unreasonably interfere with Licensee's operations, except during the {QUARTER} close, when interference is the point.
+Licensee shall permit Licensor's auditors access to the machine room, the tape library and {PLACE}.
+Licensee certifies annually, on form {FORM}, that it has used the Program only as permitted. Licensee's certification will be believed.
+Licensor's internal auditors may review the Program at any time and have done so in {YEAR}, finding it "adequate."
+Licensee shall retain execution records for seven years, or until the next audit, whichever is later.
+Licensor shall not audit more than once per {QUARTER}, unless the previous audit found something.

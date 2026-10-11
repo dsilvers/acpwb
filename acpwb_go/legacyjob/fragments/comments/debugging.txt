@@ -1,0 +1,31 @@
+Set IDEBUG to 1 to print every intermediate value. Set it back before the production run. Seriously.
+The debug WRITE below prints {VAR} in hex. Nobody reads hex anymore. It stays.
+To debug: run with the test deck, PARM=DEBUG, and a fresh pot of {DRINK}.
+If the totals are off by one, check the trailer card. If they are off by two, check {CODER2}.
+If the job abends with {ERRMSG}, look at the last card read. It is in the dump at offset {HEXN}.
+The dump for this program is {N} pages. The interesting part is on page 3. It is always on page 3.
+The trace switch was left on in {YEAR}. The trace output filled a disk pack. The trace switch is now commented out.
+To find which client caused an abend, look at the last client name printed. Then look at the one after.
+This routine prints "HERE" when it reaches this point. There are four other routines that print "HERE."
+The second debug message says "HERE2." Then "HERE3." Then "WHY." Then "OK."
+Debugging this loop requires a pencil, a ruler and the listing. A terminal will not help.
+If the change column shows nonsense, the deck columns have shifted. Check column 34.
+To reproduce the {QUARTER} discrepancy, rerun with the {QUARTER} deck and the {HW} microcode level from that week.
+The bug was found by printing every value and reading them out loud to {CODER2}.
+The bug was not found. The bug went away. We do not trust it.
+Breakpoints do not work in this routine under {COMPILER}. Use WRITE statements.
+The core dump from {DATE} is preserved on {MEDIUM}. It is the only record of what {VAR} contained that night.
+Use the storage map to find {VAR}. It is at the offset in the map, unless the map is from the previous compile.
+If the program loops, the GOTO at label {LABEL} is the usual suspect.
+If the program prints nothing, the output DD is probably missing. If it prints everything twice, the output DD is probably duplicated.
+The debug flag also changes the page length. This is a bug. It helps with debugging.
+The diagnostic message numbers are in the {OLDYEAR} message manual. The message manual is in {PLACE}.
+When debugging, remember that the variable named TOTAL is not a total.
+When debugging, remember that the routine named {ROUTINE} does not do what its name suggests.
+When debugging, remember that the comments may be lying. Including this one.
+The test harness for this routine is a second program that calls it once and prints OK. It always prints OK.
+To check the ladder, multiply the median by 1.84 on a desk calculator. Compare to P95. Repeat for each rung.
+The program was debugged on {HOLIDAY} by {CODER2}, with the lights off, using only the console typewriter.
+{CODER.I} spent three days on this bug. The fix was one character. The character was a period.
+Debug output goes to SYSOUT class {CLASS}. Nobody looks at class {CLASS}. That is why it is the debug class.
+To isolate the bug, remove half the deck and rerun. Repeat until only one card remains. Blame that card.

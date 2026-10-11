@@ -1,0 +1,9 @@
+#name: Sleepycat-style License
+#kind: dual
+#from: 1996
+#to: 2012
+Copyright (c) {YEARRANGE} {HOLDER}. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that redistributions in any form must be accompanied by information on how to obtain complete source code for this program and any accompanying software that uses it. The source code must either be included in the distribution or be available for no more than the cost of distribution plus a nominal fee.
+
+Organizations that do not wish to release their source code may purchase a commercial license from {HOLDER} at ${FEE} per Designated Machine. Contact {CODER} at {DEPT}.

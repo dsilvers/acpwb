@@ -1,0 +1,66 @@
+Y2K remediated {Y2KDATE} by {CODER}. Years now four digits. Mostly.
+Millennium compliance certified by the Y2K Task Force. Certificate number {TICKET}.
+Y2K: the windowing pivot is {PIVOT}. Years below {PIVOT} are 20xx. Years above are 19xx. Years equal to {PIVOT} are a problem.
+Two-digit year retained here for compatibility with the {DEPT} job, which was not remediated.
+The Y2K contractor ({VENDOR}) added this check, billed {N} hours for it, and left.
+Tested for Y2K on {Y2KDATE} by setting the system clock forward. The clock was not set back until {Y2KDATE2}.
+Leap year logic verified for 2000. 2100 is someone else's problem.
+Julian date routine certified millennium compliant. The certification did not cover February.
+Y2K: dates are stored as YYMMDD in {ROUTINE}. The task force accepted the risk because the routine is dead.
+Y2K remediation added two digits to the year in {SMALLN} places and missed one. See {ROUTINE}.
+Y2K: the sort on the date field was replaced with a sort on the record ID. Nobody noticed.
+Y2K task force ticket {TICKET}: program certified compliant on the condition that it is never run on February 29.
+Y2K: the windowing logic assumes no client data predates 19{PIVOT}. {CLIENT} has data from 1946.
+Y2K testing performed on a machine whose clock was set to 1999-12-31 23:55. The test ran for five minutes.
+Y2K: the Julian date in the page header now prints a four-digit year on some printers.
+The Y2K contractor left a note: "should be ok." We framed it.
+Y2K remediation cost {N} hours. The program has dated nothing incorrectly since, because it dates almost nothing.
+Y2K: the two-digit year in the job card is cosmetic. Probably.
+The millennium review of this program consisted of {CODER} reading it and saying "huh."
+Y2K: all hard-coded '19' prefixes were removed except the one in the comment above.
+The program ran correctly on January 1, 2000. Nobody was in the office to see it.
+Y2K certification: {CERT}. Valid until the next millennium.
+Y2K note: the leap year routine was tested for 2000 and passed. 2100 is outside the support window.
+Y2K: the date comparison in {ROUTINE} uses string comparison, which works until 2100 or until someone changes the format.
+The Y2K inventory listed this program as "low risk, low priority, low documentation."
+Y2K: dates in comments were not remediated. Several still refer to "next year" in 1998.
+Y2K: four-digit year support was added to the job card, the page header and nowhere else.
+The Y2K war room had this program's listing taped to the wall for six months.
+Y2K: the program was run on 2000-01-01 at 00:05 by the night operator, who then went home.
+Y2K review signed by {CODER}, who added: "I will be on vacation that week."
+Y2K: the comment dates in this file were not remediated and still use two digits.
+The Y2K inventory mistakenly listed this program as a payroll system. It was remediated twice.
+Y2K: a date window of {PIVOT} was chosen by asking the oldest employee when they were born.
+Y2K: post-millennium verification found no issues. Verification consisted of the report printing.
+Y2K: two-digit years expanded to four digits on {Y2KDATE} by the Y2K Task Force. Certificate {CERT}.
+Y2K: windowing with pivot {PIVOT}. Years 00-{PIVOT} are 20xx. The rest are 19xx. Will fail in 20{PIVOT}.
+Y2K: this routine was declared compliant on {Y2KDATE}. It does not use dates. It was declared compliant anyway.
+Y2K: the date field in the deck is still two digits. The program adds 1900, unless the result is less than {PIVOT}+1900. Then it adds 2000.
+Y2K: tested with the system clock set to 2000-01-01. The report printed "19100." Fixed on {Y2KDATE}.
+Y2K: leap year 2000 verified. 2000 is a leap year because it is divisible by 400. The previous code thought it was not.
+Y2K: the Task Force put a sticker on the {HW}. The sticker says COMPLIANT. The {HW} does not know.
+Y2K: remediation contractor {VENDOR} replaced every 19 with a variable. Some of the 19s were not years.
+Y2K: the Julian routine rolls over correctly at the millennium. The page header does not. Cosmetic.
+Y2K: compliance letter sent to {CLIENT} on {Y2KDATE}. They asked for a letter for the letter.
+Y2K: on 2000-01-01 at 00:00, {CODER2} was in the machine room with {SNACK} and a flashlight. Nothing happened.
+Y2K: nothing happened. Budget for next year was cut because nothing happened.
+Y2K: the task force binder is in {PLACE}. It is {N} pages and covers this program on page 3.
+Y2K: the old two-digit field is retained for backward compatibility. Nothing is backward compatible with it.
+Y2K: the year 1999 was used as an end-of-file marker in the {OLDYEAR} version. This has been fixed. Mostly.
+Y2K: {CODER2} said "we will all be retired by 2000." {CODER2} retired in 1999.
+Y2K: changed 'YY' to 'YYYY' in {N} FORMAT statements. Two of them were the word "YYYYES" in a message.
+Y2K: the program now handles dates up to 9999. Then it is someone else's problem.
+Y2K: the Task Force reviewed {N} programs in {Y2KYEAR}. This was number {SMALLN}. It took the longest.
+Y2K: two-digit years remain in the input deck for compatibility with clients who will not change. Windowed at {PIVOT}.
+Y2K: the {HW} BIOS was certified separately. The certification is taped inside the case.
+Y2K: the Task Force's remediation of this routine is marked with the initials TF. Do not remove them. They are evidence.
+Y2K: the report header showed 1900 for one hour on 1 January 2000 during the test run. The production run was fine.
+Y2K: the date field on the job card is still 2 digits. The job card is not our responsibility.
+Y2K: the leap-year routine was rewritten to handle 2000. It now handles 2000 correctly and 2100 incorrectly. Note for 2099.
+Y2K: the Task Force asked whether the percentile ladder was date-dependent. It is not. They certified it anyway.
+Y2K: expanded the year on {N} output lines. The report is now 2 characters wider. Columns 131-132 are new territory.
+Y2K: the contingency plan for this program was to run it by hand with a desk calculator. The plan was tested. It took three days.
+Y2K: {CODER2} was on call on New Year's Eve 1999 with a pager and {SNACK}. The pager did not go off.
+Y2K: the sticker on this listing reads "Y2K OK - {CERT}." The sticker was applied before the review.
+Y2K: compliance letter to {CLIENT}: "{PROGRAM} will correctly process dates through 2099." Legal changed 2099 to "the foreseeable future."
+Y2K: the {Y2KYEAR} budget for remediation was {BIGN} dollars. This program used {SMALLN} percent of it.

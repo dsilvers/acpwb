@@ -1,0 +1,51 @@
+# {EXCUSE}
+the compiler did it
+it worked on the test system
+somebody changed the deck
+the operator mounted the wrong tape
+the client sent bad data
+it was like that when I got here
+the spec was unclear
+the spec was clear but wrong
+I was on vacation
+the memo came out after I finished
+cosmic rays
+the printer dropped a line
+it is a known issue
+it is a feature
+nobody told me
+the meeting ran long
+the vendor said it was fine
+it passed the audit
+the clock was wrong
+it is the client's fault
+the tape was mislabeled
+the deck was upside down
+the deck was in the wrong tray
+the printer jammed
+the {HW} was down
+the {NETWORK} link dropped
+the client changed the layout
+the memo was ambiguous
+the memo was clear but late
+the compiler was upgraded over the weekend
+the operator was new
+the operator was on break
+{VP} asked for it that way
+it was like that in the {OLDYEAR} version
+it matched last year's output
+nobody reviewed it
+everybody reviewed it and nobody read it
+the test deck passed
+the auditors approved it
+it was {HOLIDAY}
+there was {WEATHER}
+there was {ANIMAL} in the machine room
+the coffee machine was broken
+{CODER2} said it was fine
+I was told to
+I was not told not to
+the budget ran out
+the schedule slipped
+the requirements changed
+the requirements did not change, which was the problem

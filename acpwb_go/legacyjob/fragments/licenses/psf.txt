@@ -1,0 +1,14 @@
+#name: Python Software Foundation License (adapted)
+#kind: open
+#from: 2001
+#to: 2025
+#langs: py2
+LICENSE AGREEMENT FOR {PROGRAM}
+
+1. This LICENSE AGREEMENT is between {HOLDER} ("ACPWB"), and the Individual or Organization ("Licensee") accessing and otherwise using {PROGRAM} release {REL} in source or binary form and its associated documentation.
+
+2. Subject to the terms and conditions of this License Agreement, ACPWB hereby grants Licensee a nonexclusive, royalty-free, world-wide license to reproduce, analyze, test, perform and/or display publicly, prepare derivative works, distribute, and otherwise use {PROGRAM} alone or in any derivative version, provided, however, that ACPWB's License Agreement and ACPWB's notice of copyright, i.e., "Copyright (c) {YEARRANGE} {HOLDER}; All Rights Reserved" are retained in {PROGRAM} alone or in any derivative version prepared by Licensee.
+
+3. ACPWB is making {PROGRAM} available to Licensee on an "AS IS" basis. ACPWB MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED.
+
+4. This License Agreement will automatically terminate upon a material breach of its terms and conditions, or upon migration of the Program to Python 3, whichever happens first. (It will not be migrated to Python 3.)

@@ -1,0 +1,1570 @@
+Initialization
+Read control cards
+Read engagement metric cards
+Read benchmark median cards
+Compute period-over-period change
+Apply percentile ladder
+Validate computed values
+Cross-check ladder
+Print page header
+Print engagement metrics table
+Print market benchmark table
+Print run statistics
+Error handling
+Termination
+Dead code (retained for audit)
+Declarations
+Work areas
+Constants
+Format statements
+Checksum
+Debug output
+Housekeeping
+Client special handling
+Legacy compatibility
+Data definitions
+Storage layout
+Common blocks
+Main line
+Subroutines
+End of job
+Revised {YEAR}: Declarations (per audit {AUDIT})
+Section {SMALLN}.{SMALLN2} Common blocks - see memo {MEMO}
+Client: Error handling (per audit {AUDIT})
+Tape handling (per audit {AUDIT})
+Section {SMALLN}.{SMALLN2} Restart logic (temporary)
+Optional: Debug output [{YEAR}]
+Optional: Termination - {CODER.I}
+Part {SMALLN}: Read benchmark cards (temporary)
+Error handling - see memo {MEMO}
+(Do Not Modify) Validate input [{YEAR}]
+Part {SMALLN}: Formats [{YEAR}]
+(Do Not Modify) Termination (temporary)
+(Obsolete) Cross-check (temporary)
+Section {SMALLN}.{SMALLN2} Print metrics (continued)
+Part {SMALLN}: Audit trail - {CODER.I}
+Phase {SMALLN} - Error handling (temporary)
+Client: Work areas [{YEAR}]
+Legacy: Print benchmarks (continued)
+Legacy: Formats (continued)
+Section {SMALLN}.{SMALLN2} Read benchmark cards - {CODER.I}
+Optional: Statistics - see memo {MEMO}
+Step {SMALLN}0: Termination for {CLIENT}
+Error handling [{YEAR}]
+Section {SMALLN}.{SMALLN2} Audit trail
+(Do Not Modify) Client special handling for {CLIENT}
+Phase {SMALLN} - Termination (temporary)
+Legacy: Restart logic - {CODER.I}
+Phase {SMALLN} - Housekeeping - {CODER.I}
+Legacy: Error handling [{YEAR}]
+(Do Not Modify) Declarations (continued)
+(Do Not Modify) Apply ladder (per audit {AUDIT})
+Revised {YEAR}: Sort routines
+Phase {SMALLN} - Main line - {CODER.I}
+Mandatory: Termination (temporary)
+Step {SMALLN}0: Validate input (temporary)
+Optional: Work areas
+Phase {SMALLN} - Y2K logic
+(Do Not Modify) Print metrics (per audit {AUDIT})
+Mandatory: Legacy compatibility - see memo {MEMO}
+(Obsolete) Audit trail (temporary)
+Revised {YEAR}: Apply ladder (per audit {AUDIT})
+(Do Not Modify) Read control cards (temporary)
+Revised {YEAR}: Statistics (continued)
+Section {SMALLN}.{SMALLN2} Initialization for {CLIENT}
+(Obsolete) Work areas (per audit {AUDIT})
+Dead code for {CLIENT}
+Part {SMALLN}: Overflow checks - see memo {MEMO}
+Revised {YEAR}: Restart logic for {CLIENT}
+Client: Subroutines - {CODER.I}
+Phase {SMALLN} - Constants [{YEAR}]
+Revised {YEAR}: Print header - {CODER.I}
+Part {SMALLN}: Legacy compatibility (temporary)
+(Do Not Modify) Debug output for {CLIENT}
+Revised {YEAR}: Checksum [{YEAR}]
+Section {SMALLN}.{SMALLN2} Legacy compatibility [{YEAR}]
+Revised {YEAR}: Apply ladder (continued)
+Optional: Checksum (per audit {AUDIT})
+Optional: Page control (continued)
+Step {SMALLN}0: Initialization for {CLIENT}
+Mandatory: Apply ladder (temporary)
+Main line - {CODER.I}
+Revised {YEAR}: Formats - {CODER.I}
+Optional: Apply ladder [{YEAR}]
+Client: Dead code - {CODER.I}
+Legacy: Overflow checks (continued)
+(Obsolete) Read metric cards (temporary)
+Legacy: Print metrics - see memo {MEMO}
+Read control cards (per audit {AUDIT})
+(Do Not Modify) Housekeeping (temporary)
+Step {SMALLN}0: Formats
+Section {SMALLN}.{SMALLN2} Debug output - {CODER.I}
+Revised {YEAR}: Common blocks - see memo {MEMO}
+Phase {SMALLN} - Date routines for {CLIENT}
+(Obsolete) Debug output (temporary)
+Legacy: Compute changes
+(Do Not Modify) Constants (continued)
+Legacy: Checksum (per audit {AUDIT})
+(Do Not Modify) Print trailer [{YEAR}]
+Part {SMALLN}: Statistics for {CLIENT}
+Cross-check
+Part {SMALLN}: Housekeeping - see memo {MEMO}
+Part {SMALLN}: Retained for audit
+Step {SMALLN}0: Y2K logic - {CODER.I}
+Mandatory: Work areas for {CLIENT}
+Optional: Formats (continued)
+Compute changes - {CODER.I}
+Client: Cross-check for {CLIENT}
+Revised {YEAR}: Apply ladder for {CLIENT}
+Revised {YEAR}: Date routines
+Optional: Checksum - see memo {MEMO}
+Legacy: Read benchmark cards (temporary)
+Part {SMALLN}: Y2K logic [{YEAR}]
+(Obsolete) Date routines - see memo {MEMO}
+Page control [{YEAR}]
+Section {SMALLN}.{SMALLN2} Read metric cards for {CLIENT}
+(Obsolete) Subroutines - {CODER.I}
+Section {SMALLN}.{SMALLN2} Subroutines - see memo {MEMO}
+Client: Constants - see memo {MEMO}
+Part {SMALLN}: Declarations for {CLIENT}
+Revised {YEAR}: Provenance seal [{YEAR}]
+Section {SMALLN}.{SMALLN2} Read benchmark cards (continued)
+Overflow checks (temporary)
+Phase {SMALLN} - Print benchmarks (continued)
+(Do Not Modify) Cross-check
+Mandatory: Print header - see memo {MEMO}
+Step {SMALLN}0: Compute changes [{YEAR}]
+Legacy: Main line (continued)
+Phase {SMALLN} - Declarations for {CLIENT}
+Section {SMALLN}.{SMALLN2} Page control [{YEAR}]
+Client: Overflow checks for {CLIENT}
+(Do Not Modify) Statistics - {CODER.I}
+Client: Housekeeping [{YEAR}]
+(Obsolete) Print benchmarks for {CLIENT}
+Mandatory: Read benchmark cards - {CODER.I}
+Print header (continued)
+(Obsolete) Declarations (per audit {AUDIT})
+Optional: Cross-check (continued)
+Mandatory: Work areas - see memo {MEMO}
+Mandatory: Overflow checks - {CODER.I}
+Section {SMALLN}.{SMALLN2} Print metrics (temporary)
+(Obsolete) Cross-check - {CODER.I}
+Part {SMALLN}: Constants (temporary)
+Phase {SMALLN} - Provenance seal - see memo {MEMO}
+Print header for {CLIENT}
+Phase {SMALLN} - Print benchmarks [{YEAR}]
+Client: Read benchmark cards - see memo {MEMO}
+Part {SMALLN}: Legacy compatibility [{YEAR}]
+Step {SMALLN}0: Constants [{YEAR}]
+Mandatory: Constants [{YEAR}]
+Optional: Error handling - see memo {MEMO}
+Phase {SMALLN} - Initialization - {CODER.I}
+Mandatory: Dead code (temporary)
+Legacy: Print trailer (continued)
+Section {SMALLN}.{SMALLN2} Page control - see memo {MEMO}
+Section {SMALLN}.{SMALLN2} Provenance seal [{YEAR}]
+Legacy: Subroutines for {CLIENT}
+Section {SMALLN}.{SMALLN2} Housekeeping - {CODER.I}
+Phase {SMALLN} - Checksum - see memo {MEMO}
+Phase {SMALLN} - Print trailer
+Part {SMALLN}: Provenance seal [{YEAR}]
+Optional: Termination [{YEAR}]
+Statistics for {CLIENT}
+Legacy: Read metric cards for {CLIENT}
+Optional: Error handling
+(Obsolete) Provenance seal [{YEAR}]
+Revised {YEAR}: Main line - see memo {MEMO}
+Section {SMALLN}.{SMALLN2} Retained for audit for {CLIENT}
+Step {SMALLN}0: Common blocks for {CLIENT}
+Section {SMALLN}.{SMALLN2} Declarations - see memo {MEMO}
+Phase {SMALLN} - Checksum (per audit {AUDIT})
+Step {SMALLN}0: Termination - see memo {MEMO}
+Legacy: Checksum [{YEAR}]
+Revised {YEAR}: Cross-check [{YEAR}]
+Mandatory: Housekeeping (continued)
+Read benchmark cards - {CODER.I}
+Legacy: Print trailer - see memo {MEMO}
+Part {SMALLN}: Declarations
+Mandatory: Formats - see memo {MEMO}
+Step {SMALLN}0: Sort routines
+Legacy: Client special handling (temporary)
+Optional: Constants
+Optional: Client special handling - {CODER.I}
+Error handling (temporary)
+Date routines [{YEAR}]
+Step {SMALLN}0: Formats (continued)
+Phase {SMALLN} - Housekeeping for {CLIENT}
+Legacy: Initialization (continued)
+Phase {SMALLN} - Tape handling (per audit {AUDIT})
+(Obsolete) Validate input - {CODER.I}
+(Do Not Modify) Overflow checks
+Section {SMALLN}.{SMALLN2} Sort routines - {CODER.I}
+Step {SMALLN}0: Read benchmark cards (temporary)
+Legacy: Page control - see memo {MEMO}
+Revised {YEAR}: Debug output - see memo {MEMO}
+Revised {YEAR}: Page control for {CLIENT}
+Page control (temporary)
+Print metrics
+Phase {SMALLN} - Compute changes [{YEAR}]
+(Do Not Modify) Formats (per audit {AUDIT})
+(Do Not Modify) Page control (per audit {AUDIT})
+Mandatory: Client special handling for {CLIENT}
+Mandatory: Subroutines for {CLIENT}
+Part {SMALLN}: Client special handling (continued)
+Phase {SMALLN} - Compute changes (continued)
+Legacy: Formats (per audit {AUDIT})
+Mandatory: Statistics - see memo {MEMO}
+Client: Print trailer (temporary)
+(Do Not Modify) Read metric cards
+Section {SMALLN}.{SMALLN2} Read metric cards (continued)
+(Obsolete) Dead code - {CODER.I}
+Section {SMALLN}.{SMALLN2} Subroutines (continued)
+Dead code (per audit {AUDIT})
+Section {SMALLN}.{SMALLN2} Statistics - see memo {MEMO}
+Client: Print header [{YEAR}]
+Phase {SMALLN} - Error handling - {CODER.I}
+Section {SMALLN}.{SMALLN2} Read benchmark cards (temporary)
+(Obsolete) Constants
+Phase {SMALLN} - Retained for audit [{YEAR}]
+(Do Not Modify) Read metric cards (temporary)
+Phase {SMALLN} - Formats (continued)
+Revised {YEAR}: Print benchmarks (temporary)
+(Do Not Modify) Date routines
+Phase {SMALLN} - Constants (continued)
+(Do Not Modify) Subroutines - see memo {MEMO}
+Compute changes (temporary)
+Legacy: Main line [{YEAR}]
+Termination (continued)
+Section {SMALLN}.{SMALLN2} Termination (per audit {AUDIT})
+Mandatory: Subroutines (per audit {AUDIT})
+Mandatory: Common blocks - see memo {MEMO}
+Print metrics [{YEAR}]
+Mandatory: Dead code - {CODER.I}
+(Do Not Modify) Declarations [{YEAR}]
+Client: Housekeeping (per audit {AUDIT})
+Legacy: Declarations
+(Obsolete) Housekeeping (per audit {AUDIT})
+Mandatory: Provenance seal (continued)
+Step {SMALLN}0: Main line for {CLIENT}
+Retained for audit
+Validate input (temporary)
+Part {SMALLN}: Y2K logic - {CODER.I}
+Part {SMALLN}: Statistics [{YEAR}]
+Section {SMALLN}.{SMALLN2} Read benchmark cards
+Mandatory: Formats (continued)
+Client: Initialization - see memo {MEMO}
+Optional: Sort routines (temporary)
+Optional: Initialization for {CLIENT}
+Constants (temporary)
+Optional: Termination
+Client: Declarations - see memo {MEMO}
+Error handling (per audit {AUDIT})
+Section {SMALLN}.{SMALLN2} Housekeeping (temporary)
+Client: Formats (continued)
+Step {SMALLN}0: Validate input
+Client: Validate input - see memo {MEMO}
+Phase {SMALLN} - Overflow checks [{YEAR}]
+(Do Not Modify) Read control cards (continued)
+Step {SMALLN}0: Main line [{YEAR}]
+Section {SMALLN}.{SMALLN2} Print header - {CODER.I}
+Checksum - see memo {MEMO}
+(Obsolete) Statistics - see memo {MEMO}
+Phase {SMALLN} - Print benchmarks - {CODER.I}
+Legacy: Checksum (continued)
+Mandatory: Print trailer (temporary)
+Step {SMALLN}0: Dead code - see memo {MEMO}
+Revised {YEAR}: Termination
+(Do Not Modify) Tape handling [{YEAR}]
+Legacy: Restart logic [{YEAR}]
+Legacy: Print benchmarks (temporary)
+Step {SMALLN}0: Page control (continued)
+Revised {YEAR}: Formats (temporary)
+Mandatory: Print header
+Mandatory: Constants for {CLIENT}
+Phase {SMALLN} - Tape handling
+Revised {YEAR}: Read benchmark cards [{YEAR}]
+Legacy: Declarations - see memo {MEMO}
+Optional: Checksum - {CODER.I}
+Mandatory: Print benchmarks - {CODER.I}
+Legacy: Termination
+Step {SMALLN}0: Declarations (temporary)
+Client: Statistics [{YEAR}]
+Revised {YEAR}: Dead code (temporary)
+Optional: Declarations [{YEAR}]
+(Do Not Modify) Provenance seal for {CLIENT}
+(Obsolete) Client special handling [{YEAR}]
+Optional: Print header (per audit {AUDIT})
+(Do Not Modify) Client special handling (continued)
+Step {SMALLN}0: Housekeeping
+Revised {YEAR}: Audit trail (continued)
+Step {SMALLN}0: Declarations - {CODER.I}
+Part {SMALLN}: Checksum [{YEAR}]
+Tape handling
+Phase {SMALLN} - Retained for audit - see memo {MEMO}
+Phase {SMALLN} - Legacy compatibility - {CODER.I}
+Client: Dead code (temporary)
+Mandatory: Retained for audit [{YEAR}]
+Optional: Date routines - {CODER.I}
+Section {SMALLN}.{SMALLN2} Validate input for {CLIENT}
+Y2K logic
+Client: Validate input (continued)
+Section {SMALLN}.{SMALLN2} Declarations for {CLIENT}
+Mandatory: Print trailer [{YEAR}]
+(Obsolete) Print benchmarks - {CODER.I}
+(Do Not Modify) Dead code for {CLIENT}
+Revised {YEAR}: Print metrics for {CLIENT}
+Phase {SMALLN} - Read benchmark cards - {CODER.I}
+Optional: Read benchmark cards (continued)
+Phase {SMALLN} - Initialization for {CLIENT}
+Legacy: Client special handling - see memo {MEMO}
+Optional: Constants - see memo {MEMO}
+Mandatory: Initialization - see memo {MEMO}
+Optional: Y2K logic - see memo {MEMO}
+Formats for {CLIENT}
+Provenance seal (temporary)
+Phase {SMALLN} - Validate input
+Phase {SMALLN} - Overflow checks - see memo {MEMO}
+Step {SMALLN}0: Main line - {CODER.I}
+Optional: Restart logic - {CODER.I}
+Part {SMALLN}: Client special handling (per audit {AUDIT})
+Legacy: Date routines - {CODER.I}
+Read control cards for the {QUARTER} run
+Grand totals - see memo {MEMO}
+Copy control - {HW} only
+Reconciliation - see memo {MEMO}
+Debug output - per {RULE}
+Lookup tables
+Initialization - unused since {YEAR}
+Phase 6: Validate input
+Peer group (per audit {AUDIT})
+Totals - see memo {MEMO}
+Appendix D: Legacy
+Merge - per {RULE}
+Reversal - DO NOT MODIFY
+Part XII: Validation pass 2
+Phase 3: Restart logic
+Phase 5: Totals
+Constants (per audit {AUDIT})
+Section 9: Message table
+Merge - DO NOT MODIFY
+Abnormal termination ({OLDYEAR} version)
+Y2K remediation - DO NOT MODIFY
+Section 7: Date routines
+Section 2: Temporary
+Exit routines - {CODER.I}
+Page control - per {RULE}
+Sanity limits - {ADJ}
+Grand totals
+Phase 1: Sanity limits
+Step 60: Adjustments
+Y2K remediation - added by {CODER2.I}
+Restart logic
+Section 1: Grand totals
+Appendix C: Validation pass 3
+Page control - retained for audit
+Initialization (per audit {AUDIT})
+Print trailer - rewritten {YEAR}
+Exit routines - see {MANUAL}
+Appendix H: Error handling
+Restart logic, continued
+Step 10: Legacy
+Compute changes - see memo {MEMO}
+Part V: Lookup tables
+Step 20: Print metrics
+Phase 1: Overflow checks
+Section 6: Client table
+Reconciliation - see {MANUAL}
+Permanent temporary - DO NOT MODIFY
+Statistics - rewritten {YEAR}
+Legacy: Message table
+Reversal - retained for audit
+Validation pass 2 (per audit {AUDIT})
+Year-end adjustment - see memo {MEMO}
+Optional: Date routines
+Statistics for the {QUARTER} run
+Driver - {CLIENT} only
+Spool handling, continued
+Restart logic - added by {CODER2.I}
+Read metric cards ({OLDYEAR} version)
+Y2K remediation, continued
+Section 9: Client special handling
+Audit trail - retained for audit
+Appendix H: Y2K remediation
+Subtotals (per audit {AUDIT})
+Checksum - retained for audit
+Constants - retained for audit
+Cross-check ladder - {HW} only
+Optional: Permanent temporary
+Phase 5: Spool handling
+Section 2: Quarter-end adjustment
+Part XI: Apply ladder
+Step 50: Compute changes
+Print benchmarks ({OLDYEAR} version)
+Step 60: Exit routines
+Cleanup - {CODER.I}
+Initialization - {CLIENT} only
+Return codes - {CODER.I}
+Final checks ({OLDYEAR} version)
+Section 5: Driver
+Subtotals, continued
+Error table - {HW} only
+Phase 5: Distribution
+Appendix G: Print headings
+Housekeeping - retained for audit
+Section 8: Lookup tables
+Appendix B: Utility routines
+Appendix H: Checkpoint
+Work areas - DO NOT MODIFY
+Phase 3: Abnormal termination
+Step 70: Year-end adjustment
+Validation pass 2 ({OLDYEAR} version)
+Housekeeping - added by {CODER2.I}
+Part II: Audit trail
+Section 2: Date routines
+Deprecated - {ADJ}
+Temporary
+Appendix E: Card handling
+Read benchmark cards for the {QUARTER} run
+Statistics ({OLDYEAR} version)
+Section 3: Page control
+Optional: Compute changes
+Part IX: Reconciliation
+Sort
+Subtotals ({OLDYEAR} version)
+Part II: Utility routines
+Optional: Operator messages
+Read control cards - see memo {MEMO}
+Error handling - DO NOT MODIFY
+Checkpoint - rewritten {YEAR}
+Optional: Print benchmarks
+Overflow checks - see memo {MEMO}
+Utility routines for the {QUARTER} run
+Spool handling - see {MANUAL}
+Checkpoint for the {QUARTER} run
+Validation pass 2 for the {QUARTER} run
+Section 8: Permanent temporary
+Housekeeping - unused since {YEAR}
+Statistics - unused since {YEAR}
+Appendix F: Initialization
+Part XII: Shadow computation
+Legacy: Deprecated
+Part II: Grand totals
+Read metric cards
+Distribution, continued
+Step 40: Validate input
+Appendix A: Deprecated
+Validation pass 3 (per audit {AUDIT})
+Page control - rewritten {YEAR}
+Part XII: Deprecated
+Work areas - {HW} only
+Debug output - {CODER.I}
+Page control - {HW} only
+Rounding (disabled) for the {QUARTER} run
+Seal and watermark - unused since {YEAR}
+Appendix G: Validate input
+Experimental (per audit {AUDIT})
+Read metric cards - {ADJ}
+Year-end adjustment, continued
+Section 3: Normal termination
+Legacy: Banner
+Permanent temporary - see {MANUAL}
+Utility routines - {HW} only
+Error table - retained for audit
+Part I: Print headings
+Legacy: Debug output
+Merge ({OLDYEAR} version)
+Phase 3: Read metric cards
+Restart logic - {HW} only
+Part XI: Error handling
+Part XI: Cleanup
+Cross-check ladder (per audit {AUDIT})
+Read control cards - retained for audit
+Tape handling, continued
+Appendix C: Abnormal termination
+Legacy: Restart logic
+Copy control - see {MANUAL}
+Vendor interface - DO NOT MODIFY
+Print headings - rewritten {YEAR}
+Utility routines - see {MANUAL}
+Driver - see {MANUAL}
+Peer group - see {MANUAL}
+Abnormal termination - added by {CODER2.I}
+Housekeeping, continued
+Lookup tables - {CLIENT} only
+Legacy: Apply ladder
+Read metric cards (per audit {AUDIT})
+Step 30: Error handling
+Section 8: Sanity limits
+Seal and watermark - see memo {MEMO}
+Experimental - see memo {MEMO}
+Phase 6: Return codes
+Subtotals - per {RULE}
+Step 30: Totals
+Initialization, continued
+Constants - added by {CODER2.I}
+Peer group - {ADJ}
+Print trailer, continued
+Sort - unused since {YEAR}
+Grand totals - unused since {YEAR}
+Appendix F: Client table
+Read benchmark cards (per audit {AUDIT})
+Validate input - {ADJ}
+Report writer - rewritten {YEAR}
+Statistics - {ADJ}
+Phase 6: Constants
+Print benchmarks - retained for audit
+Copy control - retained for audit
+Exit routines - {ADJ}
+Section 3: Return codes
+Part V: Operator messages
+Part I: Checksum
+Optional: Peer group
+Step 90: Card handling
+Client special handling ({OLDYEAR} version)
+Year-end adjustment - DO NOT MODIFY
+Merge - {CODER.I}
+Legacy: Utility routines
+Section 5: Final checks
+Sort - DO NOT MODIFY
+Part IV: Card handling
+Y2K remediation ({OLDYEAR} version)
+Temporary (per audit {AUDIT})
+Industry table (per audit {AUDIT})
+Page control - DO NOT MODIFY
+Section 5: Statistics
+Sanity limits, continued
+Card handling - {ADJ}
+Shadow computation - retained for audit
+Legacy: Constants
+Apply ladder - {CODER.I}
+Appendix G: Compatibility shims
+Subtotals - see {MANUAL}
+Banner ({OLDYEAR} version)
+Phase 4: Checkpoint
+Shadow computation ({OLDYEAR} version)
+Part III: Copy control
+Peer group - {HW} only
+Apply ladder (per audit {AUDIT})
+Client table - retained for audit
+Constants - see {MANUAL}
+Dispatcher - {HW} only
+Part IX: Debug output
+Subtotals - {HW} only
+Optional: Page control
+Sanity limits - retained for audit
+Phase 3: Validation pass 3
+Part X: Validation pass 3
+Rounding (disabled) - see {MANUAL}
+Operator messages - {CODER.I}
+Error table - unused since {YEAR}
+Dispatcher - {CLIENT} only
+Client table (per audit {AUDIT})
+Cross-check ladder - rewritten {YEAR}
+Optional: Housekeeping
+Legacy: Rounding (disabled)
+Part XI: Distribution
+Grand totals - DO NOT MODIFY
+Print trailer - see {MANUAL}
+Checkpoint (per audit {AUDIT})
+Report writer - per {RULE}
+Legacy: Reversal
+Section 5: Audit trail
+Print metrics, continued
+Client special handling, continued
+Phase 4: Compute changes
+Overflow checks - retained for audit
+Section 8: Work areas
+Phase 6: Final checks
+Deprecated ({OLDYEAR} version)
+Compatibility shims - {CODER.I}
+Legacy: Temporary
+Abnormal termination, continued
+Y2K remediation
+Sanity limits - rewritten {YEAR}
+Message table - see memo {MEMO}
+Driver
+Legacy: Y2K remediation
+Section 1: Reversal
+Part VII: Reconciliation
+Step 10: Message table
+Legacy: Print headings
+Spool handling (per audit {AUDIT})
+Storage - see memo {MEMO}
+Statistics
+Section 9: Deprecated
+Shadow computation - {ADJ}
+Message table - rewritten {YEAR}
+Industry table, continued
+Storage - see {MANUAL}
+Step 80: Error table
+Abnormal termination - {CODER.I}
+Optional: Report writer
+Page control - added by {CODER2.I}
+Print headings (per audit {AUDIT})
+Final checks - rewritten {YEAR}
+Print trailer - retained for audit
+Appendix D: Permanent temporary
+Appendix G: Return codes
+Debug output, continued
+Housekeeping ({OLDYEAR} version)
+Phase 1: Cross-check ladder
+Temporary - per {RULE}
+Step 80: Read metric cards
+Distribution for the {QUARTER} run
+Part VI: Deprecated
+Rounding (disabled) ({OLDYEAR} version)
+Initialization - added by {CODER2.I}
+Shadow computation, continued
+Part V: Read control cards
+Shadow computation - {CODER.I}
+Sort - rewritten {YEAR}
+Interfaces
+Checksum - per {RULE}
+Error table - {ADJ}
+Part XI: Housekeeping
+Main line - {ADJ}
+Quarter-end adjustment ({OLDYEAR} version)
+Read benchmark cards - {HW} only
+Dispatcher - per {RULE}
+Audit trail - {ADJ}
+Read control cards - added by {CODER2.I}
+Storage - DO NOT MODIFY
+Operator messages - see memo {MEMO}
+Appendix E: Client special handling
+Reconciliation, continued
+Legacy - DO NOT MODIFY
+Legacy: Vendor interface
+Section 4: Merge
+Step 60: Print trailer
+Phase 2: Card handling
+Audit trail, continued
+Appendix A: Validate input
+Appendix E: Exit routines
+Error handling - {ADJ}
+Checksum, continued
+Legacy - unused since {YEAR}
+Totals
+Print headings - {HW} only
+Appendix B: Debug output
+Step 80: Print trailer
+Section 4: Print benchmarks
+Error table - per {RULE}
+Page control - {CLIENT} only
+Banner - {HW} only
+Peer group - {CODER.I}
+Housekeeping (per audit {AUDIT})
+Card handling, continued
+Date routines - see {MANUAL}
+Report writer ({OLDYEAR} version)
+Appendix D: Print benchmarks
+Client table - {CLIENT} only
+Section 6: Utility routines
+Dispatcher - DO NOT MODIFY
+Hooks for {PROGRAM2} - {CLIENT} only
+Shadow computation - per {RULE}
+Print headings - {CLIENT} only
+Industry table - per {RULE}
+Section 1: Temporary
+Legacy: Sort
+Validation pass 3 - retained for audit
+Overflow checks - rewritten {YEAR}
+Appendix C: Return codes
+Temporary ({OLDYEAR} version)
+Read benchmark cards - unused since {YEAR}
+Appendix E: Validation pass 2
+Read metric cards - retained for audit
+Client special handling - {CLIENT} only
+Section 8: Reversal
+Read metric cards - see {MANUAL}
+Sanity limits - {CODER.I}
+Normal termination - unused since {YEAR}
+Totals ({OLDYEAR} version)
+Client table - unused since {YEAR}
+Reversal - per {RULE}
+Part VII: Permanent temporary
+Phase 1: Final checks
+Tape handling - see {MANUAL}
+Part II: Merge
+Phase 2: Restart logic
+Operator messages - added by {CODER2.I}
+Section 3: Vendor interface
+Compatibility shims (per audit {AUDIT})
+Step 50: Industry table
+Phase 6: Exit routines
+Apply ladder - unused since {YEAR}
+Reversal - see memo {MEMO}
+Checkpoint - per {RULE}
+Section 7: Tape handling
+Card handling - added by {CODER2.I}
+Client table - {ADJ}
+Client table - DO NOT MODIFY
+Appendix A: Read benchmark cards
+Section 2: Spool handling
+Step 10: Quarter-end adjustment
+Appendix A: Work areas
+Constants - see memo {MEMO}
+Rounding (disabled) - added by {CODER2.I}
+Banner (per audit {AUDIT})
+Housekeeping - per {RULE}
+Apply ladder - rewritten {YEAR}
+Optional: Seal and watermark
+Statistics - DO NOT MODIFY
+Phase 6: Cleanup
+Phase 5: Year-end adjustment
+Print trailer ({OLDYEAR} version)
+Date routines, continued
+Appendix E: Subtotals
+Y2K remediation - per {RULE}
+Optional: Subtotals
+Storage - {HW} only
+Validate input ({OLDYEAR} version)
+Exit routines - DO NOT MODIFY
+Debug output - see memo {MEMO}
+Optional: Overflow checks
+Print headings, continued
+Step 10: Error table
+Adjustments - retained for audit
+Apply ladder for the {QUARTER} run
+Spool handling - retained for audit
+Exit routines - retained for audit
+Phase 3: Subtotals
+Compute changes - added by {CODER2.I}
+Seal and watermark - {HW} only
+Client special handling - see {MANUAL}
+Part IX: Read metric cards
+Appendix F: Restart logic
+Section 6: Print trailer
+Step 30: Rounding (disabled)
+Part VII: Storage
+Appendix D: Storage
+Optional: Distribution
+Part VI: Year-end adjustment
+Compute changes - DO NOT MODIFY
+Phase 2: Subtotals
+Adjustments ({OLDYEAR} version)
+Distribution (per audit {AUDIT})
+Temporary - see memo {MEMO}
+Housekeeping - rewritten {YEAR}
+Phase 4: Debug output
+Housekeeping - {CODER.I}
+Return codes - {ADJ}
+Reversal (per audit {AUDIT})
+Section 9: Vendor interface
+Phase 1: Totals
+Compute changes - {ADJ}
+Legacy: Main line
+Seal and watermark - retained for audit
+Constants - {ADJ}
+Phase 2: Distribution
+Validate input - DO NOT MODIFY
+Peer group - {CLIENT} only
+Appendix F: Merge
+Part XI: Abnormal termination
+Year-end adjustment - unused since {YEAR}
+Section 5: Temporary
+Step 90: Work areas
+Year-end adjustment for the {QUARTER} run
+Step 70: Adjustments
+Rounding (disabled) - see memo {MEMO}
+Appendix A: Cross-check ladder
+Step 70: Y2K remediation
+Step 70: Validation pass 2
+Compute changes (per audit {AUDIT})
+Legacy: Seal and watermark
+Phase 3: Error table
+Distribution - {CLIENT} only
+Step 50: Read benchmark cards
+Grand totals - {CLIENT} only
+Step 40: Seal and watermark
+Error table, continued
+Appendix A: Abnormal termination
+Optional: Checksum
+Utility routines - unused since {YEAR}
+Distribution - see {MANUAL}
+Industry table - see memo {MEMO}
+Error handling, continued
+Date routines (per audit {AUDIT})
+Print metrics for the {QUARTER} run
+Appendix A: Shadow computation
+Legacy: Adjustments
+Debug output - rewritten {YEAR}
+Driver - rewritten {YEAR}
+Legacy: Checksum
+Appendix D: Deprecated
+Read metric cards - see memo {MEMO}
+Totals - DO NOT MODIFY
+Card handling - rewritten {YEAR}
+Spool handling for the {QUARTER} run
+Y2K remediation for the {QUARTER} run
+Statistics - retained for audit
+Statistics - added by {CODER2.I}
+Adjustments - see {MANUAL}
+Phase 4: Reconciliation
+Section 4: Apply ladder
+Tape handling - see memo {MEMO}
+Experimental, continued
+Cross-check ladder for the {QUARTER} run
+Read metric cards - {CODER.I}
+Operator messages ({OLDYEAR} version)
+Section 8: Year-end adjustment
+Permanent temporary - retained for audit
+Appendix H: Grand totals
+Vendor interface - added by {CODER2.I}
+Copy control for the {QUARTER} run
+Part VIII: Experimental
+Message table
+Reconciliation (per audit {AUDIT})
+Client special handling - see memo {MEMO}
+Quarter-end adjustment for the {QUARTER} run
+Appendix F: Audit trail
+Step 20: Normal termination
+Legacy: Merge
+Reversal - added by {CODER2.I}
+Optional: Read metric cards
+Error table - see {MANUAL}
+Phase 2: Client special handling
+Appendix G: Checkpoint
+Initialization - see memo {MEMO}
+Work areas, continued
+Subtotals - rewritten {YEAR}
+Legacy: Distribution
+Report writer - {HW} only
+Abnormal termination - unused since {YEAR}
+Utility routines - per {RULE}
+Subtotals - {CLIENT} only
+Return codes - added by {CODER2.I}
+Subtotals - see memo {MEMO}
+Copy control - {CLIENT} only
+Final checks - {HW} only
+Grand totals - {ADJ}
+Audit trail - {CODER.I}
+Cross-check ladder - see {MANUAL}
+Reconciliation - {ADJ}
+Grand totals - added by {CODER2.I}
+Report writer for the {QUARTER} run
+Validation pass 3 - see memo {MEMO}
+Shadow computation - {CLIENT} only
+Optional: Copy control
+Date routines - rewritten {YEAR}
+Section 7: Cross-check ladder
+Permanent temporary - {HW} only
+Lookup tables - retained for audit
+Hooks for {PROGRAM2} - retained for audit
+Y2K remediation - see memo {MEMO}
+Part VI: Distribution
+Final checks - DO NOT MODIFY
+Appendix H: Checksum
+Distribution - rewritten {YEAR}
+Step 10: Merge
+Return codes - DO NOT MODIFY
+Message table (per audit {AUDIT})
+Shadow computation
+Quarter-end adjustment - added by {CODER2.I}
+Print headings - {ADJ}
+Legacy: Compatibility shims
+Banner - added by {CODER2.I}
+Read metric cards - unused since {YEAR}
+Page control, continued
+Compute changes - retained for audit
+Restart logic - retained for audit
+Client special handling - DO NOT MODIFY
+Work areas - per {RULE}
+Page control - see memo {MEMO}
+Legacy - {CLIENT} only
+Section 9: Exit routines
+Merge - added by {CODER2.I}
+Statistics - see {MANUAL}
+Legacy: Audit trail
+Industry table for the {QUARTER} run
+Step 30: Legacy
+Error handling - retained for audit
+Date routines - per {RULE}
+Step 40: Validation pass 2
+Step 30: Housekeeping
+Optional: Y2K remediation
+Year-end adjustment
+Optional: Validation pass 2
+Read benchmark cards - see {MANUAL}
+Lookup tables - rewritten {YEAR}
+Permanent temporary - {CLIENT} only
+Legacy
+Distribution ({OLDYEAR} version)
+Phase 5: Return codes
+Appendix F: Adjustments
+Step 10: Restart logic
+Checkpoint - {HW} only
+Spool handling - {CLIENT} only
+Checksum - added by {CODER2.I}
+Merge for the {QUARTER} run
+Step 70: Audit trail
+Step 50: Print metrics
+Adjustments - DO NOT MODIFY
+Legacy: Normal termination
+Optional: Restart logic
+Interfaces - per {RULE}
+Sort - retained for audit
+Final checks - per {RULE}
+Banner
+Subtotals - {ADJ}
+Checkpoint - added by {CODER2.I}
+Legacy: Card handling
+Checkpoint - {ADJ}
+Distribution - {CODER.I}
+Cross-check ladder - {CODER.I}
+Shadow computation (per audit {AUDIT})
+Totals (per audit {AUDIT})
+Normal termination, continued
+Dispatcher - {ADJ}
+Section 8: Storage
+Print metrics - retained for audit
+Read metric cards - {CLIENT} only
+Grand totals - {CODER.I}
+Error handling ({OLDYEAR} version)
+Operator messages - per {RULE}
+Section 2: Sort
+Housekeeping - see memo {MEMO}
+Section 5: Exit routines
+Appendix D: Subtotals
+Sanity limits - {CLIENT} only
+Section 3: Quarter-end adjustment
+Vendor interface - {ADJ}
+Interfaces - DO NOT MODIFY
+Merge - see memo {MEMO}
+Lookup tables - DO NOT MODIFY
+Print benchmarks - {HW} only
+Phase 1: Checksum
+Part IV: Compatibility shims
+Experimental - {ADJ}
+Section 4: Date routines
+Quarter-end adjustment - unused since {YEAR}
+Phase 4: Print benchmarks
+Overflow checks
+Seal and watermark - DO NOT MODIFY
+Reversal - unused since {YEAR}
+Apply ladder - {CLIENT} only
+Apply ladder - DO NOT MODIFY
+Rounding (disabled) - DO NOT MODIFY
+Appendix E: Year-end adjustment
+Print benchmarks - added by {CODER2.I}
+Phase 3: Quarter-end adjustment
+Message table - {CODER.I}
+Optional: Exit routines
+Adjustments
+Print trailer
+Year-end adjustment - retained for audit
+Temporary - see {MANUAL}
+Operator messages (per audit {AUDIT})
+Operator messages - {CLIENT} only
+Part VIII: Banner
+Appendix H: Totals
+Part XI: Seal and watermark
+Error handling - {HW} only
+Operator messages - DO NOT MODIFY
+Quarter-end adjustment - {ADJ}
+Normal termination - {HW} only
+Copy control - see memo {MEMO}
+Exit routines ({OLDYEAR} version)
+Step 20: Main line
+Part XI: Debug output
+Optional: Experimental
+Distribution - {ADJ}
+Utility routines - {CLIENT} only
+Section 5: Error table
+Legacy: Print metrics
+Read benchmark cards - {ADJ}
+Phase 2: Operator messages
+Shadow computation - DO NOT MODIFY
+Reconciliation - DO NOT MODIFY
+Storage - retained for audit
+Normal termination for the {QUARTER} run
+Storage - added by {CODER2.I}
+Experimental - {CLIENT} only
+Appendix B: Experimental
+Reversal ({OLDYEAR} version)
+Compute changes ({OLDYEAR} version)
+Tape handling ({OLDYEAR} version)
+Part VIII: Driver
+Compatibility shims for the {QUARTER} run
+Overflow checks - DO NOT MODIFY
+Report writer - {CLIENT} only
+Part VII: Normal termination
+Part XII: Interfaces
+Validate input - {CLIENT} only
+Work areas - {CODER.I}
+Appendix B: Restart logic
+Apply ladder - {HW} only
+Constants - {CLIENT} only
+Hooks for {PROGRAM2} (per audit {AUDIT})
+Report writer - see memo {MEMO}
+Banner - see memo {MEMO}
+Exit routines - unused since {YEAR}
+Part VII: Dispatcher
+Part XII: Grand totals
+Dead code (retained) for the {QUARTER} run
+Step 60: Validation pass 2
+Return codes (per audit {AUDIT})
+Legacy - rewritten {YEAR}
+Phase 2: Constants
+Quarter-end adjustment - {HW} only
+Optional: Normal termination
+Validate input - unused since {YEAR}
+Legacy: Dispatcher
+Quarter-end adjustment - retained for audit
+Abnormal termination - see memo {MEMO}
+Validate input - see memo {MEMO}
+Hooks for {PROGRAM2}, continued
+Section 3: Main line
+Checksum for the {QUARTER} run
+Peer group, continued
+Appendix E: Legacy
+Sanity limits - per {RULE}
+Legacy: Client table
+Sort - see memo {MEMO}
+Legacy: Report writer
+Part II: Quarter-end adjustment
+Experimental
+Section 9: Validation pass 3
+Cleanup - {ADJ}
+Card handling - {HW} only
+Interfaces - {HW} only
+Hooks for {PROGRAM2} - rewritten {YEAR}
+Checksum - {ADJ}
+Read benchmark cards - see memo {MEMO}
+Appendix H: Final checks
+Phase 4: Restart logic
+Appendix G: Cleanup
+Part XII: Validation pass 3
+Report writer - see {MANUAL}
+Peer group - rewritten {YEAR}
+Merge - unused since {YEAR}
+Rounding (disabled) - {ADJ}
+Year-end adjustment (per audit {AUDIT})
+Message table, continued
+Banner - unused since {YEAR}
+Totals - added by {CODER2.I}
+Validation pass 2 - added by {CODER2.I}
+Quarter-end adjustment (per audit {AUDIT})
+Dispatcher
+Section 4: Grand totals
+Cleanup - see {MANUAL}
+Exit routines (per audit {AUDIT})
+Step 50: Lookup tables
+Optional: Grand totals
+Work areas - added by {CODER2.I}
+Quarter-end adjustment, continued
+Experimental for the {QUARTER} run
+Restart logic - {CODER.I}
+Appendix H: Apply ladder
+Dead code (retained) - see memo {MEMO}
+Legacy: Abnormal termination
+Totals - {CLIENT} only
+Return codes - retained for audit
+Legacy: Overflow checks
+Section 4: Operator messages
+Optional: Deprecated
+Deprecated - {CODER.I}
+Exit routines - added by {CODER2.I}
+Phase 6: Print metrics
+Section 2: Year-end adjustment
+Validation pass 2 - {HW} only
+Step 20: Apply ladder
+Step 40: Validation pass 3
+Appendix D: Report writer
+Industry table - see {MANUAL}
+Appendix B: Checksum
+Cleanup - rewritten {YEAR}
+Housekeeping - {CLIENT} only
+Seal and watermark - per {RULE}
+Abnormal termination
+Deprecated, continued
+Legacy: Error table
+Hooks for {PROGRAM2} - unused since {YEAR}
+Optional: Return codes
+Compatibility shims - added by {CODER2.I}
+Phase 2: Cross-check ladder
+Checksum - {HW} only
+Error table - added by {CODER2.I}
+Legacy: Print trailer
+Dead code (retained) - unused since {YEAR}
+Step 20: Storage
+Phase 6: Print benchmarks
+Grand totals - see {MANUAL}
+Phase 3: Work areas
+Utility routines - {ADJ}
+Error table for the {QUARTER} run
+Legacy: Experimental
+Compatibility shims - DO NOT MODIFY
+Quarter-end adjustment - see {MANUAL}
+Vendor interface - {CLIENT} only
+Dead code (retained) - {CLIENT} only
+Appendix A: Storage
+Part V: Sort
+Section 5: Operator messages
+Grand totals - per {RULE}
+Cleanup - {HW} only
+Section 8: Totals
+Operator messages - unused since {YEAR}
+Appendix B: Exit routines
+Error table ({OLDYEAR} version)
+Restart logic - rewritten {YEAR}
+Optional: Main line
+Legacy: Return codes
+Shadow computation - see memo {MEMO}
+Initialization ({OLDYEAR} version)
+Constants, continued
+Phase 2: Error table
+Optional: Card handling
+Phase 2: Lookup tables
+Print metrics - see memo {MEMO}
+Section 1: Merge
+Y2K remediation - unused since {YEAR}
+Phase 1: Print benchmarks
+Dead code (retained) - added by {CODER2.I}
+Part VII: Constants
+Checkpoint - unused since {YEAR}
+Appendix A: Validation pass 3
+Year-end adjustment - per {RULE}
+Validate input - rewritten {YEAR}
+Phase 4: Storage
+Phase 3: Sort
+Seal and watermark - rewritten {YEAR}
+Section 5: Read control cards
+Part V: Cross-check ladder
+Audit trail - DO NOT MODIFY
+Error handling for the {QUARTER} run
+Hooks for {PROGRAM2} - see {MANUAL}
+Vendor interface - unused since {YEAR}
+Sort ({OLDYEAR} version)
+Merge (per audit {AUDIT})
+Part VIII: Totals
+Statistics - {CODER.I}
+Tape handling - per {RULE}
+Card handling - see memo {MEMO}
+Section 3: Statistics
+Phase 1: Constants
+Optional: Legacy
+Part X: Read benchmark cards
+Permanent temporary for the {QUARTER} run
+Step 50: Distribution
+Vendor interface - {HW} only
+Compatibility shims - retained for audit
+Section 4: Rounding (disabled)
+Client table, continued
+Sort - added by {CODER2.I}
+Work areas for the {QUARTER} run
+Appendix E: Copy control
+Cleanup for the {QUARTER} run
+Vendor interface - see {MANUAL}
+Legacy: Print benchmarks
+Legacy: Validation pass 2
+Part I: Restart logic
+Permanent temporary
+Phase 5: Sanity limits
+Quarter-end adjustment - see memo {MEMO}
+Step 10: Work areas
+Reversal, continued
+Initialization - rewritten {YEAR}
+Adjustments - added by {CODER2.I}
+Checksum (per audit {AUDIT})
+Legacy: Lookup tables
+Main line (per audit {AUDIT})
+Part VIII: Permanent temporary
+Shadow computation for the {QUARTER} run
+Print trailer - unused since {YEAR}
+Validation pass 3, continued
+Subtotals - unused since {YEAR}
+Y2K remediation - {ADJ}
+Section 4: Report writer
+Part IV: Legacy
+Return codes - {HW} only
+Permanent temporary ({OLDYEAR} version)
+Section 3: Copy control
+Compatibility shims - unused since {YEAR}
+Appendix H: Legacy
+Part XII: Main line
+Appendix D: Utility routines
+Section 5: Dispatcher
+Validation pass 3 - {HW} only
+Main line - see memo {MEMO}
+Driver - unused since {YEAR}
+Housekeeping for the {QUARTER} run
+Return codes - see memo {MEMO}
+Read benchmark cards ({OLDYEAR} version)
+Restart logic - DO NOT MODIFY
+Phase 3: Operator messages
+Page control
+Distribution - {HW} only
+Apply ladder - see {MANUAL}
+Step 70: Temporary
+Validation pass 3 - DO NOT MODIFY
+Vendor interface - rewritten {YEAR}
+Reversal - see {MANUAL}
+Industry table
+Compute changes - rewritten {YEAR}
+Seal and watermark, continued
+Appendix A: Permanent temporary
+Report writer, continued
+Print benchmarks for the {QUARTER} run
+Reconciliation - {CLIENT} only
+Industry table - {CODER.I}
+Error table (per audit {AUDIT})
+Part VIII: Seal and watermark
+Step 50: Page control
+Part II: Tape handling
+Totals, continued
+Constants - {HW} only
+Compute changes, continued
+Step 30: Restart logic
+Final checks (per audit {AUDIT})
+Year-end adjustment ({OLDYEAR} version)
+Main line - {HW} only
+Experimental - see {MANUAL}
+Industry table - DO NOT MODIFY
+Lookup tables - see memo {MEMO}
+Debug output - {HW} only
+Legacy - {ADJ}
+Appendix B: Hooks for {PROGRAM2}
+Part IV: Print metrics
+Phase 5: Vendor interface
+Appendix D: Seal and watermark
+Section 1: Audit trail
+Housekeeping - {ADJ}
+Vendor interface - see memo {MEMO}
+Initialization - DO NOT MODIFY
+Legacy: Read control cards
+Appendix A: Restart logic
+Appendix A: Reversal
+Audit trail - {HW} only
+Legacy: Quarter-end adjustment
+Part XII: Year-end adjustment
+Step 10: Subtotals
+Sanity limits - see memo {MEMO}
+Optional: Statistics
+Final checks - retained for audit
+Copy control - added by {CODER2.I}
+Vendor interface, continued
+Spool handling - per {RULE}
+Section 1: Client special handling
+Report writer
+Return codes - see {MANUAL}
+Debug output - added by {CODER2.I}
+Section 9: Reconciliation
+Legacy - added by {CODER2.I}
+Validate input for the {QUARTER} run
+Optional: Year-end adjustment
+Read benchmark cards - added by {CODER2.I}
+Y2K remediation - {CLIENT} only
+Section 8: Read metric cards
+Error handling - added by {CODER2.I}
+Section 6: Compatibility shims
+Sanity limits - unused since {YEAR}
+Deprecated - retained for audit
+Adjustments - {CODER.I}
+Sort - {ADJ}
+Constants - unused since {YEAR}
+Step 10: Exit routines
+Read control cards - see {MANUAL}
+Peer group - per {RULE}
+Step 50: Rounding (disabled)
+Legacy - retained for audit
+Subtotals - {CODER.I}
+Checksum - rewritten {YEAR}
+Print headings - added by {CODER2.I}
+Phase 5: Dead code (retained)
+Rounding (disabled) - {HW} only
+Step 60: Subtotals
+Statistics - see memo {MEMO}
+Return codes - unused since {YEAR}
+Message table - {CLIENT} only
+Grand totals - {HW} only
+Appendix E: Work areas
+Read metric cards - rewritten {YEAR}
+Driver - {CODER.I}
+Read benchmark cards - {CLIENT} only
+Shadow computation - unused since {YEAR}
+Appendix A: Read control cards
+Part X: Reversal
+Part X: Date routines
+Optional: Error table
+Deprecated (per audit {AUDIT})
+Appendix A: Print metrics
+Apply ladder ({OLDYEAR} version)
+Client special handling (per audit {AUDIT})
+Overflow checks - see {MANUAL}
+Phase 5: Driver
+Operator messages - retained for audit
+Read control cards - {CLIENT} only
+Abnormal termination - see {MANUAL}
+Step 30: Banner
+Permanent temporary - added by {CODER2.I}
+Part IX: Dead code (retained)
+Step 10: Initialization
+Industry table ({OLDYEAR} version)
+Hooks for {PROGRAM2} - added by {CODER2.I}
+Banner - DO NOT MODIFY
+Section 2: Compatibility shims
+Client table - per {RULE}
+Step 20: Hooks for {PROGRAM2}
+Vendor interface
+Shadow computation - added by {CODER2.I}
+Distribution
+Card handling - see {MANUAL}
+Overflow checks for the {QUARTER} run
+Phase 3: Error handling
+Legacy: Shadow computation
+Compute changes - see {MANUAL}
+Seal and watermark - {CLIENT} only
+Shadow computation - {HW} only
+Part XII: Sort
+Dead code (retained) - retained for audit
+Validation pass 2 - see memo {MEMO}
+Phase 2: Overflow checks
+Appendix F: Shadow computation
+Utility routines - {CODER.I}
+Sanity limits - added by {CODER2.I}
+Temporary - unused since {YEAR}
+Step 80: Grand totals
+Tape handling - {CLIENT} only
+Initialization - retained for audit
+Return codes ({OLDYEAR} version)
+Date routines - {HW} only
+Rounding (disabled) - {CLIENT} only
+Section 5: Cleanup
+Cross-check ladder, continued
+Phase 5: Permanent temporary
+Y2K remediation - {CODER.I}
+Optional: Adjustments
+Statistics, continued
+Read control cards - DO NOT MODIFY
+Client table - see memo {MEMO}
+Appendix D: Y2K remediation
+Seal and watermark - see {MANUAL}
+Part VIII: Audit trail
+Permanent temporary - see memo {MEMO}
+Spool handling - rewritten {YEAR}
+Interfaces (per audit {AUDIT})
+Vendor interface (per audit {AUDIT})
+Normal termination - rewritten {YEAR}
+Print headings - see {MANUAL}
+Driver ({OLDYEAR} version)
+Optional: Shadow computation
+Section 8: Operator messages
+Reconciliation - rewritten {YEAR}
+Sanity limits ({OLDYEAR} version)
+Spool handling - {ADJ}
+Part IX: Sanity limits
+Lookup tables - see {MANUAL}
+Section 6: Lookup tables
+Compatibility shims, continued
+Read control cards - per {RULE}
+Reversal - {HW} only
+Restart logic - unused since {YEAR}
+Date routines
+Phase 6: Copy control
+Exit routines - {CLIENT} only
+Checksum - see {MANUAL}
+Optional: Temporary
+Part V: Industry table
+Reconciliation - per {RULE}
+Part VIII: Housekeeping
+Work areas (per audit {AUDIT})
+Apply ladder - retained for audit
+Statistics (per audit {AUDIT})
+Quarter-end adjustment - {CLIENT} only
+Section 5: Legacy
+Audit trail - see memo {MEMO}
+Lookup tables, continued
+Appendix B: Sanity limits
+Compatibility shims - {HW} only
+Section 1: Subtotals
+Validation pass 2, continued
+Part X: Statistics
+Merge - {CLIENT} only
+Reversal
+Step 10: Client special handling
+Totals for the {QUARTER} run
+Error table - rewritten {YEAR}
+Final checks, continued
+Normal termination - {CLIENT} only
+Return codes, continued
+Validation pass 2 - retained for audit
+Work areas - rewritten {YEAR}
+Legacy: Read benchmark cards
+Client special handling - unused since {YEAR}
+Sort - {HW} only
+Abnormal termination - {CLIENT} only
+Message table - {ADJ}
+Copy control, continued
+Main line for the {QUARTER} run
+Appendix C: Client table
+Print metrics - per {RULE}
+Driver - added by {CODER2.I}
+Section 3: Message table
+Temporary - {ADJ}
+Interfaces - rewritten {YEAR}
+Return codes - rewritten {YEAR}
+Error handling - see {MANUAL}
+Operator messages - see {MANUAL}
+Print metrics - {CLIENT} only
+Legacy: Statistics
+Optional: Tape handling
+Totals - per {RULE}
+Sort - per {RULE}
+Constants - rewritten {YEAR}
+Client special handling - per {RULE}
+Tape handling - rewritten {YEAR}
+Lookup tables (per audit {AUDIT})
+Dispatcher - {CODER.I}
+Part X: Final checks
+Phase 2: Legacy
+Cross-check ladder ({OLDYEAR} version)
+Merge - {ADJ}
+Lookup tables - added by {CODER2.I}
+Initialization - per {RULE}
+Appendix H: Card handling
+Section 7: Overflow checks
+Rounding (disabled) - {CODER.I}
+Checksum ({OLDYEAR} version)
+Step 20: Abnormal termination
+Normal termination
+Step 60: Shadow computation
+Phase 1: Exit routines
+Permanent temporary - per {RULE}
+Overflow checks, continued
+Page control - see {MANUAL}
+Step 40: Industry table
+Sanity limits - DO NOT MODIFY
+Work areas - see {MANUAL}
+Optional: Validation pass 3
+Permanent temporary - rewritten {YEAR}
+Part III: Overflow checks
+Deprecated - see {MANUAL}
+Constants - per {RULE}
+Cross-check ladder - {ADJ}
+Appendix B: Message table
+Cleanup - DO NOT MODIFY
+Appendix F: Validation pass 3
+Dead code (retained) - {ADJ}
+Storage ({OLDYEAR} version)
+Adjustments - {HW} only
+Phase 1: Tape handling
+Section 5: Main line
+Appendix C: Cross-check ladder
+Section 8: Exit routines
+Part VI: Validate input
+Tape handling - {CODER.I}
+Dispatcher - unused since {YEAR}
+Phase 4: Page control
+Final checks - {CODER.I}
+Storage - per {RULE}
+Section 4: Compute changes
+Part I: Work areas
+Read benchmark cards - rewritten {YEAR}
+Optional: Utility routines
+Shadow computation - rewritten {YEAR}
+Optional: Sort
+Work areas - unused since {YEAR}
+Abnormal termination - retained for audit
+Legacy - {CODER.I}
+Legacy: Copy control
+Interfaces - see memo {MEMO}
+Final checks - {ADJ}
+Statistics - {CLIENT} only
+Phase 3: Legacy
+Step 30: Print benchmarks
+Deprecated - added by {CODER2.I}
+Print metrics - DO NOT MODIFY
+Apply ladder, continued
+Dispatcher for the {QUARTER} run
+Section 9: Report writer
+Normal termination - see memo {MEMO}
+Part XII: Restart logic
+Appendix B: Sort
+Optional: Checkpoint
+Part X: Distribution
+Abnormal termination - rewritten {YEAR}
+Section 7: Print benchmarks
+Interfaces - {CODER.I}
+Sort - {CODER.I}
+Optional: Driver
+Step 20: Overflow checks
+Cross-check ladder - see memo {MEMO}
+Section 9: Operator messages
+Appendix C: Dead code (retained)
+Date routines - {CODER.I}
+Phase 2: Page control
+Cleanup - retained for audit
+Industry table - {HW} only
+Main line - {CLIENT} only
+Tape handling - {HW} only
+Lookup tables - {ADJ}
+Final checks - added by {CODER2.I}
+Phase 3: Print benchmarks
+Checkpoint - {CLIENT} only
+Grand totals (per audit {AUDIT})
+Debug output - unused since {YEAR}
+Section 6: Print headings
+Audit trail for the {QUARTER} run
+Appendix E: Quarter-end adjustment
+Appendix B: Quarter-end adjustment
+Banner - {CODER.I}
+Step 80: Debug output
+Validation pass 2 - {ADJ}
+Print metrics ({OLDYEAR} version)
+Print metrics - added by {CODER2.I}
+Print headings ({OLDYEAR} version)
+Section 4: Driver
+Validate input - retained for audit
+Hooks for {PROGRAM2} - {CODER.I}
+Legacy: Page control
+Validate input - see {MANUAL}
+Distribution - added by {CODER2.I}
+Phase 2: Final checks
+Rounding (disabled), continued
+Validation pass 3 - {CODER.I}
+Overflow checks - unused since {YEAR}
+Phase 2: Grand totals
+Part VI: Cleanup
+Cross-check ladder - added by {CODER2.I}
+Hooks for {PROGRAM2}
+Year-end adjustment - {CODER.I}
+Card input
+Card output
+Header processing
+Trailer processing
+Control card validation
+Metric card validation
+Benchmark card validation
+Change computation (integer)
+Ladder application (double precision)
+Report header block
+Report detail block
+Report footer block
+Benchmark heading block
+Seal and trailer
+Run statistics block
+Operator message block
+Error message table
+Condition code mapping
+Restart and checkpoint (unused)
+Debug dump (disabled)
+Y2K windowing (pivot {PIVOT})
+Leap-year handling
+Julian date conversion
+Ordinal suffix table
+Client special handling - {CLIENT}
+Client special handling - others (empty)
+Peer group lookup
+Engagement code table
+Record ID formatting
+Page and line control
+Banner font table
+Shadow ladder (audit)
+Cross-check (audit)
+Checksum (audit)
+Dead routines (retained per audit {AUDIT})
+Vendor interface - {VENDOR}
+Compatibility shims for {PROGRAM2}
+Local modifications - {CODER.I}
+Night shift modifications - {CODER2.I}
+Emergency fixes - see revision history

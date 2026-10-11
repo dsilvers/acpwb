@@ -1,0 +1,11 @@
+#name: Government Contract Notice
+#kind: proprietary
+#from: 1975
+#to: 2025
+NOTICE
+
+This software was developed by {HOLDER} under Contract No. {CONTRACT} with the {AGENCY}. The Government has rights to use, modify, reproduce, release, perform, display, or disclose this software as provided in the clause at {FARCLAUSE}.
+
+Any reproduction of this software or portions thereof marked with this legend must also reproduce the markings. Distribution limited to U.S. Government agencies and their contractors; other requests shall be referred to the Contracting Officer.
+
+The percentile ladder was not developed under this contract and is excluded from the Government's rights.

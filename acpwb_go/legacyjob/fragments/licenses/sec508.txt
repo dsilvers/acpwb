@@ -1,0 +1,9 @@
+#name: Accessibility Statement
+#kind: proprietary
+#from: 2001
+#extra: yes
+ACCESSIBILITY STATEMENT
+
+{HOLDER} is committed to making its software accessible to people with disabilities, consistent with Section 508 of the Rehabilitation Act. {PROGRAM} produces fixed-width text output, which is compatible with screen readers, braille displays, and anyone with a ruler.
+
+Known limitations: the green-bar shading is decorative and conveys no information. The percentile ladder conveys no information either, but is not decorative.

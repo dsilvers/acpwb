@@ -1,0 +1,20 @@
+Scheduled nightly at 2 AM, Monday through Friday. Saturday runs are manual. Sunday runs are prayers.
+Runs after {PROGRAM2} and before the backup. If {PROGRAM2} runs long, this job waits. If this job runs long, the backup waits. If the backup waits, ops calls.
+Do not schedule this job during the payroll window.
+The schedule was moved from midnight to 2 AM in {YEAR} after {INCIDENT}. It has stayed there.
+On month-end, this job runs at 11 PM so the output is ready for the morning meeting.
+On quarter-end, this job runs three times: once for real, once for the auditors, and once because someone asks.
+The scheduler entry for this job is in the {OLDYEAR} format. The new scheduler reads it anyway.
+This job has a dependency on a job that was deleted in {YEAR}. The scheduler has been told the job is complete. Every night.
+The job is held on {HOLIDAY}. It is released the next business day and runs twice to catch up.
+If the job is missed, rerun it with the previous day's date on the control card. Do not use today's date.
+The scheduler was replaced in {YEAR}. This job was the last to be moved. It was moved by hand.
+1990-|The cron entry for this job is in {CODER2.I}'s personal crontab. Do not delete {CODER2.I}'s account.
+1995-|The Windows scheduled task for this job runs as {CODER2.I}. {CODER2.I}'s password must never expire.
+2005-|The job is triggered by a file appearing in the drop folder. A file has appeared every night since {YEAR}. It is empty.
+2012-|The Jenkins job for this runs on a timer. The timer is in UTC. The comments assume Central. The report is an hour early half the year.
+2014-|The container is scheduled by the orchestrator. The orchestrator restarts it if it exits. It exits on success. It runs {SMALLN} times a night.
+The job's expected duration is {CPU} CPU seconds. The scheduler alerts if it exceeds three times that. It has never alerted. The alert was never configured.
+The run calendar excludes the fiscal holidays listed in memo {MEMO}. The memo has the wrong date for Good Friday.
+Do not add another job to this schedule window. The window is full. The window has been full since {OLDYEAR}.
+This job used to run weekly. Then {VP} wanted daily. Then {VP} wanted hourly. It is daily.

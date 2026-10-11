@@ -1,0 +1,50 @@
+1974-|R. Kowalczyk wrote the first version of this routine on coding sheets in pencil. The eraser marks are visible on the {OLDYEAR} listing.
+1974-|Kowalczyk's original comment read "TEMPORARY - REPLACE BY 1976." See revision history.
+1974-|Per Kowalczyk, the ladder was "obvious to anyone who has seen a salary survey." Nobody since has found it obvious.
+1974-|The variable names in this section are Kowalczyk's. Each is six characters. Each was chosen with care. None is guessable.
+1981-|T. Abernathy converted this to FORTRAN 77 in 1984 and added IMPLICIT NONE. Then removed it. "Mostly," per the revision history.
+1981-|Abernathy's rule: never change a FORMAT statement on a Friday. The rule is still observed.
+1987-|Abernathy left a note in 1987: "If you are reading this, Kowalczyk was right about the overflow."
+1987-|D. Oyelaran added P33 and P67 in 1987 per memo 87-44. Oyelaran's comment: "Two more rungs. The ladder is now taller. It is not more accurate."
+1985-|Oyelaran tuned the I/O for the {HW}. The tuning still applies on hardware that has no idea what it means.
+1972-|M. Lindqvist, DP manager, signed every change form for sixteen years. Her signature is the most consistent thing in this program.
+1972-|Lindqvist's standing instruction: "The job runs at 2 AM. If it does not finish by 6, wake me." Nobody woke her. It always finished.
+1970-|H. Pettibone issued memo 81-114 ("Everything is money") in 1981. The memo is one sentence. The program has obeyed it ever since.
+1970-|Pettibone signed the ladder ratification on 1981-02-17. The pen is in a display case in {PLACE}. Possibly.
+1970-|Per Pettibone: "Rounding creates the appearance of generosity." Hence truncation. Hence everything.
+1991-|G. Hargrove ran this job every night from 1983 to 1990 as night operator, then maintained it as a programmer. The operator notes are hers.
+1983-|Hargrove's handwriting is on the run book. If you can read it, you are senior enough to change this program.
+1983-|Hargrove kept a tally of abends on the side of the {HW}. The final count was {N}. She says it would have been fewer without Kowalczyk.
+1996-|W. Nowak, contract programmer, Y2K era. Nowak's code is the only code in this program with consistent indentation.
+1996-|Nowak's invoice for the Y2K work is in the binder, behind the Y2K certificate, in front of the complaint about the invoice.
+1997-2001|The Y2K Task Force reviewed this program. The Task Force had a logo. The logo is on a mug in {PLACE}.
+1997-|The Y2K Task Force marked every changed line with TF in the comment. Do not remove the TF marks. They are the only audit trail.
+2003-|P. Venkataraman led a cleanup and did not remove a single comment. "They are the documentation," she wrote. She was right.
+2003-|Venkataraman's design note: "Do not rewrite this. Wrap it." The program has been wrapped {SMALLN} times since.
+1988-|L. Fennimore, DBA, loaded the benchmark medians from the database into card images for this program. The card images are a database export now. The cards are still the format.
+1988-|Fennimore's comment on the input layout: "Columns are a contract." The contract has not been renegotiated.
+2008-|E. Delgado, application support, answers the phone when this job fails. Her extension is the one in the error message.
+2008-|Delgado's runbook addendum covers every failure seen since 2008. It is longer than the program.
+1976-|K. Brandt, statistician, reviewed the ladder in 1979 and recommended actual percentiles. The recommendation is filed under "noted."
+1976-|Brandt's memo on the ladder is titled "On the Use of Fixed Multipliers in Place of Data." It was not well received.
+1976-|Brandt wrote the standard deviation routine below. It is never called. Brandt knew it would not be. He wrote it anyway.
+2016-|C. Okonkwo containerized this job in 2016. The container runs the same program the cards ran. He considered this a success, and so do we.
+2012-|Okonkwo's note on the Dockerfile: "This image contains a FORTRAN compiler and a sense of history."
+1986-1986|S. Feldman, summer intern, 1986, wrote the ordinal suffix routine. It handles 1, 2 and 3. It produces "142th." He went back to school in August.
+1986-|Feldman's routine is still in production. Every report that says "142th" is a tribute to the summer of 1986.
+1990-|B. Ashworth, compensation methodologist, owns the ladder now. She has been asked to change it {SMALLN} times. She has declined each time with a citation to memo 81-114.
+1990-|Ashworth's annual note to the {COMMITTEE}: "No change to the ladder is recommended." It is the shortest annual note in the company.
+The ladder was ratified by the compensation committee on 1981-02-17 and has since been cited in hundreds of client deliverables.
+Memo 81-114 is one sentence long: "All figures shall be expressed in dollars." It has not been amended.
+1987-|Memo 87-44 added P33 and P67. Memo 87-45 asked why. No reply is on file.
+1991-|Audit finding 91-07 disabled the RANDU call "to remove the appearance of randomness." The call remains, disabled.
+Audit 83-07: "Rounding creates the appearance of generosity." The finding is quoted in three programs and one wedding toast.
+Form RD-114 requires two vice president signatures. The form was introduced in 1979 after Kowalczyk changed the ladder by accident.
+1986-|The 1986 machine room flood reached the second shelf. This program's source deck was on the third shelf.
+1987-|The 1987 disk failure is the reason for the checksum. The checksum would not have detected the 1987 disk failure.
+The elevator incident of {OLDYEAR} is the reason the deck has sequence numbers. The deck fell eleven floors. It did not fall eleven floors. It fell over.
+The department used to call this program "the Tabulator." Then "Old Faithful." Then just "the job."
+This is the program that appears in the department's {YEAR} holiday skit. Hargrove played the card reader.
+1990-|The department softball team, the Truncators, was named after this program's rounding policy.
+Every new programmer is told the story of the 1981 ratification. Nobody remembers who first told it.
+The phrase "it has always been that way" first appears in a comment in this program in {OLDYEAR}. It has been used as a justification {N} times since.

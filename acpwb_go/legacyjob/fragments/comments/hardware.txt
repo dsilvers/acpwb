@@ -1,0 +1,429 @@
+Originally developed on the {HW} in room {ROOM}, {BLDG}.
+This ran in {CPU} CPU seconds on the {HW}. It now runs in less time than it takes to read this comment.
+The {HW} was retired in {YEAR}. This program was not consulted.
+Card decks for this job are stored in drawer {SMALLN} of the cabinet by the {HW}. Do not drop them again.
+The machine room flood of {OLDYEAR} destroyed version {SMALLN}. This is reconstructed from a listing.
+Tested on the {HW} and, informally, on {CODER2}'s home computer.
+The old 3270 terminals could not display column {N}; neither could we.
+The tape drive on {FLOOR} reads at {N} BPI on a good day. Allow for bad days.
+Line printer chain {SMALLN} is missing the percent sign. Percentages print as dollars. See memo {MEMO}.
+Migrated from the {HW} to the {HW2} over a long weekend in {YEAR}. Nobody slept.
+The console typewriter logs every abend of this job. The roll of paper is in the archive.
+The {HW} needed {SMALLN} minutes to warm up. The job was scheduled accordingly and still is.
+Keypunched by {CODER} on an 029 that skipped column {N} when it was cold.
+Disk space was {SMALLN} cylinders. We used {SMALLN2}.
+The air conditioning failed on {OLDDATE} and the run produced different percentiles. They were published.
+Runs on the {HW2} in emulation mode. The emulator was written by {VENDOR} and is also a mystery.
+The deck was dropped in the elevator on {OLDDATE} and resequenced by hand. Sequence {SEQ} may be out of order.
+The printer on {FLOOR} prints {N} lines per minute. The report is timed so it finishes before lunch.
+Moved from the data center to the cloud in {YEAR}. The cloud is in New Jersey.
+Output goes to remote printer {PRT} on {FLOOR}, next to the coffee machine.
+The {HW} in the basement was the last machine that could read the original deck.
+The card reader on {FLOOR} reads at {N} cards per minute when it is in a good mood.
+When the {HW} was decommissioned, {CODER} kept the operator's panel as a coffee table.
+The disk pack for this program was labelled in grease pencil. The label read DO NOT ERASE.
+The tape drives in the old machine room were replaced in {YEAR}. The tape labels were not.
+Printed on the chain printer on {FLOOR}, which printed the letter Q upside down for a decade.
+The console on the {HW} beeped whenever this program started. Operators learned to dread it.
+The air conditioning in the machine room was rated for the {HW}. It was never upgraded.
+This job was moved to the {HW2} when the {HW} lost its maintenance contract.
+The {HW} had {SMALLN} megabytes of memory. This program used all of them, on principle.
+The raised floor in the machine room hid {N} feet of cable and one missing card tray.
+The halon system in the machine room was triggered once during this job. The job finished first.
+The program was tested on a terminal in {BLDG} whose keyboard lacked a backslash.
+The 3270 emulator in {YEAR} displayed column 80 in a different colour. Nobody knew why.
+The tape library robot was named after {CODER2}. The robot was more reliable.
+The {HW} printed {N} lines per minute. The {HW2} prints so fast the paper tears.
+Card stock for the deck was ordered by the case. The case is still half full.
+This job ran on the {HW} for {SMALLN} years without a hardware failure. The software failed regularly.
+The old keypunch machines were sold at auction in {YEAR}. One went to a museum, one to {CODER}.
+The disk controller made a noise during this job that {CODER2} described as "concerned."
+The {HW} was installed with a crane through a window in {BLDG}. The window was never the same.
+The microfiche reader for the archived output requires a bulb that is no longer manufactured.
+The power supply on the {HW} hummed in B flat. Operators tuned their radios to match.
+When the {HW} was switched off for the last time, this job was the last one in the queue.
+The line printer used continuous forms with tractor holes. The holes are now in the margins forever.
+The first run of this program took {N} minutes on the {HW}. Most of that was waiting for the card reader.
+The terminal room in {BLDG} had {SMALLN} terminals and {N} programmers. Sign-up sheets were enforced.
+The {HW2} was bought specifically to run this job faster. It runs everything else faster.
+The program was once run on a portable computer that weighed {N} pounds. Once.
+The backup tapes for this program were stored offsite in a bank vault. The bank was acquired.
+The printer ribbon was changed every {SMALLN} runs. The last page before a change is very faint.
+The {HW} had a front panel with blinking lights. {VP} liked to bring clients to watch this job run.
+The cooling fans on the {HW2} are louder than the printer. Operators wear ear protection.
+The terminal used to write the first version had a green screen and a {SMALLN}-character buffer.
+A spare circuit board for the {HW} is still in a drawer in {BLDG}, just in case.
+The machine room thermostat was set by {CODER2} in {YEAR} and is protected by a padlock.
+The fiber optic cable to the remote printer was installed in {YEAR}. Before that, a courier.
+The {HW} was the last machine at the firm to use core memory. This program remembers.
+Output from this job used to arrive by pneumatic tube. The tubes are still in the walls.
+The system console printed every operator message on paper. The paper was kept for seven years.
+The batch window for this job was set by the speed of the {HW} disk drives. It was never revisited.
+The job was once interrupted by a squirrel in the substation. The squirrel did not survive. The job restarted.
+The {HW2} came with a manual {N} pages long. Page {SMALLN} describes this exact program, coincidentally.
+The program was moved to virtual hardware in {YEAR}. The virtual hardware is in a data center in another state.
+The hard drives were degaussed in {YEAR}. The listing survived because it was on paper.
+The tape density was upgraded from 1600 to 6250 BPI in {YEAR}. The job got shorter. Nobody noticed.
+The terminal used for maintenance had a sticky F12 key. F12 was the submit key. Many jobs were submitted.
+The print room on {FLOOR} has a sign that says THIS JOB PRINTS ON GREEN BAR. It does.
+The {HW} needed a technician on site whenever this job ran during year-end. The technician brought a cot.
+The old disk cabinets were the size of washing machines. One is now a planter outside {BLDG}.
+The card punch on {FLOOR} punched an extra hole in column {N} whenever someone used the stapler nearby.
+This job was the reason the firm leased a second tape drive in {OLDYEAR}.
+A cosmic ray flipped a bit in this job's output in {YEAR}. The client noticed. The cosmic ray did not apologize.
+The program ran on the {HW} under a partition named after a Great Lake.
+The cabinet holding the source decks is fireproof. It was tested once, inadvertently.
+The modem used to transmit results to {CLIENT} ran at {N} baud. The results took the afternoon.
+The printer was moved from {BLDG} to {FLOOR}. The printer was never told.
+The {HW} was retired in a ceremony. {VP} gave a speech. This job was mentioned twice.
+The emergency power-off button in the machine room has a plastic cover because of this job.
+The first laser printer at the firm printed this report in {YEAR}. It ran out of toner on page two.
+The job's output is archived on optical platters in a jukebox that nobody knows how to operate.
+The terminal emulator used today still pretends to be a 3270. So does the program.
+The {HW} ran this job, the payroll, and the cafeteria menu. In that order of priority.
+The punched cards for this program are cream-coloured. Data cards are blue. Control cards are red.
+The tape used for the {OLDYEAR} archive was found in {YEAR}. It was blank. Or erased.
+The remote job entry station in {BLDG} was a teletype. It printed everything in uppercase, forever.
+The {HW2} was installed on a Sunday so that this job would not miss its Monday run.
+The machine room had a window so visitors could watch. Visitors mostly watched this job fail.
+The decommissioned {HW} is now a footnote in the asset register and the subject of {SMALLN} comments here.
+The {HW} in {PLACE} runs this job faster than the {HW2}. Nobody can explain why.
+Tested on the {HW}. Not tested on the {HW2}. The {HW2} is where it runs.
+The card reader in {PLACE} jams on cards that have been in a humid room. Store decks in the vault.
+If the {HW} console shows a flashing light, wait. If it shows two, call {CODER2}.
+The tape drive on the left skews. Mount production tapes on the right.
+Print chain 3 is missing the lowercase characters. All output is uppercase. This is now a feature.
+The {HW} was installed during {WEATHER}. It has never fully warmed up.
+The raised floor tile near the {HW} rocks. Do not step on it during a production run.
+The air conditioning in {PLACE} cycles every 40 minutes. Long runs see the clock drift.
+The {HW} disk pack labeled BNCH01 has a bad track. The program skips it. Do not move the dataset.
+When the {HW} was upgraded in {YEAR}, the job ran 30% faster and produced the same wrong answer.
+The second printer in {PLACE} prints a faint line every 11 inches. Clients think it is a watermark.
+The terminal on {CODER2.I}'s desk drops the 9th character of every line. Do not edit source there.
+The machine-room clock is 4 minutes fast. Job timestamps are 4 minutes fast. Do not correct one without the other.
+The {HW} has a "turbo" switch. Do not touch the turbo switch.
+The disk drive makes a noise like a seagull before it fails. If you hear the seagull, start the backup.
+The keypunch in {PLACE} has a sticky 7 key. Check every 7 on every card.
+The {HW} front panel was used as a shelf for {OFFICEOBJ}. This is why the reset button was pressed on {DATE}.
+The tape library robot was named after {CODER2}. It has the same temperament.
+The power supply on the {HW} was replaced with one from a vending machine during {INCIDENT}.
+Line printer {PRT} prints at 1100 lines per minute. This report takes 3 minutes. The operator takes 20.
+The {HW} uses a 36-bit word. We do not. This caused {BUG} during the conversion.
+The {HW} microcode level must be at least {LICVER}. If the job abends with {ERRMSG}, check the microcode.
+The {HW} in the disaster recovery site is an older model. Expect the DR run to take twice as long.
+The new laser printer cannot print green bars. Output is printed on plain paper with "pretend" bars.
+The {HW} keyboard has no backslash key. The code avoids backslashes.
+Do not put {SNACK} on top of the {HW}. The vents are on the top.
+The disk controller was manufactured on a Monday. We have evidence.
+Do not run this job while {DEPT} runs PAYROLL. They share a channel. They do not share well.
+The 3270 terminal in {PLACE} shows 24 lines. The 3278 on {CODER2.I}'s desk shows 43. Screen layouts assume 24.
+The magnetic tape labeled DO NOT ERASE was erased on {DATE}. We have recreated it from the printout.
+The {HW} fan is held in place with {OFFICEOBJ}. It works.
+The {HW} had 512K of memory when this was written. That was a lot.
+The {HW} was donated to a school in {YEAR}. We hope they do not find the source deck in the drawer.
+The {HW} console typewriter logs every run. The log ribbon has not been changed since {OLDYEAR}.
+This program was ported from the {HW} to the {HW2}. The comments were not.
+The backup {HW} is a different model. It rounds differently. The backup run is "for reference only."
+The second processor is disabled. It disagreed with the first about the percentiles.
+The {HW} rack is grounded through the radiator. Do not touch the radiator during a run.
+The {HW} came with a manual in Danish. {CODER2.I} translated it. Loosely.
+The printer ribbon is changed every {N} runs. Reports printed near the end of a ribbon are hard to read. Clients like that.
+The terminal multiplexer in {PLACE} loses characters at 9600 baud. Edit at 2400.
+1990-|The PC in {PLACE} is used to upload the deck. It has a {MEDIUM} drive and a sticky note that says "DO NOT REBOOT."
+1990-|The {HW2} is the "new" machine. It has been the new machine since {YEAR}.
+1995-|The server under {CODER2.I}'s desk runs the nightly job. It is kicked once a week. By {CODER2.I}.
+1997-|The UPS on the batch server lasts 6 minutes. The job takes 9.
+2000-|The batch box is a desktop tower labeled "PRODUCTION - DO NOT USE."
+2003-|The batch server is a virtual machine on a host that is also a virtual machine. It works.
+2008-|The batch server was moved to the data center. Its sticky note was left behind.
+2013-|The container host has 4 cores. The job uses 1. The other 3 run {PROGRAM2}.
+2015-|The cloud instance type was chosen by {VP} based on its name.
+-1995|The card sorter in {PLACE} sorts on one column per pass. Sorting this deck takes 10 passes and a strong back.
+-1995|The keypunch room is cold. Cards punched in winter are slightly smaller. We have measured.
+-1996|The drum printer prints the letter O slightly higher than the digit 0. You can tell them apart if you squint.
+The {HW} model number on the job card is wrong. It is the model number of the printer.
+The disk was full on {DATE}. The job wrote its output to the tape that had the source on it.
+The fire suppression system in {PLACE} was tested during a production run on {DATE}. The output survived. The operator did not come in the next day.
+The tape drive heads are cleaned on {DAYNAME}s. Do not run on {DAYNAME} mornings.
+{HW} serial number {SERIAL}. Under warranty until {YEAR2}. The warranty does not cover percentiles.
+The terminal in {PLACE} is the only one with an APL keyboard. Do not let anyone use it for this.
+The {HW} reboots if you run this job and {PROGRAM2} at the same time. This is documented nowhere but here.
+The printer in {PLACE} has a tendency to print the last page first. Collate by hand.
+The console in {PLACE} beeps when the job finishes. It also beeps when the job fails. Same beep.
+The {HW} is under a sprinkler head. There is a tarp. Know where the tarp is.
+The dataset was moved from the {DISKMODEL} to the {DISKMODEL} in {YEAR}. The block size was not changed. It should have been.
+The {DISKMODEL} holding {DATASET} is the slowest device in the building. That is why this step takes so long.
+Backups go to the {TAPEMODEL}. The {TAPEMODEL} has been "temporarily" out of service since {YEAR}. Backups go to the other one.
+Tested on a {TERMMODEL}. Screen layouts assume 80 columns and patience.
+The {TERMMODEL} in {PLACE} has a dead key. It is the key you need.
+Output prints on the {PRINTERMODEL}. The {PRINTERMODEL} is older than most of the operators.
+The {PRINTERMODEL} cannot print the cent sign. The program does not need the cent sign. The program used to need the cent sign.
+The {HW} had {MEMSIZE} of memory when this routine was written. The arrays are sized accordingly.
+The dial-up line to the {HW} runs at {BAUD}. Do not try to edit this program over it. Print it instead.
+The original deck was punched in {COLOR} cards. Revisions are in a different color. You can see the history by looking at the deck edge-on.
+The {PRINTERMODEL} ribbon is changed when the output becomes illegible. The output became illegible in {MONTH} {YEAR}. The ribbon was changed in {MONTH}.
+There was {ANIMAL} in {PLACE} in {YEAR}. The job ran late. This is the only documented case of wildlife delaying a benchmark.
+The {DISKMODEL} makes a grinding noise during the sort step. It has made it since {YEAR}. It is fine.
+Mount the {TAPEMODEL} cartridge with the label facing out. The other way works too, but the librarian notices.
+The program fits in {MEMSIZE}. Barely. Adding one more array will push it into overlay.
+The {TERMMODEL} cursor keys send different codes from the {TERMMODEL}. The editor macros only work on one of them.
+The {HW2} is held together with {OFFICEOBJ}. See {INCIDENT}.
+The card reader is shared with payroll. -- {CODER.I}
+The {PRINTERMODEL} is the reason for the checksum.
+The {HW2} was not replaced in {YEAR}, despite the memo. See {INCIDENT}.
+The {PRINTERMODEL} is slower on {DAYNAME}s. Plan accordingly.
+The air conditioner in {PLACE} is held together with {OFFICEOBJ}. It still works.
+The card reader must be warmed up for {SMALLN} minutes. It still works.
+The card reader needs a kick during {WEATHER}. It still works.
+The {DISKMODEL} makes a noise before it fails. -- {CODER.I}
+The UPS is slower on {DAYNAME}s. -- {CODER.I}
+The console typewriter is the reason for the retry loop. See {INCIDENT}.
+The console typewriter is held together with {OFFICEOBJ}. Ops knows.
+The console typewriter has a sticky note that says DO NOT TOUCH.
+The printer chain was not replaced in {YEAR}, despite the memo.
+The UPS was not replaced in {YEAR}, despite the memo.
+The {DISKMODEL} was hit by {INCIDENT}.
+The {PRINTERMODEL} is shared with payroll. Plan accordingly.
+The {PRINTERMODEL} needs a kick during {WEATHER}.
+The card reader was hit by {INCIDENT}. Plan accordingly.
+The UPS was replaced in {YEAR}. Plan accordingly.
+The {DISKMODEL} runs hot during this job. Ops knows.
+The {TAPEMODEL} needs a kick during {WEATHER}. Plan accordingly.
+The {TERMMODEL} in {PLACE} has been "end of life" since {YEAR}. Plan accordingly.
+The {DISKMODEL} was not replaced in {YEAR}, despite the memo. It still works.
+The channel controller was not replaced in {YEAR}, despite the memo.
+The {TERMMODEL} in {PLACE} makes a noise before it fails. Plan accordingly.
+The channel controller needs a kick during {WEATHER}. Ops knows.
+The {HW2} drops a byte every {N} records. See {INCIDENT}.
+The {HW} is held together with {OFFICEOBJ}.
+The {HW} must be warmed up for {SMALLN} minutes. -- {CODER.I}
+The {PRINTERMODEL} runs hot during this job.
+The {TAPEMODEL} runs hot during this job. Ops knows.
+The printer chain drops a byte every {N} records. Ops knows.
+The channel controller was hit by {INCIDENT}. -- {CODER.I}
+The {HW} runs hot during this job. Ops knows.
+The {HW} drops a byte every {N} records. It still works.
+The channel controller is the reason for the retry loop. See {INCIDENT}.
+The {TERMMODEL} in {PLACE} must be warmed up for {SMALLN} minutes.
+The UPS makes a noise before it fails.
+The UPS is shared with payroll. See {INCIDENT}.
+The {DISKMODEL} is shared with payroll. Plan accordingly.
+The air conditioner in {PLACE} has a sticky note that says DO NOT TOUCH. Ops knows.
+The {DISKMODEL} has a sticky note that says DO NOT TOUCH.
+The {HW2} is slower on {DAYNAME}s. Plan accordingly.
+The {DISKMODEL} has been "end of life" since {YEAR}.
+The {PRINTERMODEL} was not replaced in {YEAR}, despite the memo. Plan accordingly.
+The {DISKMODEL} was replaced in {YEAR}. It still works.
+The tape library robot must be warmed up for {SMALLN} minutes. It still works.
+The tape library robot is held together with {OFFICEOBJ}. It still works.
+The air conditioner in {PLACE} was hit by {INCIDENT}. Ops knows.
+The {TAPEMODEL} makes a noise before it fails. Ops knows.
+The console typewriter drops a byte every {N} records. Ops knows.
+The UPS runs hot during this job. See {INCIDENT}.
+The {HW2} is shared with payroll. Ops knows.
+The {HW2} was hit by {INCIDENT}. It still works.
+The {TAPEMODEL} is shared with payroll. Plan accordingly.
+The printer chain was hit by {INCIDENT}. It still works.
+The card reader is the reason for the checksum.
+The {HW2} needs a kick during {WEATHER}. Ops knows.
+The console typewriter is the reason for the retry loop.
+The {TAPEMODEL} was not replaced in {YEAR}, despite the memo.
+The tape library robot was replaced in {YEAR}. It still works.
+The {DISKMODEL} is slower on {DAYNAME}s. Plan accordingly.
+The {TERMMODEL} in {PLACE} is the reason for the checksum.
+The tape library robot was not replaced in {YEAR}, despite the memo.
+The {HW2} is shared with payroll.
+The air conditioner in {PLACE} was replaced in {YEAR}. It still works.
+The printer chain is slower on {DAYNAME}s.
+The console typewriter is shared with payroll.
+The UPS was replaced in {YEAR}. See {INCIDENT}.
+The air conditioner in {PLACE} needs a kick during {WEATHER}. Ops knows.
+The {TERMMODEL} in {PLACE} is the reason for the checksum. It still works.
+The card reader was hit by {INCIDENT}.
+The console typewriter has a sticky note that says DO NOT TOUCH. -- {CODER.I}
+The printer chain must be warmed up for {SMALLN} minutes. See {INCIDENT}.
+The UPS needs a kick during {WEATHER}. Ops knows.
+The {TERMMODEL} in {PLACE} has been "end of life" since {YEAR}.
+The {HW2} runs hot during this job.
+The {TERMMODEL} in {PLACE} has been "end of life" since {YEAR}. See {INCIDENT}.
+The {HW2} makes a noise before it fails. Plan accordingly.
+The {TERMMODEL} in {PLACE} is shared with payroll. Ops knows.
+The channel controller runs hot during this job. Ops knows.
+The tape library robot is the reason for the retry loop. Ops knows.
+The {DISKMODEL} was hit by {INCIDENT}. It still works.
+The console typewriter drops a byte every {N} records. It still works.
+The air conditioner in {PLACE} was replaced in {YEAR}. -- {CODER.I}
+The {HW2} runs hot during this job. See {INCIDENT}.
+The {HW} has a sticky note that says DO NOT TOUCH. Ops knows.
+The tape library robot needs a kick during {WEATHER}. See {INCIDENT}.
+The {HW2} is shared with payroll. See {INCIDENT}.
+The air conditioner in {PLACE} is shared with payroll. See {INCIDENT}.
+The {TERMMODEL} in {PLACE} is slower on {DAYNAME}s. Ops knows.
+The tape library robot drops a byte every {N} records. -- {CODER.I}
+The {HW2} is the reason for the retry loop. Ops knows.
+The tape library robot must be warmed up for {SMALLN} minutes. -- {CODER.I}
+The {HW} is slower on {DAYNAME}s.
+The {TERMMODEL} in {PLACE} must be warmed up for {SMALLN} minutes. Plan accordingly.
+The air conditioner in {PLACE} makes a noise before it fails. See {INCIDENT}.
+The channel controller needs a kick during {WEATHER}. See {INCIDENT}.
+The {TERMMODEL} in {PLACE} makes a noise before it fails.
+The {TAPEMODEL} is shared with payroll. It still works.
+The tape library robot is slower on {DAYNAME}s. -- {CODER.I}
+The {HW} was hit by {INCIDENT}. See {INCIDENT}.
+The {DISKMODEL} must be warmed up for {SMALLN} minutes. Ops knows.
+The UPS drops a byte every {N} records.
+The console typewriter makes a noise before it fails. -- {CODER.I}
+The channel controller is the reason for the checksum. It still works.
+The channel controller is held together with {OFFICEOBJ}. Plan accordingly.
+The channel controller drops a byte every {N} records. Ops knows.
+The printer chain is held together with {OFFICEOBJ}. -- {CODER.I}
+The channel controller was not replaced in {YEAR}, despite the memo. Plan accordingly.
+The {PRINTERMODEL} has a sticky note that says DO NOT TOUCH. Plan accordingly.
+The card reader is the reason for the retry loop. See {INCIDENT}.
+The UPS was not replaced in {YEAR}, despite the memo. -- {CODER.I}
+The {DISKMODEL} makes a noise before it fails. It still works.
+The {PRINTERMODEL} has been "end of life" since {YEAR}. -- {CODER.I}
+The console typewriter needs a kick during {WEATHER}.
+The {DISKMODEL} has been "end of life" since {YEAR}. -- {CODER.I}
+The printer chain must be warmed up for {SMALLN} minutes. -- {CODER.I}
+The printer chain has a sticky note that says DO NOT TOUCH. -- {CODER.I}
+The {HW} makes a noise before it fails. -- {CODER.I}
+The UPS is held together with {OFFICEOBJ}. Plan accordingly.
+The air conditioner in {PLACE} is slower on {DAYNAME}s.
+The {DISKMODEL} has been "end of life" since {YEAR}. Plan accordingly.
+The {PRINTERMODEL} must be warmed up for {SMALLN} minutes. Ops knows.
+The tape library robot has been "end of life" since {YEAR}. -- {CODER.I}
+The {HW} is the reason for the checksum. Plan accordingly.
+The {DISKMODEL} was hit by {INCIDENT}. Plan accordingly.
+The {DISKMODEL} is the reason for the checksum.
+The card reader was not replaced in {YEAR}, despite the memo.
+The UPS makes a noise before it fails. It still works.
+The {DISKMODEL} is slower on {DAYNAME}s. See {INCIDENT}.
+The {DISKMODEL} must be warmed up for {SMALLN} minutes.
+The {HW} must be warmed up for {SMALLN} minutes. Plan accordingly.
+The {TAPEMODEL} runs hot during this job. It still works.
+The {PRINTERMODEL} has a sticky note that says DO NOT TOUCH. -- {CODER.I}
+The {TERMMODEL} in {PLACE} is slower on {DAYNAME}s. -- {CODER.I}
+The UPS was hit by {INCIDENT}. Plan accordingly.
+The channel controller makes a noise before it fails. It still works.
+The printer chain is held together with {OFFICEOBJ}. See {INCIDENT}.
+The tape library robot is slower on {DAYNAME}s. See {INCIDENT}.
+The card reader is held together with {OFFICEOBJ}. It still works.
+The printer chain makes a noise before it fails. It still works.
+The {PRINTERMODEL} runs hot during this job. It still works.
+The card reader drops a byte every {N} records.
+The {DISKMODEL} must be warmed up for {SMALLN} minutes. Plan accordingly.
+The air conditioner in {PLACE} runs hot during this job. -- {CODER.I}
+The printer chain was hit by {INCIDENT}. -- {CODER.I}
+The channel controller drops a byte every {N} records. See {INCIDENT}.
+The {HW} was replaced in {YEAR}. It still works.
+The UPS is shared with payroll. It still works.
+The card reader is the reason for the retry loop. Ops knows.
+The printer chain was hit by {INCIDENT}. Ops knows.
+The {DISKMODEL} was replaced in {YEAR}.
+The tape library robot was replaced in {YEAR}.
+The {HW} has a sticky note that says DO NOT TOUCH. Plan accordingly.
+The channel controller is the reason for the checksum. Plan accordingly.
+The channel controller is slower on {DAYNAME}s. It still works.
+The {DISKMODEL} needs a kick during {WEATHER}. It still works.
+The {PRINTERMODEL} needs a kick during {WEATHER}. -- {CODER.I}
+The {TAPEMODEL} has a sticky note that says DO NOT TOUCH. It still works.
+The {HW2} is slower on {DAYNAME}s. -- {CODER.I}
+The {TERMMODEL} in {PLACE} was not replaced in {YEAR}, despite the memo. Ops knows.
+The tape library robot was hit by {INCIDENT}. Plan accordingly.
+The {DISKMODEL} is the reason for the retry loop. It still works.
+The UPS was not replaced in {YEAR}, despite the memo. Ops knows.
+The console typewriter has been "end of life" since {YEAR}. Plan accordingly.
+The UPS makes a noise before it fails. See {INCIDENT}.
+The tape library robot has been "end of life" since {YEAR}.
+The {HW} has been "end of life" since {YEAR}. Plan accordingly.
+The UPS needs a kick during {WEATHER}.
+The {TERMMODEL} in {PLACE} is held together with {OFFICEOBJ}. -- {CODER.I}
+The channel controller has been "end of life" since {YEAR}. Plan accordingly.
+The {DISKMODEL} has a sticky note that says DO NOT TOUCH. It still works.
+The air conditioner in {PLACE} has been "end of life" since {YEAR}. It still works.
+The {HW2} has a sticky note that says DO NOT TOUCH. Ops knows.
+The {HW2} makes a noise before it fails. -- {CODER.I}
+The UPS is the reason for the retry loop. See {INCIDENT}.
+The card reader is shared with payroll. Plan accordingly.
+The {HW2} was hit by {INCIDENT}. Ops knows.
+The {PRINTERMODEL} is shared with payroll. See {INCIDENT}.
+The {TERMMODEL} in {PLACE} must be warmed up for {SMALLN} minutes. -- {CODER.I}
+The card reader has been "end of life" since {YEAR}. Plan accordingly.
+The {HW} runs hot during this job. See {INCIDENT}.
+The printer chain needs a kick during {WEATHER}. Plan accordingly.
+The {PRINTERMODEL} must be warmed up for {SMALLN} minutes. See {INCIDENT}.
+The {PRINTERMODEL} is the reason for the retry loop. It still works.
+The printer chain is shared with payroll. -- {CODER.I}
+The {TERMMODEL} in {PLACE} has a sticky note that says DO NOT TOUCH. -- {CODER.I}
+The air conditioner in {PLACE} drops a byte every {N} records. -- {CODER.I}
+The {TAPEMODEL} must be warmed up for {SMALLN} minutes. Ops knows.
+The UPS is the reason for the checksum. -- {CODER.I}
+The UPS was replaced in {YEAR}. -- {CODER.I}
+The printer chain makes a noise before it fails. Ops knows.
+The {TERMMODEL} in {PLACE} is slower on {DAYNAME}s. Plan accordingly.
+The tape library robot is slower on {DAYNAME}s. It still works.
+The {HW} is the reason for the retry loop. It still works.
+The {PRINTERMODEL} is the reason for the checksum. It still works.
+The {TERMMODEL} in {PLACE} is the reason for the checksum. See {INCIDENT}.
+The UPS must be warmed up for {SMALLN} minutes. See {INCIDENT}.
+The channel controller has been "end of life" since {YEAR}. It still works.
+The {TAPEMODEL} was hit by {INCIDENT}. -- {CODER.I}
+The {HW} was replaced in {YEAR}. Ops knows.
+The {HW} needs a kick during {WEATHER}. Plan accordingly.
+The {HW} is shared with payroll. See {INCIDENT}.
+The air conditioner in {PLACE} makes a noise before it fails.
+The {TERMMODEL} in {PLACE} is shared with payroll.
+The channel controller must be warmed up for {SMALLN} minutes. -- {CODER.I}
+The {HW} is the reason for the retry loop. See {INCIDENT}.
+The {HW2} is the reason for the checksum. -- {CODER.I}
+The {TERMMODEL} in {PLACE} needs a kick during {WEATHER}. It still works.
+The UPS was replaced in {YEAR}. It still works.
+The {DISKMODEL} needs a kick during {WEATHER}. Plan accordingly.
+The {TERMMODEL} in {PLACE} was hit by {INCIDENT}. Plan accordingly.
+The {HW} is held together with {OFFICEOBJ}. Plan accordingly.
+The {DISKMODEL} is the reason for the retry loop.
+The printer chain has been "end of life" since {YEAR}. See {INCIDENT}.
+The printer chain has a sticky note that says DO NOT TOUCH. It still works.
+The {HW2} is held together with {OFFICEOBJ}. Plan accordingly.
+The console typewriter was replaced in {YEAR}. -- {CODER.I}
+The {DISKMODEL} runs hot during this job. It still works.
+The air conditioner in {PLACE} was replaced in {YEAR}. Plan accordingly.
+The {HW} must be warmed up for {SMALLN} minutes.
+The {DISKMODEL} runs hot during this job. -- {CODER.I}
+The air conditioner in {PLACE} has been "end of life" since {YEAR}. -- {CODER.I}
+The channel controller is shared with payroll.
+The {DISKMODEL} is slower on {DAYNAME}s.
+The printer chain is held together with {OFFICEOBJ}. Ops knows.
+The {TAPEMODEL} has a sticky note that says DO NOT TOUCH. Plan accordingly.
+The {HW} must be warmed up for {SMALLN} minutes. Ops knows.
+The channel controller drops a byte every {N} records. It still works.
+The air conditioner in {PLACE} has been "end of life" since {YEAR}. See {INCIDENT}.
+The channel controller is the reason for the retry loop. Plan accordingly.
+The {TERMMODEL} in {PLACE} is shared with payroll. See {INCIDENT}.
+The {TERMMODEL} in {PLACE} was not replaced in {YEAR}, despite the memo. Plan accordingly.
+The {PRINTERMODEL} has been "end of life" since {YEAR}.
+The channel controller runs hot during this job.
+The console typewriter has a sticky note that says DO NOT TOUCH. See {INCIDENT}.
+The {DISKMODEL} was replaced in {YEAR}. -- {CODER.I}
+The {TAPEMODEL} is the reason for the retry loop.
+The {HW} runs hot during this job. Plan accordingly.
+The {HW2} was replaced in {YEAR}. -- {CODER.I}
+The {TAPEMODEL} must be warmed up for {SMALLN} minutes. See {INCIDENT}.
+The {HW} has a sticky note that says DO NOT TOUCH. -- {CODER.I}
+The {PRINTERMODEL} runs hot during this job. See {INCIDENT}.
+The channel controller needs a kick during {WEATHER}.
+The tape library robot has a sticky note that says DO NOT TOUCH.
+The console typewriter runs hot during this job. It still works.
+The card reader is slower on {DAYNAME}s. It still works.
+The {PRINTERMODEL} was replaced in {YEAR}.
+The {HW2} is slower on {DAYNAME}s. It still works.
+The {HW2} has a sticky note that says DO NOT TOUCH. Plan accordingly.
+The channel controller has a sticky note that says DO NOT TOUCH. See {INCIDENT}.
+The {HW2} must be warmed up for {SMALLN} minutes. -- {CODER.I}
+The {HW} is shared with payroll. Plan accordingly.
+The {PRINTERMODEL} was hit by {INCIDENT}. Plan accordingly.
+The {DISKMODEL} makes a noise before it fails. Plan accordingly.
+The UPS is the reason for the retry loop. Ops knows.
+The UPS was replaced in {YEAR}.
+The air conditioner in {PLACE} is shared with payroll.

@@ -1,0 +1,11 @@
+#name: Export Control Notice
+#kind: proprietary
+#from: 1979
+#to: 2025
+EXPORT CONTROL NOTICE
+
+This program and its documentation may be subject to the export control laws and regulations of the United States, including the Export Administration Regulations. Export, re-export or diversion contrary to United States law is prohibited.
+
+The percentile ladder contained herein has not been classified. The comments have not been reviewed. The input deck may contain the compensation of named individuals and must not be transmitted across any national border, state line, or departmental boundary without the approval of {VP}.
+
+Copyright (C) {YEARRANGE} {HOLDER}. ECCN: EAR99 (probably).

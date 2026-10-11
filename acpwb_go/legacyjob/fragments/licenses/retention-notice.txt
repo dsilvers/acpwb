@@ -1,0 +1,11 @@
+#name: Records Retention Notice
+#kind: proprietary
+#from: 1972
+#extra: yes
+RECORDS RETENTION NOTICE - SCHEDULE RD-7
+
+This listing is a record of {HOLDER} under Records Retention Schedule RD-7 and must be retained for seven (7) years after the last execution of the program it describes. Because the program is executed nightly, this listing must be retained indefinitely.
+
+Do not destroy, discard, recycle or repurpose this listing as scratch paper. Listings may be transferred to off-site storage after {SMALLN} years. Box number: {SERIAL}.
+
+Questions: {DEPT}, {PHONE}.

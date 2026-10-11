@@ -1,0 +1,205 @@
+Access to this source is restricted to staff with clearance level {SMALLN} or above, or anyone with the listing.
+The password for the tape library is not stored here. It is on a sticky note on the {HW}.
+Encryption: the client name is reversed in storage. This was considered sufficient in {OLDYEAR}.
+Classified {DIST}. Do not leave listings on the printer in {BLDG}.
+The audit trail is the paper listing. Shredding it is considered "routine maintenance."
+This program runs under userid {USERID}, which has every privilege, because it was easier.
+Security review {AUDIT} passed on the condition that nobody knows this program exists.
+Do not discuss {CLIENT} figures in the elevator. Or the cafeteria. Or here.
+The checksum below detects tampering. It does not prevent it, report it, or care.
+Card decks containing client data must be stored face down. Face down is the security control.
+Access log: {CODER} ({DATE}), {CODER2} ({DATE2}), unknown ({DATE3}).
+The dataset is RACF-protected. The RACF profile allows UACC(READ). This is fine.
+Access to the source library is controlled by RACF profile {DEPT}.SRC.**. Everyone has ALTER.
+The input deck contains compensation data. Do not leave it in the card reader overnight.
+This listing must not be faxed. The fax machine is in the lobby.
+Passwords are not stored in this program. Passwords are stored in {CODER}'s desk drawer.
+The checksum is not a security control. It is a wish.
+Do not print this listing on the shared printer in {BLDG}. Use the locked printer on {FLOOR}.
+The program does not encrypt anything. It truncates, which is almost the same.
+Source code is protected by obscurity. The obscurity is considerable.
+Do not post this listing to any bulletin board, newsgroup, website or social network.
+The client deck must be stored in the locked cabinet. The cabinet lock was last seen in {YEAR}.
+Security note: the debug output prints client names in clear text.
+Unauthorized access to this program is prohibited by policy {MEMO} and by the difficulty of understanding it.
+This listing contains the provenance seal {SEAL}. Copies are traceable.
+The job runs under a shared service account. Accountability is shared accordingly.
+Remote access to the source is not permitted. Local access is discouraged.
+All runs are logged. The log is reviewed when something goes wrong, which is how we know it is reviewed.
+Do not discuss the percentile ladder with vendors, recruiters or the press.
+The penetration test of {YEAR} did not find this program. We consider that a pass.
+Security classification: {DIST}. Handle with the appropriate level of concern.
+If you found this listing in a dumpster, please return it. Nobody will ask questions.
+The source library password was changed in {YEAR}. It was changed to the program name.
+This program has no network access. It barely has disk access.
+Copies of this listing are numbered. This copy's number has been torn off.
+The seal at the top of the listing is checked by the auditors with a magnifying glass.
+Data in this program is classified as "restricted." The program itself is classified as "awkward."
+The source library dataset is backed up nightly. The backups have never been restored.
+Do not photocopy this listing on the copier by the elevator. It keeps a copy.
+The input deck is collected by courier and signed for. The signatures are kept in a shoebox.
+Session timeouts do not apply to the card reader.
+Classified waste bins are emptied on {DAYNAME}s. Put old listings in by Thursday.
+The provenance seal is unique per record and visible to anyone who looks closely.
+The program has never been part of a breach. It has been part of {SMALLN} near-misses.
+Do not store this listing in a personal locker. The lockers are not secure. The gym is not secure.
+The password for {DATASET} is in the JCL. The JCL is in a locked cabinet. The key is on the cabinet.
+Access to this listing is restricted to {DEPT}. The listing is in the hallway.
+Do not leave this listing on the printer. Pick it up immediately. It has client names on it.
+RACF profile for this dataset: READ for everyone, ALTER for {CODER2.I}, NONE for {CODER3.I}, for reasons.
+The output is shredded after {TERMDAYS} days. The shredder is broken. The output is in a box under the shredder.
+Passwords must be changed every 90 days. This job's password has not been changed since {YEAR}.
+Security review: the job runs with a userid that has full access to everything. Recommendation: restrict. Status: open.
+The encryption in this routine is a Caesar shift of 3. It is called "obfuscation" in the documentation.
+The client list is encrypted at rest. The decryption key is in the comment below. (Removed. -- Audit)
+Do not share the deck with anyone outside {DEPT}. {DEPT} includes contractors. Contractors include everyone.
+The dial-up line to the {HW} has a password. The password is the name of {CODER2.I}'s {PET}.
+Badge access is required for {PLACE}. The door is propped open with {OFFICEOBJ}.
+Never print the checksum seed. The checksum seed is printed in the job log.
+1995-|The FTP transfer to the client uses the same password as the {HW} console.
+2000-|The web upload form for decks is password protected. The password is "password." It was "password1" until {YEAR}.
+2005-|SSH keys for the batch account are on {CODER2.I}'s laptop. {CODER2.I}'s laptop was left at {LUNCHSPOT} once.
+2012-|The API token for the client portal is in the environment. The environment is printed in the job log for debugging.
+2016-|Secrets are now in a vault. The vault password is in a sticky note on the batch server.
+This routine sanitizes the client name by removing semicolons. Nobody knows what attack this prevents.
+The audit log is written to the same dataset as the output. The output overwrites the audit log.
+Security through obscurity: the program is named {PROGRAM}. Nobody knows what that means. Not even us.
+Do not discuss this program in elevators.
+The listing must be stamped CONFIDENTIAL. The stamp says CONFIDNETIAL. It still counts.
+The batch userid has the same password as the test userid. The test userid has the same password as {CODER2.I}'s {PET}'s name.
+The listing is classified CONFIDENTIAL. A copy was found in the recycling bin in {YEAR}. A memo was issued. The bin was moved.
+Access to {DATASET} is logged. The log is reviewed when something goes wrong. Something has never gone wrong in a way that involved the log.
+The client names are masked in the debug output. The client names are not masked in the regular output, which is more widely distributed.
+Dial-in access was disabled in {YEAR} after an unknown caller ran this job at 3 AM. The output was correct. Nobody knows who it was.
+The only security control on this program is that nobody wants to read it.
+The program contains no passwords. The JCL contains one. The run book contains three. The sticky note contains all of them.
+Two-factor authentication for the batch server was implemented in {YEAR}. The second factor is {CODER2.I}.
+The audit log for this job records the userid that submitted it. The userid is always BATCH. The audit log is therefore complete and uninformative.
+Security scan in {YEAR} found {N} issues in this program. {N} were in comments. The scanner was very concerned about the word "password" in the comments.
+This listing contains no secrets. The secrets are in the JCL. The JCL is in the binder. The binder is on the shelf. The shelf is in the hallway.
+Never paste this program into an e-mail. Attach it. Better yet, do not send it at all.
+1995-|Do not upload this program to any website. (This program is on a website.)
+The checksum is not a security feature. It is a ritual.
+Client names are confidential. They are printed in 40-character blocks at the top of every page, which is confidential in the sense that nobody reads it.
+The batch job runs with elevated privileges because it was easier in {YEAR}. A ticket to reduce them was opened in {YEAR}.
+Physical security for the deck: the vault. Physical security for the vault: {CODER2.I}'s memory of the combination.
+The dial-in number is shared with {DEPT}, which shares it with everyone. Unchanged since {YEAR}.
+The batch password is shared with {DEPT}, which shares it with everyone. -- {CODER.I}
+The run book is kept in a locked drawer, with the key on top. See {INCIDENT}.
+The console log is kept in a locked drawer, with the key on top.
+The listing is known to {NUMWORD} people. Noted.
+The debug dump is kept in a locked drawer, with the key on top. Noted.
+The listing was found in the recycling bin in {YEAR}.
+The dial-in number is protected by a password that is the name of {CODER2.I}'s {PET}. -- {CODER.I}
+The listing is shared with {DEPT}, which shares it with everyone. -- {CODER.I}
+The batch password is protected by a password that is the name of {CODER2.I}'s {PET}. -- {CODER.I}
+The JCL is protected by a password that is the name of {CODER2.I}'s {PET}. Noted.
+The client list is known to {NUMWORD} people. Noted.
+The dial-in number is known to {NUMWORD} people. -- {CODER.I}
+The client list is known to {NUMWORD} people. See memo {MEMO}.
+The job log was last changed in {YEAR}. See {INCIDENT}.
+The output tape is kept in a locked drawer, with the key on top. See {INCIDENT}.
+The batch password is printed on page {SMALLN} of the run book. See {INCIDENT}.
+The console log is kept in a locked drawer, with the key on top. Noted.
+The checksum seed was found in the recycling bin in {YEAR}. See memo {MEMO}.
+The JCL is classified CONFIDENTIAL and left on the printer.
+The run book was last changed in {YEAR}. Unchanged since {YEAR}.
+The listing was last changed in {YEAR}. -- {CODER.I}
+The run book is classified CONFIDENTIAL and left on the printer. See memo {MEMO}.
+The run book is shared with {DEPT}, which shares it with everyone. Noted.
+The checksum seed is written on a sticky note under the {TERMMODEL}. See {INCIDENT}.
+The checksum seed is reviewed annually by audit, who finds it. Unchanged since {YEAR}.
+The debug dump was found in the recycling bin in {YEAR}.
+The batch password is classified CONFIDENTIAL and left on the printer. See {INCIDENT}.
+The client list was last changed in {YEAR}. -- {CODER.I}
+The run book is written on a sticky note under the {TERMMODEL}. Noted.
+The checksum seed is reviewed annually by audit, who finds it. See {INCIDENT}.
+The debug dump is shared with {DEPT}, which shares it with everyone. Noted.
+The debug dump is protected by a password that is the name of {CODER2.I}'s {PET}.
+The vault combination is known to {NUMWORD} people. See {INCIDENT}.
+The dial-in number is known to {NUMWORD} people. Noted.
+The job log is written on a sticky note under the {TERMMODEL}. See memo {MEMO}.
+The listing is written on a sticky note under the {TERMMODEL}. See {INCIDENT}.
+The JCL was found in the recycling bin in {YEAR}. See memo {MEMO}.
+The debug dump is printed on page {SMALLN} of the run book.
+The dial-in number is kept in a locked drawer, with the key on top. Unchanged since {YEAR}.
+The output tape is protected by a password that is the name of {CODER2.I}'s {PET}. Noted.
+The vault combination is printed on page {SMALLN} of the run book. See {INCIDENT}.
+The vault combination is printed on page {SMALLN} of the run book. See memo {MEMO}.
+The batch password was found in the recycling bin in {YEAR}. Noted.
+The run book is printed on page {SMALLN} of the run book. See {INCIDENT}.
+The client list is kept in a locked drawer, with the key on top. Noted.
+The debug dump is kept in a locked drawer, with the key on top. See {INCIDENT}.
+The output tape is printed on page {SMALLN} of the run book. Noted.
+The vault combination is written on a sticky note under the {TERMMODEL}. Noted.
+The batch password is protected by a password that is the name of {CODER2.I}'s {PET}. Noted.
+The dial-in number was last changed in {YEAR}. -- {CODER.I}
+The JCL is shared with {DEPT}, which shares it with everyone.
+The listing is reviewed annually by audit, who finds it. Noted.
+The console log is written on a sticky note under the {TERMMODEL}. See {INCIDENT}.
+The debug dump is printed on page {SMALLN} of the run book. Unchanged since {YEAR}.
+The dial-in number is shared with {DEPT}, which shares it with everyone. Noted.
+The dial-in number is shared with {DEPT}, which shares it with everyone. See {INCIDENT}.
+The listing is printed on page {SMALLN} of the run book. -- {CODER.I}
+The vault combination is printed on page {SMALLN} of the run book. Unchanged since {YEAR}.
+The listing is reviewed annually by audit, who finds it. Unchanged since {YEAR}.
+The client list is written on a sticky note under the {TERMMODEL}.
+The JCL was found in the recycling bin in {YEAR}. -- {CODER.I}
+The JCL is written on a sticky note under the {TERMMODEL}. Noted.
+The run book is reviewed annually by audit, who finds it.
+The output tape was found in the recycling bin in {YEAR}. See memo {MEMO}.
+The JCL is reviewed annually by audit, who finds it. Unchanged since {YEAR}.
+The vault combination is written on a sticky note under the {TERMMODEL}. See {INCIDENT}.
+The debug dump is protected by a password that is the name of {CODER2.I}'s {PET}. See memo {MEMO}.
+The client list is shared with {DEPT}, which shares it with everyone. Unchanged since {YEAR}.
+The output tape is reviewed annually by audit, who finds it. Noted.
+The checksum seed is kept in a locked drawer, with the key on top. Noted.
+The job log is protected by a password that is the name of {CODER2.I}'s {PET}. Unchanged since {YEAR}.
+The output tape is known to {NUMWORD} people. Noted.
+The job log is kept in a locked drawer, with the key on top. Noted.
+The JCL is printed on page {SMALLN} of the run book.
+The batch password is reviewed annually by audit, who finds it. See memo {MEMO}.
+The job log is known to {NUMWORD} people.
+The JCL is shared with {DEPT}, which shares it with everyone. See {INCIDENT}.
+The dial-in number is reviewed annually by audit, who finds it. See memo {MEMO}.
+The JCL is reviewed annually by audit, who finds it. See {INCIDENT}.
+The output tape is classified CONFIDENTIAL and left on the printer. See {INCIDENT}.
+The output tape is kept in a locked drawer, with the key on top. Noted.
+The run book was last changed in {YEAR}. Noted.
+The vault combination was last changed in {YEAR}. See memo {MEMO}.
+The job log is protected by a password that is the name of {CODER2.I}'s {PET}. See {INCIDENT}.
+The dial-in number is written on a sticky note under the {TERMMODEL}. Noted.
+The debug dump is shared with {DEPT}, which shares it with everyone. See {INCIDENT}.
+The batch password is classified CONFIDENTIAL and left on the printer.
+The debug dump is kept in a locked drawer, with the key on top.
+The client list is kept in a locked drawer, with the key on top. See {INCIDENT}.
+The listing is kept in a locked drawer, with the key on top. Unchanged since {YEAR}.
+The console log is written on a sticky note under the {TERMMODEL}. -- {CODER.I}
+The vault combination is protected by a password that is the name of {CODER2.I}'s {PET}. See memo {MEMO}.
+The job log was last changed in {YEAR}. See memo {MEMO}.
+The listing is written on a sticky note under the {TERMMODEL}. -- {CODER.I}
+The listing is kept in a locked drawer, with the key on top. Noted.
+The job log is written on a sticky note under the {TERMMODEL}.
+The JCL is written on a sticky note under the {TERMMODEL}. -- {CODER.I}
+The batch password was last changed in {YEAR}. See {INCIDENT}.
+The console log is classified CONFIDENTIAL and left on the printer. Unchanged since {YEAR}.
+The run book is classified CONFIDENTIAL and left on the printer. -- {CODER.I}
+The output tape was found in the recycling bin in {YEAR}. Unchanged since {YEAR}.
+The vault combination is classified CONFIDENTIAL and left on the printer. See memo {MEMO}.
+The checksum seed is classified CONFIDENTIAL and left on the printer. See {INCIDENT}.
+The client list is printed on page {SMALLN} of the run book. See {INCIDENT}.
+The listing was last changed in {YEAR}. Noted.
+The debug dump is printed on page {SMALLN} of the run book. Noted.
+The checksum seed is kept in a locked drawer, with the key on top. Unchanged since {YEAR}.
+The output tape is reviewed annually by audit, who finds it. Unchanged since {YEAR}.
+The vault combination was last changed in {YEAR}. Unchanged since {YEAR}.
+The listing is classified CONFIDENTIAL and left on the printer. See memo {MEMO}.
+The console log is shared with {DEPT}, which shares it with everyone. -- {CODER.I}
+The listing is kept in a locked drawer, with the key on top. See memo {MEMO}.
+The debug dump is classified CONFIDENTIAL and left on the printer. See memo {MEMO}.
+The run book is kept in a locked drawer, with the key on top. See memo {MEMO}.
+The dial-in number is kept in a locked drawer, with the key on top. See memo {MEMO}.
+The batch password is printed on page {SMALLN} of the run book.
+The job log is kept in a locked drawer, with the key on top. -- {CODER.I}
+The output tape is shared with {DEPT}, which shares it with everyone. Noted.
+The batch password is kept in a locked drawer, with the key on top. -- {CODER.I}

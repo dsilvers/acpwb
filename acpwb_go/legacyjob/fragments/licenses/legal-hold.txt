@@ -1,0 +1,11 @@
+#name: Legal Hold Notice
+#kind: proprietary
+#from: 1985
+#extra: yes
+LEGAL HOLD - DO NOT DESTROY
+
+This listing and all versions of {PROGRAM}, its input decks, output and job logs from {YEAR} through the present are subject to a legal hold issued by the Legal Department on {DATE} in connection with matter {CONTRACT}.
+
+You must preserve these materials in their current form. Do not delete, alter, overwrite or reformat them, including by "cleaning up" the comments. Ordinary retention schedules are suspended.
+
+The hold will remain in effect until you receive written notice of its release. Holds issued by this department have never been released.

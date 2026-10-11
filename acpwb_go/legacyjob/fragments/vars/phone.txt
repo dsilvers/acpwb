@@ -1,0 +1,9 @@
+# {PHONE}
+x{EXT}
+414-555-0{SMALLN}{SMALLN}
+the red phone in the machine room
+the operator console phone
+the pay phone in the lobby
+-1998|a beeper
+1995-2008|a pager
+2000-|a cell phone

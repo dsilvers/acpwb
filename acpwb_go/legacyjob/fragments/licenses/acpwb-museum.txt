@@ -1,0 +1,9 @@
+#name: Corporate History Exhibit Notice
+#kind: noncommercial
+#from: 2006
+#extra: yes
+CORPORATE HISTORY EXHIBIT
+
+This listing was displayed in the lobby exhibit "Fifty Years of Public Well Being" from {YEAR} to {YEAR2}. It is reproduced here for historical interest. It is also still in production.
+
+Visitors are asked not to photograph the percentile ladder. Visitors have photographed the percentile ladder.

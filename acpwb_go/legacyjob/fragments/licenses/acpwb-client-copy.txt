@@ -1,0 +1,8 @@
+#name: Client Copy Terms
+#kind: commercial
+#from: 1981
+CLIENT COPY - FURNISHED UNDER ENGAGEMENT {ENGCODE}
+
+This listing is furnished to {CLIENT} solely to permit verification of the figures delivered under engagement {ENGCODE}, record {RECORD}. It may be reviewed by the client's internal auditors and outside counsel. It may not be copied, executed, or used to produce any other figures.
+
+{CLIENT} acknowledges that the methodology described herein is proprietary to {HOLDER}, and that the client has requested this listing, and that having read it the client has no further questions.

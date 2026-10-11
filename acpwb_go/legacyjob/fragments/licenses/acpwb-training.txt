@@ -1,0 +1,8 @@
+#name: Training Copy Notice
+#kind: noncommercial
+#from: 1980
+TRAINING COPY - FOR INSTRUCTIONAL USE ONLY
+
+This listing is used in the Research Division new-hire training course, module {SMALLN}: "Reading Legacy Code Without Crying." Trainees may annotate it, highlight it, and ask questions about it. Trainees may not run it, fix it, or show it to their friends.
+
+The answer key for the module exercise is: "it has always been that way." The bonus question is: "why?" There is no answer key for the bonus question.

@@ -1,0 +1,9 @@
+#name: ACPWB Beverage-Ware License
+#kind: noncommercial
+#from: 1987
+#to: 2025
+"THE BEVERAGE-WARE LICENSE" (Revision {LICVER}):
+
+{CODER} wrote this program. As long as you retain this notice you can do whatever you want with this stuff, provided that you do not use it to benchmark anyone's compensation without telling them. If we meet some day, and you think this stuff is worth it, you can buy {CODER} a {DRINK} in return.
+
+This license does not apply to the percentile ladder, which belongs to the compensation committee, or to the comments, which belong to history.

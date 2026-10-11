@@ -1,0 +1,9 @@
+#name: Personal Data Processing Notice
+#kind: proprietary
+#from: 2018
+#extra: yes
+PERSONAL DATA NOTICE
+
+This program processes aggregate benchmark data and does not process personal data, except for the names, initials and e-mail addresses of the programmers who appear in its comments, who are data subjects and have not been told.
+
+Data controller: {HOLDER}, {ADDRESS}. Data protection contact: {DEPT}. Lawful basis: legitimate interest in knowing who to blame. Retention: indefinite (see Records Retention Notice).

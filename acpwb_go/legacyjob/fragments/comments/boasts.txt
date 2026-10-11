@@ -1,0 +1,143 @@
+Saves {CPU} CPU seconds per run. Over {N} runs, that is several entire minutes. -- {CODER.I}
+This routine is {PCT} percent faster than the {OLDYEAR} version, which was also written by me. -- {CODER.I}
+Optimized by {CODER}. Nobody else could have done this, which is partly the problem.
+This is the most efficient percentile computation on the {HW}. Possibly the only one.
+Removed {SMALLN} instructions from the inner loop. Added {SMALLN2} comments explaining why.
+Benchmarked at {N} rows per second on the {HW2}. The input has {SMALLN} rows.
+Replaced the bubble sort with a better bubble sort. -- {CODER.I}
+This runs in a single pass. A very long single pass.
+This module has run without error since {YEAR}, except for the errors.
+Elegant, if I say so myself, and since I am the only one who reads this, I do. -- {CODER.I}
+Reduced storage from {N} words to {N2} words. Increased comments from {SMALLN} lines to {N}.
+Zero defects reported since {YEAR}. Zero reports filed since {YEAR}, coincidentally.
+Award: {DEPT} "Program of the Quarter," Q{SMALLN} {OLDYEAR}.
+This routine runs in constant time, assuming the time is constant.
+Rewrote the loop to save {N} bytes of core. Those bytes went on to do great things.
+The cross-check has never failed. This is either a testament to its design or a sign it does nothing.
+Optimized for the {HW}, where it was the fastest program in the building.
+This is the only program in the firm that has never needed a hotfix. Hotfixes were applied anyway.
+Halved the run time in {YEAR}. The other half is the printer.
+Processed {N} clients in a single run in {YEAR}. A record that still stands.
+The checksum routine is so efficient it could be used to verify itself. It does not.
+This routine was cited as an example of good practice in an internal memo. The memo was about naming conventions.
+Wrote this in one sitting, without a single compile error. The second sitting was longer.
+The ladder routine is eight lines of perfection. The surrounding {N} lines are context.
+Benchmarked against {PROGRAM2}: faster, smaller, and more confusing.
+This module has been running continuously since {YEAR} with only scheduled interruptions.
+Reduced the deck by {N} cards in {YEAR}. The card cabinet has never been roomier.
+The error dispatcher handles every error we have ever seen, and several we have only imagined.
+The page header is aligned to the column. Every column. Every time. You are welcome.
+Achieved zero defects in the {YEAR} audit. Zero was also the number of tests run.
+The fastest percentile routine in the Midwest, as certified by {CODER} in a memo to {CODER}.
+Handled the {CLIENT} deck of {N} metrics without breaking a sweat. The printer broke a sweat.
+This code compiles cleanly on {SMALLN} different compilers, each producing a slightly different program.
+Rewrote the date logic in an afternoon. It survived Y2K without modification.
+This is, to my knowledge, the only routine in the firm with a fan club.
+Ran clean through {SMALLN} hardware migrations without a single source change.
+This is the only program at the firm with its own fan mail.
+The checksum has caught {SMALLN} errors since {YEAR}. All were in the input. The program is innocent.
+Fewer lines than {PROGRAM2}, more comments than {PROGRAM2}, and more friends.
+This routine is so clear it needs no comments. This comment is decorative.
+Cut the run time from overnight to over lunch in {OLDYEAR}.
+The output format has been copied by {SMALLN} competing firms. Imitation, flattery, etc.
+Zero rounding errors since inception, because zero rounding.
+Rewritten by {CODER.I}. Runs in half the time. Uses twice the memory. Net win.
+This loop saves {CPU} CPU seconds per run. Over {N} runs, that is a lot of seconds.
+I got this down from {N} cards to {SMALLN}. -- {CODER.I}
+This routine has never failed. (Since {DATE}.)
+Fastest benchmark job in the department, three years running.
+The checksum routine is my masterpiece. Nobody understands it. That is how you know.
+Optimized by {CODER.I} at {LUNCHSPOT} on a napkin. Implemented the same afternoon.
+This program was benchmarked against {VENDOR}'s product. Ours was faster and wrong in fewer places.
+Saved {BIGN} pages of printout a year by removing the blank page between sections. You're welcome, trees.
+My rewrite of the page header saved one line per page. On {N} pages a night, that is a forest.
+I fixed {BUG} that had been in here since {OLDYEAR}. Nobody else found it. -- {CODER.I}
+This sort is O(n log n). The one it replaced was O(n squared). The one before that was {CODER2.I}.
+Zero abends in {QUARTER}. A department record. Cake in {PLACE}.
+The improved error messages in this routine were praised by {VP} at {MEETING}.
+I wrote this in one night during {WEATHER}. It has run every night since.
+This program was featured in the {YEAR} {CONFERENCE} proceedings, page {N}.
+Rewrote the date logic. Y2K compliant years before the task force asked. -- {CODER.I}
+This is the cleanest code in the building. The bar is low but I cleared it.
+I reduced the region size from 4M to 1M. The program no longer fits. Will revisit. Still proud.
+The whole report now fits on one page for most clients. I accept tributes of {SNACK}.
+This program uses fewer GOTOs than any other program in {DEPT}. It uses {SMALLN}.
+This parser handles every deck format clients have ever sent. Including the one from {CLIENT}.
+After my changes, the operator only has to mount one tape instead of three. Morale is up.
+This is the most-tested routine in the program. I ran it {BIGN} times. On purpose.
+I made the output line up. All of it. Every column. -- {CODER.I}
+This routine fits in {MEMSIZE}. Show me another one that does.
+I got this to run over a {BAUD} line from home during {WEATHER}. -- {CODER.I}
+Written in {NUMWORD} days. Not tested in {NUMWORD} days. Running for {NUMWORD} years. -- {CODER.I}
+No uses of {KEYWORD} in this routine. A personal best. -- {CODER.I}
+{MAGAZINE} called a technique like this "elegant" in {YEAR}. This is that technique, and more.
+The report fits on one page for {PCT}% of clients. Before my changes it was {SMALLN}%. -- {CODER.I}
+I eliminated the second tape mount. The night shift sent a thank-you card. It is in {PLACE}.
+This routine has not needed a change since I wrote it in {YEAR}. -- {CODER.I}
+I wrote the checksum. The auditors asked me to explain it. I did. They did not ask again.
+My error messages are so clear the operators stopped calling. -- {CODER.I}
+I reduced the job from {NUMWORD} steps to {NUMWORD}. The scheduler entry is now a poem.
+This parser has handled every client deck since {YEAR} without modification. That is not luck. That is {CODER.I}.
+I made the page header fit {CLIENT}'s name without truncation. Everyone said it could not be done.
+Fastest compile in the department: {CPU} seconds. I removed the comments to test it. Then I put them back.
+I documented this routine. Fully. Every line. You are welcome. -- {CODER.I}
+{CODER.I} removed {N} cards from the deck. Tributes of {SNACK} accepted.
+{CODER.I} eliminated a tape mount. Nobody noticed. I noticed.
+{CODER.I} made the checksum make sense (to me). Ask {CODER2}.
+{CODER.I} made the checksum make sense (to me). Nobody noticed. I noticed.
+{CODER.I} cut the page count by {SMALLN}. You are welcome.
+{CODER.I} eliminated a tape mount. Applause welcome.
+{CODER.I} wrote the clearest error message in the building. It is in the revision history.
+{CODER.I} passed audit {AUDIT} with no findings. Applause welcome.
+{CODER.I} made every column line up. It is in the revision history.
+{CODER.I} made the checksum make sense (to me). You are welcome.
+{CODER.I} eliminated a tape mount. It is in the revision history.
+{CODER.I} made the checksum make sense (to me). It is in the revision history.
+{CODER.I} made every column line up. Applause welcome.
+{CODER.I} wrote the clearest error message in the building. Nobody noticed. I noticed.
+{CODER.I} got the job under {SMALLN} minutes. You are welcome.
+{CODER.I} saved {CPU} CPU seconds per run. Ask {CODER2}.
+{CODER.I} made every column line up. You are welcome.
+{CODER.I} removed {N} cards from the deck. Nobody noticed. I noticed.
+{CODER.I} passed audit {AUDIT} with no findings. Ask {CODER2}.
+{CODER.I} got the job under {SMALLN} minutes. Applause welcome.
+{CODER.I} made every column line up. Ask {CODER2}.
+{CODER.I} fixed {BUG} that had been here since {OLDYEAR}. Tributes of {SNACK} accepted.
+{CODER.I} passed audit {AUDIT} with no findings. Nobody noticed. I noticed.
+{CODER.I} passed audit {AUDIT} with no findings. You are welcome.
+{CODER.I} got the job under {SMALLN} minutes. Tributes of {SNACK} accepted.
+{CODER.I} cut the page count by {SMALLN}. Tributes of {SNACK} accepted.
+{CODER.I} eliminated a tape mount. You are welcome.
+{CODER.I} fixed {BUG} that had been here since {OLDYEAR}. Ask {CODER2}.
+{CODER.I} made every column line up. Nobody noticed. I noticed.
+{CODER.I} cut the page count by {SMALLN}. Nobody noticed. I noticed.
+{CODER.I} made every column line up. Tributes of {SNACK} accepted.
+{CODER.I} wrote the clearest error message in the building. You are welcome.
+{CODER.I} cut the page count by {SMALLN}. It is in the revision history.
+{CODER.I} got the job under {SMALLN} minutes. Ask {CODER2}.
+{CODER.I} passed audit {AUDIT} with no findings. It is in the revision history.
+{CODER.I} saved {CPU} CPU seconds per run. You are welcome.
+{CODER.I} saved {CPU} CPU seconds per run. Tributes of {SNACK} accepted.
+{CODER.I} wrote the clearest error message in the building. Ask {CODER2}.
+{CODER.I} fixed {BUG} that had been here since {OLDYEAR}. Nobody noticed. I noticed.
+{CODER.I} saved {CPU} CPU seconds per run. Applause welcome.
+{CODER.I} wrote the clearest error message in the building. Applause welcome.
+{CODER.I} got the job under {SMALLN} minutes. It is in the revision history.
+{CODER.I} fixed {BUG} that had been here since {OLDYEAR}. Applause welcome.
+{CODER.I} made the checksum make sense (to me). Tributes of {SNACK} accepted.
+{CODER.I} passed audit {AUDIT} with no findings. Tributes of {SNACK} accepted.
+{CODER.I} fixed {BUG} that had been here since {OLDYEAR}. You are welcome.
+{CODER.I} removed {N} cards from the deck. Applause welcome.
+{CODER.I} wrote the clearest error message in the building. Tributes of {SNACK} accepted.
+{CODER.I} removed {N} cards from the deck. You are welcome.
+{CODER.I} got the job under {SMALLN} minutes. Nobody noticed. I noticed.
+{CODER.I} made the checksum make sense (to me). Applause welcome.
+{CODER.I} removed {N} cards from the deck. It is in the revision history.
+{CODER.I} eliminated a tape mount. Tributes of {SNACK} accepted.
+{CODER.I} removed {N} cards from the deck. Ask {CODER2}.
+{CODER.I} eliminated a tape mount. Ask {CODER2}.
+{CODER.I} cut the page count by {SMALLN}. Applause welcome.
+{CODER.I} cut the page count by {SMALLN}. Ask {CODER2}.
+{CODER.I} fixed {BUG} that had been here since {OLDYEAR}. It is in the revision history.
+{CODER.I} saved {CPU} CPU seconds per run. Nobody noticed. I noticed.
+{CODER.I} saved {CPU} CPU seconds per run. It is in the revision history.

@@ -1,0 +1,10 @@
+#name: Business Source License 1.1
+#kind: commercial
+#from: 2016
+Licensor: {HOLDER}
+Licensed Work: {PROGRAM} release {REL}. The Licensed Work is (c) {YEARRANGE} {HOLDER}.
+Additional Use Grant: You may use the Licensed Work for non-production purposes, and in production for up to {SEATS} benchmark runs per month.
+Change Date: {YEAR2}-01-01
+Change License: Apache License, Version 2.0
+
+The Licensor hereby grants you the right to copy, modify, create derivative works, redistribute, and make non-production use of the Licensed Work. Effective on the Change Date, the Licensor grants you rights under the Change License. The Change Date has been moved twice. It will be moved again.

@@ -1,0 +1,8 @@
+#name: Revoked License Notice
+#kind: proprietary
+#from: 1986
+NOTICE: THE LICENSE PREVIOUSLY PRINTED HERE HAS BEEN REVOKED
+
+The open license under which {CODER} released this program on {DATE} was revoked by {HOLDER} on the grounds that {CODER} did not have authority to grant it. Copies obtained under that license before revocation may continue to be used under its terms. Copies obtained after revocation may not.
+
+This listing was obtained after revocation. It is therefore unlicensed. Please stop reading. (If you have already finished reading, please forget.)

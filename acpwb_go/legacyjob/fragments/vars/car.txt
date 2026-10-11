@@ -1,0 +1,21 @@
+# {CAR}
+-1995|an AMC Pacer
+-1993|a Chevy Citation
+-1996|a Ford Pinto
+-1998|a Plymouth Reliant
+-1999|a Dodge Omni
+-2002|an Oldsmobile Cutlass
+-2004|a Buick LeSabre
+a station wagon with wood paneling
+a pickup truck
+a minivan
+a Volvo
+a Saab
+1990-|a Ford Taurus
+1994-|a Geo Metro
+1997-|a Saturn
+2001-|a PT Cruiser
+2004-|a Prius
+2012-|a Tesla
+a company car
+a rental car

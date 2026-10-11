@@ -1,0 +1,2300 @@
+Original program.
+Initial version for the {INDUSTRY} practice.
+Added P33 and P67 per memo {MEMO}.
+All output now expressed in dollars per memo {MEMO}.
+Converted to {LANG}. Mostly.
+Fixed overflow in {VAR} for large clients.
+Added deck checksum per audit {AUDIT}.
+Removed rounding per audit {AUDIT}.
+Changed page length from {N} to {N2} lines.
+Added {CLIENT} special handling.
+Removed {CLIENT} special handling.
+Restored {CLIENT} special handling.
+Y2K remediation. Four-digit years.
+Recompiled under {COMPILER}. No source changes.
+Recompiled under {COMPILER}. Some source changes.
+Moved ladder into {ROUTINE}.
+Moved ladder back out of {ROUTINE}.
+Increased metric limit to {N}.
+Added sanity check on {VAR}.
+Disabled RANDU per audit {AUDIT}.
+Changed peer group default to {PEER}.
+Corrected the corrected percentile ladder.
+Added Julian date to page header.
+Fixed page eject on the {DEPT} printer.
+Added second checksum to verify first checksum.
+Cosmetic changes to report headings.
+Reverted cosmetic changes to report headings.
+Migrated to the {HW2}.
+Ported from the {HW}.
+Added comments. Removed some comments. Net comments unchanged.
+Emergency fix for the {CLIENT} run. See ticket {TICKET}.
+Annual review. No changes. Signed.
+Renamed variables for clarity.
+Renamed variables back.
+Split {ROUTINE} into {SMALLN} routines.
+Merged {SMALLN} routines into {ROUTINE}.
+Added debug output under IDEBUG flag.
+Removed debug output. Kept IDEBUG flag.
+Changed truncation to explicit INT per {COMPILER} upgrade.
+Added error dispatcher {ROUTINE}.
+Updated copyright banner.
+Updated distribution class to {DIST}.
+Removed obsolete tape logic. Left tape label check.
+Changed record length from {N} to {N2}.
+Added cross-reference comments for engagement {ENGCODE}.
+Documented magic numbers. Partially.
+Fixed spelling in comments only.
+Hotfix for quarter-end. Do not repeat.
+Per {TEAM}: added validation for {METRIC}.
+Rebuilt from listing after the {OLDYEAR} flood.
+Merged {DEPT} changes. Resolved conflicts by hand. Many hands.
+Corrected sign of change column.
+Restored original sign of change column per client request.
+Increased name field to 40 characters.
+Reduced name field to 40 characters (it had become 41).
+Added {SMALLN} new error messages.
+Performance tuning. Saves {CPU} CPU seconds.
+Security review changes per {AUDIT}.
+Recompiled for the new license manager.
+Automated rebuild. No human involvement.
+Simplified label {LABEL}.
+Merged the cross-check for the {COMPILER} upgrade.
+Re-sequenced label {LABEL} for the {COMPILER} upgrade.
+Fixed the COMMON blocks.
+Re-sequenced the error dispatcher.
+Fixed the trailer line after audit {AUDIT}.
+Tuned the deck checksum.
+Disabled the input validation.
+Corrected the column headings.
+Revalidated the trailer line for engagement {ENGCODE}.
+Re-sequenced the card reader logic after {CODER2} complained.
+Revived the tape label check after audit {AUDIT}.
+Reorganised the tape label check.
+Expanded the leap year routine per {VP}.
+Reduced the deck checksum.
+Re-certified the leap year routine.
+Simplified the line counter following ticket {TICKET}.
+Documented the sanity limits to match {PROGRAM2}.
+Removed the trailer line during the hiring freeze.
+Renamed the record ID handling to satisfy the auditors.
+Rewrote the ordinal suffix routine per {VP}.
+Documented the cross-check after the {YEAR} incident.
+Reverted the input validation.
+Simplified the record ID handling.
+Clarified the temporary file handling.
+Corrected the error dispatcher.
+Re-certified the column headings for the {COMPILER} upgrade.
+Clarified the tape label check after the {HW2} migration.
+Revalidated the engagement metrics table.
+Revived the engagement metrics table for the {COMPILER} upgrade.
+Rewrote {VAR}.
+Re-enabled the tape label check for no recorded reason.
+Reduced the percentile ladder as a temporary measure.
+Widened the cross-check.
+Reverted the card reader logic.
+Narrowed the Julian date routine.
+Split the {CLIENT} special case for the {INDUSTRY} practice.
+Corrected the cross-check before the board meeting.
+Split the peer group card at the request of {TEAM}.
+Clarified the debug dump.
+Added {ROUTINE} following ticket {TICKET}.
+Re-sequenced the tape label check for no recorded reason.
+Reverted the storage layout.
+Re-sequenced the input validation after the {HW2} migration.
+Widened the provenance seal during the hiring freeze.
+Re-certified the benchmark table.
+Simplified the line counter.
+Hardened label {LABEL} per memo {MEMO}.
+Re-enabled the deck checksum.
+Revived the record ID handling for quarter-end.
+Reorganised the percentile ladder at the request of {TEAM}.
+Split the deck checksum for quarter-end.
+Widened the storage layout.
+Moved the deck checksum after the {YEAR} incident.
+Patched {ROUTINE}.
+Disabled the page eject logic.
+Expanded the storage layout.
+Simplified the debug dump after the {HW2} migration.
+Split the FORMAT statements.
+Patched the engagement metrics table per form {FORM}.
+Split the provenance seal.
+Re-certified the ordinal suffix routine after the deck was dropped.
+Restored the benchmark table to satisfy the auditors.
+Rewrote the page header as a temporary measure.
+Tuned the engagement metrics table as a temporary measure.
+Fixed the card reader logic for the {INDUSTRY} practice.
+Moved the trailer line.
+Disabled the benchmark table.
+Restored the leap year routine per memo {MEMO}.
+Reduced the tape label check for the {COMPILER} upgrade.
+Disabled the ordinal suffix routine per {VP}.
+Revived the COMMON blocks after the {HW2} migration.
+Corrected the tape label check for engagement {ENGCODE}.
+Removed the FORMAT statements per memo {MEMO}.
+Renamed label {LABEL}.
+Revived the engagement metrics table.
+Fixed the column headings to match {PROGRAM2}.
+Added the provenance seal per memo {MEMO}.
+Re-documented the storage layout for the {COMPILER} upgrade.
+Tuned {ROUTINE}.
+Revalidated the leap year routine per memo {MEMO}.
+Simplified {VAR} for engagement {ENGCODE}.
+Widened the error dispatcher for no recorded reason.
+Renamed the job card after the {HW2} migration.
+Clarified the job card to match {PROGRAM2}.
+Tuned the cross-check after {CODER2} complained.
+Tuned the job card.
+Reorganised the peer group card.
+Narrowed the deck checksum.
+Re-documented the provenance seal.
+Reduced the leap year routine.
+Re-enabled the leap year routine.
+Revalidated the deck checksum.
+Rewrote the debug dump.
+Restored the engagement metrics table.
+Simplified the provenance seal.
+Re-documented the column headings.
+Split the record ID handling.
+Patched the COMMON blocks.
+Re-certified the deck checksum.
+Patched the {CLIENT} special case.
+Merged the sanity limits per form {FORM}.
+Reduced the column headings for quarter-end.
+Re-documented the job card.
+Moved the column headings per {VP}.
+Reduced the input validation after the deck was dropped.
+Restored the storage layout.
+Corrected the page eject logic before the board meeting.
+Merged the benchmark table for engagement {ENGCODE}.
+Expanded {ROUTINE}.
+Reverted the peer group card after the deck was dropped.
+Rewrote the column headings.
+Re-enabled the restart logic after the {YEAR} incident.
+Simplified the trailer line per {VP}.
+Merged the restart logic.
+Hardened the card reader logic.
+Moved the restart logic.
+Re-documented the ordinal suffix routine.
+Widened {VAR}.
+Added the COMMON blocks.
+Widened the temporary file handling to match {PROGRAM2}.
+Merged the ordinal suffix routine.
+Expanded the COMMON blocks.
+Re-certified the line counter.
+Reorganised the storage layout.
+Rewrote the restart logic for engagement {ENGCODE}.
+Split label {LABEL} per memo {MEMO}.
+Reverted label {LABEL}.
+Merged the tape label check after the deck was dropped.
+Documented the provenance seal per memo {MEMO}.
+Renamed the storage layout.
+Revived the COMMON blocks.
+Re-enabled the job card per {VP}.
+Clarified the line counter to satisfy the auditors.
+Documented the {CLIENT} special case after the {HW2} migration.
+Revalidated the job card.
+Widened the percentile ladder.
+Moved the deck checksum.
+Clarified the card reader logic.
+Corrected the job card.
+Fixed the page header.
+Corrected the ordinal suffix routine.
+Corrected the debug dump.
+Renamed the metric name field per form {FORM}.
+Narrowed the card reader logic following ticket {TICKET}.
+Removed the page header.
+Tuned the error dispatcher.
+Widened the metric name field during the hiring freeze.
+Re-documented the peer group card.
+Re-enabled the card reader logic per memo {MEMO}.
+Split the job card to satisfy the auditors.
+Re-certified the trailer line before the board meeting.
+Expanded the column headings for no recorded reason.
+Reorganised the trailer line following ticket {TICKET}.
+Tuned the sanity limits.
+Widened the cross-check after the deck was dropped.
+Clarified the card reader logic for the {INDUSTRY} practice.
+Retired the job card.
+Re-sequenced the deck checksum for quarter-end.
+Documented the peer group card.
+Split the input validation.
+Retired the ordinal suffix routine.
+Revived the job card after {CODER2} complained.
+Documented the trailer line before the board meeting.
+Moved the restart logic per memo {MEMO}.
+Hardened the change column to match {PROGRAM2}.
+Hardened the tape label check to satisfy the auditors.
+Restored the trailer line at the request of {TEAM}.
+Revalidated the sanity limits.
+Narrowed the error dispatcher after the deck was dropped.
+Retired the cross-check.
+Reorganised the metric name field.
+Revived {ROUTINE} to satisfy the auditors.
+Retired the provenance seal.
+Reverted the deck checksum after the {HW2} migration.
+Clarified the page eject logic to satisfy the auditors.
+Added the page eject logic for {CLIENT}.
+Widened the debug dump for engagement {ENGCODE}.
+Corrected the line counter.
+Reverted the trailer line.
+Re-documented the engagement metrics table.
+Documented the job card.
+Rewrote {VAR} after the {HW2} migration.
+Re-sequenced the temporary file handling to satisfy the auditors.
+Re-certified the column headings.
+Moved the job card.
+Fixed the FORMAT statements.
+Simplified the change column for quarter-end.
+Clarified the line counter.
+Re-certified the percentile ladder after {CODER2} complained.
+Reverted the record ID handling.
+Re-enabled the input validation.
+Merged the storage layout per {VP}.
+Split the line counter per memo {MEMO}.
+Restored the error dispatcher.
+Corrected the change column after the {YEAR} incident.
+Fixed the card reader logic.
+Tuned the trailer line for the {INDUSTRY} practice.
+Merged the error dispatcher.
+Patched {VAR} because it seemed like a good idea.
+Narrowed the Julian date routine for the {COMPILER} upgrade.
+Added the change column.
+Merged the restart logic per form {FORM}.
+Patched the change column to satisfy the auditors.
+Removed the cross-check.
+Simplified the job card as a temporary measure.
+Restored the COMMON blocks to match {PROGRAM2}.
+Merged the COMMON blocks for engagement {ENGCODE}.
+Hardened the error dispatcher after {CODER2} complained.
+Reorganised the card reader logic.
+Revived the cross-check.
+Renamed the leap year routine.
+Moved the provenance seal after {CODER2} complained.
+Patched the restart logic for no recorded reason.
+Simplified the restart logic during the hiring freeze.
+Re-enabled the debug dump because it seemed like a good idea.
+Reduced the COMMON blocks during the hiring freeze.
+Revived the sanity limits at the request of {TEAM}.
+Moved the engagement metrics table.
+Narrowed the COMMON blocks for no recorded reason.
+Documented the storage layout.
+Moved the metric name field per memo {MEMO}.
+Revalidated the peer group card.
+Documented the sanity limits.
+Retired the trailer line after audit {AUDIT}.
+Retired the column headings before the board meeting.
+Expanded the metric name field.
+Revalidated the page header as a temporary measure.
+Retired label {LABEL} per memo {MEMO}.
+Removed the engagement metrics table.
+Corrected the page header.
+Widened the Julian date routine after {CODER2} complained.
+Clarified the leap year routine before the board meeting.
+Hardened the deck checksum.
+Expanded {ROUTINE} after the {HW2} migration.
+Re-certified the engagement metrics table.
+Re-certified the job card for no recorded reason.
+Simplified the {CLIENT} special case.
+Split the column headings before the board meeting.
+Re-documented the storage layout.
+Removed the deck checksum because it seemed like a good idea.
+Widened the tape label check.
+Retired the benchmark table.
+Re-certified the benchmark table to satisfy the auditors.
+Reduced the debug dump per form {FORM}.
+Merged the debug dump as a temporary measure.
+Retired the input validation after the {YEAR} incident.
+Re-sequenced the metric name field.
+Reorganised the restart logic after audit {AUDIT}.
+Renamed the benchmark table for engagement {ENGCODE}.
+Reverted the change column.
+Clarified {VAR} for quarter-end.
+Widened the trailer line.
+Renamed the change column.
+Rewrote the card reader logic for {CLIENT}.
+Re-sequenced the page header for the {COMPILER} upgrade.
+Fixed the Julian date routine.
+Rewrote the tape label check for {CLIENT}.
+Tuned the debug dump.
+Reduced the cross-check.
+Re-enabled {VAR} because it seemed like a good idea.
+Added the record ID handling after {CODER2} complained.
+Renamed the ordinal suffix routine as a temporary measure.
+Merged the Julian date routine.
+Rewrote the record ID handling after audit {AUDIT}.
+Patched the change column.
+Widened the engagement metrics table following ticket {TICKET}.
+Revived the cross-check to match {PROGRAM2}.
+Removed the COMMON blocks.
+Fixed the storage layout after the deck was dropped.
+Disabled the temporary file handling.
+Reverted the provenance seal.
+Moved the Julian date routine for {CLIENT}.
+Simplified the column headings.
+Split the page header at the request of {TEAM}.
+Revived the card reader logic to match {PROGRAM2}.
+Documented the leap year routine after the deck was dropped.
+Re-sequenced the change column.
+Fixed the Julian date routine during the hiring freeze.
+Re-certified label {LABEL} for the {COMPILER} upgrade.
+Renamed {VAR}.
+Disabled the page eject logic per memo {MEMO}.
+Re-sequenced the benchmark table as a temporary measure.
+Re-documented the cross-check as a temporary measure.
+Re-certified the change column.
+Moved {ROUTINE}.
+Narrowed {VAR}.
+Moved the debug dump.
+Hardened the Julian date routine.
+Moved the {CLIENT} special case.
+Expanded the FORMAT statements.
+Clarified the input validation because it seemed like a good idea.
+Disabled the page header.
+Fixed the debug dump.
+Expanded label {LABEL} for quarter-end.
+Disabled the engagement metrics table after the deck was dropped.
+Re-enabled the temporary file handling to satisfy the auditors.
+Widened the line counter after audit {AUDIT}.
+Removed the error dispatcher before the board meeting.
+Re-documented {ROUTINE}.
+Reverted the page eject logic.
+Removed the restart logic after {CODER2} complained.
+Merged the sanity limits.
+Rewrote {ROUTINE}.
+Documented the peer group card after the deck was dropped.
+Documented the storage layout per memo {MEMO}.
+Disabled the error dispatcher for engagement {ENGCODE}.
+Removed the ordinal suffix routine.
+Merged the FORMAT statements before the board meeting.
+Documented the ordinal suffix routine to satisfy the auditors.
+Disabled label {LABEL}.
+Disabled the benchmark table for {CLIENT}.
+Restored the {CLIENT} special case.
+Corrected the FORMAT statements.
+Reorganised the card reader logic before the board meeting.
+Retired the leap year routine.
+Re-sequenced the deck checksum.
+Reduced {VAR}.
+Added the Julian date routine.
+Patched the percentile ladder.
+Clarified the change column at the request of {TEAM}.
+Documented the percentile ladder for the {INDUSTRY} practice.
+Revalidated the error dispatcher.
+Reorganised the temporary file handling.
+Rewrote the deck checksum for the {COMPILER} upgrade.
+Re-sequenced the storage layout.
+Patched the record ID handling per memo {MEMO}.
+Patched the Julian date routine per memo {MEMO}.
+Removed the benchmark table.
+Patched the line counter for the {INDUSTRY} practice.
+Expanded the cross-check.
+Added the input validation for the {INDUSTRY} practice.
+Renamed the provenance seal during the hiring freeze.
+Disabled label {LABEL} after {CODER2} complained.
+Disabled the {CLIENT} special case.
+Rewrote the page header.
+Fixed the input validation for {CLIENT}.
+Split the sanity limits for the {INDUSTRY} practice.
+Clarified the tape label check.
+Re-documented the record ID handling after {CODER2} complained.
+Re-enabled {VAR}.
+Reorganised the ordinal suffix routine.
+Tuned the provenance seal because it seemed like a good idea.
+Expanded the temporary file handling after the {HW2} migration.
+Simplified the metric name field for no recorded reason.
+Rewrote the provenance seal per memo {MEMO}.
+Clarified the FORMAT statements for {CLIENT}.
+Patched the leap year routine.
+Re-certified the metric name field for {CLIENT}.
+Corrected the input validation as a temporary measure.
+Moved the storage layout for quarter-end.
+Widened the leap year routine because it seemed like a good idea.
+Documented the debug dump.
+Split the benchmark table after the {HW2} migration.
+Added the Julian date routine for {CLIENT}.
+Reorganised the input validation.
+Removed the debug dump.
+Reverted the change column after audit {AUDIT}.
+Reduced the peer group card.
+Re-certified {VAR} at the request of {TEAM}.
+Removed the tape label check.
+Narrowed the restart logic.
+Patched the ordinal suffix routine.
+Retired the ordinal suffix routine for {CLIENT}.
+Merged the {CLIENT} special case for {CLIENT}.
+Renamed the page eject logic for quarter-end.
+Revalidated the tape label check after the deck was dropped.
+Moved the sanity limits for the {INDUSTRY} practice.
+Rewrote the page eject logic for quarter-end.
+Merged the provenance seal per memo {MEMO}.
+Added the record ID handling.
+Documented the error dispatcher.
+Documented the record ID handling per {VP}.
+Tuned the sanity limits for engagement {ENGCODE}.
+Tuned the page header.
+Widened the {CLIENT} special case as a temporary measure.
+Moved the temporary file handling before the board meeting.
+Removed the peer group card following ticket {TICKET}.
+Re-documented the leap year routine.
+Restored the change column.
+Reorganised the column headings during the hiring freeze.
+Renamed the trailer line.
+Clarified the engagement metrics table to satisfy the auditors.
+Restored the peer group card.
+Clarified {ROUTINE}.
+Narrowed the column headings.
+Restored the percentile ladder.
+Re-documented {VAR}.
+Removed the column headings because it seemed like a good idea.
+Re-enabled the deck checksum after the {HW2} migration.
+Widened the error dispatcher.
+Reorganised the benchmark table.
+Re-enabled the temporary file handling.
+Hardened the leap year routine at the request of {TEAM}.
+Reduced the ordinal suffix routine during the hiring freeze.
+Re-enabled the error dispatcher for the {COMPILER} upgrade.
+Re-certified the page header.
+Added the {CLIENT} special case.
+Fixed the benchmark table after the {YEAR} incident.
+Re-sequenced the temporary file handling.
+Patched the error dispatcher after the {YEAR} incident.
+Fixed the percentile ladder.
+Fixed the trailer line.
+Removed the change column.
+Moved the metric name field.
+Widened the percentile ladder to satisfy the auditors.
+Rewrote the ordinal suffix routine.
+Hardened the tape label check.
+Clarified the peer group card.
+Clarified the deck checksum.
+Tuned the column headings per form {FORM}.
+Added the debug dump.
+Split the restart logic after {CODER2} complained.
+Rewrote {ROUTINE} as a temporary measure.
+Simplified the Julian date routine at the request of {TEAM}.
+Re-certified the change column after audit {AUDIT}.
+Simplified the benchmark table for quarter-end.
+Re-sequenced the job card.
+Retired {ROUTINE}.
+Corrected the FORMAT statements after the {YEAR} incident.
+Restored the line counter.
+Split the ordinal suffix routine.
+Clarified the error dispatcher.
+Clarified the leap year routine.
+Reorganised the debug dump for no recorded reason.
+Fixed the leap year routine.
+Removed the trailer line.
+Re-sequenced the ordinal suffix routine after {CODER2} complained.
+Reorganised the {CLIENT} special case.
+Tuned label {LABEL} after {CODER2} complained.
+Revalidated the Julian date routine.
+Revived the column headings.
+Expanded the engagement metrics table.
+Documented the restart logic.
+Re-sequenced the line counter.
+Tuned the COMMON blocks as a temporary measure.
+Revalidated the job card at the request of {TEAM}.
+Hardened the debug dump because it seemed like a good idea.
+Retired the line counter.
+Reorganised the sanity limits because it seemed like a good idea.
+Narrowed the leap year routine for no recorded reason.
+Revalidated the restart logic.
+Tuned the metric name field for engagement {ENGCODE}.
+Documented the temporary file handling.
+Merged the engagement metrics table.
+Reverted the trailer line per memo {MEMO}.
+Retired the job card because it seemed like a good idea.
+Tuned the error dispatcher per memo {MEMO}.
+Re-enabled the {CLIENT} special case after the {HW2} migration.
+Narrowed the page eject logic.
+Added the card reader logic during the hiring freeze.
+Expanded the restart logic after {CODER2} complained.
+Clarified {VAR}.
+Expanded the peer group card after the {HW2} migration.
+Re-certified the temporary file handling.
+Widened the engagement metrics table.
+Patched the temporary file handling.
+Fixed the provenance seal.
+Tuned the leap year routine as a temporary measure.
+Revived the input validation after audit {AUDIT}.
+Corrected the provenance seal.
+Rewrote the input validation to match {PROGRAM2}.
+Reverted the {CLIENT} special case per memo {MEMO}.
+Reorganised the {CLIENT} special case during the hiring freeze.
+Disabled the trailer line for quarter-end.
+Hardened the sanity limits.
+Renamed the input validation at the request of {TEAM}.
+Re-documented the restart logic as a temporary measure.
+Restored the job card per {VP}.
+Fixed the engagement metrics table.
+Expanded the benchmark table.
+Fixed the {CLIENT} special case.
+Hardened the temporary file handling per {VP}.
+Re-sequenced the engagement metrics table.
+Fixed the COMMON blocks because it seemed like a good idea.
+Patched the column headings to match {PROGRAM2}.
+Moved the line counter.
+Renamed label {LABEL} to match {PROGRAM2}.
+Reorganised the sanity limits.
+Corrected the temporary file handling.
+Revived the ordinal suffix routine.
+Expanded the line counter for the {INDUSTRY} practice.
+Removed the restart logic.
+Re-certified the provenance seal for engagement {ENGCODE}.
+Revived the storage layout.
+Expanded the benchmark table after the deck was dropped.
+Revalidated the restart logic before the board meeting.
+Re-sequenced the sanity limits after the {HW2} migration.
+Re-documented the metric name field per form {FORM}.
+Re-certified the COMMON blocks.
+Narrowed the percentile ladder at the request of {TEAM}.
+Re-sequenced the page eject logic.
+Restored the page eject logic.
+Fixed the error dispatcher during the hiring freeze.
+Clarified the ordinal suffix routine.
+Renamed the ordinal suffix routine.
+Moved the input validation.
+Merged the deck checksum for the {COMPILER} upgrade.
+Rewrote the percentile ladder.
+Renamed the percentile ladder per memo {MEMO}.
+Retired the FORMAT statements.
+Corrected the page header to match {PROGRAM2}.
+Split the leap year routine.
+Disabled the restart logic.
+Restored the provenance seal.
+Retired the cross-check after the {YEAR} incident.
+Corrected label {LABEL} to match {PROGRAM2}.
+Rewrote the COMMON blocks.
+Re-sequenced the debug dump because it seemed like a good idea.
+Restored the sanity limits to satisfy the auditors.
+Fixed the input validation.
+Re-sequenced the metric name field as a temporary measure.
+Restored the cross-check before the board meeting.
+Retired {VAR}.
+Tuned the ordinal suffix routine for no recorded reason.
+Simplified the FORMAT statements for quarter-end.
+Disabled the line counter.
+Moved the input validation after the {YEAR} incident.
+Narrowed the cross-check as a temporary measure.
+Rewrote the benchmark table after the {YEAR} incident.
+Added the percentile ladder.
+Moved the record ID handling for the {INDUSTRY} practice.
+Removed the leap year routine after the deck was dropped.
+Re-sequenced the page header.
+Simplified the job card.
+Added the job card at the request of {TEAM}.
+Restored the error dispatcher for quarter-end.
+Renamed {VAR} after the deck was dropped.
+Corrected the leap year routine.
+Removed the job card.
+Restored the benchmark table.
+Clarified the {CLIENT} special case per {VP}.
+Narrowed the change column following ticket {TICKET}.
+Reorganised the restart logic.
+Reduced the percentile ladder.
+Merged the provenance seal.
+Clarified the FORMAT statements.
+Patched the provenance seal for the {INDUSTRY} practice.
+Restored the sanity limits.
+Revalidated the FORMAT statements for {CLIENT}.
+Fixed the job card.
+Re-sequenced the restart logic.
+Split the engagement metrics table following ticket {TICKET}.
+Hardened the peer group card before the board meeting.
+Revived label {LABEL} to satisfy the auditors.
+Hardened the percentile ladder during the hiring freeze.
+Patched the storage layout.
+Hardened the restart logic.
+Re-sequenced the FORMAT statements.
+Split the sanity limits.
+Added the percentile ladder as a temporary measure.
+Re-certified the storage layout.
+Restored the page eject logic for {CLIENT}.
+Documented the column headings.
+Reorganised the Julian date routine.
+Rewrote the benchmark table.
+Merged the leap year routine for the {COMPILER} upgrade.
+Narrowed the error dispatcher.
+Disabled the restart logic following ticket {TICKET}.
+Re-documented the sanity limits before the board meeting.
+Revived the benchmark table for {CLIENT}.
+Retired the storage layout.
+Reduced the restart logic.
+Moved the cross-check for the {INDUSTRY} practice.
+Fixed the {CLIENT} special case after the {YEAR} incident.
+Fixed the column headings.
+Tuned the leap year routine.
+Hardened the engagement metrics table.
+Patched {VAR}.
+Moved the leap year routine.
+Renamed the storage layout after audit {AUDIT}.
+Documented the line counter for no recorded reason.
+Renamed the page header because it seemed like a good idea.
+Split the cross-check.
+Corrected the peer group card.
+Renamed the temporary file handling.
+Renamed the card reader logic during the hiring freeze.
+Re-enabled the page eject logic for the {INDUSTRY} practice.
+Tuned the restart logic.
+Narrowed label {LABEL}.
+Revalidated the line counter for quarter-end.
+Renamed the {CLIENT} special case.
+Revived the trailer line.
+Added the deck checksum.
+Fixed the debug dump to satisfy the auditors.
+Corrected the benchmark table after the {HW2} migration.
+Documented {VAR}.
+Re-documented the error dispatcher.
+Removed the input validation.
+Retired the tape label check.
+Merged the temporary file handling.
+Moved the record ID handling.
+Reorganised the page eject logic for engagement {ENGCODE}.
+Removed the metric name field.
+Disabled the storage layout.
+Corrected the sanity limits as a temporary measure.
+Disabled {ROUTINE} for no recorded reason.
+Expanded the {CLIENT} special case per {VP}.
+Reverted the benchmark table after audit {AUDIT}.
+Moved the tape label check because it seemed like a good idea.
+Recompiled under {COMPILER}. No source changes. Output changed anyway.
+Restored from the {OLDYEAR} listing after {INCIDENT}.
+Retyped from the printout after the source library was lost.
+Converted the deck from {MEDIUM} to {MEDIUM}.
+Removed the {CLIENT} special case. Restored the {CLIENT} special case.
+Widened the metric name field to {N} characters for {CLIENT}.
+Fixed {BUG} in the change column.
+Fixed {BUG} in the page header.
+Fixed {BUG} introduced by the previous fix.
+Added the record ID to every page, per {RULE}.
+Added the provenance seal to the trailer line.
+Added a checksum over the input deck, per audit {AUDIT}.
+Added a second checksum, because nobody trusted the first.
+Moved the percentile ladder into a BLOCK DATA.
+Moved the percentile ladder back out of the BLOCK DATA.
+Split the main routine into {SMALLN} subroutines for readability. Readability unchanged.
+Merged the {SMALLN} subroutines back into the main routine for performance.
+Replaced the bubble sort with a different bubble sort.
+Rewrote the date logic for the {HW2}.
+Ported from the {HW} to the {HW2}.
+Added support for {N} benchmark rows.
+Raised MAXMET from 40 to {N}. Lowered it back to 40 when the report stopped fitting.
+Changed output class from A to {CLASS} per operations.
+Changed the job to run at 2 AM per memo {MEMO}.
+Moved the job from {DAYNAME} to {DAYNAME} after {INCIDENT}.
+Cosmetic changes only. (Not cosmetic. See next entry.)
+Reverted the cosmetic changes.
+Updated the header to say rel. {REL}.
+Updated copyright line. Updated it again because the first update had the wrong year.
+Removed the debug WRITE statements. Left one. It is important.
+Re-added the debug WRITE statements for the {QUARTER} run.
+Fixed spelling in the error messages. Ops scripts updated to match.
+Changed "ERROR" to "CONDITION" per memo {MEMO}.
+Changed "BENCH MARK" to "BENCHMARK" throughout.
+Disabled the RANDU call per audit {AUDIT}. Left the call in place.
+Added Y2K windowing, pivot {PIVOT}. Certificate {CERT}.
+Expanded two-digit years to four digits.
+Added the P33 and P67 rungs per {COMMITTEE}.
+Changed P90 multiplier from 1.60 to 1.62 per memo {MEMO}. Retroactively.
+Corrected the ordinal suffix table for 11th, 12th and 13th. Introduced "142th."
+Increased the region size to {N}K.
+Reduced the region size after {DEPT} complained.
+Changed the tape retention from 30 to 17 days.
+Added the {QUARTER} adjustment. To be removed after the {QUARTER} run.
+Did not remove the {QUARTER} adjustment.
+Added a check for an empty deck. The check prints a page.
+Added restart logic. Never used.
+Removed restart logic. Immediately needed.
+Re-added restart logic from the {OLDYEAR} listing.
+Changed the sort key from metric name to card sequence.
+Added a cross-check of the ladder against a shadow array.
+Removed the shadow array. Kept the cross-check. It now cross-checks against itself.
+Renamed {ROUTINE} to avoid a conflict with {PROGRAM2}.
+Renamed it back after {PROGRAM2} was retired.
+Re-sequenced columns 73-80 after the deck was dropped.
+Re-sequenced columns 73-80 again because the first re-sequence skipped a card.
+Converted Hollerith constants to quoted strings.
+Converted quoted strings back to Hollerith for the {HW}.
+Replaced the arithmetic IF with a block IF.
+Replaced the block IF with a computed GOTO for "performance."
+Upgraded to {COMPILER}.
+Downgraded from {COMPILER} after the output changed.
+Added the client name to the console message for operations.
+Removed the client name from the console message per {RULE}.
+Truncated the client name to 40 characters.
+Changed "TOTAL" column to "CHANGE."
+Changed the sign convention of the change column. Then changed it back.
+Added logic to skip blank cards.
+Added logic to skip cards containing only a period.
+Added logic to skip cards from {CLIENT} that start with an asterisk.
+Changed the end-of-data sentinel from 999999 to 9999999.
+Added a {N}-second sleep before the print step.
+Removed the sleep. Added it back.
+Merged changes from {CODER2.I}'s private copy.
+Discarded changes from {CODER2.I}'s private copy.
+Added comment explaining the 0.58. Removed comment at legal's request. Added a shorter comment.
+Rebuilt the load module from the source in {DATASET}.
+Patched the load module directly. Source not updated. (Source updated. -- {CODER2.I})
+Added the engagement code to the job card.
+Updated the job card account number after the re-org.
+Increased TIME parameter after the job was cancelled for running long.
+Changed MSGCLASS so output stops going to {CODER2.I}'s printer.
+Moved the program from {DATASET} to {DATASET}.
+Added a banner page.
+Removed the banner page to save paper. Added it back because operators could not find the output.
+Changed the date format on the header from MM/DD/YY to YY.DDD.
+Changed it back for the {INDUSTRY} practice.
+Added support for lowercase in comments.
+Added a trailer line with the record count.
+Corrected the record count in the trailer line.
+Changed the report title per {VP}.
+Added "CONFIDENTIAL" to the top of each page.
+Changed "CONFIDENTIAL" to "PRIVILEGED AND CONFIDENTIAL" per legal.
+Removed the {SPORTS} pool tracker. Someone put it back.
+Rewrote the input parser to accept the {CLIENT} deck layout.
+Fixed the parser so it still accepts every other deck layout.
+Updated the vendor library to {VENDOR} release {LICVER}.
+Removed dependence on {VENDOR} library.
+Added the market benchmark section.
+Added the peer group name to the benchmark heading.
+Changed the benchmark heading to say "ALL VALUES DOLLARS."
+Stopped printing the benchmark section when there are no benchmark cards.
+Started printing it again with a message, per {VP}.
+Fixed the column alignment for negative changes.
+Fixed the column alignment for positive changes, which broke when negative changes were fixed.
+Added the + sign to positive changes.
+Converted from {LANG2} to {LANG}.
+Restructured for {LANG} without changing the output by one byte.
+Ran through {UTILITY} to reformat. Nothing else changed. (The output changed.)
+Rebuilt after disk failure. Source recovered from {MEDIUM}.
+Rebuilt after the {WEATHER} outage.
+Changed CPU limit for {HOLIDAY} runs.
+Added a check that the job is not run twice in one day.
+Disabled the check that the job is not run twice in one day, for the rerun.
+Re-enabled the check.
+Made the check a warning.
+Changed the default peer group to {PEER}.
+Changed the default client name from "TEST" to blank. Production had been printing "TEST" since {YEAR}.
+Added comments. Many comments.
+Removed most of the comments per {VP}, who said the listing was too long.
+Restored the comments from the previous listing.
+Annotated the source for the auditors.
+Removed the annotations after the auditors left.
+Initial version of the cross-reference comment block.
+Updated the cross-reference after renumbering.
+Initial check-in to source control.
+Migrated from one source control system to another. History lost.
+Recreated history from the listings in the binder.
+Bumped release to {REL} for the {QUARTER} run.
+Emergency fix during the {QUARTER} close. Details to follow. (Details did not follow.)
+Hotfix for {ERRMSG}.
+Hotfix for the hotfix.
+Decentralised the COMMON block layout for {CLIENT}.
+Converted the DATA statements (unplanned).
+Ported the COMMON block layout per audit {AUDIT}.
+Certified the {UTILITY} step per {COMMITTEE}.
+Restored the checksum to match the {OLDYEAR} output.
+Re-enabled the job card per {COMMITTEE}.
+Re-certified the comment cards without changing the output.
+Fixed the median card parser see {INCIDENT}.
+Re-keyed the sequence numbers form {FORM}.
+Narrowed the {UTILITY} step at {TIME} on a {DAYNAME}.
+Simplified the copy count during {WEATHER}.
+Replaced the checksum on the {HW2}.
+Relaxed the continuation cards which the client noticed.
+Renamed the {UTILITY} step ahead of the {HW2} migration.
+Re-certified the sanity limits on {HOLIDAY}.
+Commented out the EBCDIC table which the client noticed.
+Re-keyed the EQUIVALENCE to save a page.
+Tightened the {CLIENT} branch per {VP}.
+Corrected the output class per {VP}.
+Rewrote the leap-year test after {ERRMSG}.
+Certified the step names (cosmetic).
+Relinked the {DATASET} reference to save {CPU} CPU seconds.
+Re-applied the column alignment per {VP}.
+Hard-coded the merge (emergency).
+De-optimised the return codes over {CODER2.I}'s objection.
+Simplified the median card parser for the {HW} only.
+Generalised the pivot year for the {QUARTER} run.
+Audited the output class see {MANUAL}.
+Reformatted the form number without changing the output.
+Split the computed GO TO to match the {OLDYEAR} output.
+Relaxed the time limit (cosmetic).
+Fixed the merge to save a page.
+Tightened the region size as a permanent measure.
+Reverted the metric card parser as a permanent measure.
+Patched the control card check because {CODER2.I} asked.
+Disabled the trailer card check see {INCIDENT}.
+Specialised the tape label check which changed the output.
+Renumbered the tape label check per memo {MEMO}.
+Renamed the P95 rung over {CODER2.I}'s objection.
+Simplified the percentile ladder during {WEATHER}.
+Generalised the copy count during {SPORTS}.
+Re-fixed the percentile ladder to save a page.
+Centralised the computed GO TO during {WEATHER}.
+Patched the {PROGRAM2} interface for the {QUARTER} run.
+Re-enabled the overflow check on the {HW2}.
+Validated the step names on the {HW2}.
+Split the copy count on the {HW2}.
+Backported the zero check for the {INDUSTRY} practice.
+Rewrote the change column to match the {OLDYEAR} output.
+Converted the two-digit years which the client noticed.
+Re-enabled the sign handling for the {QUARTER} run.
+Re-fixed the watermark literal per {COMMITTEE}.
+Converted the region size without changing the output.
+Rewrote the region size see {MANUAL}.
+Certified the overflow check for the {QUARTER} run.
+Removed the zero check (cosmetic).
+Re-validated the debug WRITEs ahead of the {HW2} migration.
+Relinked the BLOCK DATA for the {HW} only.
+Re-sequenced the DD statements ahead of the {HW2} migration.
+Cleaned up the COMMON block layout ahead of the {HW2} migration.
+Hard-coded the lookup table to save a page.
+Loosened the client special cases after a client complaint.
+Merged the form number for the {INDUSTRY} practice.
+Simplified the trace switch which nobody noticed.
+Ported the tape label check per memo {MEMO}.
+Duplicated the leap-year test to satisfy {COMMITTEE}.
+Commented out the column alignment form {FORM}.
+Re-enabled the trailer card check see {MANUAL}.
+Hard-coded the {PROGRAM2} interface per memo {MEMO}.
+Cleaned up the comment cards for the {INDUSTRY} practice.
+Cleaned up the abend codes after {INCIDENT}.
+Split the DATA statements as a temporary measure.
+Generalised the P95 rung which changed the output.
+Relinked the job card form {FORM}.
+Hard-coded the dataset names to match the {OLDYEAR} output.
+Renamed the sanity limits to save {CPU} CPU seconds.
+Decentralised the ordinal suffix table after a phone call from {CLIENT}.
+Rolled back the Hollerith constants to save a page.
+Re-keyed the COMMON block layout (not cosmetic).
+Restored the trailer line per memo {MEMO}.
+Documented the comment cards (cosmetic).
+Disabled the DD statements during {WEATHER}.
+Re-enabled the checkpoint logic (cosmetic).
+Replaced the metric card parser as a permanent measure.
+Renamed the trailer line ahead of the {HW2} migration.
+Certified the checksum (not cosmetic).
+Moved the {CLIENT} branch form {FORM}.
+Unfixed the DATA statements per memo {MEMO}.
+Re-validated the change column (planned).
+Annotated the checkpoint logic for no recorded reason.
+Simplified the checksum to match the {OLDYEAR} output.
+Generalised the region size for {CLIENT}.
+Documented the region size (planned).
+Recompiled the continuation cards to save {CPU} CPU seconds.
+Generalised the trace switch which the client noticed.
+Rewrote the record count as a temporary measure.
+Hard-coded the pivot year after a client complaint.
+Corrected the page footer because it seemed like a good idea.
+Reformatted the FORMAT widths because it seemed like a good idea.
+Tightened the DATA statements as a permanent measure.
+Retyped the P33 rung (cosmetic).
+Re-validated the {UTILITY} step to save {CPU} CPU seconds.
+Un-hard-coded the record count after {ERRMSG}.
+Reinstated the page footer see {INCIDENT}.
+Reverted the FORMAT widths to save {CPU} CPU seconds.
+Re-applied the date format to save {CPU} CPU seconds.
+Reverted the banner page ahead of the {HW2} migration.
+Rolled back the time limit which changed the output by one dollar.
+Tightened the peer group heading to fit in {N} columns.
+Lengthened the DD statements per memo {MEMO}.
+Ported the control card check for the {QUARTER} run.
+Validated the pivot year see {MANUAL}.
+De-optimised the ordinal suffix table during {WEATHER}.
+Cleaned up the {VENDOR} interface after a phone call from {CLIENT}.
+Disabled the sequence numbers (unplanned).
+Cleaned up the region size ticket {TICKET}.
+Backported the continuation cards to satisfy {COMMITTEE}.
+Rolled back the trailer card check per {VP}.
+Converted the merge as a temporary measure.
+Backported the checksum (planned).
+Reinstated the BLOCK DATA for the {INDUSTRY} practice.
+Relaxed the job card during {SPORTS}.
+Duplicated the {UTILITY} step for {CLIENT}.
+De-optimised the form number to match the {OLDYEAR} output.
+Parameterised the dollar signs to satisfy {COMMITTEE}.
+Certified the continuation cards which changed the output.
+Backported the record count on the {HW2}.
+Unfixed the merge per memo {MEMO}.
+Patched the provenance seal to save a page.
+Moved the plus signs ahead of the {HW2} migration.
+Centralised the Hollerith constants per memo {MEMO}.
+Rewrote the distribution list see {INCIDENT}.
+Re-validated the Hollerith constants per {VP}.
+Simplified the checkpoint logic over {CODER2.I}'s objection.
+Un-hard-coded the change column (cosmetic).
+Annotated the control card check for the {QUARTER} run.
+De-optimised the cross-check per {VP}.
+Unfixed the P33 rung per {RULE}.
+Shortened the P67 rung because it seemed like a good idea.
+Re-certified the error messages see {INCIDENT}.
+Re-certified the change column per memo {MEMO}.
+Narrowed the continuation cards for the {INDUSTRY} practice.
+Annotated the metric card parser ticket {TICKET}.
+Specialised the percentile ladder at {TIME} on a {DAYNAME}.
+Tightened the trace switch form {FORM}.
+Re-enabled the COMMON block layout on {HOLIDAY}.
+Retyped the trace switch as a temporary measure.
+Certified the COMMON block layout for the {HW} only.
+Re-enabled the column alignment over {CODER2.I}'s objection.
+Converted the checksum see {INCIDENT}.
+Uncommented the client special cases for the {INDUSTRY} practice.
+Unfixed the copy count for {CLIENT}.
+Cleaned up the client special cases (emergency).
+Hardened the date format as a temporary measure.
+Loosened the shadow array as a temporary measure.
+Narrowed the leap-year test form {FORM}.
+Hardened the sign handling to save {CPU} CPU seconds.
+Replaced the {PROGRAM2} interface (unplanned).
+Ported the tape label check because {CODER2.I} asked.
+Retested the comment cards (not cosmetic).
+Merged the two-digit years to satisfy {COMMITTEE}.
+Unfixed the trailer line which changed the output by one dollar.
+Restored the trace switch to fit in {N} columns.
+Replaced the sanity limits for the {QUARTER} run.
+Unfixed the {DATASET} reference to satisfy {COMMITTEE}.
+Parameterised the watermark literal which nobody noticed.
+Audited the output class after {INCIDENT}.
+Hardened the time limit for no recorded reason.
+Certified the {VENDOR} interface per memo {MEMO}.
+Commented out the zero check per {RULE}.
+Cleaned up the metric card parser over {CODER2.I}'s objection.
+Specialised the sign handling (cosmetic).
+Uncommented the trace switch because {CODER2.I} asked.
+Replaced the tape label check ticket {TICKET}.
+Renumbered the FORMAT widths (cosmetic).
+Hardened the step names which the client noticed.
+Re-certified the control card check after a phone call from {CLIENT}.
+Merged the return codes to save a page.
+Cleaned up the metric card parser (not cosmetic).
+Documented the dataset names for the {HW} only.
+Re-applied the date format (emergency).
+Split the COMMON block layout after {ERRMSG}.
+Un-hard-coded the distribution list per {RULE}.
+Audited the banner page which changed the output.
+Recompiled the sanity limits per {VP}.
+Hard-coded the comment cards per {COMMITTEE}.
+Re-certified the dataset names for {CLIENT}.
+Replaced the FORMAT widths because it seemed like a good idea.
+Uncommented the form number to satisfy {COMMITTEE}.
+Simplified the plus signs (cosmetic).
+Commented out the comment cards form {FORM}.
+Un-hard-coded the pivot year ahead of the {HW2} migration.
+Converted the Julian routine (not cosmetic).
+Certified the plus signs (not cosmetic).
+Validated the computed GO TO ahead of the {HW2} migration.
+Annotated the metric card parser to satisfy {COMMITTEE}.
+Widened the dollar signs to save a page.
+Ported the {CLIENT} branch (not cosmetic).
+Reverted the {VENDOR} interface which the client noticed.
+Retyped the dollar signs because {CODER2.I} asked.
+Uncommented the zero check for the {HW} only.
+Widened the banner page (not cosmetic).
+Fixed the sanity limits per audit {AUDIT}.
+Documented the BLOCK DATA (unplanned).
+Corrected the date format ahead of the {HW2} migration.
+Disabled the region size which changed the output.
+Re-fixed the banner page which the client noticed.
+Recompiled the BLOCK DATA as a permanent measure.
+Re-fixed the checkpoint logic after {ERRMSG}.
+Patched the P95 rung after {INCIDENT}.
+Decentralised the time limit as a temporary measure.
+Re-sequenced the lookup table because it seemed like a good idea.
+Retested the {PROGRAM2} interface as a temporary measure.
+Tightened the EQUIVALENCE to satisfy {COMMITTEE}.
+Tightened the {CLIENT} branch form {FORM}.
+Parameterised the lookup table to match the {OLDYEAR} output.
+Widened the region size (cosmetic).
+Re-keyed the control card check because it seemed like a good idea.
+Re-fixed the P95 rung which changed the output by one dollar.
+Optimised the distribution list per memo {MEMO}.
+Disabled the trailer card check ahead of the {HW2} migration.
+Restored the region size which changed the output by one dollar.
+Replaced the return codes during {WEATHER}.
+Hardened the checksum (unplanned).
+Rewrote the EBCDIC table form {FORM}.
+Validated the provenance seal (cosmetic).
+Removed the percentile ladder (unplanned).
+Relaxed the column alignment on {HOLIDAY}.
+Split the plus signs to save a page.
+Narrowed the merge at {TIME} on a {DAYNAME}.
+Rewrote the plus signs because {CODER2.I} asked.
+Un-hard-coded the step names for no recorded reason.
+Reverted the time limit because {CODER2.I} asked.
+De-optimised the comment cards during {WEATHER}.
+Loosened the checkpoint logic because it seemed like a good idea.
+Moved the DATA statements to save {CPU} CPU seconds.
+Renumbered the peer group heading for {CLIENT}.
+Re-fixed the zero check per audit {AUDIT}.
+Hard-coded the P33 rung to match the {OLDYEAR} output.
+Unfixed the date format over {CODER2.I}'s objection.
+Documented the plus signs after a client complaint.
+Validated the error messages for {CLIENT}.
+Shortened the record count after {ERRMSG}.
+Audited the time limit per memo {MEMO}.
+Rewrote the COMMON block layout because it seemed like a good idea.
+Certified the client special cases form {FORM}.
+Cleaned up the leap-year test because {CODER2.I} asked.
+Specialised the form number during {SPORTS}.
+Re-applied the region size (cosmetic).
+Uncommented the comment cards as a temporary measure.
+Removed the restart logic which the client noticed.
+Merged the FORMAT widths per {VP}.
+Relaxed the record count to save a page.
+Fixed the sequence numbers over {CODER2.I}'s objection.
+Re-fixed the EBCDIC table which changed the output.
+Unfixed the zero check after {ERRMSG}.
+Re-applied the time limit form {FORM}.
+Reinstated the P33 rung on the {HW2}.
+Rewrote the page footer for no recorded reason.
+Reinstated the Julian routine which changed the output by one dollar.
+Audited the {PROGRAM2} interface for {CLIENT}.
+Lengthened the banner page per audit {AUDIT}.
+Removed the page header (not cosmetic).
+Documented the job card as a temporary measure.
+Merged the sign handling per {RULE}.
+Uncommented the FORMAT widths for no recorded reason.
+Optimised the return codes because it seemed like a good idea.
+Generalised the peer group heading form {FORM}.
+Renumbered the debug WRITEs after {ERRMSG}.
+Disabled the {PROGRAM2} interface (cosmetic).
+Ported the checksum for the {HW} only.
+Parameterised the console messages form {FORM}.
+De-optimised the COMMON block layout (unplanned).
+Disabled the {CLIENT} branch over {CODER2.I}'s objection.
+Fixed the shadow array for {CLIENT}.
+Re-fixed the copy count (unplanned).
+Re-fixed the EBCDIC table (not cosmetic).
+Simplified the peer group heading during {WEATHER}.
+Un-hard-coded the record count after a phone call from {CLIENT}.
+Narrowed the computed GO TO at {TIME} on a {DAYNAME}.
+Loosened the COMMON block layout (planned).
+Recompiled the metric card parser to fit in {N} columns.
+Renumbered the P95 rung at {TIME} on a {DAYNAME}.
+Tidied the cross-check see {INCIDENT}.
+Restored the lookup table which changed the output.
+Cleaned up the overflow check see {INCIDENT}.
+Optimised the {QUARTER} adjustment see {MANUAL}.
+Narrowed the column alignment for the {INDUSTRY} practice.
+Duplicated the dollar signs during {SPORTS}.
+Simplified the page footer which nobody noticed.
+Re-certified the pivot year per memo {MEMO}.
+Annotated the COMMON block layout for {CLIENT}.
+Decentralised the trace switch which changed the output.
+Cleaned up the dataset names (planned).
+Ported the EQUIVALENCE see {MANUAL}.
+Re-validated the ordinal suffix table per {RULE}.
+Relaxed the shadow array after a phone call from {CLIENT}.
+Certified the EQUIVALENCE after a phone call from {CLIENT}.
+Centralised the DATA statements without changing the output.
+Merged the {DATASET} reference over {CODER2.I}'s objection.
+Moved the {UTILITY} step per {COMMITTEE}.
+Loosened the debug WRITEs after {INCIDENT}.
+Merged the Julian routine which changed the output by one dollar.
+De-optimised the trailer card check (planned).
+Rolled back the record count as a permanent measure.
+Backported the banner page see {INCIDENT}.
+Parameterised the sign handling during {WEATHER}.
+Re-enabled the {UTILITY} step ticket {TICKET}.
+Renumbered the percentile ladder (not cosmetic).
+Centralised the checkpoint logic per {RULE}.
+Loosened the banner page for the {HW} only.
+Fixed the sequence numbers per {RULE}.
+Renamed the page header which the client noticed.
+Un-hard-coded the distribution list after a phone call from {CLIENT}.
+Re-validated the job card to satisfy {COMMITTEE}.
+Patched the comment cards (planned).
+Relaxed the zero check as a permanent measure.
+Restored the sort because it seemed like a good idea.
+Restored the percentile ladder form {FORM}.
+Documented the distribution list as a temporary measure.
+Converted the merge for the {QUARTER} run.
+Ported the comment cards (cosmetic).
+Re-keyed the EQUIVALENCE on the {HW2}.
+Reformatted the date format per {RULE}.
+Re-keyed the cross-check to fit in {N} columns.
+Parameterised the two-digit years per memo {MEMO}.
+Converted the EQUIVALENCE per audit {AUDIT}.
+Reformatted the DD statements as a permanent measure.
+Retested the column alignment per {VP}.
+Duplicated the percentile ladder which the client noticed.
+Duplicated the record count after a phone call from {CLIENT}.
+Tidied the change column per memo {MEMO}.
+Ported the BLOCK DATA which the client noticed.
+Re-applied the checkpoint logic (cosmetic).
+Parameterised the computed GO TO per {VP}.
+Reformatted the cross-check to satisfy {COMMITTEE}.
+Moved the comment cards (emergency).
+Re-fixed the watermark literal after a phone call from {CLIENT}.
+Tidied the dataset names per memo {MEMO}.
+Annotated the BLOCK DATA per audit {AUDIT}.
+Split the form number for no recorded reason.
+Cleaned up the EQUIVALENCE per {RULE}.
+Centralised the metric card parser which changed the output by one dollar.
+Re-applied the form number without changing the output.
+Corrected the client special cases as a permanent measure.
+Retested the leap-year test on {HOLIDAY}.
+Commented out the dollar signs see {INCIDENT}.
+Simplified the page header to save {CPU} CPU seconds.
+Cleaned up the column alignment as a permanent measure.
+Widened the copy count after {INCIDENT}.
+Duplicated the comment cards after a phone call from {CLIENT}.
+Certified the page footer (emergency).
+Duplicated the dollar signs (unplanned).
+Narrowed the lookup table after a phone call from {CLIENT}.
+Lengthened the cross-check (unplanned).
+Split the dollar signs (not cosmetic).
+Patched the pivot year on {HOLIDAY}.
+Reinstated the FORMAT widths (cosmetic).
+Re-keyed the dollar signs at {TIME} on a {DAYNAME}.
+Split the computed GO TO see {INCIDENT}.
+Validated the FORMAT widths which changed the output.
+Re-enabled the {UTILITY} step for {CLIENT}.
+Narrowed the debug WRITEs after a client complaint.
+Validated the page header as a permanent measure.
+Rolled back the restart logic (not cosmetic).
+Disabled the shadow array for the {HW} only.
+Re-keyed the computed GO TO per {RULE}.
+Commented out the shadow array during {SPORTS}.
+Lengthened the control card check to satisfy {COMMITTEE}.
+Renumbered the Hollerith constants as a permanent measure.
+Reverted the EQUIVALENCE for the {HW} only.
+Re-fixed the watermark literal (not cosmetic).
+Retested the sort for no recorded reason.
+Validated the record count to save {CPU} CPU seconds.
+Centralised the plus signs as a permanent measure.
+Re-validated the column alignment which the client noticed.
+Patched the FORMAT widths over {CODER2.I}'s objection.
+Fixed the {VENDOR} interface to save a page.
+Annotated the cross-check to satisfy {COMMITTEE}.
+Centralised the page footer after {INCIDENT}.
+Reinstated the lookup table for the {INDUSTRY} practice.
+Narrowed the client special cases per {COMMITTEE}.
+Reverted the two-digit years per memo {MEMO}.
+Converted the pivot year (not cosmetic).
+Retyped the cross-check for the {HW} only.
+Optimised the zero check after a client complaint.
+Audited the abend codes per {RULE}.
+Loosened the overflow check because it seemed like a good idea.
+Removed the form number per audit {AUDIT}.
+Narrowed the tape label check because {CODER2.I} asked.
+Split the computed GO TO because {CODER2.I} asked.
+Parameterised the sequence numbers which the client noticed.
+Tightened the time limit after {ERRMSG}.
+Relaxed the record count for {CLIENT}.
+Validated the two-digit years during {SPORTS}.
+Renamed the plus signs form {FORM}.
+Merged the merge per {COMMITTEE}.
+Reverted the COMMON block layout which the client noticed.
+Renumbered the P95 rung during {SPORTS}.
+Renumbered the sanity limits for the {INDUSTRY} practice.
+Backported the P33 rung without changing the output.
+Converted the zero check see {MANUAL}.
+Validated the COMMON block layout because {CODER2.I} asked.
+Re-keyed the sort to fit in {N} columns.
+Renumbered the page footer to fit in {N} columns.
+Shortened the region size over {CODER2.I}'s objection.
+Retyped the sign handling to save a page.
+Duplicated the percentile ladder to satisfy {COMMITTEE}.
+Cleaned up the plus signs see {INCIDENT}.
+Audited the provenance seal see {MANUAL}.
+Cleaned up the P95 rung for the {HW} only.
+Certified the P67 rung for no recorded reason.
+Split the DD statements after a client complaint.
+Audited the P33 rung as a permanent measure.
+Tightened the sequence numbers (cosmetic).
+Centralised the comment cards (cosmetic).
+Re-validated the step names see {MANUAL}.
+Re-certified the shadow array to satisfy {COMMITTEE}.
+Shortened the COMMON block layout after a client complaint.
+Shortened the zero check per {VP}.
+Lengthened the EQUIVALENCE because it seemed like a good idea.
+Audited the restart logic because it seemed like a good idea.
+Backported the control card check over {CODER2.I}'s objection.
+Narrowed the DD statements see {INCIDENT}.
+Corrected the record count (emergency).
+Merged the {VENDOR} interface to satisfy {COMMITTEE}.
+Shortened the DATA statements as a permanent measure.
+Annotated the column alignment for no recorded reason.
+Un-hard-coded the DATA statements after a phone call from {CLIENT}.
+Relaxed the P95 rung (cosmetic).
+Validated the time limit which changed the output by one dollar.
+Ported the region size per memo {MEMO}.
+Specialised the job card because {CODER2.I} asked.
+Re-applied the Hollerith constants (emergency).
+Cleaned up the plus signs during {SPORTS}.
+Lengthened the tape label check to fit in {N} columns.
+Tightened the error messages per memo {MEMO}.
+Reinstated the EQUIVALENCE to fit in {N} columns.
+Generalised the zero check which changed the output.
+Recompiled the sign handling during {WEATHER}.
+Narrowed the checksum to save a page.
+Commented out the page header to save {CPU} CPU seconds.
+Patched the region size which nobody noticed.
+Converted the comment cards (unplanned).
+Fixed the distribution list during {SPORTS}.
+Optimised the banner page (emergency).
+Certified the console messages to match the {OLDYEAR} output.
+Removed the dataset names at {TIME} on a {DAYNAME}.
+Re-certified the sign handling because {CODER2.I} asked.
+Duplicated the date format to save {CPU} CPU seconds.
+Certified the shadow array form {FORM}.
+Backported the control card check (planned).
+Rolled back the continuation cards per {COMMITTEE}.
+Cleaned up the watermark literal over {CODER2.I}'s objection.
+Removed the change column which changed the output.
+Annotated the P33 rung per {COMMITTEE}.
+De-optimised the trace switch per audit {AUDIT}.
+Tightened the dollar signs ticket {TICKET}.
+Re-sequenced the zero check over {CODER2.I}'s objection.
+Decentralised the sign handling at {TIME} on a {DAYNAME}.
+Retested the P33 rung because {CODER2.I} asked.
+Un-hard-coded the watermark literal for no recorded reason.
+Retyped the restart logic as a temporary measure.
+Tightened the trailer line for no recorded reason.
+Annotated the DD statements (planned).
+Certified the pivot year for the {INDUSTRY} practice.
+Backported the copy count for no recorded reason.
+Converted the sign handling to match the {OLDYEAR} output.
+Loosened the two-digit years ticket {TICKET}.
+Reverted the date format per {COMMITTEE}.
+Cleaned up the control card check (unplanned).
+Split the client special cases which changed the output by one dollar.
+Specialised the FORMAT widths after a client complaint.
+Generalised the return codes (unplanned).
+Replaced the median card parser as a temporary measure.
+Split the {QUARTER} adjustment for the {INDUSTRY} practice.
+Retyped the record count because {CODER2.I} asked.
+Relinked the shadow array (planned).
+Audited the sanity limits per memo {MEMO}.
+Backported the debug WRITEs (unplanned).
+Reformatted the P33 rung ticket {TICKET}.
+Re-certified the metric card parser because it seemed like a good idea.
+Reinstated the pivot year for the {QUARTER} run.
+Documented the sequence numbers after a phone call from {CLIENT}.
+Retested the provenance seal over {CODER2.I}'s objection.
+Audited the percentile ladder to save a page.
+Hardened the peer group heading at {TIME} on a {DAYNAME}.
+Narrowed the {DATASET} reference see {INCIDENT}.
+Retested the zero check for the {HW} only.
+Cleaned up the P33 rung to save a page.
+Re-validated the checksum after {ERRMSG}.
+Restored the step names to save {CPU} CPU seconds.
+Backported the comment cards during {SPORTS}.
+Un-hard-coded the copy count which nobody noticed.
+Re-sequenced the checksum after a phone call from {CLIENT}.
+Rewrote the region size after {ERRMSG}.
+Fixed the overflow check (not cosmetic).
+Documented the overflow check without changing the output.
+Backported the region size over {CODER2.I}'s objection.
+Corrected the computed GO TO which changed the output by one dollar.
+Validated the two-digit years for the {QUARTER} run.
+Re-enabled the P67 rung for no recorded reason.
+Merged the form number which changed the output.
+Re-certified the {DATASET} reference (cosmetic).
+Corrected the page header as a permanent measure.
+Tidied the plus signs during {SPORTS}.
+Rewrote the merge per {RULE}.
+Corrected the percentile ladder per {COMMITTEE}.
+De-optimised the comment cards for no recorded reason.
+Certified the copy count which changed the output.
+Converted the provenance seal (planned).
+Corrected the DATA statements after a client complaint.
+Renamed the restart logic after a phone call from {CLIENT}.
+Re-applied the {VENDOR} interface per memo {MEMO}.
+Reinstated the abend codes for the {INDUSTRY} practice.
+Widened the zero check at {TIME} on a {DAYNAME}.
+Converted the abend codes as a temporary measure.
+Removed the DATA statements to fit in {N} columns.
+Narrowed the job card to save {CPU} CPU seconds.
+Re-validated the watermark literal on {HOLIDAY}.
+Decentralised the dollar signs per {VP}.
+Validated the banner page ahead of the {HW2} migration.
+Relaxed the two-digit years which nobody noticed.
+Centralised the merge form {FORM}.
+Ported the ordinal suffix table (unplanned).
+Backported the pivot year to match the {OLDYEAR} output.
+Backported the job card for the {QUARTER} run.
+Relinked the {PROGRAM2} interface ahead of the {HW2} migration.
+Re-validated the merge after a phone call from {CLIENT}.
+Relaxed the control card check after {ERRMSG}.
+Parameterised the DD statements for the {QUARTER} run.
+Backported the client special cases per {VP}.
+Un-hard-coded the watermark literal ticket {TICKET}.
+Reformatted the form number per {VP}.
+Removed the {DATASET} reference for {CLIENT}.
+Certified the metric card parser as a temporary measure.
+Restored the watermark literal after a client complaint.
+Reverted the cross-check (planned).
+Commented out the checksum to match the {OLDYEAR} output.
+Relaxed the plus signs for the {INDUSTRY} practice.
+Audited the form number because {CODER2.I} asked.
+Renumbered the merge which changed the output.
+Simplified the plus signs which nobody noticed.
+Moved the output class on {HOLIDAY}.
+Corrected the P95 rung see {MANUAL}.
+Moved the computed GO TO per memo {MEMO}.
+Ported the leap-year test (planned).
+Reformatted the pivot year for the {INDUSTRY} practice.
+Moved the lookup table because it seemed like a good idea.
+Optimised the region size for the {INDUSTRY} practice.
+Re-validated the banner page over {CODER2.I}'s objection.
+Re-certified the sign handling per {COMMITTEE}.
+Decentralised the zero check as a permanent measure.
+Parameterised the metric card parser because {CODER2.I} asked.
+Rewrote the BLOCK DATA which the client noticed.
+Ported the lookup table per {VP}.
+Recompiled the zero check to satisfy {COMMITTEE}.
+Corrected the continuation cards (cosmetic).
+De-optimised the {QUARTER} adjustment for the {HW} only.
+Disabled the {UTILITY} step for no recorded reason.
+Disabled the banner page ahead of the {HW2} migration.
+Reinstated the sanity limits (planned).
+Rolled back the dataset names over {CODER2.I}'s objection.
+Audited the P33 rung to save {CPU} CPU seconds.
+Optimised the page header on the {HW2}.
+Reformatted the {VENDOR} interface to save {CPU} CPU seconds.
+Merged the EBCDIC table over {CODER2.I}'s objection.
+Commented out the checkpoint logic after a phone call from {CLIENT}.
+Widened the step names after {ERRMSG}.
+Re-fixed the trailer card check per {COMMITTEE}.
+Removed the record count because {CODER2.I} asked.
+Parameterised the BLOCK DATA to save {CPU} CPU seconds.
+Annotated the {CLIENT} branch (planned).
+Narrowed the restart logic form {FORM}.
+Shortened the client special cases to fit in {N} columns.
+Optimised the Hollerith constants per {COMMITTEE}.
+Centralised the trailer line (not cosmetic).
+Removed the two-digit years which changed the output by one dollar.
+Re-enabled the column alignment per {COMMITTEE}.
+Narrowed the cross-check on the {HW2}.
+Generalised the P33 rung see {INCIDENT}.
+Relinked the time limit (not cosmetic).
+Re-fixed the {QUARTER} adjustment for {CLIENT}.
+Hard-coded the EBCDIC table on {HOLIDAY}.
+Converted the time limit per memo {MEMO}.
+Documented the watermark literal which changed the output.
+Reinstated the trailer card check (cosmetic).
+Split the peer group heading to match the {OLDYEAR} output.
+Relaxed the error messages on {HOLIDAY}.
+Documented the P67 rung to match the {OLDYEAR} output.
+Replaced the computed GO TO on {HOLIDAY}.
+Widened the checksum for no recorded reason.
+Annotated the debug WRITEs ticket {TICKET}.
+Renamed the sanity limits to fit in {N} columns.
+Relaxed the record count because it seemed like a good idea.
+Renamed the {PROGRAM2} interface form {FORM}.
+Recompiled the Hollerith constants (cosmetic).
+Hardened the client special cases for the {INDUSTRY} practice.
+Lengthened the page footer as a temporary measure.
+Commented out the two-digit years which changed the output.
+Re-validated the median card parser per audit {AUDIT}.
+Cleaned up the output class see {INCIDENT}.
+Re-keyed the step names for {CLIENT}.
+Hardened the restart logic (unplanned).
+Corrected the computed GO TO for no recorded reason.
+Unfixed the zero check see {INCIDENT}.
+Renamed the {VENDOR} interface to satisfy {COMMITTEE}.
+Tightened the restart logic ahead of the {HW2} migration.
+Narrowed the DD statements which changed the output by one dollar.
+Removed the metric card parser per {COMMITTEE}.
+Re-keyed the page footer to save {CPU} CPU seconds.
+Widened the leap-year test for the {HW} only.
+Backported the job card ticket {TICKET}.
+Reformatted the record count for the {HW} only.
+Validated the copy count as a temporary measure.
+Loosened the Hollerith constants for the {INDUSTRY} practice.
+Backported the watermark literal see {INCIDENT}.
+Annotated the banner page see {INCIDENT}.
+Removed the overflow check per memo {MEMO}.
+Converted the computed GO TO at {TIME} on a {DAYNAME}.
+Re-certified the region size for {CLIENT}.
+Hard-coded the merge for {CLIENT}.
+Lengthened the {VENDOR} interface (not cosmetic).
+Commented out the {DATASET} reference after {INCIDENT}.
+Re-fixed the dollar signs to fit in {N} columns.
+Backported the restart logic form {FORM}.
+Relinked the pivot year to save {CPU} CPU seconds.
+Re-certified the computed GO TO see {INCIDENT}.
+Tidied the sanity limits after {INCIDENT}.
+Re-keyed the merge without changing the output.
+Centralised the computed GO TO ahead of the {HW2} migration.
+Disabled the time limit over {CODER2.I}'s objection.
+Split the control card check which changed the output by one dollar.
+Moved the output class after a phone call from {CLIENT}.
+Patched the restart logic to match the {OLDYEAR} output.
+Hard-coded the leap-year test after {INCIDENT}.
+Tidied the change column form {FORM}.
+Reinstated the copy count for the {INDUSTRY} practice.
+Specialised the banner page because {CODER2.I} asked.
+Re-certified the COMMON block layout to save a page.
+Tidied the zero check on {HOLIDAY}.
+Moved the distribution list which the client noticed.
+Ported the continuation cards to save a page.
+Re-certified the date format form {FORM}.
+Retested the DD statements as a permanent measure.
+Re-applied the peer group heading as a permanent measure.
+Narrowed the {PROGRAM2} interface as a temporary measure.
+Moved the zero check to satisfy {COMMITTEE}.
+Commented out the sequence numbers to save {CPU} CPU seconds.
+Documented the lookup table over {CODER2.I}'s objection.
+Fixed the {VENDOR} interface after a phone call from {CLIENT}.
+Re-validated the record count for no recorded reason.
+Narrowed the abend codes at {TIME} on a {DAYNAME}.
+Ported the FORMAT widths see {MANUAL}.
+De-optimised the BLOCK DATA which changed the output.
+Replaced the time limit which changed the output.
+Disabled the form number as a temporary measure.
+Lengthened the FORMAT widths after {ERRMSG}.
+Reverted the distribution list which nobody noticed.
+Rewrote the median card parser without changing the output.
+De-optimised the control card check during {SPORTS}.
+Moved the trace switch over {CODER2.I}'s objection.
+Documented the sort which changed the output by one dollar.
+Widened the overflow check (emergency).
+Cleaned up the EQUIVALENCE per {VP}.
+Hardened the {UTILITY} step after a client complaint.
+Re-certified the return codes because it seemed like a good idea.
+Audited the continuation cards ahead of the {HW2} migration.
+Relaxed the pivot year on {HOLIDAY}.
+Hard-coded the job card which the client noticed.
+Relaxed the sequence numbers on the {HW2}.
+Shortened the client special cases to satisfy {COMMITTEE}.
+Documented the P33 rung ahead of the {HW2} migration.
+Tidied the leap-year test (cosmetic).
+Corrected the median card parser see {MANUAL}.
+Cleaned up the abend codes which nobody noticed.
+Reverted the page footer (unplanned).
+Recompiled the checkpoint logic (emergency).
+Restored the page footer per {COMMITTEE}.
+Centralised the percentile ladder ticket {TICKET}.
+Re-sequenced the form number see {MANUAL}.
+Relinked the FORMAT widths for the {INDUSTRY} practice.
+Renumbered the DD statements see {INCIDENT}.
+Removed the {QUARTER} adjustment during {SPORTS}.
+Uncommented the banner page which changed the output.
+Relaxed the {CLIENT} branch which the client noticed.
+Retyped the pivot year after {INCIDENT}.
+Retyped the {DATASET} reference on {HOLIDAY}.
+Audited the BLOCK DATA to save a page.
+Shortened the client special cases (emergency).
+Disabled the {UTILITY} step which changed the output.
+Fixed the BLOCK DATA on the {HW2}.
+Converted the plus signs which changed the output by one dollar.
+Audited the {VENDOR} interface which the client noticed.
+Tidied the banner page at {TIME} on a {DAYNAME}.
+Relaxed the BLOCK DATA per {RULE}.
+Decentralised the lookup table for no recorded reason.
+Re-sequenced the {VENDOR} interface per {RULE}.
+Documented the plus signs for no recorded reason.
+Retested the continuation cards ahead of the {HW2} migration.
+Re-certified the pivot year (planned).
+Re-certified the Hollerith constants over {CODER2.I}'s objection.
+Backported the region size which the client noticed.
+Unfixed the step names for {CLIENT}.
+Moved the lookup table to save {CPU} CPU seconds.
+Re-sequenced the step names (unplanned).
+Re-validated the restart logic on the {HW2}.
+Decentralised the column alignment (planned).
+Duplicated the checksum on {HOLIDAY}.
+Optimised the time limit at {TIME} on a {DAYNAME}.
+Reformatted the form number for the {QUARTER} run.
+Converted the COMMON block layout to match the {OLDYEAR} output.
+Patched the DD statements which nobody noticed.
+Hard-coded the cross-check because {CODER2.I} asked.
+Hardened the client special cases per audit {AUDIT}.
+Re-keyed the plus signs which changed the output.
+De-optimised the EBCDIC table per memo {MEMO}.
+Generalised the {CLIENT} branch which changed the output by one dollar.
+Relinked the step names because it seemed like a good idea.
+Cleaned up the {QUARTER} adjustment ticket {TICKET}.
+Annotated the page header which the client noticed.
+Annotated the DATA statements for {CLIENT}.
+Optimised the change column after {ERRMSG}.
+Recompiled the shadow array for the {QUARTER} run.
+Disabled the ordinal suffix table (planned).
+Un-hard-coded the overflow check per audit {AUDIT}.
+Re-certified the DD statements per memo {MEMO}.
+Retyped the trailer line (not cosmetic).
+Corrected the DATA statements see {INCIDENT}.
+Moved the {CLIENT} branch after a client complaint.
+Reformatted the BLOCK DATA which changed the output.
+Uncommented the sign handling which changed the output.
+Recompiled the lookup table over {CODER2.I}'s objection.
+Re-fixed the EQUIVALENCE form {FORM}.
+Duplicated the Hollerith constants for the {QUARTER} run.
+Recompiled the form number after a client complaint.
+De-optimised the plus signs after a client complaint.
+Re-keyed the tape label check during {WEATHER}.
+Patched the leap-year test see {MANUAL}.
+Fixed the control card check without changing the output.
+Re-applied the abend codes per memo {MEMO}.
+Un-hard-coded the dollar signs after {INCIDENT}.
+Unfixed the checksum during {WEATHER}.
+Reformatted the DATA statements at {TIME} on a {DAYNAME}.
+Patched the merge as a temporary measure.
+Patched the DATA statements see {MANUAL}.
+Renumbered the sign handling to fit in {N} columns.
+Specialised the date format which changed the output by one dollar.
+Audited the DATA statements for the {HW} only.
+Retyped the BLOCK DATA per {COMMITTEE}.
+Un-hard-coded the P33 rung (emergency).
+Certified the FORMAT widths to satisfy {COMMITTEE}.
+Renumbered the {PROGRAM2} interface to fit in {N} columns.
+Backported the {PROGRAM2} interface as a permanent measure.
+Renamed the restart logic because it seemed like a good idea.
+Removed the overflow check to save a page.
+Reformatted the comment cards (cosmetic).
+Retested the record count per {VP}.
+Cleaned up the merge (planned).
+Split the continuation cards to satisfy {COMMITTEE}.
+Hard-coded the continuation cards (not cosmetic).
+Retested the trace switch at {TIME} on a {DAYNAME}.
+Re-certified the zero check per {RULE}.
+Reverted the {UTILITY} step after {INCIDENT}.
+Simplified the overflow check after a client complaint.
+Moved the banner page at {TIME} on a {DAYNAME}.
+Re-sequenced the debug WRITEs to save {CPU} CPU seconds.
+Decentralised the cross-check which nobody noticed.
+Generalised the trace switch as a permanent measure.
+Unfixed the shadow array which changed the output by one dollar.
+Generalised the abend codes form {FORM}.
+Recompiled the client special cases after a phone call from {CLIENT}.
+Rolled back the EQUIVALENCE to satisfy {COMMITTEE}.
+Narrowed the control card check (not cosmetic).
+Validated the sequence numbers ahead of the {HW2} migration.
+Reverted the trailer line after {ERRMSG}.
+Centralised the two-digit years on the {HW2}.
+Backported the {QUARTER} adjustment ticket {TICKET}.
+Parameterised the metric card parser see {MANUAL}.
+Tidied the {PROGRAM2} interface to match the {OLDYEAR} output.
+Corrected the watermark literal for the {HW} only.
+Relinked the trailer card check per {VP}.
+Centralised the console messages during {SPORTS}.
+Re-validated the median card parser to satisfy {COMMITTEE}.
+Specialised the shadow array see {MANUAL}.
+Cleaned up the page footer during {SPORTS}.
+Unfixed the P33 rung for the {QUARTER} run.
+Simplified the {UTILITY} step which the client noticed.
+Recompiled the merge per {COMMITTEE}.
+Ported the distribution list for {CLIENT}.
+Audited the dollar signs (not cosmetic).
+Generalised the EQUIVALENCE because {CODER2.I} asked.
+Ported the peer group heading on the {HW2}.
+Split the P33 rung as a permanent measure.
+Corrected the EBCDIC table (cosmetic).
+De-optimised the tape label check after {INCIDENT}.
+Documented the checkpoint logic which the client noticed.
+Parameterised the region size for no recorded reason.
+Unfixed the continuation cards to save {CPU} CPU seconds.
+Retyped the cross-check to save a page.
+Hardened the form number during {SPORTS}.
+Split the trailer card check per {COMMITTEE}.
+Centralised the COMMON block layout which nobody noticed.
+Split the Hollerith constants to fit in {N} columns.
+Optimised the EQUIVALENCE per {VP}.
+Replaced the dollar signs per {COMMITTEE}.
+Reinstated the error messages after {INCIDENT}.
+Converted the provenance seal because it seemed like a good idea.
+Patched the job card (cosmetic).
+Optimised the COMMON block layout which changed the output by one dollar.
+Re-applied the debug WRITEs to save a page.
+Shortened the copy count (planned).
+Re-enabled the restart logic (unplanned).
+Decentralised the metric card parser per {RULE}.
+Retyped the pivot year over {CODER2.I}'s objection.
+Optimised the EQUIVALENCE during {WEATHER}.
+Uncommented the debug WRITEs ticket {TICKET}.
+Corrected the percentile ladder on the {HW2}.
+Cleaned up the return codes without changing the output.
+Specialised the ordinal suffix table after a phone call from {CLIENT}.
+Split the trace switch to save {CPU} CPU seconds.
+De-optimised the job card without changing the output.
+Hard-coded the P67 rung which the client noticed.
+Converted the EBCDIC table form {FORM}.
+Unfixed the distribution list (planned).
+Retested the EQUIVALENCE during {SPORTS}.
+Loosened the sequence numbers for no recorded reason.
+Split the return codes for no recorded reason.
+Simplified the record count (cosmetic).
+Parameterised the shadow array (cosmetic).
+Commented out the tape label check because it seemed like a good idea.
+Restored the checksum without changing the output.
+Recompiled the tape label check (not cosmetic).
+Uncommented the two-digit years (cosmetic).
+Narrowed the DD statements as a permanent measure.
+Cleaned up the metric card parser on {HOLIDAY}.
+Cleaned up the computed GO TO during {SPORTS}.
+Re-applied the leap-year test per memo {MEMO}.
+Re-fixed the EBCDIC table after a phone call from {CLIENT}.
+Merged the return codes ahead of the {HW2} migration.
+Un-hard-coded the dollar signs form {FORM}.
+Reverted the sanity limits ticket {TICKET}.
+Audited the change column after {INCIDENT}.
+Hard-coded the EQUIVALENCE (cosmetic).
+Annotated the error messages as a temporary measure.
+Validated the column alignment for the {QUARTER} run.
+Annotated the checksum during {SPORTS}.
+Lengthened the peer group heading see {MANUAL}.
+Decentralised the copy count per {COMMITTEE}.
+De-optimised the watermark literal (cosmetic).
+Ported the change column which changed the output by one dollar.
+Certified the output class see {MANUAL}.
+Centralised the DATA statements during {SPORTS}.
+Un-hard-coded the {PROGRAM2} interface ahead of the {HW2} migration.
+Re-certified the sanity limits to match the {OLDYEAR} output.
+Validated the output class after {INCIDENT}.
+Validated the checkpoint logic because {CODER2.I} asked.
+Decentralised the percentile ladder ticket {TICKET}.
+Split the column alignment to save {CPU} CPU seconds.
+Re-certified the change column at {TIME} on a {DAYNAME}.
+Replaced the computed GO TO which changed the output by one dollar.
+Decentralised the median card parser on the {HW2}.
+Lengthened the COMMON block layout (emergency).
+Re-keyed the metric card parser form {FORM}.
+Certified the shadow array to save a page.
+Audited the change column on {HOLIDAY}.
+Validated the tape label check after {ERRMSG}.
+Narrowed the sequence numbers for the {INDUSTRY} practice.
+Ported the {UTILITY} step (unplanned).
+Widened the computed GO TO to save {CPU} CPU seconds.
+Simplified the two-digit years to match the {OLDYEAR} output.
+Tightened the distribution list see {INCIDENT}.
+Optimised the column alignment see {INCIDENT}.
+Un-hard-coded the sequence numbers see {INCIDENT}.
+Parameterised the distribution list per {VP}.
+Converted the time limit after a phone call from {CLIENT}.
+Merged the ordinal suffix table per memo {MEMO}.
+Disabled the {CLIENT} branch which the client noticed.
+Corrected the merge for no recorded reason.
+Audited the P67 rung at {TIME} on a {DAYNAME}.
+Decentralised the {CLIENT} branch (cosmetic).
+Centralised the P95 rung which the client noticed.
+Re-validated the continuation cards during {SPORTS}.
+Audited the {VENDOR} interface during {SPORTS}.
+Duplicated the page footer see {MANUAL}.
+Replaced the Julian routine see {MANUAL}.
+Loosened the output class (unplanned).
+Generalised the COMMON block layout over {CODER2.I}'s objection.
+Relinked the merge without changing the output.
+Retested the control card check after a phone call from {CLIENT}.
+Reformatted the region size for {CLIENT}.
+Converted the sequence numbers on {HOLIDAY}.
+Documented the tape label check after a phone call from {CLIENT}.
+Shortened the median card parser (planned).
+Re-keyed the {UTILITY} step see {MANUAL}.
+Rewrote the banner page which changed the output by one dollar.
+Renumbered the restart logic which changed the output by one dollar.
+Certified the {UTILITY} step per {RULE}.
+Tightened the Julian routine see {INCIDENT}.
+Re-applied the region size on {HOLIDAY}.
+Moved the Hollerith constants form {FORM}.
+Tightened the dataset names after a phone call from {CLIENT}.
+Tidied the FORMAT widths (emergency).
+Corrected the step names on the {HW2}.
+Merged the form number see {INCIDENT}.
+Un-hard-coded the {DATASET} reference (planned).
+Tightened the sign handling to satisfy {COMMITTEE}.
+De-optimised the form number which changed the output by one dollar.
+Disabled the tape label check which nobody noticed.
+Uncommented the median card parser see {MANUAL}.
+Renamed the {PROGRAM2} interface see {INCIDENT}.
+Reinstated the page header because {CODER2.I} asked.
+Fixed the two-digit years which nobody noticed.
+Documented the form number after a client complaint.
+Renumbered the comment cards for {CLIENT}.
+Re-sequenced the Hollerith constants to save a page.
+Re-certified the percentile ladder after a phone call from {CLIENT}.
+Backported the {UTILITY} step (cosmetic).
+Re-keyed the P33 rung because it seemed like a good idea.
+Replaced the form number see {INCIDENT}.
+Restored the {VENDOR} interface ahead of the {HW2} migration.
+Re-keyed the EQUIVALENCE during {SPORTS}.
+Re-validated the restart logic after {ERRMSG}.
+Fixed the checkpoint logic because {CODER2.I} asked.
+Rolled back the leap-year test to save {CPU} CPU seconds.
+Removed the output class on the {HW2}.
+Cleaned up the sequence numbers to save {CPU} CPU seconds.
+Backported the abend codes per {RULE}.
+Recompiled the EQUIVALENCE as a temporary measure.
+Disabled the metric card parser which changed the output by one dollar.
+Moved the trailer card check which the client noticed.
+Simplified the {VENDOR} interface which changed the output by one dollar.
+Un-hard-coded the two-digit years per {VP}.
+Optimised the cross-check ahead of the {HW2} migration.
+Uncommented the pivot year on the {HW2}.
+Widened the sanity limits on {HOLIDAY}.
+Validated the control card check on the {HW2}.
+Audited the trailer line which changed the output by one dollar.
+Certified the DD statements after a phone call from {CLIENT}.
+Restored the two-digit years as a permanent measure.
+Re-keyed the job card (planned).
+Restored the return codes to satisfy {COMMITTEE}.
+Re-validated the EBCDIC table over {CODER2.I}'s objection.
+Removed the DD statements at {TIME} on a {DAYNAME}.
+Split the dataset names per audit {AUDIT}.
+Re-certified the DD statements on the {HW2}.
+Relaxed the cross-check ahead of the {HW2} migration.
+Optimised the peer group heading which the client noticed.
+Hardened the continuation cards as a temporary measure.
+Audited the sequence numbers (emergency).
+Documented the output class to fit in {N} columns.
+Simplified the BLOCK DATA per audit {AUDIT}.
+Re-keyed the Julian routine for the {QUARTER} run.
+Converted the {QUARTER} adjustment (emergency).
+Ported the dollar signs which changed the output by one dollar.
+Decentralised the FORMAT widths see {MANUAL}.
+Narrowed the COMMON block layout to save a page.
+Rewrote the checkpoint logic form {FORM}.
+Fixed the Hollerith constants see {MANUAL}.
+Specialised the {QUARTER} adjustment for no recorded reason.
+Decentralised the {UTILITY} step (unplanned).
+Re-keyed the pivot year after {INCIDENT}.
+Backported the computed GO TO as a temporary measure.
+Commented out the form number after {ERRMSG}.
+Un-hard-coded the trailer line because {CODER2.I} asked.
+Corrected the trailer line to fit in {N} columns.
+Disabled the client special cases during {SPORTS}.
+Removed the comment cards after {ERRMSG}.
+Lengthened the date format because {CODER2.I} asked.
+Removed the return codes after a client complaint.
+Hard-coded the output class after a phone call from {CLIENT}.
+Un-hard-coded the trailer line as a temporary measure.
+Commented out the DD statements which nobody noticed.
+Reinstated the P67 rung for the {HW} only.
+Retested the page header because it seemed like a good idea.
+Decentralised the provenance seal per {VP}.
+Optimised the BLOCK DATA per {RULE}.
+Patched the {QUARTER} adjustment which changed the output.
+Corrected the control card check ticket {TICKET}.
+Shortened the two-digit years (emergency).
+Re-enabled the dollar signs for the {HW} only.
+Split the region size to match the {OLDYEAR} output.
+Retyped the provenance seal after a phone call from {CLIENT}.
+Replaced the DATA statements for the {HW} only.
+Tidied the form number as a temporary measure.
+Un-hard-coded the P33 rung as a temporary measure.
+Retested the provenance seal ticket {TICKET}.
+Shortened the tape label check see {INCIDENT}.
+Relaxed the metric card parser see {INCIDENT}.
+Tidied the form number for {CLIENT}.
+Audited the overflow check because {CODER2.I} asked.
+Validated the banner page during {WEATHER}.
+Unfixed the computed GO TO ticket {TICKET}.
+Audited the {VENDOR} interface ticket {TICKET}.
+Annotated the EQUIVALENCE see {INCIDENT}.
+Decentralised the dollar signs for the {QUARTER} run.
+Certified the P33 rung without changing the output.
+Optimised the BLOCK DATA after {INCIDENT}.
+Optimised the trailer card check over {CODER2.I}'s objection.
+Corrected the FORMAT widths for the {HW} only.
+Renamed the pivot year which changed the output.
+Converted the abend codes (cosmetic).
+Commented out the P95 rung to save {CPU} CPU seconds.
+Widened the FORMAT widths (cosmetic).
+Replaced the tape label check (planned).
+Optimised the trailer line at {TIME} on a {DAYNAME}.
+Relinked the control card check after {ERRMSG}.
+Audited the P33 rung (not cosmetic).
+Corrected the {QUARTER} adjustment to fit in {N} columns.
+Removed the P67 rung on {HOLIDAY}.
+Parameterised the job card because {CODER2.I} asked.
+Duplicated the output class per {COMMITTEE}.
+Fixed the return codes per {VP}.
+Loosened the banner page to fit in {N} columns.
+Hardened the {DATASET} reference for {CLIENT}.
+Re-fixed the {VENDOR} interface after {INCIDENT}.
+Relaxed the return codes per {RULE}.
+Renamed the P33 rung at {TIME} on a {DAYNAME}.
+Retyped the two-digit years per memo {MEMO}.
+Cleaned up the banner page because {CODER2.I} asked.
+Re-certified the distribution list on {HOLIDAY}.
+Disabled the dollar signs because it seemed like a good idea.
+Commented out the plus signs to match the {OLDYEAR} output.
+Optimised the change column as a permanent measure.
+Moved the trailer line ticket {TICKET}.
+Re-fixed the {DATASET} reference (planned).
+Parameterised the region size to fit in {N} columns.
+Tightened the EQUIVALENCE after {ERRMSG}.
+Documented the Julian routine which changed the output.
+Certified the lookup table for the {QUARTER} run.
+Removed the zero check for the {INDUSTRY} practice.
+Validated the Hollerith constants because it seemed like a good idea.
+Reverted the dataset names during {WEATHER}.
+Re-validated the provenance seal which nobody noticed.
+Reinstated the Hollerith constants on {HOLIDAY}.
+Narrowed the COMMON block layout per memo {MEMO}.
+Moved the computed GO TO which nobody noticed.
+Re-certified the distribution list after a client complaint.
+Widened the FORMAT widths to save {CPU} CPU seconds.
+De-optimised the provenance seal ticket {TICKET}.
+Relinked the output class see {INCIDENT}.
+Parameterised the two-digit years because it seemed like a good idea.
+Uncommented the ordinal suffix table on {HOLIDAY}.
+Widened the watermark literal per memo {MEMO}.
+Hardened the two-digit years which the client noticed.
+Uncommented the restart logic over {CODER2.I}'s objection.
+Parameterised the column alignment to fit in {N} columns.
+Removed the Hollerith constants for the {HW} only.
+Audited the {PROGRAM2} interface per {RULE}.
+Restored the {DATASET} reference which changed the output.
+Lengthened the EBCDIC table on {HOLIDAY}.
+Rolled back the record count which nobody noticed.
+Audited the EBCDIC table (planned).
+Restored the checkpoint logic which the client noticed.
+Validated the sign handling to save a page.
+Validated the sanity limits for no recorded reason.
+Commented out the copy count for the {HW} only.
+Reinstated the {DATASET} reference because it seemed like a good idea.
+Loosened the P95 rung because {CODER2.I} asked.
+Merged the {PROGRAM2} interface on {HOLIDAY}.
+Hard-coded the debug WRITEs to fit in {N} columns.
+Cleaned up the restart logic ahead of the {HW2} migration.
+Decentralised the computed GO TO which nobody noticed.
+Replaced the FORMAT widths as a temporary measure.
+Certified the trailer card check per {RULE}.
+Certified the shadow array see {MANUAL}.
+Tidied the watermark literal for the {INDUSTRY} practice.
+Cleaned up the leap-year test see {INCIDENT}.
+Loosened the DATA statements see {INCIDENT}.
+Cleaned up the EBCDIC table to fit in {N} columns.
+Re-enabled the {QUARTER} adjustment after a phone call from {CLIENT}.
+Retested the dollar signs to satisfy {COMMITTEE}.
+Audited the two-digit years as a permanent measure.
+Lengthened the P33 rung as a permanent measure.
+Re-certified the tape label check (emergency).
+Restored the trailer card check which nobody noticed.
+Reinstated the pivot year during {SPORTS}.
+Disabled the two-digit years (unplanned).
+Widened the output class to fit in {N} columns.
+Validated the step names which changed the output.
+Annotated the sign handling on {HOLIDAY}.
+Loosened the Hollerith constants ticket {TICKET}.
+Re-fixed the median card parser to fit in {N} columns.
+Re-sequenced the step names for no recorded reason.
+Rewrote the merge which nobody noticed.
+Fixed the abend codes (planned).
+Optimised the {UTILITY} step to fit in {N} columns.
+Renamed the {QUARTER} adjustment (unplanned).
+Cleaned up the EQUIVALENCE ticket {TICKET}.
+Converted the P33 rung (unplanned).
+Relinked the client special cases form {FORM}.
+Decentralised the Hollerith constants for the {HW} only.
+Tidied the provenance seal to match the {OLDYEAR} output.
+Simplified the dollar signs ticket {TICKET}.
+Tightened the COMMON block layout see {MANUAL}.
+Re-keyed the lookup table after a phone call from {CLIENT}.
+Replaced the change column (planned).
+Lengthened the trace switch at {TIME} on a {DAYNAME}.
+Merged the trailer card check to fit in {N} columns.
+Centralised the cross-check after a client complaint.
+De-optimised the sort (not cosmetic).
+Audited the {PROGRAM2} interface to satisfy {COMMITTEE}.
+Ported the median card parser after a phone call from {CLIENT}.
+Fixed the banner page (planned).
+Rolled back the trace switch to save a page.
+Rewrote the tape label check during {WEATHER}.
+Restored the column alignment ticket {TICKET}.
+Parameterised the EBCDIC table which changed the output by one dollar.
+Un-hard-coded the error messages for the {QUARTER} run.
+Merged the sequence numbers as a temporary measure.
+Widened the EBCDIC table to match the {OLDYEAR} output.
+Audited the trailer card check per {RULE}.
+Recompiled the dataset names ahead of the {HW2} migration.
+Documented the percentile ladder which changed the output.
+Split the dataset names because {CODER2.I} asked.
+Duplicated the leap-year test for no recorded reason.
+Commented out the {PROGRAM2} interface for {CLIENT}.
+Relinked the banner page per {COMMITTEE}.
+Rewrote the provenance seal over {CODER2.I}'s objection.
+Narrowed the console messages as a temporary measure.
+Unfixed the client special cases ticket {TICKET}.
+Moved the job card on {HOLIDAY}.
+Ported the abend codes during {WEATHER}.
+Rolled back the percentile ladder (planned).
+Ported the job card during {SPORTS}.
+Renamed the {VENDOR} interface to fit in {N} columns.
+Centralised the overflow check ahead of the {HW2} migration.
+Duplicated the DD statements which nobody noticed.
+Re-keyed the comment cards for {CLIENT}.
+De-optimised the lookup table as a temporary measure.
+Lengthened the {UTILITY} step per {RULE}.
+Re-certified the checksum (emergency).
+Re-applied the provenance seal after {INCIDENT}.
+Rewrote the banner page without changing the output.
+Optimised the COMMON block layout for no recorded reason.
+Simplified the watermark literal because {CODER2.I} asked.
+Restored the overflow check after a phone call from {CLIENT}.
+Cleaned up the checkpoint logic to save {CPU} CPU seconds.
+Reverted the form number as a permanent measure.
+Restored the {DATASET} reference because {CODER2.I} asked.
+Reverted the abend codes (emergency).
+Commented out the date format during {SPORTS}.
+Widened the BLOCK DATA (planned).
+Ported the sort see {MANUAL}.
+Re-sequenced the watermark literal per {RULE}.
+Certified the peer group heading because it seemed like a good idea.
+Retested the {VENDOR} interface see {INCIDENT}.
+Restored the change column which nobody noticed.
+Merged the leap-year test for the {HW} only.
+Commented out the shadow array per memo {MEMO}.
+Loosened the shadow array which changed the output by one dollar.
+Reverted the COMMON block layout after a phone call from {CLIENT}.
+Fixed the merge after a phone call from {CLIENT}.
+Re-certified the copy count for {CLIENT}.
+Widened the {VENDOR} interface for the {QUARTER} run.
+Shortened the return codes to save {CPU} CPU seconds.
+Specialised the {CLIENT} branch (cosmetic).
+Reinstated the sort (unplanned).
+Recompiled the console messages per {COMMITTEE}.
+Certified the abend codes as a temporary measure.
+Cleaned up the peer group heading which changed the output by one dollar.
+De-optimised the shadow array per audit {AUDIT}.
+Restored the restart logic to save a page.
+Retested the BLOCK DATA during {WEATHER}.
+Reverted the provenance seal at {TIME} on a {DAYNAME}.
+Validated the comment cards for the {INDUSTRY} practice.
+Re-fixed the abend codes which changed the output by one dollar.
+Unfixed the job card after {INCIDENT}.
+Split the P95 rung per {VP}.
+Moved the lookup table after a phone call from {CLIENT}.
+De-optimised the console messages for the {INDUSTRY} practice.
+Re-fixed the cross-check (emergency).
+Optimised the client special cases to satisfy {COMMITTEE}.
+Recompiled the cross-check ahead of the {HW2} migration.
+Re-keyed the record count (cosmetic).
+Certified the checksum (emergency).
+Converted the computed GO TO for {CLIENT}.
+Centralised the checksum which changed the output by one dollar.
+Relinked the page footer to match the {OLDYEAR} output.
+Rewrote the region size (cosmetic).
+Retyped the BLOCK DATA per {VP}.
+Split the sanity limits to fit in {N} columns.
+Replaced the job card ahead of the {HW2} migration.
+Corrected the step names which changed the output by one dollar.
+Relinked the FORMAT widths on the {HW2}.
+Patched the ordinal suffix table without changing the output.
+Re-validated the {PROGRAM2} interface after {ERRMSG}.
+Tightened the control card check which nobody noticed.
+Loosened the return codes ahead of the {HW2} migration.
+Shortened the ordinal suffix table which changed the output.
+Re-applied the shadow array to save a page.
+Merged the abend codes for the {QUARTER} run.
+Re-fixed the FORMAT widths for {CLIENT}.
+Relaxed the {DATASET} reference on the {HW2}.
+Un-hard-coded the pivot year form {FORM}.
+Duplicated the abend codes (cosmetic).
+Relaxed the restart logic at {TIME} on a {DAYNAME}.
+Rewrote the time limit as a permanent measure.
+Certified the comment cards on {HOLIDAY}.
+Hard-coded the lookup table per {RULE}.
+Annotated the P95 rung on {HOLIDAY}.
+Validated the overflow check over {CODER2.I}'s objection.
+Annotated the lookup table to fit in {N} columns.
+Shortened the continuation cards per memo {MEMO}.
+Widened the return codes to match the {OLDYEAR} output.
+Re-fixed the Julian routine as a temporary measure.
+Restored the {CLIENT} branch ticket {TICKET}.
+Generalised the sign handling for the {INDUSTRY} practice.
+Recompiled the pivot year ahead of the {HW2} migration.
+Moved the P67 rung on {HOLIDAY}.
+Widened the return codes per {COMMITTEE}.
+Audited the {PROGRAM2} interface ahead of the {HW2} migration.
+Shortened the watermark literal (not cosmetic).
+Optimised the leap-year test per {COMMITTEE}.
+Validated the Hollerith constants (emergency).
+Rolled back the P33 rung to match the {OLDYEAR} output.
+Uncommented the checksum per {VP}.
+Re-fixed the client special cases to save {CPU} CPU seconds.
+Reverted the {CLIENT} branch after a phone call from {CLIENT}.
+Reverted the dollar signs per {COMMITTEE}.
+Re-validated the comment cards over {CODER2.I}'s objection.
+Certified the provenance seal on the {HW2}.
+Reformatted the merge during {WEATHER}.
+Fixed the form number over {CODER2.I}'s objection.
+Hardened the banner page on the {HW2}.
+Annotated the return codes without changing the output.
+Removed the trace switch (emergency).
+Removed the return codes for the {INDUSTRY} practice.
+Lengthened the {PROGRAM2} interface on {HOLIDAY}.
+Recompiled the checksum as a temporary measure.
+Replaced the abend codes over {CODER2.I}'s objection.
+Corrected the control card check as a temporary measure.
+De-optimised the sequence numbers to save a page.
+Replaced the lookup table which the client noticed.
+Uncommented the trace switch which the client noticed.
+Retyped the dataset names on {HOLIDAY}.
+Validated the lookup table which the client noticed.
+Certified the trailer line form {FORM}.
+Re-fixed the comment cards which changed the output.
+Hardened the lookup table see {INCIDENT}.
+Reformatted the {QUARTER} adjustment without changing the output.
+Renamed the comment cards for no recorded reason.
+Un-hard-coded the sanity limits see {INCIDENT}.
+Restored the trace switch form {FORM}.
+Uncommented the shadow array after {INCIDENT}.
+Loosened the restart logic (unplanned).
+Centralised the step names after {ERRMSG}.
+Renumbered the error messages after a client complaint.
+Replaced the step names which nobody noticed.
+Re-fixed the provenance seal to satisfy {COMMITTEE}.
+Parameterised the sequence numbers over {CODER2.I}'s objection.
+Reformatted the form number per {RULE}.
+Re-fixed the shadow array to save a page.
+Loosened the checkpoint logic to satisfy {COMMITTEE}.
+Narrowed the client special cases which changed the output.
+Certified the dollar signs see {INCIDENT}.
+Annotated the client special cases ticket {TICKET}.
+Relaxed the dollar signs see {INCIDENT}.
+Optimised the step names because {CODER2.I} asked.
+Rewrote the EBCDIC table to match the {OLDYEAR} output.
+Ported the watermark literal (unplanned).
+Renumbered the Julian routine which the client noticed.
+Reverted the pivot year without changing the output.
+Retested the distribution list after a phone call from {CLIENT}.
+Renamed the {PROGRAM2} interface (not cosmetic).
+Corrected the client special cases ticket {TICKET}.
+Reinstated the dataset names ahead of the {HW2} migration.
+Hard-coded the tape label check during {SPORTS}.
+Re-sequenced the merge ticket {TICKET}.
+Certified the abend codes which the client noticed.
+Unfixed the DATA statements on the {HW2}.
+Centralised the trailer line to save {CPU} CPU seconds.
+Hard-coded the console messages which changed the output.
+Decentralised the EBCDIC table (emergency).
+Simplified the sanity limits on {HOLIDAY}.
+Annotated the provenance seal on the {HW2}.
+Removed the sequence numbers ahead of the {HW2} migration.
+Annotated the P67 rung ahead of the {HW2} migration.
+Retested the time limit for {CLIENT}.
+Fixed the distribution list on {HOLIDAY}.
+Lengthened the console messages ticket {TICKET}.
+Specialised the plus signs because it seemed like a good idea.
+Split the checkpoint logic (not cosmetic).
+Certified the DATA statements to satisfy {COMMITTEE}.
+Disabled the dataset names (unplanned).
+Renamed the computed GO TO (emergency).
+Generalised the plus signs after {ERRMSG}.
+De-optimised the sign handling during {SPORTS}.
+Ported the pivot year at {TIME} on a {DAYNAME}.
+Backported the return codes (not cosmetic).
+Commented out the DD statements during {WEATHER}.
+Duplicated the {CLIENT} branch per {RULE}.
+Simplified the page footer at {TIME} on a {DAYNAME}.
+Tightened the {DATASET} reference after {INCIDENT}.
+Re-fixed the trailer line after {INCIDENT}.
+Re-validated the cross-check (cosmetic).
+Annotated the Julian routine ticket {TICKET}.
+Centralised the P95 rung for {CLIENT}.
+Backported the region size per {VP}.
+Re-fixed the COMMON block layout which the client noticed.
+Commented out the plus signs which changed the output by one dollar.
+Converted the merge (emergency).
+Hard-coded the cross-check for {CLIENT}.
+Retested the merge per audit {AUDIT}.
+Uncommented the checkpoint logic after a phone call from {CLIENT}.
+Loosened the zero check during {SPORTS}.
+Re-fixed the {VENDOR} interface see {MANUAL}.
+Retyped the metric card parser for the {QUARTER} run.
+Re-enabled the column alignment after a client complaint.
+Replaced the median card parser which changed the output by one dollar.
+Generalised the BLOCK DATA to fit in {N} columns.
+Re-enabled the P67 rung see {INCIDENT}.
+Audited the DD statements over {CODER2.I}'s objection.
+Annotated the control card check (unplanned).
+Retyped the percentile ladder (cosmetic).
+Retested the record count which nobody noticed.
+Re-fixed the tape label check (emergency).
+Hard-coded the date format which changed the output.
+Documented the EQUIVALENCE which changed the output.
+Loosened the pivot year for no recorded reason.
+Fixed the pivot year for {CLIENT}.
+Corrected the tape label check for the {INDUSTRY} practice.
+Uncommented the zero check because {CODER2.I} asked.
+De-optimised the provenance seal per {RULE}.
+Reinstated the pivot year on {HOLIDAY}.
+Tidied the BLOCK DATA for the {QUARTER} run.
+Cleaned up the COMMON block layout which changed the output by one dollar.
+Narrowed the abend codes after {ERRMSG}.
+Shortened the EBCDIC table as a temporary measure.
+Fixed the P95 rung which changed the output.
+Converted the error messages per audit {AUDIT}.
+Tightened the job card per memo {MEMO}.
+Reverted the banner page (emergency).
+Corrected the {DATASET} reference ahead of the {HW2} migration.
+Tidied the {UTILITY} step on the {HW2}.
+Tidied the client special cases on {HOLIDAY}.
+Un-hard-coded the dollar signs for {CLIENT}.
+Patched the Julian routine as a temporary measure.
+Tidied the merge on {HOLIDAY}.
+Re-validated the page header which the client noticed.
+Shortened the {PROGRAM2} interface on the {HW2}.
+Re-certified the overflow check during {SPORTS}.
+Hardened the page footer after a phone call from {CLIENT}.
+Re-keyed the lookup table which changed the output.
+Narrowed the {QUARTER} adjustment which nobody noticed.
+Converted the sanity limits form {FORM}.
+Fixed the merge see {INCIDENT}.
+Shortened the two-digit years form {FORM}.
+Tightened the console messages to match the {OLDYEAR} output.
+Replaced the dollar signs without changing the output.
+Hardened the P33 rung because {CODER2.I} asked.
+Re-enabled the trailer line (unplanned).
+Documented the job card ticket {TICKET}.
+Rewrote the checksum to save a page.
+Renamed the P95 rung which the client noticed.
+Rewrote the P67 rung (emergency).
+Reverted the sanity limits for no recorded reason.
+Rewrote the control card check (planned).
+Disabled the merge because it seemed like a good idea.
+Annotated the {UTILITY} step see {INCIDENT}.
+Re-validated the sort ticket {TICKET}.
+Parameterised the checkpoint logic (planned).
+Commented out the DATA statements for the {QUARTER} run.
+Documented the sequence numbers to match the {OLDYEAR} output.
+Generalised the column alignment for the {HW} only.
+Specialised the comment cards at {TIME} on a {DAYNAME}.
+Centralised the ordinal suffix table after a client complaint.
+Certified the Julian routine on {HOLIDAY}.
+Relinked the ordinal suffix table to match the {OLDYEAR} output.
+Restored the metric card parser form {FORM}.
+De-optimised the output class after a client complaint.
+Restored the dollar signs to match the {OLDYEAR} output.
+Converted the job card per memo {MEMO}.
+Loosened the {CLIENT} branch per {COMMITTEE}.
+Parameterised the dollar signs on {HOLIDAY}.
+Replaced the change column after a client complaint.
+Documented the comment cards to fit in {N} columns.
+Validated the lookup table per {COMMITTEE}.
+Reformatted the {VENDOR} interface which changed the output by one dollar.
+Un-hard-coded the DD statements at {TIME} on a {DAYNAME}.
+Re-keyed the sanity limits after a client complaint.
+Rewrote the trailer line after {ERRMSG}.
+Re-keyed the {DATASET} reference to save {CPU} CPU seconds.
+Disabled the return codes for the {QUARTER} run.
+Lengthened the restart logic to match the {OLDYEAR} output.
+Corrected the percentile ladder to fit in {N} columns.
+Tightened the step names per {RULE}.
+Uncommented the trailer card check for the {HW} only.
+Narrowed the record count ahead of the {HW2} migration.
+Renamed the percentile ladder ticket {TICKET}.
+Disabled the Julian routine to save {CPU} CPU seconds.
+Simplified the abend codes (cosmetic).
+Reinstated the date format to save a page.
+Split the peer group heading per {RULE}.
+Replaced the lookup table see {INCIDENT}.
+Duplicated the sort ticket {TICKET}.
+Optimised the P95 rung to fit in {N} columns.
+Uncommented the sequence numbers because it seemed like a good idea.
+Un-hard-coded the Julian routine because it seemed like a good idea.
+Cleaned up the {VENDOR} interface as a permanent measure.
+Removed the page footer to satisfy {COMMITTEE}.
+Fixed the provenance seal to match the {OLDYEAR} output.
+Optimised the checksum see {MANUAL}.
+Narrowed the sort to save a page.
+Retyped the distribution list for the {HW} only.
+Commented out the BLOCK DATA per memo {MEMO}.
+Merged the sanity limits which nobody noticed.
+Un-hard-coded the DD statements as a permanent measure.
+Decentralised the ordinal suffix table for the {QUARTER} run.
+Commented out the return codes which nobody noticed.
+Commented out the EQUIVALENCE for the {HW} only.
+Certified the continuation cards per {RULE}.
+Moved the error messages during {WEATHER}.
+Tidied the median card parser see {MANUAL}.
+Certified the date format per {RULE}.
+Re-keyed the sanity limits over {CODER2.I}'s objection.
+Tightened the BLOCK DATA during {WEATHER}.
+Cleaned up the continuation cards to satisfy {COMMITTEE}.
+Audited the plus signs after a phone call from {CLIENT}.
+Widened the {UTILITY} step during {WEATHER}.
+Rolled back the shadow array for the {HW} only.
+Certified the EBCDIC table because {CODER2.I} asked.
+Reformatted the trace switch over {CODER2.I}'s objection.
+Re-keyed the dataset names for the {HW} only.
+Widened the two-digit years to fit in {N} columns.
+Parameterised the merge over {CODER2.I}'s objection.
+Hardened the control card check on the {HW2}.
+Disabled the tape label check form {FORM}.
+Unfixed the peer group heading (planned).
+Converted the metric card parser to save a page.
+Centralised the P33 rung per memo {MEMO}.
+Tidied the distribution list ahead of the {HW2} migration.
+Parameterised the metric card parser because it seemed like a good idea.
+Generalised the FORMAT widths ahead of the {HW2} migration.
+Annotated the {PROGRAM2} interface after {ERRMSG}.
+Re-certified the plus signs which the client noticed.
+Reinstated the error messages for the {QUARTER} run.
+Annotated the client special cases see {INCIDENT}.
+Hardened the step names for the {HW} only.
+Ported the banner page see {INCIDENT}.
+Decentralised the {DATASET} reference per {VP}.
+Documented the P33 rung after a client complaint.
+Centralised the cross-check per {COMMITTEE}.
+Simplified the merge (unplanned).
+Disabled the dollar signs (planned).
+Relinked the dollar signs for {CLIENT}.
+Hardened the P33 rung per audit {AUDIT}.
+Split the time limit (emergency).
+Duplicated the banner page which nobody noticed.
+Relinked the checkpoint logic without changing the output.
+Commented out the page footer (emergency).
+Loosened the dollar signs ahead of the {HW2} migration.
+Certified the {UTILITY} step to save {CPU} CPU seconds.
+Loosened the DD statements to save a page.
+Renumbered the comment cards to save a page.
+Widened the {DATASET} reference to fit in {N} columns.
+Lengthened the banner page after {ERRMSG}.
+Annotated the EQUIVALENCE (emergency).
+Centralised the dataset names ticket {TICKET}.
+Shortened the computed GO TO because {CODER2.I} asked.
+Rolled back the {CLIENT} branch for the {HW} only.
+Hardened the EBCDIC table for the {INDUSTRY} practice.
+Retyped the Julian routine on the {HW2}.
+Reformatted the time limit to match the {OLDYEAR} output.
+Backported the {PROGRAM2} interface because {CODER2.I} asked.
+Validated the shadow array to match the {OLDYEAR} output.
+Re-certified the page header see {MANUAL}.
+Converted the provenance seal because {CODER2.I} asked.
+Removed the plus signs for {CLIENT}.
+Tidied the EQUIVALENCE which the client noticed.
+Unfixed the trailer line (unplanned).
+Narrowed the sort ticket {TICKET}.
+Documented the job card (planned).
+Re-validated the computed GO TO ticket {TICKET}.
+Documented the shadow array which changed the output.
+Renumbered the provenance seal (emergency).
+Decentralised the DATA statements per {VP}.
+Lengthened the sort without changing the output.
+Reformatted the sign handling to satisfy {COMMITTEE}.
+Removed the page header ticket {TICKET}.
+Tidied the two-digit years see {INCIDENT}.
+Decentralised the {DATASET} reference per {RULE}.
+Ported the step names as a permanent measure.
+Replaced the leap-year test to match the {OLDYEAR} output.
+Un-hard-coded the EQUIVALENCE per {COMMITTEE}.
+Generalised the computed GO TO ticket {TICKET}.
+De-optimised the continuation cards to save {CPU} CPU seconds.
+Centralised the page footer ticket {TICKET}.
+Reinstated the page header without changing the output.
+Corrected the dollar signs to satisfy {COMMITTEE}.
+De-optimised the {DATASET} reference (not cosmetic).
+Reformatted the console messages to fit in {N} columns.
+Merged the dollar signs after a client complaint.
+Duplicated the tape label check per {VP}.
+Disabled the BLOCK DATA for the {HW} only.
+Renumbered the watermark literal on {HOLIDAY}.
+Reverted the plus signs during {SPORTS}.
+Tidied the DATA statements for the {QUARTER} run.
+Re-validated the {QUARTER} adjustment because it seemed like a good idea.
+Optimised the pivot year which changed the output.
+Replaced the control card check on {HOLIDAY}.
+Re-enabled the percentile ladder because {CODER2.I} asked.
+Re-validated the overflow check which nobody noticed.
+Audited the P95 rung at {TIME} on a {DAYNAME}.
+Uncommented the control card check to save a page.
+Tidied the error messages over {CODER2.I}'s objection.
+Ported the leap-year test at {TIME} on a {DAYNAME}.
+Reformatted the plus signs because {CODER2.I} asked.

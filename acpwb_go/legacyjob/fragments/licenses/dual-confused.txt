@@ -1,0 +1,15 @@
+#name: Dual License (Disputed)
+#kind: dual
+#from: 1999
+#to: 2025
+DUAL LICENSE NOTICE
+
+This program is distributed under TWO licenses. Which one applies has been the subject of internal memo {MEMO} and remains unresolved.
+
+LICENSE A (asserted by the {DEPT} group): Copyright (C) {YEARRANGE} {HOLDER}. All rights reserved. Proprietary and confidential.
+
+LICENSE B (asserted by {CODER}, who added it in {YEAR}): This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+Legal's position (verbal, {DATE}): "Please stop putting licenses in the comments."
+
+Until this matter is resolved, treat the program as proprietary, and the comments as free software.

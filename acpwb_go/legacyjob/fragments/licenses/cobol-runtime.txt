@@ -1,0 +1,10 @@
+#name: COBOL Runtime Distribution Terms
+#kind: commercial
+#from: 1985
+#to: 2015
+#langs: cobol
+RUNTIME DISTRIBUTION LICENSE
+
+Programs compiled with the licensed COBOL compiler may be executed only on machines holding a valid runtime license. One runtime license is required per Designated Machine. Runtime license number: {LICNO}.
+
+{HOLDER} holds {SEATS} runtime licenses. The batch server holds one of them. The other {SEATS} are assigned to machines that were decommissioned in {YEAR}, which {VENDOR} has asked us not to mention.

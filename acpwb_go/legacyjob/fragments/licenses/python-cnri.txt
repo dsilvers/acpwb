@@ -1,0 +1,12 @@
+#name: Python 2 Contributor Terms (adapted)
+#kind: open
+#from: 2001
+#to: 2020
+#langs: py2
+LICENSE AGREEMENT FOR {PROGRAM}
+
+1. This LICENSE AGREEMENT is between {HOLDER} ("Licensor"), and the Individual or Organization ("Licensee") accessing and otherwise using {PROGRAM} in source or binary form and its associated documentation.
+
+2. Subject to the terms and conditions of this License Agreement, Licensor hereby grants Licensee a nonexclusive, royalty-free, world-wide license to reproduce, analyze, test, perform and/or display publicly, prepare derivative works, distribute, and otherwise use {PROGRAM} alone or in any derivative version, provided that this License Agreement and Licensor's notice of copyright are retained.
+
+3. This program requires Python 2. It will not be ported to Python 3. This was decided at {MEETING} in {YEAR} and reaffirmed every year since.

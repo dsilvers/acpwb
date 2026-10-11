@@ -1,0 +1,7 @@
+The Program may not be exported or re-exported except in compliance with the export laws of the United States, as they may be understood by {DEPT}.
+Licensee shall not transmit the Program across any national border, including by carrying the listing on an airplane.
+The Program contains no encryption technology, unless the checksum counts, in which case it contains very weak encryption technology.
+Licensee represents that it is not located in, and will not use the Program in, any country subject to U.S. embargo, or in Canada without telling us.
+The territory of this license is the continental United States, Alaska, Hawaii, and the parking lot at {ADDRESS}.
+Export of the Output is permitted. Export of the percentile ladder is not.
+Licensee shall not make the Program available through {NETWORK} to persons outside the territory.

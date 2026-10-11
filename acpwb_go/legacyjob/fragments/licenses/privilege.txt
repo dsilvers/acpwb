@@ -1,0 +1,9 @@
+#name: Privileged and Confidential Notice
+#kind: proprietary
+#from: 1980
+#extra: yes
+PRIVILEGED AND CONFIDENTIAL - ATTORNEY WORK PRODUCT - PREPARED AT THE DIRECTION OF COUNSEL
+
+This listing was prepared at the request of counsel in anticipation of litigation concerning the methodology of the {CLIENT} engagement. It is protected by the attorney-client privilege and the work product doctrine.
+
+Counsel would like it noted that they did not request the comments. Counsel would further like it noted that the comments are not privileged, they are just unfortunate.

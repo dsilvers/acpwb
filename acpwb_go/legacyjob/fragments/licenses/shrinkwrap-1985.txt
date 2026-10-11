@@ -1,0 +1,11 @@
+#name: Shrink-Wrap License
+#kind: commercial
+#from: 1983
+#to: 1998
+IMPORTANT: READ THIS BEFORE OPENING THE DISKETTE PACKAGE.
+
+By opening this sealed diskette package you indicate your acceptance of the following terms. If you do not agree, return the unopened package to the place you obtained it within {TERMDAYS} days for a full refund.
+
+{HOLDER} grants you the right to use one copy of {PROGRAM} on a single computer. You may make one backup copy. You may not use the program on more than one computer at a time, or on a network, or on a computer belonging to {CODER2}.
+
+LIMITED WARRANTY: {HOLDER} warrants the diskette to be free of defects for {TERMDAYS} days. If the diskette is defective, return it with proof of purchase and we will replace it. That is the entire warranty. The percentiles are not on the diskette. They are in the program, and are not warranted.

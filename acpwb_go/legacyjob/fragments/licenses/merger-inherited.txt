@@ -1,0 +1,8 @@
+#name: Inherited License (Acquisition)
+#kind: commercial
+#from: 1988
+NOTICE OF ASSIGNED LICENSE
+
+{PROGRAM} was originally licensed to a company that {HOLDER} acquired in {YEAR}. The license was assigned to {HOLDER} as part of the acquisition, together with the program, the binder, and {CODER2}, who came with the program.
+
+The original license is in a box in the off-site storage facility. The box is labeled "MISC - KEEP." The terms are believed to be favorable.

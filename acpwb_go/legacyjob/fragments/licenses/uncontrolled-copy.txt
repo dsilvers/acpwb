@@ -1,0 +1,9 @@
+#name: Uncontrolled Copy Notice
+#kind: proprietary
+#from: 1990
+#extra: yes
+UNCONTROLLED COPY WHEN PRINTED
+
+The controlled version of this program is maintained in {DATASET}. Printed copies are uncontrolled and may be out of date. Verify the release number ({REL}) against the controlled version before relying on this listing.
+
+This listing was printed on {DATE}. It is already out of date. {CODER2} has made a change since then.

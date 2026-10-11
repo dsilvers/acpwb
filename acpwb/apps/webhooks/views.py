@@ -120,7 +120,10 @@ def pipe_inbound(request):
 
 
 def _match_honeypot(inbound_email):
-    """Find GeneratedEmployee records matching the recipient address."""
+    """Match the recipient address against every place the site hands out
+    generated addresses: GeneratedEmployee rows (Our People page) and the
+    programmer addresses shown on legacy source-code pages."""
+    from apps.honeypot.models import SourceCodeEmail
     from apps.people.models import GeneratedEmployee
 
     recipient = inbound_email.recipient.lower().strip()
@@ -128,31 +131,44 @@ def _match_honeypot(inbound_email):
     matches = GeneratedEmployee.objects.filter(
         email__iexact=recipient,
     ).select_related('visit')
+    code_pages = list(SourceCodeEmail.objects.filter(address__iexact=recipient).order_by('first_seen')[:50])
 
-    if matches.exists():
-        for employee in matches:
-            HoneypotMatch.objects.create(
-                inbound_email=inbound_email,
-                generated_employee=employee,
-                original_visit=employee.visit,
-                match_confidence='exact',
-                notes=(
-                    f"Recipient {recipient} matched employee {employee.full_name} "
-                    f"generated during visit {employee.visit.id} "
-                    f"from IP {employee.visit.ip_address} "
-                    f"at {employee.visit.timestamp:%Y-%m-%d %H:%M:%S}"
-                ),
-            )
+    for employee in matches:
+        HoneypotMatch.objects.create(
+            inbound_email=inbound_email,
+            generated_employee=employee,
+            original_visit=employee.visit,
+            match_confidence='exact',
+            notes=(
+                f"Recipient {recipient} matched employee {employee.full_name} "
+                f"generated during visit {employee.visit.id} "
+                f"from IP {employee.visit.ip_address} "
+                f"at {employee.visit.timestamp:%Y-%m-%d %H:%M:%S}"
+            ),
+        )
+    for page in code_pages:
+        HoneypotMatch.objects.create(
+            inbound_email=inbound_email,
+            source_code_email=page,
+            match_confidence='exact',
+            notes=(
+                f"Recipient {recipient} was shown on source-code page {page.host}{page.path} "
+                f"(first served {page.first_seen:%Y-%m-%d %H:%M:%S} to {page.first_ip or 'unknown IP'}, "
+                f"{page.times_served} time(s))"
+            ),
+        )
+
+    if matches.exists() or code_pages:
         logger.info(
-            "Honeypot match: %s → %d employee record(s)",
-            recipient, matches.count(),
+            "Honeypot match: %s → %d employee record(s), %d source-code page(s)",
+            recipient, matches.count(), len(code_pages),
         )
     else:
         # No exact match — log it anyway with no match
         HoneypotMatch.objects.create(
             inbound_email=inbound_email,
             match_confidence='none',
-            notes=f"No GeneratedEmployee found for recipient: {recipient}",
+            notes=f"No GeneratedEmployee or source-code page found for recipient: {recipient}",
         )
         logger.info("No honeypot match found for recipient: %s", recipient)
 

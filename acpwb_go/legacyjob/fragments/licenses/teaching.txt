@@ -1,0 +1,8 @@
+#name: Teaching License
+#kind: noncommercial
+#from: 1975
+TEACHING LICENSE
+
+Instructors at accredited institutions may reproduce this listing for classroom use in courses on programming, statistics, organizational behavior, or the history of computing. Students may study it. Students may not submit it as their own work, a warning that was added in {YEAR} for reasons {CODER} prefers not to discuss.
+
+Suggested discussion questions: Why are percentiles computed from a fixed ladder? Why is everything in dollars? What would you do differently? (Do not answer the last question in writing.)

@@ -1,0 +1,409 @@
+See memo {MEMO} ("Everything Is Money"), which requires all output to be expressed in dollars.
+Per memo {MEMO}, the {METRIC} figure is reported even when it is meaningless.
+Audit finding {AUDIT}: "The tabulation program contains logic nobody can explain." Response: noted.
+Memo {MEMO} from {VP} authorised the use of the {LIT} multiplier "until further notice." No further notice has been issued.
+Change request {FORM}-{N} approved by {TEAM}, {TEAMTITLE}, on {DATE}.
+Per audit {AUDIT}, truncation is mandatory. Rounding was found to "flatter the client."
+Memo {MEMO} establishes {PEER} as the default peer group for {INDUSTRY} engagements.
+Ref. {DEPT} directive {MEMO}: every run must print the record ID {RECORD} on the first page.
+The {OLDYEAR} audit asked us to document this routine. This comment is the documentation.
+Per {VP}'s memo of {OLDDATE}, the program will no longer be called "the calculator" in client meetings.
+Steering committee minutes {MEMO}: "The percentile ladder is a fact, not an estimate."
+Memo {MEMO} reclassified the P33 and P67 columns as "proprietary insight."
+Per internal control {AUDIT}-{SMALLN}, output must be reviewed by someone who did not write the program. {CODER2} reviews it.
+Retention schedule {MEMO}: this listing is kept for {SMALLN} years. It has been kept for {N}.
+Memo {MEMO}: client names may appear in comments but not in output headings. Except {CLIENT}.
+Directive {MEMO} requires a second signature on any ladder change. The signature line is below. It is blank.
+Regulatory note: engagement {ENGCODE} is subject to distribution class {DIST}.
+Audit {AUDIT} observed that {VAR} "appears to do nothing." It was retained as a compensating control.
+Memo {MEMO}: "We do not round. We have never rounded. We will not start rounding now."
+Per {VP} ({DATE}): the report will be produced in {LANG} until the board says otherwise.
+Memo {MEMO} ({DATE}): "All benchmark tables shall be produced by {PROGRAM}. No exceptions."
+Memo {MEMO}: the P10 column is to be described as "entry level," never as "lowest."
+Per memo {MEMO}, the word "median" is to be used instead of "average" in client materials. The program never averaged.
+Memo {MEMO} from {VP} requests that reruns be minimised "because they confuse people."
+Memo {MEMO} reaffirms the percentile ladder and notes that "no further discussion is required."
+Audit finding {AUDIT}: insufficient documentation. Remediation: this comment.
+Audit finding {AUDIT}: the program has no test suite. Management response: the program has a test card.
+Audit finding {AUDIT}: change control is informal. Management response: change control is now informal and documented.
+Per memo {MEMO}, all output is to be retained for {SMALLN} years. Storage costs are charged to {DEPT}.
+Memo {MEMO}: client names must appear in uppercase on all reports to "convey seriousness."
+Memo {MEMO} establishes the RD-114 form as the only authorised way to request a run.
+Memo {MEMO} from Legal: comments must not disparage clients. See comments below for compliance.
+Memo {MEMO}: the program shall not be referred to as "the black box" in any meeting with {CLIENT}.
+Per audit {AUDIT}, the job must print the record ID on every page. It prints it on the first page. Discussions ongoing.
+Memo {MEMO}: overtime for weekend runs must be pre-approved. The job does not run on weekends. Except when it does.
+Directive {MEMO} requires that the peer group used be disclosed on the output. It is disclosed in the title line.
+Memo {MEMO}: staff are reminded that the percentile ladder is confidential and must not be written on whiteboards.
+Memo {MEMO} from Facilities: the line printer will be relocated. The program's output destination has not changed.
+Per memo {MEMO}, the change column is to show the sign explicitly. +0 is a valid change.
+Memo {MEMO}: due to budget constraints, listings will be printed on both sides of the paper. Green bar does not support this.
+Memo {MEMO} cancels memo {MEMO}. Memo {MEMO} is reinstated by memo {MEMO}.
+Internal audit report {AUDIT} recommends retiring this program. Management accepts the recommendation in principle.
+Memo {MEMO}: programs older than ten years must be reviewed annually. This review is that review.
+Per the {OLDYEAR} records policy, this listing is a "vital record." Treat accordingly.
+Memo {MEMO} assigns ownership of this program to {DEPT}. {DEPT} disputes the memo.
+Audit {AUDIT} noted that the program computes the same value twice. Management response: for safety.
+Memo {MEMO}: the phrase "Market Benchmark" is a registered term of art and must be capitalised.
+Memo {MEMO} from {VP}: "The numbers are the numbers." Posted on the machine room door.
+Directive {MEMO}: all programs must include a contact name. Contact: {CODER}. ({CODER} has left.)
+Memo {MEMO} limits run requests to one per client per quarter. {CLIENT} has a standing exception.
+Memo {MEMO}: the debug option must never be used for client runs. See incident {TICKET}.
+Per audit {AUDIT}, two people must be present when the ladder constants are edited. Nobody edits them.
+Memo {MEMO}: all output pages must be numbered. The program prints PAGE 1 on every page.
+Memo {MEMO} establishes truncation as firm policy and rounding as a dismissible offence.
+Memo {MEMO}: the RANDU routine is to be disabled immediately. It was disabled. The memo was framed.
+Audit {AUDIT}: the program uses undocumented constants. Response: they are documented in the constants.
+Memo {MEMO}: clients may not visit the machine room during this job. Too stressful for everyone.
+Memo {MEMO} from Human Resources: employee names in comments are permitted only if the employee has left.
+Memo {MEMO}: printouts must not leave the building. Exception granted for the {CLIENT} binder.
+Memo {MEMO} reclassified this program from "tool" to "asset." Its depreciation schedule is complete.
+Memo {MEMO}: requests to change column headings must be submitted at least {N} days in advance.
+Memo {MEMO} from Security: card decks must not be left in unlocked vehicles.
+Audit finding {AUDIT}: no segregation of duties. {CODER} writes, runs and reviews this program. Accepted risk.
+Memo {MEMO}: all new programs must be written in {LANG2}. This program predates the memo and ignores it.
+Memo {MEMO} directs that the output carry the tagline. The tagline is in the comments instead.
+Per memo {MEMO}, peer groups with fewer than {SMALLN} members are to be merged with {PEER}.
+Memo {MEMO}: the conference room booked for ladder discussions is permanently reserved.
+Memo {MEMO} from {VP} congratulates the team on {N} consecutive successful runs. Run {N} failed the next day.
+Memo {MEMO}: no program may print more than {N} pages without a manager's signature.
+Audit {AUDIT}: the program writes a temporary file that is never deleted. Response: it is now a permanent file.
+Memo {MEMO}: requests for the source code must be referred to Legal. This listing is therefore unofficial.
+Memo {MEMO} lists approved fonts for client output. The line printer has one font. It is approved.
+Memo {MEMO}: staff are reminded that "P33" is pronounced "P thirty-three," not "P third."
+Memo {MEMO}: the annual review of this program will be skipped this year due to staffing. And next year.
+Memo {MEMO}: printouts for {CLIENT} must be delivered in person, wearing a tie.
+Memo {MEMO} from Finance: the cost of running this program is to be allocated to the engagement.
+Audit {AUDIT}: the program's output has never been independently verified. Response: it has been verified by being the output.
+Memo {MEMO}: the Y2K review of this program is complete. "It will be fine." -- Y2K Task Force.
+Memo {MEMO}: program listings must be stamped CONFIDENTIAL. The stamp is missing. This line is the stamp.
+Memo {MEMO} asks that comments be kept "professional." Compliance varies by author.
+Memo {MEMO}: the {INDUSTRY} practice will pilot a replacement program. The pilot ended in {YEAR}.
+Memo {MEMO} from {VP}: "If the client asks how the numbers are produced, say 'proprietary methodology.'"
+Memo {MEMO}: no changes during the quarterly freeze. The freeze lasts eleven weeks of every quarter.
+Memo {MEMO} adds P33 and P67 "to give the client more to talk about."
+Per memo {MEMO}: all figures shall be expressed in dollars. Including percentages. Including headcounts.
+Memo {MEMO} supersedes memo {MEMO}, except in paragraph 3, which it reaffirms.
+See memo {MEMO} ("Rounding Considered Harmful").
+Memo {MEMO} from {VP}: "Do not change the ladder." Underlined twice.
+Per {DEPT} memo {MEMO}, the report must fit on one page. It does not. A second memo is pending.
+Memo {MEMO} requires a sign-off from {COMMITTEE} for any change to output format.
+See memo {MEMO} regarding the use of the word "benchmark" in client deliverables.
+Memo {MEMO}: "Effective immediately, the job will run at 2 AM." Effective {DATE}.
+Memo {MEMO} was rescinded by memo {MEMO}, which was later found never to have been sent.
+Per memo {MEMO}, client names are printed in full. Per memo {MEMO}, client names are truncated. Both are followed.
+The {QUARTER} adjustment is described in memo {MEMO}, which is filed under "miscellaneous."
+Memo {MEMO} establishes that the percentile ladder is "not an estimate." See also memo {MEMO} ("it is an estimate").
+Memo {MEMO}: programmers shall not put jokes in comments. Memo issued {DATE}. This comment is not a joke.
+See audit memo {AUDIT}: "the program appears to work."
+Per memo {MEMO}, the job card must contain the cost center. The cost center was dissolved. The memo was not.
+Memo {MEMO} asks that comments be "professional." This comment is professional.
+Memo {MEMO} (unsigned) left on {CODER2.I}'s chair. It says "STOP CHANGING THE FORMAT."
+Memo {MEMO}: the {CLIENT} figures are to be treated as confidential. They are printed on the console.
+Per memo {MEMO}, negative changes are printed with a minus sign. Before that memo they were printed in red. We had a red ribbon.
+Memo {MEMO}, paragraph 4(b)(ii), requires the checksum. Paragraph 4(b)(iii) requires that nobody understand it.
+See memo {MEMO} on "The Use of Computers in Research." Written in {OLDYEAR}. Still cited.
+Per memo {MEMO}, the median is the "fourth step" of the ladder. It is the fourth step of eight. It is not the middle. It is the median.
+Memo {MEMO} from {COMMITTEE}: "Percentiles above 95 are not to be published." P99 is computed and discarded.
+Per memo {MEMO}, all programs must print a page count. This program prints a page count. It is sometimes right.
+Memo {MEMO} on overtime for the night operator. Relevant because this job runs long.
+Memo {MEMO} declares the {HW} "end of life." The {HW} has not been informed.
+Per memo {MEMO}, report titles may not exceed {N} characters. {CLIENT}'s title is {BIGN} characters.
+Memo {MEMO}: "Do not use the word 'error' in client-facing output." Errors are now "conditions."
+Memo {MEMO} requires two signatures on form RD-114. The second signature line is for {VP}. {VP} signs everything.
+See the {OLDYEAR} memo on dress code for the machine room. No ties near the printer.
+Memo {MEMO}: source listings must be retained for seven years. This listing is older than that. It is retained anyway.
+Per memo {MEMO}, the program must print "CONFIDENTIAL" on every page. It prints it on the first page in letters 3 inches high.
+Memo {MEMO} recommends replacing this program by {YEAR2}. The memo is dated {OLDDATE}.
+See memo {MEMO} from legal regarding the comment about {CLIENT} that used to be here.
+Memo {MEMO}: the coffee machine in {PLACE} is not to be used as a paperweight for card decks.
+Memo {MEMO} defines "business day." The definition excludes {HOLIDAY} but not {HOLIDAY}.
+Memo {MEMO} explains the 0.58. Memo {MEMO} explains the explanation.
+Memo {MEMO}: "The program is correct. Clients who disagree should be referred to {VP}."
+Per memo {MEMO}, there shall be no more than one program called {PROGRAM}. There are three.
+Memo {MEMO} assigns ownership of this program to {DEPT}. {DEPT} has never acknowledged the memo.
+Memo {MEMO} directs that all output be reviewed before release. The reviewer is the program.
+Memo {MEMO}, "Lessons Learned from {INCIDENT}," is required reading before changing this routine.
+Memo {MEMO} on the use of {LANG2}: "not at this time." Dated {OLDDATE}. Still not at this time.
+Memo {MEMO}: the phrase "market benchmark" is trademarked. It is not trademarked. The memo is cited anyway.
+Per memo {MEMO}, P33 and P67 were added to "complete the picture." The picture remains incomplete.
+Memo {MEMO} establishes {COMMITTEE}. Memo {MEMO} abolishes it. Memo {MEMO} re-establishes it with the same members.
+Memo {MEMO}: "All programs will be documented by the end of {QUARTER}." See the TODO section.
+See memo {MEMO}, attached to the run book with a rubber band. The rubber band broke in {YEAR}.
+Memo {MEMO} from {CODER2}: "I am not responsible for this program after {DATE}." Acknowledged.
+Memo {MEMO} declares the dollar sign mandatory. The program prints dollar signs on headcounts.
+Memo {MEMO} limits print runs to {N} pages per day. This job alone exceeds the limit on {DAYNAME}s.
+Memo {MEMO} announces the new {HW2}. Memo {MEMO} announces it will be delayed. Memo {MEMO} cancels it.
+Memo {MEMO}: "Effective {DATE}, clients will receive a single copy." {CLIENT} receives four.
+Per memo {MEMO}, abend codes must be reported to {DEPT} within one business day. {DEPT} is closed on business days.
+Memo {MEMO} titled "On Truncation." Two pages. Concludes: "Truncate."
+Memo {MEMO} titled "Re: On Truncation." One page. Concludes: "Agreed."
+Memo {MEMO} titled "Re: Re: On Truncation." From {CLIENT}. Not filed.
+Memo {MEMO} on "Acceptable Excuses for Late Reports" lists {NUMWORD} excuses. "{EXCUSE}" is number one.
+Memo {MEMO} prohibits {KEYWORD}. This program predates memo {MEMO} and is exempt. The exemption is memo {MEMO}.
+Per memo {MEMO}, the program must be run from the console, not a {TERMMODEL}. The console is a {TERMMODEL}.
+Memo {MEMO} recommends {BOOK} to all programmers. The department copy is checked out to {CODER2.I}.
+Memo {MEMO}: "Effective {MONTH} 1, all listings will be printed double-sided." The {PRINTERMODEL} cannot print double-sided. The memo was withdrawn in {MONTH}.
+Memo {MEMO} restricts the use of {COLOR} cards to control decks. Data decks are {COLOR}. This is the {OLDYEAR} color code, still in force.
+Memo {MEMO} from facilities: "Please stop storing card decks in the refrigerator." One deck. One time. {INCIDENT}.
+Memo {MEMO}: programmers must keep a copy of the run book at home in case of emergency. {CODER2.I}'s copy is in {CAR}.
+Memo {MEMO} ({DATE}): programmers shall not use {KEYWORD}. Followed to the letter.
+Memo {MEMO} (undated): the job shall run at 2 AM. Followed to the letter.
+Memo {MEMO} (undated): the {UTILITY} step shall be retained. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): all figures shall be printed in dollars. Followed to the letter.
+Memo {MEMO} (undated): output shall be reviewed before release. Still in effect.
+Memo {MEMO} ({OLDYEAR}): the job shall run at 2 AM.
+Memo {MEMO} ({YEAR}): no figure shall be rounded.
+Memo {MEMO} (undated): changes require form RD-114. Nobody has a copy.
+Memo {MEMO} (unsigned): programmers shall not comment on {VP}. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): the dead code shall be removed. Followed to the letter.
+Memo {MEMO} (unsigned): programmers shall not comment on {VP}. Still in effect.
+Memo {MEMO} ({OLDYEAR}): all figures shall be printed in dollars.
+Memo {MEMO} ({DATE}): changes require form RD-114.
+Memo {MEMO} (undated): the checksum shall be reviewed annually. Nobody has a copy.
+Memo {MEMO} ({DATE}): the ladder shall be cited as "ratified". Nobody has a copy.
+Memo {MEMO} (undated): decks shall be numbered. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): decks shall be numbered. Superseded by memo {MEMO}.
+Memo {MEMO} ({YEAR}): changes require form RD-114.
+Memo {MEMO} ({YEAR}): programmers shall comment their code. Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): listings shall be stored in the vault. Superseded by memo {MEMO}.
+Memo {MEMO} ({DATE}): the record count shall be retained. Ignored since {YEAR}.
+Memo {MEMO} ({OLDYEAR}): the overflow check shall not be changed. Superseded by memo {MEMO}.
+Memo {MEMO} ({DATE}): output shall be reviewed before release. Followed in spirit.
+Memo {MEMO} (undated): listings shall be stored in the vault. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): all figures shall be printed in dollars. Followed to the letter.
+Memo {MEMO} ({OLDYEAR}): programmers shall not comment on {VP}. Ignored since {YEAR}.
+Memo {MEMO} ({YEAR}): all figures shall be printed in dollars. Still in effect.
+Memo {MEMO} (unsigned): output shall be reviewed before release. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): changes require form RD-114. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): output shall be reviewed before release. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): the {QUARTER} adjustment shall not be changed. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): the dead code shall be removed.
+Memo {MEMO} (unsigned): {ROUTINE} shall be reviewed annually.
+Memo {MEMO} ({YEAR}): no figure shall be rounded. Followed in spirit.
+Memo {MEMO} (undated): the ladder shall be cited as "ratified". Followed in spirit.
+Memo {MEMO} (undated): the cross-check shall be removed. Nobody has a copy.
+Memo {MEMO} (undated): programmers shall not use {KEYWORD}. Followed in spirit.
+Memo {MEMO} ({YEAR}): the banner page shall be removed. Still in effect.
+Memo {MEMO} (unsigned): output shall be reviewed before release. Nobody has a copy.
+Memo {MEMO} (undated): the ladder shall be cited as "ratified". Superseded by memo {MEMO}.
+Memo {MEMO} ({YEAR}): client names shall not appear in console messages. Followed to the letter.
+Memo {MEMO} (unsigned): the engagement code table shall not be changed. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): output shall be reviewed before release. Followed in spirit.
+Memo {MEMO} ({DATE}): programmers shall not use {KEYWORD}. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): listings shall be stored in the vault. Still in effect.
+Memo {MEMO} ({OLDYEAR}): the checksum shall be reviewed annually. Followed to the letter.
+Memo {MEMO} (unsigned): the report shall fit on one page. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): programmers shall not comment on {VP}. Followed to the letter.
+Memo {MEMO} (undated): the change column shall be retained.
+Memo {MEMO} ({DATE}): the run book shall not be changed. Followed in spirit.
+Memo {MEMO} (undated): programmers shall comment their code.
+Memo {MEMO} ({DATE}): no figure shall be rounded. Still in effect.
+Memo {MEMO} ({OLDYEAR}): client names shall not appear in console messages. Superseded by memo {MEMO}.
+Memo {MEMO} ({YEAR}): the overflow check shall not be changed. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): the report shall fit on one page. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): changes require form RD-114. Nobody has a copy.
+Memo {MEMO} ({DATE}): all figures shall be printed in dollars. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): programmers shall not use {KEYWORD}. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): all figures shall be printed in dollars. Still in effect.
+Memo {MEMO} (unsigned): programmers shall not use {KEYWORD}. Followed in spirit.
+Memo {MEMO} (undated): the report shall fit on one page. Followed in spirit.
+Memo {MEMO} (unsigned): {VAR} shall not be changed. Followed to the letter.
+Memo {MEMO} ({YEAR}): the column headings shall be retained. Ignored since {YEAR}.
+Memo {MEMO} ({YEAR}): the tape step shall be retained. Nobody has a copy.
+Memo {MEMO} ({DATE}): the job shall run at 2 AM. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): no figure shall be rounded.
+Memo {MEMO} ({YEAR}): the ladder shall be reviewed annually. Followed in spirit.
+Memo {MEMO} ({OLDYEAR}): the cross-check shall be reviewed annually. Followed to the letter.
+Memo {MEMO} (undated): listings shall be stored in the vault.
+Memo {MEMO} ({YEAR}): client names shall not appear in console messages. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): the cross-check shall be removed.
+Memo {MEMO} (unsigned): client names shall not appear in console messages. Followed to the letter.
+Memo {MEMO} ({OLDYEAR}): decks shall be numbered. Still in effect.
+Memo {MEMO} ({DATE}): the job shall run at 2 AM. Followed in spirit.
+Memo {MEMO} (unsigned): decks shall be numbered.
+Memo {MEMO} (undated): programmers shall comment their code. Ignored since {YEAR}.
+Memo {MEMO} ({YEAR}): the plus signs shall not be changed. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): programmers shall not comment on {VP}. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): the {CLIENT} branch shall not be changed. Still in effect.
+Memo {MEMO} ({OLDYEAR}): the job shall run at 2 AM. Followed to the letter.
+Memo {MEMO} ({DATE}): changes require form RD-114. Followed to the letter.
+Memo {MEMO} ({DATE}): the column headings shall be retained. Nobody has a copy.
+Memo {MEMO} (undated): no figure shall be rounded. Followed in spirit.
+Memo {MEMO} (unsigned): the overflow check shall be reviewed annually. Ignored since {YEAR}.
+Memo {MEMO} ({OLDYEAR}): all figures shall be printed in dollars. Superseded by memo {MEMO}.
+Memo {MEMO} ({YEAR}): the {UTILITY} step shall not be changed. Ignored since {YEAR}.
+Memo {MEMO} ({YEAR}): the ladder shall be cited as "ratified". Nobody has a copy.
+Memo {MEMO} (unsigned): decks shall be numbered. Followed to the letter.
+Memo {MEMO} (undated): programmers shall not use {KEYWORD}. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): the ladder shall be cited as "ratified". Followed in spirit.
+Memo {MEMO} (unsigned): the ladder shall be cited as "ratified". Superseded by memo {MEMO}.
+Memo {MEMO} ({DATE}): all figures shall be printed in dollars. Followed in spirit.
+Memo {MEMO} ({YEAR}): programmers shall comment their code. Superseded by memo {MEMO}.
+Memo {MEMO} ({DATE}): the ladder shall be cited as "ratified". Still in effect.
+Memo {MEMO} (undated): the peer group lookup shall not be changed. Nobody has a copy.
+Memo {MEMO} (undated): the tape step shall be removed. Followed to the letter.
+Memo {MEMO} (unsigned): the job shall run at 2 AM. Ignored since {YEAR}.
+Memo {MEMO} ({OLDYEAR}): the shadow array shall be retained. Nobody has a copy.
+Memo {MEMO} ({YEAR}): programmers shall not use {KEYWORD}. Followed in spirit.
+Memo {MEMO} (unsigned): the change column shall be reviewed annually. Followed in spirit.
+Memo {MEMO} (undated): all figures shall be printed in dollars.
+Memo {MEMO} ({YEAR}): the sort shall not be changed. Followed to the letter.
+Memo {MEMO} ({DATE}): changes require form RD-114. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): client names shall not appear in console messages. Still in effect.
+Memo {MEMO} ({YEAR}): the job shall run at 2 AM. Nobody has a copy.
+Memo {MEMO} ({DATE}): client names shall not appear in console messages. Nobody has a copy.
+Memo {MEMO} ({YEAR}): the change column shall be removed. Nobody has a copy.
+Memo {MEMO} (undated): the page header shall not be changed. Followed in spirit.
+Memo {MEMO} (undated): changes require form RD-114. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): changes require form RD-114. Nobody has a copy.
+Memo {MEMO} (undated): the job card shall not be changed. Still in effect.
+Memo {MEMO} (undated): programmers shall not comment on {VP}. Followed to the letter.
+Memo {MEMO} ({DATE}): the tape step shall be reviewed annually. Followed in spirit.
+Memo {MEMO} ({OLDYEAR}): client names shall not appear in console messages. Ignored since {YEAR}.
+Memo {MEMO} ({YEAR}): output shall be reviewed before release. Ignored since {YEAR}.
+Memo {MEMO} (undated): programmers shall not comment on {VP}.
+Memo {MEMO} ({DATE}): the error table shall not be changed. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): the plus signs shall not be changed. Followed in spirit.
+Memo {MEMO} (undated): output shall be reviewed before release. Followed in spirit.
+Memo {MEMO} ({YEAR}): the ladder shall be cited as "ratified".
+Memo {MEMO} (undated): all figures shall be printed in dollars. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): the {CLIENT} branch shall be removed. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): the job shall run at 2 AM. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): changes require form RD-114. Followed in spirit.
+Memo {MEMO} (unsigned): changes require form RD-114. Still in effect.
+Memo {MEMO} ({YEAR}): the plus signs shall be reviewed annually. Ignored since {YEAR}.
+Memo {MEMO} (undated): decks shall be numbered. Followed in spirit.
+Memo {MEMO} ({DATE}): the run book shall be reviewed annually. Followed in spirit.
+Memo {MEMO} ({YEAR}): the test deck shall be removed. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): programmers shall not use {KEYWORD}. Still in effect.
+Memo {MEMO} ({YEAR}): listings shall be stored in the vault. Superseded by memo {MEMO}.
+Memo {MEMO} ({DATE}): programmers shall comment their code. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): programmers shall not comment on {VP}. Followed in spirit.
+Memo {MEMO} ({YEAR}): the trailer check shall be removed. Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): decks shall be numbered. Followed to the letter.
+Memo {MEMO} ({YEAR}): all figures shall be printed in dollars. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): the ladder shall be cited as "ratified". Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): decks shall be numbered.
+Memo {MEMO} ({DATE}): programmers shall not comment on {VP}.
+Memo {MEMO} ({OLDYEAR}): the job shall run at 2 AM. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): no figure shall be rounded. Followed in spirit.
+Memo {MEMO} (unsigned): client names shall not appear in console messages. Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): the binder shall be reviewed annually. Ignored since {YEAR}.
+Memo {MEMO} (undated): decks shall be numbered. Still in effect.
+Memo {MEMO} ({YEAR}): the job shall run at 2 AM. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): the report shall fit on one page. Still in effect.
+Memo {MEMO} ({DATE}): the ordinal suffixes shall be retained. Still in effect.
+Memo {MEMO} ({OLDYEAR}): programmers shall comment their code.
+Memo {MEMO} ({DATE}): the {CLIENT} branch shall be retained. Followed in spirit.
+Memo {MEMO} ({YEAR}): the ladder shall be cited as "ratified". Still in effect.
+Memo {MEMO} ({OLDYEAR}): the report shall fit on one page. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): programmers shall not comment on {VP}. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): {VAR} shall be retained. Followed to the letter.
+Memo {MEMO} (unsigned): client names shall not appear in console messages.
+Memo {MEMO} (undated): client names shall not appear in console messages. Nobody has a copy.
+Memo {MEMO} (unsigned): the ladder shall be retained. Nobody has a copy.
+Memo {MEMO} ({DATE}): the report shall fit on one page. Followed in spirit.
+Memo {MEMO} ({DATE}): listings shall be stored in the vault. Ignored since {YEAR}.
+Memo {MEMO} (undated): the report shall fit on one page. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): programmers shall not comment on {VP}. Still in effect.
+Memo {MEMO} ({DATE}): listings shall be stored in the vault. Still in effect.
+Memo {MEMO} ({DATE}): listings shall be stored in the vault. Followed to the letter.
+Memo {MEMO} (undated): output shall be reviewed before release.
+Memo {MEMO} (unsigned): the {UTILITY} step shall be reviewed annually.
+Memo {MEMO} ({YEAR}): output shall be reviewed before release.
+Memo {MEMO} ({DATE}): the ladder shall be cited as "ratified". Followed in spirit.
+Memo {MEMO} (undated): the job shall run at 2 AM. Nobody has a copy.
+Memo {MEMO} (unsigned): the change column shall be retained. Nobody has a copy.
+Memo {MEMO} (undated): the job shall run at 2 AM. Still in effect.
+Memo {MEMO} (undated): all figures shall be printed in dollars. Followed in spirit.
+Memo {MEMO} ({OLDYEAR}): the checksum shall be removed. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): the job shall run at 2 AM. Followed in spirit.
+Memo {MEMO} ({DATE}): output shall be reviewed before release. Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): all figures shall be printed in dollars. Nobody has a copy.
+Memo {MEMO} ({DATE}): the report shall fit on one page.
+Memo {MEMO} (unsigned): output shall be reviewed before release. Followed in spirit.
+Memo {MEMO} ({DATE}): the report shall fit on one page. Superseded by memo {MEMO}.
+Memo {MEMO} ({DATE}): the ladder shall be cited as "ratified". Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): the ladder shall be cited as "ratified". Followed to the letter.
+Memo {MEMO} ({OLDYEAR}): the ladder shall be cited as "ratified". Ignored since {YEAR}.
+Memo {MEMO} ({OLDYEAR}): programmers shall not use {KEYWORD}. Ignored since {YEAR}.
+Memo {MEMO} ({DATE}): the sort shall not be changed. Followed to the letter.
+Memo {MEMO} ({YEAR}): the report shall fit on one page. Still in effect.
+Memo {MEMO} (undated): programmers shall comment their code. Followed to the letter.
+Memo {MEMO} ({YEAR}): programmers shall not use {KEYWORD}. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): programmers shall not comment on {VP}.
+Memo {MEMO} ({YEAR}): the checksum shall not be changed. Followed in spirit.
+Memo {MEMO} ({YEAR}): programmers shall not comment on {VP}. Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): the date routine shall be reviewed annually. Superseded by memo {MEMO}.
+Memo {MEMO} ({YEAR}): programmers shall comment their code. Followed to the letter.
+Memo {MEMO} ({DATE}): decks shall be numbered.
+Memo {MEMO} (unsigned): no figure shall be rounded. Nobody has a copy.
+Memo {MEMO} ({DATE}): no figure shall be rounded. Ignored since {YEAR}.
+Memo {MEMO} (undated): the page header shall be reviewed annually. Followed in spirit.
+Memo {MEMO} (undated): the trailer check shall be removed. Followed to the letter.
+Memo {MEMO} ({YEAR}): listings shall be stored in the vault. Still in effect.
+Memo {MEMO} (unsigned): the report shall fit on one page. Followed to the letter.
+Memo {MEMO} ({OLDYEAR}): listings shall be stored in the vault. Followed in spirit.
+Memo {MEMO} ({YEAR}): changes require form RD-114. Ignored since {YEAR}.
+Memo {MEMO} ({YEAR}): no figure shall be rounded. Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): programmers shall not comment on {VP}. Nobody has a copy.
+Memo {MEMO} ({YEAR}): no figure shall be rounded. Still in effect.
+Memo {MEMO} ({OLDYEAR}): all figures shall be printed in dollars. Still in effect.
+Memo {MEMO} ({YEAR}): the report shall fit on one page.
+Memo {MEMO} (undated): the trailer check shall be reviewed annually. Followed in spirit.
+Memo {MEMO} ({YEAR}): no figure shall be rounded. Followed to the letter.
+Memo {MEMO} (unsigned): output shall be reviewed before release. Followed to the letter.
+Memo {MEMO} (undated): programmers shall not use {KEYWORD}.
+Memo {MEMO} (unsigned): no figure shall be rounded. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): the seal literal shall be retained. Nobody has a copy.
+Memo {MEMO} (unsigned): decks shall be numbered. Still in effect.
+Memo {MEMO} ({OLDYEAR}): no figure shall be rounded. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): programmers shall not comment on {VP}. Nobody has a copy.
+Memo {MEMO} ({OLDYEAR}): the peer group lookup shall be removed. Followed to the letter.
+Memo {MEMO} (unsigned): {VAR} shall be removed. Still in effect.
+Memo {MEMO} ({OLDYEAR}): programmers shall comment their code. Still in effect.
+Memo {MEMO} ({YEAR}): all figures shall be printed in dollars.
+Memo {MEMO} ({DATE}): the COMMON layout shall be removed. Followed in spirit.
+Memo {MEMO} (unsigned): programmers shall not use {KEYWORD}. Followed to the letter.
+Memo {MEMO} ({YEAR}): programmers shall not comment on {VP}. Still in effect.
+Memo {MEMO} ({YEAR}): the report shall fit on one page. Followed to the letter.
+Memo {MEMO} (undated): the ladder shall be reviewed annually. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): changes require form RD-114. Nobody has a copy.
+Memo {MEMO} ({YEAR}): all figures shall be printed in dollars. Ignored since {YEAR}.
+Memo {MEMO} ({OLDYEAR}): the region size shall not be changed. Followed in spirit.
+Memo {MEMO} ({DATE}): the banner page shall be removed. Still in effect.
+Memo {MEMO} (unsigned): all figures shall be printed in dollars. Nobody has a copy.
+Memo {MEMO} (undated): no figure shall be rounded. Still in effect.
+Memo {MEMO} ({DATE}): changes require form RD-114. Still in effect.
+Memo {MEMO} ({OLDYEAR}): programmers shall comment their code. Superseded by memo {MEMO}.
+Memo {MEMO} ({YEAR}): the debug output shall be reviewed annually. Followed to the letter.
+Memo {MEMO} ({DATE}): label {LABEL} shall be retained. Still in effect.
+Memo {MEMO} ({OLDYEAR}): the ladder shall be cited as "ratified". Superseded by memo {MEMO}.
+Memo {MEMO} (undated): the ladder shall be cited as "ratified".
+Memo {MEMO} ({YEAR}): the job shall run at 2 AM. Followed in spirit.
+Memo {MEMO} (undated): output shall be reviewed before release. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): the job shall run at 2 AM.
+Memo {MEMO} (unsigned): no figure shall be rounded. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): changes require form RD-114. Still in effect.
+Memo {MEMO} ({OLDYEAR}): the report shall fit on one page. Nobody has a copy.
+Memo {MEMO} (undated): the job shall run at 2 AM. Ignored since {YEAR}.
+Memo {MEMO} ({YEAR}): the job shall run at 2 AM. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): the job shall run at 2 AM. Followed in spirit.
+Memo {MEMO} ({OLDYEAR}): the job shall run at 2 AM. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): the job shall run at 2 AM. Still in effect.
+Memo {MEMO} ({OLDYEAR}): the ladder shall be cited as "ratified". Followed in spirit.
+Memo {MEMO} (undated): the tape step shall be reviewed annually. Superseded by memo {MEMO}.
+Memo {MEMO} (undated): client names shall not appear in console messages. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): output shall be reviewed before release. Followed to the letter.
+Memo {MEMO} ({DATE}): all figures shall be printed in dollars. Followed to the letter.
+Memo {MEMO} ({OLDYEAR}): no figure shall be rounded. Ignored since {YEAR}.
+Memo {MEMO} (unsigned): the ladder shall be cited as "ratified". Followed to the letter.
+Memo {MEMO} ({OLDYEAR}): the test deck shall be retained. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): programmers shall comment their code. Followed to the letter.
+Memo {MEMO} ({DATE}): client names shall not appear in console messages. Followed to the letter.
+Memo {MEMO} (unsigned): the cross-check shall be reviewed annually. Superseded by memo {MEMO}.
+Memo {MEMO} ({YEAR}): the region size shall be retained. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): the job shall run at 2 AM. Superseded by memo {MEMO}.
+Memo {MEMO} ({OLDYEAR}): output shall be reviewed before release. Superseded by memo {MEMO}.
+Memo {MEMO} (unsigned): the ladder shall be cited as "ratified". Nobody has a copy.

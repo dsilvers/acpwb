@@ -1,0 +1,11 @@
+#name: Employee Work-For-Hire Notice
+#kind: proprietary
+#from: 1966
+#to: 2025
+WORK MADE FOR HIRE
+
+This program was written by employees of {HOLDER} within the scope of their employment and is a work made for hire under 17 U.S.C. section 101. All rights vest in {HOLDER}.
+
+Employees named in the revision history (including {CODER}, {CODER2} and {CODER3}) acknowledge that they retain no rights in the Program, the comments they wrote about each other, or the variable names they invented. Contractors named in the revision history assigned their rights under their respective statements of work, except {CODER3}, whose statement of work cannot be located.
+
+Copyright (C) {YEARRANGE} {HOLDER}. All rights reserved.

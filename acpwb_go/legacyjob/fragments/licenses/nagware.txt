@@ -1,0 +1,11 @@
+#name: Registration Reminder (Nagware)
+#kind: commercial
+#from: 1987
+#to: 2004
+*** UNREGISTERED COPY ***
+
+You have used {PROGRAM} {N} times. If you continue to use this program after the {TERMDAYS}-day evaluation period, you are expected to register it. Registration costs ${FEE} and removes this message, the delay on startup, and the word UNREGISTERED from the page header.
+
+Registered users receive the latest version on {MEDIUM}, a printed manual (the comments, photocopied) and the satisfaction of knowing that they are honest.
+
+To register, send a check to {HOLDER}, {ADDRESS}. Please include your serial number: {SERIAL}.

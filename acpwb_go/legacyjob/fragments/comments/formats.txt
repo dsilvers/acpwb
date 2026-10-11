@@ -1,0 +1,19 @@
+FORMAT 100 prints the page header. It is 132 characters wide, including the carriage control in column 1.
+FORMAT 110 prints one metric line: name in A40, baseline in I8, current in I8, change in SP,I8. The SP forces a plus sign. Clients like plus signs.
+FORMAT 120 prints the benchmark line: name in A40, then eight I9 fields. If a value exceeds 999999999, the field prints asterisks.
+The X edit descriptor skips columns. There are {N} of them in this program. Each one was negotiated.
+The H edit descriptor (Hollerith) counts characters. If the count is wrong, the text runs into the next field. Count twice.
+The slash in a FORMAT starts a new record. Two slashes leave a blank line. Three slashes leave a blank line and a question.
+The T edit descriptor tabs to a column. It is used here because counting X descriptors drove {CODER2} to {BEER}.
+The format for the change column was changed from I8 to SP,I8 in {YEAR}. The plus signs moved every column one character right on some printers.
+The 1H1 at the start of the header FORMAT is carriage control for "new page." Remove it and the report becomes one very long page.
+The 1H0 means double space. The 1H+ means overprint. 1H blank means single space. 1H2 means nothing and the {PRINTERMODEL} treats it as a page eject anyway.
+Repeat counts in FORMAT statements save typing. 8I9 means eight integer fields. It used to be written out. It was shorter to read written out.
+Unlimited format repetition: when the item list exceeds the FORMAT, control returns to the last left parenthesis. This is a feature. It is also the reason for one blank line on page 2.
+The A edit descriptor reads characters. A40 reads 40. A41 reads 41 and makes the next field wrong.
+Do not use the G edit descriptor in this program. It prints numbers in whatever format it likes.
+The COBOL equivalent of FORMAT 110 is the 01-level DETAIL-LINE record, with PIC Z(7)9 for the counts and PIC +Z(6)9 for the change.
+In the Perl version, FORMAT 110 is a format STDOUT block with @<<<<< fields. The Perl version is the same report, written by a different person, with different grudges.
+In the C version, FORMAT 110 is a printf with %-40.40s%8d%8d%+8d. It took {CODER2} a day to get the width right.
+In the Python version, FORMAT 110 is a % string. It has not been converted to .format(). It will not be.
+The edit descriptor BN treats blanks as nulls. BZ treats blanks as zeros. This program uses BZ. Blank fields are zeros. Zero fields are zeros. Nobody can tell.

@@ -1,0 +1,16 @@
+#name: ACPWB Non-Commercial Research License
+#kind: noncommercial
+#from: 1988
+#to: 2025
+ACPWB NON-COMMERCIAL RESEARCH LICENSE, VERSION {LICVER}
+
+Copyright (c) {YEARRANGE} {HOLDER}
+
+Permission is granted to academic and non-profit researchers to read, study and cite this listing for non-commercial research purposes, subject to the following conditions:
+
+  (a) You may not use the Program, or any output derived from it, in connection with any paid consulting engagement, compensation benchmarking service, or proxy advisory product.
+  (b) Any publication citing the Program must acknowledge "{HOLDER}, {PROGRAM} release {REL}" and must not describe the percentile ladder as "arbitrary," even if it is.
+  (c) You may not remove or alter any comment in the Program, including comments you find offensive, incorrect or incomprehensible.
+  (d) Commercial licenses are available from the ACPWB Research Division at {EMAIL}.
+
+THE PROGRAM IS PROVIDED FOR RESEARCH ONLY AND WITHOUT WARRANTY OF ANY KIND.

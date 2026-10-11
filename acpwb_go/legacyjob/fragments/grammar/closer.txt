@@ -1,0 +1,1320 @@
+Please see {CODER2} before changing it.
+Do not revert.
+This is intentional.
+Leave it alone.
+Consult the {OLDYEAR} binder.
+The listing in cabinet {SMALLN} has details.
+Ask {CODER3} if they are still here.
+It works. Do not ask why.
+This has been tested, in a sense.
+Results are unchanged, as far as anyone can tell.
+File any concerns on form {FORM}.
+The client has been informed.
+The client has not been informed.
+Nobody objected.
+{VP} signed off.
+There is no plan to revisit this.
+This will be revisited in {YEAR2}.
+It is what it is.
+See also {ROUTINE2}.
+Refer questions to {EMAIL}.
+The totals still match page 1.
+Treat with caution.
+This is the last time.
+It was not the last time.
+The auditors were satisfied.
+Proceed with confidence, or at least proceed.
+Change at your own risk.
+Do not tell the client.
+History will judge.
+Moving on.
+It is not fine, but it is stable Really.
+This is final Seriously.
+Ask {TEAM}.
+For now Really.
+The totals have always matched ({DATE})
+Moving on ({DATE})
+Until {YEAR2} -- {CODER.I}
+Thank you for your patience.
+Grudgingly approved -- {CODER.I}
+Grudgingly approved Really.
+Somebody complained once Really.
+Thank you for reading Really.
+Long live the ladder.
+Noted Seriously.
+The totals have always matched.
+Thank you for your patience -- {CODER.I}
+Approved.
+Proceed anyway.
+It worked on the {HW}.
+Do not round -- {CODER.I}
+Under protest.
+See the {OLDYEAR} binder Really.
+Noted Really.
+Rounding is forbidden.
+Signed, the management Really.
+Everything is money.
+The numbers are the numbers Seriously.
+Signed, the management.
+Somebody complained once ({DATE})
+It is probably fine ({DATE})
+You have been warned ({DATE})
+Forever, apparently -- {CODER.I}
+Approved Really.
+Everything is money Really.
+Please do not ask Really.
+Nobody has complained ({DATE})
+Thank you for reading ({DATE})
+You have been warned.
+This will not be revisited -- {CODER.I}
+So noted ({DATE})
+Further action required, eventually Seriously.
+Ask {CODER2} Seriously.
+Grudgingly approved ({DATE})
+Nobody has complained Really.
+Approved -- {CODER.I}
+File a form {FORM} if you disagree.
+Ask {CODER3}, if you can find them ({DATE})
+See audit {AUDIT} -- {CODER.I}
+Proceed anyway ({DATE})
+Good luck -- {CODER.I}
+Please do ask, but not me ({DATE})
+Thank you for reading Seriously.
+Approved Seriously.
+Nobody has complained -- {CODER.I}
+Rounding is forbidden Really.
+It worked on the {HW} Seriously.
+It is fine -- {CODER.I}
+Proceed carefully ({DATE})
+Proceed anyway Seriously.
+Forever, apparently Seriously.
+Proceed anyway Really.
+Not sorry Seriously.
+Thank you for your patience Really.
+Never round ({DATE})
+See {ROUTINE2} for the rest of the story Seriously.
+Until {YEAR2} Seriously.
+Do not round Really.
+For now -- {CODER.I}
+End of discussion.
+This will not be revisited ({DATE})
+It worked on the {HW} -- {CODER.I}
+Noted -- {CODER.I}
+Long live the ladder Really.
+See memo {MEMO}.
+Ask {CODER2} -- {CODER.I}
+Good luck.
+Leave as is ({DATE})
+See memo {MEMO} Seriously.
+Do not change this Really.
+Please do not ask.
+It works on the {HW} ({DATE})
+This is final -- {CODER.I}
+Please do not ask ({DATE})
+Truncate responsibly Seriously.
+Long live the ladder Seriously.
+It is fine ({DATE})
+Forever, apparently.
+Truncate responsibly Really.
+The totals have always matched Really.
+It is not fine, but it is stable Seriously.
+See ticket {TICKET}.
+It is fine Really.
+It is not fine, but it is stable ({DATE})
+Ask {CODER3}, if you can find them Really.
+Proceed carefully.
+This will be revisited.
+Sorry ({DATE})
+The totals have always matched -- {CODER.I}
+It is not fine, but it is stable -- {CODER.I}
+Long live the ladder -- {CODER.I}
+Grudgingly approved Seriously.
+Disagreements to {EMAIL}.
+The client never noticed Seriously.
+This will be revisited Really.
+No further action required -- {CODER.I}
+End of note ({DATE})
+Do not change this -- {CODER.I}
+Forever, apparently ({DATE})
+Grudgingly approved.
+See the {OLDYEAR} binder Seriously.
+Comments to {EMAIL} ({DATE})
+Comments to {EMAIL} -- {CODER.I}
+This is not final ({DATE})
+Good luck ({DATE})
+This is final Really.
+Leave as is.
+It is probably fine.
+This is not final Seriously.
+Comments to {EMAIL} Seriously.
+For now ({DATE})
+Ask {TEAM} -- {CODER.I}
+Thank you for your patience Seriously.
+Please do ask, but not me Seriously.
+Further action required, eventually ({DATE})
+Thank you for reading -- {CODER.I}
+Proceed anyway -- {CODER.I}
+This will not be revisited.
+Somebody complained once -- {CODER.I}
+See {ROUTINE2} for the rest of the story.
+See the {OLDYEAR} binder ({DATE})
+Nobody has complained.
+This will not be revisited Really.
+The auditors noticed but let it go -- {CODER.I}
+The auditors noticed but let it go Seriously.
+It works on the {HW} -- {CODER.I}
+Good luck Really.
+See ticket {TICKET} ({DATE})
+The numbers are the numbers.
+The auditors noticed but let it go ({DATE})
+Proceed carefully Seriously.
+Everything is money Seriously.
+Until {YEAR2}.
+That is all Really.
+Signed, the management Seriously.
+Do not change this ({DATE})
+Ask {CODER2} Really.
+See {ROUTINE2} for the rest of the story -- {CODER.I}
+Comments to {EMAIL}.
+Somebody complained once.
+End of discussion Seriously.
+Nobody has complained Seriously.
+Please do ask, but not me Really.
+Under protest Seriously.
+Comments to {EMAIL} Really.
+Ask {TEAM} ({DATE})
+Consider yourself informed Seriously.
+Ask {CODER3}, if you can find them Seriously.
+End of note -- {CODER.I}
+So noted.
+Truncate responsibly.
+This is not final -- {CODER.I}
+Leave as is -- {CODER.I}
+End of discussion -- {CODER.I}
+The client never noticed -- {CODER.I}
+So noted Seriously.
+Do not round ({DATE})
+For now.
+It is fine Seriously.
+Noted ({DATE})
+The totals still match -- {CODER.I}
+File a form {FORM} if you disagree Seriously.
+Long live the ladder ({DATE})
+You have been warned Seriously.
+This is final.
+It works on the {HW} Seriously.
+See audit {AUDIT}.
+Everything is money -- {CODER.I}
+File a form {FORM} if you disagree Really.
+The totals have always matched Seriously.
+Proceed carefully Really.
+Until further notice.
+Ask {CODER3}, if you can find them.
+Not sorry ({DATE})
+See audit {AUDIT} Seriously.
+See ticket {TICKET} Seriously.
+See memo {MEMO} -- {CODER.I}
+See memo {MEMO} ({DATE})
+Under protest ({DATE})
+The totals still match Really.
+This is final ({DATE})
+Good luck Seriously.
+Rounding is forbidden -- {CODER.I}
+This will not be revisited Seriously.
+Never round.
+Thank you for reading.
+Sorry Seriously.
+Rounding is forbidden ({DATE})
+This will be revisited ({DATE})
+So noted Really.
+No further action required Seriously.
+This will be revisited -- {CODER.I}
+The totals still match ({DATE})
+Never round Really.
+Sorry -- {CODER.I}
+Until {YEAR2} Really.
+Never round -- {CODER.I}
+See ticket {TICKET} Really.
+Consider yourself informed -- {CODER.I}
+Please do not ask -- {CODER.I}
+Disagreements to {EMAIL} ({DATE})
+Ask {CODER2} ({DATE})
+Until further notice Really.
+Until {YEAR2} ({DATE})
+The numbers are the numbers Really.
+It worked on the {HW} ({DATE})
+Never round Seriously.
+See the {OLDYEAR} binder -- {CODER.I}
+See the {OLDYEAR} binder.
+See {ROUTINE2} for the rest of the story ({DATE})
+Noted.
+End of note.
+It is probably fine -- {CODER.I}
+File a form {FORM} if you disagree ({DATE})
+Signed, the management ({DATE})
+It is probably fine Really.
+Moving on Seriously.
+Thank you for your patience ({DATE})
+Consider yourself informed.
+The auditors noticed but let it go Really.
+Disagreements to {EMAIL} Really.
+Under protest Really.
+Moving on -- {CODER.I}
+Ask {TEAM} Really.
+This is not final.
+The client never noticed Really.
+No further action required Really.
+Not sorry Really.
+So noted -- {CODER.I}
+You have been warned Really.
+Proceed carefully -- {CODER.I}
+Until further notice Seriously.
+It is fine.
+This is not final Really.
+The totals still match.
+End of note Seriously.
+This will be revisited Seriously.
+Until further notice -- {CODER.I}
+Truncate responsibly -- {CODER.I}
+See {ROUTINE2} for the rest of the story Really.
+The client never noticed.
+Forever, apparently Really.
+Leave as is Seriously.
+Approved ({DATE})
+Please do ask, but not me -- {CODER.I}
+See ticket {TICKET} -- {CODER.I}
+End of discussion Really.
+End of discussion ({DATE})
+Everything is money ({DATE})
+For now Seriously.
+Until further notice ({DATE})
+The numbers are the numbers -- {CODER.I}
+It works on the {HW}.
+That is all Seriously.
+Moving on Really.
+Do not change this.
+Do not round Seriously.
+Disagreements to {EMAIL} Seriously.
+Leave as is Really.
+Not sorry -- {CODER.I}
+Consider yourself informed Really.
+End of note Really.
+That is all -- {CODER.I}
+Truncate responsibly ({DATE})
+It is not fine, but it is stable.
+Further action required, eventually -- {CODER.I}
+Ask {TEAM} Seriously.
+See audit {AUDIT} ({DATE})
+Ask {CODER2}.
+See audit {AUDIT} Really.
+The numbers are the numbers ({DATE})
+Sorry.
+File a form {FORM} if you disagree -- {CODER.I}
+That is all ({DATE})
+Sorry Really.
+Further action required, eventually.
+The totals still match Seriously.
+Somebody complained once Seriously.
+No further action required.
+Ask {CODER3}, if you can find them -- {CODER.I}
+Rounding is forbidden Seriously.
+Signed, the management -- {CODER.I}
+Please do not ask Seriously.
+That is all.
+Do not change this Seriously.
+The auditors noticed but let it go.
+Please do ask, but not me.
+It worked on the {HW} Really.
+Further action required, eventually Really.
+Do not round.
+It is probably fine Seriously.
+Keep {VP} happy. Signed, the management.
+This is not fine. Really.
+Reopened again. Really.
+Good enough. Seriously.
+Consider yourself warned. -- {CODER.I}
+Talk to {VP} before changing it. Please.
+That is all. Really.
+Wake up {CODER2}. -- {CODER.I}
+This comment has been removed. (Not really.) ({CODER.I})
+The client noticed. Please.
+This is your second warning. (See {RULE}.)
+It is not simple. ({CODER.I})
+Operations informed us. -- {CODER.I}
+The client must not find out. Really.
+The reason was {INCIDENT}. ({CODER.I})
+The auditors noticed and wrote it up.
+Do not round. Ever. (See {RULE}.)
+Details available from {DEPT}. ({CODER.I})
+Never run it on {HOLIDAY}. ({CODER.I})
+Check the deck order. Again.
+This comment will be removed. -- {CODER.I}
+That is all. Signed, the management.
+Do not round. Thanks, {CODER2.I}.
+The auditors noticed but let it go. -- {CODER.I}
+Bring {SNACK}. Please.
+We tried. (See {RULE}.)
+Not good enough, but here we are.
+Call {CODER2} at {PHONE}. Signed, the management.
+Leave it alone. (See {RULE}.)
+It is complicated. ({CODER.I})
+It works on the {HW}. Seriously.
+It will be worse.
+Ignore the comment below. Signed, the management.
+Consult the binder. Again.
+This is a bug. Seriously.
+Nobody knows why. Really.
+Dollars. Always dollars. Please.
+It will be worse. Seriously.
+Good enough for government work. Signed, the management.
+That is all you need to know.
+This comment has been removed. (Not really.) Signed, the management.
+Call {PHONE} if it breaks. -- {CODER.I}
+End of rant. -- {CODER.I}
+Check the microcode. Please.
+This is not the fix. Again.
+Consult the {OLDYEAR} binder. Really.
+Do not panic. ({CODER.I})
+Ignore the comment above. Seriously.
+Trust the code. Signed, the management.
+Godspeed. Again.
+Do not touch. (See {RULE}.)
+Good enough for government work. Seriously.
+File a form RD-114. (See {RULE}.)
+Not good enough, but here we are. Please.
+This is fine. Thanks, {CODER2.I}.
+Good enough for the auditors. Please.
+Bring {FOOD} for the operators. ({CODER.I})
+That is all I am allowed to say. Again.
+So it goes. Again.
+Do not ask me. Thanks, {CODER2.I}.
+We tried twice. (See {RULE}.)
+Do not ask. (See {RULE}.)
+It worked in {YEAR}. Please.
+Do not change this. Again.
+The reason was money. Signed, the management.
+We are very proud of this. Thanks, {CODER2.I}.
+Reopened again. Signed, the management.
+It is not simple.
+This is not the fix. Seriously.
+Nobody remembers why. ({CODER.I})
+The client never noticed. Again.
+Get it in writing. Signed, the management.
+End of story. ({CODER.I})
+Further action required, eventually. Again.
+Keep the operators happy. (See {RULE}.)
+Knock on the cabinet. Seriously.
+The night operator knows. Please.
+Onward. Again.
+Let it be. Please.
+Approved by {COMMITTEE}. Again.
+We regret nothing. Thanks, {CODER2.I}.
+Consult the binder. Thanks, {CODER2.I}.
+End of rant. Seriously.
+Trust the code. Really.
+Discussion closed. Seriously.
+Revisit after the {QUARTER} run. Really.
+It mostly works. -- {CODER.I}
+Stay calm. Please.
+{CODER2} knows why. ({CODER.I})
+Operations has been informed. -- {CODER.I}
+It is what it is. Signed, the management.
+That is all we know. Signed, the management.
+Call {PHONE} if it breaks. Really.
+The night operator does not care. ({CODER.I})
+Nobody remembers why. Please.
+Operations informed us. Signed, the management.
+We are a little proud of this. Again.
+Consult the {OLDYEAR} binder. Again.
+Bring {FOOD} for the operators.
+Trust nobody.
+Bring {SNACK}. -- {CODER.I}
+Get it in writing. Again.
+Consult the binder. Signed, the management.
+Leave it alone. -- {CODER.I}
+This is not a bug. Again.
+Onward. Thanks, {CODER2.I}.
+Details lost in {INCIDENT}. Thanks, {CODER2.I}.
+Keep this comment updated. Seriously.
+It will be worse. ({CODER.I})
+Trust the comment. -- {CODER.I}
+It could be worse. -- {CODER.I}
+We tried. Again.
+It is complicated.
+Details in the minutes of {MEETING}. Really.
+Keep the operators happy. Again.
+Onward. Signed, the management.
+The reason is in the binder. Again.
+See the comment above. Please.
+We are not proud of this. ({CODER.I})
+Reopened again. Seriously.
+Do not round. Ever.
+More details on request. Thanks, {CODER2.I}.
+Everybody knows why. Signed, the management.
+Further action required, eventually. -- {CODER.I}
+Do not ask me. Seriously.
+Do not remove, ever. Seriously.
+The auditors did not notice. Again.
+Do not wake up {CODER2}.
+This is a known bug. -- {CODER.I}
+Resolved, sort of. ({CODER.I})
+File a form RD-114. ({CODER.I})
+This is permanent. Seriously.
+Further action required. Again.
+Check the tape label. Really.
+File two forms RD-114. Please.
+Thank you. Please.
+See {CODER2} first. Thanks, {CODER2.I}.
+Revisit in {YEAR2}. Signed, the management.
+Consider yourself warned. Again.
+Nobody wants to know why. ({CODER.I})
+Bring the binder. Again.
+See audit {AUDIT}. Please.
+This comment is up to date as of {DATE}. (See {RULE}.)
+Check three times. Signed, the management.
+It is not fine.
+This is permanent. Please.
+It will be worse. Again.
+It is definitely fine. Again.
+More details on request. -- {CODER.I}
+Run it once. Really.
+Approved by {VP}. Again.
+Consult the binder. Seriously.
+That is all. -- {CODER.I}
+We are not proud of this. Thanks, {CODER2.I}.
+Good enough for government work. -- {CODER.I}
+Do not round. Signed, the management.
+We will try again in {YEAR2}. Thanks, {CODER2.I}.
+Ignore the comment above.
+It will work until {YEAR2}. ({CODER.I})
+Knock on the cabinet. Please.
+It will work until {YEAR2}. Signed, the management.
+So it goes. Please.
+The night operator does not care. Thanks, {CODER2.I}.
+Ignore the comment above. -- {CODER.I}
+End of story. Thanks, {CODER2.I}.
+Operations informed us. ({CODER.I})
+Let it be. Seriously.
+The client never noticed. -- {CODER.I}
+Revisit in {YEAR2}. Really.
+Revisit never.
+The auditors noticed and wrote it up. Signed, the management.
+Get it in writing. Please.
+See the run book, page {N}. Signed, the management.
+We are very proud of this. -- {CODER.I}
+The auditors did not notice. Really.
+Wake up {CODER2}. ({CODER.I})
+This is intentional. (See {RULE}.)
+The reason was politics.
+Ignore the comment below. Seriously.
+Keep this comment. Please.
+The reason was {INCIDENT}. Thanks, {CODER2.I}.
+Carry on. Please.
+Trust nobody. Thanks, {CODER2.I}.
+Reopened again.
+So it goes. Seriously.
+Do not change this. -- {CODER.I}
+It was worse. -- {CODER.I}
+That is all you need to know. -- {CODER.I}
+We regret nothing. Signed, the management.
+The client must not find out. Seriously.
+{CODER2} knows why. Thanks, {CODER2.I}.
+Do not remove. ({CODER.I})
+Let it be. (See {RULE}.)
+Call {CODER2} at {PHONE}. Seriously.
+Run it once. -- {CODER.I}
+See audit {AUDIT}. Again.
+Case closed. -- {CODER.I}
+Closed as fixed.
+See the comment above. ({CODER.I})
+Closed as fixed. ({CODER.I})
+Details lost in {INCIDENT}. -- {CODER.I}
+It is complicated. -- {CODER.I}
+You have been warned. Thanks, {CODER2.I}.
+The client prefers it this way. (See {RULE}.)
+Do not remove until {CODER2} retires. Again.
+Revisit never. Really.
+Not approved by anyone. Thanks, {CODER2.I}.
+End of discussion. Seriously.
+Leave it alone. Again.
+It is probably fine. Seriously.
+We will try again in {YEAR2}. Please.
+Please do not ask. Again.
+Leave it. Seriously.
+End of rant. (See {RULE}.)
+Revisit in {YEAR2}. -- {CODER.I}
+Closed as fixed. Really.
+Closed as won't fix. ({CODER.I})
+Operations has not been informed. (See {RULE}.)
+Check the deck order. Thanks, {CODER2.I}.
+Let it be. Signed, the management.
+End of discussion. Thanks, {CODER2.I}.
+Stay calm. ({CODER.I})
+Let it be. Thanks, {CODER2.I}.
+Do not touch.
+It mostly works. Seriously.
+Do not remove, ever. Thanks, {CODER2.I}.
+We tried. Please.
+Revisit after the {QUARTER} run.
+Close enough. ({CODER.I})
+We regret nothing. Please.
+Trust {CODER2}, mostly. (See {RULE}.)
+Do not remove, ever. Signed, the management.
+Do not touch. Really.
+Check three times. Really.
+Do not remove, ever. ({CODER.I})
+It has always worked. Really.
+See the run book, page {N}. ({CODER.I})
+Talk to {VP} before changing it. -- {CODER.I}
+Revisit after the {QUARTER} run. Please.
+The client prefers it this way. Signed, the management.
+Good enough. Thanks, {CODER2.I}.
+This is a bug. -- {CODER.I}
+Ask {CODER2}. Again.
+Truncate. Always truncate. (See {RULE}.)
+The reason was the deadline. Please.
+Check the microcode. ({CODER.I})
+Do not touch. ({CODER.I})
+Good enough.
+Remove after {YEAR2}. ({CODER.I})
+Talk to {VP} before changing it. Really.
+Consult the {OLDYEAR} binder. ({CODER.I})
+Good enough for the auditors. Thanks, {CODER2.I}.
+It was worse. Please.
+The reason was money.
+It is simple, really. Please.
+The night operator knows. Thanks, {CODER2.I}.
+This comment was approved by legal. Again.
+Panic. Thanks, {CODER2.I}.
+Ask {CODER2}. (See {RULE}.)
+We regret everything. Thanks, {CODER2.I}.
+Do not ask. -- {CODER.I}
+Run it once.
+Unresolved. Please.
+Details available from {DEPT}. Really.
+We regret some things. Again.
+Good enough for {CLIENT}. -- {CODER.I}
+Do not ask. ({CODER.I})
+This is not the fix. Really.
+Onward. Seriously.
+Reopened.
+File two forms RD-114. ({CODER.I})
+It works. Thanks, {CODER2.I}.
+Check the tape label. -- {CODER.I}
+That is all you need to know. Really.
+Do not wake up {CODER2}. ({CODER.I})
+It could be worse. Please.
+Further action required. (See {RULE}.)
+We regret some things. Really.
+End of note. Really.
+Sorry. Again.
+Check the tape label. (See {RULE}.)
+Operations has not been informed. Thanks, {CODER2.I}.
+Trust the code.
+Thank you. Thanks, {CODER2.I}.
+This is permanent. Thanks, {CODER2.I}.
+Do not round. Again.
+Unresolved. Again.
+See the run book, page {N}. Please.
+Trust nobody. Seriously.
+This is not the fix. -- {CODER.I}
+Further action required, eventually. Signed, the management.
+Do not remove until {CODER2} retires.
+It is not fine. Please.
+Trust the code. (See {RULE}.)
+Consider yourself warned. Thanks, {CODER2.I}.
+The reason was {INCIDENT}. Signed, the management.
+This is not the fix. Thanks, {CODER2.I}.
+The client noticed. (See {RULE}.)
+Carry on. ({CODER.I})
+The reason is lost. Signed, the management.
+See {CODER2} first. ({CODER.I})
+Page the on-call programmer. Thanks, {CODER2.I}.
+The client insists. Thanks, {CODER2.I}.
+The client noticed. Thanks, {CODER2.I}.
+Let it be. Again.
+This is intentional. Please.
+Knock on the cabinet. Thanks, {CODER2.I}.
+Get it in writing. Seriously.
+This is not fine. -- {CODER.I}
+The client never noticed. Please.
+Thank you. Really.
+Dollars. Always dollars. Signed, the management.
+We are very proud of this. Signed, the management.
+Keep the operators happy.
+Bring {FOOD} for the operators. Thanks, {CODER2.I}.
+It was worse. Really.
+Keep the operators happy. ({CODER.I})
+We are not proud of this. Really.
+Run it twice. Seriously.
+Bring {FOOD} for the operators. Really.
+Run it twice. ({CODER.I})
+The auditors noticed and wrote it up. Seriously.
+This is permanent. Signed, the management.
+This is not a bug. Really.
+Do not panic.
+Consult the binder. -- {CODER.I}
+Ignore the comment above. Thanks, {CODER2.I}.
+See the run book, page {N}. Seriously.
+The client insists. Again.
+Check the tape label.
+We are a little proud of this. ({CODER.I})
+You have been warned. -- {CODER.I}
+{CODER2} knows why.
+It is probably fine. Really.
+Do not remove. -- {CODER.I}
+Do not round. Ever. Please.
+See {CODER2} first. Again.
+Do not panic. Again.
+Panic. Signed, the management.
+It is complicated. (See {RULE}.)
+It works. Signed, the management.
+This comment is out of date.
+Do not remove. Really.
+We regret everything. (See {RULE}.)
+We tried. Really.
+Discussion closed. Please.
+It works on the {HW}. -- {CODER.I}
+Do not remove. (See {RULE}.)
+You are welcome. (See {RULE}.)
+Nobody wants to know why. Please.
+The client never noticed. (See {RULE}.)
+The client noticed. Seriously.
+The reason is lost. Again.
+We tried. Thanks, {CODER2.I}.
+Revisit in {YEAR2}. Please.
+Closed as fixed. Signed, the management.
+Ask {CODER3}, if you can find {CODER3}. Please.
+Revisit never. Please.
+Stay calm. Signed, the management.
+End of story.
+Keep this comment updated. Again.
+Page the on-call programmer. Seriously.
+Check the microcode.
+Breathe. -- {CODER.I}
+Trust the comment. Really.
+Ignore the comment above. Again.
+That is all. ({CODER.I})
+The reason was {VP}. Signed, the management.
+The night operator does not care. Seriously.
+Talk to {VP} before changing it.
+The night operator knows. Seriously.
+The reason was {INCIDENT}. Please.
+Good luck. Signed, the management.
+Do not remove. Again.
+Panic. Really.
+Bring {SNACK}. Signed, the management.
+We regret some things. Seriously.
+This comment has been removed. (Not really.) Again.
+It could be worse. Really.
+Revisit in {YEAR2}. Thanks, {CODER2.I}.
+Details lost in {INCIDENT}. (See {RULE}.)
+That is all I am allowed to say. -- {CODER.I}
+This is the fix. ({CODER.I})
+The reason was the deadline. -- {CODER.I}
+More details on request. ({CODER.I})
+Revisit never. ({CODER.I})
+It is complicated. Please.
+The reason was money. Seriously.
+That is all you need to know. (See {RULE}.)
+Close enough. Please.
+We tried twice. Please.
+End of discussion. Please.
+Closed as won't fix. Please.
+You have been warned. ({CODER.I})
+This is temporary.
+We gave up. Signed, the management.
+See {MANUAL}. Seriously.
+It has always worked. ({CODER.I})
+Bring the listing. Signed, the management.
+Good enough for government work.
+Page the on-call programmer. -- {CODER.I}
+This is intentional. Again.
+Carry on. -- {CODER.I}
+The auditors did not notice. Thanks, {CODER2.I}.
+Keep {VP} happy. Thanks, {CODER2.I}.
+Call {PHONE} if it breaks. Please.
+Resolved, sort of. Please.
+Operations informed us. Please.
+This is a bug. ({CODER.I})
+Details withheld at legal's request. Again.
+Carry on. Signed, the management.
+Bring a flashlight.
+So it goes. Thanks, {CODER2.I}.
+See the comment below. Thanks, {CODER2.I}.
+This is the fix. Seriously.
+Consider yourself warned. Signed, the management.
+Approved by {COMMITTEE}. (See {RULE}.)
+The client insists. Please.
+This is your second warning.
+We are very proud of this. Please.
+Details lost in {INCIDENT}. Please.
+The auditors noticed but let it go. Seriously.
+Trust nobody. -- {CODER.I}
+The client prefers it this way. Seriously.
+It will work until {YEAR2}. Thanks, {CODER2.I}.
+This comment has been removed. (Not really.) (See {RULE}.)
+It was worse.
+Do not panic. (See {RULE}.)
+Details withheld at legal's request. Thanks, {CODER2.I}.
+The client prefers it this way. Again.
+Operations informed us. Seriously.
+The reason was {VP}. ({CODER.I})
+Wake up {CODER2}. Signed, the management.
+It is definitely fine. Really.
+End of rant. Really.
+Check the totals.
+Further action required. Signed, the management.
+Such is life.
+File two forms RD-114. -- {CODER.I}
+That is all we know. ({CODER.I})
+Do not panic. Really.
+Consult the {OLDYEAR} binder. Signed, the management.
+It is simple, really.
+Close enough. Really.
+{CODER2} knows why. -- {CODER.I}
+Discussion closed. Really.
+Bring the listing. Again.
+We gave up. Really.
+Details in the minutes of {MEETING}. -- {CODER.I}
+Pray. -- {CODER.I}
+See {MANUAL}. (See {RULE}.)
+This is your second warning. Thanks, {CODER2.I}.
+Reopened. Again.
+Closed as won't fix. Seriously.
+Check the deck order. Seriously.
+Ask {CODER3}, if you can find {CODER3}. Really.
+It has never worked. Please.
+We tried twice. Signed, the management.
+Nobody knows why.
+Breathe. Again.
+This comment is up to date as of {DATE}. Thanks, {CODER2.I}.
+Never run it on {HOLIDAY}. Please.
+It has never worked. Really.
+Unresolved. Thanks, {CODER2.I}.
+This comment has been removed. (Not really.) Seriously.
+Keep {VP} happy. -- {CODER.I}
+The client must not find out.
+Pray. Again.
+See the comment above. Signed, the management.
+File a form RD-114. Really.
+We are not proud of this.
+Approved by {COMMITTEE}. Really.
+The auditors did not notice.
+Remove after {YEAR2}. Thanks, {CODER2.I}.
+Sorry. Thanks, {CODER2.I}.
+It was worse. Signed, the management.
+Not good enough, but here we are. Thanks, {CODER2.I}.
+Ignore the comment below. -- {CODER.I}
+The reason was politics. Again.
+Bring the listing. -- {CODER.I}
+Do not touch. Thanks, {CODER2.I}.
+Good luck. Please.
+Remove after {YEAR2}. -- {CODER.I}
+We regret some things. -- {CODER.I}
+Keep this comment updated. (See {RULE}.)
+We regret some things. Thanks, {CODER2.I}.
+Leave it. (See {RULE}.)
+That is all I am allowed to say. (See {RULE}.)
+Good enough for {CLIENT}. (See {RULE}.)
+Pending approval since {YEAR}. Seriously.
+You are welcome. Signed, the management.
+Not approved by anyone. ({CODER.I})
+This is not the fix. ({CODER.I})
+See the comment above. Again.
+We regret everything. -- {CODER.I}
+We will try again in {YEAR2}. -- {CODER.I}
+This comment was approved by legal. ({CODER.I})
+We are a little proud of this. Please.
+The reason is in the binder. -- {CODER.I}
+This is a known bug. Thanks, {CODER2.I}.
+Pending approval since {YEAR}. ({CODER.I})
+So it goes. Signed, the management.
+It is definitely fine. Seriously.
+This is not a bug. Signed, the management.
+Close enough. Seriously.
+Bring {SNACK}. Seriously.
+It is definitely fine. Please.
+Run it once. Again.
+Consult the {OLDYEAR} binder. Seriously.
+Do not wake up {CODER2}. Signed, the management.
+Discussion closed. ({CODER.I})
+Resolved, sort of. -- {CODER.I}
+Thank you. Seriously.
+It has always worked. Thanks, {CODER2.I}.
+This is a bug.
+Not approved by anyone. Signed, the management.
+See memo {MEMO}. Again.
+Trust the comment. (See {RULE}.)
+The client never noticed. Really.
+The auditors noticed but let it go. (See {RULE}.)
+The client insists. Seriously.
+You are welcome. ({CODER.I})
+This is the fix. Again.
+Ignore the comment below. Really.
+Call {CODER2} at {PHONE}. ({CODER.I})
+Close enough.
+Good luck. (See {RULE}.)
+It has never worked. Thanks, {CODER2.I}.
+Ignore the comment below. Please.
+Trust the code. Thanks, {CODER2.I}.
+You are welcome. Please.
+Panic. -- {CODER.I}
+The client noticed. -- {CODER.I}
+Do not touch. Again.
+We regret everything. Signed, the management.
+Call {CODER2} at {PHONE}. -- {CODER.I}
+Bring {SNACK}. Again.
+Reopened. Thanks, {CODER2.I}.
+It works on the {HW}. Signed, the management.
+Keep this comment.
+Truncate. Always truncate. Seriously.
+This comment was approved by legal. Seriously.
+Nobody wants to know why. Seriously.
+It is not fine. Really.
+This is a bug. Thanks, {CODER2.I}.
+{CODER2} knows why. Seriously.
+Not approved by anyone. (See {RULE}.)
+The reason was politics. ({CODER.I})
+Ask {CODER2}. -- {CODER.I}
+No further action required. -- {CODER.I}
+This is permanent. Again.
+Get it in writing. Thanks, {CODER2.I}.
+End of rant. Again.
+Do not wake up {CODER2}. Please.
+Ask {CODER3}, if you can find {CODER3}. ({CODER.I})
+Such is life. (See {RULE}.)
+Dollars. Always dollars. Again.
+This is not fine. Please.
+Ask {CODER2}. Signed, the management.
+This comment is up to date as of {DATE}. Really.
+Resolved, sort of. (See {RULE}.)
+File two forms RD-114. Thanks, {CODER2.I}.
+The client insists. Really.
+End of note. Please.
+Check the microcode. Really.
+It is probably fine. -- {CODER.I}
+Everybody knows why. Again.
+Check the date. ({CODER.I})
+Check the totals. Please.
+Details available from {DEPT}. (See {RULE}.)
+File two forms RD-114. Seriously.
+The reason was money. ({CODER.I})
+Sorry. Seriously.
+It is not fine. -- {CODER.I}
+That is all. (See {RULE}.)
+This comment was approved by legal. Really.
+We tried twice. Seriously.
+Good enough for government work. ({CODER.I})
+It is what it is. Thanks, {CODER2.I}.
+Do not remove, ever. Really.
+This comment will be removed. Please.
+The client must not find out. Signed, the management.
+This comment is out of date. Signed, the management.
+It is not simple. (See {RULE}.)
+Do not ask me. ({CODER.I})
+File a form RD-114. Seriously.
+We are very proud of this.
+Details in the minutes of {MEETING}. Again.
+The auditors noticed but let it go. ({CODER.I})
+The reason is in the binder. Signed, the management.
+Do not panic. Seriously.
+This is your only warning. Please.
+Check twice. -- {CODER.I}
+Check the deck order. Signed, the management.
+It works on the {HW}. (See {RULE}.)
+Approved by {VP}. Signed, the management.
+Bring a flashlight. Thanks, {CODER2.I}.
+End of discussion. Signed, the management.
+It works. Seriously.
+This is a known bug. Signed, the management.
+No further action required. Signed, the management.
+It is not simple. -- {CODER.I}
+Check the date. (See {RULE}.)
+Trust nobody. Signed, the management.
+Please do not ask. -- {CODER.I}
+Case closed. Signed, the management.
+Further action required. Really.
+Closed as fixed. Seriously.
+This comment will be removed. Really.
+See {MANUAL}. Please.
+Check the totals. -- {CODER.I}
+Details withheld at legal's request. (See {RULE}.)
+Page the on-call programmer. ({CODER.I})
+The auditors noticed but let it go. Signed, the management.
+That is all we know. Again.
+Do not remove until {CODER2} retires. ({CODER.I})
+Check twice. Signed, the management.
+Check twice. Thanks, {CODER2.I}.
+The client must not find out. -- {CODER.I}
+Wake up {CODER2}. Really.
+Pending approval since {YEAR}.
+Breathe. Thanks, {CODER2.I}.
+It could be worse. (See {RULE}.)
+This is your only warning. (See {RULE}.)
+It works on the {HW}. ({CODER.I})
+Good enough for the auditors.
+Check the tape label. ({CODER.I})
+Resolved, sort of. Again.
+Ask {CODER3}, if you can find {CODER3}. -- {CODER.I}
+Details withheld at legal's request. ({CODER.I})
+This is the fix.
+File a form RD-114.
+Trust {CODER2}, mostly. Signed, the management.
+It will be worse. Really.
+Check twice. (See {RULE}.)
+Ask {CODER3}, if you can find {CODER3}. Thanks, {CODER2.I}.
+It will be worse. Signed, the management.
+Sorry. (See {RULE}.)
+Do not wake up {CODER2}. Thanks, {CODER2.I}.
+{CODER2} knows why. Signed, the management.
+See memo {MEMO}. Really.
+Pray. ({CODER.I})
+Bring the binder. Signed, the management.
+Bring a flashlight. Really.
+Never run it on {HOLIDAY}. (See {RULE}.)
+Run it twice. -- {CODER.I}
+Reopened. Seriously.
+Thank you. Again.
+Stay calm. Again.
+Check three times. ({CODER.I})
+This is fine. Again.
+This is temporary. ({CODER.I})
+This is your only warning. Signed, the management.
+Bring the binder. -- {CODER.I}
+End of rant. ({CODER.I})
+Keep this comment. Really.
+This is temporary. -- {CODER.I}
+It mostly works. (See {RULE}.)
+Closed as won't fix. Signed, the management.
+It will work until {YEAR2}.
+Approved by {VP}.
+This comment will be removed. ({CODER.I})
+Operations has been informed. (See {RULE}.)
+We regret some things. Signed, the management.
+The reason was the deadline. Signed, the management.
+Consider yourself warned. Really.
+Pending approval since {YEAR}. Signed, the management.
+Nobody remembers why.
+Check the totals. Again.
+Remove after {YEAR2}. (See {RULE}.)
+Nobody remembers why. Signed, the management.
+We gave up. Please.
+We are a little proud of this. Signed, the management.
+Such is life. Again.
+Run it once. Seriously.
+We regret nothing. ({CODER.I})
+Do not round. Ever. ({CODER.I})
+This is intentional. Signed, the management.
+Not good enough, but here we are. -- {CODER.I}
+Revisit in {YEAR2}. ({CODER.I})
+We tried twice. Again.
+The auditors did not notice. (See {RULE}.)
+This is a known bug. (See {RULE}.)
+Godspeed. Signed, the management.
+Check twice.
+Godspeed. (See {RULE}.)
+Knock on the cabinet. -- {CODER.I}
+Details in the minutes of {MEETING}. ({CODER.I})
+It is not simple. Really.
+We will try again in {YEAR2}. ({CODER.I})
+The client prefers it this way.
+Sorry. Really.
+Godspeed. Please.
+Operations has been informed.
+Not good enough, but here we are. Signed, the management.
+We are a little proud of this. Seriously.
+Nobody knows why. -- {CODER.I}
+This is temporary. Thanks, {CODER2.I}.
+Breathe. Really.
+Good enough for {CLIENT}. Seriously.
+Good enough for {CLIENT}. Really.
+Get it in writing.
+Operations has not been informed. Really.
+This comment is out of date. Thanks, {CODER2.I}.
+Remove after {YEAR2}. Really.
+This is your only warning.
+We are very proud of this. Again.
+No further action required. Seriously.
+Talk to {VP} before changing it. Thanks, {CODER2.I}.
+Leave it. -- {CODER.I}
+Onward. Please.
+Trust {CODER2}, mostly.
+Details in the minutes of {MEETING}. Seriously.
+Everybody knows why. Really.
+Bring {SNACK}. Really.
+Good luck. Seriously.
+This is your only warning. -- {CODER.I}
+End of discussion. (See {RULE}.)
+This is your second warning. Really.
+See memo {MEMO}. (See {RULE}.)
+You have been warned. Please.
+Check the date.
+Trust nobody. ({CODER.I})
+This is your second warning. Please.
+Bring a flashlight. ({CODER.I})
+Bring {FOOD} for the operators. Again.
+It is what it is. Really.
+Approved by {VP}. Thanks, {CODER2.I}.
+Run it twice.
+Leave it alone. ({CODER.I})
+That is all you need to know. Seriously.
+Keep {VP} happy. Seriously.
+We gave up. Thanks, {CODER2.I}.
+Details withheld at legal's request. Signed, the management.
+Good luck. ({CODER.I})
+This is fine. ({CODER.I})
+Panic. (See {RULE}.)
+The night operator does not care.
+Good enough. ({CODER.I})
+Discussion closed. Signed, the management.
+It is what it is. Again.
+Keep {VP} happy. Again.
+Keep this comment. -- {CODER.I}
+Pending approval since {YEAR}. (See {RULE}.)
+Reopened. (See {RULE}.)
+Knock on the cabinet. Again.
+Leave it alone. Really.
+Everybody knows why. Please.
+See the comment below. (See {RULE}.)
+Check the deck order. (See {RULE}.)
+Never run it on {HOLIDAY}.
+Bring the binder. Really.
+The auditors noticed and wrote it up. Thanks, {CODER2.I}.
+This comment is up to date as of {DATE}. Signed, the management.
+Operations has not been informed. Again.
+Further action required, eventually. Please.
+Case closed. Seriously.
+The reason was {INCIDENT}. Again.
+The reason was {VP}. (See {RULE}.)
+Discussion closed. -- {CODER.I}
+You are welcome.
+Unresolved.
+Pray. Please.
+Revisit after the {QUARTER} run. Thanks, {CODER2.I}.
+See memo {MEMO}. Signed, the management.
+Check the date. Again.
+Such is life. -- {CODER.I}
+No further action required. Please.
+It has never worked. Again.
+Keep this comment. (See {RULE}.)
+Check the date. Really.
+Further action required, eventually. Thanks, {CODER2.I}.
+Good enough for {CLIENT}. ({CODER.I})
+Ignore the comment above. (See {RULE}.)
+We tried twice.
+Details lost in {INCIDENT}. Seriously.
+More details on request. Signed, the management.
+Approved by {COMMITTEE}.
+Operations informed us. Thanks, {CODER2.I}.
+Pray. Signed, the management.
+This comment will be removed. Thanks, {CODER2.I}.
+Further action required. ({CODER.I})
+See the comment below.
+This is not fine. Thanks, {CODER2.I}.
+Dollars. Always dollars. Seriously.
+More details on request. Really.
+Page the on-call programmer.
+It has never worked. ({CODER.I})
+Operations has been informed. ({CODER.I})
+The night operator does not care. (See {RULE}.)
+Good enough. Really.
+Wake up {CODER2}.
+Call {CODER2} at {PHONE}. (See {RULE}.)
+This is not a bug.
+It could be worse. Signed, the management.
+The reason was {INCIDENT}. (See {RULE}.)
+Trust the comment. Thanks, {CODER2.I}.
+This is temporary. Again.
+We will try again in {YEAR2}. Again.
+Keep the operators happy. Really.
+This is a known bug.
+It works on the {HW}. Thanks, {CODER2.I}.
+Not good enough, but here we are. (See {RULE}.)
+Nobody knows why. Thanks, {CODER2.I}.
+So it goes.
+See {CODER2} first. -- {CODER.I}
+The client prefers it this way. -- {CODER.I}
+Revisit after the {QUARTER} run. ({CODER.I})
+Thank you.
+Nobody knows why. (See {RULE}.)
+Run it once. Signed, the management.
+Case closed. Thanks, {CODER2.I}.
+This is the fix. -- {CODER.I}
+The reason was the deadline. Again.
+Case closed. ({CODER.I})
+That is all I am allowed to say. Signed, the management.
+This is your only warning. Again.
+Leave it. Again.
+Please do not ask. (See {RULE}.)
+Panic. Again.
+It is simple, really. Signed, the management.
+See {MANUAL}. Really.
+This is fine. -- {CODER.I}
+It worked in {YEAR}. ({CODER.I})
+The auditors did not notice. -- {CODER.I}
+Nobody remembers why. -- {CODER.I}
+We gave up.
+Bring the listing. Thanks, {CODER2.I}.
+We regret everything. Really.
+It worked in {YEAR}. Seriously.
+Check the totals. Thanks, {CODER2.I}.
+Approved by {VP}. -- {CODER.I}
+We regret nothing. -- {CODER.I}
+See the run book, page {N}. Really.
+Details available from {DEPT}. -- {CODER.I}
+That is all we know. -- {CODER.I}
+The reason was money. (See {RULE}.)
+Good enough for the auditors. Seriously.
+We regret nothing. Seriously.
+This is a bug. Signed, the management.
+Run it twice. Signed, the management.
+The reason is lost. Really.
+Details available from {DEPT}. Seriously.
+End of story. Seriously.
+Breathe. ({CODER.I})
+Never run it on {HOLIDAY}. Again.
+Reopened again. -- {CODER.I}
+Talk to {VP} before changing it. Again.
+It is not fine. (See {RULE}.)
+Do not change this. Signed, the management.
+Please do not ask. Really.
+That is all we know. Thanks, {CODER2.I}.
+Case closed. Please.
+The auditors noticed and wrote it up. Really.
+Keep {VP} happy.
+End of discussion. Again.
+This is temporary. Please.
+Not approved by anyone. Seriously.
+Please do not ask. Please.
+Do not ask me. Again.
+Do not remove until {CODER2} retires. Thanks, {CODER2.I}.
+See the comment above. Thanks, {CODER2.I}.
+It is not fine. Thanks, {CODER2.I}.
+We regret everything.
+It works. Please.
+Bring the listing. Please.
+It is simple, really. -- {CODER.I}
+You are welcome. Thanks, {CODER2.I}.
+Closed as fixed. Again.
+Unresolved. ({CODER.I})
+We will try again in {YEAR2}. Really.
+Call {CODER2} at {PHONE}.
+Consult the binder. Please.
+Nobody knows why. Please.
+Nobody wants to know why.
+It mostly works. Thanks, {CODER2.I}.
+Do not ask. Really.
+End of note. ({CODER.I})
+This comment has been removed. (Not really.) -- {CODER.I}
+Carry on. Really.
+This comment is out of date. (See {RULE}.)
+Trust the comment.
+It worked in {YEAR}. -- {CODER.I}
+Trust the comment. Again.
+It could be worse.
+Not approved by anyone. Again.
+Breathe. (See {RULE}.)
+The client noticed. Signed, the management.
+Good enough for {CLIENT}. Please.
+This is fine. Really.
+Closed as won't fix. (See {RULE}.)
+This comment is up to date as of {DATE}. -- {CODER.I}
+The client must not find out. Please.
+Do not ask me. Signed, the management.
+The auditors noticed but let it go. Again.
+See audit {AUDIT}. (See {RULE}.)
+Do not ask me.
+Closed as won't fix. Really.
+Do not remove until {CODER2} retires. Please.
+Never run it on {HOLIDAY}. -- {CODER.I}
+Do not wake up {CODER2}. Really.
+The night operator knows. Again.
+It is probably fine. ({CODER.I})
+It is simple, really. ({CODER.I})
+Check the date. Thanks, {CODER2.I}.
+Do not remove until {CODER2} retires. Seriously.
+Ignore the comment below. Again.
+The reason is in the binder. (See {RULE}.)
+No further action required. ({CODER.I})
+See {CODER2} first. (See {RULE}.)
+It mostly works. Really.
+That is all I am allowed to say. Really.
+The night operator knows. Signed, the management.
+The reason was the deadline. Thanks, {CODER2.I}.
+That is all I am allowed to say.
+End of note. (See {RULE}.)
+The reason is lost. -- {CODER.I}
+The reason is in the binder. Thanks, {CODER2.I}.
+Pending approval since {YEAR}. Please.
+The client never noticed. Seriously.
+See the comment above. -- {CODER.I}
+Godspeed. Thanks, {CODER2.I}.
+Do not ask. Thanks, {CODER2.I}.
+Approved by {COMMITTEE}. ({CODER.I})
+The reason was {VP}. Again.
+This comment is out of date. Again.
+Check the microcode. Seriously.
+Check the microcode. -- {CODER.I}
+Nobody remembers why. (See {RULE}.)
+See {MANUAL}. Signed, the management.
+Onward.
+Consult the {OLDYEAR} binder. Thanks, {CODER2.I}.
+Do not round. Ever. Seriously.
+Run it twice. (See {RULE}.)
+Revisit never. Signed, the management.
+Remove after {YEAR2}. Seriously.
+Do not remove. Please.
+Such is life. Signed, the management.
+Trust the code. Please.
+Resolved, sort of.
+Bring the binder. (See {RULE}.)
+Leave it alone. Signed, the management.
+It works. (See {RULE}.)
+Stay calm. -- {CODER.I}
+Ask {CODER3}, if you can find {CODER3}. Seriously.
+Call {PHONE} if it breaks. ({CODER.I})
+Such is life. Please.
+Truncate. Always truncate. -- {CODER.I}
+Good enough for the auditors. (See {RULE}.)
+Details lost in {INCIDENT}. Really.
+Call {PHONE} if it breaks.
+Godspeed. Really.
+It worked in {YEAR}.
+This comment was approved by legal. -- {CODER.I}
+Reopened. Really.
+It is definitely fine. (See {RULE}.)
+It is definitely fine. ({CODER.I})
+Operations has been informed. Thanks, {CODER2.I}.
+See the comment below. Please.
+Bring the listing. Really.
+It is complicated. Seriously.
+Page the on-call programmer. (See {RULE}.)
+This is not a bug. Please.
+See audit {AUDIT}. Seriously.
+Keep the operators happy. Thanks, {CODER2.I}.
+Reopened again. (See {RULE}.)
+The reason is lost. ({CODER.I})
+We are a little proud of this. -- {CODER.I}
+Nobody wants to know why. Signed, the management.
+It is simple, really. Really.
+Revisit never. -- {CODER.I}
+Good enough for government work. Again.
+The reason was politics. -- {CODER.I}
+Do not round. Seriously.
+It works. Really.
+Pray. (See {RULE}.)
+It will work until {YEAR2}. (See {RULE}.)
+Ask {CODER2}. Please.
+Do not change this. Really.
+Everybody knows why. (See {RULE}.)
+The reason was {VP}. Please.
+Truncate. Always truncate. Please.
+Please do not ask. Seriously.
+This is not a bug. Seriously.
+Nobody wants to know why. (See {RULE}.)
+Bring a flashlight. -- {CODER.I}
+This comment will be removed. Signed, the management.
+This is the fix. (See {RULE}.)
+Close enough. Signed, the management.
+Truncate. Always truncate. ({CODER.I})

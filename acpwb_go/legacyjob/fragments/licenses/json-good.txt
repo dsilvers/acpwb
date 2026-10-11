@@ -1,0 +1,12 @@
+#name: JSON License ("Good, not Evil")
+#kind: open
+#from: 2002
+Copyright (c) {YEARRANGE} {HOLDER}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software, to deal in the Software without restriction, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+The Software shall be used for Good, not Evil.
+
+(Whether benchmarking compensation is Good was debated at {MEETING}. The minutes record no conclusion. Use at your own moral risk.)

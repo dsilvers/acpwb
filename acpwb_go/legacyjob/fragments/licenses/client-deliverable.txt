@@ -1,0 +1,22 @@
+#name: Client Deliverable License
+#kind: commercial
+#from: 1975
+#to: 2025
+CLIENT DELIVERABLE LICENSE
+
+Licensor: {HOLDER} ("ACPWB")
+Licensee: {CLIENT} ("Client")
+Engagement: {ENGCODE}
+Program: {PROGRAM} release {REL}
+
+1. Grant. ACPWB grants Client a non-exclusive, non-transferable, non-sublicensable, revocable license to view this listing solely for the purpose of verifying the figures delivered in engagement {ENGCODE}.
+
+2. No Execution. Client shall not compile, execute, emulate, translate, port or otherwise cause the Program to run. The figures are the deliverable. The Program is not.
+
+3. Ownership. All right, title and interest in the Program, including the percentile ladder and every comment herein, remain with ACPWB. Client's data remains Client's data, except to the extent it appears in the input deck, where it is shared custody.
+
+4. Fees. The license fee is included in the engagement fee of engagement {ENGCODE}. Additional copies of this listing are available at ${FEE} per page.
+
+5. Term. This license terminates {TERMDAYS} days after delivery of the final report, or upon Client's first attempt to round any figure, whichever is sooner.
+
+Accepted for ACPWB: {CODER}            Accepted for Client: ______________________

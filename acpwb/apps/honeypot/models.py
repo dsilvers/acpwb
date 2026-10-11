@@ -22,6 +22,7 @@ class CrawlerVisit(models.Model):
         ('handbook', 'Company Handbook'),
         ('process_improvement', 'Process Improvement'),
         ('presentation', 'Presentation'),
+        ('source_code', 'Legacy Source Code'),
         ('other', 'Other'),
     ]
 
@@ -368,3 +369,32 @@ class PublishedIPReputation(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} [{self.classification}] confidence={self.confidence}"
+
+
+class SourceCodeEmail(models.Model):
+    """One (address, page) pair: a programmer address shown on an archive
+    article's legacy source-code page (served by acpwb_go at
+    <article>/source-code/).
+
+    Addresses use the site-wide first.last@acpwb.com format, so the same
+    address can appear on many pages. acpwb_go RPUSHes every newly-served
+    pair onto acpwb:code_email_queue (deduped per pair for 30 days) and
+    drain_code_email_queue folds them in here, so an inbound email to the
+    address can be matched back to the page(s) it was harvested from.
+    """
+    address = models.EmailField(db_index=True)
+    host = models.CharField(max_length=253, blank=True)
+    path = models.CharField(max_length=512)
+    first_seen = models.DateTimeField(default=timezone.now, db_index=True)
+    last_seen = models.DateTimeField(default=timezone.now)
+    first_ip = models.GenericIPAddressField(null=True, blank=True)
+    times_served = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        unique_together = [('address', 'path')]
+        ordering = ['-first_seen']
+        verbose_name = 'Source Code Email'
+        verbose_name_plural = 'Source Code Emails'
+
+    def __str__(self):
+        return f"{self.address} @ {self.host}{self.path}"

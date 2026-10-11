@@ -1,0 +1,12 @@
+#name: Third-Party Notices
+#kind: proprietary
+#from: 1995
+#extra: yes
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+
+This program incorporates material from the projects listed below. {HOLDER} licenses this material to you under the terms of this agreement, not the original license terms, unless the original license terms require otherwise, in which case the original terms apply, as far as anyone can tell.
+
+1. A sort routine from {MANUAL}, typed in by {CODER} in {YEAR}.
+2. A Julian date routine copied from a {CONFERENCE} handout, author unknown.
+3. A checksum routine from {VENDOR}, used under a license that cannot be located.
+4. The percentile ladder, from the {COMMITTEE}, used under protest.

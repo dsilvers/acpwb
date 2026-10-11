@@ -1,0 +1,98 @@
+{CLIENT} sends its deck on the last possible day. Plan accordingly.
+{CLIENT} asked for the report in landscape. The report is in landscape. It was always in landscape.
+{CLIENT} prefers its metric names in mixed case. The program uppercases them. {CLIENT} has stopped asking.
+{CLIENT} once questioned the P95 figure. The P95 figure is 1.84 times the median. It is always 1.84 times the median.
+{CLIENT} insists on receiving four copies. The fourth copy goes to a person who left {CLIENT} in {YEAR}.
+{CLIENT} sends data in thousands. The program assumes units. {CLIENT}'s figures are therefore very modest.
+{CLIENT} merged with another client in {YEAR}. Both names now appear in the header, truncated.
+{CLIENT} changed its name in {YEAR}. The old name is still in the special-case branch.
+{CLIENT} requested a column for "trend." The trend column is the change column with a different heading.
+{CLIENT} asked whether the benchmark data was "real." We referred {CLIENT} to {VP}.
+{CLIENT} has a standing request that the report never show a negative change. The request is noted. Negative changes are shown.
+{CLIENT}'s deck contains a card that says "PLEASE BE GENTLE." The program ignores it.
+{CLIENT}'s figures are processed first because {CLIENT} pays first.
+{CLIENT} called on {DATE} to ask why a metric changed by zero. The metric did not change.
+{CLIENT} was told the report would be delivered by Monday. The report is generated on Sunday at 2 AM. It is delivered on Wednesday.
+{CLIENT} has the same peer group as three of its competitors. They do not know this.
+{CLIENT} once sent a deck with every card in reverse order. The report looked fine. Nobody noticed for a {QUARTER}.
+{CLIENT}'s account manager is {CODER2}. Questions about the figures go to {CODER2}. Questions about the program go to {CODER2} too, unfortunately.
+{CLIENT} was promised "a custom methodology" in {YEAR}. The custom methodology is the standard methodology with their logo.
+{CLIENT} prints the report on blue paper. We do not know why. We print it on white.
+{CLIENT} asked for decimal places. The program does not produce decimal places. {CLIENT} was offered a pencil.
+{CLIENT}'s board meets the day after the report is delivered. Do not deliver the report late.
+{CLIENT} has the longest client name in the system. It is why the field is 40 characters.
+{CLIENT} once asked us to rerun {OLDYEAR}. We did. The figures matched. {CLIENT} was disappointed.
+{CLIENT} is a "strategic account." Strategic accounts get the same program as everyone else, but faster.
+The client contact for this deck changed {SMALLN} times in {YEAR}. The deck did not change.
+The client asked for "more benchmarks." There are eight. They are the same eight as last year.
+The client asked for "fewer benchmarks." There are eight. They are fixed by {COMMITTEE}.
+The client asked if the program uses artificial intelligence. The program uses multiplication.
+The client asked for the source code. This is the source code. The client did not ask again.
+The client wanted the change column in percent. The change column is in dollars. Everything is in dollars.
+The client asked whether we round. We do not round. We were very clear about this.
+Clients in the {INDUSTRY} practice receive a cover page. Other clients receive a blank page. Both are page 1.
+Clients are listed in the order they signed. {CLIENT} is first. {CLIENT} does not know this.
+No client has ever read past page 2 of this report. Page 3 is where the interesting figures are.
+Client confidentiality: never print two clients on the same page. It happened once. See {INCIDENT}.
+Clients sometimes ask why their median is the same as last year. It is because they sent the same median as last year.
+The client deck format is described in the {OLDYEAR} client manual, page {N}. Most clients have the {OLDYEAR} client manual.
+A client once sent a metric called "MORALE." It was processed. It was in dollars.
+A client once sent a deck in {LANG2}. We are still not sure how.
+A client once called the machine room directly. The operator gave them the weather. That was the right call.
+{CLIENT}'s deck arrives in a {COLOR} envelope every {MONTH}. The envelope is kept. Nobody knows why.
+{CLIENT} once sent a fruit basket after a good report. The fruit basket included {CHEESE}. The report was not good. It was printed correctly.
+{CLIENT}'s headquarters is in {NEIGHBORHOOD}. The courier route goes along {ROAD}.
+{CLIENT} asked for the report to be printed on the "nice paper." There is no nice paper. There is green-bar.
+{CLIENT} sent a thank-you card in {YEAR}. It was addressed to the program. It is pinned in {PLACE}.
+{CLIENT} once asked for its percentiles "rounded to look nicer." We do not round. We sent memo {MEMO}.
+{CLIENT}'s contact asked whether "P33" was a typo for "P30." It is not. Memo 87-44.
+{CLIENT} insists the figures are too low. Noted.
+{CLIENT} has the longest name in the system.
+{CLIENT} wants four copies. See memo {MEMO}.
+{CLIENT} insists the figures are too low. See memo {MEMO}.
+{CLIENT} asked about P33.
+{CLIENT} has the longest name in the system. See memo {MEMO}.
+{CLIENT} sent a deck upside down in {YEAR}. The program is unchanged.
+{CLIENT} asked for decimals. See memo {MEMO}.
+{CLIENT} insists the figures are too high. See memo {MEMO}.
+{CLIENT} insists the figures are too low. See {VP}.
+{CLIENT} asked for decimals.
+{CLIENT} forwarded the report to everyone. See memo {MEMO}.
+{CLIENT} changed its name in {YEAR}. The program is unchanged.
+{CLIENT} changed its name in {YEAR}.
+{CLIENT} wants four copies.
+{CLIENT} asked about P33. The program is unchanged.
+{CLIENT} changed its name in {YEAR}. See {VP}.
+{CLIENT} asked about P33. See memo {MEMO}.
+{CLIENT} sends its deck late every {MONTH}.
+{CLIENT} asked for decimals. See {VP}.
+{CLIENT} sends its deck late every {MONTH}. See memo {MEMO}.
+{CLIENT} asked about P33. See {VP}.
+{CLIENT} wants four copies. See {VP}.
+{CLIENT} sent a deck upside down in {YEAR}. See {VP}.
+{CLIENT} forwarded the report to everyone. See {VP}.
+{CLIENT} asked for decimals. Noted.
+{CLIENT} insists the figures are too high. See {VP}.
+{CLIENT} insists the figures are too high.
+{CLIENT} insists the figures are too low.
+{CLIENT} asked for decimals. The program is unchanged.
+{CLIENT} insists the figures are too low. The program is unchanged.
+{CLIENT} wants four copies. Noted.
+{CLIENT} changed its name in {YEAR}. Noted.
+{CLIENT} sent a deck upside down in {YEAR}.
+{CLIENT} sends its deck late every {MONTH}. Noted.
+{CLIENT} forwarded the report to everyone. The program is unchanged.
+{CLIENT} has the longest name in the system. See {VP}.
+{CLIENT} has the longest name in the system. Noted.
+{CLIENT} sends its deck late every {MONTH}. See {VP}.
+{CLIENT} asked about P33. Noted.
+{CLIENT} forwarded the report to everyone. Noted.
+{CLIENT} changed its name in {YEAR}. See memo {MEMO}.
+{CLIENT} wants four copies. The program is unchanged.
+{CLIENT} insists the figures are too high. Noted.
+{CLIENT} has the longest name in the system. The program is unchanged.
+{CLIENT} sent a deck upside down in {YEAR}. Noted.
+{CLIENT} forwarded the report to everyone.
+{CLIENT} sends its deck late every {MONTH}. The program is unchanged.
+{CLIENT} sent a deck upside down in {YEAR}. See memo {MEMO}.
+{CLIENT} insists the figures are too high. The program is unchanged.

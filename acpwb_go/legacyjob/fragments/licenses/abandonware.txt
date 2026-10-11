@@ -1,0 +1,7 @@
+#name: Abandonware Notice
+#kind: noncommercial
+#from: 1997
+#extra: yes
+NOTICE: ORPHANED SOFTWARE
+
+The original vendor of a component of this program ({VENDOR}) ceased operations in {YEAR}. No successor in interest has been identified. {HOLDER} continues to use the component in good faith and will cease use upon request from any rights holder who can prove ownership and who can explain what the component does.

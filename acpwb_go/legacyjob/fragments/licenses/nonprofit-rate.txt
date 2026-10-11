@@ -1,0 +1,8 @@
+#name: Nonprofit and Public Sector License
+#kind: noncommercial
+#from: 1982
+NONPROFIT AND PUBLIC SECTOR LICENSE
+
+Qualifying nonprofit organizations, public universities, and units of state and local government may use {PROGRAM} at no charge for tabulating their own compensation data, provided that they do not use it to benchmark against private-sector clients of {HOLDER} without telling those clients.
+
+Qualification is determined by {DEPT} on receipt of form {FORM} and a letter on letterhead. The letterhead requirement is strictly enforced. The letter may say anything.

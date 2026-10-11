@@ -1,0 +1,7 @@
+#name: Copyright Registration Notice
+#kind: proprietary
+#from: 1978
+#extra: yes
+This work is registered with the United States Copyright Office, Registration No. TXu {SMALLN}-{SERIAL}, effective {DATE}. Identifying material deposited: the first and last 25 pages of source code, with trade secret portions blocked out.
+
+The blocked-out portions were the percentile ladder. The ladder is printed in full on every page of the report. The Copyright Office has not commented.

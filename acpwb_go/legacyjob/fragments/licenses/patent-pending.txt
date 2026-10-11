@@ -1,0 +1,9 @@
+#name: Patent Pending Notice
+#kind: proprietary
+#from: 1982
+#extra: yes
+PATENT PENDING
+
+Aspects of the method implemented by this program, including the fixed percentile ladder and the practice of expressing all values in dollars, are the subject of a pending patent application by {HOLDER}, Ser. No. {SMALLN}{SERIAL}.
+
+The application has been pending since {YEAR}. The examiner has asked {SMALLN} times what the invention is. The department's response is being drafted by {CODER}.

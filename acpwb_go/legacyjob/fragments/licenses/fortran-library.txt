@@ -1,0 +1,10 @@
+#name: Mathematical Library License
+#kind: commercial
+#from: 1975
+#to: 2010
+#langs: f4,f77,gf
+MATHEMATICAL AND STATISTICAL SUBROUTINE LIBRARY - LICENSE
+
+{VENDOR} grants {HOLDER} a non-exclusive license to link the subroutine library with application programs executed on the Designated Machine. Linked load modules may not be distributed outside the Site.
+
+This program was originally linked with the library in {YEAR} for its standard deviation routine. The call was later replaced with a hand-written routine, but the license fee is still paid annually because nobody is sure the call is gone.

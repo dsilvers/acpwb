@@ -1,0 +1,47 @@
+# {ERRMSG}
+IEC141I 013-18
+IEF450I ABEND S0C7
+IGZ0035S
+IEW2456E SYMBOL UNRESOLVED
+IHO217I FIOCS
+IGI0013I
+%SYSTEM-F-ACCVIO
+%FOR-F-INPCONERR
+%DCL-W-UNDFIL
+SQLCODE -805
+Bad command or file name
+Abort, Retry, Fail?
+Segmentation fault (core dumped)
+Bus error
+Floating exception
+1995-|Internal Server Error
+1999-|Can't locate object method
+2002-|Use of uninitialized value
+2005-|TypeError: unsupported operand type(s)
+2008-|UnicodeDecodeError
+2012-|Killed (OOM)
+2015-|Error response from daemon
+IEC030I B37-04
+IEC032I E37-04
+IEF212I DATASET NOT FOUND
+IEF253I DUPLICATE NAME ON DIRECT ACCESS VOLUME
+IEC130I SYSPRINT DD STATEMENT MISSING
+IEW0461 WARNING - SYMBOL PRINTED IS AN UNRESOLVED EXTERNAL REFERENCE
+IHN211I
+IGZ0037S
+CEE3204S
+S322
+S806
+S0C4
+S0C1
+SB37
+%RMS-E-FNF
+%FOR-F-ADJARRDIM
+%SYSTEM-F-ROPRAND
+-1995|Divide overflow
+-1999|Not ready reading drive A
+1990-|core dumped
+1995-|Permission denied
+2000-|No such file or directory
+2005-|IndexError: list index out of range
+2010-|exit status 137

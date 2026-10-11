@@ -1,0 +1,44 @@
+# {MEETING}
+the Monday status meeting
+the quarterly operations review
+the change control board
+the post-incident review
+the all-hands
+the budget offsite
+the vendor briefing
+the steering committee
+the standards committee
+the planning retreat
+the brown-bag lunch
+the user group meeting
+the Y2K readiness review
+the audit kickoff
+the client debrief
+the performance review
+the department picnic
+the holiday party
+the farewell lunch for {CODER2}
+the meeting about the meeting
+2004-|the Scrum of Scrums
+2008-|the sprint retrospective
+2010-|the daily standup
+2014-|the architecture review board
+the methodology review
+the ladder review
+the annual ratification meeting
+the client kickoff
+the client wrap-up
+the quarterly business review
+the deck review
+the operations handoff
+the shift change briefing
+the vendor renewal meeting
+the reorganization announcement
+the town hall
+the lessons-learned session
+the go/no-go call
+the 7 AM conference call
+the emergency meeting about {INCIDENT}
+the budget hearing
+the retirement party planning committee
+the cake meeting

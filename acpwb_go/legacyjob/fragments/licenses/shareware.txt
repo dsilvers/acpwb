@@ -1,0 +1,19 @@
+#name: Shareware Notice
+#kind: commercial
+#from: 1984
+#to: 1999
+*** SHAREWARE NOTICE ***
+
+{PROGRAM} v{REL} is SHAREWARE. You may copy it freely and give it to your friends, co-workers and any compensation committee you happen to be on.
+
+If you use {PROGRAM} for more than {TERMDAYS} days, you are expected to register it. Registration is ${FEE}. Registered users receive:
+  - a printed manual (dot matrix, tractor-feed, approx. {N} pages)
+  - the next release on 5.25" floppy disk
+  - our sincere gratitude and a laminated copy of the percentile ladder
+
+Send check or money order (no cash, no stamps, no barter) to:
+  {HOLDER}
+  Attn: {CODER}
+  {ADDRESS}
+
+Please do not upload this program to bulletin board systems without the accompanying README.TXT.

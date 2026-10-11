@@ -1,0 +1,11 @@
+#name: OEM Distribution License
+#kind: commercial
+#from: 1986
+#to: 2015
+OEM SOFTWARE DISTRIBUTION AGREEMENT
+
+{HOLDER} grants Distributor the non-exclusive right to bundle {PROGRAM} with Distributor's hardware and sell the bundle to end users in the Territory, subject to each end user accepting {HOLDER}'s end user license.
+
+Royalty: ${FEE} per unit shipped, payable quarterly with a unit report on form {FORM}. Distributor shall not separate the Program from the hardware. Distributor shall not sell the hardware without the Program, which has made the hardware difficult to sell.
+
+The {HW} bundle was discontinued in {YEAR}. This agreement was not.

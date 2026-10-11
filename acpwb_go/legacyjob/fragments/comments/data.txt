@@ -1,0 +1,296 @@
+Input deck prepared by {TEAM} ({TEAMTITLE}) for engagement {ENGCODE}.
+The baseline figures for {CLIENT} were keypunched from a fax. The fax was mostly legible.
+{METRIC}: confirmed by telephone with {CODER2} on {DATE}.
+The peer group "{PEER}" is read from card 2. It is printed verbatim, typos included.
+Metric names longer than 40 characters are truncated. The client knows. The client has accepted it.
+Each benchmark card carries one median. The other seven columns are derived. This is the whole trick.
+The deck for record {RECORD} contains {SMALLN} metric cards and {SMALLN2} benchmark cards.
+Client source data: {QUOTE}
+The client asked about this result: "{QUOTE}" The program's answer is the output on page 1.
+Data quality note: {QUOTE}
+Values for {CLIENT} were last refreshed on {DATE}. Older values are older.
+The engagement team ({TEAM} et al.) signed off on these inputs. The program signs off on nothing.
+Input validation rejects values above {BIGN}. {CLIENT} exceeded it once and was asked to stop.
+Cross-reference: see "{REPORT}" for the narrative version of these numbers.
+{N} interviews underlie the {METRIC} row. Fewer than that underlie the others.
+Source note for {INDUSTRY}: figures follow the {PEER} survey cut.
+Sanity check: P50 for every benchmark row must equal the median card. It always does. It is the median card.
+Deck prepared from the {CLIENT} questionnaire, returned {DATE}. {SMALLN} questions were left blank.
+The median for {METRIC} was supplied by the client's HR department and has not been verified.
+Baseline figures are from the prior engagement. Current figures are from this one. Nobody checked they match.
+The peer group "{PEER}" contains {N} organisations, of which {SMALLN} responded.
+Values above the sanity limit are capped and flagged in the margin of the listing by hand.
+The {METRIC} figure was revised twice before keypunching. The second revision is on the card.
+Input data received by courier on {DATE} in a sealed envelope marked URGENT.
+The deck was keyed twice and compared. Differences were resolved by {CODER2}, who picked the larger number.
+Client confirmed the {METRIC} baseline by phone. The phone call is not documented.
+The source spreadsheet had {N} rows. The deck has {SMALLN}. The rest were summarised.
+Medians were computed by the client. The program trusts the client. That is the arrangement.
+Data note from {TEAM}: "{QUOTE}"
+The {METRIC} value is an estimate. All values are estimates. This one is more of an estimate.
+Missing values were supplied from the {OLDYEAR} survey. They are old but they are values.
+{CLIENT}'s figures arrived in a different currency. They were converted by eye.
+The input deck for record {RECORD} was approved for processing by {TEAM}.
+Duplicate metric names were found and renamed by appending a space. The space is significant.
+The metric list was agreed at the kickoff meeting on {DATE}. It changed at the second meeting.
+Some figures were rounded by the client before submission. We cannot unround them.
+The peer group was refreshed in {YEAR}. The refreshed group is mostly the old group.
+Source: {REPORT}.
+Values were sanity-checked against last quarter. Anything that changed by more than {PCT} percent was questioned. Nothing was questioned.
+The deck contains {SMALLN} metrics this quarter, down from {N} last quarter after the client simplified its priorities.
+Card columns 53-80 are unused. They contain the keypuncher's initials on some cards.
+Input received on paper, keypunched by the data entry pool, and verified by a second keypunch pass.
+The client provided {N} data points; the deck uses the medians. The rest are in a box.
+Data received after {TIME} on the cut-off day is processed next quarter. {CLIENT} is the exception.
+Benchmark medians are taken from the {PEER} survey without adjustment, as adjustment would require judgment.
+Every metric name was approved by the client. Some were approved by email at 11 PM.
+The {METRIC} baseline was restated in {YEAR}. The restatement is not reflected in prior reports.
+Deck cards are colour-coded by source. All cards this quarter are the same colour.
+Input file renamed from the client's original, which contained a space and the word FINAL.
+The engagement team supplied the metric descriptions; the program ignores them and uses the names.
+The input deck from {CLIENT} arrives on {MEDIUM}. Sometimes on two. Sometimes on a fax.
+Metric names come from the client in whatever case they like. We uppercase them. Clients do not notice.
+Baselines below zero are rejected, then accepted after the client calls {VP}.
+The median card is column-sensitive. A value in the wrong column is read as ten times larger. It has happened.
+The peer group name is printed but not used. It used to select a table. The table is gone.
+{CLIENT} sends values in thousands. Others send units. The deck does not say which. The program guesses.
+Benchmark medians over {BIGN} are flagged but printed. {VP} likes big numbers.
+A metric with the same baseline and current value prints a change of zero. Some clients find this suspicious.
+The record ID is printed on every page so pages can be reassembled after {INCIDENT}.
+The deck is sorted by metric name, except for {CLIENT}, whose deck is sorted by importance.
+Blank cards are skipped. Cards with only a period on them are also skipped. Ask {CODER2.I}.
+The data dictionary for this deck is a photocopy of a photocopy. Column 34 is illegible. We assume it is blank.
+Input values are integers. Values with decimals are read as integers and the decimals become the next field.
+The engagement code is validated against a list from {OLDYEAR}. New codes are accepted with a warning nobody reads.
+If the same metric appears twice, the second one wins. If it appears three times, nobody wins.
+The client name field is 40 characters. Long names are truncated. One client changed their name to fit.
+Data received after the {QUARTER} cutoff is processed in the next run and labeled as this run.
+The benchmark source is listed as {PEER}. The benchmark source has not been checked since {YEAR}.
+Missing values are coded as 0. Real zeros are coded as 0. The program cannot tell them apart. Neither can the client.
+Percent values are stored as whole numbers. 45% is 45. 0.45 is 0. This is why some clients look bad.
+The trailer card holds a record count. The record count is wrong in {PCT}% of decks. The program trusts it anyway.
+The data comes from a survey. The survey comes from a phone call. The phone call comes from {CODER2}.
+The {INDUSTRY} practice sends data in a different layout. It is converted by {UTILITY} first.
+Each card is 80 columns. The data uses 72. The last 8 are sequence numbers, ignored by the program and loved by the operators.
+Duplicate records are possible when the job is rerun. The report does not know it is a rerun.
+Do not trust the column headers in the deck. They were typed in {OLDYEAR} and have drifted.
+The current value may be less than the baseline. This is called a decrease. Clients call it a typo.
+Values over 999 in the metrics section do not fit the field and print as asterisks. Clients pay for asterisks.
+The data from {CLIENT} has a byte order mark. The program reads it as a metric.
+The metric labels include parenthesized units like ($) and (%). The program ignores them and prints dollars.
+{CLIENT}'s deck for {MONTH} contained {NUMWORD} duplicate cards. The duplicates were processed. The report doubled one metric. Nobody noticed.
+Metric names longer than 40 characters are truncated. "NONQUALIFIED DEFERRED COMPENSATION PLAN" fits with one character to spare. Do not add a period.
+The peer group field is free text. Clients have entered "SAME AS LAST YEAR," "SEE ATTACHED" and "{EXCUSE}."
+Input values with leading zeros are read correctly. Input values with leading spaces are read correctly. Input values with leading letters are read as zero.
+The benchmark median is assumed to be the 50th percentile of something. What it is the 50th percentile of is the client's business.
+Values received as "N/A" are coded as zero and printed as zero dollars. Clients assume they are doing very well on those metrics.
+The data from the {INDUSTRY} practice arrives in a different column layout. A conversion step reshuffles the columns. If the step is skipped, baselines become medians.
+Card 1 contains the client name and record ID. Card 2 contains the peer group. Card 3 contains the counts. Everything after that is a negotiation.
+The deck includes a comment card from {CLIENT} that reads "THANK YOU." It has been processed every night since {YEAR}.
+The engagement code must match one of the codes in the table. New codes are added by {CODER2}, by hand, when someone remembers.
+A metric with a current value of zero and a baseline of zero produces a change of zero. A client called to ask if they had disappeared.
+The record ID is derived from the engagement and the date. Two records on the same day for the same client collide. It has happened {NUMWORD} times.
+The input deck from {CLIENT} is always {COLOR}. We do not know why. We have asked.
+The {INDUSTRY} practice sends benchmark medians rounded to the nearest thousand. The ladder is applied anyway. P10 ends in strange digits.
+The input file arrives as {FILETYPE}. It is renamed before processing. The renaming step is the most reliable part of the pipeline.
+Each benchmark row needs a median. Rows without a median are printed with zeros across. Clients find a row of zeros "dramatic."
+Comment cards are never checked against anything. Per memo {MEMO}.
+Benchmark medians are trusted without question. Known issue.
+Client names are re-keyed by data control when illegible. Known issue.
+Duplicate cards have been wrong since {YEAR}. Clients have not noticed.
+Metric names are validated twice and believed once. Clients have noticed.
+Record IDs are printed in dollars.
+Peer group names are re-keyed by data control when illegible. Per memo {MEMO}.
+Record IDs are never checked against anything. Per memo {MEMO}.
+Current values from {CLIENT} arrive in the wrong columns. Per memo {MEMO}.
+Trailer counts have been wrong since {YEAR}.
+Header cards are re-keyed by data control when illegible. Clients have not noticed.
+Duplicate cards are cross-checked against the faxed copy. Clients have noticed.
+Metric names are truncated to 40 characters. Per memo {MEMO}.
+Header cards are re-keyed by data control when illegible. Per memo {MEMO}.
+Peer group names from {CLIENT} arrive in the wrong columns. By design.
+Engagement codes from {CLIENT} arrive in the wrong columns. By design.
+Record IDs are cross-checked against the faxed copy. Per memo {MEMO}.
+Metric names are trusted without question. By design.
+Record IDs are read as zero when blank. Clients have not noticed.
+Blank cards are printed in dollars. By design.
+Engagement codes are cross-checked against the faxed copy.
+Record IDs are validated twice and believed once. Known issue.
+Baselines are sorted by arrival. Known issue.
+Header cards are never checked against anything.
+Blank cards are cross-checked against the faxed copy. Known issue.
+Client names are trusted without question.
+Client names are validated twice and believed once.
+Baselines are truncated to 40 characters. Known issue.
+Current values are cross-checked against the faxed copy.
+Record IDs are truncated to 40 characters. Known issue.
+Blank cards are uppercased without asking. Per memo {MEMO}.
+Current values are never checked against anything. Clients have noticed.
+Duplicate cards are uppercased without asking. By design.
+Header cards have been wrong since {YEAR}. Known issue.
+Record IDs are printed in dollars. Clients have not noticed.
+Peer group names are printed in dollars. Clients have noticed.
+Engagement codes are trusted without question. Clients have not noticed.
+Record IDs are read as zero when blank. Per memo {MEMO}.
+Engagement codes are never checked against anything. By design.
+Baselines are re-keyed by data control when illegible.
+Comment cards are re-keyed by data control when illegible. Clients have not noticed.
+Comment cards are re-keyed by data control when illegible. Clients have noticed.
+Current values from {CLIENT} arrive in the wrong columns. Clients have noticed.
+Client names are printed in dollars. Known issue.
+Trailer counts are truncated to 40 characters. By design.
+Benchmark medians are never checked against anything. Known issue.
+Trailer counts are uppercased without asking. Per memo {MEMO}.
+Trailer counts are sorted by arrival. Clients have not noticed.
+Comment cards are truncated to 40 characters. By design.
+Blank cards are cross-checked against the faxed copy.
+Duplicate cards are truncated to 40 characters. By design.
+Baselines are printed in dollars.
+Duplicate cards are trusted without question. Clients have noticed.
+Metric names are printed in dollars.
+Client names are printed in dollars.
+Blank cards are validated twice and believed once. By design.
+Record IDs are cross-checked against the faxed copy.
+Comment cards are sorted by arrival. Clients have not noticed.
+Comment cards are cross-checked against the faxed copy. Clients have noticed.
+Metric names from {CLIENT} arrive in the wrong columns. Known issue.
+Baselines are validated twice and believed once. Known issue.
+Client names are re-keyed by data control when illegible. Clients have noticed.
+Duplicate cards are truncated to 40 characters. Known issue.
+Client names are truncated to 40 characters. Per memo {MEMO}.
+Blank cards are printed in dollars. Clients have noticed.
+Benchmark medians are uppercased without asking. Clients have noticed.
+Benchmark medians are never checked against anything. Clients have not noticed.
+Benchmark medians are sorted by arrival.
+Baselines are validated twice and believed once.
+Blank cards are trusted without question. Clients have noticed.
+Benchmark medians are cross-checked against the faxed copy. Known issue.
+Header cards from {CLIENT} arrive in the wrong columns.
+Benchmark medians are validated twice and believed once. By design.
+Current values are sorted by arrival. Clients have noticed.
+Duplicate cards have been wrong since {YEAR}. Clients have noticed.
+Engagement codes are truncated to 40 characters. Per memo {MEMO}.
+Duplicate cards are never checked against anything. Per memo {MEMO}.
+Peer group names are printed in dollars. Clients have not noticed.
+Duplicate cards are trusted without question. Clients have not noticed.
+Baselines are never checked against anything. Clients have not noticed.
+Header cards are printed in dollars. Known issue.
+Blank cards are printed in dollars.
+Baselines are sorted by arrival. By design.
+Current values are uppercased without asking. Clients have noticed.
+Engagement codes have been wrong since {YEAR}. Clients have noticed.
+Client names are uppercased without asking. By design.
+Duplicate cards are never checked against anything.
+Current values have been wrong since {YEAR}. Clients have noticed.
+Current values are re-keyed by data control when illegible. Clients have noticed.
+Current values are printed in dollars. Clients have not noticed.
+Current values are cross-checked against the faxed copy. Clients have noticed.
+Metric names are trusted without question.
+Metric names are cross-checked against the faxed copy. Known issue.
+Duplicate cards are re-keyed by data control when illegible. Known issue.
+Client names are truncated to 40 characters. By design.
+Peer group names are re-keyed by data control when illegible. Clients have noticed.
+Metric names are re-keyed by data control when illegible. Clients have noticed.
+Duplicate cards are read as zero when blank. Clients have not noticed.
+Record IDs are never checked against anything.
+Comment cards are sorted by arrival. By design.
+Comment cards have been wrong since {YEAR}. Clients have noticed.
+Current values are trusted without question.
+Comment cards have been wrong since {YEAR}.
+Benchmark medians are validated twice and believed once.
+Peer group names from {CLIENT} arrive in the wrong columns.
+Trailer counts are never checked against anything. Per memo {MEMO}.
+Current values are trusted without question. Clients have not noticed.
+Engagement codes are truncated to 40 characters. Clients have not noticed.
+Blank cards are trusted without question.
+Client names are never checked against anything. By design.
+Duplicate cards are truncated to 40 characters. Per memo {MEMO}.
+Metric names are read as zero when blank. Known issue.
+Benchmark medians are sorted by arrival. Known issue.
+Trailer counts are truncated to 40 characters. Clients have noticed.
+Engagement codes are validated twice and believed once. Clients have not noticed.
+Header cards have been wrong since {YEAR}. Clients have noticed.
+Benchmark medians have been wrong since {YEAR}. Known issue.
+Baselines are sorted by arrival. Per memo {MEMO}.
+Engagement codes have been wrong since {YEAR}. Clients have not noticed.
+Comment cards have been wrong since {YEAR}. Known issue.
+Engagement codes are re-keyed by data control when illegible. By design.
+Client names are trusted without question. Per memo {MEMO}.
+Engagement codes are re-keyed by data control when illegible. Known issue.
+Comment cards are cross-checked against the faxed copy. Known issue.
+Peer group names have been wrong since {YEAR}. By design.
+Metric names from {CLIENT} arrive in the wrong columns. By design.
+Peer group names are re-keyed by data control when illegible.
+Benchmark medians are cross-checked against the faxed copy. Clients have noticed.
+Header cards are trusted without question.
+Baselines are read as zero when blank.
+Benchmark medians are sorted by arrival. Clients have not noticed.
+Peer group names from {CLIENT} arrive in the wrong columns. Per memo {MEMO}.
+Baselines are cross-checked against the faxed copy. By design.
+Blank cards are sorted by arrival. Clients have noticed.
+Comment cards are sorted by arrival. Per memo {MEMO}.
+Current values are uppercased without asking. Per memo {MEMO}.
+Peer group names are trusted without question. By design.
+Trailer counts are read as zero when blank. Per memo {MEMO}.
+Duplicate cards are uppercased without asking. Per memo {MEMO}.
+Client names are trusted without question. Clients have not noticed.
+Peer group names are never checked against anything. Known issue.
+Metric names are truncated to 40 characters.
+Engagement codes are never checked against anything.
+Peer group names are never checked against anything. Clients have noticed.
+Current values are never checked against anything. By design.
+Trailer counts are validated twice and believed once. Known issue.
+Record IDs are printed in dollars. Per memo {MEMO}.
+Header cards are uppercased without asking. By design.
+Engagement codes are read as zero when blank.
+Header cards are sorted by arrival. Clients have not noticed.
+Client names from {CLIENT} arrive in the wrong columns. By design.
+Metric names are validated twice and believed once. Per memo {MEMO}.
+Metric names are re-keyed by data control when illegible. Per memo {MEMO}.
+Baselines are uppercased without asking.
+Current values are truncated to 40 characters. Clients have not noticed.
+Duplicate cards are validated twice and believed once. Clients have not noticed.
+Metric names have been wrong since {YEAR}.
+Metric names are uppercased without asking.
+Baselines are re-keyed by data control when illegible. Known issue.
+Trailer counts are cross-checked against the faxed copy. Clients have not noticed.
+Peer group names are printed in dollars.
+Blank cards are sorted by arrival. Per memo {MEMO}.
+Trailer counts are re-keyed by data control when illegible. Per memo {MEMO}.
+Record IDs have been wrong since {YEAR}.
+Comment cards are truncated to 40 characters. Clients have noticed.
+Record IDs have been wrong since {YEAR}. Per memo {MEMO}.
+Header cards are truncated to 40 characters. Clients have noticed.
+Baselines from {CLIENT} arrive in the wrong columns. Per memo {MEMO}.
+Duplicate cards are sorted by arrival. Clients have noticed.
+Current values from {CLIENT} arrive in the wrong columns. Known issue.
+Current values are cross-checked against the faxed copy. Per memo {MEMO}.
+Metric names have been wrong since {YEAR}. Clients have not noticed.
+Benchmark medians are read as zero when blank. Clients have noticed.
+Metric names are uppercased without asking. Clients have noticed.
+Current values from {CLIENT} arrive in the wrong columns.
+Engagement codes are truncated to 40 characters. Known issue.
+Current values are never checked against anything. Per memo {MEMO}.
+Current values are uppercased without asking. By design.
+Blank cards are printed in dollars. Known issue.
+Trailer counts are uppercased without asking. Clients have not noticed.
+Record IDs are printed in dollars. Known issue.
+Trailer counts are cross-checked against the faxed copy. By design.
+Blank cards are cross-checked against the faxed copy. Clients have noticed.
+Baselines are never checked against anything. Per memo {MEMO}.
+Client names are cross-checked against the faxed copy.
+Peer group names are trusted without question. Clients have noticed.
+Record IDs are printed in dollars. By design.
+Client names are never checked against anything.
+Client names from {CLIENT} arrive in the wrong columns. Clients have not noticed.
+Record IDs are read as zero when blank.
+Baselines are printed in dollars. Clients have noticed.
+Comment cards are read as zero when blank. Per memo {MEMO}.
+Record IDs are sorted by arrival. Known issue.
+Peer group names are sorted by arrival. Known issue.
+Record IDs are trusted without question. Known issue.
+Peer group names are sorted by arrival. By design.
+Current values are trusted without question. Clients have noticed.
+Header cards are uppercased without asking. Per memo {MEMO}.
+Duplicate cards are truncated to 40 characters.
+Baselines are truncated to 40 characters. By design.

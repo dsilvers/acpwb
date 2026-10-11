@@ -1,0 +1,23 @@
+Deck order: job card, EXEC card, source deck, /*, data deck, /*, //. If the order changes, the job fails in an interesting way.
+The source deck is {N} cards. The data deck varies. The control deck never varies. Keep them in separate trays.
+Draw a diagonal line across the top of the deck with a marker. If the deck is dropped, the line shows the order.
+The marker line on this deck is {COLOR}. The previous deck had a {COLOR} line. Do not mix decks.
+Columns 73-80 carry the sequence number. Columns 1-72 carry the program. Column 0 does not exist, despite {CODER2.I}'s claims.
+The continuation column is 6. Any character there continues the previous card. A zero does not. A blank does not. Everything else does.
+Comment cards start with C in column 1. A C in column 2 is a syntax error. {CODER2.I} has made this mistake {NUMWORD} times.
+The deck must be loaded face down, nine edge first. The reader rejects anything else, eventually.
+If the reader jams, remove the deck, smooth the cards, and restart from the card after the last card read. The last card read is in the console log.
+A card with a hole punched in every column is a "lace card." It jams the reader. Do not put lace cards in this deck as a joke. See {INCIDENT}.
+The deck was re-punched in {YEAR} after the originals warped in the {WEATHER}. The new cards are a different shade of {COLOR}.
+The rubber band around the deck must be removed before loading. The rubber band has been loaded {NUMWORD} times.
+Keep the deck in the tray marked {PROGRAM}. The tray is labeled in {CODER2.I}'s handwriting. The label is older than the tray.
+The data cards from {CLIENT} come pre-punched. They are checked against the listing before loading. They usually match.
+Interpreted cards have the characters printed along the top edge. Uninterpreted cards do not. This deck is interpreted. The {OLDYEAR} deck was not.
+To duplicate a card, use the keypunch's DUP key. To duplicate a mistake, use the DUP key without looking.
+The deck is stored in the vault between runs. The vault combination is known to {NUMWORD} people. One of them is the janitor.
+A bent card will be rejected by the reader with an error that does not say "bent card." It says {ERRMSG}.
+The trailer card says END OF DATA. Do not remove it. Do not duplicate it. Do not let it out of your sight.
+The deck has been converted to card images on disk since {YEAR}. The card images still have 80 columns and sequence numbers. Old habits.
+Card 1 of the data deck is the client card. If it is missing, the report is printed for the previous client.
+Never re-punch a card by hand without logging it on the deck log. The deck log is the inside cover of the tray.
+The deck for the test run is the production deck with a red card on top. Remove the red card for production. Seriously, remove the red card.

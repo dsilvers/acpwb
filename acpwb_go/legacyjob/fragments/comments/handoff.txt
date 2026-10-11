@@ -1,0 +1,228 @@
+If you are reading this, I have left the company. Good luck. -- {CODER.I}
+To my successor: the ladder is in {ROUTINE}. The bodies are in {ROUTINE2}.
+Handover note ({DATE}): run it, check page 1, file the listing. Do not think too hard.
+Retiring {DATE}. {CODER2} has the keys to the card cabinet. -- {CODER.I}
+To whoever inherits this: {CODER2} knows the history, {CODER3} knows the code, and nobody knows both.
+Last day today. The program works. Do not ask me how. Do not ask {CODER2} either. -- {CODER.I}
+Transferred to the {DEPT} group in {YEAR}. Still on call for this, apparently.
+Farewell note: it has been an honor maintaining {PROGRAM}. It has also been a sentence.
+Contact {EMAIL} with questions. If that bounces, contact {EMAIL2}.
+Note to future self: you wrote this. You will not believe it, but you did. -- {CODER.I}
+{CODER} is the only person who can restart this job from a checkpoint. Be nice to {CODER}.
+Handoff to {VENDOR} contractors, {DATE}. Contract ended {DATE2}. Handoff back to us, undated.
+If this job fails on a weekend, call {CODER2} at home. Number is in the blue binder.
+On my last day I removed {SMALLN} GOTOs. I added {SMALLN2} back after testing. -- {CODER.I}
+Leaving the firm to open a restaurant. Do not change {VAR}. -- {CODER.I}
+For questions about the {CLIENT} logic, contact {TEAM} ({TEAMTITLE}).
+Questions about this program should be directed to {EMAIL}, who will direct them elsewhere.
+Maintained by {CODER} ({EMAIL}) until {YEAR}; maintained by nobody since.
+Handover {DATE}: the job runs itself. Mostly. Watch for {ABEND} on quarter-end.
+If you inherit this program, start by reading the revision history, then lower your expectations.
+To whoever is next: the binder on {FLOOR} has the run book. Page {SMALLN} is wrong.
+I am leaving the firm on {DATE}. Questions about this program can go to {EMAIL}, who knows nothing, or to me, who knows less.
+Note for the new maintainer: never run the job without the peer group card. You will see why.
+Transferred to {DEPT} effective {DATE}. I will answer questions about this program until my phone stops ringing.
+This program is now your problem. I am sorry, and I am also relieved. -- {CODER.I}
+Before you change anything, talk to {CODER2}. Before you talk to {CODER2}, bring coffee.
+Things I meant to fix: {SMALLN}. Things I fixed: {SMALLN2}. Things I broke: see the change log.
+The secret to this program is that there is no secret. Also, label {LABEL}.
+Handoff checklist: deck (drawer {SMALLN}), listing (cabinet), keys (with {CODER2}), dignity (gone).
+If the job fails at night, the operator will call the number in the run book. The number in the run book is mine. Please update it.
+Retiring after {N} years. This program has been with me for most of them. Be kind to it.
+New maintainer: you will want to rewrite this. Everyone does. Do not.
+I have left a test deck in drawer {SMALLN}. It is labelled TEST. It contains production data.
+Moving to the {INDUSTRY} practice. If this program needs me, it knows where I am.
+To my successor: the comments are honest. The code is complicated. The client is patient.
+Leaving instructions: run quarterly, check page one, file the listing, go home.
+Gone fishing. Literally. Back in two weeks. In the meantime do not touch {ROUTINE}.
+This is my last change to this program. I have said this {SMALLN} times before.
+Final note: it was never really about the percentiles. It was about the people. And the percentiles.
+If you are reading this after {YEAR2}, the program has outlived its planned retirement. Congratulations.
+The documentation is in my head. My head is leaving on {DATE}.
+Handover to {CODER2}: good luck, and remember the ladder is sacred.
+On leave from {DATE}. For emergencies, contact {CODER2}. For non-emergencies, wait.
+The only person who has ever understood this program fully was {CODER3}. {CODER3} left in {YEAR}.
+For continuity, I have recorded a voice memo explaining this program. The voice memo is on a cassette.
+Promoted out of this role. Not out of this program. Never out of this program.
+When I joined, the previous maintainer left me one note: "it works." I leave you the same note.
+Please keep the comment about the coffee machine. It is the last thing I will be remembered for.
+I have trained {CODER2} on this program. {CODER2} has trained {CODER3}. Nobody has trained anyone since.
+Contact details in this file may be out of date. All of them are.
+Handoff complete. The program and I are no longer on speaking terms. -- {CODER.I}
+For the auditors: ownership transferred to {DEPT} on {DATE}. Paperwork is on form {FORM}.
+Leaving the final run of the quarter to {CODER2}. Sorry about the timing. And the program.
+The keys to the card cabinet are now with {CODER2}. The combination is the program name backwards.
+If you need to restore from backup, the backup is on the {HW}. The {HW} is gone. Good luck.
+Last day. The program ran successfully this morning. I am taking that as a sign.
+I wrote this comment so you would know someone cared. -- {CODER.I}
+If you are reading this, I have retired. The deck is in the second drawer. Good luck. -- {CODER.I}
+To my successor: the answer to most questions is "it has always been that way."
+To whoever gets this next: call {CODER2} at {PHONE}. If {CODER2} does not answer, you are on your own.
+Handing this over to {CODER2} as of {DATE}. {CODER2} has been warned.
+This program is now {CODER2.I}'s problem. -- {CODER.I}, last day.
+I leave you this program, a box of {MEDIUM}, and my {OFFICEOBJ}. Use them wisely.
+My last change. The keys to {PLACE} are with {CODER2}. -- {CODER.I}
+Transferred to {DEPT}. Questions to {CODER2}. Complaints to {VP}.
+If the job fails on the first night after I leave, it is a coincidence. If it fails on the second, see label {LABEL}.
+I tried to leave this better than I found it. I found it on fire.
+For the next programmer: the comments in this section are accurate as of {DATE}. After that, trust nothing.
+I am taking a job at a bank. The bank uses this program. I will see you again.
+Before you change anything, read every comment. Then read them again. Then call {CODER2}.
+To {CODER2}: the trick is to run it twice. Do not tell {VP}.
+To {CODER2}: the client special cases are in the order clients complained, not alphabetically.
+My notes on this program are on the floppy in my desk. The floppy is labeled "RECIPES."
+Last change before my retirement party at {LUNCHSPOT}. Come by. -- {CODER.I}
+If this program ever stops working, the first thing to check is whether {CODER2} has also left.
+I am leaving. This program is staying. One of us made the right choice.
+When you inherit this, you also inherit the {QUARTER} phone call from {CLIENT}. Answer it.
+The run book is accurate except for steps 4, 7 and 9. See my notes inside the back cover.
+I was handed this program in {OLDYEAR} with the words "it basically runs itself." It does not.
+To whoever reads this: I am sorry. And the password is on the bottom of the {HW}. (Changed. -- {CODER2.I})
+Handed off to {CODER2} during {WEATHER}. If the handoff notes are brief, that is why.
+If you need to understand the checksum, find {CODER3}. {CODER3} retired to the north woods. Bring {FOOD}.
+Note to successor: the 2 AM page is always the tape mount. Always.
+Note to successor: {VP} will ask you to "just add a column." Say no. Then add the column.
+Note to successor: the test deck is the production deck from {YEAR} with the client names changed.
+Note to successor: never run this on {HOLIDAY}.
+Note to successor: the operators like {SNACK}. Keep some in your desk.
+Leaving for {DEPT}. Take care of the ladder. -- {CODER.I}
+This is my third handoff note. The first two were not read. -- {CODER.I}
+I was the last person who understood the {LANG2} version. That is no longer necessary. Probably.
+From this point on, all changes must go through {CODER2}. {CODER2} has agreed to this under protest.
+The program is yours now. Love it or rewrite it. Do not do both.
+If you need me, I will be at {LUNCHSPOT} every Friday until {YEAR2}.
+On my last day I deleted nothing. You are welcome.
+Good luck. You will need it less than I did.
+I am leaving this note in the source because nobody reads e-mail. -- {CODER.I}
+2000-|I am leaving this note in the source because nobody reads the wiki. -- {CODER.I}
+2010-|I am leaving this note in the source because the ticketing system was migrated and the old tickets are gone. -- {CODER.I}
+To future me: you wrote this. Do not pretend you did not.
+To {CODER2}: I took the {OFFICEOBJ}. It was mine. Check the label.
+My parting gift: I renamed all the variables to something meaningful. Then I renamed them back. It was too confusing.
+Handover checklist: deck (yes), listing (yes), run book (mostly), understanding (no).
+I am moving to the {INDUSTRY} practice. If you need something, I will be busy.
+For the new hire: welcome. This program is your orientation.
+Please water the plant in {PLACE}. It is part of the disaster recovery plan.
+I hand this program to {CODER2} with full confidence and a slight sense of guilt.
+If {CODER2} is reading this: you were right about the overflow. -- {CODER.I}
+Whoever finds this: the {QUARTER} run needs the override card. It is taped under my desk.
+Departing note: the answers you seek are in memo {MEMO}. The questions you should be asking are in memo {MEMO}.
+Do not let them turn this into a web page. -- {CODER.I}
+To my successor: the {TERMMODEL} in {PLACE} is the only one configured for this program. Guard it.
+To my successor: if you need a laugh, read the comments from {YEAR}. If you need a cry, read the ones from {INCIDENT}.
+To my successor: my copy of {BOOK} is on the shelf. The margins have notes about this program.
+To my successor: you will hear about {INCIDENT}. It was not my fault. It was a little bit my fault.
+To my successor: take {ROAD} in, not {ROAD}. You will want to be here early on {QUARTER} close days.
+To my successor: I have taken up {HOBBY}. You will have time for a hobby too, once you understand the checksum. (You will not understand the checksum.)
+To my successor: {CODER2} brings {CHEESE} to the {QUARTER} close. Bring crackers.
+To my successor: the excuse "{EXCUSE}" has been used. Find a new one.
+I am off to {NEIGHBORHOOD} and early retirement. This program is yours. Be kind to it. It has been kind to me, mostly.
+Final handoff note: the program works. The people around it are the hard part. Good luck. -- {CODER.I}
+Handing over: the program, the deck, the binder, the run book, the {COLOR} folder, and the knowledge that it has always been that way.
+If you only read one comment in this program, read the one above the ladder.
+I tried to write a proper handoff document. It became these comments.
+To the next maintainer: when in doubt, change nothing and rerun. It works more often than it should.
+The program will outlive both of us. Make peace with that early.
+There is a list of people who understand this program. It is short. You are on it now.
+If you call me after I retire, I will answer, but I will not remember. -- {CODER.I}
+Every handoff note in this program says the same thing in different words: be careful. Be careful.
+For my successor: nothing should be changed in {QUARTER}. You will be fine.
+Before I go: the run book is wrong on page {SMALLN}. -- {CODER.I}
+Before I go: {CODER2} knows the vault combination. -- {CODER.I}
+For my successor: {CODER2} knows the vault combination. Probably.
+For my successor: the operators like {SNACK}.
+Handoff note: {CODER2} knows the vault combination. You will be fine.
+Remember: the deck is in the {COLOR} tray. You will be fine.
+Before I go: the operators like {SNACK}. -- {CODER.I}
+Before I go: the client calls every {MONTH}.
+One last thing: the checksum is not worth understanding. Probably.
+Remember: the {QUARTER} run needs the second tape. Probably.
+Before I go: the {QUARTER} run needs the second tape.
+Remember: the client calls every {MONTH}. Good luck.
+One last thing: the operators like {SNACK}. Probably.
+For my successor: the {QUARTER} run needs the second tape. Probably.
+Handoff note: the binder is in {PLACE}. Good luck.
+One last thing: the binder is in {PLACE}. -- {CODER.I}
+Before I go: the client calls every {MONTH}. Good luck.
+Handoff note: the operators like {SNACK}. Probably.
+For my successor: the binder is in {PLACE}. Probably.
+For my successor: the run book is wrong on page {SMALLN}. Probably.
+One last thing: {CODER2} knows the vault combination. Good luck.
+Remember: the operators like {SNACK}. You will be fine.
+Handoff note: the override card is taped under the desk. -- {CODER.I}
+One last thing: the {QUARTER} run needs the second tape. You will be fine.
+One last thing: the {QUARTER} run needs the second tape. -- {CODER.I}
+For my successor: the binder is in {PLACE}. Good luck.
+For my successor: the client calls every {MONTH}. Good luck.
+Before I go: the checksum is not worth understanding. -- {CODER.I}
+For my successor: the binder is in {PLACE}.
+Before I go: the run book is wrong on page {SMALLN}. You will be fine.
+One last thing: nothing should be changed in {QUARTER}. You will be fine.
+For my successor: the run book is wrong on page {SMALLN}. You will be fine.
+One last thing: the operators like {SNACK}. Good luck.
+For my successor: the {QUARTER} run needs the second tape.
+Remember: the deck is in the {COLOR} tray. Good luck.
+Handoff note: the checksum is not worth understanding. Probably.
+Before I go: the operators like {SNACK}. Probably.
+Handoff note: the deck is in the {COLOR} tray.
+One last thing: the checksum is not worth understanding.
+Remember: {CODER2} knows the vault combination. -- {CODER.I}
+One last thing: the override card is taped under the desk. Good luck.
+Before I go: the override card is taped under the desk. Good luck.
+Handoff note: the operators like {SNACK}. Good luck.
+Remember: the run book is wrong on page {SMALLN}. Good luck.
+Handoff note: the deck is in the {COLOR} tray. You will be fine.
+Remember: the operators like {SNACK}.
+One last thing: {CODER2} knows the vault combination. You will be fine.
+Before I go: {CODER2} knows the vault combination. Good luck.
+Handoff note: the client calls every {MONTH}. -- {CODER.I}
+Remember: nothing should be changed in {QUARTER}. -- {CODER.I}
+Remember: the override card is taped under the desk. -- {CODER.I}
+Before I go: the deck is in the {COLOR} tray.
+One last thing: the client calls every {MONTH}.
+For my successor: the deck is in the {COLOR} tray.
+One last thing: the deck is in the {COLOR} tray.
+Remember: the client calls every {MONTH}. Probably.
+Before I go: nothing should be changed in {QUARTER}.
+Before I go: the override card is taped under the desk. You will be fine.
+Remember: {CODER2} knows the vault combination. Probably.
+Before I go: {CODER2} knows the vault combination. Probably.
+Handoff note: the binder is in {PLACE}.
+One last thing: nothing should be changed in {QUARTER}.
+Before I go: the {QUARTER} run needs the second tape. Probably.
+One last thing: the run book is wrong on page {SMALLN}. You will be fine.
+Remember: the operators like {SNACK}. Probably.
+Remember: the override card is taped under the desk. Good luck.
+Handoff note: the override card is taped under the desk. Probably.
+Handoff note: the client calls every {MONTH}.
+One last thing: the run book is wrong on page {SMALLN}. -- {CODER.I}
+Remember: the deck is in the {COLOR} tray. Probably.
+Before I go: the binder is in {PLACE}. -- {CODER.I}
+Remember: the override card is taped under the desk. You will be fine.
+Handoff note: the {QUARTER} run needs the second tape.
+Before I go: nothing should be changed in {QUARTER}. -- {CODER.I}
+Handoff note: nothing should be changed in {QUARTER}. Probably.
+Remember: the override card is taped under the desk. Probably.
+Handoff note: nothing should be changed in {QUARTER}.
+For my successor: {CODER2} knows the vault combination.
+One last thing: the checksum is not worth understanding. -- {CODER.I}
+Handoff note: the operators like {SNACK}. You will be fine.
+Remember: the checksum is not worth understanding.
+Handoff note: the checksum is not worth understanding. Good luck.
+Handoff note: the run book is wrong on page {SMALLN}.
+Before I go: the client calls every {MONTH}. -- {CODER.I}
+Remember: {CODER2} knows the vault combination. You will be fine.
+Handoff note: the override card is taped under the desk.
+Handoff note: nothing should be changed in {QUARTER}. -- {CODER.I}
+One last thing: the client calls every {MONTH}. Good luck.
+For my successor: the run book is wrong on page {SMALLN}. Good luck.
+For my successor: the {QUARTER} run needs the second tape. Good luck.
+Handoff note: the binder is in {PLACE}. Probably.
+One last thing: the {QUARTER} run needs the second tape. Good luck.
+Remember: the override card is taped under the desk.
+Remember: the client calls every {MONTH}. You will be fine.
+Before I go: the run book is wrong on page {SMALLN}.
+Before I go: the operators like {SNACK}. You will be fine.
+One last thing: the {QUARTER} run needs the second tape.
+Before I go: nothing should be changed in {QUARTER}. Probably.
+Before I go: the checksum is not worth understanding.

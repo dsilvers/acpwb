@@ -1,0 +1,13 @@
+#name: Evaluation License
+#kind: commercial
+#from: 1985
+#to: 2025
+EVALUATION LICENSE - NOT FOR PRODUCTION USE
+
+This copy of {PROGRAM} release {REL} is provided for evaluation purposes only for a period of {TERMDAYS} days from {DATE}.
+
+During the evaluation period you may run the Program on test data only. Any output produced during evaluation is stamped EVALUATION COPY and may not be presented to a board of directors, a compensation committee, a regulator, or a spouse.
+
+At the end of the evaluation period you must either purchase a license (contact {EMAIL}) or destroy all copies of the Program, including this listing, the input deck, and any notes you made while trying to understand label {LABEL}.
+
+Evaluation license number: {LICNO}

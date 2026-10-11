@@ -1,0 +1,23 @@
+"Program" means {PROGRAM} release {REL}, in source, object, listing, card, tape or any other form, including the comments, which are the most valuable part.
+"Licensee" means the person or organization holding this listing, whether or not they asked for it.
+"Output" means any report, table, figure, percentile or rounding error produced by the Program.
+"Designated Machine" means the {HW} bearing serial number {SERIAL}, or any machine the operators say is close enough.
+"Business Day" means any day other than a Saturday, Sunday, {HOLIDAY}, or a day on which {DEPT} is closed for inventory.
+"Percentile Ladder" means the eight multipliers set out in the Program, which are confidential, ratified and not open to discussion.
+"Documentation" means the comments in the Program. There is no other documentation.
+"Derivative Work" means any program that produces the same Output, whether or not it was written with knowledge of the Program, and especially if it was.
+"Authorized User" means an employee of Licensee who has completed the {OLDYEAR} training and still has the binder.
+"Confidential Information" means the Program, the Output, the client names, the existence of the {CLIENT} special case, and this definition.
+"Site" means the building at {ADDRESS}, including the parking structure but excluding the roof.
+"Update" means a new release of the Program that fixes one {BUG} and introduces no more than two.
+"Error" means a reproducible failure of the Program to conform to its Documentation. Because the Documentation is the comments, nothing is an Error.
+"Term" means the period beginning on the date this listing was printed and ending when the paper yellows.
+"Licensor" means {HOLDER}, its successors, assigns, and any committee it may convene.
+"Effective Date" means the date on the first page of the listing, or the date of first use, whichever the auditors prefer.
+"Client" means any organization whose figures are processed by the Program, including {CLIENT}, whom we are not allowed to mention.
+"Sanctioned Copy" means a copy of the Program made by an operator on {MEDIUM} and logged in the tape library register.
+"Machine-Readable Form" means cards, tape, disk, or anything a sufficiently patient person could keypunch.
+"Use" means loading, executing, displaying, printing, reading aloud, or thinking about the Program at length.
+"Rounding" means any operation that makes a figure more pleasant than it is. Rounding is not permitted.
+"Dollar" means the unit of all values produced by the Program, regardless of what the metric measures.
+"Successor" means the next programmer to inherit the Program, who has our sympathy.

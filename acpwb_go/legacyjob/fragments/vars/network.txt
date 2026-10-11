@@ -1,0 +1,21 @@
+# {NETWORK}
+-2001|SNA
+-2003|DECnet
+-1999|a 300-baud modem
+-1999|BITNET
+1988-2004|Novell NetWare
+1990-|Ethernet
+1993-|the T1 line
+1998-|the VPN
+2003-|the Wi-Fi
+2010-|the cloud
+the leased line
+the sneakernet
+-1999|RJE
+-2002|the 3705
+-2005|token ring
+1995-|the LAN
+2000-|the intranet
+2005-|the WAN
+2012-|the corporate proxy
+2016-|the VPC

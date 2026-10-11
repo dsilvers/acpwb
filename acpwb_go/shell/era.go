@@ -169,6 +169,9 @@ type EraPageParams struct {
 	Year     int
 	AllYears []int
 	YearData EraYearData
+
+	// OGImage overrides the share image URL; empty keeps the site default.
+	OGImage string
 }
 
 // RenderEraPage ports templates/jinja2/honeypot/archive_era_base.html
@@ -195,7 +198,11 @@ func RenderEraPage(p EraPageParams) string {
 	fmt.Fprintf(&b, `  <meta property="og:title" content="%s">`+"\n", escape(title))
 	fmt.Fprintf(&b, `  <meta property="og:description" content="%s">`+"\n", escape(p.OGDescription))
 	fmt.Fprintf(&b, `  <meta property="og:url" content="https://acpwb.com%s">`+"\n", escape(p.RequestPath))
-	fmt.Fprintf(&b, `  <meta property="og:image" content="%s">`+"\n", staticOGImageURL)
+	ogImage := p.OGImage
+	if ogImage == "" {
+		ogImage = staticOGImageURL
+	}
+	fmt.Fprintf(&b, `  <meta property="og:image" content="%s">`+"\n", escape(ogImage))
 	b.WriteString(`  <meta property="og:image:width" content="1200">` + "\n")
 	b.WriteString(`  <meta property="og:image:height" content="630">` + "\n")
 	// twitter:title/twitter:description are NEVER overridden by any of the
@@ -208,7 +215,7 @@ func RenderEraPage(p EraPageParams) string {
 	b.WriteString(`  <meta name="twitter:card" content="summary_large_image">` + "\n")
 	fmt.Fprintf(&b, `  <meta name="twitter:title" content="%s">`+"\n", escape(defaultOGTitle))
 	fmt.Fprintf(&b, `  <meta name="twitter:description" content="%s">`+"\n", escape(defaultOGDescription))
-	fmt.Fprintf(&b, `  <meta name="twitter:image" content="%s">`+"\n", staticOGImageURL)
+	fmt.Fprintf(&b, `  <meta name="twitter:image" content="%s">`+"\n", escape(ogImage))
 
 	fmt.Fprintf(&b, "\n  <link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", staticFaviconURL)
 	fmt.Fprintf(&b, "\n  <link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", staticFontURL)

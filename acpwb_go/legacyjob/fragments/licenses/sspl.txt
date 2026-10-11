@@ -1,0 +1,8 @@
+#name: Server Side Public License (adapted)
+#kind: commercial
+#from: 2018
+Copyright (c) {YEARRANGE} {HOLDER}
+
+If you make the functionality of the Program available to third parties as a service, you must make the Service Source Code available, including the source code of all programs you use to make the Program available as a service: management software, user interfaces, application programming interfaces, automation software, monitoring software, backup software, storage software and hosting software, and the coffee machine firmware in {PLACE}.
+
+{HOLDER} operates the Program as a service. {HOLDER} has published the Service Source Code. It is this page.

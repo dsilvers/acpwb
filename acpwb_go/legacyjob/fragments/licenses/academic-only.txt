@@ -1,0 +1,11 @@
+#name: Academic Use License
+#kind: noncommercial
+#from: 1975
+#to: 2008
+ACADEMIC USE ONLY
+
+This program is made available by {HOLDER} to accredited universities for instruction in business data processing. It may be used in the classroom as an example of (choose one, per your syllabus): structured programming, unstructured programming, the dangers of either.
+
+Students may copy the listing for coursework. Students may not submit the listing as their own work. Instructors are reminded that the comments contain the names of real-seeming people and should be treated with the dignity due to fictional colleagues.
+
+Commercial use requires a separate license. Contact {EMAIL}.

@@ -1,0 +1,11 @@
+#name: Tripartite Escrow Agreement
+#kind: proprietary
+#from: 1982
+#extra: yes
+SOURCE CODE ESCROW - TRIPARTITE AGREEMENT No. {LICNO}
+
+{HOLDER} ("Depositor") shall deposit the source code of {PROGRAM}, together with build instructions and the run book, with the Escrow Agent within {TERMDAYS} days of each new release.
+
+The Escrow Agent shall release the deposit to Beneficiary upon (a) Depositor's bankruptcy, (b) Depositor's failure to support the Program, or (c) the retirement of {CODER2} without a successor.
+
+The deposit was last verified on {DATE}. Verification consisted of confirming that the box was still there. The box was still there.

@@ -1,0 +1,10 @@
+R0
+R1
+R12
+R13
+R14
+R15
+general register 3
+the base register
+the link register
+the save area

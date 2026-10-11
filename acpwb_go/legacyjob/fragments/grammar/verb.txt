@@ -1,0 +1,1320 @@
+was re-validated
+was rewritten
+was moved here
+must not be changed
+has been known to fail
+was added
+was disabled
+was re-enabled
+behaves differently
+was copied from {PROGRAM2}
+is deliberately redundant
+was reviewed
+was simplified
+was made more complicated
+is no longer used
+is still used
+was declared obsolete
+was declared mandatory
+was tuned
+was certified
+was renumbered
+was split in two
+was merged
+is correct
+is probably correct
+is wrong but consistent
+was approved
+was disputed
+was audited
+is undocumented
+was ported from the {HW}
+is accidentally fast with great reluctance
+was defended by {CODER}
+must be left alone by {CODER2}
+must run first by {CODER2}
+is printed but not computed for {CLIENT}
+cannot be explained in {YEAR}
+cannot be removed without review
+is decorative at {TIME}
+must be left alone with great reluctance
+was loudly fixed in {YEAR}
+has been audited again
+was renumbered in {YEAR}
+has been audited by {CODER2}
+is mandatory
+is optional again
+must never run twice with great reluctance
+was re-certified in {YEAR}
+must be left alone on a {DAYNAME}
+was documented in memo {MEMO} by {CODER2}
+was moved into {ROUTINE} for {CLIENT}
+was added under protest
+was approved anyway for {CLIENT}
+was flagged in audit {AUDIT} without review
+was never tested on a {DAYNAME}
+was renamed in {YEAR}
+is obsolete without review
+is printed but not computed on a {DAYNAME}
+is redundant by design by {CODER2}
+is obsolete on a {DAYNAME}
+was signed off by {TEAM} again
+is deliberately slow in {YEAR}
+was questioned by the client with great reluctance
+does not do what it says with great reluctance
+is critical by {CODER2}
+was the subject of ticket {TICKET} on a {DAYNAME}
+is critical without review
+was quietly fixed by {CODER2}
+is mandatory without review
+is load-bearing without review
+has never worked as documented with great reluctance
+was resequenced by hand on a {DAYNAME}
+has been disputed
+cannot be explained without review
+was approved anyway in {YEAR}
+was tested once at {TIME}
+was the subject of ticket {TICKET} in {YEAR}
+was rejected by committee again
+was moved without notice without review
+was reformatted again
+has been blessed by {VP} without review
+does too much in {YEAR}
+was quietly fixed on a {DAYNAME}
+was resequenced by hand at {TIME}
+was rejected by committee with great reluctance
+was rejected by committee at {TIME}
+was tested once by {CODER2}
+was added under protest without review
+must run last for {CLIENT}
+was copied verbatim again
+was tuned for the {HW} again
+should not be rewritten on a {DAYNAME}
+was tested once for {CLIENT}
+is mandatory with great reluctance
+is decorative for {CLIENT}
+is optional at {TIME}
+must run first in {YEAR}
+was approved by committee
+cannot be removed again
+has always been this way without review
+is optional for {CLIENT}
+has always been this way in {YEAR}
+was tuned for the {HW} in {YEAR}
+was re-certified on a {DAYNAME}
+was tested in production at {TIME}
+was approved anyway again
+was moved out of {ROUTINE} in {YEAR}
+was resequenced by hand for {CLIENT}
+was added under protest for {CLIENT}
+does nothing at {TIME}
+has been cursed by {CODER2} for {CLIENT}
+cannot be removed by {CODER2}
+was resequenced by hand again
+is checked twice by {CODER2}
+has never worked as documented on a {DAYNAME}
+does exactly what it says on a {DAYNAME}
+was tested in production in {YEAR}
+was translated from {LANG2} on a {DAYNAME}
+was certified for Y2K
+has been disputed with great reluctance
+is printed but not computed by {CODER2}
+is accidentally fast without review
+does not do what it says
+does too much with great reluctance
+was reformatted at {TIME}
+does exactly what it says at {TIME}
+cannot be explained by {CODER2}
+does exactly what it says without review
+should be rewritten at {TIME}
+is deliberately slow on a {DAYNAME}
+does nothing for {CLIENT}
+was inherited again
+was re-certified at {TIME}
+was moved into {ROUTINE}
+was restructured again
+is accidentally fast by {CODER2}
+was questioned by the client for {CLIENT}
+was flagged in audit {AUDIT}
+is mandatory by {CODER2}
+does too much again
+has never worked as documented in {YEAR}
+was translated from {LANG2} in {YEAR}
+is printed but not computed
+was inherited for {CLIENT}
+was reformatted by {CODER2}
+is deliberately slow by {CODER2}
+does exactly what it says with great reluctance
+cannot be explained on a {DAYNAME}
+was re-certified for {CLIENT}
+was quietly fixed for {CLIENT}
+was restructured by {CODER2}
+has been disputed in {YEAR}
+was approved anyway
+was tested in production by {CODER2}
+is deliberately slow at {TIME}
+is redundant by design without review
+is redundant by design on a {DAYNAME}
+was simplified and then complicated again for {CLIENT}
+is decorative in {YEAR}
+was tested in production for {CLIENT}
+is redundant by design again
+is printed but not computed with great reluctance
+must never run twice by {CODER2}
+is checked twice in {YEAR}
+cannot be removed for {CLIENT}
+was documented in memo {MEMO} on a {DAYNAME}
+was certified for Y2K again
+was restructured for {CLIENT}
+should be rewritten by {CODER2}
+was translated from {LANG2} with great reluctance
+was reformatted in {YEAR}
+is optional by {CODER2}
+does too much for {CLIENT}
+is accidentally fast
+was ported from the {HW} at {TIME}
+must be left alone in {YEAR}
+was loudly fixed with great reluctance
+was inherited
+was added under protest at {TIME}
+has been cursed by {CODER2} at {TIME}
+was signed off by {TEAM} at {TIME}
+was reformatted on a {DAYNAME}
+was renamed with great reluctance
+was simplified and then complicated again without review
+was quietly fixed
+was added under protest in {YEAR}
+was questioned by the client by {CODER2}
+was reformatted
+is checked twice without review
+is checked twice with great reluctance
+is redundant by design for {CLIENT}
+must never run twice
+must be left alone
+was approved by committee at {TIME}
+is checked never in {YEAR}
+must be left alone without review
+was inherited without review
+was tested once with great reluctance
+was re-certified without review
+was approved anyway with great reluctance
+must be left alone for {CLIENT}
+has been blessed by {VP} for {CLIENT}
+was ported from the {HW} by {CODER2}
+was certified for Y2K by {CODER2}
+was loudly fixed at {TIME}
+was moved without notice on a {DAYNAME}
+does not do what it says without review
+was copied verbatim by {CODER2}
+was the subject of ticket {TICKET} again
+was ported from the {HW} in {YEAR}
+is checked never by {CODER2}
+is load-bearing with great reluctance
+was certified for Y2K on a {DAYNAME}
+is checked never with great reluctance
+was re-certified by {CODER2}
+must never run twice again
+was renamed for {CLIENT}
+was tuned for the {HW} at {TIME}
+has always been this way at {TIME}
+was renamed without review
+must run first on a {DAYNAME}
+was removed and then restored again
+has never worked as documented for {CLIENT}
+must run last at {TIME}
+is accidentally fast on a {DAYNAME}
+does nothing on a {DAYNAME}
+was moved out of {ROUTINE} at {TIME}
+was restructured
+does exactly what it says
+should be rewritten again
+was the subject of ticket {TICKET} for {CLIENT}
+is deliberately slow without review
+was documented in memo {MEMO} for {CLIENT}
+was ported from the {HW} with great reluctance
+is decorative again
+was loudly fixed for {CLIENT}
+was simplified and then complicated again
+was inherited by {CODER2}
+was the subject of ticket {TICKET} by {CODER2}
+was rejected by committee without review
+is obsolete
+was approved by committee again
+was renumbered by {CODER2}
+has been disputed on a {DAYNAME}
+was never tested for {CLIENT}
+was simplified and then complicated again on a {DAYNAME}
+must be left alone again
+was signed off by {TEAM} without review
+was inherited in {YEAR}
+was documented in memo {MEMO} at {TIME}
+was loudly fixed
+was rejected by committee by {CODER2}
+was simplified and then complicated again by {CODER2}
+is printed but not computed again
+must run last again
+was translated from {LANG2} for {CLIENT}
+was moved out of {ROUTINE} for {CLIENT}
+was the subject of ticket {TICKET}
+does too much at {TIME}
+was renumbered without review
+was moved without notice
+was never tested in {YEAR}
+was translated from {LANG2} again
+was moved out of {ROUTINE} with great reluctance
+was approved by committee with great reluctance
+is computed but not printed for {CLIENT}
+was rejected by committee on a {DAYNAME}
+has been blessed by {VP} in {YEAR}
+must run first
+was simplified and then complicated again at {TIME}
+is accidentally fast at {TIME}
+cannot be removed in {YEAR}
+is decorative
+does exactly what it says for {CLIENT}
+was translated from {LANG2} at {TIME}
+has been audited on a {DAYNAME}
+was moved into {ROUTINE} without review
+was renamed by {CODER2}
+is mandatory for {CLIENT}
+is redundant by design with great reluctance
+does too much by {CODER2}
+was tuned for the {HW} without review
+is decorative without review
+was moved without notice again
+was loudly fixed without review
+is optional in {YEAR}
+has never worked as documented again
+was rewritten twice in {YEAR}
+was approved by committee in {YEAR}
+was rewritten twice without review
+was questioned by the client again
+has been cursed by {CODER2} without review
+has been cursed by {CODER2} on a {DAYNAME}
+was added under protest again
+is computed but not printed at {TIME}
+was rewritten twice by {CODER2}
+is mandatory again
+is printed but not computed in {YEAR}
+was moved without notice in {YEAR}
+does too much
+was removed and then restored at {TIME}
+was documented in memo {MEMO} with great reluctance
+does not do what it says at {TIME}
+was tested in production without review
+was tested once
+must run first for {CLIENT}
+does nothing by {CODER2}
+is critical for {CLIENT}
+was tuned for the {HW} by {CODER2}
+was tuned for the {HW}
+is load-bearing at {TIME}
+must run first again
+is checked twice at {TIME}
+was reformatted without review
+is checked never on a {DAYNAME}
+does exactly what it says again
+was questioned by the client in {YEAR}
+has never worked as documented
+has been audited in {YEAR}
+is deliberately slow
+has been blessed by {VP} with great reluctance
+has always been this way with great reluctance
+was tested once without review
+was restructured on a {DAYNAME}
+is load-bearing
+was reformatted for {CLIENT}
+is checked twice on a {DAYNAME}
+was quietly fixed at {TIME}
+was removed and then restored by {CODER2}
+was never tested by {CODER2}
+distrusts {VAR} at {TIME}
+must be run by hand in {YEAR}
+must be run by hand by {CODER3}
+breaks on {HOLIDAY} in {YEAR}
+was misunderstood under protest
+distrusts {VAR} in {YEAR}
+was split in two by mistake
+was sent to {DEPT} in {YEAR}
+depends on the phase of the moon after hours
+was relinked over a weekend
+was hot-fixed by {CODER3}
+was ported over a weekend
+survived the {YEAR} rewrite during {WEATHER}
+ignores {VAR} per memo {MEMO}
+depends on the {HW} microcode on purpose
+was re-ratified twice
+overwrites {VAR} by mistake
+should be rewritten for {CLIENT}
+must stay in double precision at {TIME}
+was stamped with great reluctance
+was re-patched per memo {MEMO}
+was relinked in a hurry
+was certified under protest
+may print garbage during {WEATHER}
+was deleted quietly
+was desk-checked in {YEAR}
+was moved back without review
+should be rewritten without review
+is right with great reluctance
+is haunted for {CLIENT}
+is required during {WEATHER}
+only works for {CLIENT} by mistake
+is obsolete per memo {MEMO}
+is intentional per memo {MEMO}
+was initialled quietly
+is policy during {WEATHER}
+was optimised on purpose
+only works on the {HW}
+only works on the {HW} with great reluctance
+was reinstated quietly
+was presented to {COMMITTEE} by {CODER2}
+is mostly right with great reluctance
+was uncommented during {SPORTS}
+was re-keypunched in a hurry
+was documented during {WEATHER}
+depends on the deck order for {CLIENT}
+may abend by mistake
+was restored
+ignores {VAR} with great reluctance
+is accidental by {CODER2}
+has never failed during {WEATHER}
+was mentioned at {MEETING} under protest
+was never explained twice
+may print garbage by {CODER2}
+is tradition after hours
+was relinked per memo {MEMO}
+was retyped under protest
+was moved back per memo {MEMO}
+has its own memo quietly
+breaks on leap years at {TIME}
+was found in a drawer quietly
+survived the {YEAR} rewrite on a {DAYNAME}
+explains {INCIDENT} twice
+was rewritten by {CODER2}
+can be ignored by {CODER3}
+was copied from {PROGRAM2} on a {DAYNAME}
+is a control per memo {MEMO}
+was explained on purpose
+should never be reached without review
+can be ignored with great reluctance
+was rolled forward in {YEAR}
+was ratified twice
+is load-bearing quietly
+was de-optimised twice
+should be documented during {WEATHER}
+depends on the phase of the moon quietly
+may overflow under protest
+was copied to {PROGRAM2} during {SPORTS}
+has never failed after hours
+was re-keypunched during {WEATHER}
+duplicates the work of {ROUTINE} quietly
+was keypunched with great reluctance
+explains {INCIDENT} per memo {MEMO}
+was escalated to {VP} for {CLIENT}
+confuses everyone per memo {MEMO}
+was ported for {CLIENT}
+was signed off twice
+replaced {ROUTINE} quietly
+has its own memo after hours
+may be removed after {YEAR2} by mistake
+depends on {ROUTINE} during {WEATHER}
+was made slower over a weekend
+is intentional during {WEATHER}
+is policy by mistake
+distrusts {VAR} per memo {MEMO}
+was commented out without review
+depends on the {HW} microcode over a weekend
+has outlived its author by mistake
+was misunderstood
+was converted over a weekend
+is mostly right without review
+has no owner
+is a bug by {CODER2}
+should be tested in a hurry
+has its own committee for {CLIENT}
+has two tickets under protest
+must not be changed with great reluctance
+was copied from {PROGRAM2} for {CLIENT}
+was copied to {PROGRAM2} quietly
+has its own memo by {CODER3}
+was decertified on purpose
+is a bug during {SPORTS}
+was complicated on purpose
+is haunted during {SPORTS}
+was presented to {COMMITTEE} per memo {MEMO}
+confuses {COMPILER} quietly
+was stamped by {CODER3}
+has its own committee during {WEATHER}
+should be rewritten on a {DAYNAME}
+was re-enabled over a weekend
+must not be moved under protest
+may be removed after {YEAR2} over a weekend
+is unexplained in a hurry
+is a control by mistake
+has outlived its author quietly
+depends on the deck order twice
+was merged in a hurry
+survived {INCIDENT} at {TIME}
+is wrong for the right reasons for {CLIENT}
+was ratified by {CODER2}
+was restored in a hurry
+was made faster during {WEATHER}
+must be run by hand in a hurry
+was made slower in {YEAR}
+is a workaround with great reluctance
+is superstition by mistake
+was reverted
+cancels out the bug in {ROUTINE} by mistake
+was made correct over a weekend
+was approved on purpose
+was frozen by {CODER3}
+was re-patched during {WEATHER}
+replaced {ROUTINE} in {YEAR}
+is sacred under protest
+was desk-checked at {TIME}
+confuses {COMPILER} without review
+depends on {ROUTINE} twice
+was re-patched quietly
+duplicates the work of {ROUTINE} under protest
+was de-optimised with great reluctance
+may print nothing in a hurry
+was merged under protest
+has its own committee by {CODER2}
+depends on {VAR} by mistake
+was split in two over a weekend
+clears {VAR} with great reluctance
+was sent to {DEPT} without review
+was frozen in a hurry
+was translated after hours
+was decertified in {YEAR}
+has been known to fail after hours
+was re-patched at {TIME}
+only works on the {HW} during {SPORTS}
+was reverted under protest
+has outlived its author on a {DAYNAME}
+was replaced by {ROUTINE} on purpose
+was renamed over a weekend
+breaks on {HOLIDAY} during {WEATHER}
+has outlived its author in {YEAR}
+was re-enabled in a hurry
+was escalated to {VP} by {CODER2}
+duplicates the work of {ROUTINE} on a {DAYNAME}
+was moved here during {SPORTS}
+has two tickets
+was rolled back by {CODER2}
+may print nothing by {CODER3}
+has a ticket by mistake
+was tested in a hurry
+was re-keypunched
+must not be changed at {TIME}
+was rolled forward after hours
+has three owners after hours
+is load-bearing by {CODER3}
+prevented {INCIDENT} over a weekend
+should never be reached per memo {MEMO}
+depends on {VAR} under protest
+was copied from {PROGRAM2} during {WEATHER}
+may print garbage at {TIME}
+was recompiled at {TIME}
+is unexplained after hours
+only works on the {HW} by mistake
+must run first under protest
+was approved twice
+depends on the phase of the moon over a weekend
+was blamed
+was made to match the {OLDYEAR} output by mistake
+was un-deleted in {YEAR}
+trusts {VAR} in a hurry
+is wrong for the right reasons under protest
+was signed off during {WEATHER}
+was un-deleted by {CODER2}
+is deprecated on purpose
+caused {INCIDENT} by {CODER3}
+is mostly right during {WEATHER}
+has failed every {DAYNAME} after hours
+has failed once on purpose
+was sealed without review
+was commented out on purpose
+was found in a drawer in {YEAR}
+was re-run at {TIME}
+works on Tuesdays by mistake
+was rejected quietly
+was rolled forward over a weekend
+survived {INCIDENT} in a hurry
+was complicated
+was made consistent after hours
+was rediscovered
+is a bug on purpose
+was re-keypunched for {CLIENT}
+breaks on leap years during {SPORTS}
+is optional in a hurry
+was relinked for {CLIENT}
+depends on the deck order by {CODER2}
+is unexplained for {CLIENT}
+must not be moved
+was presented to {COMMITTEE} for {CLIENT}
+is optional under protest
+was copied from {PROGRAM2} under protest
+was re-enabled for {CLIENT}
+was frozen over a weekend
+ignores {VAR} during {WEATHER}
+was commented out in {YEAR}
+is temporary after hours
+was made correct under protest
+is a bug at {TIME}
+is unexplained on purpose
+is sacred per memo {MEMO}
+must stay in double precision with great reluctance
+was found in a drawer on purpose
+must be run by hand under protest
+was never explained in {YEAR}
+was rolled back per memo {MEMO}
+was tested after hours
+has no owner on a {DAYNAME}
+is sacred by {CODER3}
+works on Tuesdays quietly
+should be rewritten per memo {MEMO}
+depends on {VAR} during {WEATHER}
+was ported in {YEAR}
+was certified with great reluctance
+was presented to {COMMITTEE} during {SPORTS}
+was rejected twice
+was simplified over a weekend
+was initialled by {CODER3}
+shadows {VAR} by mistake
+was commented out by {CODER3}
+works by design in a hurry
+must not be removed by mistake
+was made correct
+trusts {VAR} on purpose
+may overflow over a weekend
+is a feature in {YEAR}
+must not be moved on purpose
+may abend without review
+was replaced by {ROUTINE}
+should be rewritten over a weekend
+was reformatted by {CODER3}
+only works for {CLIENT} with great reluctance
+has been known to fail twice
+was thawed over a weekend
+was hot-fixed on purpose
+is a feature on purpose
+must stay in double precision for {CLIENT}
+confused the auditors in a hurry
+is haunted in a hurry
+was copied from {PROGRAM2} by mistake
+was decertified quietly
+breaks if touched by mistake
+was simplified without review
+is a workaround by {CODER3}
+is a workaround during {WEATHER}
+was reverted by mistake
+was renumbered per memo {MEMO}
+works by design with great reluctance
+was decertified under protest
+was replaced by {ROUTINE} in a hurry
+was made consistent on purpose
+was re-ratified on purpose
+has two tickets during {WEATHER}
+was converted twice
+was stamped after hours
+was moved back in {YEAR}
+was presented to {COMMITTEE} under protest
+confuses everyone in a hurry
+may abend twice
+was certified per memo {MEMO}
+was rolled back in {YEAR}
+was patched
+is a workaround on purpose
+cannot be ignored in {YEAR}
+is a bug in a hurry
+is intentional for {CLIENT}
+was hot-fixed with great reluctance
+was misunderstood during {WEATHER}
+is accidental in {YEAR}
+was uncommented with great reluctance
+was reinstated after hours
+works on Tuesdays by {CODER2}
+was optimised on a {DAYNAME}
+was mentioned at {MEETING} twice
+was converted by {CODER3}
+was rewritten on purpose
+depends on the {HW} microcode by {CODER2}
+only works for {CLIENT} on a {DAYNAME}
+was moved here under protest
+was signed off in a hurry
+was keypunched in {YEAR}
+duplicates the work of {ROUTINE} during {WEATHER}
+was patched per memo {MEMO}
+was never tested over a weekend
+was moved back by {CODER3}
+breaks on leap years with great reluctance
+is tradition with great reluctance
+may loop forever quietly
+was initialled twice
+is deprecated during {SPORTS}
+was approved on a {DAYNAME}
+was merged at {TIME}
+was de-optimised during {SPORTS}
+was copied to {PROGRAM2} by mistake
+has a ticket twice
+was re-run per memo {MEMO}
+was escalated to {VP} twice
+is permanent
+is cursed
+was converted quietly
+depends on the {HW} microcode by {CODER3}
+is accidental without review
+was documented quietly
+was de-optimised quietly
+was disabled with great reluctance
+is right after hours
+was made correct during {SPORTS}
+was made to match the {OLDYEAR} output quietly
+may print garbage for {CLIENT}
+was documented twice
+must not be removed
+must not be changed by mistake
+is right for the wrong reasons by mistake
+clears {VAR} for {CLIENT}
+was copied to {PROGRAM2} on a {DAYNAME}
+is optional
+was misunderstood twice
+has failed every {DAYNAME} by {CODER3}
+was un-deleted on purpose
+was signed off
+was de-optimised under protest
+was re-patched for {CLIENT}
+was returned by {DEPT} after hours
+was re-indented after hours
+cannot be ignored under protest
+was undocumented in {YEAR}
+must not be changed over a weekend
+was mentioned at {MEETING} after hours
+is sacred on purpose
+is temporary on purpose
+works by accident on purpose
+is superstition
+was duplicated during {WEATHER}
+overwrites {VAR} during {SPORTS}
+was moved here with great reluctance
+was blamed by mistake
+was replaced by {ROUTINE} on a {DAYNAME}
+confuses everyone with great reluctance
+was hot-fixed
+is a feature for {CLIENT}
+is wrong after hours
+can be ignored in {YEAR}
+was re-run on a {DAYNAME}
+confuses {COMPILER} during {WEATHER}
+was reformatted after hours
+overwrites {VAR} over a weekend
+has been known to fail by {CODER2}
+was made to match the {OLDYEAR} output twice
+must not be removed on purpose
+was returned by {DEPT} for {CLIENT}
+is a control at {TIME}
+was re-run without review
+ignores {VAR} on purpose
+was renamed twice
+was initialled with great reluctance
+is mandatory in {YEAR}
+was re-enabled quietly
+only works on the {HW} at {TIME}
+was re-keypunched with great reluctance
+is cursed by mistake
+was reinstated in {YEAR}
+shadows {VAR} with great reluctance
+must run twice on a {DAYNAME}
+should be removed by {CODER2}
+confused the auditors over a weekend
+was re-ratified by mistake
+was praised with great reluctance
+was reverted over a weekend
+was certified during {SPORTS}
+has three owners during {WEATHER}
+is deprecated by {CODER2}
+must run twice without review
+has its own committee after hours
+should be removed under protest
+survived {INCIDENT}
+was ratified for {CLIENT}
+cancels out the bug in {ROUTINE} during {WEATHER}
+caused {INCIDENT} quietly
+was split in two by {CODER3}
+was keypunched without review
+is right in a hurry
+is obsolete during {WEATHER}
+works by accident in a hurry
+cannot be ignored in a hurry
+confused the auditors on purpose
+is load-bearing under protest
+may overflow at {TIME}
+depends on {VAR} in a hurry
+was certified on purpose
+was re-ratified in a hurry
+cannot be ignored on a {DAYNAME}
+was un-deleted per memo {MEMO}
+was recompiled on purpose
+was initialled in {YEAR}
+was desk-checked quietly
+was retyped at {TIME}
+was sent to {DEPT} per memo {MEMO}
+was replaced by {ROUTINE} under protest
+is permanent in {YEAR}
+was escalated to {VP} on a {DAYNAME}
+is sacred on a {DAYNAME}
+was reinstated by mistake
+must run twice over a weekend
+was made consistent under protest
+was moved here by {CODER3}
+was made slower
+has failed once
+was optimised by {CODER2}
+was made faster over a weekend
+must be run by hand by {CODER2}
+has its own committee per memo {MEMO}
+was thawed after hours
+clears {VAR} during {WEATHER}
+was reinstated for {CLIENT}
+ignores {VAR} after hours
+is policy after hours
+shadows {VAR} without review
+works by design under protest
+must not be optimised under protest
+is unexplainable on purpose
+was complicated with great reluctance
+must stay in double precision over a weekend
+was audited twice
+is mandatory by {CODER3}
+prevented {INCIDENT} for {CLIENT}
+depends on {VAR}
+was commented out over a weekend
+must not be moved during {SPORTS}
+only works for {CLIENT} in a hurry
+trusts {VAR} over a weekend
+breaks if touched twice
+was uncommented in a hurry
+has failed every {DAYNAME} quietly
+was rolled forward at {TIME}
+was rewritten twice
+was un-deleted on a {DAYNAME}
+was certified at {TIME}
+was made consistent by {CODER2}
+ignores {VAR}
+was recompiled quietly
+has never failed per memo {MEMO}
+was tested over a weekend
+was ratified during {WEATHER}
+is accidental under protest
+should be documented quietly
+was patched twice
+was rejected at {TIME}
+was copied to {PROGRAM2} over a weekend
+is mostly right for {CLIENT}
+has never failed with great reluctance
+was ported during {SPORTS}
+was escalated to {VP}
+was thawed under protest
+was patched during {WEATHER}
+is wrong quietly
+has been known to fail for {CLIENT}
+depends on the {HW} microcode twice
+shadows {VAR} during {WEATHER}
+was recompiled
+is mandatory twice
+works on Tuesdays in {YEAR}
+was re-sequenced quietly
+was re-run in {YEAR}
+was praised after hours
+was sealed at {TIME}
+was certified by {CODER3}
+was tested
+is permanent on purpose
+was thawed
+was praised without review
+was retyped by {CODER2}
+works by accident after hours
+has failed once during {WEATHER}
+was misunderstood by {CODER2}
+was simplified by {CODER3}
+was restored with great reluctance
+was decertified by {CODER2}
+cannot be ignored over a weekend
+is intentional after hours
+was rediscovered with great reluctance
+was reverted by {CODER3}
+distrusts {VAR} twice
+depends on the deck order after hours
+can be ignored by mistake
+is policy with great reluctance
+should be tested on purpose
+was approved by {CODER3}
+confuses everyone during {WEATHER}
+was copied to {PROGRAM2} during {WEATHER}
+is unexplainable under protest
+was reinstated during {SPORTS}
+must not be moved in {YEAR}
+was ported per memo {MEMO}
+was made faster per memo {MEMO}
+survived the {YEAR} rewrite in a hurry
+was rolled forward on a {DAYNAME}
+was desk-checked with great reluctance
+was sealed by {CODER2}
+was recompiled by {CODER3}
+was never explained for {CLIENT}
+was rewritten on a {DAYNAME}
+must run first per memo {MEMO}
+is accidental with great reluctance
+prevented {INCIDENT}
+works on Tuesdays in a hurry
+must run twice quietly
+should never be reached on purpose
+may abend for {CLIENT}
+was explained during {SPORTS}
+was re-ratified at {TIME}
+is permanent at {TIME}
+breaks on leap years during {WEATHER}
+was blamed on a {DAYNAME}
+was explained by {CODER2}
+is unexplained in {YEAR}
+distrusts {VAR} under protest
+may print garbage by mistake
+has three owners during {SPORTS}
+depends on the phase of the moon with great reluctance
+explains {INCIDENT} with great reluctance
+clears {VAR} per memo {MEMO}
+is deprecated without review
+is intentional in a hurry
+has failed once twice
+should be documented by {CODER2}
+is a workaround under protest
+is temporary twice
+is tradition at {TIME}
+was presented to {COMMITTEE} in {YEAR}
+was translated for {CLIENT}
+should be documented for {CLIENT}
+was patched in a hurry
+was reformatted over a weekend
+survived {INCIDENT} without review
+was documented during {SPORTS}
+was made correct for {CLIENT}
+is tradition on a {DAYNAME}
+has its own memo under protest
+was re-run twice
+is superstition quietly
+was re-sequenced by {CODER3}
+was blamed in a hurry
+is cursed in {YEAR}
+was optimised without review
+survived the {YEAR} rewrite after hours
+has three owners with great reluctance
+was merged during {SPORTS}
+was signed off on purpose
+was rediscovered during {SPORTS}
+has outlived its author for {CLIENT}
+may print garbage after hours
+breaks if touched by {CODER3}
+shadows {VAR} after hours
+may print nothing over a weekend
+may loop forever under protest
+was rediscovered at {TIME}
+is permanent during {WEATHER}
+breaks on {HOLIDAY} over a weekend
+was stamped by mistake
+was thawed per memo {MEMO}
+is superstition for {CLIENT}
+was translated in {YEAR}
+was simplified per memo {MEMO}
+was desk-checked per memo {MEMO}
+was made to match the {OLDYEAR} output under protest
+depends on {VAR} quietly
+may overflow per memo {MEMO}
+was re-indented
+is obsolete at {TIME}
+should be removed by mistake
+may be removed after {YEAR2} in {YEAR}
+has been known to fail at {TIME}
+is required quietly
+was found in {PLACE} with great reluctance
+must stay in double precision by mistake
+was rediscovered twice
+was converted by mistake
+was made slower during {WEATHER}
+should never be reached
+was re-patched during {SPORTS}
+caused {INCIDENT} under protest
+is right during {WEATHER}
+was hot-fixed in a hurry
+was deleted twice
+trusts {VAR} after hours
+was stamped over a weekend
+was translated during {WEATHER}
+was recompiled per memo {MEMO}
+must not be optimised twice
+was complicated at {TIME}
+may loop forever over a weekend
+must run last on a {DAYNAME}
+was found in a drawer by mistake
+confuses everyone without review
+confuses {COMPILER} by mistake
+was disabled at {TIME}
+depends on the {HW} microcode quietly
+has its own committee on purpose
+should never be reached after hours
+was rolled forward per memo {MEMO}
+was patched after hours
+overwrites {VAR} in a hurry
+explains {INCIDENT} quietly
+is optional on a {DAYNAME}
+is wrong for the right reasons in {YEAR}
+confuses everyone
+must not be removed on a {DAYNAME}
+is haunted by {CODER2}
+was approved under protest
+was ratified without review
+is a control with great reluctance
+replaced {ROUTINE} under protest
+was undocumented at {TIME}
+was signed off quietly
+was found in {PLACE} at {TIME}
+confused the auditors by {CODER2}
+was mentioned at {MEETING} per memo {MEMO}
+has three owners on purpose
+is a workaround
+cancels out the bug in {ROUTINE} in {YEAR}
+should be tested for {CLIENT}
+was deleted at {TIME}
+is required during {SPORTS}
+must run twice for {CLIENT}
+confuses {COMPILER} on a {DAYNAME}
+depends on {ROUTINE} per memo {MEMO}
+was undocumented by {CODER2}
+was decertified for {CLIENT}
+was re-enabled during {SPORTS}
+is haunted in {YEAR}
+was retyped twice
+has no owner during {SPORTS}
+breaks on leap years without review
+may print nothing without review
+was re-indented by {CODER3}
+was duplicated over a weekend
+was re-ratified in {YEAR}
+is tradition during {SPORTS}
+depends on {VAR} with great reluctance
+may overflow on purpose
+was audited under protest
+is policy
+was restored quietly
+has a ticket for {CLIENT}
+has no owner for {CLIENT}
+was sealed twice
+works by accident by {CODER2}
+was desk-checked twice
+can be ignored under protest
+was deleted under protest
+is permanent during {SPORTS}
+has two tickets by mistake
+is accidental during {WEATHER}
+cancels out the bug in {ROUTINE} per memo {MEMO}
+is right for the wrong reasons during {SPORTS}
+was un-deleted for {CLIENT}
+was duplicated in a hurry
+must run first during {WEATHER}
+was renumbered for {CLIENT}
+depends on the phase of the moon by {CODER2}
+breaks on {HOLIDAY}
+was moved back with great reluctance
+must run twice by {CODER3}
+replaced {ROUTINE}
+was made consistent in {YEAR}
+has failed every {DAYNAME}
+may overflow without review
+was copied to {PROGRAM2} on purpose
+distrusts {VAR} over a weekend
+is right for {CLIENT}
+is load-bearing during {SPORTS}
+was found in a drawer by {CODER3}
+was stamped on purpose
+depends on the {HW} microcode with great reluctance
+is a control quietly
+is mostly right twice
+was documented by mistake
+was moved back on purpose
+was rolled back quietly
+is wrong during {WEATHER}
+has its own committee in a hurry
+is unexplainable in a hurry
+only works for {CLIENT} per memo {MEMO}
+must not be changed for {CLIENT}
+should be documented at {TIME}
+must run last by {CODER2}
+was initialled under protest
+may be removed after {YEAR2} for {CLIENT}
+was split in two in {YEAR}
+is deprecated twice
+depends on {ROUTINE} with great reluctance
+was found in a drawer without review
+has been known to fail in a hurry
+was moved here by {CODER2}
+must not be moved by mistake
+was audited on purpose
+is wrong over a weekend
+is superstition per memo {MEMO}
+breaks if touched after hours
+was praised during {SPORTS}
+depends on the phase of the moon in a hurry
+was duplicated after hours
+is superstition with great reluctance
+depends on the deck order quietly
+is a bug without review
+was translated on purpose
+was merged on a {DAYNAME}
+was duplicated for {CLIENT}
+must not be optimised for {CLIENT}
+was blamed quietly
+confused the auditors on a {DAYNAME}
+was converted by {CODER2}
+was made consistent with great reluctance
+breaks on {HOLIDAY} per memo {MEMO}
+was never tested by {CODER3}
+was never tested twice
+is wrong with great reluctance
+cancels out the bug in {ROUTINE} during {SPORTS}
+has failed once for {CLIENT}
+was rolled back on a {DAYNAME}
+was rewritten in {YEAR}
+breaks on {HOLIDAY} during {SPORTS}
+has failed once under protest
+was frozen after hours
+must run last by {CODER3}
+may loop forever during {SPORTS}
+caused {INCIDENT} during {SPORTS}
+was translated in a hurry
+must not be optimised
+was audited after hours
+caused {INCIDENT} after hours
+breaks on leap years per memo {MEMO}
+must be run by hand during {SPORTS}
+is sacred for {CLIENT}
+was un-deleted by mistake
+was copied from {PROGRAM2} in a hurry
+may be removed after {YEAR2} quietly
+only works for {CLIENT}
+cancels out the bug in {ROUTINE} after hours
+was keypunched per memo {MEMO}
+is a feature without review
+has failed every {DAYNAME} with great reluctance
+may loop forever after hours
+was never explained on a {DAYNAME}
+was approved at {TIME}
+should be rewritten twice
+was complicated during {WEATHER}
+was uncommented
+has no owner quietly
+is obsolete in a hurry
+is a control by {CODER3}
+overwrites {VAR} on purpose
+is haunted
+was restored in {YEAR}
+is wrong for the right reasons
+is a control in {YEAR}
+is wrong for the right reasons with great reluctance
+was found in {PLACE} for {CLIENT}
+was made consistent for {CLIENT}
+was never tested per memo {MEMO}
+was renumbered on purpose
+should be tested during {WEATHER}
+caused {INCIDENT} for {CLIENT}
+survived the {YEAR} rewrite under protest
+was never tested during {SPORTS}
+was re-indented in {YEAR}
+was replaced by {ROUTINE} at {TIME}
+has a ticket under protest
+was retyped in a hurry
+was audited without review
+was returned by {DEPT} on a {DAYNAME}
+must run last on purpose
+is policy for {CLIENT}
+was explained with great reluctance
+prevented {INCIDENT} in a hurry
+trusts {VAR} with great reluctance
+was rejected with great reluctance
+was approved by {CODER2}
+is unexplainable during {SPORTS}
+was praised over a weekend
+survived the {YEAR} rewrite on purpose
+was rewritten after hours
+is temporary without review
+may print nothing in {YEAR}
+is temporary on a {DAYNAME}
+was simplified at {TIME}
+was stamped in {YEAR}
+was re-ratified with great reluctance
+is cursed during {WEATHER}
+was rolled forward twice
+was disabled by {CODER3}
+is unexplainable for {CLIENT}
+was presented to {COMMITTEE} twice
+has two tickets over a weekend
+is mostly right in a hurry
+was sent to {DEPT} during {WEATHER}
+was made faster on a {DAYNAME}
+clears {VAR} at {TIME}
+was undocumented during {SPORTS}
+replaced {ROUTINE} during {WEATHER}
+works by accident on a {DAYNAME}
+was keypunched by mistake
+was frozen with great reluctance
+has no owner over a weekend
+survived {INCIDENT} for {CLIENT}
+was split in two at {TIME}
+may loop forever twice
+was ratified over a weekend
+is wrong for the right reasons by mistake
+was split in two in a hurry
+was explained in {YEAR}
+must not be optimised after hours
+trusts {VAR} without review
+depends on {ROUTINE} by {CODER2}
+ignores {VAR} in {YEAR}
+has never failed
+explains {INCIDENT} after hours
+was simplified after hours
+can be ignored on purpose
+was complicated twice
+is mandatory during {WEATHER}
+was reverted in a hurry
+was reformatted by mistake
+was mentioned at {MEETING} in {YEAR}
+should be removed during {SPORTS}
+was rejected for {CLIENT}
+was never explained under protest
+was translated by {CODER3}
+must run first with great reluctance
+must not be moved in a hurry
+was re-sequenced with great reluctance
+was re-keypunched by mistake
+overwrites {VAR} twice
+was uncommented over a weekend
+was uncommented by {CODER3}
+is obsolete with great reluctance
+was patched at {TIME}
+was renamed on purpose
+is required on a {DAYNAME}
+was returned by {DEPT} under protest
+is intentional
+must be run by hand for {CLIENT}
+breaks if touched without review
+was re-indented by mistake
+was relinked in {YEAR}
+confused the auditors by {CODER3}
+was misunderstood on purpose
+depends on the phase of the moon under protest
+distrusts {VAR} by mistake
+was recompiled for {CLIENT}
+was undocumented per memo {MEMO}
+was retyped on a {DAYNAME}
+was re-enabled per memo {MEMO}
+is a bug by {CODER3}
+is temporary over a weekend
+has failed once in a hurry
+trusts {VAR} quietly
+caused {INCIDENT} in {YEAR}
+was found in {PLACE} on a {DAYNAME}
+was relinked quietly
+was never explained on purpose
+was sent to {DEPT} quietly
+was keypunched by {CODER2}
+was optimised
+is unexplainable per memo {MEMO}
+was returned by {DEPT} during {SPORTS}
+was re-patched under protest
+was re-indented in a hurry
+has failed every {DAYNAME} over a weekend
+should be removed at {TIME}
+has three owners over a weekend
+was tested under protest
+was rolled back during {SPORTS}
+was made faster for {CLIENT}
+was deleted for {CLIENT}
+is accidental
+is unexplainable with great reluctance
+was renumbered under protest
+is cursed during {SPORTS}
+was frozen twice
+must not be changed twice
+was made faster during {SPORTS}
+was sealed during {SPORTS}
+has its own memo by {CODER2}
+confused the auditors without review
+may abend under protest
+is a feature with great reluctance
+works by design
+depends on the deck order during {WEATHER}
+is wrong for the right reasons during {WEATHER}
+was copied from {PROGRAM2} over a weekend
+was replaced by {ROUTINE} quietly
+has been known to fail in {YEAR}
+was made to match the {OLDYEAR} output during {SPORTS}
+was duplicated on a {DAYNAME}
+is superstition during {WEATHER}
+should never be reached over a weekend
+breaks if touched at {TIME}
+was ported during {WEATHER}
+prevented {INCIDENT} twice
+explains {INCIDENT} over a weekend
+only works on the {HW} on a {DAYNAME}
+was made faster on purpose
+depends on {ROUTINE} over a weekend
+is right for the wrong reasons on purpose
+should be rewritten by mistake
+was re-sequenced at {TIME}
+was sealed over a weekend
+has failed every {DAYNAME} at {TIME}
+replaced {ROUTINE} by {CODER3}
+was mentioned at {MEETING} at {TIME}
+works on Tuesdays under protest
+prevented {INCIDENT} during {WEATHER}
+was praised in {YEAR}
+was moved here twice
+is haunted per memo {MEMO}
+is unexplained by mistake
+works by design on a {DAYNAME}
+clears {VAR} by mistake
+was thawed on a {DAYNAME}
+is right for the wrong reasons during {WEATHER}
+was disabled over a weekend
+is a workaround over a weekend
+was converted on a {DAYNAME}
+was undocumented quietly
+can be ignored without review
+is optional on purpose
+was uncommented at {TIME}
+was rediscovered in {YEAR}
+was rolled back by mistake
+was re-sequenced for {CLIENT}
+breaks on {HOLIDAY} on purpose
+was split in two during {WEATHER}
+was re-enabled at {TIME}
+is required for {CLIENT}
+was hot-fixed after hours
+has a ticket on a {DAYNAME}
+was sealed after hours
+was disabled by mistake
+was renumbered by {CODER3}
+was never explained quietly
+is cursed under protest
+has outlived its author during {WEATHER}
+has three owners without review
+may be removed after {YEAR2} during {WEATHER}
+was misunderstood over a weekend
+was found in {PLACE} without review
+was de-optimised
+is a feature
+was moved here after hours
+has no owner under protest
+duplicates the work of {ROUTINE} after hours
+was audited over a weekend
+shadows {VAR} in {YEAR}

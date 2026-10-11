@@ -1,0 +1,8 @@
+#name: C Compiler Runtime Exception
+#kind: open
+#from: 1990
+#langs: c
+#extra: yes
+RUNTIME LIBRARY EXCEPTION
+
+As a special exception, you may link this program with the C runtime library supplied with the compiler and distribute the resulting executable without that executable being covered by the runtime library's license. This exception does not cover the program itself, which is licensed as stated above, nor the percentile ladder, which is not software but policy.

@@ -1,0 +1,10 @@
+#name: Volume License Agreement
+#kind: commercial
+#from: 1993
+VOLUME LICENSE AGREEMENT - AUTHORIZATION NUMBER {LICNO}
+
+Licensee may install and use up to {SEATS} copies of {PROGRAM} on computers owned or leased by Licensee, at the price tier specified in the enrollment ({TIER}). Additional copies may be added at any time and must be reported ("trued up") on each anniversary.
+
+True-up is performed by counting the number of copies in use. The department counts by asking {CODER2}, who says "about {SMALLN}."
+
+Licensee may reassign licenses between machines no more than once every 90 days, except in the case of hardware failure, which happens more often than that.

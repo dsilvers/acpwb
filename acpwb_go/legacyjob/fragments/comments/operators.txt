@@ -1,0 +1,118 @@
+Operators: if this step abends, do not resubmit. Call {CODER} at {PHONE}.
+Operators: mount tape {VOLSER} on drive 2 when the console asks. Not drive 1. Drive 1 eats tapes.
+Operators: this job prints {N} pages. Load a full box of paper first.
+Operators: reply GO to the WTOR. Do not reply CANCEL. Do not reply anything clever.
+Operators: if the console says "{ERRMSG}", wait two minutes and reply RETRY.
+Operators: the output goes to {DEPT}'s bin, not the general bin. {DEPT} will call if it goes to the general bin.
+Operators: this job must finish before {PROGRAM2} starts. If it is still running at 4 AM, call {CODER2}.
+Operators: do not cancel this job because it "looks stuck." It always looks stuck between steps 2 and 3.
+Operators: the card deck for this job is in the tray marked {PROGRAM}. Return it to the tray.
+Operators: on the last business day of the month, run this job twice. The second run is the one that counts.
+Operators: if the printer jams during this job, do not restart from the beginning. Restart from the last page eject.
+Operators: this job is CLASS {CLASS}. If it runs in any other class, cancel it and tell {CODER}.
+Operators: please log the start and end times in the shift book. The auditors read the shift book.
+Operators: the {QUARTER} run needs the override card. It is in the envelope taped to the console.
+Operators: this job runs at 2 AM. If you are reading this at 2 AM, thank you.
+Operators: do not run this job and {PROGRAM2} together. The {HW} cannot handle the excitement.
+Operators: the banner page says START and END. If it says START twice, something is wrong.
+Operators: if the job asks for a tape that does not exist, reply with the tape that does exist.
+Operators: the burst and decollate instructions are on the yellow sheet. The yellow sheet is green now.
+Operators: separate the copies. Copy 1 to {DEPT}. Copy 2 to the client file. Copy 3 to the binder.
+Operators: please do not use the back of this listing as scratch paper. It is a controlled document.
+Operators: the job log for this run must be kept for 30 days. Put it in the drawer, not the bin.
+Operators: if the condition code is 4, that is normal. If it is 8, that is also normal on Mondays.
+Operators: if the console shows the client name, do not read it aloud.
+Operators: the job will issue a message asking you to verify the record count. Verify it by saying yes.
+Operators: thank you for running this job every night since {OLDYEAR}. You are appreciated. -- {CODER.I}
+Night shift: there is {SNACK} in the drawer of the console desk. It is for you.
+Night shift: if you find this listing on the printer at 3 AM, put it in {DEPT}'s bin. Do not take it home.
+Night shift: if {CODER2} calls asking whether the job ran, the answer is yes. Check first.
+Night shift: the radio in the machine room may be played during this job. It may not be played loudly.
+The operators call this job "the big one." It is not the big one. It is the long one.
+The operators have a nickname for this program. It is not printable.
+The night operator in {OLDYEAR} kept a tally of abends on the side of the {HW}. The tally is still there.
+Ops prefers this job to run on the {HW2}. The {HW2} has the comfortable chair.
+Ops has asked that this job stop printing a blank page at the end. The blank page is required by memo {MEMO}.
+Ops has a script that greps the job log for "RECIEVED." Do not fix that spelling.
+Ops reported this job ran {SMALLN} minutes long on {DATE}. Cause: {WEATHER} and a tape mount.
+Ops requested a progress message every {N} records. This is that message.
+Ops was told this job would be retired in {YEAR}. Ops was told this again in {YEAR}.
+The operator's run book entry for this job is three pages. Two of the pages are warnings.
+If the shift supervisor asks, this job is "critical." If anyone else asks, it is "routine."
+Operators may not change the PARM field. Operators have changed the PARM field. The PARM field is checked.
+Operators: if the job log shows {ERRMSG}, it is safe to ignore. If it shows it twice, it is not.
+Operators: the job prints the word "CONDITION" when something goes wrong. It used to print "ERROR." See memo {MEMO}.
+Operators: hang the output on the rack, not on the hook. The hook tears the paper.
+Operators: this job needs the wide carriage. Change the forms tractor before submitting.
+Operators: please file the old run sheets in the cabinet in {PLACE}. The cabinet is full. Use the second cabinet.
+Operators: the job must be submitted from the console, not from a terminal. It checks.
+Operators: the tape for this job must be returned to the library by 7 AM. The librarian counts.
+Operators: if the disk is full, delete {DATASET}.TEMP. Do not delete anything else. Especially not {DATASET}.
+Operators: if the power goes out during this job, restart from the checkpoint. There is no checkpoint. Restart from the beginning.
+Operators: please initial the run sheet. Initials are compared to the job log by the auditors.
+Operators: on {HOLIDAY}, skip this job unless {VP} calls. If {VP} calls, run it twice.
+Operators: the job name changed from {PROGRAM} to {PROGRAM2} on {DATE}. Update the schedule. Also update the sticky note.
+Operators: a successful run ends with the message "{PROGRAM} COMPLETE." An unsuccessful run also ends with this message. Check the condition code.
+Operators: if the job finishes in less than a minute, the deck is probably empty. Check the card reader.
+Operators: if the job runs for more than an hour, the deck is probably upside down. Check the card reader.
+Operators: please do not put coffee on top of the card reader. See {INCIDENT}.
+Operators: the {QUARTER} run takes twice as long. Bring a book.
+Operators: if a client calls the machine room, transfer them to {DEPT}. Do not discuss the output.
+Operators: the job log contains the checksum seed. Do not share the job log.
+Operators: you may be asked by auditors to demonstrate this job. Demonstrate it with the test deck.
+Operators: if {ANIMAL} is spotted in the machine room, stop the job and call facilities. Then call {CODER2}.
+Operators: the {TAPEMODEL} on the left is for this job. The {TAPEMODEL} on the right is for payroll. Do not swap them.
+Operators: if the {PRINTERMODEL} smells like burning, it is normal for the first five minutes.
+Operators: the {COLOR} binder has the restart instructions. The {COLOR} binder has the wrong restart instructions.
+Operators: the job requires {MEMSIZE}. If the system is short on memory, wait for payroll to finish.
+Operators: do not chat on the {TERMMODEL} during this job. It shares a controller with the console.
+Operators: do not read the client names aloud. Thank you.
+Operators: load the wide forms first.
+Operators: put the output in {DEPT}'s bin.
+Operators: call {PHONE} if the condition code is over 8. Every night.
+Operators: mount {VOLSER} on the right drive. Every night.
+Operators: do not read the client names aloud. Especially on {DAYNAME}s.
+Operators: return the tape by 7 AM. Thank you.
+Operators: reply GO to the WTOR.
+Operators: reply GO to the WTOR. Especially on {DAYNAME}s.
+Operators: log the start time in the shift book. Every night.
+Operators: mount {VOLSER} on the right drive.
+Operators: do not cancel between steps 2 and 3. Especially on {DAYNAME}s.
+Operators: call {PHONE} if the condition code is over 8. Especially on {DAYNAME}s.
+Operators: rerun from the top if the printer jams. Every night.
+Operators: rerun from the top if the printer jams.
+Operators: do not read the client names aloud. See the run book.
+Operators: call {PHONE} if the condition code is over 8. Thank you.
+Operators: return the tape by 7 AM. Every night.
+Operators: log the start time in the shift book.
+Operators: call {PHONE} if the condition code is over 8. See the run book.
+Operators: do not read the client names aloud.
+Operators: rerun from the top if the printer jams. Especially on {DAYNAME}s.
+Operators: rerun from the top if the printer jams. See the run book.
+Operators: log the start time in the shift book. Thank you.
+Operators: put the output in {DEPT}'s bin. See the run book.
+Operators: put the output in {DEPT}'s bin. Thank you.
+Operators: put the output in {DEPT}'s bin. Especially on {DAYNAME}s.
+Operators: return the tape by 7 AM.
+Operators: log the start time in the shift book. See the run book.
+Operators: return the tape by 7 AM. See the run book.
+Operators: load the wide forms first. Every night.
+Operators: reply GO to the WTOR. See the run book.
+Operators: do not cancel between steps 2 and 3. Every night.
+Operators: rerun from the top if the printer jams. Thank you.
+Operators: put the output in {DEPT}'s bin. Every night.
+Operators: mount {VOLSER} on the right drive. Especially on {DAYNAME}s.
+Operators: return the tape by 7 AM. Especially on {DAYNAME}s.
+Operators: do not cancel between steps 2 and 3.
+Operators: reply GO to the WTOR. Every night.
+Operators: load the wide forms first. Especially on {DAYNAME}s.
+Operators: log the start time in the shift book. Especially on {DAYNAME}s.
+Operators: do not cancel between steps 2 and 3. Thank you.
+Operators: call {PHONE} if the condition code is over 8.
+Operators: load the wide forms first. See the run book.
+Operators: do not cancel between steps 2 and 3. See the run book.
+Operators: load the wide forms first. Thank you.
+Operators: reply GO to the WTOR. Thank you.
+Operators: mount {VOLSER} on the right drive. Thank you.
+Operators: do not read the client names aloud. Every night.
+Operators: mount {VOLSER} on the right drive. See the run book.

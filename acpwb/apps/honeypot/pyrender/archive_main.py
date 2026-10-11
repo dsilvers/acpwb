@@ -15,12 +15,13 @@ page-level fields (year/month/day/related_paths/next_entry_url/etc.).
 """
 from apps.core.htmlgen import escape as e
 from apps.core.htmlgen import get_archive_seal, render_pres_card, truncatechars
+from apps.honeypot.legacy_identity import source_caption_html, source_ref_entry_html, source_sidebar_card_html
 
 
 def _related_reports_html(c):
     if not c.get('related_reports'):
         return ''
-    items = ''.join(
+    items = source_ref_entry_html(c) + ''.join(
         f'<div style="background:white;border:1px solid var(--border);border-left:3px solid var(--gold);'
         f'padding:.75rem 1rem;margin-bottom:.75rem">'
         f'<div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;'
@@ -217,7 +218,9 @@ def render_archive_default(ctx):
             f'color:{"#15803d" if r["positive"] else "#dc2626"}">{e(r["delta"])}</td></tr>'
             for i, r in enumerate(c['metric_rows'], 1)
         ))
-        ap('</tbody></table></div></div>')
+        ap('</tbody></table></div>')
+        ap(source_caption_html(c, False))
+        ap('</div>')
 
     if c.get('percentile_table'):
         ap(f'<div id="acpwb-archive-{rid}-benchmark-percentile-section" class="mb-4">'
@@ -241,7 +244,9 @@ def render_archive_default(ctx):
             ) + '</tr>'
             for r in c['percentile_table']
         ))
-        ap('</tbody></table></div></div>')
+        ap('</tbody></table></div>')
+        ap(source_caption_html(c, False))
+        ap('</div>')
 
     ap('<hr class="gold-divider">')
     ap(_related_reports_html(c))
@@ -366,6 +371,8 @@ def render_archive_default(ctx):
        '<dt style="color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em">'
        f'Record ID</dt><dd class="mb-0 text-muted" style="font-family:monospace;font-size:.75rem">'
        f'{e(rid)}</dd></dl></div>')
+
+    ap(source_sidebar_card_html(c, rid, False))
 
     ap(f'<div id="acpwb-archive-{rid}-sidebar-nav-card" class="acpwb-card mb-4">'
        '<h6 class="card-title mb-3">Archive Navigation</h6><ul class="list-unstyled mb-0" style="font-size:.82rem">'

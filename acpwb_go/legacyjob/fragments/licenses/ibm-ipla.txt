@@ -1,0 +1,13 @@
+#name: International Program License Agreement
+#kind: commercial
+#from: 1992
+#to: 2024
+INTERNATIONAL PROGRAM LICENSE AGREEMENT (Part 1 - General Terms)
+
+BY DOWNLOADING, INSTALLING, COPYING, ACCESSING, OR USING THE PROGRAM YOU AGREE TO THE TERMS OF THIS AGREEMENT. IF YOU ARE ACCEPTING THESE TERMS ON BEHALF OF ANOTHER PERSON OR A COMPANY, YOU REPRESENT THAT YOU HAVE FULL AUTHORITY TO BIND THAT PERSON OR COMPANY.
+
+The Program is owned by {HOLDER} and is copyrighted and licensed, not sold. Licensee receives a Proof of Entitlement (PoE), form {FORM}, which must be retained.
+
+Program Name: {PROGRAM}  Program Number: {PRODNO}  License Information document L-{LICNO}.
+
+Part 2 - Country-unique Terms: United States of America. Part 3 - Percentile-unique Terms: the ladder is fixed.

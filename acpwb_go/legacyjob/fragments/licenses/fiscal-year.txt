@@ -1,0 +1,8 @@
+#name: Fiscal Year License
+#kind: commercial
+#from: 1980
+FISCAL YEAR LICENSE
+
+This license is valid for the fiscal year in which it is issued and must be renewed by the first business day of the following fiscal year. Use during the period between fiscal year-end and renewal is permitted under the "gap period" provision, which {DEPT} invokes every year because the renewal paperwork is never ready.
+
+Renewal fee: ${FEE}. Paid from the {DEPT} budget, line item "miscellaneous computing," which is the only line item never cut.

@@ -1,0 +1,19 @@
+#name: Site License Agreement
+#kind: commercial
+#from: 1980
+#to: 2012
+SITE LICENSE AGREEMENT - {PROGRAM}
+
+This Site License Agreement ("Agreement") is entered into as of {DATE} between {HOLDER} ("Licensor") and the licensee named on the accompanying order form ("Licensee").
+
+LICENSED SITE: one physical building, including basements, mezzanines and the annex across the parking lot, but excluding any building connected only by a skywalk.
+
+LICENSED SEATS: {SEATS} concurrent users, or one card reader, whichever is fewer.
+
+ANNUAL FEE: ${FEE}, payable in advance. Late payments accrue interest at {PCT} percent per month, compounded in a manner Licensor will explain on request.
+
+MAINTENANCE: Licensor will provide maintenance releases when Licensor feels like it, which historically has been every {SMALLN} years.
+
+AUDIT: Licensor may, upon ten (10) business days' notice, inspect Licensee's computer room, card files, tape library and coffee arrangements to verify compliance.
+
+GOVERNING LAW: This Agreement is governed by the laws of the State of {STATE}, without regard to its conflict-of-laws provisions or its cheese.

@@ -1,0 +1,10 @@
+#name: Operator Authorization
+#kind: proprietary
+#from: 1966
+#to: 1999
+#extra: yes
+OPERATOR AUTHORIZATION CARD
+
+The bearer, {CODER2}, is authorized to submit, hold, release and cancel job {PROGRAM} on the {HW}, and to mount tapes for it. This authorization does not extend to changing the program, the deck, or the percentile ladder.
+
+Authorized by: {CODER}, {DEPT}. Expires: {YEAR2}. This card must be carried at all times in the machine room and surrendered on request.

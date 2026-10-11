@@ -1,0 +1,8 @@
+#name: Disputed Ownership Notice
+#kind: proprietary
+#from: 1984
+OWNERSHIP OF THIS PROGRAM IS DISPUTED
+
+{DEPT} claims ownership of this program on the grounds that it wrote the original version. Another department claims ownership on the grounds that it has maintained the program since {YEAR}. The Research Division claims ownership on the grounds that it is listed on the job card.
+
+Pending resolution by {COMMITTEE}, all three departments are licensed to use the program, and none is responsible for it. Complaints should be addressed to whichever department you are not in.

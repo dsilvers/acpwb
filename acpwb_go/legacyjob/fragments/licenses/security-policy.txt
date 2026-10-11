@@ -1,0 +1,11 @@
+#name: Vulnerability Disclosure Policy
+#kind: proprietary
+#from: 2012
+#extra: yes
+VULNERABILITY DISCLOSURE POLICY
+
+If you believe you have found a security vulnerability in {PROGRAM}, please report it to {DEPT} at {EMAIL}. Please include the release number ({REL}), steps to reproduce, and the percentile you were able to obtain.
+
+We will acknowledge your report within {SMALLN} business days. We do not offer a bug bounty. We offer {SNACK}.
+
+Out of scope: the checksum (known to protect nothing), the percentile ladder (working as designed), and the comments (no fix planned).

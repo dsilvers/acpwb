@@ -1,0 +1,25 @@
+programmer trainee
+junior programmer
+programmer
+programmer/analyst
+senior programmer/analyst
+systems analyst
+systems programmer
+lead programmer
+project leader
+DP supervisor
+DP manager
+MIS director
+operations supervisor
+shift supervisor
+computer operator
+tape librarian
+keypunch operator
+data control clerk
+1990-|software engineer
+1995-|senior software engineer
+2000-|application developer
+2005-|technical lead
+2010-|DevOps engineer
+2014-|site reliability engineer
+2016-|data engineer

@@ -1,0 +1,11 @@
+#name: Public Domain Dedication
+#kind: public
+#from: 1966
+#to: 1995
+THIS PROGRAM IS IN THE PUBLIC DOMAIN.
+
+Written by {CODER} at {HOLDER} and released for the general good, the authors having no further use for it and the legal department having been unable to determine who owns it.
+
+Use it, copy it, modify it, sell it, punch it onto cards and use the cards as bookmarks. No rights are reserved and no warranty is given. If it breaks, you get to keep both pieces.
+
+(Note added {DATE}: the legal department has since determined who owns it. See the proprietary notice that was supposed to replace this one.)

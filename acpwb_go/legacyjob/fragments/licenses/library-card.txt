@@ -1,0 +1,10 @@
+#name: Program Library Lending Terms
+#kind: proprietary
+#from: 1968
+#to: 1996
+#extra: yes
+PROGRAM LIBRARY - LENDING TERMS
+
+This listing is the property of the {HOLDER} Program Library and is lent for a period of {TERMDAYS} days. Please sign the card in the pocket on the inside cover. Overdue listings are subject to a fine of 5 cents per day, payable to {CODER2}, who uses the fines to buy {SNACK}.
+
+Do not write in this listing. Do not remove pages. Do not use as a doorstop. Previous borrowers: {CODER.I}, {CODER2.I}, {CODER3.I}.

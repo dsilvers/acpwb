@@ -1,0 +1,18 @@
+The Mythical Man-Month
+The Elements of Programming Style
+Software Tools
+The Art of Computer Programming, volume 3
+Structured Programming
+Programming Proverbs
+The Psychology of Computer Programming
+1984-|The UNIX Programming Environment
+1978-|The C Programming Language
+1988-|Advanced Programming in the UNIX Environment (well, a draft)
+1991-|Programming Perl
+1995-|Design Patterns
+1999-|The Pragmatic Programmer
+1999-|Refactoring
+2004-|Working Effectively with Legacy Code
+2008-|Clean Code
+the department standards manual
+a statistics textbook from {OLDYEAR}

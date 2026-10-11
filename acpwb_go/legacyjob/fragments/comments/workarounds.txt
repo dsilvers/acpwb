@@ -1,0 +1,524 @@
+Workaround for {COMPILER} defect {TICKET}: the compiler miscounts nested loops deeper than {SMALLN}.
+The dummy assignment below prevents {COMPILER} from optimizing away {VAR}, which it would otherwise do incorrectly.
+{OS} truncates records at column {N}; the second card carries the overflow.
+On the {HW}, integer division of negatives rounds the wrong way. We avoid negatives.
+The EQUIVALENCE below exists because the {HW} had {SMALLN}K of core and we needed it twice.
+Extra CONTINUE statements keep {COMPILER} from merging labels {LABEL} and {LABEL2}.
+The {OS} scheduler kills jobs over {CPU} CPU seconds; the loop is split to stay under it.
+This was a single statement until {COMPILER} release {SMALLN}.{SMALLN2} refused to compile it.
+Under {OS}, the printer needs a page eject before the first line or it prints on the perforation.
+The redundant read below flushes the card reader buffer on the {HW}. Harmless elsewhere. Probably.
+{COMPILER} warns about this. The warning is correct. We are ignoring it per {VP}.
+Spill to a temporary because {COMPILER} loses precision across the subroutine boundary.
+The second copy of {VAR} protects against the {OS} storage overlay bug of {YEAR}.
+Columns 73-80 are ignored by the compiler and used by {DEPT} for the deck sequence. Do not type past 72.
+The odd label numbering avoids collisions when this deck is merged with {DEPT}'s deck.
+Blank COMMON is avoided because the {DEPT} job also uses blank COMMON and the linker is indifferent.
+The tape is opened twice because the first open always fails on {DAYNAME}s.
+The FORMAT is repeated instead of shared because {COMPILER} corrupted shared FORMATs in {YEAR}.
+Integer overflow trapping is disabled at the job level. That is why this check exists.
+This routine avoids recursion because {LANG} did not support it, and then because {CODER} did not.
+Output is padded to {N} columns because the microfiche vendor charges by the line, not the character.
+The line printer drops the last line of a page under load. We print it twice.
+The sort is done in core because the SORT utility license expired in {YEAR}.
+Lowercase is avoided throughout. The {HW} did not have it and the habit stuck.
+The extra blank card at the end of the deck satisfies the reader on {FLOOR}.
+The DUMMY assignment keeps {COMPILER} from hoisting {VAR} out of the loop, which it does incorrectly.
+{OS} pads short records with nulls. The program trims them, mostly.
+The second OPEN is needed on {OS} because the first one is advisory.
+We read the card twice because {HW} occasionally reports the previous card's contents.
+The EQUIVALENCE avoids a {COMPILER} bug in which COMMON blocks larger than {N} bytes were silently truncated.
+The extra parentheses prevent {COMPILER} from evaluating the expression right to left.
+Integer arithmetic is used throughout because the floating point unit on the {HW} was optional and we did not buy it.
+The loop is unrolled because {COMPILER} generated wrong code for the rolled version at OPT({SMALLN}).
+The early RETURN avoids a stack overflow on {OS} when called from {ROUTINE}.
+The odd FORMAT width works around a print spooler that eats the last character of any line ending in a digit.
+{OS} reorders output from unit 6 and unit 0. Everything goes to unit 6.
+The SAVE statement is required on {COMPILER}; locals are otherwise undefined between calls.
+The temporary file is named after the job number because {OS} does not support unique names.
+The ASSIGN statement for the printer is repeated because the first one is forgotten after a page eject.
+The sleep before the print step works around a race with the spooler on {OS}.
+We avoid the ** operator because {COMPILER} computed powers with logarithms.
+The character data is kept in a separate COMMON because {COMPILER} would not align mixed blocks.
+The WRITE is split into two statements to stay under the {COMPILER} limit of {N} items per list.
+The routine is duplicated rather than shared because the linker on {OS} could not resolve the reference.
+The explicit conversion to DOUBLE PRECISION works around a precision loss in {COMPILER} release {SMALLN}.{SMALLN2}.
+The ENDFILE before CLOSE is needed or the last block is not written on {OS}.
+The program sets the condition code by dividing by zero on purpose in {ROUTINE}. Do not fix.
+The {N}-byte buffer works around the tape label check in {OS}.
+The labels are numbered upwards because {COMPILER} required it for DO loops.
+We avoid the NAMELIST feature because {COMPILER} implemented it differently from everyone else.
+The blank COMMON is avoided because {OS} loaded it at a fixed address shared with another job.
+The CONTINUE statements exist because {COMPILER} would not accept a label on a DO terminal statement of this type.
+The redundant initialisation works around {OS} not clearing memory between job steps.
+We use A4 format for strings because {COMPILER} did not support CHARACTER at the time.
+The sequence numbers in columns 73-80 are required by the {DEPT} card sorter.
+The routine name is six characters because {COMPILER} truncated longer names silently.
+The timeout is doubled on {DAYNAME}s because of the backup job.
+The deck is padded with a blank card because the reader on {FLOOR} drops the last card.
+We print a dummy first line because the printer's first line on a new form is unreadable.
+{COMPILER} warns about the unreferenced label. The label is referenced from the {DEPT} copy of the program.
+The explicit IMPLICIT statement works around a site default that made everything REAL.
+The DATA statement is in BLOCK DATA because {COMPILER} rejected DATA for COMMON members elsewhere.
+The tape is rewound twice because the first rewind is sometimes ignored by the {HW} controller.
+The output is written in two passes because {OS} could not hold the whole report in memory.
+The loop counter is copied to a temporary because {COMPILER} modified the original on exit.
+The error message is shorter than it should be because the console only displays {N} characters.
+We call the date routine twice because the first call returns yesterday on {OS}.
+The program avoids recursion because {COMPILER} did not save return addresses on a stack.
+The arithmetic IF is used because the logical IF generated wrong branches on {COMPILER} release {SMALLN}.
+Character constants are split across cards because {COMPILER} disallowed continuation inside literals.
+The {VAR} array is one larger than needed because {COMPILER} wrote one element past the end.
+The job requests {N}K of memory more than it needs because {OS} miscounts.
+The REWIND at the start is required after a previous job left the tape at the end.
+The STOP code is non-zero on purpose so the scheduler records the run.
+We avoid tabs because {OS} expands them to eight spaces and {COMPILER} to six.
+The PRINT statements use explicit unit numbers because unit * meant the console on {OS}.
+The checksum uses MOD because the {HW} had no overflow detection.
+The program re-reads the control card because {OS} did not guarantee the first read.
+{COMPILER} optimized away the wait loop. The wait loop now has a side effect so it cannot be removed.
+We store the date as an integer because the {HW} had no date type and neither did we.
+The {N}-iteration delay loop gave the printer time to catch up on the {HW}. On modern hardware it does nothing.
+The file is opened with STATUS='OLD' because 'UNKNOWN' created duplicates on {OS}.
+We write a trailer record because the downstream program cannot detect end of file.
+The FORMAT uses Hollerith constants because quotes were not supported by the {DEPT} keypunch drum.
+The program avoids lowercase because the {HW} line printer chain had no lowercase characters.
+The dummy argument keeps the calling sequence compatible with the {OLDYEAR} version.
+The constant is assigned at run time because {COMPILER} put DATA constants in read-only storage that {ROUTINE} writes to.
+The output record length is 133 because {OS} expects the carriage control byte.
+We check for a negative zero because the {HW} had one.
+The loop runs backwards because {COMPILER} vectorized the forward version incorrectly.
+The temporary array avoids aliasing between {VAR} and {VAR2}, which {COMPILER} did not detect.
+The ROUND function is avoided because it was not available on {COMPILER}.
+The second compile step is needed because {OS} did not keep the object deck between steps.
+The program avoids INQUIRE because it hung {OS} when the file was on tape.
+We use GO TO instead of a block IF because {COMPILER} limited block IF nesting to {SMALLN}.
+The statement function is used because {COMPILER} inlined it and saved {CPU} seconds.
+The page eject is done with a carriage control character because the escape sequence differs per printer.
+The integer division is done twice because {COMPILER} returned the remainder in the wrong register.
+We avoid EXTERNAL because the linker on {OS} confused it with a system routine of the same name.
+The trailing blanks are removed by hand because {COMPILER} padded strings inconsistently.
+The input is read into a buffer first because {OS} could not reposition a card reader.
+The checksum is computed on integers because the floating point checksum differed between the {HW} and the {HW2}.
+The program uses the old-style DO loop termination because the new style broke {DEPT}'s preprocessor.
+The {N}-character limit on routine names is enforced by hand because {COMPILER} silently truncated.
+We avoid the T format descriptor because {COMPILER} miscounted positions after an X descriptor.
+The extra blank line after the trailer works around a printer that cuts the last line.
+The open statement specifies BLANK='NULL' because the default changed between compiler releases.
+The ladder is stored as integers in hundredths in one place and as doubles in another because of {COMPILER} rounding.
+The error dispatcher uses a computed GO TO because a series of IFs exceeded the {COMPILER} code size per routine.
+The program writes to a scratch file first because {OS} could not print and compute at the same time.
+We use a lookup table instead of MOD because MOD was slow on the {HW}.
+The INCLUDE statements were expanded inline because {OS} had no include path.
+The variable is declared twice, once in each COMMON, because {COMPILER} required it. Do not ask.
+The job uses a separate step to sort because the in-program sort exceeded memory.
+The cards are punched in EBCDIC because the {HW} read nothing else.
+We avoid DO WHILE because {COMPILER} did not support it until release {SMALLN}.
+The output goes through {ROUTINE} because {OS} buffered unit 6 differently from other units.
+The second CALL is a retry. The first CALL fails on {OS} when the system is busy.
+The program avoids character comparisons because the collating sequence differed between {HW} and {HW2}.
+We print the record ID twice because the microfiche camera crops the first one.
+The ENTRY statement is used because {COMPILER} could not handle the routine as two separate subroutines.
+The magic delay is calibrated to the {HW}. On faster machines the report finishes before the operator sits down.
+We avoid the word CONTINUE in comments because the {DEPT} preprocessor treated it as a statement.
+The job card specifies a region because {OS} defaulted to a size smaller than the program.
+The extra COMMON padding aligns the arrays on doubleword boundaries for the {HW}.
+We pass the array length explicitly because {COMPILER} did not support assumed-size arrays.
+The program reads one card ahead because {OS} only signalled end of file on the read after the last card.
+The ASCII-to-EBCDIC table is retained because the {DEPT} feed still arrives in ASCII.
+The routine uses a GOTO into a loop because {COMPILER} allowed it and it was faster.
+The PAUSE statement gives the operator time to mount the next tape. There is no next tape.
+We use REAL*8 instead of DOUBLE PRECISION because {COMPILER} parsed the latter as two words.
+The deck includes a dummy job card because {OS} discarded the first card of every submission.
+We avoid EQUIVALENCE between character and numeric data because {COMPILER2} forbade it.
+The program sets the job's return code by writing to a reserved storage location. This no longer works.
+The output width was reduced by one character because the {DEPT} printer wrapped at 132.
+We avoid labels above 9999 because the {DEPT} cross-reference utility could not display them.
+The leading space in every output line is the carriage control. Do not remove it.
+The program avoids the use of zero-length strings because {COMPILER} crashed on them.
+The intermediate WRITE to a dummy unit flushes the buffer on {OS}.
+We sort the input externally because the in-core sort exceeded the {N}K partition.
+The program uses only uppercase letters in strings because the {HW} terminal did not display lowercase.
+The OPEN statement includes RECL={N} because {OS} assumed 80.
+The {VAR} variable is SAVEd because {COMPILER} reinitialised locals on every call.
+The dollar sign in the FORMAT suppresses the newline on {COMPILER}. Other compilers print a dollar sign.
+The loop limit is precomputed because {COMPILER} re-evaluated it every iteration.
+We pad the record ID to eight characters because the {OS} catalog required it.
+The second ENDIF is for {COMPILER2}, which required a matching ENDIF for each ELSE IF.
+We avoid the double-precision intrinsic DNINT because it rounded half away from zero on one compiler and to even on another.
+The extra comment card keeps the deck count even, which the card sorter preferred.
+We read the date from the job card rather than the system because the system clock was set by the night operator.
+The temporary dataset is catalogued because {OS} deleted uncatalogued datasets between steps.
+The {N}-line chunking works around a spool file limit.
+The FORMAT label is repeated in each routine because {COMPILER} did not share FORMATs across units.
+The program handles its own page numbering because the printer's numbering restarted at every form feed.
+We avoid long variable names because the cross-reference listing truncated them to six characters.
+The pause between steps lets the disk controller finish writing.
+Workaround for {ERRMSG} on the {HW}. Remove when the {HW} is gone.
+The extra CONTINUE keeps {COMPILER} from merging the two loops and getting the answer wrong.
+Do not let {COMPILER} optimize this loop. It optimizes it into a different loop.
+Dummy assignment to {VAR} to stop the compiler warning about an unused variable. The warning was right.
+Call to {ROUTINE} here only to force the COMMON block to load. Do not remove.
+The intermediate variable is required; {COMPILER} loses the low bit otherwise.
+Write and re-read the record because the {HW} channel program caches the buffer.
+Two-pass read because {UTILITY} truncates records over {N} bytes.
+This PAUSE was for the operator in {OLDYEAR}. It is now a no-op. The operator still waits.
+Pad the record to 80 bytes because {UTILITY} drops short records without telling anyone.
+Avoid {UTILITY} on Sundays. It runs in a different region on Sundays and runs out of space.
+The {N}-byte blocksize works around the tape drive firmware. Do not "fix" it.
+The sleep loop gives the print spooler time to catch up. Yes, really.
+Double-close the file because {OS} sometimes ignores the first close.
+Re-open the file after {ERRMSG}; the second attempt always works. Nobody knows why.
+Divide first, then multiply. The other order overflows on the {HW}.
+Hard-code the record length; the catalog entry is wrong and nobody has the authority to fix it.
+Run the step twice and keep the second result; the first result is off by one for reasons involving {INCIDENT}.
+This blank card stops the reader from double-feeding. Keep one blank card at the end of every deck.
+Extra space in the FORMAT to keep the {HW} printer from swallowing the first column.
+Uppercase everything before comparing; the client sends mixed case on {DAYNAME}s.
+Manual carriage control because the spooler ignores ASA control characters on {PRT}.
+Initialize every array element by hand because DATA initialization is broken on {COMPILER}.
+The second IF repeats the first. {COMPILER} evaluates the first one wrong under OPT(2).
+The variable is declared twice, once in each of two include members. It works. It should not work.
+Use the old Julian routine; the new one disagrees with the tape catalog by one day in leap years.
+The extra parentheses force evaluation order. {COMPILER} is not trusted with evaluation order.
+Store the intermediate in a COMMON block so the debugger can see it. The debugger is {CODER2.I}.
+Wrap the call in a dummy subroutine because the linkage editor cannot find it otherwise.
+Use INTEGER*2 here because the {HW} file was written that way in {OLDYEAR}.
+The negative zero check is for the {HW}. Other machines do not have negative zero. The {HW} did.
+Skip record 1; {UTILITY} inserts a header that nobody asked for.
+Strip trailing blanks; the {NETWORK} link adds them.
+Re-sort after the merge because the merge is "stable" only in the vendor's opinion.
+Convert to EBCDIC and back to strip the characters the {NETWORK} gateway inserts.
+The checksum is computed twice because the first computation is disturbed by the page eject.
+Do not use the system date; it is wrong on the backup machine. Read it from the control card.
+Retry the tape mount up to {SMALLN} times; the operators are busy on {DAYNAME}s.
+Fake the record count in the trailer because the real count includes the header.
+Truncate the client name to {N} characters because {PROGRAM2} chokes on longer names.
+Write the report twice, to {PRT} and to the spool, because {DEPT} lost the first copy in {YEAR}.
+The FLUSH is here because {OS} buffers output until the job ends, and the job sometimes does not end.
+Swap the bytes. Then swap them back. The middle step is where the bug used to be.
+This loop runs one extra iteration and throws away the result; it primes the {HW} cache.
+Workaround for {BUG} in {COMPILER}: split the expression across two statements.
+Do not use the intrinsic; it rounds on the {HW} and truncates everywhere else.
+Workaround for {CLIENT}'s deck format. They put the year in columns 79-80.
+Workaround for the {WEATHER} power outage of {YEAR}: checkpoint every {N} records.
+Compute in pennies and divide at the end; floating point on the {HW} is decorative.
+Avoid the word "END" in literals; the {OS} card reader treats it as end of deck.
+The literal is split into two pieces because the editor wraps at column 72.
+Run with REGION=4M even though it needs 1M; at 1M the job runs in a partition that {DEPT} owns.
+Keep this unused file open; closing it triggers {ERRMSG} in the next step.
+The pause before the read is required by the {NETWORK} link. It is 0.3 seconds. Do not shorten it.
+Escape the dollar sign because {OS} treats it as a variable in this context.
+Quote the path because the share has a space in it. Thank you, {DEPT}.
+Use the octal constant here; the hex constant is rejected by the {COMPILER} front end.
+The goto around the block is because the block crashes {COMPILER} when compiled with debug on.
+Copy the array before passing it; the routine modifies it and the vendor says it does not.
+Do not call {ROUTINE} twice in one run; the second call returns yesterday's value.
+The temporary file name includes the job number so two runs do not collide. They still collide.
+Force the locale to C because the server in {PLACE} was installed in French.
+Force the timezone; the batch server thinks it is in Greenwich.
+The dummy argument keeps the calling sequence the same as in {OLDYEAR}. Nobody remembers why that matters.
+Use the long form of the command; the short form means something else on {OS}.
+The output is piped through {UTILITY} to remove form feeds that {PRT} interprets as "panic."
+Set the record format explicitly; the default changed between {OS} releases.
+Ignore return code 4; it means "worked, but felt bad about it."
+Ignore return code 8 from {UTILITY} on the first run of the month. It always complains on the first run of the month.
+Treat return code 12 as success if the output file exists. Ops agreed to this at {MEETING}.
+Explicitly zero the high-order word; the {HW} leaves garbage there.
+This SAVE statement is required; without it {COMPILER} discards {VAR} between calls.
+The vendor patch for {ERRMSG} introduced a different {ERRMSG}. This works around the second one.
+The extra semicolon keeps the {EDITOR} auto-indenter from destroying the block.
+The array is one larger than needed because {COMPILER} writes past the end in this loop.
+Retry on timeout. The timeout is caused by the retry. It converges.
+The file is renamed rather than deleted because delete is slower on {OS}.
+Write the output to a temp file and rename it, so {PROGRAM2} never reads half a report.
+Lock file to stop the cron job from overlapping itself. The lock file is never removed. See below.
+Remove the stale lock file if it is older than a day. See above.
+The environment variable is set twice because the wrapper script unsets it once.
+Run as the batch user; the service account cannot read {DATASET}.
+Explicitly flush stdout because the log rotation steals buffered output.
+The magic sleep of {SMALLN} seconds waits for the {NETWORK} mount to come up.
+Do not use the shared drive letter; it is mapped differently on {CODER2.I}'s machine, which is the batch machine.
+This regular expression is longer than it needs to be because the short one matches {CLIENT}'s name.
+The encoding is forced to Latin-1 because one client name has an umlaut and it broke the {QUARTER} run.
+Avoid the newer library call; the batch server runs an older version that nobody is allowed to upgrade.
+Pin the library version; the new one rounds half to even.
+The {OPCODE} instruction in the vendor library is used here because the high-level equivalent is slower on the {HW}.
+Save {REGISTER} before the call. The vendor routine trashes it.
+Restore {REGISTER} after the call. {CODER2.I} forgot once. See {INCIDENT}.
+The {FILETYPE} file must be saved with CR/LF line endings. The batch server cannot read anything else.
+The block size is set for the {DISKMODEL}. On the {DISKMODEL} it wastes half a track. Nobody has complained.
+The record format works around a firmware bug on the {TAPEMODEL}.
+The extra line feed works around the {PRINTERMODEL}, which swallows the first line after a form feed.
+The screen is redrawn twice because the {TERMMODEL} misses the first redraw at {BAUD}.
+The array is limited to {MEMSIZE} because that is all the {HW} had. The limit was never raised.
+Avoid {KEYWORD} here: {COMPILER} generates wrong code for it in this context.
+The {OPCODE} sequence in the dump at this point is normal. Do not report it to {VENDOR} again.
+Read the deck twice: once to count, once to process. The trailer count cannot be trusted.
+Strip the byte order mark from {CLIENT}'s file. It shows up as three garbage characters at the start of the first metric name otherwise.
+Upper-case the client name before the lookup. The table was typed in uppercase in {OLDYEAR}.
+The {ROAD} construction detour in {YEAR} changed the courier schedule. The job runs an hour earlier to compensate. The construction is finished. The schedule is not.
+Delay the print step by {SMALLN} seconds so the {PRINTERMODEL} can finish warming up.
+Use the {COLOR} paper for the first page. The pre-printed logo is on the {COLOR} paper.
+Bypass the {UTILITY} step if the input is empty; {UTILITY} abends on empty input instead of doing nothing.
+Treat a blank peer group as "{PEER}." Some clients leave it blank. They meant {PEER}. Probably.
+Force double precision because the clock on the backup machine is wrong. See {INCIDENT}.
+Re-read the card because the spooler loses the last page.
+Force the timezone because the {NETWORK} link adds garbage. Do not remove.
+Reset {VAR} because the {TAPEMODEL} firmware misreports the length. Found the hard way.
+Copy the array first because {UTILITY} truncates long records. Do not remove.
+Force uppercase because the clock on the backup machine is wrong. Remove when the {HW} is gone.
+Copy the array first because {CLIENT} sends the deck that way. Do not remove.
+Ignore return code 4 because {PROGRAM2} reads the file while we write it.
+Reset {VAR} because {COMPILER} gets it wrong otherwise. See {INCIDENT}.
+Retry once because the {TERMMODEL} misses the first redraw. See {INCIDENT}.
+Save {REGISTER} because {CLIENT} sends the deck that way.
+Re-read the card because the {PRINTERMODEL} swallows the first line. Do not remove.
+Close and reopen the file because {PROGRAM2} reads the file while we write it. See {INCIDENT}.
+Close and reopen the file because the spooler loses the last page. Do not remove.
+Skip the first record because the spooler loses the last page. Found the hard way.
+Run {UTILITY} first because {CLIENT} sends the deck that way. Do not remove.
+Close and reopen the file because {UTILITY} truncates long records. Found the hard way.
+Close and reopen the file because {OS} buffers until end of job. See {INCIDENT}.
+Use the old routine because {UTILITY} truncates long records. Do not remove.
+Force the timezone because the spooler loses the last page. Remove when the {HW} is gone.
+Pad the record because {ERRMSG} otherwise, on alternate {DAYNAME}s. Found the hard way.
+Skip the first record because {ERRMSG} otherwise, on alternate {DAYNAME}s. Do not remove.
+Strip trailing blanks because {UTILITY} truncates long records. -- {CODER.I}
+Ignore return code 4 because the spooler loses the last page. Do not remove.
+Reset {VAR} because {UTILITY} truncates long records.
+Run {UTILITY} first because the {DISKMODEL} block size is wrong in the catalog. Found the hard way.
+Strip trailing blanks because the {TAPEMODEL} firmware misreports the length. Remove when the {HW} is gone.
+Write the record twice because {UTILITY} truncates long records. Do not remove.
+Save {REGISTER} because the {NETWORK} link adds garbage. Do not remove.
+Force uppercase because {CLIENT} sends the deck that way. See {INCIDENT}.
+Reset {VAR} because {ERRMSG} otherwise, on alternate {DAYNAME}s. Remove when the {HW} is gone.
+Sleep {SMALLN} seconds because {UTILITY} truncates long records. -- {CODER.I}
+Strip trailing blanks because the {DISKMODEL} block size is wrong in the catalog. Do not remove.
+Force the locale because the {DISKMODEL} block size is wrong in the catalog. Found the hard way.
+Close and reopen the file because the {TERMMODEL} misses the first redraw.
+Force double precision because the {NETWORK} link adds garbage. See {INCIDENT}.
+Skip the first record because the {HW} drops the last byte.
+Retry once because the {PRINTERMODEL} swallows the first line. Do not remove.
+Ignore return code 4 because {UTILITY} truncates long records. Remove when the {HW} is gone.
+Strip trailing blanks because {ERRMSG} otherwise, on alternate {DAYNAME}s. Do not remove.
+Close and reopen the file because the {PRINTERMODEL} swallows the first line. Do not remove.
+Write the record twice because {CLIENT} sends the deck that way. Do not remove.
+Use the old routine because {COMPILER} gets it wrong otherwise. Found the hard way.
+Write the record twice because the {HW} drops the last byte. See {INCIDENT}.
+Reset {VAR} because {PROGRAM2} reads the file while we write it. Remove when the {HW} is gone.
+Skip the first record because the clock on the backup machine is wrong. Remove when the {HW} is gone.
+Write the record twice because {CLIENT} sends the deck that way.
+Close and reopen the file because the {HW} drops the last byte. -- {CODER.I}
+Skip the first record because the spooler loses the last page. Remove when the {HW} is gone.
+Reset {VAR} because {VENDOR}'s library modifies its arguments. Remove when the {HW} is gone.
+Force uppercase because {VENDOR}'s library modifies its arguments. See {INCIDENT}.
+Use a temporary file because the clock on the backup machine is wrong. Do not remove.
+Reset {VAR} because {CLIENT} sends the deck that way. See {INCIDENT}.
+Ignore return code 4 because the {TAPEMODEL} firmware misreports the length.
+Copy the array first because {OS} buffers until end of job. See {INCIDENT}.
+Copy the array first because {UTILITY} truncates long records. -- {CODER.I}
+Re-read the card because the {TERMMODEL} misses the first redraw. Remove when the {HW} is gone.
+Write the record twice because the {TERMMODEL} misses the first redraw. -- {CODER.I}
+Run {UTILITY} first because the spooler loses the last page. Found the hard way.
+Save {REGISTER} because the {PRINTERMODEL} swallows the first line. Remove when the {HW} is gone.
+Write the record twice because the {TAPEMODEL} firmware misreports the length. See {INCIDENT}.
+Retry once because {UTILITY} truncates long records. Remove when the {HW} is gone.
+Copy the array first because {UTILITY} truncates long records.
+Force uppercase because {ERRMSG} otherwise, on alternate {DAYNAME}s. Do not remove.
+Reset {VAR} because {PROGRAM2} reads the file while we write it. -- {CODER.I}
+Reset {VAR} because {UTILITY} truncates long records. Remove when the {HW} is gone.
+Copy the array first because the {TERMMODEL} misses the first redraw. -- {CODER.I}
+Force the locale because the {TAPEMODEL} firmware misreports the length.
+Split the expression because the {DISKMODEL} block size is wrong in the catalog. See {INCIDENT}.
+Copy the array first because {OS} buffers until end of job. Do not remove.
+Reset {VAR} because {COMPILER} gets it wrong otherwise. Do not remove.
+Split the expression because {VENDOR}'s library modifies its arguments. Do not remove.
+Force the timezone because the {TERMMODEL} misses the first redraw. -- {CODER.I}
+Force double precision because {OS} buffers until end of job. See {INCIDENT}.
+Use a temporary file because the clock on the backup machine is wrong. See {INCIDENT}.
+Strip trailing blanks because the {TERMMODEL} misses the first redraw.
+Force the timezone because the clock on the backup machine is wrong. -- {CODER.I}
+Write the record twice because the {TERMMODEL} misses the first redraw. See {INCIDENT}.
+Sleep {SMALLN} seconds because the clock on the backup machine is wrong. Remove when the {HW} is gone.
+Copy the array first because the {TAPEMODEL} firmware misreports the length. Remove when the {HW} is gone.
+Force the timezone because {UTILITY} truncates long records.
+Run {UTILITY} first because {UTILITY} truncates long records. Found the hard way.
+Reset {VAR} because the {HW} drops the last byte. Found the hard way.
+Copy the array first because the {TAPEMODEL} firmware misreports the length. See {INCIDENT}.
+Pad the record because the {HW} drops the last byte.
+Sleep {SMALLN} seconds because {VENDOR}'s library modifies its arguments. See {INCIDENT}.
+Strip trailing blanks because {CLIENT} sends the deck that way. Do not remove.
+Force the timezone because the spooler loses the last page. -- {CODER.I}
+Run {UTILITY} first because the {NETWORK} link adds garbage. Found the hard way.
+Force double precision because the {TAPEMODEL} firmware misreports the length. -- {CODER.I}
+Strip trailing blanks because the {DISKMODEL} block size is wrong in the catalog. Found the hard way.
+Retry once because {VENDOR}'s library modifies its arguments.
+Run {UTILITY} first because the spooler loses the last page. Remove when the {HW} is gone.
+Pad the record because the {PRINTERMODEL} swallows the first line. Do not remove.
+Force uppercase because the {DISKMODEL} block size is wrong in the catalog.
+Use a temporary file because the {TERMMODEL} misses the first redraw. Remove when the {HW} is gone.
+Force double precision because {CLIENT} sends the deck that way. Remove when the {HW} is gone.
+Sleep {SMALLN} seconds because the {NETWORK} link adds garbage.
+Force the locale because the {NETWORK} link adds garbage. See {INCIDENT}.
+Save {REGISTER} because {UTILITY} truncates long records. Do not remove.
+Re-read the card because the spooler loses the last page. -- {CODER.I}
+Close and reopen the file because {ERRMSG} otherwise, on alternate {DAYNAME}s. Found the hard way.
+Ignore return code 4 because {CLIENT} sends the deck that way. -- {CODER.I}
+Reset {VAR} because the spooler loses the last page. Found the hard way.
+Save {REGISTER} because the spooler loses the last page. Do not remove.
+Copy the array first because {OS} buffers until end of job. Found the hard way.
+Strip trailing blanks because the {DISKMODEL} block size is wrong in the catalog. Remove when the {HW} is gone.
+Reset {VAR} because the {PRINTERMODEL} swallows the first line. -- {CODER.I}
+Strip trailing blanks because the {TERMMODEL} misses the first redraw. -- {CODER.I}
+Close and reopen the file because {VENDOR}'s library modifies its arguments.
+Force uppercase because the {NETWORK} link adds garbage. Found the hard way.
+Sleep {SMALLN} seconds because the {DISKMODEL} block size is wrong in the catalog.
+Sleep {SMALLN} seconds because the clock on the backup machine is wrong. Found the hard way.
+Retry once because {CLIENT} sends the deck that way. See {INCIDENT}.
+Use the old routine because {CLIENT} sends the deck that way. Do not remove.
+Pad the record because {VENDOR}'s library modifies its arguments. Remove when the {HW} is gone.
+Save {REGISTER} because the {PRINTERMODEL} swallows the first line. See {INCIDENT}.
+Force the timezone because {PROGRAM2} reads the file while we write it. Found the hard way.
+Sleep {SMALLN} seconds because {COMPILER} gets it wrong otherwise. -- {CODER.I}
+Split the expression because {COMPILER} gets it wrong otherwise. -- {CODER.I}
+Reset {VAR} because the clock on the backup machine is wrong. Remove when the {HW} is gone.
+Close and reopen the file because the {HW} drops the last byte.
+Force double precision because the {NETWORK} link adds garbage. -- {CODER.I}
+Run {UTILITY} first because {UTILITY} truncates long records.
+Use a temporary file because {VENDOR}'s library modifies its arguments.
+Use a temporary file because {VENDOR}'s library modifies its arguments. See {INCIDENT}.
+Force the timezone because {UTILITY} truncates long records. See {INCIDENT}.
+Force uppercase because {COMPILER} gets it wrong otherwise.
+Force the timezone because {VENDOR}'s library modifies its arguments. -- {CODER.I}
+Force the locale because {CLIENT} sends the deck that way. See {INCIDENT}.
+Reset {VAR} because {PROGRAM2} reads the file while we write it. Found the hard way.
+Close and reopen the file because {PROGRAM2} reads the file while we write it. -- {CODER.I}
+Use the old routine because {COMPILER} gets it wrong otherwise. See {INCIDENT}.
+Save {REGISTER} because {CLIENT} sends the deck that way. Found the hard way.
+Sleep {SMALLN} seconds because {PROGRAM2} reads the file while we write it. Remove when the {HW} is gone.
+Force double precision because the {PRINTERMODEL} swallows the first line. Found the hard way.
+Copy the array first because the {NETWORK} link adds garbage.
+Reset {VAR} because {OS} buffers until end of job. -- {CODER.I}
+Save {REGISTER} because {CLIENT} sends the deck that way. Do not remove.
+Close and reopen the file because the spooler loses the last page. Remove when the {HW} is gone.
+Use the old routine because {PROGRAM2} reads the file while we write it. Found the hard way.
+Run {UTILITY} first because {PROGRAM2} reads the file while we write it. -- {CODER.I}
+Reset {VAR} because the clock on the backup machine is wrong. Do not remove.
+Retry once because the {TAPEMODEL} firmware misreports the length. Do not remove.
+Force the locale because the clock on the backup machine is wrong. -- {CODER.I}
+Reset {VAR} because the {PRINTERMODEL} swallows the first line. Remove when the {HW} is gone.
+Use a temporary file because {COMPILER} gets it wrong otherwise.
+Use a temporary file because {VENDOR}'s library modifies its arguments. Remove when the {HW} is gone.
+Close and reopen the file because the {TERMMODEL} misses the first redraw. Found the hard way.
+Sleep {SMALLN} seconds because {PROGRAM2} reads the file while we write it. -- {CODER.I}
+Write the record twice because the {NETWORK} link adds garbage. See {INCIDENT}.
+Strip trailing blanks because {COMPILER} gets it wrong otherwise. Do not remove.
+Skip the first record because the {NETWORK} link adds garbage. -- {CODER.I}
+Split the expression because the {HW} drops the last byte. Found the hard way.
+Re-read the card because the clock on the backup machine is wrong. See {INCIDENT}.
+Split the expression because the {TAPEMODEL} firmware misreports the length. Do not remove.
+Close and reopen the file because the {PRINTERMODEL} swallows the first line. Found the hard way.
+Force uppercase because {COMPILER} gets it wrong otherwise. Do not remove.
+Close and reopen the file because {UTILITY} truncates long records. Remove when the {HW} is gone.
+Force the locale because {VENDOR}'s library modifies its arguments. Remove when the {HW} is gone.
+Save {REGISTER} because {CLIENT} sends the deck that way. -- {CODER.I}
+Force double precision because {OS} buffers until end of job.
+Use the old routine because {PROGRAM2} reads the file while we write it. Remove when the {HW} is gone.
+Force the locale because the {PRINTERMODEL} swallows the first line. Do not remove.
+Write the record twice because {UTILITY} truncates long records. See {INCIDENT}.
+Sleep {SMALLN} seconds because {CLIENT} sends the deck that way. See {INCIDENT}.
+Sleep {SMALLN} seconds because the clock on the backup machine is wrong. Do not remove.
+Reset {VAR} because {ERRMSG} otherwise, on alternate {DAYNAME}s.
+Force double precision because {VENDOR}'s library modifies its arguments. -- {CODER.I}
+Retry once because the {HW} drops the last byte. -- {CODER.I}
+Pad the record because the {TERMMODEL} misses the first redraw. -- {CODER.I}
+Use the old routine because {ERRMSG} otherwise, on alternate {DAYNAME}s. Do not remove.
+Pad the record because the {NETWORK} link adds garbage. See {INCIDENT}.
+Ignore return code 4 because {UTILITY} truncates long records. -- {CODER.I}
+Run {UTILITY} first because {COMPILER} gets it wrong otherwise. Remove when the {HW} is gone.
+Write the record twice because {ERRMSG} otherwise, on alternate {DAYNAME}s.
+Split the expression because the {TERMMODEL} misses the first redraw. See {INCIDENT}.
+Re-read the card because the {TAPEMODEL} firmware misreports the length. Found the hard way.
+Reset {VAR} because {UTILITY} truncates long records. See {INCIDENT}.
+Skip the first record because the {PRINTERMODEL} swallows the first line. Do not remove.
+Retry once because the {DISKMODEL} block size is wrong in the catalog. See {INCIDENT}.
+Split the expression because the {TERMMODEL} misses the first redraw. Remove when the {HW} is gone.
+Strip trailing blanks because {VENDOR}'s library modifies its arguments. Found the hard way.
+Ignore return code 4 because {UTILITY} truncates long records. Do not remove.
+Run {UTILITY} first because {COMPILER} gets it wrong otherwise. Found the hard way.
+Sleep {SMALLN} seconds because {ERRMSG} otherwise, on alternate {DAYNAME}s. Do not remove.
+Pad the record because {COMPILER} gets it wrong otherwise. Do not remove.
+Strip trailing blanks because the {NETWORK} link adds garbage. See {INCIDENT}.
+Ignore return code 4 because the spooler loses the last page. -- {CODER.I}
+Force the locale because {PROGRAM2} reads the file while we write it. -- {CODER.I}
+Write the record twice because the {TERMMODEL} misses the first redraw. Remove when the {HW} is gone.
+Force double precision because {ERRMSG} otherwise, on alternate {DAYNAME}s.
+Use the old routine because {OS} buffers until end of job. See {INCIDENT}.
+Skip the first record because the {TAPEMODEL} firmware misreports the length. Do not remove.
+Force uppercase because the {TERMMODEL} misses the first redraw. Remove when the {HW} is gone.
+Force double precision because {UTILITY} truncates long records. Remove when the {HW} is gone.
+Ignore return code 4 because the clock on the backup machine is wrong. Do not remove.
+Save {REGISTER} because the clock on the backup machine is wrong. Found the hard way.
+Force uppercase because the {NETWORK} link adds garbage. -- {CODER.I}
+Force the locale because {PROGRAM2} reads the file while we write it. See {INCIDENT}.
+Retry once because {CLIENT} sends the deck that way. Remove when the {HW} is gone.
+Write the record twice because the {HW} drops the last byte. -- {CODER.I}
+Sleep {SMALLN} seconds because the {DISKMODEL} block size is wrong in the catalog. -- {CODER.I}
+Retry once because the {DISKMODEL} block size is wrong in the catalog. Found the hard way.
+Save {REGISTER} because {VENDOR}'s library modifies its arguments. Found the hard way.
+Sleep {SMALLN} seconds because {ERRMSG} otherwise, on alternate {DAYNAME}s. See {INCIDENT}.
+Split the expression because the {NETWORK} link adds garbage. Do not remove.
+Retry once because {COMPILER} gets it wrong otherwise. See {INCIDENT}.
+Pad the record because the {HW} drops the last byte. -- {CODER.I}
+Ignore return code 4 because the {HW} drops the last byte. Remove when the {HW} is gone.
+Copy the array first because the clock on the backup machine is wrong. Do not remove.
+Reset {VAR} because the {NETWORK} link adds garbage. Do not remove.
+Run {UTILITY} first because {CLIENT} sends the deck that way. Found the hard way.
+Write the record twice because the {DISKMODEL} block size is wrong in the catalog. Do not remove.
+Re-read the card because the {NETWORK} link adds garbage. -- {CODER.I}
+Force the timezone because the clock on the backup machine is wrong.
+Re-read the card because the {TAPEMODEL} firmware misreports the length. Remove when the {HW} is gone.
+Sleep {SMALLN} seconds because {OS} buffers until end of job.
+Use a temporary file because the {HW} drops the last byte. -- {CODER.I}
+Copy the array first because the clock on the backup machine is wrong. See {INCIDENT}.
+Sleep {SMALLN} seconds because the {TAPEMODEL} firmware misreports the length. -- {CODER.I}
+Force the locale because {COMPILER} gets it wrong otherwise. -- {CODER.I}
+Use the old routine because {COMPILER} gets it wrong otherwise.
+Force the timezone because {COMPILER} gets it wrong otherwise. Do not remove.
+Run {UTILITY} first because the {PRINTERMODEL} swallows the first line. Found the hard way.
+Use the old routine because the spooler loses the last page. -- {CODER.I}
+Strip trailing blanks because the {HW} drops the last byte. -- {CODER.I}
+Force the timezone because {OS} buffers until end of job. Found the hard way.
+Force the timezone because {OS} buffers until end of job. Remove when the {HW} is gone.
+Pad the record because {COMPILER} gets it wrong otherwise.
+Run {UTILITY} first because the {DISKMODEL} block size is wrong in the catalog. Remove when the {HW} is gone.
+Re-read the card because {VENDOR}'s library modifies its arguments. See {INCIDENT}.
+Strip trailing blanks because {VENDOR}'s library modifies its arguments.
+Close and reopen the file because the {TAPEMODEL} firmware misreports the length. Remove when the {HW} is gone.
+Split the expression because the {PRINTERMODEL} swallows the first line. -- {CODER.I}
+Force double precision because {OS} buffers until end of job. Do not remove.
+Use a temporary file because the {NETWORK} link adds garbage. Do not remove.
+Reset {VAR} because the {TERMMODEL} misses the first redraw. Found the hard way.
+Pad the record because the {HW} drops the last byte. See {INCIDENT}.
+Ignore return code 4 because the {PRINTERMODEL} swallows the first line. See {INCIDENT}.
+Force the timezone because {UTILITY} truncates long records. Do not remove.
+Split the expression because {OS} buffers until end of job.
+Skip the first record because the spooler loses the last page. -- {CODER.I}
+Split the expression because {VENDOR}'s library modifies its arguments. Remove when the {HW} is gone.
+Force the locale because {ERRMSG} otherwise, on alternate {DAYNAME}s. Do not remove.
+Force double precision because {VENDOR}'s library modifies its arguments. Do not remove.
+Save {REGISTER} because the {TAPEMODEL} firmware misreports the length. -- {CODER.I}
+Use a temporary file because {OS} buffers until end of job. Do not remove.
+Write the record twice because {ERRMSG} otherwise, on alternate {DAYNAME}s. -- {CODER.I}
+Run {UTILITY} first because the {HW} drops the last byte. Remove when the {HW} is gone.
+Force the locale because {UTILITY} truncates long records. Remove when the {HW} is gone.
+Strip trailing blanks because {VENDOR}'s library modifies its arguments. Do not remove.
+Retry once because the spooler loses the last page. -- {CODER.I}
+Force double precision because the {HW} drops the last byte.
+Force the locale because {OS} buffers until end of job. -- {CODER.I}
+Use a temporary file because the {TAPEMODEL} firmware misreports the length. See {INCIDENT}.
+Force the locale because {PROGRAM2} reads the file while we write it. Do not remove.
+Retry once because the {DISKMODEL} block size is wrong in the catalog. Do not remove.
+Reset {VAR} because the {TERMMODEL} misses the first redraw. Remove when the {HW} is gone.
+Sleep {SMALLN} seconds because {CLIENT} sends the deck that way. Do not remove.

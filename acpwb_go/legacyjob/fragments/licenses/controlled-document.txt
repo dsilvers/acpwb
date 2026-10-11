@@ -1,0 +1,11 @@
+#name: Controlled Document Notice
+#kind: proprietary
+#from: 1994
+#extra: yes
+CONTROLLED DOCUMENT - QMS-{SMALLN}{SMALLN}{SMALLN}
+
+Document owner: {DEPT}. Approver: {VP}. Revision: {LICVER}. Effective: {DATE}. Next review: {YEAR2}.
+
+This document is controlled under the {HOLDER} quality management system. Changes require a change request (form RD-114) and approval by the document owner. Superseded revisions must be marked OBSOLETE and removed from points of use.
+
+Points of use: the machine room, the binder, {CODER2}'s desk, and this website.

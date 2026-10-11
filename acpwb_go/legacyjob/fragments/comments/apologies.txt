@@ -1,0 +1,604 @@
+Sorry about this. -- {CODER.I}
+I apologise in advance to whoever maintains this next. It is probably still me. -- {CODER.I} {DATE}
+I am sorry for what follows. It was a different time and the deadline was {DAYNAME}.
+This is not my best work. It is, however, my only work on this routine.
+Apologies for the GOTOs. Structured programming had not reached {FLOOR} yet.
+Sorry, I know this is ugly. {CLIENT} needed it by {TIME} and it is now {YEAR}.
+Apologies to {CODER2} for deleting the original. It was on the only copy of the deck.
+I regret the name {VAR}. It seemed funny at {TIME}.
+Sorry for the magic numbers. The real numbers are in a binder on {FLOOR}.
+I owe {CODER2} lunch for figuring this out. I owe {CODER3} an apology for blaming them first.
+Apologies for the length of this routine. I did not have time to write a shorter one.
+Sorry about the indentation. The keypunch did it.
+This comment is longer than the code it describes. I am sorry for both.
+I am aware this could be done in {SMALLN} lines. It was done in {N}. Sorry.
+Apologies to the night operator. You know why.
+Sorry. {CODER.I}
+My apologies for the hard-coded {CLIENT} logic. They were our biggest client in {YEAR}.
+Sorry for using {VAR} for two different things. Storage was expensive.
+I apologise for the formatting of the {METRIC} line. The client asked for it this way and then left.
+Sorry this is in {LANG}. It was going to be rewritten in {YEAR}.
+Sorry for the nested IFs. Each level was added during a different crisis.
+I apologise for the variable called {VAR}. It made sense in context. The context is gone.
+Sorry this routine is so long. It used to be three routines and nobody could find them.
+My apologies to the auditors. This is the best I could do with the time allowed.
+Sorry for the hard-coded peer group. {PEER} was the only one we had at the time.
+Sorry. I know. I know. -- {CODER.I}
+Apologies for the arithmetic IF. It was {OLDYEAR} and we were young.
+Sorry about the duplicate code below. Copying it was faster than understanding it.
+I apologise for the comment above. It was written at {TIME} after a failed run.
+Sorry for the lack of error handling. The operators are the error handling.
+Apologies to {CODER2}, whose elegant version I replaced with this one, which works.
+Sorry for the extra page eject. The client's binder demanded it.
+I regret the decision to reuse {VAR} as a loop counter. I regret it every quarter.
+Sorry, future maintainer. I was a past maintainer once. It does not get better.
+Apologies for the column alignment. The keypunch was having a bad day.
+Sorry about all the GOTOs. They seemed like a good idea to everyone at the time.
+I apologise for not finishing the documentation. I apologise for starting it.
+Sorry for the sudden change of naming convention halfway down. I changed jobs halfway through.
+Apologies to the night shift for the {YEAR} incident. It will not happen again. It happened again.
+Sorry for the magic constant. The non-magic version was {N} lines longer.
+I am sorry this program still exists. Truly. -- {CODER.I}
+Apologies for the {CLIENT} special case. They were very persuasive.
+Sorry for the inconsistent capitalisation. The terminal had a sticky shift key.
+I apologise for the second checksum. The first one was not trusted by {VP}.
+Sorry that the output is still 132 columns. The world moved on. This report did not.
+Apologies to anyone trying to port this. Good luck. Bring snacks.
+Sorry for the misleading routine name. It used to do what it says.
+I am sorry about the dead code. I could not bring myself to delete it.
+Apologies for the comments in all capitals. The compiler insisted. Then it stopped insisting. Habits remained.
+Sorry for not using a library. The library cost money.
+Sorry this is not in a newer language. Every attempt to rewrite it has been cancelled.
+Apologies for the cryptic error codes. They map to a laminated card at the operator console.
+Sorry for the weird spacing in the FORMATs. It matches the client's preprinted forms.
+I apologise for leaving the debug flag in. It turned out to be the only way to diagnose anything.
+Sorry about the deeply nested loops. The data was deeply nested.
+Apologies for the length of this comment. The code it describes is worse.
+Sorry for the label numbers. They were assigned by a committee.
+Sorry for the off-by-one fix that is itself off by one. It cancels out. Probably.
+I apologise in advance for the next fifty lines.
+Sorry for the inconsistent date formats. Each was correct in its own decade.
+Apologies to the {DEPT} group, whose job this program accidentally deletes the temp file of.
+Sorry for the bare numbers in the conditions. The named constants were lost in the {OLDYEAR} conversion.
+I am sorry for writing "temporary" here. It has been {N} quarters.
+Apologies for the blank comment lines. They are where explanations used to be.
+Sorry for using EQUIVALENCE. Memory was precious and so was my sanity, and I chose memory.
+Sorry, {CODER2}. I know you hated this approach. You were right.
+Apologies for the misleading comment two lines up. I wrote it before I understood the problem.
+Sorry about the cascading IFs. A CASE statement was not available.
+I apologise for the program name. It was chosen in a meeting.
+Sorry for the indentation change on this line. It is deliberate. Do not ask.
+Apologies for any offence caused by the error message text. It has been toned down twice.
+Sorry for the duplication of the ladder. Two copies agree more often than one.
+I apologise to whoever has to explain this to an auditor. I have done it {SMALLN} times.
+Sorry this routine modifies its arguments. Fortran made it so easy.
+Apologies for the commented-out PRINT statements. They are the closest thing we have to a debugger.
+Sorry for the long line. It does not wrap nicely and neither does the logic.
+I apologise for the routine below. It was written to meet a deadline that was later moved.
+Sorry for the unconventional loop. Convention arrived later.
+Apologies for still using cards in {YEAR}. The cards are emotional support.
+Sorry for the {N} warnings at compile time. They have been reviewed. They are all fine. Mostly.
+I am sorry for every comment that says "obviously."
+Sorry for the inconsistent rounding. There is no rounding. That is the inconsistency.
+Apologies for testing in production. There was no other environment.
+Sorry about the program header. It lists people who would prefer it did not.
+I apologise for not asking {TEAM} what {METRIC} actually measures.
+Sorry for the emergency patch. Emergencies do not wait for elegance.
+Apologies for the reliance on {OS} behaviour. {OS} was the only system we had.
+Sorry for using the word "never" in a comment. It happened twice.
+I apologise for the many layers of this routine. Like an onion. Also like an onion, it brings tears.
+Sorry for the inexplicable sort. It explains itself when the deck is dropped.
+Apologies for not renumbering the labels after the {YEAR} changes.
+Sorry for the absent validation of {METRIC}. It was present until {YEAR}.
+I apologise for the unusual handling of zero. Zero was unusual for {CLIENT}.
+Sorry for the hand-tuned constants. The tuning hand has retired.
+Apologies to the printer. It deserves better.
+Sorry that the page header still says ACPWB RESEARCH DIVISION. The division was renamed {SMALLN} times.
+Sorry about this. It made more sense on the whiteboard.
+I apologise for the comment style. It was mandated, then unmandated.
+Sorry for the overlong subroutine argument list. Each argument was requested by a different person.
+Apologies for the global state. Everything about this program is global, including the anxiety.
+Sorry the tests are a single card. The card is very thorough.
+I apologise for the cleverness of the next line. Cleverness was a phase.
+Sorry for the misleading variable {VAR}. It is not a {VAR}. It never was.
+Apologies to {CLIENT}. Your name appears in this code more than you would like.
+Sorry that this routine is called twice. Twice is how it was tested.
+I apologise for the unexplained wait loop. The explanation was a person who has left.
+Sorry for the absence of a flowchart. The flowchart template was borrowed and not returned.
+Apologies for the overlapping COMMON blocks. They were not supposed to overlap. They do.
+Sorry about the job name. It was the only eight characters left.
+Sorry for the error message that says CALL {CODER2}. {CODER2} would like it removed.
+I apologise for the line that subtracts zero. It is a placeholder for a correction that was never needed.
+Sorry for writing this comment instead of fixing the problem. It was faster.
+Apologies for the {SMALLN} levels of nesting. Each one is someone's requirement.
+Sorry for the programs that depend on this one. They did not ask to be born.
+I apologise for the inconsistent use of tabs. Tabs were introduced in {YEAR} by a well-meaning editor.
+Sorry for the many exit points. The operators wanted options.
+Apologies for the routine that does nothing. It was going to do something.
+Sorry for the old-fashioned FORMAT. The new-fashioned one did not survive the audit.
+I apologise for every assumption in this file. They were reasonable once.
+Sorry for the mixture of languages. Each stage was added by a different decade.
+Apologies to the reader for the unreadable. -- {CODER.I}
+Sorry that the client name is truncated to 40 characters. It truncated {CLIENT} into something unfortunate once.
+I apologise for the comment that says this is fast. It was fast relative to doing it by hand.
+Sorry for the endless DATA statements. The tables had to live somewhere.
+Apologies for the strange behaviour on leap days. Leap days are strange.
+Sorry for ignoring the compiler's advice. The compiler was not in the meeting.
+Apologies for the cards that say DO NOT FOLD. They are folded.
+Sorry for the routine named after a weekday. It runs on that weekday.
+I apologise for the second program hiding inside this one. It is the old version. It still runs.
+Sorry for the inconsistent spelling of {METRIC}. The client spells it three ways.
+Apologies for the awkward handoff between {ROUTINE} and {ROUTINE2}. They were written by people who did not speak.
+Sorry that every routine declares every COMMON block. It was safer than guessing.
+I apologise for the comments that disagree with each other. Both authors were sincere.
+Sorry about the bug in the comment below. The code is fine.
+Apologies for the {SMALLN} near-identical routines. They diverged slowly, like continents.
+Sorry for the length of the revision history. Everyone wanted to be remembered.
+I apologise for my optimism in the {YEAR} change log.
+Sorry for the unusually precise sanity limit. It was the largest value {CLIENT} ever submitted.
+Apologies for using a spreadsheet to verify this program. The spreadsheet was also wrong.
+Sorry for the "do not remove" comments. They multiply when not observed.
+I apologise for the decision to print zero as blank. Blank was friendlier.
+Sorry for the unconventional error recovery. It recovers by printing the report anyway.
+Apologies for the routine that exists only to call another routine. It was a compromise.
+Sorry for the inherited mess. I added to it, but respectfully. -- {CODER.I}
+I apologise for the gap in the label numbers. Those labels went somewhere better.
+Sorry that the trailer line says SEAL. Legal liked the sound of it.
+Apologies for the late changes. The client changed their mind at the last minute. And the minute after.
+Sorry for the comment wall. Scroll past. Everyone does.
+I apologise for writing this program. I also apologise for being the only one who can maintain it.
+Sorry that this routine has two names. It was renamed but the old name was too famous.
+Apologies to {CODER3}, whose initials were removed from the header by mistake. Here they are: {CODER3.I}.
+Sorry for the bit twiddling. The {HW} needed it. Nothing since has.
+I apologise for the redundant reads. The card reader was unreliable and so am I.
+Sorry for the inconsistent truncation. Some fields truncate left, some right, some emotionally.
+Apologies for keeping the {OLDYEAR} logic alongside the new. Someone asked for a comparison once.
+Sorry about the literal 40 everywhere. It should have been a constant. It became a culture.
+I apologise for any resemblance between this code and working code. It is coincidental.
+Sorry for the fact that the main program is at the bottom. It sank.
+Apologies for the stubborn behaviour of this routine on {DAYNAME}s.
+Sorry for not naming the loop variables better. I, J and K were the names of the era.
+I apologise for the lack of comments in the next section. I was saving them for this one.
+Sorry about the giant DATA statement. Someone had to type it, and that someone was me.
+Apologies to those who expected the P50 column to be computed. It is copied.
+Sorry for using the same FORMAT for two different reports. They looked the same from across the room.
+I apologise for the accumulator that never resets. It was resetting the client relationship.
+Sorry that the debug output is more readable than the real output.
+Apologies for the handwritten patch in the listing margin. It has been typed in now. Mostly.
+Sorry for the {N}-line routine. Splitting it would require understanding it.
+I apologise for the final STOP being unreachable. The penultimate STOP does the job.
+Sorry for the bizarre ordering of subroutines. They are in order of creation, not of sense.
+Apologies for any distress caused by the storage map.
+Sorry for leaving this TODO. And the {SMALLN} others.
+I apologise to {VP} for the {YEAR} report. The figures were correct. The labels were not.
+Sorry that the program still calls the client a "customer." Marketing has been informed.
+Apologies for the unexplained rounding. Correction: unexplained lack of rounding.
+Sorry about the comment that was meant for another program. It is here now. It lives here.
+I apologise for the unrequested features. They seemed like requests at the time.
+Sorry for the long silence in the change log. Nothing changed. Nobody dared.
+Apologies to everyone who has asked me about this routine. The answer is still no.
+Sorry for using reverse loops. The data looked better backwards.
+I apologise for the elaborate initialisation. It initialises things nobody uses, thoroughly.
+Sorry the job takes longer than the coffee break. It used to be shorter than the coffee break.
+Apologies for the mid-routine RETURN. It saves {SMALLN} lines and costs {SMALLN2} hours of confusion.
+Sorry for the ambiguous comment. It is ambiguous because the requirement was.
+I apologise for the decision to hard-code the record length. It was hard-coded in hardware.
+Sorry, {CLIENT}, for the misspelling of your name in {YEAR}. It has been corrected. It may come back.
+Apologies for the haphazard testing. The haphazard was thorough.
+Sorry for the routine called FIXIT. It fixes it.
+I apologise for not deleting the {OLDYEAR} comments. They are history now. Literally.
+Sorry about the cross-check that checks nothing. It checks morale.
+Apologies for the conditional compilation. There is only one condition and it is always true.
+Sorry that the output says PAGE 1 even when there are more pages. There are never more pages.
+I apologise for my handwriting, which was the original specification.
+Sorry for the absence of a main program heading. The heading fell off with the first card.
+Apologies for retaining the RANDU routine. It is a museum piece.
+Sorry the comments are better than the code. That was the plan.
+Sorry about this. It was {HOLIDAY} and I wanted to go home. -- {CODER.I}
+I apologize to whoever reads this next. I apologize especially if it is me. -- {CODER.I}
+Sorry, {CODER2.I}. I know you asked me not to do it this way.
+I am sorry for the GOTO. There was no other way. There was another way. I was tired.
+Apologies for the variable names. I named them after {PET}'s litter.
+I am truly sorry about {BUG}. I did not know it was there until {CLIENT} called.
+Sorry for the mess. I was interrupted by {MEETING} and never came back.
+This is not my best work. My best work was rejected by {COMMITTEE}.
+My apologies to the night operator for the extra {MEDIUM} mounts.
+Sorry this is so long. I did not have time to make it shorter.
+Sorry. -- {CODER.I}
+I regret this routine. I regret it every {QUARTER}.
+Please forgive the duplicated logic. The original was on {MEDIUM} and I could not find it.
+Sorry about the debug output. I meant to take it out before {HOLIDAY}.
+I apologize for the hardcoded {CLIENT}. It was supposed to be one run.
+Forgive me, {CODER2}. I have changed your loop.
+I am sorry to have to say this, but the percentile ladder is not my fault.
+Sorry for the sarcasm in the comments above. I was not having a good {QUARTER}.
+I apologize in advance for {BUG}, which I am sure is in here somewhere.
+Sorry, this used to be cleaner. Then {CLIENT} happened.
+Apologies to {DEPT} for the delay. The delay was {WEATHER}.
+Sorry for writing this in {EDITOR}. It was the only thing installed.
+I am sorry that the output does not round. I was told not to round.
+I am sorry that the output does round. I was told to round. See the comment above, which is older.
+Sorry about the long lines. My terminal was wider than yours.
+To whoever inherits this: I am sorry, and there is {SNACK} in my bottom drawer. Take it.
+Sorry for not documenting this. I was promised a technical writer in {OLDYEAR}.
+I apologize for the language in the previous version of this comment. -- {CODER.I}
+Apologies, this was translated from {LANG2} by hand over {SPORTS}.
+Sorry, I know this check is redundant. {VP} likes to see it in the listing.
+I am sorry the error message just says "ERROR." There were too many errors to name.
+Sorry for the {ADJ} workaround. It was supposed to last a week. It has lasted since {YEAR}.
+I owe {CODER2} an apology for the comment I left in {YEAR}. This is it. Sorry, {CODER2.I}.
+Sorry, I got the sign wrong. Then I got it wrong again in the other direction. Now it is right.
+I regret to inform you that this routine also handles payroll for one client. Do not ask.
+Sorry about the three nested IFs. There used to be seven.
+Sorry this abends on {HOLIDAY}. It is a long story involving {INCIDENT}.
+I am deeply sorry for {UTILITY}. It was the only tool available in {YEAR}.
+My apologies; this was a one-off for {CLIENT} that became the main program.
+Sorry for the hard-coded tape volume. It was the only tape we had that day.
+Apologies for the comment density. {VP} measured us on comment lines in {YEAR}.
+Sorry. I meant to come back to this. I did not come back to this. -- {CODER.I}
+Sorry the totals do not add up. They are not supposed to add up. See memo {MEMO}.
+I apologize for this subroutine to the entire {DEPT} department, collectively and individually.
+I am not proud of this, but it ran on time.
+Sorry, {CODER2.I}, I borrowed your {OFFICEOBJ} to hold the deck together.
+Sorry for the empty ELSE. I could not think of what else to do.
+Sorry for the GOTO into the middle of the loop. The compiler allowed it, so I took it as permission.
+I am sorry about the ASCII art. {CODER2.I} dared me.
+Sorry this routine is named after {CODER2}. {CODER2} insisted.
+Apologies to the auditors for the comment on line {N}. It was a joke. It was not a funny joke.
+Sorry, the test deck was lost in {INCIDENT}. This was tested against memory.
+I am sorry to report that nobody understands the checksum, including its author, who is me.
+Apologies for the shouting. This compiler only supports capital letters.
+Sorry for the copy-paste. There are four copies of this loop. They are slightly different. All four are needed.
+I am sorry for leaving this in a half-converted state between {LANG} and {LANG2}.
+I apologize for having been on vacation during {INCIDENT}. That is why this patch is so careful.
+Sorry for the spaghetti. It was {FOOD} night.
+Sorry about the extra blank lines. I was paid by the line in {OLDYEAR}. I am joking. Mostly.
+I am sorry for the way this routine treats negative numbers. They deserve better.
+Sorry, {CODER2.I}. I took out your joke comment. Audit made me. It was a good joke.
+Sorry for what you are about to read.
+Sorry for what you just read.
+I regret the decision to store the year in one digit. It seemed fine in {OLDYEAR}.
+Sorry for the misleading routine name. It used to do what it says.
+Apologies to {CODER3.I}, whose fix I accidentally reverted on {DATE} and re-applied on {DATE}.
+Sorry for using {VAR} for two different things. We were short on variable names that year.
+I am sorry the documentation for this is a sticky note. The sticky note fell off in {YEAR}.
+Sorry, this check is wrong but it has been wrong in a consistent direction since {OLDYEAR}.
+Sorry, I could not find the original source, so this was retyped from the {OLDYEAR} listing.
+Apologies to whoever has to explain this to {CLIENT}.
+I apologize for the overlong FORMAT. The printer was wider in {OLDYEAR}.
+Sorry for the {ADJ} label names. The good names were taken.
+I am sorry this is not in {LANG2}. It was going to be. Then {COMMITTEE} met.
+Sorry about the commented-out code. It is load-bearing as documentation.
+I apologize for leaving this routine in place after it was replaced. It is still called. By accident.
+Sorry for using the word "obviously" in the comments. Nothing below is obvious.
+Sorry about the loop that counts down. I was trying something. It worked. I left it.
+Sorry: the variable called TOTAL is not a total. It is a count. The variable called COUNT is the total.
+Apologies, the header says rel. {REL}. It is not rel. {REL}. Nobody updated the header.
+Sorry, the date on this change is wrong. I was using the operator's calendar, which was from {OLDYEAR}.
+Sorry to {CODER2}, who had to debug this at 3 AM on {HOLIDAY}. -- {CODER.I}
+Apology accepted. -- {CODER2.I}
+Sorry the comment says one thing and the code does another. Trust the code. No, trust the comment. Ask {CODER2}.
+Sorry for the magic number. It is magic. I am not a magician.
+Sorry for the double negative. It is not unclear. I am not not sorry.
+I am sorry I wrote this whole routine and then found {UTILITY} could do it.
+Sorry for the long comment. The short version is: do not change this.
+Sorry this routine only works on Tuesdays. It is complicated. See {INCIDENT}.
+My sincere apologies to the {CLIENT} engagement team for the {QUARTER} figures.
+Sorry, I added a column to the report and moved every other column one space right.
+I apologize for the unnecessary precision. I was promised it would matter.
+Sorry: this is the third rewrite. The first two are below, commented out, for "reference."
+Sorry for the {KEYWORD}. It was {MONTH}. Everyone was tired.
+Apologies for assuming a {TERMMODEL}. It was all we had.
+Sorry, {CODER2.I}, for borrowing your copy of {BOOK} for {NUMWORD} years.
+I apologize for writing this at {BAUD}. Every keystroke was a decision.
+Sorry for the mood of these comments. The mood was {MOOD}.
+Sorry about the hard-coded {CLIENT}. In my defense, it was {MONTH} and {CLIENT} was the only client.
+Sorry. I know the comment says "temporary." I meant it at the time.
+Sorry for the routine name. It made sense at {LUNCHSPOT}.
+I apologize for this entire subroutine and for the one after it.
+Sorry for the indentation. {EDITOR} did it. I let it.
+Sorry. The deadline was the {QUARTER} close and the {QUARTER} close was yesterday.
+My apologies to the night operators for the extra page. It is required. I fought it. I lost.
+Sorry for the long FORMAT. The alternative was three short FORMATs and a GOTO.
+Sorry this is in uppercase. The compiler insisted. So did {CODER2.I}.
+I apologize for leaving the test client in the production deck from {DATE} to {DATE}. The test client's figures were very good.
+Sorry for the debug WRITE. I ran out of time and {DRINK}.
+Sorry for the workaround for {BUG}. It was {WEATHER}. Forgive me.
+Sorry for the long FORMAT. {CODER2.I} told me to. Forgive me.
+Sorry for the debug WRITE. I was new. It will not happen again. (It happened again.)
+Sorry for the debug WRITE. I was {MOOD}. Judge gently.
+Sorry for the variable names. There was no specification. Judge gently.
+Sorry for the missing comments. The deadline was the {QUARTER} close. Please do not judge.
+Sorry for the hard-coded {CLIENT}. I ran out of time and {DRINK}. It will not happen again. (It happened again.)
+Sorry for the uppercase. The client was on the phone.
+Sorry for the debug WRITE. {CODER2.I} told me to.
+Sorry for the duplicated loop. It seemed clever at the time. Judge gently.
+Sorry for the redundant check. There was no specification.
+Sorry for the dependency on {PROGRAM2}. I meant to come back.
+Sorry for the misleading comments. I ran out of time and {DRINK}. I am sorry.
+Sorry for the assumption about the deck order. It seemed clever at the time. Judge gently.
+Sorry for the workaround for {BUG}. It was {WEATHER}. I am sorry.
+Sorry for the GOTO. The deadline was the {QUARTER} close. I am sorry.
+Sorry for the uppercase. The client was on the phone. -- {CODER.I}
+Sorry for the variable names. I was tired. Please do not judge.
+Sorry for the two-digit year. I meant to come back. It will not happen again. (It happened again.)
+Sorry for the uppercase. It was {WEATHER}. It will not happen again. (It happened again.)
+Sorry for the long FORMAT. I ran out of time and {DRINK}.
+Sorry for the debug WRITE. There was no budget. I am sorry.
+Sorry for the misleading comments. It was supposed to be temporary. -- {CODER.I}
+Sorry for the {KEYWORD}. The client was on the phone. Forgive me.
+Sorry for the GOTO. It was the only way {COMPILER} would accept. It will not happen again. (It happened again.)
+Sorry for the assumption about the {HW}. It was {HOLIDAY}. -- {CODER.I}
+Sorry for the label numbering. It seemed clever at the time.
+Sorry for the extra page. I was new. -- {CODER.I}
+Sorry for the long FORMAT. It was the only way that fit in {MEMSIZE}. I am sorry.
+Sorry for the magic number. The deadline was the {QUARTER} close. Judge gently.
+Sorry for the two-digit year. It was {HOLIDAY}. Judge gently.
+Sorry for the {KEYWORD}. It seemed clever at the time. I am sorry.
+Sorry for the shortcut in {ROUTINE}. I was tired. Judge gently.
+Sorry for the empty ELSE. It was the only way that fit in {MEMSIZE}. Forgive me.
+Sorry for the GOTO. There was no budget. Forgive me.
+Sorry for the GOTO. I meant to come back.
+Sorry for the GOTO. There was no specification. -- {CODER.I}
+Sorry for the nested IFs. The client was on the phone. I am sorry.
+Sorry for the empty ELSE. It was {WEATHER}. It will not happen again. (It happened again.)
+Sorry for the debug WRITE. It was the only way that fit in {MEMSIZE}. Judge gently.
+Sorry for the variable names. There was no specification. It will not happen again. (It happened again.)
+Sorry for the two-digit year. The deadline was the {QUARTER} close. Forgive me.
+Sorry for the missing comments. I was tired. Judge gently.
+Sorry for the assumption about the {HW}. I was new. Forgive me.
+Sorry for the extra page. There was no budget. -- {CODER.I}
+Sorry for the commented-out code. I was new. It will not happen again. (It happened again.)
+Sorry for the redundant check. There was no budget. Forgive me.
+Sorry for the assumption about the deck order. I meant to come back. Judge gently.
+Sorry for the variable names. It was the only way that fit in {MEMSIZE}. -- {CODER.I}
+Sorry for the commented-out code. I was {MOOD}. It will not happen again. (It happened again.)
+Sorry for the nested IFs. It was {HOLIDAY}. -- {CODER.I}
+Sorry for the redundant check. {VP} was waiting. Judge gently.
+Sorry for the assumption about the {HW}. It was the only way that fit in {MEMSIZE}. Judge gently.
+Sorry for the magic number. There was no specification. Forgive me.
+Sorry for the hard-coded {CLIENT}. It was {HOLIDAY}. I am sorry.
+Sorry for the nested IFs. There was no specification. It will not happen again. (It happened again.)
+Sorry for the two-digit year. It was the only way that fit in {MEMSIZE}. Forgive me.
+Sorry for the magic number. I meant to come back. Please do not judge.
+Sorry for the label numbering. It was {WEATHER}.
+Sorry for the extra page. I meant to come back. Please do not judge.
+Sorry for the commented-out code. I was new. Forgive me.
+Sorry for the missing comments. It was supposed to be temporary.
+Sorry for the magic number. I was new.
+Sorry for the dependency on {PROGRAM2}. I ran out of time and {DRINK}. -- {CODER.I}
+Sorry for the workaround for {BUG}. The deadline was the {QUARTER} close. Forgive me.
+Sorry for the dependency on {PROGRAM2}. I was {MOOD}. Please do not judge.
+Sorry for the debug WRITE. I was new. Please do not judge.
+Sorry for the variable names. {VP} was waiting. Forgive me.
+Sorry for the uppercase. I ran out of time and {DRINK}.
+Sorry for the missing comments. It was {HOLIDAY}. It will not happen again. (It happened again.)
+Sorry for the commented-out code. There was no specification. Please do not judge.
+Sorry for the magic number. I was {MOOD}. Please do not judge.
+Sorry for the assumption about the {HW}. I ran out of time and {DRINK}.
+Sorry for the duplicated loop. The deadline was the {QUARTER} close. Please do not judge.
+Sorry for the dependency on {PROGRAM2}. I ran out of time and {DRINK}. It will not happen again. (It happened again.)
+Sorry for the hard-coded {CLIENT}. {VP} was waiting. -- {CODER.I}
+Sorry for the extra page. It was {WEATHER}. Judge gently.
+Sorry for the misleading comments. It was supposed to be temporary. Judge gently.
+Sorry for the {KEYWORD}. It seemed clever at the time. Forgive me.
+Sorry for the assumption about the {HW}. I meant to come back. It will not happen again. (It happened again.)
+Sorry for the {KEYWORD}. I was {MOOD}. It will not happen again. (It happened again.)
+Sorry for the {KEYWORD}. I meant to come back. I am sorry.
+Sorry for the copy-paste. It seemed clever at the time. Please do not judge.
+Sorry for the variable names. It seemed clever at the time. It will not happen again. (It happened again.)
+Sorry for the misleading comments. {VP} was waiting.
+Sorry for the commented-out code. The deadline was the {QUARTER} close. -- {CODER.I}
+Sorry for the long FORMAT. It was the only way that fit in {MEMSIZE}. Forgive me.
+Sorry for the magic number. It was the only way {COMPILER} would accept. -- {CODER.I}
+Sorry for the shortcut in {ROUTINE}. It was {HOLIDAY}. Judge gently.
+Sorry for the magic number. I ran out of time and {DRINK}. Judge gently.
+Sorry for the long FORMAT. I meant to come back. I am sorry.
+Sorry for the two-digit year. I ran out of time and {DRINK}. Forgive me.
+Sorry for the copy-paste. I was {MOOD}. It will not happen again. (It happened again.)
+Sorry for the duplicated loop. It was {HOLIDAY}. It will not happen again. (It happened again.)
+Sorry for the variable names. I was {MOOD}. Forgive me.
+Sorry for the label numbering. I was tired. -- {CODER.I}
+Sorry for the long FORMAT. I was {MOOD}. Forgive me.
+Sorry for the hard-coded {CLIENT}. I was new. Judge gently.
+Sorry for the debug WRITE. There was no specification. Forgive me.
+Sorry for the variable names. I was tired. I am sorry.
+Sorry for the workaround for {BUG}. The deadline was the {QUARTER} close. It will not happen again. (It happened again.)
+Sorry for the debug WRITE. It was {TIME} and I wanted to go home. -- {CODER.I}
+Sorry for the two-digit year. {CODER2.I} told me to. Judge gently.
+Sorry for the assumption about the {HW}. It seemed clever at the time. I am sorry.
+Sorry for the copy-paste. There was no specification. Please do not judge.
+Sorry for the copy-paste. I was tired.
+Sorry for the variable names. I was new. It will not happen again. (It happened again.)
+Sorry for the hard-coded {CLIENT}. The client was on the phone. I am sorry.
+Sorry for the magic number. It was the only way that fit in {MEMSIZE}. I am sorry.
+Sorry for the hard-coded {CLIENT}. I was tired.
+Sorry for the debug WRITE. It seemed clever at the time. Please do not judge.
+Sorry for the extra page. It was {WEATHER}. Please do not judge.
+Sorry for the commented-out code. The client was on the phone. Forgive me.
+Sorry for the commented-out code. I meant to come back. Judge gently.
+Sorry for the misleading comments. There was no budget. -- {CODER.I}
+Sorry for the long FORMAT. It was {TIME} and I wanted to go home. Judge gently.
+Sorry for the hard-coded {CLIENT}. I ran out of time and {DRINK}. Judge gently.
+Sorry for the uppercase. It was the only way {COMPILER} would accept. Forgive me.
+Sorry for the extra page. It was supposed to be temporary. Judge gently.
+Sorry for the empty ELSE. It was {TIME} and I wanted to go home. It will not happen again. (It happened again.)
+Sorry for the hard-coded {CLIENT}. It was {TIME} and I wanted to go home. I am sorry.
+Sorry for the empty ELSE. It was the only way {COMPILER} would accept. Please do not judge.
+Sorry for the extra page. It seemed clever at the time.
+Sorry for the {KEYWORD}. I was {MOOD}. Forgive me.
+Sorry for the assumption about the {HW}. I ran out of time and {DRINK}. -- {CODER.I}
+Sorry for the assumption about the {HW}. I was tired. It will not happen again. (It happened again.)
+Sorry for the misleading comments. I was {MOOD}. I am sorry.
+Sorry for the shortcut in {ROUTINE}. I ran out of time and {DRINK}. -- {CODER.I}
+Sorry for the extra page. It seemed clever at the time. I am sorry.
+Sorry for the two-digit year. {VP} was waiting.
+Sorry for the debug WRITE. It was {WEATHER}. It will not happen again. (It happened again.)
+Sorry for the variable names. I ran out of time and {DRINK}.
+Sorry for the GOTO. It was {TIME} and I wanted to go home. It will not happen again. (It happened again.)
+Sorry for the variable names. The client was on the phone. Please do not judge.
+Sorry for the {KEYWORD}. I ran out of time and {DRINK}. -- {CODER.I}
+Sorry for the copy-paste. It was supposed to be temporary. It will not happen again. (It happened again.)
+Sorry for the missing comments. It was the only way {COMPILER} would accept. Forgive me.
+Sorry for the misleading comments. I was tired. Forgive me.
+Sorry for the two-digit year. I was {MOOD}. -- {CODER.I}
+Sorry for the {KEYWORD}. It was the only way that fit in {MEMSIZE}. -- {CODER.I}
+Sorry for the two-digit year. {CODER2.I} told me to. Please do not judge.
+Sorry for the missing comments. It was {HOLIDAY}. I am sorry.
+Sorry for the nested IFs. It was supposed to be temporary. Judge gently.
+Sorry for the missing comments. I was {MOOD}. -- {CODER.I}
+Sorry for the label numbering. There was no budget. It will not happen again. (It happened again.)
+Sorry for the workaround for {BUG}. There was no specification. Forgive me.
+Sorry for the commented-out code. The client was on the phone. -- {CODER.I}
+Sorry for the two-digit year. It was supposed to be temporary. Judge gently.
+Sorry for the debug WRITE. {VP} was waiting. Please do not judge.
+Sorry for the shortcut in {ROUTINE}. It was the only way that fit in {MEMSIZE}. Forgive me.
+Sorry for the missing comments. It was supposed to be temporary. Please do not judge.
+Sorry for the redundant check. The client was on the phone. Judge gently.
+Sorry for the duplicated loop. It was supposed to be temporary.
+Sorry for the nested IFs. It was the only way that fit in {MEMSIZE}. Judge gently.
+Sorry for the extra page. There was no specification. Forgive me.
+Sorry for the variable names. I meant to come back. It will not happen again. (It happened again.)
+Sorry for the label numbering. It seemed clever at the time. Please do not judge.
+Sorry for the hard-coded {CLIENT}. I ran out of time and {DRINK}.
+Sorry for the empty ELSE. {CODER2.I} told me to. Judge gently.
+Sorry for the commented-out code. There was no budget. I am sorry.
+Sorry for the two-digit year. It was supposed to be temporary. I am sorry.
+Sorry for the misleading comments. There was no budget. Forgive me.
+Sorry for the magic number. There was no specification. -- {CODER.I}
+Sorry for the empty ELSE. {CODER2.I} told me to. Please do not judge.
+Sorry for the variable names. It was {HOLIDAY}.
+Sorry for the label numbering. The client was on the phone.
+Sorry for the commented-out code. It seemed clever at the time. It will not happen again. (It happened again.)
+Sorry for the dependency on {PROGRAM2}. It was {HOLIDAY}. I am sorry.
+Sorry for the copy-paste. {CODER2.I} told me to. Forgive me.
+Sorry for the copy-paste. It seemed clever at the time.
+Sorry for the long FORMAT. I was {MOOD}. -- {CODER.I}
+Sorry for the extra page. I was {MOOD}.
+Sorry for the copy-paste. It was {HOLIDAY}. -- {CODER.I}
+Sorry for the duplicated loop. It seemed clever at the time. I am sorry.
+Sorry for the assumption about the deck order. There was no specification. Judge gently.
+Sorry for the copy-paste. There was no budget. Forgive me.
+Sorry for the label numbering. The deadline was the {QUARTER} close. Forgive me.
+Sorry for the uppercase. It was the only way that fit in {MEMSIZE}.
+Sorry for the empty ELSE. {VP} was waiting. Judge gently.
+Sorry for the empty ELSE. I was tired. Please do not judge.
+Sorry for the copy-paste. {VP} was waiting.
+Sorry for the missing comments. I meant to come back.
+Sorry for the hard-coded {CLIENT}. It was supposed to be temporary. Forgive me.
+Sorry for the copy-paste. The deadline was the {QUARTER} close. I am sorry.
+Sorry for the debug WRITE. It was the only way that fit in {MEMSIZE}. -- {CODER.I}
+Sorry for the uppercase. The deadline was the {QUARTER} close. Judge gently.
+Sorry for the label numbering. I was tired. Please do not judge.
+Sorry for the uppercase. It was the only way {COMPILER} would accept.
+Sorry for the commented-out code. {VP} was waiting.
+Sorry for the GOTO. It was {TIME} and I wanted to go home. Judge gently.
+Sorry for the two-digit year. There was no budget. Please do not judge.
+Sorry for the shortcut in {ROUTINE}. There was no budget.
+Sorry for the commented-out code. It was the only way that fit in {MEMSIZE}. -- {CODER.I}
+Sorry for the variable names. There was no specification. Please do not judge.
+Sorry for the two-digit year. {CODER2.I} told me to. -- {CODER.I}
+Sorry for the variable names. I meant to come back. -- {CODER.I}
+Sorry for the two-digit year. The deadline was the {QUARTER} close. -- {CODER.I}
+Sorry for the assumption about the {HW}. It was supposed to be temporary.
+Sorry for the empty ELSE. It was the only way {COMPILER} would accept. Judge gently.
+Sorry for the dependency on {PROGRAM2}. {VP} was waiting. Judge gently.
+Sorry for the assumption about the {HW}. It was {TIME} and I wanted to go home. Please do not judge.
+Sorry for the shortcut in {ROUTINE}. There was no specification. It will not happen again. (It happened again.)
+Sorry for the copy-paste. There was no budget. I am sorry.
+Sorry for the copy-paste. {VP} was waiting. It will not happen again. (It happened again.)
+Sorry for the copy-paste. It was {TIME} and I wanted to go home. Please do not judge.
+Sorry for the variable names. {CODER2.I} told me to. -- {CODER.I}
+Sorry for the missing comments. I was {MOOD}. I am sorry.
+Sorry for the assumption about the deck order. I ran out of time and {DRINK}. It will not happen again. (It happened again.)
+Sorry for the label numbering. There was no specification. I am sorry.
+Sorry for the extra page. I meant to come back. I am sorry.
+Sorry for the debug WRITE. It was {HOLIDAY}. Forgive me.
+Sorry for the magic number. I was {MOOD}. Forgive me.
+Sorry for the hard-coded {CLIENT}. {VP} was waiting. Forgive me.
+Sorry for the empty ELSE. It was the only way {COMPILER} would accept. Forgive me.
+Sorry for the two-digit year. It was the only way {COMPILER} would accept. I am sorry.
+Sorry for the variable names. I was new. Judge gently.
+Sorry for the misleading comments. The deadline was the {QUARTER} close. Please do not judge.
+Sorry for the variable names. The client was on the phone. I am sorry.
+Sorry for the {KEYWORD}. It seemed clever at the time. Please do not judge.
+Sorry for the long FORMAT. {CODER2.I} told me to. -- {CODER.I}
+Sorry for the uppercase. It was supposed to be temporary. I am sorry.
+Sorry for the debug WRITE. It was {HOLIDAY}. Please do not judge.
+Sorry for the redundant check. I was new.
+Sorry for the debug WRITE. The deadline was the {QUARTER} close. Judge gently.
+Sorry for the nested IFs. I meant to come back. -- {CODER.I}
+Sorry for the shortcut in {ROUTINE}. It was {WEATHER}. I am sorry.
+Sorry for the {KEYWORD}. It was the only way {COMPILER} would accept. It will not happen again. (It happened again.)
+Sorry for the extra page. There was no specification. -- {CODER.I}
+Sorry for the hard-coded {CLIENT}. The client was on the phone. It will not happen again. (It happened again.)
+Sorry for the debug WRITE. {VP} was waiting. Judge gently.
+Sorry for the extra page. There was no specification. I am sorry.
+Sorry for the duplicated loop. I was {MOOD}. Judge gently.
+Sorry for the redundant check. The client was on the phone.
+Sorry for the {KEYWORD}. {CODER2.I} told me to. I am sorry.
+Sorry for the {KEYWORD}. I was new. -- {CODER.I}
+Sorry for the shortcut in {ROUTINE}. I meant to come back. I am sorry.
+Sorry for the magic number. I meant to come back. I am sorry.
+Sorry for the workaround for {BUG}. The client was on the phone. Please do not judge.
+Sorry for the copy-paste. It was {WEATHER}. I am sorry.
+Sorry for the variable names. It was {TIME} and I wanted to go home. Forgive me.
+Sorry for the magic number. {CODER2.I} told me to.
+Sorry for the dependency on {PROGRAM2}. I was new. Forgive me.
+Sorry for the duplicated loop. I was new.
+Sorry for the workaround for {BUG}. I ran out of time and {DRINK}.
+Sorry for the assumption about the deck order. It was {WEATHER}. Forgive me.
+Sorry for the missing comments. The client was on the phone. Please do not judge.
+Sorry for the {KEYWORD}. There was no budget. I am sorry.
+Sorry for the {KEYWORD}. I was {MOOD}. I am sorry.
+Sorry for the copy-paste. There was no budget. It will not happen again. (It happened again.)
+Sorry for the empty ELSE. I was {MOOD}. Judge gently.
+Sorry for the assumption about the deck order. {CODER2.I} told me to. Please do not judge.
+Sorry for the redundant check. It was {WEATHER}. Judge gently.
+Sorry for the nested IFs. It was {TIME} and I wanted to go home. I am sorry.
+Sorry for the long FORMAT. I was new.
+Sorry for the copy-paste. {VP} was waiting. Please do not judge.
+Sorry for the GOTO. There was no budget. Judge gently.
+Sorry for the extra page. It seemed clever at the time. Judge gently.
+Sorry for the {KEYWORD}. It was {WEATHER}. Please do not judge.
+Sorry for the copy-paste. {CODER2.I} told me to. -- {CODER.I}
+Sorry for the long FORMAT. I meant to come back.
+Sorry for the debug WRITE. I meant to come back. Please do not judge.
+Sorry for the label numbering. It was {HOLIDAY}.
+Sorry for the GOTO. The client was on the phone. It will not happen again. (It happened again.)
+Sorry for the missing comments. The deadline was the {QUARTER} close. Forgive me.
+Sorry for the variable names. It was the only way {COMPILER} would accept. I am sorry.
+Sorry for the {KEYWORD}. There was no budget. Please do not judge.
+Sorry for the extra page. It was {HOLIDAY}. -- {CODER.I}
+Sorry for the copy-paste. It was {TIME} and I wanted to go home. Forgive me.
+Sorry for the assumption about the deck order. I was new. -- {CODER.I}
+Sorry for the label numbering. It was {TIME} and I wanted to go home. Forgive me.
+Sorry for the magic number. It was {WEATHER}. I am sorry.
+Sorry for the empty ELSE. There was no specification. Please do not judge.
+Sorry for the uppercase. It was {WEATHER}. Judge gently.
+Sorry for the missing comments. {CODER2.I} told me to. It will not happen again. (It happened again.)
+Sorry for the dependency on {PROGRAM2}. The client was on the phone. It will not happen again. (It happened again.)
+Sorry for the assumption about the deck order. I meant to come back.
+Sorry for the shortcut in {ROUTINE}. I was {MOOD}. -- {CODER.I}
+Sorry for the GOTO. {CODER2.I} told me to. I am sorry.
+Sorry for the dependency on {PROGRAM2}. I was {MOOD}. It will not happen again. (It happened again.)
+Sorry for the GOTO. It was {TIME} and I wanted to go home. Please do not judge.
+Sorry for the missing comments. I was tired. -- {CODER.I}
+Sorry for the hard-coded {CLIENT}. The client was on the phone. Judge gently.
+Sorry for the label numbering. I was {MOOD}. Judge gently.
+Sorry for the nested IFs. The client was on the phone.
+Sorry for the duplicated loop. It was {TIME} and I wanted to go home. It will not happen again. (It happened again.)
+Sorry for the two-digit year. I was {MOOD}. I am sorry.
+Sorry for the extra page. The client was on the phone. I am sorry.
+Sorry for the assumption about the deck order. It seemed clever at the time. It will not happen again. (It happened again.)
+Sorry for the long FORMAT. I was tired. Judge gently.
+Sorry for the uppercase. It was supposed to be temporary. It will not happen again. (It happened again.)
+Sorry for the empty ELSE. It was {TIME} and I wanted to go home. Judge gently.
+Sorry for the dependency on {PROGRAM2}. {CODER2.I} told me to. Forgive me.
+Sorry for the long FORMAT. It was the only way that fit in {MEMSIZE}. Please do not judge.
+Sorry for the missing comments. I ran out of time and {DRINK}. -- {CODER.I}
+Sorry for the {KEYWORD}. There was no budget. Forgive me.
+Sorry for the label numbering. It was {HOLIDAY}. I am sorry.
+Sorry for the assumption about the {HW}. It was {TIME} and I wanted to go home.
+Sorry for the extra page. It was supposed to be temporary. -- {CODER.I}
+Sorry for the two-digit year. I ran out of time and {DRINK}. Judge gently.

@@ -1,0 +1,8 @@
+#name: Open Software License 3.0
+#kind: open
+#from: 2005
+Licensed under the Open Software License version 3.0
+
+Licensor grants You a worldwide, royalty-free, non-exclusive, sublicensable license to use the Original Work, provided that any Derivative Works You distribute are licensed under this same license, and that You provide a machine-readable copy of the Source Code with each copy You distribute.
+
+External Deployment: the use of the Original Work in a way that allows a third party to use it over a network constitutes distribution. {HOLDER} has deployed the Original Work externally. Source code is provided above.

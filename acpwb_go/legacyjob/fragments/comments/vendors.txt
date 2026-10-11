@@ -1,0 +1,129 @@
+The statistics package from {VENDOR} cost {BIGN} dollars a year and did this in one call. We wrote our own.
+{VENDOR} support ticket {TICKET} remains open since {YEAR}.
+The {COMPILER} license is tied to the serial number of the {HW}. We still have the serial number.
+Maintenance contract with {VENDOR} lapsed in {YEAR}. The program did not notice.
+{VENDOR} recommended rewriting this in their fourth-generation language. We declined. They went bankrupt.
+The license manager daemon must be running on {HOST} for this to compile. It is always running. Do not look for it.
+{VENDOR} consultant's comment, preserved verbatim: "This should be refactored."
+Per the {VENDOR} contract, we may not decompile their library. We wrote around it instead.
+The {VENDOR} upgrade of {YEAR} changed the default rounding mode. Hence the explicit truncation.
+{VENDOR} invoices for "percentile consulting" are filed under this program's cost center.
+{VENDOR} offered to replace this program with their package for ${N},000. Their package could not truncate.
+The {VENDOR} sales representative described this program as "charming."
+The {COMPILER} license renewal arrived with a {PCT} percent increase. Paid under protest.
+{VENDOR} support recommended upgrading to the latest release. The latest release no longer supports this program's dialect.
+The maintenance contract with {VENDOR} covers the hardware, not this program, and not the comments.
+{VENDOR} was acquired by a larger vendor, which was acquired by a larger vendor. The ticket remains open.
+A {VENDOR} consultant spent {SMALLN} weeks reviewing this program and recommended "more comments."
+The {VENDOR} emulator runs this program correctly except on leap days.
+{VENDOR} promised a migration tool in {YEAR}. The tool migrated the comments and nothing else.
+License audit by {VENDOR} in {YEAR} found this program running on an unlicensed processor. It was the only processor.
+{VENDOR}'s replacement product printed the same numbers in a nicer font. It was rejected on cost.
+The {VENDOR} contract includes a clause about "legacy workloads." This is the workload.
+{VENDOR} support: "Have you tried turning it off and on again?" The {HW} took forty minutes to restart.
+The library from {VENDOR} that this program used to call was discontinued in {YEAR}. The calls remain, commented out.
+{VENDOR} still sends a Christmas card addressed to the program.
+The emulator vendor charges per MIPS. This program uses very few MIPS and is grateful.
+{VENDOR} once offered a discount if we would let them study this program. We declined. They insisted. We still declined.
+The printer vendor's technician knows this program by its sound.
+A cloud vendor proposed "lifting and shifting" this program. It was lifted. It did not shift.
+The {COMPILER} vendor's documentation cites a bug report filed by {CODER} in {YEAR}.
+{VENDOR}'s modernization assessment scored this program 2 out of 10 on maintainability and 10 out of 10 on longevity.
+The tape vendor was paid to keep making tapes for this program for {SMALLN} extra years.
+Every vendor demo since {OLDYEAR} has ended with "and of course it can import your existing reports." It could not.
+{VENDOR} support hours are 9 to 5 Eastern. This job runs at 2 AM Central.
+The licence key for the {COMPILER} is taped to the inside of the card cabinet door.
+{VENDOR} support said this was "working as designed." We redesigned around it.
+{VENDOR} has not returned our call since {YEAR}. The ticket is still open.
+The {VENDOR} contract requires us to cite their manual. We cite it here: {MANUAL}.
+{VENDOR} charges per CPU second. This loop was tuned to save {VENDOR} money. Our money.
+{VENDOR} discontinued the product in {YEAR}. We bought their last {SMALLN} licenses.
+The {VENDOR} sales rep said this would be fixed in the next release. That release was {YEAR}.
+Replaced {VENDOR}'s sort with our own after {VENDOR} raised prices. Ours is slower. Ours is free.
+{VENDOR} field engineer visited on {DATE}. Diagnosis: "the program is too long."
+{VENDOR}'s compiler has a known issue with this construct. Their known issues list is 400 pages.
+The {VENDOR} license key expires on {DATE}. Renewal is in {DEPT}'s budget. {DEPT} is out of budget.
+{VENDOR} was acquired by another vendor, who was acquired by {VENDOR}. Support is now "in transition."
+{VENDOR} sent us a tape with a fix. The tape was blank. The second tape had someone else's payroll.
+Do not upgrade the {VENDOR} runtime. The last upgrade changed rounding.
+{VENDOR} recommended a consultant. The consultant recommended {VENDOR}.
+{VENDOR} promised compatibility with {LANG2}. That promise was printed on a mug. The mug is in {PLACE}.
+The {VENDOR} manual describes a parameter that does not exist. We pass it anyway. It does nothing. Probably.
+{VENDOR} uses a different definition of percentile. That is why we do not use {VENDOR}'s routine.
+We once asked {VENDOR} for the source code. They sent a lawyer.
+{VENDOR} support is available 9 to 5 Central. This job runs at 2 AM. Good luck.
+{VENDOR}'s user group meets at {CONFERENCE}. {CODER2} goes for the free {FOOD}.
+The {VENDOR} maintenance fee went up {PCT}% in {YEAR}. This routine replaced their product the same month.
+{VENDOR} says the error is in our code. Our code says the error is in {VENDOR}. The error says nothing.
+Warning from {VENDOR}: "do not run on the {HW}." We run on the {HW}.
+{VENDOR}'s compiler release notes for {LICVER} mention "improved numeric fidelity." Our output changed by one dollar at P90.
+{VENDOR} sent a support engineer who looked at this routine and asked for a chair.
+{VENDOR} wants us to upgrade. Upgrading requires recompiling. Recompiling requires {CODER2}. {CODER2} is retired.
+{VENDOR}'s invoice for {YEAR} listed this program as "TABULATOR (OBSOLETE)." We still pay for it.
+The {VENDOR} manual says to call {OPCODE} directly for speed. We do. It is fast. It is wrong in one case.
+{VENDOR}'s licensing daemon checks every {N} minutes. If it cannot reach the license server, the job prints a warning in the middle of the report.
+{VENDOR} says this behaviour is "implementation-defined." Our implementation defines it as a problem.
+{VENDOR} support asked for a reproducible test case. We sent the whole deck. They have not replied since {YEAR}.
+{VENDOR} has offered to "modernize" this program for {BIGN} dollars. The program works. We declined.
+{VENDOR}'s new product does the same thing as this program, with a graphical user interface and a different answer.
+The {VENDOR} runtime must be installed in {DATASET}. Moving it breaks every program that uses it, including some in {DEPT}.
+{VENDOR} blames our code. See {INCIDENT}.
+{VENDOR} was acquired, and support is "in transition". -- {CODER.I}
+{VENDOR} recommends an upgrade we cannot afford. -- {CODER.I}
+{VENDOR} discontinued the product we depend on. See {INCIDENT}.
+{VENDOR} raised prices again in {YEAR}. Unchanged since {YEAR}.
+{VENDOR} says it is working as designed. -- {CODER.I}
+{VENDOR} sent a patch that changed rounding. Noted.
+{VENDOR} says it is working as designed. See {INCIDENT}.
+{VENDOR} has not returned our call since {YEAR}. See memo {MEMO}.
+{VENDOR} cannot reproduce it. -- {CODER.I}
+{VENDOR} has not returned our call since {YEAR}.
+{VENDOR} sent a patch that changed rounding. See memo {MEMO}.
+{VENDOR} was acquired, and support is "in transition". See memo {MEMO}.
+{VENDOR} promised a fix in {LICVER}. Noted.
+{VENDOR} sent a patch that changed rounding.
+{VENDOR} has not returned our call since {YEAR}. See {INCIDENT}.
+{VENDOR} recommends an upgrade we cannot afford. See memo {MEMO}.
+{VENDOR} recommends an upgrade we cannot afford.
+{VENDOR} was acquired, and support is "in transition". See {INCIDENT}.
+{VENDOR} cannot reproduce it. See memo {MEMO}.
+{VENDOR} discontinued the product we depend on. Noted.
+{VENDOR} was acquired, and support is "in transition".
+{VENDOR} discontinued the product we depend on. See memo {MEMO}.
+{VENDOR} discontinued the product we depend on. Unchanged since {YEAR}.
+{VENDOR} raised prices again in {YEAR}. See memo {MEMO}.
+{VENDOR} says it is working as designed. Noted.
+{VENDOR} promised a fix in {LICVER}. See memo {MEMO}.
+{VENDOR} has not returned our call since {YEAR}. Unchanged since {YEAR}.
+{VENDOR} says it is working as designed. See memo {MEMO}.
+{VENDOR} recommends an upgrade we cannot afford. Unchanged since {YEAR}.
+{VENDOR} blames our code. Noted.
+{VENDOR} raised prices again in {YEAR}. Noted.
+{VENDOR} cannot reproduce it.
+{VENDOR} raised prices again in {YEAR}.
+{VENDOR} cannot reproduce it. Unchanged since {YEAR}.
+{VENDOR} was acquired, and support is "in transition". Noted.
+{VENDOR} blames our code. -- {CODER.I}
+{VENDOR} has not returned our call since {YEAR}. -- {CODER.I}
+{VENDOR} cannot reproduce it. Noted.
+{VENDOR} cannot reproduce it. See {INCIDENT}.
+{VENDOR} discontinued the product we depend on.
+{VENDOR} was acquired, and support is "in transition". Unchanged since {YEAR}.
+{VENDOR} recommends an upgrade we cannot afford. See {INCIDENT}.
+{VENDOR} raised prices again in {YEAR}. -- {CODER.I}
+{VENDOR} says it is working as designed. Unchanged since {YEAR}.
+{VENDOR} promised a fix in {LICVER}. Unchanged since {YEAR}.
+{VENDOR} sent a patch that changed rounding. See {INCIDENT}.
+{VENDOR} sent a patch that changed rounding. -- {CODER.I}
+{VENDOR} blames our code. Unchanged since {YEAR}.
+{VENDOR} promised a fix in {LICVER}. See {INCIDENT}.
+{VENDOR} discontinued the product we depend on. -- {CODER.I}
+{VENDOR} says it is working as designed.
+{VENDOR} promised a fix in {LICVER}.
+{VENDOR} blames our code.
+{VENDOR} promised a fix in {LICVER}. -- {CODER.I}
+{VENDOR} raised prices again in {YEAR}. See {INCIDENT}.
+{VENDOR} recommends an upgrade we cannot afford. Noted.
+{VENDOR} has not returned our call since {YEAR}. Noted.
+{VENDOR} sent a patch that changed rounding. Unchanged since {YEAR}.
+{VENDOR} blames our code. See memo {MEMO}.

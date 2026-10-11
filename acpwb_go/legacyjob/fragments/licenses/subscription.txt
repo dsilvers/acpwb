@@ -1,0 +1,10 @@
+#name: Annual Subscription License
+#kind: commercial
+#from: 2008
+{HOLDER} SUBSCRIPTION AGREEMENT
+
+This subscription grants Licensee the right to use {PROGRAM} for a term of twelve (12) months from the Effective Date, renewing automatically for successive twelve-month terms unless either party gives notice of non-renewal at least {TERMDAYS} days before the end of the then-current term.
+
+Subscription fee: ${FEE} per year at the {TIER} level, billed annually in advance. Prices increase {PCT}% at each renewal. This is described in the order form as "inflation protection."
+
+If the subscription lapses, the program continues to run but the page header changes to read "EXPIRED - {HOLDER}." Most clients have not noticed.

@@ -1,0 +1,8 @@
+#name: Dual License (GPL or Commercial)
+#kind: dual
+#from: 1998
+DUAL LICENSING
+
+{PROGRAM} is available under two licenses. You may use it under the terms of the GNU General Public License, version 2, if you are willing to release your own programs under the same terms. Or you may purchase a commercial license from {HOLDER} at ${FEE} per Designated Machine.
+
+Most users choose neither and run the copy they found on the shared drive. That copy is licensed under the GPL, whether they know it or not.

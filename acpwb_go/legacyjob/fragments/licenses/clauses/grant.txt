@@ -1,0 +1,22 @@
+Licensor grants Licensee a non-exclusive, non-transferable license to use the Program on the single computer system identified by serial number {SERIAL}.
+Licensee may use the Program solely for its internal business purposes and solely to tabulate data supplied by Licensee.
+Licensee may make one (1) backup copy of the Program on cards or magnetic tape, which shall bear all proprietary notices.
+Licensee may view the source listing for audit purposes only; Licensee may not compile it.
+Licensee may run the Program no more than {N} times per calendar quarter.
+Licensee may permit up to {SEATS} named employees to read the listing, each of whom must sign a confidentiality acknowledgement.
+Licensee may use the output of the Program in reports to its board of directors, provided each page bears the legend "Prepared with {PROGRAM}."
+Licensee may reproduce the printed output, but not the percentile ladder, which is reproduced on the output and therefore may not be.
+The license is limited to the Program as delivered; no license is granted to future releases, past releases, or releases of {PROGRAM2}.
+Licensee may use the Program at a single site, defined as one building and the parking structure attached to it.
+Licensor grants Licensee a non-exclusive, non-transferable, revocable license to execute the Program on the Designated Machine for Licensee's internal benchmark tabulation.
+Licensee may copy the Program into machine-readable form solely for backup or archival purposes, provided all copies bear Licensor's notices and none bear Licensee's improvements.
+Licensee may use the Program on a temporary replacement machine during any period in which the Designated Machine is inoperative, including during {WEATHER}.
+Licensee may permit its contractors to use the Program on Licensee's behalf, provided the contractors are bound by terms at least as strict as these, and are supervised by {CODER2}.
+This license permits Licensee to read, print and annotate the listing. Annotations become part of the Program and the property of Licensor.
+Licensee may run the Program no more than {N} times per business day, which is several times more than anyone has needed.
+Licensee may use the Program for up to {SEATS} concurrent users. The Program has no way of counting users and relies on Licensee's honour.
+Licensee may modify the Program for its own use, provided that modified versions are clearly marked and are not called {PROGRAM}.
+Licensee may distribute Output, but not the Program, to Clients.
+The license granted here is perpetual, subject to termination, and subject to the paper lasting.
+Licensee may use the Program at a single Site. A second building connected by a skywalk counts as the same Site.
+Licensee may make one (1) printed listing per Designated Machine for maintenance purposes. This is that listing.

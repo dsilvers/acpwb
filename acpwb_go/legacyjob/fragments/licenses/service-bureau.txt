@@ -1,0 +1,11 @@
+#name: Service Bureau Processing Agreement
+#kind: commercial
+#from: 1966
+#to: 1997
+SERVICE BUREAU PROCESSING AGREEMENT
+
+Client shall deliver input decks to the {HOLDER} data control window, {PLACE}, by 4 PM on the processing day. Decks delivered after 4 PM will be processed the following business day, or will be processed the same day and reported as the following business day.
+
+{HOLDER} will process the deck using {PROGRAM} and deliver printed output by courier the next morning. Client acknowledges that the Program and its methods are confidential and that Client receives only the Output.
+
+{HOLDER} is not responsible for decks that are dropped, bent, folded, spindled or mutilated in transit. Client should number its cards.

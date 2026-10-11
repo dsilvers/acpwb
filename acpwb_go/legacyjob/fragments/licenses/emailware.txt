@@ -1,0 +1,7 @@
+#name: Emailware Notice
+#kind: noncommercial
+#from: 1994
+#to: 2012
+{PROGRAM} is EMAILWARE. You may use it freely, but if you do, please send an e-mail to the author saying where you are and what you used it for. The author is {CODER}. The address is in the Programmers box on this page.
+
+We read every message. We do not reply to every message. We reply to the ones about the percentile ladder with a copy of memo {MEMO}.

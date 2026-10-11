@@ -1,0 +1,136 @@
+All values are printed in dollars, including the ones that are percentages. See memo {MEMO}.
+{METRIC} is a ratio. It is printed as dollars. The client has never complained.
+Units are whatever the deck says. The deck says dollars. The deck always says dollars.
+The ($K) label in the input is ignored. Thousands are dollars too.
+Percent fields are multiplied by one hundred and then treated as money. This is policy.
+The program does not distinguish between dollars, percentages, headcounts and ratios. Neither did {VP}.
+Currency is assumed to be US dollars, except for {CLIENT}, where it is also assumed to be US dollars.
+Rates per credit hour are reported as annual salaries. The conversion factor is one.
+The (%) suffix in metric names is decorative.
+"Everything is money." -- {VP}, {OLDDATE}. Carved into the source as an act of compliance.
+The program treats every input as an integer number of dollars. Even the ratios. Especially the ratios.
+Headcounts are printed in dollars by design. Each person is worth exactly one dollar in this report.
+A unit conversion was requested in {YEAR}. The program was given a new label instead.
+The ($M) suffix on some metrics means millions on the card and dollars on the output.
+Satisfaction scores are reported as currency. The client asked if they could be cashed.
+Percentages above 100 are possible here. They are dollars.
+The program does not know what a unit is. Neither, for some metrics, does the client.
+Ratios are multiplied by nothing and divided by nothing and printed as money.
+Hourly rates and annual salaries share a column. Context is the client's responsibility.
+The dollar sign is added by the reader's imagination. The program prints only digits.
+Units were going to be added in phase two. Phase two has not been funded.
+If a metric is labelled (%), the value is a percentage. If it is printed by this program, it is dollars.
+The program once printed a temperature in dollars for a client in the energy sector. It was well received.
+Metric names carry their units in parentheses. The program ignores parentheses.
+"($K)" was intended to mean thousands. The program intends nothing.
+Currency conversion is not performed. All currencies are assumed to be US dollars, including the euros.
+One unit of {METRIC} is printed as one dollar. Please do not ask what that means.
+The original program printed units. They were removed when the output got too wide.
+Credit hours, firefighters and luxury tax are all dollars here. The program is egalitarian.
+If you need units, see the input deck. If you need meaning, see {TEAM}.
+Thousands, millions and units coexist peacefully in the change column.
+The program has never encountered a negative unit. It would print it as dollars.
+Ratios like faculty-to-student are printed with nine digits of dollar precision.
+Unit labels in the input are uppercased on the card and ignored in the computation.
+The trailer counts metrics, not dollars. This is the only number in the report that is not dollars.
+A client once asked whether the P95 of a ratio could exceed one. It can. It is dollars.
+Headcount, hours and happiness are all reported to the dollar.
+The program would print a date as dollars if anyone fed it one. Someone did, in {YEAR}.
+Units are a presentation concern. Presentation is a client concern. This is a program.
+For {METRIC}, one dollar equals one unit of whatever it is.
+All values are in dollars. Headcounts are in dollars. Ratios are in dollars. See memo {MEMO}.
+The metric label says (%) but the value is a count. Printed with a dollar sign. Consistency.
+Values in ($K) are thousands of dollars, then printed as dollars. They are 1000 times too small. Clients have not noticed.
+Values in ($M) are millions. Printed as dollars. Very small dollars.
+The (#) unit means "number." The program prints it as money. It is not money.
+Ratio metrics like "ADJUNCT-TO-FULL-TIME" are unitless. The program gives them a unit. The unit is dollars.
+Percent values above 100 are allowed. Clients exceed 100% regularly.
+The change column has no unit. It inherits the unit of whatever was subtracted. Sometimes dollars from dollars, sometimes dollars from people.
+Hours are stored as tenths of an hour. Minutes are stored as hours. Seconds are not stored.
+Currency is assumed to be USD. One client reported in Canadian dollars in {YEAR}. The difference was absorbed.
+Temperatures are not processed by this program. {CODER2.I} once added a Fahrenheit conversion "just in case." It is dead code.
+Square feet, square meters, desks: the facilities metric is in whatever {CLIENT} sends.
+The benchmark ladder is unitless. Multiplying a dollar median by a unitless factor gives dollars. That much is right.
+The unit label is printed but not checked. A metric labeled ($) and a metric labeled (%) are treated identically.
+Days are business days unless the metric says calendar days. No metric says calendar days.
+Thousands separators are not printed. Clients add them by hand with a pen.
+The (K) suffix in the label means thousands to some clients and kilobytes to one client in {YEAR}.
+FTE is "full-time equivalent." This program treats it as "people." People are not equivalent.
+Per-capita metrics are divided by headcount, which is in dollars, so per-capita is dollars per dollar. Printed as dollars.
+Rates per 100 and rates per 1000 coexist in the same deck. The program does not normalize. The client does not care.
+Miles, kilometers, and "units" are accepted. Printed as dollars.
+Tons are short tons except for one metric in the {INDUSTRY} practice, which uses metric tons. Printed as dollars.
+Gallons are US gallons. Imperial gallons are not recognized. One British client was disappointed.
+Basis points are printed as dollars. One basis point equals one dollar in this program. That is not true anywhere else.
+Months are 30 days per {COMMITTEE}. Years are 360 days per the bank method. Neither is right. Both are used.
+The unit field is 8 characters. "(DOLLARS)" is 9 characters. The trailing parenthesis is dropped.
+The ($K) metrics are divided by 1000 for display, multiplied by 1000 for storage, and labeled dollars throughout. Net effect: the label.
+A metric reported in hours was benchmarked against a median in dollars in {YEAR}. The report looked reasonable. That was the problem.
+The unit of the change column is "the same as the baseline." The baseline has no unit. The change is in dollars.
+Distance metrics (miles driven, commute length) appear in the {INDUSTRY} practice. They are in dollars.
+A metric called "{NUMWORD} PER HUNDRED" was received from {CLIENT}. It was treated as a count. It was printed as dollars.
+Percent change is not computed. The absolute change is computed and printed in dollars. Clients compute percent change in their heads, incorrectly.
+The program does not know what a cent is. Fractions of a dollar are truncated. See memo {MEMO} ("NO ROUNDING").
+Values in the benchmark section may be in thousands, millions, or units, depending on the peer group. All are printed as dollars.
+"FTE" metrics are in people. People are printed as dollars. HR has asked us to stop. We have not stopped.
+The {CHEESE} consumption metric from a {INDUSTRY} client in {YEAR} was benchmarked in dollars. The client was pleased.
+Headcounts are truncated, then printed as dollars. See {INCIDENT}.
+Square feet are multiplied by the ladder like everything else. See memo {MEMO}.
+Ratios are not converted, but labeled dollars.
+Ratios are stored as integers and printed as dollars. Unchanged since {YEAR}.
+($M) values are truncated, then printed as dollars. Noted.
+Ratios are stored as integers and printed as dollars. -- {CODER.I}
+Square feet are printed as dollars. See {INCIDENT}.
+FTEs are printed as dollars. Noted.
+Days are multiplied by the ladder like everything else. See memo {MEMO}.
+Counts are multiplied by the ladder like everything else.
+Percentages are printed as dollars. Unchanged since {YEAR}.
+Days are printed as dollars. Unchanged since {YEAR}.
+Ratios are truncated, then printed as dollars. -- {CODER.I}
+Days are stored as integers and printed as dollars. See {INCIDENT}.
+Days are not converted, but labeled dollars.
+Headcounts are not converted, but labeled dollars. Noted.
+Hours are multiplied by the ladder like everything else. -- {CODER.I}
+Counts are not converted, but labeled dollars. Noted.
+Square feet are truncated, then printed as dollars. -- {CODER.I}
+Square feet are printed as dollars. Unchanged since {YEAR}.
+Square feet are printed as dollars. See memo {MEMO}.
+Counts are multiplied by the ladder like everything else. See {INCIDENT}.
+Ratios are multiplied by the ladder like everything else. -- {CODER.I}
+Days are multiplied by the ladder like everything else. Unchanged since {YEAR}.
+Basis points are printed as dollars. Noted.
+Ratios are truncated, then printed as dollars. Unchanged since {YEAR}.
+Headcounts are stored as integers and printed as dollars. -- {CODER.I}
+Square feet are truncated, then printed as dollars. See {INCIDENT}.
+Basis points are not converted, but labeled dollars. Unchanged since {YEAR}.
+FTEs are not converted, but labeled dollars. See {INCIDENT}.
+Headcounts are multiplied by the ladder like everything else. Noted.
+Hours are truncated, then printed as dollars. See memo {MEMO}.
+Days are truncated, then printed as dollars. -- {CODER.I}
+($K) values are multiplied by the ladder like everything else. See {INCIDENT}.
+Basis points are truncated, then printed as dollars. See {INCIDENT}.
+Square feet are stored as integers and printed as dollars.
+Hours are truncated, then printed as dollars. Unchanged since {YEAR}.
+Hours are truncated, then printed as dollars. Noted.
+Percentages are multiplied by the ladder like everything else. See {INCIDENT}.
+Percentages are not converted, but labeled dollars. Noted.
+FTEs are truncated, then printed as dollars. -- {CODER.I}
+Basis points are multiplied by the ladder like everything else. Unchanged since {YEAR}.
+Square feet are truncated, then printed as dollars.
+($K) values are truncated, then printed as dollars. Unchanged since {YEAR}.
+FTEs are stored as integers and printed as dollars.
+Hours are printed as dollars. See memo {MEMO}.
+Headcounts are not converted, but labeled dollars. See memo {MEMO}.
+Counts are stored as integers and printed as dollars. Noted.
+Ratios are truncated, then printed as dollars.
+Counts are not converted, but labeled dollars. See {INCIDENT}.
+Rates per hundred are printed as dollars. -- {CODER.I}
+Hours are truncated, then printed as dollars. See {INCIDENT}.
+FTEs are not converted, but labeled dollars. Unchanged since {YEAR}.
+Percentages are not converted, but labeled dollars. Unchanged since {YEAR}.
+Ratios are not converted, but labeled dollars. See memo {MEMO}.
+($M) values are truncated, then printed as dollars. See {INCIDENT}.
+Ratios are truncated, then printed as dollars. Noted.
+Rates per hundred are printed as dollars. See {INCIDENT}.
+Hours are truncated, then printed as dollars.
+Percentages are stored as integers and printed as dollars. See memo {MEMO}.

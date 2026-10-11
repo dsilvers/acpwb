@@ -1,0 +1,48 @@
+# {MANUAL}: manuals people cite
+the VS FORTRAN Language Reference, GC26-4119
+the FORTRAN 77 standard, ANSI X3.9-1978
+the JCL Reference, GC28-1757
+the MVS System Codes manual
+the MVS System Messages manual, volume 3
+the COBOL Programming Guide
+the ANSI COBOL 74 standard
+the IBM 029 Card Punch reference
+the IBM System/370 Principles of Operation, GA22-7000
+the green card (GX20-1850)
+the yellow card
+the VAX FORTRAN User Manual
+the VMS DCL Dictionary
+the Orange Wall
+the DEC Grey Wall
+the RSTS/E System Manager's Guide
+the HP 3000 MPE commands manual
+the BASIC-PLUS reference card
+the K&R book, first edition
+1988-|the K&R book, second edition
+1990-|the Camel book
+1997-|the Camel book, second edition
+2000-|the Camel book, third edition
+2001-|Learning Python
+2004-|the Python Library Reference
+1995-|the Solaris man pages
+1991-|the SunOS manual set
+1990-|the POSIX.1 standard
+2006-|the Perl Best Practices book
+2010-|the gfortran manual
+the operator's run book
+the departmental standards binder
+the DP Procedures Manual, revision {N}
+the yellow-tabbed binder in the tape library
+the unofficial guide written by {CODER2}
+the MVS JCL User's Guide
+the VS FORTRAN Programming Guide, SC26-4118
+the OS/VS COBOL Compiler and Library Programmer's Guide
+the VAX/VMS Guide to Using Command Procedures
+the HP 3000 BASIC/3000 Reference
+the IBM 3800 Printing Subsystem Programmer's Guide
+the DFSORT Application Programming Guide
+the IDCAMS Access Method Services manual
+the Operator's Library
+the Messages and Codes manual
+the tape librarian's procedures, typed, {OLDYEAR}
+the client deck specification, revision {SMALLN}

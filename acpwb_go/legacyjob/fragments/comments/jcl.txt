@@ -1,0 +1,20 @@
+The JOB card account field charges the run to {DEPT}. {DEPT} has never seen the bill.
+REGION=4M is more than needed. It has been 4M since {YEAR}. Reducing it would require a form.
+TIME=(0,30) cancels the job after 30 CPU seconds. The job uses about {CPU}. There is headroom, and fear.
+MSGCLASS={CLASS} sends the job log to a printer {DEPT} does not check. That is intentional.
+NOTIFY=&SYSUID sends a message to whoever submitted the job. That is BATCH. BATCH does not read messages.
+The COND parameter on step 2 skips it if step 1 returns more than 4. Step 1 returns 4 when it is happy.
+The DD statement for SYSUT1 allocates a work file on the {DISKMODEL}. The space estimate dates from {OLDYEAR}.
+DISP=(NEW,CATLG,DELETE) creates the dataset, catalogs it on success, and deletes it on failure. On partial failure it does something else.
+DSN=&&TEMP is a temporary dataset. It is deleted at end of job. It has been found on disk the next morning {NUMWORD} times.
+The procedure FORTVCLG compiles, links and runs. It is in SYS1.PROCLIB. It was modified by {CODER2} in {YEAR}. The modification is undocumented.
+The EXEC PGM=IEFBR14 step does nothing. It is there to delete the old output dataset. It is the most reliable step in the job.
+The SYSIN DD * is followed by the data deck. The /* ends it. If the data deck contains /* in columns 1-2, the job ends early.
+The OUTPUT statement sets the forms to {FORM}. The operators override it with whatever paper is loaded.
+The JES2 /*ROUTE card sends output to the remote printer in {PLACE}. The remote printer is gone. Output goes to the default. Nobody minds.
+The job name is {PROGRAM} followed by a letter. The letter is the day of the week. Sunday is "S." Saturday is also "S." Hence {INCIDENT}.
+UNIT=TAPE requests any tape drive. VOL=SER={VOLSER} requests a specific tape. The operator mounts whatever is closest.
+The RESTART parameter is coded on the JOB card but commented out. Uncomment it to restart at step 3. Step 3 does not exist anymore.
+SPACE=(TRK,(10,5)) is enough for {N} clients. At {BIGN} clients it abends with {ERRMSG}. We have {N} clients.
+The JCL was last changed on {DATE}. The change was a comment. The comment was the date.
+The job uses the {DATASET} catalog. The catalog was merged with another catalog in {YEAR}. Datasets with duplicate names were renamed with a 2. This is why there is {DATASET}2.

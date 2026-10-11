@@ -1,0 +1,35 @@
+# {OFFICEOBJ}
+a red stapler
+a Rolodex
+a coffee mug that says WORLD'S OKAYEST PROGRAMMER
+a box of green-bar paper
+a plastic template for flowcharts
+a slide rule
+a desk calculator
+a pocket protector
+a bottle of correction fluid
+a three-ring binder
+a card tray
+a tape reel
+a desk fan
+a space heater
+a cardigan
+a lucky pencil
+a ruler marked in print columns
+a hole punch
+1988-|a paperweight from the 1987 SHARE conference
+a framed memo
+a desk blotter calendar from {OLDYEAR}
+a box of number 2 pencils
+a mechanical pencil with a broken clip
+a coffee can full of rubber bands
+a stack of interoffice envelopes
+a desk nameplate with the wrong name
+a mug of cold {DRINK}
+a plastic flowchart template
+a magnifying glass for reading dumps
+a card deck in a rubber band
+a stapler that only works upside down
+a lamp with a {COLOR} shade
+a cushion from the old operator chair
+a souvenir pennant from {SPORTS}

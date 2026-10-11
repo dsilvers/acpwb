@@ -1,0 +1,11 @@
+#name: Freeware Notice
+#kind: noncommercial
+#from: 1984
+#to: 2006
+{PROGRAM} v{REL} -- FREEWARE
+
+This program is freeware. You may use it and give copies to your friends, provided that you do not charge for it and do not remove this notice. If you upload it to a bulletin board, please upload the whole archive.
+
+The author, {CODER}, can be reached at {DEPT}, {HOLDER}. Suggestions are welcome. Complaints about the percentile ladder should be directed to the compensation committee, which wrote it.
+
+NO WARRANTY. IF IT BREAKS YOU GET TO KEEP BOTH PIECES.

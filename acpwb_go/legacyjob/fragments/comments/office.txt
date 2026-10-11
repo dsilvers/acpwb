@@ -1,0 +1,27 @@
+The binder for this program is on the third shelf in {PLACE}, between the payroll binder and the binder nobody owns.
+The original flowchart is pinned to the corkboard in {PLACE}. Do not unpin it. The pins are holding the corkboard together.
+{CODER2.I}'s desk is next to the printer. That is why {CODER2.I} always knows when this job finishes.
+The department moved to the sixth floor in {YEAR}. The program did not notice. The operators did.
+The coffee machine in {PLACE} makes coffee that tastes like toner. The job runs fine regardless.
+Office hours for questions about this program: {DAYNAME} afternoons, by appointment, in {PLACE}.
+The whiteboard in {PLACE} still has the {YEAR} change plan on it. It says "DO NOT ERASE." It has not been erased.
+The department fridge contains {FOOD} labeled {CODER2.I}. It has been there since {YEAR}. Do not touch.
+The department plant was named after this program. It has outlived three programmers.
+The phone extension for this program's support line is {EXT}. It rings in an empty office.
+The department softball team is called the {PROGRAM}s. They have the same record as the program: it runs, mostly.
+The quarterly potluck is scheduled around this job's {QUARTER} run. Bring {FOOD}.
+Somebody keeps leaving {SNACK} next to the listing. Thank you.
+The office thermostat is set to 68. The machine room is set to 64. Programmers spend a lot of time in the machine room in summer.
+The parking spot nearest the door belongs to whoever is on call for this job. It is the only perk.
+The department newsletter featured this program in {YEAR} under the headline "Old Faithful."
+The fire drill in {YEAR} happened during this job. The job finished. The building did not burn. Everyone was relieved twice.
+The department's {OFFICEOBJ} was a gift from {CLIENT} after the {YEAR} engagement. It is on {CODER2.I}'s desk.
+Every new programmer's first task is to read this listing. Every new programmer's second task is to ask for a transfer.
+The department {COLOR} stapler is reserved for listings of this program. Do not take it.
+{CODER2.I}'s {HOBBY} trophies are on the shelf above the binder. Please do not move them to reach the binder.
+The holiday party in {YEAR} was held in {PLACE} because the job was running long. There was {CHEESE}.
+The department sign-up sheet for {SPORTS} is pinned next to the run schedule. Do not confuse the two.
+The {ANIMAL} incident of {YEAR} is commemorated by a photo in {PLACE}.
+Someone keeps leaving {MAGAZINE} in the break room open to an article about replacing legacy programs. We know who.
+The department carpools from {NEIGHBORHOOD} on {ROAD}. The carpool leaves at 7. The job is checked at 7:30.
+The office was painted {COLOR} in {YEAR}. The listing binder was painted too, accidentally.

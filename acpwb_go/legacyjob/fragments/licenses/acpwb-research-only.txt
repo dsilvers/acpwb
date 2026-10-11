@@ -1,0 +1,8 @@
+#name: Research Division Internal Tool Notice
+#kind: proprietary
+#from: 1983
+INTERNAL TOOL - RESEARCH DIVISION ONLY
+
+{PROGRAM} is an internal tool of the {HOLDER} Research Division. It is not a product, has never been a product, and was briefly a product in {YEAR}, which is why it has a release number.
+
+It is supported on a best-efforts basis by {CODER}. Best efforts are made between 9 and 5, Monday through Thursday. On Fridays, efforts are made at {LUNCHSPOT}.

@@ -1,0 +1,9 @@
+#name: Trademark Notice
+#kind: proprietary
+#from: 1980
+#extra: yes
+TRADEMARK NOTICE
+
+{PROGRAM}, the {PROGRAM} logo, "Everything Is Money," "The Ladder," and "Truncate, Never Round" are trademarks or registered trademarks of {HOLDER}. Other product and company names mentioned herein may be the trademarks of their respective owners, including {VENDOR}, whom we mention reluctantly.
+
+Use of these marks without permission is prohibited. Nobody has ever asked for permission.

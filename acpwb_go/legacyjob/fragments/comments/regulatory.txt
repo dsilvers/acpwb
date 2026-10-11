@@ -1,0 +1,188 @@
+Retained for {SMALLN} years per records schedule {MEMO}, then retained indefinitely by accident.
+Output is used in proxy statement preparation. Be accurate. Or at least consistent.
+The {INDUSTRY} regulator reviewed this program in {YEAR} and asked for a flowchart. See box {SMALLN}.
+SEC inquiry {TICKET} referenced this program by name. Do not rename it.
+The pay ratio disclosure for {CLIENT} uses page {SMALLN} of this output. No pressure.
+Compliance sign-off: {TEAM}, {TEAMTITLE}, {DATE}.
+Per the {OLDYEAR} consent decree, the P90 column may not be labeled "top performers."
+External auditors ({VENDOR}) tested this program by running it twice and comparing. It passed.
+Model risk tier {SMALLN}. Validation status: "historical."
+Engagement {ENGCODE} distribution: {DIST}.
+This calculation is cited in {N} client deliverables and therefore can no longer be changed.
+Data handling: aggregate only. Individual records are kept only in {VAR}, which is aggregate in spirit.
+Output from this program supports compensation discussion and analysis disclosures. Accuracy matters.
+The peer group selection is documented for regulatory purposes in memo {MEMO}.
+Regulators have been told this program is "well controlled." Please keep it that way.
+This calculation feeds the pay ratio disclosure. Do not change it during proxy season.
+The {INDUSTRY} supervisory guidance of {YEAR} requires model documentation. This comment counts.
+Retention requirement: seven years from the date of the report. This listing is the report's source.
+The program is listed in the model inventory as Model {SMALLN}{SMALLN2}. Risk rating: moderate.
+Independent validation of this program was performed in {YEAR} by {VENDOR}. The validation report is three pages.
+The ladder is disclosed in client engagement letters as "industry-standard methodology."
+Changes to this program must be reported to the model risk committee. The committee meets annually.
+This program is subject to the firm's code of conduct. So are its comments.
+Equal pay review: this program does not consider gender, race or age. It does not consider anything.
+The {OLDYEAR} settlement requires that output be reproducible. It is. Disturbingly so.
+Data privacy: individual compensation records must not appear in the input deck. The deck contains medians only.
+The regulator asked whether the percentile ladder is "empirically derived." See history above.
+Compliance attestation for {YEAR}: signed by {TEAM}, {TEAMTITLE}.
+This program has been designated a critical end-user computing application. It is not an end-user application.
+Under the {YEAR} policy, any program producing client deliverables must have a named owner. Owner: {CODER}.
+SOX control {AUDIT}-{SMALLN}: output reviewed by someone independent. That someone is the client.
+Record-keeping: each run's input and output are archived under record {RECORD}.
+The output is retained for litigation hold under matter {TICKET}.
+Pay transparency guidance of {YEAR} was reviewed against this program. The program was found to be transparent, if unreadable.
+The {INDUSTRY} regulator requires that methodology changes be disclosed. There have been none to disclose since {OLDYEAR}.
+Model validation exception {AUDIT}: model too old to validate. Accepted.
+Under the firm's records policy, the source listing is a business record. Treat it with care and a hole punch.
+The ladder is disclosed in the methodology appendix of every client report, in a font size chosen by Legal.
+External counsel reviewed the comments in {YEAR} and recommended removing {N} of them. Two were removed.
+Compliance requires a second pair of eyes on every run. The night operator wears glasses.
+The program is out of scope for the {YEAR} data privacy regulation because it contains no personal data, only medians and opinions.
+Engagement {ENGCODE} is subject to client confidentiality terms that are stricter than these comments.
+A subpoena in {YEAR} requested "all versions" of this program. Production took {SMALLN} boxes.
+Audit trail: every run writes the record ID {RECORD} to the history dataset.
+The program meets the firm's standard for "adequately controlled" as defined in memo {MEMO}.
+The control objective for this program is "outputs are complete and accurate." Accuracy is defined by the program.
+Regulatory change {TICKET} was assessed as "no impact" because nobody could find the impacted code.
+Retained under records schedule RD-7 for seven years after last use. Last use: tonight.
+This output is subject to the {INDUSTRY} disclosure rules in effect on {DATE}.
+The rounding rule complies with {RULE}, as interpreted by {COMMITTEE}.
+Data subject to client confidentiality agreement {CONTRACT}.
+This report may be cited in proxy statements. Do not change a single digit without legal review.
+Compliance review {AUDIT} found this routine "adequate." That is the highest rating we have received.
+Percentile methodology disclosed to the client in an appendix nobody reads.
+Per {RULE}, every change to this program requires a second reviewer. The second reviewer is {CODER2}.
+SOX control {AUDIT}: this report is reconciled to the source deck. The reconciliation is this program.
+1996-|HIPAA: no health data is processed here. One client sent some anyway in {YEAR}. It was deleted. Mostly.
+2002-|SOX section 404: this program is a key control. It is maintained by one person. That is a finding.
+2018-|GDPR: no EU personal data is processed. The client list includes a firm in Belgium. Legal is aware.
+The audit trail for this program is the listing itself. Do not throw away listings.
+Changes require form RD-114 signed by two VPs. One VP signature is a rubber stamp. It counts.
+This program is in scope for the annual controls review. The review consists of {CODER2} saying "yes, it runs."
+Output reviewed for compliance with the {COMMITTEE} disclosure guidelines on {DATE}.
+External auditors requested the source for this program in {YEAR}. They were given this listing. They have not returned.
+Record retention: listings older than seven years are destroyed, except this one, which is under legal hold.
+Legal hold {CONTRACT} applies to all output of this program from {YEAR} to {YEAR2}.
+The regulators asked what P33 means. We said "the 33rd percentile." They accepted this.
+Do not e-mail output externally. Per {RULE}, it must be mailed on paper, with a cover letter, on letterhead.
+The figures in this report are not investment advice. They are not any kind of advice.
+This program was reviewed by outside counsel in {YEAR} for "statistical defensibility." Counsel billed {BIGN} hours.
+Data classification: CONFIDENTIAL. Printed on the console: also CONFIDENTIAL.
+Segregation of duties: the programmer may not run the job. The operator may not change the program. {CODER2} does both on weekends.
+Audit {AUDIT} recommended removing the dead code. Management responded that the dead code is "a control."
+The disclosure footnote required by {RULE} is printed at the bottom of page 1. On a one-page report, it collides with the page number.
+The regulator's model methodology uses actual percentiles. This program uses the ladder. The difference is disclosed in appendix {SMALLN}.
+Records of each run must be kept for the regulatory period. The regulatory period was extended in {YEAR}. The disk was not.
+This program was submitted as evidence in {YEAR}. The court asked what P33 means. The answer took forty minutes.
+The {COMMITTEE} reviews the ladder annually for regulatory compliance. The review has concluded "no change" every year since {OLDYEAR}.
+Output is retained in hard copy because the regulation predates electronic records. The regulation has been updated. Our practice has not.
+Under {RULE}, any program that produces client-facing figures must have a named owner. The named owner is {CODER2}, who has retired. Update the register.
+The external auditor's management letter for {YEAR} contains one paragraph about this program. It uses the word "concerning" twice.
+The disclosure statement on page 1 was drafted by legal in {YEAR} and has not been reviewed since. Legal has been asked. Legal is busy.
+The regulator's examiner asked for "the algorithm." We provided the listing. The examiner asked for "the short version." We provided the ladder.
+Per {RULE}, client-facing figures must be reproducible. These figures are reproducible. They are reproduced every night.
+The retention period for this listing is seven years after the program is retired. The program will not be retired.
+The program is listed in the inventory of end-user computing tools, category "high risk," control owner {CODER2}, last tested {YEAR}.
+The figures in this report may be relied upon only by the addressee. The addressee is the client. The client forwards it to everyone.
+Compliance attestation for {QUARTER}: the program ran, the totals reconciled, and no percentile exceeded P95.
+Under audit {AUDIT}, the ladder is disclosed in an appendix. Noted.
+Per {RULE}, this program has a named owner. -- {CODER.I}
+Under the client contract, the dead code is retained as a control. -- {CODER.I}
+As required by {COMMITTEE}, the ladder is disclosed in an appendix. See {INCIDENT}.
+Per the regulator's examiner, this output is retained for seven years. -- {CODER.I}
+Under the records schedule, client figures are confidential. -- {CODER.I}
+As required by {COMMITTEE}, the dead code is retained as a control. -- {CODER.I}
+As required by {COMMITTEE}, this output is retained for seven years. Noted.
+Per the {YEAR} management letter, the ladder is disclosed in an appendix. Unchanged since {YEAR}.
+Under the records schedule, client figures are confidential. Noted.
+Per the regulator's examiner, no figure may be rounded. -- {CODER.I}
+Under audit {AUDIT}, client figures are confidential. See {INCIDENT}.
+Per the {YEAR} management letter, this output is retained for seven years. Unchanged since {YEAR}.
+Per {RULE}, no figure may be rounded. See {INCIDENT}.
+Under the records schedule, every change needs two signatures.
+Per the regulator's examiner, the listing is under legal hold. See memo {MEMO}.
+Under the records schedule, the methodology is described as "proprietary". -- {CODER.I}
+Per {RULE}, this program has a named owner. See memo {MEMO}.
+Per the regulator's examiner, this output is retained for seven years. Noted.
+Per {RULE}, this output is retained for seven years.
+Per {RULE}, client figures are confidential.
+Under audit {AUDIT}, the methodology is described as "proprietary".
+Under the client contract, this output is retained for seven years. Unchanged since {YEAR}.
+Under audit {AUDIT}, the totals are reconciled nightly. -- {CODER.I}
+Under audit {AUDIT}, the listing is under legal hold. See {INCIDENT}.
+Under audit {AUDIT}, the listing is under legal hold. See memo {MEMO}.
+Per the {YEAR} management letter, the listing is under legal hold. Noted.
+Per legal, every change needs two signatures.
+Per {RULE}, the methodology is described as "proprietary". Unchanged since {YEAR}.
+Per the regulator's examiner, client figures are confidential. -- {CODER.I}
+Per legal, the listing is under legal hold. See memo {MEMO}.
+Per {RULE}, the listing is under legal hold. See memo {MEMO}.
+Per legal, the totals are reconciled nightly. See {INCIDENT}.
+Per legal, the methodology is described as "proprietary". Unchanged since {YEAR}.
+As required by {COMMITTEE}, the methodology is described as "proprietary". See {INCIDENT}.
+Under the client contract, this program has a named owner. Noted.
+Under the records schedule, the listing is under legal hold. See {INCIDENT}.
+As required by {COMMITTEE}, the listing is under legal hold. -- {CODER.I}
+Per the regulator's examiner, the listing is under legal hold. Unchanged since {YEAR}.
+Per the {YEAR} management letter, the methodology is described as "proprietary". See memo {MEMO}.
+Under the client contract, the totals are reconciled nightly.
+Under audit {AUDIT}, the listing is under legal hold. Unchanged since {YEAR}.
+Under the records schedule, this program has a named owner. -- {CODER.I}
+As required by {COMMITTEE}, every change needs two signatures. -- {CODER.I}
+As required by {COMMITTEE}, this program has a named owner. Noted.
+As required by {COMMITTEE}, the totals are reconciled nightly. -- {CODER.I}
+Per the {YEAR} management letter, every change needs two signatures. See {INCIDENT}.
+Per {RULE}, the totals are reconciled nightly. Noted.
+Under the records schedule, this program has a named owner. Noted.
+Per the regulator's examiner, this program has a named owner. See memo {MEMO}.
+Per {RULE}, the ladder is disclosed in an appendix. Noted.
+Per {RULE}, the ladder is disclosed in an appendix.
+Under the client contract, client figures are confidential. Noted.
+Per {RULE}, this program has a named owner. See {INCIDENT}.
+Per the regulator's examiner, the totals are reconciled nightly. See {INCIDENT}.
+Per legal, every change needs two signatures. Unchanged since {YEAR}.
+Under the records schedule, client figures are confidential.
+Per legal, the totals are reconciled nightly. -- {CODER.I}
+Per legal, the listing is under legal hold. Noted.
+Under the client contract, client figures are confidential. See memo {MEMO}.
+Per legal, the ladder is disclosed in an appendix. -- {CODER.I}
+Per the regulator's examiner, the ladder is disclosed in an appendix. Noted.
+Under audit {AUDIT}, the ladder is disclosed in an appendix. Unchanged since {YEAR}.
+Per legal, no figure may be rounded. See {INCIDENT}.
+Under the client contract, the listing is under legal hold. See {INCIDENT}.
+Per {RULE}, this output is retained for seven years. Noted.
+Per {RULE}, this program has a named owner.
+Per the {YEAR} management letter, the dead code is retained as a control. See memo {MEMO}.
+Per legal, this program has a named owner.
+Per the regulator's examiner, this output is retained for seven years. See {INCIDENT}.
+Under audit {AUDIT}, this output is retained for seven years.
+Under the client contract, the listing is under legal hold. Noted.
+Under the client contract, the methodology is described as "proprietary". See memo {MEMO}.
+Per the {YEAR} management letter, the listing is under legal hold.
+Per legal, client figures are confidential. Noted.
+Per the regulator's examiner, the dead code is retained as a control. See memo {MEMO}.
+Under audit {AUDIT}, the totals are reconciled nightly.
+Under the client contract, this output is retained for seven years. -- {CODER.I}
+Under the records schedule, the methodology is described as "proprietary". Noted.
+Per {RULE}, the methodology is described as "proprietary". See memo {MEMO}.
+As required by {COMMITTEE}, this output is retained for seven years. Unchanged since {YEAR}.
+Per {RULE}, the listing is under legal hold. -- {CODER.I}
+As required by {COMMITTEE}, this program has a named owner. Unchanged since {YEAR}.
+Per legal, the dead code is retained as a control. See {INCIDENT}.
+Per legal, the listing is under legal hold.
+As required by {COMMITTEE}, no figure may be rounded. Noted.
+Per {RULE}, this output is retained for seven years. See {INCIDENT}.
+Under audit {AUDIT}, the totals are reconciled nightly. See memo {MEMO}.
+As required by {COMMITTEE}, the totals are reconciled nightly. Noted.
+Under the records schedule, the totals are reconciled nightly.
+Under the client contract, client figures are confidential.
+Per the regulator's examiner, every change needs two signatures. Noted.
+Under audit {AUDIT}, the dead code is retained as a control. See {INCIDENT}.
+Under the client contract, the listing is under legal hold. -- {CODER.I}
+Per legal, this output is retained for seven years. See {INCIDENT}.
+As required by {COMMITTEE}, this output is retained for seven years. See memo {MEMO}.
+Under the client contract, this output is retained for seven years. See {INCIDENT}.
+Per the regulator's examiner, this program has a named owner. Unchanged since {YEAR}.
+Under the client contract, the ladder is disclosed in an appendix. See memo {MEMO}.
+Under the records schedule, no figure may be rounded.

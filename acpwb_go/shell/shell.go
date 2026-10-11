@@ -80,6 +80,7 @@ var footerCol1 = []navItem{
 	{"Projects", "/projects/"},
 	{"Reports", "/reports/"},
 	{"Public Policy", "/public-policy/"},
+	{"Source Code", "/source-code/"},
 	{"Archives", "/archive/"},
 }
 
@@ -137,6 +138,8 @@ type PageParams struct {
 	// Django's |default: filter behavior in base.html.
 	OGTitle       string
 	OGDescription string
+	// OGImage overrides the share image URL; empty keeps the site default.
+	OGImage string
 
 	// RequestPath is the request's full path (e.g. from
 	// request.URL.RequestURI() including any query string), used for
@@ -316,6 +319,10 @@ func RenderPage(p PageParams) string {
 	if ogDescription == "" {
 		ogDescription = defaultOGDescription
 	}
+	ogImage := p.OGImage
+	if ogImage == "" {
+		ogImage = staticOGImageURL
+	}
 	token := honeypotToken(p.RequestPath, p.RemoteAddr)
 	year := strconv.Itoa(time.Now().Year())
 
@@ -332,14 +339,14 @@ func RenderPage(p PageParams) string {
 	fmt.Fprintf(&b, `  <meta property="og:title" content="%s">`+"\n", escape(ogTitle))
 	fmt.Fprintf(&b, `  <meta property="og:description" content="%s">`+"\n", escape(ogDescription))
 	fmt.Fprintf(&b, `  <meta property="og:url" content="https://acpwb.com%s">`+"\n", escape(p.RequestPath))
-	fmt.Fprintf(&b, `  <meta property="og:image" content="%s">`+"\n", staticOGImageURL)
+	fmt.Fprintf(&b, `  <meta property="og:image" content="%s">`+"\n", escape(ogImage))
 	b.WriteString(`  <meta property="og:image:width" content="1200">` + "\n")
 	b.WriteString(`  <meta property="og:image:height" content="630">` + "\n")
 	b.WriteString("  <!-- Twitter Card -->\n")
 	b.WriteString(`  <meta name="twitter:card" content="summary_large_image">` + "\n")
 	fmt.Fprintf(&b, `  <meta name="twitter:title" content="%s">`+"\n", escape(ogTitle))
 	fmt.Fprintf(&b, `  <meta name="twitter:description" content="%s">`+"\n", escape(ogDescription))
-	fmt.Fprintf(&b, `  <meta name="twitter:image" content="%s">`+"\n", staticOGImageURL)
+	fmt.Fprintf(&b, `  <meta name="twitter:image" content="%s">`+"\n", escape(ogImage))
 
 	fmt.Fprintf(&b, "\n  <link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", staticFaviconURL)
 	fmt.Fprintf(&b, "\n  <link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", staticFontURL)

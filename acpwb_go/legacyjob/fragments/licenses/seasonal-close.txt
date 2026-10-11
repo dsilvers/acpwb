@@ -1,0 +1,8 @@
+#name: Quarter-Close Usage Terms
+#kind: proprietary
+#from: 1980
+QUARTER-CLOSE USAGE TERMS
+
+During the last ten business days of each fiscal quarter, this program is designated "close-critical." Close-critical programs may not be modified, recompiled, moved, renamed, or looked at unnecessarily. Requests to run the program outside its normal schedule must be approved by {VP}.
+
+Outside the close, the program may be used under the terms of the standard house license, which is identical to these terms, minus the anxiety.

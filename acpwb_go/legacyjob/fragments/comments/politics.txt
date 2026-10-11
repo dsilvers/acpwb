@@ -1,0 +1,211 @@
+The {DEPT} group wanted this to be their program. It is ours. This comment is the proof.
+Steering committee vote on the percentile ladder: {SMALLN} for, {SMALLN2} against, {CODER2} abstained "on principle."
+{VP} wanted the P95 column removed because it "makes people ask questions." It stays.
+This routine is a compromise between the {DEPT} group and the {INDUSTRY} practice. Both hate it equally.
+Budget for a rewrite was approved in {YEAR} and spent on a reception.
+The rewrite project ({PROJECT}) was cancelled after the kickoff lunch.
+Two departments compute this differently. This one is the one the board sees.
+{VP} asked for the numbers to be "more confident." Font size was increased.
+The {CLIENT} partner asked for the deltas to be shown in green "even the negative ones." Declined. Mostly.
+{TEAM} asked whether the P33 could be renamed P-third. It could not.
+Political note: do not mention {PROGRAM2} in front of {VP}.
+The {OLDYEAR} reorganization moved this program to {DEPT}, then back, then to {DEPT2}, then back.
+The {INDUSTRY} practice wanted its own peer group. The compromise was to rename {PEER}.
+{VP} requested that the P10 column be suppressed for executive clients. Suppressed via a very small font.
+The steering committee met {N} times to discuss the column order. The order did not change.
+This program was briefly claimed by {DEPT} during budget season. It was returned afterwards.
+Two partners disagreed about the ladder in {YEAR}. The ladder won.
+The Research Division and the {INDUSTRY} practice each believe they own this program. Both pay for it.
+Requests to add a P99 column have come from {SMALLN} different partners, each with a different client in mind.
+The program's name was chosen by a vote. {PROGRAM2} came second.
+{VP} asked that the program be described as "AI-assisted" in the {YEAR} brochure. It was not.
+Ownership of the deck format is disputed between {DEPT} and {DEPT2}. Cards are neutral.
+The decision to truncate was made in a meeting that ran until midnight. Everyone remembers it differently.
+Changes to this program require consensus. Consensus has been reached {SMALLN} times since {OLDYEAR}.
+The P33 column exists because one partner wanted thirds and another wanted quarters. Both got their way.
+{VP} forbade the phrase "legacy system." This program is a "heritage platform."
+Every reorganisation since {OLDYEAR} has moved this program to a new department and back again.
+The budget for rewriting this program was redirected to the PERCH conference in {YEAR}.
+A competing firm hired {CODER2} in {YEAR}. The program's comments were reviewed for trade secrets.
+{TEAM} asked for the output in landscape. {VP} preferred portrait. The output is 132 columns wide, which decided it.
+The rewrite proposal of {YEAR} was approved, scheduled, staffed and cancelled within a single quarter.
+The steering committee's last recorded decision: "leave it alone."
+The {DEPT} group asked to be copied on every run. They are copied. They do not read it.
+A partner once demanded the ladder be "more Midwestern." Nobody knew what that meant. Nothing changed.
+The column order was decided by seniority of the partners who requested each column.
+{VP} vetoed the color printer for this report because "green bar is tradition."
+The peer group debate of {YEAR} lasted longer than the engagement it was for.
+The program is on the agenda of every annual planning meeting. It is never discussed.
+Funding for maintenance comes from three cost centers, none of which admit it.
+Proposals to retire this program are traditionally submitted in January and withdrawn in March.
+The executive committee once requested a "simpler" version. They received the same version with fewer comments.
+{CODER2} lobbied for a P40 column for {SMALLN} years. The lobbying continues posthumously, in this comment.
+The decision to keep FORTRAN was taken by people who no longer remember taking it.
+The {INDUSTRY} practice considers this program theirs because they use it most. The Research Division considers it theirs because they pay for it.
+The rename to {PROGRAM} was a concession to the marketing department in exchange for not renaming the firm.
+A {YEAR} survey of staff ranked this program the second most feared system at the firm.
+{VP} once asked whether the output could "show more growth." It can, if the input shows more growth.
+The only unanimous decision ever made about this program was to stop holding meetings about it.
+Every new CIO has promised to replace this program. Every new CIO has been replaced first.
+{TEAM} sends a thank-you note after every run. It is pinned above the printer.
+The program's budget line was once mistaken for a typo and deleted. It was restored after quarter-end failed.
+A {YEAR} task force recommended forming a second task force.
+This change was made for {VP}, who outranks everyone who objected.
+{DEPT} and {DEPT} both claim ownership of this routine. It has two maintainers and no owner.
+Approved by {COMMITTEE} after the third presentation. The first two were "premature."
+{VP} wants this report on one page. Legal wants it on three. It is on two. Nobody is happy.
+The client relationship partner insisted on this special case. The special case pays for the {HW}.
+This routine was kept in when the rest was cut because {VP} once mentioned it in a meeting.
+We are not allowed to say the ladder is wrong. We are allowed to say it is "conservative."
+The budget for rewriting this was moved to {DEPT} in {YEAR}. {DEPT} bought a coffee machine.
+This change was pre-approved by {VP} in a hallway. There is no paper trail. This comment is the paper trail.
+{COMMITTEE} voted to keep the old output format, 4 to 3. The 3 maintain this program.
+{VP} and {VP} disagree about the definition of "baseline." The program uses both, in different places.
+This was escalated to {VP}, who escalated it back to us.
+The new format was rejected because it "looked like a competitor's." It looked like ours.
+This report goes to the board. That is why every number has a dollar sign. Board members like dollar signs.
+{DEPT} asked for this column. {DEPT} no longer exists. The column remains, as a memorial.
+The re-org of {YEAR} moved this program from {DEPT} to {DEPT}. Neither department was told.
+{VP} reads only the last line of the report. The last line is the most carefully tested line in the program.
+We added P33 and P67 so {VP} could say "eight-point ladder" at {CONFERENCE}.
+The original plan was to fix this properly. The plan was revised at {MEETING}.
+This was made configurable to settle a dispute between {CODER2} and {CODER3}. The configuration is never changed.
+Do not mention this routine to {VP}. {VP} has opinions.
+The comment that used to be here criticized {DEPT}. It has been replaced with this comment, which does not.
+This change was demanded by the {CLIENT} account team in a meeting {CODER2.I} was not invited to.
+The "quick win" from the {YEAR} offsite. It took a year.
+Approved, overruled, reinstated, and grandfathered.
+The ladder was frozen by {COMMITTEE} to avoid "the appearance of tinkering." It is now tinkered with in a separate step.
+{VP} asked whether the program could produce "better" numbers. The program produces the same numbers.
+The steering committee wants status updates on this program every {QUARTER}. The status is: it runs.
+The new manager wants a rewrite. The previous three managers also wanted a rewrite.
+This field is printed in bold because {VP} needs reading glasses but will not wear them.
+This comment was approved by {COMMITTEE}.
+The routine is called {ROUTINE} because {VP} named it in a slide deck before it was written.
+We were told to "leverage synergies" with {PROGRAM2}. We call it once and ignore the result.
+This was the subject of a turf war between {DEPT} and {DEPT} in {YEAR}. {DEPT} won. It is in {DEPT}'s listing now.
+The vendor's sales rep golfs with {VP}. That is why we use {VENDOR}.
+Legal reviewed this comment. Legal approved it. Legal would like it noted that they did not write it.
+The {INDUSTRY} practice wanted their own version of this program. They got this one with a different title line.
+This branch exists because a client once sent a letter to the CEO. The letter is in the binder.
+This program has been reorganized into {NUMWORD} different departments. It has stayed in the same dataset.
+The new VP asked to see "the system." We showed {VP} this listing. {VP} asked to see something else.
+The {YEAR} budget review proposed retiring this program. The proposal was retired.
+The {COMMITTEE} chair and the {DEPT} director have different interpretations of P33. The program prints both. One of them is labeled P33.
+This comment was softened at the request of {VP}. The original comment was accurate.
+This feature exists because a board member asked a question in {YEAR}. The question was "can it do that?" Now it can.
+Credit for this improvement was claimed by {VP} in the {YEAR} annual review. It was written by {CODER2}.
+The consultant hired in {YEAR} to evaluate this program recommended a rewrite and a second consultant.
+Two departments wanted this report on different days. It is now run on both days. Each department receives the other's copy.
+This change was described in the steering committee minutes as "minor." The minutes were written by the person who made the change.
+{VP} wants this program to be "best in class." The class has one member.
+The department was asked to "reduce headcount by automating this program." This program is the automation.
+{VP} once asked why the program needs comments. The answer was this comment.
+The {COMMITTEE} reviewed a proposal to add P99. The proposal was tabled. The table is in {PLACE}.
+The client relationship team calls this program "the methodology." The programmers call it "the job." The auditors call it "a finding."
+This routine is owned by {DEPT} on paper and by {CODER2} in practice.
+A {YEAR} reorganization moved the ladder to a different department than the program that uses it. Changes now require two sets of signatures and a mediator.
+When {VP} retired, the program was the only thing the department did not have to re-justify.
+The {YEAR} cost-cutting review listed this program as "zero cost." It runs on a machine that costs {FEE} dollars a month.
+Every new manager asks for a dashboard. The dashboard is page 1 of the report.
+Questions about the methodology are forwarded to {COMMITTEE}. {COMMITTEE} forwards them to {DEPT}. {DEPT} forwards them to {CODER2}. {CODER2} answers them.
+{VP} wants to rewrite this in {LANG2}. Declined.
+The new director took credit for this fix. See memo {MEMO}.
+The {INDUSTRY} practice lead took credit for this fix. Noted.
+{COMMITTEE} took credit for this fix. Deferred.
+The client partner blocked this change for a {QUARTER}. Approved, then reversed.
+The client partner wants a dashboard. See memo {MEMO}.
+The new director wants a new column. Noted.
+The new director wants it to "look modern". See memo {MEMO}.
+The new director wants to retire this program. Declined.
+The client partner wants a new column. Approved, then reversed.
+{COMMITTEE} wants to rewrite this in {LANG2}. Declined.
+The client partner wants to retire this program. Declined.
+{COMMITTEE} wants fewer columns. Deferred.
+{VP} wants it to "look modern". Approved, then reversed.
+The client partner wants it to run faster. See memo {MEMO}.
+The new director took credit for this fix.
+The steering committee blocked this change for a {QUARTER}. Deferred.
+{VP} wants a new column. Noted.
+The client partner wants it to run faster.
+{COMMITTEE} blocked this change for a {QUARTER}. Noted.
+The steering committee wants it to "look modern". Deferred.
+The client partner wants to retire this program. Deferred.
+{COMMITTEE} blocked this change for a {QUARTER}. Declined.
+{COMMITTEE} wants to rewrite this in {LANG2}. Deferred.
+The client partner wants this report on one page. Declined.
+The steering committee took credit for this fix. See memo {MEMO}.
+The new director blocked this change for a {QUARTER}. Declined.
+The {INDUSTRY} practice lead wants it to "look modern". Deferred.
+The {INDUSTRY} practice lead wants to rewrite this in {LANG2}. See memo {MEMO}.
+The steering committee wants it to "look modern". Declined.
+{VP} wants it to run faster.
+{COMMITTEE} wants to retire this program. Declined.
+The client partner wants this report on one page.
+The new director wants a new column. See memo {MEMO}.
+The new director wants fewer columns. Declined.
+The steering committee wants to rewrite this in {LANG2}. See memo {MEMO}.
+The steering committee wants it to "look modern".
+The steering committee wants it to "look modern". See memo {MEMO}.
+The {INDUSTRY} practice lead took credit for this fix. Approved, then reversed.
+{COMMITTEE} wants it to run faster. Deferred.
+The steering committee wants to retire this program. Noted.
+The new director wants to retire this program. See memo {MEMO}.
+The new director took credit for this fix. Noted.
+The steering committee wants it to run faster. Deferred.
+The new director wants this report on one page. Deferred.
+The new director wants it to "look modern". Approved, then reversed.
+The new director wants fewer columns. Deferred.
+The client partner wants a new column. Declined.
+The new director wants to rewrite this in {LANG2}.
+The steering committee wants fewer columns.
+{VP} wants fewer columns. Deferred.
+The {INDUSTRY} practice lead wants to rewrite this in {LANG2}.
+The client partner took credit for this fix. Deferred.
+The new director blocked this change for a {QUARTER}. See memo {MEMO}.
+The {INDUSTRY} practice lead wants it to "look modern".
+{COMMITTEE} wants fewer columns. See memo {MEMO}.
+{VP} wants this report on one page.
+{COMMITTEE} wants it to "look modern". Deferred.
+{COMMITTEE} wants to retire this program. Approved, then reversed.
+{COMMITTEE} wants it to run faster. Approved, then reversed.
+The {INDUSTRY} practice lead wants fewer columns. Approved, then reversed.
+{COMMITTEE} wants it to "look modern". Approved, then reversed.
+The {INDUSTRY} practice lead wants a dashboard. Noted.
+{VP} wants to rewrite this in {LANG2}. Approved, then reversed.
+The {INDUSTRY} practice lead wants to rewrite this in {LANG2}. Deferred.
+The client partner blocked this change for a {QUARTER}.
+The client partner wants to rewrite this in {LANG2}. Declined.
+The steering committee blocked this change for a {QUARTER}. Declined.
+The client partner wants to rewrite this in {LANG2}. Approved, then reversed.
+{VP} wants to retire this program. Deferred.
+The new director wants fewer columns. See memo {MEMO}.
+{COMMITTEE} wants it to "look modern". Noted.
+{VP} took credit for this fix. See memo {MEMO}.
+The {INDUSTRY} practice lead wants to rewrite this in {LANG2}. Noted.
+The {INDUSTRY} practice lead wants it to run faster. Deferred.
+{COMMITTEE} wants to retire this program. See memo {MEMO}.
+{COMMITTEE} wants fewer columns. Noted.
+The steering committee wants it to run faster. Noted.
+The steering committee wants this report on one page. Noted.
+{COMMITTEE} blocked this change for a {QUARTER}. See memo {MEMO}.
+The {INDUSTRY} practice lead wants this report on one page. See memo {MEMO}.
+The new director wants to rewrite this in {LANG2}. Approved, then reversed.
+The new director wants to rewrite this in {LANG2}. Declined.
+The new director took credit for this fix. Deferred.
+{VP} wants a dashboard. Deferred.
+The steering committee wants it to run faster.
+The new director wants it to run faster. Noted.
+{COMMITTEE} wants a dashboard. See memo {MEMO}.
+{COMMITTEE} wants this report on one page. Approved, then reversed.
+{VP} wants this report on one page. See memo {MEMO}.
+{VP} wants this report on one page. Deferred.
+The {INDUSTRY} practice lead wants to retire this program. Noted.
+{VP} wants to retire this program. Noted.
+{VP} wants it to "look modern". See memo {MEMO}.
+The client partner wants it to run faster. Noted.
+The steering committee wants it to "look modern". Approved, then reversed.
+{COMMITTEE} took credit for this fix. See memo {MEMO}.
+The steering committee wants fewer columns. Declined.
+The steering committee wants a dashboard. Noted.
+The steering committee wants this report on one page. See memo {MEMO}.

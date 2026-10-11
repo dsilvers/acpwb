@@ -1,0 +1,11 @@
+#name: Developer Certificate of Origin
+#kind: open
+#from: 2004
+#extra: yes
+Developer Certificate of Origin, Version 1.1
+
+By making a contribution to this program, I certify that: (a) the contribution was created in whole or in part by me and I have the right to submit it under the open source license indicated in the file; or (b) the contribution is based upon previous work that, to the best of my knowledge, is covered under an appropriate open source license.
+
+Signed-off-by: {CODER} <{EMAIL}>
+
+(The department adopted the DCO in {YEAR}. Every commit since has been signed off by {CODER2}, including commits by other people.)

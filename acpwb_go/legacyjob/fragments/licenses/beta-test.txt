@@ -1,0 +1,10 @@
+#name: Beta Test Agreement
+#kind: proprietary
+#from: 1985
+BETA TEST AGREEMENT - {PROGRAM} {REL} (PRE-RELEASE)
+
+Tester acknowledges that the Program is a pre-release version that may contain errors, may not function as described, and may produce percentiles that differ from the production version by amounts {COMMITTEE} has described as "within tolerance."
+
+Tester shall report all problems to {CODER} within {SMALLN} business days of discovery, using form {FORM}. Tester shall not use the beta version for client deliverables. Tester has used the beta version for client deliverables since {YEAR}.
+
+This agreement terminates on general availability of the Program. General availability has been announced {SMALLN} times.

@@ -1,0 +1,65 @@
+# {INCIDENT}
+the machine room flood
+1987-|the 1986 halon discharge
+the time the card reader ate the deck
+the elevator incident
+the tape library fire drill
+the raised-floor mouse
+the coffee spill on the console
+the night the operator rebooted production
+the great printer jam
+the PAYROLL/BNCHMK mix-up
+the time the wrong tape was mounted
+the parking ramp collapse scare
+the air conditioning failure
+the backhoe that cut the phone line
+the squirrel in the transformer
+the Christmas Eve abend
+the misfiled tape
+the rounding incident
+the duplicate run
+the time the output went to the client twice
+1998-|the Y2K dry run
+1999-|the leap-year scare
+2003-|the blackout
+2009-|the virus scare
+2014-|the phishing test
+2016-|the cloud migration weekend
+the night the sprinklers went off
+the day the tape library door jammed shut
+the time the job ran on the wrong calendar
+the time the printer printed in reverse
+the week the console clock was set to 1900
+the {QUARTER} rerun that nobody authorized
+the deck that was keypunched twice
+the client report mailed to the wrong client
+the time the job was submitted with yesterday's deck
+the great green-bar shortage
+the ribbon that ran out mid-page
+the night the backup tape was the only tape
+the time {CODER2} was locked in the vault
+the time the vault was left open over a weekend
+the Thanksgiving abend
+the case of the missing trailer card
+the duplicate-metric incident
+the negative-baseline incident
+the {CLIENT} name-change incident
+the time the job ran for eleven hours
+the time the job finished in four seconds
+the 2 AM fire alarm
+the cafeteria grease fire
+the frozen pipe in the ceiling above the {HW}
+the time the operator spilled {DRINK} into the card reader
+the escaped hamster from the holiday party
+the floor waxing that tripped the breakers
+the lightning strike on the antenna
+the day the parking structure flooded
+the misprinted run book
+the swapped forms tractor
+the time the wrong program was renamed {PROGRAM}
+the deleted catalog entry
+the accidental purge of the print queue
+the {MONTH} the {HW} was out for repair
+the visit from the regulators
+the visit from the client
+the visit from the board

@@ -1,0 +1,10 @@
+#name: ACPWB House License (Form L-2, Revised)
+#kind: proprietary
+#from: 2005
+{HOLDERUP} - SOFTWARE USE POLICY - FORM L-2 (REVISED)
+
+This software is a corporate asset of {HOLDER}. Use is limited to authorized personnel for authorized business purposes. Authorized business purposes are those approved by the Research Division in writing or by e-mail with a read receipt.
+
+Personnel may not copy the software to personal devices, upload it to external repositories, paste it into chat tools, or describe it in detail at {CONFERENCE}.
+
+Violations may result in disciplinary action up to and including termination, or reassignment to the maintenance of this software. Questions: {DEPT}.

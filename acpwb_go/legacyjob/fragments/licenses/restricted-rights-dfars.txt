@@ -1,0 +1,11 @@
+#name: Restricted Rights Legend (DFARS)
+#kind: proprietary
+#from: 1983
+#to: 2001
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication or disclosure by the Government is subject to restrictions as set forth in subparagraph (c)(1)(ii) of the Rights in Technical Data and Computer Software clause at DFARS 252.227-7013, or subparagraphs (c)(1) and (2) of the Commercial Computer Software - Restricted Rights clause at FAR 52.227-19, as applicable.
+
+Contractor/manufacturer: {HOLDER}, {ADDRESS}.
+
+{PROGRAM} release {REL}. Copyright (C) {YEARRANGE} {HOLDER}. Unpublished - rights reserved under the copyright laws of the United States.

@@ -1,0 +1,614 @@
+TODO: remove this before go-live. -- {CODER.I} {OLDDATE}
+TODO ({OLDYEAR}): rewrite in a modern language once one is approved.
+TODO: handle the case where {VAR} is zero. Nobody has seen it yet, but we will.
+FIXME: this breaks if there are more than {N} metrics. There are never more than {N} metrics. Yet.
+TODO: ask {CODER2} what this does before {CODER2} retires. (Update {YEAR}: too late.)
+TODO: move the percentile ladder into a table on disk. Deferred to Phase {SMALLN} of the {OLDYEAR} plan.
+FIXME: {METRIC} is labelled in dollars but is not dollars. See memo {MEMO}.
+TODO: replace with call to the corporate statistics library when it exists.
+TODO: Y2K. (Update: done, mostly. Update: see {ROUTINE}.)
+FIXME: the ordinal suffix routine produces "{N}th". Low priority per {VP}.
+TODO: get the real peer group list from {DEPT}. Using {PEER} until then.
+TODO {DATE}: document this routine. -- {CODER.I}
+FIXME: temporary workaround for {COMPILER} bug {TICKET}. Remove when fixed. It will not be fixed.
+TODO: confirm with {TEAM} whether {CLIENT} wants percentiles or percentages. They are different.
+TODO: delete dead code below. Leaving it for now in case we need it. We have not needed it since {OLDYEAR}.
+FIXME: race condition with the {DEPT} job that reads the same tape. Run ours first.
+TODO: this should be a subroutine. It is now {SMALLN} subroutines. It should be one subroutine.
+TODO: remove hard-coded {CLIENT} branch after engagement {ENGCODE} closes.
+FIXME: {VAR} overflows above {BIGN}. Nobody earns that much. (Update {YEAR}: someone did.)
+TODO: reconcile with {REPORT}.
+TODO: switch output to the new laser printer. Requires a change request on form {FORM}.
+FIXME: works on the {HW}, not on the {HW2}. We only have the {HW2}.
+TODO: write unit tests. Define "unit." Define "tests."
+TODO ({CODER.I}): understand this. Then delete this comment.
+FIXME: page eject sometimes happens one line late on the {DEPT} printer only.
+TODO: replace the hand-rolled sort with the system SORT once the license is renewed.
+TODO: make the page length a parameter. It has been 60 since {OLDYEAR}.
+FIXME: {ROUTINE} ignores its second argument. Callers keep passing it anyway.
+TODO ({YEAR}): convert to the new report standard. The new standard has since been replaced.
+TODO: add a check for duplicate metric names. {CLIENT} sent two once.
+FIXME: the trailer count is wrong when a card is skipped. Cards are never skipped. Allegedly.
+TODO: ask {TEAM} whether {METRIC} should be shown at all.
+TODO: externalise the percentile ladder. See also: every TODO since {OLDYEAR}.
+FIXME: line counter drifts by one per page on the {DEPT} printer.
+TODO: get sign-off from {VP} on the new column headings. ({VP} has left. Get sign-off from whoever is VP.)
+TODO: document the input deck format somewhere other than this comment.
+FIXME: the debug dump prints the wrong label for the P67 column.
+TODO: retire the {OLDYEAR} compatibility mode. Nobody remembers what it is compatible with.
+TODO: remove the second checksum after the auditors stop asking about the first.
+FIXME: {VAR} is uninitialised on the first pass if the deck is empty.
+TODO: support more than {N} benchmark rows. Current maximum is {N}. Current need is {SMALLN}.
+TODO: replace this comment with real documentation. Due date: {YEAR2}.
+FIXME: changing the output width breaks the microfiche index.
+TODO: handle clients whose names contain lowercase letters.
+TODO: add the P99 column if the board ever asks. The board will ask.
+FIXME: the error dispatcher does not set the condition code correctly for error {SMALLN}.
+TODO: move the client special case into a table.
+TODO: confirm that {PEER} is still a valid peer group. It may have been dissolved.
+FIXME: this loop runs one more time than necessary. Harmless. Noted since {YEAR}.
+TODO: find out who reads the trailer line.
+TODO: rewrite in {LANG2}. Signed, every new hire since {OLDYEAR}.
+FIXME: leading zeros are suppressed in the record ID. They are significant.
+TODO: rename {VAR}. Suggested names: anything else.
+TODO: verify that truncation is still mandated. See audit {AUDIT}.
+FIXME: if two metrics have the same name the second overwrites the first in the debug dump.
+TODO: check with {DEPT} whether they still use our temp file.
+TODO: stop printing the separator page. Saves {SMALLN} pages per run. Pending approval since {YEAR}.
+FIXME: {ROUTINE2} is called with arguments in the wrong order. Results are symmetric, so nobody noticed.
+TODO: implement the "what if" mode {VP} asked for in {OLDYEAR}.
+TODO: delete {ROUTINE} once confirmed unused. Confirmation pending.
+FIXME: page header shows the run date, not the data date. Clients compare them.
+TODO: convert the DATA statements to a parameter file. The parameter file will need its own DATA statements.
+TODO: add a way to rerun a single client without the whole deck.
+FIXME: on {OS}, the last line of the report is sometimes lost.
+TODO: replace the magic numbers in {ROUTINE} with named constants. Started {YEAR}. Abandoned {YEAR}.
+TODO: archive the old card decks. They are in a box labelled MISC.
+TODO: make this work with the new printer. The new printer was installed in {YEAR}.
+FIXME: the cross-check compares the ladder to itself. It should compare it to something else.
+TODO: work out why the checksum differs between the {HW} and the {HW2}.
+TODO: add validation for the peer group card. A blank peer group printed "PEER GROUP: " for a year.
+FIXME: SEAL field overflows for large decks. No deck has been large enough yet.
+TODO: train someone else on this program.
+TODO: ask legal whether "Market Benchmark" is trademarked.
+FIXME: inconsistent date formats in the history block. Pick one. Any one.
+TODO: switch to four-digit years throughout. Partially done in {Y2KYEAR}.
+TODO: confirm the numbers with {TEAM} before the {CLIENT} board meeting.
+FIXME: {METRIC} is in thousands on the input and units on the output.
+TODO: remove references to the {HW}. It was sold for scrap in {YEAR}.
+TODO: investigate why the job takes {SMALLN} times longer on the first business day.
+FIXME: commented-out code below contains the correct algorithm.
+TODO: get budget to rewrite. Budget request filed {YEAR}. Budget request lost {YEAR}.
+TODO: stop using {VAR} for two things.
+FIXME: report fails silently if the peer group card is missing.
+TODO: move the error messages into a message file. The message file would need translating.
+TODO: add a comment explaining the previous comment.
+FIXME: rounding in {ROUTINE} contradicts audit {AUDIT}.
+TODO: notify {CODER2} when the ladder changes. The ladder never changes. Notify anyway.
+TODO: make output machine readable. Clients currently retype it.
+FIXME: the program assumes exactly one peer group per deck.
+TODO: support decimal medians. Every median so far has been whole dollars. For now.
+TODO: decide whether the change column should show percentages. Decision deferred since {OLDYEAR}.
+FIXME: the job abends with {ABEND} if the deck contains a tab character.
+TODO: replace the hand-built FORMATs with a template. Once we have templates.
+TODO: write down what the error codes mean before {CODER2} retires.
+FIXME: extra blank page at the end of every run.
+TODO: check whether anyone still reads page 2.
+TODO: unify the three copies of the ladder.
+FIXME: {ROUTINE} leaks a file handle per run. The system reboots weekly, which covers it.
+TODO: remove the hard-coded record length.
+TODO: move this program to the new scheduler. The new scheduler cannot read the old JCL.
+FIXME: header alignment off by one column when the release number has a letter suffix.
+TODO: research whether the percentile ladder has a citation.
+TODO: tell {CLIENT} that their data was truncated.
+FIXME: the delta for a metric that did not change prints as +0. The client asked if that is good.
+TODO: replace the screen scrape that produces the input deck.
+TODO: figure out the units for {METRIC}.
+FIXME: the cross-reference listing is longer than the program.
+TODO: drop support for the {HW}. Support dropped {YEAR}. Code retained {YEAR}-present.
+TODO: write a proper specification. Current specification: this program.
+FIXME: sort order varies with the locale on {OS}.
+TODO: ask why the median card has seven digits but the metric cards have six.
+TODO: retire the debug dump after the {YEAR} audit closes. It closed. Retire it.
+FIXME: report header still reads "{PROGRAM} REL" plus the old release number on some printers.
+TODO: confirm the job still needs REGION=4M. Nobody knows what happens with less.
+TODO: clean up the deck of obsolete control cards.
+FIXME: the error message for code 3 is printed for code 4 too.
+TODO: produce a version of the report for mobile devices. ({YEAR}: a request was made. It was ignored.)
+TODO: remove trailing blanks from all lines. Careful: the checksum counts them.
+FIXME: {VAR} not reset between clients when run in batch mode.
+TODO: consolidate the ten nearly identical tabulation programs into one. This is one of the ten.
+TODO: archive the {OLDYEAR} test results somewhere they will not flood.
+FIXME: the trailer line misspells BENCHMARKS on the {DEPT} printer's character set.
+TODO: talk to {TEAM} about the {METRIC} spike.
+TODO: build a test deck that covers every branch. Estimated branches: {N}.
+FIXME: unreachable code after STOP in {ROUTINE}.
+TODO: make the job restartable. Currently restarts from the beginning, emotionally and literally.
+TODO: list all programs that read our output. Started a list. The list is long.
+FIXME: page eject character ignored by laser printers. Prints a literal "1".
+TODO: retire this TODO list.
+TODO: rename the output from REPORT.LIS to something that says what it is.
+FIXME: cross-check aborts the run on a mismatch that cannot occur.
+TODO: verify the leap-year routine for 2100. Delegated to whoever is here in 2100.
+TODO: use the corporate statistics package. ({YEAR}: it does not do truncation.)
+FIXME: input validation accepts negative medians.
+TODO: split the report into two reports. Or merge it with another. Pending decision.
+TODO: get the peer group list from the database instead of the card. Card is the database.
+FIXME: column header for P33 is one character too wide on some fonts.
+TODO: add a page for the methodology. Methodology: see comments.
+TODO: update the copyright line.
+FIXME: {ROUTINE2} returns before setting its output if the input is zero.
+TODO: understand what the {CLIENT} branch actually does.
+TODO: add unit labels to the output. Memo {MEMO} says they are all dollars.
+FIXME: overflow in the checksum is silently wrapped. Intentional? Unknown.
+TODO: stop emailing the report. Start printing it. Or the reverse. Await instruction.
+TODO: write the migration plan. The migration plan for the migration plan is overdue.
+FIXME: job fails when the client name begins with a number.
+TODO: find the original specification. Last seen in {BLDG}.
+TODO: confirm we are allowed to keep this listing.
+FIXME: {VAR} printed with the wrong FORMAT in the debug output.
+TODO: reduce output to one page for executives. Full output for everyone else. Same page.
+TODO: check that the record ID still matches the binder label.
+FIXME: interrupting the job leaves a lock file that stops the next run.
+TODO: look into why {CLIENT}'s deck is always one card longer.
+TODO: deprecate the debug flag. Replace with a better debug flag.
+FIXME: header says {SMALLN} pages, report has {SMALLN2}.
+TODO: compile with warnings as errors. Brave. Scheduled for {YEAR2}.
+TODO: write a README. This is the README.
+FIXME: last metric row omitted when the deck has a trailing blank card.
+TODO: replace the RANDU call. Or just delete it. It is disabled.
+TODO: get the vendor to fix ticket {TICKET}.
+FIXME: inconsistent behaviour between optimized and debug builds.
+TODO: produce a CSV version. ({YEAR}: produced. Nobody uses it. Everybody asks for it.)
+TODO: decide what happens when baseline equals current. Currently prints +0. See complaint {TICKET}.
+FIXME: one too many blank lines between the two tables.
+TODO: clean out the {N} commented-out PRINT statements.
+TODO: retire the separator banner. The mail room uses it to sort printouts. Keep the banner.
+FIXME: {ROUTINE} recomputes the ladder needlessly. Saves no time to stop it.
+TODO: confirm the data retention period for this listing.
+TODO: replace the job card account code. The account was closed in {YEAR}.
+FIXME: trailing comma in a FORMAT accepted by {COMPILER} only.
+TODO: ask {CODER2} where the other half of the routine went.
+TODO: write regression tests before changing anything. Changes were made. Tests were not.
+FIXME: deck sequence numbers out of order after the elevator incident.
+TODO: move dead code to a separate library. Library would also be dead.
+TODO: verify whether the debug checkpoint numbers mean anything.
+FIXME: accumulated rounding difference of zero dollars. Investigate anyway, per {VP}.
+TODO: apply the {YEAR} security review recommendations. Recommendation 1: delete this program.
+TODO: replace this program. (Recurring.)
+TODO: replace this with {UTILITY}. -- {CODER.I} {DATE}
+TODO ({CODER.I}, {DATE}): ask {CODER2} what {VAR} is for.
+TODO: remove {CLIENT} special case after the {QUARTER} run.
+TODO: re-validate against {MANUAL}.
+FIXME: {BUG} when the deck has more than {N} cards.
+FIXME: this breaks during {WEATHER} for reasons nobody has identified.
+TODO: get {COMMITTEE} to approve the new ladder. Again.
+TODO: migrate off {MEDIUM}.
+TODO: rewrite in {LANG2} once {VP} approves the budget.
+TODO: delete this routine after {YEAR2}.
+TODO: document this. Someone. Anyone.
+TODO: confirm with {DEPT} that nobody still reads column 73.
+XXX: this assumes the deck is sorted. The deck is not always sorted.
+XXX: {CODER2.I} says this is fine. Verify.
+TODO: handle negative baselines. They should not exist. They exist.
+TODO: find out why this is needed. Removing it breaks {PROGRAM2}.
+TODO: fix the page header for clients with names over 40 characters.
+TODO: stop printing the debug line every night. Nobody reads it. {CODER2.I} reads it.
+FIXME: {ERRMSG} on the second run of the day.
+TODO: move the constants into a BLOCK DATA. Discussed at {MEETING}, {OLDYEAR}.
+TODO: the error codes overlap with {PROGRAM2}'s. Pick new ones.
+TODO: check whether {CLIENT} still exists.
+TODO: write the test deck that the comment above refers to.
+TODO: replace the hand-rolled sort. -- {CODER.I} {OLDDATE}
+TODO: replace the hand-rolled sort. -- {CODER2.I} {DATE} (still)
+TODO: replace the hand-rolled sort. I am not doing it either. -- {CODER3.I}
+TODO: figure out what happens on leap day.
+TODO: tell {CODER2} the job runs at 2 AM now, not midnight.
+TODO: remove after audit {AUDIT} closes. (Audit {AUDIT} closed in {YEAR}.)
+TODO: get a second opinion on the rounding from someone who is not {CODER2.I}.
+TODO: when {DEPT} gets its own printer, remove the routing hack.
+TODO: see if {UTILITY} can replace the checksum routine.
+TODO: the comments in this section refer to label numbers that no longer exist.
+TODO: un-hardcode {DATASET}.
+TODO: stop using {MEDIUM} for backups.
+TODO: ask {VP} whether "all values in dollars" applies to percentages.
+FIXME: produces "142th." Ordinal suffix table only handles 1-3.
+FIXME: header prints "PAGE    0" when the report is exactly one page.
+TODO: this was supposed to be temporary. -- {CODER.I}, {OLDYEAR}
+TODO: remember why we skip the first card.
+TODO: remove the {SPORTS} pool tracker that {CODER2.I} hid in this program.
+TODO: the retry loop retries forever. Make it retry less than forever.
+TODO: when {CODER2} retires, rename all {CODER2.I}-prefixed variables. (Not before. {CODER2.I} will notice.)
+TODO: rename {ROUTINE}. It does not do what its name says.
+TODO: decide whether {VAR} is in thousands. Currently: depends.
+TODO: replace {EDITOR} line markers with something a human can read.
+FIXME: occasionally prints the previous client's name. Cosmic rays? {CODER.I}
+TODO: convert the remaining Hollerith constants. ({N} left.)
+TODO: drop support for the {HW}.
+TODO: confirm the new {HW2} gives the same answer. It does not. Find out why.
+TODO: figure out why the output is right when it should be wrong.
+TODO: when you fix the overflow, also fix the comment that says there is no overflow.
+TODO: the {QUARTER} adjustment needs to come out after the {QUARTER} run. Every year. Forever.
+TODO: put this in source control. -- {CODER.I} {DATE}
+TODO: put this in source control. -- {CODER2.I} {DATE}
+TODO: we are in source control now. Remove the TODOs about source control.
+TODO: find whoever wrote "TODO: find whoever wrote this."
+TODO: audit trail.
+TODO: audit trail for the audit trail.
+TODO: add a check for duplicate metric names. ({CLIENT} sent the same metric twice in {YEAR}.)
+TODO: if {COMMITTEE} ever ratifies the new ladder, change PCTMUL and nothing else.
+TODO: when the new building opens, update {PLACE} in the error message.
+TODO: get {CODER2.I} to explain label {LABEL}.
+FIXME: {ROUTINE} leaks a file handle every call. It is called once. Leave it.
+TODO: there is a cleaner way to do this. I saw it at {CONFERENCE}. I do not remember it.
+TODO: someone should check if the {INDUSTRY} practice still uses this field.
+TODO: use the real Julian routine instead of the one {CODER2.I} wrote.
+TODO: use the one {CODER2.I} wrote instead of the real Julian routine. (Reversed after {INCIDENT}.)
+TODO: make the page length configurable. It is 66. It will always be 66. Make it configurable anyway.
+FIXME: if {VAR} is zero the program prints "INFINITY" in a {N}-character field and the page wraps.
+TODO: revisit after {YEAR2}.
+TODO: revisit after {YEAR2}. (Revisited. Still TODO.)
+TODO: someday. -- {CODER.I}
+TODO: someday is now. -- {CODER2.I}
+TODO: not today. -- {CODER.I}
+TODO: the input deck should have a trailer card. It has a trailer card on Mondays.
+TODO: check the {CLIENT} figures against the faxed copy.
+TODO: put the magic numbers in a table. Then put the table somewhere.
+TODO: retire the {OLDYEAR} compatibility mode. Nobody has used it since {OLDYEAR}.
+TODO: fix spelling of "recieved" in the console message. Ops has scripts that grep for it. Coordinate.
+TODO: ask legal whether the comment above about {CLIENT} needs to go.
+TODO: drop the second copy of the ladder. Make sure it really is a copy first.
+TODO: handle the case where {VP} asks for "just one more column."
+TODO: tell {DEPT} the field moved.
+FIXME: the job card account number belongs to {DEPT}, which was dissolved in {YEAR}.
+TODO: support more than {N} benchmark rows. {CLIENT} wants {BIGN}.
+TODO: find the original specification. Last seen in {PLACE}.
+TODO: find out if anyone still gets the carbon copy.
+TODO: make this routine reentrant. Or at least entrant.
+TODO: replace {UTILITY} step with something supported.
+TODO: this TODO is a placeholder for a TODO that {CODER2.I} is writing.
+TODO: verify with {CODER3} before the {QUARTER} close.
+TODO: when the {HW} lease ends, delete everything below this line.
+TODO: the {HW} lease ended in {YEAR}. Everything below this line is still here.
+TODO: understand.
+TODO: sleep.
+TODO: move {DATASET} off the {DISKMODEL} before it fails. It is making the noise.
+TODO: replace the {TERMMODEL}-specific screen codes.
+TODO: stop assuming a {PRINTERMODEL}.
+TODO: raise the memory assumption above {MEMSIZE}.
+TODO: remove {KEYWORD}. -- {CODER.I} {DATE}
+TODO: rename {FIELDNAME}. (Do not rename {FIELDNAME}. -- {CODER2.I})
+TODO: read {BOOK} and then refactor this. ({CODER.I} has read {BOOK}. This has not been refactored.)
+TODO: convert {PROGRAM}{FILETYPE} to the new naming standard.
+TODO: return {CODER2.I}'s copy of {BOOK}.
+TODO: confirm that {NEIGHBORHOOD} office still exists before printing its address on the cover page.
+TODO: the {COLOR} card color code is not written down anywhere. Write it down.
+TODO: find out whether {CLIENT} still wants four copies.
+TODO: make the page header adapt to long client names instead of truncating them. (Requested {YEAR}. Requested {YEAR}. Requested {YEAR}.)
+TODO: check whether {OPCODE} is still faster than the high-level code on the {HW2}.
+TODO: replace the {REGISTER} save/restore with a proper calling convention.
+TODO: write down why we skip the first card, before {CODER2} retires.
+TODO: retire {DATASET}. It has been "retired" since {YEAR} but is still read nightly.
+TODO: figure out who gets the third copy.
+TODO: when the department moves, update {PLACE} in the console messages.
+TODO: rename the routine called TEMP. It has been permanent since {OLDYEAR}.
+TODO: retire the peer group lookup never, probably.
+TODO: remove the debug output before the next reorganization. (ticket {TICKET})
+XXX: confirm the job card before {CODER2} retires.
+TODO: replace the FORMAT widths before the {QUARTER} run. -- {CODER.I}
+TODO: re-ratify label {LABEL} after the migration to {LANG2}. (ticket {TICKET})
+XXX: retest the checksum when {CODER2} retires. (ticket {TICKET})
+FIXME: remove the ordinal suffixes if {CLIENT} renews. [still open {YEAR}]
+TODO: explain the cross-check after the migration to {LANG2}.
+FIXME: benchmark {VAR} when the {HW} goes away. -- {CODER.I}
+FIXME: rename {VAR} if {CLIENT} renews. -- {CODER.I}
+TODO: explain the overflow check when {CODER2} retires. [still open {YEAR}]
+TODO: split the ordinal suffixes when {VP} is on vacation. (ticket {TICKET})
+TODO: confirm the {QUARTER} adjustment before the {QUARTER} run. (ticket {TICKET})
+TODO: simplify the run book after the {QUARTER} run. (ticket {TICKET})
+TODO: understand {VAR} after the migration to {LANG2}. ({CODER.I}, {YEAR})
+TODO: confirm the plus signs before the next reorganization.
+TODO: replace the peer group lookup before anyone asks. -- {CODER.I}
+XXX: rewrite {ROUTINE} when {CODER2} retires. [still open {YEAR}]
+XXX: move {ROUTINE} never, probably. -- {CODER.I} {DATE}
+TODO: confirm label {LABEL} before anyone asks. ({CODER.I}, {YEAR})
+TODO: explain the cross-check if {CLIENT} renews.
+XXX: parameterize the COMMON layout before the next reorganization.
+XXX: re-ratify the test deck someday. ({CODER.I}, {YEAR})
+TODO: move the {CLIENT} branch when {CODER2} retires. -- {CODER.I} {DATE}
+FIXME: parameterize the plus signs when {VP} is on vacation.
+TODO: parameterize the plus signs when there is budget. [still open {YEAR}]
+FIXME: confirm the {QUARTER} adjustment before the {QUARTER} run. -- {CODER.I} {DATE}
+TODO: confirm the overflow check when {CODER2} retires. -- {CODER.I}
+TODO: clean up the peer group lookup when the {HW} goes away.
+TODO: understand the restart logic before the {QUARTER} run. (ticket {TICKET})
+XXX: document the trailer check before {CODER2} retires. -- {CODER.I}
+FIXME: confirm the page header after {COMMITTEE} meets. (ticket {TICKET})
+TODO: revisit the {CLIENT} branch someday. ({CODER.I}, {YEAR})
+TODO: simplify the record count before anyone asks. ({CODER.I}, {YEAR})
+XXX: document label {LABEL} when there is budget.
+XXX: un-hard-code the ordinal suffixes when the {HW} goes away. (ticket {TICKET})
+XXX: benchmark the shadow array after the migration to {LANG2}.
+TODO: rename the {UTILITY} step if {CLIENT} renews. ({CODER.I}, {YEAR})
+TODO: understand the {CLIENT} branch if {CLIENT} renews.
+TODO: understand the cross-check before the {QUARTER} run. -- {CODER.I}
+XXX: merge the seal literal after audit {AUDIT}. ({CODER.I}, {YEAR})
+XXX: re-ratify the engagement code table someday. (ticket {TICKET})
+XXX: parameterize {FIELDNAME} before the {QUARTER} run. -- {CODER.I}
+XXX: parameterize the dollar signs after the {QUARTER} run. ({CODER.I}, {YEAR})
+TODO: un-hard-code {ROUTINE} before anyone asks. -- {CODER.I}
+TODO: benchmark {VAR} when {CODER2} retires. ({CODER.I}, {YEAR})
+TODO: document the engagement code table when someone asks.
+TODO: benchmark {FIELDNAME} never, probably.
+XXX: delete the {UTILITY} step before {CODER2} retires.
+TODO: test the overflow check someday. ({CODER.I}, {YEAR})
+TODO: validate the change column before the {QUARTER} run. -- {CODER.I}
+TODO: replace the ordinal suffixes after {COMMITTEE} meets. -- {CODER.I} {DATE}
+XXX: split the {QUARTER} adjustment in {YEAR2}. -- {CODER.I} {DATE}
+TODO: rewrite the engagement code table never, probably. -- {CODER.I} {DATE}
+TODO: benchmark the date routine when someone asks.
+FIXME: retire the dead code someday. ({CODER.I}, {YEAR})
+XXX: move the restart logic never, probably. (ticket {TICKET})
+FIXME: remove {FIELDNAME} after the migration to {LANG2}. [still open {YEAR}]
+TODO: retest the ladder when someone asks. (ticket {TICKET})
+XXX: un-hard-code the tape step when there is budget. (ticket {TICKET})
+TODO: document the banner page when there is budget. ({CODER.I}, {YEAR})
+TODO: validate the sort when there is budget. (ticket {TICKET})
+TODO: validate the debug output if {CLIENT} renews. [still open {YEAR}]
+TODO: merge the dollar signs when the {HW} goes away. [still open {YEAR}]
+TODO: delete the change column before the {QUARTER} run. ({CODER.I}, {YEAR})
+TODO: split the COMMON layout after audit {AUDIT}. [still open {YEAR}]
+TODO: retire the error table after {COMMITTEE} meets. ({CODER.I}, {YEAR})
+XXX: explain the COMMON layout someday.
+TODO: re-ratify the error table before anyone asks. -- {CODER.I}
+XXX: benchmark the peer group lookup if {CLIENT} renews. -- {CODER.I} {DATE}
+TODO: simplify the checksum when someone asks. ({CODER.I}, {YEAR})
+TODO: rename the error table when there is budget.
+XXX: retest the {UTILITY} step when {CODER2} retires. (ticket {TICKET})
+TODO: understand the Julian routine when someone asks. -- {CODER.I}
+XXX: confirm the trailer check after the migration to {LANG2}. -- {CODER.I}
+TODO: revisit the debug output before the {QUARTER} run. -- {CODER.I} {DATE}
+FIXME: remove the FORMAT widths before the next reorganization. ({CODER.I}, {YEAR})
+XXX: revisit the error table someday. ({CODER.I}, {YEAR})
+TODO: explain the cross-check in {YEAR2}. -- {CODER.I} {DATE}
+TODO: rewrite the debug output when {CODER2} retires.
+TODO: simplify the {CLIENT} branch when {CODER2} retires. -- {CODER.I} {DATE}
+TODO: split the {QUARTER} adjustment in {YEAR2}. [still open {YEAR}]
+TODO: confirm the change column if {CLIENT} renews. [still open {YEAR}]
+TODO: move the page header after {COMMITTEE} meets. (ticket {TICKET})
+TODO: re-ratify the ordinal suffixes when {VP} is on vacation.
+TODO: rename the binder when there is budget.
+TODO: split the overflow check after {COMMITTEE} meets. -- {CODER.I} {DATE}
+XXX: document the error table when the {HW} goes away. (ticket {TICKET})
+TODO: benchmark the plus signs someday. -- {CODER.I} {DATE}
+TODO: replace {FIELDNAME} after the {QUARTER} run. -- {CODER.I}
+XXX: un-hard-code the trailer check before the next reorganization. -- {CODER.I}
+TODO: clean up the record count before the next reorganization. [still open {YEAR}]
+TODO: merge the tape step when {CODER2} retires. -- {CODER.I}
+TODO: benchmark the debug output when there is budget.
+TODO: explain the date routine after {COMMITTEE} meets. -- {CODER.I}
+TODO: rename the plus signs when there is budget. -- {CODER.I} {DATE}
+XXX: move the job card when the {HW} goes away. [still open {YEAR}]
+FIXME: replace the {CLIENT} branch after the migration to {LANG2}.
+TODO: un-hard-code the FORMAT widths before the next reorganization. (ticket {TICKET})
+FIXME: retire {VAR} after the {QUARTER} run. -- {CODER.I}
+TODO: merge the record count never, probably. -- {CODER.I} {DATE}
+TODO: un-hard-code the {UTILITY} step when the {HW} goes away. [still open {YEAR}]
+FIXME: replace the job card when someone asks. -- {CODER.I}
+TODO: revisit the ordinal suffixes after the {QUARTER} run. (ticket {TICKET})
+TODO: document the {QUARTER} adjustment when {VP} is on vacation. (ticket {TICKET})
+TODO: re-ratify the plus signs when {CODER2} retires. -- {CODER.I} {DATE}
+TODO: explain the trailer check after {COMMITTEE} meets. [still open {YEAR}]
+TODO: validate the change column when {VP} is on vacation. ({CODER.I}, {YEAR})
+FIXME: merge the peer group lookup after the {QUARTER} run.
+FIXME: move the {CLIENT} branch before the next reorganization. -- {CODER.I}
+FIXME: merge the run book when {CODER2} retires. -- {CODER.I} {DATE}
+TODO: retire the ladder after {COMMITTEE} meets. [still open {YEAR}]
+XXX: split the checksum in {YEAR2}. -- {CODER.I}
+TODO: understand the Julian routine after audit {AUDIT}. -- {CODER.I} {DATE}
+FIXME: understand the job card before the {QUARTER} run. -- {CODER.I} {DATE}
+XXX: clean up the FORMAT widths if {CLIENT} renews. -- {CODER.I} {DATE}
+XXX: revisit the restart logic when the {HW} goes away. ({CODER.I}, {YEAR})
+TODO: parameterize the region size when someone asks. ({CODER.I}, {YEAR})
+TODO: confirm the sort when there is budget. [still open {YEAR}]
+TODO: re-ratify the peer group lookup before anyone asks. (ticket {TICKET})
+TODO: retire the tape step when the {HW} goes away. (ticket {TICKET})
+FIXME: remove the record count when {CODER2} retires. (ticket {TICKET})
+TODO: simplify the {QUARTER} adjustment when someone asks. (ticket {TICKET})
+XXX: validate the dead code after audit {AUDIT}. ({CODER.I}, {YEAR})
+TODO: document label {LABEL} in {YEAR2}. -- {CODER.I} {DATE}
+XXX: understand the plus signs when {CODER2} retires. -- {CODER.I} {DATE}
+TODO: confirm the tape step never, probably.
+TODO: rename the ordinal suffixes after the migration to {LANG2}. ({CODER.I}, {YEAR})
+XXX: retire the restart logic after the {QUARTER} run.
+FIXME: retire {ROUTINE} before {CODER2} retires.
+TODO: document the binder before the next reorganization. [still open {YEAR}]
+FIXME: split the peer group lookup if {CLIENT} renews.
+FIXME: re-ratify the {QUARTER} adjustment after the migration to {LANG2}. (ticket {TICKET})
+TODO: re-ratify the peer group lookup never, probably.
+FIXME: benchmark the banner page someday. -- {CODER.I} {DATE}
+TODO: explain the Julian routine if {CLIENT} renews. [still open {YEAR}]
+TODO: replace the page header never, probably. [still open {YEAR}]
+TODO: re-ratify the ordinal suffixes after {COMMITTEE} meets.
+TODO: explain the {UTILITY} step in {YEAR2}.
+FIXME: split the record count before the next reorganization.
+TODO: test {VAR} never, probably. -- {CODER.I}
+TODO: parameterize the checksum when someone asks. (ticket {TICKET})
+TODO: split the {CLIENT} branch if {CLIENT} renews. (ticket {TICKET})
+TODO: revisit the sort in {YEAR2}.
+XXX: rewrite {VAR} in {YEAR2}.
+FIXME: re-ratify the sort after {COMMITTEE} meets. -- {CODER.I}
+FIXME: revisit the tape step after the migration to {LANG2}. -- {CODER.I}
+TODO: clean up the COMMON layout after the {QUARTER} run.
+TODO: simplify label {LABEL} never, probably. -- {CODER.I}
+TODO: benchmark the ordinal suffixes if {CLIENT} renews. -- {CODER.I} {DATE}
+TODO: remove the column headings before the {QUARTER} run. -- {CODER.I} {DATE}
+XXX: test the run book before anyone asks. [still open {YEAR}]
+TODO: validate the region size when someone asks. -- {CODER.I} {DATE}
+XXX: replace the {UTILITY} step in {YEAR2}. ({CODER.I}, {YEAR})
+TODO: retire the {CLIENT} branch after the migration to {LANG2}.
+XXX: retire the Julian routine in {YEAR2}. [still open {YEAR}]
+TODO: split {VAR} after the migration to {LANG2}.
+TODO: validate the plus signs when {CODER2} retires. -- {CODER.I} {DATE}
+TODO: parameterize the {QUARTER} adjustment before anyone asks. -- {CODER.I}
+TODO: retire label {LABEL} when there is budget. -- {CODER.I}
+TODO: validate the engagement code table when someone asks. ({CODER.I}, {YEAR})
+FIXME: retest the seal literal before the {QUARTER} run. [still open {YEAR}]
+TODO: retire {ROUTINE} after {COMMITTEE} meets. ({CODER.I}, {YEAR})
+XXX: simplify the debug output before anyone asks. ({CODER.I}, {YEAR})
+TODO: test the Julian routine when there is budget. ({CODER.I}, {YEAR})
+TODO: rewrite the job card after audit {AUDIT}.
+FIXME: un-hard-code the Julian routine before anyone asks. [still open {YEAR}]
+FIXME: benchmark the engagement code table when {VP} is on vacation. ({CODER.I}, {YEAR})
+TODO: merge the {QUARTER} adjustment when there is budget. [still open {YEAR}]
+FIXME: split the job card when {VP} is on vacation. -- {CODER.I} {DATE}
+XXX: explain label {LABEL} when the {HW} goes away. ({CODER.I}, {YEAR})
+XXX: merge the change column never, probably.
+TODO: move the region size when there is budget. (ticket {TICKET})
+TODO: document the checksum after the migration to {LANG2}. ({CODER.I}, {YEAR})
+TODO: delete the cross-check after {COMMITTEE} meets. [still open {YEAR}]
+TODO: un-hard-code the overflow check before anyone asks. -- {CODER.I}
+TODO: understand the test deck in {YEAR2}. -- {CODER.I} {DATE}
+TODO: revisit the COMMON layout after audit {AUDIT}. ({CODER.I}, {YEAR})
+TODO: rewrite the binder in {YEAR2}. [still open {YEAR}]
+FIXME: delete the overflow check after the {QUARTER} run. -- {CODER.I} {DATE}
+XXX: delete the dead code after the migration to {LANG2}. -- {CODER.I} {DATE}
+FIXME: split {FIELDNAME} when there is budget. (ticket {TICKET})
+TODO: confirm the tape step after the migration to {LANG2}. -- {CODER.I}
+FIXME: revisit the cross-check when the {HW} goes away. -- {CODER.I}
+TODO: parameterize {VAR} when {CODER2} retires. ({CODER.I}, {YEAR})
+FIXME: rename the dead code after {COMMITTEE} meets. ({CODER.I}, {YEAR})
+TODO: revisit label {LABEL} if {CLIENT} renews. [still open {YEAR}]
+TODO: test the debug output someday. (ticket {TICKET})
+TODO: validate the error table when someone asks. -- {CODER.I} {DATE}
+XXX: retest the seal literal when {CODER2} retires. (ticket {TICKET})
+TODO: benchmark label {LABEL} if {CLIENT} renews. -- {CODER.I} {DATE}
+TODO: re-ratify the binder when the {HW} goes away. [still open {YEAR}]
+TODO: merge the engagement code table before the {QUARTER} run. ({CODER.I}, {YEAR})
+TODO: document the change column when {VP} is on vacation. -- {CODER.I}
+TODO: move the cross-check when there is budget. (ticket {TICKET})
+TODO: test the dollar signs when {VP} is on vacation. (ticket {TICKET})
+TODO: replace {ROUTINE} before the {QUARTER} run. ({CODER.I}, {YEAR})
+TODO: confirm the binder if {CLIENT} renews. -- {CODER.I}
+TODO: retest the debug output before {CODER2} retires. [still open {YEAR}]
+XXX: un-hard-code the dead code when the {HW} goes away. [still open {YEAR}]
+XXX: re-ratify the engagement code table after {COMMITTEE} meets. -- {CODER.I}
+TODO: move the column headings after {COMMITTEE} meets. ({CODER.I}, {YEAR})
+TODO: replace the {UTILITY} step if {CLIENT} renews. (ticket {TICKET})
+FIXME: validate the test deck if {CLIENT} renews. [still open {YEAR}]
+XXX: revisit the {QUARTER} adjustment after audit {AUDIT}. (ticket {TICKET})
+FIXME: move the job card when someone asks. [still open {YEAR}]
+FIXME: move the date routine after the {QUARTER} run.
+TODO: retest the run book someday. -- {CODER.I}
+TODO: merge the {QUARTER} adjustment when someone asks. ({CODER.I}, {YEAR})
+TODO: validate the change column when {VP} is on vacation. -- {CODER.I}
+XXX: explain the dollar signs before anyone asks.
+TODO: confirm the dollar signs before the next reorganization. ({CODER.I}, {YEAR})
+TODO: remove the overflow check after the {QUARTER} run. (ticket {TICKET})
+TODO: retest the date routine before the next reorganization. (ticket {TICKET})
+TODO: retire the seal literal when {VP} is on vacation. [still open {YEAR}]
+XXX: test the dollar signs after audit {AUDIT}. (ticket {TICKET})
+TODO: confirm {ROUTINE} in {YEAR2}. ({CODER.I}, {YEAR})
+XXX: test label {LABEL} after the migration to {LANG2}.
+TODO: simplify the restart logic after audit {AUDIT}. (ticket {TICKET})
+TODO: explain the column headings when someone asks. -- {CODER.I}
+TODO: parameterize the banner page when {VP} is on vacation. -- {CODER.I}
+FIXME: simplify the column headings never, probably. ({CODER.I}, {YEAR})
+XXX: benchmark the shadow array when someone asks. [still open {YEAR}]
+TODO: replace the dollar signs when {VP} is on vacation. -- {CODER.I}
+FIXME: benchmark the date routine when {CODER2} retires. -- {CODER.I}
+TODO: understand the cross-check when {CODER2} retires. -- {CODER.I}
+TODO: test the dollar signs when {CODER2} retires. (ticket {TICKET})
+TODO: re-ratify the region size when someone asks. (ticket {TICKET})
+XXX: replace the FORMAT widths in {YEAR2}. -- {CODER.I} {DATE}
+TODO: re-ratify the error table before the next reorganization. [still open {YEAR}]
+XXX: move the page header in {YEAR2}. [still open {YEAR}]
+TODO: merge the error table when {VP} is on vacation. [still open {YEAR}]
+TODO: un-hard-code {ROUTINE} someday. -- {CODER.I} {DATE}
+TODO: move the column headings when {CODER2} retires. -- {CODER.I} {DATE}
+TODO: benchmark the region size after the migration to {LANG2}. -- {CODER.I} {DATE}
+TODO: confirm the Julian routine after audit {AUDIT}. -- {CODER.I} {DATE}
+TODO: clean up the record count when there is budget. (ticket {TICKET})
+TODO: un-hard-code the debug output before the {QUARTER} run. [still open {YEAR}]
+TODO: move the sort when there is budget. [still open {YEAR}]
+FIXME: benchmark the page header before {CODER2} retires.
+TODO: rewrite the {CLIENT} branch when the {HW} goes away.
+FIXME: remove the binder before {CODER2} retires. [still open {YEAR}]
+TODO: confirm the seal literal someday. ({CODER.I}, {YEAR})
+TODO: document {FIELDNAME} before anyone asks. ({CODER.I}, {YEAR})
+TODO: un-hard-code the column headings before {CODER2} retires. -- {CODER.I}
+FIXME: simplify the {UTILITY} step before the next reorganization. -- {CODER.I}
+TODO: delete the shadow array before the next reorganization. ({CODER.I}, {YEAR})
+TODO: remove the {CLIENT} branch after the migration to {LANG2}. ({CODER.I}, {YEAR})
+XXX: un-hard-code the dollar signs before {CODER2} retires. -- {CODER.I} {DATE}
+FIXME: merge the column headings before {CODER2} retires. ({CODER.I}, {YEAR})
+TODO: test the run book after {COMMITTEE} meets. -- {CODER.I}
+TODO: clean up the error table someday. -- {CODER.I} {DATE}
+TODO: retest {FIELDNAME} never, probably.
+TODO: revisit the FORMAT widths when {VP} is on vacation. -- {CODER.I}
+TODO: document the dollar signs in {YEAR2}.
+TODO: test the shadow array never, probably. ({CODER.I}, {YEAR})
+TODO: explain the page header when the {HW} goes away. [still open {YEAR}]
+XXX: split the binder before anyone asks. -- {CODER.I} {DATE}
+FIXME: delete the {CLIENT} branch after the {QUARTER} run. [still open {YEAR}]
+TODO: replace the {QUARTER} adjustment when someone asks. (ticket {TICKET})
+TODO: merge the cross-check after audit {AUDIT}. -- {CODER.I} {DATE}
+FIXME: document the {UTILITY} step after {COMMITTEE} meets.
+FIXME: explain the Julian routine before {CODER2} retires. -- {CODER.I}
+XXX: parameterize label {LABEL} after the migration to {LANG2}. (ticket {TICKET})
+XXX: validate the seal literal someday. (ticket {TICKET})
+TODO: parameterize the peer group lookup someday.
+TODO: move {FIELDNAME} when the {HW} goes away. ({CODER.I}, {YEAR})
+TODO: benchmark {FIELDNAME} when there is budget. -- {CODER.I}
+TODO: retire the page header when the {HW} goes away.
+TODO: rewrite the overflow check before the next reorganization. ({CODER.I}, {YEAR})
+TODO: remove the cross-check after the migration to {LANG2}. (ticket {TICKET})
+FIXME: un-hard-code the checksum when the {HW} goes away. ({CODER.I}, {YEAR})
+FIXME: move the tape step if {CLIENT} renews.
+TODO: retest the sort after audit {AUDIT}. (ticket {TICKET})
+TODO: explain the FORMAT widths when there is budget.
+FIXME: test the page header when someone asks. -- {CODER.I} {DATE}
+FIXME: retire {VAR} before the next reorganization. (ticket {TICKET})
+TODO: validate the shadow array before the {QUARTER} run. -- {CODER.I}
+TODO: document the test deck if {CLIENT} renews. -- {CODER.I}
+FIXME: retest the change column before the next reorganization. -- {CODER.I} {DATE}
+TODO: delete the ordinal suffixes after the {QUARTER} run. [still open {YEAR}]
+TODO: understand the FORMAT widths after audit {AUDIT}. [still open {YEAR}]
+TODO: un-hard-code the FORMAT widths when the {HW} goes away. -- {CODER.I} {DATE}
+TODO: replace the COMMON layout someday. (ticket {TICKET})
+TODO: simplify {FIELDNAME} before the next reorganization. ({CODER.I}, {YEAR})
+TODO: split the {QUARTER} adjustment never, probably. -- {CODER.I} {DATE}
+FIXME: remove the Julian routine never, probably. -- {CODER.I}
+XXX: confirm the peer group lookup before the {QUARTER} run. -- {CODER.I} {DATE}
+TODO: retest the dead code before anyone asks. -- {CODER.I} {DATE}
+TODO: delete the Julian routine if {CLIENT} renews.
+XXX: test the dollar signs before anyone asks. -- {CODER.I} {DATE}
+FIXME: validate the Julian routine after audit {AUDIT}.
+TODO: retire the date routine after the {QUARTER} run. (ticket {TICKET})
+FIXME: re-ratify the {QUARTER} adjustment never, probably. [still open {YEAR}]
+TODO: replace the column headings before the next reorganization. [still open {YEAR}]
+TODO: rename the date routine after the migration to {LANG2}. -- {CODER.I} {DATE}
+FIXME: simplify the engagement code table before the {QUARTER} run.
+FIXME: merge the record count when the {HW} goes away. -- {CODER.I}
+FIXME: retest label {LABEL} when there is budget. [still open {YEAR}]
+XXX: delete the checksum after audit {AUDIT}.
+TODO: un-hard-code the region size when the {HW} goes away. -- {CODER.I}
+FIXME: explain the ladder before anyone asks. (ticket {TICKET})
+FIXME: split label {LABEL} before the {QUARTER} run. ({CODER.I}, {YEAR})
+FIXME: understand the plus signs after the migration to {LANG2}. -- {CODER.I} {DATE}
+FIXME: replace the test deck when the {HW} goes away.
+TODO: test the peer group lookup someday. -- {CODER.I} {DATE}
+XXX: validate the {UTILITY} step never, probably. (ticket {TICKET})
+TODO: clean up the job card when {VP} is on vacation. (ticket {TICKET})
+TODO: merge {VAR} when there is budget.
+TODO: retest the error table someday.
+TODO: retire the change column after {COMMITTEE} meets. -- {CODER.I}
+TODO: understand the peer group lookup never, probably. -- {CODER.I}
+TODO: revisit the trailer check before anyone asks. (ticket {TICKET})
+TODO: split the {UTILITY} step when there is budget. ({CODER.I}, {YEAR})
+FIXME: revisit the FORMAT widths after the migration to {LANG2}. ({CODER.I}, {YEAR})
+FIXME: replace the banner page after the migration to {LANG2}.
+TODO: retest the page header if {CLIENT} renews. [still open {YEAR}]
+TODO: un-hard-code the engagement code table if {CLIENT} renews. -- {CODER.I}
+TODO: split the FORMAT widths before the {QUARTER} run. [still open {YEAR}]
+XXX: document the cross-check if {CLIENT} renews. (ticket {TICKET})

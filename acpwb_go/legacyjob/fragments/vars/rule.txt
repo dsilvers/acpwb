@@ -1,0 +1,9 @@
+Standard {N}
+Rule {SMALLN}.{SMALLN}
+section {SMALLN}.{SMALLN}.{SMALLN} of the DP Procedures Manual
+Policy RD-{N}
+Procedure OPS-{N}
+Guideline {SMALLN}
+the two-person rule
+the no-changes-in-December rule
+the Friday freeze

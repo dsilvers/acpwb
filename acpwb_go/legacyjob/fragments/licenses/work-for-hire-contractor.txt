@@ -1,0 +1,11 @@
+#name: Contractor Work-For-Hire Agreement
+#kind: proprietary
+#from: 1978
+#extra: yes
+INDEPENDENT CONTRACTOR - ASSIGNMENT OF RIGHTS
+
+Contractor ({CODER}, of {VENDOR}) agrees that all programs, listings, comments, decks and documentation prepared under purchase order {LICNO} are works made for hire for {HOLDER}. To the extent any such work is not a work made for hire, Contractor hereby assigns all rights in it to {HOLDER}.
+
+Contractor waives any moral rights in the comments, including the right to be identified as their author, which Contractor is nonetheless identified as, throughout.
+
+Contractor shall not reuse any portion of the Program for any other client. Contractor has since reused portions of the Program for every other client.

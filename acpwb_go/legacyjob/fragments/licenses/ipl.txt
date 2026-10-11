@@ -1,0 +1,11 @@
+#name: IBM Public License 1.0 (adapted)
+#kind: open
+#from: 1999
+#to: 2010
+THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THE PROGRAM CONSTITUTES RECIPIENT'S ACCEPTANCE OF THIS AGREEMENT.
+
+Copyright (c) {YEARRANGE} {HOLDER}. Original Contributor: {CODER}.
+
+Subject to the terms of this Agreement, each Contributor hereby grants Recipient a non-exclusive, worldwide, royalty-free copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, distribute and sublicense the Contribution.
+
+This adaptation removes the patent grant, at the request of {DEPT}, which believes the percentile ladder may be patentable.

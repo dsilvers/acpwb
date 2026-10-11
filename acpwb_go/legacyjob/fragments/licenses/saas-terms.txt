@@ -1,0 +1,13 @@
+#name: ACPWB Hosted Services Terms
+#kind: commercial
+#from: 2010
+#to: 2025
+ACPWB HOSTED TABULATION SERVICES - TERMS OF SERVICE (excerpt, rev. {DATE})
+
+The source code displayed on this page is provided for transparency only and is licensed, not sold. The tabulation service it implements is offered to Customers under the Master Services Agreement and the applicable Order Form.
+
+Customer may not (i) copy, frame or mirror any part of the source code; (ii) access the source code in order to build a competitive product or service, including any percentile ladder; (iii) use any automated means, including crawlers, scrapers or machine-learning training pipelines, to collect, index or reproduce the source code or its comments.
+
+Uptime target: {PCT}9.{SMALLN} percent, measured monthly, excluding scheduled maintenance, unscheduled maintenance, and quarter-end.
+
+These Terms are governed by the laws of the State of {STATE}. Disputes shall be resolved by binding arbitration in {CITY}, {STATE}.

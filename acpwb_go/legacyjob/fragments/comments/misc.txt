@@ -1,0 +1,126 @@
+This space intentionally left blank.
+End of routine. Thank you for reading this far. Nobody does. -- {CODER.I}
+Lunch order for the {OLDYEAR} conversion weekend: {SMALLN} pizzas, {SMALLN2} regrets.
+The coffee machine on {FLOOR} is broken again. Not related to this program. Probably.
+{CODER} was here. {DATE}.
+Happy birthday {CODER2}! (Written {DATE}. Comment never removed.)
+If found, please return this listing to room {ROOM}, {BLDG}.
+This page of the listing was used as a placemat on {DATE}. Stains are not bugs.
+Reminder: PERCH conference abstracts are due. Not related to this program.
+Overtime for this run billed to {ENGCODE}.
+Shift log: run started {TIME}, operator {CODER2}, coffee consumed: considerable.
+The listing for this job is filed under {RECORD} in cabinet {SMALLN}.
+Program {PROGRAM} release {REL}. Built {DATE}.
+"{QUOTE}" -- excerpt from the client report, pasted here so nobody has to open it.
+Contact the help desk at extension {EXT}. They will not know what this is.
+For background, see "{REPORT}" in the research archive.
+Fun fact: the {METRIC} row has been printed {N} times since {YEAR}.
+Note: {CLIENT} is pronounced the way {TEAM} says it, not the way it is spelled.
+The coffee stain on page {SMALLN} of the {OLDYEAR} listing is not part of the program.
+Lunch orders for the {YEAR} year-end run are in the binder behind the listing.
+This comment is here to make the page count even.
+Today's run brought to you by {CODER} and the letter K.
+If you can read this, you are closer to understanding this program than most.
+Remember to fill in the timesheet code {ENGCODE} for any time spent here.
+The fire drill on {DATE} interrupted the run. The job finished while everyone was outside.
+The office plant on {FLOOR} is named after this program.
+For background music while reading this listing, {CODER} recommends something long.
+This program is older than the building it now runs in.
+Blank comment card inserted to separate thoughts.
+The cafeteria menu was once accidentally fed into this program. It produced a valid report.
+Reminder: the holiday party is not a valid reason to skip quarter-end.
+The best time to run this job is early in the morning, before anyone can ask about it.
+If you are reading this on paper, please recycle responsibly. If on screen, please stop scrolling so fast.
+This line intentionally left non-blank.
+The {YEAR} softball team was named after this program. They also did not win.
+Happy {SMALLN}th anniversary to this program, which nobody celebrated.
+Note found taped to the card cabinet: "PLEASE DO NOT TAKE THE LAST BOX OF CARDS."
+On the day this was written, it snowed {SMALLN} inches in Milwaukee.
+The listing was once used as evidence that the firm had computers.
+Hello to whoever is reading this in the far future. We used cards. It was fine.
+A visiting student once asked if this was "real code." It is very real code.
+The job was briefly featured in an orientation video for new hires. The video is on VHS.
+Fun fact: the longest client name ever processed was {N} characters. It was truncated to 40.
+Please initial here if you have read this far: ____
+This file has been printed {N} times. This line has been read {SMALLN} times.
+The binder holding the listing has a crack in the spine at this exact page.
+Sticky note found on this page of the listing: "ask about the ladder." Asked. No answer.
+If you are new: welcome. If you are old: welcome back. If you are an auditor: welcome, please sit.
+The program celebrates its birthday on the date of its first successful run, which nobody recorded.
+This comment was added to see whether anyone reads the comments. Please email {EMAIL} if you do.
+The listing makes an excellent doorstop when the comments are included.
+The original deck is kept in a climate-controlled room. The current deck is kept in a drawer.
+The first person to read this whole program wins {FOOD}. Contact {CODER.I}.
+This line intentionally left blank.
+Fun fact: this program has been run more times than {CODER2} has been to {LUNCHSPOT}. That is a lot.
+Best viewed on green-bar paper.
+If found, please return to {DEPT}, {PLACE}.
+Today is {DAYNAME}. That matters for reasons explained elsewhere.
+Happy {HOLIDAY} to the night operator.
+Written during {SPORTS}. Go team.
+Written during {WEATHER}. The heat was off in {PLACE}.
+Composed with {EDITOR}, a strong cup of {DRINK}, and very little sleep.
+This comment is here to make the routine an even number of lines. {CODER2.I} likes even numbers.
+{CODER2.I}'s {PET} is the department mascot. There is a photo in {PLACE}.
+The department bowling team is named after this program.
+If you print this listing, use the good paper. It is a historical document.
+This routine is dedicated to {CODER2}, who taught me FORMAT statements.
+Run this before lunch. The output is easier to read on a full stomach.
+Reminder: {MEETING} is on {DAYNAME}. Bring the listing.
+This program contains no animal products. {CODER2.I} asked.
+The comments in this section were proofread by {CODER3}.
+This routine was written on {HOLIDAY}. It is festive.
+Word of the day: idempotent. This routine is not.
+There is a typo somewhere in this program. Find it and win {SNACK}.
+The listing for this program is used as a doorstop in {PLACE}. Please return it when finished.
+Department motto: "It ran last night."
+This loop was named "the Hobbit" because it goes there and back again.
+The cookie jar in {PLACE} is funded by a collection taken every time this job abends.
+The {SNACK} in the machine room is for operators only.
+{CODER2.I} is learning {HOBBY}. Ask about it. Then set aside an hour.
+This listing has been folded, spindled and mutilated. Please do not mutilate further.
+Please do not write on this listing in pen. Pencil only. See {RULE}.
+If the coffee machine is broken, the job will run late. Both are on the same circuit.
+The plant in {PLACE} is named {PROGRAM}. It is also maintained by {DEPT}.
+Fun fact: the percentile ladder is printed on a poster in {PLACE}. Someone added a P99 in marker.
+On a clear day you can see the lake from {PLACE}. On a cloudy day you can see this listing.
+This program is older than half the department.
+Congratulations to {CODER2.I} on {SMALLN} years of service. This routine is the cake.
+This code compiles to {N} bytes. That is about the size of a short letter.
+The office pool for the {SPORTS} is maintained in a COMMON block nobody else uses.
+Lunch order for the {QUARTER} close: {FOOD} for everyone, {SNACK} for {CODER2.I}.
+If you hear polka from {PLACE}, the job has finished. {CODER2.I}'s radio.
+The {CAR} in the loading dock belongs to {CODER2}. It is not abandoned. It is resting.
+{CODER2.I} drives {CAR}. This is relevant because the {QUARTER} decks are kept in the trunk.
+Remember to sign the card for {CODER3}. It is in {PLACE}.
+The fish tank in {PLACE} is on the same UPS as the batch server. Priorities.
+This routine runs in the time it takes to microwave {FOOD}.
+For entertainment purposes only. (Not really. See audit {AUDIT}.)
+Do not feed the operators after midnight.
+Somebody left {FOOD} in the break room fridge in {YEAR}. It is still there. It is also maintained by {DEPT}.
+Written on a {TERMMODEL} at {BAUD} during {WEATHER}. Patience was involved.
+This routine was mentioned in {MAGAZINE} in {YEAR}. Not by name. But we know.
+{CODER2.I} read about this technique in {MAGAZINE}. The technique did not survive contact with our deck.
+Recommended reading before changing this routine: {BOOK}. Mandatory reading: memo {MEMO}.
+{CODER.I} keeps a copy of {BOOK} on the desk. It is used to level the {TERMMODEL}.
+{CODER2.I} commutes on {ROAD}. If {ROAD} is closed, the job will not be checked until noon.
+Traffic on {ROAD} during {WEATHER} is the main risk to the {QUARTER} run, per {CODER2}.
+{CODER2.I} lives in {NEIGHBORHOOD} and walks to {LUNCHSPOT} every Friday. Questions on Fridays go unanswered.
+The department mood on the day this was written: {MOOD}.
+Programmer mood at time of writing: {MOOD}. -- {CODER.I}
+{EXCLAIM} This is the third time this routine has been rewritten. -- {CODER.I}
+{EXCLAIM} The deck was upside down again.
+{EXCLAIM} {CODER2.I} was right.
+{EXCLAIM} The fix worked.
+The gift basket from {CLIENT} included {CHEESE}. It was eaten during the {QUARTER} close. This routine was written the same night.
+The celebration after the first successful run in {OLDYEAR} involved {BEER} at {LUNCHSPOT}.
+{CODER2.I} bet {BEER} that this routine would not survive the {YEAR} audit. {CODER2.I} owes {CODER.I} {BEER}.
+{CODER.I} was a {JOBTITLE} when this was written. {CODER.I} is now a {JOBTITLE}. The routine has not been promoted.
+The {JOBTITLE} who approved this change is no longer with the company. The change is.
+This program has {NUMWORD} entry points. Only one is used. The other {NUMWORD} are for "flexibility."
+Rewritten in {MONTH} {YEAR}, the month nothing else happened.
+The source file is {PROGRAM}{FILETYPE}. It used to be {PROGRAM2}{FILETYPE}. Search for both.
+{FIELDNAME} is the most important variable in the program. Do not rename it. Do not reuse it. Do not make eye contact with it.
+The use of {KEYWORD} here is deliberate. {CODER2.I} would like that on the record.
+The {KEYWORD} below was approved by {COMMITTEE}, which normally forbids {KEYWORD}.
+{CODER.I} counted {NUMWORD} uses of {KEYWORD} in this program in {YEAR}. There are more now.

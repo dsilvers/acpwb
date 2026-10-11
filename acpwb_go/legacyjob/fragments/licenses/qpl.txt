@@ -1,0 +1,9 @@
+#name: Q Public License 1.0 (adapted)
+#kind: open
+#from: 1999
+#to: 2008
+Copyright (C) {YEARRANGE} {HOLDER}
+
+You may make copies of the Software and distribute them, provided that you do not modify the Software. Modifications must be distributed separately as patches, so that the original Software is always recoverable.
+
+This requirement suits the department, which has distributed this program as a sequence of patches since {OLDYEAR}. The original is in the vault. The patches are below.

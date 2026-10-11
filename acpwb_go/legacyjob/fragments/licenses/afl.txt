@@ -1,0 +1,8 @@
+#name: Academic Free License 3.0
+#kind: open
+#from: 2005
+Licensed under the Academic Free License version 3.0
+
+Licensor ({HOLDER}) grants You a worldwide, royalty-free, non-exclusive, sublicensable license to reproduce the Original Work in copies, to translate, adapt, alter, transform, modify, or arrange the Original Work, to distribute or communicate copies of the Original Work and Derivative Works to the public, to perform the Original Work publicly, and to display the Original Work publicly.
+
+The Original Work is {PROGRAM} release {REL}. Despite the name of the license, the Original Work has never been used in an academic setting. {CODER} chose it because it sounded respectable.

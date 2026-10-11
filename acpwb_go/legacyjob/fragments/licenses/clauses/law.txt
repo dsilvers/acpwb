@@ -1,0 +1,9 @@
+This Agreement is governed by the laws of the State of {STATE}. Exclusive venue lies in the courts of {COUNTY}, {STATE}.
+Any dispute shall be resolved by binding arbitration in {CITY}, {STATE}, under the rules then in effect, before a single arbitrator who understands FORTRAN.
+This Agreement shall be construed in accordance with the laws of the State of {STATE}, excluding the United Nations Convention on Contracts for the International Sale of Goods, which nobody here has read.
+The parties consent to the personal jurisdiction of the state and federal courts located in {COUNTY}.
+This Agreement is governed by the laws of the State of {STATE}, without regard to conflict of laws principles, and without regard to anyone's feelings.
+The parties submit to the exclusive jurisdiction of the state and federal courts located in {COUNTY}, {STATE}.
+Any action arising under this Agreement must be brought within one year after the cause of action arises, or within one year after anyone notices.
+Disputes shall first be referred to {COMMITTEE}, then to senior management, then to arbitration in {CITY}, and finally to the courts, by which time nobody will remember the dispute.
+The prevailing party in any action shall be entitled to its reasonable attorneys' fees, and to an apology.

@@ -1,0 +1,9 @@
+#name: Draft - Not For Distribution
+#kind: proprietary
+#from: 1975
+#extra: yes
+DRAFT - NOT FOR DISTRIBUTION - FOR DISCUSSION PURPOSES ONLY
+
+This listing is a working draft. It has not been reviewed, approved or tested. It may contain errors, omissions, and opinions. Do not quote, cite, copy, forward, or act upon this draft.
+
+This draft has been in production since {YEAR}.

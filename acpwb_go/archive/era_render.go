@@ -1,6 +1,8 @@
 package archive
 
 import (
+	"acpwb_go/legacyjob"
+
 	"fmt"
 	"strings"
 )
@@ -177,7 +179,9 @@ func RenderArchiveDefaultEra(c *EraContext) string {
 				e(r.Name), e(r.Baseline), e(r.Current), color, e(r.Delta),
 			)
 		}
-		b.WriteString(`</tbody></table></div></div>`)
+		b.WriteString(`</tbody></table></div>`)
+		b.WriteString(sourceCaptionHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL), true))
+		b.WriteString(`</div>`)
 	}
 
 	if len(c.PercentileTable) > 0 {
@@ -218,7 +222,9 @@ func RenderArchiveDefaultEra(c *EraContext) string {
 				e(r.Metric), e(r.P10), e(r.P25), e(r.P33), e(r.P50), e(r.P67), e(r.P75), e(r.P90), e(r.P95),
 			)
 		}
-		b.WriteString(`</tbody></table></div></div>`)
+		b.WriteString(`</tbody></table></div>`)
+		b.WriteString(sourceCaptionHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL), true))
+		b.WriteString(`</div>`)
 	}
 
 	fmt.Fprintf(&b,
@@ -366,6 +372,8 @@ func RenderArchiveDefaultEra(c *EraContext) string {
 		e(c.EngCode), e(c.DocVersion), c.PageCount, c.FileSizeKB, e(c.Distribution), e(rid),
 	)
 
+	b.WriteString(sourceSidebarCardHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL), rid, true))
+
 	fmt.Fprintf(&b,
 		`<div id="acpwb-archive-%s-sidebar-nav-card" style="background:rgba(128,128,128,.07);`+
 			`border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">`+
@@ -389,13 +397,15 @@ func RenderArchiveDefaultEra(c *EraContext) string {
 		rid, e(c.NextEntryURL), c.Year,
 	)
 
-	if len(c.RelatedDocs) > 0 {
+	{
 		fmt.Fprintf(&b,
 			`<div id="acpwb-archive-%s-related-docs" style="background:rgba(128,128,128,.07);`+
 				`border:1px solid rgba(128,128,128,.2);padding:1rem;margin-bottom:1rem">`+
 				`<div class="era-section-head" style="margin-bottom:.6rem">Related Documents</div>`,
 			rid,
 		)
+		b.WriteString(sourceRefEntryEraHTML(legacyjob.Identity(c.Year, c.Month, c.Day, c.Slug), sourceCodeHref(c.ExportCSVURL),
+			fmt.Sprintf("%d-%02d-%02d", c.Year, c.Month, c.Day)))
 		for _, d := range c.RelatedDocs {
 			fmt.Fprintf(&b,
 				`<a href="%s" class="era-entry-card" style="margin-bottom:.5rem">`+

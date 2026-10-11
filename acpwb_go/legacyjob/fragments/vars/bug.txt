@@ -1,0 +1,50 @@
+# {BUG}
+an off-by-one error
+an integer overflow
+a sign error
+a truncation error
+a rounding error
+an uninitialized variable
+a missing CONTINUE
+a stray period
+a missing continuation mark
+a column 73 overflow
+a mismatched COMMON block
+a subscript out of range
+a divide by zero
+a race with the print spooler
+a two-digit year
+a leap-year bug
+a typo in the format
+a hardcoded path
+a missing semicolon
+an unescaped quote
+a buffer overrun
+a memory leak
+a dangling pointer
+an infinite loop
+an implicit typing surprise
+an off-by-two error
+a fencepost error
+a misplaced decimal
+a wrong-sign change
+a stale COMMON value
+a swapped argument
+a shadowed variable
+a reused label
+a missing END IF
+an extra END IF
+a wrong FORMAT label
+a field overrun into column 73
+a misread continuation card
+a double-counted trailer
+a skipped header
+an uninitialized counter
+a mis-sized array
+a truncated client name
+an unescaped dollar sign
+a timezone error
+a daylight saving error
+a locale-dependent sort
+an integer division surprise
+a floating-point equality test

@@ -1,0 +1,18 @@
+# {EDITOR}
+-2024|ISPF EDIT
+-1995|the 029 keypunch
+-1996|WYLBUR
+-2001|EDT
+-2003|TPU
+-1998|EDLIN
+-2000|WordStar
+1985-|vi
+1985-|emacs
+1990-|the DOS EDIT command
+1995-|Notepad
+1998-|TextPad
+2001-|UltraEdit
+2004-|vim
+2009-|Notepad++
+2012-|Sublime Text
+2016-|VS Code

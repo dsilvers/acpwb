@@ -1,0 +1,194 @@
+Payroll
+Compensation Analytics
+Data Processing
+Information Systems
+Computer Operations
+Records Management
+Internal Audit
+Research Division
+Benefits Administration
+Actuarial Services
+Market Pricing
+Client Accounting
+Tabulating
+Systems Programming
+Production Control
+Quality Assurance
+Corporate Planning
+Treasury Systems
+Executive Reporting
+Statistical Services
+Human Resources Information Systems
+Office Automation
+End User Computing
+Technical Services
+Applications Development
+Management Information Systems
+Data Administration
+Report Distribution
+Microfiche Services
+Strategic Rewards
+Research Division
+Benchmark Services
+Market Pricing
+Executive Compensation
+Total Rewards Analytics
+Survey Operations
+Survey Design
+Data Control
+Data Entry
+Keypunch Services
+Tape Library
+Computer Operations
+Systems Programming
+Applications Programming
+Application Support
+Production Control
+Production Scheduling
+Quality Assurance
+Quality Control
+Methods and Standards
+Information Systems
+Management Information Systems
+Corporate Systems
+Technical Services
+Technical Support
+End User Computing
+Office Automation
+Word Processing
+Records Management
+Records Retention
+Forms Control
+Print Services
+Reprographics
+Mail Services
+Facilities
+Facilities Engineering
+Security
+Internal Audit
+External Reporting
+Financial Reporting
+Corporate Accounting
+Cost Accounting
+General Ledger
+Accounts Payable
+Accounts Receivable
+Treasury
+Tax
+Legal
+Contracts
+Procurement
+Purchasing
+Vendor Management
+Human Resources
+Benefits Administration
+HR Information Systems
+Training and Development
+Organizational Effectiveness
+Workforce Planning
+Labor Relations
+Client Services
+Client Delivery
+Engagement Management
+Account Management
+Business Development
+Marketing
+Marketing Research
+Public Relations
+Communications
+Publications
+Editorial
+Graphics
+Statistical Services
+Statistical Methods
+Economic Research
+Actuarial Services
+Pension Analytics
+Healthcare Practice
+Public Sector Practice
+Higher Education Practice
+Hospitality Practice
+Retail Practice
+Manufacturing Practice
+Financial Services Practice
+Energy Practice
+Technology Practice
+Nonprofit Practice
+Federal Practice
+State and Local Practice
+Strategy Group
+Planning
+Corporate Planning
+Long Range Planning
+Operations Research
+Decision Support
+Business Intelligence
+Data Warehouse
+Data Governance
+Data Quality
+Master Data
+Analytics Engineering
+Reporting Services
+Batch Operations
+Job Scheduling
+Change Management
+Release Management
+Configuration Management
+Disaster Recovery
+Business Continuity
+Capacity Planning
+Performance Tuning
+Database Administration
+Network Services
+Telecommunications
+Help Desk
+Desktop Support
+Infrastructure
+Platform Engineering
+Site Reliability
+DevOps
+Cloud Services
+Web Services
+Internet Group
+Intranet Committee
+Knowledge Management
+Library Services
+Archives
+Special Projects
+Office of the CIO
+Office of the CFO
+Office of the President
+Executive Office
+Board Relations
+Investor Relations
+Compliance
+Risk Management
+Enterprise Risk
+Ethics Office
+Privacy Office
+Y2K Program Office
+Conversion Team
+Migration Team
+Modernization Office
+Transformation Office
+Shared Services
+Center of Excellence
+Innovation Lab
+Skunkworks
+Night Shift
+Weekend Operations
+Second Shift
+Third Shift
+Mailroom
+Copy Center
+Distribution
+Shipping and Receiving
+Warehouse
+West Allis Annex
+Waukesha Site
+Downtown Office
+Building C Operations
+Fourth Floor
+Sixth Floor Annex
+Lower Level
+Basement Operations

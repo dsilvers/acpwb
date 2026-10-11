@@ -1,0 +1,11 @@
+#name: Monthly License Charge Terms
+#kind: commercial
+#from: 1975
+#to: 2005
+MONTHLY LICENSE CHARGE (MLC) TERMS - PROGRAM {PRODNO}
+
+{PROGRAM} is licensed on a monthly basis, priced by the MSU capacity of the designated machine. Current charge: ${FEE} per month at the {TIER} tier.
+
+Sub-capacity pricing is available upon submission of SCRT reports by the second business day of each month. Failure to submit reports results in full-capacity pricing, which is also what happened in {YEAR}.
+
+Licensee may not run {PROGRAM} on any machine whose serial number does not appear on the License Information Document, regardless of how tempting the new machine is.

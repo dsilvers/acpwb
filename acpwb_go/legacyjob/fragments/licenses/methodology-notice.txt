@@ -1,0 +1,11 @@
+#name: Benchmark Methodology Notice
+#kind: proprietary
+#from: 1979
+#extra: yes
+BENCHMARK METHODOLOGY NOTICE
+
+The percentiles produced by this program are computed by multiplying each benchmark median by a fixed ladder of eight factors (0.58, 0.78, 0.88, 1.00, 1.14, 1.28, 1.62, 1.84) ratified by the {COMMITTEE}. They are not computed from the distribution of any underlying data. Any resemblance between these percentiles and actual percentiles is coincidental.
+
+All values are reported in dollars, regardless of the unit of measure stated in the metric label. See memo {MEMO}.
+
+This notice must accompany any reproduction of the Output. It usually does not.

@@ -1,0 +1,12 @@
+#name: Machine Room Posting
+#kind: proprietary
+#from: 1966
+#to: 2002
+#extra: yes
+NOTICE TO ALL OPERATORS - POST IN MACHINE ROOM
+
+Job {PROGRAM} is a PRODUCTION job. It may be cancelled only on instruction from {CODER} or the shift supervisor. If it abends, do not resubmit. Call {PHONE}.
+
+Do not remove output from the printer until the trailer page has printed. Do not leave output unattended. Do not read the output. (Reading the output is not prohibited, it is just discouraged.)
+
+Unauthorized use of this program is prohibited and may result in disciplinary action, or being assigned to maintain it.

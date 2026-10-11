@@ -1,0 +1,8 @@
+#name: Hippocratic License 2.1 (adapted)
+#kind: noncommercial
+#from: 2019
+Copyright {YEARRANGE} {HOLDER}
+
+Permission is granted to use this software for any purpose, provided that the software is not used, by the licensee or any third party, in a manner that endangers, harms or otherwise threatens the physical, mental, economic or general well-being of individuals or groups.
+
+{HOLDER}, the American Corporation for Public Well Being, notes that this condition is consistent with its name, and inconsistent with several of its clients. The license was adopted on {DATE} and is under review by {COMMITTEE}.

@@ -1,0 +1,6 @@
+The Program is a "commercial item" consisting of "commercial computer software" and "commercial computer software documentation," as those terms are used in {FARCLAUSE}.
+Use, duplication or disclosure by the U.S. Government is subject to the restrictions set forth in {FARCLAUSE}. Contractor is {HOLDER}, {ADDRESS}.
+If the Program is acquired under contract {CONTRACT}, the Government receives only those rights granted to commercial licensees, and the comments.
+RESTRICTED RIGHTS LEGEND: Use, duplication or disclosure is subject to restrictions as set forth in subparagraph (c)(1)(ii) of the Rights in Technical Data and Computer Software clause.
+State and local government agencies may use the Program under this license on the same terms as commercial Licensees, plus one additional form.
+Nothing in this license obligates {AGENCY} to read the Program. {AGENCY} has not read the Program.

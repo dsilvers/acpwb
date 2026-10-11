@@ -1,0 +1,17 @@
+#name: End User License Agreement
+#kind: commercial
+#from: 1995
+#to: 2025
+END USER LICENSE AGREEMENT FOR {PROGRAM}
+
+IMPORTANT - READ CAREFULLY: This End User License Agreement ("EULA") is a legal agreement between you (either an individual or a single entity) and {HOLDER} for the software product identified above, which includes computer software, associated media, printed materials, the separator page, and "online" or electronic documentation ("SOFTWARE PRODUCT").
+
+BY SCROLLING TO THE BOTTOM OF THIS PAGE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS EULA. IF YOU DO NOT AGREE, SCROLL BACK UP AND PRETEND YOU NEVER SAW IT.
+
+1. GRANT OF LICENSE. {HOLDER} grants you the right to read the SOFTWARE PRODUCT on one (1) screen at a time.
+2. RESTRICTIONS. You may not reverse engineer, decompile or disassemble the SOFTWARE PRODUCT, except that you may read it, which is all anyone has ever done with it.
+3. NO RENTAL. You may not rent, lease or lend the SOFTWARE PRODUCT, or the binder it came in.
+4. TERMINATION. Without prejudice to any other rights, {HOLDER} may terminate this EULA if you fail to comply with its terms, or if {VP} has a bad day.
+5. LIMITED WARRANTY. NONE. SEE ABOVE.
+
+License ID: {LICNO}

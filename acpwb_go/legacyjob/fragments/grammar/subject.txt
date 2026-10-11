@@ -1,0 +1,1408 @@
+the percentile ladder
+this loop
+{VAR}
+the change column
+label {LABEL}
+the checksum
+routine {ROUTINE}
+the median card
+the page header
+the deck
+the P33 column
+the P95 column
+the error dispatcher
+the debug flag
+the {METRIC} row
+the client name field
+the peer group card
+the truncation step
+the second cross-check
+the record ID
+this FORMAT
+the storage layout
+the line counter
+the Julian date
+the sanity limit
+the card reader logic
+the output width
+the {CLIENT} branch
+the metric count
+the ladder constant table
+the work array
+this whole section
+the temporary error messages
+the so-called arithmetic IF
+the undocumented work arrays
+the second P25 column
+the new P90 column
+the old RANDU call
+the retry logic
+the mysterious overflow check
+the new storage map
+the so-called industry code
+the mysterious comment below
+the old work arrays
+the old client override
+the mysterious print step
+the original RANDU call
+the work arrays
+the revised output class
+the new comment above
+the mysterious retry logic
+the undocumented P75 column
+the undocumented first pass
+the original client override
+the overflow check
+the original Julian conversion
+the new tape read
+the new {PEER} cut
+the so-called peer group
+the temporary comment below
+the new arithmetic IF
+the undocumented EQUIVALENCE
+the new compile options
+the temporary loop counter
+the second baseline column
+the so-called compile options
+the new JCL
+the temporary second pass
+the original seal value
+the undocumented region size
+the so-called P90 column
+the new second pass
+the so-called loop counter
+the so-called P25 column
+the new retry logic
+the original link step
+the revised P10 column
+the old job card
+the temporary median card
+the original condition code
+the new P25 column
+the P67 column
+the RANDU call
+the {CLIENT} logic
+the undocumented P67 column
+the undocumented {METRIC} row
+the temporary ordinal suffix
+the so-called Julian conversion
+the second restart point
+the temporary change sign
+the revised debug switch
+the undocumented decimal handling
+the undocumented overflow check
+the temporary card read
+the old column alignment
+the mysterious tape read
+the mysterious change sign
+the old JCL
+the temporary region size
+the so-called time limit
+the temporary EQUIVALENCE
+the original tape read
+the separator page
+the print destination
+the so-called job card
+the old decimal handling
+the error messages
+the temporary time limit
+the so-called deck sequence numbers
+the original leap year test
+the temporary dead code
+the temporary separator page
+the undocumented engagement code
+label {LABEL2}
+the so-called trailer count
+the second shadow array
+the so-called decimal handling
+the old separator page
+this COMMON block
+the P10 column
+the comment above
+the revised leap year test
+the temporary industry code
+the negative check
+the second rounding that is not done
+the mysterious provenance seal
+the new page eject
+the second P90 column
+the new region size
+the second compile options
+the mysterious P67 column
+the mysterious Julian conversion
+the original rounding that is not done
+the original comment above
+the new P10 column
+the so-called page eject
+the engagement code
+the old negative check
+the second tape read
+the original ladder multipliers
+the revised decimal handling
+the original region size
+the trailer count
+the new comment below
+the mysterious column alignment
+the mysterious work arrays
+the new EQUIVALENCE
+this paragraph
+the mysterious arithmetic IF
+the old time limit
+the so-called JCL
+the revised shadow array
+the undocumented P90 column
+the second {CLIENT} logic
+the truncation
+the mysterious {PEER} cut
+the mysterious time limit
+the mysterious {METRIC} row
+the original P90 column
+the temporary retry logic
+the temporary debug switch
+the revised cross-reference
+the revised DO loop
+the new P67 column
+the second link step
+the mysterious comment above
+the temporary baseline column
+the second record ID
+the temporary P25 column
+the deck sequence numbers
+the old zero check
+the new truncation
+this subroutine
+the temporary work arrays
+the undocumented print step
+the mysterious loop counter
+the revised return code
+the second negative check
+the so-called print step
+the second dead code
+the revised {PEER} cut
+the second peer group
+the original P25 column
+the so-called RANDU call
+the mysterious second pass
+the original job card
+the revised deck sequence numbers
+the second page eject
+{ROUTINE2}
+the revised median card
+the second P10 column
+the original decimal handling
+the new loop counter
+the old rounding that is not done
+the so-called overflow check
+the second DO loop
+the second engagement code
+this routine
+the undocumented DO loop
+the mysterious error messages
+the JCL
+the revised first pass
+the mysterious cross-reference
+the baseline column
+the original print destination
+the original truncation
+the first pass
+the second separator page
+the {PEER} cut
+the P90 column
+the so-called first pass
+the original computed GO TO
+the old {METRIC} row
+the old card read
+the revised print destination
+the old deck sequence numbers
+the second time limit
+this FORMAT statement
+the revised error messages
+the revised page eject
+the old output class
+the revised dead code
+the original loop counter
+the undocumented dead code
+the undocumented output class
+the so-called comment above
+the undocumented debug switch
+the undocumented compile options
+the mysterious client override
+the old industry code
+the original provenance seal
+the so-called P50 column
+the cross-reference
+the dead code
+the undocumented tape read
+the undocumented comment below
+the revised current column
+the mysterious leap year test
+the temporary shadow array
+the new rounding that is not done
+this DATA statement
+the original P50 column
+the undocumented leap year test
+the so-called ladder multipliers
+the second truncation
+the temporary print destination
+the second card read
+the undocumented condition code
+the new P50 column
+the so-called {PEER} cut
+the revised storage map
+the old seal value
+the temporary engagement code
+the undocumented JCL
+the revised tape read
+the revised {CLIENT} logic
+the original compile options
+the second seal value
+the so-called return code
+the original EQUIVALENCE
+the arithmetic IF
+the original restart point
+the so-called tape read
+the so-called restart point
+the mysterious seal value
+the revised peer group
+the original record ID
+the mysterious DO loop
+the DO loop
+the comment below
+the original work arrays
+the old print step
+the undocumented second pass
+the undocumented job card
+the undocumented trailer count
+the second median card
+the original trailer count
+the mysterious separator page
+the revised {METRIC} row
+the original return code
+the temporary P50 column
+the mysterious card read
+the revised RANDU call
+the computed GO TO
+the mysterious engagement code
+the restart point
+the undocumented time limit
+the temporary print step
+the P50 column
+the temporary P10 column
+the mysterious P90 column
+the temporary P75 column
+the undocumented shadow array
+the new RANDU call
+the mysterious return code
+the new peer group
+the current column
+the temporary zero check
+the new negative check
+the revised loop counter
+the undocumented truncation
+the original {METRIC} row
+the second region size
+the revised comment below
+the new provenance seal
+the new work arrays
+the debug switch
+the second comment above
+the second print destination
+the second {PEER} cut
+the mysterious P50 column
+the so-called work arrays
+the mysterious JCL
+the original overflow check
+the second P75 column
+the revised print step
+the old computed GO TO
+the so-called second pass
+the second EQUIVALENCE
+the revised Julian conversion
+the undocumented rounding that is not done
+the temporary client override
+the peer group
+the original separator page
+the second deck sequence numbers
+the client override
+the revised P90 column
+the new deck sequence numbers
+the old EQUIVALENCE
+the mysterious zero check
+the revised computed GO TO
+the so-called column alignment
+the so-called zero check
+the undocumented storage map
+the revised time limit
+the second return code
+the so-called negative check
+the mysterious record ID
+the undocumented restart point
+the temporary page eject
+the old baseline column
+the undocumented ordinal suffix
+the new overflow check
+the second current column
+the undocumented computed GO TO
+the second industry code
+the new zero check
+the undocumented retry logic
+the temporary current column
+the old peer group
+the mysterious restart point
+the loop counter
+card {N}
+the current operator reply
+that sequence number
+the official P25 rung
+the {YEAR} ordinal suffix table
+the rewritten storage map
+the disabled vendor library
+the certified account field
+the reinstated trailer card
+this four-digit year
+this client special case
+the redundant line counter
+the unreachable column 72
+the patched arithmetic IF
+the hated blank card
+the {CLIENT}'s form number
+the old {QUARTER} adjustment
+that inner loop
+the notorious output class
+the rewritten BLOCK DATA
+the {OLDYEAR} page eject
+the unreachable message table
+the unused dead routine
+the mysterious test deck
+the temporary P10 rung
+the previous system date
+the hard-coded header card
+the certified P25 rung
+the broken error table
+the hated rule line
+{CODER2}'s workaround
+the infamous inner loop
+the commented-out operator reply
+the legacy client special case
+the second client name
+the hand-tuned step name
+the interim load module
+the original DO loop
+the original P25 rung
+the previous holiday table
+the hated column 1
+the unreachable page counter
+the new metrics table
+the legacy P90 rung
+the legacy distribution list
+the unofficial trailer card
+the {OLDYEAR} code
+the reinstated rule line
+the unapproved message table
+this optimisation level
+the {CODER2.I}'s volume serial
+the hand-tuned debug flag
+the hated continuation card
+the missing cross-reference
+this entire routine
+the hated CRC routine
+the rewritten index table
+the disabled leap-year test
+this rounding
+the shadow abend code
+the unused print queue
+the redundant tape label
+the temporary tape mount
+the interim console message
+that decimal point
+the extra pivot year
+the block above
+the uncertified sort
+the official audit trail
+everything below label {LABEL}
+the rewritten dollar sign
+this tape mount
+the beloved sign check
+that baseline column
+the beloved cost center
+the dreaded DO loop
+the dreaded P75 rung
+the temporary DD statement
+the so-called column 1
+the shadow region size
+the notorious control card
+the rewritten source deck
+the shadow two-digit year
+the duplicate EQUIVALENCE
+the unofficial input deck
+the extra page counter
+the current index table
+the extra cost center
+the temporary four-digit year
+the approved region size
+the duplicate lookup table
+the current client name
+that fiscal calendar
+the missing year-end adjustment
+the unoptimised job card
+the original metric card
+the current truncation
+the {ADJ} P90 rung
+the broken plus sign
+the mysterious abend code
+this Gaussian routine
+the unused timer
+the {CLIENT}'s return code
+the extra RANDU call
+the certified run book
+the certified DD statement
+the disabled control card
+the permanent restart logic
+the next {SMALLN} lines
+the current banner page
+the extra checkpoint
+this object deck
+the notorious checksum
+the spare two-digit year
+the unofficial seal
+the third account field
+the legacy return code
+the spare P75 rung
+the previous form number
+the {ADJ} computed GO TO
+the approved form number
+the provisional EBCDIC table
+the restored sequence number
+this block IF
+the uncertified dollar sign
+the previous column 73
+that comment card
+the hard-coded BCD routine
+the second page header
+the {CLIENT}'s console message
+the original step name
+the fixed metric card
+the optimised CRC routine
+the patched inner loop
+the unofficial audit trail
+the official header card
+the fixed audit trail
+the extra COMMON block
+column {SMALLN}
+the official {QUARTER} adjustment
+every second card
+the redundant overflow check
+the commented-out Hollerith literal
+the {YEAR} current column
+the third metric card
+this operator reply
+the approved copy count
+the mysterious CPU estimate
+the restored leap day
+the legacy record count
+the interim P10 rung
+the infamous line counter
+the original link edit
+this median card
+the old form number
+the approved P10 rung
+the reinstated symbol table
+that error table
+the rewritten column 72
+the famous P90 rung
+this column 72
+this CRC routine
+the unused Gaussian routine
+the extra DD statement
+the mysterious FORMAT statement
+the approved system date
+the {OLDYEAR} page footer
+this column 73
+this truncation
+the official pivot year
+the commented-out storage map
+the so-called test deck
+this control card
+the unoptimised output class
+whatever this is
+the fixed change column
+the optimised dataset name
+this link edit
+the temporary rounding
+the infamous tape label
+the disabled leap day
+that EBCDIC table
+the backup total line
+the unoptimised baseline column
+the beloved page header
+the provisional timer
+that plus sign
+this leap-year test
+the reinstated P50 rung
+the hard-coded shadow array
+that P50 rung
+this range check
+the disabled volume serial
+the uncertified change column
+the unofficial computed GO TO
+the spare holiday table
+the {N}th iteration
+the infamous restart logic
+the hand-tuned sanity check
+this merge
+that rounding
+the disabled checksum
+the patched link edit
+the backup holiday table
+that {QUARTER} adjustment
+the rewritten symbol table
+the uncertified dead routine
+this cross-reference
+the current fiscal calendar
+the infamous outer loop
+the redundant input deck
+the unapproved spool file
+the provisional step name
+{VAR} and its twin
+the restored RANDU call
+the unused pivot year
+the so-called pivot year
+the last card
+the shadow P50 rung
+the reinstated metrics table
+the duplicate outer loop
+the {ADJ} DD statement
+that percentile ladder
+this fiscal calendar
+the hated record ID
+the reinstated copy count
+the unofficial sequence number
+the unused decimal point
+the hand-tuned zero check
+the fixed CPU estimate
+the famous provenance seal
+the missing cross-check
+the dreaded tape label
+this DO loop
+the patched continuation card
+the beloved error table
+the disabled dataset name
+the broken P50 rung
+the missing page counter
+the notorious summary line
+the hard-coded minus sign
+that merge
+the interim CPU estimate
+the alleged DATA statement
+this region size
+the shadow line counter
+this line counter
+that header card
+the unoptimised time limit
+the current outer loop
+the backup column 1
+the {CODER2.I}'s year-end adjustment
+the patched object deck
+the undocumented continuation card
+the duplicate link edit
+that test deck
+this P10 rung
+the official banner page
+the famous metric card
+this compiler option
+the optimised four-digit year
+the restored merge
+the rewritten Gaussian routine
+the {YEAR} region size
+the notorious shadow array
+the fixed range check
+the hard-coded watermark
+the current error table
+the reinstated DATA statement
+the patched DATA statement
+the {OLDYEAR} summary line
+the missing baseline column
+the previous current column
+the disabled DO loop
+the spare rule line
+the mysterious ordinal suffix table
+the old column 72
+that COMMON block
+the {CLIENT}'s total line
+the official fiscal calendar
+{ROUTINE} and its callers
+that time limit
+the unofficial spool file
+the certified blank card
+this system date
+the broken spool file
+the {OLDYEAR} percentile ladder
+the restored job card
+the old optimisation level
+the fixed P10 rung
+the shadow current column
+the dreaded carriage control
+the old sequence number
+the spare work array
+the missing Gaussian routine
+this time limit
+that zero check
+this EQUIVALENCE
+the {YEAR} patch
+the temporary P67 rung
+the previous DATA statement
+the certified dataset name
+that work array
+the certified page header
+the hard-coded outer loop
+the {OLDYEAR} peer group
+this form number
+the restored truncation
+the optimised truncation
+the unapproved range check
+the backup output class
+the {OLDYEAR} optimisation level
+the fixed arithmetic IF
+the famous client name
+the restored client name
+this listing
+the original BLOCK DATA
+that page header
+the unapproved symbol table
+the current vendor library
+the block below
+the unused clock
+this trailer card
+this arithmetic IF
+the {YEAR} {CLIENT} branch
+the restored COMMON block
+the so-called operator reply
+the alleged BLOCK DATA
+the unused leap-year test
+the {ADJ} {CLIENT} branch
+the notorious run book
+the infamous merge
+the {MEDIUM} copy
+the unofficial median card
+that P75 rung
+the hand-tuned total line
+the {MANUAL} recommendation
+the notorious lookup table
+the missing engagement code
+the approved sanity check
+this tape label
+the {CLIENT}'s RANDU call
+the unused console message
+the shadow debug flag
+the beloved comment card
+the duplicate work array
+the shadow FORMAT statement
+the redundant column 72
+this dead routine
+this metrics table
+this CPU estimate
+the infamous truncation
+the alleged audit trail
+this {CLIENT} branch
+{PROGRAM2}
+the spare dataset name
+the notorious copy count
+this DD statement
+this error table
+the original page eject
+the uncertified shadow array
+the undocumented RANDU call
+the restored seal
+the backup P50 rung
+the restored Hollerith literal
+the rewritten test deck
+the {CLIENT}'s leap-year test
+this two-digit year
+the unreachable ordinal suffix table
+the {ADJ} minus sign
+the backup step name
+the patched line counter
+the alleged P67 rung
+that cross-check
+the uncertified EBCDIC table
+the notorious banner page
+the rewritten listing
+the approved job card
+the undocumented ordinal suffix table
+the unoptimised run book
+the provisional input deck
+the old truncation
+the second spool file
+the {ADJ} message table
+the reinstated summary line
+the optimised {QUARTER} adjustment
+the {LANG2} version
+the hated zero check
+the hand-tuned benchmark table
+the unofficial {CLIENT} branch
+this audit trail
+the previous tape mount
+the disabled cross-reference
+the unreachable cross-check
+the second leap-year test
+the mysterious rounding
+the else branch
+the fixed compiler option
+the disabled optimisation level
+the hard-coded error table
+the beloved compiler option
+the optimised region size
+the approved metrics table
+the {CLIENT}'s leap day
+the undocumented volume serial
+the spare EQUIVALENCE
+the third checkpoint
+the uncertified trailer card
+the unofficial storage map
+the certified leap-year test
+the hated index table
+the hated EQUIVALENCE
+this symbol table
+the fixed symbol table
+the uncertified zero check
+the dreaded audit trail
+the commented-out control card
+the missing fiscal calendar
+the redundant console message
+the extra provenance seal
+the unoptimised two-digit year
+this P67 rung
+the interim two-digit year
+the missing shadow array
+the permanent total line
+the duplicate column 73
+the famous source deck
+the legacy comment card
+the unreachable column 73
+the original CPU estimate
+the undocumented P33 rung
+the original spool file
+this P50 rung
+the beloved header card
+the unoptimised EQUIVALENCE
+the interim vendor library
+the disabled comment card
+the original abend code
+that dollar sign
+the first card
+the old storage map
+the permanent CRC routine
+the duplicate sanity check
+the {CLIENT}'s page counter
+the unused current column
+the approved line counter
+this comment card
+this peer group
+the backup compiler option
+the {YEAR} P90 rung
+the famous EQUIVALENCE
+the hated account field
+the hard-coded checkpoint
+this sign check
+the old distribution list
+the notorious P50 rung
+the spare FORMAT statement
+the shadow total line
+the legacy RANDU call
+this RANDU call
+the patched ordinal suffix table
+the patched summary line
+the interim FORMAT statement
+the call to {ROUTINE}
+the uncertified Hollerith literal
+the official storage map
+the uncertified year-end adjustment
+the unused benchmark table
+the broken storage map
+this holiday table
+this Hollerith literal
+this cost center
+the uncertified operator reply
+the temporary error table
+the restored work array
+that benchmark table
+line {N}
+the commented-out sign check
+the unused holiday table
+the extra shadow array
+the missing record count
+the interim DATA statement
+the previous block IF
+the dreaded sequence number
+the third plus sign
+the redundant load module
+the leap-year case
+the backup index table
+the unapproved operator reply
+that pivot year
+this print queue
+the {CODER2.I}'s cross-check
+this pivot year
+the legacy page footer
+the third record ID
+the shadow print queue
+the backup link edit
+the shadow engagement code
+the original {CLIENT} branch
+the disabled pivot year
+the alleged COMMON block
+the official sign check
+the infamous percentile ladder
+the approved carriage control
+the spare time limit
+the unoptimised record ID
+this run book
+the {HW2} port
+the certified column 72
+the unreachable lookup table
+the hand-tuned BLOCK DATA
+the provisional block IF
+that lookup table
+this index table
+the unapproved zero check
+the commented-out current column
+the {CLIENT}'s P25 rung
+page {SMALLN}
+this leap day
+the backup DO loop
+the dreaded P10 rung
+the missing EBCDIC table
+the approved P67 rung
+the approved Julian routine
+the {CODER2.I}'s total line
+the disabled header card
+the empty case
+the temporary copy count
+this P95 rung
+the undocumented summary line
+this column 1
+the notorious vendor library
+the dreaded page header
+the commented-out trailer card
+the approved timer
+the alleged job card
+the extra watermark
+the {PROGRAM2} interface
+the unreachable CRC routine
+the commented-out ordinal suffix table
+the hated checksum
+the missing P33 rung
+the third P75 rung
+this P25 rung
+the mysterious debug flag
+the reinstated column 73
+the unoptimised dollar sign
+the {OLDYEAR} lookup table
+the certified cross-check
+the broken two-digit year
+this debug flag
+the commented-out engagement code
+the {CODER2.I}'s P90 rung
+the restored pivot year
+this sort
+this cross-check
+the temporary BCD routine
+the unofficial inner loop
+the {OLDYEAR} listing
+the hated metrics table
+the missing provenance seal
+the interim run book
+the unapproved restart logic
+the {CLIENT}'s checksum
+the current P95 rung
+the {ADJ} metric card
+the extra decimal point
+the unused region size
+the unoptimised median card
+that source deck
+the {ADJ} leap day
+whatever {CODER2.I} meant here
+the previous minus sign
+the current record count
+the second dollar sign
+the backup Hollerith literal
+the redundant P33 rung
+that CRC routine
+the {OLDYEAR} trailer card
+the shadow BLOCK DATA
+the code that follows
+the fixed abend code
+the infamous P67 rung
+that two-digit year
+this {QUARTER} adjustment
+the spare leap-year test
+the {CODER2.I}'s job card
+the {YEAR} copy count
+the undocumented form number
+that year-end adjustment
+the unapproved Hollerith literal
+the {CLIENT}'s holiday table
+the unreachable P95 rung
+the uncertified checksum
+the undocumented print queue
+the {OLDYEAR} test deck
+the undocumented timer
+the {YEAR} decimal point
+this work array
+the {CLIENT}'s object deck
+the restored line counter
+this volume serial
+the hated benchmark table
+the backup overflow check
+the unofficial sort
+the {HW} version
+that banner page
+the approved page eject
+the unapproved BCD routine
+the provisional zero check
+the unused tape mount
+the hard-coded column 1
+the original account field
+the {YEAR} dead routine
+the redundant client special case
+the second ordinal suffix table
+the second plus sign
+the original minus sign
+the reinstated vendor library
+the previous four-digit year
+the second client special case
+that current column
+the {CLIENT} case
+the {CODER2.I}'s continuation card
+the original peer group
+the patched return code
+the interim print queue
+the unapproved change column
+the broken cross-reference
+the disabled page header
+the third FORMAT statement
+the so-called listing
+that client name
+the spare clock
+the permanent plus sign
+the optimised watermark
+the rewritten operator reply
+that compiler option
+the beloved rule line
+the disabled inner loop
+the {CLIENT}'s EBCDIC table
+that page eject
+the {YEAR} job card
+the optimised compiler option
+the commented-out source deck
+the {ADJ} client special case
+the undocumented sort
+this summary line
+the unoptimised trailer card
+this change column
+the second input deck
+the restored load module
+the temporary index table
+the {ADJ} BCD routine
+the alleged provenance seal
+this dataset name
+the legacy percentile ladder
+that copy count
+the shadow record count
+the mysterious metric card
+the hated dataset name
+this BCD routine
+the undocumented benchmark table
+the unapproved baseline column
+the {VENDOR} library
+the interim dollar sign
+the redundant P50 rung
+the mysterious seal
+the commented-out watermark
+the previous object deck
+the notorious console message
+the restored column 1
+the famous operator reply
+the extra tape mount
+the spare percentile ladder
+the {ADJ} truncation
+the spare CPU estimate
+the unapproved engagement code
+the notorious print queue
+the spare minus sign
+the unofficial BCD routine
+the approved plus sign
+this P75 rung
+the unused BCD routine
+the unoptimised compiler option
+the interim EBCDIC table
+the patched merge
+the certified load module
+the restored lookup table
+the backup source deck
+the official Gaussian routine
+the current tape label
+the {OLDYEAR} client special case
+the second P67 rung
+this checkpoint
+the unreachable compiler option
+the undocumented BLOCK DATA
+this page header
+the hated cross-reference
+that print queue
+the optimised metrics table
+the {CODER2.I}'s {CLIENT} branch
+the unofficial page footer
+the {CLIENT}'s current column
+that range check
+the broken continuation card
+the beloved return code
+this vendor library
+the spare tape label
+the hard-coded clock
+the unoptimised header card
+the duplicate page eject
+the shadow comment card
+the undocumented CRC routine
+this Julian routine
+the rewritten provenance seal
+the redundant P90 rung
+the temporary EBCDIC table
+the optimised sequence number
+the commented-out inner loop
+the unofficial form number
+the unreachable {QUARTER} adjustment
+the notorious rule line
+the rewritten DATA statement
+the provisional CRC routine
+the old total line
+the new column 72
+the unreachable Gaussian routine
+the optimised P33 rung
+the commented-out four-digit year
+the notorious P95 rung
+the unreachable timer
+this abend code
+the original dollar sign
+the shadow blank card
+the {OLDYEAR} BLOCK DATA
+the optimised audit trail
+the original source deck
+the approved sign check
+the rewritten step name
+the {OLDYEAR} record ID
+the {DATASET} dataset
+this header card
+this zero check
+the hard-coded truncation
+the dreaded arithmetic IF
+the unapproved abend code
+the {OLDYEAR} COMMON block
+the certified P90 rung
+the restored Julian routine
+that minus sign
+the temporary checkpoint
+this page footer
+the previous time limit
+the restored distribution list
+the famous block IF
+the original DD statement
+the previous P33 rung
+the commented-out compiler option
+the optimised leap day
+the temporary source deck
+the infamous tape mount
+that shadow array
+the broken abend code
+this dollar sign
+the hard-coded distribution list
+the {YEAR} spool file
+the new rounding
+the disabled debug flag
+the third load module
+the previous page footer
+the spare load module
+this BLOCK DATA
+the backup time limit
+the unapproved year-end adjustment
+that P95 rung
+the permanent holiday table
+the unapproved P75 rung
+the permanent Gaussian routine
+the infamous metrics table
+the rewritten peer group
+the duplicate DO loop
+this EBCDIC table
+that checkpoint
+the third object deck
+the unreachable peer group
+that index table
+the certified spool file
+the second comment card
+the dreaded dead routine
+the shadow volume serial
+this seal
+the {ADJ} column 1
+the fixed console message
+the so-called P33 rung
+this blank card
+this overflow check
+the official output class
+this record ID
+the redundant work array
+the shadow step name
+that outer loop
+the unused overflow check
+that Gaussian routine
+the rewritten {QUARTER} adjustment
+the uncertified message table
+that engagement code
+the {CODER2.I}'s minus sign
+the commented-out object deck
+{CODER2}'s loop
+the third vendor library
+the previous restart logic
+the certified zero check
+the notorious change column
+the {CLIENT}'s banner page
+this page counter
+the {CODER2.I}'s block IF
+the mysterious link edit
+the approved page counter
+the hand-tuned Julian routine
+the backup checkpoint
+this continuation card
+the previous inner loop
+this message table
+the unused {QUARTER} adjustment
+the certified baseline column
+the disabled P10 rung
+the loop at label {LABEL}
+the {YEAR} percentile ladder
+the code that preceded this
+the hated job card
+the hated EBCDIC table
+the hard-coded sort
+the unoptimised test deck
+the disabled shadow array
+the shadow COMMON block
+this sanity check
+the unoptimised {QUARTER} adjustment
+the fixed tape mount
+the broken header card
+the reinstated region size
+the interim output class
+this output class
+the uncertified column 73
+this shadow array
+the commented-out CRC routine
+this benchmark table
+the patched sort
+the third seal
+the certified error table
+the alleged run book
+the unofficial block IF
+the third engagement code
+the previous optimisation level
+the official client name
+this spool file
+the backup print queue
+the temporary decimal point
+the uncertified lookup table
+the disabled rounding
+the third {CLIENT} branch
+the hand-tuned output class
+this plus sign
+this year-end adjustment
+the third four-digit year
+the hard-coded sequence number
+the disabled dead routine
+the {ADJ} object deck
+that computed GO TO
+the then branch
+the unoptimised work array
+the redundant form number
+the famous record ID
+the mysterious P95 rung
+the rewritten P75 rung
+the patched input deck
+the famous cross-reference
+this provenance seal
+the {CLIENT}'s step name
+the restored page footer
+the default case
+the restored dead routine
+the duplicate overflow check
+the unoptimised P10 rung
+the restored fiscal calendar
+the {OLDYEAR} arithmetic IF
+the infamous P25 rung
+the infamous watermark
+the routine {ROUTINE}
+the commented-out baseline column
+the hand-tuned range check
+the permanent sign check
+the rewritten sort
+the legacy control card
+the restored column 73
+this step name
+the alleged engagement code
+the {OLDYEAR} account field
+the hand-tuned volume serial
+the missing computed GO TO
+the unapproved plus sign
+the unoptimised blank card
+the interim cross-check
+the infamous client special case
+the overflow case
+the unoptimised sort
+the certified output class
+the beloved watermark
+the disabled seal
+this computed GO TO
+the alleged fiscal calendar
+the spare continuation card
+the hard-coded symbol table
+the commented-out abend code
+the so-called P95 rung
+the unoptimised year-end adjustment
+the fall-through
+the official overflow check
+the {CLIENT}'s seal
+that blank card
+the old pivot year
+the legacy watermark
+the hated checkpoint
+the redundant peer group
+the famous P75 rung
+the undocumented restart logic
+the shadow provenance seal
+the famous change column
+the alleged tape label
+the dreaded copy count
+the broken sequence number
+the hand-tuned FORMAT statement
+this account field
+the missing distribution list
+this record count
+the mysterious lookup table
+the unoptimised message table
+the notorious account field
+the unused return code
+the restored P33 rung
+the rewritten RANDU call
+the fixed restart logic
+the old block IF
+this watermark
+that checksum
+the disabled Julian routine
+the hated outer loop
+this current column
+the optimised merge
+this P90 rung
+the so-called BCD routine
+this banner page
+the notorious cross-check
+that optimisation level
+the shadow change column
+the uncertified page counter
+the infamous peer group
+the {OLDYEAR} timer
+the alleged header card
+the spare merge
+the third peer group
+this distribution list
+the approved outer loop
+the current cost center
+the fixed control card
+the unofficial range check
+the extra optimisation level
+the patched run book
+the undocumented range check
+the missing summary line
+the restored column 72
+the previous carriage control
+the certified rounding
+the disabled summary line
+this restart logic
+the commented-out fiscal calendar
+the famous control card
+the {UTILITY} step
+the shadow listing
+this rule line
+the rewritten cross-reference
+the unapproved client special case
+this inner loop
+the third time limit
+the permanent leap day
+iteration zero
+the rewritten load module
+the old page counter
+this copy count
+the undocumented source deck
+the beloved blank card
+that arithmetic IF
+{ROUTINE}
+the patched P25 rung
+the spare inner loop
+the beloved COMMON block
+the mysterious DD statement
+the unapproved rounding
+the patched system date
+the mysterious dead routine
+the negative case
+the {CLIENT}'s page header
+the beloved clock
+the {OLDYEAR} decimal point
+the patched page footer
+the disabled percentile ladder
+the provisional sanity check
+the variable {VAR}
+the dreaded dataset name
+the redundant range check
+the permanent audit trail
+the shadow seal
+the hard-coded block IF
+that RANDU call
+the beloved P95 rung
+the fixed blank card
+the provisional client name
+the restored cross-reference
+the redundant decimal point
+this load module
+the unapproved sanity check
+the unofficial record count
+the second print queue
+the alleged copy count
+the shadow link edit
+the dreaded P50 rung
+the temporary blank card
+the famous return code
+the second benchmark table
+the unreachable control card
+the notorious page header
+the restored cost center
+the unapproved object deck
+the unapproved error table
+the hard-coded four-digit year
+the redundant shadow array
+the unofficial merge
+this lookup table
+the {CLIENT}'s range check
+the third work array
+this job card
+the {CODER2.I}'s clock
+the approved link edit
+the temporary client name
+the redundant volume serial
+the official percentile ladder
+the fixed record count
+the provisional cost center
+the {ADJ} median card
+the commented-out carriage control
+the provisional comment card
+the hated sign check
+the unofficial metrics table
+the rewritten DD statement
+the legacy engagement code
+the alleged message table

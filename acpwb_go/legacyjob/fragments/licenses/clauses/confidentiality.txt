@@ -1,0 +1,18 @@
+The Program, including its structure, sequence, organization and comments, constitutes confidential information and trade secrets of Licensor.
+Licensee shall protect the Program with at least the degree of care it uses to protect its own payroll data, and in no event less than reasonable care.
+Licensee shall store all listings in a locked cabinet when not in use. The key shall not be kept on top of the cabinet.
+Confidentiality obligations survive termination of this Agreement for a period of {N} years, or until the Program is no longer embarrassing, whichever is later.
+Licensee shall promptly notify Licensor of any unauthorised disclosure, including disclosure by photocopier, fax, or the open window in {BLDG}.
+Licensee acknowledges that the comments in the Program may refer to identifiable individuals and agrees not to contact them.
+Printed listings must be shredded, not recycled. Microfiche must be returned. Cards must be accounted for by count.
+Licensee shall disclose the Program only to employees who need to know it, and shall inform each of them that knowing it is a burden.
+Licensee shall not discuss the Program in elevators, cafeterias, or at {LUNCHSPOT}.
+Confidentiality obligations survive termination of this Agreement for as long as the Program remains in use anywhere, which is indefinitely.
+Licensee shall promptly notify Licensor of any unauthorized disclosure, including disclosure by a crawler, robot, scraper or similar device.
+The Program shall be stored in a locked cabinet, a locked tape library, or a locked file system. Two of the three are recommended.
+Listings shall be shredded when no longer needed. Listings are always needed.
+Licensee acknowledges that the comments in the Program reveal internal matters of Licensor, including the existence of {COMMITTEE}, and shall keep them confidential.
+The obligations of this section do not apply to information that is or becomes public through no fault of Licensee, such as this listing, which is on a website.
+Licensee shall mark all copies "CONFIDENTIAL" in letters at least as large as the client's name.
+Licensee shall not leave the listing on the printer.
+Licensee shall require each person granted access to the Program to sign form {FORM} and to return it to {DEPT}.

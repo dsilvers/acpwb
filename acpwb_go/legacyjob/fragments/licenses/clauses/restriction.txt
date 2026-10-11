@@ -1,0 +1,39 @@
+Licensee shall not modify, translate, adapt or create derivative works of the Program, including by rounding any figure it produces.
+Licensee shall not reverse engineer the percentile ladder, which is supplied in the clear and may not be understood.
+Licensee shall not sublicense, rent, lease, lend or time-share the Program, or offer it as a service bureau.
+Licensee shall not remove, obscure or alter any proprietary notice, comment, revision history entry or apology contained in the Program.
+Licensee shall not use the Program to benchmark the compensation of Licensor's own employees.
+Licensee shall not port the Program to any language other than the one in which it was delivered.
+Licensee shall not transfer the Program to any computer outside the State of {STATE} without written consent.
+Licensee shall not publish the results of any performance benchmark of the Program, which runs in {CPU} CPU seconds and is embarrassed about it.
+Licensee shall not disclose the existence of label {LABEL} to any third party.
+Licensee shall not use the Program in connection with nuclear facilities, aircraft navigation, life support, or year-end bonuses.
+Licensee shall not feed the Program input decks prepared by any competitor of Licensor.
+Licensee shall not collect, crawl, scrape or index the Program by automated means, nor include it in any training corpus.
+Licensee shall not remove the RANDU routine, which is disabled but culturally significant.
+Licensee shall not translate the comments into any language, including plain English.
+Licensee shall not exhibit the listing at trade shows, conferences, or the PERCH annual dinner.
+Licensee shall not remove, obscure or alter any proprietary notice, seal, watermark or comment contained in the Program.
+Licensee shall not use the Program to operate a service bureau or time-sharing service, or to tabulate benchmarks for a competitor of Licensor.
+Licensee shall not disassemble, decompile or reverse engineer the load module. The source is right here. There is no need.
+Licensee shall not publish benchmarks of the Program's performance without Licensor's prior written consent.
+Licensee shall not use the Program in the operation of nuclear facilities, aircraft navigation, life support systems, or salary negotiations.
+Licensee shall not translate the Program into any other programming language, including {LANG2}, without permission.
+Licensee shall not combine the Program with any program licensed under terms that would require disclosure of the Program.
+Licensee shall not run the Program on {HOLIDAY}.
+Licensee shall not alter the percentile ladder, including by multiplying it by one.
+Licensee shall not use the Program to compute any percentile above P95.
+Licensee shall not change the number of lines per page, which is 66.
+Licensee shall not export any comment from the Program to any presentation, newsletter or slide deck.
+Licensee shall not rent, lease, lend, sell, sublicense, assign or otherwise transfer the Program, or leave it on a bus.
+Licensee shall not use the Program to develop a competing product, including a spreadsheet.
+Licensee shall not permit any person to keypunch the Program who has not signed the confidentiality acknowledgement.
+Licensee shall not use any name, trademark or logo of Licensor in connection with any Output, except as required by the Output notice.
+Licensee shall not attempt to circumvent the checksum, which does nothing, but is nonetheless protected.
+Licensee shall not reproduce the Program on any medium capable of being read outside the Site, including on {MEDIUM}.
+Licensee shall not provide the Program to any automated system for the purpose of analysis, summarization or imitation.
+Licensee shall not quote the comments out of context. Licensee shall not quote them in context either.
+Licensee shall not run more than one copy of the Program at a time, because the copies argue.
+Licensee shall not remove the dead code, which forms part of the Program's character.
+Licensee shall not rename the Program, its routines, or its variables, all of which were named with care, or at least named.
+Licensee shall not use the Program while operating heavy machinery.

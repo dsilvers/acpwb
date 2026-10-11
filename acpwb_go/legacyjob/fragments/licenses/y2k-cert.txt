@@ -1,0 +1,9 @@
+#name: Year 2000 Readiness Disclosure
+#kind: proprietary
+#from: 1998
+#extra: yes
+YEAR 2000 READINESS DISCLOSURE (Year 2000 Information and Readiness Disclosure Act of 1998)
+
+{HOLDER} has reviewed {PROGRAM} for Year 2000 compliance. Two-digit year fields have been expanded or windowed (pivot {PIVOT}). Date arithmetic has been tested across the century boundary, including 29 February 2000. Certificate: {CERT}.
+
+This statement is a Year 2000 Readiness Disclosure. It does not constitute a warranty. It does not extend any existing warranty. It does not mean anything in particular after 31 December 2000, a date which has passed without incident, thanks to the Task Force.

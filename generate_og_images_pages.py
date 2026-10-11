@@ -94,6 +94,20 @@ _PAGES = [
         'scene': 'institutional archive room, rows of filing cabinets and binders, single focused desk lamp, organized and serious',
     },
     {
+        'slug': 'source-code',
+        'title': 'Source Code — ACPWB Research Division',
+        'description': (
+            'Legacy batch job listings behind four decades of ACPWB benchmark tables: '
+            'the programs, job control, input decks and printouts, 1985–2025.'
+        ),
+        'scene': (
+            'vintage mainframe machine room, rows of tall navy blue cabinets with reel-to-reel tape drives, '
+            'neat stacks of blank manila punch cards in long wooden trays on a steel table in the foreground, '
+            'a tall stack of pale green fan-fold printer paper, raised white tile floor, cool fluorescent light '
+            'with warm brass accents'
+        ),
+    },
+    {
         'slug': 'awards',
         'title': 'Awards & Recognition — American Corporation for Public Well Being',
         'description': (

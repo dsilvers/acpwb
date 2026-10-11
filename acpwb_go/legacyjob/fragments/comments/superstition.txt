@@ -1,0 +1,293 @@
+Run only on Tuesdays. It has never failed on a Tuesday.
+Do not run this job on the {SMALLN}th of the month. Nobody remembers why. Nobody wants to find out.
+The job runs better when submitted from terminal {TERM}. This has been independently confirmed by {CODER2}.
+Submit after {TIME}. Before then the numbers come out "nervous."
+This loop runs one extra time for luck. It is harmless. It is also unremovable.
+Do not submit during a full moon. (This is a joke.) (It is not entirely a joke.)
+Always resubmit at least once. The first run is a rehearsal.
+Keep the original deck in the drawer. The program knows if it is gone.
+The printer must be warm. Run a blank page first.
+Nobody has run this program in reverse order. Nobody should.
+When in doubt, recompile. When not in doubt, recompile anyway.
+{CODER} taps the card reader twice before every run. Results are measurably better.
+This job has never been run on {CLIENT}'s fiscal year end without something going wrong.
+The lucky label is {LABEL}. Do not renumber it.
+If the output has an odd number of pages, run it again.
+Never submit this job with the job number ending in 13.
+The job runs best when the printer has fresh paper. The printer knows the difference.
+Do not say the program's name aloud in the machine room.
+Operators knock on the cabinet twice before mounting the tape. It works.
+Never run this job immediately after the payroll job. Give it a minute.
+The deck must face up in the hopper. Face down has worked, but nobody liked it.
+Run on even-numbered days for even-numbered clients. This is not a rule. It is a tradition.
+The job fails if the operator whistles. This has been observed {SMALLN} times.
+Always wear the lucky tie when delivering this report to {CLIENT}.
+Do not put the listing on the floor. Listings on the floor bring audits.
+Resubmit with a different job class if the first run feels wrong.
+The program prefers the left-hand card reader.
+Never schedule this job during a thunderstorm. The {HW} was nervous about lightning, and so are we.
+The first run after a holiday always fails. Run a dummy job first to wake things up.
+Keep a copy of the {OLDYEAR} listing nearby. It brings stability.
+The job is most reliable when run by someone who has never read the source.
+If the printer jams on page one, the report will be accurate. If it jams on page two, rerun.
+Do not change the job's priority. It has made peace with its place in the queue.
+Never compile on a Friday. Never run on a Monday. Tuesday through Thursday, anything goes.
+{CODER} insists the program runs faster when the machine room lights are off.
+The job card must be punched by hand, not duplicated. The program can tell.
+If you rename this program, rename it back before quarter-end.
+The output must be collected from the printer within an hour. Otherwise it becomes someone else's.
+Never let the deck count be divisible by {SMALLN}.
+The last card of the deck must be blank. Superstition, or physics, depending on who you ask.
+The job is said to be haunted by {CODER3}, who still adjusts the margins.
+Do not look directly at the console during the ladder step.
+Always thank the operator. The operator controls the queue.
+Never run a rerun of a rerun.
+If the run finishes at an odd minute, file the listing in the odd cabinet.
+Never run this job on Friday the 13th. We tried once. See {INCIDENT}.
+Always knock on the {HW} cabinet before submitting.
+The deck must be squared on the table three times before loading. Operators know.
+Do not say the word "abend" in the machine room while this job is running.
+{CODER2.I} always submits this job wearing the same tie. The tie has not been washed since {OLDYEAR}.
+Label 13 is skipped. Do not use label 13 in this program.
+The job runs better when the radio in {PLACE} is on.
+Keep the {OFFICEOBJ} on top of the console during runs. Results are more consistent.
+The first card in the deck is blank for luck. It is also for the reader, but mostly for luck.
+Never submit this job during a full moon. The night operator refuses.
+If the job finishes in under a minute, rerun it. A fast run is a bad omen.
+The printer must be loaded with paper from the left box. The right box is unlucky.
+Do not change the job name. The job name is lucky.
+This routine was blessed by {CODER2}'s cousin, a priest, in {OLDYEAR}. No abends since. Well, few.
+Run order: payroll, then this job, then nothing. Never the other way. Nobody remembers why.
+The tape labeled LUCKY is used for the {QUARTER} run only.
+Always run the test deck first. Not for testing. For luck.
+The {HW} is called "the old girl." Speak to her kindly before the {QUARTER} run.
+The number of cards in the deck must not be divisible by 13. Pad with comment cards if necessary.
+We do not mention the year {OLDYEAR} near this program.
+{CODER2.I} touches the {HW} power switch before every run. Not to switch it. Just to touch it.
+Whistling in the machine room causes tape errors. This has been observed.
+If the console prints a 7 in the job number, expect a long run.
+Do not wear red in {PLACE} during a production run. {CODER2.I}'s rule. It works.
+The job was once run backwards to "undo" {INCIDENT}. It did not work, but morale improved.
+A penny is taped inside the {HW}. Do not remove it.
+Do not refactor this routine in {QUARTER}. Refactoring is for spring.
+We submit this job at 2:22 AM. Two is a good number. Three twos is better.
+The program runs cleaner after a pot of fresh {DRINK} is made. Correlation has been observed.
+Never print the report on a {DAYNAME}. If you must, print it twice and burn the first copy. (Recycle it. Fire code.)
+The deck for the {QUARTER} run is always carried in {CODER2.I}'s {COLOR} folder. The folder is lucky.
+Never run this job while {ANIMAL} is in the building. The last time, see {INCIDENT}.
+Do not change the program during {SPORTS}. It distracts the program.
+{CODER2.I} keeps {CHEESE} in the desk drawer during the {QUARTER} close. For luck and for snacks.
+The {TAPEMODEL} works better if you say "please." The operators confirm.
+Always use the {COLOR} cards for the control deck. White cards have caused abends. Correlation is not causation, but it is policy.
+Running the job twice in a row "cleans the pipes." {CODER2.I} believes this. It does not hurt.
+If the printer starts with a blank page, the run will be fine. If it starts with a full page, rerun.
+Do not wear {COLOR} in the machine room on the night of the {QUARTER} run.
+Before every production change, {CODER2.I} drives once around the block on {ROAD}. For focus.
+Do not recompile on a Friday. Do not recompile on a Monday either. Tuesday is acceptable.
+The test run must always be done by {CODER2.I}. When anyone else does it, the production run fails. {NUMWORD} data points.
+The {QUARTER} deck is shuffled once, gently, by {CODER2.I}, and then put back in order. It is a tradition.
+If the console clock reads 2:22 when the job starts, the job will be clean. If it reads 2:23, rerun.
+Nobody sits in {CODER2.I}'s chair during a production run.
+The job is never submitted while anyone is eating {FOOD} in the machine room.
+The lucky {OFFICEOBJ} goes on the console for the {QUARTER} run.
+The program is never referred to by name on the night of the {QUARTER} run. It is "the job."
+Do not touch the deck on the first run of a quarter. See {INCIDENT}.
+Do not say the program's name while {ANIMAL} is in the building. It works.
+Do not say the program's name during {SPORTS}. Ops insists.
+Do not whistle in the machine room on Friday the 13th. Nobody knows why it works.
+Bring {SNACK} on Friday the 13th. It works.
+Do not touch the deck while {ANIMAL} is in the building. {CODER2.I} insists.
+Do not say the program's name when it is {WEATHER}. Nobody knows why it works.
+Bring {SNACK} on the first run of a quarter. See {INCIDENT}.
+Always run this job before 2:22 AM. It works.
+Do not say the program's name during a full moon. Nobody knows why it works.
+Always run this job during a full moon.
+Do not whistle in the machine room while {ANIMAL} is in the building. It works.
+Bring {SNACK} on Friday the 13th. Nobody knows why it works.
+Wear the lucky tie on the first run of a quarter. Nobody knows why it works.
+Keep {OFFICEOBJ} on the console during {SPORTS}. See {INCIDENT}.
+Do not touch the deck during {SPORTS}. Nobody knows why it works.
+Do not say the program's name on {HOLIDAY}. It works.
+Wear the lucky tie before 2:22 AM. See {INCIDENT}.
+Do not whistle in the machine room when it is {WEATHER}. Ops insists.
+Knock twice on the {HW} during a full moon. It works.
+Keep {OFFICEOBJ} on the console after a tape error.
+Knock twice on the {HW} on {HOLIDAY}. Nobody knows why it works.
+Always run this job during {SPORTS}. See {INCIDENT}.
+Do not recompile while {ANIMAL} is in the building. See {INCIDENT}.
+Always run this job before 2:22 AM. {CODER2.I} insists.
+Keep {OFFICEOBJ} on the console on Friday the 13th. {CODER2.I} insists.
+Do not say the program's name before 2:22 AM. Nobody knows why it works.
+Do not whistle in the machine room when it is {WEATHER}.
+Knock twice on the {HW} on Friday the 13th. It works.
+Always run this job during a full moon. It works.
+Do not say the program's name during {SPORTS}. See {INCIDENT}.
+Never run this job during {SPORTS}. {CODER2.I} insists.
+Bring {SNACK} while {ANIMAL} is in the building. Nobody knows why it works.
+Do not recompile before 2:22 AM. Nobody knows why it works.
+Do not touch the deck when {CODER2.I} is out. Ops insists.
+Always run this job on Friday the 13th. Nobody knows why it works.
+Do not whistle in the machine room while {ANIMAL} is in the building. {CODER2.I} insists.
+Always run this job while {ANIMAL} is in the building. It works.
+Wear the lucky tie during a full moon. {CODER2.I} insists.
+Always run this job on the first run of a quarter. It works.
+Always run this job after a tape error. Ops insists.
+Wear the lucky tie while {ANIMAL} is in the building. See {INCIDENT}.
+Wear the lucky tie when it is {WEATHER}. See {INCIDENT}.
+Do not whistle in the machine room on Friday the 13th. See {INCIDENT}.
+Do not recompile when {CODER2.I} is out. {CODER2.I} insists.
+Do not say the program's name on {HOLIDAY}. {CODER2.I} insists.
+Wear the lucky tie during a full moon.
+Bring {SNACK} on the first run of a quarter. It works.
+Do not touch the deck after a tape error. Ops insists.
+Never run this job on Friday the 13th. It works.
+Never run this job before 2:22 AM. It works.
+Do not whistle in the machine room when it is {WEATHER}. Nobody knows why it works.
+Do not say the program's name during a full moon. {CODER2.I} insists.
+Bring {SNACK} when {CODER2.I} is out. {CODER2.I} insists.
+Bring {SNACK} before 2:22 AM. Nobody knows why it works.
+Do not whistle in the machine room when it is {WEATHER}. {CODER2.I} insists.
+Always run this job when {CODER2.I} is out. Nobody knows why it works.
+Wear the lucky tie when it is {WEATHER}. It works.
+Always run this job when it is {WEATHER}. Nobody knows why it works.
+Do not whistle in the machine room during {SPORTS}.
+Never run this job when it is {WEATHER}. It works.
+Knock twice on the {HW} before 2:22 AM. Nobody knows why it works.
+Knock twice on the {HW} on {HOLIDAY}. It works.
+Wear the lucky tie after a tape error. See {INCIDENT}.
+Wear the lucky tie when {CODER2.I} is out. Nobody knows why it works.
+Keep {OFFICEOBJ} on the console on {HOLIDAY}. See {INCIDENT}.
+Do not whistle in the machine room when it is {WEATHER}. It works.
+Keep {OFFICEOBJ} on the console while {ANIMAL} is in the building. It works.
+Do not say the program's name after a tape error. {CODER2.I} insists.
+Do not recompile during a full moon. It works.
+Bring {SNACK} when it is {WEATHER}. Nobody knows why it works.
+Always run this job when it is {WEATHER}.
+Knock twice on the {HW} during {SPORTS}. {CODER2.I} insists.
+Knock twice on the {HW} on {HOLIDAY}. Ops insists.
+Knock twice on the {HW} after a tape error. Nobody knows why it works.
+Do not touch the deck while {ANIMAL} is in the building. It works.
+Knock twice on the {HW} when {CODER2.I} is out. See {INCIDENT}.
+Knock twice on the {HW} during a full moon. Nobody knows why it works.
+Do not recompile during {SPORTS}.
+Do not whistle in the machine room when {CODER2.I} is out. Nobody knows why it works.
+Do not recompile during a full moon. {CODER2.I} insists.
+Do not whistle in the machine room during a full moon.
+Do not whistle in the machine room while {ANIMAL} is in the building. Ops insists.
+Always run this job on the first run of a quarter. Nobody knows why it works.
+Keep {OFFICEOBJ} on the console during a full moon.
+Never run this job during a full moon. Nobody knows why it works.
+Bring {SNACK} during {SPORTS}. {CODER2.I} insists.
+Wear the lucky tie before 2:22 AM. Nobody knows why it works.
+Do not recompile after a tape error. {CODER2.I} insists.
+Bring {SNACK} during {SPORTS}. It works.
+Keep {OFFICEOBJ} on the console on {HOLIDAY}.
+Always run this job during a full moon. Ops insists.
+Wear the lucky tie on the first run of a quarter. See {INCIDENT}.
+Always run this job on Friday the 13th.
+Do not say the program's name on the first run of a quarter.
+Do not say the program's name when it is {WEATHER}. Ops insists.
+Bring {SNACK} after a tape error. Ops insists.
+Always run this job after a tape error. It works.
+Knock twice on the {HW} on the first run of a quarter. See {INCIDENT}.
+Always run this job before 2:22 AM. Nobody knows why it works.
+Bring {SNACK} before 2:22 AM.
+Knock twice on the {HW} during a full moon. See {INCIDENT}.
+Never run this job on the first run of a quarter. It works.
+Do not say the program's name when it is {WEATHER}. See {INCIDENT}.
+Knock twice on the {HW} during {SPORTS}.
+Always run this job on the first run of a quarter. See {INCIDENT}.
+Knock twice on the {HW} after a tape error. Ops insists.
+Keep {OFFICEOBJ} on the console on {HOLIDAY}. Ops insists.
+Always run this job while {ANIMAL} is in the building.
+Do not say the program's name on Friday the 13th. It works.
+Do not whistle in the machine room during a full moon. Nobody knows why it works.
+Wear the lucky tie while {ANIMAL} is in the building. Nobody knows why it works.
+Do not recompile on {HOLIDAY}. Ops insists.
+Knock twice on the {HW} during a full moon. Ops insists.
+Do not whistle in the machine room when {CODER2.I} is out.
+Do not touch the deck when it is {WEATHER}. Nobody knows why it works.
+Knock twice on the {HW} before 2:22 AM. It works.
+Do not recompile during a full moon. Ops insists.
+Knock twice on the {HW} during a full moon.
+Keep {OFFICEOBJ} on the console during a full moon. {CODER2.I} insists.
+Do not recompile before 2:22 AM. {CODER2.I} insists.
+Keep {OFFICEOBJ} on the console during {SPORTS}. It works.
+Knock twice on the {HW} when it is {WEATHER}. Nobody knows why it works.
+Do not recompile before 2:22 AM. Ops insists.
+Do not whistle in the machine room when {CODER2.I} is out. {CODER2.I} insists.
+Bring {SNACK} during a full moon. See {INCIDENT}.
+Wear the lucky tie on Friday the 13th. It works.
+Bring {SNACK} while {ANIMAL} is in the building.
+Do not recompile after a tape error. Nobody knows why it works.
+Do not whistle in the machine room on {HOLIDAY}. It works.
+Do not touch the deck on the first run of a quarter. Ops insists.
+Keep {OFFICEOBJ} on the console on the first run of a quarter. Ops insists.
+Keep {OFFICEOBJ} on the console before 2:22 AM.
+Do not say the program's name on the first run of a quarter. It works.
+Do not touch the deck on {HOLIDAY}.
+Do not whistle in the machine room on {HOLIDAY}. {CODER2.I} insists.
+Bring {SNACK} during {SPORTS}. Nobody knows why it works.
+Do not whistle in the machine room on Friday the 13th. {CODER2.I} insists.
+Do not touch the deck on {HOLIDAY}. {CODER2.I} insists.
+Never run this job during a full moon. See {INCIDENT}.
+Do not touch the deck when {CODER2.I} is out. It works.
+Keep {OFFICEOBJ} on the console when {CODER2.I} is out. It works.
+Do not whistle in the machine room during {SPORTS}. {CODER2.I} insists.
+Bring {SNACK} during a full moon.
+Do not say the program's name while {ANIMAL} is in the building. Ops insists.
+Do not say the program's name when {CODER2.I} is out. It works.
+Bring {SNACK} while {ANIMAL} is in the building. Ops insists.
+Do not recompile on {HOLIDAY}. See {INCIDENT}.
+Keep {OFFICEOBJ} on the console during a full moon. It works.
+Do not whistle in the machine room on Friday the 13th. Ops insists.
+Do not touch the deck before 2:22 AM. Ops insists.
+Never run this job during a full moon. It works.
+Do not say the program's name after a tape error. It works.
+Knock twice on the {HW} when {CODER2.I} is out. Ops insists.
+Bring {SNACK} on Friday the 13th. {CODER2.I} insists.
+Wear the lucky tie during a full moon. Ops insists.
+Do not whistle in the machine room after a tape error. It works.
+Do not touch the deck while {ANIMAL} is in the building.
+Bring {SNACK} when {CODER2.I} is out. See {INCIDENT}.
+Do not say the program's name when {CODER2.I} is out. Nobody knows why it works.
+Do not say the program's name on {HOLIDAY}. Nobody knows why it works.
+Do not whistle in the machine room on the first run of a quarter. Ops insists.
+Keep {OFFICEOBJ} on the console during {SPORTS}.
+Knock twice on the {HW} while {ANIMAL} is in the building. Nobody knows why it works.
+Do not whistle in the machine room during a full moon. Ops insists.
+Keep {OFFICEOBJ} on the console on the first run of a quarter. Nobody knows why it works.
+Do not recompile while {ANIMAL} is in the building.
+Do not whistle in the machine room on the first run of a quarter. {CODER2.I} insists.
+Do not say the program's name during a full moon.
+Do not whistle in the machine room after a tape error.
+Do not touch the deck after a tape error. See {INCIDENT}.
+Do not whistle in the machine room on the first run of a quarter. Nobody knows why it works.
+Do not say the program's name before 2:22 AM. {CODER2.I} insists.
+Do not whistle in the machine room during a full moon. See {INCIDENT}.
+Always run this job when {CODER2.I} is out. Ops insists.
+Never run this job during a full moon.
+Never run this job on Friday the 13th. {CODER2.I} insists.
+Do not whistle in the machine room on Friday the 13th.
+Always run this job during a full moon. See {INCIDENT}.
+Never run this job when {CODER2.I} is out. {CODER2.I} insists.
+Do not whistle in the machine room when {CODER2.I} is out. See {INCIDENT}.
+Wear the lucky tie when it is {WEATHER}. {CODER2.I} insists.
+Do not whistle in the machine room before 2:22 AM. {CODER2.I} insists.
+Do not touch the deck while {ANIMAL} is in the building. See {INCIDENT}.
+Never run this job before 2:22 AM. Nobody knows why it works.
+Do not touch the deck when {CODER2.I} is out. {CODER2.I} insists.
+Do not whistle in the machine room during {SPORTS}. See {INCIDENT}.
+Do not recompile when it is {WEATHER}.
+Wear the lucky tie on the first run of a quarter.
+Do not touch the deck on {HOLIDAY}. See {INCIDENT}.
+Do not touch the deck on Friday the 13th. Nobody knows why it works.
+Keep {OFFICEOBJ} on the console when {CODER2.I} is out. See {INCIDENT}.
+Do not recompile on Friday the 13th. See {INCIDENT}.
+Never run this job when it is {WEATHER}.
+Never run this job when {CODER2.I} is out.
+Never run this job while {ANIMAL} is in the building. It works.
+Always run this job on {HOLIDAY}. Nobody knows why it works.
+Wear the lucky tie before 2:22 AM. It works.
+Never run this job before 2:22 AM.
+Always run this job while {ANIMAL} is in the building. Nobody knows why it works.

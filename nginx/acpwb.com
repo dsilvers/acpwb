@@ -161,6 +161,22 @@ server {
         proxy_set_header   X-TLS-Cipher      $ssl_cipher;
     }
 
+    # Legacy source-code index (/source-code/, /source-code/YYYY/,
+    # /source-code/YYYY/MM/) is served by acpwb_go alongside the per-article
+    # .../source-code/ pages (which already ride the archive day-level routes).
+    location /source-code/ {
+        proxy_pass         http://acpwb_go;
+        proxy_http_version 1.1;
+        proxy_set_header   Connection        "";
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Client-Protocol $server_protocol;
+        proxy_set_header   X-TLS-Protocol    $ssl_protocol;
+        proxy_set_header   X-TLS-Cipher      $ssl_cipher;
+    }
+
     # Public policy pages (index/year/month/detail) are served by acpwb_go —
     # the other bulk-content honeypot surface alongside archives.
     location /public-policy/ {

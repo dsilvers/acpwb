@@ -1,0 +1,8 @@
+#name: Intranet Wiki Content Terms
+#kind: proprietary
+#from: 2005
+INTRANET CONTENT TERMS
+
+Content on the {HOLDER} intranet wiki is provided for internal reference only. Content may be edited by any employee. Content is not reviewed. Content may be out of date. Content may be wrong. Content is frequently the only documentation available.
+
+This listing was attached to the wiki page "{PROGRAM} - How It Works" by {CODER} on {DATE}. The page itself says only "see attachment."

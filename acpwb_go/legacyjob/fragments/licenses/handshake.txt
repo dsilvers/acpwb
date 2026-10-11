@@ -1,0 +1,9 @@
+#name: Handshake License (Memorialized)
+#kind: commercial
+#from: 1966
+#to: 1995
+MEMORANDUM OF UNDERSTANDING
+
+This memorandum records the agreement reached on {OLDDATE} between {CODER} of {HOLDER} and a representative of {VENDOR}, by handshake, at {LUNCHSPOT}, concerning the use of {PROGRAM}.
+
+The terms, as best anyone can recall, were: we may use it, they may use it, nobody sells it, and the next round is on {CODER2}. This memorandum was prepared in {YEAR} after both original parties had retired, from the recollections of a waiter.

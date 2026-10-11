@@ -1,0 +1,12 @@
+Licensor will provide telephone support during business hours, Central Time, at {PHONE}. The phone is answered by {CODER} when {CODER} is at their desk.
+Support is limited to the current release and the release before it. Releases before that are supported by prayer.
+Licensor will use reasonable efforts to correct reproducible Errors. Because the Documentation is the comments, there are no reproducible Errors.
+Updates, if any, will be delivered on {MEDIUM}. Licensee is responsible for reading them.
+Licensor does not provide support for modified versions of the Program, versions run on machines other than the Designated Machine, or versions run on {HOLIDAY}.
+On-site support is available at Licensor's then-current rates, with a minimum charge of {SMALLN} hours and one lunch.
+Licensor will respond to severity 1 problems within {SMALLN} business days. A severity 1 problem is one that {VP} has noticed.
+Maintenance includes Updates, bug fixes, and an annual newsletter, which has not been published since {YEAR}.
+Licensee shall designate one technical contact. The technical contact shall be the person who understands the Program, if one exists.
+Support does not include training. Training is available at {CONFERENCE}, where it is not offered.
+Licensor may discontinue support for any release on {TERMDAYS} days' notice, or on no notice if the release is older than {CODER2}.
+Problem reports must include the job log, the input deck, the listing and a short description of what Licensee expected, which Licensor will gently correct.

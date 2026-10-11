@@ -1,0 +1,9 @@
+#name: Night Shift Use License
+#kind: noncommercial
+#from: 1970
+#to: 2010
+NIGHT SHIFT USE LICENSE
+
+The night shift may run this program between 11 PM and 6 AM without further authorization, provided that the job is logged in the shift book and the output is placed in {DEPT}'s bin before the day shift arrives.
+
+The night shift may not modify the program. The night shift has modified the program. The modifications are good. They are documented here under {CODER2}'s initials, by agreement.

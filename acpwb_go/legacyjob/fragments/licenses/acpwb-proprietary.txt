@@ -1,0 +1,13 @@
+#name: ACPWB Proprietary and Confidential
+#kind: proprietary
+#from: 1966
+#to: 2025
+PROPRIETARY AND CONFIDENTIAL
+
+Copyright (C) {YEARRANGE} {HOLDER}. All rights reserved.
+
+This program, {PROGRAM} release {REL}, together with its input decks, output listings and any documentation (collectively, the "Program"), is the confidential and proprietary property of {HOLDER}. The Program contains trade secrets and may not be copied, disclosed, reproduced, transmitted, keypunched, photographed, microfilmed or otherwise used, in whole or in part, without the prior written consent of an officer of {HOLDER}.
+
+Possession of this listing does not convey any right to use, reproduce or disclose the Program. If you have received this listing in error, return it to Room {ROOM}, {BLDG}, and destroy any copies, including carbon copies.
+
+Unauthorised use is subject to civil and criminal penalties under the laws of the State of {STATE} and of the United States of America.

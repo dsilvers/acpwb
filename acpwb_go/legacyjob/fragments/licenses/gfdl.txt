@@ -1,0 +1,10 @@
+#name: GNU Free Documentation License 1.2
+#kind: open
+#from: 2002
+Copyright (C) {YEARRANGE} {HOLDER}.
+
+Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+
+{CODER} applied the GFDL on the grounds that the program is "mostly documentation." The ratio of comment lines to code lines supports this.
+
+Invariant Sections: none. (The percentile ladder is not a Section. It is, however, invariant.)

@@ -1,0 +1,215 @@
+Test case {SMALLN}: all zeros. Expected: all zeros. Actual: all zeros. Excellent.
+Tested with {CLIENT} data on {DATE}. Results matched the previous run, which was assumed correct.
+Regression test: compare page 1 to last quarter's page 1 by eye. Done by {CODER2}.
+Test deck is in drawer {SMALLN}. It contains one card. The card is blank.
+Known failing case: a metric named exactly forty characters. It prints, then something else breaks.
+Parallel run against {PROGRAM2} on {DATE}: {SMALLN} differences, all attributed to {PROGRAM2}.
+This was tested. The test results are in the {OLDYEAR} binder, which is in storage, which flooded.
+Acceptance test signed by {TEAM}. The signature reads "looks fine."
+Boundary test: {BIGN}. Above that, the program prints asterisks, as {LANG} intended.
+We test in production because production is the only environment with the card reader.
+Regression test: run last quarter's deck and compare with last quarter's output. It always matches. That is suspicious.
+The test deck exercises every routine except the ones that matter.
+Tested on {DATE} against the {CLIENT} deck. Results reviewed by {TEAM}. Approved without comment.
+Unit tests were attempted in {YEAR}. The test harness was longer than the program.
+Edge case: a metric with a baseline of zero. The change column prints the current value. Correct.
+Edge case: a median of one dollar. P10 is zero. The client was not amused.
+Edge case: 40-character metric names are handled. 41-character names are truncated without warning.
+The cross-check is the test. If the ladder ever disagrees with itself, something is very wrong.
+This routine was tested by inspection, meaning someone looked at it and nodded.
+Acceptance testing consisted of the client comparing the output to their own spreadsheet. The spreadsheet was wrong.
+Load test: {N} metrics. The program handled it. The printer did not.
+Tested with an empty deck. The program printed the header and trailer and nothing else. As designed.
+Test results are retained in the binder labelled TESTS, which also contains lunch menus.
+Parallel test against {PROGRAM2} showed a difference in the third column. {PROGRAM2} was fixed.
+The {YEAR} test plan had {N} test cases. {SMALLN} were executed. All passed.
+Boundary testing found that values over {BIGN} print as asterisks. This is considered informative.
+The program has a test mode. Test mode is the same as production mode with a different job name.
+Tests were performed on the {HW2}; production runs on the {HW}. They are assumed equivalent.
+Manual verification: P50 was compared with the median card for every row. They matched. They always match.
+Smoke test: if the job produces smoke, stop. (This happened once on the {HW}.)
+A test failure in {YEAR} turned out to be a correct result that nobody expected.
+The test deck has a card for every metric ever processed. It is very heavy.
+The program was tested with deliberately wrong input in {YEAR}. It produced deliberately wrong output.
+Testing note: P50 equals the median card. If it ever does not, stop everything.
+The {YEAR} regression run was performed twice because the first run was too good.
+Test coverage is estimated at "most of the important parts."
+The change column was tested by changing things.
+There is no test for the separator page. Visual inspection suffices.
+Testing confirmed that the output fits on a single sheet of green bar. Barely.
+The client's acceptance test was to see whether their name was spelled correctly. It was, after the third run.
+A fuzz test in {YEAR} fed random cards to the program. It printed a random but well-formatted report.
+The test environment is the production environment on a Sunday.
+All tests pass. All tests have always passed. There are three tests.
+Test data includes a fictional client called TEST CLIENT INC. It has been billed twice.
+Performance test: completes before the coffee is ready.
+Tested with the {OLDYEAR} test deck. The {OLDYEAR} test deck is also used in production.
+Test case 1: empty deck. Result: one blank page and a bill.
+Test case 2: one metric. Result: correct, apart from the page number.
+Test case 3: {N} metrics. Result: page break in the wrong place. Accepted.
+Test case 4: negative baseline. Result: "NEGATIVE BASELINE" message and the report anyway.
+Test case 5: client name with an apostrophe. Result: the report for "O."
+Tested on the {HW}. Tested on the {HW2}. Results differ in the fourth decimal place. We print zero decimal places.
+Regression test: run last {QUARTER}'s deck and compare. Differences are investigated, then accepted.
+The test plan for this routine is "run it and see." It has been run and seen.
+Unit tests for this routine are in {DATASET}. They test the routine that used to be here.
+To test: submit the job with CLASS=T. CLASS=T goes to the same queue as CLASS=A.
+Test results reviewed by {CODER2} on {DATE}. {CODER2} initialed every page except the one that failed.
+This routine has 100% test coverage, in the sense that it is run every night.
+Parallel run: old and new versions run side by side for one {QUARTER}. The new version was turned off. Then the old one.
+Tested with {CLIENT} data, with permission. The permission was verbal.
+Known test failure: test 7 fails on leap years. Test 7 is skipped on leap years.
+The expected output file was regenerated from the actual output on {DATE}. All tests now pass.
+Edge case: a metric named "END." It ends the deck. Test passes if you consider this correct.
+Edge case: a baseline of exactly 999999. The program interprets it as end of data. Documented here, now.
+Test deck card 17 is intentionally wrong. It checks that the error message prints. The error message prints in the wrong place.
+Load test: {BIGN} metrics. The job ran for {SMALLN} hours and printed {N} pages before the operator stopped it.
+Desk-checked by {CODER2} on {DATE}. Desk-checking is when you read the code and believe it.
+Acceptance test signed by {CLIENT} on {DATE}. They signed the wrong page.
+1998-|Y2K test: system clock set to 1999-12-31 23:59. Program printed 1900. Fixed. Retested. Printed 19100. Fixed again.
+2005-|The test suite takes longer than the job. It is run quarterly.
+2010-|CI runs the tests on every commit. The tests are a single diff against last year's output.
+2014-|Tests run in a container identical to production. Production is not in a container.
+Test the change by running the job twice. If the outputs match, the change is safe. If they differ, the change is interesting.
+Golden output is in {DATASET}. Do not regenerate it. Do not look at it too long either.
+Smoke test: if the job runs and nothing catches fire, it passes.
+The test environment has fewer clients than production. Bugs that need more than {SMALLN} clients will not be found.
+This change was tested in production, carefully, at 3 AM, by {CODER2}.
+Test case: {NUMWORD} identical metrics. Result: {NUMWORD} identical lines. The sort did not move any of them. Pass.
+Test case: a client name with only spaces. Result: a report for nobody. Pass, philosophically.
+Test case: benchmark median of 1. Result: P10 is 0. P95 is 1. The ladder works even at the bottom.
+Test case: benchmark median of {BIGN}. Result: P95 overflows the field and prints asterisks. Known limitation.
+Test case: the deck dropped on the floor and reassembled by hand. Result: identical output. The program sorts by sequence number. This was the point.
+Test case: run on {HOLIDAY}. Result: the job ran. Nobody was there to see it. Pass, presumably.
+Test case: the {CLIENT} deck from {YEAR}. Result: matches the {YEAR} report exactly, including the error the client complained about.
+The test plan was signed by {CODER2} and {CODER3}. Neither ran the tests. Both trusted the other.
+Testing was performed on a {TERMMODEL} over a {BAUD} line. The tests passed slowly.
+Parallel testing on the {HW} and {HW2} found one difference: the {HW2} prints the page number one column to the right.
+Regression suite: {N} saved decks and their expected reports. The suite runs in {SMALLN} minutes. It has failed {NUMWORD} times, each time because the expected report was wrong.
+Boundary test: a metric baseline of 0 and current of 999999. The change prints as +999999 in a field that holds 7 characters. The plus sign falls off.
+Boundary test: a client name of exactly 40 characters. The name fits. The trailing blank does not exist. The next field touches the name. Accepted.
+Negative test: a deck with no trailer card. Result: the program reads until end of file, prints the report, and warns about the trailer. Correct.
+Negative test: a deck with two trailer cards. Result: the second trailer is read as a metric named END OF DATA. Known.
+Smoke test after every compile: run the {OLDYEAR} deck and compare the totals by eye.
+Unit test for the ladder: median 100000. Expected P10 58000, P25 78000, P33 88000, P50 100000, P67 114000, P75 128000, P90 162000, P95 184000. Pass.
+The test deck includes a client called TEST CLIENT INC. It has appeared in production twice. Both times the figures were excellent.
+The acceptance test depends on the deck being sorted. See memo {MEMO}.
+The boundary test has passed since {YEAR}. See memo {MEMO}.
+The parallel run passes if you squint.
+The acceptance test uses {CLIENT} data with verbal permission. -- {CODER.I}
+Test case {SMALLN} passes on the {HW} and fails on the {HW2}. See memo {MEMO}.
+Test case {SMALLN} has passed since {YEAR}. Noted.
+The smoke test found {BUG}. -- {CODER.I}
+The acceptance test passes if you squint. -- {CODER.I}
+The parallel run was signed off by {CODER2} without being run. See {INCIDENT}.
+Regression run {SMALLN} uses {CLIENT} data with verbal permission. Unchanged since {YEAR}.
+The smoke test passes if you squint. Unchanged since {YEAR}.
+Regression run {SMALLN} uses {CLIENT} data with verbal permission. See {INCIDENT}.
+Regression run {SMALLN} found nothing, suspiciously. See memo {MEMO}.
+The smoke test was signed off by {CODER2} without being run.
+Test case {SMALLN} was signed off by {CODER2} without being run. See memo {MEMO}.
+The {OLDYEAR} test deck has passed since {YEAR}. -- {CODER.I}
+Test case {SMALLN} takes longer than the job. -- {CODER.I}
+The {OLDYEAR} test deck uses {CLIENT} data with verbal permission. -- {CODER.I}
+The smoke test takes longer than the job. See {INCIDENT}.
+The {OLDYEAR} test deck was skipped in {YEAR} and never reinstated.
+The parallel run passes if you squint. See {INCIDENT}.
+The acceptance test passes on the {HW} and fails on the {HW2}. -- {CODER.I}
+Test {N} found nothing, suspiciously. See {INCIDENT}.
+Test {N} takes longer than the job. Unchanged since {YEAR}.
+The smoke test depends on the deck being sorted.
+The boundary test found {BUG}. Noted.
+Test {N} was skipped in {YEAR} and never reinstated. -- {CODER.I}
+Test {N} found {BUG}. Unchanged since {YEAR}.
+The {OLDYEAR} test deck found nothing, suspiciously. See {INCIDENT}.
+The boundary test uses {CLIENT} data with verbal permission. See {INCIDENT}.
+The smoke test found nothing, suspiciously. See {INCIDENT}.
+The {OLDYEAR} test deck has passed since {YEAR}.
+Regression run {SMALLN} was signed off by {CODER2} without being run. Unchanged since {YEAR}.
+Test case {SMALLN} passes if you squint. Noted.
+The smoke test passes on the {HW} and fails on the {HW2}. Noted.
+The acceptance test was skipped in {YEAR} and never reinstated.
+Regression run {SMALLN} passes on the {HW} and fails on the {HW2}. Noted.
+The boundary test found nothing, suspiciously. Unchanged since {YEAR}.
+The parallel run found nothing, suspiciously. See {INCIDENT}.
+The parallel run passes on the {HW} and fails on the {HW2}. See {INCIDENT}.
+Test case {SMALLN} found {BUG}. -- {CODER.I}
+The acceptance test was skipped in {YEAR} and never reinstated. See memo {MEMO}.
+Test {N} found nothing, suspiciously.
+The {OLDYEAR} test deck passes if you squint. See memo {MEMO}.
+The parallel run has passed since {YEAR}. Unchanged since {YEAR}.
+Regression run {SMALLN} was signed off by {CODER2} without being run. See {INCIDENT}.
+The parallel run depends on the deck being sorted. See memo {MEMO}.
+Test case {SMALLN} takes longer than the job. Noted.
+The {OLDYEAR} test deck passes on the {HW} and fails on the {HW2}. Unchanged since {YEAR}.
+The parallel run was skipped in {YEAR} and never reinstated. Noted.
+Test case {SMALLN} passes on the {HW} and fails on the {HW2}. See {INCIDENT}.
+The smoke test depends on the deck being sorted. See memo {MEMO}.
+Test case {SMALLN} takes longer than the job. See {INCIDENT}.
+Regression run {SMALLN} depends on the deck being sorted.
+The boundary test has passed since {YEAR}. Unchanged since {YEAR}.
+Test case {SMALLN} passes on the {HW} and fails on the {HW2}. Noted.
+Test {N} was signed off by {CODER2} without being run. See {INCIDENT}.
+Test {N} takes longer than the job. Noted.
+Test case {SMALLN} found nothing, suspiciously.
+Regression run {SMALLN} uses {CLIENT} data with verbal permission. -- {CODER.I}
+The parallel run found {BUG}. Unchanged since {YEAR}.
+The acceptance test uses {CLIENT} data with verbal permission. Noted.
+Test {N} uses {CLIENT} data with verbal permission.
+The {OLDYEAR} test deck takes longer than the job. Noted.
+The {OLDYEAR} test deck was signed off by {CODER2} without being run. -- {CODER.I}
+The smoke test passes on the {HW} and fails on the {HW2}. See {INCIDENT}.
+Test {N} takes longer than the job. See memo {MEMO}.
+The boundary test found {BUG}. See {INCIDENT}.
+The parallel run was signed off by {CODER2} without being run.
+Test case {SMALLN} passes if you squint.
+The {OLDYEAR} test deck found nothing, suspiciously. -- {CODER.I}
+Test {N} found {BUG}. See {INCIDENT}.
+The {OLDYEAR} test deck found {BUG}.
+The smoke test was skipped in {YEAR} and never reinstated.
+Regression run {SMALLN} depends on the deck being sorted. See {INCIDENT}.
+The boundary test has passed since {YEAR}. Noted.
+Test {N} depends on the deck being sorted. -- {CODER.I}
+The smoke test takes longer than the job. -- {CODER.I}
+Test case {SMALLN} takes longer than the job. See memo {MEMO}.
+The smoke test found {BUG}.
+Test {N} passes on the {HW} and fails on the {HW2}. See memo {MEMO}.
+The boundary test passes if you squint. Noted.
+The boundary test depends on the deck being sorted. See {INCIDENT}.
+The boundary test has passed since {YEAR}. See {INCIDENT}.
+Test case {SMALLN} has passed since {YEAR}. See {INCIDENT}.
+The boundary test found {BUG}.
+Test {N} passes if you squint. -- {CODER.I}
+The smoke test uses {CLIENT} data with verbal permission. -- {CODER.I}
+The boundary test was signed off by {CODER2} without being run.
+The smoke test depends on the deck being sorted. Noted.
+The parallel run was skipped in {YEAR} and never reinstated. -- {CODER.I}
+The parallel run found {BUG}.
+The acceptance test has passed since {YEAR}. Noted.
+The smoke test has passed since {YEAR}. -- {CODER.I}
+The {OLDYEAR} test deck uses {CLIENT} data with verbal permission. Unchanged since {YEAR}.
+The {OLDYEAR} test deck was skipped in {YEAR} and never reinstated. Noted.
+The boundary test found {BUG}. Unchanged since {YEAR}.
+Regression run {SMALLN} found {BUG}. See {INCIDENT}.
+The acceptance test passes if you squint.
+The smoke test depends on the deck being sorted. Unchanged since {YEAR}.
+The {OLDYEAR} test deck passes if you squint. Noted.
+The {OLDYEAR} test deck found {BUG}. Unchanged since {YEAR}.
+The parallel run was signed off by {CODER2} without being run. Noted.
+The boundary test takes longer than the job.
+Test case {SMALLN} takes longer than the job.
+Test case {SMALLN} passes on the {HW} and fails on the {HW2}. Unchanged since {YEAR}.
+The {OLDYEAR} test deck depends on the deck being sorted. Noted.
+The acceptance test found nothing, suspiciously. See memo {MEMO}.
+Test case {SMALLN} was signed off by {CODER2} without being run.
+Regression run {SMALLN} passes if you squint. Noted.
+The {OLDYEAR} test deck has passed since {YEAR}. Noted.
+The parallel run passes if you squint. -- {CODER.I}
+Regression run {SMALLN} passes on the {HW} and fails on the {HW2}. See memo {MEMO}.
+The acceptance test has passed since {YEAR}. Unchanged since {YEAR}.
+The acceptance test has passed since {YEAR}.
+The boundary test depends on the deck being sorted. Unchanged since {YEAR}.
+The acceptance test was signed off by {CODER2} without being run. Noted.
+The acceptance test has passed since {YEAR}. See memo {MEMO}.
+The smoke test found {BUG}. See {INCIDENT}.
+Regression run {SMALLN} depends on the deck being sorted. Noted.

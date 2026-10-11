@@ -10,6 +10,7 @@ from . import views
 urlpatterns = [
     path('robots.txt', views.archive_subdomain_robots, name='archive-sub-robots'),
     path('sitemap.xml', views.archive_subdomain_sitemap, name='archive-sub-sitemap'),
+    path('sitemap-source-code.xml', views.archive_subdomain_sitemap_source_code, name='archive-sub-sitemap-source-code'),
     path('', views.archive_subdomain_index, name='archive-sub-index'),
     path('<int:month>/', views.archive_month, name='archive-sub-month'),
     path('<int:month>', views.archive_month),

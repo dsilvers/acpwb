@@ -1,0 +1,13 @@
+#name: GNU Affero General Public License v3
+#kind: open
+#from: 2007
+{PROGRAM} - engagement metric and percentile tabulator
+Copyright (C) {YEARRANGE} {HOLDER}
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+If you modify this program and make it available to users over a network, you must offer them the corresponding source. Since this page is the corresponding source, {HOLDER} considers the obligation fulfilled, and then some.
+
+NOTE: Legal has asked that this license be "reviewed." Review ticket {TICKET} has been open since {YEAR}.

@@ -1,0 +1,10 @@
+#name: Creative Commons Attribution 3.0
+#kind: open
+#from: 2007
+This work is licensed under the Creative Commons Attribution 3.0 Unported License.
+
+You are free to share - to copy, distribute and transmit the work - and to remix - to adapt the work - under the condition that you attribute the work in the manner specified by the author or licensor.
+
+Attribution: "Tabulated by {PROGRAM} rel. {REL}, {HOLDER}, {YEARRANGE}."
+
+(Creative Commons does not recommend its licenses for software. {CODER} was informed of this on {DATE} and replied "noted.")

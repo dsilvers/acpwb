@@ -1,0 +1,228 @@
+{N} is the number of lines that fit on a page of green-bar at six lines per inch, minus the header.
+The multiplier {LIT} comes from the {OLDYEAR} compensation survey and has never been questioned.
+{N}: the maximum number of peer organizations, set when the peer list was typed on one sheet.
+{SMALLN} is the number of ladder rungs per memo {MEMO}. It used to be {SMALLN2}.
+{BIGN} is the sanity limit for any single value. It was raised twice, both times for {CLIENT}.
+{N} is the record length of the old tape format. We no longer have the tape. We still have the record length.
+The value {LIT} was chosen because it made the {OLDYEAR} totals match the board deck.
+{HEXN} is the deck checksum seed. Do not ask why it is in hexadecimal.
+{N} represents the number of cards per box. A box is a unit of work in this department.
+Column 41 starts the numeric fields because the names were once limited to 40 characters by {VP}.
+{SMALLN} retries, because the tape drive on {FLOOR} usually works on the third try.
+The P50 multiplier is exactly one. This was not always the case. See audit {AUDIT}.
+{N} seconds is the operator's patience, measured empirically in {OLDYEAR}.
+{LIT} truncates rather than rounds. Rounding "creates the appearance of generosity" (audit {AUDIT}).
+{N} is the number of the conference room where the ladder was agreed. It has since been renumbered.
+{PCT} percent is the tolerance agreed with {CLIENT}'s CFO over lunch in {OLDYEAR}.
+{SMALLN} decimal places, because the {HW} printed {SMALLN}.
+We multiply by 100 and divide by 100 again so the intermediate is visible in the dump.
+{N} is the upper bound of the {METRIC} field. Values above it are reported as {N}.
+The constant {HEXN} is a checksum of the original deck as punched by {CODER} on {OLDDATE}.
+The divisor {SMALLN} is historical. Historians disagree about it.
+{N} lines of output is the expected count for a standard run. Fewer means a card fell out.
+The offset {SMALLN} skips the header cards added by {DEPT} in {YEAR}.
+{N} was the line count of the longest report ever printed by this job. It became the limit.
+The constant {LIT} is the P{SMALLN}0 multiplier from the {OLDYEAR} survey, rounded by a typewriter.
+{SMALLN} is the number of copies the {DEPT} group used to receive. They now receive one. The constant remains.
+{BIGN} is the largest integer the {HW} could print without asterisks.
+{N} is the record count at which the {OS} sort utility started to page.
+The {HEXN} in the job card is the checksum of the first production deck. It has never matched since.
+{SMALLN} seconds is how long the operator waits before replying to the console prompt.
+{N} is the number of peer organizations in the original {PEER} cut.
+{PCT} percent is the variance {VP} considered "close enough" in {OLDYEAR}.
+40 characters for metric names because the original form had 40 boxes.
+{N} is the number of the floor tile under which the original deck was found after the move.
+{LIT} replaced a previous value of {LIT} after the {YEAR} review. Both are wrong. This one is consistent.
+The 133-character print line is 132 columns plus one carriage control character, as God and IBM intended.
+{SMALLN} decimal digits of precision because the {HW} gave us {SMALLN}.
+{N} is how many cards fit in the tray of the {HW} card reader before it jams.
+The offset of {SMALLN} skips the job card, the control card and a card nobody can identify.
+{BIGN} is not a real limit. It is a number {CODER2} typed while thinking.
+{N} microseconds is the fudge factor for the {HW} clock drift. It no longer drifts. The fudge remains.
+The value 999 marks the end of the table. A real value of 999 would end the table early. This has happened.
+{SMALLN} is the maximum nesting depth {COMPILER} would accept. We use all of it.
+The P95 multiplier {LIT} came from a newspaper article {VP} read on a plane.
+{N} is a prime, chosen so the hash would distribute evenly. There is no hash.
+The seed {HEXN} was {CODER}'s badge number.
+{N} lines per page at eight lines per inch. The old printer did six.
+The tolerance of zero is intentional. Any non-zero tolerance must be approved by {VP}.
+{SMALLN} retries because the third retry is when operations notices.
+{N} is the employee count of {CLIENT} in {OLDYEAR}. It is used here as a sanity limit for no good reason.
+The divisor 100 converts hundredths to whole numbers. The hundredths were never there.
+{N} is the number of distinct metric names ever submitted. The table holds {N}.
+{BIGN} dollars was once considered an unimaginable salary. See {CLIENT}.
+The multiplier 1.00 for P50 is not a placeholder. It is the most important number in the program.
+{SMALLN} is the unit number of the card reader on the {HW}. It is hard-coded in the READ statements.
+The magic value -1 means "not supplied." Zero means "supplied as zero." Blank means "ask {TEAM}."
+{N} is the block size. Do not change it. The tape library has opinions.
+The literal 6 is the printer unit. The literal 5 is the card reader. Literal 7 was the punch, now retired.
+{N} is the page count at which the job pages {CODER2}.
+The {PCT} percent margin was negotiated with {CLIENT}'s procurement office.
+{SMALLN} columns of padding to the left of every row to clear the tractor holes.
+The constant {LIT} differs from the published ladder in the fourth decimal place. Nobody prints the fourth decimal place.
+{N} represents the maximum number of characters the client's fax machine could transmit per line.
+The number 1979 appears here because it was the year this program first ran. It does nothing.
+{BIGN} is the largest median we will accept before assuming a decimal point was lost.
+{SMALLN} is the version of the ladder agreed in memo {MEMO}.
+The 72 in the column check is the end of the statement field. Beyond 72 lies the sequence field and madness.
+{N} is the number of times this program has been run without a single complaint. It resets frequently.
+The value {HEXN} is a sentinel. If you ever see it printed, something went badly wrong upstream.
+{SMALLN} is how many VPs must countersign a ladder change. It was two. It became three after {YEAR}.
+{N} seconds is the timeout before assuming the tape drive is not coming back.
+The factor of 1.0 in the cross-check exists to force floating point. It is the only reason.
+{PCT} percent is the minimum response rate for a peer group to count. Most do not.
+The weekday constant {SMALLN} corresponds to {DAYNAME}, the only day the job is allowed to run.
+{N} is the expected byte count of a clean output file. Larger means debug output leaked.
+The 8 in the ladder loop is the number of rungs. If you change it, you change the universe.
+{N} is the old account code for the {DEPT} cost center.
+The truncation rather than rounding saves an average of {SMALLN} dollars per row in client goodwill.
+{BIGN} was copied from the {OS} documentation as the maximum record number.
+The median scale factor of 1 is a fossil from when medians were supplied in hundreds.
+{SMALLN} cards per metric was the original layout. It is now one. The constant is still {SMALLN}.
+The hard-coded {N} is the physical width of the paper in tenths of an inch.
+{N} was chosen because it is the birthday of {CODER2}. {CODER2} confirmed this at the retirement party.
+The ladder rung 0.88 was 0.90 until a client objected that P33 looked too generous.
+1.62 is not the golden ratio. It is close. This has caused confusion in at least {SMALLN} meetings.
+{N} is a lucky number. The program has been luckier since.
+The constant {LIT} should be read as a percentage of the median, not a percentile. The column header disagrees.
+{SMALLN} levels of page headings, because the binder has {SMALLN} tabs.
+The 40 in DIMENSION is a historical accident that became policy in memo {MEMO}.
+{BIGN} is used as infinity. Infinity is smaller than it used to be.
+The checksum modulus {N} was chosen to fit in a half-word.
+{SMALLN} is the minimum number of benchmarks a client must buy for the report to be produced.
+{N} is the number of minutes the job is allowed before the scheduler kills it.
+The value {HEXN} was found in a core dump and is assumed to be important.
+The printer control byte X'F1' starts a new page. X'F0' double spaces. Everything else is a gamble.
+{N} is the dollar amount below which a benchmark is considered "not compensation."
+{PCT} percent is the drift allowed between the two ladder computations. The drift has always been zero.
+{SMALLN} is the number of significant digits the client can read before glazing over.
+The 1.84 at the top of the ladder was 2.00 until {YEAR}, when it was deemed "vulgar."
+{N} is how many metrics fit on one page. Beyond that, the report is considered a book.
+The magic string END OF DECK was abandoned in {YEAR}. The program still recognises it.
+{BIGN} is the upper limit of the change column, chosen because nobody changes that much in a quarter.
+{SMALLN} is the size of the array of ordinal suffixes. It is too small, hence the "142TH".
+The {N} in the WAIT statement is in hundredths of a second, on most machines.
+{N} is a placeholder for a value that {TEAM} was going to send. It became permanent.
+The constant 0.58 for P10 was derived empirically from a single client in {OLDYEAR}.
+{N} records per block, chosen to fit exactly on one track of the {HW} disk.
+{SMALLN} is the number of decimal places stored. Zero are printed.
+The literal "RSCH" appears {N} times in this program. It refers to a department that was dissolved.
+{N} is the length of the longest client name ever, plus one for safety.
+{BIGN} dollars is the threshold above which values are flagged for review. Nobody reviews them.
+The 1 in column 1 of the header line is a page eject, not the number one.
+{N} lines of overhead per report: header, column titles, trailer and the blank line {VP} likes.
+{SMALLN} is the number of times the ladder has been formally re-ratified. The numbers never changed.
+The multiplier 1.14 for P67 is the reciprocal of nothing in particular.
+{N} is the maximum pages per job before an operator must change the paper box.
+The value 31 in the checksum is the multiplier from a textbook. The textbook used 37.
+{SMALLN} is the job priority that gets the job run before lunch.
+{N} is the index of the first unused slot in the work array, assuming nobody used it.
+The constant {LIT} is applied before truncation, not after. Order matters. See audit {AUDIT}.
+{BIGN} microseconds is the CPU budget per row. We use a fraction of it and feel good about ourselves.
+{N} is the number of characters of the peer group name that appear in the heading. The rest is implied.
+The 60 in the page length was set when the forms were 11 inches long.
+{SMALLN} metric cards were the minimum in {OLDYEAR}. Today there is no minimum, but the check remains.
+The default year 1985 is used when the deck omits the year. The deck has always included the year.
+{N} is the count of programs that read our output tape. Probably.
+The {HEXN} in the storage map is where {VAR} lived on the {HW}. It moved.
+{PCT} percent is the share of benchmarks that come from the {PEER} survey. Approximately.
+The multiplier 0.78 for P25 is three quarters plus a little extra for luck.
+{N} is the number of the RD-114 form that authorised the original ladder.
+The 9 in the field width allows values up to 999,999,999. The largest ever was much smaller.
+{SMALLN} blank lines separate the tables. {VP} counted.
+{BIGN} is the sentinel for "value withheld by client." It appears in {CLIENT}'s deck regularly.
+{N} is the number of times {CODER} rewrote this routine. The constant was never touched.
+The value 0 in the debug flag is the factory setting. Nobody has changed the factory settings.
+The 1.28 multiplier for P75 has been in use since before anyone now employed was employed.
+{N} is how many characters fit on the operator's console line. Messages are trimmed to fit.
+The ratio 100/58 appears in the inverse ladder in {ROUTINE}, which is never called.
+{SMALLN} is the minimum width of the page number. Pages beyond 99,999 are not anticipated.
+The magic number 7 in the computed GO TO is the number of branches. Only 6 have labels.
+{N} records is where the old tape format switched to a second reel.
+The carriage control "0" double-spaces before the title. Single spacing was deemed "cramped."
+{BIGN} was the cap on {METRIC} before the cap was raised for {CLIENT}.
+The value of {LIT} was chosen so that the P{SMALLN}0 column would fit in nine characters.
+{N} is the agreed number of quarters before a peer group is refreshed. It has been longer.
+{N}: the number of cards in a full tray, minus the header card.
+66 lines per page. Standard green-bar. Do not change for any client, including {CLIENT}.
+132: print width. 133 if you count the carriage control. We count it.
+{LIT}: see memo {MEMO}. The memo is three sentences long and none of them explains it.
+0.58 is P10. It was ratified by {COMMITTEE}. It is no longer a number; it is policy.
+1.84 is P95. It was 1.85 until {OLDYEAR}. Ask {CODER2} about the missing hundredth.
+{N} is the maximum number of metrics per record. {CLIENT} once sent {BIGN}. We printed {N}.
+40 characters for the metric name, because the 1979 deck layout had 40.
+7 decimal digits is all the {HW} single precision can hold. The ladder needs 2. We use double anyway.
+The 999999 sentinel marks end of data. A real value of 999999 ends the report early.
+{SMALLN} retries. Chosen at {MEETING} by show of hands.
+Base year 1900. Changed to 1950 in {Y2KYEAR}. Changed to "{PIVOT} pivot" later. See Y2K section.
+86400: seconds per day. Leap seconds are not recognized by this program or by {DEPT}.
+365.25: the length of the year according to {CODER2.I}.
+365.2425: the length of the year according to {CODER3.I}. They no longer speak.
+{HEXN}: the deck checksum seed. Derived from the record ID. Do not ask how.
+12: number of months. Has not changed. May change. We are ready.
+{N} records per block, chosen to fit one track of the {HW} disk exactly.
+The divisor 100 converts hundredths to units. The divisor 1000 converts units to thousands. Both are applied. On purpose.
+{PCT}%: the tolerance for the cross-check. Wider than it should be since {INCIDENT}.
+The constant {LIT} is the number of business days in the {QUARTER} according to {DEPT}'s calendar.
+{N}: maximum client name length, because the header is {N} wide after the record ID.
+The 0.5 added before truncation is commented out. See memo {MEMO} ("NO ROUNDING").
+42: the column where the numbers start. It used to be 41. A client complained.
+{SMALLN}: number of copies. The third copy goes to a filing cabinet nobody opens.
+The 8 in NLADR is the number of percentiles. There were 6 until {OLDYEAR}. There may be 10 by {YEAR2}.
+1000: the batch size. Also the number of times {CODER2.I} has asked to change the batch size.
+{CPU}: the expected CPU seconds. If the run takes more, ops kills it. If it takes less, ops investigates.
+{N} is the page count after which the job requests a new form. It never reaches {N}.
+A 3 in column 1 means "continue on the next card." A 4 means "this card is a lie." Do not ask.
+The value 17 is the number of days the tape is retained. It was 30 until the tape budget was cut.
+{LIT} is the conversion factor from the old units to the new units. The old units were never defined.
+-1 means "not applicable." -2 means "not available." -3 means "{CODER2.I} has not decided yet."
+99 is the error code for "unknown error." 98 is "known error." Nobody uses 98.
+{N} is the maximum number of runs per day. The scheduler allows more. Do not let it.
+The offset of {SMALLN} skips the record type, the sequence number, and a byte nobody remembers.
+{BIGN}: maximum dollar amount before the field overflows. A client exceeded it. The client was pleased.
+The 1.0D-9 epsilon is there because {CODER2.I} saw it in {MANUAL}.
+The 3.14159 here is not pi. It is a coincidence. It is the ratio from memo {MEMO}.
+{N}: the number of characters in a 3270 screen row, minus the attribute bytes.
+24: hours. Except during the daylight saving change, when it is 23 or 25 and this program is wrong.
+The minus 1 adjusts for the header card. The plus 1 adjusts for the trailer card. Leave both.
+1966: the year the department got its first computer. Used as the minimum valid year.
+{N} is the record ID length. It was {SMALLN} shorter before the {YEAR} merger.
+2.54 converts inches to centimeters. Why this program needs that is a mystery.
+The 0.95 factor is the "conservatism adjustment" from {COMMITTEE}. It is applied and then divided out.
+{LIT} is the largest number the {HW} printer can print in the field without asterisks.
+The factor of 12 annualizes monthly figures. Some figures are already annual. They are annualized again.
+The 52 assumes 52 weeks per year. There are 52 and a bit. The bit is {CODER2.I}'s problem.
+These eight multipliers are the percentile ladder. They are the only part of this program anyone outside {DEPT} has ever seen.
+{N}: magic. Just magic. -- {CODER.I}
+{N} is the seat count on the {HW} license. Exceed it and the vendor sends a letter.
+The 7 here is lucky. It was {CODER2.I}'s badge number. It works.
+The value 13 is avoided entirely. See superstition section.
+The 256 is the size of the lookup table. The table has 200 entries. The rest are reserved for {CLIENT}.
+{SMALLN}: indentation for the sub-total line. Specified by {CLIENT}'s printing contract.
+The 1.0001 multiplier prevents a divide by exact zero on the {HW}. It changes nothing else. Probably.
+Field width 10 for money, 7 for counts, 5 for percentages. Do not let anyone change these. Columns line up with a pre-printed form.
+The 4-digit job number wraps at 9999. It wrapped on {DATE}. Two jobs had the same number. See {INCIDENT}.
+The prime 9973 is used to hash client names into buckets. There is one bucket in use.
+The 0.01 is "a penny." Some of the values are not money. They still get a penny.
+{N} lines of overhead per page: header, blank, column titles, rule.
+The number 30 here is the number of days in a month per {COMMITTEE}. All months.
+The two hard-coded dates bracket the valid data. The second date is {YEAR2}. Mark your calendar.
+The version number is checked against {REL}. If it does not match, the program prints a warning and continues.
+{BIGN}: the seed for the dead random number generator. It has not generated anything since audit {AUDIT}.
+65535 is the largest value an unsigned 16-bit field can hold. Several values are 65535. They are not real.
+The 1.5 factor converts "full-time equivalent" to "people." It is wrong but agreed.
+The 100 in the percentage calculation is applied twice in one place. The percentage is 100 times too large. That is the published figure.
+The 360 is the bank-year day count. This program is not a bank.
+{N} is the expected number of benchmark rows. Fewer rows prints a warning. More prints an apology.
+1998-|The offset 1900 is added to two-digit years. The offset 2000 is added to two-digit years less than {PIVOT}.
+{SMALLN} is the minimum number of peers for a valid percentile. Some percentiles have {SMALLN} peers. They are valid.
+The 1.25 "load factor" is applied to the CPU estimate for {HOLIDAY} runs.
+{LIT} came from a napkin at {LUNCHSPOT}. The napkin is in the binder.
+{NUMWORD} copies: the client, the file, the binder, the auditors, and one for luck.
+The 2:22 start time is from {CODER2.I}. There is no technical reason. See superstition section.
+The {MEMSIZE} array limit is the memory of the {HW} in {OLDYEAR}, minus the operating system, minus hope.
+The tape retention of 17 days is the number of days between the {QUARTER} run and the audit request deadline.
+The magic string "{SEAL}" is the provenance seal. It is derived from the record. It must never be edited.
+The 80 in the card loop is the number of columns on a card. The 72 is the number of columns that matter. The 8 is the number nobody reads.
+The 3 in the retry loop is the number of times the operator is willing to remount a tape.
+The 11 in the page break test is the number of lines in the benchmark heading block plus a margin. It was 10 until a client complained about crowding.

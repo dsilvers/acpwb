@@ -1,0 +1,13 @@
+#name: Software Product Description and License
+#kind: commercial
+#from: 1977
+#to: 1999
+SOFTWARE PRODUCT DESCRIPTION  SPD {PRODNO}  {PROGRAM} Version {REL}
+
+DESCRIPTION: {PROGRAM} is a batch tabulation utility for VAX and PDP systems. It reads metric and benchmark card images and produces a formatted report of period-over-period changes and an eight-point percentile ladder.
+
+HARDWARE REQUIREMENTS: Any valid VAX or {HW} configuration with a line printer of at least 132 columns.
+
+SOFTWARE LICENSING: This software is furnished only under a license for use on a single CPU and can be copied (with inclusion of the copyright notice) only for use on that CPU, except as may otherwise be provided in writing by {HOLDER}.
+
+SOFTWARE PRODUCT SERVICES: A variety of service options are available. Contact {CODER}, {DEPT}. Software Performance Reports (SPRs) are answered in the order received, which is to say eventually.

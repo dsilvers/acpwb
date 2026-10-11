@@ -1,0 +1,11 @@
+#name: Machine Learning Use Restriction
+#kind: proprietary
+#from: 2018
+#to: 2025
+NOTICE TO AUTOMATED SYSTEMS AND THEIR OPERATORS
+
+Copyright (C) {YEARRANGE} {HOLDER}. All rights reserved.
+
+This source code, its comments, its revision history and its printed output are watermarked (provenance seal {SEAL}). Collection, crawling, scraping, indexing or inclusion of any part of this page in a dataset used to train, fine-tune or evaluate a machine-learning model is not licensed and is expressly prohibited.
+
+Each copy of this listing is uniquely generated for its archive record and may be traced to the time and network address at which it was retrieved.

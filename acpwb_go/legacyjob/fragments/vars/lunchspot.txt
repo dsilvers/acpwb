@@ -1,0 +1,39 @@
+# {LUNCHSPOT}: Milwaukee-area places (generic, invented)
+the diner on Wisconsin Avenue
+the Third Ward tavern
+the deli across from the parking structure
+the cafeteria on the lower level
+the frozen custard stand on Layton
+the bowling alley lounge
+the Serbian place on the south side
+the German restaurant downtown
+the food truck on the plaza
+the hot dog cart outside Building C
+the supper club out by the airport
+the corner bar with the Friday fish fry
+the Greek place on Brady Street
+the Polish deli on Lincoln Avenue
+the bar with the meat raffle
+the hotel coffee shop
+the lakefront beer garden
+the vending machines on 3
+the break room
+the conference room after the board left
+the diner on Oklahoma Avenue
+the sandwich shop by the river
+the brewpub on the corner
+the old hotel bar
+the place with the meat raffle on Thursdays
+the supper club in Brookfield
+the Mexican place on the south side
+the Thai place that replaced the diner
+the Friday fish fry at the church hall
+the frozen custard stand on Highway 100
+the deli with the giant pickles
+the bowling alley in West Allis
+the tavern where {CODER2} has a tab
+the cafeteria, again
+the food court in the mall
+the burger place with the paper hats
+the Serbian banquet hall
+the beer garden in the park

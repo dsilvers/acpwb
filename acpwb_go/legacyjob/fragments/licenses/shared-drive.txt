@@ -1,0 +1,8 @@
+#name: Shared Drive Terms
+#kind: proprietary
+#from: 1994
+SHARED DRIVE USE TERMS
+
+Files on the departmental shared drive are the property of {HOLDER} and are available to all members of {DEPT}. Files may be copied for business use. Files may not be renamed, moved, or "cleaned up" without asking the owner.
+
+The owner of this file is listed as {CODER}. {CODER} left in {YEAR}. The file has not been touched since, except by the batch job, every night, at 2 AM.

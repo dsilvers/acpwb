@@ -1,0 +1,10 @@
+#name: BASIC Interpreter Runtime Terms
+#kind: commercial
+#from: 1977
+#to: 1996
+#langs: basic
+BASIC SYSTEM - TERMS OF USE
+
+This program is written in BASIC and requires the BASIC interpreter supplied with the {HW}. The interpreter is licensed by {VENDOR} for use on the {HW} only. Programs written in it may be freely copied, but will not run anywhere else, which amounts to the same thing.
+
+LIST, SAVE and RUN commands are included with the interpreter. RENUMBER is an extra-cost option, which explains the line numbers.

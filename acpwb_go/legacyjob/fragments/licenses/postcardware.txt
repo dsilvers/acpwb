@@ -1,0 +1,13 @@
+#name: Postcardware License
+#kind: noncommercial
+#from: 1988
+#to: 2008
+{PROGRAM} is POSTCARDWARE.
+
+You may use, copy and distribute this program at no charge. If you find it useful, please send a picture postcard of your home town to:
+
+    {CODER}
+    {HOLDER}
+    {ADDRESS}
+
+The postcards are pinned to the corkboard in {PLACE}. As of {DATE} there are {N} of them, one from every state except North Dakota. If you live in North Dakota, please.

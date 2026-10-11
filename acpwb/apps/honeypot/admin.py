@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import (
+    SourceCodeEmail,
     CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, IPIntelligence,
     RequestFingerprint, IPReputationScore, PublishedIPReputation,
 )
@@ -105,3 +106,11 @@ class PublishedIPReputationAdmin(admin.ModelAdmin):
     search_fields = ('ip_address',)
     readonly_fields = ('published_at',)
     ordering = ('-published_at',)
+
+
+@admin.register(SourceCodeEmail)
+class SourceCodeEmailAdmin(admin.ModelAdmin):
+    list_display = ('address', 'host', 'path', 'first_seen', 'last_seen', 'times_served', 'first_ip')
+    search_fields = ('address', 'path', 'first_ip')
+    list_filter = ('first_seen',)
+    readonly_fields = ('first_seen', 'last_seen', 'times_served')

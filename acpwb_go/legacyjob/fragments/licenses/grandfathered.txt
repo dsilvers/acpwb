@@ -1,0 +1,8 @@
+#name: Grandfathered Use Notice
+#kind: proprietary
+#from: 1990
+GRANDFATHERED USE
+
+This program predates the current software licensing policy (Policy {RULE}) and is exempt from it under the grandfather provision in section 9. The exemption applies only to the program as it existed on the policy's effective date.
+
+The program has been modified {N} times since then. Each modification has been described as "maintenance" to preserve the exemption. Internal audit is aware.

@@ -1,0 +1,1300 @@
+Do not modify {VAR} without written approval from {VP}.
+Do not change the order of these statements. {CODER.I} tried in {YEAR} and the {DEPT} payroll run failed.
+Do not remove this line. Nobody knows what it does, which is precisely why it stays.
+Warning: {ROUTINE} is not reentrant. It was never meant to be. Neither was {CODER}.
+Do not run this job during month-end close. See memo {MEMO}.
+Do not recompile with optimization above level {SMALLN}. The ladder comes out different on Thursdays.
+Under no circumstances should {VAR} be initialised to zero. Ask {CODER2} why. Actually, don't.
+Changing the dimension of {VAR} requires a change to {SMALLN} other programs, none of which are documented.
+This section is load-bearing. {CODER.I} {DATE}
+Never let the card count exceed {N}. The reader on {FLOOR} jams.
+Do not "fix" the spelling in the report headings. Clients have built macros around the misspellings.
+Do not change label {LABEL}. Three other jobs branch here via a mechanism we no longer understand.
+If you are reading this to fix a bug, please stop and call {CODER} at extension {EXT}.
+Warning: removing the debug flag causes {CLIENT} totals to drift by {PCT} percent. Leave it.
+Do not touch the percentile ladder. It was ratified by the compensation committee on {OLDDATE}.
+Any change to this routine must be reviewed by two VPs and one person who understands it. The third requirement has been waived since {YEAR}.
+This code must remain compatible with the {HW}, even though the {HW} was scrapped in {YEAR}.
+Do not edit with an editor that strips trailing blanks. Columns 73 through 80 matter to someone.
+Do not add comments below this line. The listing exceeds the {N}-line spool limit.
+Do not replace this loop with a library call. The library call is wrong in a different way.
+The constant below is not a typo. It was a typo in {OLDYEAR}, but it has since become policy.
+Do not run against production data before {TIME}. Operations will page {CODER2} and {CODER2} will page you.
+If this abends with code {ABEND}, mount tape {VOLSER} and resubmit. If that fails, go home.
+Never set {VAR} negative. The last time this happened {CLIENT} received a refund.
+Do not reformat this paragraph. The auditors compare listings by holding them up to the window.
+Warning: this program assumes {SMALLN} digit years in one place and {SMALLN2} in another.
+Do not delete the RANDU call. Removing it changed the output of an unrelated job in {YEAR}.
+This routine is called from {SMALLN} places. {SMALLN2} of them are intentional.
+Under audit finding {AUDIT}, all changes here must be logged on form {FORM} in triplicate.
+Do not change {VAR} to a larger type. The storage map is printed on a single page for a reason.
+Do not alter the DIMENSION statements. The storage map has been laminated.
+Do not move this routine above {ROUTINE}. The linker loads them in alphabetical order and that matters here.
+Changing the record length breaks the {DEPT} extract, the {DEPT2} extract, and a spreadsheet on {CODER2}'s desk.
+Do not put this job in the same JCL stream as the payroll run. They share a temp dataset name.
+This code assumes the deck is sorted. If the deck is not sorted, neither is your evening.
+Warning: {VAR} doubles as the error flag on alternate Thursdays. See {ROUTINE2}.
+Do not attempt to make this program "faster." It is synchronized with the operator's coffee break.
+Do not change the ladder multipliers even if a client asks nicely. Especially if a client asks nicely.
+Removing the trailing blank card causes an end-of-file condition one card early.
+Do not reuse label numbers between {LABEL} and {LABEL2}. They are reserved for {DEPT}.
+Never compile this with the debugging option on the production LPAR. It prints the client name {N} times.
+Do not replace the integer arithmetic with floating point. {CODER2} tried. The pennies went somewhere.
+Do not use this program for anything other than benchmark tabulation. It has been used to schedule vacations.
+This routine is not thread safe. Threads were not invented when it was written and it intends to keep it that way.
+Never change the header text without updating the microfiche index.
+Do not increase the metric limit above {N} without increasing the page length, the box size and the budget.
+Warning: {ROUTINE} modifies its arguments. All of them. Including the constants, on the {HW}.
+Do not delete the commented-out code. It is the only record of the {OLDYEAR} logic.
+The order of the READ statements must match the order of the cards. This sounds obvious. It was not, in {YEAR}.
+Do not rename {PROGRAM}. The scheduler, the run book and {VP}'s calendar all refer to it by name.
+Warning: the job will appear to succeed even when it fails. Check page 1.
+Never submit this job twice at the same time. The second copy wins and the first copy is billed.
+Do not change the sign convention of the change column. Clients read green as good regardless.
+This statement looks redundant. It is redundant. It is also mandatory.
+Do not remove the seemingly unused variable {VAR}. It holds the place of a variable that was removed.
+Warning: values above {BIGN} are silently capped. Silently is the important part.
+Do not copy this routine into another program. It has been copied {SMALLN} times already and each copy diverged.
+Do not use tabs in this source. The {HW} did not understand tabs and neither does the auditor.
+This program depends on the collating sequence of the {HW}. Do not sort anything.
+Never mount the scratch tape as the input tape. The scratch tape has a label that says INPUT.
+Warning: the {CLIENT} branch is still live. Every so often {CLIENT} comes back.
+Do not shorten the comments. The listing page count is cited in the engagement budget.
+Do not put a period in column 72. The {COMPILER} reads it as part of the next card.
+Under no circumstances call {ROUTINE} with a negative count. It will try.
+Do not change the output to lowercase. The client's scanner only reads uppercase.
+This logic is duplicated in {PROGRAM2}. Change both or neither. Preferably neither.
+Do not remove the second page eject. Remote printer {PRT} eats the first one.
+Warning: {VAR} is initialized by DATA, not by assignment. Re-running without reloading gives last quarter's answer.
+Never edit this member in place. Copy, edit, test, pray, replace.
+Do not submit after {TIME} on the last business day. The batch window closes and so does {CODER2}.
+Changing {VAR} requires notifying {TEAM}, {TEAMTITLE}, in writing, with a reason.
+Do not "clean up" the label numbers. They correspond to page numbers in the {OLDYEAR} specification.
+Warning: the checksum includes the comments. Editing a comment changes the checksum. Yes, really.
+Do not run this job from a terminal on {FLOOR}. The terminal adds a trailing character nobody can see.
+Never reorder the benchmark cards. The client expects to see them in the order they were invented.
+Do not change the FORMAT widths. Column alignment is used by a downstream OCR process.
+This routine must be called exactly once. It has been called twice since {YEAR} and nobody knows where.
+Warning: the debug flag is checked with .EQ. 1, not .NE. 0. Setting it to 2 does something else.
+Do not remove the early RETURN. The code after it is load-bearing in a different way.
+Do not change the program name in the header. It is used to route the printout to the right mail slot.
+The deck must start with the client card. A deck that starts with a benchmark card prints the {OLDYEAR} report.
+Do not add new fields to the metric card. There is no room left between column 52 and the end of the world.
+Warning: the P50 column is copied, not computed. If it is wrong, the card is wrong.
+Do not remove the dummy argument from {ROUTINE}. The calling sequence is shared with {PROGRAM2}.
+Do not assume the input is uppercase. It is uppercase. Do not assume it.
+Never let an intern near the percentile ladder. This is a lesson, not a policy. It is also a policy.
+Warning: the output of this program is quoted in a board presentation every quarter. Act accordingly.
+Do not use this listing as a scratch pad. Notes written on it have been mistaken for requirements.
+Do not change the error codes. Operations has them memorized and responds by reflex.
+Warning: this program reads one card past the end of the deck and ignores it. Do not put anything important there.
+Do not compile with the {COMPILER2} compiler. It accepts this code and produces a different program.
+Do not shorten {VAR} to fewer characters. Another variable already has that name.
+Changing the page width to {N} columns requires a new box of paper.
+Do not enable the RANDU path. It produces numbers that look plausible, which is the problem.
+Warning: the job abends if the client name contains an apostrophe. Remove apostrophes from clients.
+Do not set {VAR} by hand in the dump. {CODER2} did that in {YEAR} and it is still set.
+Do not convert this program. It has survived {SMALLN} conversions already and is tired.
+Warning: correct output depends on the deck being punched on an 029, not an 026. The plus sign differs.
+Do not add a second peer group card. The program reads the second one and forgets the first.
+Never leave this job in the hold queue overnight. It releases itself at {TIME}.
+Do not make the benchmark table wider than one page. The client staples on the left.
+Do not fix the off-by-one in the line counter. The page header depends on it.
+Warning: renaming the COMMON block breaks {SMALLN} programs that are not in source control.
+Do not alter the job class. Class {CLASS} is the only class allowed to touch the client tapes.
+Under no circumstances should the output be emailed. It must be printed, signed and then scanned.
+Do not merge this with the quarterly job. The quarterly job has opinions about rounding.
+Warning: this code reads the system date. If the system date is wrong, so is the Julian date, and so is everything.
+Never mark this job as restartable. It restarts from the beginning and bills twice.
+Do not trust the comments. Trust the code. Do not trust the code either.
+Do not add error handling here. Errors are handled by the operator, who handles them by calling {CODER}.
+Warning: the variable named {VAR} is not the variable you think it is. That one was renamed in {YEAR}.
+Do not change the number of digits in the record ID. The filing cabinets are labeled by it.
+Do not remove the PAUSE statement. The operator uses it to change the paper.
+Do not reduce the CPU time limit. The job uses all of it, out of habit.
+Warning: the percentile ladder is applied to the median, not to the mean. Do not feed it means.
+Do not move the FORMAT statements to the end. {CODER2} reads the listing top to bottom.
+Never allow {VAR} to equal {VAR2}. When they are equal, the report prints in reverse.
+Do not replace the hand-written sort. The sort utility sorts EBCDIC and we sort by feel.
+Warning: any change here invalidates the {OLDYEAR} certification, which nobody can find but everybody cites.
+Do not change the input card layout without updating the keypunch drum card in drawer {SMALLN}.
+Do not use the word "estimate" in the output. Memo {MEMO} forbids it.
+Warning: {ROUTINE2} expects {VAR} in hundredths. Everything else expects it in dollars.
+Do not delete this program even if it appears unused. It runs once a year and the year is unpredictable.
+Do not remove the extra space before the numbers. The client's macro counts spaces.
+Never set the debug flag in a client run. The debug output includes {CODER2}'s opinions.
+Do not change the program to read from disk. The disk is for other people.
+Warning: this loop terminates because the data runs out, not because the logic says so.
+Do not touch anything between this line and the matching END comment.
+Do not edit the matching END comment either.
+Do not alter the sequence numbers by hand. Use the resequencing utility, which is also by hand.
+Warning: {CLIENT}'s deck has one card more than every other client's deck. The program expects it.
+Do not change the metric name width. Forty is the number. Forty shall be the number.
+Never print this report on the color printer. The green bars come out red and the client panics.
+Do not modify without reading the whole program first. Nobody has read the whole program.
+Warning: this code has no known bugs. That is not the same as having no bugs.
+Do not insert cards between the header and the first metric. The reader is sensitive.
+Do not reduce the number of retries. Three is the number the tape drive respects.
+Do not change the order of the ladder rungs. P10 must come before P95. It has not always.
+Warning: output is right-justified. Left-justified output has been known to frighten clients.
+Do not add new benchmark columns. The paper is fifteen inches wide and not an inch more.
+Do not run the job with an empty deck. It prints a full report anyway.
+Never interrupt this job. It does not like being interrupted and will start again from card one.
+Do not remove the IMPLICIT statement. Everything after it depends on the letter a variable starts with.
+Warning: the totals at the bottom are not totals. They are counts. The label says totals.
+Do not change the value of {VAR} at run time. It is a constant in every sense but the compiler's.
+Do not delete the obsolete error message {SMALLN}. Operations still sees it twice a year.
+Do not change the line spacing. Double spacing was approved for executives only.
+Warning: the header contains the run date, not the data date. Clients have confused the two since {OLDYEAR}.
+Do not convert the counts to floating point. They count people, and people are integers, per {VP}.
+Never leave a blank in column {SMALLN} of the control card. The program reads it as zero and means it.
+Do not change the routine names. They are referenced in the operator's run book by page number.
+Do not combine the two passes. The first pass reads; the second pass trusts.
+Warning: the job writes a temporary dataset named after {CODER}. It is not {CODER}'s fault.
+Do not alter this comment block. It is quoted in the {OLDYEAR} audit response.
+Do not remove the final STOP. Without it the program falls through into {ROUTINE} and runs it.
+Never assume the deck has no duplicates. {CLIENT}'s deck had {SMALLN} identical cards once.
+Do not change the output dataset disposition. KEEP means keep. It does not mean maybe.
+Warning: {VAR} is reused as a loop counter in {ROUTINE}. Do not rely on its value afterwards.
+Do not change the percentile ladder to match the {VENDOR} survey. Their ladder is different and wrong.
+Do not add a P99. The paper ends.
+Do not touch the {DEPT} section. The {DEPT} group touches it.
+Warning: this code was correct in {OLDYEAR}. Correctness is not inherited.
+Do not change the case of the program name. {OS} distinguishes. {CODER2} does not.
+Do not remove the duplicate WRITE. The printer drops the first line on page two.
+Never set the page length to zero. It has been tried. It printed forever.
+Do not re-enable the {CLIENT} override without written approval from {TEAM}.
+Warning: this routine depends on a side effect of {ROUTINE2}. The side effect is documented nowhere but here.
+Do not change the input deck format between quarters. Clients keep the old decks.
+Do not remove the leading zero suppression. Zeroes frighten clients more than blanks.
+Never run this program against the test deck in production. The test deck contains real data.
+Do not alter the storage order of the arrays. The dump reader expects them in this order.
+Warning: this job reserves {N} cylinders it never uses. Releasing them causes the next job to fail.
+Do not rename the output dataset. It is named after a project that ended in {OLDYEAR}.
+Do not edit the ladder during business hours. Or after. Do not edit the ladder.
+Never assume the median card is correct. Never assume it is incorrect. Print it.
+Do not change the comment character. Column one is sacred.
+Warning: this program is older than most of its users. Treat it with the respect due to the elderly.
+Do not add logging. The listing is the log.
+Do not change the program to support more than one client per run. One client, one deck, one truth.
+Warning: the change column assumes the baseline comes first. If the cards are reversed, so is reality.
+Do not remove the label {LABEL} even though nothing branches to it. Something used to.
+Never use this program to compute bonuses. It has been. The bonuses were truncated.
+Do not change the error dispatcher's computed GOTO. The branch table is aligned with the operator's manual.
+Do not remove the {OLDYEAR} compatibility mode. It is the default mode.
+Warning: compile time grows with every comment. This is not a reason to remove comments.
+Do not lowercase the client name. {CLIENT} pays extra for capitals.
+Do not change the value of the sanity limit without consulting the {OLDYEAR} spreadsheet.
+Never reformat this source with an automated tool. The last tool reformatted the logic.
+Do not alter the default peer group. It is {PEER}, and {PEER} it shall remain.
+Warning: the second cross-check compares the ladder to itself. It has never failed. That is the point.
+Do not replace the DATA statement with assignments. DATA is loaded once. Assignments are loaded always.
+Do not split the output into two reports. The client has one binder.
+Never remove the blank line before the totals. It is a dramatic pause.
+Do not let this routine see a value it was not expecting. Its reactions are unpredictable.
+Do not change the job's accounting code. The overtime budget is tied to it.
+Warning: this program prints the word "TOTAL" in a column that contains no total.
+Do not delete the workfile at the end. The next quarter's run reads it, for comparison, without saying so.
+Do not change the {METRIC} label. It is spelled the way the client spelled it in {OLDYEAR}.
+Do not remove the spaces around the equals signs. They are counted by the checksum.
+Never trust a deck that arrives on a {DAYNAME}.
+Do not change the routine order. The overlay structure depends on it.
+Warning: if {VAR} ever becomes negative, the error message will say it became positive.
+Do not modify the program while it is running. It has been done. Results were mixed.
+Do not change the percentile labels to "deciles." Some of them are not deciles.
+Do not merge the P25 and P33 columns. They are close but they are not the same and the client pays for both.
+Warning: the job name is also a password. Do not ask.
+Do not change {VAR} from INTEGER to REAL. It was REAL once. That is why it is INTEGER now.
+Never remove a card from the deck without replacing it with a blank card. The sequence check counts.
+Do not alter the column headings. They are legally reviewed.
+Do not reduce the output width. The client reads the right margin first.
+Warning: the comments in this section were written before the code. The code went another way.
+Do not change the value of pi. It is not used here, but {CODER2} set it to 3 in {YEAR} as a test.
+Do not call this routine from outside this program. It has no idea who you are.
+Never format the change column without a sign. Zero must be +0, by order of {VP}.
+Do not change the deck reader to accept lowercase. Lowercase decks are a sign of trouble.
+Warning: the record ID on the first page must match the binder label. If it does not, change the binder.
+Do not optimize the ladder loop. It is already as fast as the printer.
+Do not add another level of indentation. Column 72 is closer than it looks.
+Warning: there is a second copy of this program in {DEPT}'s library. It is older and more popular.
+Do not change the default year window. Clients from the past still submit decks.
+Never allow a metric name to begin with a digit. The parser thinks it is a count.
+Do not change the numbering of the error messages. Number {SMALLN} is famous.
+Do not remove the explicit truncation. Implicit truncation is a different, sneakier truncation.
+Warning: this program is the system of record for something. Nobody remembers what.
+Do not change the program while {CODER2} is on vacation. They will know.
+Do not adjust the margins. The hole punch is calibrated to them.
+Never compile on a {DAYNAME}. The license server is rebooted.
+Do not delete the {OLDYEAR} header. It is the only place the original program name survives.
+Warning: the benchmark table is not sorted. It appears sorted. Do not rely on appearances.
+Do not alter the value of the page counter in the debugger. It remembers.
+Do not change the client card width. Forty characters, then the record ID, then nothing.
+Do not tell anyone about label {LABEL}.
+Warning: this is the production copy. There is no test copy. There is this copy.
+Do not change the program to print fewer pages. Fewer pages means less work, which is noticed.
+Never change two things at once in this program. Change one thing. Wait a quarter.
+Do not remove the stub for {ROUTINE}. The linker needs something to point at.
+Do not change the number format. Commas were outlawed in {OLDYEAR}.
+Warning: the job sends its listing to the {DEPT} printer by default. Change JCL, not code.
+Do not alter the deck sequence prefix. It identifies the program to the card sorter.
+Do not rename {VAR} to something meaningful. Meaning changes. {VAR} does not.
+Never allow the change column to overflow. When it overflows, it prints as asterisks, and asterisks are a sign.
+Do not remove the copyright notice. It is the only thing legal has ever read.
+Warning: one of the benchmark rows is always slightly wrong. We do not know which.
+Do not change the number of output lines per metric. One. Always one.
+Do not use the ladder for anything other than benchmarks. It has been used for tips.
+Never reinitialize the COMMON block mid-run. The values are sentimental.
+Do not change the code without changing the change log. The change log is the code's diary.
+Warning: the program prints the peer group name even if the card is blank. It prints a blank, confidently.
+Do not change the deck to use commas between fields. Fixed columns are a way of life.
+Do not adjust the sanity limits for inflation. Inflation is a client problem.
+Never let the program run longer than {CPU} CPU seconds. Beyond that it starts to think.
+Do not replace the error dispatcher with a single STOP. The operators like variety.
+Warning: there is an Easter egg in the error messages. Do not trigger it.
+Do not change anything on a Friday.
+Do not change anything on a Monday either. Changes are for Wednesdays.
+Never remove the comment about the coffee machine. It is the most read line in the listing.
+Do not add metrics beginning with the letter Q. The report sorts Q under O.
+Warning: if you can read this, the listing has been printed in the wrong font.
+Do not compile with warnings disabled. Enjoy the warnings. They are company.
+Do not edit the deck with a text editor. Use a keypunch, or at least think like one.
+Do not change the default distribution class. {DIST} is the class of record.
+Warning: there are two variables called {VAR}. One is in COMMON. The other is lonely.
+Do not shorten the program name in the JCL. The scheduler matches on all six characters.
+Never put the debug output on the same printer as the client output.
+Do not move the checksum to the end. It must be computed before anyone has a chance to regret anything.
+Do not use this code as an example in training. It has been. The trainees are still recovering.
+Warning: the program assumes a 132-column printer. On an 80-column printer, the right half of the truth is lost.
+Do not delete the entry point {ROUTINE2}. It is called by a program that has been deleted, just in case.
+Do not change the order of the COMMON variables. They are addressed by position by {PROGRAM2}.
+Never increase the precision. More digits invite more questions.
+Do not remove the extra STOP after the STOP. Belt and suspenders.
+Warning: the job condition code is always zero. Look at the output.
+Do not adjust the line count for the new paper size. The new paper size was cancelled.
+Do not assume the program ends where the listing ends. There is a second deck.
+Never change the job priority. Priority {SMALLN} is the one the operators ignore least.
+Do not alter the format of the record ID. It is a primary key in a database that was never built.
+Warning: this program cannot be tested. It can only be run.
+Do not change the error threshold. It is calibrated to {CODER2}'s patience.
+Do not remove the wait loop. It gives the printer time to catch up with our ambition.
+Never copy the client deck. Copies multiply. Decks should not.
+Do not change the banner text. It is how the mail room knows where to send the printout.
+Do not raise the tolerance in {ROUTINE}. It was lowered on purpose after the {CLIENT} incident.
+Never let this job run concurrently with the quarter-end close. They fight over the same disk pack.
+Do not edit this source on a terminal set to 80 columns. It wraps, and so does the logic.
+Warning: {VAR} is printed but never computed. It holds whatever the last job left in memory.
+Do not swap the order of the two READ statements. The deck was designed around this order in {OLDYEAR}.
+Do not add {METRIC} to the sanity check. It legitimately exceeds every limit we have ever set.
+Never remove the second STOP. The first one is not always reached.
+Warning: the debug output contains client names. Do not route it to the shared printer.
+Do not put this program in a loop. It has no idea how to stop being run.
+Do not simplify the condition below. Every clause was added after a specific failure.
+Do not change the program to accept negative baselines. A negative baseline is a philosophical problem.
+Never assume the median is the middle. It is the middle of what we were given.
+Warning: changing the page header shifts every line on every page. The auditors notice.
+Do not hard-code this year's date. That is how {ROUTINE} broke in {YEAR}.
+Do not shorten the wait. The tape library robot needs its moment.
+Do not convert the counts to strings and back. Something is lost each time.
+Warning: {ROUTINE2} assumes {VAR} has been initialised by {ROUTINE}. Call them in order.
+Do not remove the trailing period. COBOL people will see it and weep, but it compiles.
+Never rename the input dataset without telling {TEAM}. They prepare it by name.
+Do not alter the ladder rung count. Eight rungs. Not seven, not nine. Eight.
+Do not let the output exceed one page per metric group. The binder rings only hold so much.
+Warning: the job prints a blank page first. This is the cover page. It is intentionally blank.
+Do not remove the sleep before the print step. The spooler is slower than it looks.
+Do not compute the median here. The median is supplied. Trust the median.
+Never set the percentile to anything above P99. It has been tried. It printed P100.
+Do not change the integer kind. The storage map is published in the operations manual.
+Warning: this code is cited by name in a deposition transcript. Do not touch.
+Do not turn on bounds checking in production. It finds things.
+Do not remove the explicit zero initialisation. The {HW} did not clear memory between jobs.
+Never assume the input deck matches last quarter's layout.
+Do not add a percentile between P33 and P50. The steering committee has spoken.
+Warning: this routine is reached through a computed GO TO with seven branches. Six are used.
+Do not replace the hand-rolled checksum with a library routine. The auditors certified this one.
+Do not let {VAR} wrap around. When it wraps, the totals go negative and the client calls.
+Do not run this job twice in one day. The second run believes it is tomorrow.
+Never assume that zero means nothing. In {ROUTINE}, zero means the card was missing.
+Do not shorten the client name field. Some clients have very long names and very short tempers.
+Warning: the output is sorted by the order the cards were punched, not by any reasonable key.
+Do not add new metrics without a new DATA statement. The program will invent values.
+Do not change the output to dollars and cents. Whole dollars were mandated in {OLDYEAR}.
+Never feed this program a deck from {DEPT}. Their cards have a different layout and no warning label.
+Do not rely on the line counter after a page eject. It is reset by the printer, not by us.
+Warning: this routine writes to unit 6 even when the output has been redirected. It knows where the printer is.
+Do not use this program after {TIME} on the last business day of the quarter.
+Do not remove the redundant parentheses. The {COMPILER} parses them differently without.
+Never change the sign of the delta. Clients have learned to read it backwards.
+Do not optimize the I/O. The I/O is the only reason the timing works.
+Warning: {VAR2} and {VAR} share storage through EQUIVALENCE. Changing one changes the other.
+Do not ask the program to explain itself. It cannot. Neither can we.
+Do not edit the comment above this one. It is referenced by page number in the run book.
+Do not change the order of the COMMON blocks. {PROGRAM2} depends on it.
+Do not change FORMAT widths. The output is read by {PROGRAM2}, which counts columns.
+Do not remove the blank card at the end of the deck.
+Do not run this job and {PROGRAM2} at the same time.
+Do not rerun without clearing {DATASET}. The output appends.
+Do not change the page length. The printer forms are pre-cut.
+Do not use this routine for anything other than benchmarks. It has been used for payroll. See {INCIDENT}.
+Warning: {VAR} is used as both a counter and a flag. Read carefully.
+Warning: the loop below modifies its own index. Yes, on purpose.
+Warning: label {LABEL} is the target of a GOTO from three places. Do not move it.
+Warning: this subroutine has a side effect on COMMON /RUNCTL/.
+Warning: this routine is called with the arguments in the wrong order in one place. It still works.
+Warning: the ladder below must stay in DOUBLE PRECISION. Single precision changes P90 by one dollar.
+Warning: the comment above is wrong. The code is right.
+Warning: the code below is wrong. The comment is right. The output is what clients expect.
+Warning: this branch is never taken. If it is ever taken, call {CODER2}.
+Warning: this check is load-bearing.
+Warning: removing this CONTINUE changes the output.
+Warning: this field is printed on the client's invoice.
+Warning: this is the only copy of this routine.
+Warning: {DATASET} is shared with {DEPT}. Do not delete anything you did not create.
+Warning: running with PARM=DEBUG prints the client list to the console.
+Warning: the input deck is not validated. Neither is the operator.
+Warning: if the job fails here, it leaves a partial report in the print queue. Purge it before rerunning.
+Warning: changing this constant affects every report since {OLDYEAR} if anyone reruns them.
+Warning: this job must finish before {PROGRAM2} starts at 4 AM.
+Warning: the next {SMALLN} lines are copied in {ROUTINE}. Change both.
+Warning: this loop has an off-by-one that cancels the off-by-one in the caller.
+Warning: the variable name says one thing. The value means another. See {MEMO}.
+Warning: this routine assumes the deck is sorted. Nobody sorts the deck.
+Warning: {VP} reads the output of this line personally.
+Warning: if you change this, you also have to change the run book, the client manual and {CODER2}'s mind.
+Warning: this is a "temporary" fix from {OLDYEAR}.
+Warning: do not trust {ROUTINE}'s return code. It returns 0 for everything.
+Warning: the tape name is hard coded. If the tape is replaced, update this line before the next run.
+Warning: this job is not restartable. If it fails, start over. From the beginning. Including the coffee.
+Warning: a value of zero here means "missing." A missing value here means zero.
+Warning: the printer at {PRT} truncates at column 120. The report is 132 wide.
+Warning: there are two variables named {VAR} in two different routines. They are not the same.
+Warning: this subroutine is called recursively by accident. It works because the recursion depth is one.
+Warning: output from this step is used as input to the {QUARTER} filing. Errors here go to the regulator.
+DANGER: do not touch.
+DANGER: really do not touch.
+CAUTION: do not run on {HOLIDAY}. See {INCIDENT}.
+CAUTION: this section handles money.
+CAUTION: this section claims to handle money. It handles numbers. They are labeled as money.
+NOTICE: changes to the ladder require {COMMITTEE} approval.
+NOTICE: this program is under change freeze until the end of {QUARTER}.
+NOTICE: this source is confidential. If found, return to {DEPT}, {PLACE}.
+Do not "fix" the truncation. It is policy, not a bug. See memo {MEMO}.
+Do not remove the call to {ROUTINE}. Nobody knows what it does. Everybody knows what happens when you remove it.
+Do not put a period after the END IF. {COMPILER} accepts it and does something unexpected.
+Do not reorder these DATA statements. The order matches the {OLDYEAR} deck.
+Do not edit this file in {EDITOR}. It converts tabs and the columns shift.
+Do not run the test deck against production data. It has been done. {INCIDENT}.
+Do not delete the old versions in {DATASET}. Clients sometimes ask for reruns from {OLDYEAR}.
+Do not change the job name. The operators' scripts look for it.
+Do not change the job class. The scheduler looks for it.
+Do not add more than {N} metrics. The page breaks in a way that clients find "upsetting."
+Do not use this program as a template for new programs. It has been used as a template. Several times. See {PROGRAM2}.
+Do not let {CODER2} near this routine before {QUARTER} close.
+Do not compile with OPT(3). It is faster and wrong.
+Do not compile without OPT(2). It is slower and differently wrong.
+Do not remove the dollar signs. Clients pay for dollar signs.
+Do not move this routine above the BLOCK DATA. Linkage order matters on the {HW}.
+Do not reuse {VAR}. It has history.
+Never pass a negative value to {ROUTINE}. It loops forever.
+Never call {ROUTINE} with the same array as input and output.
+Never run this job with the old deck. The old deck has a different layout and the job does not notice.
+Never print this report on the color printer. The red ink is reserved.
+Never change the percentile ladder without changing the comment above it. Then change the comment below it. Then call {VP}.
+Warning: {FIELDNAME} is shared with {PROGRAM2} through COMMON. Changing its size changes {PROGRAM2}.
+Warning: the {KEYWORD} below jumps into the middle of a block. It works on {COMPILER}. It may not work anywhere else.
+Warning: do not run this on the {TERMMODEL} in {PLACE}. It drops characters at {BAUD}.
+Warning: the {DISKMODEL} holding the master file is nearly full. Do not add clients without checking.
+Warning: the output exceeds the {PRINTERMODEL} line width if a metric name is longer than 40 characters.
+Warning: {REGISTER} is assumed to hold the base address on entry. Do not call this routine from {LANG2}.
+Do not open the {FILETYPE} file in {EDITOR}. It will convert the tabs, and the columns will shift.
+Never move the dataset names: {COMPILER} requires it.
+Do not optimise the output class: {COMPILER} requires it.
+Do not rename the FORMAT widths: it is the only thing preventing {INCIDENT}.
+Do not touch the comment cards: the {HW} requires it.
+Do not reorder the metric card parser: the report columns line up only this way.
+Do not change the banner page: the client reads it.
+Do not move the tape label check: {RULE} says so.
+Do not duplicate the continuation cards: {CODER2.I} will notice.
+Do not touch the distribution list: it changes the output.
+Do not rename the banner page: nobody remembers why it works.
+Ask {CODER2} before changing the date format: {COMPILER} requires it.
+Never reorder the abend codes: it was ratified by {COMMITTEE}.
+Never move the merge: the operators' scripts grep for it.
+Do not change the distribution list: {CODER2.I} will notice.
+Never move the percentile ladder: the {HW} requires it.
+Never move the EBCDIC table: the run book refers to it by line number.
+Do not remove the P33 rung: the client reads it.
+Do not split the {CLIENT} branch: it is policy, not code.
+Never remove the output class: {COMPILER} requires it.
+Do not optimise the merge: it is policy, not code.
+Do not rename the metric card parser: it matches the {OLDYEAR} deck.
+Do not split the console messages: memo {MEMO} says so.
+Think twice before changing the output class: memo {MEMO} says so.
+Never move the peer group heading: it took {CODER2} a {QUARTER} to get right.
+Never remove the continuation cards: memo {MEMO} says so.
+Be careful with the continuation cards: it changes the output.
+Do not inline the page footer: memo {MEMO} says so.
+Do not resize the pivot year: nobody remembers why it works.
+Get approval before changing the sort: the {HW} requires it.
+Ask {CODER2} before changing the tape label check: it was ratified by {COMMITTEE}.
+Do not rename the {UTILITY} step: memo {MEMO} says so.
+Do not duplicate the two-digit years: it is load-bearing.
+Do not round the computed GO TO: the auditors check it.
+Do not remove the job card: it is referenced in client contracts.
+Check with {DEPT} before changing the copy count: it is referenced in client contracts.
+Do not comment out the P95 rung: the client reads it.
+Do not re-indent the EQUIVALENCE: nobody remembers why it works.
+Do not reformat the shadow array: it was like that when we got here.
+Do not split the computed GO TO: the report columns line up only this way.
+Do not change the metric card parser: it cancels out a bug elsewhere.
+Do not round the column alignment: nobody remembers why it works.
+Do not resize the page header: it matches the {OLDYEAR} deck.
+Do not reformat the checkpoint logic: it is the only thing preventing {INCIDENT}.
+Never reorder the return codes: it changes the output.
+Do not move the {QUARTER} adjustment: nobody remembers why it works.
+Be careful with the time limit: the auditors check it.
+Think twice before changing the watermark literal: the {HW} requires it.
+Do not "fix" the FORMAT widths: the report columns line up only this way.
+Do not inline the form number: {PROGRAM2} depends on it.
+Do not re-indent the console messages: audit {AUDIT} says so.
+Never move the sign handling: it cancels out a bug elsewhere.
+Never change the job card: it is policy, not code.
+Do not move the {QUARTER} adjustment: legal has asked us not to.
+Do not remove the page header: it cancels out a bug elsewhere.
+Do not remove the step names: {RULE} says so.
+Be careful with the ordinal suffix table: the auditors check it.
+Do not remove the ordinal suffix table: memo {MEMO} says so.
+Do not reorder the DD statements: it was like that when we got here.
+Do not duplicate the {VENDOR} interface: nobody remembers why it works.
+Do not reformat the control card check: it is shared through COMMON.
+Do not "fix" the sequence numbers: it is older than you.
+Do not reorder the overflow check: {COMPILER} requires it.
+Do not change the step names: it changes the output.
+Ask {CODER2} before changing the date format: the {HW} requires it.
+Do not remove the {VENDOR} interface: {RULE} says so.
+Be careful with the restart logic: it matches the {OLDYEAR} deck.
+Think twice before changing the pivot year: memo {MEMO} says so.
+Do not comment out the Julian routine: it cancels out a bug elsewhere.
+Do not duplicate the control card check: {PROGRAM2} depends on it.
+Do not comment out the shadow array: it is referenced in client contracts.
+Never change the P67 rung: {PROGRAM2} depends on it.
+Do not comment out the time limit: it is the only thing preventing {INCIDENT}.
+Get approval before changing the trace switch: it is policy, not code.
+Check with {DEPT} before changing the trailer line: {COMPILER} requires it.
+Do not reformat the abend codes: nobody remembers why it works.
+Do not change the record count: the run book refers to it by line number.
+Check with {DEPT} before changing the change column: nobody remembers why it works.
+Do not comment out the overflow check: {CODER2.I} will notice.
+Do not inline the lookup table: it was ratified by {COMMITTEE}.
+Be careful with the P95 rung: {CODER2.I} will notice.
+Do not inline the computed GO TO: it is load-bearing.
+Do not merge the plus signs: the client reads it.
+Do not simplify the provenance seal: it changes the output by one dollar.
+Do not optimise the change column: the {HW} requires it.
+Do not touch the {DATASET} reference: the run book refers to it by line number.
+Do not reorder the console messages: it cancels out a bug elsewhere.
+Ask {CODER2} before changing the ordinal suffix table: it took {CODER2} a {QUARTER} to get right.
+Do not duplicate the record count: nobody remembers why it works.
+Do not rename the form number: it took {CODER2} a {QUARTER} to get right.
+Check with {DEPT} before changing the P33 rung: memo {MEMO} says so.
+Do not merge the date format: it is load-bearing.
+Do not resize the plus signs: it is referenced in client contracts.
+Do not reformat the lookup table: {VP} reads it.
+Do not comment out the column alignment: the {HW} requires it.
+Never reorder the BLOCK DATA: memo {MEMO} says so.
+Do not comment out the sort: the operators' scripts grep for it.
+Think twice before changing the provenance seal: the {HW} requires it.
+Do not rename the plus signs: {CODER2.I} will notice.
+Do not simplify the change column: it took {CODER2} a {QUARTER} to get right.
+Do not reformat the Julian routine: it is shared through COMMON.
+Do not touch the banner page: it took {CODER2} a {QUARTER} to get right.
+Ask {CODER2} before changing the Hollerith constants: it is shared through COMMON.
+Never move the watermark literal: {PROGRAM2} depends on it.
+Do not merge the {PROGRAM2} interface: audit {AUDIT} says so.
+Do not split the {UTILITY} step: memo {MEMO} says so.
+Do not round the region size: it changes the output by one dollar.
+Never move the leap-year test: it is older than you.
+Do not resize the DD statements: it was ratified by {COMMITTEE}.
+Do not rename the EBCDIC table: it took {CODER2} a {QUARTER} to get right.
+Be careful with the watermark literal: it is referenced in client contracts.
+Do not change the plus signs: {COMPILER} requires it.
+Do not split the {QUARTER} adjustment: it is the only thing preventing {INCIDENT}.
+Never remove the median card parser: {COMPILER} requires it.
+Never move the two-digit years: it changes the output by one dollar.
+Do not re-indent the {UTILITY} step: {CODER2.I} will notice.
+Never change the {QUARTER} adjustment: the operators' scripts grep for it.
+Do not round the distribution list: {PROGRAM2} depends on it.
+Do not duplicate the P67 rung: the {HW} requires it.
+Never reorder the {DATASET} reference: the operators' scripts grep for it.
+Never remove the overflow check: it was like that when we got here.
+Check with {DEPT} before changing the continuation cards: it changes the output.
+Do not change the region size: memo {MEMO} says so.
+Do not remove the job card: it is shared through COMMON.
+Never move the sanity limits: it was like that when we got here.
+Check with {DEPT} before changing the leap-year test: it was ratified by {COMMITTEE}.
+Do not merge the pivot year: legal has asked us not to.
+Do not simplify the change column: the client reads it.
+Do not inline the trailer card check: it is the only thing preventing {INCIDENT}.
+Never change the Hollerith constants: it is older than you.
+Do not simplify the column alignment: it changes the output.
+Do not remove the median card parser: it is referenced in client contracts.
+Do not inline the checksum: legal has asked us not to.
+Do not move the EBCDIC table: it changes the output by one dollar.
+Do not simplify the region size: {VP} reads it.
+Do not duplicate the page footer: it matches the {OLDYEAR} deck.
+Check with {DEPT} before changing the step names: it matches the {OLDYEAR} deck.
+Do not touch the {VENDOR} interface: {PROGRAM2} depends on it.
+Get approval before changing the percentile ladder: {COMPILER} requires it.
+Never remove the pivot year: the client reads it.
+Do not re-indent the page footer: {RULE} says so.
+Do not reformat the form number: the client reads it.
+Do not optimise the step names: it cancels out a bug elsewhere.
+Do not "fix" the distribution list: {RULE} says so.
+Do not round the sequence numbers: the auditors check it.
+Think twice before changing the dataset names: {VP} reads it.
+Do not optimise the overflow check: {VP} reads it.
+Do not merge the checkpoint logic: it took {CODER2} a {QUARTER} to get right.
+Do not resize the computed GO TO: legal has asked us not to.
+Think twice before changing the checksum: {VP} reads it.
+Do not re-indent the {DATASET} reference: it is policy, not code.
+Do not change the sanity limits: legal has asked us not to.
+Do not inline the pivot year: it is shared through COMMON.
+Think twice before changing the provenance seal: it changes the output.
+Do not reorder the P95 rung: it is older than you.
+Do not inline the region size: audit {AUDIT} says so.
+Be careful with the control card check: {VP} reads it.
+Do not merge the P33 rung: {RULE} says so.
+Check with {DEPT} before changing the watermark literal: {VP} reads it.
+Do not move the EBCDIC table: it is referenced in client contracts.
+Ask {CODER2} before changing the BLOCK DATA: {RULE} says so.
+Do not touch the {PROGRAM2} interface: it cancels out a bug elsewhere.
+Never change the DATA statements: it took {CODER2} a {QUARTER} to get right.
+Do not optimise the error messages: the auditors check it.
+Do not reformat the metric card parser: it was ratified by {COMMITTEE}.
+Do not reorder the checksum: it is the only thing preventing {INCIDENT}.
+Do not touch the peer group heading: legal has asked us not to.
+Do not merge the page header: the {HW} requires it.
+Never reorder the EBCDIC table: it is referenced in client contracts.
+Do not remove the P67 rung: the {HW} requires it.
+Do not comment out the merge: {PROGRAM2} depends on it.
+Do not merge the {DATASET} reference: it changes the output.
+Never reorder the region size: it changes the output by one dollar.
+Never reorder the P33 rung: it is shared through COMMON.
+Do not re-indent the tape label check: the {HW} requires it.
+Do not comment out the watermark literal: nobody remembers why it works.
+Do not split the abend codes: it cancels out a bug elsewhere.
+Do not comment out the metric card parser: the client reads it.
+Never change the checkpoint logic: it is policy, not code.
+Do not touch the {QUARTER} adjustment: it was ratified by {COMMITTEE}.
+Ask {CODER2} before changing the P67 rung: the client reads it.
+Get approval before changing the {PROGRAM2} interface: the client reads it.
+Do not rename the ordinal suffix table: it is shared through COMMON.
+Do not simplify the lookup table: it is referenced in client contracts.
+Do not "fix" the distribution list: {PROGRAM2} depends on it.
+Do not merge the date format: it was ratified by {COMMITTEE}.
+Check with {DEPT} before changing the output class: {PROGRAM2} depends on it.
+Never change the copy count: {VP} reads it.
+Do not touch the shadow array: legal has asked us not to.
+Check with {DEPT} before changing the EBCDIC table: {RULE} says so.
+Do not remove the zero check: {COMPILER} requires it.
+Never change the peer group heading: it was ratified by {COMMITTEE}.
+Get approval before changing the console messages: it changes the output.
+Do not split the plus signs: it changes the output by one dollar.
+Do not comment out the Hollerith constants: nobody remembers why it works.
+Do not simplify the trace switch: nobody remembers why it works.
+Do not resize the EQUIVALENCE: {VP} reads it.
+Do not merge the cross-check: {PROGRAM2} depends on it.
+Do not resize the continuation cards: it is load-bearing.
+Get approval before changing the {CLIENT} branch: it took {CODER2} a {QUARTER} to get right.
+Do not re-indent the DATA statements: {PROGRAM2} depends on it.
+Do not comment out the sort: it is older than you.
+Do not simplify the overflow check: it is policy, not code.
+Do not re-indent the abend codes: {PROGRAM2} depends on it.
+Do not reformat the Hollerith constants: it took {CODER2} a {QUARTER} to get right.
+Do not round the computed GO TO: {PROGRAM2} depends on it.
+Do not move the sign handling: the {HW} requires it.
+Never change the pivot year: it is policy, not code.
+Do not remove the watermark literal: {COMPILER} requires it.
+Do not reformat the FORMAT widths: it is older than you.
+Do not duplicate the {CLIENT} branch: it was ratified by {COMMITTEE}.
+Do not simplify the trace switch: it is the only thing preventing {INCIDENT}.
+Do not round the column alignment: the client reads it.
+Do not simplify the page header: the auditors check it.
+Do not rename the P67 rung: the operators' scripts grep for it.
+Check with {DEPT} before changing the COMMON block layout: it cancels out a bug elsewhere.
+Do not remove the leap-year test: it changes the output.
+Do not reformat the merge: {CODER2.I} will notice.
+Think twice before changing the comment cards: the client reads it.
+Do not simplify the tape label check: {VP} reads it.
+Do not comment out the trace switch: the run book refers to it by line number.
+Do not merge the computed GO TO: it changes the output.
+Think twice before changing the leap-year test: it changes the output.
+Do not reorder the BLOCK DATA: {COMPILER} requires it.
+Do not rename the console messages: memo {MEMO} says so.
+Never reorder the job card: {PROGRAM2} depends on it.
+Do not optimise the provenance seal: it is load-bearing.
+Do not "fix" the lookup table: it is the only thing preventing {INCIDENT}.
+Do not remove the BLOCK DATA: it was like that when we got here.
+Do not move the page header: it is shared through COMMON.
+Do not duplicate the zero check: the auditors check it.
+Ask {CODER2} before changing the overflow check: it is older than you.
+Do not split the checksum: it is older than you.
+Do not reorder the P67 rung: {COMPILER} requires it.
+Never move the watermark literal: the operators' scripts grep for it.
+Do not inline the client special cases: it took {CODER2} a {QUARTER} to get right.
+Never reorder the two-digit years: it is referenced in client contracts.
+Do not reorder the median card parser: legal has asked us not to.
+Do not resize the two-digit years: the run book refers to it by line number.
+Do not resize the COMMON block layout: memo {MEMO} says so.
+Do not reorder the zero check: {RULE} says so.
+Do not reformat the distribution list: it was like that when we got here.
+Do not inline the return codes: it is older than you.
+Do not touch the pivot year: it is the only thing preventing {INCIDENT}.
+Do not round the client special cases: legal has asked us not to.
+Do not "fix" the Julian routine: it is referenced in client contracts.
+Never move the lookup table: nobody remembers why it works.
+Do not merge the time limit: it was like that when we got here.
+Ask {CODER2} before changing the {DATASET} reference: audit {AUDIT} says so.
+Do not re-indent the sign handling: it cancels out a bug elsewhere.
+Do not split the abend codes: it was like that when we got here.
+Do not reorder the output class: the operators' scripts grep for it.
+Do not inline the leap-year test: it is the only thing preventing {INCIDENT}.
+Do not move the DATA statements: it changes the output.
+Do not comment out the zero check: it is the only thing preventing {INCIDENT}.
+Do not "fix" the page footer: the {HW} requires it.
+Do not simplify the computed GO TO: it took {CODER2} a {QUARTER} to get right.
+Do not remove the restart logic: the {HW} requires it.
+Do not duplicate the FORMAT widths: the report columns line up only this way.
+Never change the peer group heading: it is shared through COMMON.
+Do not "fix" the change column: it changes the output by one dollar.
+Never remove the client special cases: {COMPILER} requires it.
+Do not inline the provenance seal: {VP} reads it.
+Do not rename the comment cards: the report columns line up only this way.
+Do not simplify the change column: {COMPILER} requires it.
+Do not split the change column: {PROGRAM2} depends on it.
+Do not merge the dataset names: it is older than you.
+Be careful with the sort: it changes the output by one dollar.
+Think twice before changing the provenance seal: it took {CODER2} a {QUARTER} to get right.
+Do not optimise the COMMON block layout: it cancels out a bug elsewhere.
+Do not duplicate the client special cases: the operators' scripts grep for it.
+Get approval before changing the debug WRITEs: the run book refers to it by line number.
+Never move the form number: the report columns line up only this way.
+Think twice before changing the banner page: {CODER2.I} will notice.
+Do not split the pivot year: the auditors check it.
+Do not rename the continuation cards: the client reads it.
+Do not rename the dataset names: it matches the {OLDYEAR} deck.
+Ask {CODER2} before changing the trailer card check: the {HW} requires it.
+Never move the provenance seal: it was ratified by {COMMITTEE}.
+Do not simplify the error messages: it is shared through COMMON.
+Do not merge the EQUIVALENCE: it is the only thing preventing {INCIDENT}.
+Get approval before changing the checksum: it is policy, not code.
+Do not split the client special cases: legal has asked us not to.
+Do not touch the Hollerith constants: it is load-bearing.
+Do not inline the tape label check: {VP} reads it.
+Do not comment out the dollar signs: the auditors check it.
+Do not optimise the sequence numbers: the operators' scripts grep for it.
+Do not round the trace switch: it changes the output.
+Do not remove the COMMON block layout: legal has asked us not to.
+Do not comment out the percentile ladder: the auditors check it.
+Do not simplify the continuation cards: it was like that when we got here.
+Do not resize the sign handling: legal has asked us not to.
+Do not merge the watermark literal: it is older than you.
+Do not comment out the {CLIENT} branch: memo {MEMO} says so.
+Do not comment out the {VENDOR} interface: it is load-bearing.
+Think twice before changing the sort: the client reads it.
+Do not round the comment cards: it is the only thing preventing {INCIDENT}.
+Never remove the percentile ladder: it is the only thing preventing {INCIDENT}.
+Do not re-indent the page header: it is older than you.
+Ask {CODER2} before changing the form number: it is load-bearing.
+Do not touch the Hollerith constants: the client reads it.
+Do not comment out the EQUIVALENCE: the auditors check it.
+Do not remove the tape label check: nobody remembers why it works.
+Do not round the step names: {PROGRAM2} depends on it.
+Do not split the computed GO TO: it is load-bearing.
+Do not reorder the DD statements: the report columns line up only this way.
+Do not comment out the step names: {VP} reads it.
+Never remove the restart logic: it was like that when we got here.
+Do not "fix" the continuation cards: legal has asked us not to.
+Do not optimise the banner page: the client reads it.
+Do not rename the sequence numbers: it is older than you.
+Do not inline the comment cards: it cancels out a bug elsewhere.
+Do not duplicate the sanity limits: legal has asked us not to.
+Never move the column alignment: the report columns line up only this way.
+Do not reorder the Hollerith constants: it is older than you.
+Be careful with the peer group heading: the {HW} requires it.
+Do not "fix" the P95 rung: the auditors check it.
+Do not change the {UTILITY} step: it changes the output by one dollar.
+Check with {DEPT} before changing the provenance seal: it took {CODER2} a {QUARTER} to get right.
+Do not merge the distribution list: nobody remembers why it works.
+Get approval before changing the return codes: the run book refers to it by line number.
+Do not duplicate the form number: it is referenced in client contracts.
+Do not optimise the comment cards: it cancels out a bug elsewhere.
+Do not inline the peer group heading: the operators' scripts grep for it.
+Never reorder the two-digit years: memo {MEMO} says so.
+Do not split the {UTILITY} step: it is older than you.
+Do not comment out the EBCDIC table: it is load-bearing.
+Do not simplify the restart logic: the client reads it.
+Do not split the Julian routine: it is the only thing preventing {INCIDENT}.
+Do not simplify the computed GO TO: the auditors check it.
+Do not move the sort: it is older than you.
+Do not "fix" the percentile ladder: it matches the {OLDYEAR} deck.
+Do not reformat the plus signs: the report columns line up only this way.
+Think twice before changing the overflow check: it cancels out a bug elsewhere.
+Do not re-indent the dataset names: it is policy, not code.
+Get approval before changing the EQUIVALENCE: it is older than you.
+Do not change the sequence numbers: {COMPILER} requires it.
+Do not remove the DATA statements: it is the only thing preventing {INCIDENT}.
+Do not comment out the percentile ladder: {VP} reads it.
+Do not split the provenance seal: it is load-bearing.
+Do not comment out the computed GO TO: memo {MEMO} says so.
+Never remove the control card check: it is policy, not code.
+Check with {DEPT} before changing the metric card parser: legal has asked us not to.
+Do not simplify the EQUIVALENCE: it took {CODER2} a {QUARTER} to get right.
+Never reorder the debug WRITEs: it is older than you.
+Be careful with the tape label check: it is the only thing preventing {INCIDENT}.
+Never reorder the cross-check: {CODER2.I} will notice.
+Do not duplicate the sort: it cancels out a bug elsewhere.
+Do not move the copy count: it is policy, not code.
+Do not split the trailer line: it cancels out a bug elsewhere.
+Do not resize the shadow array: it is load-bearing.
+Do not reorder the sort: the run book refers to it by line number.
+Check with {DEPT} before changing the EQUIVALENCE: legal has asked us not to.
+Do not simplify the P33 rung: {COMPILER} requires it.
+Do not round the change column: legal has asked us not to.
+Do not re-indent the comment cards: the run book refers to it by line number.
+Do not change the {UTILITY} step: it is referenced in client contracts.
+Do not round the job card: it was ratified by {COMMITTEE}.
+Never move the pivot year: it is load-bearing.
+Do not "fix" the trailer card check: legal has asked us not to.
+Do not optimise the leap-year test: the run book refers to it by line number.
+Do not split the distribution list: {PROGRAM2} depends on it.
+Never move the COMMON block layout: it is load-bearing.
+Get approval before changing the ordinal suffix table: {COMPILER} requires it.
+Do not resize the sanity limits: it took {CODER2} a {QUARTER} to get right.
+Get approval before changing the console messages: audit {AUDIT} says so.
+Do not rename the P33 rung: legal has asked us not to.
+Do not simplify the peer group heading: it matches the {OLDYEAR} deck.
+Never change the checksum: {RULE} says so.
+Do not rename the return codes: {COMPILER} requires it.
+Do not resize the distribution list: the auditors check it.
+Be careful with the job card: {RULE} says so.
+Never remove the checksum: it was ratified by {COMMITTEE}.
+Get approval before changing the lookup table: the report columns line up only this way.
+Do not touch the sanity limits: it was ratified by {COMMITTEE}.
+Do not resize the date format: legal has asked us not to.
+Do not "fix" the BLOCK DATA: {COMPILER} requires it.
+Check with {DEPT} before changing the leap-year test: {VP} reads it.
+Do not round the Julian routine: it was like that when we got here.
+Never remove the step names: it was ratified by {COMMITTEE}.
+Do not remove the P33 rung: it took {CODER2} a {QUARTER} to get right.
+Do not round the output class: it matches the {OLDYEAR} deck.
+Do not optimise the time limit: {RULE} says so.
+Never remove the sanity limits: {PROGRAM2} depends on it.
+Check with {DEPT} before changing the trace switch: {PROGRAM2} depends on it.
+Do not duplicate the P95 rung: it was ratified by {COMMITTEE}.
+Never change the P95 rung: {COMPILER} requires it.
+Do not re-indent the lookup table: the operators' scripts grep for it.
+Do not remove the record count: it matches the {OLDYEAR} deck.
+Never move the change column: it was like that when we got here.
+Do not change the metric card parser: it changes the output.
+Do not change the error messages: the report columns line up only this way.
+Be careful with the EBCDIC table: {CODER2.I} will notice.
+Do not split the region size: it is referenced in client contracts.
+Do not reorder the pivot year: {COMPILER} requires it.
+Never remove the {PROGRAM2} interface: audit {AUDIT} says so.
+Do not resize the banner page: {VP} reads it.
+Do not touch the pivot year: it changes the output.
+Do not round the metric card parser: it is older than you.
+Do not reformat the job card: {PROGRAM2} depends on it.
+Never change the return codes: {RULE} says so.
+Do not duplicate the change column: it cancels out a bug elsewhere.
+Do not "fix" the debug WRITEs: it is referenced in client contracts.
+Do not comment out the two-digit years: it was ratified by {COMMITTEE}.
+Check with {DEPT} before changing the trailer card check: it is referenced in client contracts.
+Do not split the control card check: it is referenced in client contracts.
+Ask {CODER2} before changing the EBCDIC table: it matches the {OLDYEAR} deck.
+Never move the copy count: {COMPILER} requires it.
+Never move the output class: the {HW} requires it.
+Do not round the dataset names: {RULE} says so.
+Do not round the tape label check: it is older than you.
+Do not optimise the DD statements: the {HW} requires it.
+Think twice before changing the sort: memo {MEMO} says so.
+Do not touch the trailer card check: it is older than you.
+Never remove the ordinal suffix table: it changes the output.
+Never reorder the sequence numbers: it was like that when we got here.
+Be careful with the P95 rung: the report columns line up only this way.
+Do not reformat the trailer card check: it changes the output by one dollar.
+Never remove the checksum: it matches the {OLDYEAR} deck.
+Think twice before changing the peer group heading: it cancels out a bug elsewhere.
+Think twice before changing the record count: it is shared through COMMON.
+Do not merge the sequence numbers: {COMPILER} requires it.
+Never reorder the continuation cards: the {HW} requires it.
+Do not move the sequence numbers: the run book refers to it by line number.
+Do not touch the step names: it is shared through COMMON.
+Do not split the {PROGRAM2} interface: it is shared through COMMON.
+Do not reformat the distribution list: it is load-bearing.
+Do not merge the ordinal suffix table: the client reads it.
+Never reorder the Hollerith constants: it is older than you.
+Do not inline the copy count: the {HW} requires it.
+Do not "fix" the P33 rung: the report columns line up only this way.
+Do not reorder the leap-year test: it is referenced in client contracts.
+Never move the computed GO TO: {PROGRAM2} depends on it.
+Do not inline the computed GO TO: the client reads it.
+Do not reorder the dollar signs: the auditors check it.
+Never reorder the provenance seal: {COMPILER} requires it.
+Never remove the trace switch: it cancels out a bug elsewhere.
+Do not merge the {CLIENT} branch: memo {MEMO} says so.
+Do not change the dollar signs: it is shared through COMMON.
+Do not split the Hollerith constants: {RULE} says so.
+Never reorder the column alignment: {VP} reads it.
+Do not change the merge: memo {MEMO} says so.
+Do not duplicate the {QUARTER} adjustment: it is the only thing preventing {INCIDENT}.
+Do not remove the sanity limits: {PROGRAM2} depends on it.
+Think twice before changing the leap-year test: it is older than you.
+Do not touch the trailer line: audit {AUDIT} says so.
+Do not re-indent the pivot year: it is policy, not code.
+Do not "fix" the output class: {CODER2.I} will notice.
+Do not merge the plus signs: {RULE} says so.
+Do not reorder the sort: it is referenced in client contracts.
+Do not round the control card check: it was ratified by {COMMITTEE}.
+Get approval before changing the date format: it was like that when we got here.
+Do not rename the sort: the client reads it.
+Do not "fix" the {VENDOR} interface: the client reads it.
+Do not split the return codes: the {HW} requires it.
+Think twice before changing the shadow array: the client reads it.
+Get approval before changing the leap-year test: the auditors check it.
+Do not optimise the return codes: nobody remembers why it works.
+Do not duplicate the DATA statements: {PROGRAM2} depends on it.
+Do not resize the error messages: memo {MEMO} says so.
+Do not merge the step names: it matches the {OLDYEAR} deck.
+Do not remove the dataset names: {CODER2.I} will notice.
+Do not touch the sort: it cancels out a bug elsewhere.
+Never move the change column: legal has asked us not to.
+Ask {CODER2} before changing the checksum: memo {MEMO} says so.
+Do not re-indent the job card: it is load-bearing.
+Do not re-indent the console messages: it matches the {OLDYEAR} deck.
+Do not re-indent the page header: nobody remembers why it works.
+Get approval before changing the date format: it is policy, not code.
+Never move the banner page: audit {AUDIT} says so.
+Never change the banner page: the client reads it.
+Do not optimise the merge: memo {MEMO} says so.
+Be careful with the page footer: it is referenced in client contracts.
+Do not touch the trailer line: the operators' scripts grep for it.
+Do not simplify the leap-year test: it is shared through COMMON.
+Do not merge the date format: the operators' scripts grep for it.
+Do not rename the overflow check: it is load-bearing.
+Do not round the {DATASET} reference: {VP} reads it.
+Do not inline the lookup table: it is referenced in client contracts.
+Do not "fix" the abend codes: {VP} reads it.
+Do not round the {CLIENT} branch: it is load-bearing.
+Get approval before changing the trailer line: it is policy, not code.
+Do not inline the comment cards: it is older than you.
+Never move the date format: it changes the output.
+Do not rename the leap-year test: it was ratified by {COMMITTEE}.
+Do not "fix" the plus signs: it changes the output.
+Do not duplicate the page footer: it was ratified by {COMMITTEE}.
+Do not inline the {QUARTER} adjustment: it was like that when we got here.
+Do not change the FORMAT widths: it matches the {OLDYEAR} deck.
+Do not resize the page header: it is older than you.
+Do not touch the page header: it was like that when we got here.
+Do not merge the leap-year test: it is older than you.
+Do not "fix" the two-digit years: {VP} reads it.
+Never reorder the overflow check: it cancels out a bug elsewhere.
+Do not rename the {DATASET} reference: it matches the {OLDYEAR} deck.
+Do not re-indent the percentile ladder: it is load-bearing.
+Ask {CODER2} before changing the record count: it was ratified by {COMMITTEE}.
+Do not change the pivot year: it changes the output.
+Do not touch the leap-year test: the run book refers to it by line number.
+Do not "fix" the two-digit years: it is referenced in client contracts.
+Do not remove the page header: the {HW} requires it.
+Do not reformat the record count: the auditors check it.
+Do not merge the sign handling: the client reads it.
+Check with {DEPT} before changing the sign handling: it is older than you.
+Do not change the client special cases: the auditors check it.
+Do not comment out the {UTILITY} step: the report columns line up only this way.
+Do not change the debug WRITEs: the run book refers to it by line number.
+Do not re-indent the EQUIVALENCE: it was like that when we got here.
+Do not resize the DATA statements: it was ratified by {COMMITTEE}.
+Do not remove the DD statements: the auditors check it.
+Do not "fix" the FORMAT widths: it is load-bearing.
+Do not reformat the COMMON block layout: the client reads it.
+Do not comment out the job card: it is older than you.
+Never move the dataset names: the report columns line up only this way.
+Do not remove the two-digit years: it changes the output by one dollar.
+Do not change the checksum: audit {AUDIT} says so.
+Do not reformat the change column: {VP} reads it.
+Do not reformat the time limit: the {HW} requires it.
+Do not round the {PROGRAM2} interface: it is the only thing preventing {INCIDENT}.
+Do not touch the trailer line: it is load-bearing.
+Do not rename the dollar signs: nobody remembers why it works.
+Do not round the {PROGRAM2} interface: nobody remembers why it works.
+Do not re-indent the job card: memo {MEMO} says so.
+Do not round the {QUARTER} adjustment: {PROGRAM2} depends on it.
+Do not remove the trace switch: {CODER2.I} will notice.
+Do not round the shadow array: it took {CODER2} a {QUARTER} to get right.
+Do not remove the time limit: legal has asked us not to.
+Get approval before changing the change column: nobody remembers why it works.
+Do not reorder the dataset names: it changes the output.
+Never move the step names: it is the only thing preventing {INCIDENT}.
+Do not re-indent the trailer card check: the client reads it.
+Do not "fix" the pivot year: it is referenced in client contracts.
+Do not reformat the checkpoint logic: audit {AUDIT} says so.
+Do not change the sequence numbers: memo {MEMO} says so.
+Do not touch the sequence numbers: it matches the {OLDYEAR} deck.
+Never reorder the console messages: it cancels out a bug elsewhere.
+Do not merge the form number: the auditors check it.
+Do not remove the {PROGRAM2} interface: it changes the output.
+Do not reformat the watermark literal: it is older than you.
+Never reorder the overflow check: nobody remembers why it works.
+Get approval before changing the cross-check: {RULE} says so.
+Do not move the {PROGRAM2} interface: the report columns line up only this way.
+Do not reformat the FORMAT widths: {RULE} says so.
+Do not "fix" the DD statements: {VP} reads it.
+Do not touch the P95 rung: the run book refers to it by line number.
+Do not simplify the dollar signs: it changes the output.
+Be careful with the median card parser: the operators' scripts grep for it.
+Do not re-indent the DD statements: it is shared through COMMON.
+Get approval before changing the output class: it is the only thing preventing {INCIDENT}.
+Get approval before changing the sanity limits: audit {AUDIT} says so.
+Do not optimise the merge: it changes the output.
+Do not round the sequence numbers: {CODER2.I} will notice.
+Do not "fix" the error messages: {CODER2.I} will notice.
+Do not reformat the page header: it matches the {OLDYEAR} deck.
+Do not merge the {UTILITY} step: memo {MEMO} says so.
+Do not split the page header: {VP} reads it.
+Never change the debug WRITEs: memo {MEMO} says so.
+Check with {DEPT} before changing the {QUARTER} adjustment: it is referenced in client contracts.
+Ask {CODER2} before changing the debug WRITEs: {RULE} says so.
+Do not duplicate the return codes: {VP} reads it.
+Do not reformat the {QUARTER} adjustment: audit {AUDIT} says so.
+Check with {DEPT} before changing the computed GO TO: audit {AUDIT} says so.
+Get approval before changing the median card parser: it was like that when we got here.
+Do not inline the lookup table: it is shared through COMMON.
+Do not comment out the P67 rung: the client reads it.
+Do not re-indent the {DATASET} reference: legal has asked us not to.
+Do not comment out the plus signs: the report columns line up only this way.
+Do not duplicate the checkpoint logic: the run book refers to it by line number.
+Do not re-indent the ordinal suffix table: the report columns line up only this way.
+Do not split the {VENDOR} interface: legal has asked us not to.
+Do not simplify the abend codes: {COMPILER} requires it.
+Do not split the peer group heading: it is the only thing preventing {INCIDENT}.
+Never move the dataset names: it is policy, not code.
+Never reorder the trailer line: it is the only thing preventing {INCIDENT}.
+Never move the Julian routine: it cancels out a bug elsewhere.
+Do not inline the FORMAT widths: {CODER2.I} will notice.
+Do not simplify the EBCDIC table: it changes the output.
+Do not round the output class: it changes the output by one dollar.
+Do not remove the error messages: the report columns line up only this way.
+Do not round the sign handling: it is shared through COMMON.
+Think twice before changing the restart logic: it is policy, not code.
+Do not reformat the continuation cards: legal has asked us not to.
+Do not optimise the continuation cards: it was like that when we got here.
+Do not reorder the console messages: {PROGRAM2} depends on it.
+Do not inline the Hollerith constants: {PROGRAM2} depends on it.
+Do not "fix" the abend codes: memo {MEMO} says so.
+Do not change the sanity limits: it was ratified by {COMMITTEE}.
+Never reorder the distribution list: it is load-bearing.
+Get approval before changing the sign handling: the report columns line up only this way.
+Get approval before changing the continuation cards: it matches the {OLDYEAR} deck.
+Do not duplicate the metric card parser: it is policy, not code.
+Never change the lookup table: the report columns line up only this way.
+Do not re-indent the tape label check: {VP} reads it.
+Do not inline the {PROGRAM2} interface: the report columns line up only this way.
+Do not optimise the {QUARTER} adjustment: {COMPILER} requires it.
+Do not reorder the {PROGRAM2} interface: the {HW} requires it.
+Do not remove the overflow check: it matches the {OLDYEAR} deck.
+Do not remove the BLOCK DATA: it is referenced in client contracts.
+Do not round the change column: the run book refers to it by line number.
+Do not round the copy count: it cancels out a bug elsewhere.
+Do not remove the sign handling: the {HW} requires it.
+Check with {DEPT} before changing the lookup table: the run book refers to it by line number.
+Do not remove the FORMAT widths: it changes the output by one dollar.
+Do not duplicate the continuation cards: it is the only thing preventing {INCIDENT}.
+Do not remove the continuation cards: the client reads it.
+Check with {DEPT} before changing the step names: it was like that when we got here.
+Think twice before changing the two-digit years: the report columns line up only this way.
+Do not reorder the median card parser: it cancels out a bug elsewhere.
+Ask {CODER2} before changing the checksum: it is the only thing preventing {INCIDENT}.
+Ask {CODER2} before changing the column alignment: {COMPILER} requires it.
+Do not touch the Julian routine: the client reads it.
+Do not change the FORMAT widths: it is policy, not code.
+Do not change the distribution list: legal has asked us not to.
+Check with {DEPT} before changing the record count: {PROGRAM2} depends on it.
+Do not change the output class: {COMPILER} requires it.
+Never reorder the checksum: it was ratified by {COMMITTEE}.
+Never move the merge: it changes the output.
+Do not split the restart logic: it is load-bearing.
+Do not inline the Hollerith constants: it took {CODER2} a {QUARTER} to get right.
+Do not "fix" the dataset names: memo {MEMO} says so.
+Think twice before changing the page footer: it is policy, not code.
+Do not reorder the Julian routine: it is load-bearing.
+Never reorder the EBCDIC table: {PROGRAM2} depends on it.
+Do not simplify the {DATASET} reference: the run book refers to it by line number.
+Do not re-indent the sort: it changes the output by one dollar.
+Do not re-indent the DD statements: memo {MEMO} says so.
+Be careful with the merge: it changes the output by one dollar.
+Do not inline the form number: the {HW} requires it.
+Do not inline the checkpoint logic: the run book refers to it by line number.
+Never move the debug WRITEs: {CODER2.I} will notice.
+Do not resize the {UTILITY} step: {COMPILER} requires it.
+Do not split the return codes: it was like that when we got here.
+Do not change the time limit: the client reads it.
+Do not touch the P95 rung: memo {MEMO} says so.
+Do not reorder the client special cases: {VP} reads it.
+Do not remove the region size: {RULE} says so.
+Think twice before changing the P95 rung: {COMPILER} requires it.
+Check with {DEPT} before changing the restart logic: {CODER2.I} will notice.
+Think twice before changing the abend codes: {VP} reads it.
+Never reorder the trailer line: it is policy, not code.
+Do not remove the watermark literal: it was ratified by {COMMITTEE}.
+Never reorder the continuation cards: the auditors check it.
+Do not simplify the watermark literal: it is the only thing preventing {INCIDENT}.
+Do not "fix" the COMMON block layout: {VP} reads it.
+Get approval before changing the copy count: memo {MEMO} says so.
+Be careful with the error messages: it matches the {OLDYEAR} deck.
+Do not re-indent the time limit: the run book refers to it by line number.
+Do not move the page header: it cancels out a bug elsewhere.
+Do not "fix" the debug WRITEs: audit {AUDIT} says so.
+Do not change the shadow array: it is older than you.
+Do not inline the median card parser: it cancels out a bug elsewhere.
+Check with {DEPT} before changing the computed GO TO: it is shared through COMMON.
+Do not inline the {QUARTER} adjustment: {RULE} says so.
+Do not duplicate the dataset names: it is shared through COMMON.
+Do not touch the BLOCK DATA: it matches the {OLDYEAR} deck.
+Be careful with the plus signs: {PROGRAM2} depends on it.
+Do not resize the EBCDIC table: the {HW} requires it.
+Do not merge the {UTILITY} step: the report columns line up only this way.
+Do not optimise the ordinal suffix table: {RULE} says so.
+Do not rename the restart logic: it took {CODER2} a {QUARTER} to get right.
+Do not optimise the EQUIVALENCE: it is policy, not code.
+Do not comment out the sign handling: it changes the output.
+Do not rename the COMMON block layout: it is load-bearing.
+Do not change the DATA statements: it cancels out a bug elsewhere.
+Never move the {CLIENT} branch: {VP} reads it.
+Never reorder the {QUARTER} adjustment: memo {MEMO} says so.
+Do not remove the continuation cards: it is shared through COMMON.
+Do not comment out the abend codes: it is load-bearing.
+Do not remove the P33 rung: the run book refers to it by line number.
+Check with {DEPT} before changing the zero check: the report columns line up only this way.
+Do not split the distribution list: it was like that when we got here.
+Do not reorder the P95 rung: the auditors check it.
+Do not round the cross-check: the auditors check it.
+Be careful with the output class: it changes the output by one dollar.
+Think twice before changing the checksum: {COMPILER} requires it.
+Do not round the DD statements: nobody remembers why it works.
+Never remove the column alignment: it cancels out a bug elsewhere.
+Check with {DEPT} before changing the zero check: it changes the output by one dollar.
+Do not simplify the shadow array: it is older than you.
+Do not duplicate the record count: it is the only thing preventing {INCIDENT}.
+Do not rename the zero check: the operators' scripts grep for it.
+Check with {DEPT} before changing the percentile ladder: it is load-bearing.
+Do not comment out the trace switch: {VP} reads it.
+Do not rename the trace switch: {CODER2.I} will notice.
+Do not move the DATA statements: it cancels out a bug elsewhere.
+Do not move the overflow check: {RULE} says so.
+Do not simplify the date format: it was like that when we got here.
+Never remove the tape label check: it is load-bearing.
+Never reorder the job card: it is shared through COMMON.
+Do not resize the dataset names: {VP} reads it.
+Do not optimise the {CLIENT} branch: it is load-bearing.
+Do not reorder the {DATASET} reference: the run book refers to it by line number.
+Do not optimise the overflow check: it matches the {OLDYEAR} deck.
+Think twice before changing the record count: it is the only thing preventing {INCIDENT}.
+Do not inline the {DATASET} reference: it is shared through COMMON.
+Ask {CODER2} before changing the DD statements: the run book refers to it by line number.
+Do not optimise the sign handling: it changes the output by one dollar.
+Think twice before changing the trailer card check: it is policy, not code.
+Ask {CODER2} before changing the console messages: the {HW} requires it.
+Do not resize the merge: it is the only thing preventing {INCIDENT}.
+Do not resize the output class: it changes the output.
+Do not split the EQUIVALENCE: the run book refers to it by line number.
+Do not re-indent the debug WRITEs: it was ratified by {COMMITTEE}.
+Get approval before changing the {DATASET} reference: it is shared through COMMON.
+Ask {CODER2} before changing the abend codes: it is older than you.
+Do not round the P95 rung: it changes the output.
+Do not simplify the trace switch: it is policy, not code.
+Do not duplicate the watermark literal: {PROGRAM2} depends on it.
+Do not simplify the EBCDIC table: audit {AUDIT} says so.
+Do not duplicate the provenance seal: the auditors check it.
+Do not move the computed GO TO: legal has asked us not to.
+Never remove the record count: memo {MEMO} says so.
+Do not optimise the dollar signs: it changes the output by one dollar.
+Do not resize the time limit: it is shared through COMMON.
+Do not remove the banner page: the {HW} requires it.
+Do not reorder the tape label check: it is policy, not code.
+Do not rename the {DATASET} reference: it took {CODER2} a {QUARTER} to get right.
+Never reorder the computed GO TO: the client reads it.
+Do not reformat the output class: {VP} reads it.
+Do not split the ordinal suffix table: {CODER2.I} will notice.
+Do not simplify the Hollerith constants: {CODER2.I} will notice.
+Never reorder the plus signs: it was ratified by {COMMITTEE}.
+Do not move the P95 rung: it is load-bearing.
+Think twice before changing the trace switch: it cancels out a bug elsewhere.
+Never change the page header: it is referenced in client contracts.
+Never move the region size: it cancels out a bug elsewhere.
+Be careful with the record count: it is the only thing preventing {INCIDENT}.
+Do not split the merge: legal has asked us not to.
+Think twice before changing the copy count: {RULE} says so.
+Do not "fix" the output class: it is the only thing preventing {INCIDENT}.
+Never remove the column alignment: it was ratified by {COMMITTEE}.
+Do not simplify the sequence numbers: it is the only thing preventing {INCIDENT}.
+Do not merge the Julian routine: it is older than you.
+Do not reorder the return codes: legal has asked us not to.
+Do not inline the EQUIVALENCE: it is load-bearing.
+Do not duplicate the trailer line: memo {MEMO} says so.
+Never change the trace switch: it cancels out a bug elsewhere.
+Never move the sign handling: the {HW} requires it.
+Get approval before changing the merge: {COMPILER} requires it.
+Do not rename the two-digit years: it is the only thing preventing {INCIDENT}.
+Think twice before changing the metric card parser: legal has asked us not to.
+Never change the page header: it matches the {OLDYEAR} deck.
+Do not remove the job card: nobody remembers why it works.
+Do not reorder the FORMAT widths: the report columns line up only this way.
+Do not rename the P95 rung: it is policy, not code.
+Do not resize the page header: {VP} reads it.
+Think twice before changing the change column: it is policy, not code.
+Never move the {UTILITY} step: the auditors check it.
+Do not remove the Julian routine: it changes the output by one dollar.
+Do not move the page footer: it was ratified by {COMMITTEE}.
+Check with {DEPT} before changing the client special cases: {COMPILER} requires it.
+Do not resize the tape label check: it is load-bearing.
+Do not reorder the two-digit years: {RULE} says so.
+Do not re-indent the DATA statements: {COMPILER} requires it.
+Do not round the banner page: it took {CODER2} a {QUARTER} to get right.
+Do not reorder the form number: it is the only thing preventing {INCIDENT}.
+Do not simplify the EBCDIC table: it changes the output by one dollar.
+Do not optimise the dollar signs: the report columns line up only this way.
+Get approval before changing the COMMON block layout: it took {CODER2} a {QUARTER} to get right.
+Do not reorder the BLOCK DATA: {VP} reads it.
+Do not round the checksum: {CODER2.I} will notice.
+Get approval before changing the step names: it is older than you.
+Do not re-indent the plus signs: nobody remembers why it works.
+Do not reformat the peer group heading: it was ratified by {COMMITTEE}.
+Do not reorder the checkpoint logic: {RULE} says so.
+Never reorder the trace switch: it matches the {OLDYEAR} deck.
+Never remove the cross-check: the {HW} requires it.
+Do not duplicate the abend codes: it cancels out a bug elsewhere.
+Do not simplify the metric card parser: the auditors check it.
+Get approval before changing the overflow check: the client reads it.
+Do not optimise the return codes: memo {MEMO} says so.
+Do not round the {DATASET} reference: it changes the output by one dollar.
+Do not optimise the computed GO TO: {VP} reads it.
+Do not resize the shadow array: it changes the output.
+Do not re-indent the time limit: it is load-bearing.
+Do not simplify the P33 rung: it matches the {OLDYEAR} deck.
+Get approval before changing the FORMAT widths: {CODER2.I} will notice.
+Do not split the P95 rung: {CODER2.I} will notice.
+Do not rename the control card check: the report columns line up only this way.
+Never move the distribution list: {COMPILER} requires it.
+Do not round the {QUARTER} adjustment: it is policy, not code.
+Do not resize the date format: it is shared through COMMON.
+Do not rename the {UTILITY} step: {PROGRAM2} depends on it.
+Do not simplify the pivot year: it is shared through COMMON.
+Do not inline the page footer: the {HW} requires it.
+Never change the leap-year test: {PROGRAM2} depends on it.
+Do not reorder the EBCDIC table: it matches the {OLDYEAR} deck.
+Never remove the region size: {RULE} says so.
+Do not move the job card: it was like that when we got here.
+Do not "fix" the leap-year test: the client reads it.
+Be careful with the tape label check: {COMPILER} requires it.
+Get approval before changing the overflow check: legal has asked us not to.
+Do not change the P67 rung: memo {MEMO} says so.
+Do not rename the trailer line: it is referenced in client contracts.
+Do not comment out the form number: {CODER2.I} will notice.
+Never change the plus signs: it cancels out a bug elsewhere.
+Never change the form number: the operators' scripts grep for it.
+Do not touch the trailer card check: the operators' scripts grep for it.
+Do not change the {UTILITY} step: it changes the output.
+Do not change the checkpoint logic: the run book refers to it by line number.
+Do not split the P67 rung: it took {CODER2} a {QUARTER} to get right.
+Do not round the banner page: the report columns line up only this way.
+Check with {DEPT} before changing the DD statements: it changes the output.
+Do not round the continuation cards: {COMPILER} requires it.
+Do not touch the distribution list: it is older than you.
+Check with {DEPT} before changing the trailer line: it cancels out a bug elsewhere.
+Do not reformat the median card parser: it changes the output.
+Check with {DEPT} before changing the {CLIENT} branch: {VP} reads it.
+Do not merge the trace switch: {PROGRAM2} depends on it.
+Be careful with the overflow check: it is policy, not code.
+Do not remove the checkpoint logic: it is policy, not code.
+Do not round the median card parser: memo {MEMO} says so.
+Think twice before changing the sign handling: it matches the {OLDYEAR} deck.
+Be careful with the overflow check: memo {MEMO} says so.
+Do not optimise the date format: the auditors check it.
+Do not round the merge: the operators' scripts grep for it.
+Do not round the continuation cards: nobody remembers why it works.
+Do not change the step names: {PROGRAM2} depends on it.
+Do not touch the {CLIENT} branch: nobody remembers why it works.
+Do not duplicate the time limit: it is the only thing preventing {INCIDENT}.
+Do not duplicate the {PROGRAM2} interface: the report columns line up only this way.
+Do not comment out the trailer card check: {CODER2.I} will notice.
+Do not touch the console messages: it is shared through COMMON.
+Do not duplicate the overflow check: the {HW} requires it.
+Do not comment out the FORMAT widths: it cancels out a bug elsewhere.
+Do not touch the computed GO TO: it cancels out a bug elsewhere.
+Do not "fix" the output class: it is load-bearing.
+Do not "fix" the record count: it changes the output.
+Do not remove the EQUIVALENCE: it was ratified by {COMMITTEE}.
+Do not rename the copy count: {VP} reads it.
+Be careful with the DD statements: it is older than you.
+Think twice before changing the page footer: it took {CODER2} a {QUARTER} to get right.
+Do not rename the Hollerith constants: it was ratified by {COMMITTEE}.
+Do not touch the dataset names: {COMPILER} requires it.
+Do not inline the DD statements: nobody remembers why it works.
+Do not round the Julian routine: it was ratified by {COMMITTEE}.
+Never reorder the distribution list: it is referenced in client contracts.
+Be careful with the banner page: it is load-bearing.
+Do not resize the error messages: {PROGRAM2} depends on it.
+Do not change the page footer: it is older than you.
+Do not merge the sort: the run book refers to it by line number.
+Do not comment out the {PROGRAM2} interface: it is policy, not code.
+Do not duplicate the page header: memo {MEMO} says so.
+Do not rename the region size: the operators' scripts grep for it.
+Do not round the {DATASET} reference: {PROGRAM2} depends on it.
+Do not move the leap-year test: it is referenced in client contracts.
+Do not merge the shadow array: {PROGRAM2} depends on it.
+Do not comment out the metric card parser: it was ratified by {COMMITTEE}.
+Get approval before changing the watermark literal: {RULE} says so.
+Do not optimise the dataset names: it is the only thing preventing {INCIDENT}.
+Do not comment out the sequence numbers: it is policy, not code.
+Do not reformat the {UTILITY} step: it took {CODER2} a {QUARTER} to get right.
+Never move the return codes: the {HW} requires it.
+Do not "fix" the Hollerith constants: the auditors check it.
+Do not move the copy count: it was like that when we got here.
+Never change the {UTILITY} step: {VP} reads it.
+Never move the output class: the auditors check it.
+Do not change the sign handling: it matches the {OLDYEAR} deck.
+Ask {CODER2} before changing the EQUIVALENCE: {RULE} says so.
+Do not remove the abend codes: it was ratified by {COMMITTEE}.
+Never change the trailer card check: it was ratified by {COMMITTEE}.
+Get approval before changing the error messages: {RULE} says so.
+Check with {DEPT} before changing the EQUIVALENCE: the run book refers to it by line number.
+Get approval before changing the trailer card check: it changes the output by one dollar.
+Ask {CODER2} before changing the Julian routine: the run book refers to it by line number.
+Do not rename the debug WRITEs: {COMPILER} requires it.
+Never change the control card check: it cancels out a bug elsewhere.
+Never reorder the sort: it changes the output.
+Think twice before changing the page footer: {PROGRAM2} depends on it.
+Do not change the EQUIVALENCE: it was like that when we got here.
+Do not merge the shadow array: it cancels out a bug elsewhere.
+Do not re-indent the client special cases: it was ratified by {COMMITTEE}.
+Do not merge the restart logic: it is referenced in client contracts.
+Do not optimise the time limit: legal has asked us not to.
+Do not inline the P95 rung: it was ratified by {COMMITTEE}.
+Check with {DEPT} before changing the banner page: it was ratified by {COMMITTEE}.
+Never remove the trace switch: legal has asked us not to.
+Do not "fix" the P95 rung: the run book refers to it by line number.
+Do not touch the dollar signs: {CODER2.I} will notice.
+Think twice before changing the percentile ladder: it is load-bearing.
+Do not re-indent the {UTILITY} step: the client reads it.
+Do not touch the console messages: audit {AUDIT} says so.
+Do not touch the {CLIENT} branch: it is older than you.
+Do not merge the column alignment: the operators' scripts grep for it.
+Do not duplicate the checksum: the operators' scripts grep for it.
+Do not touch the sequence numbers: {VP} reads it.
+Do not comment out the {QUARTER} adjustment: it changes the output.
+Do not reformat the {PROGRAM2} interface: memo {MEMO} says so.
+Do not touch the peer group heading: audit {AUDIT} says so.
+Get approval before changing the sort: it cancels out a bug elsewhere.
+Do not move the checksum: it was like that when we got here.
+Do not change the median card parser: memo {MEMO} says so.

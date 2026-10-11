@@ -1,0 +1,7 @@
+BY LOADING THE PROGRAM, LICENSEE ACKNOWLEDGES THAT IT HAS READ THIS AGREEMENT, UNDERSTANDS IT, AND AGREES TO BE BOUND BY ITS TERMS.
+Opening the sealed tape canister constitutes acceptance of this license. If you do not accept, return the canister unopened. The canister is not sealed.
+Licensee's continued use of the Program after {DATE} constitutes acceptance of these terms as amended.
+Licensee accepts the Program in its current condition, including all known and unknown {BUG}s.
+Acceptance testing shall be completed within {TERMDAYS} days of delivery. Failure to complete acceptance testing constitutes acceptance.
+By reading this far you have accepted. There is no way to un-read it.
+Licensee acknowledges that it has had the opportunity to consult counsel, and that counsel also did not read the Program.

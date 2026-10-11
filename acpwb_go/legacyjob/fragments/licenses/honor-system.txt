@@ -1,0 +1,7 @@
+#name: Honor System License
+#kind: noncommercial
+#from: 1970
+#to: 2000
+HONOR SYSTEM
+
+There is no license fee for this program. There is a coffee can on the shelf in {PLACE}. If you run this program, put something in the can. The can is checked every {DAYNAME} by {CODER2}, who reports the contents to {VP}, who has never asked.

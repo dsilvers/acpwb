@@ -1,0 +1,14 @@
+#name: ACPWB House License (Form L-1)
+#kind: proprietary
+#from: 1979
+#to: 2004
+{HOLDERUP} - HOUSE SOFTWARE LICENSE - FORM L-1
+
+1. This program belongs to the Research Division. It is lent, not given, to whoever is running it.
+2. You may run it. You may read it. You may not change it without form RD-114 signed by two vice presidents.
+3. You may not take it home, except during the {QUARTER} close, when everyone takes everything home.
+4. You may not show it to clients. You may show clients its Output.
+5. You may not round.
+6. When you leave the company, leave the program.
+
+Approved: {VP}, {DATE}. Form L-1 rev. {LICVER}.

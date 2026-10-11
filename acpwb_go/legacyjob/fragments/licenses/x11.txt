@@ -1,0 +1,12 @@
+#name: X11 License
+#kind: open
+#from: 1987
+Copyright (C) {YEARRANGE} {HOLDER}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. IN NO EVENT SHALL {HOLDERUP} BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS PERCENTILES.
+
+Except as contained in this notice, the name of {HOLDER} shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from {HOLDER}, which has never been given.

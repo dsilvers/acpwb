@@ -1,0 +1,10 @@
+#name: End-of-Life Runtime Notice
+#kind: proprietary
+#from: 2020
+#langs: py2
+#extra: yes
+NOTICE: UNSUPPORTED RUNTIME
+
+This program runs on Python 2.7, which reached end of life on 1 January 2020 and no longer receives security updates. {HOLDER} has accepted this risk under exception {TICKET}, approved by {VP} and renewed annually.
+
+Migration to Python 3 is planned for {YEAR2}. The migration has been planned for {YEAR2} since {YEAR}.

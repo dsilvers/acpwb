@@ -1,0 +1,13 @@
+#name: Software Bill of Materials
+#kind: proprietary
+#from: 2021
+#extra: yes
+SOFTWARE BILL OF MATERIALS (SBOM) - {PROGRAM} {REL}
+
+Component: {PROGRAM}  Supplier: {HOLDER}  Version: {REL}  License: see above
+Component: percentile ladder  Supplier: {COMMITTEE}  Version: 1981  License: none (fact)
+Component: Julian routine  Supplier: unknown ({CONFERENCE} handout)  Version: unknown  License: unknown
+Component: checksum  Supplier: {VENDOR}  Version: {LICVER}  License: lost
+Component: dead code  Supplier: various  Version: various  License: retained for audit
+
+Known vulnerabilities: none. Known oddities: see comments.

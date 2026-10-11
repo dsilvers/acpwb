@@ -1,0 +1,13 @@
+#name: Perl Terms (Artistic or GPL)
+#kind: open
+#from: 1991
+#langs: perl
+Copyright {YEARRANGE} {CODER}, {HOLDER}.
+
+This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself, that is, under the terms of either:
+
+a) the GNU General Public License as published by the Free Software Foundation; either version 1, or (at your option) any later version, or
+
+b) the "Artistic License" which comes with Perl.
+
+(Nobody at {HOLDER} has read either. {CODER} copied this from CPAN on {DATE}. It is the most popular license in the department by a factor of one.)

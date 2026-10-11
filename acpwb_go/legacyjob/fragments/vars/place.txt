@@ -1,0 +1,47 @@
+# {PLACE}
+the machine room
+the tape library
+the raised floor
+the print room
+the keypunch room
+the data control window
+the third-floor annex
+the basement
+the sub-basement
+the loading dock
+the mail room
+the conference room on 6
+the vault
+the cafeteria
+the parking structure
+the roof
+the warehouse in West Allis
+the off-site storage facility
+the disaster recovery site in Waukesha
+the hallway outside {CODER2}'s office
+the tape vault
+the operator's console
+the printer room on 2
+the keypunch pool
+the steno pool
+the third-floor supply closet
+the old data control room, now a closet
+the fifth-floor conference room with the bad projector
+the room with the {HW}
+the room where the {HW} used to be
+the lobby display case
+the records storage room
+the freight elevator
+the north stairwell
+the smoking area by the loading dock
+the employee lounge
+the training room
+the library
+the copy room
+the back hallway on 4
+the annex across the street
+the skywalk
+the basement storage cage
+{CODER2.I}'s cubicle
+the corner office
+the empty office at the end of the hall

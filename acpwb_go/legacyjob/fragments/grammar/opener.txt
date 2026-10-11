@@ -1,0 +1,1281 @@
+Note:
+NB:
+Important:
+Caution:
+Please note that
+For the record,
+Be advised:
+Historical note:
+Per {CODER2},
+As discussed with {VP},
+Reminder:
+Attention maintainers:
+FYI:
+Heads up:
+Observation:
+Per audit {AUDIT},
+As of {DATE},
+Following the {OLDYEAR} review,
+For reasons now lost,
+Strictly speaking,
+To be clear,
+Off the record,
+Clarification:
+Per memo {MEMO},
+In case anyone asks,
+Warning:
+Remark:
+Technically,
+For {CLIENT},
+Since {YEAR},
+Correction ({DATE}) per memo {MEMO}:
+Correction ({DATE}):
+Known issue per memo {MEMO}:
+See also ({DATE}):
+Update ({YEAR}) ({YEAR}):
+Addendum per {VP}:
+Note to future maintainers per memo {MEMO}:
+Pending approval [{CODER.I} {YEAR}]:
+Reminder to all ({CODER.I}):
+Open question:
+Correction ({DATE}) per {VP}:
+Officially,
+Disclaimer per {VP}:
+Unresolved per {CODER2}:
+Historical footnote per {CODER2}:
+Open question ({DATE}):
+Operations note ({YEAR}):
+Explanation [{CODER.I} {YEAR}]:
+Important note ({YEAR}):
+Audit note ({DATE}):
+Under review:
+Rejected:
+Reminder to all ({DATE}):
+Rationale:
+Apparently,
+Lesson learned:
+See also ({YEAR}):
+Disclaimer [{CODER.I} {YEAR}]:
+Rejected ({CODER.I}):
+Deferred per {CODER2}:
+Background ({DATE}):
+Editorial comment ({YEAR}):
+Related:
+Side note ({YEAR}):
+PLEASE NOTE:
+Update ({YEAR}):
+Observation ({DATE}) ({YEAR}):
+Design note [{CODER.I} {YEAR}]:
+Side note per {VP}:
+Maintenance note per {VP}:
+Note to self [{CODER.I} {YEAR}]:
+Open question [{CODER.I} {YEAR}]:
+Legal note ({YEAR}):
+Per {TEAM},
+Update ({YEAR}) [{CODER.I} {YEAR}]:
+For context,
+Side note ({DATE}):
+Erratum ({DATE}):
+Correction ({DATE}) ({DATE}):
+Design note per {VP}:
+Key point per {CODER2}:
+Client note ({DATE}):
+Note to future maintainers:
+Implementation note ({YEAR}):
+Audit note per {CODER2}:
+Unresolved ({YEAR}):
+Note to self ({DATE}):
+PLEASE NOTE ({DATE}):
+Audit note ({YEAR}):
+Pending approval per {CODER2}:
+Reminder to all [{CODER.I} {YEAR}]:
+Client note ({YEAR}):
+Important note ({DATE}):
+Side note ({CODER.I}):
+Design note ({DATE}):
+Allegedly,
+Historical footnote ({CODER.I}):
+Implementation note:
+Lesson learned ({CODER.I}):
+Background [{CODER.I} {YEAR}]:
+Update ({YEAR}) ({CODER.I}):
+PLEASE NOTE per {VP}:
+Observation ({DATE}):
+Observation ({DATE}) [{CODER.I} {YEAR}]:
+Before you ask,
+Operations note per {VP}:
+Approved:
+Caveat per {CODER2}:
+Design note ({CODER.I}):
+Aside per {VP}:
+Explanation:
+Known issue [{CODER.I} {YEAR}]:
+Maintenance note per memo {MEMO}:
+Explanation ({CODER.I}):
+Deferred ({DATE}):
+Approved ({CODER.I}):
+Historical footnote [{CODER.I} {YEAR}]:
+For the record ({DATE}),
+In practice,
+Observation ({DATE}) per {CODER2}:
+Rationale ({YEAR}):
+Resolved ({CODER.I}):
+Lesson learned ({YEAR}):
+Editorial comment per memo {MEMO}:
+Legal note [{CODER.I} {YEAR}]:
+Editorial comment [{CODER.I} {YEAR}]:
+Important note:
+Editorial comment:
+Known issue per {CODER2}:
+Legal note per memo {MEMO}:
+Pending approval ({DATE}):
+Side note per {CODER2}:
+Fair warning per {VP}:
+Context:
+Unresolved [{CODER.I} {YEAR}]:
+Per ticket {TICKET},
+Unresolved:
+Historical footnote:
+Deferred ({YEAR}):
+Erratum:
+Lesson learned [{CODER.I} {YEAR}]:
+Historically,
+Maintenance note [{CODER.I} {YEAR}]:
+Caveat [{CODER.I} {YEAR}]:
+Resolved ({YEAR}):
+Maintenance note:
+Note to self per memo {MEMO}:
+Disclaimer ({YEAR}):
+Unresolved per memo {MEMO}:
+Rejected per {CODER2}:
+N.B.
+Fair warning per memo {MEMO}:
+Editorial comment per {VP}:
+See also ({CODER.I}):
+After much discussion,
+Audit note per {VP}:
+Note to future maintainers [{CODER.I} {YEAR}]:
+Aside ({CODER.I}):
+Update per {CODER2}:
+In short,
+Context per {VP}:
+Operations note [{CODER.I} {YEAR}]:
+Pending approval per {VP}:
+Note to self ({CODER.I}):
+Approved [{CODER.I} {YEAR}]:
+Design note per memo {MEMO}:
+Aside [{CODER.I} {YEAR}]:
+Fair warning [{CODER.I} {YEAR}]:
+Aside ({YEAR}):
+Erratum per memo {MEMO}:
+Addendum [{CODER.I} {YEAR}]:
+Disclaimer ({CODER.I}):
+Explanation per {VP}:
+Note to self ({YEAR}):
+Update:
+Implementation note per memo {MEMO}:
+Explanation per {CODER2}:
+Caveat per {VP}:
+Caveat ({DATE}):
+Implementation note [{CODER.I} {YEAR}]:
+Under review [{CODER.I} {YEAR}]:
+Note to future maintainers ({CODER.I}):
+Under review per memo {MEMO}:
+Pending approval ({CODER.I}):
+Disclaimer per memo {MEMO}:
+Related ({CODER.I}):
+Attention ({CODER.I}):
+Unresolved ({CODER.I}):
+Key point ({CODER.I}):
+Client note per {CODER2}:
+Side note:
+Design note ({YEAR}):
+Deferred per memo {MEMO}:
+Legal note per {VP}:
+Deferred per {VP}:
+Lesson learned per memo {MEMO}:
+Under review ({YEAR}):
+Pending approval:
+In theory,
+Legal note ({DATE}):
+Related [{CODER.I} {YEAR}]:
+Fair warning ({YEAR}):
+Under review per {CODER2}:
+Resolved:
+Update ({YEAR}) per {CODER2}:
+Historical footnote per {VP}:
+Observation ({DATE}) ({DATE}):
+Caveat ({CODER.I}):
+Background per memo {MEMO}:
+Rejected [{CODER.I} {YEAR}]:
+Rejected per {VP}:
+Unresolved per {VP}:
+Legal note per {CODER2}:
+Side note per memo {MEMO}:
+Erratum [{CODER.I} {YEAR}]:
+Audit note:
+Addendum ({CODER.I}):
+According to the {OLDYEAR} binder,
+Resolved ({DATE}):
+Attention per memo {MEMO}:
+Explanation ({YEAR}):
+Addendum ({DATE}):
+Implementation note per {CODER2}:
+Attention ({DATE}):
+Known issue ({DATE}):
+Explanation ({DATE}):
+Deferred ({CODER.I}):
+Maintenance note per {CODER2}:
+Attention per {CODER2}:
+Maintenance note ({DATE}):
+For what it is worth,
+Aside:
+Update [{CODER.I} {YEAR}]:
+Disclaimer:
+Reminder to all:
+Note to future maintainers ({DATE}):
+Side note [{CODER.I} {YEAR}]:
+Important note [{CODER.I} {YEAR}]:
+Key point:
+Update ({YEAR}) ({DATE}):
+Client note:
+Audit note per memo {MEMO}:
+Addendum ({YEAR}):
+Reminder to all per memo {MEMO}:
+Background ({CODER.I}):
+Correction ({DATE}) ({YEAR}):
+Reminder to all per {CODER2}:
+Resolved [{CODER.I} {YEAR}]:
+Important note per {CODER2}:
+Rationale per {CODER2}:
+Rationale ({CODER.I}):
+Legal note:
+Caveat:
+Context ({YEAR}):
+Key point per {VP}:
+Rationale ({DATE}):
+Design note per {CODER2}:
+Attention ({YEAR}):
+Update ({DATE}):
+Correction ({DATE}) per {CODER2}:
+Addendum per memo {MEMO}:
+Background per {CODER2}:
+Update ({CODER.I}):
+Important note ({CODER.I}):
+Operations note:
+Update ({YEAR}) per {VP}:
+Erratum ({YEAR}):
+Fair warning:
+Editorial comment ({CODER.I}):
+Operations note ({CODER.I}):
+PLEASE NOTE [{CODER.I} {YEAR}]:
+PLEASE NOTE ({CODER.I}):
+Per form {FORM},
+Caveat per memo {MEMO}:
+Rationale per memo {MEMO}:
+After the {YEAR} audit,
+Client note per {VP}:
+To the best of our knowledge,
+Important note per {VP}:
+Open question ({CODER.I}):
+Lesson learned ({DATE}):
+Related per {CODER2}:
+Background per {VP}:
+Erratum ({CODER.I}):
+Under review ({DATE}):
+Legal note ({CODER.I}):
+Attention per {VP}:
+See also [{CODER.I} {YEAR}]:
+Observation ({DATE}) ({CODER.I}):
+Addendum per {CODER2}:
+Addendum:
+Deferred:
+Implementation note per {VP}:
+Implementation note ({CODER.I}):
+Before changing anything,
+Observation ({DATE}) per {VP}:
+Design note:
+PLEASE NOTE ({YEAR}):
+Operations note per {CODER2}:
+Note to self per {CODER2}:
+Open question ({YEAR}):
+Erratum per {CODER2}:
+Note to future maintainers ({YEAR}):
+Aside ({DATE}):
+Lesson learned per {CODER2}:
+Attention [{CODER.I} {YEAR}]:
+Aside per {CODER2}:
+Reminder to all per {VP}:
+Approved ({DATE}):
+Fair warning ({DATE}):
+Resolved per memo {MEMO}:
+Fair warning per {CODER2}:
+Note to future maintainers per {VP}:
+Under review per {VP}:
+PLEASE NOTE per {CODER2}:
+Erratum per {VP}:
+Background:
+Approved ({YEAR}):
+Maintenance note ({YEAR}):
+Known issue ({CODER.I}):
+Historical footnote per memo {MEMO}:
+Maintenance note ({CODER.I}):
+According to {CODER2},
+Rejected ({DATE}):
+Correction ({DATE}) [{CODER.I} {YEAR}]:
+As far as anyone knows,
+Rejected ({YEAR}):
+Editorial comment ({DATE}):
+Operations note ({DATE}):
+Update ({YEAR}) per memo {MEMO}:
+Obsolete for {DEPT}:
+Theory #{SMALLN}:
+Mysteriously,
+Guess (again):
+Sadly,
+Note ({DATE}):
+Field note from {CODER2}:
+Tip, {DAYNAME}:
+Abandoned ({DATE}):
+For the last time,
+Convention per {VP}:
+Effective {DATE},
+Unresolved ({DATE}):
+Known issue re {CLIENT}:
+Retraction from {CODER2}:
+Objection per memo {MEMO}:
+Rumour has it that
+Known limitation (see {MANUAL}):
+Correction [{CODER.I}]:
+Closed issue, {QUARTER}:
+As threatened,
+Instruction (urgent):
+Caveat after {INCIDENT}:
+Objection per audit {AUDIT}:
+Programmers please note:
+Known issue (again):
+Implementation note ({DATE}):
+Analyst's note ({CODER.I}):
+Minute #{SMALLN}:
+Since the {YEAR} conversion,
+Deferred, {DAYNAME}:
+Prayer (urgent):
+Yet again,
+Conjecture per {VP}:
+Exception #{SMALLN}:
+Fear ({DATE}):
+Observation for {DEPT}:
+Client note #{SMALLN}:
+Alert per {VP}:
+Suspicion re {CLIENT}:
+Errata (see {MANUAL}):
+Ironically,
+Conjecture #{SMALLN}:
+Reminder per {VP}:
+Reminder from {CODER2}:
+Wish for {DEPT}:
+Pending before the {QUARTER} run:
+Update per memo {MEMO}:
+Convention:
+Field note ({YEAR}):
+To whom it may concern:
+Advisory #{SMALLN}:
+Directive after {INCIDENT}:
+Worry re {CLIENT}:
+Context, {QUARTER}:
+Fear from {CODER2}:
+Assumption (see {MANUAL}):
+Attention night shift:
+Summary (do not remove):
+Since {OLDYEAR},
+It is hoped that
+Pencil note:
+For audit purposes,
+Dear successor,
+Attention [{CODER.I}]:
+Caution per audit {AUDIT}:
+Premise (do not remove):
+Errata re {CLIENT}:
+Secret [{CODER.I}]:
+Exception before the {QUARTER} run:
+Editorial note:
+Complaint #{SMALLN}:
+In retrospect,
+Retraction per {VP}:
+Operator's note, {QUARTER}:
+Log entry before the {QUARTER} run:
+Legal note re {CLIENT}:
+Pending from {CODER2}:
+Proviso re {CLIENT}:
+For historical reasons,
+Known issue from {CODER2}:
+Note, {QUARTER}:
+Advisory (urgent):
+Curiously,
+Lore, {QUARTER}:
+Until {YEAR2},
+Clarification, {QUARTER}:
+Field note per {VP}:
+Secret (urgent):
+Admission for {DEPT}:
+Status per audit {AUDIT}:
+Policy before the {QUARTER} run:
+Gossip (see {MANUAL}):
+Hint (urgent):
+Protest (do not remove):
+Guess after {INCIDENT}:
+Guess per memo {MEMO}:
+Aside #{SMALLN}:
+Grievance per audit {AUDIT}:
+Wish from {CODER2}:
+Operator's note per memo {MEMO}:
+Auditor's note (do not remove):
+Objection ({YEAR}):
+Hope, {DAYNAME}:
+Amendment (urgent):
+Summary (see {MANUAL}):
+Errata:
+Caveat [{CODER.I}]:
+Scribble for {DEPT}:
+Diary re {CLIENT}:
+Summary (urgent):
+Listen,
+In hindsight,
+Exception per {VP}:
+Minute re {CLIENT}:
+Programmer's note for {DEPT}:
+Complaint from {CODER2}:
+Attention operators:
+Regrettably,
+Programmer's note [{CODER.I}]:
+Status for {DEPT}:
+Review comment [{CODER.I}]:
+Legal note, {QUARTER}:
+Memo [{CODER.I}]:
+Correction from {CODER2}:
+Open issue (do not remove):
+Justification [{CODER.I}]:
+Objection, {QUARTER}:
+Translator's note (again):
+Disclaimer (see {MANUAL}):
+Observation per memo {MEMO}:
+Estimate:
+Correction after {INCIDENT}:
+Notice for {DEPT}:
+One more time,
+Really,
+Finding, {QUARTER}:
+Pencil note per {VP}:
+OK.
+Record, {QUARTER}:
+Summary #{SMALLN}:
+Wish per memo {MEMO}:
+Justification:
+Update (see {MANUAL}):
+Estimate ({DATE}):
+The long answer is that
+As predicted by {CODER2},
+Amendment ({DATE}):
+The short answer is that
+Observation, {DAYNAME}:
+Folklore per memo {MEMO}:
+Log entry (see {MANUAL}):
+Once again,
+Log entry [{CODER.I}]:
+Plea (again):
+Proviso, {DAYNAME}:
+Tradition ({CODER.I}):
+Admission, {QUARTER}:
+Erratum from {CODER2}:
+Exception after {INCIDENT}:
+Theory, {DAYNAME}:
+Retraction after {INCIDENT}:
+Notice #{SMALLN}:
+Important (see {MANUAL}):
+Unresolved (urgent):
+Open issue ({CODER.I}):
+Warning re {CLIENT}:
+Context per audit {AUDIT}:
+Notice per audit {AUDIT}:
+Rumour (see {MANUAL}):
+Procedure #{SMALLN}:
+Special case for {DEPT}:
+Qualification, {DAYNAME}:
+Advisory, {QUARTER}:
+Context after {INCIDENT}:
+Directive (again):
+Important, {QUARTER}:
+Worry ({CODER.I}):
+Implementation note (urgent):
+NB from {CODER2}:
+Historical note per memo {MEMO}:
+Analyst's note (again):
+To be honest,
+Edge case before the {QUARTER} run:
+Exception, {QUARTER}:
+Suspicion:
+Scribble after {INCIDENT}:
+Policy:
+Attention #{SMALLN}:
+I am told
+Analyst's note, {DAYNAME}:
+Editorial note re {CLIENT}:
+Programmer's note, {QUARTER}:
+Erratum re {CLIENT}:
+Erratum #{SMALLN}:
+Caution (do not remove):
+Auditor's note per {VP}:
+Until further notice,
+Admittedly,
+Custom after {INCIDENT}:
+We believe
+Exception (again):
+Journal [{CODER.I}]:
+Sticky note before the {QUARTER} run:
+Heads up (see {MANUAL}):
+Conjecture (see {MANUAL}):
+Heads up for {DEPT}:
+Post-it for {DEPT}:
+Confession:
+Record ({DATE}):
+Superseded:
+Rule #{SMALLN}:
+Fear (again):
+Special case ({CODER.I}):
+Tip #{SMALLN}:
+Implementation note before the {QUARTER} run:
+NB [{CODER.I}]:
+Open issue (again):
+Warning per memo {MEMO}:
+Proviso (urgent):
+Errata #{SMALLN}:
+Closed issue re {CLIENT}:
+Advisory, {DAYNAME}:
+Grievance:
+Hypothesis re {CLIENT}:
+Post-it (see {MANUAL}):
+Errata per {VP}:
+Hope from {CODER2}:
+Edge case, {DAYNAME}:
+Procedure (again):
+Lore [{CODER.I}]:
+Legend (again):
+Translator's note (do not remove):
+Record ({YEAR}):
+Programmer's note from {CODER2}:
+Team:
+Rationale before the {QUARTER} run:
+Scribble per memo {MEMO}:
+Scribble per audit {AUDIT}:
+Legend #{SMALLN}:
+Confession per {VP}:
+Pencil note ({YEAR}):
+Attention (see {MANUAL}):
+Trust me,
+Secret (do not remove):
+With respect,
+Confession per memo {MEMO}:
+As discussed at {MEETING},
+Protest ({YEAR}):
+Rule (urgent):
+Strangely,
+Clarification #{SMALLN}:
+Open issue per {VP}:
+Directive re {CLIENT}:
+Obsolete (see {MANUAL}):
+With thanks to {CODER3},
+Memo re {CLIENT}:
+Estimate (see {MANUAL}):
+NB ({YEAR}):
+Custom ({DATE}):
+Warning per audit {AUDIT}:
+Audit note [{CODER.I}]:
+For legal reasons,
+Plea per audit {AUDIT}:
+Bulletin (urgent):
+Justification after {INCIDENT}:
+Post-it, {QUARTER}:
+Worry #{SMALLN}:
+Special case [{CODER.I}]:
+Analyst's note ({DATE}):
+Finding for {DEPT}:
+Per our conversation at {LUNCHSPOT},
+Manager's note, {QUARTER}:
+Closed issue per memo {MEMO}:
+Surprisingly,
+Pending (see {MANUAL}):
+Editorial note ({DATE}):
+Oddly,
+Confession per audit {AUDIT}:
+Unresolved re {CLIENT}:
+We suspect
+Complaint (urgent):
+Long version:
+Tip (again):
+Postscript ({DATE}):
+Estimate for {DEPT}:
+Status after {INCIDENT}:
+Amendment per {VP}:
+Fortunately,
+Estimate per audit {AUDIT}:
+Abandoned ({YEAR}):
+So.
+Correction (see {MANUAL}):
+Field note:
+Order for {DEPT}:
+Qualification per {VP}:
+Auditor's note ({CODER.I}):
+Log entry ({CODER.I}):
+Credit to {CODER2}:
+Legend ({YEAR}):
+Addendum, {DAYNAME}:
+Policy per {VP}:
+Remark ({YEAR}):
+Minute ({DATE}):
+Lore (again):
+Tradition #{SMALLN}:
+Prayer per memo {MEMO}:
+Protest ({DATE}):
+Manager's note (urgent):
+Editorial note per audit {AUDIT}:
+Qualification per memo {MEMO}:
+Translator's note from {CODER2}:
+Design note for {DEPT}:
+Legal note (urgent):
+Proviso before the {QUARTER} run:
+Translator's note per audit {AUDIT}:
+Objection re {CLIENT}:
+Dear auditor,
+Tradition (do not remove):
+Minute, {QUARTER}:
+Folklore re {CLIENT}:
+Sticky note per memo {MEMO}:
+We hope
+Obsolete re {CLIENT}:
+Rationale from {CODER2}:
+Analyst's note (do not remove):
+Auditor's note (urgent):
+Caveat (see {MANUAL}):
+Admission after {INCIDENT}:
+Rumour ({CODER.I}):
+Operator's note (see {MANUAL}):
+Wish ({YEAR}):
+Reviewer's note ({YEAR}):
+Confession ({CODER.I}):
+Summary per {VP}:
+Tradition (urgent):
+Important (again):
+Hope for {DEPT}:
+Explanation from {CODER2}:
+Caveat ({YEAR}):
+Review comment ({YEAR}):
+Historical note #{SMALLN}:
+NB (see {MANUAL}):
+Alert, {DAYNAME}:
+Instruction re {CLIENT}:
+Post-it after {INCIDENT}:
+Auditor's note (see {MANUAL}):
+Long story short,
+Prayer after {INCIDENT}:
+TL;DR:
+It is known that
+Minute [{CODER.I}]:
+Amendment (do not remove):
+Footnote (do not remove):
+Footnote (see {MANUAL}):
+Secret ({YEAR}):
+Lore #{SMALLN}:
+Secret ({DATE}):
+Proviso (do not remove):
+Obsolete (urgent):
+Again,
+Open issue ({YEAR}):
+Reviewer's note:
+Known limitation per memo {MEMO}:
+Pending [{CODER.I}]:
+Notice before the {QUARTER} run:
+Guess for {DEPT}:
+Folklore #{SMALLN}:
+Reminder after {INCIDENT}:
+Manager's note per memo {MEMO}:
+Sticky note from {CODER2}:
+Protest, {DAYNAME}:
+Grievance, {QUARTER}:
+Minute for {DEPT}:
+Reviewer's note per {VP}:
+Well.
+Bottom line:
+Record (do not remove):
+For reasons lost to history,
+Bulletin re {CLIENT}:
+As agreed,
+Hat tip to {CODER3}:
+Rationale (urgent):
+Amendment per memo {MEMO}:
+Correction ({CODER.I}):
+Guess [{CODER.I}]:
+Assumption (again):
+Legend after {INCIDENT}:
+Footnote:
+Retraction:
+Trick ({CODER.I}):
+Record re {CLIENT}:
+Protest after {INCIDENT}:
+Gossip for {DEPT}:
+Mercifully,
+Programmer's note per {VP}:
+Worry, {QUARTER}:
+Hope #{SMALLN}:
+Resolved, {QUARTER}:
+Clarification after {INCIDENT}:
+Superseded, {QUARTER}:
+Request per audit {AUDIT}:
+Remark #{SMALLN}:
+Addendum from {CODER2}:
+Fear (do not remove):
+Legal note (do not remove):
+Trick (do not remove):
+Status re {CLIENT}:
+Abandoned after {INCIDENT}:
+Note ({YEAR}):
+Diary (urgent):
+Assumption (do not remove):
+Log entry (do not remove):
+Obviously,
+Auditor's note #{SMALLN}:
+Directive per audit {AUDIT}:
+Audit note re {CLIENT}:
+Qualification per audit {AUDIT}:
+Known limitation (do not remove):
+Warning [{CODER.I}]:
+Request ({DATE}):
+Predictably,
+Directive per {VP}:
+Correction (urgent):
+Honestly,
+Record, {DAYNAME}:
+Rebuttal, {QUARTER}:
+Inexplicably,
+Estimate #{SMALLN}:
+Rule per memo {MEMO}:
+Caution #{SMALLN}:
+Admission per {VP}:
+Note after {INCIDENT}:
+Summary per audit {AUDIT}:
+Hypothesis, {QUARTER}:
+Premise from {CODER2}:
+Procedure per memo {MEMO}:
+Abandoned [{CODER.I}]:
+Unfortunately,
+We fear
+Premise (urgent):
+Admission [{CODER.I}]:
+Rumour (again):
+For reasons {CODER2} will explain,
+Edge case from {CODER2}:
+Look,
+Status before the {QUARTER} run:
+Caveat (urgent):
+Plea (do not remove):
+Rule:
+Directive per memo {MEMO}:
+NB for {DEPT}:
+Rebuttal for {DEPT}:
+Remark after {INCIDENT}:
+Between us,
+Tip [{CODER.I}]:
+Amendment after {INCIDENT}:
+Historical note (again):
+Closed issue (see {MANUAL}):
+Request (again):
+Footnote ({DATE}):
+Supposedly,
+Unsurprisingly,
+Superseded ({YEAR}):
+As promised,
+Bulletin, {DAYNAME}:
+Journal per {VP}:
+Attention {DEPT}:
+Word is
+Footnote ({CODER.I}):
+Rumour per audit {AUDIT}:
+Field note ({CODER.I}):
+Post-it per audit {AUDIT}:
+Disclaimer #{SMALLN}:
+Instruction per audit {AUDIT}:
+Known issue, {DAYNAME}:
+We were promised
+Deferred, {QUARTER}:
+Edge case ({CODER.I}):
+Premise ({YEAR}):
+Clarification re {CLIENT}:
+Custom, {DAYNAME}:
+Sticky note per {VP}:
+Bulletin before the {QUARTER} run:
+Journal ({YEAR}):
+Postscript per audit {AUDIT}:
+Somehow,
+Editorial note (urgent):
+Manager's note ({DATE}):
+Journal for {DEPT}:
+Hypothesis (see {MANUAL}):
+Caution before the {QUARTER} run:
+Suspicion ({YEAR}):
+Remark, {QUARTER}:
+Client note [{CODER.I}]:
+Custom per audit {AUDIT}:
+Alert after {INCIDENT}:
+Rebuttal #{SMALLN}:
+Notice:
+Operations note re {CLIENT}:
+Field note after {INCIDENT}:
+Known issue ({YEAR}):
+Rule ({YEAR}):
+Suspicion ({DATE}):
+Explanation per audit {AUDIT}:
+Grievance (see {MANUAL}):
+Worry (do not remove):
+Guess re {CLIENT}:
+Important ({DATE}):
+Per our conversation,
+Order per audit {AUDIT}:
+Premise per audit {AUDIT}:
+Like it or not,
+Qualification re {CLIENT}:
+Pending (do not remove):
+Reviewer's note per audit {AUDIT}:
+To be fair,
+Attention from {CODER2}:
+Design note, {QUARTER}:
+Manager's note #{SMALLN}:
+Folklore per audit {AUDIT}:
+Errata (again):
+Conjecture re {CLIENT}:
+Advisory ({CODER.I}):
+Operator's note for {DEPT}:
+Known limitation [{CODER.I}]:
+Warning #{SMALLN}:
+Hypothesis after {INCIDENT}:
+Assumption ({DATE}):
+Audit note (urgent):
+Caution, {DAYNAME}:
+Alert re {CLIENT}:
+Open issue (see {MANUAL}):
+Convention per memo {MEMO}:
+I am fairly sure
+Ever since {MEETING},
+Prayer for {DEPT}:
+Theory for {DEPT}:
+Operator's note, {DAYNAME}:
+It is feared that
+Heads up #{SMALLN}:
+Superseded [{CODER.I}]:
+Hint re {CLIENT}:
+Margin note ({YEAR}):
+Memo (do not remove):
+Assumption (urgent):
+Translator's note per {VP}:
+Deferred (do not remove):
+Superseded ({CODER.I}):
+Legend says
+Sticky note (urgent):
+Prayer, {QUARTER}:
+Convention (urgent):
+Complaint ({YEAR}):
+Procedure, {DAYNAME}:
+Disclaimer for {DEPT}:
+Retraction per audit {AUDIT}:
+Analyst's note per audit {AUDIT}:
+Postscript [{CODER.I}]:
+Update (do not remove):
+Pencil note re {CLIENT}:
+Effective immediately,
+Complaint (again):
+Hypothesis before the {QUARTER} run:
+Aside (urgent):
+With apologies to {CODER2},
+Hint (see {MANUAL}):
+Rumour, {DAYNAME}:
+Design note per audit {AUDIT}:
+Operations note #{SMALLN}:
+Procedure for {DEPT}:
+Reminder (see {MANUAL}):
+Operations note [{CODER.I}]:
+Convention before the {QUARTER} run:
+Diary for {DEPT}:
+Margin note (urgent):
+Fear, {DAYNAME}:
+The story goes that
+Request before the {QUARTER} run:
+Programmer's note before the {QUARTER} run:
+Important after {INCIDENT}:
+Admission (again):
+Abandoned ({CODER.I}):
+Hint (again):
+Status (again):
+Context ({CODER.I}):
+Alert #{SMALLN}:
+Pencil note (do not remove):
+Hope per memo {MEMO}:
+Known limitation per {VP}:
+Journal (do not remove):
+Legend, {QUARTER}:
+Observation per audit {AUDIT}:
+Sticky note (see {MANUAL}):
+Rule [{CODER.I}]:
+NB before the {QUARTER} run:
+Resolved (do not remove):
+Review comment (do not remove):
+As agreed with {VP},
+Request, {DAYNAME}:
+Client note (see {MANUAL}):
+Sigh.
+Request ({YEAR}):
+As of rel. {REL},
+Margin note, {DAYNAME}:
+Aside (again):
+Plea, {QUARTER}:
+Review comment:
+Convention ({CODER.I}):
+Audit note (see {MANUAL}):
+Proviso, {QUARTER}:
+Procedure per {VP}:
+Review comment ({DATE}):
+Abandoned per audit {AUDIT}:
+Client note after {INCIDENT}:
+Plea before the {QUARTER} run:
+Conjecture after {INCIDENT}:
+Warning, {QUARTER}:
+Caution (again):
+Margin note per audit {AUDIT}:
+Implementation note #{SMALLN}:
+Gossip re {CLIENT}:
+Edge case (again):
+Folklore from {CODER2}:
+For reasons unknown,
+Instruction for {DEPT}:
+Edge case ({DATE}):
+Heads up (do not remove):
+Beginning in {QUARTER},
+Rebuttal per {VP}:
+I am not sure, but
+Obsolete:
+Custom from {CODER2}:
+Note, {DAYNAME}:
+Policy re {CLIENT}:
+Known limitation:
+Instruction, {QUARTER}:
+Translator's note re {CLIENT}:
+Alert, {QUARTER}:
+Scribble before the {QUARTER} run:
+Instruction from {CODER2}:
+Hint (do not remove):
+Candidly,
+Pending after {INCIDENT}:
+Finding before the {QUARTER} run:
+Design note re {CLIENT}:
+Footnote before the {QUARTER} run:
+Obsolete from {CODER2}:
+Observation ({CODER.I}):
+Gossip (urgent):
+Operations note, {QUARTER}:
+Reminder (do not remove):
+Tradition from {CODER2}:
+Known issue (see {MANUAL}):
+Update before the {QUARTER} run:
+Order per {VP}:
+Plea from {CODER2}:
+Unresolved before the {QUARTER} run:
+Retraction (urgent):
+Policy (urgent):
+Heads up ({CODER.I}):
+Deferred #{SMALLN}:
+Lore per audit {AUDIT}:
+Rebuttal ({CODER.I}):
+Theory ({DATE}):
+Post-it ({YEAR}):
+Dear {CODER2},
+Frankly,
+Tip for {DEPT}:
+Wish:
+Review comment, {DAYNAME}:
+Everyone:
+Protest before the {QUARTER} run:
+Clarification for {DEPT}:
+Tip before the {QUARTER} run:
+Margin note (again):
+Fear per audit {AUDIT}:
+Scribble per {VP}:
+Gossip, {DAYNAME}:
+Whether we like it or not,
+Objection from {CODER2}:
+Disclaimer (urgent):
+Historical note ({CODER.I}):
+We are told
+Manager's note from {CODER2}:
+Postscript per {VP}:
+Prayer from {CODER2}:
+Secret re {CLIENT}:
+Memo ({CODER.I}):
+Dear reader,
+Trick (see {MANUAL}):
+Hypothesis from {CODER2}:
+Special case re {CLIENT}:
+Unresolved, {QUARTER}:
+Premise, {DAYNAME}:
+Finding after {INCIDENT}:
+Diary per {VP}:
+Pencil note per memo {MEMO}:
+Special case #{SMALLN}:
+Update, {QUARTER}:
+It is believed that
+Justification (do not remove):
+Believe it or not,
+Clarification per audit {AUDIT}:
+Closed issue after {INCIDENT}:
+Reportedly,
+Bulletin per audit {AUDIT}:
+Trick before the {QUARTER} run:
+Qualification ({DATE}):
+Finding (see {MANUAL}):
+Grievance (do not remove):
+Wish (again):
+Seriously,
+Explanation (see {MANUAL}):
+In fairness,
+Observation (urgent):
+Advisory before the {QUARTER} run:
+Justification ({YEAR}):
+Thankfully,
+Diary per audit {AUDIT}:
+Editorial note, {DAYNAME}:
+They say
+Margin note (see {MANUAL}):
+Tradition before the {QUARTER} run:
+Since {INCIDENT},
+As discussed,
+Custom, {QUARTER}:
+Reviewer's note after {INCIDENT}:
+Order (again):
+Context (see {MANUAL}):
+Complaint ({DATE}):
+Remark (urgent):
+Bulletin #{SMALLN}:
+Finding:
+Attention after {INCIDENT}:
+Suspicion from {CODER2}:
+Journal per audit {AUDIT}:
+Memo per memo {MEMO}:
+Hope after {INCIDENT}:
+Order after {INCIDENT}:
+Remark (see {MANUAL}):
+Reviewer's note before the {QUARTER} run:
+Explanation [{CODER.I}]:
+Ever since {CODER2} left,
+Happily,
+Rebuttal ({DATE}):
+Conjecture per memo {MEMO}:
+Aside after {INCIDENT}:
+Special case per memo {MEMO}:
+Rumour per {VP}:
+Notice, {DAYNAME}:
+Superseded per {VP}:
+Explanation (urgent):
+Closed issue (again):
+Justification (urgent):
+Theory (do not remove):
+Client note (do not remove):
+Trick after {INCIDENT}:
+Evidently,
+Confession ({DATE}):
+Rationale (see {MANUAL}):
+Grievance for {DEPT}:
+Correct me if I am wrong, but
+Disclaimer [{CODER.I}]:
+For political reasons,
+As always,
+Worry for {DEPT}:
+Important per audit {AUDIT}:
+Short version:
+Lore:
+All hands:
+Log entry (urgent):
+Policy ({YEAR}):
+Note from {CODER2}:
+Folklore, {DAYNAME}:
+Legend ({CODER.I}):
+As feared,
+Erratum after {INCIDENT}:
+Postscript ({YEAR}):
+Historical note after {INCIDENT}:
+Unresolved per audit {AUDIT}:
+For the third time,
+Memo (again):
+Suspicion [{CODER.I}]:
+Starting with rel. {REL},
+Theory (urgent):
+Thanks a lot, {CODER2}:
+Diary [{CODER.I}]:
+Trick re {CLIENT}:
+As usual,
+Postscript for {DEPT}:
+Blame {CODER2}:
+Gossip from {CODER2}:
+I could be wrong, but
+In brief,
+It is said that
+Order ({YEAR}):
+Clearly,
+Hint per memo {MEMO}:
+Operator's note per audit {AUDIT}:
+Assumption #{SMALLN}:
+Addendum per audit {AUDIT}:
+Hello again.
+Welcome back.
+Good morning.
+Good evening.
+Late night note:
+Early morning note:
+Weekend note:
+Holiday note:
+Quarter-close note:
+Note from the night shift:
+Note from the day shift:
+Note from ops:
+Note from audit:
+Note from legal:
+Note from {VP}:
+Note from {COMMITTEE}:
+Note from the vendor:
+Note from the Y2K Task Force:
+Note to self:
+Note to {CODER2}:
+Note to the auditors:
+Note to the client:
+Note to whoever:
+Overheard at {LUNCHSPOT}:
+Overheard in {PLACE}:
+Heard at {MEETING}:
+From the minutes of {MEETING}:
+From {MANUAL}:
+From {BOOK}:
+From {MAGAZINE}:
+From the {OLDYEAR} binder:
+From the run book:
+From a sticky note:
+From a napkin:
+From memory:
+From the old listing:
+Transcribed from a {COLOR} card:
+{EXCLAIM}
+{EXCLAIM} Again.
+{MOOD} note:
+A word of warning:
+A word of advice:
+A word of explanation:
+A word of apology:
+A brief history:
+A short story:
+A long story:
+A confession:
+A complaint:
+A plea:
+A theory:
+A fact:
+An opinion:
+A rumour:
+A legend:
+A riddle:
+A reminder:
+A secret:
+For posterity:
+For the auditors:
+For the record, again:
+For the avoidance of doubt:
+For those keeping score:
+Before you ask:
+Before you change anything:
+Before you call {CODER2}:
+If you are wondering,
+If you must know,
+If anyone asks,
+If this breaks,
+If this works,
+If you are reading this at 3 AM,
+If you are reading this during the {QUARTER} close,
+If you are an auditor,
+If you are a new hire,
+If you are {CODER2},
+If you are not {CODER2},
+In case of emergency,
+In case of {INCIDENT},
+In the event of an abend,
+In the event of a client call,
+Once upon a time,
+Long ago,
+Not so long ago,
+Back in {OLDYEAR},
+Back when we had the {HW},
+Back when this ran on cards,
+Back when {CODER2} was here,
+Since time immemorial,
+For as long as anyone can remember,
+Officially,
+Unofficially,
+Off the books,
+On the books,
+Between you and me,
+Between the lines,
+Reading between the lines,
+To summarize,
+To elaborate,
+To clarify the clarification,
+To correct the correction,
+To amend the amendment,
+To whoever changed this last:
+To whoever changes this next:
+Spoiler:
+Plot twist:
+Fun fact:
+Sad fact:
+True story:
+Mostly true story:
+Unconfirmed:
+Confirmed:
+Disputed:
+Settled:
+Unsettled:
+Resolved at {MEETING}:
+Unresolved since {YEAR}:
+Escalated:
+De-escalated:
+Approved, reluctantly:
+Rejected, politely:
+Rejected, impolitely:
+Deferred indefinitely:
+Postponed until {YEAR2}:
+Overtaken by events:
+Superseded by memo {MEMO}:
+Reinstated by memo {MEMO}:
+Pending review:
+Pending lunch:
+Pending {CODER2}:
+WARNING WARNING WARNING:
+ATTENTION:
+CAUTION:
+DANGER:
+NOTICE:
+IMPORTANT:
+URGENT:
+READ THIS:
+READ THIS FIRST:
+READ THIS TWICE:
+DO NOT SKIP:
+P.S.
+P.P.S.
+N.B.
+Q:
+A:
+Re:
+Fwd:
+cc:

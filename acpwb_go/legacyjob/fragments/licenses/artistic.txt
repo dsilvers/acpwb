@@ -1,0 +1,12 @@
+#name: Artistic License (same terms as Perl)
+#kind: open
+#from: 1991
+#to: 2025
+#langs: perl
+Copyright {YEARRANGE} {HOLDER}
+
+This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself, i.e. under the terms of either the GNU General Public License as published by the Free Software Foundation, or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+The "Package" for the purposes of the Artistic License is {PROGRAM}. The "Copyright Holder" is {HOLDER}. The "Standard Version" is release {REL}, as printed on this page. Any version that rounds is not the Standard Version.

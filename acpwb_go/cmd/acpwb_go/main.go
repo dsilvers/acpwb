@@ -24,6 +24,7 @@ import (
 
 	"acpwb_go/archive"
 	"acpwb_go/botclassify"
+	"acpwb_go/legacyjob"
 	"acpwb_go/policy"
 	"acpwb_go/shell"
 	"acpwb_go/visitqueue"
@@ -148,6 +149,15 @@ func fingerprintFieldsFrom(r *http.Request) (clientProtocol, tlsProtocol, tlsCip
 func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
+		if base, file, ok := splitSourceCodeFile(r.URL.Path); ok {
+			year, month, day, slug, ok := parseArchivePath(base)
+			if !ok {
+				http.NotFound(w, r)
+				return
+			}
+			serveSourceCode(w, r, vq, start, year, month, day, slug, false, file)
+			return
+		}
 		year, month, day, slug, ok := parseArchivePath(r.URL.Path)
 		if !ok {
 			http.NotFound(w, r)
@@ -404,6 +414,23 @@ func toEraYearData(yd archive.YearData) shell.EraYearData {
 func eraHandler(vq *visitqueue.Queue, year int) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
+		if sy, sm, ok := archive.ParseSourceEraPath(year, r.URL.Path); ok {
+			p := archive.RenderSourceYearEra(year, sy)
+			if sm > 0 {
+				p = archive.RenderSourceMonthEra(year, sy, sm)
+			}
+			serveSourceIndex(w, r, vq, start, p, year)
+			return
+		}
+		if base, file, ok := splitSourceCodeFile(r.URL.Path); ok {
+			month, day, slug, ok := parseEraPath(base)
+			if !ok {
+				http.NotFound(w, r)
+				return
+			}
+			serveSourceCode(w, r, vq, start, year, month, day, slug, true, file)
+			return
+		}
 		month, day, slug, ok := parseEraPath(r.URL.Path)
 		if !ok {
 			http.NotFound(w, r)
@@ -635,6 +662,7 @@ func policySubdomainHandler(vq *visitqueue.Queue, agency string) http.HandlerFun
 func rootHandler(vq *visitqueue.Queue) http.HandlerFunc {
 	mainArchive := archiveHandler(vq)
 	mainPolicy := policyHandler(vq)
+	sourceIndex := sourceIndexHandler(vq)
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		host := strings.ToLower(r.Host)
@@ -660,6 +688,8 @@ func rootHandler(vq *visitqueue.Queue) http.HandlerFunc {
 			mainArchive(w, r)
 		case strings.HasPrefix(r.URL.Path, "/public-policy/"):
 			mainPolicy(w, r)
+		case r.URL.Path == "/source-code" || strings.HasPrefix(r.URL.Path, "/source-code/"):
+			sourceIndex(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -682,6 +712,7 @@ func main() {
 	}
 
 	root := rootHandler(vq)
+	go archive.WarmSourceIndex()
 
 	var handler http.Handler = root
 	if os.Getenv("ACCESS_LOG") == "1" {
@@ -695,4 +726,155 @@ func main() {
 
 	log.Printf("acpwb_go listening on %s", addr)
 	log.Fatal(http.ListenAndServe(addr, handler))
+}
+
+// sourceCodeSuffix marks the legacy "source code" page that sits next to an
+// archive article (…/<slug>/source-code/). No generated slug word equals
+// "source-code", so it can't collide with a real archive path.
+const sourceCodeSuffix = "/source-code"
+
+func splitSourceCode(path string) (string, bool) {
+	base, _, ok := splitSourceCodeFile(path)
+	return base, ok
+}
+
+// splitSourceCodeFile also recognises a download next to the page:
+// …/<slug>/source-code/<archive name>.
+func splitSourceCodeFile(path string) (base, file string, ok bool) {
+	p := strings.TrimSuffix(path, "/")
+	if strings.HasSuffix(p, sourceCodeSuffix) {
+		return strings.TrimSuffix(p, sourceCodeSuffix) + "/", "", true
+	}
+	if i := strings.LastIndex(p, sourceCodeSuffix+"/"); i >= 0 {
+		rest := p[i+len(sourceCodeSuffix)+1:]
+		if rest != "" && !strings.Contains(rest, "/") && strings.Contains(rest, ".") {
+			return p[:i] + "/", rest, true
+		}
+	}
+	return path, "", false
+}
+
+// serveSourceCode renders the generated legacy batch-job listing for an
+// archive article, inside the main-domain or era shell, and logs the visit
+// as trap_type=source_code plus the honeypot programmer emails it showed.
+func serveSourceCode(w http.ResponseWriter, r *http.Request, vq *visitqueue.Queue, start time.Time, year, month, day int, slug string, era bool, file string) {
+	ip := clientIP(r)
+	ua := r.Header.Get("User-Agent")
+	botType := botclassify.ClassifyUAOrIP(ua, ip)
+	botGroup := botclassify.BotTypeToGroup(botType)
+
+	in := archive.SourceCodeInput(year, month, day, slug, era)
+	in.Host = r.Host
+	l := legacyjob.Build(&in)
+	if file != "" {
+		ct, data, ok := l.BuildArchive(file)
+		if !ok {
+			http.NotFound(w, r)
+			return
+		}
+		w.Header().Set("Content-Type", ct)
+		w.Header().Set("Content-Disposition", `attachment; filename="`+file+`"`)
+		w.Header().Set("Content-Length", strconv.Itoa(len(data)))
+		_, _ = w.Write(data)
+		cp, tp, tc, bh := fingerprintFieldsFrom(r)
+		go vq.PushVisit(visitqueue.Visit{
+			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
+			Referrer: r.Header.Get("Referer"), TrapType: "source_code", QueryString: r.URL.RawQuery,
+			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
+			ResponseBytes: len(data), ResponseMs: time.Since(start).Milliseconds(),
+			ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+		})
+		go vq.PushCodeEmails(r.Host, r.URL.Path, ip, l.Emails)
+		return
+	}
+	body := legacyjob.RenderHTML(l)
+	title := fmt.Sprintf("%s — Source Code (%s %s)", in.Title, l.ID.Program, l.ID.Language)
+	desc := fmt.Sprintf("Source code for %s: the %s batch job %s rel. %s that tabulated the engagement metrics and market benchmark tables for %s, archive record %s (%04d-%02d-%02d).",
+		in.Title, l.ID.Language, l.ID.Program, l.ID.Release, in.Org, strings.ToUpper(in.RecordID), year, month, day)
+
+	var page string
+	if era {
+		yd := archive.YearDataFor(year)
+		page = shell.RenderEraPage(shell.EraPageParams{
+			EraContentHTML: body, Title: title, TitleSuffix: "ACPWB Archive", OGDescription: desc,
+			RequestPath: r.URL.RequestURI(), RemoteAddr: ip, Year: year, AllYears: archive.AllArchiveYears(),
+			YearData: toEraYearData(yd),
+		})
+	} else {
+		page = shell.RenderPage(shell.PageParams{
+			ContentHTML: body, OGTitle: title, OGDescription: desc,
+			RequestPath: r.URL.RequestURI(), RemoteAddr: ip, SiteRoot: "",
+		})
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	_, _ = w.Write([]byte(page))
+
+	cp, tp, tc, bh := fingerprintFieldsFrom(r)
+	go vq.PushVisit(visitqueue.Visit{
+		IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
+		Referrer: r.Header.Get("Referer"), TrapType: "source_code", QueryString: r.URL.RawQuery,
+		BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
+		ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+		ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+	})
+	go vq.PushCodeEmails(r.Host, r.URL.Path, ip, l.Emails)
+}
+
+// sourceIndexHandler serves the main-domain source-code index:
+// /source-code/ (years x months), /source-code/YYYY/ (months with sample
+// jobs) and /source-code/YYYY/MM/ (every record + program that month).
+func sourceIndexHandler(vq *visitqueue.Queue) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		year, month, ok := archive.ParseSourceIndexPath(r.URL.Path)
+		if !ok {
+			http.NotFound(w, r)
+			return
+		}
+		var p archive.SourcePage
+		switch {
+		case year == 0:
+			p = archive.RenderSourceIndex()
+		case month == 0:
+			p = archive.RenderSourceYear(year)
+		default:
+			p = archive.RenderSourceMonth(year, month)
+		}
+		serveSourceIndex(w, r, vq, start, p, 0)
+	}
+}
+
+const sourceOGImage = "https://acpwb.com/static/img/page-covers/source-code.jpg"
+
+// serveSourceIndex writes a source-code index page in the main-site shell,
+// or (sub > 0) in the era shell of archives-<sub>.acpwb.com, and logs it.
+func serveSourceIndex(w http.ResponseWriter, r *http.Request, vq *visitqueue.Queue, start time.Time, p archive.SourcePage, sub int) {
+	ip := clientIP(r)
+	ua := r.Header.Get("User-Agent")
+	var page string
+	if sub > 0 {
+		page = shell.RenderEraPage(shell.EraPageParams{
+			EraContentHTML: p.HTML, Title: p.Title, TitleSuffix: "ACPWB Archive", OGDescription: p.Description,
+			RequestPath: r.URL.RequestURI(), RemoteAddr: ip, Year: sub, AllYears: archive.AllArchiveYears(),
+			YearData: toEraYearData(archive.YearDataFor(sub)), OGImage: sourceOGImage,
+		})
+	} else {
+		page = shell.RenderPage(shell.PageParams{
+			ContentHTML: p.HTML, OGTitle: p.Title, OGDescription: p.Description,
+			OGImage:     sourceOGImage,
+			RequestPath: r.URL.RequestURI(), RemoteAddr: ip, SiteRoot: "",
+		})
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	_, _ = w.Write([]byte(page))
+
+	botType := botclassify.ClassifyUAOrIP(ua, ip)
+	cp, tp, tc, bh := fingerprintFieldsFrom(r)
+	go vq.PushVisit(visitqueue.Visit{
+		IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
+		Referrer: r.Header.Get("Referer"), TrapType: "source_code", QueryString: r.URL.RawQuery,
+		BotType: botType, BotGroup: botclassify.BotTypeToGroup(botType), Method: r.Method, Status: http.StatusOK,
+		ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
+		ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+	})
 }

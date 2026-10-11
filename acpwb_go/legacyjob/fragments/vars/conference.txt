@@ -1,0 +1,12 @@
+# {CONFERENCE}
+SHARE
+GUIDE
+DECUS
+the CMG conference
+the regional DPMA chapter meeting
+the users' group
+1991-|USENIX
+1999-|YAPC
+2003-|PyCon
+2003-|OSCON
+2010-|re:Invent

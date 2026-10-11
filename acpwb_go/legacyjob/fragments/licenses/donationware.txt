@@ -1,0 +1,6 @@
+#name: Donationware Notice
+#kind: noncommercial
+#from: 1999
+This program is donationware. It is free to use for any purpose. If it saves you time, consider donating to the {HOLDER} Research Division coffee fund.
+
+Current coffee fund balance: ${FEE}. Current coffee: {DRINK}. Programs supported by the coffee fund: all of them.

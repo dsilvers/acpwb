@@ -326,3 +326,51 @@ func (q *Queue) PushVisit(v Visit) {
 		_, _ = fp.Exec(ctx)
 	}
 }
+
+const (
+	codeEmailQueueKey = "acpwb:code_email_queue"
+	codeEmailSeenTTL  = 30 * 24 * time.Hour
+)
+
+// PushCodeEmails registers the honeypot programmer addresses shown on a
+// legacy source-code page, so an inbound email to one of them can be traced
+// back to the exact page it was harvested from (drained into
+// honeypot.SourceCodeEmail by Django's drain_code_email_queue). A per
+// (address, path) SETNX dedupes repeat crawls of the same page.
+func (q *Queue) PushCodeEmails(host, path, ip string, addrs []string) {
+	if q == nil || q.client == nil || len(addrs) == 0 {
+		return
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
+	defer cancel()
+
+	pipe := q.client.Pipeline()
+	cmds := make([]*redis.BoolCmd, len(addrs))
+	for i, a := range addrs {
+		cmds[i] = pipe.SetNX(ctx, "acpwb:codemail:"+a+"|"+path, "1", codeEmailSeenTTL)
+	}
+	if _, err := pipe.Exec(ctx); err != nil && err != redis.Nil {
+		return
+	}
+	push := q.client.Pipeline()
+	n := 0
+	for i, a := range addrs {
+		if ok, _ := cmds[i].Result(); !ok {
+			continue
+		}
+		data, err := json.Marshal(map[string]any{
+			"address":    a,
+			"host":       truncate(host, 253),
+			"path":       truncate(path, 512),
+			"ip_address": ip,
+			"timestamp":  nowISO(),
+		})
+		if err == nil {
+			push.RPush(ctx, codeEmailQueueKey, data)
+			n++
+		}
+	}
+	if n > 0 {
+		_, _ = push.Exec(ctx)
+	}
+}

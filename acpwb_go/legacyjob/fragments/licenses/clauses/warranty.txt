@@ -1,0 +1,14 @@
+THE PROGRAM IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+Licensor warrants that the Program will substantially conform to its documentation for {TERMDAYS} days after delivery. The Program has no documentation.
+LICENSOR DOES NOT WARRANT THAT THE PROGRAM WILL MEET LICENSEE'S REQUIREMENTS, OPERATE WITHOUT INTERRUPTION, OR PRODUCE PERCENTILES THAT ARE PLEASING.
+Licensor's sole obligation under any warranty is to rerun the Program. Rerunning produces the same output.
+NO ORAL OR WRITTEN INFORMATION GIVEN BY LICENSOR, ITS EMPLOYEES OR THE COMMENTS IN THE PROGRAM SHALL CREATE A WARRANTY.
+The Program is warranted to truncate. It is not warranted to do anything else.
+Licensor warrants that the media on which the Program is delivered will be free from defects for {TERMDAYS} days. The Program itself is not warranted.
+LICENSOR DOES NOT WARRANT THE ACCURACY OF ANY PERCENTILE, MEDIAN, CHANGE OR DOLLAR SIGN PRODUCED BY THE PROGRAM.
+Licensor warrants that, to its knowledge, the Program does not infringe any copyright. The comments may infringe good taste.
+No oral or written information given by Licensor, its employees, or {CODER2} shall create any warranty.
+Licensor warrants that the Program will produce the same Output every time it is given the same input, except on the {HW2}.
+THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH LICENSEE. SHOULD THE PROGRAM PROVE DEFECTIVE, LICENSEE ASSUMES THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION, AND OF EXPLAINING IT TO THE CLIENT.
+Licensor makes no warranty that the Program is free of date-related defects, except as stated in the release notes, of which there are none.
+Licensor warrants that the Program was written by human beings, most of whom were awake.

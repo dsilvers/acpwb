@@ -1,0 +1,11 @@
+#name: Mutual Non-Disclosure Agreement
+#kind: proprietary
+#from: 1975
+#extra: yes
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+Each party may disclose to the other certain confidential information, including, in the case of {HOLDER}, the source listing of {PROGRAM}. The receiving party shall hold the disclosing party's confidential information in confidence, use it only for the purpose of evaluating the proposed relationship, and return or destroy it on request.
+
+Confidential information does not include information that is publicly available. The parties acknowledge that this listing is publicly available on a website and agree to treat it as confidential anyway, as a matter of principle.
+
+Term: {SMALLN} years from the Effective Date. Obligations survive for {SMALLN} years after termination, or until the paper yellows.

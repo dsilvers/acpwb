@@ -1,0 +1,8 @@
+#name: Sunset License
+#kind: proprietary
+#from: 1990
+SUNSET PROVISION
+
+This license expires automatically on 31 December {YEAR2}, by which date the program is scheduled to be retired and replaced. After that date, no person may run the program.
+
+The sunset date has been extended {SMALLN} times. Each extension was approved by {VP} on the recommendation of the department, which recommended that the program continue to run because the replacement is not ready. The replacement has not been started.

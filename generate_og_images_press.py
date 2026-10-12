@@ -95,6 +95,7 @@ _SLUG_SCENES = {
     'one-billion-pages-served': 'vast data center corridor, server racks receding to vanishing point, deep navy ambient glow, gold edge lighting',
     'perch-2027-announced': 'modern convention center hall before a business conference, low black stage, wide LED video wall glowing deep blue, sleek acrylic lectern with microphone, neat straight rows of identical black chairs, warm gold accent lights',
     'record-peak-traffic-august-2026': 'close angled view of a single storefront window at night, tightly framed so no signage, lettering, or awnings are visible, blank dark brick wall bordering the window, dozens of mismatched old television sets crammed onto shelves behind rain-streaked glass, screens glowing dim static, warm interior light spilling onto wet pavement at the bottom edge of frame',
+    'ukraine-drone-strike-yandex-data-center-russia-traffic': 'long data center aisle at night, every server rack dark and silent, dim amber emergency lights along the ceiling, one rack at the far end still blinking blue, polished floor reflecting the glow',
     'record-traffic-september-2026': 'dim windowless corporate conference room at night, dozens of vintage carousel slide projectors crowded across a long boardroom table and stacked on folding carts, every projector running, crisscrossing beams of warm light cutting through dusty air onto a blank white pull-down screen, overlapping squares of empty light, tangled extension cords and power strips on the carpet, empty office chairs pushed back',
 }
 
@@ -102,6 +103,7 @@ _SLUG_SCENES = {
 # for scenes that need a different photographic treatment than the default corporate look.
 _SLUG_STYLE_SUFFIX = {
     'record-peak-traffic-august-2026': ', 35mm film photograph, Kodak Portra 800, visible film grain, handheld candid framing, slight motion blur, muted realistic color grading, documentary street photography, no visible content on the screens',
+    'ukraine-drone-strike-yandex-data-center-russia-traffic': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, no text, no signage, no labels',
     'record-traffic-september-2026': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy carpet and walls with warm gold projector light, projected squares are plain blank light with no text or images',
 }
 
@@ -157,6 +159,8 @@ _NEGATIVE_PROMPT = (
 OG_WIDTH, OG_HEIGHT = 1200, 630
 # Use dimensions with a closer aspect ratio to 1200x630, divisible by 16.
 _GEN_WIDTH, _GEN_HEIGHT = 1024, 544
+# FLUX handles large canvases well; render above OG size and downscale for crisp detail
+_FLUX_GEN_WIDTH, _FLUX_GEN_HEIGHT = 1600, 848
 
 
 def _headline_words(headline):
@@ -193,11 +197,14 @@ def _is_flux(model_id):
     return 'flux' in model_id.lower()
 
 
-def _pick_device(torch, flux=False):
+def _pick_device(torch, flux=False, bf16=False, fp32=False):
     if torch.cuda.is_available():
         # FLUX is trained in bfloat16; SD models use float16
         return 'cuda', torch.bfloat16 if flux else torch.float16
     if getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available():
+        # FLUX in float32 is ~68GB of weights and swaps on a 64GB Mac; bf16 is ~34GB
+        if (flux or bf16) and not fp32:
+            return 'mps', torch.bfloat16
         return 'mps', torch.float32  # float16/bfloat16 both produce artifacts on Apple Silicon
     return 'cpu', torch.float32
 
@@ -221,7 +228,9 @@ def main():
     parser.add_argument('slugs', nargs='*', help='Press release slugs to generate (default: all)')
     parser.add_argument('--output-dir', default=str(HERE / 'acpwb' / 'media' / 'og'))
     parser.add_argument('--model', default='stabilityai/stable-diffusion-xl-base-1.0')
-    parser.add_argument('--steps', type=int, default=30)
+    parser.add_argument('--steps', type=int, default=None, help='Inference steps (default: 4 for FLUX schnell, 30 otherwise)')
+    parser.add_argument('--bf16', action='store_true', help='Use bfloat16 on Apple Silicon for non-FLUX models (FLUX uses it by default)')
+    parser.add_argument('--fp32', action='store_true', help='Force float32 on Apple Silicon (FLUX needs ~68GB and will swap)')
     parser.add_argument('--hf-token', default=os.environ.get('HF_TOKEN'), help='Hugging Face token (or set HF_TOKEN env var)')
     parser.add_argument('--force', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
@@ -293,7 +302,9 @@ def main():
             print(f'  {pr["slug"]}\n    seed={_slug_to_seed(pr["slug"])}\n    {prompt}\n')
         return
 
-    device, dtype = _pick_device(torch, flux=flux)
+    device, dtype = _pick_device(torch, flux=flux, bf16=args.bf16, fp32=args.fp32)
+    if args.steps is None:
+        args.steps = 4 if flux and 'schnell' in args.model.lower() else 30
     print(f'Loading {args.model} on {device} ({dtype}) …')
 
     # Suppress verbose model loading warnings
@@ -339,8 +350,8 @@ def main():
             gen_kwargs = dict(
                 prompt=prompt,
                 num_inference_steps=args.steps,
-                width=_GEN_WIDTH,
-                height=_GEN_HEIGHT,
+                width=_FLUX_GEN_WIDTH if flux else _GEN_WIDTH,
+                height=_FLUX_GEN_HEIGHT if flux else _GEN_HEIGHT,
                 generator=generator,
             )
             if flux:

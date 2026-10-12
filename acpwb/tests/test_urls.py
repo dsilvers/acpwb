@@ -212,3 +212,22 @@ def test_internal_login_post_logs_credentials(client):
     assert response.status_code in (200, 302)
     from apps.honeypot.models import InternalLoginAttempt
     assert InternalLoginAttempt.objects.filter(username='admin').exists()
+
+
+@pytest.mark.django_db
+def test_press_releases_feed(client):
+    from xml.etree import ElementTree
+
+    from apps.public.press_data import _PRESS_RELEASES
+
+    response = client.get('/press-releases/feed.xml')
+    assert response.status_code == 200
+    assert response['Content-Type'].startswith('application/rss+xml')
+    root = ElementTree.fromstring(response.content)
+    items = root.findall('./channel/item')
+    assert len(items) == len(_PRESS_RELEASES)
+    first = _PRESS_RELEASES[0]
+    assert items[0].findtext('title') == first['headline']
+    assert items[0].findtext('link').endswith(f"/{first['slug']}/")
+    content = items[0].findtext('{http://purl.org/rss/1.0/modules/content/}encoded')
+    assert 'href="/' not in content and 'src="/' not in content

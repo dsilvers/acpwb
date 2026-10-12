@@ -91,7 +91,7 @@ func policyHeadCommon(title, description, canonicalPath, ogImagePath, ogType str
 	fmt.Fprintf(&b, "<link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", staticURL("favicon.svg"))
 	fmt.Fprintf(&b, "<link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", staticURL("fonts/inter/inter-variable-latin.woff2"))
 	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s\">\n", staticURL("vendor/bootstrap/bootstrap.min.css"))
-	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20260430\">\n", staticURL("css/acpwb.css"))
+	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20261011\">\n", staticURL("css/acpwb.css"))
 	b.WriteString(feeds)
 	return b.String()
 }
@@ -186,7 +186,8 @@ func RenderPolicyIndex(meta PageMeta, years []YearIndexEntry) string {
 	b.WriteString(getPromptInjection(meta.HoneypotToken))
 	b.WriteString("\n\n<main>\n\n")
 
-	b.WriteString(`<section class="page-banner"><div class="container">` +
+	b.WriteString(`<div style="width:100%;height:320px;overflow:hidden;position:relative"><img src="` + staticURL("img/page-covers/public-policy.jpg") + `" alt="Public Policy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentElement.style.display='none'"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,.08) 0%,rgba(10,22,40,.72) 100%)"></div></div>` + "\n")
+	b.WriteString(`<section class="page-banner" style="padding-top:2rem"><div class="container">` +
 		`<p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;` +
 		`font-size:.72rem">ACPWB</p>` +
 		`<h1 style="font-size:clamp(1.6rem,3.5vw,2.8rem)">Public Policy</h1>` +
@@ -288,7 +289,7 @@ func RenderPolicyYear(meta PageMeta, year int, yearData YearData, months []Month
 
 	var b strings.Builder
 	b.WriteString("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n")
-	b.WriteString(policyHeadCommon(title, description, meta.RequestPath, "img/og-default.png", "website", false))
+	b.WriteString(policyHeadCommon(title, description, meta.RequestPath, "img/page-covers/public-policy.jpg", "website", false))
 	b.WriteString(getJSONLDGarbage(meta.HoneypotToken))
 	b.WriteString(yearStyle)
 	b.WriteString("</head>\n<body>\n\n")
@@ -471,15 +472,15 @@ func RenderPolicyMonth(meta PageMeta, p MonthPageParams) string {
 	fmt.Fprintf(&b, "<meta property=\"og:title\" content=\"%s\">\n", e(ogTitle))
 	fmt.Fprintf(&b, "<meta property=\"og:description\" content=\"%s\">\n", e(description))
 	fmt.Fprintf(&b, "<meta property=\"og:url\" content=\"https://acpwb.com%s\">\n", e(meta.RequestPath))
-	fmt.Fprintf(&b, "<meta property=\"og:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/og-default.png"))
+	fmt.Fprintf(&b, "<meta property=\"og:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/page-covers/public-policy.jpg"))
 	b.WriteString("<meta name=\"twitter:card\" content=\"summary_large_image\">\n")
 	fmt.Fprintf(&b, "<meta name=\"twitter:title\" content=\"%s\">\n", e(ogTitle))
 	fmt.Fprintf(&b, "<meta name=\"twitter:description\" content=\"%s\">\n", e(description))
-	fmt.Fprintf(&b, "<meta name=\"twitter:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/og-default.png"))
+	fmt.Fprintf(&b, "<meta name=\"twitter:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/page-covers/public-policy.jpg"))
 	fmt.Fprintf(&b, "<link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", staticURL("favicon.svg"))
 	fmt.Fprintf(&b, "<link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", staticURL("fonts/inter/inter-variable-latin.woff2"))
 	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s\">\n", staticURL("vendor/bootstrap/bootstrap.min.css"))
-	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20260430\">\n", staticURL("css/acpwb.css"))
+	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20261011\">\n", staticURL("css/acpwb.css"))
 	b.WriteString(getJSONLDGarbage(meta.HoneypotToken))
 	b.WriteString(monthMonthStyle)
 	b.WriteString("</head>\n<body>\n\n")
@@ -613,7 +614,7 @@ func RenderPolicySubdomainIndex(meta PageMeta, p SubdomainIndexParams) string {
 	fmt.Fprintf(&b, "<link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", staticURL("favicon.svg"))
 	fmt.Fprintf(&b, "<link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", staticURL("fonts/inter/inter-variable-latin.woff2"))
 	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s\">\n", staticURL("vendor/bootstrap/bootstrap.min.css"))
-	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20260430\">\n", staticURL("css/acpwb.css"))
+	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20261011\">\n", staticURL("css/acpwb.css"))
 	b.WriteString(getJSONLDGarbage(meta.HoneypotToken))
 	b.WriteString(subdomainIndexStyle)
 	b.WriteString("</head>\n<body>\n\n")
@@ -729,15 +730,15 @@ func RenderPolicySubdomainYear(meta PageMeta, p SubdomainYearParams) string {
 	fmt.Fprintf(&b, "<meta property=\"og:title\" content=\"%s\">\n", e(p.OGTitle))
 	fmt.Fprintf(&b, "<meta property=\"og:description\" content=\"%s\">\n", e(ogDescription))
 	fmt.Fprintf(&b, "<meta property=\"og:url\" content=\"https://policy-%s.acpwb.com/%d/\">\n", p.Agency, p.Year)
-	fmt.Fprintf(&b, "<meta property=\"og:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/og-default.png"))
+	fmt.Fprintf(&b, "<meta property=\"og:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/page-covers/public-policy.jpg"))
 	b.WriteString("<meta name=\"twitter:card\" content=\"summary_large_image\">\n")
 	fmt.Fprintf(&b, "<meta name=\"twitter:title\" content=\"%s\">\n", e(p.OGTitle))
 	fmt.Fprintf(&b, "<meta name=\"twitter:description\" content=\"%s\">\n", e(twitterDescription))
-	fmt.Fprintf(&b, "<meta name=\"twitter:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/og-default.png"))
+	fmt.Fprintf(&b, "<meta name=\"twitter:image\" content=\"https://acpwb.com%s\">\n", staticURL("img/page-covers/public-policy.jpg"))
 	fmt.Fprintf(&b, "<link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", staticURL("favicon.svg"))
 	fmt.Fprintf(&b, "<link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", staticURL("fonts/inter/inter-variable-latin.woff2"))
 	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s\">\n", staticURL("vendor/bootstrap/bootstrap.min.css"))
-	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20260430\">\n", staticURL("css/acpwb.css"))
+	fmt.Fprintf(&b, "<link rel=\"stylesheet\" href=\"%s?v=20261011\">\n", staticURL("css/acpwb.css"))
 	b.WriteString(getJSONLDGarbage(meta.HoneypotToken))
 	b.WriteString(subdomainYearStyle)
 	b.WriteString("</head>\n<body>\n\n")
@@ -869,7 +870,7 @@ func RenderPolicyDetail(meta PageMeta, p DetailParams) string {
 
 	var b strings.Builder
 	b.WriteString("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n")
-	b.WriteString(policyHeadCommon(title, description, meta.RequestPath, "img/og-default.png", "article", true))
+	b.WriteString(policyHeadCommon(title, description, meta.RequestPath, "img/page-covers/public-policy.jpg", "article", true))
 	b.WriteString(getJSONLDGarbage(meta.HoneypotToken))
 	b.WriteString(detailStyle)
 	b.WriteString("</head>\n<body>\n\n")

@@ -1,0 +1,25 @@
+{% load static %}<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>ACPWB Press Releases</title>
+    <link>https://acpwb.com/press-releases/</link>
+    <description>Official announcements from the American Corporation for Public Well Being.</description>
+    <language>en-us</language>
+    <atom:link rel="self" href="https://acpwb.com/press-releases/feed.xml" type="application/rss+xml" />{% if last_build %}
+    <lastBuildDate>{{ last_build }}</lastBuildDate>{% endif %}
+    <image>
+      <url>https://acpwb.com{% static 'img/og-default.png' %}</url>
+      <title>ACPWB Press Releases</title>
+      <link>https://acpwb.com/press-releases/</link>
+    </image>{% for item in items %}
+    <item>
+      <title>{{ item.pr.headline }}</title>
+      <link>{{ item.url }}</link>
+      <guid isPermaLink="true">{{ item.url }}</guid>
+      <pubDate>{{ item.pub_date }}</pubDate>
+      <description>{{ item.pr.subhead }}</description>
+      <content:encoded>{{ item.content }}</content:encoded>
+      <media:content url="{{ item.cover }}" medium="image" type="image/jpeg" />
+    </item>{% endfor %}
+  </channel>
+</rss>

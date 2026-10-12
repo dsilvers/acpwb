@@ -98,7 +98,6 @@ def main():
         use_safetensors=True,
     )
     pipe = pipe.to("mps")
-    pipe.enable_attention_slicing()
 
     print(f"Generating {len(to_generate)} images (skipping {len(existing)} existing) ...")
 

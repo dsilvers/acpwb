@@ -256,6 +256,8 @@ _NEGATIVE_PROMPT = (
 OG_WIDTH, OG_HEIGHT = 1200, 630
 # Use dimensions with a closer aspect ratio to 1200x630, divisible by 16.
 _GEN_WIDTH, _GEN_HEIGHT = 1024, 544
+# FLUX handles large canvases well; render above OG size and downscale for crisp detail
+_FLUX_GEN_WIDTH, _FLUX_GEN_HEIGHT = 1600, 848
 
 # Hardcoded overrides for slugs where word-level matching produces bad results.
 # Tuple of (subject, scene) — replaces both the subject and scene for that slug.
@@ -309,11 +311,14 @@ def _is_flux(model_id):
     return 'flux' in model_id.lower()
 
 
-def _pick_device(torch, flux=False):
+def _pick_device(torch, flux=False, bf16=False, fp32=False):
     if torch.cuda.is_available():
         # FLUX is trained in bfloat16; SD models use float16
         return 'cuda', torch.bfloat16 if flux else torch.float16
     if getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available():
+        # FLUX in float32 is ~68GB of weights and swaps on a 64GB Mac; bf16 is ~34GB
+        if (flux or bf16) and not fp32:
+            return 'mps', torch.bfloat16
         return 'mps', torch.float32  # float16/bfloat16 both produce artifacts on Apple Silicon
     return 'cpu', torch.float32
 
@@ -337,7 +342,9 @@ def main():
     parser.add_argument('slugs', nargs='*', help='Slugs to generate (default: all _ARCHIVE_SLUGS)')
     parser.add_argument('--output-dir', default=str(HERE / 'acpwb' / 'media' / 'og'))
     parser.add_argument('--model', default='stabilityai/stable-diffusion-xl-base-1.0')
-    parser.add_argument('--steps', type=int, default=30)
+    parser.add_argument('--steps', type=int, default=None, help='Inference steps (default: 4 for FLUX schnell, 30 otherwise)')
+    parser.add_argument('--bf16', action='store_true', help='Use bfloat16 on Apple Silicon for non-FLUX models (FLUX uses it by default)')
+    parser.add_argument('--fp32', action='store_true', help='Force float32 on Apple Silicon (FLUX needs ~68GB and will swap)')
     parser.add_argument('--hf-token', default=os.environ.get('HF_TOKEN'), help='Hugging Face token (or set HF_TOKEN env var)')
     parser.add_argument('--force', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
@@ -387,7 +394,9 @@ def main():
         return
 
     flux = _is_flux(args.model)
-    device, dtype = _pick_device(torch, flux=flux)
+    device, dtype = _pick_device(torch, flux=flux, bf16=args.bf16, fp32=args.fp32)
+    if args.steps is None:
+        args.steps = 4 if flux and 'schnell' in args.model.lower() else 30
     print(f'Loading {args.model} on {device} ({dtype}) …')
 
     # Suppress verbose model loading warnings
@@ -413,8 +422,8 @@ def main():
             gen_kwargs = dict(
                 prompt=prompt,
                 num_inference_steps=args.steps,
-                width=_GEN_WIDTH,
-                height=_GEN_HEIGHT,
+                width=_FLUX_GEN_WIDTH if flux else _GEN_WIDTH,
+                height=_FLUX_GEN_HEIGHT if flux else _GEN_HEIGHT,
                 generator=generator,
             )
             if flux:

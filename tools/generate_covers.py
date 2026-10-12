@@ -472,7 +472,6 @@ def main():
         use_safetensors=True,
     )
     pipe = pipe.to("mps")
-    pipe.enable_attention_slicing()
 
     report_entries, project_industries = load_data_from_json()
 

@@ -28,7 +28,7 @@ def _now_year():
     return datetime.now().year
 
 
-def _policy_head_common(title, description, canonical_path, og_image_path='img/og-default.png',
+def _policy_head_common(title, description, canonical_path, og_image_path='img/page-covers/public-policy.jpg',
                          og_type='article', feed_links=True):
     feeds = (
         '<link rel="alternate" type="application/atom+xml" title="ACPWB Archive Feed" '
@@ -55,7 +55,7 @@ def _policy_head_common(title, description, canonical_path, og_image_path='img/o
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20260430">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
         f'{feeds}'
     )
 
@@ -170,7 +170,12 @@ def render_policy_index(ctx):
     ap(get_prompt_injection(ctx['honeypot_token']))
     ap('\n\n<main>\n\n')
 
-    ap('<section class="page-banner"><div class="container">'
+    cover = static('img/page-covers/public-policy.jpg')
+    ap(f'<div style="width:100%;height:320px;overflow:hidden;position:relative">'
+       f'<img src="{cover}" alt="Public Policy" style="width:100%;height:100%;object-fit:cover;display:block" '
+       'onerror="this.parentElement.style.display=\'none\'">'
+       '<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,.08) 0%,rgba(10,22,40,.72) 100%)"></div></div>\n')
+    ap('<section class="page-banner" style="padding-top:2rem"><div class="container">'
        '<p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;'
        'font-size:.72rem">ACPWB</p>'
        '<h1 style="font-size:clamp(1.6rem,3.5vw,2.8rem)">Public Policy</h1>'
@@ -462,16 +467,16 @@ def render_policy_month(ctx):
         f'<meta property="og:title" content="{e(og_title)}">\n'
         f'<meta property="og:description" content="{e(description)}">\n'
         f'<meta property="og:url" content="https://acpwb.com{e(request.get_full_path())}">\n'
-        f'<meta property="og:image" content="https://acpwb.com{static("img/og-default.png")}">\n'
+        f'<meta property="og:image" content="https://acpwb.com{static("img/page-covers/public-policy.jpg")}">\n'
         '<meta name="twitter:card" content="summary_large_image">\n'
         f'<meta name="twitter:title" content="{e(og_title)}">\n'
         f'<meta name="twitter:description" content="{e(description)}">\n'
-        f'<meta name="twitter:image" content="https://acpwb.com{static("img/og-default.png")}">\n'
+        f'<meta name="twitter:image" content="https://acpwb.com{static("img/page-covers/public-policy.jpg")}">\n'
         f'<link rel="icon" type="image/svg+xml" href="{static("favicon.svg")}">\n'
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20260430">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
     )
     ap(get_jsonld_garbage(ctx['honeypot_token']))
     ap(_MONTH_MONTH_STYLE)
@@ -606,7 +611,7 @@ def render_policy_subdomain_index(ctx):
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20260430">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
     )
     ap(get_jsonld_garbage(ctx['honeypot_token']))
     ap(_SUBDOMAIN_INDEX_STYLE)
@@ -727,16 +732,16 @@ def render_policy_subdomain_year(ctx):
         f'<meta property="og:title" content="{e(og_title)}">\n'
         f'<meta property="og:description" content="{e(og_description)}">\n'
         f'<meta property="og:url" content="https://policy-{agency}.acpwb.com/{year}/">\n'
-        f'<meta property="og:image" content="https://acpwb.com{static("img/og-default.png")}">\n'
+        f'<meta property="og:image" content="https://acpwb.com{static("img/page-covers/public-policy.jpg")}">\n'
         '<meta name="twitter:card" content="summary_large_image">\n'
         f'<meta name="twitter:title" content="{e(og_title)}">\n'
         f'<meta name="twitter:description" content="{e(twitter_description)}">\n'
-        f'<meta name="twitter:image" content="https://acpwb.com{static("img/og-default.png")}">\n'
+        f'<meta name="twitter:image" content="https://acpwb.com{static("img/page-covers/public-policy.jpg")}">\n'
         f'<link rel="icon" type="image/svg+xml" href="{static("favicon.svg")}">\n'
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20260430">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
     )
     ap(get_jsonld_garbage(ctx['honeypot_token']))
     ap(_SUBDOMAIN_YEAR_STYLE)

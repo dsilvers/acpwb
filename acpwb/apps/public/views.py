@@ -408,6 +408,39 @@ def press_releases(request):
     })
 
 
+_SITE = 'https://acpwb.com'
+# Root-relative href/src in release bodies; feed readers need absolute URLs.
+_ROOT_RELATIVE_RE = re.compile(r'((?:href|src)=")/(?!/)')
+
+
+def press_releases_feed(request):
+    import datetime
+    from email.utils import format_datetime
+    from zoneinfo import ZoneInfo
+
+    from django.template.loader import render_to_string
+    from django.templatetags.static import static
+    from django.urls import reverse
+
+    tz = ZoneInfo('America/Chicago')
+    items = []
+    for pr in _PRESS_RELEASES:
+        published = datetime.datetime.combine(pr['date'], datetime.time(9, 0), tzinfo=tz)
+        body = render_to_string('public/_press_body_feed.html', {'pr': pr})
+        items.append({
+            'pr': pr,
+            'url': _SITE + reverse('press_release_detail', args=[pr['year'], pr['month'], pr['day'], pr['slug']]),
+            'pub_date': format_datetime(published),
+            'content': _ROOT_RELATIVE_RE.sub(r'\1' + _SITE + '/', body).strip(),
+            'cover': _SITE + static(f"img/pr-covers/{pr['slug']}.jpg"),
+            'published': published,
+        })
+    last_build = format_datetime(max(i['published'] for i in items)) if items else ''
+    return render(request, 'public/press_releases_feed.xml',
+                  {'items': items, 'last_build': last_build},
+                  content_type='application/rss+xml; charset=utf-8')
+
+
 def press_release_detail(request, year, month, day, slug):
     pr = next((p for p in _PRESS_RELEASES if p['slug'] == slug), None)
     if pr is None:

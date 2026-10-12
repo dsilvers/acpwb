@@ -1,0 +1,10 @@
+{% load static %}{% for block in pr.body %}{% if block.type == 'heading' %}
+<h2>{{ block.text }}</h2>{% elif block.type == 'stats' %}
+<ul>{% for stat in block.items %}<li><strong>{{ stat.value }}</strong> — {{ stat.label }}</li>{% endfor %}</ul>{% elif block.type == 'table' %}
+<table>{% if block.caption %}<caption>{{ block.caption }}</caption>{% endif %}<thead><tr>{% for h in block.headers %}<th>{{ h }}</th>{% endfor %}</tr></thead><tbody>{% for row in block.rows %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>{% if block.note %}
+<p><em>{{ block.note }}</em></p>{% endif %}{% elif block.type == 'image' %}
+<figure><img src="{% static block.src %}" alt="{{ block.alt }}">{% if block.caption %}<figcaption>{{ block.caption }}{% if block.note %} {{ block.note }}{% endif %}</figcaption>{% endif %}</figure>{% elif block.type == 'list' %}
+<ul>{% for item in block.items %}<li>{% if item.url %}<a href="{{ item.url }}">{{ item.text }}</a>{% else %}<strong>{{ item.text }}</strong>{% endif %}{% if item.note %} — {{ item.note }}{% endif %}</li>{% endfor %}</ul>{% elif block.type == 'html' %}
+<p>{{ block.html|safe }}</p>{% else %}
+<p>{{ block|urlize }}</p>{% endif %}{% endfor %}{% if pr.quote %}
+<blockquote><p>&ldquo;{{ pr.quote }}&rdquo;</p><p>— {{ pr.quote_attribution }}</p></blockquote>{% endif %}

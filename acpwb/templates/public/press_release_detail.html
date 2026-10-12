@@ -73,10 +73,16 @@
           </div>
           {% if block.note %}<p style="font-size:.78rem;color:#666;margin:.5rem 0 0">{{ block.note }}</p>{% endif %}
         </figure>
+        {% elif block.type == 'image' %}
+        <figure style="margin:0 0 2rem;background:var(--white);border-top:3px solid var(--gold);padding:1rem 1.1rem .9rem">
+          {% if block.caption %}<figcaption style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.6rem">{{ block.caption }}</figcaption>{% endif %}
+          <img src="{% static block.src %}" alt="{{ block.alt }}" loading="lazy" style="width:100%;height:auto;display:block">
+          {% if block.note %}<p style="font-size:.78rem;color:#666;margin:.6rem 0 0;line-height:1.5">{{ block.note }}</p>{% endif %}
+        </figure>
         {% elif block.type == 'list' %}
         <ul style="font-size:1rem;line-height:1.7;color:#222;margin-bottom:1.6rem;padding-left:1.2rem">
           {% for item in block.items %}
-          <li style="margin-bottom:.55rem">{% if item.url %}<a href="{{ item.url }}" style="color:var(--navy);font-weight:600">{{ item.text }}</a>{% else %}<strong style="color:var(--navy)">{{ item.text }}</strong>{% endif %}{% if item.note %} — {{ item.note }}{% endif %}</li>
+          <li style="margin-bottom:.55rem">{% if item.url %}<a href="{{ item.url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} style="color:var(--navy);font-weight:600">{{ item.text }}</a>{% else %}<strong style="color:var(--navy)">{{ item.text }}</strong>{% endif %}{% if item.note %} — {{ item.note }}{% endif %}</li>
           {% endfor %}
         </ul>
         {% elif block.type == 'html' %}

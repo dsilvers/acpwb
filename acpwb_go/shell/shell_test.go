@@ -51,7 +51,7 @@ func TestRenderPage_Structure(t *testing.T) {
 		`/static/favicon.svg`,
 		`/static/fonts/inter/inter-variable-latin.woff2`,
 		`/static/vendor/bootstrap/bootstrap.min.css`,
-		`/static/css/acpwb.css?v=20260430`,
+		`/static/css/acpwb.css?v=20261011`,
 		`/static/vendor/bootstrap/bootstrap.bundle.min.js`,
 	} {
 		if !strings.Contains(html, want) {

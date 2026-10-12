@@ -256,6 +256,26 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--gold);
 }
 
+.acpwb-footer .footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.acpwb-footer .footer-social a {
+  color: rgba(255,255,255,0.5);
+  display: inline-flex;
+}
+
+.acpwb-footer .footer-social a:hover {
+  color: var(--gold);
+}
+
+.acpwb-footer .footer-social svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
 .acpwb-footer .footer-logo-line1,
 .acpwb-footer .footer-logo-line2 {
   font-size: 0.85rem;

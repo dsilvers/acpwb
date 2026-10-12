@@ -101,10 +101,8 @@ _PAGES = [
             'the programs, job control, input decks and printouts, 1985–2025.'
         ),
         'scene': (
-            'vintage mainframe machine room, rows of tall navy blue cabinets with reel-to-reel tape drives, '
-            'neat stacks of blank manila punch cards in long wooden trays on a steel table in the foreground, '
-            'a tall stack of pale green fan-fold printer paper, raised white tile floor, cool fluorescent light '
-            'with warm brass accents'
+            '1970s mainframe tape drive cabinets, each with two crisp silver reels of brown magnetic tape '
+            'behind glass, symmetrical row of smooth blank navy cabinet doors, a tray of punch cards in front, warm side light'
         ),
     },
     {
@@ -170,6 +168,18 @@ _PAGES = [
         ),
         'scene': 'organized corporate reference library, structured shelves, document binders, warm systematic interior',
     },
+    {
+        'slug': 'public-policy',
+        'title': 'Public Policy — ACPWB',
+        'description': (
+            'ACPWB public policy positions, regulatory comment letters, and legislative '
+            'testimony on compensation, labor, and corporate governance.'
+        ),
+        'scene': (
+            'empty legislative hearing room, polished wooden witness table with one microphone '
+            'and a neat stack of bound blank documents, navy carpet, brass lamps, soft morning window light'
+        ),
+    },
 ]
 
 _PAGES_BY_SLUG = {p['slug']: p for p in _PAGES}
@@ -201,6 +211,8 @@ _NEGATIVE_PROMPT = (
 
 OG_WIDTH, OG_HEIGHT = 1200, 630
 _GEN_WIDTH, _GEN_HEIGHT = 1024, 544
+# FLUX handles large canvases well; render above OG size and downscale for crisp detail
+_FLUX_GEN_WIDTH, _FLUX_GEN_HEIGHT = 1600, 848
 
 
 def _ai_build_prompt(page, client, model):
@@ -228,10 +240,13 @@ def _is_flux(model_id):
     return 'flux' in model_id.lower()
 
 
-def _pick_device(torch, flux=False):
+def _pick_device(torch, flux=False, bf16=False, fp32=False):
     if torch.cuda.is_available():
         return 'cuda', torch.bfloat16 if flux else torch.float16
     if getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available():
+        # FLUX in float32 is ~68GB of weights and swaps on a 64GB Mac; bf16 is ~34GB
+        if (flux or bf16) and not fp32:
+            return 'mps', torch.bfloat16
         return 'mps', torch.float32
     return 'cpu', torch.float32
 
@@ -255,7 +270,9 @@ def main():
     parser.add_argument('slugs', nargs='*', help='Page slugs to generate (default: all)')
     parser.add_argument('--output-dir', default=str(HERE / 'acpwb' / 'media' / 'og'))
     parser.add_argument('--model', default='stabilityai/stable-diffusion-xl-base-1.0')
-    parser.add_argument('--steps', type=int, default=30)
+    parser.add_argument('--steps', type=int, default=None, help='Inference steps (default: 4 for FLUX schnell, 30 otherwise)')
+    parser.add_argument('--bf16', action='store_true', help='Use bfloat16 on Apple Silicon for non-FLUX models (FLUX uses it by default)')
+    parser.add_argument('--fp32', action='store_true', help='Force float32 on Apple Silicon (FLUX needs ~68GB and will swap)')
     parser.add_argument('--hf-token', default=os.environ.get('HF_TOKEN'), help='Hugging Face token (or set HF_TOKEN env var)')
     parser.add_argument('--force', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
@@ -321,7 +338,9 @@ def main():
         return
 
     flux = _is_flux(args.model)
-    device, dtype = _pick_device(torch, flux=flux)
+    device, dtype = _pick_device(torch, flux=flux, bf16=args.bf16, fp32=args.fp32)
+    if args.steps is None:
+        args.steps = 4 if flux and 'schnell' in args.model.lower() else 30
     print(f'Loading {args.model} on {device} ({dtype}) …')
 
     diffusers_logging.set_verbosity_error()
@@ -350,8 +369,8 @@ def main():
             gen_kwargs = dict(
                 prompt=prompt,
                 num_inference_steps=args.steps,
-                width=_GEN_WIDTH,
-                height=_GEN_HEIGHT,
+                width=_FLUX_GEN_WIDTH if flux else _GEN_WIDTH,
+                height=_FLUX_GEN_HEIGHT if flux else _GEN_HEIGHT,
                 generator=generator,
             )
             if flux:

@@ -265,7 +265,9 @@ func RenderEraPage(p EraPageParams) string {
 	b.WriteString("          Milwaukee, WI 53202<br>\n")
 	b.WriteString(`          <a href="tel:+14146675665" style="color:rgba(255,255,255,0.5)">(414) 667-5665</a><br>` + "\n")
 	b.WriteString(`          <a href="mailto:inquiry+website@acpwb.com" style="color:rgba(255,255,255,0.5)">inquiry@acpwb.com</a>` + "\n")
-	b.WriteString("        </p>\n      </div>\n")
+	b.WriteString("        </p>\n")
+	b.WriteString(footerSocialHTML(siteRoot))
+	b.WriteString("      </div>\n")
 
 	b.WriteString(`      <div class="col-lg-4">` + "\n")
 	b.WriteString(`        <div class="row g-0">` + "\n")

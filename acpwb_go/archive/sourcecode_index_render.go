@@ -122,6 +122,10 @@ func (lk srcLinks) site(path string) string {
 	return "https://acpwb.com" + path
 }
 
+// sourceCover is the page-cover image above the /source-code/ index banner,
+// matching the other site index pages (e.g. templates/honeypot/archive_index.html).
+const sourceCover = `<div style="width:100%;height:320px;overflow:hidden;position:relative"><img src="/static/img/page-covers/source-code.jpg" alt="Research Division Source Code Archive" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentElement.style.display='none'"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,.08) 0%,rgba(10,22,40,.72) 100%)"></div></div>`
+
 func sourceBanner(kicker, title, sub string) string {
 	return fmt.Sprintf(`<section class="page-banner" style="padding-top:2rem"><div class="container">`+
 		`<p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">%s</p>`+
@@ -181,7 +185,7 @@ func RenderSourceIndex() SourcePage {
 	return SourcePage{
 		Title:       "Source Code Archive — ACPWB Research Division",
 		Description: "Legacy source code behind the ACPWB institutional archive, 1985 to present: FORTRAN, COBOL, RPG, REXX, SAS, APL, C, Perl and dozens more batch jobs, indexed by year and month.",
-		HTML:        sourceWrap(lk, sourceBanner("Source Code", "Research Division Source Code Archive", "Batch job listings &bull; 1985&ndash;present &bull; Indexed by year and month"), b.String(), 0),
+		HTML:        sourceWrap(lk, sourceCover+sourceBanner("Source Code", "Research Division Source Code Archive", "Batch job listings &bull; 1985&ndash;present &bull; Indexed by year and month"), b.String(), 0),
 	}
 }
 

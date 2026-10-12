@@ -115,7 +115,13 @@ _LANGUAGE_TABLE = [
 
 
 def _era_languages(year):
-    return [(k, label, w) for k, label, a, b, w in _LANGUAGE_TABLE if a <= year <= b]
+    out = [(k, label, w) for k, label, a, b, w in _LANGUAGE_TABLE if a <= year <= b]
+    lo = min(a for _, _, a, _, _ in _LANGUAGE_TABLE)
+    hi = max(b for _, _, _, b, _ in _LANGUAGE_TABLE)
+    # Mirrors legacyjob/identity.go:eraLanguages — out-of-span years borrow the nearest covered year.
+    if not out and (year < lo or year > hi):
+        return _era_languages(max(lo, min(year, hi)))
+    return out
 
 
 def legacy_identity(year, month, day, slug):

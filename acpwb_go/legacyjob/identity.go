@@ -127,10 +127,18 @@ var languageTable = []langOpt{
 // eraLanguages returns the weighted pool for an article year, in table order.
 func eraLanguages(year int) []langOpt {
 	var out []langOpt
+	lo, hi := languageTable[0].from, languageTable[0].to
 	for _, l := range languageTable {
 		if year >= l.from && year <= l.to {
 			out = append(out, l)
 		}
+		lo, hi = min(lo, l.from), max(hi, l.to)
+	}
+	// Years outside every language's service span (e.g. a 1984 archive page)
+	// borrow the nearest covered year rather than leaving Identity nothing to
+	// pick from. Mirrored in apps/honeypot/legacy_identity.py:_era_languages.
+	if len(out) == 0 && (year < lo || year > hi) {
+		return eraLanguages(max(lo, min(year, hi)))
 	}
 	return out
 }

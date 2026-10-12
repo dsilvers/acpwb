@@ -492,20 +492,15 @@ certbot certonly \
   -d '*.acpwb.com'
 ```
 
-If Cloudflare proxies the subdomains (orange cloud), the origin cert is only needed for "Full (strict)" SSL mode — Cloudflare provides the public certificate to end users. Renewal: `certbot renew` (same cron/systemd timer as before).
+Keep Cloudflare DNS-only (grey cloud) for acpwb.com and its subdomains:
+`acpwb_edge` fingerprints the client's own TLS ClientHello (JA4/JA3), and
+behind Cloudflare's proxy it would only ever see Cloudflare's.
 
-Nginx can't start with the SSL config until the certificate exists. Use the bootstrap config first:
-
-```bash
-sudo mkdir -p /var/www/certbot
-sudo cp nginx/acpwb.com.bootstrap /etc/nginx/sites-available/acpwb.com
-sudo ln -s /etc/nginx/sites-available/acpwb.com /etc/nginx/sites-enabled/acpwb.com
-sudo nginx -t && sudo systemctl reload nginx
-
-# After wildcard cert is issued:
-sudo cp nginx/acpwb.com /etc/nginx/sites-available/acpwb.com
-sudo nginx -t && sudo systemctl reload nginx
-```
+`acpwb_edge` (not nginx) serves these certificates: certbot renews them via
+`certbot.timer`, and `deploy/certbot-deploy-hook.sh` (installed as a
+`renewal-hooks/deploy` hook) copies each renewal to `/etc/acpwb-edge/certs/`
+and reloads the edge. See `deploy/README.md` → "acpwb_edge" for install and
+cutover.
 
 ### Systemd service
 

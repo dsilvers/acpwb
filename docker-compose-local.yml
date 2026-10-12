@@ -98,35 +98,39 @@ services:
         condition: service_started
     restart: unless-stopped
 
-  nginx:
+  # TLS termination, JA4/JA3/JA4H/HTTP2 fingerprinting, routing, static
+  # files and gzip — the same binary that fronts production in place of
+  # nginx. EDGE_DEV serves a self-signed cert for acpwb.com / *.acpwb.com /
+  # acpwb.example / localhost; :8090 serves botseed.net over plain HTTP.
+  edge:
     build:
-      context: ./nginx
+      context: ./acpwb_edge
+    environment:
+      EDGE_DEV: "1"
+      EDGE_HTTPS_ADDR: ":8001"
+      EDGE_HTTP_ADDR: ":8090"
+      EDGE_PLAIN_BOTSEED: "1"
+      EDGE_DJANGO_UPSTREAM: web:8000
+      EDGE_GO_UPSTREAM: acpwb_go:8091
+      EDGE_WS_UPSTREAM: ws:8765
+      EDGE_BOTSEED_WS_UPSTREAM: botseed_ws:8766
+      EDGE_BOTSEED_API_UPSTREAM: botseed_ws:8767
+      EDGE_STATIC_ROOT: /app/staticfiles
+      EDGE_BOTSEED_ROOT: /botseed
+      REDIS_URL: redis://redis:6379/0
     volumes:
       - ./acpwb/staticfiles:/app/staticfiles:ro
       - ./botseed:/botseed:ro
     ports:
-      # Port 80 is deliberately NOT published to the host here — haproxy
-      # takes over host port 8001 (TLS + JA3/JA4 capture) and reaches this
-      # service over the compose network only. 8090 (botseed) is untouched:
-      # it's a separate, non-TLS server block, out of scope for this work.
+      - "127.0.0.1:8001:8001"
       - "127.0.0.1:8090:8090"
     depends_on:
       - web
       - ws
       - botseed_ws
       - acpwb_go
-
-  # TLS termination + JA3/JA4 fingerprint capture only — every other
-  # responsibility (routing, static files, gzip, WebSocket proxying) stays
-  # on the unmodified nginx service behind it. See haproxy/haproxy.cfg and
-  # the plan this implements for why this is additive, not a replacement.
-  haproxy:
-    build:
-      context: ./haproxy
-    ports:
-      - "127.0.0.1:8001:8001"
-    depends_on:
-      - nginx
+      - redis
+    restart: unless-stopped
 
 volumes:
   postgres_data:

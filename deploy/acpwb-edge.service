@@ -1,0 +1,40 @@
+[Unit]
+Description=ACPWB edge (TLS termination + JA4/HTTP2 fingerprinting; replaces nginx)
+After=network-online.target redis-server.service acpwb-gunicorn.service acpwb-go.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=acpwb
+Group=acpwb
+# www-data: the gunicorn socket is acpwb:www-data 0770 under a 0750 dir.
+SupplementaryGroups=www-data
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+LimitNOFILE=200000
+WorkingDirectory=/home/acpwb/acpwb/acpwb_edge
+
+Environment=EDGE_HTTPS_ADDR=:443
+Environment=EDGE_HTTP_ADDR=:80
+Environment=EDGE_CERT_DIR=/etc/acpwb-edge/certs
+Environment=EDGE_DJANGO_UPSTREAM=unix:/run/acpwb-gunicorn/gunicorn.sock
+Environment=EDGE_GO_UPSTREAM=127.0.0.1:8091
+Environment=EDGE_WS_UPSTREAM=127.0.0.1:8765
+Environment=EDGE_BOTSEED_WS_UPSTREAM=127.0.0.1:8766
+Environment=EDGE_BOTSEED_API_UPSTREAM=127.0.0.1:8767
+Environment=EDGE_STATIC_ROOT=/home/acpwb/acpwb/acpwb/staticfiles
+Environment=EDGE_BOTSEED_ROOT=/home/acpwb/acpwb/botseed
+Environment=EDGE_ACME_ROOT=/var/www/certbot
+Environment=REDIS_URL=redis://127.0.0.1:6379/0
+
+ExecStart=/home/acpwb/acpwb/acpwb_edge/acpwb_edge
+# SIGHUP reloads certificates (the certbot deploy hook sends it).
+ExecReload=/bin/kill -HUP $MAINPID
+# SIGTERM drains connections gracefully (up to 15s).
+TimeoutStopSec=20
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

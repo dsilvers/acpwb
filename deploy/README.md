@@ -9,6 +9,7 @@ with Postgres 16 + TimescaleDB and Redis installed locally on the box.
 sudo cp deploy/acpwb-*.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now acpwb-gunicorn acpwb-ws acpwb-botseed-ws acpwb-botseed-processor acpwb-go
+# acpwb-edge: see "acpwb_edge" below — it is installed via a staged cutover.
 ```
 
 ## acpwb_go (archive/policy render service)
@@ -123,6 +124,92 @@ validate the "10x" target directly rather than by proxy through the
 render-time numbers above), it needs to be re-run and this section
 updated with the result.
 
+## acpwb_edge (TLS front-end — replaces nginx)
+
+`acpwb_edge/` is the public front-end on :443/:80 for acpwb.com,
+`*.acpwb.com` and botseed.net. It terminates TLS itself so it can
+fingerprint every client — JA4/JA4_r/JA3 from the raw ClientHello, JA4H from
+request header order, and the HTTP/2 SETTINGS/WINDOW_UPDATE/PRIORITY/
+pseudo-header ("Akamai") fingerprint — and otherwise does what nginx did:
+the same routing (`acpwb_edge/router`, a line-by-line port of
+`nginx/acpwb.com` + `nginx/botseed.net`, pinned by `router_test.go`), static
+files, gzip, WebSockets, `Server: nginx`, nginx's error pages.
+
+What it sends the apps: `X-Real-IP`/`X-Forwarded-For` (the single client
+IP), `X-Forwarded-Proto`, `X-Client-Protocol` (`HTTP/1.1`/`HTTP/2.0`),
+`X-TLS-Protocol`/`X-TLS-Cipher` (nginx's naming), `X-JA4`, `X-JA3`, `X-JA4H`,
+`X-H2-Fingerprint` — after deleting any client-sent copy of every one of
+them. What it records: one row per connection, failed handshakes included,
+RPUSHed to `acpwb:edge_conn_queue` → `drain_edge_conn_queue` →
+`honeypot.EdgeConnection` (dashboard: `/acpwb-dashboard/edge/`).
+
+It accepts TLS 1.0+ like nginx did (old-client bots keep reaching the
+traps), and offers h2, which nginx never did — `RequestFingerprint.
+client_protocol` is `HTTP/2.0` for real browsers from the cutover on.
+
+### Build
+
+```bash
+cd /home/acpwb/acpwb/acpwb_edge
+go build -o acpwb_edge ./cmd/acpwb_edge
+```
+
+Rebuild and `sudo systemctl restart acpwb-edge` on every deploy touching
+`acpwb_edge/` (a restart drops in-flight connections for a moment; SIGTERM
+drains for up to 15s first).
+
+### Certificates
+
+certbot keeps issuing and renewing (`certbot.timer`): `acpwb.com` +
+`*.acpwb.com` by DNS-01 (`dns-cloudflare`), `botseed.net` by webroot
+(`/var/www/certbot`, which the edge serves on :80 for every host, same as
+nginx did). Neither renewal config references nginx. The edge reads copies
+in `/etc/acpwb-edge/certs/<lineage>/` (letsencrypt's own dirs are root-only)
+that the deploy hook maintains:
+
+```bash
+sudo install -m 0755 deploy/certbot-deploy-hook.sh /etc/letsencrypt/renewal-hooks/deploy/acpwb-edge.sh
+# seed once:
+sudo RENEWED_LINEAGE=/etc/letsencrypt/live/acpwb.com   /etc/letsencrypt/renewal-hooks/deploy/acpwb-edge.sh
+sudo RENEWED_LINEAGE=/etc/letsencrypt/live/botseed.net /etc/letsencrypt/renewal-hooks/deploy/acpwb-edge.sh
+```
+
+On renewal the hook copies the new files and `systemctl reload acpwb-edge`
+(SIGHUP → reload; the edge also re-checks mtimes hourly and logs a warning
+to the journal for any certificate within 14 days of expiry). Before this
+hook nothing reloaded nginx after a renewal at all.
+
+### Install, staging and cutover
+
+1. Django first: migrate (`0022` adds the `RequestFingerprint` columns and
+   the `EdgeConnection` hypertable), restart gunicorn, rebuild/restart
+   acpwb_go, and install the updated crontab (`drain_edge_conn_queue`).
+   Producers must never ship keys the drain doesn't know — though the
+   drains now drop unknown keys rather than whole rows.
+2. Build the edge, install the deploy hook and seed certs (above), then
+   install the unit with **staging ports** alongside nginx:
+   ```bash
+   sudo cp deploy/acpwb-edge.service /etc/systemd/system/
+   sudo systemctl edit acpwb-edge   # override: Environment=EDGE_HTTPS_ADDR=:8443 / EDGE_HTTP_ADDR=:8080
+   sudo systemctl daemon-reload && sudo systemctl start acpwb-edge
+   ```
+   Verify through it: `curl --resolve acpwb.com:8443:127.0.0.1 https://acpwb.com:8443/...`
+   with `--http1.1`, `--http2` and `--tlsv1.0 --tls-max 1.0`, across
+   `/`, `/wiki/x/`, `/archive/1999/06/15/`, an `archives-YYYY` day page,
+   a `policy-*` year page, `/source-code/`, `/static/...`, botseed.net
+   `/` and `/api/`, and the live stream WebSocket; then check
+   `EdgeConnection` rows arrive (`drain_edge_conn_queue`).
+3. Cutover:
+   ```bash
+   sudo systemctl revert acpwb-edge        # drop the staging-port override
+   sudo systemctl disable --now nginx
+   sudo systemctl enable acpwb-edge && sudo systemctl restart acpwb-edge
+   sudo certbot renew --dry-run            # botseed.net's webroot now via the edge
+   ```
+4. Rollback: `sudo systemctl disable --now acpwb-edge && sudo systemctl enable --now nginx`.
+   nginx's config stays installed until the edge has run stably; only then
+   remove nginx and this repo's `nginx/` directory.
+
 ## Install cron jobs
 
 ```bash
@@ -156,7 +243,7 @@ Make sure `/var/log/acpwb-*.log` are writable by `acpwb` before the first run.
   intermittent nginx 502s. Sanity check with `namei -l <path-to-a-static-file>`
   as a non-root user, not as root.
 
-## nginx tuning (main `nginx.conf`, not tracked in this repo)
+## nginx tuning (main `nginx.conf`, not tracked in this repo — superseded by acpwb_edge, kept for history and rollback)
 
 The stock Debian `nginx.conf` defaults (`worker_connections 768`, no
 `worker_rlimit_nofile`, one TCP connection to gunicorn per request) fall over

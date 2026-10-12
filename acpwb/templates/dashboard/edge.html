@@ -1,0 +1,141 @@
+{% extends "dashboard/base.html" %}
+{% block title %}TLS Fingerprints{% endblock %}
+{% block page_title %}TLS Fingerprints — Last 24 Hours{% endblock %}
+{% block nav_edge %}active{% endblock %}
+
+{% block content %}
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card">
+      <div class="label">Connections</div>
+      <div class="value">{{ total }}</div>
+      <div class="sub">Accepted by acpwb_edge</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card">
+      <div class="label">HTTP/2</div>
+      <div class="value">{{ h2_pct }}%</div>
+      <div class="sub">{{ h2 }} negotiated h2</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card" style="border-top-color:#dc3545">
+      <div class="label">Failed / Aborted</div>
+      <div class="value" style="color:#dc3545">{{ failed_pct }}%</div>
+      <div class="sub">{{ failed }} never reached the apps</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Outcome</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Outcome</th><th>Conns</th><th>%</th></tr></thead>
+        <tbody>
+          {% for r in by_outcome %}
+          <tr><td><span class="trap-badge">{{ r.name }}</span></td><td>{{ r.count }}</td><td style="color:var(--muted)">{{ r.pct }}%</td></tr>
+          {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No data — run precalc_dashboard</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>ALPN</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Protocol</th><th>Conns</th><th>%</th></tr></thead>
+        <tbody>
+          {% for r in by_alpn %}
+          <tr><td style="font-family:monospace;font-size:.78rem">{{ r.name }}</td><td>{{ r.count }}</td><td style="color:var(--muted)">{{ r.pct }}%</td></tr>
+          {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>TLS Version</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Version</th><th>Conns</th><th>%</th></tr></thead>
+        <tbody>
+          {% for r in by_tls_version %}
+          <tr><td style="font-family:monospace;font-size:.78rem">{{ r.name }}</td><td>{{ r.count }}</td><td style="color:var(--muted)">{{ r.pct }}%</td></tr>
+          {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top JA4</h6><span style="font-size:.72rem;color:var(--muted)">Many UAs on one JA4 = spoofed user agents</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>JA4</th><th>Conns</th><th>IPs</th><th>UAs</th></tr></thead>
+        <tbody>
+          {% for r in top_ja4 %}
+          <tr><td style="font-family:monospace;font-size:.72rem">{{ r.ja4 }}</td><td>{{ r.count }}</td><td>{{ r.ips }}</td><td>{{ r.uas }}</td></tr>
+          {% empty %}<tr><td colspan="4" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top JA4 — Failed Handshakes</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>JA4</th><th>Conns</th><th>IPs</th></tr></thead>
+        <tbody>
+          {% for r in top_failed_ja4 %}
+          <tr><td style="font-family:monospace;font-size:.72rem">{{ r.ja4 }}</td><td>{{ r.count }}</td><td>{{ r.ips }}</td></tr>
+          {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="section-card mb-4">
+  <div class="section-card-header"><h6>Top HTTP/2 Fingerprints</h6><span style="font-size:.72rem;color:var(--muted)">SETTINGS | WINDOW_UPDATE | PRIORITY | pseudo-header order</span></div>
+  <div style="overflow-x:auto">
+    <table class="dash-table w-100">
+      <thead><tr><th>Fingerprint</th><th>Conns</th><th>IPs</th></tr></thead>
+      <tbody>
+        {% for r in top_h2 %}
+        <tr><td style="font-family:monospace;font-size:.72rem">{{ r.h2_fingerprint }}</td><td>{{ r.count }}</td><td>{{ r.ips }}</td></tr>
+        {% empty %}<tr><td colspan="3" class="text-muted text-center py-3">No data</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="section-card-header"><h6>Recent Connections</h6><span style="font-size:.72rem;color:var(--muted)">Last 50</span></div>
+  <div style="overflow-x:auto">
+    <table class="dash-table w-100">
+      <thead><tr><th>Timestamp</th><th>IP</th><th>Outcome</th><th>ALPN</th><th>TLS</th><th>JA4</th><th>Reqs</th><th>First Request</th><th>User Agent</th></tr></thead>
+      <tbody>
+        {% for c in recent %}
+        <tr>
+          <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ c.timestamp|date:"Y-m-d H:i:s" }}</td>
+          <td style="font-family:monospace;font-size:.75rem;white-space:nowrap">{{ c.ip_address }}</td>
+          <td><span class="trap-badge">{{ c.outcome }}</span></td>
+          <td style="font-family:monospace;font-size:.72rem">{{ c.alpn|default:"—" }}</td>
+          <td style="font-family:monospace;font-size:.72rem">{{ c.tls_version|default:"—" }}</td>
+          <td style="font-family:monospace;font-size:.7rem;white-space:nowrap">{{ c.ja4|default:"—" }}</td>
+          <td>{{ c.request_count }}</td>
+          <td style="font-family:monospace;font-size:.72rem;color:var(--muted);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ c.first_host }}{{ c.first_path }}">{{ c.first_method }} {{ c.first_host }}{{ c.first_path|truncatechars:50 }}</td>
+          <td style="font-size:.7rem;color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ c.first_user_agent }}">{{ c.first_user_agent|truncatechars:60 }}</td>
+        </tr>
+        {% empty %}<tr><td colspan="9" class="text-muted text-center py-3">No connections recorded yet</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

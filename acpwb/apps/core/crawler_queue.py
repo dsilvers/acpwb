@@ -443,6 +443,34 @@ def queue_fingerprint_signal(data: dict) -> None:
         pass
 
 
+# acpwb_edge pushes one record per client connection here (Go side:
+# acpwb_edge/edgequeue); Django only ever consumes it, via
+# drain_edge_conn_queue → honeypot.EdgeConnection.
+_EDGE_CONN_QUEUE_KEY = 'acpwb:edge_conn_queue'
+
+
+def pop_edge_connections(count: int = 500):
+    """Same contract as pop_crawler_visits(), for the edge connection queue."""
+    return _pop_visits(_EDGE_CONN_QUEUE_KEY, count)
+
+
+def recover_edge_connections():
+    """Recover any orphaned edge-connection batches from a prior crashed run."""
+    return _recover_visits(_EDGE_CONN_QUEUE_KEY)
+
+
+def edge_conn_queue_length() -> int:
+    """Return the edge connection queue depth, or -1 if Redis is unavailable."""
+    r = _get_consumer_client()
+    if r is None:
+        return -1
+    try:
+        return r.llen(_EDGE_CONN_QUEUE_KEY)
+    except Exception:
+        _mark_consumer_failure()
+        return -1
+
+
 _FIRST_SEEN_TTL_SECONDS = 30 * 24 * 60 * 60  # 30 days
 
 

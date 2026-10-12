@@ -266,11 +266,12 @@ class RequestFingerprint(models.Model):
     hypertable), so idempotency_key gets a real unique constraint from day
     one instead of CrawlerVisit's app-level dedup workaround.
 
-    Deliberately captures header *presence*, not header *order*: order
-    survives reliably in Django (gunicorn/WSGI preserves wire order in
-    request.META) but not in acpwb_go (Go's net/http.Header is an unordered
-    map), and a signal that means different things on the two backends that
-    write this table isn't worth having.
+    Header *order* is only captured via ja4h, which acpwb_edge computes from
+    the raw request bytes before either backend sees them: order survives in
+    Django (gunicorn/WSGI preserves wire order in request.META) but not in
+    acpwb_go (Go's net/http.Header is an unordered map), and a signal that
+    means different things on the two backends that write this table isn't
+    worth having.
     """
     timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
     ip_address = models.GenericIPAddressField(db_index=True)
@@ -279,14 +280,24 @@ class RequestFingerprint(models.Model):
     referrer_present = models.BooleanField(default=False)
     first_seen_ip = models.BooleanField(default=False, db_index=True)
 
-    # What the client actually negotiated with nginx — not the same as the
-    # HTTP/1.1 connection nginx always re-encodes to for the upstream, so
-    # this has to be forwarded explicitly (see nginx's $server_protocol ->
-    # X-Client-Protocol). Blank if the header wasn't forwarded (e.g. a
-    # request that reached Django/Go directly, bypassing nginx).
+    # What the client actually negotiated with acpwb_edge — not the same as
+    # the plain HTTP/1.1 connection the edge proxies over, so it's forwarded
+    # explicitly (X-Client-Protocol / X-TLS-*, nginx-compatible naming).
+    # Blank if the header wasn't forwarded (e.g. a request that reached
+    # Django/Go directly, bypassing the edge).
     client_protocol = models.CharField(max_length=16, blank=True)
     tls_protocol = models.CharField(max_length=16, blank=True)
     tls_cipher = models.CharField(max_length=64, blank=True)
+
+    # ClientHello / HTTP fingerprints computed by acpwb_edge (X-JA4, X-JA3,
+    # X-JA4H, X-H2-Fingerprint). ja3 is the MD5 form; h2_fingerprint is the
+    # Akamai-style SETTINGS|WINDOW_UPDATE|PRIORITY|pseudo-header-order
+    # string, blank on HTTP/1.x. The connection-level detail (JA4_r, the JA3
+    # string, failed handshakes) lives in EdgeConnection.
+    ja4 = models.CharField(max_length=40, blank=True, db_index=True)
+    ja3 = models.CharField(max_length=32, blank=True)
+    ja4h = models.CharField(max_length=64, blank=True)
+    h2_fingerprint = models.CharField(max_length=512, blank=True)
 
     # Sorted, comma-joined subset of a fixed candidate list of headers real
     # browsers send (Accept-Language, Sec-Fetch-*, sec-ch-ua, ...) that were
@@ -306,6 +317,81 @@ class RequestFingerprint(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} @ {self.timestamp:%Y-%m-%d %H:%M} ({self.client_protocol or '?'})"
+
+
+class EdgeConnection(models.Model):
+    """One row per client TCP connection accepted by acpwb_edge (the Go TLS
+    front-end that replaced nginx), including connections that never
+    produced a request — failed or aborted TLS handshakes, scanners that
+    connect and leave. Pushed by the edge to acpwb:edge_conn_queue and
+    batch-drained by drain_edge_conn_queue, same pattern as
+    RequestFingerprint.
+
+    Per-request fingerprints already reach RequestFingerprint via forwarded
+    headers; this table is the connection-level view (raw JA4_r / JA3
+    string, handshake outcome, timing, byte counts) plus a summary of the
+    connection's first request, since most bot connections carry only one.
+
+    A TimescaleDB hypertable (see migration 0022): no primary key, and the
+    idempotency constraint includes the partitioning column, as TimescaleDB
+    requires. Joined to everything else by ip_address value, never by FK.
+    """
+    OUTCOME_CHOICES = [
+        ('ok', 'Handshake completed'),
+        ('handshake_failed', 'Handshake failed'),
+        ('no_hello', 'No ClientHello'),
+        ('timeout', 'Timed out'),
+        ('plain', 'Plain HTTP (port 80)'),
+    ]
+
+    timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
+    ip_address = models.GenericIPAddressField()
+    sni = models.CharField(max_length=253, blank=True)
+    alpn = models.CharField(max_length=16, blank=True)
+    tls_version = models.CharField(max_length=16, blank=True)
+    tls_cipher = models.CharField(max_length=64, blank=True)
+    outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES)
+
+    ja4 = models.CharField(max_length=40, blank=True)
+    ja4_r = models.TextField(blank=True)
+    ja3 = models.CharField(max_length=32, blank=True)
+    ja3_str = models.TextField(blank=True)
+    h2_fingerprint = models.CharField(max_length=512, blank=True)
+
+    rtt_us = models.BigIntegerField(default=0)
+    handshake_us = models.BigIntegerField(default=0)
+    duration_ms = models.BigIntegerField(default=0)
+    bytes_in = models.BigIntegerField(default=0)
+    bytes_out = models.BigIntegerField(default=0)
+    request_count = models.IntegerField(default=0)
+    hdr_capture_lost = models.BooleanField(default=False)
+
+    first_host = models.CharField(max_length=253, blank=True)
+    first_method = models.CharField(max_length=16, blank=True)
+    first_path = models.CharField(max_length=512, blank=True)
+    first_user_agent = models.TextField(blank=True)
+    first_ja4h = models.CharField(max_length=64, blank=True)
+    first_header_names = models.TextField(blank=True)
+    first_status = models.IntegerField(default=0)
+    first_route = models.CharField(max_length=32, blank=True)
+
+    idempotency_key = models.UUIDField(null=True, blank=True, default=None)
+
+    class Meta:
+        ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['ip_address', 'timestamp']),
+            models.Index(fields=['ja4', 'timestamp']),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['idempotency_key', 'timestamp'], name='honeypot_edgeconn_idem_ts_uniq',
+            ),
+        ]
+        verbose_name = 'Edge Connection'
+
+    def __str__(self):
+        return f"{self.ip_address} @ {self.timestamp:%Y-%m-%d %H:%M} {self.outcome} {self.ja4 or '-'}"
 
 
 class IPReputationScore(models.Model):

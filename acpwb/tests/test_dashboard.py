@@ -77,3 +77,30 @@ def test_dashboard_shows_crawler_data(client, staff_client):
     assert response.status_code == 200
     # recent_crawlers is a live query — shows trap type even before precalc runs
     assert b'ghost_link' in response.content
+
+
+# ── TLS fingerprints (acpwb_edge) ──────────────────────────────────────────────
+
+@pytest.mark.django_db
+def test_dashboard_edge_200_empty(staff_client):
+    response = staff_client.get('/acpwb-dashboard/edge/')
+    assert response.status_code == 200
+    assert b'TLS Fingerprints' in response.content
+
+
+@pytest.mark.django_db
+def test_dashboard_edge_shows_summary(staff_client):
+    from apps.core.models import DashboardStat
+    DashboardStat.objects.create(key='edge.summary_24h', value={
+        'total': 10,
+        'by_outcome': {'ok': 8, 'handshake_failed': 2},
+        'by_alpn': {'h2': 5, 'http/1.1': 3, '(none)': 2},
+        'by_tls_version': {'TLSv1.3': 8},
+        'top_ja4': [{'ja4': 't13d1516h2_8daaf6152771_e5627efa2ab1', 'count': 5, 'ips': 2, 'uas': 4}],
+        'top_failed_ja4': [],
+        'top_h2_fingerprint': [{'h2_fingerprint': '1:65536|15663105|0|m,a,s,p', 'count': 5, 'ips': 2}],
+    })
+    content = staff_client.get('/acpwb-dashboard/edge/').content
+    assert b't13d1516h2_8daaf6152771_e5627efa2ab1' in content
+    assert b'20.0%' in content  # failed share
+    assert b'50.0%' in content  # h2 share

@@ -171,3 +171,28 @@ def test_precalc_dashboard_waits_when_backlog_is_older_than_hwm_window():
 
     assert 'waiting on Redis queue backlog' in out.getvalue()
     assert not DashboardStat.objects.filter(key='crawlers.total').exists()
+
+
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
+def test_precalc_dashboard_edge_summary():
+    from apps.honeypot.models import EdgeConnection
+    now = timezone.now()
+    ja4 = 't13d1516h2_8daaf6152771_e5627efa2ab1'
+    EdgeConnection.objects.bulk_create([
+        EdgeConnection(timestamp=now - timedelta(minutes=i), ip_address=f'203.0.113.{i % 2}', outcome='ok',
+                       alpn='h2', tls_version='TLSv1.3', ja4=ja4, h2_fingerprint='1:65536|0|0|m,a,s,p',
+                       first_user_agent=f'ua-{i}')
+        for i in range(4)
+    ] + [
+        EdgeConnection(timestamp=now, ip_address='198.51.100.1', outcome='handshake_failed', ja4='t10i0607ht_x_y'),
+        # Outside the 24h window — must not count.
+        EdgeConnection(timestamp=now - timedelta(days=2), ip_address='198.51.100.2', outcome='ok', ja4=ja4),
+    ])
+    call_command('precalc_dashboard', stdout=io.StringIO())
+
+    s = DashboardStat.objects.get(key='edge.summary_24h').value
+    assert s['total'] == 5
+    assert s['by_outcome'] == {'ok': 4, 'handshake_failed': 1}
+    assert s['top_ja4'][0] == {'ja4': ja4, 'count': 4, 'ips': 2, 'uas': 4}
+    assert s['top_failed_ja4'] == [{'ja4': 't10i0607ht_x_y', 'count': 1, 'ips': 1, 'uas': 1}]
+    assert s['top_h2_fingerprint'][0]['count'] == 4

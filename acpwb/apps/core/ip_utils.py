@@ -1,13 +1,13 @@
 def get_client_ip(request):
-    """Best-effort real client IP behind nginx.
+    """Best-effort real client IP behind acpwb_edge.
 
-    nginx is the only proxy hop (no CDN in front) and sets X-Forwarded-For via
-    $proxy_add_x_forwarded_for, which *appends* $remote_addr to whatever
-    X-Forwarded-For the client already sent rather than replacing it. Taking
-    the first entry — as this codebase used to everywhere — lets a client
-    spoof the logged IP by sending its own X-Forwarded-For header. The last
-    entry is always the one nginx itself appended, so it's the only value
-    that can't be forged by the client.
+    The edge is the only proxy hop (no CDN in front) and replaces any
+    client-sent X-Forwarded-For with the single address it accepted the
+    connection from. Taking the last entry is still the safe choice: it's
+    the one the proxy writes, so it also holds behind a proxy that appends
+    instead (the old nginx $proxy_add_x_forwarded_for setup), whereas the
+    first entry — as this codebase used to take everywhere — lets a client
+    spoof the logged IP with its own X-Forwarded-For header.
     """
     x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded:

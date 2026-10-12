@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     SourceCodeEmail,
     CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, IPIntelligence,
-    RequestFingerprint, IPReputationScore, PublishedIPReputation,
+    RequestFingerprint, IPReputationScore, PublishedIPReputation, EdgeConnection,
 )
 
 
@@ -83,11 +83,21 @@ class IPIntelligenceAdmin(admin.ModelAdmin):
 
 @admin.register(RequestFingerprint)
 class RequestFingerprintAdmin(admin.ModelAdmin):
-    list_display = ('timestamp', 'ip_address', 'client_protocol', 'tls_protocol', 'first_seen_ip', 'referrer_present')
+    list_display = ('timestamp', 'ip_address', 'client_protocol', 'tls_protocol', 'ja4', 'first_seen_ip', 'referrer_present')
     list_filter = ('client_protocol', 'tls_protocol', 'first_seen_ip', 'referrer_present')
-    search_fields = ('ip_address', 'user_agent', 'browser_headers_present')
+    search_fields = ('ip_address', 'user_agent', 'browser_headers_present', 'ja4', 'ja3', 'ja4h')
     readonly_fields = ('timestamp',)
     ordering = ('-timestamp',)
+
+
+@admin.register(EdgeConnection)
+class EdgeConnectionAdmin(admin.ModelAdmin):
+    list_display = ('timestamp', 'ip_address', 'outcome', 'alpn', 'tls_version', 'ja4', 'request_count', 'first_path')
+    list_filter = ('outcome', 'alpn', 'tls_version')
+    search_fields = ('ip_address', 'ja4', 'ja3', 'sni', 'first_user_agent')
+    readonly_fields = ('timestamp',)
+    ordering = ('-timestamp',)
+    show_full_result_count = False
 
 
 @admin.register(IPReputationScore)

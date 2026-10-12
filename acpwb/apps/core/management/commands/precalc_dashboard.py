@@ -31,7 +31,7 @@ from apps.core.crawler_queue import oldest_pending_archive_visit, oldest_pending
 from apps.core.db_router import force_db
 from apps.core.graph_gen import RECENT_BUCKET_MINUTES, RECENT_BUCKET_RETENTION_DAYS, _bucket_key
 from apps.core.models import DashboardStat
-from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
+from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, EdgeConnection, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import DataOptOutRequest
@@ -131,6 +131,7 @@ class Command(BaseCommand):
                     self._update_opt_outs()
 
                 self._update_canary()
+                self._update_edge()
                 self._update_graphs()
 
             elapsed = time.monotonic() - run_start
@@ -915,3 +916,46 @@ class Command(BaseCommand):
         stat.save()
 
         self.stdout.write(f'  canary: {count} triggered')
+
+    # ── EdgeConnection (rolling 24h window — always recomputed) ───────────────
+
+    def _update_edge(self):
+        """Connection-level TLS/HTTP fingerprint summary from acpwb_edge.
+        A rolling window rather than HWM-incremental like the others: it
+        only ever touches the last day's hypertable chunk, and "what does
+        traffic look like right now" is the question it answers."""
+        since = timezone.now() - timedelta(hours=24)
+        qs = EdgeConnection.objects.filter(timestamp__gte=since)
+
+        def by(field):
+            return {
+                (r[field] or '(none)'): r['c']
+                for r in qs.values(field).annotate(c=Count('id')).order_by('-c')[:20]
+            }
+
+        def top_ja4(rows):
+            return [
+                {'ja4': r['ja4'], 'count': r['c'], 'ips': r['ips'], 'uas': r['uas']}
+                for r in rows.exclude(ja4='').values('ja4').annotate(
+                    c=Count('id'),
+                    ips=Count('ip_address', distinct=True),
+                    uas=Count('first_user_agent', distinct=True),
+                ).order_by('-c')[:20]
+            ]
+
+        summary = {
+            'total': qs.count(),
+            'by_outcome': by('outcome'),
+            'by_alpn': by('alpn'),
+            'by_tls_version': by('tls_version'),
+            'top_ja4': top_ja4(qs),
+            'top_failed_ja4': top_ja4(qs.exclude(outcome__in=['ok', 'plain'])),
+            'top_h2_fingerprint': [
+                {'h2_fingerprint': r['h2_fingerprint'], 'count': r['c'], 'ips': r['ips']}
+                for r in qs.exclude(h2_fingerprint='').values('h2_fingerprint').annotate(
+                    c=Count('id'), ips=Count('ip_address', distinct=True),
+                ).order_by('-c')[:20]
+            ],
+        }
+        self._set_stat('edge.summary_24h', summary)
+        self.stdout.write(f'  edge: {summary["total"]} connections in last 24h')

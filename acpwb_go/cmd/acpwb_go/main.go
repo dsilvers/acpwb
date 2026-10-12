@@ -115,13 +115,12 @@ func parseArchivePath(path string) (year, month, day int, slug string, ok bool) 
 	return y, m, d, slug, true
 }
 
-// clientIP returns the best-effort real client IP behind nginx. nginx is the
-// only proxy hop (no CDN in front) and sets X-Forwarded-For via
-// $proxy_add_x_forwarded_for, which appends $remote_addr to whatever
-// X-Forwarded-For the client already sent rather than replacing it. Taking
-// the first entry lets a client spoof the logged IP via its own
-// X-Forwarded-For header; the last entry is always the one nginx itself
-// appended, so it's the only value that can't be forged by the client.
+// clientIP returns the real client IP behind acpwb_edge. The edge is the
+// only proxy hop (no CDN in front) and replaces any client-sent
+// X-Forwarded-For with the single address it accepted the connection from.
+// Taking the last entry is still the safe choice: it's the one the proxy
+// writes, so it holds even behind a proxy that appends instead (the old
+// nginx $proxy_add_x_forwarded_for setup) and can't be forged by the client.
 func clientIP(r *http.Request) string {
 	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
 		parts := strings.Split(xff, ",")
@@ -134,16 +133,6 @@ func clientIP(r *http.Request) string {
 		return r.RemoteAddr
 	}
 	return host
-}
-
-// fingerprintFieldsFrom reads the residential-proxy-detection raw signal off
-// headers nginx sets (X-Client-Protocol/X-Tls-Protocol/X-Tls-Cipher — see
-// nginx/acpwb.com) plus the fixed browser-header candidate set, for the
-// RequestFingerprint row PushVisit queues alongside the crawler/archive
-// visit it already writes.
-func fingerprintFieldsFrom(r *http.Request) (clientProtocol, tlsProtocol, tlsCipher, browserHeaders string) {
-	return r.Header.Get("X-Client-Protocol"), r.Header.Get("X-Tls-Protocol"),
-		r.Header.Get("X-Tls-Cipher"), visitqueue.BrowserHeadersPresent(r)
 }
 
 func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
@@ -207,17 +196,13 @@ func archiveHandler(vq *visitqueue.Queue) http.HandlerFunc {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
-		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "archive", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-			Archive:               &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
-			ClientProtocol:        cp,
-			TLSProtocol:           tp,
-			TLSCipher:             tc,
-			BrowserHeadersPresent: bh,
+			Archive:     &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+			Fingerprint: visitqueue.FingerprintFrom(r),
 		})
 	}
 }
@@ -345,13 +330,12 @@ func policyHandler(vq *visitqueue.Queue) http.HandlerFunc {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
-		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "policy", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-			ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+			Fingerprint: visitqueue.FingerprintFrom(r),
 		})
 	}
 }
@@ -493,17 +477,13 @@ func eraHandler(vq *visitqueue.Queue, year int) http.HandlerFunc {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
-		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "archive", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-			Archive:               &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
-			ClientProtocol:        cp,
-			TLSProtocol:           tp,
-			TLSCipher:             tc,
-			BrowserHeadersPresent: bh,
+			Archive:     &visitqueue.ArchiveInfo{Year: year, Month: month, Day: day, Depth: depth, Slug: slug},
+			Fingerprint: visitqueue.FingerprintFrom(r),
 		})
 	}
 }
@@ -643,13 +623,12 @@ func policySubdomainHandler(vq *visitqueue.Queue, agency string) http.HandlerFun
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(page))
 
-		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "policy", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-			ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+			Fingerprint: visitqueue.FingerprintFrom(r),
 		})
 	}
 }
@@ -776,13 +755,12 @@ func serveSourceCode(w http.ResponseWriter, r *http.Request, vq *visitqueue.Queu
 		w.Header().Set("Content-Disposition", `attachment; filename="`+file+`"`)
 		w.Header().Set("Content-Length", strconv.Itoa(len(data)))
 		_, _ = w.Write(data)
-		cp, tp, tc, bh := fingerprintFieldsFrom(r)
 		go vq.PushVisit(visitqueue.Visit{
 			IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 			Referrer: r.Header.Get("Referer"), TrapType: "source_code_download", QueryString: r.URL.RawQuery,
 			BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 			ResponseBytes: len(data), ResponseMs: time.Since(start).Milliseconds(),
-			ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+			Fingerprint: visitqueue.FingerprintFrom(r),
 		})
 		go vq.PushCodeEmails(r.Host, r.URL.Path, ip, l.Emails)
 		return
@@ -809,13 +787,12 @@ func serveSourceCode(w http.ResponseWriter, r *http.Request, vq *visitqueue.Queu
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_, _ = w.Write([]byte(page))
 
-	cp, tp, tc, bh := fingerprintFieldsFrom(r)
 	go vq.PushVisit(visitqueue.Visit{
 		IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 		Referrer: r.Header.Get("Referer"), TrapType: "source_code", QueryString: r.URL.RawQuery,
 		BotType: botType, BotGroup: botGroup, Method: r.Method, Status: http.StatusOK,
 		ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-		ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+		Fingerprint: visitqueue.FingerprintFrom(r),
 	})
 	go vq.PushCodeEmails(r.Host, r.URL.Path, ip, l.Emails)
 }
@@ -869,12 +846,11 @@ func serveSourceIndex(w http.ResponseWriter, r *http.Request, vq *visitqueue.Que
 	_, _ = w.Write([]byte(page))
 
 	botType := botclassify.ClassifyUAOrIP(ua, ip)
-	cp, tp, tc, bh := fingerprintFieldsFrom(r)
 	go vq.PushVisit(visitqueue.Visit{
 		IPAddress: ip, UserAgent: ua, Host: r.Host, Path: r.URL.Path,
 		Referrer: r.Header.Get("Referer"), TrapType: "source_code", QueryString: r.URL.RawQuery,
 		BotType: botType, BotGroup: botclassify.BotTypeToGroup(botType), Method: r.Method, Status: http.StatusOK,
 		ResponseBytes: len(page), ResponseMs: time.Since(start).Milliseconds(),
-		ClientProtocol: cp, TLSProtocol: tp, TLSCipher: tc, BrowserHeadersPresent: bh,
+		Fingerprint: visitqueue.FingerprintFrom(r),
 	})
 }

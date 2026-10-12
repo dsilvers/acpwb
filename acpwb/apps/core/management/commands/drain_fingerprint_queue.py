@@ -24,11 +24,15 @@ from apps.core.crawler_queue import (
 )
 from apps.honeypot.models import RequestFingerprint
 
-_LOCK_FILE = '/tmp/acpwb-fingerprint-drain.lock'
-
-
 class Command(BaseCommand):
     help = 'Drain the Redis fingerprint-signal queue into PostgreSQL via bulk_create'
+
+    # drain_edge_conn_queue subclasses this command and swaps these out.
+    model = RequestFingerprint
+    lock_file = '/tmp/acpwb-fingerprint-drain.lock'
+    pop = staticmethod(pop_fingerprint_signals)
+    recover = staticmethod(recover_fingerprint_signals)
+    queue_length = staticmethod(fingerprint_queue_length)
 
     def add_arguments(self, parser):
         parser.add_argument('--batch', type=int, default=500)
@@ -40,7 +44,7 @@ class Command(BaseCommand):
         self.stdout.write(f'[{ts}] {msg}')
 
     def handle(self, *args, **options):
-        with open(_LOCK_FILE, 'w') as lock_fh:
+        with open(self.lock_file, 'w') as lock_fh:
             try:
                 fcntl.flock(lock_fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
             except OSError:
@@ -49,22 +53,27 @@ class Command(BaseCommand):
             self._drain(options)
 
     def _process_batch(self, items, batch_key):
+        # Keys the model doesn't know are dropped rather than failing the
+        # row: a producer (acpwb_go, acpwb_edge) that ships a new field
+        # before this side's migration would otherwise lose every record.
+        fields = {f.attname for f in self.model._meta.concrete_fields}
         objs = []
         for item in items:
             try:
+                item = {k: v for k, v in item.items() if k in fields}
                 if 'timestamp' in item:
                     ts = parse_datetime(item['timestamp'])
                     item['timestamp'] = ts if ts else item.pop('timestamp')
                 if not item.get('ip_address'):
                     item['ip_address'] = '0.0.0.0'
-                objs.append(RequestFingerprint(**item))
+                objs.append(self.model(**item))
             except Exception:
                 pass  # skip malformed entries
 
         inserted = 0
         if objs:
             try:
-                RequestFingerprint.objects.bulk_create(objs, ignore_conflicts=True)
+                self.model.objects.bulk_create(objs, ignore_conflicts=True)
                 inserted = len(objs)
             except Exception as exc:
                 self._log(f'Batch insert failed ({exc}); retrying rows individually.')
@@ -87,7 +96,7 @@ class Command(BaseCommand):
         started = time.monotonic()
 
         recovered = 0
-        for items, batch_key in recover_fingerprint_signals():
+        for items, batch_key in self.recover():
             recovered += self._process_batch(items, batch_key)
         if recovered:
             self._log(f'Recovered {recovered} record(s) from a prior interrupted run.')
@@ -95,7 +104,7 @@ class Command(BaseCommand):
         while True:
             if max_seconds and time.monotonic() - started >= max_seconds:
                 break
-            items, batch_key = pop_fingerprint_signals(batch_size)
+            items, batch_key = self.pop(batch_size)
             if not batch_key:
                 break
 
@@ -105,7 +114,7 @@ class Command(BaseCommand):
             if max_batches and batches_run >= max_batches:
                 break
 
-        remaining = fingerprint_queue_length()
+        remaining = self.queue_length()
         depth_display = 'unknown (Redis unavailable)' if remaining < 0 else remaining
         self._log(
             f'Inserted {total_inserted} records in {batches_run} batch(es). '

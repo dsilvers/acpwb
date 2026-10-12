@@ -10,6 +10,7 @@ urlpatterns = [
     path('emails/<int:pk>/',  views.email_detail,  name='dashboard-email-detail'),
     path('people/',   views.people,         name='dashboard-people'),
     path('logins/',   views.logins,         name='dashboard-logins'),
+    path('edge/',     views.edge,           name='dashboard-edge'),
     path('careers/',  views.careers_applications, name='dashboard-careers'),
     path('conference/', views.conference_registrations, name='dashboard-conference'),
     path('conference/<int:pk>/', views.conference_registration_detail, name='dashboard-conference-detail'),

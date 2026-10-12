@@ -206,14 +206,34 @@ type Visit struct {
 	ResponseMs                                 int64
 	Archive                                    *ArchiveInfo
 
-	// Residential-proxy-detection raw signal — see RequestFingerprint /
-	// apps.core.stream_middleware.py's _queue_fingerprint for the Django
-	// side of this same capture. ClientProtocol/TLSProtocol/TLSCipher come
-	// from headers nginx sets (X-Client-Protocol/X-Tls-Protocol/X-Tls-Cipher)
-	// since this service, like Django, only ever sees the HTTP/1.1
-	// connection nginx re-encodes to for the upstream.
+	Fingerprint
+}
+
+// Fingerprint is the residential-proxy-detection raw signal for one request
+// — see RequestFingerprint / apps.core.stream_middleware.py's
+// _queue_fingerprint for the Django side of this same capture. Everything
+// but BrowserHeadersPresent comes from headers acpwb_edge sets after
+// stripping any client-supplied copies, since this service, like Django,
+// only ever sees the plain HTTP/1.1 connection the edge proxies over.
+type Fingerprint struct {
 	ClientProtocol, TLSProtocol, TLSCipher string
+	JA4, JA3, JA4H, H2Fingerprint          string
 	BrowserHeadersPresent                  string
+}
+
+// FingerprintFrom reads r's Fingerprint off the acpwb_edge headers plus the
+// fixed browser-header candidate set.
+func FingerprintFrom(r *http.Request) Fingerprint {
+	return Fingerprint{
+		ClientProtocol:        r.Header.Get("X-Client-Protocol"),
+		TLSProtocol:           r.Header.Get("X-Tls-Protocol"),
+		TLSCipher:             r.Header.Get("X-Tls-Cipher"),
+		JA4:                   r.Header.Get("X-Ja4"),
+		JA3:                   r.Header.Get("X-Ja3"),
+		JA4H:                  r.Header.Get("X-Ja4h"),
+		H2Fingerprint:         r.Header.Get("X-H2-Fingerprint"),
+		BrowserHeadersPresent: BrowserHeadersPresent(r),
+	}
 }
 
 // PushVisit sends the crawler-queue RPUSH, the optional archive-queue RPUSH,
@@ -314,6 +334,10 @@ func (q *Queue) PushVisit(v Visit) {
 		"client_protocol":         truncate(v.ClientProtocol, 16),
 		"tls_protocol":            truncate(v.TLSProtocol, 16),
 		"tls_cipher":              truncate(v.TLSCipher, 64),
+		"ja4":                     truncate(v.JA4, 40),
+		"ja3":                     truncate(v.JA3, 32),
+		"ja4h":                    truncate(v.JA4H, 64),
+		"h2_fingerprint":          truncate(v.H2Fingerprint, 512),
 		"browser_headers_present": truncate(v.BrowserHeadersPresent, 512),
 		"idempotency_key":         uuid4(),
 	}

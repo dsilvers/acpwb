@@ -1,6 +1,9 @@
 package visitqueue
 
-import "testing"
+import (
+	"net/http/httptest"
+	"testing"
+)
 
 // Reference buckets from Python: int(hashlib.md5(ip.encode()).hexdigest()[:8], 16) / 2**32.
 // Must stay in lockstep with apps.core.signal_capture.fingerprint_sampled —
@@ -45,5 +48,27 @@ func TestFingerprintCaptureDefaultsOff(t *testing.T) {
 	q, _ = New("redis://127.0.0.1:6379/0")
 	if !q.fingerprintEnabled || q.fingerprintSampleRate != 0.01 {
 		t.Errorf("env not applied: enabled=%v rate=%v", q.fingerprintEnabled, q.fingerprintSampleRate)
+	}
+}
+
+func TestFingerprintFromEdgeHeaders(t *testing.T) {
+	r := httptest.NewRequest("GET", "/", nil)
+	r.Header.Set("X-Client-Protocol", "HTTP/2.0")
+	r.Header.Set("X-TLS-Protocol", "TLSv1.3")
+	r.Header.Set("X-TLS-Cipher", "TLS_AES_128_GCM_SHA256")
+	r.Header.Set("X-JA4", "t13d1516h2_8daaf6152771_e5627efa2ab1")
+	r.Header.Set("X-JA3", "0123456789abcdef0123456789abcdef")
+	r.Header.Set("X-JA4H", "ge20nn09enus_abc_000000000000_000000000000")
+	r.Header.Set("X-H2-Fingerprint", "1:65536;2:0|15663105|0|m,a,s,p")
+	r.Header.Set("Accept-Language", "en-US")
+	got := FingerprintFrom(r)
+	want := Fingerprint{
+		ClientProtocol: "HTTP/2.0", TLSProtocol: "TLSv1.3", TLSCipher: "TLS_AES_128_GCM_SHA256",
+		JA4: "t13d1516h2_8daaf6152771_e5627efa2ab1", JA3: "0123456789abcdef0123456789abcdef",
+		JA4H: "ge20nn09enus_abc_000000000000_000000000000", H2Fingerprint: "1:65536;2:0|15663105|0|m,a,s,p",
+		BrowserHeadersPresent: "accept-language",
+	}
+	if got != want {
+		t.Fatalf("got %+v\nwant %+v", got, want)
 	}
 }

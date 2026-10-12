@@ -14,7 +14,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from apps.core.models import DashboardStat
-from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, InternalLoginAttempt
+from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, EdgeConnection, InternalLoginAttempt
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import ConferenceRegistration, DataOptOutRequest, JobApplication, JobApplicationDocument
@@ -285,6 +285,31 @@ def people(request):
         'updated_at':      _updated_at('people.total'),
     }
     return render(request, 'dashboard/people.html', ctx)
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def edge(request):
+    summary = _stat('edge.summary_24h', {}) or {}
+    total = summary.get('total', 0)
+    outcomes = summary.get('by_outcome', {})
+    alpn = summary.get('by_alpn', {})
+    failed = sum(v for k, v in outcomes.items() if k not in ('ok', 'plain'))
+    ctx = {
+        'total':          total,
+        'failed':         failed,
+        'failed_pct':     round(failed * 100 / total, 1) if total else 0,
+        'h2':             alpn.get('h2', 0),
+        'h2_pct':         round(alpn.get('h2', 0) * 100 / total, 1) if total else 0,
+        'by_outcome':     _top_named(outcomes),
+        'by_alpn':        _top_named(alpn),
+        'by_tls_version': _top_named(summary.get('by_tls_version', {})),
+        'top_ja4':        summary.get('top_ja4', []),
+        'top_failed_ja4': summary.get('top_failed_ja4', []),
+        'top_h2':         summary.get('top_h2_fingerprint', []),
+        'recent':         list(EdgeConnection.objects.order_by('-timestamp')[:50]),
+        'updated_at':     _updated_at('edge.summary_24h'),
+    }
+    return render(request, 'dashboard/edge.html', ctx)
 
 
 @staff_member_required(login_url='/django-admin/login/')

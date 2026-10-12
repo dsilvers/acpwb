@@ -123,3 +123,69 @@ def test_push_fingerprint_signal_caps_queue_length(settings):
     pipe.rpush.assert_called_once()
     pipe.ltrim.assert_called_once_with('acpwb:fingerprint_queue', -5, -1)
     pipe.execute.assert_called_once()
+
+
+@pytest.mark.django_db
+def test_middleware_forwards_edge_fingerprint_headers(client, capture_on):
+    with patch('apps.core.crawler_queue.check_first_seen_ip', return_value=False), \
+         patch('apps.core.crawler_queue.queue_fingerprint_signal') as mock_queue:
+        client.get(
+            '/careers/',
+            HTTP_X_CLIENT_PROTOCOL='HTTP/2.0',
+            HTTP_X_TLS_PROTOCOL='TLSv1.3',
+            HTTP_X_JA4='t13d1516h2_8daaf6152771_e5627efa2ab1',
+            HTTP_X_JA3='0123456789abcdef0123456789abcdef',
+            HTTP_X_JA4H='ge20nn09enus_' + 'a' * 12 + '_000000000000_000000000000',
+            HTTP_X_H2_FINGERPRINT='1:65536;2:0;4:6291456;6:262144|15663105|0|m,a,s,p',
+        )
+
+    data = mock_queue.call_args[0][0]
+    assert data['ja4'] == 't13d1516h2_8daaf6152771_e5627efa2ab1'
+    assert data['ja3'] == '0123456789abcdef0123456789abcdef'
+    assert data['ja4h'].startswith('ge20nn09enus_')
+    assert data['h2_fingerprint'].endswith('|m,a,s,p')
+
+
+@pytest.mark.django_db
+def test_drain_fingerprint_queue_drops_unknown_keys_instead_of_rows():
+    """A producer shipping a new payload key before this side's migration
+    must not lose the whole row."""
+    push_fingerprint_signal({
+        'timestamp': '2026-01-01T00:00:00.000000+00:00',
+        'ip_address': '203.0.113.77',
+        'ja4': 't13d1516h2_8daaf6152771_e5627efa2ab1',
+        'some_future_field': 'x',
+    })
+    call_command('drain_fingerprint_queue', stdout=io.StringIO())
+
+    row = RequestFingerprint.objects.get(ip_address='203.0.113.77')
+    assert row.ja4 == 't13d1516h2_8daaf6152771_e5627efa2ab1'
+
+
+def _push_edge_conn(record):
+    import json
+    from apps.core.crawler_queue import _EDGE_CONN_QUEUE_KEY, _get_client
+    _get_client().rpush(_EDGE_CONN_QUEUE_KEY, json.dumps(record))
+
+
+@pytest.mark.django_db
+def test_drain_edge_conn_queue_persists_and_dedupes():
+    from apps.honeypot.models import EdgeConnection
+    record = {
+        'timestamp': '2026-01-01T00:00:00.000000+00:00',
+        'ip_address': '192.0.2.10',
+        'outcome': 'handshake_failed',
+        'ja4': 't10i0607ht_aaaaaaaaaaaa_bbbbbbbbbbbb',
+        'ja3_str': '769,47-53,0-10-11,23-24,0',
+        'bytes_in': 517,
+        'idempotency_key': '22222222-2222-2222-2222-222222222222',
+        'unknown_future_key': 1,
+    }
+    _push_edge_conn(record)
+    _push_edge_conn(record)  # a replayed batch must not duplicate
+    call_command('drain_edge_conn_queue', stdout=io.StringIO())
+
+    rows = EdgeConnection.objects.filter(ip_address='192.0.2.10')
+    assert rows.count() == 1
+    assert rows[0].outcome == 'handshake_failed'
+    assert rows[0].bytes_in == 517

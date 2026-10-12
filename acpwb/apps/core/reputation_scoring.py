@@ -30,8 +30,9 @@ _NON_BROWSER_MARKERS = (
     'scrapy', 'go-http-client', 'okhttp', 'aiohttp', 'libwww',
 )
 
-# TLS versions no current browser release negotiates by default — nginx
-# forwards $ssl_protocol as-is (see nginx/acpwb.com's X-TLS-Protocol header).
+# TLS versions no current browser release negotiates by default — acpwb_edge
+# forwards the negotiated version in nginx's $ssl_protocol naming
+# (X-TLS-Protocol), so rows from before and after the cutover compare.
 _OLD_TLS_PROTOCOLS = {'SSLv2', 'SSLv3', 'TLSv1', 'TLSv1.1'}
 
 # Rule weights. Deliberately simple/additive for a v1 — see module docstring
@@ -103,8 +104,8 @@ def is_old_tls_protocol(tls_protocol):
 
 
 def is_http1(client_protocol):
-    """True for both nginx's exact "HTTP/1.1" and HAProxy's coarser
-    "HTTP/1" (only the major version is available from HAProxy's
-    fc_http_major fetch — see haproxy/haproxy.cfg) — this signal needs to
-    mean the same thing regardless of which layer captured it."""
+    """True for "HTTP/1.1"/"HTTP/1.0" (acpwb_edge and the old nginx) and the
+    coarser "HTTP/1" older local-dev rows got from the since-removed HAProxy
+    front-end — this signal needs to mean the same thing regardless of which
+    layer captured it."""
     return bool(client_protocol) and client_protocol.startswith('HTTP/1')

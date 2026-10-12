@@ -164,6 +164,10 @@ class RequestStreamMiddleware:
                 'client_protocol': request.META.get('HTTP_X_CLIENT_PROTOCOL', '')[:16],
                 'tls_protocol': request.META.get('HTTP_X_TLS_PROTOCOL', '')[:16],
                 'tls_cipher': request.META.get('HTTP_X_TLS_CIPHER', '')[:64],
+                'ja4': request.META.get('HTTP_X_JA4', '')[:40],
+                'ja3': request.META.get('HTTP_X_JA3', '')[:32],
+                'ja4h': request.META.get('HTTP_X_JA4H', '')[:64],
+                'h2_fingerprint': request.META.get('HTTP_X_H2_FINGERPRINT', '')[:512],
                 'browser_headers_present': browser_headers_present(present_headers),
             }
             queue_fingerprint_signal(data)

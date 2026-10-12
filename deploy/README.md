@@ -27,7 +27,7 @@ one — this is the first Go component):
 
 ```bash
 # one-time, if Go isn't already installed:
-curl -fsSL https://go.dev/dl/go1.24.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
+curl -fsSL https://go.dev/dl/go1.27.1.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
 # add /usr/local/go/bin to acpwb's PATH (or build as another user and copy
 # the resulting binary — it's a static, CGO_ENABLED=0 binary with no
 # runtime deps beyond matching OS/arch)

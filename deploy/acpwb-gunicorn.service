@@ -5,14 +5,19 @@ After=network.target postgresql.service redis-server.service
 [Service]
 Type=simple
 User=acpwb
-Group=acpwb
+Group=www-data
+RuntimeDirectory=acpwb-gunicorn
+RuntimeDirectoryMode=0750
+LimitNOFILE=65536
 WorkingDirectory=/home/acpwb/acpwb/acpwb
 EnvironmentFile=/home/acpwb/acpwb/.env
 ExecStart=/home/acpwb/acpwb/.direnv/python-3.14/bin/gunicorn config.wsgi:application \
-    --bind 127.0.0.1:8000 \
+    --bind unix:/run/acpwb-gunicorn/gunicorn.sock \
+    --umask 0007 \
     --worker-class gevent \
-    --workers 33 \
-    --worker-connections 1000 \
+    --workers 40 \
+    --worker-connections 50 \
+    --backlog 8192 \
     --timeout 60
 Restart=on-failure
 RestartSec=5

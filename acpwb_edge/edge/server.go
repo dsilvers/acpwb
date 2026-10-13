@@ -43,6 +43,7 @@ type Config struct {
 	TLS       http.Handler
 	Plain     http.Handler
 	Sink      Sink
+	Live      Live // the dashboard's live stream; nil: none
 
 	// CookieDomain gives the client cookie's Domain for a host, or false
 	// for hosts that get none (router.Config.CookieDomain). Nil: no cookie.
@@ -550,9 +551,26 @@ func (s *Server) Shutdown(ctx context.Context) error {
 // newConn starts tracking an accepted connection.
 func (s *Server) newConn(raw net.Conn, isTLS bool) *connInfo {
 	ci := newConnInfo(raw, isTLS)
+	sink, live := s.cfg.Sink, s.cfg.Live
 	ci.emit = s.records.emit
-	if sink := s.cfg.Sink; sink != nil {
-		ci.emitReq = func(rec *RequestRecord) { sink.Push(edgequeue.RequestQueue, rec) }
+	if live != nil {
+		ci.emit = func(rec *Record) {
+			if live.Active() {
+				live.Conn(rec)
+			}
+			s.records.emit(rec)
+		}
+	}
+	if sink != nil || live != nil {
+		ci.emitReq = func(rec *RequestRecord) {
+			if live != nil && live.Active() {
+				live.Request(rec, ci.connTLS())
+			}
+			if sink != nil {
+				requestsLogged.Add(1)
+				sink.Push(edgequeue.RequestQueue, rec)
+			}
+		}
 	}
 	return ci
 }

@@ -506,7 +506,6 @@ func (ci *connInfo) closeRequests() {
 
 func (ci *connInfo) pushRequest(rec *RequestRecord) {
 	if ci.emitReq != nil {
-		requestsLogged.Add(1)
 		ci.emitReq(rec)
 	}
 }

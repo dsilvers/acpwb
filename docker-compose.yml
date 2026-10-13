@@ -37,6 +37,9 @@ services:
       STREAM_WS_TOKEN: ${STREAM_WS_TOKEN:-}
     ports:
       - "127.0.0.1:8765:8765"
+    volumes:
+      # Agent classification uses Django's own patterns (see ws_server._load_bot_classify).
+      - ./acpwb/apps/core/bot_classify.py:/app/bot_classify.py:ro
     depends_on:
       - redis
     restart: unless-stopped

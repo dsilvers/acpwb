@@ -5,56 +5,215 @@
 {% block nav_live %}active{% endblock %}
 
 {% block content %}
+<style>
+  .lv-filters .form-label { font-size: .62rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .15rem; }
+  .lv-filters .form-control, .lv-filters .form-select { font-size: .78rem; padding: .25rem .5rem; border-radius: 0; }
+  .lv-filters .is-invalid { border-color: #dc2626; }
+  .lv-filters .lv-err { font-size: .68rem; color: #dc2626; min-height: 0; }
+  .lv-help { font-size: .7rem; color: var(--muted); }
+  .lv-help code { font-size: .7rem; color: var(--navy); }
+  .lv-btn { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; border: 1px solid var(--border); background: white; color: var(--navy); padding: .25rem .6rem; }
+  .lv-btn:hover { background: var(--surface); }
+  .lv-btn.on { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+  .lv-status { font-size: .72rem; font-weight: 700; color: var(--muted); }
+  .stat-card .value.sm { font-size: 1.5rem; }
+  .lv-legend { font-size: .7rem; color: var(--muted); display: flex; gap: 1rem; }
+  .lv-legend i { display: inline-block; width: .7rem; height: .2rem; vertical-align: middle; margin-right: .3rem; }
+  .lv-top { font-size: .74rem; }
+  .lv-top .row-item { display: grid; grid-template-columns: minmax(0, 1fr) 5.5rem 3.2rem; gap: .5rem; align-items: center; padding: .12rem 0; }
+  .lv-top .k { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .7rem; }
+  .lv-top .k:hover { color: #2563eb; text-decoration: underline; }
+  .lv-top .n { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .lv-top .empty { color: var(--muted); font-style: italic; }
+  .lv-top-card .section-card-header { padding: .5rem .9rem; }
+  .lv-top-card .section-card-body { padding: .5rem .9rem; }
+  .lv-top-card h6 small { font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--muted); }
+  #stream-table td { padding: .3rem .6rem; font-size: .76rem; }
+  #stream-table th { padding: .45rem .6rem; position: sticky; top: 0; z-index: 1; }
+  #stream-table tbody tr.req { cursor: pointer; }
+  #stream-table tbody tr.req.open { background: #fdf8ea; }
+  #stream-table td.mono, .lv-detail .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .7rem; }
+  #stream-table td.path { word-break: break-all; }
+  #stream-table td.num { font-variant-numeric: tabular-nums; text-align: right; color: var(--muted); }
+  #stream-table td.slow { color: #d97706; font-weight: 700; }
+  #stream-table td.very-slow { color: #dc2626; font-weight: 700; }
+  .lv-detail td { background: #fbfbfc; }
+  .lv-detail dl { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: .15rem .75rem; margin: .25rem 0; font-size: .72rem; }
+  .lv-detail dt { color: var(--muted); font-weight: 700; }
+  .lv-detail dd { margin: 0; word-break: break-all; }
+  .lv-detail a { cursor: pointer; font-size: .66rem; margin-left: .4rem; }
+  .lv-badge { display: inline-block; font-size: .62rem; font-weight: 700; padding: .05rem .35rem; border: 1px solid var(--border); background: var(--surface); color: var(--navy); white-space: nowrap; }
+  .lv-badge.warn { border-color: #f59e0b; background: #fffbeb; color: #92400e; }
+  .lv-badge.err { border-color: #fca5a5; background: #fef2f2; color: #991b1b; }
+</style>
 
-<div class="row g-3 mb-3">
-  <div class="col-6 col-lg-3">
-    <div class="stat-card">
-      <div class="label">Req/sec</div>
-      <div class="value" id="rps-1">—</div>
+<div class="section-card lv-filters">
+  <div class="section-card-header">
+    <h6>Filters</h6>
+    <div style="display:flex;gap:.4rem;align-items:center">
+      <span id="ws-status" class="lv-status me-2">Connecting…</span>
+      <button type="button" class="lv-btn" id="btn-pause" title="Freeze the request table (stats keep updating)">Pause</button>
+      <button type="button" class="lv-btn" id="btn-more">More filters</button>
+      <button type="button" class="lv-btn" id="btn-clear">Clear</button>
     </div>
   </div>
+  <div class="section-card-body" style="padding:.75rem 1.1rem">
+    <form id="filter-form" autocomplete="off" onsubmit="return false">
+      <div class="row g-2">
+        <div class="col-12 col-md-6 col-xl-3"><label class="form-label" for="f-path">Path / query</label><input class="form-control" id="f-path" name="path" placeholder="/wiki/, !/static/"><div class="lv-err" data-err="path"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-ip">IP / CIDR</label><input class="form-control" id="f-ip" name="ip" placeholder="203.0.113.0/24"><div class="lv-err" data-err="ip"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-host">Host</label><input class="form-control" id="f-host" name="host" placeholder="archives-"><div class="lv-err" data-err="host"></div></div>
+        <div class="col-12 col-md-6 col-xl-3"><label class="form-label" for="f-ua">User agent</label><input class="form-control" id="f-ua" name="ua" placeholder="bot, !Chrome"><div class="lv-err" data-err="ua"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-group">Agent type</label>
+          <select class="form-select" id="f-group" name="group">
+            <option value="">Any</option>
+            <option value="AI Crawlers">AI crawlers</option>
+            <option value="Search Engines">Search engines</option>
+            <option value="SEO / Other Bots">SEO / other bots</option>
+            <option value="Generic Scrapers">Generic scrapers</option>
+            <option value="AI Crawlers,Search Engines,SEO / Other Bots,Generic Scrapers">Any bot</option>
+            <option value="Other / Browser">Browser UA</option>
+            <option value="(empty user agent)">Empty UA</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-status">Status</label><input class="form-control" id="f-status" name="status" placeholder="4xx, 5xx, !404"><div class="lv-err" data-err="status"></div></div>
+        <div class="col-6 col-md-3 col-xl-1"><label class="form-label" for="f-min_ms">Slower than</label><input class="form-control" id="f-min_ms" name="min_ms" type="number" min="0" step="50" placeholder="ms"><div class="lv-err" data-err="min_ms"></div></div>
+        <div class="col-6 col-md-3 col-xl-1"><label class="form-label" for="f-method">Method</label>
+          <select class="form-select" id="f-method" name="method">
+            <option value="">Any</option><option>GET</option><option>HEAD</option><option>POST</option>
+            <option value="PUT,PATCH,DELETE,OPTIONS,CONNECT,TRACE,PROPFIND">Other</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-tls">TLS</label>
+          <select class="form-select" id="f-tls" name="tls">
+            <option value="">Any</option><option>TLSv1.3</option><option>TLSv1.2</option>
+            <option value="TLSv1,TLSv1.1">TLS 1.0 / 1.1</option><option value="plain">Plain HTTP</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-1"><label class="form-label" for="f-proto">HTTP</label>
+          <select class="form-select" id="f-proto" name="proto">
+            <option value="">Any</option><option value="HTTP/2.0">h2</option><option value="HTTP/1.1">1.1</option><option value="HTTP/1.0">1.0</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-ja4">JA4</label><input class="form-control" id="f-ja4" name="ja4" placeholder="t13d1516h2_"><div class="lv-err" data-err="ja4"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-route">Route</label>
+          <select class="form-select" id="f-route" name="route">
+            <option value="">Any</option><option>django</option><option>acpwb_go</option><option>static</option>
+            <option>redirect</option><option>ws</option><option value="botseed_ws,botseed_api,botseed_static">botseed</option><option>acme</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-error">Error</label>
+          <select class="form-select" id="f-error" name="error">
+            <option value="">Any</option><option value="*">Any error</option>
+            <option>client_closed</option><option>upstream_error</option><option>upstream_timeout</option>
+            <option>rejected</option><option>incomplete</option><option>h2_not_served</option>
+            <option>plain_on_tls</option><option>overload</option><option>write_failed</option><option>body_too_large</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2 d-flex align-items-end">
+          <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="f-new_client" name="new_client"><label class="form-check-label" for="f-new_client" style="font-size:.76rem">New clients only</label></div>
+        </div>
+      </div>
+      <div class="row g-2 mt-0" id="more-filters" hidden>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-agent">Agent name</label><input class="form-control" id="f-agent" name="agent" placeholder="GPTBot"><div class="lv-err" data-err="agent"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-ja4h">JA4H</label><input class="form-control" id="f-ja4h" name="ja4h"><div class="lv-err" data-err="ja4h"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-ja3">JA3</label><input class="form-control" id="f-ja3" name="ja3"><div class="lv-err" data-err="ja3"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-h2">HTTP/2 fingerprint</label><input class="form-control" id="f-h2" name="h2"><div class="lv-err" data-err="h2"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-cipher">TLS cipher</label><input class="form-control" id="f-cipher" name="cipher" placeholder="CBC"><div class="lv-err" data-err="cipher"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-referer">Referer</label><input class="form-control" id="f-referer" name="referer"><div class="lv-err" data-err="referer"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-lang">Accept-Language</label><input class="form-control" id="f-lang" name="lang"><div class="lv-err" data-err="lang"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-ctype">Content type</label><input class="form-control" id="f-ctype" name="ctype" placeholder="text/html"><div class="lv-err" data-err="ctype"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-client">Client ID</label><input class="form-control" id="f-client" name="client"><div class="lv-err" data-err="client"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-conn">Connection ID</label><input class="form-control" id="f-conn" name="conn"><div class="lv-err" data-err="conn"></div></div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-rows">Table rows / sec</label>
+          <select class="form-select" id="f-rows" name="rows">
+            <option value="25">25</option><option value="100" selected>100</option><option value="250">250</option><option value="500">500</option><option value="0">None (stats only)</option>
+          </select>
+        </div>
+      </div>
+      <div class="lv-help mt-2">
+        Comma-separated terms match any; <code>!term</code> excludes; <code>*</code> wildcards the whole value;
+        <code>~regex</code> for a regular expression. IPs match by prefix or CIDR. Status: <code>404</code>, <code>4xx</code>, <code>500-599</code>, <code>!304</code>.
+        Click any breakdown entry to filter on it, or shift-click to exclude it.
+        <span id="lv-error-global" style="color:#dc2626"></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-6 col-md-3 col-xl">
+    <div class="stat-card"><div class="label">Requests / sec</div><div class="value" id="s-rps">—</div><div class="sub" id="s-rps-sub">all traffic</div></div>
+  </div>
+  <div class="col-6 col-md-3 col-xl">
+    <div class="stat-card"><div class="label">Matching / sec</div><div class="value" id="s-match">—</div><div class="sub" id="s-match-sub">&nbsp;</div></div>
+  </div>
+  <div class="col-6 col-md-3 col-xl">
+    <div class="stat-card"><div class="label">Latency p50 / p95</div><div class="value sm" id="s-lat">—</div><div class="sub" id="s-lat-sub">&nbsp;</div></div>
+  </div>
+  <div class="col-6 col-md-3 col-xl">
+    <div class="stat-card"><div class="label">Errors (4xx / 5xx)</div><div class="value sm" id="s-err">—</div><div class="sub" id="s-err-sub">&nbsp;</div></div>
+  </div>
+  <div class="col-6 col-md-3 col-xl">
+    <div class="stat-card"><div class="label">Bandwidth</div><div class="value sm" id="s-bw">—</div><div class="sub" id="s-bw-sub">&nbsp;</div></div>
+  </div>
+  <div class="col-6 col-md-3 col-xl">
+    <div class="stat-card"><div class="label">Connections / sec</div><div class="value sm" id="s-conn">—</div><div class="sub" id="s-conn-sub">&nbsp;</div></div>
+  </div>
+  <div class="col-6 col-md-3 col-xl">
+    <div class="stat-card"><div class="label">Unique IPs</div><div class="value sm" id="s-ips">—</div><div class="sub" id="s-ips-sub">&nbsp;</div></div>
+  </div>
 </div>
 
 <div class="section-card mb-3">
-  <div class="section-card-header" style="justify-content:space-between">
-    <h6>Requests / sec</h6>
+  <div class="section-card-header">
+    <h6>Requests / sec <small id="sampled-badge" hidden><span class="lv-badge warn" title="The edge caps each one-second bundle; totals are exact, matched counts and breakdowns are from the capped sample.">sampled</span></small></h6>
+    <div class="lv-legend">
+      <span><i style="background:#94a3b8"></i>All</span>
+      <span><i style="background:#C9A84C"></i>Matching</span>
+      <span><i style="background:#dc2626"></i>Errors</span>
+      <span id="hist-span">last 10 min</span>
+    </div>
   </div>
   <div class="section-card-body" style="padding:.75rem 1.1rem">
-    <canvas id="rps-canvas" style="width:100%;height:80px;display:block"></canvas>
+    <canvas id="rps-canvas" style="width:100%;height:90px;display:block"></canvas>
   </div>
 </div>
 
-<div class="section-card mb-3" style="padding:.75rem 1.1rem">
-  <span style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--navy)">Total transferred</span>
-  <span id="bytes-total" style="margin-left:1rem;font-size:1.1rem;font-weight:900;color:var(--navy)">0 B</span>
-  <span style="margin-left:.5rem;font-size:.72rem;color:var(--muted)">(uncompressed — pre-gzip Django response size)</span>
+<div class="d-flex align-items-baseline justify-content-between mb-2">
+  <h6 style="margin:0;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--navy)">Breakdown <small id="window-label" style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--muted)"></small></h6>
+  <span class="lv-help" id="conn-note"></span>
+</div>
+<div class="row g-3 mb-3" id="tops">
+  {% comment %}Filled from TOPS in the script.{% endcomment %}
 </div>
 
 <div class="section-card mb-3">
-  <div class="section-card-header" style="justify-content:space-between">
-    <h6>Incoming Requests</h6>
-    <span id="ws-status" style="font-size:.72rem;font-weight:700;color:var(--muted)">Connecting…</span>
+  <div class="section-card-header">
+    <h6>Requests <small id="rows-note" style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--muted)"></small></h6>
+    <span class="lv-status" id="pause-note"></span>
   </div>
   <div class="section-card-body" style="padding:0">
-    <div style="overflow-x:auto">
+    <div style="overflow:auto;max-height:75vh">
       <table class="table dash-table mb-0" id="stream-table">
         <thead>
           <tr>
-            <th style="width:6rem">Time</th>
-            <th style="width:5rem">Method</th>
-            <th style="width:3rem">Status</th>
-            <th style="width:8rem">IP</th>
-            <th style="width:10rem">Host</th>
+            <th style="width:6.5rem">Time</th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>IP</th>
+            <th>Host</th>
             <th>Path</th>
-            <th style="width:5rem">ms</th>
-            <th style="width:5rem">bytes</th>
-            <th>Bot / Browser</th>
+            <th class="text-end">ms</th>
+            <th class="text-end">TTFB</th>
+            <th class="text-end">Bytes</th>
+            <th>Proto / TLS</th>
+            <th>JA4</th>
+            <th>Agent</th>
           </tr>
         </thead>
         <tbody id="stream-body">
-          <tr id="waiting-row">
-            <td colspan="9" style="text-align:center;color:var(--muted);padding:2rem">Waiting for requests…</td>
-          </tr>
+          <tr id="waiting-row"><td colspan="12" style="text-align:center;color:var(--muted);padding:2rem">Waiting for requests…</td></tr>
         </tbody>
       </table>
     </div>
@@ -63,257 +222,461 @@
 
 <script>
 (function () {
+  "use strict";
   const token = "{{ ws_token|escapejs }}";
   const proto = location.protocol === "https:" ? "wss:" : "ws:";
   const url = proto + "//" + location.host + "/ws/requests/" + (token ? "?token=" + encodeURIComponent(token) : "");
 
-  const statusEl   = document.getElementById("ws-status");
-  const tbody      = document.getElementById("stream-body");
-  const waitingRow = document.getElementById("waiting-row");
-  const MAX_ROWS   = 200;
+  const $ = (id) => document.getElementById(id);
+  const form = $("filter-form");
+  const tbody = $("stream-body");
+  const MAX_TABLE_ROWS = 500;
+  const HISTORY = 600; // seconds on the sparkline
 
-  // RPS tracking — ring buffer of arrival timestamps (ms), max 1 min window
-  const WINDOW_MS = 60 * 1000;
-  const timestamps = [];  // sorted ascending
+  // ---- formatting -------------------------------------------------------
+  const ESC = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"};
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ESC[c]);
+  const fmtNum = (n) => n == null ? "—" : n >= 10000 ? (n / 1000).toFixed(1) + "k" : String(Math.round(n * 10) / 10);
+  function fmtBytes(b) {
+    if (b >= 1073741824) return (b / 1073741824).toFixed(2) + " GB";
+    if (b >= 1048576) return (b / 1048576).toFixed(1) + " MB";
+    if (b >= 1024) return (b / 1024).toFixed(1) + " KB";
+    return (b || 0) + " B";
+  }
+  const fmtMs = (ms) => ms == null ? "—" : ms >= 1000 ? (ms / 1000).toFixed(2) + "s" : (ms >= 10 ? Math.round(ms) : ms.toFixed(1)) + "ms";
+  const statusColor = (c) => !c ? "#6B7280" : c < 300 ? "#16a34a" : c < 400 ? "#2563eb" : c < 500 ? "#d97706" : "#dc2626";
+  const METHOD_COLORS = {GET: "#6B7280", HEAD: "#6B7280", POST: "#2563eb", PUT: "#d97706", PATCH: "#7c3aed", DELETE: "#dc2626"};
+  const pct = (n, d) => d ? Math.round(n / d * 1000) / 10 + "%" : "—";
 
-  const rps1El = document.getElementById("rps-1");
-  const bytesEl = document.getElementById("bytes-total");
-  let totalBytes = 0;
+  // ---- filter form <-> spec <-> URL hash -------------------------------
+  const SET_FIELDS = ["method", "proto", "tls", "route", "group", "error"];
 
-  // Sparkline
-  const HISTORY = 1200;  // 10 minutes of per-second buckets
-  const rpsHistory = new Array(HISTORY).fill(0);
-  const canvas = document.getElementById("rps-canvas");
+  function readSpec() {
+    const spec = {};
+    for (const el of form.elements) {
+      if (!el.name || el.name === "rows") continue;
+      if (el.type === "checkbox") { if (el.checked) spec[el.name] = true; continue; }
+      const v = el.value.trim();
+      if (!v) continue;
+      spec[el.name] = SET_FIELDS.includes(el.name) ? v.split(",") : v;
+    }
+    return spec;
+  }
+
+  function writeHash() {
+    const p = new URLSearchParams();
+    for (const el of form.elements) {
+      if (!el.name) continue;
+      if (el.type === "checkbox") { if (el.checked) p.set(el.name, "1"); }
+      else if (el.value.trim() && !(el.name === "rows" && el.value === "100")) p.set(el.name, el.value.trim());
+    }
+    const h = p.toString();
+    history.replaceState(null, "", h ? "#" + h : location.pathname + location.search);
+  }
+
+  function ensureOption(sel, value) {
+    if (![...sel.options].some((o) => o.value === value)) {
+      sel.add(new Option(value, value));
+    }
+  }
+
+  function readHash() {
+    const p = new URLSearchParams(location.hash.slice(1));
+    let more = false;
+    for (const el of form.elements) {
+      if (!el.name || !p.has(el.name)) continue;
+      const v = p.get(el.name);
+      if (el.type === "checkbox") el.checked = v === "1";
+      else { if (el.tagName === "SELECT") ensureOption(el, v); el.value = v; }
+      if (el.closest("#more-filters")) more = true;
+    }
+    if (more) toggleMore(true);
+  }
+
+  function toggleMore(show) {
+    const box = $("more-filters");
+    box.hidden = show === undefined ? !box.hidden : !show;
+    $("btn-more").classList.toggle("on", !box.hidden);
+  }
+
+  function clearErrors() {
+    for (const el of form.querySelectorAll(".is-invalid")) el.classList.remove("is-invalid");
+    for (const el of form.querySelectorAll("[data-err]")) el.textContent = "";
+    $("lv-error-global").textContent = "";
+  }
+
+  function showError(field, message) {
+    const el = form.elements[field];
+    const slot = form.querySelector('[data-err="' + field + '"]');
+    if (el) el.classList.add("is-invalid");
+    if (slot) slot.textContent = message;
+    else $("lv-error-global").textContent = message;
+  }
+
+  let ws = null;
+  let sendTimer = null;
+  function sendFilter() {
+    clearTimeout(sendTimer);
+    writeHash();
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    ws.send(JSON.stringify({type: "filter", filter: readSpec(), max_rows: parseInt(form.elements.rows.value, 10)}));
+    resetWindowView();
+  }
+  const sendFilterSoon = () => { clearTimeout(sendTimer); sendTimer = setTimeout(sendFilter, 350); };
+
+  form.addEventListener("input", (e) => { if (e.target.tagName === "INPUT" && e.target.type !== "checkbox") sendFilterSoon(); });
+  form.addEventListener("change", (e) => { if (e.target.tagName === "SELECT" || e.target.type === "checkbox") sendFilter(); });
+  form.addEventListener("keydown", (e) => { if (e.key === "Enter") sendFilter(); });
+  $("btn-clear").addEventListener("click", () => {
+    for (const el of form.elements) {
+      if (!el.name || el.name === "rows") continue;
+      if (el.type === "checkbox") el.checked = false; else el.value = "";
+    }
+    sendFilter();
+  });
+  $("btn-more").addEventListener("click", () => toggleMore());
+
+  // Set (or, with exclude, add an exclusion to) a filter field.
+  function applyFilter(field, value, exclude) {
+    const el = form.elements[field];
+    if (!el) return;
+    if (el.tagName === "SELECT") {
+      if (exclude) return;
+      ensureOption(el, value);
+      el.value = value;
+    } else if (exclude) {
+      // Terms can't be mixed with a ~regex expression; an exclusion replaces one.
+      const cur = el.value.trim();
+      el.value = (cur && !cur.startsWith("~") ? cur + ", " : "") + "!" + value;
+    } else {
+      el.value = value;
+    }
+    if (el.closest("#more-filters")) toggleMore(true);
+    sendFilter();
+  }
+
+  const reEscape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // The filter term that selects exactly this breakdown value (an exclusion
+  // can't be a regex, so paths and agents are excluded by substring).
+  function termFor(field, value, exclude) {
+    if (field === "ip") return value.endsWith(".xxx") ? value.slice(0, -3) : value + (value.includes(":") ? "/128" : "/32");
+    if (exclude) return value;
+    if (field === "path") return "~^" + reEscape(value) + "(\\?|$)";
+    if (field === "agent") return "~^" + reEscape(value) + "$";
+    return value;
+  }
+
+  // ---- breakdown panels --------------------------------------------------
+  // [server dimension, title, filter field (or null), denominator]
+  const TOPS = [
+    ["path", "Paths", "path", "req"],
+    ["ip", "IP addresses", "ip", "req"],
+    ["agent", "Agents", "agent", "req"],
+    ["group", "Agent types", "group", "req"],
+    ["status", "Status codes", "status", "req"],
+    ["host", "Hosts", "host", "req"],
+    ["tls", "TLS versions", "tls", "req"],
+    ["proto", "HTTP versions", "proto", "req"],
+    ["route", "Routes", "route", "req"],
+    ["ja4", "JA4", "ja4", "req"],
+    ["ja4h", "JA4H", "ja4h", "req"],
+    ["h2", "HTTP/2 fingerprints", "h2", "req"],
+    ["error", "Request errors", "error", "req"],
+    ["method", "Methods", "method", "req"],
+    ["outcome", "Connection outcomes", null, "conns"],
+    ["close", "Close reasons", null, "conns"],
+    ["fail_ja4", "Failed-handshake JA4s", "ja4", "conns"],
+    ["fail_ip", "Failed-handshake IPs", "ip", "conns"],
+  ];
+  const topsEl = $("tops");
+  topsEl.innerHTML = TOPS.map(([dim, title]) =>
+    '<div class="col-12 col-md-6 col-xl-4 col-xxl-3"><div class="section-card lv-top-card mb-0">' +
+    '<div class="section-card-header"><h6>' + esc(title) + ' <small data-total="' + dim + '"></small></h6></div>' +
+    '<div class="section-card-body lv-top" data-top="' + dim + '"><div class="empty">—</div></div></div></div>'
+  ).join("");
+  const topBodies = Object.fromEntries(TOPS.map(([dim]) => [dim, topsEl.querySelector('[data-top="' + dim + '"]')]));
+  const topTotals = Object.fromEntries(TOPS.map(([dim]) => [dim, topsEl.querySelector('[data-total="' + dim + '"]')]));
+
+  topsEl.addEventListener("click", (e) => {
+    const k = e.target.closest(".k[data-field]");
+    if (!k) return;
+    applyFilter(k.dataset.field, termFor(k.dataset.field, k.dataset.value, e.shiftKey), e.shiftKey);
+  });
+
+  function renderTops(win) {
+    $("window-label").textContent = "— last " + win.seconds + "s, " + fmtNum(win.req) + " matching requests, " + fmtNum(win.conns) + " connections";
+    for (const [dim, , field, denomKey] of TOPS) {
+      const items = win.top[dim] || [];
+      const denom = win[denomKey] || 0;
+      const body = topBodies[dim];
+      topTotals[dim].textContent = dim === "ip" ? "(" + win.top.unique_ips + " unique)" : dim === "path" ? "(" + win.top.unique_paths + " unique)" : "";
+      if (!items.length) { body.innerHTML = '<div class="empty">none</div>'; continue; }
+      const max = items[0][1] || 1;
+      let html = "";
+      for (const [key, n] of items) {
+        const label = key === "" ? "(none)" : key;
+        const attrs = field && key !== "" ? ' data-field="' + field + '" data-value="' + esc(key) + '"' : "";
+        html += '<div class="row-item"><span class="k"' + attrs + ' title="' + esc(label) + '">' + esc(label) + '</span>' +
+          '<div class="bar-track"><div class="bar-fill' + (denomKey === "conns" ? " navy" : "") + '" style="width:' + (n / max * 100).toFixed(1) + '%"></div></div>' +
+          '<span class="n" title="' + n + '">' + pct(n, denom) + '</span></div>';
+      }
+      body.innerHTML = html;
+    }
+  }
+
+  function resetWindowView() {
+    for (const dim in topBodies) topBodies[dim].innerHTML = '<div class="empty">—</div>';
+    $("window-label").textContent = "";
+    matchHistory.fill(0);
+    errHistory.fill(0);
+  }
+
+  // ---- sparkline ----------------------------------------------------------
+  const allHistory = new Array(HISTORY).fill(0);
+  const matchHistory = new Array(HISTORY).fill(0);
+  const errHistory = new Array(HISTORY).fill(0);
+  const canvas = $("rps-canvas");
   const ctx = canvas.getContext("2d");
 
   function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
-    canvas.width  = rect.width  * devicePixelRatio;
+    canvas.width = rect.width * devicePixelRatio;
     canvas.height = rect.height * devicePixelRatio;
     drawSparkline();
   }
 
-  function drawSparkline() {
+  function drawSeries(series, max, color, fill) {
     const w = canvas.width, h = canvas.height;
-    ctx.clearRect(0, 0, w, h);
-    const max = Math.max(...rpsHistory, 1);
     const step = w / (HISTORY - 1);
-    const points = rpsHistory.map((v, i) => ({
-      x: i * step,
-      y: h - (v / max) * h * 0.88,
-    }));
-
+    const y = (v) => h - (v / max) * h * 0.9;
     ctx.beginPath();
-    ctx.moveTo(points[0].x, h);
-    points.forEach(p => ctx.lineTo(p.x, p.y));
-    ctx.lineTo(points[points.length - 1].x, h);
-    ctx.closePath();
-    ctx.fillStyle = "rgba(10, 22, 40, 0.08)";
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, points[0].y);
-    points.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
-    ctx.strokeStyle = "#0A1628";
+    ctx.moveTo(0, y(series[0]));
+    for (let i = 1; i < series.length; i++) ctx.lineTo(i * step, y(series[i]));
+    if (fill) {
+      ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
+      ctx.fillStyle = fill; ctx.fill();
+      return;
+    }
+    ctx.strokeStyle = color;
     ctx.lineWidth = 1.5 * devicePixelRatio;
     ctx.lineJoin = "round";
     ctx.stroke();
   }
 
+  function drawSparkline() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    let max = 1;
+    for (const v of allHistory) if (v > max) max = v;
+    drawSeries(allHistory, max, null, "rgba(148, 163, 184, .25)");
+    drawSeries(allHistory, max, "#94a3b8");
+    drawSeries(matchHistory, max, "#C9A84C");
+    drawSeries(errHistory, max, "#dc2626");
+    ctx.fillStyle = "#6B7280";
+    ctx.font = (10 * devicePixelRatio) + "px system-ui, sans-serif";
+    ctx.fillText(fmtNum(max) + "/s", 4 * devicePixelRatio, 12 * devicePixelRatio);
+  }
+
+  function pushHistory(arr, v) { arr.push(v); if (arr.length > HISTORY) arr.shift(); }
+
   new ResizeObserver(resizeCanvas).observe(canvas);
-  resizeCanvas();
 
-  function formatBytes(b) {
-    if (b >= 1073741824) return (b / 1073741824).toFixed(2) + ' GB';
-    if (b >= 1048576)    return (b / 1048576).toFixed(2) + ' MB';
-    if (b >= 1024)       return (b / 1024).toFixed(1) + ' KB';
-    return b + ' B';
+  // ---- request table ------------------------------------------------------
+  let paused = false;
+  let skippedWhilePaused = 0;
+  const rowData = new Map(); // request_id -> record, for detail rows
+  $("btn-pause").addEventListener("click", () => {
+    paused = !paused;
+    $("btn-pause").classList.toggle("on", paused);
+    $("btn-pause").textContent = paused ? "Resume" : "Pause";
+    if (!paused) skippedWhilePaused = 0;
+    $("pause-note").textContent = paused ? "Paused" : "";
+  });
+
+  function shortProto(r) {
+    const p = r.protocol === "HTTP/2.0" ? "h2" : (r.protocol || "").replace("HTTP/", "h");
+    const t = r.tls ? (r.tls_version || "TLS?").replace("TLSv", "") : "plain";
+    return p + " · " + t;
   }
 
-  function updateRPS() {
-    const now = Date.now();
-    while (timestamps.length && now - timestamps[0] > WINDOW_MS) timestamps.shift();
-    const cutoff = now - 1000;
-    let lo = 0, hi = timestamps.length;
-    while (lo < hi) { const mid = (lo + hi) >> 1; if (timestamps[mid] < cutoff) lo = mid + 1; else hi = mid; }
-    const current = timestamps.length - lo;
-    rps1El.textContent = current;
-    rpsHistory.push(current);
-    if (rpsHistory.length > HISTORY) rpsHistory.shift();
-    drawSparkline();
+  function rowHtml(r, key) {
+    const time = r.timestamp ? r.timestamp.slice(11, 23) : "";
+    const ms = r._ms || 0;
+    const msClass = ms >= 5000 ? "num very-slow" : ms >= 1000 ? "num slow" : "num";
+    const err = r.error ? ' <span class="lv-badge err">' + esc(r.error) + "</span>" : "";
+    const isNew = r.new_client ? ' <span class="lv-badge" title="This response issued the client cookie">new</span>' : "";
+    return '<tr class="req" data-key="' + esc(key) + '">' +
+      '<td class="num" style="text-align:left">' + esc(time) + "</td>" +
+      '<td><span style="font-weight:700;color:' + (METHOD_COLORS[r.method] || "#6B7280") + '">' + esc(r.method) + "</span></td>" +
+      '<td><span style="font-weight:700;color:' + statusColor(r.status) + '">' + esc(r.status || "—") + "</span>" + err + "</td>" +
+      '<td class="mono">' + esc(r.ip_address) + "</td>" +
+      '<td style="max-width:10rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(r.host) + '">' + esc(r.host) + "</td>" +
+      '<td class="path">' + esc(r._url) + isNew + "</td>" +
+      '<td class="' + msClass + '">' + fmtMs(ms) + "</td>" +
+      '<td class="num">' + (r.ttfb_us ? fmtMs(r.ttfb_us / 1000) : "—") + "</td>" +
+      '<td class="num">' + fmtBytes(r.response_bytes) + "</td>" +
+      '<td style="white-space:nowrap">' + esc(shortProto(r)) + "</td>" +
+      '<td class="mono" style="white-space:nowrap" title="' + esc(r.ja4) + '">' + esc((r.ja4 || "").split("_")[0]) + "</td>" +
+      '<td style="white-space:nowrap;color:var(--muted)" title="' + esc(r.user_agent) + '">' + esc(r._agent) + "</td>" +
+      "</tr>";
   }
 
-  setInterval(updateRPS, 1000);
-
-  function statusLabel(code) {
-    if (code < 300) return '<span style="color:#16a34a;font-weight:700">' + code + '</span>';
-    if (code < 400) return '<span style="color:#2563eb;font-weight:700">' + code + '</span>';
-    if (code < 500) return '<span style="color:#d97706;font-weight:700">' + code + '</span>';
-    return '<span style="color:#dc2626;font-weight:700">' + code + '</span>';
+  let rowSeq = 0;
+  function addRows(rows) {
+    if (!rows.length) return;
+    const waiting = $("waiting-row");
+    if (waiting) waiting.remove();
+    let html = "";
+    // Newest first, as before.
+    for (let i = rows.length - 1; i >= 0; i--) {
+      const key = String(++rowSeq);
+      rowData.set(key, rows[i]);
+      html += rowHtml(rows[i], key);
+    }
+    tbody.insertAdjacentHTML("afterbegin", html);
+    while (tbody.rows.length > MAX_TABLE_ROWS) {
+      const last = tbody.rows[tbody.rows.length - 1];
+      if (last.dataset.key) rowData.delete(last.dataset.key);
+      last.remove();
+    }
   }
 
-  function methodLabel(m) {
-    const colors = {GET:"#6B7280",POST:"#2563eb",PUT:"#d97706",PATCH:"#7c3aed",DELETE:"#dc2626"};
-    const c = colors[m] || "#6B7280";
-    return '<span style="color:' + c + ';font-weight:700">' + m + '</span>';
-  }
-
-  // Mirror Python BOT_PATTERNS: [substring, shortLabel]
-  const UA_PATTERNS = [
-    ['GPTBot',                'GPTBot'],
-    ['OAI-SearchBot',         'OAI-Search'],
-    ['ChatGPT-User',          'ChatGPT'],
-    ['ClaudeBot',             'ClaudeBot'],
-    ['Claude-Web',            'Claude-Web'],
-    ['anthropic-ai',          'Anthropic'],
-    ['PerplexityBot',         'Perplexity'],
-    ['Google-Extended',       'Google-Ext'],
-    ['meta-externalagent',    'Meta-Agent'],
-    ['FacebookBot',           'FacebookBot'],
-    ['Applebot-Extended',     'Applebot-Ext'],
-    ['Bytespider',            'Bytespider'],
-    ['Amazonbot',             'Amazonbot'],
-    ['Diffbot',               'Diffbot'],
-    ['omgili',                'Omgili'],
-    ['webzio-extended',       'Webzio'],
-    ['CCBot',                 'CCBot'],
-    ['cohere-ai',             'Cohere'],
-    ['Timpibot',              'Timpibot'],
-    ['Nexus 5X Build/MMB29P', 'Googlebot/M'],
-    ['Googlebot',             'Googlebot'],
-    ['GoogleOther',           'GoogleOther'],
-    ['bingbot',               'Bingbot'],
-    ['BingPreview',           'BingPreview'],
-    ['msnbot',                'msnbot'],
-    ['Baiduspider',           'Baidu'],
-    ['YandexBot',             'Yandex'],
-    ['Slurp',                 'Yahoo'],
-    ['DuckDuckBot',           'DuckDuck'],
-    ['Applebot',              'Applebot'],
-    ['sogou',                 'Sogou'],
-    ['360Spider',             '360Spider'],
-    ['SeznamBot',             'Seznam'],
-    ['SemrushBot',            'Semrush'],
-    ['AhrefsBot',             'Ahrefs'],
-    ['MJ12bot',               'MJ12'],
-    ['DotBot',                'DotBot'],
-    ['DataForSeoBot',         'DataForSEO'],
-    ['PetalBot',              'PetalBot'],
-    ['PiplBot',               'Pipl'],
-    ['SERankingBacklinksBot', 'SERANKBot'],
-    ['ZoominfoBot',           'Zoominfo'],
-    ['BitSightBot',           'BitSight'],
-    ['zgrab',                 'zgrab'],
-    ['Twitterbot',            'Twitter'],
-    ['facebookexternalhit',   'FB-Scraper'],
-    ['LinkedInBot',           'LinkedIn'],
-    ['ia_archiver',           'Archive.org'],
-    ['archive.org_bot',       'Archive.org'],
-    ['python-requests',       'py-requests'],
-    ['curl/',                 'curl'],
-    ['wget',                  'wget'],
-    ['scrapy',                'scrapy'],
-    ['Go-http-client',        'go-http'],
-    ['Java/',                 'java-http'],
-    ['libwww-perl',           'libwww'],
-    ['axios',                 'axios'],
-    ['node-fetch',            'node-fetch'],
-    ['okhttp',                'okhttp'],
-    ['httpx',                 'httpx'],
-    ['aiohttp',               'aiohttp'],
-    ['Faraday',               'faraday'],
+  // [label, record key, filter field (or null), formatter]
+  const DETAIL = [
+    ["URL", "_url", "path"], ["Host", "host", "host"], ["IP", "ip_address", "ip"],
+    ["User agent", "user_agent", "ua"], ["Agent", "_agent", "agent"], ["Agent type", "_group", "group"],
+    ["Referer", "referer", "referer"], ["Accept-Language", "accept_language", "lang"],
+    ["Status / route", (r) => (r.status || "—") + " via " + (r.route || "—") + (r.error ? " (" + r.error + ")" : "")],
+    ["Content type", "content_type", "ctype"],
+    ["Timing", (r) => "total " + fmtMs(r._ms) + ", TTFB " + (r.ttfb_us ? fmtMs(r.ttfb_us / 1000) : "—")],
+    ["Bytes", (r) => fmtBytes(r.request_bytes) + " in, " + fmtBytes(r.response_bytes) + " out"],
+    ["Protocol", (r) => (r.protocol || "") + (r.tls ? " over " + (r.tls_version || "TLS") : " (plain)") + (r.alpn ? ", ALPN " + r.alpn : "") + (r.sni ? ", SNI " + r.sni : "")],
+    ["TLS cipher", "tls_cipher", "cipher"],
+    ["JA4", "ja4", "ja4"], ["JA3", "ja3", "ja3"], ["JA4H", "ja4h", "ja4h"], ["HTTP/2 fp", "h2_fingerprint", "h2"],
+    ["Header order", "header_names", null],
+    ["Client ID", (r) => (r.client_id || "—") + (r.new_client ? " (new)" : ""), "client", "client_id"],
+    ["Connection", (r) => (r.conn_id || "—") + " · request #" + (r.seq || "?"), "conn", "conn_id"],
+    ["Request ID", "request_id", null],
   ];
 
-  function classifyUA(ua) {
-    if (!ua) return '(empty)';
-    const lower = ua.toLowerCase();
-    for (const [pat, label] of UA_PATTERNS) {
-      if (lower.includes(pat.toLowerCase())) return label;
+  function detailHtml(r) {
+    let html = "<dl>";
+    for (const [label, key, field, rawKey] of DETAIL) {
+      const v = typeof key === "function" ? key(r) : r[key];
+      if (v === undefined || v === null || v === "") continue;
+      const fv = rawKey ? r[rawKey] : typeof key === "string" ? r[key] : null;
+      const link = field && fv ? '<a data-field="' + field + '" data-value="' + esc(fv) + '">filter</a>' : "";
+      html += "<dt>" + esc(label) + '</dt><dd class="mono">' + esc(v) + link + "</dd>";
     }
-    // Browser fallback
-    if (lower.includes('edg/'))    return 'Edge';
-    if (lower.includes('chrome/')) return 'Chrome';
-    if (lower.includes('firefox/')) return 'Firefox';
-    if (lower.includes('safari/')) return 'Safari';
-    return 'Browser';
+    return html + "</dl>";
   }
 
-  function mkTd(text, style) {
-    const td = document.createElement("td");
-    if (style) td.setAttribute("style", style);
-    td.textContent = text;
-    return td;
+  tbody.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-field]");
+    if (a) { applyFilter(a.dataset.field, termFor(a.dataset.field, a.dataset.value, e.shiftKey), e.shiftKey); return; }
+    const tr = e.target.closest("tr.req");
+    if (!tr) return;
+    const next = tr.nextElementSibling;
+    if (next && next.classList.contains("lv-detail")) { next.remove(); tr.classList.remove("open"); return; }
+    const r = rowData.get(tr.dataset.key);
+    if (!r) return;
+    tr.classList.add("open");
+    tr.insertAdjacentHTML("afterend", '<tr class="lv-detail"><td colspan="12">' + detailHtml(r) + "</td></tr>");
+  });
+
+  // ---- ticks ---------------------------------------------------------------
+  function setText(id, text) { const el = $(id); if (el.textContent !== text) el.textContent = text; }
+
+  function onTick(t) {
+    if (t.stale) {
+      setText("ws-status", "Live — no data from the edge");
+      $("ws-status").style.color = "#d97706";
+      return;
+    }
+    setText("ws-status", "Live");
+    $("ws-status").style.color = "#16a34a";
+    const a = t.all, m = t.match;
+    const filtered = Object.keys(readSpec()).length > 0;
+    const errs = (m.status["4xx"] || 0) + (m.status["5xx"] || 0);
+
+    pushHistory(allHistory, a.req);
+    pushHistory(matchHistory, filtered ? m.req : 0);
+    pushHistory(errHistory, errs);
+
+    $("sampled-badge").hidden = !t.sampled;
+    setText("s-rps", fmtNum(a.req));
+    setText("s-rps-sub", t.sampled ? "all traffic (" + a.req_sent + " sampled)" : "all traffic");
+    setText("s-match", filtered ? fmtNum(m.req) : "—");
+    setText("s-match-sub", filtered ? pct(m.req, a.req_sent) + " of traffic" : "no filter");
+    setText("s-lat", m.p50 == null ? "—" : fmtMs(m.p50) + " / " + fmtMs(m.p95));
+    setText("s-lat-sub", m.p50 == null ? " " : "p99 " + fmtMs(m.p99) + ", max " + fmtMs(m.max) + ", TTFB p50 " + fmtMs(m.ttfb_p50));
+    setText("s-err", m.req ? (m.status["4xx"] || 0) + " / " + (m.status["5xx"] || 0) : "—");
+    setText("s-err-sub", m.req ? pct(errs, m.req) + " of requests" + (m.errors ? ", " + m.errors + " failed" : "") : " ");
+    setText("s-bw", fmtBytes(filtered ? m.bytes : a.bytes) + "/s");
+    setText("s-bw-sub", filtered ? "matching (all: " + fmtBytes(a.bytes) + "/s)" : "as sent, compressed");
+    setText("s-conn", fmtNum(filtered ? m.conns : a.conns));
+    setText("s-conn-sub", (filtered ? m.conn_fail : a.conn_fail) + " failed handshakes" + (filtered ? " · all " + fmtNum(a.conns) : ""));
+    setText("s-ips", fmtNum(t.window.top.unique_ips));
+    setText("s-ips-sub", m.ips + " this second · " + m.new_clients + " new clients");
+    setText("conn-note", t.conn_note ? "Connections: only those carrying a matching request" : "");
+
+    if (document.hidden) return; // keep counting, skip drawing
+    drawSparkline();
+    renderTops(t.window);
+
+    const shown = t.rows.length, total = shown + t.rows_omitted;
+    setText("rows-note", total > shown ? "— showing " + shown + " of " + total + " matching this second" : "");
+    if (paused) {
+      skippedWhilePaused += total;
+      setText("pause-note", "Paused — " + fmtNum(skippedWhilePaused) + " requests not shown");
+      return;
+    }
+    addRows(t.rows);
   }
 
-  function addRow(d) {
-    if (waitingRow && waitingRow.parentNode) waitingRow.remove();
-    const bot = classifyUA(d.user_agent);
-    const time = d.timestamp ? d.timestamp.slice(11, 23) : "";
-    const tr = document.createElement("tr");
-    tr.appendChild(mkTd(time,                    "font-variant-numeric:tabular-nums;color:var(--muted)"));
-    const tdMethod = mkTd("", null);
-    tdMethod.appendChild(Object.assign(document.createElement("span"), {
-      textContent: d.method || "",
-      style: "color:" + ({GET:"#6B7280",POST:"#2563eb",PUT:"#d97706",PATCH:"#7c3aed",DELETE:"#dc2626"}[d.method] || "#6B7280") + ";font-weight:700"
-    }));
-    tr.appendChild(tdMethod);
-    const code = d.status || 0;
-    const statusColor = code < 300 ? "#16a34a" : code < 400 ? "#2563eb" : code < 500 ? "#d97706" : "#dc2626";
-    const tdStatus = mkTd("", null);
-    tdStatus.appendChild(Object.assign(document.createElement("span"), {
-      textContent: code,
-      style: "color:" + statusColor + ";font-weight:700"
-    }));
-    tr.appendChild(tdStatus);
-    tr.appendChild(mkTd(d.ip || "",              "font-variant-numeric:tabular-nums"));
-    tr.appendChild(mkTd(d.host || "",            "max-width:10rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"));
-    tr.appendChild(mkTd(d.path || "",            "word-break:break-all"));
-    tr.appendChild(mkTd(d.response_ms ?? "",     "font-variant-numeric:tabular-nums;color:var(--muted)"));
-    tr.appendChild(mkTd(d.response_bytes ?? "",  "font-variant-numeric:tabular-nums;color:var(--muted)"));
-    const tdBot = mkTd(bot,                      "white-space:nowrap;color:var(--muted)");
-    tdBot.title = d.user_agent || "";
-    tr.appendChild(tdBot);
-    tbody.insertBefore(tr, tbody.firstChild);
-    while (tbody.rows.length > MAX_ROWS) tbody.deleteRow(tbody.rows.length - 1);
-  }
-
+  // ---- socket ----------------------------------------------------------
   function connect() {
-    statusEl.textContent = "Connecting…";
-    statusEl.style.color = "var(--muted)";
-
-    const ws = new WebSocket(url);
+    setText("ws-status", "Connecting…");
+    $("ws-status").style.color = "var(--muted)";
+    ws = new WebSocket(url);
 
     ws.onopen = function () {
-      statusEl.textContent = "Live";
-      statusEl.style.color = "#16a34a";
+      setText("ws-status", "Waiting for edge…");
+      sendFilter();
     };
 
     ws.onmessage = function (evt) {
-      let d;
-      try { d = JSON.parse(evt.data); } catch (e) { return; }
-      timestamps.push(Date.now());
-      totalBytes += (d.response_bytes || 0);
-      bytesEl.textContent = formatBytes(totalBytes);
-      addRow(d);
+      let msg;
+      try { msg = JSON.parse(evt.data); } catch (e) { return; }
+      switch (msg.type) {
+        case "tick": onTick(msg); break;
+        case "filter_ok": clearErrors(); break;
+        case "filter_error": clearErrors(); showError(msg.field, msg.message); break;
+        case "hello":
+          if (!msg.full_ips) form.elements.ip.placeholder = "203.0.113. (IPs censored)";
+          break;
+      }
     };
 
     ws.onclose = function (evt) {
       if (evt.code === 4401) {
-        statusEl.textContent = "Unauthorized";
-        statusEl.style.color = "#dc2626";
+        setText("ws-status", "Unauthorized");
+        $("ws-status").style.color = "#dc2626";
         return;
       }
-      statusEl.textContent = "Reconnecting…";
-      statusEl.style.color = "#d97706";
+      setText("ws-status", "Reconnecting…");
+      $("ws-status").style.color = "#d97706";
       setTimeout(connect, 3000);
     };
 
     ws.onerror = function () {
-      statusEl.textContent = "Error";
-      statusEl.style.color = "#dc2626";
+      setText("ws-status", "Error");
+      $("ws-status").style.color = "#dc2626";
     };
   }
 
+  readHash();
+  resizeCanvas();
   connect();
 })();
 </script>

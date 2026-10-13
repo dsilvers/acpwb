@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -868,5 +869,73 @@ func TestRapidResetConnectionIsClosed(t *testing.T) {
 	rec := e.sink.next(t)
 	if rec.CloseReason != CloseRapidReset || rec.H2Resets < 200 {
 		t.Errorf("close_reason=%q resets=%d streams=%d", rec.CloseReason, rec.H2Resets, rec.H2Streams)
+	}
+}
+
+type liveTap struct {
+	active atomic.Bool
+	mu     sync.Mutex
+	reqs   []*RequestRecord
+	tls    []ConnTLS
+	conns  []*Record
+}
+
+func (l *liveTap) Active() bool { return l.active.Load() }
+func (l *liveTap) Request(rec *RequestRecord, t ConnTLS) {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	cp := *rec
+	l.reqs, l.tls = append(l.reqs, &cp), append(l.tls, t)
+}
+func (l *liveTap) Conn(rec *Record) {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	cp := *rec
+	l.conns = append(l.conns, &cp)
+}
+
+// The live stream gets each request with its connection's TLS details,
+// every connection (before aggregation), and nothing while inactive.
+func TestLiveFeed(t *testing.T) {
+	lt := &liveTap{}
+	e := startWith(t, func(c *Config) { c.Live = lt; c.Limits.RecordsPerIPMin = 1 })
+
+	c := client(e, clientTLS("h2", "http/1.1"))
+	get := func(p string) {
+		resp, err := c.Get("https://acpwb.com" + p)
+		if err != nil {
+			t.Fatal(err)
+		}
+		io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
+	}
+	get("/unwatched/")
+	c.CloseIdleConnections()
+	e.sink.next(t)
+	lt.active.Store(true)
+	get("/wiki/a/")
+	c.CloseIdleConnections()
+	rec := e.sink.next(t)
+	for range 3 {
+		nc, _ := net.Dial("tcp", e.tlsAddr)
+		nc.Write([]byte("junk that isn't TLS"))
+		io.Copy(io.Discard, nc)
+		nc.Close()
+	}
+	e.sink.next(t)
+
+	lt.mu.Lock()
+	defer lt.mu.Unlock()
+	if len(lt.reqs) != 1 || lt.reqs[0].Path != "/wiki/a/" {
+		t.Fatalf("live requests %+v", lt.reqs)
+	}
+	ct := lt.tls[0]
+	if ct.Version != "TLSv1.3" || ct.ALPN != "h2" || ct.SNI != "acpwb.com" || !ja4Re.MatchString(ct.JA4) || ct.H2FP == "" || ct.H2FP != rec.H2FP {
+		t.Errorf("live TLS %+v (conn record %+v)", ct, rec)
+	}
+	// One conn with the request, then all three junk ones even though the
+	// gate aggregated two of them.
+	if len(lt.conns) != 4 || lt.conns[0].RequestCount != 1 || lt.conns[3].Outcome != OutcomeNoHello || lt.conns[3].Aggregated {
+		t.Errorf("live conns %d: %+v", len(lt.conns), lt.conns)
 	}
 }

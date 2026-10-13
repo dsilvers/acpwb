@@ -30,7 +30,6 @@ import (
 	"acpwb_edge/edge"
 	"acpwb_edge/edgequeue"
 	"acpwb_edge/httpfp"
-	"acpwb_edge/livefeed"
 	"acpwb_edge/proxy"
 	"acpwb_edge/router"
 )
@@ -112,20 +111,11 @@ func main() {
 
 	var sink edge.Sink
 	var queue *edgequeue.Queue
-	var live edge.Live // stays a nil interface without Redis
-	var feed *livefeed.Feed
 	if redisURL := os.Getenv("REDIS_URL"); redisURL != "" {
 		if queue, err = edgequeue.New(redisURL, envInt("EDGE_QUEUE_MAX", 1_000_000)); err != nil {
 			log.Fatalf("acpwb_edge: %v", err)
 		}
 		sink = queue
-		// The dashboard's live stream: one bundle a second while someone
-		// watches /acpwb-dashboard/live/, capped per bundle.
-		if feed, err = livefeed.New(redisURL,
-			int(envInt("EDGE_LIVE_MAX_REQUESTS", 5000)), int(envInt("EDGE_LIVE_MAX_CONNS", 2000))); err != nil {
-			log.Fatalf("acpwb_edge: %v", err)
-		}
-		live = feed
 	} else {
 		log.Printf("acpwb_edge: REDIS_URL unset — connection and request records are not being recorded")
 	}
@@ -148,7 +138,6 @@ func main() {
 		TLS:          router.TLS(rc),
 		Plain:        router.Plain(rc, envBool("EDGE_PLAIN_BOTSEED")),
 		Sink:         sink,
-		Live:         live,
 		CookieDomain: rc.CookieDomain,
 		CookieSecret: cookieSecret,
 		HTTPSBase:    rc.HTTPSBase,
@@ -192,9 +181,6 @@ func main() {
 		for k, v := range queue.Stats() {
 			st[k] = v
 		}
-		for k, v := range feed.Stats() {
-			st[k] = v
-		}
 		return st
 	}
 	go func() {
@@ -229,6 +215,5 @@ func main() {
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Printf("acpwb_edge: shutdown: %v", err)
 	}
-	feed.Close()
 	queue.Close()
 }

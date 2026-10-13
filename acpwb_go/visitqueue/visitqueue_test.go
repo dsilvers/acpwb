@@ -61,14 +61,22 @@ func TestFingerprintFromEdgeHeaders(t *testing.T) {
 	r.Header.Set("X-JA4H", "ge20nn09enus_abc_000000000000_000000000000")
 	r.Header.Set("X-H2-Fingerprint", "1:65536;2:0|15663105|0|m,a,s,p")
 	r.Header.Set("Accept-Language", "en-US")
+	r.Header.Set("X-Request-Id", "0f8fad5b-d9cb-469f-a165-70867728950e")
 	got := FingerprintFrom(r)
 	want := Fingerprint{
 		ClientProtocol: "HTTP/2.0", TLSProtocol: "TLSv1.3", TLSCipher: "TLS_AES_128_GCM_SHA256",
 		JA4: "t13d1516h2_8daaf6152771_e5627efa2ab1", JA3: "0123456789abcdef0123456789abcdef",
 		JA4H: "ge20nn09enus_abc_000000000000_000000000000", H2Fingerprint: "1:65536;2:0|15663105|0|m,a,s,p",
 		BrowserHeadersPresent: "accept-language",
+		RequestID:             "0f8fad5b-d9cb-469f-a165-70867728950e",
 	}
 	if got != want {
 		t.Fatalf("got %+v\nwant %+v", got, want)
+	}
+
+	// Anything but a UUID would fail Django's UUIDField and lose the row.
+	r.Header.Set("X-Request-Id", "not-a-uuid'; drop table")
+	if got := FingerprintFrom(r).RequestID; got != "" {
+		t.Fatalf("RequestID %q from a malformed header", got)
 	}
 }

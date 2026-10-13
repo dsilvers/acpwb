@@ -14,7 +14,9 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from apps.core.models import DashboardStat
-from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, EdgeConnection, InternalLoginAttempt
+from apps.honeypot.models import (
+    ArchiveVisit, CanaryToken, CrawlerVisit, EdgeConnection, EdgeRequest, InternalLoginAttempt,
+)
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import ConferenceRegistration, DataOptOutRequest, JobApplication, JobApplicationDocument
@@ -292,7 +294,9 @@ def edge(request):
     import time
     summary = _stat('edge.summary_24h', {}) or {}
     process = _stat('edge.process', {}) or {}
+    reqs = _stat('edge.requests_24h', {}) or {}
     total = summary.get('total', 0)
+    req_total = reqs.get('total', 0)
     outcomes = summary.get('by_outcome', {})
     alpn = summary.get('by_alpn', {})
     failed = sum(v for k, v in outcomes.items() if k not in ('ok', 'plain'))
@@ -317,6 +321,18 @@ def edge(request):
         'process':        process,
         'uptime_hours':   round((time.time() - process['started_at']) / 3600, 1) if process.get('started_at') else None,
         'recent':         list(EdgeConnection.objects.order_by('-timestamp')[:50]),
+        'req_total':      req_total,
+        'req_clients':    reqs.get('clients', 0),
+        'req_new_clients': reqs.get('new_clients', 0),
+        'req_ips':        reqs.get('ips', 0),
+        'req_failed':     reqs.get('failed', 0),
+        'req_failed_pct': round(reqs.get('failed', 0) * 100 / req_total, 1) if req_total else 0,
+        'req_by_route':   reqs.get('by_route', []),
+        'req_by_status':  _top_named(reqs.get('by_status', {})),
+        'req_by_error':   _top_named(reqs.get('by_error', {})),
+        'req_by_protocol': _top_named(reqs.get('by_protocol', {})),
+        'multi_ip_clients': reqs.get('multi_ip_clients', []),
+        'recent_requests': list(EdgeRequest.objects.order_by('-timestamp')[:50]),
         'updated_at':     _updated_at('edge.summary_24h'),
     }
     return render(request, 'dashboard/edge.html', ctx)

@@ -23,22 +23,27 @@ func TestPushNeverBlocksWhenRedisDown(t *testing.T) {
 	const n = 200_000 // > channel capacity
 	start := time.Now()
 	for i := range n {
-		q.Push(map[string]int{"i": i})
+		q.Push(RequestQueue, map[string]int{"i": i})
+		if i%10 == 0 {
+			q.Push(ConnQueue, map[string]int{"i": i})
+		}
 	}
 	if el := time.Since(start); el > 2*time.Second {
 		t.Fatalf("pushing took %v — Push must not block", el)
 	}
 	q.Close()
-	if got := q.Dropped() + q.Pushed(); got != n {
-		t.Fatalf("dropped+pushed = %d, want %d", got, n)
-	}
-	if q.Pushed() != 0 {
-		t.Fatalf("pushed %d with no Redis", q.Pushed())
+	for key, want := range map[string]int64{RequestQueue: n, ConnQueue: n / 10} {
+		if got := q.Dropped(key) + q.Pushed(key); got != want {
+			t.Fatalf("%s: dropped+pushed = %d, want %d", key, got, want)
+		}
+		if q.Pushed(key) != 0 {
+			t.Fatalf("%s: pushed %d with no Redis", key, q.Pushed(key))
+		}
 	}
 }
 
 func TestNilQueueIsANoop(t *testing.T) {
 	var q *Queue
-	q.Push(1)
+	q.Push(ConnQueue, 1)
 	q.Close()
 }

@@ -23,11 +23,13 @@ import (
 // connInfo is everything known about one client connection. It becomes a
 // Record when the connection closes.
 type connInfo struct {
+	id       string // EdgeConnection.conn_id / EdgeRequest.conn_id
 	ip       string
 	accepted time.Time
 	tls      bool
-	raw      net.Conn      // the TCP socket, for kernel RTT
-	emit     func(*Record) // where the Record goes at close
+	raw      net.Conn             // the TCP socket, for kernel RTT
+	emit     func(*Record)        // where the Record goes at close
+	emitReq  func(*RequestRecord) // where request records go
 
 	in, out atomic.Int64
 
@@ -45,8 +47,10 @@ type connInfo struct {
 	cipher      string
 	h1          *httpfp.H1Conn
 	h2          *httpfp.H2Conn
-	requests    int
-	rejected    int // requests refused by the edge's limits (503)
+	requests    int // requests that reached a handler
+	rejected    int // of those, refused by the edge's overload valve (503)
+	unserved    int // requests read that no handler served (see closeRequests)
+	clientID    string
 	closeReason string
 	first       *firstRequest
 }
@@ -130,6 +134,8 @@ func Stats() map[string]int64 {
 		"requests_in_flight":   inFlight.Load(),
 		"rejected_requests":    rejectedRequests.Load(),
 		"records_aggregated":   recordsAggregated.Load(),
+		"requests_logged":      requestsLogged.Load(),
+		"requests_unserved":    requestsUnserved.Load(),
 		"parser_panics":        parsePanics.Load(),
 	}
 }
@@ -137,7 +143,7 @@ func Stats() map[string]int64 {
 func newConnInfo(raw net.Conn, isTLS bool) *connInfo {
 	connsOpen.Add(1)
 	connsTotal.Add(1)
-	ci := &connInfo{accepted: time.Now(), tls: isTLS, raw: raw}
+	ci := &connInfo{id: uuid4(), accepted: time.Now(), tls: isTLS, raw: raw}
 	if a, ok := raw.RemoteAddr().(*net.TCPAddr); ok {
 		ip := a.IP
 		if v4 := ip.To4(); v4 != nil {
@@ -187,20 +193,32 @@ func (ci *connInfo) fingerprints() tlsfp.Fingerprints {
 	return ci.fps
 }
 
-// plainHTTPOnTLS reports whether the client sent an HTTP request line to
-// the TLS port.
-func (ci *connInfo) plainHTTPOnTLS() bool {
+// plainHTTPOnTLS returns the opening bytes if the client sent an HTTP
+// request line to the TLS port.
+func (ci *connInfo) plainHTTPOnTLS() ([]byte, bool) {
 	ci.mu.Lock()
 	defer ci.mu.Unlock()
 	_, _, ok := requestLine(ci.rawHead)
-	return ok
+	return ci.rawHead, ok
 }
 
-// noteRequest counts a request and keeps a summary of the first one.
-func (ci *connInfo) noteRequest(r *http.Request, m *meta.Request, names []string, status int) {
+// startRequest counts a request reaching the handler and returns its
+// position on the connection (1 for the first).
+func (ci *connInfo) startRequest() int {
 	ci.mu.Lock()
 	defer ci.mu.Unlock()
 	ci.requests++
+	return ci.requests
+}
+
+// noteRequest keeps a summary of the connection's first request, and its
+// first client ID.
+func (ci *connInfo) noteRequest(r *http.Request, m *meta.Request, names []string, status int) {
+	ci.mu.Lock()
+	defer ci.mu.Unlock()
+	if ci.clientID == "" {
+		ci.clientID = m.ClientID
+	}
 	if ci.first != nil {
 		return
 	}
@@ -232,6 +250,9 @@ func (ci *connInfo) record(now time.Time) *Record {
 		BytesOut:       ci.out.Load(),
 		RequestCount:   ci.requests,
 		RejectedReqs:   ci.rejected,
+		UnservedReqs:   ci.unserved,
+		ConnID:         ci.id,
+		ClientID:       ci.clientID,
 		CloseReason:    ci.closeReason,
 		ConnCount:      1,
 		IdempotencyKey: uuid4(),
@@ -257,7 +278,8 @@ func (ci *connInfo) record(now time.Time) *Record {
 		rec.FirstStatus, rec.FirstRoute = f.status, f.route
 	} else if method, target, ok := requestLine(ci.rawHead); ok {
 		// Plain HTTP sent to the TLS port.
-		rec.FirstMethod, rec.FirstPath = method, target
+		rec.FirstMethod, rec.FirstPath, rec.FirstStatus = method, target, http.StatusMovedPermanently
+		rec.FirstRoute = ErrPlainOnTLS
 	}
 	rec.truncate()
 	return rec
@@ -295,7 +317,7 @@ func (c *wireConn) Read(p []byte) (int, error) {
 			c.ci.mu.Lock()
 			c.ci.helloErr = perr
 			if errors.Is(perr, tlsfp.ErrNotTLS) {
-				c.ci.rawHead = c.buf[:min(len(c.buf), 1024)]
+				c.ci.rawHead = c.buf[:min(len(c.buf), 4096)]
 			}
 			c.ci.mu.Unlock()
 			c.recording, c.buf = false, nil
@@ -317,6 +339,7 @@ func (c *wireConn) Close() error {
 	var err error
 	c.closeOnce.Do(func() {
 		connsOpen.Add(-1)
+		c.ci.closeRequests()
 		rec := c.ci.record(time.Now()) // before close: kernel RTT needs the socket
 		err = c.Conn.Close()
 		if c.ci.emit != nil {
@@ -430,7 +453,63 @@ func requestLine(b []byte) (method, target string, ok bool) {
 	return parts[0], parts[1], true
 }
 
-var parsePanics atomic.Int64
+var (
+	parsePanics      atomic.Int64
+	requestsUnserved atomic.Int64
+)
+
+// closeRequests logs the requests the taps read that no handler served:
+// HTTP/1 requests the server rejected (it answers those itself — 400, 431,
+// 501 — and closes) or whose head never completed, and HTTP/2 streams the
+// server refused or the client reset before a handler ran. Runs as the
+// connection closes, when the server is done reading.
+func (ci *connInfo) closeRequests() {
+	ci.mu.Lock()
+	h1, h2 := ci.h1, ci.h2
+	ci.mu.Unlock()
+	now := time.Now()
+	var recs []*RequestRecord
+	switch {
+	case h2 != nil:
+		for _, h := range h2.Unserved() {
+			recs = append(recs, ci.unservedRecord(h, 0, ErrNotServed, "HTTP/2.0", now))
+		}
+	case h1 != nil:
+		heads, status := h1.Unserved()
+		for i, h := range heads {
+			kind, st := ErrRejected, 0
+			if h.Partial {
+				kind = ErrIncomplete
+			}
+			if i == len(heads)-1 && status >= 400 {
+				st = status // the server's reply to the request it gave up on
+			}
+			recs = append(recs, ci.unservedRecord(h, st, kind, "HTTP/1.1", now))
+		}
+	}
+	if len(recs) == 0 {
+		return
+	}
+	requestsUnserved.Add(int64(len(recs)))
+	ci.mu.Lock()
+	seq := ci.requests + ci.unserved
+	ci.unserved += len(recs)
+	ci.mu.Unlock()
+	for i, rec := range recs {
+		if i >= maxUnservedLogged {
+			break
+		}
+		rec.Seq = seq + i + 1
+		ci.pushRequest(rec)
+	}
+}
+
+func (ci *connInfo) pushRequest(rec *RequestRecord) {
+	if ci.emitReq != nil {
+		requestsLogged.Add(1)
+		ci.emitReq(rec)
+	}
+}
 
 // safeParse parses and fingerprints client-controlled bytes; a bug in
 // either must cost one connection its fingerprint, never the process.

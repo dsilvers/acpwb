@@ -105,7 +105,14 @@ func main() {
 		}
 		sink = queue
 	} else {
-		log.Printf("acpwb_edge: REDIS_URL unset — connection records are not being recorded")
+		log.Printf("acpwb_edge: REDIS_URL unset — connection and request records are not being recorded")
+	}
+
+	// Signs the acpwb_cid client cookie. Must stay the same across
+	// restarts, or every browser gets a new client ID.
+	cookieSecret := []byte(os.Getenv("EDGE_COOKIE_SECRET"))
+	if len(cookieSecret) == 0 && !dev {
+		log.Printf("acpwb_edge: EDGE_COOKIE_SECRET unset — client IDs reset on every restart")
 	}
 
 	srv := edge.New(edge.Config{
@@ -118,6 +125,9 @@ func main() {
 		TLS:          router.TLS(rc),
 		Plain:        router.Plain(rc, envBool("EDGE_PLAIN_BOTSEED")),
 		Sink:         sink,
+		CookieDomain: rc.CookieDomain,
+		CookieSecret: cookieSecret,
+		HTTPSBase:    rc.HTTPSBase,
 		MaxBodyBytes: envInt("EDGE_MAX_BODY_BYTES", 10<<20),
 		Limits: edge.Limits{
 			StallTimeout:     time.Duration(envInt("EDGE_STALL_TIMEOUT_SECONDS", 60)) * time.Second,
@@ -155,8 +165,8 @@ func main() {
 		st["tap_panics"] = httpfp.Panics()
 		st["goroutines"] = int64(runtime.NumGoroutine())
 		st["started_at"] = started
-		if queue != nil {
-			st["records_pushed"], st["records_dropped"] = queue.Pushed(), queue.Dropped()
+		for k, v := range queue.Stats() {
+			st[k] = v
 		}
 		return st
 	}

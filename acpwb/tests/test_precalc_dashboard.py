@@ -207,3 +207,35 @@ def test_precalc_dashboard_edge_summary():
     assert s['by_close_reason']['client_closed'] == 50
     assert s['top_h2_abuse'] == [{'ip_address': '192.0.2.77', 'conns': 1, 'streams': 1000, 'resets': 1000, 'continuations': 0}]
     assert s['top_conn_ips'][0] == {'ip_address': '192.0.2.66', 'conns': 50, 'requests': 0, 'ja4s': 0}
+
+
+@pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
+def test_precalc_dashboard_edge_requests():
+    import uuid
+    from apps.honeypot.models import EdgeRequest
+    now = timezone.now()
+
+    def req(**kw):
+        base = dict(timestamp=now, request_id=uuid.uuid4(), ip_address='203.0.113.1', route='django', status=200)
+        base.update(kw)
+        return EdgeRequest(**base)
+
+    EdgeRequest.objects.bulk_create([
+        # One browser cookie seen from three IPs.
+        req(client_id='c' * 22, ip_address='203.0.113.1', new_client=True),
+        req(client_id='c' * 22, ip_address='203.0.113.2', route='static', duration_us=2000),
+        req(client_id='c' * 22, ip_address='203.0.113.3', route='static', duration_us=4000),
+        req(client_id='d' * 22, protocol='HTTP/2.0'),
+        req(status=400, error='rejected', route=''),
+        req(timestamp=now - timedelta(days=2)),  # outside the window
+    ])
+    call_command('precalc_dashboard', stdout=io.StringIO())
+
+    s = DashboardStat.objects.get(key='edge.requests_24h').value
+    assert s['total'] == 5
+    assert s['clients'] == 2
+    assert s['new_clients'] == 1
+    assert s['failed'] == 1
+    assert s['by_error'] == {'rejected': 1}
+    assert {'name': 'static', 'count': 2, 'avg_ms': 3.0, 'bytes': 0} in s['by_route']
+    assert s['multi_ip_clients'] == [{'client_id': 'c' * 22, 'ips': 3, 'requests': 3, 'uas': 1}]

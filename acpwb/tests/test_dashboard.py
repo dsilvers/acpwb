@@ -111,7 +111,8 @@ def test_dashboard_edge_shows_process_counters(staff_client):
     from apps.core.models import DashboardStat
     DashboardStat.objects.create(key='edge.summary_24h', value={'total': 0})
     DashboardStat.objects.create(key='edge.process', value={
-        'conns_open': 12, 'conns_total': 3456, 'records_pushed': 3400, 'records_dropped': 56,
+        'conns_open': 12, 'conns_total': 3456, 'records_pushed_conn': 3400, 'records_dropped_conn': 56,
+        'records_pushed_request': 9000, 'records_dropped_request': 0,
         'records_aggregated': 0, 'rejected_requests': 0, 'parser_panics': 0, 'tap_panics': 0,
         'goroutines': 40, 'started_at': 1,
     })
@@ -119,3 +120,25 @@ def test_dashboard_edge_shows_process_counters(staff_client):
     assert 'Edge Process' in content
     assert '3456' in content
     assert 'color:#dc3545;font-weight:700">56<' in content  # dropped records flagged
+    assert '9000' in content
+
+
+@pytest.mark.django_db
+def test_dashboard_edge_shows_requests(staff_client):
+    from apps.core.models import DashboardStat
+    from apps.honeypot.models import EdgeRequest
+    DashboardStat.objects.create(key='edge.summary_24h', value={'total': 0})
+    DashboardStat.objects.create(key='edge.requests_24h', value={
+        'total': 200, 'clients': 7, 'new_clients': 3, 'ips': 9, 'failed': 20, 'bytes_out': 1,
+        'by_route': [{'name': 'static', 'count': 150, 'avg_ms': 1.5, 'bytes': 2048}],
+        'by_status': {'200': 180, '400': 20}, 'by_error': {'rejected': 20},
+        'by_protocol': {'HTTP/2.0': 200},
+        'multi_ip_clients': [{'client_id': 'AAAAAAAAAAAAAAAAAAAAAA', 'ips': 4, 'requests': 30, 'uas': 1}],
+    })
+    EdgeRequest.objects.create(request_id='0f8fad5b-d9cb-469f-a165-70867728950e', ip_address='192.0.2.5',
+                               method='GET', host='acpwb.com', path='/static/x.css', status=200, route='static')
+    content = staff_client.get('/acpwb-dashboard/edge/').content.decode()
+    assert '10.0%' in content  # failed share
+    assert 'AAAAAAAAAAAAAAAAAAAAAA' in content
+    assert 'rejected' in content
+    assert '/static/x.css' in content

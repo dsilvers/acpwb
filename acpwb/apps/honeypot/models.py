@@ -38,6 +38,12 @@ class CrawlerVisit(models.Model):
     # Denormalized at write time — enables fast GROUP BY without Python-side UA parsing
     bot_type = models.CharField(max_length=64, blank=True, db_index=True)
     bot_group = models.CharField(max_length=64, blank=True, db_index=True)
+    # acpwb_edge's ID for the HTTP request that produced this row
+    # (X-Request-Id) — joins to EdgeRequest.request_id, and through it to
+    # the connection and client. Nullable with no default so adding it to
+    # the compressed hypertable is a catalog-only change; NULL on rows from
+    # before the edge, or written outside it.
+    request_id = models.UUIDField(null=True, blank=True, default=None)
     # Minted once when an item is first queued in Redis (crawler_queue.py) so
     # the drain consumer's crash-recovery path can tell whether a recovered
     # batch already committed before re-inserting it. Deliberately NOT a DB
@@ -112,6 +118,12 @@ class ArchiveVisit(models.Model):
     # See CrawlerVisit.idempotency_key — same purpose, same deliberate lack
     # of a DB constraint/index (hypertable + no CONCURRENTLY support), same
     # NULL-for-old-rows / no-backfill approach.
+    # acpwb_edge's ID for the HTTP request that produced this row
+    # (X-Request-Id) — joins to EdgeRequest.request_id, and through it to
+    # the connection and client. Nullable with no default so adding it to
+    # the compressed hypertable is a catalog-only change; NULL on rows from
+    # before the edge, or written outside it.
+    request_id = models.UUIDField(null=True, blank=True, default=None)
     idempotency_key = models.UUIDField(null=True, blank=True, default=None)
 
     class Meta:
@@ -306,6 +318,8 @@ class RequestFingerprint(models.Model):
     # present is the core "scripted client wearing a browser UA" signal.
     browser_headers_present = models.CharField(max_length=512, blank=True)
 
+    # acpwb_edge's request ID (X-Request-Id) — joins to EdgeRequest.
+    request_id = models.UUIDField(null=True, blank=True, default=None)
     idempotency_key = models.UUIDField(unique=True, null=True, blank=True, default=None)
 
     class Meta:
@@ -370,9 +384,20 @@ class EdgeConnection(models.Model):
     # (handshake, header, idle or body stall) / write_timeout (client
     # stopped reading) / read_error / write_error / server_closed.
     close_reason = models.CharField(max_length=32, blank=True, db_index=True)
-    # Requests the edge answered 503 because the process-wide overload valve
-    # was shut. The edge never limits individual clients.
+    # Requests that reached the edge's handler (request_count), of those
+    # the ones answered 503 because the process-wide overload valve was
+    # shut (rejected_requests — the edge never limits individual clients),
+    # and requests read that no handler served (unserved_requests): HTTP/1
+    # requests the server rejected as malformed/oversized, HTTP/2 streams
+    # refused or reset before a handler. Each served request, and the first
+    # 20 unserved ones per connection, has an EdgeRequest row.
     rejected_requests = models.IntegerField(default=0)
+    unserved_requests = models.IntegerField(default=0)
+
+    # Joins to EdgeRequest.conn_id. NULL on aggregated rows.
+    conn_id = models.UUIDField(null=True, blank=True, default=None)
+    # The first acpwb_cid client ID seen on the connection, if any.
+    client_id = models.CharField(max_length=22, blank=True)
 
     # HTTP/2 client behaviour — attack signatures: Resets ≈ Streams is rapid
     # reset (CVE-2023-44487); many continuations is a CONTINUATION flood;
@@ -383,11 +408,13 @@ class EdgeConnection(models.Model):
     h2_continuations = models.IntegerField(default=0)
     h2_goaway = models.CharField(max_length=32, blank=True)
 
-    # Connections this row stands for. An IP past the edge's per-minute
-    # record budget (EDGE_RECORDS_PER_IP_MINUTE) gets one aggregated row
-    # per (IP, outcome, JA4) per minute: exact conn_count and summed
-    # bytes/requests/h2 counters, the other fields from the first of them.
-    # Count connections with Sum('conn_count'), never Count('id').
+    # Connections this row stands for. Connections that carried no request
+    # from an IP past the edge's per-minute record budget
+    # (EDGE_RECORDS_PER_IP_MINUTE) get one aggregated row per (IP, outcome,
+    # JA4) per minute: exact conn_count and summed bytes/h2 counters, the
+    # other fields from the first of them. Connections with requests are
+    # never aggregated. Count connections with Sum('conn_count'), never
+    # Count('id').
     conn_count = models.IntegerField(default=1)
     aggregated = models.BooleanField(default=False)
 
@@ -407,6 +434,7 @@ class EdgeConnection(models.Model):
         indexes = [
             models.Index(fields=['ip_address', 'timestamp']),
             models.Index(fields=['ja4', 'timestamp']),
+            models.Index(fields=['conn_id']),
         ]
         constraints = [
             models.UniqueConstraint(
@@ -417,6 +445,89 @@ class EdgeConnection(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} @ {self.timestamp:%Y-%m-%d %H:%M} {self.outcome} {self.ja4 or '-'}"
+
+
+class EdgeRequest(models.Model):
+    """One row per HTTP request seen by acpwb_edge — every request, static
+    files and redirects included, and the failed ones: requests the HTTP
+    server rejected before any handler ran, HTTP/2 streams never served,
+    clients that went away mid-response, upstream errors (see `error`).
+    Pushed by the edge to acpwb:edge_request_queue and batch-drained by
+    drain_edge_request_queue.
+
+    How it links up (by value — these are hypertables, no FKs):
+
+        IPIntelligence ─ip_address─ EdgeConnection ─conn_id─ EdgeRequest
+        EdgeRequest ─request_id─ CrawlerVisit / ArchiveVisit / RequestFingerprint
+        EdgeRequest ─client_id─ every request from the same browser (the
+            acpwb_cid cookie), across connections and IPs
+
+    A TimescaleDB hypertable (see migration 0023): no primary key;
+    request_id + timestamp is the idempotency constraint.
+    """
+    ERROR_CHOICES = [
+        ('', 'Served'),
+        ('client_closed', 'Client went away'),
+        ('write_failed', 'Response write failed'),
+        ('overload', 'Overload valve (503)'),
+        ('body_too_large', 'Body too large (413)'),
+        ('upstream_error', 'Upstream error (502)'),
+        ('upstream_timeout', 'Upstream timeout (504)'),
+        ('rejected', 'Rejected by HTTP server'),
+        ('incomplete', 'Incomplete request head'),
+        ('h2_not_served', 'HTTP/2 stream not served'),
+        ('plain_on_tls', 'Plain HTTP on TLS port'),
+    ]
+
+    timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
+    request_id = models.UUIDField()
+    conn_id = models.UUIDField(null=True, blank=True)
+    client_id = models.CharField(max_length=22, blank=True)
+    # This response issued the client cookie (first request from a browser,
+    # or one that doesn't keep cookies — those get a new ID every time).
+    new_client = models.BooleanField(default=False)
+    seq = models.IntegerField(default=0)  # position on its connection, from 1
+
+    ip_address = models.GenericIPAddressField()
+    tls = models.BooleanField(default=True)
+    protocol = models.CharField(max_length=16, blank=True)
+
+    host = models.CharField(max_length=253, blank=True)
+    method = models.CharField(max_length=16, blank=True)
+    path = models.CharField(max_length=1024, blank=True)
+    query = models.CharField(max_length=1024, blank=True)
+    user_agent = models.CharField(max_length=512, blank=True)
+    referer = models.CharField(max_length=512, blank=True)
+    accept_language = models.CharField(max_length=128, blank=True)
+    ja4h = models.CharField(max_length=64, blank=True)
+    header_names = models.CharField(max_length=2048, blank=True)
+
+    status = models.IntegerField(default=0)  # 0: no response (e.g. h2 stream never served); 499: client closed
+    route = models.CharField(max_length=32, blank=True)  # django, acpwb_go, static, redirect, …
+    error = models.CharField(max_length=20, choices=ERROR_CHOICES, blank=True)
+    content_type = models.CharField(max_length=128, blank=True)
+    request_bytes = models.BigIntegerField(default=0)
+    response_bytes = models.BigIntegerField(default=0)  # body as sent (compressed)
+    ttfb_us = models.BigIntegerField(default=0)
+    duration_us = models.BigIntegerField(default=0)
+
+    class Meta:
+        ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['ip_address', 'timestamp']),
+            models.Index(fields=['client_id', 'timestamp']),
+            models.Index(fields=['conn_id']),
+            models.Index(fields=['request_id']),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['request_id', 'timestamp'], name='honeypot_edgereq_id_ts_uniq',
+            ),
+        ]
+        verbose_name = 'Edge Request'
+
+    def __str__(self):
+        return f"{self.ip_address} @ {self.timestamp:%Y-%m-%d %H:%M:%S} {self.method} {self.host}{self.path} {self.status}"
 
 
 class IPReputationScore(models.Model):

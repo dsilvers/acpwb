@@ -23,8 +23,9 @@ const maxHeadBytes = 64 << 10
 type H1Conn struct {
 	net.Conn
 
-	mu    sync.Mutex
-	heads [][]string
+	mu         sync.Mutex
+	heads      []Head
+	lastStatus int // status of the last response head written (see Write)
 
 	// Only touched by the server's reading goroutine.
 	buf  []byte
@@ -66,7 +67,47 @@ func (c *H1Conn) NextHead() []string {
 	}
 	h := c.heads[0]
 	c.heads = c.heads[1:]
-	return h
+	return h.Names
+}
+
+// Write notes the status of each response head the server writes. The
+// last one tells what the server answered a request it rejected before
+// any handler ran (400, 431, 501…), which it writes straight to the conn.
+func (c *H1Conn) Write(p []byte) (int, error) {
+	if code, ok := statusOf(p); ok {
+		c.mu.Lock()
+		c.lastStatus = code
+		c.mu.Unlock()
+	}
+	return c.Conn.Write(p)
+}
+
+// Unserved returns the requests read from this connection that no handler
+// took with NextHead — ones the server rejected — plus a final request
+// whose head never completed, if bytes of one were waiting. Call it once
+// the connection is done. status is the last response status written
+// (see Write), 0 if none.
+func (c *H1Conn) Unserved() (reqs []Head, status int) {
+	c.mu.Lock()
+	reqs, status = c.heads, c.lastStatus
+	c.heads = nil
+	c.mu.Unlock()
+	// buf is the reading goroutine's, which is done by now.
+	if len(c.buf) > 0 && !c.lost.Load() {
+		h := parseHeadInfo(c.buf)
+		h.Partial = true
+		reqs = append(reqs, h)
+	}
+	return reqs, status
+}
+
+func statusOf(p []byte) (int, bool) {
+	// "HTTP/1.1 400 "
+	if len(p) < 13 || !bytes.HasPrefix(p, []byte("HTTP/1.")) || p[8] != ' ' {
+		return 0, false
+	}
+	code, err := strconv.Atoi(string(p[9:12]))
+	return code, err == nil && code >= 100 && code <= 999
 }
 
 // CaptureLost reports whether header capture stopped on this connection.
@@ -98,10 +139,11 @@ func (c *H1Conn) scan(data []byte) {
 			return
 		}
 		end += start + 4
-		names, bodyLen, chunked := parseHead(c.buf[:end])
+		head := parseHeadInfo(c.buf[:end])
 		c.mu.Lock()
-		c.heads = append(c.heads, names)
+		c.heads = append(c.heads, head)
 		c.mu.Unlock()
+		bodyLen, chunked := head.bodyLen, head.chunked
 		data = c.buf[end:]
 		c.buf = nil
 		if chunked {
@@ -115,23 +157,47 @@ func (c *H1Conn) scan(data []byte) {
 	}
 }
 
-// parseHead returns the header names in order, plus how to skip the body.
-func parseHead(head []byte) (names []string, bodyLen int64, chunked bool) {
+// Head is one request as the tap read it off the wire. Requests the server
+// serves only contribute Names (via NextHead); the rest describe requests
+// it rejected, for logging (see Unserved).
+type Head struct {
+	Method, Authority, Path, UserAgent string
+	Names                              []string
+	Partial                            bool // the head never completed
+
+	bodyLen int64
+	chunked bool
+}
+
+// ParseHead parses a request head, or the start of one: the request line,
+// header names in order, Host and User-Agent.
+func ParseHead(head []byte) Head { return parseHeadInfo(head) }
+
+func parseHeadInfo(head []byte) Head {
 	lines := strings.Split(strings.TrimRight(string(head), "\r\n"), "\r\n")
-	names = []string{}
+	h := Head{Names: []string{}}
+	if parts := strings.SplitN(lines[0], " ", 3); len(parts) >= 2 {
+		h.Method, h.Path = parts[0], parts[1]
+	} else {
+		h.Path = lines[0]
+	}
 	for _, line := range lines[1:] {
 		name, value, ok := strings.Cut(line, ":")
 		if !ok {
 			continue
 		}
-		names = append(names, name)
+		h.Names = append(h.Names, name)
 		value = strings.TrimSpace(value)
 		switch strings.ToLower(name) {
 		case "content-length":
-			bodyLen, _ = strconv.ParseInt(value, 10, 64)
+			h.bodyLen, _ = strconv.ParseInt(value, 10, 64)
 		case "transfer-encoding":
-			chunked = strings.Contains(strings.ToLower(value), "chunked")
+			h.chunked = strings.Contains(strings.ToLower(value), "chunked")
+		case "host":
+			h.Authority = value
+		case "user-agent":
+			h.UserAgent = value
 		}
 	}
-	return names, bodyLen, chunked
+	return h
 }

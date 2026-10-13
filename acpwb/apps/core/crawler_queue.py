@@ -339,7 +339,8 @@ def queue_crawler_visit(data: dict) -> None:
     push_crawler_visit() directly, but off the request's critical path.
     """
     from apps.core.async_utils import spawn
-    spawn(_write_crawler_visit, data)
+    from apps.core.request_id import stamp_request_id
+    spawn(_write_crawler_visit, stamp_request_id(data))
 
 
 def _write_archive_visit(data: dict):
@@ -358,7 +359,8 @@ def queue_archive_visit(data: dict) -> None:
     push_archive_visit() directly, but off the request's critical path.
     """
     from apps.core.async_utils import spawn
-    spawn(_write_archive_visit, data)
+    from apps.core.request_id import stamp_request_id
+    spawn(_write_archive_visit, stamp_request_id(data))
 
 
 def queue_length() -> int:
@@ -466,6 +468,33 @@ def edge_conn_queue_length() -> int:
         return -1
     try:
         return r.llen(_EDGE_CONN_QUEUE_KEY)
+    except Exception:
+        _mark_consumer_failure()
+        return -1
+
+
+# acpwb_edge pushes one record per HTTP request here; drained by
+# drain_edge_request_queue → honeypot.EdgeRequest.
+_EDGE_REQUEST_QUEUE_KEY = 'acpwb:edge_request_queue'
+
+
+def pop_edge_requests(count: int = 500):
+    """Same contract as pop_crawler_visits(), for the edge request queue."""
+    return _pop_visits(_EDGE_REQUEST_QUEUE_KEY, count)
+
+
+def recover_edge_requests():
+    """Recover any orphaned edge-request batches from a prior crashed run."""
+    return _recover_visits(_EDGE_REQUEST_QUEUE_KEY)
+
+
+def edge_request_queue_length() -> int:
+    """Return the edge request queue depth, or -1 if Redis is unavailable."""
+    r = _get_consumer_client()
+    if r is None:
+        return -1
+    try:
+        return r.llen(_EDGE_REQUEST_QUEUE_KEY)
     except Exception:
         _mark_consumer_failure()
         return -1

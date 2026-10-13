@@ -3,7 +3,9 @@
 // look like what nginx sent: plain HTTP/1.1 with keep-alive, the original
 // request URI, Host = nginx's $host, and the X-Real-IP / X-Forwarded-* /
 // X-Client-Protocol / X-TLS-* headers — plus the fingerprint headers
-// (X-JA4, X-JA3, X-JA4H, X-H2-Fingerprint) only the edge can compute.
+// (X-JA4, X-JA3, X-JA4H, X-H2-Fingerprint) only the edge can compute, and
+// X-Request-Id, the edge's ID for the request (EdgeRequest.request_id),
+// which the apps store on the rows the request produces.
 //
 // Every one of those headers is deleted from the client's request first,
 // whatever the client sent: they are the apps' only source for the client's
@@ -67,14 +69,17 @@ func New(u Upstream) http.Handler {
 			return nil
 		},
 		ErrorHandler: func(w http.ResponseWriter, r *http.Request, err error) {
+			m := meta.From(r.Context())
 			if errors.Is(err, context.Canceled) {
+				m.Error = "client_closed"
 				return // client went away
 			}
 			el.log(err)
 			code := http.StatusBadGateway
+			m.Error = "upstream_error"
 			var ne net.Error
 			if errors.As(err, &ne) && ne.Timeout() || errors.Is(err, context.DeadlineExceeded) {
-				code = http.StatusGatewayTimeout
+				code, m.Error = http.StatusGatewayTimeout, "upstream_timeout"
 			}
 			page.Error(w, code)
 		},
@@ -88,7 +93,7 @@ func New(u Upstream) http.Handler {
 func reserved(name string) bool {
 	n := strings.ToLower(strings.ReplaceAll(name, "_", "-"))
 	switch n {
-	case "x-real-ip", "x-client-protocol", "forwarded":
+	case "x-real-ip", "x-client-protocol", "forwarded", "x-request-id":
 		return true
 	}
 	for _, p := range []string{"x-forwarded-", "x-tls-", "x-ja3", "x-ja4", "x-h2-"} {
@@ -126,6 +131,7 @@ func SetHeaders(h http.Header, m *meta.Request) {
 	set("X-Ja3", m.JA3)
 	set("X-Ja4h", m.JA4H)
 	set("X-H2-Fingerprint", m.H2Fingerprint)
+	set("X-Request-Id", m.RequestID)
 }
 
 // errLog logs upstream errors at most once per 10s per upstream, with a

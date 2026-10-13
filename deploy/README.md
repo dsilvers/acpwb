@@ -133,15 +133,28 @@ request header order, and the HTTP/2 SETTINGS/WINDOW_UPDATE/PRIORITY/
 pseudo-header ("Akamai") fingerprint — and otherwise does what nginx did:
 the same routing (`acpwb_edge/router`, a line-by-line port of
 `nginx/acpwb.com` + `nginx/botseed.net`, pinned by `router_test.go`), static
-files, gzip, WebSockets, `Server: nginx`, nginx's error pages.
+files, gzip, WebSockets. Its own responses (error pages, redirects) say
+`Server: acpwb/web` and are styled as a 3270 terminal screen (`acpwb_edge/page`);
+plain HTTP sent to :443 is redirected to HTTPS rather than nginx's 400.
 
 What it sends the apps: `X-Real-IP`/`X-Forwarded-For` (the single client
 IP), `X-Forwarded-Proto`, `X-Client-Protocol` (`HTTP/1.1`/`HTTP/2.0`),
 `X-TLS-Protocol`/`X-TLS-Cipher` (nginx's naming), `X-JA4`, `X-JA3`, `X-JA4H`,
-`X-H2-Fingerprint` — after deleting any client-sent copy of every one of
-them. What it records: one row per connection, failed handshakes included,
-RPUSHed to `acpwb:edge_conn_queue` → `drain_edge_conn_queue` →
-`honeypot.EdgeConnection` (dashboard: `/acpwb-dashboard/edge/`).
+`X-H2-Fingerprint`, `X-Request-Id` — after deleting any client-sent copy of
+every one of them. What it records:
+
+- one row per connection, failed handshakes included: `acpwb:edge_conn_queue`
+  → `drain_edge_conn_queue` → `honeypot.EdgeConnection`
+- one row per request — static files, redirects and failed requests
+  included: `acpwb:edge_request_queue` → `drain_edge_request_queue` →
+  `honeypot.EdgeRequest`
+
+`EdgeRequest.conn_id` joins requests to their connection; `request_id`
+(sent upstream as `X-Request-Id`) joins them to the `CrawlerVisit` /
+`ArchiveVisit` / `RequestFingerprint` rows they produced; `client_id` is the
+`acpwb_cid` cookie the edge sets (first-party, signed with
+`EDGE_COOKIE_SECRET`, one year), which groups one browser's requests across
+connections and IPs. Dashboard: `/acpwb-dashboard/edge/`.
 
 It accepts TLS 1.0+ like nginx did (old-client bots keep reaching the
 traps), and offers h2, which nginx never did — `RequestFingerprint.
@@ -182,10 +195,20 @@ hook nothing reloaded nginx after a renewal at all.
 ### Install, staging and cutover
 
 1. Django first: migrate (`0022` adds the `RequestFingerprint` columns and
-   the `EdgeConnection` hypertable), restart gunicorn, rebuild/restart
-   acpwb_go, and install the updated crontab (`drain_edge_conn_queue`).
-   Producers must never ship keys the drain doesn't know — though the
-   drains now drop unknown keys rather than whole rows.
+   the `EdgeConnection` hypertable; `0023` the `EdgeRequest` hypertable and
+   the nullable `request_id` columns on `CrawlerVisit`/`ArchiveVisit`/
+   `RequestFingerprint`), restart gunicorn, **then** rebuild/restart
+   acpwb_go, and install the updated crontab (`drain_edge_conn_queue`,
+   `drain_edge_request_queue`). Order matters: acpwb_go now sends
+   `request_id`, and `drain_crawler_queue`/`drain_archive_queue` skip any
+   row with a key the model doesn't have (the fingerprint/edge drains drop
+   unknown keys instead).
+   Create the cookie secret once (it must never change):
+   ```bash
+   sudo install -d -m 0750 -g acpwb /etc/acpwb-edge
+   printf 'EDGE_COOKIE_SECRET=%s\n' "$(openssl rand -hex 32)" | sudo tee /etc/acpwb-edge/env >/dev/null
+   sudo chown root:acpwb /etc/acpwb-edge/env && sudo chmod 0640 /etc/acpwb-edge/env
+   ```
 2. Build the edge, install the deploy hook and seed certs (above), then
    install the unit with **staging ports** alongside nginx:
    ```bash
@@ -198,7 +221,8 @@ hook nothing reloaded nginx after a renewal at all.
    `/`, `/wiki/x/`, `/archive/1999/06/15/`, an `archives-YYYY` day page,
    a `policy-*` year page, `/source-code/`, `/static/...`, botseed.net
    `/` and `/api/`, and the live stream WebSocket; then check
-   `EdgeConnection` rows arrive (`drain_edge_conn_queue`).
+   `EdgeConnection` and `EdgeRequest` rows arrive, and that a `CrawlerVisit`
+   from a trap URL carries the `request_id` of its `EdgeRequest`.
 3. Cutover:
    ```bash
    sudo systemctl revert acpwb-edge        # drop the staging-port override

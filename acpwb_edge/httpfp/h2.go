@@ -44,9 +44,9 @@ const (
 )
 
 type h2Stream struct {
-	id                      uint32
-	names                   []string
-	method, authority, path string
+	id                          uint32
+	names                       []string
+	method, authority, path, ua string
 }
 
 // H2Conn watches the decrypted client→server bytes of an HTTP/2 connection
@@ -261,6 +261,21 @@ func (c *H2Conn) Claim(method, authority, path string) []string {
 	return nil
 }
 
+// Unserved returns the requests decoded on this connection that no handler
+// claimed: streams the server refused (malformed headers, over the
+// concurrency limit) or the client reset before a handler ran. Call it once
+// the connection is done.
+func (c *H2Conn) Unserved() []Head {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	out := make([]Head, 0, len(c.streams))
+	for _, s := range c.streams {
+		out = append(out, Head{Method: s.method, Authority: s.authority, Path: s.path, UserAgent: s.ua, Names: s.names})
+	}
+	c.streams = nil
+	return out
+}
+
 func (c *H2Conn) giveUp() {
 	c.lost = true
 	c.buf, c.block, c.streams = nil, nil, nil
@@ -436,6 +451,8 @@ func (c *H2Conn) endBlock() {
 			pseudo = append(pseudo, "p")
 		case "host":
 			host = f.Value
+		case "user-agent":
+			s.ua = f.Value
 		}
 	}
 	if s.authority == "" {

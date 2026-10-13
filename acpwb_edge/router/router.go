@@ -6,6 +6,7 @@
 package router
 
 import (
+	"net"
 	"net/http"
 	"path"
 	"regexp"
@@ -231,11 +232,11 @@ func TLS(c Config) http.Handler {
 			target = BotseedTarget(r.URL.Path)
 		case vhostBotseedWWW:
 			m.Route = Redirect
-			http.Redirect(w, r, "https://botseed.net"+r.URL.RequestURI(), http.StatusMovedPermanently)
+			page.Redirect(w, r, "https://botseed.net"+r.URL.RequestURI(), http.StatusMovedPermanently)
 			return
 		default: // www.acpwb.com, and nginx's default server for unknown names
 			m.Route = Redirect
-			http.Redirect(w, r, "https://acpwb.com"+r.URL.RequestURI(), http.StatusMovedPermanently)
+			page.Redirect(w, r, "https://acpwb.com"+r.URL.RequestURI(), http.StatusMovedPermanently)
 			return
 		}
 		m.Route = target
@@ -268,15 +269,58 @@ func Plain(c Config, serveBotseed bool) http.Handler {
 			return
 		}
 		m.Route = Redirect
-		target := "https://acpwb.com"
-		switch c.classify(m.Host) {
-		case vhostAcpwb, vhostAcpwbWWW:
-			target = "https://" + m.Host
-		case vhostBotseed, vhostBotseedWWW:
-			target = "https://botseed.net"
-		}
-		http.Redirect(w, r, target+r.URL.RequestURI(), http.StatusMovedPermanently)
+		page.Redirect(w, r, c.HTTPSBase(m.Host)+r.URL.RequestURI(), http.StatusMovedPermanently)
 	})
+}
+
+// HTTPSBase is where plain HTTP for hostport belongs on HTTPS, as a URL
+// with no path: the same host for our names (port kept in dev, where the
+// TLS listener isn't on 443), https://acpwb.com for anything else — never
+// an arbitrary client-supplied host.
+func (c Config) HTTPSBase(hostport string) string {
+	host := HostOf(hostport)
+	switch c.classify(host) {
+	case vhostAcpwb, vhostAcpwbWWW:
+		if _, port, err := net.SplitHostPort(hostport); c.Dev && err == nil && isPort(port) {
+			return "https://" + host + ":" + port
+		}
+		return "https://" + host
+	case vhostBotseed, vhostBotseedWWW:
+		return "https://botseed.net"
+	}
+	return "https://acpwb.com"
+}
+
+func isPort(s string) bool {
+	if s == "" || len(s) > 5 {
+		return false
+	}
+	for _, ch := range s {
+		if ch < '0' || ch > '9' {
+			return false
+		}
+	}
+	return true
+}
+
+// CookieDomain returns the Domain attribute for the edge's client cookie
+// on host — the registrable domain, so acpwb.com and every subdomain share
+// one client ID — and false for hosts that get no cookie (unknown names,
+// which are only ever redirected).
+func (c Config) CookieDomain(host string) (string, bool) {
+	switch c.classify(host) {
+	case vhostAcpwb, vhostAcpwbWWW:
+		switch {
+		case host == "acpwb.com" || strings.HasSuffix(host, ".acpwb.com"):
+			return "acpwb.com", true
+		case host == "acpwb.example" || strings.HasSuffix(host, ".acpwb.example"):
+			return "acpwb.example", true
+		}
+		return "", true // dev: localhost, 127.0.0.1 — host-only
+	case vhostBotseed, vhostBotseedWWW:
+		return "botseed.net", true
+	}
+	return "", false
 }
 
 const thirtyDays = 30 * 24 * time.Hour

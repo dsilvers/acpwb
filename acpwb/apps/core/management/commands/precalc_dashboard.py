@@ -23,7 +23,7 @@ from datetime import timedelta
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
-from django.db.models import Count, Max, Q, Sum
+from django.db.models import Avg, Count, Max, Q, Sum
 from django.db.models.functions import TruncDate, TruncMinute
 from django.utils import timezone
 
@@ -31,7 +31,9 @@ from apps.core.crawler_queue import oldest_pending_archive_visit, oldest_pending
 from apps.core.db_router import force_db
 from apps.core.graph_gen import RECENT_BUCKET_MINUTES, RECENT_BUCKET_RETENTION_DAYS, _bucket_key
 from apps.core.models import DashboardStat
-from apps.honeypot.models import ArchiveVisit, CanaryToken, CrawlerVisit, EdgeConnection, InternalLoginAttempt
+from apps.honeypot.models import (
+    ArchiveVisit, CanaryToken, CrawlerVisit, EdgeConnection, EdgeRequest, InternalLoginAttempt,
+)
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import DataOptOutRequest
@@ -985,11 +987,56 @@ class Command(BaseCommand):
         self._set_stat('edge.summary_24h', summary)
         self._set_stat('edge.process', self._edge_process_stats())
         self.stdout.write(f'  edge: {summary["total"]} connections in last 24h')
+        self._update_edge_requests(since)
+
+    def _update_edge_requests(self, since):
+        """Request-level summary from EdgeRequest (every request the edge
+        saw, static files and failures included) over the same window."""
+        qs = EdgeRequest.objects.filter(timestamp__gte=since)
+        totals = qs.aggregate(
+            total=Count('id'),
+            clients=Count('client_id', distinct=True, filter=~Q(client_id='')),
+            new_clients=Count('id', filter=Q(new_client=True)),
+            ips=Count('ip_address', distinct=True),
+            failed=Count('id', filter=~Q(error='')),
+            bytes_out=Sum('response_bytes'),
+        )
+        summary = {k: v or 0 for k, v in totals.items()}
+        summary['by_route'] = [
+            {'name': r['route'] or '(none)', 'count': r['c'], 'avg_ms': round((r['avg_us'] or 0) / 1000, 1),
+             'bytes': r['b'] or 0}
+            for r in qs.values('route').annotate(
+                c=Count('id'), avg_us=Avg('duration_us'), b=Sum('response_bytes'),
+            ).order_by('-c')[:20]
+        ]
+        summary['by_status'] = {
+            str(r['status']): r['c'] for r in qs.values('status').annotate(c=Count('id')).order_by('-c')[:20]
+        }
+        summary['by_error'] = {
+            r['error']: r['c']
+            for r in qs.exclude(error='').values('error').annotate(c=Count('id')).order_by('-c')
+        }
+        summary['by_protocol'] = {
+            (r['protocol'] or '(none)'): r['c']
+            for r in qs.values('protocol').annotate(c=Count('id')).order_by('-c')
+        }
+        # One browser (client cookie) on many IPs: rotating proxies that
+        # keep cookies show up here.
+        summary['multi_ip_clients'] = [
+            {'client_id': r['client_id'], 'ips': r['ips'], 'requests': r['c'], 'uas': r['uas']}
+            for r in qs.exclude(client_id='').values('client_id').annotate(
+                ips=Count('ip_address', distinct=True), c=Count('id'),
+                uas=Count('user_agent', distinct=True),
+            ).filter(ips__gt=1).order_by('-ips', '-c')[:20]
+        ]
+        self._set_stat('edge.requests_24h', summary)
+        self.stdout.write(f'  edge: {summary["total"]} requests in last 24h')
 
     def _edge_process_stats(self):
         """acpwb_edge's own counters (acpwb:edge_stats, refreshed every 30s):
-        what never becomes a row — connection records dropped because Redis
-        was down or the queue full, overload 503s, parser panics. Empty if
+        what never becomes a row — connection and request records dropped
+        because Redis was down or the queue full (records_dropped_conn /
+        records_dropped_request), overload 503s, parser panics. Empty if
         the edge isn't running or Redis is unreachable."""
         from apps.core.crawler_queue import _get_consumer_client
         r = _get_consumer_client()

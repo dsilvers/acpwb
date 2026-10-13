@@ -312,6 +312,7 @@ type canaryStats struct {
 	ok, failed atomic.Int64
 	mu         sync.Mutex
 	lat        []time.Duration
+	firstErr   string
 }
 
 // canary makes ordinary requests (fresh connection each time, so it also
@@ -333,6 +334,15 @@ func canary(ctx context.Context, s *canaryStats) {
 		}
 		if err != nil || resp.StatusCode >= 500 {
 			s.failed.Add(1)
+			s.mu.Lock()
+			if s.firstErr == "" {
+				if err != nil {
+					s.firstErr = err.Error()
+				} else {
+					s.firstErr = resp.Status
+				}
+			}
+			s.mu.Unlock()
 		} else {
 			s.ok.Add(1)
 			s.mu.Lock()
@@ -374,7 +384,7 @@ func run(name string) bool {
 	healthy := cs.failed.Load() == 0 && cs.ok.Load() > 0
 	verdict := "OK"
 	if !healthy {
-		verdict = "CANARY FAILED"
+		verdict = "CANARY FAILED (" + cs.firstErr + ")"
 	}
 	fmt.Printf("%-11s opened=%-7d closed_by_server=%-7d lifetime p50=%-7v max=%-7v | %s | canary ok=%d fail=%d p50=%v p99=%v  %s\n",
 		name, r.opened.Load(), r.closedByServer.Load(),
@@ -412,7 +422,7 @@ func main() {
 		}
 	}
 	fmt.Printf("after: goroutines=%d conns=%d heap=%dMB parser_panics=%d tap_panics=%d records_dropped=%d\n",
-		v["goroutines"], v["conns_open"], v["heap"]>>20, v["parser_panics"], v["tap_panics"], v["records_dropped"])
+		v["goroutines"], v["conns_open"], v["heap"]>>20, v["parser_panics"], v["tap_panics"], v["records_dropped_conn"]+v["records_dropped_request"])
 	if v["conns_open"] != 0 || v["goroutines"] > base["goroutines"]+20 || v["parser_panics"]+v["tap_panics"] != 0 {
 		fmt.Println("LEAK/PANIC CHECK FAILED")
 		ok = false

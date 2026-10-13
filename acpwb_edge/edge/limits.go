@@ -23,9 +23,11 @@ type Limits struct {
 	// onto a process that's about to run out of memory. Production carries
 	// ~1-2k; default 100000 (~4 GB worst case). Negative disables it.
 	RequestsInFlight int
-	// Individual connection records per IP per minute before the rest are
-	// folded into aggregated rows (exact conn_count, nothing dropped).
-	// Default 600; negative records every connection individually.
+	// Individual records per IP per minute for connections that carried no
+	// request, before the rest are folded into aggregated rows (exact
+	// conn_count, nothing dropped). Connections with requests are always
+	// recorded individually. Default 600; negative records every
+	// connection individually.
 	RecordsPerIPMin int
 }
 

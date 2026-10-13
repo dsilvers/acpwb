@@ -43,8 +43,13 @@ class RequestStreamMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        from apps.core import request_id
         t0 = time.monotonic()
-        response = self.get_response(request)
+        token = request_id.bind(request)
+        try:
+            response = self.get_response(request)
+        finally:
+            request_id.unbind(token)
         elapsed_ms = round((time.monotonic() - t0) * 1000)
 
         # Fire-and-forget: nothing in the response path depends on this, so
@@ -149,6 +154,7 @@ class RequestStreamMiddleware:
             from django.utils import timezone
             from apps.core.crawler_queue import queue_fingerprint_signal, check_first_seen_ip
             from apps.core.signal_capture import BROWSER_SIGNAL_HEADERS, browser_headers_present
+            from apps.core.request_id import parse_request_id
 
             present_headers = (
                 name for name in BROWSER_SIGNAL_HEADERS
@@ -168,6 +174,7 @@ class RequestStreamMiddleware:
                 'ja3': request.META.get('HTTP_X_JA3', '')[:32],
                 'ja4h': request.META.get('HTTP_X_JA4H', '')[:64],
                 'h2_fingerprint': request.META.get('HTTP_X_H2_FINGERPRINT', '')[:512],
+                'request_id': parse_request_id(request.META.get('HTTP_X_REQUEST_ID')),
                 'browser_headers_present': browser_headers_present(present_headers),
             }
             queue_fingerprint_signal(data)

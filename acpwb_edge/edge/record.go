@@ -31,8 +31,11 @@ type Record struct {
 	DurationMillis  int64  `json:"duration_ms"`
 	BytesIn         int64  `json:"bytes_in"`
 	BytesOut        int64  `json:"bytes_out"`
-	RequestCount    int    `json:"request_count"`
-	RejectedReqs    int    `json:"rejected_requests"`
+	RequestCount    int    `json:"request_count"`     // requests that reached a handler
+	RejectedReqs    int    `json:"rejected_requests"` // of those, refused by the overload valve
+	UnservedReqs    int    `json:"unserved_requests"` // requests read that no handler served
+	ConnID          string `json:"conn_id"`
+	ClientID        string `json:"client_id"` // the first client ID seen on the connection
 	HdrCaptureLost  bool   `json:"hdr_capture_lost"`
 	CloseReason     string `json:"close_reason"`
 
@@ -45,8 +48,9 @@ type Record struct {
 	H2Goaway        string `json:"h2_goaway"`
 
 	// Connections this row stands for: 1, or more for an aggregated row
-	// (an IP over the per-minute record budget; see recordGate), whose
-	// other fields describe the first of them as a sample.
+	// (requestless connections from an IP over the per-minute record
+	// budget; see recordGate), whose other fields describe the first of
+	// them as a sample.
 	ConnCount  int  `json:"conn_count"`
 	Aggregated bool `json:"aggregated"`
 
@@ -72,11 +76,7 @@ const (
 )
 
 func (r *Record) truncate() {
-	t := func(s *string, n int) {
-		if len(*s) > n {
-			*s = (*s)[:n]
-		}
-	}
+	t := func(s *string, n int) { *s = clip(*s, n) }
 	t(&r.SNI, 253)
 	t(&r.ALPN, 16)
 	t(&r.TLSVer, 16)

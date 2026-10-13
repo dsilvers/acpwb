@@ -1,12 +1,14 @@
-// Package edgequeue ships acpwb_edge's per-connection records to Redis
-// (acpwb:edge_conn_queue), where Django's drain_edge_conn_queue picks them
-// up into the EdgeConnection hypertable — the same RPUSH-then-drain pattern
-// acpwb_go's visitqueue and Django's crawler_queue use.
+// Package edgequeue ships acpwb_edge's records to Redis — one list per
+// record kind: connections (acpwb:edge_conn_queue → EdgeConnection) and
+// requests (acpwb:edge_request_queue → EdgeRequest), each drained by its
+// own Django command into its hypertable — the same RPUSH-then-drain
+// pattern acpwb_go's visitqueue and Django's crawler_queue use.
 //
-// Pushing never blocks a connection: records go onto a bounded channel and
-// a single worker sends them in pipelined batches. If the channel is full
-// or Redis is down, records are dropped and counted; the count is logged
-// once a minute.
+// Pushing never blocks a connection: each kind has its own bounded channel
+// and worker sending pipelined batches, so a flood of one kind can't crowd
+// out the other. If a channel is full or Redis is down, records are
+// dropped and counted per kind; drops are logged once a minute and
+// published with the stats.
 package edgequeue
 
 import (
@@ -22,8 +24,10 @@ import (
 )
 
 const (
-	QueueKey     = "acpwb:edge_conn_queue"
+	ConnQueue    = "acpwb:edge_conn_queue"
+	RequestQueue = "acpwb:edge_request_queue"
 	StatsKey     = "acpwb:edge_stats" // hash of process counters, read by precalc_dashboard
+
 	chanCapacity = 64 << 10
 	maxBatch     = 500
 	batchWait    = 50 * time.Millisecond
@@ -33,13 +37,21 @@ const (
 	backoff = 5 * time.Second
 )
 
+// Kinds lists the queues, with the short name used in stats.
+var Kinds = map[string]string{ConnQueue: "conn", RequestQueue: "request"}
+
 type Queue struct {
 	client   *redis.Client
 	queueMax int64
-	ch       chan []byte
-	done     chan struct{}
+	lanes    map[string]*lane
+	stop     chan struct{}
 	stopOnce sync.Once
+}
 
+type lane struct {
+	key     string
+	ch      chan []byte
+	done    chan struct{}
 	dropped atomic.Int64
 	pushed  atomic.Int64
 }
@@ -56,55 +68,69 @@ func New(redisURL string, queueMax int64) (*Queue, error) {
 	q := &Queue{
 		client:   redis.NewClient(opt),
 		queueMax: queueMax,
-		ch:       make(chan []byte, chanCapacity),
-		done:     make(chan struct{}),
+		lanes:    map[string]*lane{},
+		stop:     make(chan struct{}),
 	}
-	go q.run()
+	for key := range Kinds {
+		l := &lane{key: key, ch: make(chan []byte, chanCapacity), done: make(chan struct{})}
+		q.lanes[key] = l
+		go q.run(l)
+	}
 	go q.reportDrops()
 	return q, nil
 }
 
-// Push queues v (marshalled to JSON) without blocking. A nil Queue drops
-// everything, so callers needn't check whether Redis was configured.
-func (q *Queue) Push(v any) {
+// Push queues v (marshalled to JSON) onto the list key without blocking.
+// A nil Queue drops everything, so callers needn't check whether Redis was
+// configured.
+func (q *Queue) Push(key string, v any) {
 	if q == nil {
+		return
+	}
+	l := q.lanes[key]
+	if l == nil {
 		return
 	}
 	data, err := json.Marshal(v)
 	if err != nil {
-		q.dropped.Add(1)
+		l.dropped.Add(1)
 		return
 	}
 	select {
-	case q.ch <- data:
+	case l.ch <- data:
 	default:
-		q.dropped.Add(1)
+		l.dropped.Add(1)
 	}
 }
 
-// Dropped and Pushed report counters since startup.
-func (q *Queue) Dropped() int64 { return q.dropped.Load() }
-func (q *Queue) Pushed() int64  { return q.pushed.Load() }
+// Dropped and Pushed report key's counters since startup.
+func (q *Queue) Dropped(key string) int64 { return q.lanes[key].dropped.Load() }
+func (q *Queue) Pushed(key string) int64  { return q.lanes[key].pushed.Load() }
 
 // Close flushes what's queued (best effort, bounded by pushTimeout) and
-// stops the worker.
+// stops the workers. No Push may follow it.
 func (q *Queue) Close() {
 	if q == nil {
 		return
 	}
 	q.stopOnce.Do(func() {
-		close(q.ch)
-		<-q.done
+		close(q.stop)
+		for _, l := range q.lanes {
+			close(l.ch)
+		}
+		for _, l := range q.lanes {
+			<-l.done
+		}
 		q.client.Close()
 	})
 }
 
-func (q *Queue) run() {
-	defer close(q.done)
+func (q *Queue) run(l *lane) {
+	defer close(l.done)
 	var downUntil time.Time
 	batch := make([]any, 0, maxBatch)
 	for {
-		first, ok := <-q.ch
+		first, ok := <-l.ch
 		if !ok {
 			return
 		}
@@ -114,7 +140,7 @@ func (q *Queue) run() {
 	fill:
 		for len(batch) < maxBatch {
 			select {
-			case data, ok := <-q.ch:
+			case data, ok := <-l.ch:
 				if !ok {
 					closed = true
 					break fill
@@ -127,12 +153,12 @@ func (q *Queue) run() {
 		timer.Stop()
 
 		if time.Now().Before(downUntil) {
-			q.dropped.Add(int64(len(batch)))
-		} else if err := q.send(batch); err != nil {
-			q.dropped.Add(int64(len(batch)))
+			l.dropped.Add(int64(len(batch)))
+		} else if err := q.send(l.key, batch); err != nil {
+			l.dropped.Add(int64(len(batch)))
 			downUntil = time.Now().Add(backoff)
 		} else {
-			q.pushed.Add(int64(len(batch)))
+			l.pushed.Add(int64(len(batch)))
 		}
 		if closed {
 			return
@@ -140,14 +166,14 @@ func (q *Queue) run() {
 	}
 }
 
-func (q *Queue) send(batch []any) error {
+func (q *Queue) send(key string, batch []any) error {
 	ctx, cancel := context.WithTimeout(context.Background(), pushTimeout)
 	defer cancel()
 	pipe := q.client.Pipeline()
-	pipe.RPush(ctx, QueueKey, batch...)
+	pipe.RPush(ctx, key, batch...)
 	// Bounded like the fingerprint queue: keep only the newest queueMax
 	// entries if the drain falls behind (LTRIM is O(1) when nothing goes).
-	pipe.LTrim(ctx, QueueKey, -q.queueMax, -1)
+	pipe.LTrim(ctx, key, -q.queueMax, -1)
 	_, err := pipe.Exec(ctx)
 	return err
 }
@@ -155,18 +181,33 @@ func (q *Queue) send(batch []any) error {
 func (q *Queue) reportDrops() {
 	t := time.NewTicker(time.Minute)
 	defer t.Stop()
-	var last int64
+	last := map[string]int64{}
 	for {
 		select {
-		case <-q.done:
+		case <-q.stop:
 			return
 		case <-t.C:
-			if d := q.dropped.Load(); d != last {
-				log.Printf("edgequeue: dropped %d connection records in the last minute (%d total)", d-last, d)
-				last = d
+			for key, l := range q.lanes {
+				if d := l.dropped.Load(); d != last[key] {
+					log.Printf("edgequeue: dropped %d %s records in the last minute (%d total)", d-last[key], Kinds[key], d)
+					last[key] = d
+				}
 			}
 		}
 	}
+}
+
+// Stats returns records_pushed_<kind> / records_dropped_<kind> counters.
+func (q *Queue) Stats() map[string]int64 {
+	st := map[string]int64{}
+	if q == nil {
+		return st
+	}
+	for key, l := range q.lanes {
+		st["records_pushed_"+Kinds[key]] = l.pushed.Load()
+		st["records_dropped_"+Kinds[key]] = l.dropped.Load()
+	}
+	return st
 }
 
 // PublishStats writes the edge's process counters to the StatsKey hash, so

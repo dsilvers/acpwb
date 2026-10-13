@@ -27,6 +27,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -219,6 +220,10 @@ type Fingerprint struct {
 	ClientProtocol, TLSProtocol, TLSCipher string
 	JA4, JA3, JA4H, H2Fingerprint          string
 	BrowserHeadersPresent                  string
+	// acpwb_edge's request ID (X-Request-Id), stored as request_id on the
+	// CrawlerVisit/ArchiveVisit/RequestFingerprint rows so they join to
+	// EdgeRequest. Empty unless it's a well-formed UUID.
+	RequestID string
 }
 
 // FingerprintFrom reads r's Fingerprint off the acpwb_edge headers plus the
@@ -233,7 +238,27 @@ func FingerprintFrom(r *http.Request) Fingerprint {
 		JA4H:                  r.Header.Get("X-Ja4h"),
 		H2Fingerprint:         r.Header.Get("X-H2-Fingerprint"),
 		BrowserHeadersPresent: BrowserHeadersPresent(r),
+		RequestID:             requestID(r.Header.Get("X-Request-Id")),
 	}
+}
+
+var uuidRe = regexp.MustCompile(`^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$`)
+
+// requestID returns v if it's a UUID — anything else would fail the
+// UUIDField on the Django side and lose the row.
+func requestID(v string) string {
+	if uuidRe.MatchString(v) {
+		return v
+	}
+	return ""
+}
+
+// requestIDValue is the payload value for a request ID: null when absent.
+func requestIDValue(id string) any {
+	if id == "" {
+		return nil
+	}
+	return id
 }
 
 // PushVisit sends the crawler-queue RPUSH, the optional archive-queue RPUSH,
@@ -274,6 +299,7 @@ func (q *Queue) PushVisit(v Visit) {
 		"query_string":    truncate(v.QueryString, 256),
 		"bot_type":        v.BotType,
 		"bot_group":       v.BotGroup,
+		"request_id":      requestIDValue(v.RequestID),
 		"idempotency_key": uuid4(),
 	}
 	if data, err := json.Marshal(crawlerPayload); err == nil {
@@ -290,6 +316,7 @@ func (q *Queue) PushVisit(v Visit) {
 			"day":             v.Archive.Day,
 			"slug":            truncate(v.Archive.Slug, 512),
 			"depth":           v.Archive.Depth,
+			"request_id":      requestIDValue(v.RequestID),
 			"idempotency_key": uuid4(),
 		}
 		if data, err := json.Marshal(archivePayload); err == nil {
@@ -339,6 +366,7 @@ func (q *Queue) PushVisit(v Visit) {
 		"ja4h":                    truncate(v.JA4H, 64),
 		"h2_fingerprint":          truncate(v.H2Fingerprint, 512),
 		"browser_headers_present": truncate(v.BrowserHeadersPresent, 512),
+		"request_id":              requestIDValue(v.RequestID),
 		"idempotency_key":         uuid4(),
 	}
 	if data, err := json.Marshal(fingerprintPayload); err == nil {

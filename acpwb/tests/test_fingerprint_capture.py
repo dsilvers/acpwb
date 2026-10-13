@@ -140,6 +140,7 @@ def test_middleware_forwards_edge_fingerprint_headers(client, capture_on):
         )
 
     data = mock_queue.call_args[0][0]
+    assert data['request_id'] is None  # no X-Request-Id: no edge in front
     assert data['ja4'] == 't13d1516h2_8daaf6152771_e5627efa2ab1'
     assert data['ja3'] == '0123456789abcdef0123456789abcdef'
     assert data['ja4h'].startswith('ge20nn09enus_')
@@ -175,6 +176,7 @@ def private_edge_queue(monkeypatch):
     import uuid
     from apps.core import crawler_queue
     monkeypatch.setattr(crawler_queue, '_EDGE_CONN_QUEUE_KEY', f'test:edge_conn_queue:{uuid.uuid4()}')
+    monkeypatch.setattr(crawler_queue, '_EDGE_REQUEST_QUEUE_KEY', f'test:edge_request_queue:{uuid.uuid4()}')
 
 
 @pytest.mark.django_db
@@ -198,3 +200,54 @@ def test_drain_edge_conn_queue_persists_and_dedupes(private_edge_queue):
     assert rows.count() == 1
     assert rows[0].outcome == 'handshake_failed'
     assert rows[0].bytes_in == 517
+
+
+@pytest.mark.django_db
+def test_drain_edge_request_queue_persists_and_dedupes(private_edge_queue):
+    import json
+    from apps.core import crawler_queue
+    from apps.honeypot.models import EdgeRequest
+    record = {
+        'timestamp': '2026-01-01T00:00:00.000000+00:00',
+        'request_id': '0f8fad5b-d9cb-469f-a165-70867728950e',
+        'conn_id': '7c9e6679-7425-40de-944b-e07fc1f90ae7',
+        'client_id': 'AAAAAAAAAAAAAAAAAAAAAA',
+        'seq': 2,
+        'ip_address': '192.0.2.11',
+        'protocol': 'HTTP/2.0',
+        'method': 'GET', 'host': 'acpwb.com', 'path': '/static/css/site.css', 'query': '',
+        'status': 200, 'route': 'static', 'error': '',
+        'response_bytes': 1234, 'duration_us': 900,
+        'unknown_future_key': 1,
+    }
+    r = crawler_queue._get_client()
+    r.rpush(crawler_queue._EDGE_REQUEST_QUEUE_KEY, json.dumps(record))
+    r.rpush(crawler_queue._EDGE_REQUEST_QUEUE_KEY, json.dumps(record))  # replay
+    call_command('drain_edge_request_queue', stdout=io.StringIO())
+
+    rows = EdgeRequest.objects.filter(ip_address='192.0.2.11')
+    assert rows.count() == 1
+    assert str(rows[0].conn_id) == '7c9e6679-7425-40de-944b-e07fc1f90ae7'
+    assert rows[0].route == 'static'
+    assert rows[0].seq == 2
+
+
+@pytest.mark.django_db
+def test_crawler_visit_carries_edge_request_id(client):
+    """The edge's X-Request-Id lands on the CrawlerVisit, joining it to
+    EdgeRequest."""
+    from apps.honeypot.models import CrawlerVisit
+    rid = '0f8fad5b-d9cb-469f-a165-70867728950e'
+    with patch('apps.core.crawler_queue.push_crawler_visit', return_value=False):
+        client.get('/.env', HTTP_X_REQUEST_ID=rid, HTTP_USER_AGENT='python-requests/2.31')
+    visits = CrawlerVisit.objects.filter(path='/.env')  # the probe view and the bot middleware both log
+    assert visits.exists()
+    assert {str(v.request_id) for v in visits} == {rid}
+
+
+@pytest.mark.django_db
+def test_malformed_request_id_is_ignored(client):
+    from apps.honeypot.models import CrawlerVisit
+    with patch('apps.core.crawler_queue.push_crawler_visit', return_value=False):
+        client.get('/.env', HTTP_X_REQUEST_ID="nope'; drop table", HTTP_USER_AGENT='python-requests/2.31')
+    assert set(CrawlerVisit.objects.filter(path='/.env').values_list('request_id', flat=True)) == {None}

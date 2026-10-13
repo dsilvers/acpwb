@@ -119,6 +119,7 @@ services:
       EDGE_BOTSEED_ROOT: /botseed
       REDIS_URL: redis://redis:6379/0
       EDGE_DEBUG_ADDR: ":6061" # /debug/vars + pprof; published to localhost only
+      EDGE_COOKIE_SECRET: dev-only-not-secret # signs the acpwb_cid client cookie
     volumes:
       - ./acpwb/staticfiles:/app/staticfiles:ro
       - ./botseed:/botseed:ro

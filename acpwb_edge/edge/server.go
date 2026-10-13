@@ -16,21 +16,26 @@ import (
 	"net"
 	"net/http"
 	"slices"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 
 	"golang.org/x/net/http/httpguts"
 	"golang.org/x/net/http2"
 
+	"acpwb_edge/edgequeue"
 	"acpwb_edge/httpfp"
 	"acpwb_edge/meta"
 	"acpwb_edge/page"
 	"acpwb_edge/router"
 )
 
-// Sink receives one Record per closed connection (edgequeue.Queue).
+// Sink receives records (edgequeue.Queue): one *Record per closed
+// connection on edgequeue.ConnQueue, one *RequestRecord per request on
+// edgequeue.RequestQueue.
 type Sink interface {
-	Push(v any)
+	Push(key string, v any)
 }
 
 type Config struct {
@@ -38,6 +43,17 @@ type Config struct {
 	TLS       http.Handler
 	Plain     http.Handler
 	Sink      Sink
+
+	// CookieDomain gives the client cookie's Domain for a host, or false
+	// for hosts that get none (router.Config.CookieDomain). Nil: no cookie.
+	CookieDomain func(host string) (string, bool)
+	// CookieSecret signs client cookies; empty means a random key per
+	// process (dev — every restart issues new IDs).
+	CookieSecret []byte
+	// HTTPSBase gives the HTTPS URL (no path) that plain HTTP sent to the
+	// TLS port for a Host is redirected to (router.Config.HTTPSBase).
+	// Default https://acpwb.com.
+	HTTPSBase func(hostport string) string
 
 	HandshakeTimeout time.Duration // default 10s
 	IdleTimeout      time.Duration // default 65s (nginx keepalive_timeout)
@@ -70,6 +86,7 @@ type Server struct {
 	handshake sync.WaitGroup
 
 	records *recordGate
+	clients *clientIDs
 }
 
 func New(cfg Config) *Server {
@@ -82,8 +99,15 @@ func New(cfg Config) *Server {
 	if cfg.MaxBodyBytes == 0 {
 		cfg.MaxBodyBytes = 10 << 20
 	}
+	if cfg.HTTPSBase == nil {
+		cfg.HTTPSBase = func(string) string { return "https://acpwb.com" }
+	}
 	cfg.Limits.defaults()
-	s := &Server{cfg: cfg, records: newRecordGate(cfg.Sink, cfg.Limits.RecordsPerIPMin)}
+	s := &Server{
+		cfg:     cfg,
+		records: newRecordGate(cfg.Sink, cfg.Limits.RecordsPerIPMin),
+		clients: newClientIDs(cfg.CookieSecret, cfg.CookieDomain),
+	}
 	s.baseCtx, s.cancel = context.WithCancel(context.Background())
 
 	if cfg.TLSConfig != nil {
@@ -207,8 +231,8 @@ func (s *Server) handleTLS(raw net.Conn, cl *chanListener) {
 	s.handshake.Done()
 	if err != nil {
 		ci.handshakeFailed(err)
-		if ci.plainHTTPOnTLS() {
-			wc.Write([]byte(plainHTTPOnTLSResponse))
+		if head, ok := ci.plainHTTPOnTLS(); ok {
+			s.redirectPlainOnTLS(wc, ci, head)
 		}
 		wc.Close()
 		return
@@ -247,11 +271,43 @@ func (s *Server) handlePlain(raw net.Conn, cl *chanListener) {
 	cl.push(&h1Conn{H1Conn: hc, ci: ci})
 }
 
-// nginx's reply to plain HTTP on its TLS port.
-const plainHTTPOnTLSResponse = "HTTP/1.1 400 Bad Request\r\nServer: nginx\r\nContent-Type: text/html\r\nConnection: close\r\n\r\n" +
-	"<html>\r\n<head><title>400 The plain HTTP request was sent to HTTPS port</title></head>\r\n<body>\r\n" +
-	"<center><h1>400 Bad Request</h1></center>\r\n<center>The plain HTTP request was sent to HTTPS port</center>\r\n" +
-	"<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+// redirectPlainOnTLS answers plain HTTP sent to the TLS port (e.g.
+// http://acpwb.com:443/) with a redirect to HTTPS, where nginx sent a 400,
+// and logs it as a request.
+func (s *Server) redirectPlainOnTLS(wc *wireConn, ci *connInfo, raw []byte) {
+	start := time.Now()
+	head := httpfp.ParseHead(raw)
+	target := head.Path
+	if !strings.HasPrefix(target, "/") {
+		target = "/" // absolute-form or junk: don't reflect it
+	}
+	loc := s.cfg.HTTPSBase(head.Authority) + target
+	body := page.Render(http.StatusMovedPermanently, loc)
+	var b strings.Builder
+	b.WriteString("HTTP/1.1 301 Moved Permanently\r\nServer: " + page.ServerHeader +
+		"\r\nContent-Type: text/html; charset=utf-8\r\nLocation: " + headerSafe(loc) +
+		"\r\nContent-Length: " + strconv.Itoa(len(body)) + "\r\nConnection: close\r\n\r\n")
+	if head.Method != http.MethodHead {
+		b.Write(body)
+	}
+	n, _ := wc.Write([]byte(b.String()))
+	rec := ci.unservedRecord(head, http.StatusMovedPermanently, ErrPlainOnTLS, "HTTP/1.1", start)
+	rec.Seq = 1
+	rec.Route = router.Redirect
+	rec.ResponseBytes = int64(max(0, n-(b.Len()-len(body))))
+	rec.DurationUS = time.Since(start).Microseconds()
+	ci.pushRequest(rec)
+}
+
+// headerSafe drops anything that could end a header line.
+func headerSafe(v string) string {
+	return strings.Map(func(r rune) rune {
+		if r < 0x20 || r == 0x7f {
+			return -1
+		}
+		return r
+	}, v)
+}
 
 // serveRequest is the handler both HTTP servers run: it attaches what the
 // connection layer learned to the request, then hands it to the router.
@@ -295,16 +351,30 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 		JA4H:           httpfp.JA4H(r, names),
 		H2Fingerprint:  h2fp,
 	}
+	start := time.Now()
+	seq := ci.startRequest()
+	m.RequestID = uuid4()
 	r = r.WithContext(meta.With(r.Context(), m))
-	sw := &statusWriter{ResponseWriter: w}
-	defer func() { ci.noteRequest(r, m, names, sw.Status()) }()
+	sw := &statusWriter{ResponseWriter: w, start: start}
+	var issued bool
+	if ci.tls {
+		m.ClientID, issued = s.clients.identify(w, r, host)
+	}
+	if r.Body != nil && r.Body != http.NoBody {
+		r.Body = &countingBody{ReadCloser: r.Body}
+	}
+	body := r.Body
+	defer func() {
+		ci.noteRequest(r, m, names, sw.Status())
+		ci.pushRequest(s.requestRecord(ci, r, m, sw, names, body, seq, issued, start))
+	}()
 
 	w.Header().Set("Server", page.ServerHeader)
 	release, ok := s.admitRequest()
 	if !ok {
 		rejectedRequests.Add(1)
 		ci.noteRejectedRequest()
-		m.Route = "overload"
+		m.Route, m.Error = "overload", ErrOverload
 		sw.Header().Set("Retry-After", "1")
 		page.Error(sw, http.StatusServiceUnavailable)
 		return
@@ -324,6 +394,7 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if r.ContentLength > s.cfg.MaxBodyBytes {
+		m.Error = ErrBodyTooLarge
 		page.Error(sw, http.StatusRequestEntityTooLarge)
 		return
 	}
@@ -336,12 +407,67 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 	h.ServeHTTP(sw, r)
 }
 
-// statusWriter records the response status. Unwrap keeps Flush/Hijack
-// reachable through http.ResponseController (the proxy's WebSocket
-// upgrade hijacks through it).
+// requestRecord describes a request a handler served, as it finishes.
+func (s *Server) requestRecord(ci *connInfo, r *http.Request, m *meta.Request, sw *statusWriter,
+	names []string, body io.ReadCloser, seq int, issued bool, start time.Time) *RequestRecord {
+	path, query := splitURI(r.RequestURI)
+	rec := &RequestRecord{
+		Timestamp:      isoTime(start),
+		RequestID:      m.RequestID,
+		ConnID:         ci.id,
+		ClientID:       m.ClientID,
+		NewClient:      issued,
+		Seq:            seq,
+		IPAddress:      ci.ip,
+		TLS:            ci.tls,
+		Protocol:       protoName(r),
+		Host:           m.Host,
+		Method:         r.Method,
+		Path:           path,
+		Query:          query,
+		UserAgent:      r.UserAgent(),
+		Referer:        r.Referer(),
+		AcceptLanguage: r.Header.Get("Accept-Language"),
+		JA4H:           m.JA4H,
+		HeaderNames:    strings.Join(names, ","),
+		Status:         sw.Status(),
+		Route:          m.Route,
+		Error:          m.Error,
+		ContentType:    sw.Header().Get("Content-Type"),
+		RequestBytes:   requestBytes(body),
+		ResponseBytes:  sw.written,
+		DurationUS:     time.Since(start).Microseconds(),
+	}
+	if !sw.headAt.IsZero() {
+		rec.TTFBMicros = sw.headAt.Sub(start).Microseconds()
+	}
+	switch {
+	case rec.Error != "":
+	case r.Context().Err() != nil:
+		// The client reset the stream or went away before the response
+		// was done (nginx logs these as 499).
+		rec.Error = ErrClientClosed
+	case sw.writeErr:
+		rec.Error = ErrWriteFailed
+	}
+	if rec.Status == 0 && rec.Error == ErrClientClosed {
+		rec.Status = 499
+	}
+	rec.truncate()
+	return rec
+}
+
+// statusWriter records the response status, when the head went out, and
+// body bytes written. Unwrap keeps Flush/Hijack reachable through
+// http.ResponseController (the proxy's WebSocket upgrade hijacks through
+// it).
 type statusWriter struct {
 	http.ResponseWriter
-	status int
+	status   int
+	start    time.Time
+	headAt   time.Time
+	written  int64
+	writeErr bool
 
 	rc    *http.ResponseController // set: extend the write deadline on progress
 	stall time.Duration
@@ -351,6 +477,9 @@ type statusWriter struct {
 func (w *statusWriter) WriteHeader(code int) {
 	if w.status == 0 || w.status < 200 {
 		w.status = code
+		if code >= 200 || code == http.StatusSwitchingProtocols {
+			w.headAt = time.Now()
+		}
 	}
 	w.ResponseWriter.WriteHeader(code)
 }
@@ -358,8 +487,13 @@ func (w *statusWriter) WriteHeader(code int) {
 func (w *statusWriter) Write(p []byte) (int, error) {
 	if w.status == 0 {
 		w.status = http.StatusOK
+		w.headAt = time.Now()
 	}
 	n, err := w.ResponseWriter.Write(p)
+	w.written += int64(n)
+	if err != nil {
+		w.writeErr = true
+	}
 	if n > 0 && w.rc != nil {
 		// At most once a second: on HTTP/2 each call is a message to the
 		// connection's serve loop.
@@ -375,6 +509,7 @@ func (w *statusWriter) Flush() {
 	if f, ok := w.ResponseWriter.(http.Flusher); ok {
 		if w.status == 0 {
 			w.status = http.StatusOK
+			w.headAt = time.Now()
 		}
 		f.Flush()
 	}
@@ -416,6 +551,9 @@ func (s *Server) Shutdown(ctx context.Context) error {
 func (s *Server) newConn(raw net.Conn, isTLS bool) *connInfo {
 	ci := newConnInfo(raw, isTLS)
 	ci.emit = s.records.emit
+	if sink := s.cfg.Sink; sink != nil {
+		ci.emitReq = func(rec *RequestRecord) { sink.Push(edgequeue.RequestQueue, rec) }
+	}
 	return ci
 }
 

@@ -21,14 +21,39 @@ import (
 	"golang.org/x/net/http2/hpack"
 
 	"acpwb_edge/certs"
+	"acpwb_edge/edgequeue"
 	"acpwb_edge/proxy"
 	"acpwb_edge/router"
 	"acpwb_edge/tlsfp"
 )
 
-type sink struct{ ch chan *Record }
+type sink struct {
+	ch   chan *Record
+	reqs chan *RequestRecord
+}
 
-func (s *sink) Push(v any) { s.ch <- v.(*Record) }
+func (s *sink) Push(key string, v any) {
+	switch key {
+	case edgequeue.ConnQueue:
+		s.ch <- v.(*Record)
+	case edgequeue.RequestQueue:
+		select {
+		case s.reqs <- v.(*RequestRecord):
+		default: // tests that don't read requests mustn't block on them
+		}
+	}
+}
+
+func (s *sink) nextReq(t *testing.T) *RequestRecord {
+	t.Helper()
+	select {
+	case r := <-s.reqs:
+		return r
+	case <-time.After(5 * time.Second):
+		t.Fatal("no request record")
+		return nil
+	}
+}
 
 func (s *sink) next(t *testing.T) *Record {
 	t.Helper()
@@ -116,7 +141,7 @@ func startWith(t *testing.T, mod func(*Config)) *env {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sk := &sink{ch: make(chan *Record, 64)}
+	sk := &sink{ch: make(chan *Record, 64), reqs: make(chan *RequestRecord, 1024)}
 	e := &env{sink: sk, up: up, unblock: unblock}
 	tlsRouter := router.TLS(rc)
 	cfg := Config{
@@ -183,7 +208,7 @@ func TestHTTP1ProxyHeaders(t *testing.T) {
 	}
 	io.Copy(io.Discard, resp.Body)
 	resp.Body.Close()
-	if resp.Header.Get("Server") != "nginx" || len(resp.Header.Values("Server")) != 1 {
+	if resp.Header.Get("Server") != "acpwb/web" || len(resp.Header.Values("Server")) != 1 {
 		t.Errorf("Server header %v — upstream's must be replaced", resp.Header.Values("Server"))
 	}
 
@@ -339,18 +364,151 @@ func TestFailedHandshakeIsRecorded(t *testing.T) {
 	}
 }
 
+// Plain HTTP sent to the TLS port is redirected to HTTPS — to the same
+// host only if it's one of ours.
 func TestPlainHTTPOnTLSPort(t *testing.T) {
-	e := start(t)
-	c, _ := net.Dial("tcp", e.tlsAddr)
-	c.Write([]byte("GET /wp-login.php HTTP/1.1\r\nHost: acpwb.com\r\n\r\n"))
-	body, _ := io.ReadAll(c)
-	c.Close()
-	if !strings.Contains(string(body), "The plain HTTP request was sent to HTTPS port") {
-		t.Errorf("response %q", body)
+	rc := router.Config{}
+	e := startWith(t, func(c *Config) { c.HTTPSBase = rc.HTTPSBase })
+	for _, tc := range []struct{ host, path, want string }{
+		{"archives-1999.acpwb.com", "/wp-login.php?x=1", "https://archives-1999.acpwb.com/wp-login.php?x=1"},
+		{"evil.example", "/a", "https://acpwb.com/a"},
+		{"acpwb.com", "http://evil.example/", "https://acpwb.com/"},
+	} {
+		c, _ := net.Dial("tcp", e.tlsAddr)
+		c.Write([]byte("GET " + tc.path + " HTTP/1.1\r\nHost: " + tc.host + "\r\nUser-Agent: curl/8\r\n\r\n"))
+		resp, err := http.ReadResponse(bufio.NewReader(c), nil)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body, _ := io.ReadAll(resp.Body)
+		c.Close()
+		if resp.StatusCode != 301 || resp.Header.Get("Location") != tc.want || resp.Header.Get("Server") != "acpwb/web" ||
+			!strings.Contains(string(body), "ACPW301I") {
+			t.Errorf("%s%s: %d %v", tc.host, tc.path, resp.StatusCode, resp.Header)
+		}
+		req := e.sink.nextReq(t)
+		rec := e.sink.next(t)
+		if rec.Outcome != OutcomeNoHello || rec.FirstMethod != "GET" || rec.FirstStatus != 301 {
+			t.Errorf("conn record %+v", rec)
+		}
+		if req.Status != 301 || req.Error != ErrPlainOnTLS || req.Host != tc.host || req.UserAgent != "curl/8" ||
+			req.ConnID != rec.ConnID || req.ConnID == "" || req.Seq != 1 || req.ResponseBytes == 0 {
+			t.Errorf("request record %+v", req)
+		}
 	}
+}
+
+// Every request gets a record linked to its connection by conn_id; its
+// request_id reaches the upstream (a client's own X-Request-Id never
+// does); the client cookie is issued once and then recognised.
+func TestRequestRecords(t *testing.T) {
+	rc := router.Config{}
+	e := startWith(t, func(c *Config) { c.CookieDomain = rc.CookieDomain; c.CookieSecret = []byte("test") })
+	c := client(e, clientTLS("http/1.1"))
+
+	req, _ := http.NewRequest("POST", "https://acpwb.com/wiki/a/?q=1", strings.NewReader("hello"))
+	req.Header.Set("X-Request-Id", "spoofed")
+	req.Header.Set("User-Agent", "rec-test/1")
+	req.Header.Set("Referer", "https://example.com/")
+	resp, err := c.Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	body, _ := io.ReadAll(resp.Body)
+	resp.Body.Close()
+	cookies := resp.Cookies()
+	if len(cookies) != 1 || cookies[0].Name != ClientCookieName || cookies[0].Domain != "acpwb.com" ||
+		!cookies[0].Secure || !cookies[0].HttpOnly || cookies[0].MaxAge != clientCookieMaxAge {
+		t.Fatalf("cookies %+v", cookies)
+	}
+	r1 := e.sink.nextReq(t)
+	h, _, _ := e.up.seen()
+	if h.Get("X-Request-Id") != r1.RequestID || len(r1.RequestID) != 36 {
+		t.Errorf("upstream X-Request-Id %q, record %q", h.Get("X-Request-Id"), r1.RequestID)
+	}
+	if r1.Seq != 1 || r1.Method != "POST" || r1.Path != "/wiki/a/" || r1.Query != "q=1" || r1.Status != 200 ||
+		r1.Route != router.Django || r1.UserAgent != "rec-test/1" || r1.Referer != "https://example.com/" ||
+		r1.RequestBytes != 5 || r1.ResponseBytes != int64(len(body)) || r1.Error != "" || !r1.NewClient ||
+		len(r1.ClientID) != 22 || r1.Protocol != "HTTP/1.1" || r1.DurationUS <= 0 || r1.TTFBMicros <= 0 || !r1.TLS ||
+		!strings.Contains(r1.HeaderNames, "Referer") {
+		t.Errorf("first request %+v", r1)
+	}
+
+	// Same connection, cookie sent back: same client, not new.
+	req, _ = http.NewRequest("GET", "https://acpwb.com/static/missing.css", nil)
+	req.AddCookie(cookies[0])
+	resp, err = c.Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	io.Copy(io.Discard, resp.Body)
+	resp.Body.Close()
+	if len(resp.Cookies()) != 0 {
+		t.Errorf("cookie reissued: %v", resp.Cookies())
+	}
+	r2 := e.sink.nextReq(t)
+	if r2.Seq != 2 || r2.ConnID != r1.ConnID || r2.ClientID != r1.ClientID || r2.NewClient ||
+		r2.Status != 404 || r2.Route != router.Static {
+		t.Errorf("second request %+v", r2)
+	}
+
+	// A forged cookie is replaced, not trusted.
+	req, _ = http.NewRequest("GET", "https://acpwb.com/", nil)
+	req.AddCookie(&http.Cookie{Name: ClientCookieName, Value: r1.ClientID + ".forgedforgedforg"})
+	resp, err = c.Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	resp.Body.Close()
+	if r3 := e.sink.nextReq(t); r3.ClientID == r1.ClientID || !r3.NewClient {
+		t.Errorf("forged cookie accepted: %+v", r3)
+	}
+
+	c.CloseIdleConnections()
 	rec := e.sink.next(t)
-	if rec.Outcome != OutcomeNoHello || rec.FirstMethod != "GET" || rec.FirstPath != "/wp-login.php" {
-		t.Errorf("record %+v", rec)
+	if rec.ConnID != r1.ConnID || rec.RequestCount != 3 || rec.ClientID != r1.ClientID || rec.Aggregated {
+		t.Errorf("conn record %+v", rec)
+	}
+}
+
+func TestHTTP2RequestRecord(t *testing.T) {
+	e := start(t)
+	c := client(e, clientTLS("h2"))
+	resp, err := c.Get("https://acpwb.com/reports/")
+	if err != nil {
+		t.Fatal(err)
+	}
+	io.Copy(io.Discard, resp.Body)
+	resp.Body.Close()
+	r := e.sink.nextReq(t)
+	if r.Protocol != "HTTP/2.0" || r.Status != 200 || r.HeaderNames == "" || r.Seq != 1 {
+		t.Errorf("record %+v", r)
+	}
+}
+
+// Requests the HTTP/1 server rejects before any handler runs are still
+// logged, with the status it answered.
+func TestRejectedRequestIsRecorded(t *testing.T) {
+	e := start(t)
+	tc, err := tls.Dial("tcp", e.tlsAddr, clientTLS("http/1.1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	tc.Write([]byte("GET /ok/ HTTP/1.1\r\nHost: acpwb.com\r\n\r\n" +
+		"GET /bad/ HTTP/1.1\r\nHost: acpwb.com\r\nUser-Agent: smuggler\r\nBad Header Line\r\n\r\n"))
+	io.Copy(io.Discard, tc)
+	tc.Close()
+	ok := e.sink.nextReq(t)
+	bad := e.sink.nextReq(t)
+	if ok.Path != "/ok/" || ok.Error != "" || ok.Seq != 1 {
+		t.Errorf("served request %+v", ok)
+	}
+	if bad.Path != "/bad/" || bad.Error != ErrRejected || bad.Status != 400 || bad.UserAgent != "smuggler" ||
+		bad.Seq != 2 || bad.ConnID != ok.ConnID {
+		t.Errorf("rejected request %+v", bad)
+	}
+	if rec := e.sink.next(t); rec.RequestCount != 1 || rec.UnservedReqs != 1 {
+		t.Errorf("conn record %+v", rec)
 	}
 }
 

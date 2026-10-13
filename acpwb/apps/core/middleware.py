@@ -45,6 +45,38 @@ class _NoOpSession:
     def keys(self): return []
 
 
+class HeadResponseMiddleware:
+    """Drop the body from responses to HEAD requests, keeping the headers
+    (Content-Length included) a GET would get.
+
+    gunicorn's gevent worker sends whatever body the view produced, HEAD or
+    not. nginx used to discard it; acpwb_edge's proxy (Go's HTTP client)
+    instead sees bytes arriving after a complete HEAD response, logs
+    "Unsolicited response received on idle HTTP channel" and throws the
+    upstream connection away — hundreds of times a minute in production.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        if request.method != 'HEAD':
+            return response
+        if response.streaming:
+            close = getattr(response.streaming_content, 'close', None)
+            if close:
+                close()
+            response.streaming_content = []
+        else:
+            if not response.has_header('Content-Length'):
+                response['Content-Length'] = str(len(response.content))
+            length = response['Content-Length']
+            response.content = b''
+            response['Content-Length'] = length
+        return response
+
+
 class ConditionalAuthMiddleware:
     """Runs Session+Auth+Message middleware only for paths that need DB access."""
 

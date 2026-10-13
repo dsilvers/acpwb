@@ -272,3 +272,15 @@ def test_interrupted_batch_is_recovered_without_scanning(private_edge_queue):
     assert crawler_queue.recover_edge_requests() == []
     assert not r.exists(batch_key)
     r.delete(f'{key}:processing_batches', f'{key}:processing_scanned')
+
+
+@pytest.mark.django_db
+def test_head_response_has_headers_but_no_body(client):
+    """gunicorn sends a body for HEAD unless the app drops it; the edge's
+    proxy treats those bytes as an unsolicited response."""
+    get = client.get('/reports/ceo-pay-ratio-study/download.csv')
+    head = client.head('/reports/ceo-pay-ratio-study/download.csv')
+    assert head.status_code == 200
+    assert head.content == b''
+    assert head['Content-Length'] == str(len(get.content))
+    assert head['Content-Type'] == get['Content-Type']

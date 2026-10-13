@@ -177,15 +177,19 @@ def _pop_visits(queue_key: str, count: int):
     batch_key = f'{queue_key}:processing:{uuid.uuid4().hex}'
     try:
         pipe = r.pipeline(transaction=False)
+        # Registered before the LMOVEs (a pipeline runs in order), so a
+        # batch key can never exist without its queue's set knowing it.
+        pipe.sadd(_batches_key(queue_key), batch_key)
         for _ in range(count):
             pipe.lmove(queue_key, batch_key, 'LEFT', 'RIGHT')
-        results = pipe.execute()
+        results = pipe.execute()[1:]
     except Exception:
         _mark_consumer_failure()
         return [], None
 
     raw_items = [item for item in results if item is not None]
     if not raw_items:
+        finalize_batch(batch_key)
         return [], None
 
     items = []
@@ -232,9 +236,17 @@ def finalize_batch(batch_key) -> None:
     if r is None:
         return
     try:
-        r.delete(batch_key)
+        pipe = r.pipeline(transaction=False)
+        pipe.delete(batch_key)
+        pipe.srem(_batches_key(batch_key.split(':processing:')[0]), batch_key)
+        pipe.execute()
     except Exception:
         _mark_consumer_failure()
+
+
+def _batches_key(queue_key: str) -> str:
+    """The set of a queue's in-flight per-batch processing keys."""
+    return f'{queue_key}:processing_batches'
 
 
 def _recover_visits(queue_key: str):
@@ -244,6 +256,13 @@ def _recover_visits(queue_key: str):
     and return them as (items, batch_key) pairs — same shape as
     _pop_visits() — so the caller can retry the insert and finalize each one.
 
+    Batch keys are tracked in a per-queue set (see _pop_visits), never found
+    by scanning: production Redis holds ~12M keys (the 30-day
+    acpwb:ipseen:* markers), and a full SCAN takes ~20s of Redis time —
+    six drains doing that every minute saturated Redis and stalled every
+    queue. Batches from before the set existed are adopted by one legacy
+    scan per queue, guarded by a flag key so it runs once.
+
     Safe to call whether or not there's anything to recover.
     """
     r = _get_consumer_client()
@@ -252,11 +271,10 @@ def _recover_visits(queue_key: str):
 
     batches = []
     try:
-        # count is per SCAN round trip, not a result limit: Redis holds
-        # millions of keys (the 30-day acpwb:ipseen:* first-seen markers),
-        # and at 100 per call the scan alone ate every drain run's whole
-        # 55s budget before a single batch was popped.
-        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=10000):
+        if r.set(f'{queue_key}:processing_scanned', '1', nx=True):
+            for key in r.scan_iter(match=f'{queue_key}:processing:*', count=10000):
+                r.sadd(_batches_key(queue_key), key)
+        for key in r.smembers(_batches_key(queue_key)):
             raw_items = r.lrange(key, 0, -1)
             items = []
             for raw in raw_items:
@@ -288,11 +306,9 @@ def _oldest_pending_timestamp(queue_key: str):
         return False, None
     try:
         heads = [r.lindex(queue_key, 0)]
-        # count is per SCAN round trip, not a result limit: Redis holds
-        # millions of keys (the 30-day acpwb:ipseen:* first-seen markers),
-        # and at 100 per call the scan alone ate every drain run's whole
-        # 55s budget before a single batch was popped.
-        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=10000):
+        # The in-flight batches' set, not a keyspace SCAN (see
+        # _recover_visits).
+        for key in r.smembers(_batches_key(queue_key)):
             heads.append(r.lindex(key, 0))
     except Exception:
         _mark_consumer_failure()

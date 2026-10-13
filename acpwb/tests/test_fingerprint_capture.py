@@ -251,3 +251,24 @@ def test_malformed_request_id_is_ignored(client):
     with patch('apps.core.crawler_queue.push_crawler_visit', return_value=False):
         client.get('/.env', HTTP_X_REQUEST_ID="nope'; drop table", HTTP_USER_AGENT='python-requests/2.31')
     assert set(CrawlerVisit.objects.filter(path='/.env').values_list('request_id', flat=True)) == {None}
+
+
+def test_interrupted_batch_is_recovered_without_scanning(private_edge_queue):
+    """A drain that dies between pop and finalize leaves its batch in the
+    queue's in-flight set; recovery finds it there (no keyspace SCAN), and
+    finalizing forgets it."""
+    import json
+    from apps.core import crawler_queue
+    r = crawler_queue._get_client()
+    key = crawler_queue._EDGE_REQUEST_QUEUE_KEY
+    r.rpush(key, json.dumps({'n': 1}), json.dumps({'n': 2}))
+    items, batch_key = crawler_queue.pop_edge_requests(10)
+    assert [i['n'] for i in items] == [1, 2]
+
+    recovered = crawler_queue.recover_edge_requests()  # "crashed" before finalize
+    assert [(sorted(i['n'] for i in its), k) for its, k in recovered] == [([1, 2], batch_key)]
+
+    crawler_queue.finalize_batch(batch_key)
+    assert crawler_queue.recover_edge_requests() == []
+    assert not r.exists(batch_key)
+    r.delete(f'{key}:processing_batches', f'{key}:processing_scanned')

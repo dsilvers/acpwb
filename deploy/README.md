@@ -237,10 +237,15 @@ hook nothing reloaded nginx after a renewal at all.
 ## Install cron jobs
 
 ```bash
+# every log file the crontab appends to must already exist, owned by acpwb:
+grep -o '/var/log/acpwb-[a-z-]*\.log' deploy/acpwb-crontab | sort -u |
+  while read f; do [ -e "$f" ] || sudo install -o acpwb -g acpwb -m 0644 /dev/null "$f"; done
 sudo crontab -u acpwb deploy/acpwb-crontab
 ```
 
-Make sure `/var/log/acpwb-*.log` are writable by `acpwb` before the first run.
+`acpwb` can't create files in `/var/log`, so a job whose log file is missing
+fails at the shell redirect and never runs — silently. That's how the edge
+drains sat idle for their first minutes in production.
 
 ## Before starting
 

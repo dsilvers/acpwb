@@ -56,10 +56,16 @@ type Config struct {
 	// Default https://acpwb.com.
 	HTTPSBase func(hostport string) string
 
-	HandshakeTimeout time.Duration // default 10s
-	IdleTimeout      time.Duration // default 65s (nginx keepalive_timeout)
-	MaxBodyBytes     int64         // default 10 MiB
-	Limits           Limits
+	// Timeouts, from production data (Oct 2026). Successful handshakes
+	// run to 7.7s at p99.9 through slow residential proxies, and those
+	// clients give up at ~8s themselves. HTTP/1.1 clients reuse a
+	// connection within 2.4s at p99; HTTP/2 reuses have a long tail (p99
+	// 50s) but a reconnect costs them one ~240ms handshake.
+	HandshakeTimeout  time.Duration // default 8s
+	ReadHeaderTimeout time.Duration // HTTP/1 request head, once started; default 5s
+	IdleTimeout       time.Duration // keep-alive, both protocols; default 15s
+	MaxBodyBytes      int64         // default 10 MiB
+	Limits            Limits
 }
 
 // MaxHeaderBytes bounds a request's headers on both protocols (nginx's
@@ -92,10 +98,13 @@ type Server struct {
 
 func New(cfg Config) *Server {
 	if cfg.HandshakeTimeout == 0 {
-		cfg.HandshakeTimeout = 10 * time.Second
+		cfg.HandshakeTimeout = 8 * time.Second
+	}
+	if cfg.ReadHeaderTimeout == 0 {
+		cfg.ReadHeaderTimeout = 5 * time.Second
 	}
 	if cfg.IdleTimeout == 0 {
-		cfg.IdleTimeout = 65 * time.Second
+		cfg.IdleTimeout = 15 * time.Second
 	}
 	if cfg.MaxBodyBytes == 0 {
 		cfg.MaxBodyBytes = 10 << 20
@@ -129,7 +138,7 @@ func New(cfg Config) *Server {
 	}
 	s.h1 = &http.Server{
 		Handler:           http.HandlerFunc(s.serveRequest),
-		ReadHeaderTimeout: 10 * time.Second,
+		ReadHeaderTimeout: cfg.ReadHeaderTimeout,
 		IdleTimeout:       cfg.IdleTimeout,
 		MaxHeaderBytes:    MaxHeaderBytes,
 		ConnContext: func(ctx context.Context, c net.Conn) context.Context {

@@ -16,7 +16,9 @@ type Limits struct {
 	// client_body_timeout / send_timeout). Clients that stop reading their
 	// responses otherwise park a handler each, up to 100 per HTTP/2
 	// connection (~40 KB apiece) — 300 such connections reached 74k
-	// goroutines and ~1.9 GB in testing. Default 60s.
+	// goroutines and ~1.9 GB in testing. Default 15s (the slowest
+	// download seen in production took 19.7s in all, still making
+	// progress).
 	StallTimeout time.Duration
 	// Last-resort overload valve: past this many in-flight requests across
 	// all clients, new requests get an immediate 503 instead of piling
@@ -33,7 +35,7 @@ type Limits struct {
 
 func (l *Limits) defaults() {
 	if l.StallTimeout == 0 {
-		l.StallTimeout = 60 * time.Second
+		l.StallTimeout = 15 * time.Second
 	}
 	if l.RequestsInFlight == 0 {
 		l.RequestsInFlight = 100000

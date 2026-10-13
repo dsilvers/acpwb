@@ -59,6 +59,10 @@ func curvePreferences(pq bool) []tls.CurveID {
 	return []tls.CurveID{tls.X25519, tls.CurveP256, tls.CurveP384, tls.CurveP521}
 }
 
+func envSeconds(key string) time.Duration {
+	return time.Duration(envInt(key, 0)) * time.Second
+}
+
 func envInt(key string, def int64) int64 {
 	if v, err := strconv.ParseInt(os.Getenv(key), 10, 64); err == nil && v > 0 {
 		return v
@@ -153,8 +157,12 @@ func main() {
 		CookieSecret: cookieSecret,
 		HTTPSBase:    rc.HTTPSBase,
 		MaxBodyBytes: envInt("EDGE_MAX_BODY_BYTES", 10<<20),
+		// 0 = the edge package defaults.
+		HandshakeTimeout:  envSeconds("EDGE_HANDSHAKE_TIMEOUT_SECONDS"),
+		ReadHeaderTimeout: envSeconds("EDGE_HEADER_TIMEOUT_SECONDS"),
+		IdleTimeout:       envSeconds("EDGE_IDLE_TIMEOUT_SECONDS"),
 		Limits: edge.Limits{
-			StallTimeout:     time.Duration(envInt("EDGE_STALL_TIMEOUT_SECONDS", 60)) * time.Second,
+			StallTimeout:     envSeconds("EDGE_STALL_TIMEOUT_SECONDS"),
 			RequestsInFlight: int(envSignedInt("EDGE_MAX_IN_FLIGHT", 100000)),
 			RecordsPerIPMin:  int(envSignedInt("EDGE_RECORDS_PER_IP_MINUTE", 600)),
 		},

@@ -832,6 +832,24 @@ func TestCloseReasons(t *testing.T) {
 	if rec := e.sink.next(t); rec.CloseReason != CloseReadTimeout || rec.Outcome != OutcomeTimeout {
 		t.Errorf("stalled hello: %q %q", rec.Outcome, rec.CloseReason)
 	}
+
+	// After an HTTP/1 request net/http cancels its background read with a
+	// past deadline; that timeout isn't why the connection ended.
+	c, err := tls.Dial("tcp", e.tlsAddr, clientTLS("http/1.1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	c.Write([]byte("GET /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\n\r\n"))
+	resp, err := http.ReadResponse(bufio.NewReader(c), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	io.Copy(io.Discard, resp.Body)
+	resp.Body.Close()
+	c.Close()
+	if rec := e.sink.next(t); rec.CloseReason != CloseClient || rec.RequestCount != 1 {
+		t.Errorf("after a request: close_reason=%q requests=%d", rec.CloseReason, rec.RequestCount)
+	}
 }
 
 // A connection that resets nearly every stream it opens is ended, and

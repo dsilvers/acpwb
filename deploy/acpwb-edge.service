@@ -40,7 +40,13 @@ Environment=EDGE_DEBUG_ADDR=127.0.0.1:6061
 # (exact counts, fewer rows) for floods of connections that carry no
 # request — connections with requests are always recorded individually,
 # and every request gets its own EdgeRequest row. Defaults shown.
-#Environment=EDGE_STALL_TIMEOUT_SECONDS=60
+#Environment=EDGE_HANDSHAKE_TIMEOUT_SECONDS=8
+#Environment=EDGE_HEADER_TIMEOUT_SECONDS=5
+#Environment=EDGE_IDLE_TIMEOUT_SECONDS=15
+#Environment=EDGE_STALL_TIMEOUT_SECONDS=15
+# Key exchange: X25519 (as nginx/OpenSSL 3.0 did); 1 = Go's default, which
+# prefers hybrid post-quantum X25519MLKEM768.
+#Environment=EDGE_PQ_KEX=0
 #Environment=EDGE_MAX_IN_FLIGHT=100000
 #Environment=EDGE_RECORDS_PER_IP_MINUTE=600
 

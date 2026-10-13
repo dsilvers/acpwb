@@ -53,6 +53,11 @@ type connInfo struct {
 	clientID    string
 	closeReason string
 	first       *firstRequest
+
+	// readAborted is set while the read deadline is in the past: net/http
+	// sets one after every HTTP/1 request to cancel its background read,
+	// and the timeout that read returns isn't the connection timing out.
+	readAborted atomic.Bool
 }
 
 // Close reasons — why a connection ended, as far as the edge can tell:
@@ -98,7 +103,7 @@ func (ci *connInfo) setCloseReason(reason string) {
 
 func (ci *connInfo) noteErr(err error, write bool) {
 	reason := classifyErr(err, write)
-	if reason == "" {
+	if reason == "" || reason == CloseReadTimeout && ci.readAborted.Load() {
 		return
 	}
 	ci.mu.Lock()
@@ -324,6 +329,18 @@ func (c *wireConn) Read(p []byte) (int, error) {
 		}
 	}
 	return n, err
+}
+
+// SetReadDeadline and SetDeadline see every deadline set above — tls.Conn
+// passes them down — so they track net/http's aborted reads.
+func (c *wireConn) SetReadDeadline(t time.Time) error {
+	c.ci.readAborted.Store(!t.IsZero() && t.Before(time.Now()))
+	return c.Conn.SetReadDeadline(t)
+}
+
+func (c *wireConn) SetDeadline(t time.Time) error {
+	c.ci.readAborted.Store(!t.IsZero() && t.Before(time.Now()))
+	return c.Conn.SetDeadline(t)
 }
 
 func (c *wireConn) Write(p []byte) (int, error) {

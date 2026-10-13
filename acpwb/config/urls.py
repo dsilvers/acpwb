@@ -1,10 +1,16 @@
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
+from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 
 from apps.public.sitemaps import StaticPagesSitemap, ProjectStorySitemap
 from apps.presentations.sitemaps import PresentationOrgSitemap, PresentationDetailSitemap
+
+# Rebuilt from every ProjectStory row on each request (~800 KB, up to ~2s);
+# crawlers fetch it hundreds of times an hour. Cached per worker for an
+# hour, so new projects appear within the hour.
+sitemap = cache_page(60 * 60)(sitemap)
 
 _sitemaps = {
     'static': StaticPagesSitemap,

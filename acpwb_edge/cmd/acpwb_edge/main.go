@@ -30,6 +30,7 @@ import (
 	"acpwb_edge/edge"
 	"acpwb_edge/edgequeue"
 	"acpwb_edge/httpfp"
+	"acpwb_edge/livefeed"
 	"acpwb_edge/proxy"
 	"acpwb_edge/router"
 )
@@ -44,6 +45,18 @@ func env(key, def string) string {
 func envBool(key string) bool {
 	v, _ := strconv.ParseBool(os.Getenv(key))
 	return v
+}
+
+// curvePreferences picks the key exchange groups. Go ignores the order of
+// this list and always prefers X25519MLKEM768 when a client offers it, so
+// leaving it out is the only way to negotiate X25519 the way nginx's
+// OpenSSL 3.0 did — a ~1.1 KB smaller ServerHello. Clients that sent only
+// an ML-KEM key share get a HelloRetryRequest. pq restores Go's default.
+func curvePreferences(pq bool) []tls.CurveID {
+	if pq {
+		return nil
+	}
+	return []tls.CurveID{tls.X25519, tls.CurveP256, tls.CurveP384, tls.CurveP521}
 }
 
 func envInt(key string, def int64) int64 {
@@ -99,11 +112,20 @@ func main() {
 
 	var sink edge.Sink
 	var queue *edgequeue.Queue
+	var live edge.Live // stays a nil interface without Redis
+	var feed *livefeed.Feed
 	if redisURL := os.Getenv("REDIS_URL"); redisURL != "" {
 		if queue, err = edgequeue.New(redisURL, envInt("EDGE_QUEUE_MAX", 1_000_000)); err != nil {
 			log.Fatalf("acpwb_edge: %v", err)
 		}
 		sink = queue
+		// The dashboard's live stream: one bundle a second while someone
+		// watches /acpwb-dashboard/live/, capped per bundle.
+		if feed, err = livefeed.New(redisURL,
+			int(envInt("EDGE_LIVE_MAX_REQUESTS", 5000)), int(envInt("EDGE_LIVE_MAX_CONNS", 2000))); err != nil {
+			log.Fatalf("acpwb_edge: %v", err)
+		}
+		live = feed
 	} else {
 		log.Printf("acpwb_edge: REDIS_URL unset — connection and request records are not being recorded")
 	}
@@ -119,12 +141,14 @@ func main() {
 		TLSConfig: &tls.Config{
 			// nginx accepted TLSv1 and TLSv1.1 too; old-client bots keep
 			// reaching the traps (and their JA4s get recorded).
-			MinVersion:     tls.VersionTLS10,
-			GetCertificate: store.GetCertificate,
+			MinVersion:       tls.VersionTLS10,
+			GetCertificate:   store.GetCertificate,
+			CurvePreferences: curvePreferences(envBool("EDGE_PQ_KEX")),
 		},
 		TLS:          router.TLS(rc),
 		Plain:        router.Plain(rc, envBool("EDGE_PLAIN_BOTSEED")),
 		Sink:         sink,
+		Live:         live,
 		CookieDomain: rc.CookieDomain,
 		CookieSecret: cookieSecret,
 		HTTPSBase:    rc.HTTPSBase,
@@ -168,6 +192,9 @@ func main() {
 		for k, v := range queue.Stats() {
 			st[k] = v
 		}
+		for k, v := range feed.Stats() {
+			st[k] = v
+		}
 		return st
 	}
 	go func() {
@@ -202,5 +229,6 @@ func main() {
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Printf("acpwb_edge: shutdown: %v", err)
 	}
+	feed.Close()
 	queue.Close()
 }

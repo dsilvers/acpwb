@@ -285,7 +285,7 @@ func RenderEraPage(p EraPageParams) string {
 	b.WriteString(`    <hr style="border-color:rgba(201,168,76,0.2);margin:2rem 0 1rem">` + "\n")
 	b.WriteString(`    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">` + "\n")
 	fmt.Fprintf(&b, `      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">`+"\n        &copy; %s American Corporation for Public Well Being, Milwaukee WI. All rights reserved.\n      </p>\n", year)
-	fmt.Fprintf(&b, `      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">`+"\n"+`        <a href="%s/privacy/">Privacy &amp; Disclaimer</a>`+"\n      </p>\n", escape(siteRoot))
+	fmt.Fprintf(&b, `      <p class="mb-0" style="font-size:.78rem;color:rgba(255,255,255,0.35)">`+"\n"+`        <a href="%s/privacy/">Cookie &amp; Privacy Policies</a>`+"\n      </p>\n", escape(siteRoot))
 	b.WriteString("    </div>\n  </div>\n</footer>\n\n")
 
 	fmt.Fprintf(&b, "<script src=\"%s\"></script>\n\n", staticBootstrapJS)

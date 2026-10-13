@@ -23,7 +23,7 @@ from datetime import timedelta
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
-from django.db.models import Count, Max
+from django.db.models import Count, Max, Q, Sum
 from django.db.models.functions import TruncDate, TruncMinute
 from django.utils import timezone
 
@@ -923,39 +923,86 @@ class Command(BaseCommand):
         """Connection-level TLS/HTTP fingerprint summary from acpwb_edge.
         A rolling window rather than HWM-incremental like the others: it
         only ever touches the last day's hypertable chunk, and "what does
-        traffic look like right now" is the question it answers."""
+        traffic look like right now" is the question it answers.
+
+        Connections are Sum('conn_count'), never Count('id'): an IP past the
+        edge's per-minute record budget is folded into aggregated rows."""
         since = timezone.now() - timedelta(hours=24)
         qs = EdgeConnection.objects.filter(timestamp__gte=since)
+        conns = Sum('conn_count')
 
-        def by(field):
+        def by(field, rows=qs):
             return {
                 (r[field] or '(none)'): r['c']
-                for r in qs.values(field).annotate(c=Count('id')).order_by('-c')[:20]
+                for r in rows.values(field).annotate(c=conns).order_by('-c')[:20]
             }
 
         def top_ja4(rows):
             return [
                 {'ja4': r['ja4'], 'count': r['c'], 'ips': r['ips'], 'uas': r['uas']}
                 for r in rows.exclude(ja4='').values('ja4').annotate(
-                    c=Count('id'),
+                    c=conns,
                     ips=Count('ip_address', distinct=True),
                     uas=Count('first_user_agent', distinct=True),
                 ).order_by('-c')[:20]
             ]
 
         summary = {
-            'total': qs.count(),
+            'total': qs.aggregate(c=conns)['c'] or 0,
             'by_outcome': by('outcome'),
             'by_alpn': by('alpn'),
             'by_tls_version': by('tls_version'),
+            'by_close_reason': by('close_reason'),
+            'by_goaway': by('h2_goaway', qs.exclude(h2_goaway='')),
+            'aggregated_conns': qs.filter(aggregated=True).aggregate(c=conns)['c'] or 0,
+            'rejected_requests': qs.aggregate(c=Sum('rejected_requests'))['c'] or 0,
             'top_ja4': top_ja4(qs),
             'top_failed_ja4': top_ja4(qs.exclude(outcome__in=['ok', 'plain'])),
             'top_h2_fingerprint': [
                 {'h2_fingerprint': r['h2_fingerprint'], 'count': r['c'], 'ips': r['ips']}
                 for r in qs.exclude(h2_fingerprint='').values('h2_fingerprint').annotate(
-                    c=Count('id'), ips=Count('ip_address', distinct=True),
+                    c=conns, ips=Count('ip_address', distinct=True),
+                ).order_by('-c')[:20]
+            ],
+            # HTTP/2 attack signatures, per IP: resets ≈ streams is rapid
+            # reset; lots of continuations is a CONTINUATION flood.
+            'top_h2_abuse': [
+                {'ip_address': r['ip_address'], 'conns': r['c'], 'streams': r['streams'],
+                 'resets': r['resets'], 'continuations': r['conts']}
+                for r in qs.filter(alpn='h2').values('ip_address').annotate(
+                    c=conns, streams=Sum('h2_streams'), resets=Sum('h2_resets'),
+                    conts=Sum('h2_continuations'),
+                ).filter(Q(resets__gt=0) | Q(conts__gt=0)).order_by('-resets', '-conts')[:20]
+            ],
+            # Connection floods: who opened the most connections.
+            'top_conn_ips': [
+                {'ip_address': r['ip_address'], 'conns': r['c'], 'requests': r['reqs'], 'ja4s': r['ja4s']}
+                for r in qs.values('ip_address').annotate(
+                    c=conns, reqs=Sum('request_count'), ja4s=Count('ja4', distinct=True, filter=~Q(ja4='')),
                 ).order_by('-c')[:20]
             ],
         }
         self._set_stat('edge.summary_24h', summary)
+        self._set_stat('edge.process', self._edge_process_stats())
         self.stdout.write(f'  edge: {summary["total"]} connections in last 24h')
+
+    def _edge_process_stats(self):
+        """acpwb_edge's own counters (acpwb:edge_stats, refreshed every 30s):
+        what never becomes a row — connection records dropped because Redis
+        was down or the queue full, overload 503s, parser panics. Empty if
+        the edge isn't running or Redis is unreachable."""
+        from apps.core.crawler_queue import _get_consumer_client
+        r = _get_consumer_client()
+        if r is None:
+            return {}
+        try:
+            raw = r.hgetall('acpwb:edge_stats')
+        except Exception:
+            return {}
+        out = {}
+        for k, v in raw.items():
+            try:
+                out[k] = int(v)
+            except (TypeError, ValueError):
+                pass
+        return out

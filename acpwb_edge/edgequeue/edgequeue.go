@@ -23,6 +23,7 @@ import (
 
 const (
 	QueueKey     = "acpwb:edge_conn_queue"
+	StatsKey     = "acpwb:edge_stats" // hash of process counters, read by precalc_dashboard
 	chanCapacity = 64 << 10
 	maxBatch     = 500
 	batchWait    = 50 * time.Millisecond
@@ -166,4 +167,25 @@ func (q *Queue) reportDrops() {
 			}
 		}
 	}
+}
+
+// PublishStats writes the edge's process counters to the StatsKey hash, so
+// the dashboard can show what never becomes a row: records dropped here,
+// overload 503s, parser panics. Best effort, like everything in this
+// package.
+func (q *Queue) PublishStats(stats map[string]int64) {
+	if q == nil {
+		return
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), pushTimeout)
+	defer cancel()
+	fields := make(map[string]any, len(stats)+1)
+	for k, v := range stats {
+		fields[k] = v
+	}
+	fields["updated_at"] = time.Now().Unix()
+	pipe := q.client.Pipeline()
+	pipe.HSet(ctx, StatsKey, fields)
+	pipe.Expire(ctx, StatsKey, 10*time.Minute) // goes stale if the edge stops
+	_, _ = pipe.Exec(ctx)
 }

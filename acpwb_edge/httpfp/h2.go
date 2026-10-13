@@ -7,6 +7,7 @@ import (
 	"strings"
 	"sync"
 
+	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 )
 
@@ -15,7 +16,9 @@ const (
 
 	frameHeaders      = 0x1
 	framePriority     = 0x2
+	frameRSTStream    = 0x3
 	frameSettings     = 0x4
+	frameGoAway       = 0x7
 	frameWindowUpdate = 0x8
 	frameContinuation = 0x9
 
@@ -24,12 +27,12 @@ const (
 	flagPadded     = 0x8
 	flagPriority   = 0x20
 
-	// Bigger than any frame the server accepts (x/net/http2's default
-	// MaxReadFrameSize is 1 MiB) — past this the server has already
-	// rejected the connection, so the tap just gives up too.
-	maxTapFrame = 1<<20 + 9
-	// Header blocks are bounded by the server's MaxHeaderBytes (1 MiB).
-	maxHeaderBlock = 1 << 20
+	// The edge advertises SETTINGS_MAX_FRAME_SIZE 16 KiB, so a bigger frame
+	// is one the server rejects anyway; the tap gives up rather than
+	// buffer it.
+	maxTapFrame = 16<<10 + 9
+	// Header blocks are bounded by the server's MaxHeaderBytes (64 KiB).
+	maxHeaderBlock = 64 << 10
 	// Streams decoded but not yet claimed by a handler. Requests the
 	// server refuses never get claimed; this bounds that leftover.
 	maxUnclaimed = 512
@@ -83,6 +86,119 @@ type H2Conn struct {
 	inBlock     bool
 
 	streams []*h2Stream
+
+	// Abuse counters — counted even after header capture gives up.
+	stats     H2Stats
+	maxStream uint32
+
+	onAbuse func() // see SetRapidResetLimit
+	abused  bool
+
+	// Server→client side: just enough parsing to see GOAWAYs.
+	out     []byte // partial frame header (+ GOAWAY payload prefix)
+	outSkip int
+}
+
+// H2Stats counts what an HTTP/2 client did on one connection.
+type H2Stats struct {
+	Streams       int    // streams opened (HEADERS on a new stream ID)
+	Resets        int    // RST_STREAM frames sent (rapid reset: Resets ≈ Streams)
+	Continuations int    // CONTINUATION frames sent (CONTINUATION flood)
+	Goaway        string // error code of a GOAWAY the server sent, e.g. ENHANCE_YOUR_CALM
+}
+
+// Rapid reset (CVE-2023-44487): a client opening streams and immediately
+// resetting them makes the server start and cancel a handler for each, at
+// no cost to itself. Real clients reset a handful of streams, never
+// hundreds — so past rapidResetMin resets, at least rapidResetRatio of all
+// streams opened, the connection is ended.
+const (
+	rapidResetMin   = 200
+	rapidResetRatio = 0.9
+)
+
+// SetRapidResetLimit arranges for fn to run (once, from the reading
+// goroutine) when the client crosses the rapid-reset threshold.
+func (c *H2Conn) SetRapidResetLimit(fn func()) {
+	c.mu.Lock()
+	c.onAbuse = fn
+	c.mu.Unlock()
+}
+
+func (c *H2Conn) checkAbuse() {
+	if c.abused || c.onAbuse == nil || c.stats.Resets < rapidResetMin {
+		return
+	}
+	if float64(c.stats.Resets) >= rapidResetRatio*float64(c.stats.Streams) {
+		c.abused = true
+		go c.onAbuse() // not under c.mu: it closes the connection
+	}
+}
+
+// Counters returns the connection's H2Stats.
+func (c *H2Conn) Counters() H2Stats {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	return c.stats
+}
+
+func (c *H2Conn) Write(p []byte) (int, error) {
+	n, err := c.Conn.Write(p)
+	if n > 0 {
+		c.mu.Lock()
+		c.safeFeedOut(p[:n])
+		c.mu.Unlock()
+	}
+	return n, err
+}
+
+func (c *H2Conn) safeFeedOut(data []byte) {
+	defer func() {
+		if r := recover(); r != nil {
+			c.outSkip, c.out = 1<<62, nil // stop parsing this side
+			notePanic("h2 tap (out)", r)
+		}
+	}()
+	c.feedOut(data)
+}
+
+// feedOut follows the server's frames (it never sends a preface) and
+// records the error code of the first GOAWAY.
+func (c *H2Conn) feedOut(data []byte) {
+	for len(data) > 0 {
+		if c.outSkip > 0 {
+			n := min(c.outSkip, len(data))
+			c.outSkip -= n
+			data = data[n:]
+			continue
+		}
+		need := 9
+		if len(c.out) >= 9 && c.out[3] == frameGoAway {
+			need = 9 + 8 // last-stream-id + error code
+		}
+		take := min(need-len(c.out), len(data))
+		c.out = append(c.out, data[:take]...)
+		data = data[take:]
+		if len(c.out) < need {
+			continue
+		}
+		length := int(c.out[0])<<16 | int(c.out[1])<<8 | int(c.out[2])
+		if c.out[3] == frameGoAway && need == 9 {
+			if length < 8 {
+				c.outSkip, c.out = length, c.out[:0]
+			}
+			continue // collect the payload prefix next
+		}
+		if c.out[3] == frameGoAway {
+			if c.stats.Goaway == "" {
+				c.stats.Goaway = http2.ErrCode(binary.BigEndian.Uint32(c.out[13:17])).String()
+			}
+			c.outSkip = length - 8
+		} else {
+			c.outSkip = length
+		}
+		c.out = c.out[:0]
+	}
 }
 
 // NewH2Conn wraps c, which must deliver the decrypted HTTP/2 stream.
@@ -95,11 +211,24 @@ func (c *H2Conn) Read(p []byte) (int, error) {
 	if n > 0 {
 		c.mu.Lock()
 		if !c.lost {
-			c.feed(p[:n])
+			c.safeFeed(p[:n])
 		}
 		c.mu.Unlock()
 	}
 	return n, err
+}
+
+// safeFeed runs the parser on client-controlled bytes. A bug in it must
+// only ever cost this connection its fingerprint — a panic here would
+// otherwise take down the whole process from the server's read goroutine.
+func (c *H2Conn) safeFeed(data []byte) {
+	defer func() {
+		if r := recover(); r != nil {
+			c.giveUp()
+			notePanic("h2 tap", r)
+		}
+	}()
+	c.feed(data)
 }
 
 // Fingerprint returns the Akamai-style HTTP/2 fingerprint, or "" if the
@@ -176,6 +305,10 @@ func (c *H2Conn) feed(data []byte) {
 		switch typ {
 		case frameHeaders, framePriority, frameSettings, frameWindowUpdate, frameContinuation:
 		default:
+			if typ == frameRSTStream {
+				c.stats.Resets++
+				c.checkAbuse()
+			}
 			c.skip = length
 			c.buf = c.buf[9:]
 			continue
@@ -185,6 +318,9 @@ func (c *H2Conn) feed(data []byte) {
 		}
 		payload := c.buf[9 : 9+length]
 		c.frame(typ, flags, stream, payload)
+		if c.lost {
+			return // giveUp dropped the buffer
+		}
 		c.buf = c.buf[9+length:]
 	}
 	// Don't let a consumed prefix pin a large backing array.
@@ -215,6 +351,10 @@ func (c *H2Conn) frame(typ, flags byte, stream uint32, p []byte) {
 			c.priorities = append(c.priorities, priorityString(stream, p))
 		}
 	case frameHeaders:
+		if stream > c.maxStream {
+			c.maxStream = stream
+			c.stats.Streams++
+		}
 		if c.inBlock {
 			c.giveUp() // HEADERS inside an unfinished block: protocol error
 			return
@@ -239,6 +379,7 @@ func (c *H2Conn) frame(typ, flags byte, stream uint32, p []byte) {
 			c.endBlock()
 		}
 	case frameContinuation:
+		c.stats.Continuations++
 		if !c.inBlock || stream != c.blockStream {
 			c.giveUp()
 			return

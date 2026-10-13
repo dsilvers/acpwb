@@ -104,3 +104,18 @@ def test_dashboard_edge_shows_summary(staff_client):
     assert b't13d1516h2_8daaf6152771_e5627efa2ab1' in content
     assert b'20.0%' in content  # failed share
     assert b'50.0%' in content  # h2 share
+
+
+@pytest.mark.django_db
+def test_dashboard_edge_shows_process_counters(staff_client):
+    from apps.core.models import DashboardStat
+    DashboardStat.objects.create(key='edge.summary_24h', value={'total': 0})
+    DashboardStat.objects.create(key='edge.process', value={
+        'conns_open': 12, 'conns_total': 3456, 'records_pushed': 3400, 'records_dropped': 56,
+        'records_aggregated': 0, 'rejected_requests': 0, 'parser_panics': 0, 'tap_panics': 0,
+        'goroutines': 40, 'started_at': 1,
+    })
+    content = staff_client.get('/acpwb-dashboard/edge/').content.decode()
+    assert 'Edge Process' in content
+    assert '3456' in content
+    assert 'color:#dc3545;font-weight:700">56<' in content  # dropped records flagged

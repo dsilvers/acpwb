@@ -164,12 +164,21 @@ def test_drain_fingerprint_queue_drops_unknown_keys_instead_of_rows():
 
 def _push_edge_conn(record):
     import json
-    from apps.core.crawler_queue import _EDGE_CONN_QUEUE_KEY, _get_client
-    _get_client().rpush(_EDGE_CONN_QUEUE_KEY, json.dumps(record))
+    from apps.core import crawler_queue
+    crawler_queue._get_client().rpush(crawler_queue._EDGE_CONN_QUEUE_KEY, json.dumps(record))
+
+
+@pytest.fixture
+def private_edge_queue(monkeypatch):
+    """The dev stack's edge pushes to the same Redis: give the test a queue
+    of its own so it neither drains nor depends on live records."""
+    import uuid
+    from apps.core import crawler_queue
+    monkeypatch.setattr(crawler_queue, '_EDGE_CONN_QUEUE_KEY', f'test:edge_conn_queue:{uuid.uuid4()}')
 
 
 @pytest.mark.django_db
-def test_drain_edge_conn_queue_persists_and_dedupes():
+def test_drain_edge_conn_queue_persists_and_dedupes(private_edge_queue):
     from apps.honeypot.models import EdgeConnection
     record = {
         'timestamp': '2026-01-01T00:00:00.000000+00:00',

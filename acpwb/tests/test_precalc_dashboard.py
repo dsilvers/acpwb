@@ -185,14 +185,25 @@ def test_precalc_dashboard_edge_summary():
         for i in range(4)
     ] + [
         EdgeConnection(timestamp=now, ip_address='198.51.100.1', outcome='handshake_failed', ja4='t10i0607ht_x_y'),
+        # An aggregated flood row: 50 connections in one row.
+        EdgeConnection(timestamp=now, ip_address='192.0.2.66', outcome='no_hello', conn_count=50, aggregated=True,
+                       close_reason='client_closed'),
+        # Rapid reset over h2.
+        EdgeConnection(timestamp=now, ip_address='192.0.2.77', outcome='ok', alpn='h2', ja4=ja4,
+                       h2_streams=1000, h2_resets=1000, h2_goaway='ENHANCE_YOUR_CALM', close_reason='server_closed'),
         # Outside the 24h window — must not count.
         EdgeConnection(timestamp=now - timedelta(days=2), ip_address='198.51.100.2', outcome='ok', ja4=ja4),
     ])
     call_command('precalc_dashboard', stdout=io.StringIO())
 
     s = DashboardStat.objects.get(key='edge.summary_24h').value
-    assert s['total'] == 5
-    assert s['by_outcome'] == {'ok': 4, 'handshake_failed': 1}
-    assert s['top_ja4'][0] == {'ja4': ja4, 'count': 4, 'ips': 2, 'uas': 4}
-    assert s['top_failed_ja4'] == [{'ja4': 't10i0607ht_x_y', 'count': 1, 'ips': 1, 'uas': 1}]
+    assert s['total'] == 4 + 1 + 50 + 1  # conn_count, not rows
+    assert s['by_outcome'] == {'ok': 5, 'no_hello': 50, 'handshake_failed': 1}
+    assert s['aggregated_conns'] == 50
+    assert s['top_ja4'][0] == {'ja4': ja4, 'count': 5, 'ips': 3, 'uas': 5}
+    assert s['top_failed_ja4'][0] == {'ja4': 't10i0607ht_x_y', 'count': 1, 'ips': 1, 'uas': 1}
     assert s['top_h2_fingerprint'][0]['count'] == 4
+    assert s['by_goaway'] == {'ENHANCE_YOUR_CALM': 1}
+    assert s['by_close_reason']['client_closed'] == 50
+    assert s['top_h2_abuse'] == [{'ip_address': '192.0.2.77', 'conns': 1, 'streams': 1000, 'resets': 1000, 'continuations': 0}]
+    assert s['top_conn_ips'][0] == {'ip_address': '192.0.2.66', 'conns': 50, 'requests': 0, 'ja4s': 0}

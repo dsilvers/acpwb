@@ -27,6 +27,15 @@ Environment=EDGE_STATIC_ROOT=/home/acpwb/acpwb/acpwb/staticfiles
 Environment=EDGE_BOTSEED_ROOT=/home/acpwb/acpwb/botseed
 Environment=EDGE_ACME_ROOT=/var/www/certbot
 Environment=REDIS_URL=redis://127.0.0.1:6379/0
+# Counters (/debug/vars) + pprof — localhost only, never public.
+Environment=EDGE_DEBUG_ADDR=127.0.0.1:6061
+# Limits are never per client (bots get unthrottled access). These only
+# protect the process: stall timeout for clients that stop reading/sending,
+# a last-resort global in-flight valve, and per-IP record aggregation
+# (exact counts, fewer rows) for connection floods. Defaults shown.
+#Environment=EDGE_STALL_TIMEOUT_SECONDS=60
+#Environment=EDGE_MAX_IN_FLIGHT=100000
+#Environment=EDGE_RECORDS_PER_IP_MINUTE=600
 
 ExecStart=/home/acpwb/acpwb/acpwb_edge/acpwb_edge
 # SIGHUP reloads certificates (the certbot deploy hook sends it).

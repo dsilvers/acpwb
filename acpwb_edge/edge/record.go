@@ -26,13 +26,29 @@ type Record struct {
 	JA3Str string `json:"ja3_str"`
 	H2FP   string `json:"h2_fingerprint"`
 
-	RTTMicros       int64 `json:"rtt_us"`
-	HandshakeMicros int64 `json:"handshake_us"`
-	DurationMillis  int64 `json:"duration_ms"`
-	BytesIn         int64 `json:"bytes_in"`
-	BytesOut        int64 `json:"bytes_out"`
-	RequestCount    int   `json:"request_count"`
-	HdrCaptureLost  bool  `json:"hdr_capture_lost"`
+	RTTMicros       int64  `json:"rtt_us"`
+	HandshakeMicros int64  `json:"handshake_us"`
+	DurationMillis  int64  `json:"duration_ms"`
+	BytesIn         int64  `json:"bytes_in"`
+	BytesOut        int64  `json:"bytes_out"`
+	RequestCount    int    `json:"request_count"`
+	RejectedReqs    int    `json:"rejected_requests"`
+	HdrCaptureLost  bool   `json:"hdr_capture_lost"`
+	CloseReason     string `json:"close_reason"`
+
+	// HTTP/2 client behaviour: streams opened, RST_STREAMs sent (rapid
+	// reset), CONTINUATION frames (CONTINUATION flood), and the error code
+	// of any GOAWAY the server sent (ENHANCE_YOUR_CALM, PROTOCOL_ERROR…).
+	H2Streams       int    `json:"h2_streams"`
+	H2Resets        int    `json:"h2_resets"`
+	H2Continuations int    `json:"h2_continuations"`
+	H2Goaway        string `json:"h2_goaway"`
+
+	// Connections this row stands for: 1, or more for an aggregated row
+	// (an IP over the per-minute record budget; see recordGate), whose
+	// other fields describe the first of them as a sample.
+	ConnCount  int  `json:"conn_count"`
+	Aggregated bool `json:"aggregated"`
 
 	FirstHost        string `json:"first_host"`
 	FirstMethod      string `json:"first_method"`
@@ -77,6 +93,8 @@ func (r *Record) truncate() {
 	t(&r.FirstJA4H, 64)
 	t(&r.FirstHeaderNames, 4096)
 	t(&r.FirstRoute, 32)
+	t(&r.CloseReason, 32)
+	t(&r.H2Goaway, 32)
 }
 
 func isoTime(t time.Time) string {

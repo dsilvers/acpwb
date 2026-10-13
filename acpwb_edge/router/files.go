@@ -27,6 +27,9 @@ func files(root, prefix string, index bool, headers func(http.Header)) http.Hand
 			page.Error(w, http.StatusNotFound)
 			return
 		}
+		if r.Context().Err() != nil {
+			return // client gone (e.g. HTTP/2 stream reset): skip the file work
+		}
 		rel := strings.TrimPrefix(normalize(r.URL.Path), prefix)
 		rel = strings.TrimPrefix(rel, "/")
 		if rel == "" {

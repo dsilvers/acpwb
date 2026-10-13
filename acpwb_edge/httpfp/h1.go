@@ -39,9 +39,21 @@ func NewH1Conn(c net.Conn) *H1Conn { return &H1Conn{Conn: c} }
 func (c *H1Conn) Read(p []byte) (int, error) {
 	n, err := c.Conn.Read(p)
 	if n > 0 && !c.lost.Load() {
-		c.scan(p[:n])
+		c.safeScan(p[:n])
 	}
 	return n, err
+}
+
+// safeScan: see H2Conn.safeFeed.
+func (c *H1Conn) safeScan(data []byte) {
+	defer func() {
+		if r := recover(); r != nil {
+			c.lost.Store(true)
+			c.buf = nil
+			notePanic("h1 tap", r)
+		}
+	}()
+	c.scan(data)
 }
 
 // NextHead returns the header names of the next request read from this

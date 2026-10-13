@@ -2,17 +2,23 @@ package edge
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	"crypto/tls"
 	"errors"
+	"fmt"
 	"io"
 	"net"
 	"net/http"
 	"regexp"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
 	"time"
+
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/hpack"
 
 	"acpwb_edge/certs"
 	"acpwb_edge/proxy"
@@ -40,6 +46,7 @@ type upstream struct {
 	last http.Header
 	host string
 	uri  string
+	all  []string // every request URI seen
 }
 
 func (u *upstream) seen() (http.Header, string, string) {
@@ -52,13 +59,28 @@ type env struct {
 	tlsAddr, plainAddr string
 	sink               *sink
 	up                 *upstream
+
+	mu       sync.Mutex
+	edgeSeen []string // every request URI the edge's own handler saw
+
+	unblock chan struct{} // /wiki/block/ waits on it
+	srv     *Server
 }
 
-func start(t *testing.T) *env {
+func start(t *testing.T) *env { return startWith(t, nil) }
+
+func startWith(t *testing.T, mod func(*Config)) *env {
 	t.Helper()
 	up := &upstream{}
+	unblock := make(chan struct{})
 	upL, _ := net.Listen("tcp", "127.0.0.1:0")
 	upSrv := &http.Server{Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/wiki/block/" {
+			select {
+			case <-unblock:
+			case <-r.Context().Done():
+			}
+		}
 		if r.Header.Get("Upgrade") == "websocket" {
 			// Minimal upgrade: 101, then echo.
 			c, brw, _ := http.NewResponseController(w).Hijack()
@@ -69,13 +91,22 @@ func start(t *testing.T) *env {
 			return
 		}
 		up.mu.Lock()
+		io.Copy(io.Discard, r.Body)
 		up.last, up.host, up.uri = r.Header.Clone(), r.Host, r.RequestURI
+		up.all = append(up.all, r.RequestURI)
 		up.mu.Unlock()
 		w.Header().Set("Server", "gunicorn")
 		io.WriteString(w, "upstream ok")
 	})}
 	go upSrv.Serve(upL)
-	t.Cleanup(func() { upSrv.Close() })
+	t.Cleanup(func() {
+		select {
+		case <-unblock:
+		default:
+			close(unblock)
+		}
+		upSrv.Close()
+	})
 
 	p := proxy.New(proxy.Upstream{Name: "django", Addr: upL.Addr().String(), Keepalive: 8, Timeout: 5 * time.Second})
 	ws := proxy.New(proxy.Upstream{Name: "ws", Addr: upL.Addr().String(), Keepalive: 2, Timeout: 5 * time.Second})
@@ -86,12 +117,24 @@ func start(t *testing.T) *env {
 		t.Fatal(err)
 	}
 	sk := &sink{ch: make(chan *Record, 64)}
-	srv := New(Config{
+	e := &env{sink: sk, up: up, unblock: unblock}
+	tlsRouter := router.TLS(rc)
+	cfg := Config{
 		TLSConfig: &tls.Config{MinVersion: tls.VersionTLS10, GetCertificate: store.GetCertificate},
-		TLS:       router.TLS(rc),
-		Plain:     router.Plain(rc, false),
-		Sink:      sk,
-	})
+		TLS: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			e.mu.Lock()
+			e.edgeSeen = append(e.edgeSeen, r.RequestURI)
+			e.mu.Unlock()
+			tlsRouter.ServeHTTP(w, r)
+		}),
+		Plain: router.Plain(rc, false),
+		Sink:  sk,
+	}
+	if mod != nil {
+		mod(&cfg)
+	}
+	srv := New(cfg)
+	e.srv = srv
 	tl, _ := net.Listen("tcp", "127.0.0.1:0")
 	pl, _ := net.Listen("tcp", "127.0.0.1:0")
 	go srv.ServeTLS(tl)
@@ -101,7 +144,8 @@ func start(t *testing.T) *env {
 		defer cancel()
 		srv.Shutdown(ctx)
 	})
-	return &env{tlsAddr: tl.Addr().String(), plainAddr: pl.Addr().String(), sink: sk, up: up}
+	e.tlsAddr, e.plainAddr = tl.Addr().String(), pl.Addr().String()
+	return e
 }
 
 // clientTLS is for talking to the edge's throwaway self-signed test cert.
@@ -381,5 +425,290 @@ func TestShutdownStopsAccepting(t *testing.T) {
 		}
 	case <-time.After(2 * time.Second):
 		t.Fatal("ServeTLS didn't return")
+	}
+}
+
+// Go's HTTP/2 server answers connection-specific headers (h2spec 8.1.2.2)
+// with a 400 rather than the RST_STREAM the spec asks for. Either way, the
+// property that matters for an h2→HTTP/1.1 proxy is that none of them —
+// request-smuggling material — ever reaches the upstream: each request must
+// be rejected or forwarded without the header.
+func TestH2ConnectionSpecificHeadersNotForwarded(t *testing.T) {
+	e := start(t)
+	for i, extra := range [][2]string{
+		{"connection", "keep-alive, x-evil"}, {"keep-alive", "timeout=5"}, {"proxy-connection", "keep-alive"},
+		{"transfer-encoding", "chunked"}, {"upgrade", "h2c"}, {"te", "gzip"}, {"te", "trailers"},
+	} {
+		path := fmt.Sprintf("/wiki/smuggle-%d/", i)
+		status := h2Request(t, e, path, extra, [2]string{"x-evil", "1"})
+		h, _, uri := e.up.seen()
+		if uri != path {
+			if status != 400 {
+				t.Errorf("%s: not forwarded, but status %d (want 400 or forwarded)", extra[0], status)
+			}
+			continue
+		}
+		canon := http.CanonicalHeaderKey(extra[0])
+		if v := h.Get(canon); v != "" && !(canon == "Te" && v == "trailers") {
+			t.Errorf("%s: %q reached the upstream", canon, v)
+		}
+		if extra[0] == "connection" && h.Get("X-Evil") != "" {
+			t.Error("a header named in Connection reached the upstream")
+		}
+	}
+}
+
+// h2Request sends one GET over a raw HTTP/2 connection (so headers Go's own
+// client refuses to send can be sent) and returns the response status.
+func h2Request(t *testing.T, e *env, path string, extra ...[2]string) int {
+	t.Helper()
+	c, err := tls.Dial("tcp", e.tlsAddr, clientTLS("h2"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer c.Close()
+	c.Write([]byte(http2.ClientPreface))
+	fr := http2.NewFramer(c, c)
+	fr.WriteSettings()
+	var hb bytes.Buffer
+	enc := hpack.NewEncoder(&hb)
+	for _, f := range append([][2]string{{":method", "GET"}, {":authority", "acpwb.com"}, {":scheme", "https"}, {":path", path}}, extra...) {
+		enc.WriteField(hpack.HeaderField{Name: f[0], Value: f[1]})
+	}
+	fr.WriteHeaders(http2.HeadersFrameParam{StreamID: 1, BlockFragment: hb.Bytes(), EndStream: true, EndHeaders: true})
+	c.SetReadDeadline(time.Now().Add(5 * time.Second))
+	dec := hpack.NewDecoder(4096, nil)
+	status := 0
+	for {
+		f, err := fr.ReadFrame()
+		if err != nil {
+			t.Fatal(err)
+		}
+		switch f := f.(type) {
+		case *http2.HeadersFrame:
+			fields, _ := dec.DecodeFull(f.HeaderBlockFragment())
+			for _, hf := range fields {
+				if hf.Name == ":status" {
+					status, _ = strconv.Atoi(hf.Value)
+				}
+			}
+			if f.StreamEnded() {
+				return status
+			}
+		case *http2.DataFrame:
+			if f.StreamEnded() {
+				return status
+			}
+		case *http2.RSTStreamFrame:
+			return -1
+		}
+	}
+}
+
+// Classic HTTP/1.1 desync payloads: each tries to make the edge and the
+// upstream disagree about where the first request's body ends, so that
+// "GET /smuggled" becomes a request only the upstream sees — one that skips
+// the edge's header scrubbing and fingerprinting. Go's server rejects
+// ambiguous framing or resolves it per RFC 9112 (where /smuggled is then
+// just a pipelined request the edge itself handles), and ReverseProxy
+// re-frames what it forwards. Invariant: every request the upstream gets is
+// one the edge's handler saw.
+func TestHTTP1RequestSmuggling(t *testing.T) {
+	e := start(t)
+	smuggled := "GET /smuggled HTTP/1.1\r\nHost: acpwb.com\r\n\r\n"
+	for name, req := range map[string]string{
+		"CL.TE": "POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nContent-Length: 6\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\n" + smuggled,
+		"TE.CL": "POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nTransfer-Encoding: chunked\r\nContent-Length: 3\r\n\r\n" +
+			fmt.Sprintf("%x\r\n%s\r\n0\r\n\r\n", len(smuggled), smuggled),
+		"double CL":     "POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nContent-Length: 0\r\nContent-Length: 44\r\n\r\n" + smuggled,
+		"TE obfuscated": "POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nTransfer-Encoding: xchunked\r\nContent-Length: 0\r\n\r\n" + smuggled,
+		"TE space":      "POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nTransfer-Encoding : chunked\r\n\r\n0\r\n\r\n" + smuggled,
+		"TE list":       "POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nTransfer-Encoding: chunked, identity\r\n\r\n0\r\n\r\n" + smuggled,
+		"obs-fold":      "POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nTransfer-Encoding:\r\n chunked\r\nContent-Length: 0\r\n\r\n" + smuggled,
+		"bare LF":       "POST /wiki/a/ HTTP/1.1\nHost: acpwb.com\nContent-Length: 0\nTransfer-Encoding: chunked\n\n0\n\n" + smuggled,
+	} {
+		c, err := tls.Dial("tcp", e.tlsAddr, clientTLS("http/1.1"))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Write([]byte(req))
+		c.SetReadDeadline(time.Now().Add(2 * time.Second))
+		io.Copy(io.Discard, c)
+		c.Close()
+		e.up.mu.Lock()
+		e.mu.Lock()
+		seen := map[string]int{}
+		for _, u := range e.edgeSeen {
+			seen[u]++
+		}
+		for _, u := range e.up.all {
+			if seen[u] == 0 {
+				t.Errorf("%s: upstream got %q, which the edge never handled", name, u)
+			}
+			seen[u]--
+		}
+		e.up.all, e.edgeSeen = nil, nil
+		e.mu.Unlock()
+		e.up.mu.Unlock()
+	}
+}
+
+// Slowloris-style clients must not hold connections open: a stalled
+// ClientHello and a trickled request body are each cut off by a deadline.
+func TestSlowClientsAreCutOff(t *testing.T) {
+	e := startWith(t, func(c *Config) {
+		c.HandshakeTimeout = 300 * time.Millisecond
+		c.Limits.StallTimeout = 300 * time.Millisecond
+	})
+	closedWithin := func(name string, c net.Conn, d time.Duration) {
+		t.Helper()
+		c.SetReadDeadline(time.Now().Add(d))
+		start := time.Now()
+		_, err := io.Copy(io.Discard, c)
+		var ne net.Error
+		if errors.As(err, &ne) && ne.Timeout() {
+			t.Errorf("%s: still open after %v", name, time.Since(start))
+		}
+	}
+
+	// Half a ClientHello, then silence.
+	raw, _ := net.Dial("tcp", e.tlsAddr)
+	raw.Write(captureHello(t)[:40])
+	closedWithin("stalled ClientHello", raw, 3*time.Second)
+	raw.Close()
+	if rec := e.sink.next(t); rec.Outcome != OutcomeTimeout {
+		t.Errorf("stalled hello outcome %q, want timeout", rec.Outcome)
+	}
+
+	// A POST that promises a body and trickles one byte.
+	c, _ := tls.Dial("tcp", e.tlsAddr, clientTLS("http/1.1"))
+	c.Write([]byte("POST /wiki/a/ HTTP/1.1\r\nHost: acpwb.com\r\nContent-Length: 100000\r\n\r\nx"))
+	closedWithin("trickled body", c, 3*time.Second)
+	c.Close()
+}
+
+// The overload valve is process-wide, never per client.
+func TestOverloadValve(t *testing.T) {
+	e := startWith(t, func(c *Config) { c.Limits.RequestsInFlight = 1 })
+	cl := client(e, clientTLS("h2"))
+	go cl.Get("https://acpwb.com/wiki/block/") // holds the only slot
+	time.Sleep(200 * time.Millisecond)
+	resp, err := cl.Get("https://acpwb.com/wiki/other/")
+	if err != nil {
+		t.Fatal(err)
+	}
+	resp.Body.Close()
+	if resp.StatusCode != 503 || resp.Header.Get("Retry-After") != "1" {
+		t.Fatalf("over the limit: %d %v", resp.StatusCode, resp.Header)
+	}
+	close(e.unblock)
+	time.Sleep(100 * time.Millisecond)
+	cl.CloseIdleConnections()
+	rec := e.sink.next(t)
+	if rec.RejectedReqs != 1 || rec.RequestCount != 2 {
+		t.Errorf("record %+v", rec)
+	}
+}
+
+func TestRecordAggregation(t *testing.T) {
+	e := startWith(t, func(c *Config) { c.Limits.RecordsPerIPMin = 2 })
+	for range 5 {
+		c, _ := net.Dial("tcp", e.tlsAddr)
+		c.Write([]byte("junk that isn't TLS"))
+		io.Copy(io.Discard, c)
+		c.Close()
+	}
+	a, b := e.sink.next(t), e.sink.next(t)
+	if a.Aggregated || b.Aggregated || a.ConnCount != 1 {
+		t.Fatalf("first two should be individual: %+v %+v", a, b)
+	}
+	e.srv.records.flush()
+	agg := e.sink.next(t)
+	if !agg.Aggregated || agg.ConnCount != 3 || agg.Outcome != OutcomeNoHello || agg.BytesIn != 3*int64(len("junk that isn't TLS")) {
+		t.Errorf("aggregated record %+v", agg)
+	}
+}
+
+func TestH2AbuseCountersAndGoaway(t *testing.T) {
+	e := start(t)
+	c, err := tls.Dial("tcp", e.tlsAddr, clientTLS("h2"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	c.Write([]byte(http2.ClientPreface))
+	fr := http2.NewFramer(c, c)
+	fr.WriteSettings()
+	var hb bytes.Buffer
+	enc := hpack.NewEncoder(&hb)
+	for _, f := range [][2]string{{":method", "GET"}, {":authority", "acpwb.com"}, {":scheme", "https"}, {":path", "/wiki/x/"}} {
+		enc.WriteField(hpack.HeaderField{Name: f[0], Value: f[1]})
+	}
+	for id := uint32(1); id <= 19; id += 2 { // rapid reset x10
+		fr.WriteHeaders(http2.HeadersFrameParam{StreamID: id, BlockFragment: hb.Bytes(), EndStream: true, EndHeaders: true})
+		fr.WriteRSTStream(id, http2.ErrCodeCancel)
+	}
+	// Then a protocol violation: DATA on stream 0 → GOAWAY PROTOCOL_ERROR.
+	fr.AllowIllegalWrites = true
+	fr.WriteData(0, false, []byte("x"))
+	c.SetReadDeadline(time.Now().Add(5 * time.Second))
+	io.Copy(io.Discard, c)
+	c.Close()
+	rec := e.sink.next(t)
+	if rec.H2Streams != 10 || rec.H2Resets != 10 || rec.H2Goaway != "PROTOCOL_ERROR" {
+		t.Errorf("streams=%d resets=%d goaway=%q", rec.H2Streams, rec.H2Resets, rec.H2Goaway)
+	}
+}
+
+func TestCloseReasons(t *testing.T) {
+	e := startWith(t, func(c *Config) { c.HandshakeTimeout = 200 * time.Millisecond })
+	c, _ := tls.Dial("tcp", e.tlsAddr, clientTLS("http/1.1"))
+	c.Close()
+	if rec := e.sink.next(t); rec.CloseReason != CloseClient {
+		t.Errorf("client close: %q", rec.CloseReason)
+	}
+	raw, _ := net.Dial("tcp", e.tlsAddr)
+	raw.Write(captureHello(t)[:20])
+	io.Copy(io.Discard, raw)
+	raw.Close()
+	if rec := e.sink.next(t); rec.CloseReason != CloseReadTimeout || rec.Outcome != OutcomeTimeout {
+		t.Errorf("stalled hello: %q %q", rec.Outcome, rec.CloseReason)
+	}
+}
+
+// A connection that resets nearly every stream it opens is ended, and
+// recorded as such; a client resetting a few streams is untouched (the
+// rapid-reset test above resets 10 and keeps its connection).
+func TestRapidResetConnectionIsClosed(t *testing.T) {
+	e := start(t)
+	c, err := tls.Dial("tcp", e.tlsAddr, clientTLS("h2"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer c.Close()
+	c.Write([]byte(http2.ClientPreface))
+	fr := http2.NewFramer(c, c)
+	fr.WriteSettings()
+	var hb bytes.Buffer
+	enc := hpack.NewEncoder(&hb)
+	for _, f := range [][2]string{{":method", "GET"}, {":authority", "acpwb.com"}, {":scheme", "https"}, {":path", "/wiki/x/"}} {
+		enc.WriteField(hpack.HeaderField{Name: f[0], Value: f[1]})
+	}
+	go func() {
+		for id := uint32(1); id < 20000; id += 2 {
+			if fr.WriteHeaders(http2.HeadersFrameParam{StreamID: id, BlockFragment: hb.Bytes(), EndStream: true, EndHeaders: true}) != nil ||
+				fr.WriteRSTStream(id, http2.ErrCodeCancel) != nil {
+				return
+			}
+		}
+	}()
+	c.SetReadDeadline(time.Now().Add(5 * time.Second))
+	_, err = io.Copy(io.Discard, c)
+	var ne net.Error
+	if errors.As(err, &ne) && ne.Timeout() {
+		t.Fatal("rapid-reset connection was not closed")
+	}
+	rec := e.sink.next(t)
+	if rec.CloseReason != CloseRapidReset || rec.H2Resets < 200 {
+		t.Errorf("close_reason=%q resets=%d streams=%d", rec.CloseReason, rec.H2Resets, rec.H2Streams)
 	}
 }

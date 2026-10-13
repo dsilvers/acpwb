@@ -118,12 +118,14 @@ services:
       EDGE_STATIC_ROOT: /app/staticfiles
       EDGE_BOTSEED_ROOT: /botseed
       REDIS_URL: redis://redis:6379/0
+      EDGE_DEBUG_ADDR: ":6061" # /debug/vars + pprof; published to localhost only
     volumes:
       - ./acpwb/staticfiles:/app/staticfiles:ro
       - ./botseed:/botseed:ro
     ports:
       - "127.0.0.1:8001:8001"
       - "127.0.0.1:8090:8090"
+      - "127.0.0.1:6061:6061"
     depends_on:
       - web
       - ws

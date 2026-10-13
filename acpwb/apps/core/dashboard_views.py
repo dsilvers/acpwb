@@ -289,7 +289,9 @@ def people(request):
 
 @staff_member_required(login_url='/django-admin/login/')
 def edge(request):
+    import time
     summary = _stat('edge.summary_24h', {}) or {}
+    process = _stat('edge.process', {}) or {}
     total = summary.get('total', 0)
     outcomes = summary.get('by_outcome', {})
     alpn = summary.get('by_alpn', {})
@@ -306,6 +308,14 @@ def edge(request):
         'top_ja4':        summary.get('top_ja4', []),
         'top_failed_ja4': summary.get('top_failed_ja4', []),
         'top_h2':         summary.get('top_h2_fingerprint', []),
+        'by_close':       _top_named(summary.get('by_close_reason', {})),
+        'by_goaway':      _top_named(summary.get('by_goaway', {})),
+        'top_h2_abuse':   summary.get('top_h2_abuse', []),
+        'top_conn_ips':   summary.get('top_conn_ips', []),
+        'aggregated':     summary.get('aggregated_conns', 0),
+        'rejected':       summary.get('rejected_requests', 0),
+        'process':        process,
+        'uptime_hours':   round((time.time() - process['started_at']) / 3600, 1) if process.get('started_at') else None,
         'recent':         list(EdgeConnection.objects.order_by('-timestamp')[:50]),
         'updated_at':     _updated_at('edge.summary_24h'),
     }

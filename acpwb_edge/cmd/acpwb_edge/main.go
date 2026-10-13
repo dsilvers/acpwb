@@ -14,11 +14,14 @@ package main
 import (
 	"context"
 	"crypto/tls"
+	"expvar"
 	"log"
 	"net"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
+	"runtime"
 	"strconv"
 	"syscall"
 	"time"
@@ -26,6 +29,7 @@ import (
 	"acpwb_edge/certs"
 	"acpwb_edge/edge"
 	"acpwb_edge/edgequeue"
+	"acpwb_edge/httpfp"
 	"acpwb_edge/proxy"
 	"acpwb_edge/router"
 )
@@ -44,6 +48,14 @@ func envBool(key string) bool {
 
 func envInt(key string, def int64) int64 {
 	if v, err := strconv.ParseInt(os.Getenv(key), 10, 64); err == nil && v > 0 {
+		return v
+	}
+	return def
+}
+
+// envSignedInt is envInt that also accepts negatives ("off").
+func envSignedInt(key string, def int64) int64 {
+	if v, err := strconv.ParseInt(os.Getenv(key), 10, 64); err == nil && v != 0 {
 		return v
 	}
 	return def
@@ -107,6 +119,11 @@ func main() {
 		Plain:        router.Plain(rc, envBool("EDGE_PLAIN_BOTSEED")),
 		Sink:         sink,
 		MaxBodyBytes: envInt("EDGE_MAX_BODY_BYTES", 10<<20),
+		Limits: edge.Limits{
+			StallTimeout:     time.Duration(envInt("EDGE_STALL_TIMEOUT_SECONDS", 60)) * time.Second,
+			RequestsInFlight: int(envSignedInt("EDGE_MAX_IN_FLIGHT", 100000)),
+			RecordsPerIPMin:  int(envSignedInt("EDGE_RECORDS_PER_IP_MINUTE", 600)),
+		},
 	})
 
 	httpsAddr, httpAddr := env("EDGE_HTTPS_ADDR", ":443"), env("EDGE_HTTP_ADDR", ":80")
@@ -131,6 +148,34 @@ func main() {
 		}()
 	}
 	log.Printf("acpwb_edge: listening on %s (TLS) and %s (plain), dev=%v", httpsAddr, httpAddr, dev)
+
+	started := time.Now().Unix()
+	stats := func() map[string]int64 {
+		st := edge.Stats()
+		st["tap_panics"] = httpfp.Panics()
+		st["goroutines"] = int64(runtime.NumGoroutine())
+		st["started_at"] = started
+		if queue != nil {
+			st["records_pushed"], st["records_dropped"] = queue.Pushed(), queue.Dropped()
+		}
+		return st
+	}
+	go func() {
+		for range time.Tick(30 * time.Second) {
+			queue.PublishStats(stats())
+		}
+	}()
+
+	// Debug listener: expvar counters at /debug/vars (conns, handshakes,
+	// queue drops, parser panics, goroutines) and pprof. Bind it to
+	// localhost only — it's never for the public.
+	if debugAddr := os.Getenv("EDGE_DEBUG_ADDR"); debugAddr != "" {
+		expvar.Publish("edge", expvar.Func(func() any { return stats() }))
+		go func() {
+			// http.DefaultServeMux: where expvar and net/http/pprof register.
+			log.Printf("acpwb_edge: debug listener on %s: %v", debugAddr, http.ListenAndServe(debugAddr, nil))
+		}()
+	}
 
 	hup := make(chan os.Signal, 1)
 	signal.Notify(hup, syscall.SIGHUP)

@@ -19,6 +19,7 @@ import (
 	"sync"
 	"time"
 
+	"golang.org/x/net/http/httpguts"
 	"golang.org/x/net/http2"
 
 	"acpwb_edge/httpfp"
@@ -41,7 +42,17 @@ type Config struct {
 	HandshakeTimeout time.Duration // default 10s
 	IdleTimeout      time.Duration // default 65s (nginx keepalive_timeout)
 	MaxBodyBytes     int64         // default 10 MiB
+	Limits           Limits
 }
+
+// MaxHeaderBytes bounds a request's headers on both protocols (nginx's
+// large_client_header_buffers allowed ~32 KB); it's also the h1 tap's limit.
+const MaxHeaderBytes = 64 << 10
+
+// maxFrameSize is the HTTP/2 SETTINGS_MAX_FRAME_SIZE we advertise: the
+// spec's default rather than x/net's 1 MiB, so neither the server nor the
+// h2 tap ever buffers more than this per connection for one frame.
+const maxFrameSize = 16 << 10
 
 type Server struct {
 	cfg       Config
@@ -57,6 +68,8 @@ type Server struct {
 	chans     []*chanListener
 	closing   bool
 	handshake sync.WaitGroup
+
+	records *recordGate
 }
 
 func New(cfg Config) *Server {
@@ -69,7 +82,8 @@ func New(cfg Config) *Server {
 	if cfg.MaxBodyBytes == 0 {
 		cfg.MaxBodyBytes = 10 << 20
 	}
-	s := &Server{cfg: cfg}
+	cfg.Limits.defaults()
+	s := &Server{cfg: cfg, records: newRecordGate(cfg.Sink, cfg.Limits.RecordsPerIPMin)}
 	s.baseCtx, s.cancel = context.WithCancel(context.Background())
 
 	if cfg.TLSConfig != nil {
@@ -92,7 +106,7 @@ func New(cfg Config) *Server {
 		Handler:           http.HandlerFunc(s.serveRequest),
 		ReadHeaderTimeout: 10 * time.Second,
 		IdleTimeout:       cfg.IdleTimeout,
-		MaxHeaderBytes:    1 << 20,
+		MaxHeaderBytes:    MaxHeaderBytes,
 		ConnContext: func(ctx context.Context, c net.Conn) context.Context {
 			if hc, ok := c.(*h1Conn); ok {
 				return withConnInfo(ctx, hc.ci)
@@ -103,8 +117,9 @@ func New(cfg Config) *Server {
 		ErrorLog:    log.New(io.Discard, "", 0), // client garbage isn't news
 	}
 	s.h2 = &http2.Server{
-		MaxConcurrentStreams: 250,
+		MaxConcurrentStreams: 100, // nginx's http2_max_concurrent_streams is 128
 		IdleTimeout:          cfg.IdleTimeout,
+		MaxReadFrameSize:     maxFrameSize,
 	}
 	// Registers h2's graceful GOAWAY with s.h1.Shutdown. Our h1 conns are
 	// never *tls.Conn, so the TLSNextProto it installs is never used.
@@ -177,7 +192,7 @@ func (s *Server) handleTLS(raw net.Conn, cl *chanListener) {
 	}
 	s.handshake.Add(1) // under mu: Shutdown's Wait never races an Add
 	s.mu.Unlock()
-	ci := newConnInfo(raw, true, s.cfg.Sink)
+	ci := s.newConn(raw, true)
 	wc := &wireConn{Conn: raw, ci: ci, recording: true}
 	tc := tls.Server(wc, s.tlsConfig)
 
@@ -185,7 +200,9 @@ func (s *Server) handleTLS(raw net.Conn, cl *chanListener) {
 	// handshake on this goroutine (HandshakeContext closes the conn from
 	// another one on cancel).
 	raw.SetDeadline(time.Now().Add(s.cfg.HandshakeTimeout))
+	handshakesInFlight.Add(1)
 	err := tc.Handshake()
+	handshakesInFlight.Add(-1)
 	raw.SetDeadline(time.Time{})
 	s.handshake.Done()
 	if err != nil {
@@ -201,10 +218,14 @@ func (s *Server) handleTLS(raw net.Conn, cl *chanListener) {
 	ci.handshakeDone(st)
 	if st.NegotiatedProtocol == "h2" {
 		hc := httpfp.NewH2Conn(tc)
+		hc.SetRapidResetLimit(func() {
+			ci.setCloseReason(CloseRapidReset)
+			wc.Close() // the h2 server sees the read error and tears down
+		})
 		ci.mu.Lock()
 		ci.h2 = hc
 		ci.mu.Unlock()
-		s.h2.ServeConn(&h2Conn{H2Conn: hc, tc: tc}, &http2.ServeConnOpts{
+		s.h2.ServeConn(&h2Conn{H2Conn: hc, tc: tc, ci: ci}, &http2.ServeConnOpts{
 			Context:    withConnInfo(s.baseCtx, ci),
 			BaseConfig: s.h1,
 			Handler:    http.HandlerFunc(s.serveRequest),
@@ -219,7 +240,7 @@ func (s *Server) handleTLS(raw net.Conn, cl *chanListener) {
 }
 
 func (s *Server) handlePlain(raw net.Conn, cl *chanListener) {
-	ci := newConnInfo(raw, false, s.cfg.Sink)
+	ci := s.newConn(raw, false)
 	ci.outcome = OutcomePlain
 	hc := httpfp.NewH1Conn(&wireConn{Conn: raw, ci: ci})
 	ci.h1 = hc
@@ -239,6 +260,9 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 	if ci == nil {
 		page.Error(w, http.StatusInternalServerError)
 		return
+	}
+	if r.Context().Err() != nil {
+		return // HTTP/2 stream already reset (rapid reset): do no work
 	}
 	ci.mu.Lock()
 	h1, h2 := ci.h1, ci.h2
@@ -276,6 +300,29 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 	defer func() { ci.noteRequest(r, m, names, sw.Status()) }()
 
 	w.Header().Set("Server", page.ServerHeader)
+	release, ok := s.admitRequest()
+	if !ok {
+		rejectedRequests.Add(1)
+		ci.noteRejectedRequest()
+		m.Route = "overload"
+		sw.Header().Set("Retry-After", "1")
+		page.Error(sw, http.StatusServiceUnavailable)
+		return
+	}
+	defer release()
+	if !isUpgrade(r) {
+		// Stall timeouts (nginx client_body_timeout / send_timeout): the
+		// deadlines move forward whenever the body or response progresses.
+		rc := http.NewResponseController(w)
+		stall := s.cfg.Limits.StallTimeout
+		now := time.Now()
+		_ = rc.SetReadDeadline(now.Add(stall))
+		_ = rc.SetWriteDeadline(now.Add(stall))
+		sw.rc, sw.stall, sw.last = rc, stall, now
+		if r.Body != nil && r.Body != http.NoBody {
+			r.Body = &stallReader{ReadCloser: r.Body, rc: rc, timeout: stall, last: now}
+		}
+	}
 	if r.ContentLength > s.cfg.MaxBodyBytes {
 		page.Error(sw, http.StatusRequestEntityTooLarge)
 		return
@@ -295,6 +342,10 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 type statusWriter struct {
 	http.ResponseWriter
 	status int
+
+	rc    *http.ResponseController // set: extend the write deadline on progress
+	stall time.Duration
+	last  time.Time
 }
 
 func (w *statusWriter) WriteHeader(code int) {
@@ -308,7 +359,16 @@ func (w *statusWriter) Write(p []byte) (int, error) {
 	if w.status == 0 {
 		w.status = http.StatusOK
 	}
-	return w.ResponseWriter.Write(p)
+	n, err := w.ResponseWriter.Write(p)
+	if n > 0 && w.rc != nil {
+		// At most once a second: on HTTP/2 each call is a message to the
+		// connection's serve loop.
+		if now := time.Now(); now.Sub(w.last) > time.Second {
+			w.last = now
+			_ = w.rc.SetWriteDeadline(now.Add(w.stall))
+		}
+	}
+	return n, err
 }
 
 func (w *statusWriter) Flush() {
@@ -348,7 +408,15 @@ func (s *Server) Shutdown(ctx context.Context) error {
 	}
 	s.mu.Unlock()
 	s.cancel()
+	s.records.close() // flush aggregated records
 	return err
+}
+
+// newConn starts tracking an accepted connection.
+func (s *Server) newConn(raw net.Conn, isTLS bool) *connInfo {
+	ci := newConnInfo(raw, isTLS)
+	ci.emit = s.records.emit
+	return ci
 }
 
 // h2Capable reports whether a client can meet HTTP/2's TLS requirements
@@ -371,4 +439,10 @@ func h2Capable(h *tls.ClientHelloInfo) bool {
 		}
 	}
 	return false
+}
+
+// isUpgrade reports a WebSocket (or other) protocol upgrade, whose hijacked
+// connection must not inherit a request's deadlines.
+func isUpgrade(r *http.Request) bool {
+	return r.Header.Get("Upgrade") != "" && httpguts.HeaderValuesContainsToken(r.Header["Connection"], "upgrade")
 }

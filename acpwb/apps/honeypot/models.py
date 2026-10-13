@@ -366,6 +366,31 @@ class EdgeConnection(models.Model):
     request_count = models.IntegerField(default=0)
     hdr_capture_lost = models.BooleanField(default=False)
 
+    # How the connection ended: client_closed / client_reset / read_timeout
+    # (handshake, header, idle or body stall) / write_timeout (client
+    # stopped reading) / read_error / write_error / server_closed.
+    close_reason = models.CharField(max_length=32, blank=True, db_index=True)
+    # Requests the edge answered 503 because the process-wide overload valve
+    # was shut. The edge never limits individual clients.
+    rejected_requests = models.IntegerField(default=0)
+
+    # HTTP/2 client behaviour — attack signatures: Resets ≈ Streams is rapid
+    # reset (CVE-2023-44487); many continuations is a CONTINUATION flood;
+    # h2_goaway is the error code the server ended the connection with
+    # (ENHANCE_YOUR_CALM, PROTOCOL_ERROR, FRAME_SIZE_ERROR, NO_ERROR…).
+    h2_streams = models.IntegerField(default=0)
+    h2_resets = models.IntegerField(default=0)
+    h2_continuations = models.IntegerField(default=0)
+    h2_goaway = models.CharField(max_length=32, blank=True)
+
+    # Connections this row stands for. An IP past the edge's per-minute
+    # record budget (EDGE_RECORDS_PER_IP_MINUTE) gets one aggregated row
+    # per (IP, outcome, JA4) per minute: exact conn_count and summed
+    # bytes/requests/h2 counters, the other fields from the first of them.
+    # Count connections with Sum('conn_count'), never Count('id').
+    conn_count = models.IntegerField(default=1)
+    aggregated = models.BooleanField(default=False)
+
     first_host = models.CharField(max_length=253, blank=True)
     first_method = models.CharField(max_length=16, blank=True)
     first_path = models.CharField(max_length=512, blank=True)

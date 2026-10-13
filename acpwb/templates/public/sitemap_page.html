@@ -107,6 +107,7 @@
         <ul class="list-unstyled" style="font-size:.88rem;line-height:2.1">
           <li><a href="/feeds/reports.xml" style="color:var(--navy)">Reports RSS Feed</a></li>
           <li><a href="/feeds/archive.xml" style="color:var(--navy)">Archive Atom Feed</a></li>
+          <li><a href="{% url 'press_releases_feed' %}" style="color:var(--navy)">Press Releases RSS Feed</a></li>
           <li><a href="/api/v1/openapi.json" style="color:var(--navy)">OpenAPI Specification</a></li>
         </ul>
       </div>
@@ -138,7 +139,7 @@
     </div>
 
     <p class="small text-muted mt-5" style="font-size:.78rem">
-      This site map was last updated March 2026 and reflects the current structure of acpwb.com. Some pages may require navigational context to access. Pages listed under Feeds &amp; Data Formats are machine-readable resources intended for programmatic access by authorized parties.
+      This site map was last updated {% now "F Y" %} and reflects the current structure of acpwb.com. Some pages may require navigational context to access. Pages listed under Feeds &amp; Data Formats are machine-readable resources intended for programmatic access by authorized parties.
     </p>
 
   </div>

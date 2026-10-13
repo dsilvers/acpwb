@@ -134,7 +134,7 @@ pseudo-header ("Akamai") fingerprint — and otherwise does what nginx did:
 the same routing (`acpwb_edge/router`, a line-by-line port of
 `nginx/acpwb.com` + `nginx/botseed.net`, pinned by `router_test.go`), static
 files, gzip, WebSockets. Its own responses (error pages, redirects) say
-`Server: acpwb/web` and are styled as a 3270 terminal screen (`acpwb_edge/page`);
+`Server: acpwb/web` and use plain IBM HTTP Server-style pages (`acpwb_edge/page`);
 plain HTTP sent to :443 is redirected to HTTPS rather than nginx's 400.
 
 What it sends the apps: `X-Real-IP`/`X-Forwarded-For` (the single client

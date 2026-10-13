@@ -383,7 +383,7 @@ func TestPlainHTTPOnTLSPort(t *testing.T) {
 		body, _ := io.ReadAll(resp.Body)
 		c.Close()
 		if resp.StatusCode != 301 || resp.Header.Get("Location") != tc.want || resp.Header.Get("Server") != "acpwb/web" ||
-			!strings.Contains(string(body), "ACPW301I") {
+			!strings.Contains(string(body), "The document has moved") {
 			t.Errorf("%s%s: %d %v", tc.host, tc.path, resp.StatusCode, resp.Header)
 		}
 		req := e.sink.nextReq(t)

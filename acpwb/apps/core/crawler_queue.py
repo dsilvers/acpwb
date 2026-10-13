@@ -252,7 +252,11 @@ def _recover_visits(queue_key: str):
 
     batches = []
     try:
-        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=100):
+        # count is per SCAN round trip, not a result limit: Redis holds
+        # millions of keys (the 30-day acpwb:ipseen:* first-seen markers),
+        # and at 100 per call the scan alone ate every drain run's whole
+        # 55s budget before a single batch was popped.
+        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=10000):
             raw_items = r.lrange(key, 0, -1)
             items = []
             for raw in raw_items:
@@ -284,7 +288,11 @@ def _oldest_pending_timestamp(queue_key: str):
         return False, None
     try:
         heads = [r.lindex(queue_key, 0)]
-        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=100):
+        # count is per SCAN round trip, not a result limit: Redis holds
+        # millions of keys (the 30-day acpwb:ipseen:* first-seen markers),
+        # and at 100 per call the scan alone ate every drain run's whole
+        # 55s budget before a single batch was popped.
+        for key in r.scan_iter(match=f'{queue_key}:processing:*', count=10000):
             heads.append(r.lindex(key, 0))
     except Exception:
         _mark_consumer_failure()

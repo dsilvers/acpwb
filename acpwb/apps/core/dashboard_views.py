@@ -344,15 +344,28 @@ def edge(request):
     # in one request proves it.
     proven = sum(r.get(k, 0) for r in by_network for k in ('impersonator', 'known_bot', 'tool', 'headless'))
     unproven = sum(r.get('browser', 0) + r.get('unknown', 0) for r in by_network)
+    # The headline: the last 3 rolled-up hours, proof by behaviour included
+    # (precalc's 'headline'); the class-only 24h figures if it's missing.
+    head = classes.get('headline', {})
+    h3 = head.get('3h') or {'total': class_total, 'by_class': proven, 'by_behaviour': 0, 'unproven': unproven,
+                            'bare_ips': 0}
+    h24 = head.get('24h') or h3
+
+    def pct(n, d):
+        return round(n * 100 / d, 1) if d else 0
     fake = sum(r['impersonator'] for r in by_network)
     res_fake = sum(r['impersonator'] for r in by_network if r['network'] == 'residential')
     ctx.update({
         'cls_by_network':  by_network,
-        'cls_total':       class_total,
-        'cls_proven':      proven,
-        'cls_proven_pct':  round(proven * 100 / class_total, 1) if class_total else 0,
-        'cls_unproven':    unproven,
-        'cls_unproven_pct': round(unproven * 100 / class_total, 1) if class_total else 0,
+        'cls_total':       h3['total'],
+        'cls_proven':      h3['by_class'] + h3['by_behaviour'],
+        'cls_proven_pct':  pct(h3['by_class'] + h3['by_behaviour'], h3['total']),
+        'cls_by_class_pct': pct(h3['by_class'], h3['total']),
+        'cls_by_behaviour_pct': pct(h3['by_behaviour'], h3['total']),
+        'cls_proven_24h_pct': pct(h24['by_class'] + h24['by_behaviour'], h24['total']),
+        'cls_unproven':    h3['unproven'],
+        'cls_unproven_pct': pct(h3['unproven'], h3['total']),
+        'cls_bare_ips':    h3.get('bare_ips', 0),
         'cls_no_hello_ips': sum(r.get('no_hello_ips', 0) for r in by_network if r['network'] == 'residential'),
         'multi_ip':        classes.get('multi_ip', {}),
         'cls_fake':        fake,

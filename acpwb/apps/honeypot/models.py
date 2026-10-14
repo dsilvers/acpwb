@@ -589,6 +589,14 @@ class EdgeIPHour(models.Model):
     # (EdgeClientHour.ips): one cookie jar shared by a proxy pool.
     pool_cookie_reqs = models.IntegerField(default=0)
     trap_hits = models.IntegerField(default=0)  # CrawlerVisit rows of ABSOLUTE_PROOF_TRAP_TYPES
+    # Browser-class page loads from an IP that fetched no assets and sent no
+    # cookie back all hour: documents fetched with subresources blocked (a
+    # browser farm on a proxy pool), not pages a person viewed.
+    bare_page_reqs = models.IntegerField(default=0)
+    # Its browser/unknown requests, when behaviour convicts the IP that hour
+    # (bare page loads, a trap hit, or a pool cookie): automation that
+    # client_class couldn't prove from the request alone.
+    behaviour_proven_reqs = models.IntegerField(default=0)
     # Connections that never got as far as a request, from EdgeConnection:
     # opened and dropped without a ClientHello (typical of proxy exits
     # whose client gave up on the tunnel), or a failed / timed-out

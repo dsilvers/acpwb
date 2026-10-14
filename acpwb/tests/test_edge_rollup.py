@@ -132,10 +132,12 @@ def test_rollup_clients_pools_and_traps():
             req('198.51.100.40', caught, new=True), req('198.51.100.40', caught, route='static'),
             req('198.51.100.40', caught, route='django', cls='headless'),
             # A one-request client: no row.
-            req('198.51.100.50', 'n' * 22, new=True)]
+            req('198.51.100.50', 'n' * 22, new=True),
+            # A browser farm: a fresh profile per IP fetching one page, no assets.
+            req('198.51.100.60', 'f' * 22, new=True)]
     EdgeRequest.objects.bulk_create(reqs)
     CrawlerVisit.objects.create(ip_address='198.51.100.40', trap_type='ghost_link', path='/employees/export/',
-                                timestamp=t + timedelta(seconds=1), request_id=reqs[-2].request_id)
+                                timestamp=t + timedelta(seconds=1), request_id=reqs[8].request_id)
     rollup_hour(start)
 
     rows = {c.client_id: c for c in EdgeClientHour.objects.filter(hour=start)}
@@ -148,6 +150,14 @@ def test_rollup_clients_pools_and_traps():
     ips = {r.ip_address: r for r in EdgeIPHour.objects.filter(hour=start)}
     assert [ips[f'203.0.113.{i}'].pool_cookie_reqs for i in (10, 11, 12)] == [1, 1, 1]
     assert (ips['198.51.100.30'].pool_cookie_reqs, ips['198.51.100.30'].page_reqs) == (0, 3)
+
+    # Convicted by behaviour: a bare page load, a pool cookie, a trap hit.
+    # The scraper returns its cookie, so its pages aren't bare.
+    bare = {ip: (r.bare_page_reqs, r.behaviour_proven_reqs) for ip, r in ips.items()}
+    assert bare['198.51.100.60'] == (1, 1)
+    assert bare['203.0.113.11'] == (0, 1)
+    assert bare['198.51.100.40'] == (0, 2)  # its browser requests; the headless one was proven already
+    assert bare['198.51.100.30'] == (0, 0)
 
 
 @pytest.mark.django_db
@@ -188,6 +198,10 @@ def test_precalc_edge_classes_and_dashboard(staff_client):
     asn = s['top_proxy_asns'][0]
     assert (asn['asn'], asn['ips'], asn['fake_ips'], asn['no_hello_ips']) == (28573, 4, 3, 1)
     assert {i['ip_address']: i['traps'] for i in s['top_fake_ips']}['203.0.113.1'] == 1
+
+    # The real browser fetched assets and returned its cookie: unproven.
+    assert s['headline']['3h'] | {'since': ''} == {'total': 6, 'by_class': 4, 'by_behaviour': 0, 'unproven': 2,
+                                                   'bare_pages': 0, 'bare_ips': 0, 'since': ''}
 
     # The real browser's cookie came from one IP; nothing on 2+.
     assert (s['multi_ip']['clients'], s['multi_ip']['multi']) == (1, 0)

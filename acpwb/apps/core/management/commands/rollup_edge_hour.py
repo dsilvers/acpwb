@@ -38,6 +38,10 @@ _REQUEST_SPILL = timedelta(minutes=15)
 _HEADLESS = "(client_class = 'headless' OR (client_class = 'browser' AND network = 'hosting'))"
 _BROWSER = "(client_class = 'browser' AND network <> 'hosting')"
 _PAGE = "(route IN ('django', 'acpwb_go') AND method = 'GET')"
+# An IP whose browser page loads came with none of their assets and no
+# returning cookie: a fresh profile fetching documents with subresources
+# blocked (a browser farm), not a person, who'd get the page's CSS and JS.
+_BARE = "(r.browser_pages > 0 AND r.static = 0 AND r.cookie = 0)"
 # A cookie seen from this many IPs in one hour is a pool's shared jar, not
 # one person moving between Wi-Fi and mobile data.
 POOL_IPS = 3
@@ -91,6 +95,7 @@ WITH r AS (
         count(*) FILTER (WHERE client_class = 'known_bot') AS known_bot,
         count(*) FILTER (WHERE client_class = 'tool') AS tool,
         count(*) FILTER (WHERE """ + _PAGE + """) AS pages,
+        count(*) FILTER (WHERE """ + _BROWSER + """ AND """ + _PAGE + """) AS browser_pages,
         count(p.pool_id) AS pool_cookie,
         count(*) FILTER (WHERE client_class IN ('unknown', '')) AS unknown,
         count(*) FILTER (WHERE route = 'static') AS static,
@@ -127,7 +132,7 @@ INSERT INTO honeypot_edgeiphour (
     hour, ip_address, asn, network, requests, conns,
     browser_reqs, headless_reqs, impersonator_reqs, known_bot_reqs, tool_reqs, unknown_reqs,
     page_reqs, static_reqs, error_reqs, new_client_reqs, cookie_reqs, pool_cookie_reqs, trap_hits,
-    no_hello_conns, failed_handshakes,
+    bare_page_reqs, behaviour_proven_reqs, no_hello_conns, failed_handshakes,
     ja4s, user_agents, top_ja4, top_stack, signals
 )
 SELECT
@@ -136,7 +141,10 @@ SELECT
     coalesce(r.browser, 0), coalesce(r.headless, 0), coalesce(r.impersonator, 0), coalesce(r.known_bot, 0),
     coalesce(r.tool, 0), coalesce(r.unknown, 0),
     coalesce(r.pages, 0), coalesce(r.static, 0), coalesce(r.errors, 0), coalesce(r.new_client, 0),
-    coalesce(r.cookie, 0), coalesce(r.pool_cookie, 0), coalesce(t.hits, 0), coalesce(c.no_hello, 0), coalesce(c.failed, 0),
+    coalesce(r.cookie, 0), coalesce(r.pool_cookie, 0), coalesce(t.hits, 0),
+    CASE WHEN """ + _BARE + """ THEN r.browser_pages ELSE 0 END,
+    CASE WHEN """ + _BARE + """ OR t.hits > 0 OR r.pool_cookie > 0 THEN r.browser + r.unknown ELSE 0 END,
+    coalesce(c.no_hello, 0), coalesce(c.failed, 0),
     coalesce(r.ja4s, 0), coalesce(r.uas, 0), coalesce(r.top_ja4, ''), coalesce(r.top_stack, ''),
     coalesce(r.signals, 0)
 FROM r

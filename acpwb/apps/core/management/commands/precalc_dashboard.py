@@ -1075,12 +1075,34 @@ class Command(BaseCommand):
             by_network[row['network']] = {k: v if k == 'network' else v + prev[k] for k, v in row.items()} if prev else row
         by_network = sorted(by_network.values(), key=lambda r: -r['requests'])
 
+        # Proven automated: by the request itself (its client class), or by
+        # what its IP did that hour (bare page loads, a trap, a pool cookie;
+        # EdgeIPHour.behaviour_proven_reqs). Over the last 3 finished hours
+        # too: the 24h figure lags behind classifier changes and new waves.
+        last = EdgeIPHour.objects.aggregate(h=Max('hour'))['h']
+        headline = {}
+        for key, start in (('24h', since), ('3h', last - timedelta(hours=2) if last else since)):
+            agg = EdgeIPHour.objects.filter(hour__gte=start).aggregate(
+                total=Sum('requests'), behaviour=Sum('behaviour_proven_reqs'),
+                bare=Sum('bare_page_reqs'), browser=Sum('browser_reqs'), unknown=Sum('unknown_reqs'),
+                bare_ips=Count('ip_address', distinct=True, filter=Q(bare_page_reqs__gt=0)),
+            )
+            agg = {k: v or 0 for k, v in agg.items()}
+            unproven = agg['browser'] + agg['unknown']
+            headline[key] = {
+                'total': agg['total'], 'by_class': agg['total'] - unproven, 'by_behaviour': agg['behaviour'],
+                'unproven': unproven - agg['behaviour'], 'bare_pages': agg['bare'], 'bare_ips': agg['bare_ips'],
+                'since': start.isoformat(),
+            }
+
         hourly = [
             {'hour': r['hour'].isoformat(), 'requests': r['requests'] or 0,
-             'residential_fake': r['residential_fake'] or 0, **{c: r[f'{c}_reqs'] or 0 for c in classes}}
+             'residential_fake': r['residential_fake'] or 0, 'behaviour_proven': r['behaviour'] or 0,
+             **{c: r[f'{c}_reqs'] or 0 for c in classes}}
             for r in EdgeIPHour.objects.filter(hour__gte=since - timedelta(hours=24)).values('hour').annotate(
                 requests=Sum('requests'),
                 residential_fake=Sum('impersonator_reqs', filter=Q(network='residential')),
+                behaviour=Sum('behaviour_proven_reqs'),
                 **sums,
             ).order_by('-hour')
         ]
@@ -1132,7 +1154,7 @@ class Command(BaseCommand):
         self._set_stat('edge.classes_24h', {
             'by_network': by_network, 'hourly': hourly, 'top_fake_fps': top_fake_fps,
             'top_proxy_asns': top_proxy_asns, 'top_fake_ips': top_fake_ips,
-            **self._edge_behaviour(since),
+            'headline': headline, **self._edge_behaviour(since),
         })
         self.stdout.write(f'  edge: classes from {len(hourly)} rolled-up hour(s)')
 

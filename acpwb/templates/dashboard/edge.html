@@ -40,16 +40,16 @@
 <div class="row g-3 mb-3">
   <div class="col-lg-3 col-md-6">
     <div class="stat-card" style="border-top-color:#dc3545">
-      <div class="label">Proven Automated</div>
+      <div class="label">Proven Automated <span style="font-weight:normal;color:var(--muted)">last 3h</span></div>
       <div class="value" style="color:#dc3545">{{ cls_proven_pct }}%</div>
-      <div class="sub">{{ cls_proven }} of {{ cls_total }} requests: fake browsers, declared bots and tools, browsers in datacenters</div>
+      <div class="sub">{{ cls_proven }} of {{ cls_total }} requests · by the request {{ cls_by_class_pct }}%, by behaviour +{{ cls_by_behaviour_pct }}% · 24h: {{ cls_proven_24h_pct }}%</div>
     </div>
   </div>
   <div class="col-lg-3 col-md-6">
     <div class="stat-card">
-      <div class="label">Unproven</div>
+      <div class="label">Unproven <span style="font-weight:normal;color:var(--muted)">last 3h</span></div>
       <div class="value">{{ cls_unproven_pct }}%</div>
-      <div class="sub">{{ cls_unproven }} requests: real browser engines on home networks, or nothing to check — not proof of a person</div>
+      <div class="sub">{{ cls_unproven }} requests: real browsers on home networks that rendered pages and hit no trap — not proof of a person · {{ cls_bare_ips }} IPs fetched pages without their assets</div>
     </div>
   </div>
   <div class="col-lg-3 col-md-6">
@@ -140,12 +140,12 @@
       <div class="section-card-header"><h6>By Hour</h6><span style="font-size:.72rem;color:var(--muted)">last 48 hours</span></div>
       <div style="max-height:420px;overflow-y:auto">
       <table class="dash-table w-100">
-        <thead><tr><th>Hour (UTC)</th><th>Requests</th><th>Browsers</th><th>Headless</th><th>Fake</th><th>Residential fake</th><th>Known bots</th><th>Tools</th><th>Unknown</th></tr></thead>
+        <thead><tr><th>Hour (UTC)</th><th>Requests</th><th>Browsers</th><th>Headless</th><th>Fake</th><th>Residential fake</th><th>Known bots</th><th>Tools</th><th>Unknown</th><th title="browser/unknown requests whose IP behaviour convicts it that hour">By behaviour</th></tr></thead>
         <tbody>
         {% for h in cls_hourly %}
           <tr><td class="mono">{{ h.hour|slice:":10" }} {{ h.hour|slice:"11:13" }}:00</td><td>{{ h.requests }}</td><td>{{ h.browser }}</td>
-            <td style="color:#dc3545">{{ h.headless|default:0 }}</td><td style="color:#dc3545">{{ h.impersonator }}</td><td>{{ h.residential_fake }}</td><td>{{ h.known_bot }}</td><td>{{ h.tool }}</td><td>{{ h.unknown }}</td></tr>
-        {% empty %}<tr><td colspan="9" style="color:var(--muted)">none</td></tr>{% endfor %}
+            <td style="color:#dc3545">{{ h.headless|default:0 }}</td><td style="color:#dc3545">{{ h.impersonator }}</td><td>{{ h.residential_fake }}</td><td>{{ h.known_bot }}</td><td>{{ h.tool }}</td><td>{{ h.unknown }}</td><td style="color:#dc3545">{{ h.behaviour_proven|default:0 }}</td></tr>
+        {% empty %}<tr><td colspan="10" style="color:var(--muted)">none</td></tr>{% endfor %}
         </tbody>
       </table>
       </div>

@@ -382,6 +382,7 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 		JA4:            fps.JA4,
 		H2Fingerprint:  h2fp,
 		CookieDropped:  issued && seq > 1,
+		HeaderNames:    names,
 		Net:            ci.network(),
 	})
 	m.TrafficClass, m.ASN = cls.Class, ci.network().ASN

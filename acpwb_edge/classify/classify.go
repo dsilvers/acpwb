@@ -38,16 +38,22 @@ const (
 	SigOldTLS                     // TLS 1.1 or older from a modern browser UA
 	SigBotResidential             // a self-declared crawler from a residential ASN (likely spoofed)
 	SigKnownRange                 // from a known bot IP range
+	SigHeaderOrder                // decisive: headers in an order the claimed browser never sends
+	SigExploitProbe               // carries an exploit's header (x-middleware-subrequest: the Next.js auth bypass)
 )
+
+// decisive signals turn a browser claim into an impersonator.
+const decisive = SigTLSMismatch | SigNoH2 | SigH2Mismatch | SigHeaderOrder
 
 // Input is one request, as the edge sees it.
 type Input struct {
 	UA             string
 	AcceptLanguage string
 	IP             string
-	JA4            string // "" on plain HTTP
-	H2Fingerprint  string // "" on HTTP/1
-	CookieDropped  bool   // the response sets a new client cookie on a connection's 2nd+ request
+	JA4            string   // "" on plain HTTP
+	H2Fingerprint  string   // "" on HTTP/1
+	CookieDropped  bool     // the response sets a new client cookie on a connection's 2nd+ request
+	HeaderNames    []string // in the order the client sent them (HTTP/2 pseudo-headers included)
 	Net            NetInfo
 }
 
@@ -77,6 +83,9 @@ func Classify(in Input) Result {
 	if in.CookieDropped {
 		res.Signals |= SigCookieDropped
 	}
+	if hasHeader(in.HeaderNames, "x-middleware-subrequest") {
+		res.Signals |= SigExploitProbe
+	}
 	a, _, haveJA4 := ja4Parts(in.JA4)
 	stack, knownStack := stackFor(in.JA4)
 	switch {
@@ -105,8 +114,26 @@ func Classify(in Input) Result {
 		res.Signals |= SigKnownRange
 		return res
 	}
+	if name, bot, ok := declaredClient(in.UA); ok {
+		res.Label = name
+		if bot {
+			res.Class, res.Group = ClassKnownBot, "SEO / Other Bots"
+			if in.Net.Network == NetResidential {
+				res.Signals |= SigBotResidential
+			}
+		} else {
+			res.Class, res.Group = ClassTool, "Generic Scrapers"
+		}
+		return res
+	}
 
 	claim := claimBrowser(in.UA)
+	if claim.Name != "" && in.Net.Network == NetHosting && !haveJA4 {
+		// A browser claim from a datacenter over plain HTTP: nothing to
+		// check, but nobody browses from a cloud provider.
+		res.Class, res.Label, res.Group = ClassHeadless, "Datacenter · headless "+claim.Name, GroupDatacenterBots
+		return res
+	}
 	if claim.Name == "" || !haveJA4 {
 		res.Class, res.Group = ClassUnknown, GroupUnverified
 		switch {
@@ -126,16 +153,18 @@ func Classify(in Input) Result {
 	if in.AcceptLanguage == "" {
 		res.Signals |= SigNoAcceptLang
 	}
-	const decisive = SigTLSMismatch | SigNoH2 | SigH2Mismatch
 	switch {
 	case res.Signals&decisive != 0:
 		res.Class = ClassImpersonator
 		detail := res.Stack
 		if res.Signals&SigTLSMismatch == 0 { // the right TLS stack: say what gave it away
-			if res.Signals&SigNoH2 != 0 {
+			switch {
+			case res.Signals&SigNoH2 != 0:
 				detail += ", no h2"
-			} else {
+			case res.Signals&SigH2Mismatch != 0:
 				detail += ", foreign HTTP/2"
+			default:
+				detail += ", injected headers"
 			}
 		}
 		res.Label = "fake " + claim.Name + " (" + detail + ")"
@@ -171,6 +200,9 @@ func checkClaim(claim Claim, in Input, a string, stack Stack, knownStack bool) u
 		// Chromium and Firefox each use one cipher list across every
 		// release we've seen; anything else isn't them.
 		sig |= SigTLSMismatch
+	}
+	if claim.Family == "chromium" && claim.Name != "" && len(in.HeaderNames) > 0 && !chromiumHeaderOrderOK(in.HeaderNames) {
+		sig |= SigHeaderOrder
 	}
 	// a = t13d1516h2: [0] protocol, [1:3] TLS version, [8:10] first ALPN.
 	if v := a[1:3]; v == "10" || v == "11" || v == "s3" {

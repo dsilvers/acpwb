@@ -16,6 +16,8 @@ SIGNALS = [
     ('old_tls', 'TLS 1.1 or older from a modern browser UA'),
     ('bot_residential', 'self-declared crawler from a residential network'),
     ('known_range', 'known bot IP range'),
+    ('header_order', "headers in an order the claimed browser never sends"),
+    ('exploit_probe', 'exploit header (x-middleware-subrequest: Next.js auth bypass)'),
 ]
 
 BIT = {name: 1 << i for i, (name, _) in enumerate(SIGNALS)}

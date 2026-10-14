@@ -84,6 +84,35 @@ func TestClassify(t *testing.T) {
 			ClassUnknown, "Other · Go TLS", GroupUnverified, 0},
 		{"plain HTTP can't be checked", Input{UA: chromeUA},
 			ClassUnknown, "Unverified · Chrome", GroupUnverified, 0},
+		// Real Chrome 155 through the edge (headless, same network stack).
+		{"Chrome navigation header order", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: h(":method,:authority,:scheme,:path,sec-ch-ua,sec-ch-ua-mobile,sec-ch-ua-platform,upgrade-insecure-requests,user-agent,accept,sec-fetch-site,sec-fetch-mode,sec-fetch-user,sec-fetch-dest,accept-encoding,accept-language,cookie,priority"), Net: residential},
+			ClassBrowser, "Browser · Chrome", GroupBrowsers, 0},
+		{"Chrome subresource header order", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: h(":method,:authority,:scheme,:path,origin,sec-ch-ua-platform,user-agent,sec-ch-ua,sec-ch-ua-mobile,accept,sec-fetch-site,sec-fetch-mode,sec-fetch-dest,referer,accept-encoding,accept-language,cookie,cookie,priority"), Net: residential},
+			ClassBrowser, "Browser · Chrome", GroupBrowsers, 0},
+		// 92% of production's residential "Chrome": accept-language injected early.
+		{"injected accept-language", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: h(":method,:authority,:scheme,:path,sec-ch-ua-platform,user-agent,sec-ch-ua,accept-language,sec-ch-ua-mobile,accept,sec-fetch-site,sec-fetch-mode,sec-fetch-dest,referer,accept-encoding,cookie,priority"), Net: residential},
+			ClassImpersonator, "Residential · fake Chrome (Chromium, injected headers)", GroupResidentialBots, SigHeaderOrder},
+		{"accept-language before accept", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: h(":method,:authority,:scheme,:path,sec-ch-ua,sec-ch-ua-mobile,sec-ch-ua-platform,upgrade-insecure-requests,user-agent,accept-language,accept,sec-fetch-site,sec-fetch-mode,sec-fetch-user,sec-fetch-dest,accept-encoding,priority"), Net: hosting},
+			ClassImpersonator, "Datacenter · fake Chrome (Chromium, injected headers)", GroupDatacenterBots, SigHeaderOrder | SigHosting},
+		{"unlisted crawler", Input{UA: "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; KeenableBot/1.0; +https://keenable.ai/bot)", JA4: "t13d1516h2_8daaf6152771_02713d6af862", Net: hosting},
+			ClassKnownBot, "KeenableBot", "SEO / Other Bots", SigHosting},
+		{"unlisted crawler, compatible outside parentheses", Input{UA: "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ShapBot/0.1.0", JA4: "t13d1516h2_8daaf6152771_02713d6af862", Net: hosting},
+			ClassKnownBot, "ShapBot", "SEO / Other Bots", 0},
+		{"user agent fetcher", Input{UA: "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Claude-User/1.0; +Claude-User@anthropic.com)", JA4: "t13d1516h2_8daaf6152771_02713d6af862", Net: hosting},
+			ClassKnownBot, "Claude-User", "SEO / Other Bots", 0},
+		{"scanner greeting", Input{UA: "Hello from Palo Alto Networks, find out more about our scans in https://docs-cortex.paloaltonetworks.com/r/1/Cortex-Xpanse/Scanning-activity", JA4: "t13d131000_f57a46bbacb6_e7c285222651", Net: hosting},
+			ClassKnownBot, "Hello from Palo Alto Networks", "SEO / Other Bots", 0},
+		{"non-browser client", Input{UA: "Cpanel-HTTP-Client/1.0", JA4: "t13d131000_f57a46bbacb6_e7c285222651", Net: hosting},
+			ClassTool, "Cpanel-HTTP-Client", "Generic Scrapers", 0},
+		{"Next.js exploit probe", Input{UA: "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)", JA4: "t13d1516h2_8daaf6152771_02713d6af862",
+			HeaderNames: h(":authority,:method,:path,:scheme,x-middleware-subrequest,x-nextjs-data,user-agent,accept,cookie,accept-encoding"), Net: hosting},
+			ClassKnownBot, "Baiduspider", "Search Engines", SigExploitProbe},
+		{"plain-HTTP browser claim from a datacenter", Input{UA: chromeUA, Net: hosting},
+			ClassHeadless, "Datacenter · headless Chrome", GroupDatacenterBots, SigHosting},
 		{"cookie dropped is evidence only", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2, CookieDropped: true},
 			ClassBrowser, "Browser · Chrome", GroupBrowsers, SigCookieDropped},
 	}
@@ -131,6 +160,8 @@ func tsvColumn(t *testing.T, path string, col int) []string {
 	}
 	return out
 }
+
+func h(s string) []string { return strings.Split(s, ",") }
 
 func TestClaimBrowser(t *testing.T) {
 	for ua, want := range map[string]Claim{
@@ -219,7 +250,7 @@ func TestSignalNamesMatchPython(t *testing.T) {
 		{SigTLSMismatch, "tls_mismatch"}, {SigNoH2, "no_h2"}, {SigH2Mismatch, "h2_mismatch"},
 		{SigH2Stale, "h2_stale"}, {SigNoAcceptLang, "no_accept_language"}, {SigCookieDropped, "cookie_dropped"},
 		{SigHosting, "hosting"}, {SigOldTLS, "old_tls"}, {SigBotResidential, "bot_residential"},
-		{SigKnownRange, "known_range"},
+		{SigKnownRange, "known_range"}, {SigHeaderOrder, "header_order"}, {SigExploitProbe, "exploit_probe"},
 	}
 	if len(py) != len(want) {
 		t.Fatalf("python has %d signals, go %d: %q", len(py), len(want), py)

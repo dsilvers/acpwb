@@ -153,7 +153,7 @@ func (ci *connInfo) unservedRecord(h httpfp.Head, status int, errKind, proto str
 		Error:       errKind,
 	}
 	ja4 := ci.fingerprints().JA4
-	rec.setClass(ja4, ci.network(), classify.Classify(classify.Input{UA: h.UserAgent, IP: ci.ip, JA4: ja4, Net: ci.network()}))
+	rec.setClass(ja4, ci.network(), classify.Classify(classify.Input{UA: h.UserAgent, IP: ci.ip, JA4: ja4, HeaderNames: h.Names, Net: ci.network()}))
 	rec.truncate()
 	return rec
 }

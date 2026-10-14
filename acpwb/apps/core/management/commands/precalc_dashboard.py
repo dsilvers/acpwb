@@ -1105,7 +1105,7 @@ class Command(BaseCommand):
         classes = ('browser', 'headless', 'impersonator', 'known_bot', 'tool', 'unknown')
         sums = {f'{c}_reqs': Sum(f'{c}_reqs') for c in classes}
 
-        by_network = []
+        by_network = {}
         for r in ips.values('network').annotate(
             requests=Sum('requests'), ip_count=Count('ip_address', distinct=True),
             fake_ips=Count('ip_address', distinct=True, filter=Q(impersonator_reqs__gt=0)),
@@ -1113,11 +1113,15 @@ class Command(BaseCommand):
             no_hello=Sum('no_hello_conns'), failed=Sum('failed_handshakes'),
             **sums,
         ).order_by('-requests'):
-            by_network.append({
+            row = {
                 'network': r['network'] or 'unknown', 'requests': r['requests'] or 0, 'ips': r['ip_count'],
                 'fake_ips': r['fake_ips'], 'no_hello_ips': r['no_hello_ips'], 'no_hello': r['no_hello'] or 0,
                 'failed_handshakes': r['failed'] or 0, **{c: r[f'{c}_reqs'] or 0 for c in classes},
-            })
+            }
+            # '' (rows from before the edge recorded networks) is unknown too.
+            prev = by_network.get(row['network'])
+            by_network[row['network']] = {k: v if k == 'network' else v + prev[k] for k, v in row.items()} if prev else row
+        by_network = sorted(by_network.values(), key=lambda r: -r['requests'])
 
         hourly = [
             {'hour': r['hour'].isoformat(), 'requests': r['requests'] or 0,

@@ -58,6 +58,19 @@ func inOrder(seq, tpl []string) bool {
 	return true
 }
 
+// hiddenLink reports whether path is under one of the trap sections that
+// only invisible links point to (templates/partials/_ghost_links.html and
+// the "@see" HTML comments; Django logs them as ghost_link, see
+// BotTrackingMiddleware._classify_path).
+func hiddenLink(path string) bool {
+	for _, p := range [...]string{"/internal/", "/employees/", "/admin-panel/"} {
+		if strings.HasPrefix(path, p) {
+			return true
+		}
+	}
+	return false
+}
+
 func hasHeader(names []string, want string) bool {
 	for _, n := range names {
 		if strings.EqualFold(n, want) {

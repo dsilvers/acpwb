@@ -580,10 +580,14 @@ class EdgeIPHour(models.Model):
     tool_reqs = models.IntegerField(default=0)
     unknown_reqs = models.IntegerField(default=0)
 
+    page_reqs = models.IntegerField(default=0)  # GETs the apps answered (django / acpwb_go routes): pages, not assets
     static_reqs = models.IntegerField(default=0)  # route static: pages' assets, which browsers fetch and most bots don't
     error_reqs = models.IntegerField(default=0)
     new_client_reqs = models.IntegerField(default=0)  # responses that issued a new client cookie
     cookie_reqs = models.IntegerField(default=0)  # requests that sent a valid client cookie back
+    # Requests carrying a client cookie that came from 3+ IPs that hour
+    # (EdgeClientHour.ips): one cookie jar shared by a proxy pool.
+    pool_cookie_reqs = models.IntegerField(default=0)
     trap_hits = models.IntegerField(default=0)  # CrawlerVisit rows of ABSOLUTE_PROOF_TRAP_TYPES
     # Connections that never got as far as a request, from EdgeConnection:
     # opened and dropped without a ClientHello (typical of proxy exits
@@ -639,6 +643,11 @@ class EdgeFingerprintHour(models.Model):
     headless_reqs = models.IntegerField(default=0)
     impersonator_reqs = models.IntegerField(default=0)
     known_bot_reqs = models.IntegerField(default=0)
+    # Its requests that hit an ABSOLUTE_PROOF_TRAP_TYPES trap (CrawlerVisit,
+    # joined by request_id), and the IPs they came from: proof that this
+    # stack carries automation, however browser-like it looks.
+    trap_reqs = models.IntegerField(default=0)
+    trap_ips = models.IntegerField(default=0)
     user_agents = models.IntegerField(default=0)
     top_stack = models.CharField(max_length=48, blank=True)
     top_user_agent = models.CharField(max_length=512, blank=True)
@@ -655,6 +664,58 @@ class EdgeFingerprintHour(models.Model):
 
     def __str__(self):
         return f"{self.ja4} @ {self.hour:%Y-%m-%d %H:00} {self.ips} IPs"
+
+
+class EdgeClientHour(models.Model):
+    """One row per (hour, client cookie): what one acpwb_cid client did that
+    hour, for clients that sent their cookie back at least once (the rest
+    are one-request clients that keep no cookies — most bots). Unlike an IP
+    (CGNAT puts thousands of people behind one), a cookie is one browser
+    profile, so this is where behaviour shows:
+
+    - a cookie on many IPs is a proxy pool sharing one cookie jar;
+    - a new client (first_seen) that loads pages and never their assets
+      isn't rendering them (scrapers block images/CSS to save bandwidth);
+    - a trap hit (joined by request_id) convicts the whole client.
+
+    Built by rollup_edge_hour; a TimescaleDB hypertable (migration 0028),
+    hour + client_id unique.
+    """
+    hour = models.DateTimeField()
+    client_id = models.CharField(max_length=64)
+    first_seen = models.BooleanField(default=False)  # its cookie was issued this hour
+    requests = models.IntegerField(default=0)
+    page_reqs = models.IntegerField(default=0)
+    static_reqs = models.IntegerField(default=0)
+    trap_reqs = models.IntegerField(default=0)
+    ips = models.IntegerField(default=0)
+    asns = models.IntegerField(default=0)
+    residential_ips = models.IntegerField(default=0)
+    hosting_ips = models.IntegerField(default=0)
+    ja4s = models.IntegerField(default=0)
+    user_agents = models.IntegerField(default=0)
+    browser_reqs = models.IntegerField(default=0)
+    headless_reqs = models.IntegerField(default=0)
+    impersonator_reqs = models.IntegerField(default=0)
+    known_bot_reqs = models.IntegerField(default=0)
+    top_ip = models.GenericIPAddressField(null=True, blank=True)
+    top_ja4 = models.CharField(max_length=40, blank=True)
+    top_class = models.CharField(max_length=16, blank=True)
+    top_user_agent = models.CharField(max_length=512, blank=True)
+    signals = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-hour']
+        indexes = [
+            models.Index(fields=['client_id', 'hour']),
+        ]
+        constraints = [
+            models.UniqueConstraint(fields=['hour', 'client_id'], name='honeypot_edgeclienthour_uniq'),
+        ]
+        verbose_name = 'Edge Client Hour'
+
+    def __str__(self):
+        return f"{self.client_id} @ {self.hour:%Y-%m-%d %H:00} {self.ips} IPs"
 
 
 class IPReputationScore(models.Model):

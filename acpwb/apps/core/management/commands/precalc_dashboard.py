@@ -1041,56 +1041,8 @@ class Command(BaseCommand):
             (r['protocol'] or '(none)'): r['c']
             for r in qs.values('protocol').annotate(c=Count('id')).order_by('-c')
         }
-        # One browser (client cookie) on many IPs: rotating proxies that
-        # keep cookies show up here.
-        summary['multi_ip_clients'] = [
-            {'client_id': r['client_id'], 'ips': r['ips'], 'requests': r['c'], 'uas': r['uas']}
-            for r in qs.exclude(client_id='').values('client_id').annotate(
-                ips=Count('ip_address', distinct=True), c=Count('id'),
-                uas=Count('user_agent', distinct=True),
-            ).filter(ips__gt=1).order_by('-ips', '-c')[:20]
-        ]
-        summary['multi_ip'] = self._multi_ip_clients()
         self._set_stat('edge.requests_24h', summary)
         self.stdout.write(f'  edge: {summary["total"]} requests in last 24h')
-
-    MULTI_IP_HOURS = 6
-
-    def _multi_ip_clients(self):
-        """How many client cookies were used from more than one IP over the
-        last MULTI_IP_HOURS, by the class of most of their requests. A
-        cookie carried across IPs is one client rotating addresses (or
-        roaming between networks). Shorter than the 24h window: grouping
-        every cookie of a day is the expensive part."""
-        from django.db import connections, router
-        sql = """
-            SELECT cls, count(*), count(*) FILTER (WHERE ips >= 2), count(*) FILTER (WHERE ips >= 10), max(ips)
-            FROM (
-                SELECT client_id, count(DISTINCT ip_address) AS ips,
-                       mode() WITHIN GROUP (ORDER BY client_class) AS cls
-                FROM honeypot_edgerequest
-                WHERE timestamp >= %s AND client_id <> ''
-                GROUP BY client_id
-            ) x
-            GROUP BY cls ORDER BY 3 DESC
-        """
-        since = timezone.now() - timedelta(hours=self.MULTI_IP_HOURS)
-        # The same connection the ORM is using (force_db('direct') for a run).
-        with connections[router.db_for_read(EdgeRequest) or 'default'].cursor() as cur:
-            cur.execute(sql, [since])
-            rows = cur.fetchall()
-        by_class = [
-            {'client_class': cls or 'unclassified', 'clients': n, 'multi': multi, 'ten_plus': ten, 'max_ips': top}
-            for cls, n, multi, ten, top in rows
-        ]
-        return {
-            'hours': self.MULTI_IP_HOURS,
-            'clients': sum(r['clients'] for r in by_class),
-            'multi': sum(r['multi'] for r in by_class),
-            'ten_plus': sum(r['ten_plus'] for r in by_class),
-            'max_ips': max((r['max_ips'] or 0 for r in by_class), default=0),
-            'by_class': by_class,
-        }
 
     def _update_edge_classes(self):
         """Who's really visiting, from the hourly rollups (EdgeIPHour,
@@ -1180,8 +1132,72 @@ class Command(BaseCommand):
         self._set_stat('edge.classes_24h', {
             'by_network': by_network, 'hourly': hourly, 'top_fake_fps': top_fake_fps,
             'top_proxy_asns': top_proxy_asns, 'top_fake_ips': top_fake_ips,
+            **self._edge_behaviour(since),
         })
         self.stdout.write(f'  edge: classes from {len(hourly)} rolled-up hour(s)')
+
+    def _edge_behaviour(self, since):
+        """What clients did, from EdgeClientHour (client cookies that came
+        back) and EdgeFingerprintHour: automation that a single request
+        can't show, however real its browser fingerprint.
+
+        exposed: client-hours by the class of most of their requests, and
+        how many of them behaved like no person does: the cookie on
+        POOL_IPS+ IPs in one hour (a proxy pool's shared jar), a new client
+        loading pages but never their assets (not rendering them), or a hit
+        on an ABSOLUTE_PROOF_TRAP_TYPES trap (a ghost link no one can see).
+        """
+        from apps.core.management.commands.rollup_edge_hour import POOL_IPS
+        from apps.honeypot.models import EdgeClientHour, EdgeFingerprintHour
+        clients = EdgeClientHour.objects.filter(hour__gte=since)
+        pooled = Q(ips__gte=POOL_IPS)
+        no_render = Q(first_seen=True, page_reqs__gte=2, static_reqs=0)
+        trapped = Q(trap_reqs__gt=0)
+        exposed = [
+            {'client_class': r['top_class'] or 'unclassified', 'client_hours': r['n'], 'pooled': r['pooled'],
+             'no_render': r['no_render'], 'trapped': r['trapped'], 'any': r['any']}
+            for r in clients.values('top_class').annotate(
+                n=Count('client_id'), pooled=Count('client_id', filter=pooled),
+                no_render=Count('client_id', filter=no_render), trapped=Count('client_id', filter=trapped),
+                any=Count('client_id', filter=pooled | no_render | trapped),
+            ).order_by('-n')
+        ]
+        multi = clients.filter(ips__gte=2).aggregate(
+            multi=Count('client_id', distinct=True),
+            pools=Count('client_id', distinct=True, filter=pooled),
+            ten_plus=Count('client_id', distinct=True, filter=Q(ips__gte=10)),
+            max_ips=Max('ips'),
+        )
+        multi['clients'] = clients.aggregate(n=Count('client_id', distinct=True))['n']
+        # ip_hours sums each hour's distinct IPs, like the fingerprints'.
+        cookie_pools = [
+            {'client_id': r['client_id'], 'ip_hours': r['ip_hours'], 'max_ips': r['max_ips'], 'hours': r['hours'],
+             'requests': r['requests'] or 0, 'residential': r['res'] or 0, 'hosting': r['host'] or 0,
+             'traps': r['traps'] or 0, 'client_class': r['cls'], 'user_agent': r['ua'], 'ja4': r['ja4']}
+            for r in clients.filter(pooled).values('client_id').annotate(
+                ip_hours=Sum('ips'), max_ips=Max('ips'), hours=Count('hour'), requests=Sum('requests'),
+                res=Sum('residential_ips'), host=Sum('hosting_ips'), traps=Sum('trap_reqs'),
+                cls=Max('top_class'), ua=Max('top_user_agent'), ja4=Max('top_ja4'),
+            ).order_by('-ip_hours')[:20]
+        ]
+        # Stacks whose requests walked into traps; browser_reqs > 0 means a
+        # real browser fingerprint that a trap shows is driven by a bot.
+        trap_fps = [
+            {'ja4': r['ja4'], 'h2_fingerprint': r['h2_fingerprint'], 'trap_reqs': r['traps'] or 0,
+             'trap_ips': r['trap_ips'] or 0, 'ip_hours': r['ip_hours'] or 0, 'requests': r['requests'] or 0,
+             'browser': r['browser'] or 0, 'headless': r['headless'] or 0, 'impersonator': r['imp'] or 0,
+             'stack': r['stack'], 'user_agent': r['ua']}
+            for r in EdgeFingerprintHour.objects.filter(hour__gte=since, trap_reqs__gt=0)
+            .values('ja4', 'h2_fingerprint').annotate(
+                traps=Sum('trap_reqs'), trap_ips=Sum('trap_ips'), ip_hours=Sum('ips'), requests=Sum('requests'),
+                browser=Sum('browser_reqs'), headless=Sum('headless_reqs'), imp=Sum('impersonator_reqs'),
+                stack=Max('top_stack'), ua=Max('top_user_agent'),
+            ).order_by('-trap_ips')[:20]
+        ]
+        return {
+            'exposed': exposed, 'multi_ip': {k: v or 0 for k, v in multi.items()} | {'pool_ips': POOL_IPS},
+            'cookie_pools': cookie_pools, 'trap_fps': trap_fps,
+        }
 
     def _edge_process_stats(self):
         """acpwb_edge's own counters (acpwb:edge_stats, refreshed every 30s):

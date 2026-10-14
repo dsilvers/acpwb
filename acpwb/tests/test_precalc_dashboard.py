@@ -238,4 +238,3 @@ def test_precalc_dashboard_edge_requests():
     assert s['failed'] == 1
     assert s['by_error'] == {'rejected': 1}
     assert {'name': 'static', 'count': 2, 'avg_ms': 3.0, 'bytes': 0} in s['by_route']
-    assert s['multi_ip_clients'] == [{'client_id': 'c' * 22, 'ips': 3, 'requests': 3, 'uas': 1}]

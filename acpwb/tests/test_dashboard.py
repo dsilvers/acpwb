@@ -133,7 +133,10 @@ def test_dashboard_edge_shows_requests(staff_client):
         'by_route': [{'name': 'static', 'count': 150, 'avg_ms': 1.5, 'bytes': 2048}],
         'by_status': {'200': 180, '400': 20}, 'by_error': {'rejected': 20},
         'by_protocol': {'HTTP/2.0': 200},
-        'multi_ip_clients': [{'client_id': 'AAAAAAAAAAAAAAAAAAAAAA', 'ips': 4, 'requests': 30, 'uas': 1}],
+    })
+    DashboardStat.objects.create(key='edge.classes_24h', value={
+        'cookie_pools': [{'client_id': 'AAAAAAAAAAAAAAAAAAAAAA', 'ip_hours': 4, 'max_ips': 4, 'hours': 1,
+                          'requests': 30, 'client_class': 'browser', 'traps': 0}],
     })
     EdgeRequest.objects.create(request_id='0f8fad5b-d9cb-469f-a165-70867728950e', ip_address='192.0.2.5',
                                method='GET', host='acpwb.com', path='/static/x.css', status=200, route='static')

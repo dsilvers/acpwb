@@ -331,7 +331,6 @@ def edge(request):
         'req_by_status':  _top_named(reqs.get('by_status', {})),
         'req_by_error':   _top_named(reqs.get('by_error', {})),
         'req_by_protocol': _top_named(reqs.get('by_protocol', {})),
-        'multi_ip_clients': reqs.get('multi_ip_clients', []),
         'recent_requests': list(EdgeRequest.objects.order_by('-timestamp')[:50]),
         'updated_at':     _updated_at('edge.summary_24h'),
     }
@@ -347,7 +346,6 @@ def edge(request):
     unproven = sum(r.get('browser', 0) + r.get('unknown', 0) for r in by_network)
     fake = sum(r['impersonator'] for r in by_network)
     res_fake = sum(r['impersonator'] for r in by_network if r['network'] == 'residential')
-    multi = reqs.get('multi_ip', {}) or {}
     ctx.update({
         'cls_by_network':  by_network,
         'cls_total':       class_total,
@@ -356,7 +354,7 @@ def edge(request):
         'cls_unproven':    unproven,
         'cls_unproven_pct': round(unproven * 100 / class_total, 1) if class_total else 0,
         'cls_no_hello_ips': sum(r.get('no_hello_ips', 0) for r in by_network if r['network'] == 'residential'),
-        'multi_ip':        multi,
+        'multi_ip':        classes.get('multi_ip', {}),
         'cls_fake':        fake,
         'cls_fake_pct':    round(fake * 100 / class_total, 1) if class_total else 0,
         'cls_res_fake':    res_fake,
@@ -365,6 +363,9 @@ def edge(request):
         'cls_fake_fps':    classes.get('top_fake_fps', []),
         'cls_proxy_asns':  classes.get('top_proxy_asns', []),
         'cls_fake_ips':    classes.get('top_fake_ips', []),
+        'cls_exposed':     classes.get('exposed', []),
+        'cls_cookie_pools': classes.get('cookie_pools', []),
+        'cls_trap_fps':    classes.get('trap_fps', []),
     })
     return render(request, 'dashboard/edge.html', ctx)
 

@@ -8,7 +8,9 @@ from django.utils import timezone
 
 from apps.core.management.commands.rollup_edge_hour import floor_hour, rollup_hour
 from apps.core.models import DashboardStat
-from apps.honeypot.models import CrawlerVisit, EdgeConnection, EdgeFingerprintHour, EdgeIPHour, EdgeRequest
+from apps.honeypot.models import (
+    CrawlerVisit, EdgeClientHour, EdgeConnection, EdgeFingerprintHour, EdgeIPHour, EdgeRequest,
+)
 
 @pytest.fixture
 def staff_client(client, db):
@@ -48,7 +50,7 @@ def _traffic(start):
                                 first_user_agent='Mozilla/5.0 Chrome/131', idempotency_key=str(cid)))
     for route, new, client in (('django', True, 'c' * 22), ('static', False, 'c' * 22)):
         reqs.append(EdgeRequest(timestamp=t, request_id=uuid.uuid4(), conn_id=cid, ip_address='198.51.100.9',
-                                route=route, status=200, client_class='browser', network='residential',
+                                method='GET', route=route, status=200, client_class='browser', network='residential',
                                 ja4=CHROME_JA4, stack='Chromium', new_client=new, client_id=client))
     # A browser in a datacenter, classified before the edge had a headless
     # class: rolled up as headless.
@@ -65,14 +67,15 @@ def _traffic(start):
                             ip_address='203.0.113.1', client_class='impersonator'))
     EdgeConnection.objects.bulk_create(conns)
     EdgeRequest.objects.bulk_create(reqs)
-    CrawlerVisit.objects.create(ip_address='203.0.113.1', trap_type='ghost_link', path='/x', timestamp=t)
+    CrawlerVisit.objects.create(ip_address='203.0.113.1', trap_type='ghost_link', path='/x', timestamp=t,
+                                request_id=reqs[0].request_id)
 
 
 @pytest.mark.django_db
 def test_rollup_hour_per_ip_and_fingerprint():
     start = _hour()
     _traffic(start)
-    assert rollup_hour(start) == (6, 2)
+    assert rollup_hour(start) == (6, 2, 1)
 
     pool = EdgeIPHour.objects.get(hour=start, ip_address='203.0.113.1')
     assert (pool.requests, pool.conns, pool.impersonator_reqs, pool.browser_reqs) == (1, 1, 1, 0)
@@ -87,6 +90,7 @@ def test_rollup_hour_per_ip_and_fingerprint():
 
     browser = EdgeIPHour.objects.get(hour=start, ip_address='198.51.100.9')
     assert (browser.requests, browser.browser_reqs, browser.static_reqs, browser.cookie_reqs) == (2, 2, 1, 1)
+    assert (browser.page_reqs, browser.pool_cookie_reqs) == (1, 0)
     assert browser.trap_hits == 0
 
     fake = EdgeFingerprintHour.objects.get(hour=start, ja4=FAKE_JA4)
@@ -94,12 +98,56 @@ def test_rollup_hour_per_ip_and_fingerprint():
     assert (fake.conns, fake.ips, fake.residential_ips, fake.single_conn_ips) == (4, 3, 3, 2)
     assert (fake.impersonator_reqs, fake.browser_reqs, fake.top_stack) == (3, 0, 't13d311200')
     assert fake.top_user_agent == 'Mozilla/5.0 Chrome/131'
+    assert (fake.trap_reqs, fake.trap_ips) == (1, 1)  # the trap hit, by its request_id
     real = EdgeFingerprintHour.objects.get(hour=start, ja4=CHROME_JA4)
     assert (real.h2_fingerprint, real.requests, real.browser_reqs, real.single_conn_ips) == (CHROME_H2, 2, 2, 1)
 
+    # Only the browser sent its cookie back.
+    client = EdgeClientHour.objects.get(hour=start)
+    assert (client.client_id, client.first_seen, client.requests, client.page_reqs, client.static_reqs) == ('c' * 22, True, 2, 1, 1)
+    assert (client.ips, client.residential_ips, client.browser_reqs, client.top_ip) == (1, 1, 2, '198.51.100.9')
+
     # Re-running an hour replaces it.
-    assert rollup_hour(start) == (6, 2)
+    assert rollup_hour(start) == (6, 2, 1)
     assert EdgeIPHour.objects.filter(hour=start).count() == 6
+
+
+@pytest.mark.django_db
+def test_rollup_clients_pools_and_traps():
+    """One cookie jar shared by a proxy pool (three IPs), a scraper that
+    loads pages and never their assets, and a real-Chrome client caught by
+    a ghost link."""
+    start = _hour()
+    t = start + timedelta(minutes=10)
+
+    def req(ip, client, new=False, route='acpwb_go', cls='browser', **kw):
+        return EdgeRequest(timestamp=t, request_id=uuid.uuid4(), ip_address=ip, method='GET', route=route,
+                           status=200, client_class=cls, network='residential', ja4=CHROME_JA4, stack='Chromium',
+                           client_id=client, new_client=new, **kw)
+    pool = 'p' * 22
+    scraper = 's' * 22
+    caught = 'g' * 22
+    reqs = [req('203.0.113.10', pool, new=True), req('203.0.113.11', pool), req('203.0.113.12', pool),
+            req('198.51.100.30', scraper, new=True), req('198.51.100.30', scraper), req('198.51.100.30', scraper),
+            req('198.51.100.40', caught, new=True), req('198.51.100.40', caught, route='static'),
+            req('198.51.100.40', caught, route='django', cls='headless'),
+            # A one-request client: no row.
+            req('198.51.100.50', 'n' * 22, new=True)]
+    EdgeRequest.objects.bulk_create(reqs)
+    CrawlerVisit.objects.create(ip_address='198.51.100.40', trap_type='ghost_link', path='/employees/export/',
+                                timestamp=t + timedelta(seconds=1), request_id=reqs[-2].request_id)
+    rollup_hour(start)
+
+    rows = {c.client_id: c for c in EdgeClientHour.objects.filter(hour=start)}
+    assert set(rows) == {pool, scraper, caught}
+    assert (rows[pool].ips, rows[pool].residential_ips, rows[pool].requests) == (3, 3, 3)
+    assert (rows[scraper].first_seen, rows[scraper].page_reqs, rows[scraper].static_reqs) == (True, 3, 0)
+    assert (rows[caught].trap_reqs, rows[caught].static_reqs, rows[caught].headless_reqs) == (1, 1, 1)
+    assert rows[caught].top_class == 'browser'
+
+    ips = {r.ip_address: r for r in EdgeIPHour.objects.filter(hour=start)}
+    assert [ips[f'203.0.113.{i}'].pool_cookie_reqs for i in (10, 11, 12)] == [1, 1, 1]
+    assert (ips['198.51.100.30'].pool_cookie_reqs, ips['198.51.100.30'].page_reqs) == (0, 3)
 
 
 @pytest.mark.django_db
@@ -142,10 +190,12 @@ def test_precalc_edge_classes_and_dashboard(staff_client):
     assert {i['ip_address']: i['traps'] for i in s['top_fake_ips']}['203.0.113.1'] == 1
 
     # The real browser's cookie came from one IP; nothing on 2+.
-    multi = DashboardStat.objects.get(key='edge.requests_24h').value['multi_ip']
-    assert (multi['clients'], multi['multi']) == (1, 0)
+    assert (s['multi_ip']['clients'], s['multi_ip']['multi']) == (1, 0)
+    assert s['exposed'] == [{'client_class': 'browser', 'client_hours': 1, 'pooled': 0, 'no_render': 0,
+                             'trapped': 0, 'any': 0}]
+    assert s['trap_fps'][0]['ja4'] == FAKE_JA4 and s['trap_fps'][0]['trap_ips'] == 1
 
     content = staff_client.get('/acpwb-dashboard/edge/').content.decode()
-    assert 'Proven Automated' in content and 'Cookies on 2+ IPs' in content
+    assert 'Proven Automated' in content and 'Cookies on 2+ IPs' in content and 'Caught by Behaviour' in content
     assert "Who&#x27;s Really Visiting" in content or "Who's Really Visiting" in content
     assert FAKE_JA4 in content

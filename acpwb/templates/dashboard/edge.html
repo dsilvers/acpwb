@@ -200,7 +200,7 @@
     <div class="stat-card">
       <div class="label">Cookies on 2+ IPs</div>
       <div class="value">{{ multi_ip.multi|default:"—" }}</div>
-      <div class="sub">of {{ multi_ip.clients|default:"—" }} client cookies, last {{ multi_ip.hours|default:6 }}h · {{ multi_ip.ten_plus|default:0 }} on 10+ IPs (max {{ multi_ip.max_ips|default:0 }})</div>
+      <div class="sub">within an hour, of {{ multi_ip.clients|default:"—" }} returning cookies (24h) · {{ multi_ip.pools|default:0 }} on {{ multi_ip.pool_ips|default:3 }}+, {{ multi_ip.ten_plus|default:0 }} on 10+ (max {{ multi_ip.max_ips|default:0 }})</div>
     </div>
   </div>
 </div>
@@ -256,25 +256,46 @@
 </div>
 
 <div class="section-card mb-4">
-  <div class="section-card-header"><h6>Clients Seen on Multiple IPs</h6><span style="font-size:.72rem;color:var(--muted)">same acpwb_cid cookie from different addresses — proxy rotation (or a phone changing networks)</span></div>
-  {% if multi_ip.by_class %}
+  <div class="section-card-header"><h6>Caught by Behaviour</h6>
+    <span style="font-size:.72rem;color:var(--muted)">client cookies that came back, per hour (last 24h): what one request can't show, however real the browser fingerprint</span></div>
   <table class="dash-table w-100 mb-3">
-    <thead><tr><th>Mostly classed as</th><th>Cookies (last {{ multi_ip.hours }}h)</th><th>On 2+ IPs</th><th>On 10+ IPs</th><th>Most IPs</th></tr></thead>
+    <thead><tr><th>Mostly classed as</th><th>Client-hours</th>
+      <th title="the same cookie from {{ multi_ip.pool_ips|default:3 }}+ IPs in one hour: a proxy pool sharing one cookie jar">Pool cookie</th>
+      <th title="a new client that loaded 2+ pages and none of their assets: not rendering them">Pages, no assets</th>
+      <th title="hit a ghost link, canary or exploit probe">Trapped</th><th>Any</th></tr></thead>
     <tbody>
-      {% for c in multi_ip.by_class %}
-      <tr><td>{{ c.client_class }}</td><td>{{ c.clients }}</td><td>{{ c.multi }}</td><td>{{ c.ten_plus }}</td><td>{{ c.max_ips }}</td></tr>
-      {% endfor %}
+      {% for c in cls_exposed %}
+      <tr><td>{{ c.client_class }}</td><td>{{ c.client_hours }}</td><td>{{ c.pooled|default:"—" }}</td>
+        <td>{{ c.no_render|default:"—" }}</td><td>{{ c.trapped|default:"—" }}</td><td><strong>{{ c.any|default:"—" }}</strong></td></tr>
+      {% empty %}<tr><td colspan="6" class="text-muted text-center py-3">No data — run rollup_edge_hour</td></tr>{% endfor %}
     </tbody>
   </table>
-  {% endif %}
-  <table class="dash-table w-100">
-    <thead><tr><th>Client ID</th><th>IPs</th><th>Requests</th><th>User agents</th></tr></thead>
-    <tbody>
-      {% for r in multi_ip_clients %}
-      <tr><td style="font-family:monospace;font-size:.75rem">{{ r.client_id }}</td><td>{{ r.ips }}</td><td>{{ r.requests }}</td><td>{{ r.uas }}</td></tr>
-      {% empty %}<tr><td colspan="4" class="text-muted text-center py-3">None</td></tr>{% endfor %}
-    </tbody>
-  </table>
+  <div class="row g-3">
+    <div class="col-xl-6">
+      <h6 style="font-size:.8rem">Cookie Pools <span style="font-weight:normal;color:var(--muted)">one cookie, {{ multi_ip.pool_ips|default:3 }}+ IPs in an hour</span></h6>
+      <table class="dash-table w-100">
+        <thead><tr><th>Client ID</th><th>IP-hours</th><th>Most in 1h</th><th>Hours</th><th>Requests</th><th>Class</th><th>Traps</th></tr></thead>
+        <tbody>
+          {% for r in cls_cookie_pools %}
+          <tr><td class="mono" style="font-size:.72rem" title="{{ r.user_agent }} · {{ r.ja4 }}">{{ r.client_id }}</td><td>{{ r.ip_hours }}</td><td>{{ r.max_ips }}</td>
+            <td>{{ r.hours }}</td><td>{{ r.requests }}</td><td>{{ r.client_class }}</td><td>{{ r.traps|default:"—" }}</td></tr>
+          {% empty %}<tr><td colspan="7" class="text-muted text-center py-3">None</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xl-6">
+      <h6 style="font-size:.8rem">Fingerprints Caught in Traps <span style="font-weight:normal;color:var(--muted)">browser/headless reqs = a real browser stack, driven by a bot</span></h6>
+      <table class="dash-table w-100">
+        <thead><tr><th>JA4</th><th>Stack</th><th>Trap IPs</th><th>Trap hits</th><th>Browser</th><th>Headless</th><th>Fake</th></tr></thead>
+        <tbody>
+          {% for f in cls_trap_fps %}
+          <tr><td class="mono" title="{{ f.h2_fingerprint }} · {{ f.user_agent }}">{{ f.ja4 }}</td><td>{{ f.stack }}</td><td>{{ f.trap_ips }}</td>
+            <td>{{ f.trap_reqs }}</td><td>{{ f.browser|default:"—" }}</td><td>{{ f.headless|default:"—" }}</td><td>{{ f.impersonator|default:"—" }}</td></tr>
+          {% empty %}<tr><td colspan="7" class="text-muted text-center py-3">None</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="row g-3 mb-4">

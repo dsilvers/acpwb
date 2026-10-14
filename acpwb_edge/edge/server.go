@@ -379,11 +379,17 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 		UA:             r.UserAgent(),
 		AcceptLanguage: r.Header.Get("Accept-Language"),
 		IP:             ci.ip,
+		Path:           r.URL.Path,
 		JA4:            fps.JA4,
 		H2Fingerprint:  h2fp,
 		CookieDropped:  issued && seq > 1,
 		HeaderNames:    names,
-		Net:            ci.network(),
+		Hints: classify.ClientHints{
+			UA:       r.Header.Get("Sec-Ch-Ua"),
+			Mobile:   r.Header.Get("Sec-Ch-Ua-Mobile"),
+			Platform: r.Header.Get("Sec-Ch-Ua-Platform"),
+		},
+		Net: ci.network(),
 	})
 	m.TrafficClass, m.ASN = cls.Class, ci.network().ASN
 	if r.Body != nil && r.Body != http.NoBody {

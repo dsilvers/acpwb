@@ -1,8 +1,8 @@
 """
 Names for EdgeRequest.signals, the bitmask acpwb_edge's request classifier
 sets (acpwb_edge/classify/classify.go, the Sig* constants — same order).
-The first three are decisive: any one of them on a browser claim makes the
-request an impersonator. The rest are evidence for reputation scoring.
+The decisive ones (DECISIVE) make a browser claim an impersonator; the rest
+are evidence for reputation scoring.
 """
 
 SIGNALS = [
@@ -18,9 +18,12 @@ SIGNALS = [
     ('known_range', 'known bot IP range'),
     ('header_order', "headers in an order the claimed browser never sends"),
     ('exploit_probe', 'exploit header (x-middleware-subrequest: Next.js auth bypass)'),
+    ('client_hints', "Chromium's sec-ch-ua hints missing or contradicting the UA"),
+    ('hidden_link', 'page only linked invisibly (ghost links): no person asks for it'),
 ]
 
 BIT = {name: 1 << i for i, (name, _) in enumerate(SIGNALS)}
+DECISIVE = ('tls_mismatch', 'no_h2', 'h2_mismatch', 'header_order', 'client_hints')
 
 
 def signal_names(mask):

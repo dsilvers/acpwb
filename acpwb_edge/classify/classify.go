@@ -20,7 +20,7 @@ const (
 	ClassKnownBot     = "known_bot"    // names itself in its UA, or comes from a known bot IP range
 	ClassTool         = "tool"         // an honest HTTP library / CLI (curl, python-requests…)
 	ClassBrowser      = "browser"      // claims a browser, its fingerprint is that browser's, not from a datacenter
-	ClassHeadless     = "headless"     // the same, from a hosting network: a real browser engine automated in a datacenter
+	ClassHeadless     = "headless"     // a real browser engine, automated: from a hosting network, or admitting HeadlessChrome
 	ClassImpersonator = "impersonator" // claims a browser its fingerprint contradicts
 	ClassUnknown      = "unknown"      // no UA, no claim, or nothing to check the claim against
 )
@@ -40,20 +40,24 @@ const (
 	SigKnownRange                 // from a known bot IP range
 	SigHeaderOrder                // decisive: headers in an order the claimed browser never sends
 	SigExploitProbe               // carries an exploit's header (x-middleware-subrequest: the Next.js auth bypass)
+	SigClientHints                // decisive: Chromium's sec-ch-ua hints missing or contradicting the UA
+	SigHiddenLink                 // a page only linked invisibly (ghost links, HTML comments): no person asks for it
 )
 
 // decisive signals turn a browser claim into an impersonator.
-const decisive = SigTLSMismatch | SigNoH2 | SigH2Mismatch | SigHeaderOrder
+const decisive = SigTLSMismatch | SigNoH2 | SigH2Mismatch | SigHeaderOrder | SigClientHints
 
 // Input is one request, as the edge sees it.
 type Input struct {
 	UA             string
 	AcceptLanguage string
 	IP             string
+	Path           string
 	JA4            string   // "" on plain HTTP
 	H2Fingerprint  string   // "" on HTTP/1
 	CookieDropped  bool     // the response sets a new client cookie on a connection's 2nd+ request
 	HeaderNames    []string // in the order the client sent them (HTTP/2 pseudo-headers included)
+	Hints          ClientHints
 	Net            NetInfo
 }
 
@@ -85,6 +89,9 @@ func Classify(in Input) Result {
 	}
 	if hasHeader(in.HeaderNames, "x-middleware-subrequest") {
 		res.Signals |= SigExploitProbe
+	}
+	if hiddenLink(in.Path) {
+		res.Signals |= SigHiddenLink
 	}
 	a, _, haveJA4 := ja4Parts(in.JA4)
 	stack, knownStack := stackFor(in.JA4)
@@ -150,6 +157,20 @@ func Classify(in Input) Result {
 	}
 
 	res.Signals |= checkClaim(claim, in, a, stack, knownStack)
+	// Chromium's own admission: the HeadlessChrome brand (or UA).
+	headless := claim.Family == "chromium" && strings.Contains(strings.ToLower(in.UA), "headlesschrome")
+	if claim.Family == "chromium" && claim.Major >= 90 && len(in.HeaderNames) > 0 {
+		// Chromium 89+ always sends sec-ch-ua over HTTPS. The values are
+		// only known for served requests.
+		mismatch, hl := !hasHeader(in.HeaderNames, "sec-ch-ua"), false
+		if !mismatch && in.Hints.UA != "" {
+			mismatch, hl = hintsMismatch(in.UA, in.Hints)
+		}
+		if mismatch {
+			res.Signals |= SigClientHints
+		}
+		headless = headless || hl
+	}
 	if in.AcceptLanguage == "" {
 		res.Signals |= SigNoAcceptLang
 	}
@@ -163,6 +184,8 @@ func Classify(in Input) Result {
 				detail += ", no h2"
 			case res.Signals&SigH2Mismatch != 0:
 				detail += ", foreign HTTP/2"
+			case res.Signals&SigClientHints != 0:
+				detail += ", client hints"
 			default:
 				detail += ", injected headers"
 			}
@@ -175,6 +198,19 @@ func Classify(in Input) Result {
 			res.Label, res.Group = "Datacenter · "+res.Label, GroupDatacenterBots
 		default:
 			res.Group = GroupFakeBrowsers
+		}
+	case headless, res.Signals&SigHiddenLink != 0:
+		// A browser engine, driven: it admits to being headless, or it
+		// followed a link no person can see.
+		res.Class, res.Label, res.Group = ClassHeadless, "headless "+claim.Name, GroupFakeBrowsers
+		if !headless {
+			res.Label = "automated " + claim.Name + " (hidden link)"
+		}
+		switch in.Net.Network {
+		case NetResidential:
+			res.Label, res.Group = "Residential · "+res.Label, GroupResidentialBots
+		case NetHosting:
+			res.Label, res.Group = "Datacenter · "+res.Label, GroupDatacenterBots
 		}
 	case in.Net.Network == NetHosting:
 		// Nobody browses from a cloud provider: a browser there, real

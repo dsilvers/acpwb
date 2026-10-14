@@ -115,6 +115,27 @@ func TestClassify(t *testing.T) {
 			ClassHeadless, "Datacenter · headless Chrome", GroupDatacenterBots, SigHosting},
 		{"cookie dropped is evidence only", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2, CookieDropped: true},
 			ClassBrowser, "Browser · Chrome", GroupBrowsers, SigCookieDropped},
+		{"Chrome's client hints", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: chromeNav, Hints: chromeHints, Net: residential},
+			ClassBrowser, "Browser · Chrome", GroupBrowsers, 0},
+		// A real Chrome 155 whose UA was swapped for an older one.
+		{"client hints contradict the UA", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: chromeNav, Hints: ClientHints{UA: `"Chromium";v="155", "Not/A)Brand";v="24", "Google Chrome";v="155"`, Mobile: "?0", Platform: `"Windows"`}, Net: residential},
+			ClassImpersonator, "Residential · fake Chrome (Chromium, client hints)", GroupResidentialBots, SigClientHints},
+		{"no client hints", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: h(":method,:authority,:scheme,:path,upgrade-insecure-requests,user-agent,accept,sec-fetch-site,sec-fetch-mode,sec-fetch-user,sec-fetch-dest,accept-encoding,accept-language,priority"), Net: residential},
+			ClassImpersonator, "Residential · fake Chrome (Chromium, client hints)", GroupResidentialBots, SigClientHints},
+		{"HeadlessChrome brand", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			HeaderNames: chromeNav, Hints: ClientHints{UA: `"Chromium";v="131", "Not_A Brand";v="24", "HeadlessChrome";v="131"`, Mobile: "?0", Platform: `"Windows"`}, Net: residential},
+			ClassHeadless, "Residential · headless Chrome", GroupResidentialBots, 0},
+		// Real Chrome on a home network clicking a ghost link.
+		{"hidden link", Input{UA: chromeUA, AcceptLanguage: "en-US", JA4: "t13d1516h2_8daaf6152771_02713d6af862", H2Fingerprint: chromeH2,
+			Path: "/employees/export/", HeaderNames: chromeNav, Hints: chromeHints, Net: residential},
+			ClassHeadless, "Residential · automated Chrome (hidden link)", GroupResidentialBots, SigHiddenLink},
+		{"hidden link, fake Chrome", Input{UA: chromeUA, JA4: "t13d311200_1d947a95fc68_1aa0e0f8a5b3", Path: "/internal/portal/", Net: residential},
+			ClassImpersonator, "Residential · fake Chrome (t13d311200)", GroupResidentialBots, SigHiddenLink | SigTLSMismatch},
+		{"Safari 2 from a proxy pool", Input{UA: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; de-de) AppleWebKit/416.12 (KHTML, like Gecko) Safari/416.13", JA4: "t13d311200_1d947a95fc68_1aa0e0f8a5b3", Net: residential},
+			ClassImpersonator, "Residential · fake Safari (t13d311200, no h2)", GroupResidentialBots, SigNoH2},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
@@ -162,6 +183,51 @@ func tsvColumn(t *testing.T, path string, col int) []string {
 }
 
 func h(s string) []string { return strings.Split(s, ",") }
+
+var (
+	chromeNav   = h(":method,:authority,:scheme,:path,sec-ch-ua,sec-ch-ua-mobile,sec-ch-ua-platform,upgrade-insecure-requests,user-agent,accept,sec-fetch-site,sec-fetch-mode,sec-fetch-user,sec-fetch-dest,accept-encoding,accept-language,priority")
+	chromeHints = ClientHints{UA: `"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"`, Mobile: "?0", Platform: `"Windows"`}
+)
+
+func TestHintsMismatch(t *testing.T) {
+	const (
+		edge    = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0"
+		opera   = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0"
+		android = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36"
+		tablet  = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+		mac     = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+		linux   = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+	)
+	ch := func(brands, mobile, platform string) ClientHints {
+		return ClientHints{UA: brands, Mobile: mobile, Platform: `"` + platform + `"`}
+	}
+	c131 := `"Chromium";v="131", "Not_A Brand";v="24", "Google Chrome";v="131"`
+	for _, c := range []struct {
+		name               string
+		ua                 string
+		hints              ClientHints
+		mismatch, headless bool
+	}{
+		{"Chrome", chromeUA, chromeHints, false, false},
+		{"Edge", edge, ch(`"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"`, "?0", "Windows"), false, false},
+		{"Opera: Chromium's version, not Opera's", opera, ch(`"Opera";v="120", "Chromium";v="135", "Not-A.Brand";v="99"`, "?0", "Windows"), false, false},
+		{"Android phone", android, ch(c131, "?1", "Android"), false, false},
+		{"Android tablet", tablet, ch(c131, "?0", "Android"), false, false},
+		{"desktop-site mode", linux, ch(c131, "?0", "Android"), false, false},
+		{"Mac", mac, ch(c131, "?0", "macOS"), false, false},
+		{"other version", chromeUA, ch(`"Chromium";v="155", "Google Chrome";v="155"`, "?0", "Windows"), true, false},
+		{"no Chromium brand", chromeUA, ch(`"Google Chrome";v="131"`, "?0", "Windows"), true, false},
+		{"desktop UA, mobile hint", chromeUA, ch(c131, "?1", "Windows"), true, false},
+		{"phone UA, desktop hint", android, ch(c131, "?0", "Android"), true, false},
+		{"Windows UA, macOS hint", chromeUA, ch(c131, "?0", "macOS"), true, false},
+		{"headless", chromeUA, ch(`"HeadlessChrome";v="131", "Chromium";v="131"`, "?0", "Windows"), false, true},
+	} {
+		m, hl := hintsMismatch(c.ua, c.hints)
+		if m != c.mismatch || hl != c.headless {
+			t.Errorf("%s: mismatch=%v headless=%v, want %v %v", c.name, m, hl, c.mismatch, c.headless)
+		}
+	}
+}
 
 func TestClaimBrowser(t *testing.T) {
 	for ua, want := range map[string]Claim{
@@ -251,6 +317,7 @@ func TestSignalNamesMatchPython(t *testing.T) {
 		{SigH2Stale, "h2_stale"}, {SigNoAcceptLang, "no_accept_language"}, {SigCookieDropped, "cookie_dropped"},
 		{SigHosting, "hosting"}, {SigOldTLS, "old_tls"}, {SigBotResidential, "bot_residential"},
 		{SigKnownRange, "known_range"}, {SigHeaderOrder, "header_order"}, {SigExploitProbe, "exploit_probe"},
+		{SigClientHints, "client_hints"}, {SigHiddenLink, "hidden_link"},
 	}
 	if len(py) != len(want) {
 		t.Fatalf("python has %d signals, go %d: %q", len(py), len(want), py)

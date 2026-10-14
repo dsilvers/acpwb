@@ -41,6 +41,8 @@ func claimBrowser(ua string) Claim {
 		c = Claim{Name: "Chrome", Family: "chromium", Major: major(l, "chrome/")}
 	case strings.Contains(l, "safari/") && strings.Contains(l, "version/"):
 		c = Claim{Name: "Safari", Family: "apple", Major: major(l, "version/")}
+	case strings.Contains(l, "safari/") && strings.Contains(l, "applewebkit/"):
+		c = Claim{Name: "Safari", Family: "apple"} // Safari 2 and older had no Version/ token
 	default:
 		return Claim{}
 	}

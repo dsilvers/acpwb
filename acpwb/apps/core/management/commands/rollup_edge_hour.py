@@ -1,6 +1,7 @@
 """
 Roll each finished hour of edge traffic up into EdgeIPHour (one row per
-client IP) and EdgeFingerprintHour (one row per JA4 + HTTP/2 fingerprint).
+client IP), EdgeFingerprintHour (one row per JA4 + HTTP/2 fingerprint) and
+EdgeClientHour (one row per client cookie that came back).
 
 These are what the statistics and IP reputation scoring read: the raw
 EdgeRequest/EdgeConnection tables run to tens of millions of rows a day,
@@ -35,17 +36,62 @@ _REQUEST_SPILL = timedelta(minutes=15)
 # 'browser' rows from hosting networks predate the edge's headless class
 # (Oct 14 2026): count them as headless, as the edge does now.
 _HEADLESS = "(client_class = 'headless' OR (client_class = 'browser' AND network = 'hosting'))"
+_BROWSER = "(client_class = 'browser' AND network <> 'hosting')"
+_PAGE = "(route IN ('django', 'acpwb_go') AND method = 'GET')"
+# A cookie seen from this many IPs in one hour is a pool's shared jar, not
+# one person moving between Wi-Fi and mobile data.
+POOL_IPS = 3
+# Proof-of-automation trap hits, for joining to EdgeRequest by request_id.
+# The app logs a hit at about the time the edge does; give it slack.
+_TRAPS = """
+    SELECT DISTINCT request_id FROM honeypot_crawlervisit
+    WHERE timestamp >= %(start)s - interval '15 minutes' AND timestamp < %(spill)s
+      AND trap_type = ANY(%(traps)s) AND request_id IS NOT NULL
+"""
+
+# Only clients that sent their cookie back at least once this hour: the
+# rest are one-request clients that keep no cookies (most bots), and there
+# are a million of those an hour.
+_CLIENT_SQL = """
+WITH t AS (""" + _TRAPS + """)
+INSERT INTO honeypot_edgeclienthour (
+    hour, client_id, first_seen, requests, page_reqs, static_reqs, trap_reqs,
+    ips, asns, residential_ips, hosting_ips, ja4s, user_agents,
+    browser_reqs, headless_reqs, impersonator_reqs, known_bot_reqs,
+    top_ip, top_ja4, top_class, top_user_agent, signals
+)
+SELECT
+    %(start)s, e.client_id, bool_or(e.new_client), count(*),
+    count(*) FILTER (WHERE """ + _PAGE + """), count(*) FILTER (WHERE route = 'static'), count(t.request_id),
+    count(DISTINCT ip_address), count(DISTINCT asn),
+    count(DISTINCT ip_address) FILTER (WHERE network = 'residential'),
+    count(DISTINCT ip_address) FILTER (WHERE network = 'hosting'),
+    count(DISTINCT nullif(ja4, '')), count(DISTINCT user_agent),
+    count(*) FILTER (WHERE """ + _BROWSER + """), count(*) FILTER (WHERE """ + _HEADLESS + """),
+    count(*) FILTER (WHERE client_class = 'impersonator'), count(*) FILTER (WHERE client_class = 'known_bot'),
+    mode() WITHIN GROUP (ORDER BY ip_address), coalesce(mode() WITHIN GROUP (ORDER BY ja4), ''),
+    coalesce(mode() WITHIN GROUP (ORDER BY client_class), ''),
+    left(coalesce(mode() WITHIN GROUP (ORDER BY user_agent), ''), 512),
+    bit_or(signals)
+FROM honeypot_edgerequest e
+LEFT JOIN t USING (request_id)
+WHERE e.timestamp >= %(start)s AND e.timestamp < %(end)s AND e.client_id <> ''
+GROUP BY e.client_id
+HAVING bool_or(NOT e.new_client)
+"""
 
 _IP_SQL = """
 WITH r AS (
     SELECT
         ip_address, max(asn) AS asn, max(nullif(network, '')) AS network,
         count(*) AS requests, count(DISTINCT conn_id) AS conns,
-        count(*) FILTER (WHERE client_class = 'browser' AND network <> 'hosting') AS browser,
+        count(*) FILTER (WHERE """ + _BROWSER + """) AS browser,
         count(*) FILTER (WHERE """ + _HEADLESS + """) AS headless,
         count(*) FILTER (WHERE client_class = 'impersonator') AS impersonator,
         count(*) FILTER (WHERE client_class = 'known_bot') AS known_bot,
         count(*) FILTER (WHERE client_class = 'tool') AS tool,
+        count(*) FILTER (WHERE """ + _PAGE + """) AS pages,
+        count(p.pool_id) AS pool_cookie,
         count(*) FILTER (WHERE client_class IN ('unknown', '')) AS unknown,
         count(*) FILTER (WHERE route = 'static') AS static,
         count(*) FILTER (WHERE error <> '') AS errors,
@@ -55,7 +101,10 @@ WITH r AS (
         mode() WITHIN GROUP (ORDER BY ja4) AS top_ja4,
         mode() WITHIN GROUP (ORDER BY stack) AS top_stack,
         bit_or(signals) AS signals
-    FROM honeypot_edgerequest
+    FROM honeypot_edgerequest e
+    LEFT JOIN (
+        SELECT client_id AS pool_id FROM honeypot_edgeclienthour WHERE hour = %(start)s AND ips >= %(pool_ips)s
+    ) p ON p.pool_id = e.client_id
     WHERE timestamp >= %(start)s AND timestamp < %(end)s
     GROUP BY ip_address
 ),
@@ -77,7 +126,8 @@ t AS (
 INSERT INTO honeypot_edgeiphour (
     hour, ip_address, asn, network, requests, conns,
     browser_reqs, headless_reqs, impersonator_reqs, known_bot_reqs, tool_reqs, unknown_reqs,
-    static_reqs, error_reqs, new_client_reqs, cookie_reqs, trap_hits, no_hello_conns, failed_handshakes,
+    page_reqs, static_reqs, error_reqs, new_client_reqs, cookie_reqs, pool_cookie_reqs, trap_hits,
+    no_hello_conns, failed_handshakes,
     ja4s, user_agents, top_ja4, top_stack, signals
 )
 SELECT
@@ -85,8 +135,8 @@ SELECT
     coalesce(r.requests, 0), coalesce(r.conns, 0),
     coalesce(r.browser, 0), coalesce(r.headless, 0), coalesce(r.impersonator, 0), coalesce(r.known_bot, 0),
     coalesce(r.tool, 0), coalesce(r.unknown, 0),
-    coalesce(r.static, 0), coalesce(r.errors, 0), coalesce(r.new_client, 0), coalesce(r.cookie, 0),
-    coalesce(t.hits, 0), coalesce(c.no_hello, 0), coalesce(c.failed, 0),
+    coalesce(r.pages, 0), coalesce(r.static, 0), coalesce(r.errors, 0), coalesce(r.new_client, 0),
+    coalesce(r.cookie, 0), coalesce(r.pool_cookie, 0), coalesce(t.hits, 0), coalesce(c.no_hello, 0), coalesce(c.failed, 0),
     coalesce(r.ja4s, 0), coalesce(r.uas, 0), coalesce(r.top_ja4, ''), coalesce(r.top_stack, ''),
     coalesce(r.signals, 0)
 FROM r
@@ -95,19 +145,22 @@ LEFT JOIN t ON t.ip_address = coalesce(r.ip_address, c.ip_address)
 """
 
 _FP_SQL = """
-WITH c AS (
+WITH t AS (""" + _TRAPS + """),
+c AS (
     SELECT conn_id, ja4, h2_fingerprint, ip_address, network, conn_count, request_count, first_user_agent
     FROM honeypot_edgeconnection
     WHERE timestamp >= %(start)s AND timestamp < %(end)s AND ja4 <> ''
 ),
 r AS (
     SELECT conn_id,
-        count(*) FILTER (WHERE client_class = 'browser' AND network <> 'hosting') AS browser,
+        count(*) FILTER (WHERE """ + _BROWSER + """) AS browser,
         count(*) FILTER (WHERE """ + _HEADLESS + """) AS headless,
         count(*) FILTER (WHERE client_class = 'impersonator') AS impersonator,
         count(*) FILTER (WHERE client_class = 'known_bot') AS known_bot,
+        count(t.request_id) AS traps,
         max(stack) AS stack
     FROM honeypot_edgerequest
+    LEFT JOIN t USING (request_id)
     WHERE timestamp >= %(start)s AND timestamp < %(spill)s AND conn_id IS NOT NULL
     GROUP BY conn_id
 ),
@@ -121,7 +174,8 @@ single AS (
 )
 INSERT INTO honeypot_edgefingerprinthour (
     hour, ja4, h2_fingerprint, conns, requests, ips, residential_ips, hosting_ips, single_conn_ips,
-    browser_reqs, headless_reqs, impersonator_reqs, known_bot_reqs, user_agents, top_stack, top_user_agent
+    browser_reqs, headless_reqs, impersonator_reqs, known_bot_reqs, trap_reqs, trap_ips,
+    user_agents, top_stack, top_user_agent
 )
 SELECT
     %(start)s, c.ja4, c.h2_fingerprint, sum(c.conn_count), sum(c.request_count),
@@ -130,7 +184,8 @@ SELECT
     count(DISTINCT c.ip_address) FILTER (WHERE c.network = 'hosting'),
     max(s.ips),
     coalesce(sum(r.browser), 0), coalesce(sum(r.headless), 0), coalesce(sum(r.impersonator), 0),
-    coalesce(sum(r.known_bot), 0),
+    coalesce(sum(r.known_bot), 0), coalesce(sum(r.traps), 0),
+    count(DISTINCT c.ip_address) FILTER (WHERE r.traps > 0),
     count(DISTINCT nullif(c.first_user_agent, '')),
     coalesce(mode() WITHIN GROUP (ORDER BY r.stack), ''),
     left(coalesce(mode() WITHIN GROUP (ORDER BY nullif(c.first_user_agent, '')), ''), 512)
@@ -147,18 +202,20 @@ def floor_hour(t):
 
 def rollup_hour(start):
     """Replace the rollups for the hour starting at start. Returns
-    (ip rows, fingerprint rows)."""
+    (ip rows, fingerprint rows, client rows)."""
     params = {
         'start': start, 'end': start + timedelta(hours=1), 'spill': start + timedelta(hours=1) + _REQUEST_SPILL,
-        'traps': list(ABSOLUTE_PROOF_TRAP_TYPES),
+        'traps': list(ABSOLUTE_PROOF_TRAP_TYPES), 'pool_ips': POOL_IPS,
     }
     with transaction.atomic(), connection.cursor() as cur:
-        cur.execute('DELETE FROM honeypot_edgeiphour WHERE hour = %s', [start])
-        cur.execute('DELETE FROM honeypot_edgefingerprinthour WHERE hour = %s', [start])
+        for table in ('edgeiphour', 'edgefingerprinthour', 'edgeclienthour'):
+            cur.execute(f'DELETE FROM honeypot_{table} WHERE hour = %s', [start])
+        cur.execute(_CLIENT_SQL, params)  # first: the IP rollup reads its pool cookies
+        clients = cur.rowcount
         cur.execute(_IP_SQL, params)
         ips = cur.rowcount
         cur.execute(_FP_SQL, params)
-        return ips, cur.rowcount
+        return ips, cur.rowcount, clients
 
 
 class Command(BaseCommand):
@@ -191,8 +248,9 @@ class Command(BaseCommand):
 
     def _one(self, start):
         t0 = time.monotonic()
-        ips, fps = rollup_hour(start)
-        self.stdout.write(f'{start:%Y-%m-%dT%H}: {ips} IPs, {fps} fingerprints ({time.monotonic() - t0:.1f}s)')
+        ips, fps, clients = rollup_hour(start)
+        self.stdout.write(f'{start:%Y-%m-%dT%H}: {ips} IPs, {fps} fingerprints, {clients} clients '
+                          f'({time.monotonic() - t0:.1f}s)')
 
     def _run(self, options):
         last_finished = floor_hour(timezone.now() - ROLLUP_DELAY) - timedelta(hours=1)

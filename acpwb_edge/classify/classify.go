@@ -19,7 +19,8 @@ import (
 const (
 	ClassKnownBot     = "known_bot"    // names itself in its UA, or comes from a known bot IP range
 	ClassTool         = "tool"         // an honest HTTP library / CLI (curl, python-requests…)
-	ClassBrowser      = "browser"      // claims a browser, and its fingerprint is that browser's
+	ClassBrowser      = "browser"      // claims a browser, its fingerprint is that browser's, not from a datacenter
+	ClassHeadless     = "headless"     // the same, from a hosting network: a real browser engine automated in a datacenter
 	ClassImpersonator = "impersonator" // claims a browser its fingerprint contradicts
 	ClassUnknown      = "unknown"      // no UA, no claim, or nothing to check the claim against
 )
@@ -65,7 +66,6 @@ const (
 	GroupDatacenterBots  = "Datacenter bots"
 	GroupFakeBrowsers    = "Fake browsers"
 	GroupBrowsers        = "Browsers"
-	GroupDatacenter      = "Datacenter browsers"
 	GroupUnverified      = "Unverified"
 )
 
@@ -147,17 +147,16 @@ func Classify(in Input) Result {
 		default:
 			res.Group = GroupFakeBrowsers
 		}
+	case in.Net.Network == NetHosting:
+		// Nobody browses from a cloud provider: a browser there, real
+		// engine or not, is automation (headless Chrome, Puppeteer…).
+		res.Class, res.Label, res.Group = ClassHeadless, "Datacenter · headless "+claim.Name, GroupDatacenterBots
 	case !knownStack:
 		// A claim we can't confirm or refute (Safari's cipher hash varies
 		// across releases; an unknown hash isn't proof).
 		res.Class, res.Label, res.Group = ClassUnknown, "Unverified · "+claim.Name, GroupUnverified
 	default:
-		res.Class = ClassBrowser
-		if in.Net.Network == NetHosting {
-			res.Label, res.Group = "Datacenter · "+claim.Name, GroupDatacenter
-		} else {
-			res.Label, res.Group = "Browser · "+claim.Name, GroupBrowsers
-		}
+		res.Class, res.Label, res.Group = ClassBrowser, "Browser · "+claim.Name, GroupBrowsers
 	}
 	return res
 }

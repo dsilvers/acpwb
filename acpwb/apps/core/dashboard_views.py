@@ -338,11 +338,25 @@ def edge(request):
     classes = _stat('edge.classes_24h', {}) or {}
     by_network = classes.get('by_network', [])
     class_total = sum(r['requests'] for r in by_network)
+    # Proven: the request itself shows automation (a contradicted browser
+    # claim, a self-declared bot or HTTP tool, a browser in a datacenter).
+    # Unproven: a real browser engine on a home network, or no claim to
+    # check; on this site that's still almost all automation, but nothing
+    # in one request proves it.
+    proven = sum(r.get(k, 0) for r in by_network for k in ('impersonator', 'known_bot', 'tool', 'headless'))
+    unproven = sum(r.get('browser', 0) + r.get('unknown', 0) for r in by_network)
     fake = sum(r['impersonator'] for r in by_network)
     res_fake = sum(r['impersonator'] for r in by_network if r['network'] == 'residential')
+    multi = reqs.get('multi_ip', {}) or {}
     ctx.update({
         'cls_by_network':  by_network,
         'cls_total':       class_total,
+        'cls_proven':      proven,
+        'cls_proven_pct':  round(proven * 100 / class_total, 1) if class_total else 0,
+        'cls_unproven':    unproven,
+        'cls_unproven_pct': round(unproven * 100 / class_total, 1) if class_total else 0,
+        'cls_no_hello_ips': sum(r.get('no_hello_ips', 0) for r in by_network if r['network'] == 'residential'),
+        'multi_ip':        multi,
         'cls_fake':        fake,
         'cls_fake_pct':    round(fake * 100 / class_total, 1) if class_total else 0,
         'cls_res_fake':    res_fake,

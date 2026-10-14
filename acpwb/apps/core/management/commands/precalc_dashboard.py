@@ -1050,8 +1050,47 @@ class Command(BaseCommand):
                 uas=Count('user_agent', distinct=True),
             ).filter(ips__gt=1).order_by('-ips', '-c')[:20]
         ]
+        summary['multi_ip'] = self._multi_ip_clients()
         self._set_stat('edge.requests_24h', summary)
         self.stdout.write(f'  edge: {summary["total"]} requests in last 24h')
+
+    MULTI_IP_HOURS = 6
+
+    def _multi_ip_clients(self):
+        """How many client cookies were used from more than one IP over the
+        last MULTI_IP_HOURS, by the class of most of their requests. A
+        cookie carried across IPs is one client rotating addresses (or
+        roaming between networks). Shorter than the 24h window: grouping
+        every cookie of a day is the expensive part."""
+        from django.db import connections, router
+        sql = """
+            SELECT cls, count(*), count(*) FILTER (WHERE ips >= 2), count(*) FILTER (WHERE ips >= 10), max(ips)
+            FROM (
+                SELECT client_id, count(DISTINCT ip_address) AS ips,
+                       mode() WITHIN GROUP (ORDER BY client_class) AS cls
+                FROM honeypot_edgerequest
+                WHERE timestamp >= %s AND client_id <> ''
+                GROUP BY client_id
+            ) x
+            GROUP BY cls ORDER BY 3 DESC
+        """
+        since = timezone.now() - timedelta(hours=self.MULTI_IP_HOURS)
+        # The same connection the ORM is using (force_db('direct') for a run).
+        with connections[router.db_for_read(EdgeRequest) or 'default'].cursor() as cur:
+            cur.execute(sql, [since])
+            rows = cur.fetchall()
+        by_class = [
+            {'client_class': cls or 'unclassified', 'clients': n, 'multi': multi, 'ten_plus': ten, 'max_ips': top}
+            for cls, n, multi, ten, top in rows
+        ]
+        return {
+            'hours': self.MULTI_IP_HOURS,
+            'clients': sum(r['clients'] for r in by_class),
+            'multi': sum(r['multi'] for r in by_class),
+            'ten_plus': sum(r['ten_plus'] for r in by_class),
+            'max_ips': max((r['max_ips'] or 0 for r in by_class), default=0),
+            'by_class': by_class,
+        }
 
     def _update_edge_classes(self):
         """Who's really visiting, from the hourly rollups (EdgeIPHour,
@@ -1063,18 +1102,21 @@ class Command(BaseCommand):
         now = timezone.now()
         since = now.replace(minute=0, second=0, microsecond=0) - timedelta(hours=24)
         ips = EdgeIPHour.objects.filter(hour__gte=since)
-        classes = ('browser', 'impersonator', 'known_bot', 'tool', 'unknown')
+        classes = ('browser', 'headless', 'impersonator', 'known_bot', 'tool', 'unknown')
         sums = {f'{c}_reqs': Sum(f'{c}_reqs') for c in classes}
 
         by_network = []
         for r in ips.values('network').annotate(
             requests=Sum('requests'), ip_count=Count('ip_address', distinct=True),
             fake_ips=Count('ip_address', distinct=True, filter=Q(impersonator_reqs__gt=0)),
+            no_hello_ips=Count('ip_address', distinct=True, filter=Q(no_hello_conns__gt=0)),
+            no_hello=Sum('no_hello_conns'), failed=Sum('failed_handshakes'),
             **sums,
         ).order_by('-requests'):
             by_network.append({
                 'network': r['network'] or 'unknown', 'requests': r['requests'] or 0, 'ips': r['ip_count'],
-                'fake_ips': r['fake_ips'], **{c: r[f'{c}_reqs'] or 0 for c in classes},
+                'fake_ips': r['fake_ips'], 'no_hello_ips': r['no_hello_ips'], 'no_hello': r['no_hello'] or 0,
+                'failed_handshakes': r['failed'] or 0, **{c: r[f'{c}_reqs'] or 0 for c in classes},
             })
 
         hourly = [
@@ -1102,16 +1144,21 @@ class Command(BaseCommand):
             ).order_by('-ip_hours')[:20]
         ]
 
-        # Residential networks sending fake browsers: candidate proxy pools.
+        # Residential networks sending fake browsers, or whose IPs open and
+        # drop connections without a hello (proxy exits): candidate pools.
         asn_rows = list(
-            ips.filter(network='residential', impersonator_reqs__gt=0).values('asn').annotate(
-                ip_count=Count('ip_address', distinct=True), fake=Sum('impersonator_reqs'),
-                requests=Sum('requests'), sample_ip=Max('ip_address'),
+            ips.filter(Q(impersonator_reqs__gt=0) | Q(no_hello_conns__gt=0), network='residential')
+            .values('asn').annotate(
+                ip_count=Count('ip_address', distinct=True),
+                fake_ips=Count('ip_address', distinct=True, filter=Q(impersonator_reqs__gt=0)),
+                no_hello_ips=Count('ip_address', distinct=True, filter=Q(no_hello_conns__gt=0)),
+                fake=Sum('impersonator_reqs'), requests=Sum('requests'), sample_ip=Max('ip_address'),
             ).order_by('-ip_count')[:20]
         )
         orgs = _asn_orgs([r['sample_ip'] for r in asn_rows])
         top_proxy_asns = [
             {'asn': r['asn'], 'org': orgs.get(r['sample_ip'], ''), 'ips': r['ip_count'],
+             'fake_ips': r['fake_ips'], 'no_hello_ips': r['no_hello_ips'],
              'fake_requests': r['fake'] or 0, 'requests': r['requests'] or 0}
             for r in asn_rows
         ]

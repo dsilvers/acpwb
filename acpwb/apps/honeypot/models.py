@@ -522,7 +522,8 @@ class EdgeRequest(models.Model):
         ('', 'Not classified'),
         ('known_bot', 'Known bot'),             # names itself, or a known bot IP range
         ('tool', 'HTTP tool'),                  # curl, python-requests…
-        ('browser', 'Browser'),                 # claims a browser and is one
+        ('browser', 'Browser'),                 # claims a browser and is one, not from a datacenter
+        ('headless', 'Headless browser'),       # the same from a hosting network: automation
         ('impersonator', 'Fake browser'),       # claims a browser its fingerprint contradicts
         ('unknown', 'Unknown / unverified'),
     ]
@@ -570,8 +571,10 @@ class EdgeIPHour(models.Model):
 
     requests = models.IntegerField(default=0)
     conns = models.IntegerField(default=0)  # distinct connections that carried a request
-    # By EdgeRequest.client_class
+    # By EdgeRequest.client_class. headless also counts 'browser' rows from
+    # hosting networks classified before the edge had a headless class.
     browser_reqs = models.IntegerField(default=0)
+    headless_reqs = models.IntegerField(default=0)
     impersonator_reqs = models.IntegerField(default=0)
     known_bot_reqs = models.IntegerField(default=0)
     tool_reqs = models.IntegerField(default=0)
@@ -582,6 +585,12 @@ class EdgeIPHour(models.Model):
     new_client_reqs = models.IntegerField(default=0)  # responses that issued a new client cookie
     cookie_reqs = models.IntegerField(default=0)  # requests that sent a valid client cookie back
     trap_hits = models.IntegerField(default=0)  # CrawlerVisit rows of ABSOLUTE_PROOF_TRAP_TYPES
+    # Connections that never got as far as a request, from EdgeConnection:
+    # opened and dropped without a ClientHello (typical of proxy exits
+    # whose client gave up on the tunnel), or a failed / timed-out
+    # handshake. An IP with only these has requests = 0.
+    no_hello_conns = models.IntegerField(default=0)
+    failed_handshakes = models.IntegerField(default=0)
 
     ja4s = models.IntegerField(default=0)  # distinct JA4s
     user_agents = models.IntegerField(default=0)  # distinct User-Agents
@@ -627,6 +636,7 @@ class EdgeFingerprintHour(models.Model):
     hosting_ips = models.IntegerField(default=0)
     single_conn_ips = models.IntegerField(default=0)  # IPs that opened exactly one connection with it
     browser_reqs = models.IntegerField(default=0)
+    headless_reqs = models.IntegerField(default=0)
     impersonator_reqs = models.IntegerField(default=0)
     known_bot_reqs = models.IntegerField(default=0)
     user_agents = models.IntegerField(default=0)

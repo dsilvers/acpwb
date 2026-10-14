@@ -32,39 +32,66 @@ ROLLUP_DELAY = timedelta(minutes=15)
 # next one; join them for this long past the hour.
 _REQUEST_SPILL = timedelta(minutes=15)
 
+# 'browser' rows from hosting networks predate the edge's headless class
+# (Oct 14 2026): count them as headless, as the edge does now.
+_HEADLESS = "(client_class = 'headless' OR (client_class = 'browser' AND network = 'hosting'))"
+
 _IP_SQL = """
-INSERT INTO honeypot_edgeiphour (
-    hour, ip_address, asn, network, requests, conns,
-    browser_reqs, impersonator_reqs, known_bot_reqs, tool_reqs, unknown_reqs,
-    static_reqs, error_reqs, new_client_reqs, cookie_reqs, trap_hits,
-    ja4s, user_agents, top_ja4, top_stack, signals
-)
-SELECT
-    %(start)s, r.ip_address, max(r.asn), coalesce(max(nullif(r.network, '')), ''),
-    count(*), count(DISTINCT r.conn_id),
-    count(*) FILTER (WHERE r.client_class = 'browser'),
-    count(*) FILTER (WHERE r.client_class = 'impersonator'),
-    count(*) FILTER (WHERE r.client_class = 'known_bot'),
-    count(*) FILTER (WHERE r.client_class = 'tool'),
-    count(*) FILTER (WHERE r.client_class IN ('unknown', '')),
-    count(*) FILTER (WHERE r.route = 'static'),
-    count(*) FILTER (WHERE r.error <> ''),
-    count(*) FILTER (WHERE r.new_client),
-    count(*) FILTER (WHERE r.client_id <> '' AND NOT r.new_client),
-    coalesce(max(t.hits), 0),
-    count(DISTINCT nullif(r.ja4, '')), count(DISTINCT r.user_agent),
-    coalesce(mode() WITHIN GROUP (ORDER BY r.ja4), ''),
-    coalesce(mode() WITHIN GROUP (ORDER BY r.stack), ''),
-    coalesce(bit_or(r.signals), 0)
-FROM honeypot_edgerequest r
-LEFT JOIN (
+WITH r AS (
+    SELECT
+        ip_address, max(asn) AS asn, max(nullif(network, '')) AS network,
+        count(*) AS requests, count(DISTINCT conn_id) AS conns,
+        count(*) FILTER (WHERE client_class = 'browser' AND network <> 'hosting') AS browser,
+        count(*) FILTER (WHERE """ + _HEADLESS + """) AS headless,
+        count(*) FILTER (WHERE client_class = 'impersonator') AS impersonator,
+        count(*) FILTER (WHERE client_class = 'known_bot') AS known_bot,
+        count(*) FILTER (WHERE client_class = 'tool') AS tool,
+        count(*) FILTER (WHERE client_class IN ('unknown', '')) AS unknown,
+        count(*) FILTER (WHERE route = 'static') AS static,
+        count(*) FILTER (WHERE error <> '') AS errors,
+        count(*) FILTER (WHERE new_client) AS new_client,
+        count(*) FILTER (WHERE client_id <> '' AND NOT new_client) AS cookie,
+        count(DISTINCT nullif(ja4, '')) AS ja4s, count(DISTINCT user_agent) AS uas,
+        mode() WITHIN GROUP (ORDER BY ja4) AS top_ja4,
+        mode() WITHIN GROUP (ORDER BY stack) AS top_stack,
+        bit_or(signals) AS signals
+    FROM honeypot_edgerequest
+    WHERE timestamp >= %(start)s AND timestamp < %(end)s
+    GROUP BY ip_address
+),
+c AS (
+    SELECT
+        ip_address, max(asn) AS asn, max(nullif(network, '')) AS network,
+        sum(conn_count) FILTER (WHERE outcome = 'no_hello') AS no_hello,
+        sum(conn_count) FILTER (WHERE outcome IN ('handshake_failed', 'timeout')) AS failed
+    FROM honeypot_edgeconnection
+    WHERE timestamp >= %(start)s AND timestamp < %(end)s AND outcome IN ('no_hello', 'handshake_failed', 'timeout')
+    GROUP BY ip_address
+),
+t AS (
     SELECT ip_address, count(*) AS hits
     FROM honeypot_crawlervisit
     WHERE timestamp >= %(start)s AND timestamp < %(end)s AND trap_type = ANY(%(traps)s)
     GROUP BY ip_address
-) t ON t.ip_address = r.ip_address
-WHERE r.timestamp >= %(start)s AND r.timestamp < %(end)s
-GROUP BY r.ip_address
+)
+INSERT INTO honeypot_edgeiphour (
+    hour, ip_address, asn, network, requests, conns,
+    browser_reqs, headless_reqs, impersonator_reqs, known_bot_reqs, tool_reqs, unknown_reqs,
+    static_reqs, error_reqs, new_client_reqs, cookie_reqs, trap_hits, no_hello_conns, failed_handshakes,
+    ja4s, user_agents, top_ja4, top_stack, signals
+)
+SELECT
+    %(start)s, coalesce(r.ip_address, c.ip_address), coalesce(r.asn, c.asn), coalesce(r.network, c.network, ''),
+    coalesce(r.requests, 0), coalesce(r.conns, 0),
+    coalesce(r.browser, 0), coalesce(r.headless, 0), coalesce(r.impersonator, 0), coalesce(r.known_bot, 0),
+    coalesce(r.tool, 0), coalesce(r.unknown, 0),
+    coalesce(r.static, 0), coalesce(r.errors, 0), coalesce(r.new_client, 0), coalesce(r.cookie, 0),
+    coalesce(t.hits, 0), coalesce(c.no_hello, 0), coalesce(c.failed, 0),
+    coalesce(r.ja4s, 0), coalesce(r.uas, 0), coalesce(r.top_ja4, ''), coalesce(r.top_stack, ''),
+    coalesce(r.signals, 0)
+FROM r
+FULL JOIN c ON c.ip_address = r.ip_address
+LEFT JOIN t ON t.ip_address = coalesce(r.ip_address, c.ip_address)
 """
 
 _FP_SQL = """
@@ -75,7 +102,8 @@ WITH c AS (
 ),
 r AS (
     SELECT conn_id,
-        count(*) FILTER (WHERE client_class = 'browser') AS browser,
+        count(*) FILTER (WHERE client_class = 'browser' AND network <> 'hosting') AS browser,
+        count(*) FILTER (WHERE """ + _HEADLESS + """) AS headless,
         count(*) FILTER (WHERE client_class = 'impersonator') AS impersonator,
         count(*) FILTER (WHERE client_class = 'known_bot') AS known_bot,
         max(stack) AS stack
@@ -93,7 +121,7 @@ single AS (
 )
 INSERT INTO honeypot_edgefingerprinthour (
     hour, ja4, h2_fingerprint, conns, requests, ips, residential_ips, hosting_ips, single_conn_ips,
-    browser_reqs, impersonator_reqs, known_bot_reqs, user_agents, top_stack, top_user_agent
+    browser_reqs, headless_reqs, impersonator_reqs, known_bot_reqs, user_agents, top_stack, top_user_agent
 )
 SELECT
     %(start)s, c.ja4, c.h2_fingerprint, sum(c.conn_count), sum(c.request_count),
@@ -101,7 +129,8 @@ SELECT
     count(DISTINCT c.ip_address) FILTER (WHERE c.network = 'residential'),
     count(DISTINCT c.ip_address) FILTER (WHERE c.network = 'hosting'),
     max(s.ips),
-    coalesce(sum(r.browser), 0), coalesce(sum(r.impersonator), 0), coalesce(sum(r.known_bot), 0),
+    coalesce(sum(r.browser), 0), coalesce(sum(r.headless), 0), coalesce(sum(r.impersonator), 0),
+    coalesce(sum(r.known_bot), 0),
     count(DISTINCT nullif(c.first_user_agent, '')),
     coalesce(mode() WITHIN GROUP (ORDER BY r.stack), ''),
     left(coalesce(mode() WITHIN GROUP (ORDER BY nullif(c.first_user_agent, '')), ''), 512)

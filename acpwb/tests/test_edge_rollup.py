@@ -50,6 +50,16 @@ def _traffic(start):
         reqs.append(EdgeRequest(timestamp=t, request_id=uuid.uuid4(), conn_id=cid, ip_address='198.51.100.9',
                                 route=route, status=200, client_class='browser', network='residential',
                                 ja4=CHROME_JA4, stack='Chromium', new_client=new, client_id=client))
+    # A browser in a datacenter, classified before the edge had a headless
+    # class: rolled up as headless.
+    reqs.append(EdgeRequest(timestamp=t, request_id=uuid.uuid4(), ip_address='192.0.2.50', route='django',
+                            status=200, client_class='browser', network='hosting', ja4=CHROME_JA4))
+    # A proxy exit that only opened and dropped connections, and a failed
+    # handshake from the pool.
+    conns.append(EdgeConnection(timestamp=t, ip_address='203.0.113.99', outcome='no_hello', conn_count=2,
+                                network='residential', asn=28573, idempotency_key=uuid.uuid4()))
+    conns.append(EdgeConnection(timestamp=t, ip_address='203.0.113.2', outcome='handshake_failed', ja4=FAKE_JA4,
+                                network='residential', asn=28573, idempotency_key=uuid.uuid4()))
     # Outside the hour: ignored.
     reqs.append(EdgeRequest(timestamp=start + timedelta(hours=1, minutes=1), request_id=uuid.uuid4(),
                             ip_address='203.0.113.1', client_class='impersonator'))
@@ -62,27 +72,34 @@ def _traffic(start):
 def test_rollup_hour_per_ip_and_fingerprint():
     start = _hour()
     _traffic(start)
-    assert rollup_hour(start) == (4, 2)
+    assert rollup_hour(start) == (6, 2)
 
     pool = EdgeIPHour.objects.get(hour=start, ip_address='203.0.113.1')
     assert (pool.requests, pool.conns, pool.impersonator_reqs, pool.browser_reqs) == (1, 1, 1, 0)
     assert (pool.network, pool.asn, pool.top_stack, pool.signals) == ('residential', 28573, 't13d311200', 0b11)
     assert (pool.new_client_reqs, pool.cookie_reqs, pool.trap_hits) == (1, 0, 1)
 
+    assert EdgeIPHour.objects.get(hour=start, ip_address='203.0.113.2').failed_handshakes == 1
+    exit_only = EdgeIPHour.objects.get(hour=start, ip_address='203.0.113.99')
+    assert (exit_only.requests, exit_only.no_hello_conns, exit_only.network, exit_only.asn) == (0, 2, 'residential', 28573)
+    dc = EdgeIPHour.objects.get(hour=start, ip_address='192.0.2.50')
+    assert (dc.headless_reqs, dc.browser_reqs) == (1, 0)
+
     browser = EdgeIPHour.objects.get(hour=start, ip_address='198.51.100.9')
     assert (browser.requests, browser.browser_reqs, browser.static_reqs, browser.cookie_reqs) == (2, 2, 1, 1)
     assert browser.trap_hits == 0
 
     fake = EdgeFingerprintHour.objects.get(hour=start, ja4=FAKE_JA4)
-    assert (fake.conns, fake.ips, fake.residential_ips, fake.single_conn_ips) == (3, 3, 3, 3)
+    # The failed handshake is one more connection from an IP already counted.
+    assert (fake.conns, fake.ips, fake.residential_ips, fake.single_conn_ips) == (4, 3, 3, 2)
     assert (fake.impersonator_reqs, fake.browser_reqs, fake.top_stack) == (3, 0, 't13d311200')
     assert fake.top_user_agent == 'Mozilla/5.0 Chrome/131'
     real = EdgeFingerprintHour.objects.get(hour=start, ja4=CHROME_JA4)
     assert (real.h2_fingerprint, real.requests, real.browser_reqs, real.single_conn_ips) == (CHROME_H2, 2, 2, 1)
 
     # Re-running an hour replaces it.
-    assert rollup_hour(start) == (4, 2)
-    assert EdgeIPHour.objects.filter(hour=start).count() == 4
+    assert rollup_hour(start) == (6, 2)
+    assert EdgeIPHour.objects.filter(hour=start).count() == 6
 
 
 @pytest.mark.django_db
@@ -90,7 +107,7 @@ def test_rollup_command_follows_its_watermark():
     start = _hour(3)
     _traffic(start)
     call_command('rollup_edge_hour', since=start.strftime('%Y-%m-%dT%H'), stdout=io.StringIO())
-    assert EdgeIPHour.objects.filter(hour=start).count() == 4
+    assert EdgeIPHour.objects.filter(hour=start).count() == 6
     mark = DashboardStat.objects.get(key='edge_rollup_watermark').value['hour']
     assert mark >= (start + timedelta(hours=1)).isoformat()
 
@@ -102,7 +119,7 @@ def test_rollup_command_follows_its_watermark():
     assert not EdgeIPHour.objects.filter(hour=start).exists()
 
     call_command('rollup_edge_hour', hour=start.strftime('%Y-%m-%dT%H'), stdout=io.StringIO())
-    assert EdgeIPHour.objects.filter(hour=start).count() == 4
+    assert EdgeIPHour.objects.filter(hour=start).count() == 6
 
 
 @pytest.mark.django_db(databases=['default', 'direct'], transaction=True)
@@ -114,12 +131,21 @@ def test_precalc_edge_classes_and_dashboard(staff_client):
 
     s = DashboardStat.objects.get(key='edge.classes_24h').value
     res = next(r for r in s['by_network'] if r['network'] == 'residential')
-    assert (res['requests'], res['impersonator'], res['browser'], res['ips'], res['fake_ips']) == (5, 3, 2, 4, 3)
+    assert (res['requests'], res['impersonator'], res['browser'], res['ips'], res['fake_ips']) == (5, 3, 2, 5, 3)
+    assert (res['no_hello'], res['no_hello_ips'], res['failed_handshakes']) == (2, 1, 1)
+    hosting = next(r for r in s['by_network'] if r['network'] == 'hosting')
+    assert (hosting['headless'], hosting['browser']) == (1, 0)
     fp = s['top_fake_fps'][0]
-    assert (fp['ja4'], fp['requests'], fp['ip_hours'], fp['single_conn'], fp['residential']) == (FAKE_JA4, 3, 3, 3, 3)
-    assert s['top_proxy_asns'][0]['asn'] == 28573 and s['top_proxy_asns'][0]['ips'] == 3
+    assert (fp['ja4'], fp['requests'], fp['ip_hours'], fp['single_conn'], fp['residential']) == (FAKE_JA4, 3, 3, 2, 3)
+    asn = s['top_proxy_asns'][0]
+    assert (asn['asn'], asn['ips'], asn['fake_ips'], asn['no_hello_ips']) == (28573, 4, 3, 1)
     assert {i['ip_address']: i['traps'] for i in s['top_fake_ips']}['203.0.113.1'] == 1
 
+    # The real browser's cookie came from one IP; nothing on 2+.
+    multi = DashboardStat.objects.get(key='edge.requests_24h').value['multi_ip']
+    assert (multi['clients'], multi['multi']) == (1, 0)
+
     content = staff_client.get('/acpwb-dashboard/edge/').content.decode()
+    assert 'Proven Automated' in content and 'Cookies on 2+ IPs' in content
     assert "Who&#x27;s Really Visiting" in content or "Who's Really Visiting" in content
     assert FAKE_JA4 in content

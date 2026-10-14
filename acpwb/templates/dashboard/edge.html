@@ -40,16 +40,30 @@
 <div class="row g-3 mb-3">
   <div class="col-lg-3 col-md-6">
     <div class="stat-card" style="border-top-color:#dc3545">
+      <div class="label">Proven Automated</div>
+      <div class="value" style="color:#dc3545">{{ cls_proven_pct }}%</div>
+      <div class="sub">{{ cls_proven }} of {{ cls_total }} requests: fake browsers, declared bots and tools, browsers in datacenters</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card">
+      <div class="label">Unproven</div>
+      <div class="value">{{ cls_unproven_pct }}%</div>
+      <div class="sub">{{ cls_unproven }} requests: real browser engines on home networks, or nothing to check — not proof of a person</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card" style="border-top-color:#dc3545">
       <div class="label">Fake Browsers</div>
       <div class="value" style="color:#dc3545">{{ cls_fake_pct }}%</div>
-      <div class="sub">{{ cls_fake }} of {{ cls_total }} requests claim a browser their fingerprint contradicts</div>
+      <div class="sub">{{ cls_fake }} requests claim a browser their fingerprint contradicts</div>
     </div>
   </div>
   <div class="col-lg-3 col-md-6">
     <div class="stat-card" style="border-top-color:#d97706">
-      <div class="label">Residential Fakes</div>
+      <div class="label">Residential Proxy Candidates</div>
       <div class="value">{{ cls_res_fake_ips }}</div>
-      <div class="sub">home/ISP IPs sent {{ cls_res_fake }} fake-browser requests — proxy-pool candidates</div>
+      <div class="sub">home/ISP IPs sent fake-browser requests · {{ cls_no_hello_ips }} opened and dropped connections without a hello</div>
     </div>
   </div>
 </div>
@@ -58,14 +72,15 @@
   <div class="section-card-header"><h6>Who's Really Visiting</h6>
     <span style="font-size:.72rem;color:var(--muted)">last 24 finished hours, by network · rolled up hourly by rollup_edge_hour</span></div>
   <table class="dash-table w-100">
-    <thead><tr><th>Network</th><th>Requests</th><th>Browsers</th><th>Fake browsers</th><th>Known bots</th><th>HTTP tools</th><th>Unknown</th><th>IPs</th><th>IPs faking</th></tr></thead>
+    <thead><tr><th>Network</th><th>Requests</th><th>Browsers</th><th>Headless</th><th>Fake browsers</th><th>Known bots</th><th>HTTP tools</th><th>Unknown</th><th>IPs</th><th>IPs faking</th><th>No-hello conns (IPs)</th><th>Failed handshakes</th></tr></thead>
     <tbody>
     {% for r in cls_by_network %}
-      <tr><td>{{ r.network }}</td><td>{{ r.requests }}</td><td>{{ r.browser }}</td>
+      <tr><td>{{ r.network }}</td><td>{{ r.requests }}</td><td>{{ r.browser }}</td><td style="color:#dc3545">{{ r.headless|default:0 }}</td>
         <td style="color:#dc3545;font-weight:600">{{ r.impersonator }}</td><td>{{ r.known_bot }}</td><td>{{ r.tool }}</td>
-        <td>{{ r.unknown }}</td><td>{{ r.ips }}</td><td>{{ r.fake_ips }}</td></tr>
+        <td>{{ r.unknown }}</td><td>{{ r.ips }}</td><td>{{ r.fake_ips }}</td>
+        <td>{{ r.no_hello|default:0 }} ({{ r.no_hello_ips|default:0 }})</td><td>{{ r.failed_handshakes|default:0 }}</td></tr>
     {% empty %}
-      <tr><td colspan="9" style="color:var(--muted)">No rolled-up hours yet — rollup_edge_hour runs every 15 minutes.</td></tr>
+      <tr><td colspan="12" style="color:var(--muted)">No rolled-up hours yet — rollup_edge_hour runs every 15 minutes.</td></tr>
     {% endfor %}
     </tbody>
   </table>
@@ -93,11 +108,12 @@
       <div class="section-card-header"><h6>Residential Networks Sending Fakes</h6>
         <span style="font-size:.72rem;color:var(--muted)">proxy-pool candidates</span></div>
       <table class="dash-table w-100">
-        <thead><tr><th>ASN</th><th>Organization</th><th>IPs</th><th>Fake reqs</th></tr></thead>
+        <thead><tr><th>ASN</th><th>Organization</th><th>IPs</th><th>Faking</th><th>No-hello</th><th>Fake reqs</th></tr></thead>
         <tbody>
         {% for a in cls_proxy_asns %}
-          <tr><td class="mono">{{ a.asn|default:"—" }}</td><td>{{ a.org|default:"—" }}</td><td>{{ a.ips }}</td><td>{{ a.fake_requests }}</td></tr>
-        {% empty %}<tr><td colspan="4" style="color:var(--muted)">none</td></tr>{% endfor %}
+          <tr><td class="mono">{{ a.asn|default:"—" }}</td><td>{{ a.org|default:"—" }}</td><td>{{ a.ips }}</td>
+            <td>{{ a.fake_ips|default:"—" }}</td><td>{{ a.no_hello_ips|default:"—" }}</td><td>{{ a.fake_requests }}</td></tr>
+        {% empty %}<tr><td colspan="6" style="color:var(--muted)">none</td></tr>{% endfor %}
         </tbody>
       </table>
     </div>
@@ -124,12 +140,12 @@
       <div class="section-card-header"><h6>By Hour</h6><span style="font-size:.72rem;color:var(--muted)">last 48 hours</span></div>
       <div style="max-height:420px;overflow-y:auto">
       <table class="dash-table w-100">
-        <thead><tr><th>Hour (UTC)</th><th>Requests</th><th>Browsers</th><th>Fake</th><th>Residential fake</th><th>Known bots</th><th>Tools</th><th>Unknown</th></tr></thead>
+        <thead><tr><th>Hour (UTC)</th><th>Requests</th><th>Browsers</th><th>Headless</th><th>Fake</th><th>Residential fake</th><th>Known bots</th><th>Tools</th><th>Unknown</th></tr></thead>
         <tbody>
         {% for h in cls_hourly %}
           <tr><td class="mono">{{ h.hour|slice:":10" }} {{ h.hour|slice:"11:13" }}:00</td><td>{{ h.requests }}</td><td>{{ h.browser }}</td>
-            <td style="color:#dc3545">{{ h.impersonator }}</td><td>{{ h.residential_fake }}</td><td>{{ h.known_bot }}</td><td>{{ h.tool }}</td><td>{{ h.unknown }}</td></tr>
-        {% empty %}<tr><td colspan="8" style="color:var(--muted)">none</td></tr>{% endfor %}
+            <td style="color:#dc3545">{{ h.headless|default:0 }}</td><td style="color:#dc3545">{{ h.impersonator }}</td><td>{{ h.residential_fake }}</td><td>{{ h.known_bot }}</td><td>{{ h.tool }}</td><td>{{ h.unknown }}</td></tr>
+        {% empty %}<tr><td colspan="9" style="color:var(--muted)">none</td></tr>{% endfor %}
         </tbody>
       </table>
       </div>
@@ -182,9 +198,9 @@
   </div>
   <div class="col-lg-3 col-md-6">
     <div class="stat-card">
-      <div class="label">Clients on &gt;1 IP</div>
-      <div class="value">{{ multi_ip_clients|length }}{% if multi_ip_clients|length == 20 %}+{% endif %}</div>
-      <div class="sub">one cookie, rotating addresses</div>
+      <div class="label">Cookies on 2+ IPs</div>
+      <div class="value">{{ multi_ip.multi|default:"—" }}</div>
+      <div class="sub">of {{ multi_ip.clients|default:"—" }} client cookies, last {{ multi_ip.hours|default:6 }}h · {{ multi_ip.ten_plus|default:0 }} on 10+ IPs (max {{ multi_ip.max_ips|default:0 }})</div>
     </div>
   </div>
 </div>
@@ -241,6 +257,16 @@
 
 <div class="section-card mb-4">
   <div class="section-card-header"><h6>Clients Seen on Multiple IPs</h6><span style="font-size:.72rem;color:var(--muted)">same acpwb_cid cookie from different addresses — proxy rotation (or a phone changing networks)</span></div>
+  {% if multi_ip.by_class %}
+  <table class="dash-table w-100 mb-3">
+    <thead><tr><th>Mostly classed as</th><th>Cookies (last {{ multi_ip.hours }}h)</th><th>On 2+ IPs</th><th>On 10+ IPs</th><th>Most IPs</th></tr></thead>
+    <tbody>
+      {% for c in multi_ip.by_class %}
+      <tr><td>{{ c.client_class }}</td><td>{{ c.clients }}</td><td>{{ c.multi }}</td><td>{{ c.ten_plus }}</td><td>{{ c.max_ips }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
   <table class="dash-table w-100">
     <thead><tr><th>Client ID</th><th>IPs</th><th>Requests</th><th>User agents</th></tr></thead>
     <tbody>

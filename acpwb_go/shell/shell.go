@@ -66,7 +66,6 @@ var mainNav = []navItem{
 	{"Reports", "/reports/"},
 	{"Presentations", "/presentations/"},
 	{"Policy", "/public-policy/"},
-	{"Careers", "/careers/"},
 	{"Partners", "/partners/"},
 	{"Contact", "/contact/"},
 }

@@ -64,11 +64,11 @@ func TestRenderPage_Structure(t *testing.T) {
 		t.Errorf("missing ExtraHead content")
 	}
 
-	// Nav links (main nav) — all 10, unprefixed since SiteRoot == "".
+	// Nav links (main nav) — all 9, unprefixed since SiteRoot == "".
 	for _, want := range []string{
 		`href="/"`, `href="/our-people/"`, `href="/mission/"`, `href="/projects/"`,
 		`href="/reports/"`, `href="/presentations/"`, `href="/public-policy/"`,
-		`href="/careers/"`, `href="/partners/"`, `href="/contact/"`,
+		`href="/partners/"`, `href="/contact/"`,
 	} {
 		if !strings.Contains(html, want) {
 			t.Errorf("missing nav link %q", want)

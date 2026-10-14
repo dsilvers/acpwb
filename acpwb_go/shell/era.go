@@ -38,7 +38,6 @@ var eraMainNav = []navItem{
 	{"Mission", "/mission/"},
 	{"Projects", "/projects/"},
 	{"Reports", "/reports/"},
-	{"Careers", "/careers/"},
 	{"Partners", "/partners/"},
 	{"Contact", "/our-people/"},
 }

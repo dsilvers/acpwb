@@ -56,7 +56,6 @@
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'reports-list' %}active{% endif %}" href="{{ site_root }}{% url 'reports-list' %}">Reports</a></li>
         <li class="nav-item"><a class="nav-link {% if 'presentation' in request.resolver_match.url_name|default:'' %}active{% endif %}" href="{{ site_root }}{% url 'presentation-landing' %}">Presentations</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'public-policy-index' %}active{% endif %}" href="{{ site_root }}{% url 'public-policy-index' %}">Policy</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'careers' %}active{% endif %}" href="{{ site_root }}{% url 'careers' %}">Careers</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'partners' %}active{% endif %}" href="{{ site_root }}{% url 'partners' %}">Partners</a></li>
         <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{{ site_root }}{% url 'contact' %}">Contact</a></li>
       </ul>

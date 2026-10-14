@@ -3,7 +3,6 @@ import re
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .career_generator import generate_job, get_current_jobs, is_valid_job_id
 from .models import Fortune500Company, DataOptOutRequest, ConferenceRegistration
 from apps.projects.models import ProjectStory
 
@@ -236,37 +235,18 @@ def awards(request):
 
 
 def careers(request):
-    jobs = get_current_jobs()
     return render(request, 'public/careers.html', {
-        'jobs': jobs,
         'og_title': 'Careers — American Corporation for Public Well Being',
         'og_description': 'Join the American Corporation for Public Well Being and contribute to our mission of advancing American workforce prosperity and compensation equity.',
     })
 
 
 def job_detail(request, job_id, job_slug):
-    if not is_valid_job_id(job_id):
-        return redirect('careers')
-    job = generate_job(job_id)
-    return render(request, 'public/careers/job_detail.html', {
-        'job': job,
-        'og_title': f"{job['title']} — ACPWB Careers",
-        'og_description': f"Open position: {job['title']} in {job['department']} at the American Corporation for Public Well Being.",
-    })
+    # No open positions: old job links (and their apply/applied pages) are gone.
+    raise Http404
 
 
-def job_apply(request, job_id, job_slug):
-    if not is_valid_job_id(job_id):
-        return redirect('careers')
-    job = generate_job(job_id)
-    return render(request, 'public/careers/apply.html', {'job': job, 'form_unavailable': True})
-
-
-def job_applied(request, job_id, job_slug):
-    if not is_valid_job_id(job_id):
-        return redirect('careers')
-    job = generate_job(job_id)
-    return render(request, 'public/careers/applied.html', {'job': job})
+job_apply = job_applied = job_detail
 
 
 def mission(request):

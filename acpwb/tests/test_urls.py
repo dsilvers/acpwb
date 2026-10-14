@@ -231,3 +231,21 @@ def test_press_releases_feed(client):
     assert items[0].findtext('link').endswith(f"/{first['slug']}/")
     content = items[0].findtext('{http://purl.org/rss/1.0/modules/content/}encoded')
     assert 'href="/' not in content and 'src="/' not in content
+
+
+@pytest.mark.django_db
+def test_careers_has_no_openings(client):
+    response = client.get('/careers/')
+    assert b'We currently do not have any job openings. Please check back later.' in response.content
+    assert b'/careers/jobs/' not in response.content
+
+
+@pytest.mark.parametrize('path', [
+    '/careers/jobs/84/full-stack-developer-client-portals/',
+    '/careers/jobs/84/full-stack-developer-client-portals/apply/',
+    '/careers/jobs/84/full-stack-developer-client-portals/applied/',
+])
+@pytest.mark.django_db
+def test_job_links_404(client, path):
+    response = client.get(path)
+    assert response.status_code == 404

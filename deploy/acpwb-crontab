@@ -13,6 +13,10 @@
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_code_email_queue' >> /var/log/acpwb-code-email-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_conn_queue' >> /var/log/acpwb-edge-conn-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_request_queue' >> /var/log/acpwb-edge-request-drain.log 2>&1
+# Hourly rollups of edge traffic (EdgeIPHour, EdgeFingerprintHour) for the
+# dashboard's who's-really-visiting panels and reputation scoring. Rolls up
+# each hour 15 minutes after it ends; ~20s per hour of traffic.
+*/15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py rollup_edge_hour' >> /var/log/acpwb-edge-rollup.log 2>&1
 */5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py score_ip_reputation' >> /var/log/acpwb-score-ip-reputation.log 2>&1
 */15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py publish_ip_reputation' >> /var/log/acpwb-publish-ip-reputation.log 2>&1
 

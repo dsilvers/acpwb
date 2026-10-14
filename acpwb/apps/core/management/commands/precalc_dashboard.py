@@ -81,6 +81,26 @@ _DAILY_RETENTION_DAYS = {'crawlers': 60, 'archive': 30}
 _PENDING_QUEUE_MARGIN = timedelta(minutes=5)
 
 
+def _asn_orgs(ips):
+    """ASN organization names for a few IPs, from the GeoLite2-ASN database
+    the edge uses ({} if it isn't there)."""
+    from django.conf import settings
+    try:
+        import geoip2.database
+        import geoip2.errors
+        reader = geoip2.database.Reader(settings.GEOIP2_ASN_DB_PATH)
+    except Exception:
+        return {}
+    out = {}
+    with reader:
+        for ip in ips:
+            try:
+                out[ip] = reader.asn(ip).autonomous_system_organization or ''
+            except (geoip2.errors.AddressNotFoundError, ValueError):
+                pass
+    return out
+
+
 class Command(BaseCommand):
     help = 'Incrementally update dashboard stats in the database.'
 
@@ -988,6 +1008,7 @@ class Command(BaseCommand):
         self._set_stat('edge.process', self._edge_process_stats())
         self.stdout.write(f'  edge: {summary["total"]} connections in last 24h')
         self._update_edge_requests(since)
+        self._update_edge_classes()
 
     def _update_edge_requests(self, since):
         """Request-level summary from EdgeRequest (every request the edge
@@ -1031,6 +1052,85 @@ class Command(BaseCommand):
         ]
         self._set_stat('edge.requests_24h', summary)
         self.stdout.write(f'  edge: {summary["total"]} requests in last 24h')
+
+    def _update_edge_classes(self):
+        """Who's really visiting, from the hourly rollups (EdgeIPHour,
+        EdgeFingerprintHour; rollup_edge_hour): requests by the edge's
+        client class and network, the fingerprints faking browsers, and
+        the residential networks those come from. The last 24 finished
+        hours, plus 48 hours of per-hour totals."""
+        from apps.honeypot.models import EdgeFingerprintHour, EdgeIPHour
+        now = timezone.now()
+        since = now.replace(minute=0, second=0, microsecond=0) - timedelta(hours=24)
+        ips = EdgeIPHour.objects.filter(hour__gte=since)
+        classes = ('browser', 'impersonator', 'known_bot', 'tool', 'unknown')
+        sums = {f'{c}_reqs': Sum(f'{c}_reqs') for c in classes}
+
+        by_network = []
+        for r in ips.values('network').annotate(
+            requests=Sum('requests'), ip_count=Count('ip_address', distinct=True),
+            fake_ips=Count('ip_address', distinct=True, filter=Q(impersonator_reqs__gt=0)),
+            **sums,
+        ).order_by('-requests'):
+            by_network.append({
+                'network': r['network'] or 'unknown', 'requests': r['requests'] or 0, 'ips': r['ip_count'],
+                'fake_ips': r['fake_ips'], **{c: r[f'{c}_reqs'] or 0 for c in classes},
+            })
+
+        hourly = [
+            {'hour': r['hour'].isoformat(), 'requests': r['requests'] or 0,
+             'residential_fake': r['residential_fake'] or 0, **{c: r[f'{c}_reqs'] or 0 for c in classes}}
+            for r in EdgeIPHour.objects.filter(hour__gte=since - timedelta(hours=24)).values('hour').annotate(
+                requests=Sum('requests'),
+                residential_fake=Sum('impersonator_reqs', filter=Q(network='residential')),
+                **sums,
+            ).order_by('-hour')
+        ]
+
+        # Fingerprints faking browsers. ip_hours sums each hour's distinct
+        # IPs: an IP active in three hours counts three times.
+        top_fake_fps = [
+            {'ja4': r['ja4'], 'h2_fingerprint': r['h2_fingerprint'], 'requests': r['imp'] or 0,
+             'conns': r['conns'] or 0, 'ip_hours': r['ip_hours'] or 0, 'single_conn': r['single'] or 0,
+             'residential': r['res'] or 0, 'hosting': r['host'] or 0,
+             'stack': r['stack'], 'user_agent': r['ua']}
+            for r in EdgeFingerprintHour.objects.filter(hour__gte=since, impersonator_reqs__gt=0)
+            .values('ja4', 'h2_fingerprint').annotate(
+                imp=Sum('impersonator_reqs'), conns=Sum('conns'), ip_hours=Sum('ips'),
+                single=Sum('single_conn_ips'), res=Sum('residential_ips'), host=Sum('hosting_ips'),
+                stack=Max('top_stack'), ua=Max('top_user_agent'),
+            ).order_by('-ip_hours')[:20]
+        ]
+
+        # Residential networks sending fake browsers: candidate proxy pools.
+        asn_rows = list(
+            ips.filter(network='residential', impersonator_reqs__gt=0).values('asn').annotate(
+                ip_count=Count('ip_address', distinct=True), fake=Sum('impersonator_reqs'),
+                requests=Sum('requests'), sample_ip=Max('ip_address'),
+            ).order_by('-ip_count')[:20]
+        )
+        orgs = _asn_orgs([r['sample_ip'] for r in asn_rows])
+        top_proxy_asns = [
+            {'asn': r['asn'], 'org': orgs.get(r['sample_ip'], ''), 'ips': r['ip_count'],
+             'fake_requests': r['fake'] or 0, 'requests': r['requests'] or 0}
+            for r in asn_rows
+        ]
+
+        top_fake_ips = [
+            {'ip_address': r['ip_address'], 'network': r['network'] or 'unknown', 'asn': r['asn'],
+             'fake_requests': r['fake'] or 0, 'requests': r['requests'] or 0, 'stack': r['stack'],
+             'traps': r['traps'] or 0}
+            for r in ips.filter(impersonator_reqs__gt=0).values('ip_address').annotate(
+                fake=Sum('impersonator_reqs'), requests=Sum('requests'), network=Max('network'),
+                asn=Max('asn'), stack=Max('top_stack'), traps=Sum('trap_hits'),
+            ).order_by('-fake')[:20]
+        ]
+
+        self._set_stat('edge.classes_24h', {
+            'by_network': by_network, 'hourly': hourly, 'top_fake_fps': top_fake_fps,
+            'top_proxy_asns': top_proxy_asns, 'top_fake_ips': top_fake_ips,
+        })
+        self.stdout.write(f'  edge: classes from {len(hourly)} rolled-up hour(s)')
 
     def _edge_process_stats(self):
         """acpwb_edge's own counters (acpwb:edge_stats, refreshed every 30s):

@@ -335,6 +335,23 @@ def edge(request):
         'recent_requests': list(EdgeRequest.objects.order_by('-timestamp')[:50]),
         'updated_at':     _updated_at('edge.summary_24h'),
     }
+    classes = _stat('edge.classes_24h', {}) or {}
+    by_network = classes.get('by_network', [])
+    class_total = sum(r['requests'] for r in by_network)
+    fake = sum(r['impersonator'] for r in by_network)
+    res_fake = sum(r['impersonator'] for r in by_network if r['network'] == 'residential')
+    ctx.update({
+        'cls_by_network':  by_network,
+        'cls_total':       class_total,
+        'cls_fake':        fake,
+        'cls_fake_pct':    round(fake * 100 / class_total, 1) if class_total else 0,
+        'cls_res_fake':    res_fake,
+        'cls_res_fake_ips': sum(r['fake_ips'] for r in by_network if r['network'] == 'residential'),
+        'cls_hourly':      classes.get('hourly', []),
+        'cls_fake_fps':    classes.get('top_fake_fps', []),
+        'cls_proxy_asns':  classes.get('top_proxy_asns', []),
+        'cls_fake_ips':    classes.get('top_fake_ips', []),
+    })
     return render(request, 'dashboard/edge.html', ctx)
 
 

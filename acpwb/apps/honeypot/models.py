@@ -552,6 +552,101 @@ class EdgeRequest(models.Model):
         return f"{self.ip_address} @ {self.timestamp:%Y-%m-%d %H:%M:%S} {self.method} {self.host}{self.path} {self.status}"
 
 
+class EdgeIPHour(models.Model):
+    """One row per (hour, client IP): what that IP did that hour, by the
+    edge's per-request classification. Built by rollup_edge_hour from the
+    hour's EdgeRequest rows (plus proof-of-automation trap hits from
+    CrawlerVisit), once the hour is over. Small next to the raw tables and
+    kept forever: the statistics and IP reputation scoring read this, not
+    the raw requests.
+
+    A TimescaleDB hypertable (migration 0026): no primary key;
+    hour + ip_address is unique.
+    """
+    hour = models.DateTimeField()
+    ip_address = models.GenericIPAddressField()
+    asn = models.BigIntegerField(null=True, blank=True)
+    network = models.CharField(max_length=12, blank=True)  # hosting, residential, unknown
+
+    requests = models.IntegerField(default=0)
+    conns = models.IntegerField(default=0)  # distinct connections that carried a request
+    # By EdgeRequest.client_class
+    browser_reqs = models.IntegerField(default=0)
+    impersonator_reqs = models.IntegerField(default=0)
+    known_bot_reqs = models.IntegerField(default=0)
+    tool_reqs = models.IntegerField(default=0)
+    unknown_reqs = models.IntegerField(default=0)
+
+    static_reqs = models.IntegerField(default=0)  # route static: pages' assets, which browsers fetch and most bots don't
+    error_reqs = models.IntegerField(default=0)
+    new_client_reqs = models.IntegerField(default=0)  # responses that issued a new client cookie
+    cookie_reqs = models.IntegerField(default=0)  # requests that sent a valid client cookie back
+    trap_hits = models.IntegerField(default=0)  # CrawlerVisit rows of ABSOLUTE_PROOF_TRAP_TYPES
+
+    ja4s = models.IntegerField(default=0)  # distinct JA4s
+    user_agents = models.IntegerField(default=0)  # distinct User-Agents
+    top_ja4 = models.CharField(max_length=40, blank=True)
+    top_stack = models.CharField(max_length=48, blank=True)
+    signals = models.IntegerField(default=0)  # every classify signal seen (OR of EdgeRequest.signals)
+
+    class Meta:
+        ordering = ['-hour']
+        indexes = [
+            models.Index(fields=['ip_address', 'hour']),
+            models.Index(fields=['asn', 'hour']),
+        ]
+        constraints = [
+            models.UniqueConstraint(fields=['hour', 'ip_address'], name='honeypot_edgeiphour_uniq'),
+        ]
+        verbose_name = 'Edge IP Hour'
+
+    def __str__(self):
+        return f"{self.ip_address} @ {self.hour:%Y-%m-%d %H:00} {self.requests} reqs"
+
+
+class EdgeFingerprintHour(models.Model):
+    """One row per (hour, JA4, HTTP/2 fingerprint): a client stack's traffic
+    that hour, from EdgeConnection (joined to its requests' classes). A
+    proxy pool shows as one fingerprint over many IPs with one connection
+    each (single_conn_ips close to ips), on residential networks.
+
+    ips, residential_ips… are distinct within the hour; summing them over
+    hours counts IP-hours, not IPs.
+
+    A TimescaleDB hypertable (migration 0026); hour + ja4 + h2_fingerprint
+    is unique.
+    """
+    hour = models.DateTimeField()
+    ja4 = models.CharField(max_length=40)
+    h2_fingerprint = models.CharField(max_length=512, blank=True)  # '' for HTTP/1
+
+    conns = models.IntegerField(default=0)
+    requests = models.IntegerField(default=0)
+    ips = models.IntegerField(default=0)
+    residential_ips = models.IntegerField(default=0)
+    hosting_ips = models.IntegerField(default=0)
+    single_conn_ips = models.IntegerField(default=0)  # IPs that opened exactly one connection with it
+    browser_reqs = models.IntegerField(default=0)
+    impersonator_reqs = models.IntegerField(default=0)
+    known_bot_reqs = models.IntegerField(default=0)
+    user_agents = models.IntegerField(default=0)
+    top_stack = models.CharField(max_length=48, blank=True)
+    top_user_agent = models.CharField(max_length=512, blank=True)
+
+    class Meta:
+        ordering = ['-hour']
+        indexes = [
+            models.Index(fields=['ja4', 'hour']),
+        ]
+        constraints = [
+            models.UniqueConstraint(fields=['hour', 'ja4', 'h2_fingerprint'], name='honeypot_edgefphour_uniq'),
+        ]
+        verbose_name = 'Edge Fingerprint Hour'
+
+    def __str__(self):
+        return f"{self.ja4} @ {self.hour:%Y-%m-%d %H:00} {self.ips} IPs"
+
+
 class IPReputationScore(models.Model):
     """Rule-based residential-proxy / automation score for an IP, computed
     off the request path by apps.core.management.commands.score_ip_reputation

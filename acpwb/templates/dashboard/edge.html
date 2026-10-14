@@ -36,6 +36,107 @@
   </div>
 </div>
 
+<!-- Who's really visiting: the edge's per-request classification, from the hourly rollups -->
+<div class="row g-3 mb-3">
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card" style="border-top-color:#dc3545">
+      <div class="label">Fake Browsers</div>
+      <div class="value" style="color:#dc3545">{{ cls_fake_pct }}%</div>
+      <div class="sub">{{ cls_fake }} of {{ cls_total }} requests claim a browser their fingerprint contradicts</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card" style="border-top-color:#d97706">
+      <div class="label">Residential Fakes</div>
+      <div class="value">{{ cls_res_fake_ips }}</div>
+      <div class="sub">home/ISP IPs sent {{ cls_res_fake }} fake-browser requests — proxy-pool candidates</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-card mb-4">
+  <div class="section-card-header"><h6>Who's Really Visiting</h6>
+    <span style="font-size:.72rem;color:var(--muted)">last 24 finished hours, by network · rolled up hourly by rollup_edge_hour</span></div>
+  <table class="dash-table w-100">
+    <thead><tr><th>Network</th><th>Requests</th><th>Browsers</th><th>Fake browsers</th><th>Known bots</th><th>HTTP tools</th><th>Unknown</th><th>IPs</th><th>IPs faking</th></tr></thead>
+    <tbody>
+    {% for r in cls_by_network %}
+      <tr><td>{{ r.network }}</td><td>{{ r.requests }}</td><td>{{ r.browser }}</td>
+        <td style="color:#dc3545;font-weight:600">{{ r.impersonator }}</td><td>{{ r.known_bot }}</td><td>{{ r.tool }}</td>
+        <td>{{ r.unknown }}</td><td>{{ r.ips }}</td><td>{{ r.fake_ips }}</td></tr>
+    {% empty %}
+      <tr><td colspan="9" style="color:var(--muted)">No rolled-up hours yet — rollup_edge_hour runs every 15 minutes.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-xl-7">
+    <div class="section-card h-100">
+      <div class="section-card-header"><h6>Fingerprints Faking Browsers</h6>
+        <span style="font-size:.72rem;color:var(--muted)">IP-hours: each hour's distinct IPs, summed · one-conn: IPs that connected once</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>JA4</th><th>Real stack</th><th>Claims</th><th>Fake reqs</th><th>IP-hours</th><th>One-conn</th><th>Residential</th></tr></thead>
+        <tbody>
+        {% for f in cls_fake_fps %}
+          <tr><td class="mono" title="{{ f.h2_fingerprint }}">{{ f.ja4 }}</td><td>{{ f.stack }}</td>
+            <td style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ f.user_agent }}">{{ f.user_agent }}</td>
+            <td>{{ f.requests }}</td><td>{{ f.ip_hours }}</td><td>{{ f.single_conn }}</td><td>{{ f.residential }}</td></tr>
+        {% empty %}<tr><td colspan="7" style="color:var(--muted)">none</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-xl-5">
+    <div class="section-card h-100">
+      <div class="section-card-header"><h6>Residential Networks Sending Fakes</h6>
+        <span style="font-size:.72rem;color:var(--muted)">proxy-pool candidates</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>ASN</th><th>Organization</th><th>IPs</th><th>Fake reqs</th></tr></thead>
+        <tbody>
+        {% for a in cls_proxy_asns %}
+          <tr><td class="mono">{{ a.asn|default:"—" }}</td><td>{{ a.org|default:"—" }}</td><td>{{ a.ips }}</td><td>{{ a.fake_requests }}</td></tr>
+        {% empty %}<tr><td colspan="4" style="color:var(--muted)">none</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-xl-6">
+    <div class="section-card h-100">
+      <div class="section-card-header"><h6>Most Active Fake-Browser IPs</h6></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>IP</th><th>Network</th><th>ASN</th><th>Real stack</th><th>Fake reqs</th><th>All reqs</th><th>Trap hits</th></tr></thead>
+        <tbody>
+        {% for i in cls_fake_ips %}
+          <tr><td class="mono">{{ i.ip_address }}</td><td>{{ i.network }}</td><td class="mono">{{ i.asn|default:"—" }}</td><td>{{ i.stack }}</td>
+            <td>{{ i.fake_requests }}</td><td>{{ i.requests }}</td><td{% if i.traps %} style="color:#dc3545;font-weight:700"{% endif %}>{{ i.traps }}</td></tr>
+        {% empty %}<tr><td colspan="7" style="color:var(--muted)">none</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="section-card h-100">
+      <div class="section-card-header"><h6>By Hour</h6><span style="font-size:.72rem;color:var(--muted)">last 48 hours</span></div>
+      <div style="max-height:420px;overflow-y:auto">
+      <table class="dash-table w-100">
+        <thead><tr><th>Hour (UTC)</th><th>Requests</th><th>Browsers</th><th>Fake</th><th>Residential fake</th><th>Known bots</th><th>Tools</th><th>Unknown</th></tr></thead>
+        <tbody>
+        {% for h in cls_hourly %}
+          <tr><td class="mono">{{ h.hour|slice:":10" }} {{ h.hour|slice:"11:13" }}:00</td><td>{{ h.requests }}</td><td>{{ h.browser }}</td>
+            <td style="color:#dc3545">{{ h.impersonator }}</td><td>{{ h.residential_fake }}</td><td>{{ h.known_bot }}</td><td>{{ h.tool }}</td><td>{{ h.unknown }}</td></tr>
+        {% empty %}<tr><td colspan="8" style="color:var(--muted)">none</td></tr>{% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- The edge process itself: what never becomes a row -->
 <div class="section-card mb-4">
   <div class="section-card-header"><h6>Edge Process</h6>

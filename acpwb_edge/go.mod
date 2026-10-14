@@ -14,6 +14,7 @@ require (
 require (
 	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/oschwald/maxminddb-golang/v2 v2.8.0 // indirect
 	go.uber.org/atomic v1.12.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
 )

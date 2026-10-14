@@ -15,6 +15,7 @@ import (
 	"syscall"
 	"time"
 
+	"acpwb_edge/classify"
 	"acpwb_edge/httpfp"
 	"acpwb_edge/meta"
 	"acpwb_edge/tlsfp"
@@ -30,6 +31,10 @@ type connInfo struct {
 	raw      net.Conn             // the TCP socket, for kernel RTT
 	emit     func(*Record)        // where the Record goes at close
 	emitReq  func(*RequestRecord) // where request records go
+	asnDB    *classify.ASNDB
+
+	netOnce sync.Once
+	netInfo classify.NetInfo
 
 	in, out atomic.Int64
 
@@ -145,10 +150,10 @@ func Stats() map[string]int64 {
 	}
 }
 
-func newConnInfo(raw net.Conn, isTLS bool) *connInfo {
+func newConnInfo(raw net.Conn, isTLS bool, asnDB *classify.ASNDB) *connInfo {
 	connsOpen.Add(1)
 	connsTotal.Add(1)
-	ci := &connInfo{id: uuid4(), accepted: time.Now(), tls: isTLS, raw: raw}
+	ci := &connInfo{id: uuid4(), accepted: time.Now(), tls: isTLS, raw: raw, asnDB: asnDB}
 	if a, ok := raw.RemoteAddr().(*net.TCPAddr); ok {
 		ip := a.IP
 		if v4 := ip.To4(); v4 != nil {
@@ -233,13 +238,23 @@ func (ci *connInfo) noteRequest(r *http.Request, m *meta.Request, names []string
 	}
 }
 
+// network is the client IP's ASN and network kind, looked up once per
+// connection.
+func (ci *connInfo) network() classify.NetInfo {
+	ci.netOnce.Do(func() { ci.netInfo = ci.asnDB.Lookup(ci.ip) })
+	return ci.netInfo
+}
+
 // record builds the connection's Record at close.
 func (ci *connInfo) record(now time.Time) *Record {
+	n := ci.network()
 	ci.mu.Lock()
 	defer ci.mu.Unlock()
 	rec := &Record{
 		Timestamp:      isoTime(ci.accepted),
 		IPAddress:      ci.ip,
+		ASN:            n.ASN,
+		Network:        n.Network,
 		SNI:            ci.sni,
 		ALPN:           ci.alpn,
 		TLSVer:         ci.tlsVersion,

@@ -85,19 +85,27 @@ SEND_TIMEOUT = 5.0
 # ---------------------------------------------------------------------------
 
 
-def _load_bot_classify():
+def _load_core_module(name):
     here = Path(__file__).resolve().parent
-    for path in (here / "bot_classify.py", here.parent / "acpwb" / "apps" / "core" / "bot_classify.py"):
+    for path in (here / f"{name}.py", here.parent / "acpwb" / "apps" / "core" / f"{name}.py"):
         if path.exists():
-            spec = importlib.util.spec_from_file_location("bot_classify", path)
+            spec = importlib.util.spec_from_file_location(name, path)
             mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(mod)
             return mod
-    logger.warning("bot_classify.py not found — agents will all be 'Other / Browser'")
     return None
 
 
+def _load_bot_classify():
+    mod = _load_core_module("bot_classify")
+    if mod is None:
+        logger.warning("bot_classify.py not found — agents will all be 'Other / Browser'")
+    return mod
+
+
 _bc = _load_bot_classify()
+# Names for the edge classifier's signal bits (EdgeRequest.signals).
+_ts = _load_core_module("traffic_signals")
 BROWSER = "Other / Browser"
 EMPTY_UA = "(empty user agent)"
 
@@ -158,10 +166,25 @@ def censor_ip(ip):
 # ---------------------------------------------------------------------------
 
 
+@lru_cache(maxsize=1024)
+def _signal_names(mask):
+    if not mask or _ts is None:
+        return ""
+    return ", ".join(_ts.signal_names(mask))
+
+
 def prepare_request(r, full_ips=True):
     """Add the derived fields filters and stats use (all prefixed _)."""
     ip = r.get("ip_address") or ""
-    r["_agent"], r["_group"] = classify(r.get("user_agent") or "", ip)
+    if r.get("label"):
+        # The edge's classification: the UA's claim checked against the
+        # TLS/HTTP fingerprint and network ("Residential · fake Chrome
+        # (Go TLS)"), not the UA alone.
+        r["_agent"], r["_group"] = r["label"], r.get("group") or "Unverified"
+    else:
+        r["_agent"], r["_group"] = classify(r.get("user_agent") or "", ip)
+    r["_asn"] = str(r.get("asn") or "")
+    r["_signals"] = _signal_names(r.get("signals") or 0)
     if not full_ips:
         r["ip_address"] = censor_ip(ip)
     q = r.get("query") or ""
@@ -205,6 +228,9 @@ TEXT_FIELDS = {
     "ctype": ("content_type", "substr"),
     "client": ("client_id", "prefix"),
     "conn": ("conn_id", "prefix"),
+    "stack": ("stack", "substr"),
+    "asn": ("_asn", "prefix"),
+    "signal": ("_signals", "substr"),
 }
 # filter key → record key; the filter value is a list of allowed values
 SET_FIELDS = {
@@ -214,6 +240,8 @@ SET_FIELDS = {
     "route": "route",
     "group": "_group",
     "error": "error",
+    "class": "client_class",
+    "network": "network",
 }
 # Filters that also apply to connections, and the conn record key.
 CONN_FIELDS = {"ip": "ip_address", "ja4": "ja4", "ja3": "ja3", "host": "sni", "cipher": "tls_cipher",
@@ -395,6 +423,10 @@ REQ_DIMS = {
     "ip": (lambda r: r.get("ip_address") or "", 12),
     "agent": (lambda r: r["_agent"], 12),
     "group": (lambda r: r["_group"], 10),
+    "class": (lambda r: r.get("client_class") or "", 6),
+    "network": (lambda r: r.get("network") or "", 4),
+    "stack": (lambda r: r.get("stack") or "", 10),
+    "asn": (lambda r: r["_asn"], 10),
     "host": (lambda r: r.get("host") or "", 10),
     "ja4": (lambda r: r.get("ja4") or "", 10),
     "ja4h": (lambda r: r.get("ja4h") or "", 10),

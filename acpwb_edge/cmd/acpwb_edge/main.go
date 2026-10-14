@@ -27,6 +27,7 @@ import (
 	"time"
 
 	"acpwb_edge/certs"
+	"acpwb_edge/classify"
 	"acpwb_edge/edge"
 	"acpwb_edge/edgequeue"
 	"acpwb_edge/httpfp"
@@ -141,6 +142,16 @@ func main() {
 		log.Printf("acpwb_edge: EDGE_COOKIE_SECRET unset — client IDs reset on every restart")
 	}
 
+	// Client networks (ASN, hosting vs residential) for request
+	// classification. Without the database every network is "unknown";
+	// everything else still works. SIGHUP reloads it after
+	// download_geoip_db fetches the monthly update.
+	asnPath := env("EDGE_ASN_DB", "/home/acpwb/acpwb/acpwb/var/geoip/GeoLite2-ASN.mmdb")
+	asnDB := &classify.ASNDB{}
+	if err := asnDB.Load(asnPath); err != nil {
+		log.Printf("acpwb_edge: ASN database: %v — client networks will be unknown", err)
+	}
+
 	srv := edge.New(edge.Config{
 		TLSConfig: &tls.Config{
 			// nginx accepted TLSv1 and TLSv1.1 too; old-client bots keep
@@ -157,6 +168,7 @@ func main() {
 		CookieSecret: cookieSecret,
 		HTTPSBase:    rc.HTTPSBase,
 		MaxBodyBytes: envInt("EDGE_MAX_BODY_BYTES", 10<<20),
+		ASN:          asnDB,
 		// 0 = the edge package defaults.
 		HandshakeTimeout:  envSeconds("EDGE_HANDSHAKE_TIMEOUT_SECONDS"),
 		ReadHeaderTimeout: envSeconds("EDGE_HEADER_TIMEOUT_SECONDS"),
@@ -224,8 +236,20 @@ func main() {
 
 	hup := make(chan os.Signal, 1)
 	signal.Notify(hup, syscall.SIGHUP)
+	certHup := make(chan os.Signal, 1)
+	go func() {
+		for sig := range hup {
+			if err := asnDB.Load(asnPath); err != nil {
+				log.Printf("acpwb_edge: reloading ASN database: %v", err)
+			}
+			select {
+			case certHup <- sig:
+			default: // a reload is already pending
+			}
+		}
+	}()
 	stop := make(chan struct{})
-	go store.Watch(hup, time.Hour, stop)
+	go store.Watch(certHup, time.Hour, stop)
 
 	term := make(chan os.Signal, 1)
 	signal.Notify(term, syscall.SIGTERM, syscall.SIGINT)

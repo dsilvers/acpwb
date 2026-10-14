@@ -99,6 +99,21 @@ def test_classification():
     assert matches({"agent": "firefox"}, b)
 
 
+def test_edge_classification():
+    # The edge's label wins over the UA-only guess.
+    r = req(label="Residential · fake Chrome (Go TLS)", group="Residential bots", client_class="impersonator",
+            network="residential", asn=28573, stack="Go TLS", signals=0b1000011)
+    assert r["_agent"] == "Residential · fake Chrome (Go TLS)" and r["_group"] == "Residential bots"
+    assert r["_signals"] == "tls_mismatch, no_h2, hosting"
+    assert matches({"class": ["impersonator"], "network": ["residential"]}, r)
+    assert matches({"group": ["Residential bots"], "asn": "285", "stack": "go tls"}, r)
+    assert matches({"signal": "no_h2"}, r)
+    assert not matches({"class": ["browser"]}, r)
+    assert not matches({"asn": "1"}, r)  # a prefix of the ASN, not a substring
+    # Records from an edge without classification fall back to the UA.
+    assert req(user_agent="Mozilla/5.0 Firefox/130.0")["_signals"] == ""
+
+
 def test_censoring():
     r = ws.prepare_request({"ip_address": "203.0.113.7", "user_agent": ""}, full_ips=False)
     assert r["ip_address"] == "203.0.113.xxx"

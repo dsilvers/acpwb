@@ -34,6 +34,10 @@ Environment=REDIS_URL=redis://127.0.0.1:6379/0
 EnvironmentFile=-/etc/acpwb-edge/env
 # Counters (/debug/vars) + pprof — localhost only, never public.
 Environment=EDGE_DEBUG_ADDR=127.0.0.1:6061
+# GeoLite2-ASN, for classifying client networks (hosting vs residential).
+# Refreshed by `manage.py download_geoip_db`; `systemctl reload acpwb-edge`
+# (SIGHUP) picks up a new file. Missing: networks are "unknown".
+Environment=EDGE_ASN_DB=/home/acpwb/acpwb/acpwb/var/geoip/GeoLite2-ASN.mmdb
 # Limits are never per client (bots get unthrottled access). These only
 # protect the process: stall timeout for clients that stop reading/sending,
 # a last-resort global in-flight valve, and per-IP record aggregation

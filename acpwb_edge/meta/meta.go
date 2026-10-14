@@ -19,6 +19,9 @@ type Request struct {
 	RequestID string // forwarded upstream as X-Request-Id; EdgeRequest.request_id
 	ClientID  string // the acpwb_cid cookie's client ID, if any
 
+	TrafficClass string // classify.Class*; forwarded as X-Traffic-Class
+	ASN          uint32 // the client IP's ASN, 0 if unknown; forwarded as X-Client-Asn
+
 	Route string // set by the router: which location handled it
 	Error string // set by the proxy when the upstream failed (edge.ErrUpstream…)
 }

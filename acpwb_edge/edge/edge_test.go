@@ -202,7 +202,11 @@ func TestHTTP1ProxyHeaders(t *testing.T) {
 	req.Header.Set("X-Real-IP", "6.6.6.6")
 	req.Header.Set("X-TLS-Protocol", "SSLv3")
 	req.Header["X_Ja4"] = []string{"spoofed-underscore"}
+	req.Header.Set("X-Traffic-Class", "browser")
+	req.Header.Set("X-Client-ASN", "15169")
 	req.Header.Set("Accept-Language", "en-US")
+	// Go's TLS stack claiming Chrome.
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 	resp, err := c.Do(req)
 	if err != nil {
 		t.Fatal(err)
@@ -237,6 +241,12 @@ func TestHTTP1ProxyHeaders(t *testing.T) {
 	if h.Get("X-H2-Fingerprint") != "" {
 		t.Error("h2 fingerprint on an HTTP/1.1 request")
 	}
+	if got := h.Values("X-Traffic-Class"); len(got) != 1 || got[0] != "impersonator" {
+		t.Errorf("upstream X-Traffic-Class = %v", got)
+	}
+	if got := h.Values("X-Client-Asn"); len(got) != 0 {
+		t.Errorf("upstream X-Client-Asn = %v: no ASN database, and the client's copy must go", got)
+	}
 
 	c.CloseIdleConnections()
 	rec := e.sink.next(t)
@@ -246,6 +256,10 @@ func TestHTTP1ProxyHeaders(t *testing.T) {
 	if rec.JA4 != h.Get("X-Ja4") || rec.FirstJA4H != h.Get("X-Ja4h") || rec.FirstPath != "/wiki/topic/?q=1" ||
 		rec.FirstRoute != router.Django || rec.FirstStatus != 200 || rec.RequestCount != 1 || rec.FirstHost != "acpwb.com" {
 		t.Errorf("record %+v", rec)
+	}
+	if r := e.sink.nextReq(t); r.ClientClass != "impersonator" || !strings.HasPrefix(r.Label, "fake Chrome (") ||
+		r.Signals == 0 || r.Network != "unknown" || r.JA4 != rec.JA4 {
+		t.Errorf("request class %q label %q signals %b network %q", r.ClientClass, r.Label, r.Signals, r.Network)
 	}
 	if !strings.HasPrefix(rec.FirstHeaderNames, "Host,User-Agent,") || rec.BytesIn == 0 || rec.BytesOut == 0 {
 		t.Errorf("record names %q bytes %d/%d", rec.FirstHeaderNames, rec.BytesIn, rec.BytesOut)
@@ -948,8 +962,11 @@ func TestLiveFeed(t *testing.T) {
 		t.Fatalf("live requests %+v", lt.reqs)
 	}
 	ct := lt.tls[0]
-	if ct.Version != "TLSv1.3" || ct.ALPN != "h2" || ct.SNI != "acpwb.com" || !ja4Re.MatchString(ct.JA4) || ct.H2FP == "" || ct.H2FP != rec.H2FP {
-		t.Errorf("live TLS %+v (conn record %+v)", ct, rec)
+	if ct.Version != "TLSv1.3" || ct.ALPN != "h2" || ct.SNI != "acpwb.com" || !ja4Re.MatchString(lt.reqs[0].JA4) || ct.H2FP == "" || ct.H2FP != rec.H2FP {
+		t.Errorf("live TLS %+v, request ja4 %q (conn record %+v)", ct, lt.reqs[0].JA4, rec)
+	}
+	if r := lt.reqs[0]; r.ClientClass == "" || r.Label == "" || r.Group == "" || r.Network != "unknown" {
+		t.Errorf("live request classification: %q %q %q %q", r.ClientClass, r.Label, r.Group, r.Network)
 	}
 	// One conn with the request, then all three junk ones even though the
 	// gate aggregated two of them.

@@ -14,6 +14,8 @@ import (
 type Record struct {
 	Timestamp string `json:"timestamp"`
 	IPAddress string `json:"ip_address"`
+	ASN       uint32 `json:"asn,omitempty"`
+	Network   string `json:"network"` // classify.NetHosting / NetResidential / NetUnknown
 	SNI       string `json:"sni"`
 	ALPN      string `json:"alpn"`
 	TLSVer    string `json:"tls_version"`

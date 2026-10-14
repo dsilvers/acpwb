@@ -8,6 +8,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"acpwb_edge/classify"
 	"acpwb_edge/httpfp"
 )
 
@@ -30,6 +31,8 @@ type RequestRecord struct {
 	Seq       int    `json:"seq"`        // 1 for a connection's first request
 
 	IPAddress string `json:"ip_address"`
+	ASN       uint32 `json:"asn,omitempty"`
+	Network   string `json:"network"`
 	TLS       bool   `json:"tls"`
 	Protocol  string `json:"protocol"` // HTTP/1.1, HTTP/2.0
 
@@ -51,6 +54,22 @@ type RequestRecord struct {
 	ResponseBytes int64  `json:"response_bytes"` // body bytes written (compressed, as sent)
 	TTFBMicros    int64  `json:"ttfb_us"`        // until the response head was written
 	DurationUS    int64  `json:"duration_us"`
+
+	// What the client really is (package classify). Label and Group are
+	// for the live view; EdgeRequest stores the rest.
+	JA4         string `json:"ja4"`
+	ClientClass string `json:"client_class"`
+	Stack       string `json:"stack"`
+	Signals     uint32 `json:"signals"`
+	Label       string `json:"label"`
+	Group       string `json:"group"`
+}
+
+func (r *RequestRecord) setClass(ja4 string, n classify.NetInfo, c classify.Result) {
+	r.JA4, r.ASN, r.Network = ja4, n.ASN, n.Network
+	r.ClientClass, r.Stack, r.Signals, r.Label, r.Group = c.Class, c.Stack, c.Signals, c.Label, c.Group
+	r.JA4 = clip(r.JA4, 40)
+	r.Stack = clip(r.Stack, 48)
 }
 
 // Request errors — honeypot.EdgeRequest.error. Empty for a request that
@@ -133,6 +152,8 @@ func (ci *connInfo) unservedRecord(h httpfp.Head, status int, errKind, proto str
 		Status:      status,
 		Error:       errKind,
 	}
+	ja4 := ci.fingerprints().JA4
+	rec.setClass(ja4, ci.network(), classify.Classify(classify.Input{UA: h.UserAgent, IP: ci.ip, JA4: ja4, Net: ci.network()}))
 	rec.truncate()
 	return rec
 }

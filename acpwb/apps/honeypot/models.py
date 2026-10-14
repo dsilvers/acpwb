@@ -360,6 +360,10 @@ class EdgeConnection(models.Model):
 
     timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
     ip_address = models.GenericIPAddressField()
+    # BigInteger: ASNs are 32-bit unsigned. No Positive*: its CHECK constraint
+    # would scan the whole hypertable when the column is added.
+    asn = models.BigIntegerField(null=True, blank=True)  # from the edge's GeoLite2-ASN lookup
+    network = models.CharField(max_length=12, blank=True)  # hosting, residential, unknown
     sni = models.CharField(max_length=253, blank=True)
     alpn = models.CharField(max_length=16, blank=True)
     tls_version = models.CharField(max_length=16, blank=True)
@@ -510,6 +514,24 @@ class EdgeRequest(models.Model):
     response_bytes = models.BigIntegerField(default=0)  # body as sent (compressed)
     ttfb_us = models.BigIntegerField(default=0)
     duration_us = models.BigIntegerField(default=0)
+
+    # What the client really is, classified by the edge per request
+    # (acpwb_edge/classify): the User-Agent's claim checked against the TLS
+    # stack, ALPN, HTTP/2 framing and headers, plus the network it came from.
+    CLIENT_CLASS_CHOICES = [
+        ('', 'Not classified'),
+        ('known_bot', 'Known bot'),             # names itself, or a known bot IP range
+        ('tool', 'HTTP tool'),                  # curl, python-requests…
+        ('browser', 'Browser'),                 # claims a browser and is one
+        ('impersonator', 'Fake browser'),       # claims a browser its fingerprint contradicts
+        ('unknown', 'Unknown / unverified'),
+    ]
+    ja4 = models.CharField(max_length=40, blank=True)  # the connection's, copied for queries without a join
+    asn = models.BigIntegerField(null=True, blank=True)  # see EdgeConnection.asn
+    network = models.CharField(max_length=12, blank=True)  # hosting, residential, unknown
+    client_class = models.CharField(max_length=16, choices=CLIENT_CLASS_CHOICES, blank=True)
+    stack = models.CharField(max_length=48, blank=True)  # the real TLS client: "Go TLS", or the JA4 "a" section
+    signals = models.IntegerField(default=0)  # classify.Sig* bitmask; see apps.core.traffic_signals
 
     class Meta:
         ordering = ['-timestamp']

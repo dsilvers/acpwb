@@ -24,6 +24,7 @@ import (
 	"golang.org/x/net/http/httpguts"
 	"golang.org/x/net/http2"
 
+	"acpwb_edge/classify"
 	"acpwb_edge/edgequeue"
 	"acpwb_edge/httpfp"
 	"acpwb_edge/meta"
@@ -61,6 +62,10 @@ type Config struct {
 	// clients give up at ~8s themselves. HTTP/1.1 clients reuse a
 	// connection within 2.4s at p99; HTTP/2 reuses have a long tail (p99
 	// 50s) but a reconnect costs them one ~240ms handshake.
+	// ASN looks up client networks for classification; nil means every
+	// network is "unknown".
+	ASN *classify.ASNDB
+
 	HandshakeTimeout  time.Duration // default 8s
 	ReadHeaderTimeout time.Duration // HTTP/1 request head, once started; default 5s
 	IdleTimeout       time.Duration // keep-alive, both protocols; default 15s
@@ -370,13 +375,25 @@ func (s *Server) serveRequest(w http.ResponseWriter, r *http.Request) {
 	if ci.tls {
 		m.ClientID, issued = s.clients.identify(w, r, host)
 	}
+	cls := classify.Classify(classify.Input{
+		UA:             r.UserAgent(),
+		AcceptLanguage: r.Header.Get("Accept-Language"),
+		IP:             ci.ip,
+		JA4:            fps.JA4,
+		H2Fingerprint:  h2fp,
+		CookieDropped:  issued && seq > 1,
+		Net:            ci.network(),
+	})
+	m.TrafficClass, m.ASN = cls.Class, ci.network().ASN
 	if r.Body != nil && r.Body != http.NoBody {
 		r.Body = &countingBody{ReadCloser: r.Body}
 	}
 	body := r.Body
 	defer func() {
 		ci.noteRequest(r, m, names, sw.Status())
-		ci.pushRequest(s.requestRecord(ci, r, m, sw, names, body, seq, issued, start))
+		rec := s.requestRecord(ci, r, m, sw, names, body, seq, issued, start)
+		rec.setClass(fps.JA4, ci.network(), cls)
+		ci.pushRequest(rec)
 	}()
 
 	w.Header().Set("Server", page.ServerHeader)
@@ -559,7 +576,7 @@ func (s *Server) Shutdown(ctx context.Context) error {
 
 // newConn starts tracking an accepted connection.
 func (s *Server) newConn(raw net.Conn, isTLS bool) *connInfo {
-	ci := newConnInfo(raw, isTLS)
+	ci := newConnInfo(raw, isTLS, s.cfg.ASN)
 	sink, live := s.cfg.Sink, s.cfg.Live
 	ci.emit = s.records.emit
 	if live != nil {

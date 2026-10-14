@@ -21,7 +21,6 @@ type ConnTLS struct {
 	ALPN    string `json:"alpn"`
 	Version string `json:"tls_version"`
 	Cipher  string `json:"tls_cipher"`
-	JA4     string `json:"ja4"`
 	JA3     string `json:"ja3"`
 	H2FP    string `json:"h2_fingerprint"`
 }
@@ -30,7 +29,7 @@ func (ci *connInfo) connTLS() ConnTLS {
 	ci.mu.Lock()
 	t := ConnTLS{
 		SNI: ci.sni, ALPN: ci.alpn, Version: ci.tlsVersion, Cipher: ci.cipher,
-		JA4: ci.fps.JA4, JA3: ci.fps.JA3,
+		JA3: ci.fps.JA3,
 	}
 	h2 := ci.h2
 	ci.mu.Unlock()

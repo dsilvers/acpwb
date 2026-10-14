@@ -54,6 +54,7 @@ services:
     volumes:
       # Agent classification uses Django's own patterns (see ws_server._load_bot_classify).
       - ./acpwb/apps/core/bot_classify.py:/app/bot_classify.py:ro
+      - ./acpwb/apps/core/traffic_signals.py:/app/traffic_signals.py:ro
     depends_on:
       - redis
     restart: unless-stopped
@@ -123,9 +124,11 @@ services:
       REDIS_URL: redis://redis:6379/0
       EDGE_DEBUG_ADDR: ":6061" # /debug/vars + pprof; published to localhost only
       EDGE_COOKIE_SECRET: dev-only-not-secret # signs the acpwb_cid client cookie
+      EDGE_ASN_DB: /geoip/GeoLite2-ASN.mmdb # client network classification; absent = "unknown"
     volumes:
       - ./acpwb/staticfiles:/app/staticfiles:ro
       - ./botseed:/botseed:ro
+      - ./acpwb/var/geoip:/geoip:ro
     ports:
       - "127.0.0.1:8001:8001"
       - "127.0.0.1:8090:8090"

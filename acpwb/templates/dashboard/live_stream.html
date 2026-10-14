@@ -71,11 +71,35 @@
             <option value="Search Engines">Search engines</option>
             <option value="SEO / Other Bots">SEO / other bots</option>
             <option value="Generic Scrapers">Generic scrapers</option>
-            <option value="AI Crawlers,Search Engines,SEO / Other Bots,Generic Scrapers">Any bot</option>
-            <option value="Other / Browser">Browser UA</option>
-            <option value="(empty user agent)">Empty UA</option>
+            <option value="Residential bots">Residential bots (fake browsers)</option>
+            <option value="Datacenter bots">Datacenter bots (fake browsers)</option>
+            <option value="Residential bots,Datacenter bots,Fake browsers">Any fake browser</option>
+            <option value="AI Crawlers,Search Engines,SEO / Other Bots,Generic Scrapers,Residential bots,Datacenter bots,Fake browsers">Any bot</option>
+            <option value="Browsers">Browsers</option>
+            <option value="Datacenter browsers">Browsers in a datacenter</option>
+            <option value="Unverified">Unverified</option>
           </select>
         </div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-class">Client class</label>
+          <select class="form-select" id="f-class" name="class">
+            <option value="">Any</option>
+            <option value="impersonator">Fake browser</option>
+            <option value="browser">Browser</option>
+            <option value="known_bot">Known bot</option>
+            <option value="tool">HTTP tool</option>
+            <option value="unknown">Unknown / unverified</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-network">Network</label>
+          <select class="form-select" id="f-network" name="network">
+            <option value="">Any</option>
+            <option value="residential">Residential / ISP</option>
+            <option value="hosting">Hosting / cloud</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-stack">Real TLS stack</label><input class="form-control" id="f-stack" name="stack" placeholder="Go TLS, t13d311200"><div class="lv-err" data-err="stack"></div></div>
+        <div class="col-6 col-md-3 col-xl-1"><label class="form-label" for="f-asn">ASN</label><input class="form-control" id="f-asn" name="asn" placeholder="28573"><div class="lv-err" data-err="asn"></div></div>
         <div class="col-6 col-md-3 col-xl-2"><label class="form-label" for="f-status">Status</label><input class="form-control" id="f-status" name="status" placeholder="4xx, 5xx, !404"><div class="lv-err" data-err="status"></div></div>
         <div class="col-6 col-md-3 col-xl-1"><label class="form-label" for="f-min_ms">Slower than</label><input class="form-control" id="f-min_ms" name="min_ms" type="number" min="0" step="50" placeholder="ms"><div class="lv-err" data-err="min_ms"></div></div>
         <div class="col-6 col-md-3 col-xl-1"><label class="form-label" for="f-method">Method</label>
@@ -249,7 +273,7 @@
   const pct = (n, d) => d ? Math.round(n / d * 1000) / 10 + "%" : "—";
 
   // ---- filter form <-> spec <-> URL hash -------------------------------
-  const SET_FIELDS = ["method", "proto", "tls", "route", "group", "error"];
+  const SET_FIELDS = ["method", "proto", "tls", "route", "group", "error", "class", "network"];
 
   function readSpec() {
     const spec = {};
@@ -373,6 +397,10 @@
     ["ip", "IP addresses", "ip", "req"],
     ["agent", "Agents", "agent", "req"],
     ["group", "Agent types", "group", "req"],
+    ["class", "Client classes", "class", "req"],
+    ["network", "Networks", "network", "req"],
+    ["stack", "Real TLS stacks", "stack", "req"],
+    ["asn", "ASNs", "asn", "req"],
     ["status", "Status codes", "status", "req"],
     ["host", "Hosts", "host", "req"],
     ["tls", "TLS versions", "tls", "req"],
@@ -545,6 +573,9 @@
   const DETAIL = [
     ["URL", "_url", "path"], ["Host", "host", "host"], ["IP", "ip_address", "ip"],
     ["User agent", "user_agent", "ua"], ["Agent", "_agent", "agent"], ["Agent type", "_group", "group"],
+    ["Client class", (r) => (r.client_class || "—") + (r.stack ? " · real stack " + r.stack : ""), "class", "client_class"],
+    ["Signals", (r) => r._signals || "—"],
+    ["Network", (r) => (r.network || "—") + (r.asn ? " · AS" + r.asn : ""), "asn", "_asn"],
     ["Referer", "referer", "referer"], ["Accept-Language", "accept_language", "lang"],
     ["Status / route", (r) => (r.status || "—") + " via " + (r.route || "—") + (r.error ? " (" + r.error + ")" : "")],
     ["Content type", "content_type", "ctype"],

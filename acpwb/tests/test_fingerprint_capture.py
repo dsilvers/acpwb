@@ -218,6 +218,10 @@ def test_drain_edge_request_queue_persists_and_dedupes(private_edge_queue):
         'method': 'GET', 'host': 'acpwb.com', 'path': '/static/css/site.css', 'query': '',
         'status': 200, 'route': 'static', 'error': '',
         'response_bytes': 1234, 'duration_us': 900,
+        # The edge's classification; label and group are for the live view.
+        'ja4': 't13d131000_f57a46bbacb6_e7c285222651', 'asn': 4230000000, 'network': 'residential',
+        'client_class': 'impersonator', 'stack': 'Go TLS', 'signals': 0b11,
+        'label': 'Residential · fake Chrome (Go TLS)', 'group': 'Residential bots',
         'unknown_future_key': 1,
     }
     r = crawler_queue._get_client()
@@ -230,6 +234,15 @@ def test_drain_edge_request_queue_persists_and_dedupes(private_edge_queue):
     assert str(rows[0].conn_id) == '7c9e6679-7425-40de-944b-e07fc1f90ae7'
     assert rows[0].route == 'static'
     assert rows[0].seq == 2
+    assert (rows[0].client_class, rows[0].stack, rows[0].network, rows[0].asn) == (
+        'impersonator', 'Go TLS', 'residential', 4230000000)  # a 32-bit ASN past int4
+    assert rows[0].ja4.startswith('t13d131000_') and rows[0].signals == 3
+
+
+def test_traffic_signal_names():
+    from apps.core.traffic_signals import BIT, signal_names
+    assert signal_names(0) == []
+    assert signal_names(BIT['tls_mismatch'] | BIT['hosting']) == ['tls_mismatch', 'hosting']
 
 
 @pytest.mark.django_db

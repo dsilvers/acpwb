@@ -28,7 +28,7 @@ func TestBundleCapsAndCounts(t *testing.T) {
 	}
 	defer f.Close()
 	for i := range 10 {
-		f.Request(&edge.RequestRecord{Path: "/p", Seq: i}, edge.ConnTLS{Version: "TLSv1.3", JA4: "t13d"})
+		f.Request(&edge.RequestRecord{Path: "/p", Seq: i, JA4: "t13d"}, edge.ConnTLS{Version: "TLSv1.3"})
 	}
 	f.Conn(&edge.Record{Outcome: "ok", JA3Str: "long"})
 	f.Conn(&edge.Record{Outcome: "no_hello"})

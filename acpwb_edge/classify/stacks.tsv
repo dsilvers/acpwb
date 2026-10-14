@@ -1,0 +1,19 @@
+# Known TLS client stacks, by JA4 cipher hash (the "b" section: a hash of
+# the sorted cipher suites). One stack can have several hashes across
+# versions. family is what a browser UA must match: chromium, firefox,
+# apple, or a non-browser stack.
+#
+# Sources: the uTLS hello fixtures in tlsfp/testdata/hellos (profile names
+# in index.tsv, JA4s in golden.tsv) and production traffic, Oct 2026.
+#
+# cipher_hash	family	name
+8daaf6152771	chromium	Chromium
+46e7e9700bed	chromium	Chromium (old)
+5b57614c22b0	firefox	Firefox
+29a2cd9e9f10	firefox	Firefox (old)
+a09f3c656075	apple	Apple
+2802a3db6c62	apple	Apple
+f91c41aead95	apple	Apple (old)
+f57a46bbacb6	go	Go TLS
+d34a8e72043a	okhttp	OkHttp
+61a7ad8aa9b6	rustls	rustls

@@ -19,6 +19,7 @@ import (
 	"net"
 	"net/http"
 	"net/http/httputil"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -93,7 +94,7 @@ func New(u Upstream) http.Handler {
 func reserved(name string) bool {
 	n := strings.ToLower(strings.ReplaceAll(name, "_", "-"))
 	switch n {
-	case "x-real-ip", "x-client-protocol", "forwarded", "x-request-id":
+	case "x-real-ip", "x-client-protocol", "forwarded", "x-request-id", "x-traffic-class", "x-client-asn":
 		return true
 	}
 	for _, p := range []string{"x-forwarded-", "x-tls-", "x-ja3", "x-ja4", "x-h2-"} {
@@ -132,6 +133,10 @@ func SetHeaders(h http.Header, m *meta.Request) {
 	set("X-Ja4h", m.JA4H)
 	set("X-H2-Fingerprint", m.H2Fingerprint)
 	set("X-Request-Id", m.RequestID)
+	set("X-Traffic-Class", m.TrafficClass)
+	if m.ASN != 0 {
+		set("X-Client-Asn", strconv.FormatUint(uint64(m.ASN), 10))
+	}
 }
 
 // errLog logs upstream errors at most once per 10s per upstream, with a

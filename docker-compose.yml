@@ -40,6 +40,7 @@ services:
     volumes:
       # Agent classification uses Django's own patterns (see ws_server._load_bot_classify).
       - ./acpwb/apps/core/bot_classify.py:/app/bot_classify.py:ro
+      - ./acpwb/apps/core/traffic_signals.py:/app/traffic_signals.py:ro
     depends_on:
       - redis
     restart: unless-stopped

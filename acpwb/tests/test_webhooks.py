@@ -216,3 +216,34 @@ def test_pipe_inbound_creates_match_for_known_email(pipe_post):
     match = HoneypotMatch.objects.filter(match_confidence='exact').first()
     assert match is not None
     assert match.original_visit == visit
+
+
+PIPE_RAW_WITH_ID = (
+    "From: spammer@evil.com\r\nTo: alice@acpwb.com\r\nSubject: Hello\r\n"
+    "Message-ID: <abc123@evil.com>\r\n\r\nBody text"
+)
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_ignores_redelivery(pipe_post):
+    body = {'sender': 'spammer@evil.com', 'recipient': 'alice@acpwb.com', 'subject': 'Hello', 'raw': PIPE_RAW_WITH_ID}
+    assert pipe_post(body).status_code == 200
+    assert pipe_post(body).status_code == 200
+    assert InboundEmail.objects.count() == 1
+    assert InboundEmail.objects.get().message_id == '<abc123@evil.com>'
+    assert HoneypotMatch.objects.count() == 1
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_same_message_to_two_recipients(pipe_post):
+    for rcpt in ('alice@acpwb.com', 'bob@acpwb.com'):
+        pipe_post({'sender': 'spammer@evil.com', 'recipient': rcpt, 'subject': 'Hello', 'raw': PIPE_RAW_WITH_ID})
+    assert InboundEmail.objects.count() == 2
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_without_message_id_not_deduped(pipe_post):
+    body = {'sender': 'spammer@evil.com', 'recipient': 'alice@acpwb.com', 'subject': 'Hello', 'raw': PIPE_RAW}
+    pipe_post(body)
+    pipe_post(body)
+    assert InboundEmail.objects.count() == 2

@@ -14,7 +14,7 @@ class InboundEmailAdmin(admin.ModelAdmin):
     list_display = ('received_at', 'sender', 'recipient', 'subject_short', 'match_count')
     list_filter = ('received_at',)
     search_fields = ('sender', 'recipient', 'subject')
-    readonly_fields = ('received_at', 'mailgun_message_id')
+    readonly_fields = ('received_at', 'message_id')
     inlines = [HoneypotMatchInline]
 
     @admin.display(description='Subject')

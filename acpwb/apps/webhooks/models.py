@@ -9,7 +9,7 @@ class InboundEmail(models.Model):
     body_plain = models.TextField(blank=True)
     body_html = models.TextField(blank=True)
     raw_payload = models.JSONField(default=dict)
-    mailgun_message_id = models.CharField(max_length=256, blank=True)
+    message_id = models.CharField(max_length=256, blank=True, db_index=True)  # Message-ID header; dedupes redeliveries
 
     class Meta:
         ordering = ['-received_at']

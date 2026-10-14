@@ -55,7 +55,10 @@ def mailgun_inbound(request):
     subject = post.get('subject', '')
     body_plain = post.get('body-plain', '')
     body_html = post.get('body-html', '')
-    message_id = post.get('Message-Id', '')
+    message_id = post.get('Message-Id', '')[:256]
+
+    if _is_redelivery(message_id, recipient):
+        return HttpResponse(status=200)
 
     # Capture full payload for audit
     raw_payload = {k: v for k, v in post.items()}
@@ -67,7 +70,7 @@ def mailgun_inbound(request):
         body_plain=body_plain,
         body_html=body_html,
         raw_payload=raw_payload,
-        mailgun_message_id=message_id[:256],
+        message_id=message_id,
     )
 
     # Try to match recipient against generated employees
@@ -93,8 +96,12 @@ def pipe_inbound(request):
     raw = data.get('raw', '')
     body_plain = ''
     body_html = ''
+    message_id = ''
     if raw:
         msg = email_lib.message_from_string(raw)
+        message_id = (msg.get('Message-ID') or '').strip()[:256]
+        if _is_redelivery(message_id, data.get('recipient', '')):
+            return HttpResponse(status=200)
         if msg.is_multipart():
             for part in msg.walk():
                 ct = part.get_content_type()
@@ -112,11 +119,23 @@ def pipe_inbound(request):
         body_plain=body_plain,
         body_html=body_html,
         raw_payload=data,
+        message_id=message_id,
     )
 
     _match_honeypot(inbound)
     return HttpResponse(status=200)
 
+
+def _is_redelivery(message_id, recipient):
+    """True if this message was already stored for this recipient. The sending
+    server redelivers whenever we fail or time out, even after the row was
+    saved. One message sent to several of our addresses arrives once per
+    recipient with the same Message-ID, so the recipient is part of the key."""
+    if not message_id:
+        return False
+    return InboundEmail.objects.filter(
+        message_id=message_id, recipient__iexact=recipient[:254].strip(),
+    ).exists()
 
 
 def _match_honeypot(inbound_email):
@@ -128,10 +147,15 @@ def _match_honeypot(inbound_email):
 
     recipient = inbound_email.recipient.lower().strip()
 
-    matches = GeneratedEmployee.objects.filter(
-        email__iexact=recipient,
-    ).select_related('visit')
-    code_pages = list(SourceCodeEmail.objects.filter(address__iexact=recipient).order_by('first_seen')[:50])
+    # Both generators store addresses lowercase, so match exactly: __iexact
+    # compiles to UPPER(col) = UPPER(%s), which can't use an index, and on the
+    # 22M-row SourceCodeEmail table that took longer than the Cloudflare
+    # Worker's 15 s fetch timeout — the sender's server then redelivered the
+    # same message hourly. (address, first_seen) is indexed for the ordering.
+    matches = list(GeneratedEmployee.objects.filter(
+        email=recipient,
+    ).select_related('visit'))
+    code_pages = list(SourceCodeEmail.objects.filter(address=recipient).order_by('first_seen')[:50])
 
     for employee in matches:
         HoneypotMatch.objects.create(
@@ -158,10 +182,10 @@ def _match_honeypot(inbound_email):
             ),
         )
 
-    if matches.exists() or code_pages:
+    if matches or code_pages:
         logger.info(
             "Honeypot match: %s → %d employee record(s), %d source-code page(s)",
-            recipient, matches.count(), len(code_pages),
+            recipient, len(matches), len(code_pages),
         )
     else:
         # No exact match — log it anyway with no match

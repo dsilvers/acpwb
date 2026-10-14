@@ -811,6 +811,11 @@ class SourceCodeEmail(models.Model):
 
     class Meta:
         unique_together = [('address', 'path')]
+        indexes = [
+            # webhooks._match_honeypot: an address's earliest 50 pages. Popular
+            # addresses are on 100k+ pages, too many to fetch and sort.
+            models.Index(fields=['address', 'first_seen'], name='honeypot_sce_addr_seen_idx'),
+        ]
         ordering = ['-first_seen']
         verbose_name = 'Source Code Email'
         verbose_name_plural = 'Source Code Emails'

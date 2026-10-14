@@ -18,8 +18,8 @@
         <tr><th style="font-size:.72rem;color:var(--muted)">To</th><td style="font-size:.82rem;font-family:monospace">{{ email.recipient }}</td></tr>
         <tr><th style="font-size:.72rem;color:var(--muted)">Subject</th><td style="font-size:.82rem">{{ email.subject }}</td></tr>
         <tr><th style="font-size:.72rem;color:var(--muted)">Received</th><td style="font-size:.82rem">{{ email.received_at|date:"Y-m-d H:i:s" }} UTC</td></tr>
-        {% if email.mailgun_message_id %}
-        <tr><th style="font-size:.72rem;color:var(--muted)">Message-ID</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ email.mailgun_message_id }}</td></tr>
+        {% if email.message_id %}
+        <tr><th style="font-size:.72rem;color:var(--muted)">Message-ID</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ email.message_id }}</td></tr>
         {% endif %}
         {% with mc=email.matches.count %}{% if mc %}
         <tr><th style="font-size:.72rem;color:var(--muted)">Matched</th><td><span style="font-size:.72rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#10003; {{ mc }} honeypot match{{ mc|pluralize }}</span></td></tr>

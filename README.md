@@ -439,7 +439,7 @@ Two supported providers. Both create `InboundEmail` + `HoneypotMatch` records an
 export default {
   async email(message, env, ctx) {
     const rawEmail = await new Response(message.raw).text();
-    await fetch('https://acpwb.com/webhooks/pipe/inbound/', {
+    const resp = await fetch('https://acpwb.com/webhooks/pipe/inbound/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -452,6 +452,12 @@ export default {
         raw: rawEmail,
       }),
     });
+    // Throwing makes Cloudflare refuse the message with a temporary failure,
+    // so the sending server retries later. The webhook ignores redeliveries
+    // (same Message-ID + recipient), so a retry after a partial success is safe.
+    if (!resp.ok) {
+      throw new Error(`acpwb webhook returned ${resp.status}`);
+    }
   }
 };
 ```

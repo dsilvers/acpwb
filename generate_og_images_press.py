@@ -96,6 +96,7 @@ _SLUG_SCENES = {
     'perch-2027-announced': 'modern convention center hall before a business conference, low black stage, wide LED video wall glowing deep blue, sleek acrylic lectern with microphone, neat straight rows of identical black chairs, warm gold accent lights',
     'record-peak-traffic-august-2026': 'close angled view of a single storefront window at night, tightly framed so no signage, lettering, or awnings are visible, blank dark brick wall bordering the window, dozens of mismatched old television sets crammed onto shelves behind rain-streaked glass, screens glowing dim static, warm interior light spilling onto wet pavement at the bottom edge of frame',
     'ukraine-drone-strike-yandex-data-center-russia-traffic': 'long data center aisle at night, every server rack dark and silent, dim amber emergency lights along the ceiling, one rack at the far end still blinking blue, polished floor reflecting the glow',
+    'non-customer-consumer-protection-complaint-resolved': 'quiet government office desk at dusk, a single printed letter lying flat in a wire in-tray next to a closed manila file folder, brass desk lamp casting a warm pool of light, rubber stamp and ink pad, wall clock out of focus in the background, tall window with winter blue evening light',
     'record-traffic-september-2026': 'dim windowless corporate conference room at night, dozens of vintage carousel slide projectors crowded across a long boardroom table and stacked on folding carts, every projector running, crisscrossing beams of warm light cutting through dusty air onto a blank white pull-down screen, overlapping squares of empty light, tangled extension cords and power strips on the carpet, empty office chairs pushed back',
 }
 
@@ -104,6 +105,7 @@ _SLUG_SCENES = {
 _SLUG_STYLE_SUFFIX = {
     'record-peak-traffic-august-2026': ', 35mm film photograph, Kodak Portra 800, visible film grain, handheld candid framing, slight motion blur, muted realistic color grading, documentary street photography, no visible content on the screens',
     'ukraine-drone-strike-yandex-data-center-russia-traffic': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, no text, no signage, no labels',
+    'non-customer-consumer-protection-complaint-resolved': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, the letter and folder are blank with no legible text, no signage, no labels',
     'record-traffic-september-2026': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy carpet and walls with warm gold projector light, projected squares are plain blank light with no text or images',
 }
 

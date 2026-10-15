@@ -79,6 +79,21 @@
           <img src="{% static block.src %}" alt="{{ block.alt }}" loading="lazy" style="width:100%;height:auto;display:block">
           {% if block.note %}<p style="font-size:.78rem;color:#666;margin:.6rem 0 0;line-height:1.5">{{ block.note }}</p>{% endif %}
         </figure>
+        {% elif block.type == 'gallery' %}
+        <figure style="margin:0 0 2rem;background:var(--white);border-top:3px solid var(--gold);padding:1rem 1.1rem .9rem">
+          {% if block.caption %}<figcaption style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.75rem">{{ block.caption }}</figcaption>{% endif %}
+          <div class="row g-3">
+            {% for item in block.items %}
+            <div class="col-6">
+              <a href="{% static item.src %}" target="_blank" rel="noopener" style="display:block;text-decoration:none">
+                <img src="{% static item.thumb %}" alt="{{ item.alt }}" loading="lazy" style="width:100%;height:auto;display:block;border:1px solid #ddd">
+                <span style="display:block;font-size:.78rem;font-weight:600;color:var(--navy);margin-top:.4rem;line-height:1.4">{{ item.caption }}</span>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          {% if block.note %}<p style="font-size:.78rem;color:#666;margin:.75rem 0 0;line-height:1.5">{{ block.note }}</p>{% endif %}
+        </figure>
         {% elif block.type == 'list' %}
         <ul style="font-size:1rem;line-height:1.7;color:#222;margin-bottom:1.6rem;padding-left:1.2rem">
           {% for item in block.items %}

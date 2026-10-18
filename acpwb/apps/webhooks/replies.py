@@ -89,7 +89,8 @@ def reply_defaults(inbound):
     # like prvs=…=user@host) only as a last resort.
     to = _header(msg, 'Reply-To') or _header(msg, 'From') or inbound.sender
 
-    subject = inbound.subject or _header(msg, 'Subject')
+    # The parsed header, decoded; Cloudflare's subject field can still be RFC 2047-encoded.
+    subject = _header(msg, 'Subject') or inbound.subject
     if not re.match(r'^\s*re\s*:', subject, re.I):
         subject = f'Re: {subject}'.strip()
 

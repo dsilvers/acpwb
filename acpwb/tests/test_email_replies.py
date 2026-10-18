@@ -60,7 +60,7 @@ def test_detail_shows_attachments_and_reply_defaults(staff_client, inbound):
 def test_reply_to_header_wins(staff_client, db):
     e = InboundEmail.objects.create(
         sender='a@example.com', recipient='jane.doe@acpwb.com', subject='Re: hi',
-        raw_payload={'raw': _raw(reply_to='desk@example.gov')},
+        raw_payload={'raw': _raw(reply_to='desk@example.gov').replace('Subject: Complaint 185872', 'Subject: Re: hi')},
     )
     reply = staff_client.get(f'/acpwb-dashboard/emails/{e.pk}/').context['reply']
     assert reply['to'] == 'desk@example.gov'
@@ -132,3 +132,14 @@ def test_invalid_to_rejected(staff_client, inbound):
     })
     assert r.context['reply_error'].startswith('To:')
     assert mail.outbox == []
+
+
+@pytest.mark.django_db
+def test_encoded_subject_is_decoded(staff_client, db):
+    raw = _raw().replace('Subject: Complaint 185872', 'Subject: =?UTF-8?Q?Application_=E2=80=94_Analyst?=')
+    e = InboundEmail.objects.create(
+        sender='a@example.com', recipient='info@acpwb.com',
+        subject='=?UTF-8?Q?Application_=E2=80=94_Analyst?=', raw_payload={'raw': raw},
+    )
+    reply = staff_client.get(f'/acpwb-dashboard/emails/{e.pk}/').context['reply']
+    assert reply['subject'] == 'Re: Application \u2014 Analyst'

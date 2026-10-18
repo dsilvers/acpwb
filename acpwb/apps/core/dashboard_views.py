@@ -9,9 +9,13 @@ Recent records (last 50 visits, last 5 emails, etc.) are always live queries.
 """
 from datetime import date, timedelta
 
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.exceptions import ValidationError
 from django.http import Http404, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.http import content_disposition_header
 
 from apps.core.models import DashboardStat
 from apps.honeypot.models import (
@@ -20,6 +24,7 @@ from apps.honeypot.models import (
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import ConferenceRegistration, DataOptOutRequest, JobApplication, JobApplicationDocument
+from apps.webhooks import replies
 from apps.webhooks.models import CallLog, InboundEmail, VoicemailRecording
 
 
@@ -231,14 +236,52 @@ def emails(request):
 
 @staff_member_required(login_url='/django-admin/login/')
 def email_detail(request, pk):
-    from django.shortcuts import get_object_or_404
     from django.utils.html import strip_tags
     email = get_object_or_404(InboundEmail, pk=pk)
-    body = email.body_plain or strip_tags(email.body_html)
+    reply = replies.reply_defaults(email)
+    reply_error = None
+    if request.method == 'POST':
+        reply = {k: request.POST.get(k, '') for k in reply}
+        try:
+            replies.send_reply(email, sent_by=request.user.get_username(), **reply)
+        except ValidationError as e:
+            reply_error = ' '.join(e.messages)
+        except Exception as e:  # SMTP / network: show it, keep the draft
+            reply_error = f'Mailgun did not accept the message: {e}'
+        else:
+            messages.success(request, 'Reply sent.')
+            return redirect('dashboard-email-detail', pk=pk)
     return render(request, 'dashboard/email_detail.html', {
         'email': email,
-        'body': body,
+        'body': email.body_plain or strip_tags(email.body_html),
+        'attachments': replies.attachments(email),
+        'sent_replies': email.replies.all(),
+        'reply': reply,
+        'reply_error': reply_error,
+        'reply_domain': settings.REPLY_FROM_DOMAIN,
+        'inline_types': INLINE_ATTACHMENT_TYPES,
     })
+
+
+# Shown in the browser when asked; everything else (HTML, SVG, Office files…)
+# always downloads, so nothing a sender wrote runs on the dashboard origin.
+INLINE_ATTACHMENT_TYPES = {'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'application/pdf', 'text/plain'}
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def email_attachment(request, pk, index):
+    email = get_object_or_404(InboundEmail, pk=pk)
+    found = replies.attachment(email, index)
+    if found is None:
+        raise Http404
+    filename, content_type, data = found
+    inline = request.GET.get('inline') == '1' and content_type in INLINE_ATTACHMENT_TYPES
+    response = HttpResponse(data, content_type=content_type if inline else 'application/octet-stream')
+    response['Content-Disposition'] = content_disposition_header(not inline, filename)
+    response['X-Content-Type-Options'] = 'nosniff'
+    if content_type != 'application/pdf':  # Chrome's PDF viewer won't load sandboxed
+        response['Content-Security-Policy'] = 'sandbox'
+    return response
 
 
 @staff_member_required(login_url='/django-admin/login/')

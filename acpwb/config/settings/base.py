@@ -189,6 +189,21 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
 MAILGUN_WEBHOOK_SIGNING_KEY = env('MAILGUN_WEBHOOK_SIGNING_KEY', default='')
 MAILGUN_DOMAIN = env('MAILGUN_DOMAIN', default='acpwb.com')
 
+# Outbound mail (dashboard email replies) is relayed through Mailgun SMTP. Any
+# SMTP login on the acpwb.com Mailgun domain may send From any @acpwb.com
+# address. Without a password, mail is printed to the console instead.
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('MAILGUN_SMTP_LOGIN', default='')
+EMAIL_HOST_PASSWORD = env('MAILGUN_SMTP_PASSWORD', default='')
+EMAIL_TIMEOUT = 30
+EMAIL_BACKEND = (
+    'django.core.mail.backends.smtp.EmailBackend' if EMAIL_HOST_PASSWORD
+    else 'django.core.mail.backends.console.EmailBackend'
+)
+REPLY_FROM_DOMAIN = 'acpwb.com'
+
 # Twilio
 TWILIO_ACCOUNT_SID = env('TWILIO_ACCOUNT_SID', default='')
 TWILIO_AUTH_TOKEN  = env('TWILIO_AUTH_TOKEN',  default='')

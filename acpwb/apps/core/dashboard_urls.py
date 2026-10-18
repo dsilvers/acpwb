@@ -8,6 +8,7 @@ urlpatterns = [
     path('archive/',  views.archive,        name='dashboard-archive'),
     path('emails/',           views.emails,        name='dashboard-emails'),
     path('emails/<int:pk>/',  views.email_detail,  name='dashboard-email-detail'),
+    path('emails/<int:pk>/attachments/<int:index>/', views.email_attachment, name='dashboard-email-attachment'),
     path('people/',   views.people,         name='dashboard-people'),
     path('logins/',   views.logins,         name='dashboard-logins'),
     path('edge/',     views.edge,           name='dashboard-edge'),

@@ -19,6 +19,31 @@ class InboundEmail(models.Model):
         return f"From {self.sender} → {self.recipient} @ {self.received_at:%Y-%m-%d %H:%M}"
 
 
+class OutboundEmail(models.Model):
+    """A reply sent from the dashboard (relayed through Mailgun)."""
+    in_reply_to = models.ForeignKey(
+        InboundEmail,
+        on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name='replies',
+    )
+    sent_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    sent_by = models.CharField(max_length=150, blank=True)
+    from_email = models.CharField(max_length=320)
+    to = models.TextField()
+    cc = models.TextField(blank=True)
+    subject = models.TextField(blank=True)
+    body = models.TextField(blank=True)
+    message_id = models.CharField(max_length=256, blank=True)
+
+    class Meta:
+        ordering = ['-sent_at']
+        verbose_name = 'Outbound Email'
+
+    def __str__(self):
+        return f"From {self.from_email} → {self.to} @ {self.sent_at:%Y-%m-%d %H:%M}"
+
+
 class HoneypotMatch(models.Model):
     CONFIDENCE_CHOICES = [
         ('exact', 'Exact Email Match'),

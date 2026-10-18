@@ -279,3 +279,20 @@ def test_pipe_stores_decoded_from_header(client, settings):
     assert e.from_header == 'José <jose@example.com>'
     assert e.from_name == 'José' and e.from_address == 'jose@example.com'
     assert e.subject == 'Café'
+
+
+@pytest.mark.django_db
+def test_sent_replies_shown_after_original_and_marked(staff_client, inbound):
+    for body in ('First answer', 'Second answer'):
+        staff_client.post(f'/acpwb-dashboard/emails/{inbound.pk}/', {
+            'from_local': 'press', 'to': 'patrick@example.gov', 'subject': 'Re: Complaint 185872', 'body': body,
+        })
+    html = staff_client.get(f'/acpwb-dashboard/emails/{inbound.pk}/').content.decode()
+    assert 'Reply sent' in html and '&times;2' in html
+    body_at = html.index('<h6>Body</h6>')
+    assert body_at < html.index('First answer') < html.index('Second answer') < html.index('id="reply"')
+    assert 'Reply 1 of 2' in html
+
+    row = staff_client.get('/acpwb-dashboard/emails/inbox/').context['page'].object_list[0]
+    assert row.reply_count == 2 and row.last_reply_at is not None
+    assert 'Reply sent' in staff_client.get('/acpwb-dashboard/emails/inbox/').content.decode()

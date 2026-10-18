@@ -24,6 +24,7 @@
         {% if email.sender|lower != email.from_address|lower %}<tr><th style="font-size:.72rem;color:var(--muted)">Envelope sender</th><td style="font-size:.75rem;font-family:monospace;color:var(--muted);word-break:break-all">{{ email.sender }}</td></tr>{% endif %}
         <tr><th style="font-size:.72rem;color:var(--muted)">To</th><td style="font-size:.82rem;font-family:monospace">{{ email.recipient }}</td></tr>
         <tr><th style="font-size:.72rem;color:var(--muted)">Subject</th><td style="font-size:.82rem">{{ email.subject }}</td></tr>
+        {% if sent_replies %}<tr><th style="font-size:.72rem;color:var(--muted)">Status</th><td><span style="font-size:.72rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#8617; Reply sent{% if sent_replies|length > 1 %} &times;{{ sent_replies|length }}{% endif %}</span> <span style="font-size:.72rem;color:var(--muted)">{% with lr=sent_replies|last %}last {{ lr.sent_at|date:"Y-m-d H:i" }} UTC{% endwith %}</span></td></tr>{% endif %}
         <tr><th style="font-size:.72rem;color:var(--muted)">Received</th><td style="font-size:.82rem">{{ email.received_at|date:"Y-m-d H:i:s" }} UTC</td></tr>
         {% if email.message_id %}
         <tr><th style="font-size:.72rem;color:var(--muted)">Message-ID</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ email.message_id }}</td></tr>
@@ -69,23 +70,26 @@
   </div>
 </div>
 
-{% if sent_replies %}
-<div class="section-card mt-3">
-  <div class="section-card-header"><h6>Sent Replies</h6></div>
-  <div class="section-card-body p-0">
-    {% for r in sent_replies %}
-    <details style="border-bottom:1px solid var(--border)">
-      <summary style="padding:.6rem 1.1rem;font-size:.78rem;cursor:pointer">
-        {{ r.sent_at|date:"Y-m-d H:i" }} UTC &middot; {{ r.from_email }} &rarr; {{ r.to }}{% if r.cc %} (cc {{ r.cc }}){% endif %}{% if r.sent_by %} &middot; <span style="color:var(--muted)">by {{ r.sent_by }}</span>{% endif %}
-      </summary>
-      <pre style="margin:0;padding:.75rem 1.25rem;font-size:.75rem;white-space:pre-wrap;word-break:break-word;background:var(--surface)"><strong>{{ r.subject }}</strong>
-
-{{ r.body }}</pre>
-    </details>
-    {% endfor %}
+{% for r in sent_replies %}
+<div class="section-card mt-3" style="border-left:3px solid #15803d">
+  <div class="section-card-header">
+    <h6>&#8617; Reply{% if sent_replies|length > 1 %} {{ forloop.counter }} of {{ sent_replies|length }}{% endif %}</h6>
+    <span style="font-size:.72rem;color:var(--muted)">Sent {{ r.sent_at|date:"Y-m-d H:i:s" }} UTC{% if r.sent_by %} by {{ r.sent_by }}{% endif %}</span>
   </div>
+  <div class="section-card-body">
+    <table class="dash-table w-100" style="border:none">
+      <tbody>
+        <tr><th style="width:120px;font-size:.72rem;color:var(--muted)">From</th><td style="font-size:.82rem">{{ r.from_email }}</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">To</th><td style="font-size:.82rem">{{ r.to }}</td></tr>
+        {% if r.cc %}<tr><th style="font-size:.72rem;color:var(--muted)">Cc</th><td style="font-size:.82rem">{{ r.cc }}</td></tr>{% endif %}
+        <tr><th style="font-size:.72rem;color:var(--muted)">Subject</th><td style="font-size:.82rem">{{ r.subject }}</td></tr>
+        {% if r.message_id %}<tr><th style="font-size:.72rem;color:var(--muted)">Message-ID</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ r.message_id }}</td></tr>{% endif %}
+      </tbody>
+    </table>
+  </div>
+  <pre style="margin:0;padding:1rem 1.25rem;font-size:.78rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;background:var(--surface);border-top:1px solid var(--border);max-height:600px;overflow-y:auto">{{ r.body }}</pre>
 </div>
-{% endif %}
+{% endfor %}
 
 <div class="section-card mt-3" id="reply">
   <div class="section-card-header"><h6>Reply</h6><span style="font-size:.72rem;color:var(--muted)">Sent through Mailgun</span></div>

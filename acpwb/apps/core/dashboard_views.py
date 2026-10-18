@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
-from django.db.models import Count, Q
+from django.db.models import Count, Max, Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.http import content_disposition_header
@@ -250,6 +250,7 @@ def email_inbox(request):
     emails = emails.annotate(
         match_count=Count('matches', filter=~Q(matches__match_confidence='none'), distinct=True),
         reply_count=Count('replies', distinct=True),
+        last_reply_at=Max('replies__sent_at'),
     )
     page = Paginator(emails.defer('body_plain', 'body_html', 'raw_payload'), 50).get_page(request.GET.get('page'))
     return render(request, 'dashboard/email_inbox.html', {'page': page, 'q': q})
@@ -279,7 +280,7 @@ def email_detail(request, pk):
         'honeypot_matches': email.matches.exclude(match_confidence='none').select_related(
             'generated_employee', 'original_visit', 'source_code_email',
         ),
-        'sent_replies': email.replies.all(),
+        'sent_replies': list(email.replies.order_by('sent_at')),  # conversation order
         'reply': reply,
         'reply_error': reply_error,
         'reply_domain': settings.REPLY_FROM_DOMAIN,

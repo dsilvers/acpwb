@@ -18,24 +18,20 @@
   </div>
   <div style="overflow-x:auto">
     <table class="dash-table w-100">
-      <thead><tr><th>Received</th><th>From</th><th>To</th><th>Subject</th><th>Matched</th><th>Replied</th></tr></thead>
+      <thead><tr><th>Received</th><th>From</th><th>To</th><th>Subject</th><th>Matched</th></tr></thead>
       <tbody>
         {% for e in page %}
         <tr style="cursor:pointer" onclick="location.href='{% url 'dashboard-email-detail' e.pk %}'">
           <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ e.received_at|date:"Y-m-d H:i" }}</td>
-          <td style="font-size:.78rem;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ e.from_header|default:e.sender }}">{% if e.from_name %}<strong style="font-weight:600">{{ e.from_name }}</strong> <span style="color:var(--muted)">{{ e.from_address }}</span>{% else %}{{ e.from_address }}{% endif %}</td>
-          <td style="font-size:.75rem;color:var(--muted);font-family:monospace;white-space:nowrap">{{ e.recipient }}</td>
-          <td style="font-size:.78rem;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ e.subject }}"><a href="{% url 'dashboard-email-detail' e.pk %}" style="color:inherit;text-decoration:none">{{ e.subject|default:"(no subject)"|truncatechars:80 }}</a></td>
+          <td style="font-size:.78rem;max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ e.from_header|default:e.sender }}">{% if e.from_name %}<strong style="font-weight:600">{{ e.from_name }}</strong> <span style="color:var(--muted)">{{ e.from_address }}</span>{% else %}{{ e.from_address }}{% endif %}</td>
+          <td style="font-size:.75rem;color:var(--muted);font-family:monospace;white-space:nowrap;max-width:190px;overflow:hidden;text-overflow:ellipsis" title="{{ e.recipient }}">{{ e.recipient }}</td>
+          <td style="font-size:.78rem;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ e.subject }}">{% if e.reply_count %}<span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac;white-space:nowrap;margin-right:.35rem" title="Last reply {{ e.last_reply_at|date:'Y-m-d H:i' }} UTC">&#8617; Reply sent{% if e.reply_count > 1 %} &times;{{ e.reply_count }}{% endif %}</span>{% endif %}<a href="{% url 'dashboard-email-detail' e.pk %}" style="color:inherit;text-decoration:none">{{ e.subject|default:"(no subject)"|truncatechars:80 }}</a></td>
           <td>
             {% if e.match_count %}<span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#10003; {{ e.match_count }}</span>
             {% else %}<span style="font-size:.65rem;color:var(--muted)">—</span>{% endif %}
           </td>
-          <td>
-            {% if e.reply_count %}<span style="font-size:.65rem;font-weight:700">&#8617; {{ e.reply_count }}</span>
-            {% else %}<span style="font-size:.65rem;color:var(--muted)">—</span>{% endif %}
-          </td>
         </tr>
-        {% empty %}<tr><td colspan="6" class="text-muted text-center py-3">{% if q %}No emails match{% else %}No emails yet{% endif %}</td></tr>{% endfor %}
+        {% empty %}<tr><td colspan="5" class="text-muted text-center py-3">{% if q %}No emails match{% else %}No emails yet{% endif %}</td></tr>{% endfor %}
       </tbody>
     </table>
   </div>

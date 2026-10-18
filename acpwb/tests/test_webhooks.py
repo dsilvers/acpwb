@@ -247,3 +247,16 @@ def test_pipe_inbound_without_message_id_not_deduped(pipe_post):
     pipe_post(body)
     pipe_post(body)
     assert InboundEmail.objects.count() == 2
+
+
+@pytest.mark.django_db
+def test_pipe_inbound_html_only_goes_to_body_html(pipe_post):
+    raw = (
+        'From: lily@example.com\r\nTo: bob@acpwb.com\r\nSubject: Watches\r\n'
+        'Message-ID: <html-only@example.com>\r\nContent-Type: text/html; charset="utf-8"\r\n\r\n'
+        '<html><body><p>Luxury watches</p></body></html>\r\n'
+    )
+    pipe_post({'sender': 'lily@example.com', 'recipient': 'bob@acpwb.com', 'subject': 'Watches', 'raw': raw})
+    e = InboundEmail.objects.get()
+    assert e.body_plain == ''
+    assert '<p>Luxury watches</p>' in e.body_html

@@ -13,6 +13,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator
+from django.db.models import Count, Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.http import content_disposition_header
@@ -228,15 +230,33 @@ def emails(request):
         'top_domains':    _top_domains(_stat('emails.by_domain', {}), 20),
         'top_recipients': _top_field(_stat('emails.by_recipient', {}), 'recipient', 20),
         'daily':          _daily_bars(_stat('emails.daily', {}), 30),
-        'recent':         list(InboundEmail.objects.order_by('-received_at').prefetch_related('matches')[:50]),
         'updated_at':     _updated_at('emails.total'),
     }
     return render(request, 'dashboard/emails.html', ctx)
 
 
 @staff_member_required(login_url='/django-admin/login/')
+def email_inbox(request):
+    q = request.GET.get('q', '').strip()
+    emails = InboundEmail.objects.order_by('-received_at')
+    if q:
+        # One box: an address or domain matches sender/recipient, words match
+        # subject or body (the table is small enough for plain icontains).
+        emails = emails.filter(
+            Q(sender__icontains=q) | Q(from_header__icontains=q) | Q(recipient__icontains=q) | Q(subject__icontains=q)
+            | Q(body_plain__icontains=q) | Q(body_html__icontains=q)
+        )
+    # _match_honeypot also logs a confidence='none' row when nothing matched; that isn't a match.
+    emails = emails.annotate(
+        match_count=Count('matches', filter=~Q(matches__match_confidence='none'), distinct=True),
+        reply_count=Count('replies', distinct=True),
+    )
+    page = Paginator(emails.defer('body_plain', 'body_html', 'raw_payload'), 50).get_page(request.GET.get('page'))
+    return render(request, 'dashboard/email_inbox.html', {'page': page, 'q': q})
+
+
+@staff_member_required(login_url='/django-admin/login/')
 def email_detail(request, pk):
-    from django.utils.html import strip_tags
     email = get_object_or_404(InboundEmail, pk=pk)
     reply = replies.reply_defaults(email)
     reply_error = None
@@ -253,8 +273,12 @@ def email_detail(request, pk):
             return redirect('dashboard-email-detail', pk=pk)
     return render(request, 'dashboard/email_detail.html', {
         'email': email,
-        'body': email.body_plain or strip_tags(email.body_html),
+        'body': replies.body_text(email),
+        'reply_to_header': replies.header(email, 'Reply-To'),
         'attachments': replies.attachments(email),
+        'honeypot_matches': email.matches.exclude(match_confidence='none').select_related(
+            'generated_employee', 'original_visit', 'source_code_email',
+        ),
         'sent_replies': email.replies.all(),
         'reply': reply,
         'reply_error': reply_error,

@@ -64,8 +64,30 @@ def attachment(inbound, index):
     )
 
 
+def html_to_text(html):
+    """Readable text from an HTML body: drops head/style/script, turns block
+    ends into line breaks, decodes entities, collapses blank runs."""
+    from html import unescape
+    text = re.sub(r'(?is)<(head|style|script|title)\b.*?</\1\s*>', '', html or '')
+    text = re.sub(r'(?is)<!--.*?-->', '', text)
+    text = re.sub(r'(?i)<br\s*/?>', '\n', text)
+    text = re.sub(r'(?i)</(p|div|tr|li|h[1-6]|table|blockquote)\s*>', '\n', text)
+    text = re.sub(r'(?s)<[^>]+>', '', text)
+    lines = [re.sub(r'[ \t\xa0]+', ' ', line).strip() for line in unescape(text).splitlines()]
+    return re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()
+
+
+def body_text(inbound):
+    return inbound.body_plain or html_to_text(inbound.body_html)
+
+
 def _header(msg, name):
     return str(msg.get(name, '')) if msg is not None else ''
+
+
+def header(inbound, name):
+    """One decoded header of the original message ('' when absent or no raw)."""
+    return _header(parse_raw(inbound), name)
 
 
 def reply_defaults(inbound):
@@ -74,12 +96,13 @@ def reply_defaults(inbound):
     domain = settings.REPLY_FROM_DOMAIN
 
     # From: the address the mail was delivered to, with the display name the
-    # sender used for it in To/Cc. Names that just repeat the address are dropped.
+    # sender used for it in To/Cc. Names that just repeat the address (or the
+    # part before the @) are dropped.
     recipient = inbound.recipient.strip().lower()
     local, _, rdomain = recipient.partition('@')
     from_name = ''
     for name, addr in getaddresses([_header(msg, 'To'), _header(msg, 'Cc')]):
-        if addr.lower() == recipient and name.lower() != recipient:
+        if addr.lower() == recipient and name.lower() not in (recipient, local):
             from_name = name
             break
     if rdomain != domain or not LOCAL_PART_RE.match(local):
@@ -96,10 +119,7 @@ def reply_defaults(inbound):
 
     quoted_from = _header(msg, 'From') or inbound.sender
     date = _header(msg, 'Date') or f'{inbound.received_at:%a, %d %b %Y %H:%M:%S} +0000'
-    original = (inbound.body_plain or '').strip('\n')
-    if not original and inbound.body_html:
-        from django.utils.html import strip_tags
-        original = strip_tags(inbound.body_html).strip('\n')
+    original = body_text(inbound).strip('\n')
     quote = '\n'.join('>' + (' ' + line if line else '') for line in original.splitlines())
 
     return {

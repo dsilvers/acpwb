@@ -1,5 +1,6 @@
 import base64
 import email as email_lib
+from email.header import decode_header, make_header
 import hashlib
 import hmac
 import json
@@ -51,6 +52,7 @@ def mailgun_inbound(request):
         return HttpResponse(status=406)
 
     sender = post.get('sender', '') or post.get('from', '')
+    from_header = decode_mime_header(post.get('from', ''))
     recipient = post.get('recipient', '') or post.get('To', '')
     subject = post.get('subject', '')
     body_plain = post.get('body-plain', '')
@@ -65,8 +67,9 @@ def mailgun_inbound(request):
 
     inbound = InboundEmail.objects.create(
         sender=sender[:254],
+        from_header=from_header[:512],
         recipient=recipient[:254],
-        subject=subject[:512],
+        subject=decode_mime_header(subject)[:512],
         body_plain=body_plain,
         body_html=body_html,
         raw_payload=raw_payload,
@@ -97,25 +100,30 @@ def pipe_inbound(request):
     body_plain = ''
     body_html = ''
     message_id = ''
+    from_header = ''
     if raw:
         msg = email_lib.message_from_string(raw)
         message_id = (msg.get('Message-ID') or '').strip()[:256]
+        from_header = decode_mime_header(str(msg.get('From') or '')).strip()
         if _is_redelivery(message_id, data.get('recipient', '')):
             return HttpResponse(status=200)
         if msg.is_multipart():
             for part in msg.walk():
                 ct = part.get_content_type()
                 if ct == 'text/plain' and not body_plain:
-                    body_plain = part.get_payload(decode=True).decode(errors='replace')
+                    body_plain = _decode_part(part)
                 elif ct == 'text/html' and not body_html:
-                    body_html = part.get_payload(decode=True).decode(errors='replace')
+                    body_html = _decode_part(part)
+        elif msg.get_content_type() == 'text/html':
+            body_html = _decode_part(msg)
         else:
-            body_plain = msg.get_payload(decode=True).decode(errors='replace')
+            body_plain = _decode_part(msg)
 
     inbound = InboundEmail.objects.create(
         sender=data.get('sender', '')[:254],
+        from_header=from_header[:512],
         recipient=data.get('recipient', '')[:254],
-        subject=data.get('subject', '')[:512],
+        subject=decode_mime_header(data.get('subject', ''))[:512],
         body_plain=body_plain,
         body_html=body_html,
         raw_payload=data,
@@ -124,6 +132,27 @@ def pipe_inbound(request):
 
     _match_honeypot(inbound)
     return HttpResponse(status=200)
+
+
+def decode_mime_header(value):
+    """'=?UTF-8?Q?Caf=C3=A9?=' → 'Café', for Subject/From. The Cloudflare Worker
+    passes the Subject header through still RFC 2047-encoded."""
+    if not value or '=?' not in value:
+        return value or ''
+    try:
+        return str(make_header(decode_header(value)))
+    except Exception:
+        return value
+
+
+def _decode_part(part):
+    """A MIME part's text, decoded with its own charset (not always UTF-8)."""
+    data = part.get_payload(decode=True) or b''
+    charset = part.get_content_charset() or 'utf-8'
+    try:
+        return data.decode(charset, errors='replace')
+    except LookupError:
+        return data.decode('utf-8', errors='replace')
 
 
 def _is_redelivery(message_id, recipient):

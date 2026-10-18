@@ -7,6 +7,7 @@ urlpatterns = [
     path('honeypot/', views.honeypot_traps, name='dashboard-honeypot'),
     path('archive/',  views.archive,        name='dashboard-archive'),
     path('emails/',           views.emails,        name='dashboard-emails'),
+    path('emails/inbox/',     views.email_inbox,   name='dashboard-inbox'),
     path('emails/<int:pk>/',  views.email_detail,  name='dashboard-email-detail'),
     path('emails/<int:pk>/attachments/<int:index>/', views.email_attachment, name='dashboard-email-attachment'),
     path('people/',   views.people,         name='dashboard-people'),

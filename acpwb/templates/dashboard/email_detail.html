@@ -1,174 +1,12 @@
 {% extends "dashboard/base.html" %}
-{% block title %}Email — {{ email.subject|truncatechars:60 }}{% if sent_replies %}
-<div class="section-card mt-3">
-  <div class="section-card-header"><h6>Sent Replies</h6></div>
-  <div class="section-card-body p-0">
-    {% for r in sent_replies %}
-    <details style="border-bottom:1px solid var(--border)">
-      <summary style="padding:.6rem 1.1rem;font-size:.78rem;cursor:pointer">
-        {{ r.sent_at|date:"Y-m-d H:i" }} UTC &middot; {{ r.from_email }} &rarr; {{ r.to }}{% if r.cc %} (cc {{ r.cc }}){% endif %}{% if r.sent_by %} &middot; <span style="color:var(--muted)">by {{ r.sent_by }}</span>{% endif %}
-      </summary>
-      <pre style="margin:0;padding:.75rem 1.25rem;font-size:.75rem;white-space:pre-wrap;word-break:break-word;background:var(--surface)"><strong>{{ r.subject }}</strong>
-
-{{ r.body }}</pre>
-    </details>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
-<div class="section-card mt-3" id="reply">
-  <div class="section-card-header"><h6>Reply</h6><span style="font-size:.72rem;color:var(--muted)">Sent through Mailgun</span></div>
-  <div class="section-card-body" style="padding:1rem 1.25rem">
-    {% if reply_error %}<div class="alert alert-danger py-2" style="font-size:.8rem">{{ reply_error }}</div>{% endif %}
-    <form method="post" action="{% url 'dashboard-email-detail' email.pk %}#reply" style="font-size:.8rem">
-      {% csrf_token %}
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">From</label>
-        <div class="col-sm-4"><input type="text" name="from_name" value="{{ reply.from_name }}" placeholder="Display name" class="form-control form-control-sm"></div>
-        <div class="col-sm-7">
-          <div class="input-group input-group-sm">
-            <input type="text" name="from_local" value="{{ reply.from_local }}" required pattern="[^@\s]+" class="form-control" style="font-family:monospace">
-            <span class="input-group-text" style="font-family:monospace">@{{ reply_domain }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">To</label>
-        <div class="col-sm-11"><input type="text" name="to" value="{{ reply.to }}" required class="form-control form-control-sm"></div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Cc</label>
-        <div class="col-sm-11"><input type="text" name="cc" value="{{ reply.cc }}" placeholder="Comma-separated" class="form-control form-control-sm"></div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Subject</label>
-        <div class="col-sm-11"><input type="text" name="subject" value="{{ reply.subject }}" class="form-control form-control-sm"></div>
-      </div>
-      <textarea name="body" rows="18" class="form-control form-control-sm mb-2" style="font-family:monospace;font-size:.78rem">{{ reply.body }}</textarea>
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-sm btn-dark" onclick="return confirm('Send this reply to ' + this.form.to.value + '?')">Send Reply</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-{% endblock %}
-{% block page_title %}Email Detail{% if sent_replies %}
-<div class="section-card mt-3">
-  <div class="section-card-header"><h6>Sent Replies</h6></div>
-  <div class="section-card-body p-0">
-    {% for r in sent_replies %}
-    <details style="border-bottom:1px solid var(--border)">
-      <summary style="padding:.6rem 1.1rem;font-size:.78rem;cursor:pointer">
-        {{ r.sent_at|date:"Y-m-d H:i" }} UTC &middot; {{ r.from_email }} &rarr; {{ r.to }}{% if r.cc %} (cc {{ r.cc }}){% endif %}{% if r.sent_by %} &middot; <span style="color:var(--muted)">by {{ r.sent_by }}</span>{% endif %}
-      </summary>
-      <pre style="margin:0;padding:.75rem 1.25rem;font-size:.75rem;white-space:pre-wrap;word-break:break-word;background:var(--surface)"><strong>{{ r.subject }}</strong>
-
-{{ r.body }}</pre>
-    </details>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
-<div class="section-card mt-3" id="reply">
-  <div class="section-card-header"><h6>Reply</h6><span style="font-size:.72rem;color:var(--muted)">Sent through Mailgun</span></div>
-  <div class="section-card-body" style="padding:1rem 1.25rem">
-    {% if reply_error %}<div class="alert alert-danger py-2" style="font-size:.8rem">{{ reply_error }}</div>{% endif %}
-    <form method="post" action="{% url 'dashboard-email-detail' email.pk %}#reply" style="font-size:.8rem">
-      {% csrf_token %}
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">From</label>
-        <div class="col-sm-4"><input type="text" name="from_name" value="{{ reply.from_name }}" placeholder="Display name" class="form-control form-control-sm"></div>
-        <div class="col-sm-7">
-          <div class="input-group input-group-sm">
-            <input type="text" name="from_local" value="{{ reply.from_local }}" required pattern="[^@\s]+" class="form-control" style="font-family:monospace">
-            <span class="input-group-text" style="font-family:monospace">@{{ reply_domain }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">To</label>
-        <div class="col-sm-11"><input type="text" name="to" value="{{ reply.to }}" required class="form-control form-control-sm"></div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Cc</label>
-        <div class="col-sm-11"><input type="text" name="cc" value="{{ reply.cc }}" placeholder="Comma-separated" class="form-control form-control-sm"></div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Subject</label>
-        <div class="col-sm-11"><input type="text" name="subject" value="{{ reply.subject }}" class="form-control form-control-sm"></div>
-      </div>
-      <textarea name="body" rows="18" class="form-control form-control-sm mb-2" style="font-family:monospace;font-size:.78rem">{{ reply.body }}</textarea>
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-sm btn-dark" onclick="return confirm('Send this reply to ' + this.form.to.value + '?')">Send Reply</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-{% endblock %}
-{% block nav_emails %}active{% if sent_replies %}
-<div class="section-card mt-3">
-  <div class="section-card-header"><h6>Sent Replies</h6></div>
-  <div class="section-card-body p-0">
-    {% for r in sent_replies %}
-    <details style="border-bottom:1px solid var(--border)">
-      <summary style="padding:.6rem 1.1rem;font-size:.78rem;cursor:pointer">
-        {{ r.sent_at|date:"Y-m-d H:i" }} UTC &middot; {{ r.from_email }} &rarr; {{ r.to }}{% if r.cc %} (cc {{ r.cc }}){% endif %}{% if r.sent_by %} &middot; <span style="color:var(--muted)">by {{ r.sent_by }}</span>{% endif %}
-      </summary>
-      <pre style="margin:0;padding:.75rem 1.25rem;font-size:.75rem;white-space:pre-wrap;word-break:break-word;background:var(--surface)"><strong>{{ r.subject }}</strong>
-
-{{ r.body }}</pre>
-    </details>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
-<div class="section-card mt-3" id="reply">
-  <div class="section-card-header"><h6>Reply</h6><span style="font-size:.72rem;color:var(--muted)">Sent through Mailgun</span></div>
-  <div class="section-card-body" style="padding:1rem 1.25rem">
-    {% if reply_error %}<div class="alert alert-danger py-2" style="font-size:.8rem">{{ reply_error }}</div>{% endif %}
-    <form method="post" action="{% url 'dashboard-email-detail' email.pk %}#reply" style="font-size:.8rem">
-      {% csrf_token %}
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">From</label>
-        <div class="col-sm-4"><input type="text" name="from_name" value="{{ reply.from_name }}" placeholder="Display name" class="form-control form-control-sm"></div>
-        <div class="col-sm-7">
-          <div class="input-group input-group-sm">
-            <input type="text" name="from_local" value="{{ reply.from_local }}" required pattern="[^@\s]+" class="form-control" style="font-family:monospace">
-            <span class="input-group-text" style="font-family:monospace">@{{ reply_domain }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">To</label>
-        <div class="col-sm-11"><input type="text" name="to" value="{{ reply.to }}" required class="form-control form-control-sm"></div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Cc</label>
-        <div class="col-sm-11"><input type="text" name="cc" value="{{ reply.cc }}" placeholder="Comma-separated" class="form-control form-control-sm"></div>
-      </div>
-      <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Subject</label>
-        <div class="col-sm-11"><input type="text" name="subject" value="{{ reply.subject }}" class="form-control form-control-sm"></div>
-      </div>
-      <textarea name="body" rows="18" class="form-control form-control-sm mb-2" style="font-family:monospace;font-size:.78rem">{{ reply.body }}</textarea>
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-sm btn-dark" onclick="return confirm('Send this reply to ' + this.form.to.value + '?')">Send Reply</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-{% endblock %}
+{% block title %}Email — {{ email.subject|truncatechars:60 }}{% endblock %}
+{% block page_title %}Email Detail{% endblock %}
+{% block nav_inbox %}active{% endblock %}
 
 {% block content %}
 
 <div class="mb-3 d-flex justify-content-between align-items-center">
-  <a href="{% url 'dashboard-emails' %}" style="font-size:.8rem;color:var(--muted)">&larr; Back to Email Log</a>
+  <a href="{% url 'dashboard-inbox' %}" style="font-size:.8rem;color:var(--muted)">&larr; Back to Inbox</a>
   <a href="#reply" class="btn btn-sm btn-dark" style="font-size:.75rem">Reply</a>
 </div>
 
@@ -181,41 +19,21 @@
   <div class="section-card-body">
     <table class="dash-table w-100">
       <tbody>
-        <tr><th style="width:120px;font-size:.72rem;color:var(--muted)">From</th><td style="font-size:.82rem">{{ email.sender }}</td></tr>
+        <tr><th style="width:120px;font-size:.72rem;color:var(--muted)">From</th><td style="font-size:.82rem">{% if email.from_name %}<strong style="font-weight:600">{{ email.from_name }}</strong> &lt;{{ email.from_address }}&gt;{% else %}{{ email.from_address }}{% endif %}</td></tr>
+        {% if reply_to_header %}<tr><th style="font-size:.72rem;color:var(--muted)">Reply-To</th><td style="font-size:.82rem">{{ reply_to_header }}</td></tr>{% endif %}
+        {% if email.sender|lower != email.from_address|lower %}<tr><th style="font-size:.72rem;color:var(--muted)">Envelope sender</th><td style="font-size:.75rem;font-family:monospace;color:var(--muted);word-break:break-all">{{ email.sender }}</td></tr>{% endif %}
         <tr><th style="font-size:.72rem;color:var(--muted)">To</th><td style="font-size:.82rem;font-family:monospace">{{ email.recipient }}</td></tr>
         <tr><th style="font-size:.72rem;color:var(--muted)">Subject</th><td style="font-size:.82rem">{{ email.subject }}</td></tr>
         <tr><th style="font-size:.72rem;color:var(--muted)">Received</th><td style="font-size:.82rem">{{ email.received_at|date:"Y-m-d H:i:s" }} UTC</td></tr>
         {% if email.message_id %}
         <tr><th style="font-size:.72rem;color:var(--muted)">Message-ID</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ email.message_id }}</td></tr>
         {% endif %}
-        {% with mc=email.matches.count %}{% if mc %}
-        <tr><th style="font-size:.72rem;color:var(--muted)">Matched</th><td><span style="font-size:.72rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#10003; {{ mc }} honeypot match{{ mc|pluralize }}</span></td></tr>
-        {% endif %}{% endwith %}
+        <tr><th style="font-size:.72rem;color:var(--muted)">Matched</th><td>{% with mc=honeypot_matches|length %}{% if mc %}<a href="#matches" style="text-decoration:none"><span style="font-size:.72rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#10003; {{ mc }} honeypot match{{ mc|pluralize:"es" }}</span></a>{% else %}<span style="font-size:.75rem;color:var(--muted)">No match — this address was never shown on the site</span>{% endif %}{% endwith %}</td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
-{% if email.matches.count %}
-<div class="section-card mb-3">
-  <div class="section-card-header"><h6>Honeypot Matches</h6></div>
-  <div class="section-card-body p-0">
-    <table class="dash-table w-100">
-      <thead><tr><th>Confidence</th><th>Employee</th><th>Visit</th><th>Matched</th></tr></thead>
-      <tbody>
-        {% for m in email.matches.all %}
-        <tr>
-          <td><span style="font-size:.7rem;font-weight:700;text-transform:uppercase">{{ m.match_confidence }}</span></td>
-          <td style="font-size:.78rem">{{ m.generated_employee|default:"—" }}</td>
-          <td style="font-size:.72rem;color:var(--muted)">{{ m.original_visit|default:"—" }}</td>
-          <td style="font-size:.72rem;color:var(--muted)">{{ m.matched_at|date:"Y-m-d H:i" }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
-{% endif %}
 
 {% if attachments %}
 <div class="section-card mb-3">
@@ -276,9 +94,9 @@
     <form method="post" action="{% url 'dashboard-email-detail' email.pk %}#reply" style="font-size:.8rem">
       {% csrf_token %}
       <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">From</label>
-        <div class="col-sm-4"><input type="text" name="from_name" value="{{ reply.from_name }}" placeholder="Display name" class="form-control form-control-sm"></div>
-        <div class="col-sm-7">
+        <label class="col-sm-2 col-lg-1 col-form-label col-form-label-sm">From</label>
+        <div class="col-sm-4 col-lg-4"><input type="text" name="from_name" value="{{ reply.from_name }}" placeholder="Display name" class="form-control form-control-sm"></div>
+        <div class="col-sm-6 col-lg-7">
           <div class="input-group input-group-sm">
             <input type="text" name="from_local" value="{{ reply.from_local }}" required pattern="[^@\s]+" class="form-control" style="font-family:monospace">
             <span class="input-group-text" style="font-family:monospace">@{{ reply_domain }}</span>
@@ -286,16 +104,16 @@
         </div>
       </div>
       <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">To</label>
-        <div class="col-sm-11"><input type="text" name="to" value="{{ reply.to }}" required class="form-control form-control-sm"></div>
+        <label class="col-sm-2 col-lg-1 col-form-label col-form-label-sm">To</label>
+        <div class="col-sm-10 col-lg-11"><input type="text" name="to" value="{{ reply.to }}" required class="form-control form-control-sm"></div>
       </div>
       <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Cc</label>
-        <div class="col-sm-11"><input type="text" name="cc" value="{{ reply.cc }}" placeholder="Comma-separated" class="form-control form-control-sm"></div>
+        <label class="col-sm-2 col-lg-1 col-form-label col-form-label-sm">Cc</label>
+        <div class="col-sm-10 col-lg-11"><input type="text" name="cc" value="{{ reply.cc }}" placeholder="Comma-separated" class="form-control form-control-sm"></div>
       </div>
       <div class="row g-2 mb-2">
-        <label class="col-sm-1 col-form-label col-form-label-sm">Subject</label>
-        <div class="col-sm-11"><input type="text" name="subject" value="{{ reply.subject }}" class="form-control form-control-sm"></div>
+        <label class="col-sm-2 col-lg-1 col-form-label col-form-label-sm">Subject</label>
+        <div class="col-sm-10 col-lg-11"><input type="text" name="subject" value="{{ reply.subject }}" class="form-control form-control-sm"></div>
       </div>
       <textarea name="body" rows="18" class="form-control form-control-sm mb-2" style="font-family:monospace;font-size:.78rem">{{ reply.body }}</textarea>
       <div class="d-flex justify-content-end">
@@ -304,5 +122,37 @@
     </form>
   </div>
 </div>
+
+{% if honeypot_matches %}
+<div class="section-card mt-3" id="matches">
+  <div class="section-card-header"><h6>Honeypot Match{{ honeypot_matches|length|pluralize:"es" }}</h6><span style="font-size:.72rem;color:var(--muted)">Where {{ email.recipient }} was shown</span></div>
+  <div class="section-card-body p-0">
+    <table class="dash-table w-100">
+      <tbody>
+        {% for m in honeypot_matches %}
+        {% if m.generated_employee %}
+        <tr><td colspan="2" style="background:var(--surface);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em">Our People page &middot; {{ m.match_confidence }}</td></tr>
+        <tr><th style="width:140px;font-size:.72rem;color:var(--muted)">Employee</th><td style="font-size:.8rem">{{ m.generated_employee.first_name }} {{ m.generated_employee.last_name }} — {{ m.generated_employee.title }}, {{ m.generated_employee.department }}</td></tr>
+        {% endif %}
+        {% if m.original_visit %}
+        <tr><th style="font-size:.72rem;color:var(--muted)">Page visit</th><td style="font-size:.8rem">{{ m.original_visit.timestamp|date:"Y-m-d H:i:s" }} UTC</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">IP</th><td style="font-size:.8rem;font-family:monospace">{{ m.original_visit.ip_address }}</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">User agent</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ m.original_visit.user_agent|default:"—" }}</td></tr>
+        {% if m.original_visit.referrer %}<tr><th style="font-size:.72rem;color:var(--muted)">Referrer</th><td style="font-size:.75rem;word-break:break-all">{{ m.original_visit.referrer }}</td></tr>{% endif %}
+        <tr><th style="font-size:.72rem;color:var(--muted)">Delay</th><td style="font-size:.8rem">{{ m.original_visit.timestamp|timesince:email.received_at }} between page view and email</td></tr>
+        {% endif %}
+        {% if m.source_code_email %}
+        <tr><td colspan="2" style="background:var(--surface);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em">Source-code page &middot; {{ m.match_confidence }}</td></tr>
+        <tr><th style="width:140px;font-size:.72rem;color:var(--muted)">Page</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ m.source_code_email.host }}{{ m.source_code_email.path }}</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">First served</th><td style="font-size:.8rem">{{ m.source_code_email.first_seen|date:"Y-m-d H:i:s" }} UTC to <span style="font-family:monospace">{{ m.source_code_email.first_ip|default:"unknown IP" }}</span></td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">Last served</th><td style="font-size:.8rem">{{ m.source_code_email.last_seen|date:"Y-m-d H:i:s" }} UTC &middot; {{ m.source_code_email.times_served }} time{{ m.source_code_email.times_served|pluralize }}</td></tr>
+        <tr><th style="font-size:.72rem;color:var(--muted)">Delay</th><td style="font-size:.8rem">{{ m.source_code_email.first_seen|timesince:email.received_at }} between first page view and email</td></tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}

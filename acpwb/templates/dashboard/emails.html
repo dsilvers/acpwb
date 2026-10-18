@@ -73,32 +73,5 @@
   </div>
 </div>
 
-<!-- Email list -->
-<div class="section-card">
-  <div class="section-card-header"><h6>Email Log</h6><span style="font-size:.72rem;color:var(--muted)">Last 50 in period</span></div>
-  <div style="overflow-x:auto">
-    <table class="dash-table w-100">
-      <thead><tr><th>Received</th><th>From</th><th>To</th><th>Subject</th><th>Matched</th></tr></thead>
-      <tbody>
-        {% for e in recent %}
-        <tr style="cursor:pointer" onclick="location.href='{% url 'dashboard-email-detail' e.pk %}'">
-          <td style="white-space:nowrap;font-size:.72rem;color:var(--muted)">{{ e.received_at|date:"Y-m-d H:i" }}</td>
-          <td style="font-size:.78rem">{{ e.sender }}</td>
-          <td style="font-size:.75rem;color:var(--muted);font-family:monospace">{{ e.recipient }}</td>
-          <td style="font-size:.78rem;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ e.subject }}">{{ e.subject|truncatechars:70 }}</td>
-          <td>
-            {% with mc=e.matches.count %}
-            {% if mc %}
-            <span style="font-size:.65rem;font-weight:700;padding:.15rem .4rem;background:#dcfce7;color:#15803d;border:1px solid #86efac">&#10003; {{ mc }}</span>
-            {% else %}
-            <span style="font-size:.65rem;color:var(--muted)">—</span>
-            {% endif %}
-            {% endwith %}
-          </td>
-        </tr>
-        {% empty %}<tr><td colspan="5" class="text-muted text-center py-3">No emails in this period</td></tr>{% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+<p style="font-size:.8rem"><a href="{% url 'dashboard-inbox' %}">Open the Email Inbox &rarr;</a></p>
 {% endblock %}

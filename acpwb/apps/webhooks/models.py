@@ -1,9 +1,12 @@
+from email.utils import parseaddr
+
 from django.db import models
 
 
 class InboundEmail(models.Model):
     received_at = models.DateTimeField(auto_now_add=True, db_index=True)
-    sender = models.EmailField(db_index=True)
+    sender = models.EmailField(db_index=True)  # envelope sender (Return-Path); often a bounce/SRS address
+    from_header = models.CharField(max_length=512, blank=True)  # decoded From: header, e.g. 'Jane Doe <jane@example.com>'
     recipient = models.EmailField(db_index=True)
     subject = models.TextField(blank=True)
     body_plain = models.TextField(blank=True)
@@ -17,6 +20,14 @@ class InboundEmail(models.Model):
 
     def __str__(self):
         return f"From {self.sender} → {self.recipient} @ {self.received_at:%Y-%m-%d %H:%M}"
+
+    @property
+    def from_name(self):
+        return parseaddr(self.from_header)[0]
+
+    @property
+    def from_address(self):
+        return parseaddr(self.from_header)[1] or self.sender
 
 
 class OutboundEmail(models.Model):

@@ -142,8 +142,11 @@ SELECT
     coalesce(r.tool, 0), coalesce(r.unknown, 0),
     coalesce(r.pages, 0), coalesce(r.static, 0), coalesce(r.errors, 0), coalesce(r.new_client, 0),
     coalesce(r.cookie, 0), coalesce(r.pool_cookie, 0), coalesce(t.hits, 0),
+    -- r is NULL for an IP with only failed / hello-less connections (and
+    -- maybe a trap hit) this hour.
     CASE WHEN """ + _BARE + """ THEN r.browser_pages ELSE 0 END,
-    CASE WHEN """ + _BARE + """ OR t.hits > 0 OR r.pool_cookie > 0 THEN r.browser + r.unknown ELSE 0 END,
+    CASE WHEN """ + _BARE + """ OR t.hits > 0 OR r.pool_cookie > 0
+         THEN coalesce(r.browser + r.unknown, 0) ELSE 0 END,
     coalesce(c.no_hello, 0), coalesce(c.failed, 0),
     coalesce(r.ja4s, 0), coalesce(r.uas, 0), coalesce(r.top_ja4, ''), coalesce(r.top_stack, ''),
     coalesce(r.signals, 0)

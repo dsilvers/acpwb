@@ -69,6 +69,8 @@ def _traffic(start):
     EdgeRequest.objects.bulk_create(reqs)
     CrawlerVisit.objects.create(ip_address='203.0.113.1', trap_type='ghost_link', path='/x', timestamp=t,
                                 request_id=reqs[0].request_id)
+    # A trap hit from the proxy exit that has no requests this hour.
+    CrawlerVisit.objects.create(ip_address='203.0.113.99', trap_type='env_probe', path='/.env', timestamp=t)
 
 
 @pytest.mark.django_db
@@ -85,6 +87,7 @@ def test_rollup_hour_per_ip_and_fingerprint():
     assert EdgeIPHour.objects.get(hour=start, ip_address='203.0.113.2').failed_handshakes == 1
     exit_only = EdgeIPHour.objects.get(hour=start, ip_address='203.0.113.99')
     assert (exit_only.requests, exit_only.no_hello_conns, exit_only.network, exit_only.asn) == (0, 2, 'residential', 28573)
+    assert (exit_only.trap_hits, exit_only.behaviour_proven_reqs, exit_only.bare_page_reqs) == (1, 0, 0)
     dc = EdgeIPHour.objects.get(hour=start, ip_address='192.0.2.50')
     assert (dc.headless_reqs, dc.browser_reqs) == (1, 0)
 

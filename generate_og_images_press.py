@@ -10,7 +10,7 @@ Usage:
     python generate_og_images_press.py                        # all press releases
     python generate_og_images_press.py 200-million-pages-served # specific slugs
     python generate_og_images_press.py --force                # re-generate existing
-    python generate_og_images_press.py --steps 30             # inference steps (default 30 for SDXL)
+    python generate_og_images_press.py --steps 30             # inference steps (default 4 for FLUX schnell, 30 for SDXL)
     python generate_og_images_press.py --dry-run              # preview prompts only
 """
 import argparse
@@ -98,6 +98,7 @@ _SLUG_SCENES = {
     'ukraine-drone-strike-yandex-data-center-russia-traffic': 'long data center aisle at night, every server rack dark and silent, dim amber emergency lights along the ceiling, one rack at the far end still blinking blue, polished floor reflecting the glow',
     'non-customer-consumer-protection-complaint-resolved': 'quiet government office desk at dusk, a single printed letter lying flat in a wire in-tray next to a closed manila file folder, brass desk lamp casting a warm pool of light, rubber stamp and ink pad, wall clock out of focus in the background, tall window with winter blue evening light',
     'yandex-vladimir-second-strike-traffic-follow-up': 'empty network operations center at night, wide curved wall of dark monitors, one large central screen showing a dim abstract world map with only a few faint points of light, rows of empty desks, a single warm desk lamp left on, deep navy shadows',
+    'five-billion-requests-served': 'low close diagonal view along a long antique oak library card catalog cabinet at night, dozens of small wooden drawers each pulled out at a different length, drawers packed with cream index cards, loose index cards scattered across the dark wooden floor in the foreground, a single green glass banker\'s lamp on top of the cabinet casting a warm pool of light, the rest of the room falling away into deep shadow',
     'record-traffic-september-2026': 'dim windowless corporate conference room at night, dozens of vintage carousel slide projectors crowded across a long boardroom table and stacked on folding carts, every projector running, crisscrossing beams of warm light cutting through dusty air onto a blank white pull-down screen, overlapping squares of empty light, tangled extension cords and power strips on the carpet, empty office chairs pushed back',
 }
 
@@ -108,6 +109,7 @@ _SLUG_STYLE_SUFFIX = {
     'ukraine-drone-strike-yandex-data-center-russia-traffic': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, no text, no signage, no labels',
     'non-customer-consumer-protection-complaint-resolved': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, the letter and folder are blank with no legible text, no signage, no labels',
     'yandex-vladimir-second-strike-traffic-follow-up': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, screens show no text, no signage, no labels',
+    'five-billion-requests-served': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy shadows and warm gold lamp light, index cards are blank with no text, no signage, no labels',
     'record-traffic-september-2026': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy carpet and walls with warm gold projector light, projected squares are plain blank light with no text or images',
 }
 
@@ -231,7 +233,7 @@ def main():
     parser = argparse.ArgumentParser(description='Generate OG banner images for press releases')
     parser.add_argument('slugs', nargs='*', help='Press release slugs to generate (default: all)')
     parser.add_argument('--output-dir', default=str(HERE / 'acpwb' / 'media' / 'og'))
-    parser.add_argument('--model', default='stabilityai/stable-diffusion-xl-base-1.0')
+    parser.add_argument('--model', default='black-forest-labs/FLUX.1-schnell')
     parser.add_argument('--steps', type=int, default=None, help='Inference steps (default: 4 for FLUX schnell, 30 otherwise)')
     parser.add_argument('--bf16', action='store_true', help='Use bfloat16 on Apple Silicon for non-FLUX models (FLUX uses it by default)')
     parser.add_argument('--fp32', action='store_true', help='Force float32 on Apple Silicon (FLUX needs ~68GB and will swap)')

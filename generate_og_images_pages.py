@@ -10,7 +10,7 @@ Usage:
     python generate_og_images_pages.py                    # all pages
     python generate_og_images_pages.py home our-people    # specific slugs
     python generate_og_images_pages.py --force            # re-generate existing
-    python generate_og_images_pages.py --steps 30         # inference steps (default 30 for SDXL)
+    python generate_og_images_pages.py --steps 30         # inference steps (default 4 for FLUX schnell, 30 for SDXL)
     python generate_og_images_pages.py --dry-run          # preview prompts only
     python generate_og_images_pages.py --ai-prompt        # use OpenAI API for better prompts
     python generate_og_images_pages.py --ai-model gpt-4o  # OpenAI model (default: gpt-4o-mini)
@@ -269,7 +269,7 @@ def main():
     parser = argparse.ArgumentParser(description='Generate OG banner images for site index pages')
     parser.add_argument('slugs', nargs='*', help='Page slugs to generate (default: all)')
     parser.add_argument('--output-dir', default=str(HERE / 'acpwb' / 'media' / 'og'))
-    parser.add_argument('--model', default='stabilityai/stable-diffusion-xl-base-1.0')
+    parser.add_argument('--model', default='black-forest-labs/FLUX.1-schnell')
     parser.add_argument('--steps', type=int, default=None, help='Inference steps (default: 4 for FLUX schnell, 30 otherwise)')
     parser.add_argument('--bf16', action='store_true', help='Use bfloat16 on Apple Silicon for non-FLUX models (FLUX uses it by default)')
     parser.add_argument('--fp32', action='store_true', help='Force float32 on Apple Silicon (FLUX needs ~68GB and will swap)')

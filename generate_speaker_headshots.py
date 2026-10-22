@@ -19,8 +19,9 @@ Usage:
     python generate_speaker_headshots.py --model SG161222/RealVisXL_V4.0
 
 Model notes (all work well under 64 GB RAM):
-  - stabilityai/stable-diffusion-xl-base-1.0  — default, safe, matches press release script
-  - SG161222/RealVisXL_V4.0                   — SDXL-based, photorealistic portraits (recommended)
+  - black-forest-labs/FLUX.1-schnell          — default, matches the OG image scripts (bf16 on Apple Silicon)
+  - stabilityai/stable-diffusion-xl-base-1.0  — SDXL base
+  - SG161222/RealVisXL_V4.0                  — SDXL-based, photorealistic portraits (recommended)
   - Lykon/dreamshaper-xl-1-0                  — SDXL-based, fast, good diversity
 """
 import argparse
@@ -367,6 +368,9 @@ def _pick_device(torch, flux=False):
     if torch.cuda.is_available():
         return 'cuda', torch.bfloat16 if flux else torch.float16
     if getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available():
+        # FLUX in float32 is ~68GB of weights and swaps on a 64GB Mac; bf16 is ~34GB
+        if flux:
+            return 'mps', torch.bfloat16
         return 'mps', torch.float32
     return 'cpu', torch.float32
 
@@ -401,9 +405,9 @@ def main():
     parser = argparse.ArgumentParser(description='Generate headshot images for PERCH conference speakers')
     parser.add_argument('--year', type=int, default=None, help='Limit to speakers from a specific year')
     parser.add_argument('--output-dir', default=str(SPEAKERS_DIR))
-    parser.add_argument('--model', default='stabilityai/stable-diffusion-xl-base-1.0',
-                        help='HF model ID (default: SDXL; try SG161222/RealVisXL_V4.0 for better portraits)')
-    parser.add_argument('--steps', type=int, default=30)
+    parser.add_argument('--model', default='black-forest-labs/FLUX.1-schnell',
+                        help='HF model ID (default: FLUX.1-schnell; SDXL models such as SG161222/RealVisXL_V4.0 also work)')
+    parser.add_argument('--steps', type=int, default=None, help='Inference steps (default: 4 for FLUX schnell, 30 otherwise)')
     parser.add_argument('--force', action='store_true', help='Re-generate images that already exist')
     parser.add_argument('--dry-run', action='store_true', help='Print prompts without generating')
     parser.add_argument('--hf-token', default=os.environ.get('HF_TOKEN'))
@@ -455,6 +459,8 @@ def main():
         return
 
     flux = _is_flux(args.model)
+    if args.steps is None:
+        args.steps = 4 if flux and 'schnell' in args.model.lower() else 30
     device, dtype = _pick_device(torch, flux=flux)
     print(f'Loading {args.model} on {device} ({dtype}) …')
 

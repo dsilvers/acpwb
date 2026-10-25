@@ -1,0 +1,3 @@
+# apps/public
+
+- **PERCH conference year rollover** — `CURRENT_YEAR` in `apps/public/conference_data.py` drives `/perch-conference/`; earlier years auto-move to `/perch-conference/<year>/`. Templates read `conf.*` / `perch_year` (context processor `apps.public.context_processors.perch_context`). To roll over: add the new year's entry, flip the old one to `registration_open: False` + past tense + `attendees`, add a row to the dinner-history list in `conference_dinner.html`, and replace the hardcoded `PERCH <year>` footer label in `templates/jinja2/` and `acpwb_go` (`shell/shell.go`, `data/POLICY_FOOTER_TEMPLATE.html`, `policy/testdata/` fixtures — Go must byte-match Python output)

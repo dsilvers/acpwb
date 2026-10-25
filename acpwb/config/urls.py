@@ -25,6 +25,9 @@ urlpatterns = [
 
     # Legacy PHP URL redirects (permanent 301)
     path('index.php', RedirectView.as_view(url='/', permanent=True)),
+    # /compliance/ itself is served by acpwb_go (edge prefix route); only the
+    # slashless form reaches Django.
+    path('compliance', RedirectView.as_view(url='/compliance/', permanent=True)),
     path('profiles.php', RedirectView.as_view(url='/our-people/', permanent=True)),
     path('mission.php', RedirectView.as_view(url='/mission/', permanent=True)),
     path('disclaimer.php', RedirectView.as_view(url='/privacy/', permanent=True)),

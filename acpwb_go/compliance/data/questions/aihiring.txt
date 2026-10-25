@@ -1,0 +1,62 @@
+# AI in hiring and employment decisions. Correct answers follow NYC Local
+# Law 144, the Illinois AI Video Interview Act, and EEOC positions.
+
+Q: New York City's Local Law 144 requires employers using automated employment decision tools to:
++ Have an independent bias audit within the past year and notify candidates
+- Use only AI tools approved by the city
+- Stop interviewing in person
+- Publish candidates' scores
+
+Q: Under the Illinois Artificial Intelligence Video Interview Act, employers using AI to analyze video interviews must:
++ Notify applicants, explain how the AI works, and get their consent
+- Record all interviews in 4K
+- Use AI only for executives
+- Delete all video immediately
+
+Q: An employer that uses a vendor's AI screening tool that disproportionately screens out older applicants:
++ May still be liable for discrimination, even though the vendor built the tool
+- Is protected because a vendor built it
+- Is protected if the AI is accurate on average
+- Must sue the vendor first
+
+Q: AI-generated interview summaries should be:
++ Reviewed by a human for accuracy and fairness before use in decisions
+- Used as final decisions
+- Shared with all candidates
+- Copied into offer letters
+
+Q: Using AI to infer a candidate's age, race, or disability from their photo or voice is:
++ Not allowed
+- A useful screening shortcut
+- Allowed if the AI is confident
+- Required for diversity metrics
+
+Q: A candidate with a disability asks for an alternative to an AI-based assessment. The employer should:
++ Consider it as a reasonable accommodation request
+- Deny it, since AI is fair
+- Require the AI assessment anyway
+- Reject the candidate
+
+Q: Writing job descriptions with an AI tool requires:
++ Human review for accuracy, inclusive language, and required pay ranges
+- No review
+- Copying the output exactly
+- Approval by the AI tool
+
+Q: Feeding candidate résumés into a public AI chatbot is:
++ Not allowed; it may expose personal data
+- Efficient
+- Allowed if you remove the photos
+- Required by {SYSTEM}
+
+Q: Automated tools that rank candidates should be:
++ Monitored for adverse impact on protected groups
+- Trusted without monitoring
+- Hidden from Legal
+- Turned up to "strict"
+
+Q: Colorado and other states have passed laws addressing:
++ Algorithmic discrimination by high-risk AI systems used in consequential decisions such as employment
+- The colors of AI logos
+- The number of AI tools per office
+- AI-generated birthday cards

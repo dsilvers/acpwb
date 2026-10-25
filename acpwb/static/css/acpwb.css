@@ -89,6 +89,23 @@ h1, h2, h3, h4, h5, h6 {
   transition: color 0.2s;
 }
 
+/* Between the xl breakpoint (where the nav expands) and xxl, the ten top-nav
+   items only fit beside the logo when both are a little smaller. */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .acpwb-navbar .nav-link {
+    font-size: 0.74rem;
+    padding: 0.4rem 0.42rem !important;
+    letter-spacing: 0.03em;
+  }
+  .acpwb-navbar .acpwb-logo-line1,
+  .acpwb-navbar .acpwb-logo-line2 {
+    font-size: 1.6rem;
+  }
+  .acpwb-navbar .acpwb-logo-line3 {
+    font-size: 0.88rem;
+  }
+}
+
 .acpwb-navbar .nav-link:hover,
 .acpwb-navbar .nav-link.active {
   color: var(--gold) !important;
@@ -140,6 +157,57 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 600px;
 }
 
+/* Photo hero: campus photo behind a navy wash that is heaviest under the text */
+.acpwb-hero--photo { background: var(--navy); padding: 6rem 0 5rem; }
+.acpwb-hero--photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(10,22,40,.94) 0%, rgba(10,22,40,.86) 45%, rgba(10,22,40,.72) 100%);
+  pointer-events: none;
+}
+/* Text only covers the left of the photo on wide screens, so let the right side show */
+@media (min-width: 992px) {
+  .acpwb-hero--photo::before {
+    background: linear-gradient(90deg, rgba(10,22,40,.94) 0%, rgba(10,22,40,.86) 45%, rgba(10,22,40,.5) 100%);
+  }
+}
+.acpwb-hero--photo .hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.acpwb-hero--photo .container { z-index: 2; }
+.acpwb-hero--photo h1 {
+  color: #fff;
+  text-transform: none;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  max-width: 11em;
+  text-shadow: none;
+}
+.hero-eyebrow { color: var(--gold-light); font-weight: 600; font-size: .95rem; letter-spacing: .01em; }
+/* Balance the tagline's two lines instead of orphaning "doing so." */
+.acpwb-hero--photo .lead { text-wrap: balance; line-height: 1.5; max-width: none; }
+/* Wide enough for the whole tagline on one line; narrower screens wrap (balanced) */
+@media (min-width: 992px) {
+  .acpwb-hero--photo .lead { white-space: nowrap; font-size: 1.15rem; }
+}
+/* The mission statement under the tagline: the one sentence that says what we do */
+.hero-about {
+  color: #fff;
+  max-width: 34rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.65;
+  padding-left: 1rem;
+  border-left: 3px solid var(--gold);
+}
+
 /* ── Section headings ────────────────────────────────── */
 .section-heading {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -177,8 +245,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   color: var(--navy);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
 }
 
 /* ── Buttons ─────────────────────────────────────────── */

@@ -1,0 +1,55 @@
+# Commuting, transit benefits, bikes, and parking.
+
+Q: Qualified transit and parking benefits under Section 132(f) allow employees to:
++ Pay for eligible transit or parking with pre-tax dollars, up to a monthly limit
+- Get free cars
+- Deduct their gas for personal trips
+- Commute by helicopter
+
+Q: Bikes brought to the office should be stored:
++ In the designated bike room or racks, not in hallways or by exits
+- In stairwells
+- At your desk
+- In the elevator
+
+Q: Commuting time from home to your regular workplace is generally:
++ Not hours worked
+- Paid at overtime rates
+- Hours worked for everyone
+- Paid only if it snows
+
+Q: Carpool parking spaces are reserved for:
++ Vehicles that meet the carpool rules, such as two or more registered commuters
+- Anyone who arrives early
+- Executives
+- Visitors from {CITY}
+
+Q: Riding an electric scooter inside the building is:
++ Not allowed
+- Allowed in the hallways
+- Allowed if under 5 mph
+- Allowed on {WEEKDAY}s
+
+Q: Charging a personal e-bike battery under your desk is:
++ Not allowed, because lithium battery fires are a hazard; use designated charging areas
+- Encouraged to save money
+- Allowed overnight
+- Allowed on a power strip
+
+Q: Parking in an accessible space without a valid placard is:
++ Illegal and not allowed
+- Allowed for quick stops
+- Allowed for executives
+- Allowed if the lot is full
+
+Q: An EV charging space should be:
++ Used while charging and vacated when done, following any posted time limits
+- Used as a regular parking spot all day
+- Reserved for gas vehicles in winter
+- Blocked with cones
+
+Q: Travel between client sites during the workday is generally:
++ Work time, and mileage may be reimbursable under the policy
+- Personal time
+- Unpaid for everyone
+- Paid only if you take the bus

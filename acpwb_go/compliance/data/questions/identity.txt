@@ -1,0 +1,66 @@
+# Identity and access management.
+Q: The principle of least privilege means:
++ Users get only the access they need to do their jobs
+- Everyone gets the minimum salary
+- Admins get the least training
+- Access is granted by lottery
+
+Q: When an employee changes roles, their old access should be:
++ Reviewed and removed if no longer needed
+- Kept forever in case they return
+- Given to their replacement
+- Doubled
+
+Q: Access for a departing employee should be removed:
++ On or before their last day
+- A month later
+- When someone remembers
+- Only for email
+
+Q: Periodic access reviews ask managers to:
++ Confirm that each person's access is still needed
+- Review employees' social media
+- Approve all access automatically
+- Count passwords
+
+Q: Shared accounts used by several people:
++ Make it hard to know who did what and should be avoided
+- Improve accountability
+- Are required for teamwork
+- Are more secure
+
+Q: Single sign-on (SSO) helps security by:
++ Centralizing authentication so access can be managed and removed in one place
+- Removing all passwords from the internet
+- Letting anyone sign on
+- Signing documents automatically
+
+Q: Privileged accounts, such as administrators, should be:
++ Separate from daily-use accounts and protected with strong MFA
+- Used for email and web browsing
+- Shared with the team
+- Never monitored
+
+Q: Requesting access to a system you do not need for your work is:
++ Not appropriate
+- A good way to learn
+- Encouraged for curiosity
+- Required for promotions
+
+Q: Service accounts used by applications should:
++ Have an owner, limited permissions, and protected credentials
+- Use a default password
+- Have domain admin rights
+- Be ignored
+
+Q: An access request should be approved by:
++ The person accountable for the system or data, such as the data owner
+- The requester
+- A random coworker
+- The vendor
+
+Q: Logging into a coworker's account with their permission is:
++ Still not allowed
+- Fine if they are on vacation
+- Fine if they agree
+- Required for coverage

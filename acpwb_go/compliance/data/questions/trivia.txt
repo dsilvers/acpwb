@@ -1,0 +1,73 @@
+# Corporate knowledge. Every associate is expected to know these.
+
+Q: In what year was the American Corporation for Public Well Being founded?
++ 2006
+- 2004
+- 2008
+- 1998
+
+Q: Where is ACPWB headquartered?
++ 8833 East Michigan Street, Suite 4040, Milwaukee, WI
+- 4040 West Wisconsin Avenue, Madison, WI
+- 8833 North Lake Shore Drive, Chicago, IL
+- Suite 8833, 4040 East Michigan Street, Milwaukee, WI
+
+Q: Which of the following is the ACPWB corporate tagline?
++ "Money doesn't buy happiness, but it darn well comes close to doing so."
+- "Well Being, Well Done."
+- "Prosperity for the Public, Since 2006."
+- "Because a raise is a right."
+
+Q: Approximately how many associates does ACPWB employ?
++ 847
+- 1,240
+- 312
+- 8,833
+
+Q: Who is ACPWB's Chief Executive Officer?
++ Robert A. Pemberton III
+- Katherine M. Wellstone
+- James D. Fairbanks
+- {NAME}
+
+Q: ACPWB's mission is best summarized as:
++ Educating, assisting, and advocating for the American people with asking for a well-deserved raise
+- Maximizing shareholder value through disciplined cost control
+- Providing payroll processing services to the public sector
+- Certifying compliance professionals
+
+Q: The ACPWB annual conference on pay equity and remuneration is called:
++ PERCH
+- PAYCON
+- The Milwaukee Remuneration Summit
+- RAISE
+
+Q: The ACPWB logo consists of:
++ The words AMERICAN / CORPORATION / FOR PUBLIC WELL BEING on three lines
+- A gold eagle holding a paycheck
+- The letters ACPWB in a laurel wreath
+- A stylized Lake Michigan wave
+
+Q: The general inquiry address for ACPWB is:
++ inquiry@acpwb.com
+- info@acpwb.org
+- compliance@acpwb.net
+- {FIRST}@acpwb.com
+
+Q: Which ACPWB department owns this training?
++ {DEPT}
+- Facilities
+- The Office of Public Affairs
+- None; it was assigned automatically
+
+Q: The ACPWB headquarters suite number is:
++ 4040
+- 8833
+- 2006
+- 1985
+
+Q: The ACPWB archives cover publications from:
++ 1985 through 2024
+- 2006 through today
+- 1999 through 2009
+- Only the current year

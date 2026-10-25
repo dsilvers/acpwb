@@ -1,0 +1,61 @@
+# Wi-Fi, VPN, and working on public networks.
+
+Q: When working from a coffee shop on public Wi-Fi, you should:
++ Connect through the ACPWB VPN
+- Use the shop's network with no VPN
+- Turn off your firewall for speed
+- Ask the barista for the admin password
+
+Q: Two networks appear: "CoffeeShop_Guest" and "CoffeeShop_Guest_FREE." The second may be:
++ An "evil twin" set up by an attacker to intercept traffic
+- A faster network
+- The shop's premium tier
+- The ACPWB guest network
+
+Q: Your home Wi-Fi router should use:
++ A strong unique password and current encryption, with the default admin password changed
+- The default password printed on the router
+- No password, for guests
+- Your birthday as the network name
+
+Q: Connecting an unauthorized wireless access point to the ACPWB network is:
++ Not allowed; it can create a security hole
+- Allowed if it improves signal
+- Allowed in conference rooms
+- Allowed for {EVENT}
+
+Q: A website shows a browser warning that its certificate is invalid. You should:
++ Not proceed, especially if asked to log in or enter sensitive data
+- Click "proceed anyway"
+- Refresh until the warning goes away
+- Enter your password quickly
+
+Q: The ACPWB guest Wi-Fi is for:
++ Visitors and personal devices only, not ACPWB laptops
+- ACPWB laptops when the main network is slow
+- Servers
+- Confidential printing
+
+Q: Bluetooth on your laptop when not in use should be:
++ Turned off, to reduce the attack surface
+- Set to discoverable by everyone
+- Renamed to your full name
+- Connected to the nearest speaker
+
+Q: Hotel Wi-Fi is:
++ Untrusted and should be used only with the VPN
+- Secure, since you paid for the room
+- Secure if the password is on the key card
+- Owned by ACPWB
+
+Q: Plugging your laptop into a network jack in a hotel room is:
++ Like any untrusted network; use the VPN
+- Safer than Wi-Fi in all cases
+- Prohibited by hotels
+- Required for video calls
+
+Q: A pop-up says your computer is infected and tells you to call a support number. You should:
++ Not call the number; close the browser and report it to IT
+- Call the number right away
+- Pay for the cleanup
+- Restart and ignore it forever

@@ -1,0 +1,60 @@
+# Project intake and governance.
+Q: New projects should be submitted through:
++ The project intake process with a business case
+- Hallway conversations
+- Personal favors
+- Nothing
+
+Q: A project charter defines:
++ Scope, goals, sponsor, and success measures
+- Lunch plans
+- Nothing
+- Office seats
+
+Q: Scope creep means:
++ Uncontrolled additions to a project's scope
+- Creeping in the office
+- Faster delivery
+- Smaller scope
+
+Q: Project status reports should be:
++ Honest, including risks and delays
+- Always green
+- Optimistic regardless
+- Skipped
+
+Q: Changes to scope, budget, or schedule should go through:
++ Change control with the sponsor's approval
+- No process
+- Secret decisions
+- The newest team member
+
+Q: Risks should be:
++ Identified, assessed, and tracked with owners
+- Ignored
+- Hidden
+- Blamed
+
+Q: Project closure includes:
++ Lessons learned and handoff to operations
+- Nothing
+- Deleting files
+- Leaving early
+
+Q: "Watermelon" status reports are:
++ Green on the outside and red on the inside, hiding real problems
+- Healthy snacks
+- Accurate
+- Required
+
+Q: Project budgets should be:
++ Tracked against actual spending
+- Ignored
+- Spent quickly
+- Hidden
+
+Q: Stakeholders should be:
++ Identified and kept informed
+- Ignored
+- Surprised
+- Excluded

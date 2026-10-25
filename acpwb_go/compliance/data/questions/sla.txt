@@ -1,0 +1,66 @@
+# Service level agreements.
+Q: A service level agreement (SLA) defines:
++ The service levels a provider commits to, such as uptime or response time
+- The sales leader's agenda
+- A sleeping arrangement
+- A legal holiday
+
+Q: Response time in an SLA usually means:
++ How quickly the provider acknowledges and starts work on a request
+- How long until the issue is resolved
+- How fast employees type
+- How long a meeting lasts
+
+Q: Service credits in an SLA are:
++ Compensation owed when the provider misses commitments
+- Bonus points for good service
+- A type of gift card
+- Paid to the provider
+
+Q: SLA reports should be:
++ Based on accurate measurements and reviewed regularly
+- Edited to look better
+- Ignored unless something breaks
+- Written by sales
+
+Q: Pausing an SLA clock without a valid reason to avoid a breach is:
++ Misreporting and not allowed
+- Smart ticket management
+- Required
+- Common practice
+
+Q: An SLA uptime of 99.9% per month allows roughly:
++ 43 minutes of downtime in a 30-day month
+- 43 hours of downtime
+- No downtime
+- 7 days of downtime
+
+Q: Internal teams can use operating level agreements (OLAs) to:
++ Support the external SLA with internal commitments
+- Replace contracts
+- Avoid customers
+- Schedule lunches
+
+Q: Before agreeing to a customer's custom SLA, sales should:
++ Confirm with the delivery team that it can be met
+- Agree to anything to close the deal
+- Promise 100% uptime
+- Avoid writing it down
+
+Q: Repeated SLA breaches by a vendor should be:
++ Escalated under the contract and vendor management process
+- Accepted quietly
+- Hidden from leadership
+- Rewarded
+
+Q: Planned maintenance windows are usually:
++ Defined in the SLA and excluded from availability calculations when properly announced
+- Counted as outages always
+- Unannounced
+- Not allowed
+
+Q: Customer-facing SLA terms are approved by:
++ Legal and the service owner
+- Any sales rep
+- The customer only
+- The marketing team

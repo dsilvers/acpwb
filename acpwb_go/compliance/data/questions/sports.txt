@@ -1,0 +1,49 @@
+# Company sports leagues, fitness challenges, and recreation.
+
+Q: Participation in the ACPWB softball league is:
++ Voluntary
+- Required for team leads
+- Counted in reviews
+- Required after {EVENT}
+
+Q: Trash talk during the company softball game should:
++ Stay friendly and follow the Code of Conduct
+- Target coworkers' appearance
+- Continue in the team chat on Monday
+- Include threats
+
+Q: Step-count challenges should:
++ Allow alternatives for people who cannot participate in walking
+- Require everyone to share their step counts
+- Reward only the top 1%
+- Use a device on your pet
+
+Q: Injuries during voluntary after-hours recreation should be:
++ Reported to the event organizer and HR, who can explain what coverage may apply
+- Hidden
+- Ignored
+- Treated with ice from the {PLACE} fridge only
+
+Q: Betting on the outcome of the company tournament is:
++ Not allowed
+- Encouraged
+- Allowed under {AMOUNT}
+- Allowed for spectators only
+
+Q: Hanging a dartboard in the open office is:
++ Not a good idea
+- Required
+- Allowed near the kitchen
+- Allowed with soft darts in the hallway
+
+Q: Using company time to train for the corporate 5K is:
++ Not allowed unless it is part of an approved wellness program
+- Required
+- Allowed every afternoon
+- Allowed if you are winning
+
+Q: Team jerseys with the ACPWB logo require:
++ Approval for logo use under brand guidelines
+- No approval
+- A new logo design
+- Permission from the other team

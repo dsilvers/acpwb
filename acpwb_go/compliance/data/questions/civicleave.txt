@@ -1,0 +1,56 @@
+# Military, jury, and voting leave. Correct answers follow USERRA and the
+# federal Jury System Improvements Act; state laws may add more.
+
+Q: USERRA protects the jobs of employees who serve in:
++ The uniformed services, including the National Guard and Reserves
+- Volunteer fire departments only
+- The {COMMITTEE}
+- The office softball team
+
+Q: Under USERRA, a returning service member is generally entitled to reemployment if their cumulative military service with that employer is:
++ Five years or less, with some exceptions
+- Six months or less
+- Twenty years or less
+- One week or less
+
+Q: An employee who served 200 days must generally apply for reemployment within:
++ 90 days after completing service
+- 24 hours
+- One year
+- Whenever they want
+
+Q: Under USERRA, a returning service member is entitled to:
++ The position they would have attained with reasonable certainty had they not left, known as the escalator principle
+- Their old desk only
+- A lower position
+- Whatever position is open in the {PLACE}
+
+Q: Under federal law, firing or threatening an employee for serving on a federal jury is:
++ Prohibited
+- Allowed if the trial is long
+- Allowed during busy season
+- Allowed with notice
+
+Q: An employee receives a jury summons. They should:
++ Notify their manager and HR and provide a copy of the summons
+- Ignore it
+- Ask their manager to call the court
+- Send the summons to {VENDOR}
+
+Q: Many states require employers to give employees time off to vote, and some require it to be:
++ Paid, depending on the state
+- Unpaid in every state
+- Taken only after midnight
+- Approved by the {COMMITTEE}
+
+Q: Pressuring an employee to skip military drill weekends is:
++ Prohibited discrimination under USERRA
+- Good scheduling
+- Allowed if the project is urgent
+- Allowed for new employees
+
+Q: During military service of 30 days or less, USERRA requires the employer to:
++ Continue health coverage on the same terms as if the employee were still working
+- Cancel health coverage immediately
+- Double the employee's premium
+- Transfer coverage to the military

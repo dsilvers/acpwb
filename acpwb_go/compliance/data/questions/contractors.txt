@@ -1,0 +1,66 @@
+# Managing contractors and contingent workers on ACPWB sites.
+Q: Contractors working at an ACPWB site must:
++ Complete site safety orientation and follow ACPWB safety rules
+- Bring their own rules
+- Skip orientation if they are only here a week
+- Be invisible
+
+Q: Contractor access to systems should be:
++ Limited to what the job needs and removed when the work ends
+- The same as a full-time admin
+- Left active in case they come back
+- Shared through a team account
+
+Q: Directing a contractor's daily work like an employee can create:
++ Worker misclassification risk
+- Free overtime
+- A faster promotion
+- A new benefit plan
+
+Q: Contractors should be paid:
++ Through the approved purchase order and invoice process
+- In cash from petty cash
+- By adding them to payroll
+- With gift cards
+
+Q: A contractor has an unsafe practice on the job. You should:
++ Stop the work if there is an immediate hazard, and report it to the contract owner and EHS
+- Let it go; they are not our employees
+- Post a video online
+- Fix it yourself without telling anyone
+
+Q: Before a contractor handles confidential data, ACPWB needs:
++ A signed agreement with confidentiality terms
+- A handshake
+- Nothing; contractors are trusted by default
+- A quiz score
+
+Q: Contractor badges should:
++ Look different from employee badges and expire when the contract ends
+- Be identical to employee badges
+- Never expire
+- Be shared among the crew
+
+Q: Contractors are covered by ACPWB's harassment policy:
++ Yes; it protects contractors and applies to their conduct at our sites
+- No; they are not employees
+- Only after 90 days
+- Only if they ask
+
+Q: When a contractor engagement ends, the sponsor must:
++ Confirm return of equipment and badges and removal of access
+- Do nothing
+- Keep the contractor's laptop
+- Extend access just in case
+
+Q: Contractor insurance certificates are reviewed to confirm:
++ The contractor carries the coverage the contract requires
+- The contractor's car is insured
+- The contractor is a good driver
+- Nothing; they are filed unread
+
+Q: A contractor tells you about a coworker's harassment. You should:
++ Take it seriously and report it to HR
+- Tell them to call their own employer only
+- Ignore it
+- Share it in team chat

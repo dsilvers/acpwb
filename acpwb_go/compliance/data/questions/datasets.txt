@@ -1,0 +1,66 @@
+# Publishing and using datasets.
+Q: Before releasing a dataset publicly, the team must:
++ Remove personal data and confirm the license and approvals
+- Upload it immediately
+- Add more personal data for richness
+- Skip review
+
+Q: A dataset licensed CC BY-NC allows:
++ Non-commercial use with attribution
+- Any commercial use
+- No use at all
+- Use without attribution
+
+Q: Dataset documentation should describe:
++ How the data was collected, what it contains, its limits, and its license
+- Only the file size
+- Nothing
+- The team's lunch orders
+
+Q: Using a third-party dataset in a product requires:
++ Checking its license permits that use
+- Nothing
+- Renaming the files
+- Removing the license file
+
+Q: "Anonymized" data can sometimes be:
++ Re-identified by combining it with other data
+- Never linked to anyone
+- Used for anything
+- Ignored by privacy laws always
+
+Q: Watermarks or unique identifiers in datasets can help:
++ Trace where copies of the data end up
+- Make files larger for no reason
+- Hide errors
+- Nothing
+
+Q: Synthetic or generated data used in research should be:
++ Clearly labeled as synthetic
+- Presented as real
+- Mixed in without notice
+- Hidden
+
+Q: Dataset version control helps:
++ Reproduce results and track changes
+- Confuse users
+- Hide changes
+- Nothing
+
+Q: A dataset with known errors should be:
++ Corrected or documented with the known issues
+- Released as-is without notes
+- Deleted secretly
+- Sold
+
+Q: Sharing a restricted dataset with a partner requires:
++ A data sharing agreement
+- Nothing
+- A link in chat
+- A thumbs-up emoji
+
+Q: The ACPWB research datasets on our website are meant for:
++ Use according to their stated license
+- Any use whatsoever
+- Training only competitors
+- Nothing

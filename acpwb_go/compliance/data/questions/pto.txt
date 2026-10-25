@@ -1,0 +1,61 @@
+# Paid time off, unlimited PTO, holidays, and other leave.
+
+Q: [PTO requests|Requests for paid time off] should be submitted:
++ In the HR system, with as much notice as possible, and approved before the time is taken
+- On a sticky note on your manager's monitor
+- After you return
+- Only by email to the whole department
+
+Q: Under ACPWB's unlimited (discretionary) PTO policy, associates:
++ Do not accrue a balance, and take time off with manager approval based on business needs
+- May take any amount of time without asking
+- Are paid out for unused unlimited days when they leave
+- Must use exactly {N} days a year
+
+Q: [Taking a vacation while appearing to work|"Quiet vacationing," or appearing online while actually on vacation,] is:
++ Not permitted; request the time off instead
+- A clever use of the hybrid policy
+- Allowed if your status light stays green
+- Required during the last week of the quarter
+
+Q: [Whether unused accrued PTO is paid out|Payout of unused accrued PTO] when an associate leaves ACPWB depends on:
++ The PTO policy and the law of the state where the associate works
+- The associate's mood on the last day
+- The manager's discretion only
+- Whether the associate returns their badge on time
+
+Q: [Paid sick leave|Sick time] may be used:
++ For your own illness or a family member's, as provided by policy and applicable state or local law
+- Only after {DAYS} days of illness
+- Only with a doctor's note for every hour
+- Only on Fridays
+
+Q: [You are called for jury duty|You receive a jury summons]. You should:
++ Tell your manager, provide the summons to People Operations, and serve; the time is protected
+- Ignore it if your workload is high
+- Ask your manager to excuse you from the court
+- Use your PTO, as jury duty is unprotected
+
+Q: [Bereavement leave|Time off for bereavement] is requested:
++ Through your manager and People Operations, as set out in the leave policy
+- Only after providing a death certificate in advance
+- Only for immediate family members who work at ACPWB
+- Never; it must come from PTO
+
+Q: [A manager|{NAME}] notices a team member has not taken any time off in over a year. A good step is to:
++ Encourage them to plan time off, and help cover their work while they are away
+- Praise them in front of the team as a role model
+- Take the time off on their behalf
+- Report them to {DEPT}
+
+Q: [While you are on PTO|During your time off], you should:
++ Set an out-of-office message and arrange coverage, and avoid working unless agreed
+- Check email every hour
+- Join meetings on mute
+- Leave your laptop open so your status stays green
+
+Q: [Time off to vote|Voting leave] is:
++ Provided in many states by law; check the policy for your work location
+- Never allowed during working hours
+- Deducted from your bonus
+- Only available to managers

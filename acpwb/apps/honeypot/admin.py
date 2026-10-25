@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-    SourceCodeEmail,
+    SourceCodeEmail, ComplianceCompletion,
     CrawlerVisit, WikiPage, ArchiveVisit, PublicReport, InternalLoginAttempt, IPIntelligence,
     RequestFingerprint, IPReputationScore, PublishedIPReputation, EdgeConnection,
 )
@@ -116,6 +116,15 @@ class PublishedIPReputationAdmin(admin.ModelAdmin):
     search_fields = ('ip_address',)
     readonly_fields = ('published_at',)
     ordering = ('-published_at',)
+
+
+@admin.register(ComplianceCompletion)
+class ComplianceCompletionAdmin(admin.ModelAdmin):
+    list_display = ('timestamp', 'event', 'ip_address', 'course', 'attempt', 'score', 'passed', 'learner_name', 'learner_email')
+    list_filter = ('event', 'passed', 'timestamp')
+    search_fields = ('ip_address', 'course', 'cert_id', 'learner_name', 'learner_email', 'learner_employee_id')
+    readonly_fields = ('timestamp',)
+    ordering = ('-timestamp',)
 
 
 @admin.register(SourceCodeEmail)

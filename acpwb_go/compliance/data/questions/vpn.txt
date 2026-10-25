@@ -1,0 +1,60 @@
+# Remote access and VPN use.
+Q: When working on public Wi-Fi, you should:
++ Connect to the company VPN before accessing company resources
+- Skip the VPN for speed
+- Share your connection
+- Use any open network without protection
+
+Q: VPN credentials must:
++ Never be shared
+- Be shared with family
+- Be posted
+- Be written on your laptop
+
+Q: Split tunneling settings are:
++ Configured by IT and should not be changed by users
+- Changed freely
+- Required to disable
+- Unimportant
+
+Q: Using a personal VPN service instead of the company VPN for company data is:
++ Not allowed
+- Required
+- Safer
+- Faster and fine
+
+Q: Leaving your VPN connected on an unlocked laptop in a café:
++ Puts company systems at risk
+- Is fine
+- Is required
+- Saves time
+
+Q: Unusual VPN prompts or certificate warnings should be:
++ Reported to IT
+- Clicked through
+- Ignored
+- Shared
+
+Q: VPN logins from unexpected countries on your account should be:
++ Reported immediately
+- Ignored
+- Celebrated
+- Deleted
+
+Q: Remote access for vendors must be:
++ Approved, limited, and monitored
+- Unlimited
+- Shared accounts
+- Permanent
+
+Q: Disconnecting from the VPN to use a blocked website at work is:
++ A policy violation if it bypasses controls
+- Clever
+- Required
+- Fine
+
+Q: VPN software updates should be:
++ Installed promptly
+- Delayed forever
+- Avoided
+- Optional

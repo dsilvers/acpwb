@@ -1,0 +1,62 @@
+# Language, generations, and inclusive communication. Correct answers on
+# English-only rules follow EEOC guidance.
+
+Q: An "English-only" rule at work is generally lawful only when:
++ It is justified by business necessity and applied narrowly, such as for safety communications
+- A manager prefers it
+- It applies during breaks
+- Customers are present anywhere in the building
+
+Q: Mocking a coworker's accent is:
++ Disrespectful and can be harassment based on national origin
+- Harmless fun
+- Allowed in the team chat
+- A team-building game
+
+Q: Translating safety instructions into the languages employees understand:
++ Helps ensure everyone can work safely
+- Is prohibited
+- Is optional for warehouses
+- Is only for executives
+
+Q: Assuming a coworker is not tech-savvy because of their age is:
++ A stereotype that can lead to age discrimination
+- Usually accurate
+- Helpful
+- Required for training
+
+Q: Workplace slang and acronyms in messages to new colleagues should be:
++ Explained or avoided so everyone understands
+- Used more to build culture
+- Kept secret
+- Tested in a quiz
+
+Q: Calling a 60-year-old employee "Grandpa" at work is:
++ Inappropriate and potentially age-based harassment
+- Affectionate
+- Allowed on birthdays
+- Required in some departments
+
+Q: Interpreters for meetings with deaf or hard-of-hearing employees:
++ May be a reasonable accommodation
+- Are never provided
+- Must be paid by the employee
+- Are only for {EVENT}
+
+Q: Inclusive language in job postings helps:
++ Attract a broad range of qualified candidates
+- Reduce applications
+- Avoid legal requirements
+- Confuse search engines
+
+Q: A coworker uses a nickname you did not choose. You should:
++ Let them know what you prefer to be called
+- Accept it forever
+- Give them a worse nickname
+- Report it to {VENDOR}
+
+Q: Generational labels like "Boomers" and "Gen Z" are:
++ Broad generalizations that should not be used to judge individuals
+- Accurate personality tests
+- Required in performance reviews
+- Job titles

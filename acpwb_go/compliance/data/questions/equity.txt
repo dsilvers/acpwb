@@ -1,0 +1,49 @@
+# Equity compensation (stock options, RSUs, vesting).
+
+Q: A restricted stock unit (RSU) is:
++ A promise to deliver company shares, or their value, once vesting conditions are met
+- A share you can sell on day one
+- A parking space reserved for executives
+- A unit of the {COMMITTEE}
+
+Q: A "one-year cliff" in a four-year vesting schedule means:
++ Nothing vests until the first anniversary, when the first portion vests at once
+- Options vest only on cliffs
+- You must work at least one year without a vacation
+- Shares lose value after one year
+
+Q: A stock option is "underwater" when:
++ The current share price is below the option's exercise price
+- It was granted during a flood
+- It vests in the summer
+- The shares are held in a Cayman account
+
+Q: Trading company stock while aware of material nonpublic information is:
++ Prohibited insider trading, regardless of whether the shares came from an equity award
+- Allowed for shares received as compensation
+- Allowed if you sell, but not if you buy
+- Allowed if the profit is under {AMOUNT}
+
+Q: An 83(b) election must be filed with the IRS within:
++ 30 days of the grant of restricted stock
+- One year
+- Ten business days of vesting
+- Whenever convenient
+
+Q: A Rule 10b5-1 trading plan:
++ Is set up while not in possession of material nonpublic information and schedules future trades in advance
+- Allows trading on inside information
+- Is a 10-step plan for buying more stock
+- Applies only to trades on {WEEKDAY}
+
+Q: When an employee leaves ACPWB, unvested equity awards generally:
++ Are forfeited, unless the plan or award agreement says otherwise
+- Vest immediately
+- Transfer to their manager
+- Are converted to ACPWB Appreciation Points
+
+Q: An employee stock purchase plan (ESPP) typically lets employees:
++ Buy company shares through payroll deductions, often at a discount
+- Sell shares to coworkers
+- Vote on the CEO's salary
+- Purchase stock in competitors

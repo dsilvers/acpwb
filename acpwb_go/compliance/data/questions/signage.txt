@@ -1,0 +1,56 @@
+# Safety signs, colors, and labels. Correct answers follow ANSI Z535 and
+# OSHA signage conventions.
+
+Q: A sign with the signal word "DANGER" indicates:
++ A hazard that will result in death or serious injury if not avoided
+- A mild inconvenience
+- A slippery floor that might be damp
+- A meeting room in use
+
+Q: A "WARNING" sign indicates:
++ A hazard that could result in death or serious injury
+- That the coffee is hot
+- That a meeting is about to start
+- Nothing important
+
+Q: A "CAUTION" sign indicates:
++ A hazard that could result in minor or moderate injury
+- A guaranteed fatality
+- A celebration
+- A parking spot
+
+Q: Green safety signs typically show:
++ Safety equipment and safe conditions, such as first aid stations and emergency exits
+- Danger zones
+- Fire extinguishers only
+- Restricted areas
+
+Q: Red is used for:
++ Fire protection equipment and "DANGER" signal words
+- Coffee machines
+- Break areas
+- Recycling bins
+
+Q: A "NOTICE" sign is used for:
++ Information not related to personal injury, such as policies or procedures
+- Imminent hazards
+- Fire exits
+- Fire extinguishers
+
+Q: Removing or covering a safety sign is:
++ Not allowed
+- Allowed if it is ugly
+- Allowed for photos
+- Allowed during {EVENT}
+
+Q: An "EXIT" sign that is not lit should be:
++ Reported to Facilities
+- Ignored
+- Removed
+- Painted
+
+Q: Floor marking tape in yellow usually indicates:
++ Aisles, traffic lanes, and areas requiring caution
+- Areas to sit
+- Parking for bicycles
+- Dance floors

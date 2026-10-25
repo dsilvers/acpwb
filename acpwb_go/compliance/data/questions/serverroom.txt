@@ -1,0 +1,55 @@
+# Server rooms and data centers.
+
+Q: Access to the server room should be:
++ Limited to authorized people and logged
+- Open to anyone with a badge
+- Shared with visitors
+- Used for storage
+
+Q: Food and drinks in the server room are:
++ Not allowed
+- Allowed if covered
+- Allowed for overnight shifts
+- Required to stay alert
+
+Q: Many server rooms use clean agent fire suppression systems. When the alarm for one sounds, you should:
++ Leave the room immediately
+- Stay to watch it work
+- Try to stop the discharge
+- Unplug the servers first
+
+Q: Propping open the server room door to cool it down is:
++ Not allowed; it defeats access control and environmental controls
+- Allowed in summer
+- Allowed if a fan is used
+- Encouraged
+
+Q: Visitors to a data center must be:
++ Escorted at all times
+- Left alone to work
+- Given admin passwords
+- Given permanent badges
+
+Q: Cables in a data center should be:
++ Organized and labeled to reduce errors and outages
+- Tangled for security
+- Unlabeled
+- Painted
+
+Q: Unplugging a server you think is unused is:
++ Not allowed without a change request
+- Allowed if it is not blinking
+- Allowed on {WEEKDAY}s
+- A good way to save power
+
+Q: Raised floors in a data center may hide:
++ Cabling and cooling; lift tiles only with authorization and care
+- Treasure
+- A secret office
+- The {COMMITTEE}
+
+Q: A server rack's load rating should be:
++ Respected; overloading a rack can cause it to tip
+- Ignored
+- Doubled
+- Tested by climbing it

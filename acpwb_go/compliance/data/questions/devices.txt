@@ -1,0 +1,73 @@
+# Laptops, mobile devices, and removable media.
+
+Q: You find a USB drive labeled "Salaries {YEAR}" in the parking lot. You should:
++ Turn it in to IT Security without plugging it in
+- Plug it into your laptop to find the owner
+- Plug it into a coworker's laptop
+- Keep it as a backup drive
+
+Q: Personal devices used for ACPWB email must:
++ Be enrolled in mobile device management and meet security requirements
+- Be at least five years old
+- Have a company sticker
+- Never be locked
+
+Q: Leaving your laptop unlocked when you step away is:
++ Not allowed; lock your screen every time
+- Fine for short trips to the {PLACE}
+- Fine if your coworkers are nice
+- Required for IT updates
+
+Q: A lost or stolen ACPWB laptop or phone should be reported:
++ Immediately to IT Security
+- After you buy a replacement
+- Only if it had confidential files
+- At the next {EVENT}
+
+Q: Charging your phone at a public USB charging station in an airport:
++ Can be risky; use your own charger and a wall outlet when possible
+- Is always safe
+- Is required by the TSA
+- Charges it twice as fast
+
+Q: Installing unapproved software on an ACPWB laptop is:
++ Not allowed; request software through IT
+- Allowed if it is free
+- Allowed if a coworker recommends it
+- Allowed if it is a game
+
+Q: Software updates and security patches should be:
++ Installed promptly when prompted
+- Postponed indefinitely
+- Installed only once a year
+- Installed only on {WEEKDAY}s
+
+Q: Full-disk encryption on laptops protects data when:
++ A device is lost or stolen
+- You forget your password
+- The battery dies
+- You spill coffee on it
+
+Q: Leaving a laptop visible in a parked car is:
++ Risky; take it with you or store it out of sight
+- Fine if the doors are locked
+- Required when visiting clients
+- Fine in the ACPWB garage
+
+Q: Copying confidential files to a personal USB drive is:
++ Not allowed without approval and encryption
+- Allowed for working at home
+- Allowed if the drive is new
+- Allowed for small files
+
+Q: Smart speakers in a home office should be:
++ Muted or moved away during confidential calls
+- Placed next to the laptop for better audio
+- Asked to take meeting notes
+- Connected to {SYSTEM}
+
+Q: When you leave ACPWB, company devices must be:
++ Returned, with no data removed or wiped by you
+- Kept as a souvenir
+- Wiped and sold
+- Given to a coworker

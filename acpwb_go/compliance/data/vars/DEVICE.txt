@@ -1,0 +1,8 @@
+laptop
+mobile phone
+tablet
+desk phone
+USB drive
+external hard drive
+smart watch
+conference room display

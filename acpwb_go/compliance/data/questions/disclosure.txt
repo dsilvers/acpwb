@@ -1,0 +1,50 @@
+# Public disclosure, rumors, and Regulation FD. Correct answers follow SEC
+# Regulation FD; keep them accurate.
+
+Q: Regulation FD (Fair Disclosure) prohibits public companies from:
++ Selectively disclosing material nonpublic information to analysts or investors before the public
+- Disclosing anything
+- Holding earnings calls
+- Using social media
+
+Q: Only authorized spokespeople should:
++ Speak with analysts, investors, or the media on ACPWB's behalf
+- Answer phones
+- Attend {EVENT}
+- Use email
+
+Q: A rumor about a merger spreading in the office should be:
++ Not repeated or commented on externally; refer questions to Corporate Communications
+- Confirmed on social media
+- Shared with friends
+- Used to trade stock
+
+Q: An unintentional selective disclosure of material information under Regulation FD must be:
++ Made public promptly
+- Ignored
+- Retracted privately
+- Repeated
+
+Q: "No comment" is:
++ An appropriate response when you are not authorized to speak
+- Rude
+- A confirmation
+- Illegal
+
+Q: Posting on social media that "big news is coming next week" about ACPWB is:
++ Not allowed; it can be a selective disclosure or tip
+- Fun teaser marketing
+- Required
+- Allowed on {WEEKDAY}s
+
+Q: Earnings information before the official release is:
++ Material nonpublic information that must be kept confidential
+- Public information
+- Shareable with family
+- Shareable with {VENDOR}
+
+Q: Quiet periods before earnings releases mean:
++ The company limits communications with investors and analysts
+- The office is silent
+- No meetings
+- No coffee

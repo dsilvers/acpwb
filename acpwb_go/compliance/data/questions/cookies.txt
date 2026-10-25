@@ -1,0 +1,66 @@
+# Website cookies and tracking consent.
+Q: A cookie is:
++ A small file a website stores in a browser to remember information
+- A snack provided in the lobby
+- A type of computer virus
+- A password manager
+
+Q: "Strictly necessary" cookies are those that:
++ Are needed for the site to work, such as keeping you logged in
+- Track you across the internet for ads
+- Make the site load more slowly
+- Are necessary for marketing bonuses
+
+Q: In jurisdictions that require consent, tracking cookies should be set:
++ Only after the visitor agrees
+- Before the banner appears
+- Whether or not the visitor agrees
+- Only on mobile phones
+
+Q: A cookie banner whose "Reject" option is hidden or much harder to use than "Accept" is:
++ A dark pattern that may not produce valid consent
+- A clever design choice
+- Required by law
+- Friendlier to users
+
+Q: Third-party cookies are set by:
++ A domain other than the site the visitor is on
+- The visitor's third computer
+- The third employee who visited the page
+- Search engines only
+
+Q: Adding a new analytics or advertising tag to the ACPWB website requires:
++ Privacy review and an update to the cookie notice if needed
+- Only the marketing manager's approval
+- Nothing; tags are harmless
+- A new domain name
+
+Q: The Global Privacy Control browser signal should be:
++ Honored as an opt-out of sale or sharing where law requires
+- Ignored
+- Treated as a security attack
+- Used to show more ads
+
+Q: The cookie notice should explain:
++ What cookies are used, why, and how to change choices
+- Recipes for cookies
+- Nothing, to keep it short
+- Only the cookie expiration dates
+
+Q: Visitors should be able to change their cookie choices:
++ At any time, through a visible settings link
+- Only by clearing their browser forever
+- Only by calling customer support
+- Never
+
+Q: Cookies that identify a user can be:
++ Personal data under privacy laws such as GDPR
+- Exempt from all privacy laws
+- Shared freely with anyone
+- Sold without notice
+
+Q: ACPWB's edge sets a first-party client cookie. Because it is described in the cookie policy, changing it requires:
++ A cookie policy review
+- Nothing at all
+- A new logo
+- A press release

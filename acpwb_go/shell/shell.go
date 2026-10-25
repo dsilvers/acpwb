@@ -40,7 +40,7 @@ const (
 	staticFaviconURL   = "/static/favicon.svg"
 	staticFontURL      = "/static/fonts/inter/inter-variable-latin.woff2"
 	staticBootstrapCSS = "/static/vendor/bootstrap/bootstrap.min.css"
-	staticACPWBCSS     = "/static/css/acpwb.css?v=20261011"
+	staticACPWBCSS     = "/static/css/acpwb.css?v=20261021"
 	staticBootstrapJS  = "/static/vendor/bootstrap/bootstrap.bundle.min.js"
 	staticOGImageURL   = "https://acpwb.com/static/img/og-default.png"
 )
@@ -62,11 +62,10 @@ var mainNav = []navItem{
 	{"Home", "/"},
 	{"Our People", "/our-people/"},
 	{"Mission", "/mission/"},
-	{"Projects", "/projects/"},
 	{"Reports", "/reports/"},
 	{"Presentations", "/presentations/"},
 	{"Policy", "/public-policy/"},
-	{"Partners", "/partners/"},
+	{"Compliance", "/compliance/"},
 	{"Contact", "/contact/"},
 }
 
@@ -76,7 +75,6 @@ var footerCol1 = []navItem{
 	{"Home", "/"},
 	{"Our People", "/our-people/"},
 	{"Mission", "/mission/"},
-	{"Projects", "/projects/"},
 	{"Reports", "/reports/"},
 	{"Public Policy", "/public-policy/"},
 	{"Source Code", "/source-code/"},
@@ -101,7 +99,6 @@ var footerCol2Prefixed = []navItem{
 	{"Careers", "/careers/"},
 	{"Awards", "/awards/"},
 	{"Patents", "/patents/"},
-	{"Partners", "/partners/"},
 }
 
 // footerCol3 mirrors the footer's third link column. All entries are
@@ -110,6 +107,7 @@ var footerCol3 = []navItem{
 	{"Contact", "/contact/"},
 	{"FAQ", "/faq/"},
 	{"Press Releases", "/press-releases/"},
+	{"Compliance", "/compliance/"},
 	{"Do Not Sell My Info", "/privacy/do-not-sell/"},
 	{"Accessibility", "/accessibility/"},
 	{"Trademarks", "/trademarks/"},
@@ -137,7 +135,9 @@ type PageParams struct {
 	OGTitle       string
 	OGDescription string
 	// OGImage overrides the share image URL; empty keeps the site default.
-	OGImage string
+	// OGImageWidth/Height are its pixel size; 0 means the default 1200×630.
+	OGImage                     string
+	OGImageWidth, OGImageHeight int
 
 	// RequestPath is the request's full path (e.g. from
 	// request.URL.RequestURI() including any query string), used for
@@ -338,8 +338,12 @@ func RenderPage(p PageParams) string {
 	fmt.Fprintf(&b, `  <meta property="og:description" content="%s">`+"\n", escape(ogDescription))
 	fmt.Fprintf(&b, `  <meta property="og:url" content="https://acpwb.com%s">`+"\n", escape(p.RequestPath))
 	fmt.Fprintf(&b, `  <meta property="og:image" content="%s">`+"\n", escape(ogImage))
-	b.WriteString(`  <meta property="og:image:width" content="1200">` + "\n")
-	b.WriteString(`  <meta property="og:image:height" content="630">` + "\n")
+	ogW, ogH := p.OGImageWidth, p.OGImageHeight
+	if ogW == 0 || ogH == 0 {
+		ogW, ogH = 1200, 630
+	}
+	fmt.Fprintf(&b, `  <meta property="og:image:width" content="%d">`+"\n", ogW)
+	fmt.Fprintf(&b, `  <meta property="og:image:height" content="%d">`+"\n", ogH)
 	b.WriteString("  <!-- Twitter Card -->\n")
 	b.WriteString(`  <meta name="twitter:card" content="summary_large_image">` + "\n")
 	fmt.Fprintf(&b, `  <meta name="twitter:title" content="%s">`+"\n", escape(ogTitle))

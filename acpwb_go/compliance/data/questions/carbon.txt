@@ -1,0 +1,66 @@
+# Carbon footprint and greenhouse gas accounting basics (GHG Protocol).
+Q: Under the GHG Protocol, Scope 1 emissions are:
++ Direct emissions from sources the company owns or controls, such as company vehicles and boilers
+- Emissions from employees' home Wi-Fi
+- Emissions from the CEO's personal hobbies
+- Emissions that happened before 2006
+
+Q: Scope 2 emissions come from:
++ Purchased electricity, steam, heat, or cooling
+- Office gossip
+- Customers' cars
+- Coffee grounds
+
+Q: Scope 3 emissions include:
++ Indirect value-chain emissions, such as business travel, commuting, and purchased goods
+- Only the emissions from the third floor
+- Emissions counted three times
+- Emissions from scope creep
+
+Q: For most office-based companies, the largest share of emissions is usually:
++ Scope 3, especially purchased goods, services, and travel
+- The office printer
+- Scope 1 from the receptionist's desk fan
+- The holiday party candles
+
+Q: Which choice usually lowers business travel emissions the most?
++ Replacing a trip with a video meeting
+- Booking a window seat
+- Flying business class
+- Taking two short flights instead of one direct flight
+
+Q: Carbon offsets should be:
++ Used only after reducing emissions, and from credible, verified projects
+- Bought instead of reducing anything
+- Printed and framed
+- Counted twice for good luck
+
+Q: "Greenwashing" means:
++ Making misleading claims about environmental performance
+- Washing company vehicles with recycled water
+- Painting the office green
+- Laundering money through a botanical garden
+
+Q: A public claim that ACPWB is "carbon neutral" must be:
++ Accurate, supported by data, and reviewed by Legal and Sustainability
+- Approved by whoever writes the press release
+- Made only during Earth Week
+- Accompanied by a picture of a polar bear
+
+Q: Turning off monitors and lights at the end of the day mainly reduces:
++ Scope 2 emissions from purchased electricity
+- Scope 3 emissions from suppliers
+- Scope 1 emissions from company jets
+- Paper consumption
+
+Q: Data used in the annual emissions inventory should be:
++ Traceable to records such as utility bills, fuel receipts, and travel bookings
+- Estimated by mood
+- Copied from last year with the year changed
+- Rounded to zero
+
+Q: Choosing train travel over a short flight usually:
++ Lowers travel emissions
+- Raises Scope 1 emissions
+- Is prohibited by the travel policy
+- Has no effect

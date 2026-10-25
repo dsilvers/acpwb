@@ -1,0 +1,49 @@
+# Professional networking and online profiles.
+
+Q: Your professional networking profile may list:
++ Your role and general responsibilities, without confidential project or client details
+- Confidential client names and deal values
+- Unreleased product plans
+- Your badge number
+
+Q: Accepting a connection request from a stranger claiming to be a recruiter is:
++ Fine with caution; be wary of requests for confidential information or files
+- Required
+- Dangerous in all cases
+- A violation of {AGENCY} rules
+
+Q: A message from a "recruiter" offering a job and asking you to install software for an interview is:
++ A common scam; do not install anything
+- A normal process
+- A sign you got the job
+- Required by HR
+
+Q: Listing "ACPWB Chief Executive Officer" on your profile when you are an analyst is:
++ Misrepresentation and may violate the Code of Conduct
+- Aspirational
+- Allowed if no one checks
+- Encouraged for networking
+
+Q: Writing a recommendation for a former coworker on a networking site is:
++ A personal reference, distinct from an official ACPWB reference
+- Prohibited
+- Binding on ACPWB
+- Required for all departures
+
+Q: Networking events where competitors are present require:
++ Care to avoid discussing pricing, wages, or other competitively sensitive topics
+- No special care
+- Sharing your salary
+- Exchanging customer lists
+
+Q: Posting "We're hiring!" with an ACPWB job link is:
++ Fine for public postings, using the official link
+- Prohibited
+- Allowed only for executives
+- Allowed only with a pay range of your own
+
+Q: A former colleague now at a competitor asks how a project is going. You should:
++ Keep it general and avoid confidential details
+- Share the project plan
+- Share the budget
+- Invite them to the meeting

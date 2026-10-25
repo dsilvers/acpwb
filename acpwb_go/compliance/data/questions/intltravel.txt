@@ -1,0 +1,67 @@
+# International travel, assignments, and working abroad.
+
+Q: Before traveling internationally with an ACPWB laptop, you should:
++ Check with IT Security about destination restrictions and device requirements
+- Load all confidential files for offline access
+- Leave it unlocked for border checks
+- Mail it ahead
+
+Q: U.S. Customs and Border Protection officers may:
++ Inspect electronic devices at the border, so carry only the data you need
+- Never look at devices
+- Only look at devices of foreign citizens
+- Only look at phones on {WEEKDAY}s
+
+Q: Working remotely from another country, even for a few weeks, may:
++ Create tax, immigration, and legal obligations, so it requires approval
+- Have no consequences
+- Be done without telling anyone
+- Count as vacation
+
+Q: Hotel room safes are:
++ Better than nothing, but not suitable for leaving sensitive devices unattended for long periods
+- Unbreakable
+- Required for storing passports only
+- Owned by ACPWB
+
+Q: Registering international trips with the ACPWB travel program helps:
++ The company locate and assist travelers during emergencies
+- Earn more points
+- Avoid expense reports
+- Skip security lines
+
+Q: Business travel to a country under sanctions requires:
++ Review by Compliance before booking
+- Nothing
+- A visa only
+- A vacation day
+
+Q: A long-term international assignment may include:
++ Tax equalization, housing support, and immigration sponsorship, under the assignment policy
+- Unlimited spending
+- Dual salaries
+- A personal driver for everyone
+
+Q: Using public computers in a hotel business center to access ACPWB email is:
++ Not allowed
+- Allowed if you clear the history
+- Allowed abroad only
+- Encouraged to save laptop battery
+
+Q: Bringing ACPWB prototype hardware or controlled technology abroad may require:
++ An export license or Compliance review
+- A larger suitcase
+- Nothing if it is in carry-on
+- A customs bribe
+
+Q: When traveling, discuss ACPWB business in public places such as airport lounges:
++ Carefully, avoiding confidential details
+- Loudly, to impress others
+- On speakerphone
+- In detail, since no one is listening
+
+Q: A trip combining business and leisure, sometimes called "bleisure," should:
++ Keep personal expenses separate from reimbursable business expenses
+- Be fully expensed
+- Count the leisure days as work
+- Include family airfare on the corporate card

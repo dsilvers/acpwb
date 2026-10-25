@@ -1,0 +1,73 @@
+# Delegation of authority and signature limits.
+
+Q: The delegation of authority policy defines:
++ Who may approve or sign commitments, and up to what amount
+- Who sits where in the boardroom
+- Who gets the corner office
+- The order of speakers at {EVENT}
+
+Q: Splitting a $60,000 purchase into three $20,000 purchases to stay under your approval limit is:
++ A violation of the delegation of authority policy
+- A clever workaround
+- Allowed if approved afterward
+- Allowed at quarter end
+
+Q: Signing a contract on ACPWB's behalf without authority can:
++ Expose the company to obligations it did not approve, and is a policy violation
+- Make you a director
+- Be fixed by crossing out your name
+- Count as a promotion
+
+Q: When you are out of office, approval authority may be delegated:
++ Only as the policy permits, in writing, and never above the delegator's own limit
+- To anyone on your team
+- To your spouse
+- To {VENDOR}
+
+Q: A verbal promise to a vendor to extend a contract is:
++ Not a substitute for an approved written amendment, and should not be made without authority
+- Binding on ACPWB forever
+- A standard practice
+- Required to maintain good relationships
+
+Q: Approval of your own expense report by yourself is:
++ Not allowed; approvals must come from someone else with authority
+- Efficient
+- Allowed for small amounts
+- Allowed on {WEEKDAY}s
+
+Q: Electronic signatures on ACPWB contracts are:
++ Generally valid when made through an approved e-signature system by an authorized signer
+- Never valid
+- Valid only if typed in cursive font
+- Valid only on paper
+
+Q: Contract terms that differ from ACPWB standard terms should be:
++ Reviewed by Legal before signing
+- Accepted to save time
+- Accepted if the vendor insists
+- Hidden in an appendix
+
+Q: Approval authority belongs to:
++ The role, as documented, not to whoever is available
+- Anyone senior-looking
+- The person with the oldest badge
+- The {COMMITTEE}'s favorite
+
+Q: A contract value that includes multi-year renewals should be calculated:
++ Over the full committed term when determining the required approval level
+- For year one only
+- Monthly
+- Excluding renewals always
+
+Q: Backdating an approval to match a missed deadline is:
++ Falsification of records
+- Housekeeping
+- Allowed with a sticky note
+- Required
+
+Q: Approval delegations should be reviewed:
++ Periodically and when people change roles
+- Never
+- Only after an audit finding
+- Each {EVENT}

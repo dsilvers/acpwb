@@ -1,0 +1,59 @@
+Q: At the end of the business day, which items may remain on your desk?
++ Your monitor, keyboard, mouse, and one ACPWB-branded mug (empty)
+- Printed documents marked INTERNAL, if face down
+- Sticky notes, provided they are in a neat stack
+- A framed photo with your password written on the back
+
+Q: Confidential documents awaiting disposal must be placed in:
++ The locked grey shred console on your floor
+- The blue recycling bin
+- A desk drawer, until the volume justifies a trip
+- The printer output tray, for collection by Facilities
+
+Q: You print a RESTRICTED document to the {FLOOR}-floor printer and are called into a meeting. What is the maximum time the document may remain on the printer?
++ Zero. Use secure "hold and release" printing with your badge
+- {N} minutes
+- Until the end of the meeting
+- Until someone else prints
+
+Q: Whiteboards in conference rooms must be:
++ Erased completely after every meeting, including the "Do Not Erase" corner
+- Photographed and then erased
+- Left as-is for the next meeting's context
+- Erased only if they contain financial figures
+
+Q: Under Policy {POLICY}, a "clear screen" means:
++ No documents, chats, or email visible when the screen is unattended
+- A screen that has been cleaned with an approved wipe
+- A monitor with brightness reduced to 40%
+- A screensaver featuring the ACPWB logo
+
+Q: Which of the following counts as an "unattended" workstation?
++ A workstation left for any period of time
++ A workstation in a locked office with the door open
++ A workstation being "watched" by a colleague
+- A workstation that has been powered off and unplugged
+
+Q: [At the end of the day|Before leaving for the evening], your desk should [have|contain]:
++ No papers, notes, or removable media left out, with drawers locked
+- Only papers stacked neatly face down
+- Sticky notes with passwords, if hidden under the keyboard
+- A sign reading "Do Not Disturb"
+
+Q: [You step away|You leave your desk] for {N} minutes to get coffee. Your screen should be:
++ Locked
+- Dimmed
+- Turned to face the wall
+- Left on, since it is only {N} minutes
+
+Q: [Whiteboards|Whiteboards in the {PLACE}] used to discuss confidential matters must be:
++ Erased completely before the room is left
+- Photographed and left up for the next meeting
+- Marked "Do Not Erase"
+- Covered with a coat
+
+Q: [A colleague|{NAME}] leaves a {DOCUMENT} on the shared printer and goes home. You should:
++ Place it in a confidential shred bin or hand it to their manager in a sealed envelope
+- Leave it there for the morning
+- Read it to find out who it belongs to
+- Put it in the recycling

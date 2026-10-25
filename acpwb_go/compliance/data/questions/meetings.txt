@@ -1,0 +1,66 @@
+# Meetings, minutes, and conference rooms.
+
+Q: [You are the last person to leave|After a meeting ends in] the {PLACE}[? and the next group is already waiting]. Under Policy {POLICY}, [what must you do before leaving|which step is REQUIRED]?
++ Erase the whiteboard completely, including any [corner marked "Do Not Erase"|diagrams that "might be useful later"]
++ Collect every printed handout and place [it|them] in the locked shred console
++ Log out of the conference room display and disconnect your {DEVICE}
+- Leave the whiteboard for the next group as a courtesy
+- Photograph the whiteboard with a personal [phone|camera] for reference
+- Turn the whiteboard to face the wall
+- Leave handouts on the table for anyone who missed the meeting
+
+Q: [Meeting minutes|Minutes of a committee meeting] must [record|capture]:
++ Attendees, decisions made, and action items with owners
++ The date, time, and location of the meeting
++ Any recusals declared by attendees
+- Verbatim transcripts of all side conversations
+- [Only|Just] the decisions that were unanimous
+- The personal opinions of the note-taker
+
+Q: {NAME} [schedules|books] a recurring {WEEKDAY} meeting in the {PLACE} [for|with] {N} attendees but [rarely attends|cancels at the last minute] [?most weeks]. Under the Meeting Conduct Standard, {FIRST} should:
++ Release the room booking in the reservation system at least {N} hours in advance
+- Keep the booking in case it becomes useful
+- Hold the room by leaving a laptop bag on a chair
+- Send a delegate to sit in the empty room
+
+Q: A [vendor|guest|consultant from {ORG}] asks to [join|dial into] an internal meeting about {DOCUMENT}. [Before admitting them|Before the meeting starts], you must:
++ Confirm a signed non-disclosure agreement is on file and limit discussion to the approved agenda
+- Admit them, since they are already in the waiting room
+- Ask them to keep their camera off
+- Mute them for confidential portions only
+
+Q: [How long|For how many minutes] may a meeting [run over|exceed] its scheduled end time before attendees may leave without notice?
++ [Zero minutes|None]; attendees may leave at the scheduled end time
+- {N} minutes
+- Until the most senior attendee leaves
+- Fifteen minutes per hour of scheduled time
+
+Q: The conference room thermostat [in the {PLACE}|on the {FLOOR} floor] is set [too warm|too cold|to a temperature you disagree with]. You should:
++ Submit a Facilities request through ServiceNow
+- Adjust the thermostat yourself with a paper clip
+- Prop the door open
+- Bring a personal space heater from home
+
+Q: [During|In] a [video|hybrid] meeting, your screen share accidentally shows a {DOCUMENT}. [What should you do first?|The FIRST step is to:]
++ Stop sharing immediately and report a potential disclosure to the Privacy Office
+- Keep sharing and hope nobody noticed
+- Ask attendees to close their eyes
+- Continue, since everyone in the meeting is an associate
+
+Q: [Every meeting invitation|A meeting invitation] should include:
++ A clear purpose and an agenda
+- A list of everyone who declined last time
+- The organizer's performance rating
+- A reminder to bring snacks
+
+Q: [When joining a hybrid meeting|When joining a meeting by video] from an open-plan area, you should:
++ Use headphones and keep confidential details off screen
+- Use your laptop speakers so others can hear
+- Share your screen at all times
+- Join from the {PLACE} for the best background
+
+Q: [Booking the {PLACE}|Reserving a conference room] "just in case" and not using it is:
++ Discouraged; release rooms you do not need
+- Good practice
+- Required for meetings over {N} people
+- Allowed on {WEEKDAY}s

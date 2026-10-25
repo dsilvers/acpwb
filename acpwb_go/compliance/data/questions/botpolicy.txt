@@ -1,0 +1,66 @@
+# Bots, crawlers, and robots.txt: how ACPWB treats automated traffic.
+Q: The robots.txt file on a website is:
++ A voluntary convention that tells crawlers which paths to avoid
+- A law that every crawler must obey
+- A list of employees who are robots
+- A firewall rule
+
+Q: A crawler that ignores robots.txt:
++ Is still able to fetch pages; robots.txt is not access control
+- Is automatically blocked by the internet
+- Receives a fine from the robots.txt authority
+- Cannot see any pages at all
+
+Q: Sensitive information on a public web server should be protected by:
++ Authentication and access controls, not by hiding it in robots.txt
+- A Disallow line in robots.txt
+- Naming the folder something boring
+- Asking crawlers nicely
+
+Q: A user agent string such as "GPTBot" or "CCBot" usually identifies:
++ An automated crawler collecting web content
+- A new employee in the Data team
+- A brand of coffee machine
+- A type of firewall
+
+Q: Can a user agent string be faked?
++ Yes; any client can send any user agent string
+- No; browsers lock it permanently
+- Only on Fridays
+- Only by licensed bots
+
+Q: ACPWB staff who build scripts that scrape other websites must:
++ Follow the site's terms, legal guidance, and our scraping policy
+- Ignore robots.txt to save time
+- Use a fake browser user agent to avoid detection
+- Scrape as fast as possible before anyone notices
+
+Q: Unusually high request rates from a single network may indicate:
++ Automated traffic that the security team should review
+- A very enthusiastic reader
+- A broken keyboard
+- An upcoming holiday
+
+Q: Content published on ACPWB's public site should be assumed to be:
++ Readable by anyone, including automated crawlers
+- Visible only to people in Milwaukee
+- Hidden from search engines by default
+- Encrypted in the visitor's browser
+
+Q: A "crawl-delay" directive asks a crawler to:
++ Wait a set time between requests
+- Crawl only during business hours
+- Delete pages it already crawled
+- Pay a fee per page
+
+Q: If you find confidential documents indexed by a search engine, you should:
++ Report it to Security so the content can be removed and the exposure assessed
+- Download a copy for safekeeping
+- Share the link with your team
+- Add a funny comment to the page
+
+Q: A "honeypot" link on a web page is designed to:
++ Detect automated visitors that follow links humans never see
+- Sell honey online
+- Speed up page loads
+- Collect employee lunch orders

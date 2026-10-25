@@ -1,0 +1,66 @@
+# Customer complaint handling.
+Q: The first step in handling a customer complaint is to:
++ Listen, acknowledge the issue, and record it
+- Argue about whose fault it is
+- Transfer the customer to a random department
+- Promise a full refund immediately
+
+Q: Every complaint should be logged so that:
++ Trends can be spotted and root causes fixed
+- Customers can be blacklisted
+- Agents can be graded on volume only
+- Nothing happens
+
+Q: A complaint that alleges a safety problem with a product must be:
++ Escalated immediately under the product safety procedure
+- Treated like any billing question
+- Closed if the customer is rude
+- Answered with a coupon
+
+Q: A complaint about discrimination by an ACPWB employee should be:
++ Escalated to HR or Legal promptly
+- Handled informally by the agent
+- Deleted to protect the employee
+- Posted on the team board
+
+Q: Promising a customer an outcome you cannot authorize:
++ Creates bigger problems; explain what you can do and escalate
+- Is great customer service
+- Is required to close the ticket
+- Is fine if it ends the call
+
+Q: When a complaint is resolved, you should:
++ Confirm the resolution with the customer and close the record
+- Close the ticket before telling the customer
+- Reopen it for metrics
+- Forward it to everyone
+
+Q: A customer posts a complaint publicly on social media. You should:
++ Follow the social media response guidelines or route it to the social team
+- Reply angrily from your personal account
+- Post the customer's account details publicly
+- Report the customer as spam
+
+Q: Root cause analysis of complaints helps to:
++ Fix the underlying issue so it does not happen again
+- Assign blame
+- Increase complaint volume
+- Close tickets faster without fixing anything
+
+Q: Personal data a customer shares in a complaint should be:
++ Used only to resolve the complaint and protected like other customer data
+- Shared with marketing for upselling
+- Posted in the knowledge base
+- Printed for the break room
+
+Q: A customer is abusive or threatening on the phone. You may:
++ Follow the procedure to end the call politely and escalate to a supervisor or Security
+- Respond with matching insults
+- Keep listening indefinitely
+- Hang up and delete the record
+
+Q: The time limit for acknowledging a written complaint is set by:
++ The customer service policy and any applicable regulations
+- The mood of the agent
+- The complaint's word count
+- Nothing; acknowledgment is optional

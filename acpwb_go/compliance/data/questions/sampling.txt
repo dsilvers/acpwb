@@ -1,0 +1,66 @@
+# Audit sampling basics.
+Q: Audit sampling means:
++ Testing a subset of items to draw conclusions about the whole population
+- Testing every item always
+- Tasting food
+- Picking favorites
+
+Q: A random sample helps because:
++ Each item has a chance of selection, reducing bias
+- It is easier to cheat
+- It favors large items
+- It is faster to fake
+
+Q: Choosing only the easiest items to test is:
++ Biased sampling and not appropriate
+- Efficient
+- Required
+- Random
+
+Q: When a sample finds errors, the auditor should:
++ Evaluate what they mean for the whole population
+- Ignore them
+- Delete them
+- Choose another sample until clean
+
+Q: Larger samples generally:
++ Give more confidence in the conclusion
+- Give less confidence
+- Make no difference
+- Are prohibited
+
+Q: Providing auditors with a pre-selected "clean" sample is:
++ Improper
+- Helpful
+- Required
+- Normal
+
+Q: A population for sampling should be:
++ Complete and accurate
+- Partial
+- Filtered by management
+- Invented
+
+Q: Stratified sampling divides a population into:
++ Groups, such as by dollar amount, before sampling
+- Floors of the building
+- Random letters
+- Nothing
+
+Q: Sampling documentation should show:
++ How the sample was selected and the results
+- Only the results
+- Nothing
+- Only the auditor's name
+
+Q: Random number generators used in sampling should be:
++ Reproducible with a recorded seed
+- Unrecorded
+- Based on coin flips by management
+- Secret
+
+Q: High-value items are often:
++ Tested individually rather than sampled
+- Ignored
+- Sampled less
+- Excluded

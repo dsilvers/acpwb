@@ -1,0 +1,61 @@
+# Performance reviews, feedback, and performance improvement plans.
+
+Q: Feedback is most useful when it is:
++ Specific, timely, and focused on behavior and impact
+- Saved for the annual review, all at once
+- Vague, to avoid conflict
+- Delivered in the #general channel
+
+Q: A self-evaluation should:
++ Give an honest account of results, with examples
+- Rate yourself "Exceeds Expectations" in every category, to start negotiations high
+- Be copied from last year's
+- Be written by {VENDOR}
+
+Q: A performance improvement plan (PIP) should include:
++ Clear expectations, measurable goals, support, and a timeline
+- No goals, to keep things flexible
+- A surprise ending
+- A requirement to attend {EVENT}
+
+Q: Ratings in a calibration session should be based on:
++ Documented results and behaviors
+- Who speaks most loudly for their team
+- Whose manager brought the bagels
+- Alphabetical order
+
+Q: Giving a lower rating to an employee because they took protected leave is:
++ Unlawful retaliation
+- A way to reward people who were present
+- Allowed if the leave was longer than {DAYS} days
+- Required for fairness
+
+Q: The phrase "meets expectations" in an ACPWB review means:
++ The employee is doing the job well
+- The employee is about to be placed on a PIP
+- The reviewer did not read the self-evaluation
+- The expectations were very low
+
+Q: An employee disagrees with their review. They should:
++ Discuss it with their manager and, if needed, use the HR review process
+- Post the review on social media
+- Rewrite the review themselves in {SYSTEM}
+- Give their manager a review in return
+
+Q: Recency bias in reviews means:
++ Giving too much weight to recent events instead of the whole period
+- Reviewing only new employees
+- Writing reviews quickly
+- Rating everyone the same
+
+Q: The "halo effect" in reviews means:
++ One positive trait inflates the rating of everything else
+- Rating angels
+- Giving everyone high ratings
+- Lighting in the review room
+
+Q: Feedback about personality, such as "abrasive," is more useful when:
++ Replaced with specific behaviors and their impact
+- Repeated louder
+- Shared with the team
+- Written in all caps

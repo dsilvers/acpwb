@@ -1,0 +1,68 @@
+# Acceptable use, monitoring, and recording. Correct answers on recording
+# follow federal and state wiretap law; keep them accurate.
+
+Q: Limited personal use of ACPWB internet and devices is:
++ Allowed if it is brief, lawful, and does not interfere with work or violate policy
+- Prohibited, including checking the weather
+- Unlimited
+- Allowed only for streaming video
+
+Q: Employees should expect that their use of ACPWB systems, including email and chat:
++ May be monitored, consistent with law and policy
+- Is completely private
+- Is never stored
+- Is read aloud at {EVENT}
+
+Q: Some states, such as New York, require employers that monitor electronic communications to:
++ Give employees written notice of the monitoring
+- Monitor only on {WEEKDAY}s
+- Pay employees for being monitored
+- Ban monitoring entirely
+
+Q: Under federal law, recording a conversation you are part of generally requires:
++ The consent of at least one party, but some states, such as California and Florida, require all parties to consent
+- No consent anywhere
+- Consent of every person in the building
+- A court order
+
+Q: Secretly recording a meeting with coworkers in a state that requires all-party consent can be:
++ A crime
+- Encouraged for accuracy
+- Allowed if you later delete it
+- Allowed if the meeting is boring
+
+Q: Visiting websites with illegal, hateful, or sexually explicit content on ACPWB devices is:
++ Prohibited
+- Allowed after hours
+- Allowed in incognito mode
+- Allowed on the guest Wi-Fi
+
+Q: Security cameras at ACPWB may be used in:
++ Public and work areas as described in the security policy, never in restrooms or locker rooms
+- Restrooms for safety
+- Employees' homes
+- Any location, for any purpose
+
+Q: Using ACPWB email for personal accounts, such as a shopping site, is:
++ Discouraged; it ties personal accounts to work systems
+- Required
+- Helpful for discounts
+- Allowed for {VENDOR} only
+
+Q: Mining cryptocurrency on ACPWB computers is:
++ Prohibited misuse of company resources
+- A clever side income
+- Allowed overnight
+- Allowed if you share profits with IT
+
+Q: Keystroke logging or screen recording of employees should be:
++ Used only as permitted by law and policy, with required notice
+- Done secretly by any manager
+- Installed by employees on each other's computers
+- Used to grade typing speed
+
+Q: Using a VPN service to hide your activity from ACPWB monitoring on company devices is:
++ Not allowed
+- Recommended for privacy
+- Required for streaming
+- Allowed on {WEEKDAY}s

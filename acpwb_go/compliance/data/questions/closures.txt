@@ -1,0 +1,62 @@
+# Holidays, office closures, and inclement weather. Correct answers on pay
+# follow the FLSA salary-basis rules.
+
+Q: Federal law requires private employers to give employees paid holidays:
++ No; paid holidays are set by company policy, not federal law
+- Yes, all federal holidays
+- Yes, but only Thanksgiving
+- Yes, but only on {WEEKDAY}s
+
+Q: A floating holiday is:
++ A paid day off employees can choose to use, per the policy
+- A holiday spent on a boat
+- A holiday that moves every year by itself
+- A holiday only for executives
+
+Q: If the office closes for a snowstorm for part of a week, exempt employees who are ready and willing to work generally:
++ Must receive their full salary for that week
+- Are unpaid for the closure
+- Must use sick leave
+- Are paid half
+
+Q: If the office closes for weather, non-exempt employees:
++ Are generally paid only for hours worked, unless company policy or state law provides more
+- Are always paid for the full day
+- Must make up the time on Sunday
+- Lose their PTO
+
+Q: The best source of information about an office closure is:
++ The official ACPWB emergency notification system and intranet
+- A rumor in the team chat
+- Your neighbor
+- The local radio's weather jokes
+
+Q: Employees who can work remotely during an office closure should:
++ Follow the closure notice's instructions about remote work
+- Assume they have the day off
+- Drive to the office to check
+- Wait for {EVENT}
+
+Q: Driving to work during a declared travel ban is:
++ Not expected; your safety comes first
+- Required for essential staff without exception
+- A sign of commitment
+- Rewarded with extra PTO
+
+Q: Holiday pay at premium rates for non-exempt employees is:
++ Not required by federal law; it depends on policy or contract
+- Required at triple time
+- Required only on New Year's Day
+- Required if snow falls
+
+Q: Working on a company holiday without approval:
++ Must still be recorded and paid for non-exempt employees
+- Is unpaid volunteer time
+- Is prohibited by law
+- Earns a medal
+
+Q: Updating your emergency contact information is important because:
++ It is used to reach you or your family during emergencies and closures
+- It is used for marketing
+- It changes your PTO balance
+- It is required by {VENDOR}

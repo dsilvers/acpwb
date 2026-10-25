@@ -1,0 +1,66 @@
+# Machine guarding. Answers follow OSHA 1910.212 and 1910.147 basics.
+Q: Machine guards are designed to:
++ Prevent contact with hazardous moving parts
+- Make machines look nicer
+- Keep the machine warm
+- Slow down production
+
+Q: Removing or bypassing a guard to speed up work is:
++ Prohibited
+- Allowed for experienced operators
+- Fine during busy periods
+- Required for maintenance without lockout
+
+Q: The "point of operation" is:
++ The area where the machine cuts, shapes, or presses material
+- The machine's power button
+- The supervisor's desk
+- The break room
+
+Q: Servicing a machine where unexpected startup could cause injury requires:
++ Lockout/tagout
+- Turning off the light
+- Asking a coworker to watch the switch
+- Unplugging the coffee maker
+
+Q: Jewelry, loose clothing, and long hair near rotating machinery:
++ Can be caught and pull you in; secure or remove them
+- Are fine if they are expensive
+- Improve grip
+- Are required for visibility
+
+Q: Nip points are found where:
++ Two parts move together and can catch a body part, such as rollers or belts and pulleys
+- Employees take naps
+- Coffee is served
+- Cables are stored
+
+Q: A guard is missing on a machine you are assigned to use. You should:
++ Not use the machine and report it
+- Use it carefully
+- Make your own guard from cardboard
+- Use it faster to finish sooner
+
+Q: Reaching around or through a guard while the machine is running is:
++ Prohibited
+- Fine with gloves
+- Allowed for jams
+- Allowed for supervisors
+
+Q: Emergency stop buttons should be:
++ Easy to reach and tested to make sure they work
+- Covered to prevent accidental use
+- Removed from the machine
+- Painted to match the wall
+
+Q: Guards themselves must not:
++ Create new hazards, such as sharp edges or pinch points
+- Be bolted on
+- Be visible
+- Be inspected
+
+Q: Training on a machine should be completed:
++ Before operating it
+- After the first injury
+- Only by supervisors
+- During the first week whenever convenient

@@ -1,0 +1,49 @@
+# Virtual reality, augmented reality, and immersive training.
+
+Q: Shared VR headsets used for training should be:
++ Cleaned between users according to the device instructions
+- Shared without cleaning
+- Worn by two people at once
+- Stored in the {PLACE} refrigerator
+
+Q: Before using a VR headset, you should:
++ Clear the space around you of obstacles and people
+- Stand near a staircase
+- Stand on a desk
+- Spin in a circle
+
+Q: Motion sickness during VR training should be:
++ Treated by stopping, removing the headset, and resting
+- Ignored until the module ends
+- Fixed by spinning faster
+- Reported as a failure
+
+Q: Recording others' avatars or voices in a virtual meeting space requires:
++ The same notice and consent as recording any meeting
+- Nothing; avatars have no rights
+- A VR license
+- Approval from {VENDOR}
+
+Q: Harassment in virtual spaces, such as invading an avatar's personal space, is:
++ Covered by the Code of Conduct
+- Not real, so it is allowed
+- Allowed after hours
+- Allowed in beta
+
+Q: Using AR glasses that can record video in a confidential meeting is:
++ Not allowed without approval
+- Encouraged for note-taking
+- Allowed if the light is off
+- Required
+
+Q: Children under the age recommended by the manufacturer should:
++ Not use VR headsets on Take Your Child to Work Day
+- Be given the first turn
+- Use them unsupervised
+- Wear two headsets
+
+Q: VR training does not replace:
++ Required hands-on certifications where the law or policy requires them
+- Paper handouts
+- Coffee breaks
+- {EVENT}

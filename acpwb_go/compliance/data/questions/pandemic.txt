@@ -1,0 +1,49 @@
+# Infectious disease prevention. Correct answers follow CDC guidance.
+
+Q: If you have a fever or contagious illness, you should:
++ Stay home and follow the sick leave policy
+- Come to work to show commitment
+- Come in but sit in the {PLACE}
+- Attend {EVENT} anyway
+
+Q: Covering coughs and sneezes is best done:
++ With a tissue or your elbow, then washing your hands
+- Into your hands, then shaking hands
+- Into the air
+- Into the shared keyboard
+
+Q: Hand sanitizer should contain at least:
++ 60% alcohol
+- 5% alcohol
+- 100% water
+- Vitamin C
+
+Q: Washing hands with soap and water is preferred over hand sanitizer when:
++ Hands are visibly dirty or greasy
+- Never
+- Only on {WEEKDAY}s
+- Only in the morning
+
+Q: Shared surfaces, such as hot desks, should be:
++ Wiped down with the provided supplies
+- Licked
+- Ignored
+- Covered with sticky notes
+
+Q: Improving indoor ventilation helps:
++ Reduce the spread of airborne illnesses
+- Increase illness
+- Nothing
+- Lower the internet speed
+
+Q: Information about an employee's illness should be:
++ Kept confidential, shared only with those who need to know
+- Announced to the team
+- Posted in the chat
+- Shared with {VENDOR}
+
+Q: Vaccines offered at on-site flu clinics are:
++ Voluntary, unless a specific lawful requirement applies
+- Mandatory for everyone
+- Only for executives
+- Given by coworkers

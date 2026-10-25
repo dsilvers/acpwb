@@ -1,0 +1,67 @@
+# Climate and greenhouse gas accounting (GHG Protocol).
+
+Q: Scope 1 emissions are:
++ Direct emissions from sources the company owns or controls, such as fuel burned in company vehicles
+- Emissions from employees' home appliances
+- Emissions from the company's suppliers
+- Emissions from the CEO's speeches
+
+Q: Scope 2 emissions come from:
++ Purchased electricity, steam, heating, and cooling
+- Company-owned trucks
+- Customers using the company's products
+- Breathing
+
+Q: Scope 3 emissions include:
++ Indirect value-chain emissions, such as purchased goods, business travel, and employee commuting
+- Only the emissions from the company headquarters
+- Only emissions from the cafeteria
+- Nothing; Scope 3 is optional and imaginary
+
+Q: For many office-based companies, the largest share of emissions is usually:
++ Scope 3
+- Scope 1, from the office stapler
+- Scope 2, from the coffee machine alone
+- Scope 0
+
+Q: A carbon offset is:
++ A credit representing an emissions reduction or removal elsewhere, which should come from a credible, verified project
+- A discount on the company's power bill
+- A permission slip to pollute more
+- A tree planted in the {PLACE}
+
+Q: Turning off monitors and lights at the end of the day reduces:
++ Scope 2 emissions
+- Scope 3 emissions only
+- Nothing measurable
+- The size of the parking lot
+
+Q: Business air travel falls under:
++ Scope 3 emissions
+- Scope 1
+- Scope 2
+- No scope
+
+Q: Natural gas burned in the headquarters boiler is:
++ Scope 1
+- Scope 3
+- Scope 2
+- Not an emission
+
+Q: A science-based target is:
++ An emissions reduction goal aligned with climate science
+- A goal set by the marketing team
+- A target for the dartboard
+- A fixed budget
+
+Q: Renewable energy certificates (RECs) are used to:
++ Claim the environmental attributes of renewable electricity
+- Pay rent
+- Certify recycling
+- Measure Wi-Fi
+
+Q: Climate disclosure rules in California require large companies doing business there to:
++ Report greenhouse gas emissions and climate-related financial risks
+- Plant trees
+- Close on hot days
+- Ban air conditioning

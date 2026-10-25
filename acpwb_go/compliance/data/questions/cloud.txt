@@ -1,0 +1,66 @@
+# Cloud services: approved accounts, shared responsibility, data location.
+Q: Under the "shared responsibility model," the cloud provider is generally responsible for:
++ Security of the cloud infrastructure, while the customer secures its own data, accounts, and configurations
+- Everything, including our passwords
+- Nothing at all
+- Only billing
+
+Q: Setting up a new cloud account for company data with a personal credit card is:
++ Not allowed; cloud services must go through IT and Procurement
+- Fine if you expense it later
+- Encouraged for speed
+- Allowed for small projects
+
+Q: The most common cause of cloud data exposure is:
++ Misconfiguration, such as storage made public by mistake
+- Cosmic rays
+- Bad weather at the data center
+- Too many backups
+
+Q: Cloud administrator accounts should use:
++ Strong MFA and least privilege
+- The same password as the team chat
+- A shared login for convenience
+- No password, for automation
+
+Q: Before storing restricted data in a cloud service, you should confirm:
++ The service is approved for that data classification
+- The service has a friendly logo
+- A coworker uses it at home
+- The free tier has enough space
+
+Q: Cloud access keys found in a public code repository should be:
++ Revoked and rotated immediately, and the exposure reported
+- Left alone if the repo is old
+- Moved to a different file in the same repo
+- Shared with the team for reuse
+
+Q: Data residency requirements describe:
++ Where data may be physically stored or processed
+- Where employees must live
+- Which data likes which office
+- The landlord of the data center
+
+Q: Shutting down unused cloud resources:
++ Saves money and reduces the attack surface
+- Is forbidden by the provider
+- Deletes the whole company account
+- Only matters on weekends
+
+Q: Logging for cloud accounts should be:
++ Turned on and sent to a protected central location
+- Turned off to save storage
+- Stored only in the account being monitored
+- Printed weekly
+
+Q: A cloud storage bucket set to "public" is acceptable when:
++ It holds only content approved for public release, and Security has reviewed it
+- It holds HR files that people keep asking for
+- Someone needs a quick share link
+- It is Friday afternoon
+
+Q: Using an unapproved file-sharing app to send customer data is called:
++ Shadow IT, and it is not allowed
+- Cloud excellence
+- A pilot program
+- Agile delivery

@@ -1,0 +1,62 @@
+# Financial wellness, identity theft, and tax season. Correct answers follow
+# IRS and FTC guidance; keep them accurate.
+
+Q: Employers must furnish Form W-2 to employees by:
++ January 31
+- April 15
+- December 31 of the same year
+- {EVENT}
+
+Q: An email from "the CEO" asking Payroll to send all employees' W-2 forms as a PDF is:
++ A well-known phishing scam that should be verified and reported
+- A routine request
+- Required for tax season
+- Allowed if marked urgent
+
+Q: The IRS initiates contact about a tax debt by:
++ Usually mailing a letter, not demanding immediate payment by gift card or phone
+- Calling and demanding gift cards
+- Texting a payment link
+- Sending a coworker
+
+Q: If you suspect your identity has been stolen, a good first step is:
++ Reporting it at IdentityTheft.gov and placing a fraud alert or credit freeze
+- Changing your name
+- Ignoring it
+- Posting your Social Security number to prove it is yours
+
+Q: A credit freeze:
++ Restricts access to your credit report to make it harder to open new accounts in your name, and is free
+- Costs $500
+- Lowers your credit score
+- Freezes your bank account
+
+Q: A 401(k) loan generally must be repaid:
++ According to the plan terms, and leaving the job can shorten the repayment period
+- Never
+- Only if the market goes up
+- To your manager
+
+Q: An employee experiencing financial stress can get confidential help from:
++ The Employee Assistance Program, which often includes financial counseling
+- Their manager's personal savings
+- The {COMMITTEE}
+- A payday lender recommended by a coworker
+
+Q: Lending money to coworkers you supervise is:
++ A conflict of interest and should be avoided
+- A kind gesture
+- A benefit
+- Required in emergencies
+
+Q: A "payday loan" typically:
++ Carries very high costs; compare with lower-cost options first
+- Is interest-free
+- Is offered by the IRS
+- Improves your credit automatically
+
+Q: Your ACPWB pay stub and W-2 should be:
++ Stored securely and shredded when no longer needed
+- Posted on social media
+- Thrown in the recycling bin
+- Shared with {VENDOR}

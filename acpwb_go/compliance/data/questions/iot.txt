@@ -1,0 +1,66 @@
+# Smart devices and the Internet of Things at work.
+Q: Connecting a personal smart device, such as a smart speaker, to the corporate network is:
++ Not allowed without IT approval
+- Encouraged for productivity
+- Allowed if it is on mute
+- Required in conference rooms
+
+Q: Smart devices often ship with:
++ Default passwords that must be changed before use
+- Unbreakable security
+- No software
+- Free security monitoring
+
+Q: Building devices such as cameras, door controllers, and thermostats should be on:
++ A separate, controlled network segment
+- The guest Wi-Fi
+- The same network as payroll
+- No network at all
+
+Q: Firmware updates for smart devices:
++ Should be applied regularly to fix security flaws
+- Should never be installed
+- Are only cosmetic
+- Void all warranties
+
+Q: A smart speaker in a meeting room may:
++ Listen for wake words and record audio, so it is not allowed in confidential spaces
+- Improve confidentiality
+- Only play music
+- Encrypt the meeting
+
+Q: Buying a smart device for the office requires:
++ IT and Security review before purchase
+- Only a credit card
+- The vendor's approval
+- Nothing if it is cheap
+
+Q: Smart TVs in conference rooms should have:
++ Unneeded features such as microphones and cameras disabled
+- Every feature enabled
+- Public screen-sharing
+- No passwords
+
+Q: A smart device that keeps reaching out to unknown internet addresses should be:
++ Reported to Security for investigation
+- Ignored
+- Rebooted every hour
+- Moved to the CEO's office
+
+Q: Fitness trackers and smartwatches in secure areas:
++ May be restricted where photography or recording is prohibited
+- Are always allowed
+- Must be worn by visitors
+- Are required for badge access
+
+Q: When a smart device is retired, it should be:
++ Factory reset and disposed of through IT asset disposal
+- Thrown in the trash
+- Sold online with data intact
+- Given away at the holiday party
+
+Q: Unknown devices plugged into network ports should be:
++ Reported to IT and not unplugged by tampering if they could be evidence
+- Kept as souvenirs
+- Taken home
+- Used to charge your phone

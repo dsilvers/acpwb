@@ -1,0 +1,87 @@
+# Fire extinguishers and fire response. Correct answers follow NFPA 10 and
+# standard fire-safety guidance (PASS, extinguisher classes); keep them
+# accurate. The absurdity goes in the distractors.
+
+Q: The PASS method for using a portable fire extinguisher stands for:
++ Pull the pin, Aim low at the base of the fire, Squeeze the handle, Sweep side to side
+- Point, Alert, Spray, Signal
+- Pause, Assess, Summon, Supervise
+- Press, Aim high at the flames, Shake, Spray
+
+Q: When using a fire extinguisher, you should aim at:
++ The base of the fire
+- The top of the flames, where they are tallest
+- The smoke
+- The ceiling sprinkler, to set it off
+
+Q: A Class A fire extinguisher is for fires involving:
++ Ordinary combustibles such as paper, wood, and cloth
+- Cooking oils and fats
+- Energized electrical equipment
+- Combustible metals
+
+Q: A Class C rating means an extinguisher is safe to use on:
++ Fires involving energized electrical equipment
+- Fires in a commercial kitchen fryer
+- Paper fires only
+- Fires in the {PLACE} only
+
+Q: The extinguisher class designed for cooking oil and grease fires in commercial kitchens is:
++ Class K
+- Class A
+- Class C
+- Class Q, for quiche
+
+Q: [A pan of oil catches fire|Oil in a pan catches fire] on the stove in the {PLACE}. You should NOT:
++ Throw water on it
+- Turn off the heat if it is safe to do so
+- Cover the pan with a lid
+- Leave and pull the fire alarm if it spreads
+
+Q: Before trying to put out a small fire with an extinguisher, you should make sure that:
++ The alarm has been raised, the fire is small and contained, and you have a clear exit behind you
+- You have completed this course within the last 12 months
+- A manager has approved the use of the extinguisher in writing
+- The fire is between you and the exit, so it cannot follow you
+
+Q: The pressure gauge on [an extinguisher|the extinguisher near the {PLACE}] shows the needle in the red zone. This means:
++ The extinguisher may not work and should be reported for service
+- The extinguisher is fully charged and ready
+- The extinguisher is reserved for executives
+- The extinguisher is hot and should be cooled
+
+Q: If smoke fills a hallway during an evacuation, you should:
++ Stay low, under the smoke, and move toward the nearest exit
+- Stand tall so you can see over the smoke
+- Wait in the hallway for the smoke to clear
+- Open windows on the way to air the hallway out
+
+Q: Before opening a closed door during a fire, you should:
++ Feel the door and the handle with the back of your hand; if hot, use another way out
+- Knock three times
+- Kick it open to save time
+- Prop it open behind you
+
+Q: If your clothing catches fire, you should:
++ Stop, drop, and roll
+- Run to the nearest restroom
+- Wave your arms to put out the flames
+- Remove your badge first
+
+Q: [Portable fire extinguishers|Extinguishers at ACPWB] must be visually inspected:
++ Monthly, with a full maintenance check every year
+- Only after they have been used
+- When the {COMMITTEE} meets
+- Every {YEAR}
+
+Q: A fire extinguisher is blocked by a stack of boxes in the {PLACE}. You should:
++ Clear it or report it right away; extinguishers must be visible and reachable
+- Leave it, since the boxes are fire-resistant cardboard
+- Move the extinguisher behind the boxes, out of the way
+- Add a sign that says "Extinguisher behind boxes"
+
+Q: The fire is spreading, the extinguisher is empty, and the room is filling with smoke. You should:
++ Leave immediately, close the door behind you, and evacuate
+- Look for a second extinguisher in the room
+- Throw the empty extinguisher at the fire
+- Stay and document the incident on Form {FORM}

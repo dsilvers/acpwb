@@ -1,0 +1,61 @@
+# Driving for work and fleet safety.
+
+Q: When driving for ACPWB business, phone calls should be:
++ Avoided, or hands-free only where legal and safe; texting is never allowed
+- Taken normally to stay productive
+- Taken on speaker held in your hand
+- Made only at red lights, including texts
+
+Q: Before driving a company vehicle, you should:
++ Do a quick walk-around inspection and report any defects
+- Check only the radio
+- Assume someone else checked it
+- Skip the seatbelt for short trips
+
+Q: Drowsy driving is dangerous because:
++ It slows reaction time and can cause you to fall asleep at the wheel
+- It only affects night drivers
+- Coffee always fixes it
+- Opening the window always fixes it
+
+Q: Following distance on a dry highway should be at least:
++ About three seconds behind the vehicle ahead, more in bad weather
+- One car length
+- Close enough to read their bumper sticker
+- As close as possible to save fuel
+
+Q: A minor accident in a company vehicle should be:
++ Reported to your manager and Fleet as soon as it is safe
+- Ignored if there is no visible damage
+- Paid for privately
+- Reported only if someone was hurt
+
+Q: Driving a company vehicle after drinking alcohol is:
++ Prohibited
+- Allowed after one drink
+- Allowed if someone else navigates
+- Allowed after {EVENT}
+
+Q: Personal use of a company vehicle is:
++ Allowed only as stated in the fleet policy and may be taxable
+- Unlimited
+- Allowed for weekend trips to {CITY}
+- Allowed if you pay for gas
+
+Q: Seatbelts in company vehicles must be worn:
++ By everyone in the vehicle, on every trip
+- By the driver only
+- Only on highways
+- Only by passengers
+
+Q: Programming the GPS while driving is:
++ Distracted driving; set the route before you leave
+- Required to save time
+- Allowed at low speeds
+- Allowed with one hand
+
+Q: Mileage logs for business driving should be:
++ Accurate, recording dates, destinations, purpose, and miles
+- Estimated at year end
+- Rounded up generously
+- Kept only for long trips

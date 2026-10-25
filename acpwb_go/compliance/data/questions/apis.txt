@@ -1,0 +1,66 @@
+# API security and use.
+Q: API keys should be:
++ Kept secret, scoped to the minimum needed, and rotated
+- Shared publicly
+- Given full access
+- Never rotated
+
+Q: Public APIs should never return:
++ Data the caller is not authorized to see, such as other users' personal data
+- Error codes
+- Timestamps
+- Public information
+
+Q: Rate limiting protects an API by:
++ Limiting how many requests a client can make in a period
+- Making it faster for attackers
+- Removing authentication
+- Hiding errors
+
+Q: Broken object level authorization means:
++ An API lets users access other users' records by changing an ID
+- An API is down
+- A bug in the docs
+- A slow database
+
+Q: API keys in URLs:
++ Can leak through logs and browser history
+- Are safest
+- Are required
+- Are encrypted automatically
+
+Q: Changes to a public API should be:
++ Versioned and announced so clients are not broken
+- Made silently
+- Made daily
+- Made only on weekends
+
+Q: Input received by an API should be:
++ Validated on the server
+- Trusted if it came from our app
+- Ignored
+- Logged with passwords
+
+Q: API documentation should not include:
++ Real credentials
+- Examples
+- Error codes
+- Endpoints
+
+Q: Third-party APIs used by our products must be:
++ Reviewed for security and data handling
+- Used freely
+- Paid personally
+- Hidden
+
+Q: Logs from APIs should exclude:
++ Secrets and sensitive personal data
+- Timestamps
+- Status codes
+- Request IDs
+
+Q: An API that suddenly receives thousands of requests from one client should be:
++ Investigated for abuse
+- Celebrated
+- Ignored
+- Opened wider

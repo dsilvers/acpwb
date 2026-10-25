@@ -1300,7 +1300,7 @@ def fake_robots(request):
     rng.shuffle(site_pages)
 
     # Research / trap sections — shuffle order so archive isn't always first
-    research_paths = ['/archive/', '/source-code/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/', '/company-handbooks/', '/process-improvement/', '/presentations/']
+    research_paths = ['/archive/', '/source-code/', '/wiki/', '/api/v1/', '/datasets/', '/feeds/', '/public-policy/', '/company-handbooks/', '/process-improvement/', '/presentations/', '/compliance/']
     rng.shuffle(research_paths)
 
     research_comments = [
@@ -1356,6 +1356,7 @@ Sitemap: https://acpwb.com/sitemap-public-policy.xml
 Sitemap: https://acpwb.com/sitemap-handbooks.xml
 Sitemap: https://acpwb.com/sitemap-process-improvement.xml
 Sitemap: https://acpwb.com/sitemap-presentations.xml
+Sitemap: https://acpwb.com/compliance/sitemap.xml
 {policy_sub_sitemaps}
 """
     return HttpResponse(content, content_type='text/plain')
@@ -1413,7 +1414,7 @@ def reports_list(request):
         catalog_reports.sort(key=lambda r: r['pub_date'], reverse=True)
         _persist_reports(catalog_reports)
         return render(request, 'honeypot/reports_list.html', {
-            'reports': catalog_reports,
+            'reports': _with_covers(catalog_reports),
             'next_page': None,
             'selected_category': category,
             'categories': REPORT_CATEGORIES,
@@ -1423,7 +1424,7 @@ def reports_list(request):
     reports = generate_reports_for_page(1, count=12)
     _persist_reports(reports)
     return render(request, 'honeypot/reports_list.html', {
-        'reports': reports,
+        'reports': _with_covers(reports),
         'next_page': 2,
         'selected_category': '',
         'categories': REPORT_CATEGORIES,
@@ -1438,10 +1439,10 @@ def reports_page_api(request, page):
         offset = (max(1, page) - 1) * 12
         db_reports = list(PublicReport.objects.filter(category=category).order_by('-pub_date')[offset:offset + 12])
         reports = [get_or_generate_report_meta(obj.slug) for obj in db_reports]
-        return JsonResponse({'reports': reports, 'next_page': page + 1 if len(reports) == 12 else None})
+        return JsonResponse({'reports': _with_covers(reports), 'next_page': page + 1 if len(reports) == 12 else None})
     reports = generate_reports_for_page(max(1, page), count=12)
     _persist_reports(reports)
-    return JsonResponse({'reports': reports, 'next_page': page + 1})
+    return JsonResponse({'reports': _with_covers(reports), 'next_page': page + 1})
 
 
 def _report_covers_dir():
@@ -1454,23 +1455,63 @@ def _report_covers_dir():
 _REPORT_COVER_STEMS = frozenset(p.stem for p in _report_covers_dir().glob('*.webp')) if _report_covers_dir().is_dir() else frozenset()
 
 
-def _cover_url(slug):
-    """Return the static URL for a report cover image if it exists, else None."""
+def _cover_category_slug(category):
+    return (category or '').lower().replace(' & ', '-and-').replace(' ', '-')
+
+
+def _load_cover_pool():
+    """report-covers/pool/<category slug>-<n>.webp (tools/generate_compliance_covers.py
+    --report-pool): covers for the endless generated reports that have no
+    cover of their own, grouped by category."""
+    pool = {}
+    d = _report_covers_dir() / 'pool'
+    if d.is_dir():
+        for p in sorted(d.glob('*.webp')):
+            cat, _, n = p.stem.rpartition('-')
+            if cat and n.isdigit():
+                pool.setdefault(cat, []).append(p.stem)
+    return pool
+
+
+_REPORT_COVER_POOL = _load_cover_pool()
+_REPORT_COVER_POOL_ALL = sorted(n for names in _REPORT_COVER_POOL.values() for n in names)
+
+
+def _cover_rel(slug, category=''):
+    """Path under report-covers/ for a report: its own cover if one exists,
+    else a pool cover from its category (any category as a last resort),
+    chosen by slug hash so a report always shows the same image."""
     if slug in _REPORT_COVER_STEMS:
-        return f'/static/img/report-covers/{slug}.webp'
-    return None
+        return f'{slug}.webp'
+    names = _REPORT_COVER_POOL.get(_cover_category_slug(category)) or _REPORT_COVER_POOL_ALL
+    if not names:
+        return None
+    i = int(hashlib.md5(f'report_cover_{slug}'.encode()).hexdigest(), 16) % len(names)
+    return f'pool/{names[i]}.webp'
+
+
+def _cover_url(slug, category=''):
+    """Static URL of a report's cover image, or None."""
+    rel = _cover_rel(slug, category)
+    return f'/static/img/report-covers/{rel}' if rel else None
+
+
+def _with_covers(reports):
+    """Copies of report dicts with cover_url set (for list pages and the
+    infinite-scroll API); the originals are what gets persisted."""
+    return [{**r, 'cover_url': _cover_url(r['slug'], r.get('category', ''))} for r in reports]
 
 
 @functools.lru_cache(maxsize=256)
-def _cover_data_uri(slug):
+def _cover_data_uri(slug, category=''):
     """Return a base64 data URI for the cover image (for PDF embedding), or
     None. Cached since the underlying file — and therefore this string —
     never changes for a given slug while the process is running."""
     import base64
-    if slug not in _REPORT_COVER_STEMS:
+    rel = _cover_rel(slug, category)
+    if not rel:
         return None
-    path = _report_covers_dir() / f'{slug}.webp'
-    data = base64.b64encode(path.read_bytes()).decode()
+    data = base64.b64encode((_report_covers_dir() / rel).read_bytes()).decode()
     return f'data:image/webp;base64,{data}'
 
 
@@ -1482,7 +1523,7 @@ def report_detail(request, slug):
         return render(request, 'honeypot/report_detail.html', {
             'report': report,
             'preview_rows': rows,
-            'cover_url': _cover_url(slug),
+            'cover_url': _cover_url(slug, report.get('category', '')),
             'og_title': f'{report["title"]} — ACPWB Research Division',
             'og_description': report.get('summary', '')[:160],
         })
@@ -1490,7 +1531,7 @@ def report_detail(request, slug):
     return render(request, 'honeypot/report_detail.html', {
         'report': report,
         'doc': doc,
-        'cover_url': _cover_url(slug),
+        'cover_url': _cover_url(slug, report.get('category', '')),
         'og_title': f'{report["title"]} — ACPWB Research Division',
         'og_description': report.get('summary', '')[:160],
     })
@@ -1522,7 +1563,7 @@ def report_download_pdf(request, slug):
     html_string = render_to_string('honeypot/report_print.html', {
         'report': report,
         'doc': doc,
-        'cover_data_uri': _cover_data_uri(slug),
+        'cover_data_uri': _cover_data_uri(slug, report.get('category', '')),
     }, request=request)
     from apps.core.async_utils import run_in_thread
     # weasyprint's layout/render is CPU + C-library (cairo/pango) work that

@@ -1,0 +1,66 @@
+# Lithium-ion batteries at work.
+Q: A lithium-ion battery that is swollen, hot, or smells unusual should be:
++ Removed from use and reported for safe disposal
+- Charged to see if it recovers
+- Pressed flat
+- Thrown in the trash
+
+Q: Lithium-ion batteries should be disposed of:
++ Through approved battery or e-waste recycling
+- In the regular trash
+- In the recycling bin with paper
+- Down the drain
+
+Q: Charging an e-bike or scooter battery at an office desk is:
++ Not allowed unless in an approved charging area
+- Encouraged
+- Fine overnight
+- Required for commuters
+
+Q: Thermal runaway in a lithium-ion battery is:
++ A chain reaction of heating that can cause fire or explosion
+- A battery that runs away
+- A type of fast charging
+- A firmware update
+
+Q: Using damaged or third-party chargers that are not approved:
++ Increases the risk of battery fires
+- Makes batteries last longer
+- Is required by IT
+- Is safer
+
+Q: A laptop battery starts smoking. You should:
++ Move away, alert others, and call 911 or Security if it catches fire
+- Pick it up and carry it to the trash
+- Pour coffee on it
+- Close the lid and keep working
+
+Q: Spare lithium batteries carried in a bag should have:
++ Their terminals protected, such as in the original packaging or taped
+- Their terminals touching metal keys
+- No protection
+- A rubber band around the stack
+
+Q: Leaving devices charging on soft surfaces like beds or couches:
++ Can trap heat and increase fire risk
+- Charges them faster
+- Is recommended
+- Has no effect
+
+Q: Lithium batteries shipped by the company must:
++ Follow dangerous goods shipping rules
+- Be labeled "batteries" by hand only
+- Be shipped like any box
+- Never be shipped
+
+Q: Storage of many lithium batteries in one place should be:
++ Planned with Facilities and EHS for fire safety
+- In a cardboard box under a desk
+- Next to the heater
+- In the server room for warmth
+
+Q: A battery that was dropped and dented:
++ Should be inspected and taken out of service if damaged
+- Is stronger now
+- Should be charged immediately
+- Can be used as a paperweight

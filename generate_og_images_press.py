@@ -99,6 +99,7 @@ _SLUG_SCENES = {
     'non-customer-consumer-protection-complaint-resolved': 'quiet government office desk at dusk, a single printed letter lying flat in a wire in-tray next to a closed manila file folder, brass desk lamp casting a warm pool of light, rubber stamp and ink pad, wall clock out of focus in the background, tall window with winter blue evening light',
     'yandex-vladimir-second-strike-traffic-follow-up': 'empty network operations center at night, wide curved wall of dark monitors, one large central screen showing a dim abstract world map with only a few faint points of light, rows of empty desks, a single warm desk lamp left on, deep navy shadows',
     'five-billion-requests-served': 'low close diagonal view along a long antique oak library card catalog cabinet at night, dozens of small wooden drawers each pulled out at a different length, drawers packed with cream index cards, loose index cards scattered across the dark wooden floor in the foreground, a single green glass banker\'s lamp on top of the cabinet casting a warm pool of light, the rest of the room falling away into deep shadow',
+    'compliance-center-launch': 'empty corporate training room at night, rows of identical beige desks each holding a closed laptop and a single blank cream certificate with a gold foil seal, a laminated binder and a sharpened pencil at every seat, one laptop at the front glowing softly, a whiteboard wiped clean, a wall clock, a half-eaten sheet cake on a folding table at the back, fluorescent tubes dimmed to a warm glow, deep navy shadows',
     'record-traffic-september-2026': 'dim windowless corporate conference room at night, dozens of vintage carousel slide projectors crowded across a long boardroom table and stacked on folding carts, every projector running, crisscrossing beams of warm light cutting through dusty air onto a blank white pull-down screen, overlapping squares of empty light, tangled extension cords and power strips on the carpet, empty office chairs pushed back',
 }
 
@@ -110,6 +111,7 @@ _SLUG_STYLE_SUFFIX = {
     'non-customer-consumer-protection-complaint-resolved': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, the letter and folder are blank with no legible text, no signage, no labels',
     'yandex-vladimir-second-strike-traffic-follow-up': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy and warm gold tones, screens show no text, no signage, no labels',
     'five-billion-requests-served': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy shadows and warm gold lamp light, index cards are blank with no text, no signage, no labels',
+    'compliance-center-launch': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy shadows and warm gold lamp light, the certificates and whiteboard are blank with no text, screens show no text, no signage, no labels',
     'record-traffic-september-2026': ', no people, 35mm film photograph, Kodak Portra 800, visible film grain, documentary photography, muted realistic color grading, navy carpet and walls with warm gold projector light, projected squares are plain blank light with no text or images',
 }
 
@@ -220,6 +222,7 @@ def _save_atomic(img, path):
     try:
         os.close(fd)
         img.save(tmp, 'JPEG', quality=88, optimize=True)
+        os.chmod(tmp, 0o644)
         os.replace(tmp, path)
     except Exception:
         try:
@@ -232,7 +235,8 @@ def _save_atomic(img, path):
 def main():
     parser = argparse.ArgumentParser(description='Generate OG banner images for press releases')
     parser.add_argument('slugs', nargs='*', help='Press release slugs to generate (default: all)')
-    parser.add_argument('--output-dir', default=str(HERE / 'acpwb' / 'media' / 'og'))
+    parser.add_argument('--output-dir', default=str(HERE / 'acpwb' / 'static' / 'img' / 'pr-covers'),
+                        help='Where covers are written (default: the directory the site serves them from)')
     parser.add_argument('--model', default='black-forest-labs/FLUX.1-schnell')
     parser.add_argument('--steps', type=int, default=None, help='Inference steps (default: 4 for FLUX schnell, 30 otherwise)')
     parser.add_argument('--bf16', action='store_true', help='Use bfloat16 on Apple Silicon for non-FLUX models (FLUX uses it by default)')

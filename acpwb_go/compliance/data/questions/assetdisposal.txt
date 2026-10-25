@@ -1,0 +1,60 @@
+# IT asset disposal.
+Q: Old laptops and phones should be:
++ Returned to IT for secure wiping and disposal
+- Thrown in the trash
+- Sold online
+- Given to friends
+
+Q: Deleting files and emptying the recycle bin:
++ Does not securely erase data
+- Securely erases everything
+- Is required for disposal
+- Is enough
+
+Q: Hard drives that cannot be wiped should be:
++ Physically destroyed by an approved vendor
+- Thrown away
+- Kept in a drawer
+- Donated
+
+Q: Certificates of destruction document:
++ That media was destroyed properly
+- A destroyed relationship
+- Nothing
+- A warranty
+
+Q: Printers and copiers may store:
++ Copies of documents on internal drives
+- Nothing
+- Only toner
+- Music
+
+Q: Donating old equipment requires:
++ IT wiping and approval
+- Nothing
+- Removing stickers only
+- A tax form only
+
+Q: E-waste vendors should be:
++ Certified and approved
+- Anyone with a truck
+- Cheapest only
+- Unknown
+
+Q: Leased equipment must be:
++ Wiped before return
+- Returned with data
+- Kept
+- Destroyed without asking
+
+Q: Asset inventories should be updated when equipment is:
++ Disposed of
+- Turned on
+- Moved desks
+- Cleaned
+
+Q: Taking an old company laptop home after a refresh is:
++ Not allowed without approval
+- Allowed
+- Encouraged
+- A perk

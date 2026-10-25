@@ -1,0 +1,67 @@
+# Hazard communication: office chemicals, toner, cleaning products.
+
+Q: Safety Data Sheets (SDS) for chemicals used in the office are available:
++ Through the Facilities SDS binder or online library, for every chemical on site
+- On request, within {DAYS} days
+- Only to Facilities staff
+- Only for chemicals used in laboratories
+
+Q: [A colleague|{NAME}] wants to mix bleach with an ammonia-based glass cleaner to clean the {PLACE}. You should:
++ Stop them; the mixture releases toxic gas
+- Help, since it cleans twice as well
+- Suggest adding vinegar
+- Open a window and let them proceed
+
+Q: [Toner|Printer toner] spills inside the {FLOOR} floor printer alcove. You should:
++ Leave it, keep others away, and report it to Facilities; do not use a regular vacuum
+- Vacuum it with the office vacuum
+- Blow it away with compressed air
+- Wipe it with a damp sleeve
+
+Q: [A chemical splashes into a colleague's eyes|{NAME2} gets cleaning solution in their eyes]. They should:
++ Flush their eyes at the eyewash station or with clean water for at least 15 minutes and seek medical help
+- Rub their eyes
+- Wait for the stinging to stop
+- Apply eye drops from their desk
+
+Q: Chemicals transferred into a spray bottle must be:
++ Labelled with the product name and its hazards
+- Left unlabelled, if used the same day
+- Labelled with the user's name only
+- Stored in the shared refrigerator
+
+Q: A product's label shows a flame symbol. This means it is:
++ Flammable
+- Environmentally friendly
+- Safe near heaters
+- Approved for kitchen use
+
+Q: Safety Data Sheets (SDS) have:
++ 16 standardized sections
+- 3 sections
+- No standard format
+- 100 sections
+
+Q: First aid measures are found in SDS:
++ Section 4
+- Section 1
+- Section 16
+- The back cover
+
+Q: A secondary container, such as a spray bottle filled from a bulk drum, must be:
++ Labeled with the product identifier and hazard information, unless used immediately by the person who filled it
+- Left unlabeled
+- Labeled "stuff"
+- Labeled with your name only
+
+Q: The signal word "Danger" on a chemical label indicates:
++ A more severe hazard than "Warning"
+- A less severe hazard than "Warning"
+- No hazard
+- A brand name
+
+Q: Employees have the right to:
++ Access Safety Data Sheets for chemicals they work with
+- Ignore labels
+- Rename chemicals
+- Mix chemicals to test them

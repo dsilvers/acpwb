@@ -1,0 +1,62 @@
+# Whistleblower protections. Correct answers follow the Sarbanes-Oxley Act,
+# Dodd-Frank, and SEC Rule 21F-17; keep them accurate.
+
+Q: Retaliating against an employee for reporting suspected fraud in good faith is:
++ Prohibited, including under the Sarbanes-Oxley Act for public companies
+- Allowed if the report turns out to be wrong
+- Allowed after a 90-day waiting period
+- Required by the {COMMITTEE}
+
+Q: An employee who suspects securities fraud:
++ May report directly to the SEC, without first reporting internally
+- Must report internally first and wait for permission
+- May report only through their manager
+- May report only after leaving ACPWB
+
+Q: A confidentiality agreement that bars employees from reporting possible securities violations to the SEC:
++ Is not allowed; companies may not impede communications with the SEC
+- Is standard and enforceable
+- Is required for all employees
+- Applies only to the {DEPT} department
+
+Q: Under the SEC whistleblower program, an eligible whistleblower may receive:
++ An award of 10% to 30% of monetary sanctions collected over $1 million
+- A plaque
+- A free parking space
+- Nothing; awards are not permitted
+
+Q: A Sarbanes-Oxley retaliation complaint is filed with OSHA within:
++ 180 days of the retaliation, or of when the employee learned of it
+- 5 days
+- 10 years
+- One fiscal quarter, rounded to the nearest {WEEKDAY}
+
+Q: [A manager|{NAME}] asks who filed an anonymous report through the ethics hotline. You should:
++ Decline to speculate; trying to identify a reporter can be retaliation
+- Share your best guess
+- Forward the report to the whole team
+- Ask the hotline vendor for the caller's number
+
+Q: Examples of retaliation can include:
++ Demotion, reduced hours, exclusion from meetings, or a sudden negative review after a report
+- Thanking the reporter
+- Investigating the concern
+- Keeping the report confidential
+
+Q: Reporting a concern to a supervisor in good faith:
++ Is protected against retaliation under ACPWB policy
+- Is a career risk you must accept
+- Requires proof
+- Must be in writing only
+
+Q: The ethics hotline can be used:
++ Anonymously where permitted by law
+- Only with your name
+- Only by managers
+- Only on {WEEKDAY}s
+
+Q: Whistleblower protection applies even if:
++ The reported concern turns out not to be a violation, as long as it was raised in good faith
+- The report was malicious
+- The reporter lied
+- The reporter is not employed

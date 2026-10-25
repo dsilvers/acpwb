@@ -1,0 +1,61 @@
+# Procurement and vendor selection.
+
+Q: [Before|Prior to] signing a contract with {VENDOR} [worth|valued at] more than {AMOUNT}, you must [obtain|have]:
++ Competitive bids from at least {N} vendors and approval from Procurement
+- A handshake agreement with {VENDOR}'s account manager
+- Approval from any manager
+- Nothing, if the work has already started
+
+Q: A vendor [offers|proposes] to [include|add] a "small thank-you" for choosing them, such as [a gift card|tickets|a weekend at their lake house]. This is:
++ A potential kickback, which must be declined and reported to Compliance
+- An acceptable loyalty reward
+- Permitted if shared with the team
+- Permitted after the contract is signed
+
+Q: Splitting a [purchase|contract] into smaller [orders|amounts] to stay below the approval threshold is:
++ Prohibited, and treated as a policy violation regardless of intent
+- Encouraged to speed up procurement
+- Allowed at quarter end
+- Allowed if each piece is under {AMOUNT}
+
+Q: {NAME} [discovers|learns] that [a former colleague|a relative|a close friend] works for one of the bidders. {FIRST} should:
++ Disclose the relationship and step back from the evaluation
+- Continue, but score that bidder fairly
+- Tell the bidder what the other bids contain
+- Withdraw the bidder from consideration without explanation
+
+Q: [Splitting|Dividing] a purchase into several smaller orders to stay under an approval threshold is:
++ Prohibited, and treated as circumventing internal controls
+- Allowed if each order is from a different vendor
+- Allowed at the end of the fiscal year
+- Encouraged, to speed things up
+
+Q: [A vendor|{VENDOR}] offers you [a free trial|a complimentary license] if you sign a contract by {WEEKDAY}. You should:
++ Follow the normal sourcing process, regardless of the deadline
+- Sign quickly, since the trial is free
+- Sign with your personal email to avoid paperwork
+- Ask {VENDOR} to backdate the contract
+
+Q: [Before|Prior to] issuing a purchase order, the requester must confirm:
++ That the vendor has completed onboarding and the spend is within budget
+- That the vendor's sales representative is pleasant
+- That the purchase can be expensed later instead
+- That {DEPT} has not already ordered the same thing
+
+Q: [A competitive bid|Competitive bidding] is required for purchases over:
++ The threshold set in the Procurement Policy, currently {AMOUNT} thousand
+- Any amount the requester considers large
+- {N} items
+- Nothing; bids are optional
+
+Q: [You learn|{NAME} mentions] that [a family member|their cousin] owns a company bidding on an ACPWB contract. The right step is to:
++ Disclose the relationship and step back from the evaluation
+- Give the bid a fair score, without mentioning it
+- Share the other bids with the relative, to keep things fair
+- Ask the relative to bid under another name
+
+Q: [Which of the following|What] must be on file before a vendor is paid?
++ An approved purchase order and a matching invoice
++ Confirmation that the goods or services were received
+- A thank-you note from the requester
+- A photo of the vendor's office

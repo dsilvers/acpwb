@@ -1,0 +1,66 @@
+# Attorney-client privilege basics.
+Q: The attorney-client privilege generally protects:
++ Confidential communications between a client and its lawyers made to seek or give legal advice
+- Every email that copies a lawyer
+- Business documents labeled "privileged"
+- Conversations at lunch with a lawyer about sports
+
+Q: Marking an email "privileged" when it contains no request for legal advice:
++ Does not make it privileged
+- Makes it privileged automatically
+- Is required for all emails
+- Protects it forever
+
+Q: Forwarding legal advice to people outside ACPWB:
++ Can waive the privilege
+- Strengthens the privilege
+- Is required for transparency
+- Has no effect
+
+Q: Copying a lawyer on a routine business email:
++ Does not by itself make the email privileged
+- Makes it privileged
+- Is required by policy
+- Waives all privilege
+
+Q: In a company setting, the privilege usually belongs to:
++ The company, not the individual employee
+- The employee who wrote the email
+- The lawyer
+- The court
+
+Q: The attorney work product doctrine protects:
++ Materials prepared in anticipation of litigation
+- All company work
+- Products made by lawyers
+- Office supplies
+
+Q: Discussing legal advice in a large team chat channel:
++ Risks waiving privilege; keep distribution to those who need it
+- Is the best practice
+- Is required
+- Protects it
+
+Q: When seeking legal advice by email, you should:
++ Address it to the lawyer and state that you are asking for legal advice
+- Copy as many people as possible
+- Bury the question in a long thread
+- Use your personal email
+
+Q: Facts are:
++ Not privileged just because you told them to a lawyer
+- Always privileged
+- Privileged after a week
+- Owned by the lawyer
+
+Q: If you are unsure whether a document is privileged, you should:
++ Ask Legal before sharing it
+- Share it widely
+- Delete it
+- Label it privileged
+
+Q: An internal investigation directed by Legal is often structured to:
++ Preserve privilege over the lawyers' advice and work product
+- Avoid all documentation
+- Be public
+- Exclude lawyers

@@ -1,0 +1,67 @@
+# Birthdays, cards, office plants, and decorations.
+
+Q: Team birthday celebrations should be:
++ Optional for the honoree, since some people prefer not to celebrate at work
+- Mandatory, with singing
+- Held during all-hands meetings
+- Recorded in {SYSTEM}
+
+Q: Collecting money for a coworker's gift should be:
++ Voluntary, with no pressure or tracking of who gave
+- Mandatory at a set amount
+- Deducted from paychecks
+- Collected by the manager from direct reports
+
+Q: Asking someone's age at their birthday celebration is:
++ Best avoided; age is personal and protected from discrimination at 40 and over
+- A good icebreaker
+- Required for the card
+- Required to order the right number of candles
+
+Q: Lit candles on a birthday cake in the office are:
++ Generally prohibited by the fire safety policy; use pretend candles
+- Required for good luck
+- Allowed under the sprinklers
+- Allowed if the cake is small
+
+Q: Office plants should be:
++ Watered by their owner or a designated person, and kept away from electronics
+- Watered with leftover coffee
+- Placed on top of servers
+- Fertilized during meetings
+
+Q: Plants that are toxic to pets, such as lilies:
++ Should be avoided on Bring Your Dog to Work Day
+- Are required decorations
+- Improve air quality the most
+- Are given as awards
+
+Q: A greeting card for a coworker should be signed with:
++ A kind, appropriate message
+- Inside jokes others will not understand
+- Comments about their age or appearance
+- Your login password
+
+Q: Holiday or seasonal decorations at your desk should be:
++ Modest, inclusive, and clear of walkways and electrical outlets
+- As large as possible
+- Strung across the hallway
+- Powered by daisy-chained extension cords
+
+Q: Balloons in the office:
++ Are fine, but latex balloons may affect people with latex allergies
+- Must be helium only
+- Are prohibited by {AGENCY}
+- Must be released at {EVENT}
+
+Q: A coworker does not want their work anniversary announced. You should:
++ Respect their preference
+- Announce it anyway
+- Announce it louder
+- Ask the {COMMITTEE}
+
+Q: Celebrating one team member's birthday lavishly while ignoring others is:
++ Likely to seem unfair; keep celebrations consistent
+- Good motivation
+- Required for top performers
+- Allowed only in December

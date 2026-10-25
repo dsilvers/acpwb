@@ -1,0 +1,66 @@
+# Wire transfer fraud and business email compromise.
+Q: Business email compromise (BEC) often involves:
++ A fake or hacked email asking to send money or change payment details
+- A broken email server
+- Too many emails
+- A spam filter
+
+Q: A vendor emails new bank details for future payments. You should:
++ Verify by calling a phone number already on file, not one in the email
+- Update the details immediately
+- Reply to the email to confirm
+- Call the number in the email signature
+
+Q: An urgent, confidential request from the "CEO" to wire money today should be:
++ Verified independently through known channels before acting
+- Paid immediately
+- Kept secret as asked
+- Paid in gift cards
+
+Q: Wire transfers above approval thresholds require:
++ Dual approval
+- One approver
+- No approval if urgent
+- The requester's own approval
+
+Q: A sign of BEC is:
++ A sender address that is slightly different from the real one
+- Correct spelling
+- A request you expected
+- A normal invoice
+
+Q: If you think you sent a fraudulent wire, you should:
++ Report it immediately to Treasury and Security so the bank can try to recall it
+- Wait to see if it was real
+- Send another wire to fix it
+- Hide it
+
+Q: Changing payroll direct deposit details based only on an email request:
++ Is not allowed without verification
+- Is fine if it looks real
+- Is required
+- Speeds up payroll
+
+Q: Fraudsters often time requests for:
++ Busy periods, holidays, or when executives are traveling
+- Calm weekdays
+- When auditors are present
+- Never
+
+Q: Attachments with "updated wiring instructions" should be:
++ Treated with suspicion and verified
+- Opened and followed
+- Forwarded to everyone
+- Printed
+
+Q: Callback verification means:
++ Calling a known, trusted number to confirm a request
+- Calling the number in the suspicious email
+- Calling back the next day
+- Texting back
+
+Q: Reporting a suspicious payment request that turns out to be real is:
++ Always the right thing to do
+- Embarrassing and discouraged
+- Grounds for discipline
+- A waste of time

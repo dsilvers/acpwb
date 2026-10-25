@@ -1,0 +1,60 @@
+# Translation and multilingual communication.
+Q: Translations of policies should be:
++ Done by qualified translators and reviewed
+- Done by free online tools only
+- Skipped
+- Done by guesswork
+
+Q: Safety information for employees should be provided:
++ In a language and vocabulary they understand
+- Only in English
+- Only in writing
+- Only to managers
+
+Q: Machine translation of confidential documents using public tools is:
++ Not allowed
+- Fine
+- Required
+- Faster and safe
+
+Q: Requiring employees to speak only English at all times can:
++ Raise national origin discrimination concerns unless justified by business necessity
+- Always be fine
+- Be required
+- Be encouraged
+
+Q: Interpreters for meetings should be:
++ Qualified and bound by confidentiality
+- Any bilingual coworker always
+- Children
+- Unvetted
+
+Q: Translated marketing materials must:
++ Be reviewed for accuracy and cultural fit
+- Be literal always
+- Skip review
+- Use slang
+
+Q: Customers who need language assistance should:
++ Be offered available language support
+- Be ignored
+- Be told to bring a friend
+- Be charged extra
+
+Q: Glossaries help translations by:
++ Keeping terms consistent
+- Confusing translators
+- Adding cost only
+- Nothing
+
+Q: Legal documents in multiple languages should state:
++ Which version controls if they differ
+- Nothing
+- Both control
+- Neither controls
+
+Q: Accessibility in translation includes:
++ Plain language
+- Complex jargon
+- Tiny fonts
+- No headings

@@ -1,0 +1,66 @@
+# The internal employee portal.
+Q: The internal portal should be accessed:
++ Only with your own account, for business purposes
+- With a coworker's login
+- From public kiosks without logging out
+- By visitors
+
+Q: Exporting employee records from the portal requires:
++ A business need and authorization
+- Curiosity
+- Nothing
+- A weekend
+
+Q: Salary data in the portal is:
++ Restricted to authorized users
+- Visible to everyone
+- Public
+- Shared at lunch
+
+Q: A login page asking for your portal password that is not on an acpwb.com address is:
++ Likely phishing
+- A new portal
+- Safe
+- Required
+
+Q: Leaving the portal logged in on a shared computer is:
++ A security risk; log out when finished
+- Convenient
+- Required
+- Fine
+
+Q: Acquisition target lists stored in the portal are:
++ Highly confidential and covered by insider trading rules
+- Public
+- Sales leads
+- Gossip
+
+Q: Bookmarking hidden portal pages you found by accident and revisiting them:
++ Is inappropriate if you do not have a business need
+- Is clever
+- Is required
+- Is encouraged
+
+Q: Portal activity may be:
++ Logged and monitored as described in the acceptable use policy
+- Untracked
+- Private
+- Anonymous
+
+Q: Errors in your personal information in the portal should be:
++ Updated through HR self-service or reported
+- Left wrong
+- Fixed by editing someone else's record
+- Ignored
+
+Q: Sharing screenshots of portal data with outsiders is:
++ Not allowed
+- Fine if cropped
+- Encouraged
+- Required
+
+Q: Failed portal logins from unknown locations on your account should be:
++ Reported to IT Security
+- Ignored
+- Celebrated
+- Deleted

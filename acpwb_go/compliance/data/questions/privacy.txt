@@ -1,0 +1,59 @@
+Q: Which of the following is personal information?
++ An associate's home address
++ An IP address associated with a visitor
++ A badge photo
+- The ACPWB headquarters address
+
+Q: Personal information should be collected:
++ Only to the extent necessary for a stated purpose
+- Whenever it might be useful later
+- From anyone who visits acpwb.com, automatically
+- In spreadsheets named "misc"
+
+Q: You receive a spreadsheet of {N} associates' salaries in error. You should:
++ Delete it, notify the sender, and report a privacy incident within {N} hours
+- Review it to determine whether it is accurate
+- Forward it to HR to confirm it was sent in error
+- Save it in case it is requested later
+
+Q: A visitor asks ACPWB to delete their personal information. The request must be:
++ Logged and routed to the Privacy Office within {DAYS} days
+- Ignored if the visitor is not a customer
+- Honored only if submitted by fax
+- Forwarded to the visitor's employer
+
+Q: Personal information may be shared with {VENDOR}:
++ Only under a signed data processing agreement approved by the Privacy Office
+- If {VENDOR} promises to keep it confidential
+- If it is sent by encrypted email
+- Freely, since vendors are part of the team
+
+Q: [Personal information|Customer personal data] should be kept:
++ Only as long as needed for its purpose, then disposed of securely
+- Forever, in case it is useful later
+- For {N} years, regardless of purpose
+- Until storage runs out
+
+Q: [A customer|An individual] asks ACPWB for a copy of the personal data it holds about them. You should:
++ Forward the request to the Privacy Office the same day
+- Ask them to submit it in person in {CITY}
+- Send them whatever you can find
+- Ignore it unless they ask again
+
+Q: [Before collecting|Prior to collecting] new personal information, a team should:
++ Complete a privacy impact assessment and collect only what is needed
+- Collect as much as possible, to be safe
+- Ask {DEPT} whether anyone would object
+- Collect it, then decide what to use it for
+
+Q: [Which of the following|What] counts as personal information?
++ A home address
++ An employee ID number
+- The ACPWB headquarters address
+- The name of a conference room
+
+Q: [Spreadsheets containing personal data|Files with personal data] should be shared:
++ Through approved tools, only with people who need them, with access reviewed regularly
+- With the whole department, for transparency
+- As an email attachment to anyone who asks
+- On a USB drive left at reception

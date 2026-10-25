@@ -1,0 +1,66 @@
+# Editing the internal wiki responsibly.
+Q: Changes to official policy pages on the wiki must be made by:
++ The policy owner or with their approval
+- Anyone who disagrees with the policy
+- Interns only
+- Visitors
+
+Q: Adding confidential data to a wiki page visible to the whole company is:
++ Not allowed
+- Helpful
+- Required
+- Fine if it is temporary
+
+Q: Wiki facts should be:
++ Accurate and supported by sources
+- Funny
+- Unsourced
+- Copied from rumors
+
+Q: Reverting another person's edit should include:
++ A brief explanation in the edit summary
+- No explanation
+- Insults
+- Deleting their account
+
+Q: Vandalizing a wiki page, such as changing facts as a prank, is:
++ A policy violation
+- Harmless fun
+- Required
+- Encouraged on Fridays
+
+Q: Outdated wiki pages should be:
++ Updated or marked as outdated
+- Left as they are forever
+- Deleted without telling anyone
+- Printed
+
+Q: Uploading copyrighted images to the wiki requires:
++ Permission or a license
+- Nothing
+- A watermark removal
+- A new file name
+
+Q: Personal opinions about coworkers on wiki pages are:
++ Not appropriate
+- Encouraged
+- Required
+- Fine if anonymous
+
+Q: Wiki revision history helps by:
++ Showing who changed what and when
+- Slowing the wiki down
+- Hiding edits
+- Nothing
+
+Q: Linking to external websites from the wiki should:
++ Point to trustworthy, relevant sources
+- Point to anything
+- Include affiliate links for personal profit
+- Be avoided always
+
+Q: The wiki's page about ACPWB says the company was founded in 2006 in Milwaukee. An edit changing it to 1906 without a source should be:
++ Reverted
+- Kept for fun
+- Promoted
+- Ignored

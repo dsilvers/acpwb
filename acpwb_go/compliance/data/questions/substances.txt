@@ -1,0 +1,61 @@
+# Drugs, alcohol, tobacco, and vaping at work.
+
+Q: Working while impaired by alcohol or drugs is:
++ Prohibited
+- Allowed after lunch
+- Allowed if you feel fine
+- Allowed on {WEEKDAY}s
+
+Q: Even where cannabis is legal under state law, it:
++ Remains illegal under federal law, and ACPWB may prohibit use and impairment at work
+- Is allowed at work
+- Is required for creativity
+- Is covered as a benefit
+
+Q: Employees in safety-sensitive transportation jobs regulated by the Department of Transportation are:
++ Subject to federal drug and alcohol testing rules
+- Exempt from testing
+- Tested only at {EVENT}
+- Tested by their coworkers
+
+Q: If you suspect a coworker is impaired and their job is safety-sensitive, you should:
++ Tell your supervisor right away so they can be removed from the safety-sensitive work
+- Let them continue
+- Give them coffee
+- Post about it in the team chat
+
+Q: Smoking and vaping at ACPWB are allowed:
++ Only in designated outdoor areas, away from entrances
+- In stairwells
+- In the {PLACE}
+- At your desk if the window is open
+
+Q: The federal minimum age to buy tobacco and vaping products is:
++ 21
+- 16
+- 18
+- 25
+
+Q: Alcohol at company events should be:
++ Served responsibly, with non-alcoholic options and safe rides available
+- Unlimited
+- Required for attendance
+- Served only to managers
+
+Q: An employee who seeks help for a substance use problem through the EAP:
++ Is encouraged to do so, and the EAP is confidential
+- Is automatically disciplined
+- Must tell their team
+- Loses their benefits
+
+Q: Prescription medication that may affect your ability to work safely should be:
++ Discussed with your doctor, and your supervisor told if safety-sensitive duties may be affected, without needing to name the medication
+- Hidden from everyone
+- Shared with coworkers
+- Taken in double doses
+
+Q: Bringing alcohol to work to celebrate a closed deal is:
++ Not allowed without approval for an authorized event
+- Encouraged
+- Allowed in moderation at your desk
+- Allowed after 3 p.m.

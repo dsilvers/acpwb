@@ -1,0 +1,54 @@
+# Oversight domain: slug | display name | what it oversees
+workplace-ergonomics | Workplace Ergonomics | workstation ergonomics and repetitive-strain prevention
+facility-access | Facility Access Control | badge issuance, door hardware, and visitor escort standards
+badge-standards | Credential & Badge Standards | identification badge design, renewal, and revocation
+clean-desk | Information Hygiene | clean desk, clear screen, and document disposal practices
+records-management | Records Management | records retention schedules and destruction certificates
+pay-transparency | Pay Transparency | salary range disclosure and pay equity reporting
+wage-standards | Wage Standards | minimum wage, overtime, and wage statement accuracy
+benefits-administration | Benefits Administration | employee benefit plan administration and notices
+workplace-safety | Workplace Safety | occupational injury prevention and incident reporting
+fire-prevention | Fire Prevention | evacuation drills, fire wardens, and egress maintenance
+data-protection | Data Protection | personal data processing, consent, and breach notification
+cybersecurity | Cybersecurity | information security controls and incident disclosure
+ai-governance | Artificial Intelligence Governance | automated decision tools and generative AI use
+ethics | Public Ethics | gifts, conflicts of interest, and lobbying disclosures
+anti-corruption | Anti-Corruption | bribery prevention and third-party due diligence
+trade-controls | Trade Controls | export licensing, sanctions screening, and deemed exports
+securities-conduct | Securities Conduct | insider trading prevention and trading windows
+corporate-governance | Corporate Governance | board composition, committee charters, and proxy disclosures
+executive-pay | Executive Compensation | executive pay disclosure and clawback policies
+workforce-equity | Workforce Equity | equal employment opportunity and affirmative action plans
+harassment-prevention | Harassment Prevention | anti-harassment training and complaint procedures
+whistleblower-protection | Whistleblower Protection | non-retaliation and protected disclosure channels
+travel-expense | Travel & Expense | business travel, per diems, and expense substantiation
+procurement | Public Procurement | vendor selection, bid integrity, and contract awards
+vendor-risk | Third-Party Risk | vendor oversight and outsourcing controls
+business-continuity | Business Continuity | continuity planning and disaster recovery testing
+mail-security | Mail & Package Security | mailroom screening and suspicious package handling
+remote-work | Remote Work Standards | telework security and home office safety
+accessibility | Workplace Accessibility | reasonable accommodation and accessible technology
+leave-administration | Leave Administration | family, medical, and civic leave entitlements
+labor-relations | Labor Relations | collective bargaining and union activity rights
+training-standards | Training Standards | mandatory training content, frequency, and recordkeeping
+professional-licensing | Professional Licensing | credential verification and continuing education credits
+consumer-privacy | Consumer Privacy | consumer data rights and opt-out requests
+financial-reporting | Financial Reporting | internal controls over financial reporting
+anti-money-laundering | Anti-Money Laundering | suspicious activity monitoring and customer due diligence
+social-media | Public Communications | social media conduct and public statements by employees
+conference-standards | Conference & Event Standards | professional conference conduct and attendee safety
+parking-transportation | Parking & Commuter Programs | parking structures, commuter benefits, and fleet use
+indoor-environment | Indoor Environmental Quality | office air quality, lighting, and thermostat disputes
+food-service | Workplace Food Service | break room sanitation and shared refrigerator policy
+document-classification | Information Classification | document labelling and handling marks
+password-standards | Authentication Standards | password complexity and multi-factor authentication
+printing-standards | Print Management | secure printing and printer output tray practices
+meeting-conduct | Meeting Conduct | meeting minutes, attendance, and whiteboard hygiene
+evacuation-planning | Evacuation Planning | evacuation routes, floor wardens, and assembly points
+expense-audit | Expense Audit | travel and expense review, receipts, and reimbursement limits
+refrigeration | Shared Refrigeration | labelling, storage periods, and refrigerator sweeps
+room-booking | Room Scheduling | conference room reservations and booking etiquette
+visitor-management | Visitor Management | sign-in logs, visitor badges, and escort requirements
+retention-scheduling | Retention Scheduling | retention periods, triggers, and destruction dates
+email-integrity | Email Integrity | sender verification, link safety, and reply-to handling
+gift-registry | Gift Registry | gift registers, thresholds, and pre-approvals

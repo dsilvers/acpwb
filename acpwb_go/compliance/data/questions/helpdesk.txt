@@ -1,0 +1,66 @@
+# IT help desk procedures.
+Q: Before resetting a password or MFA for a caller, the help desk must:
++ Verify the caller's identity using the approved procedure, such as a callback
+- Trust the caller's voice
+- Reset it if the caller sounds urgent
+- Ask for the caller's current password
+
+Q: The help desk will ask for your password:
++ Never
+- When you call
+- At least once a month
+- Only on weekends
+
+Q: Every support request should be:
++ Logged in a ticket
+- Handled from memory
+- Discussed only in hallways
+- Ignored if it is quick
+
+Q: A caller claiming to be an executive demands an urgent MFA reset and gets angry when asked to verify. The technician should:
++ Follow the verification procedure and escalate if needed
+- Skip verification to avoid trouble
+- Give the reset code over the phone
+- Hang up and forget it
+
+Q: Remote support sessions should:
++ Be started only with the user's knowledge and approval
+- Be started secretly
+- Stay connected after the issue is fixed
+- Be recorded and posted
+
+Q: A user reports clicking a suspicious link. The help desk should:
++ Treat it as a potential security incident and follow the response procedure
+- Tell the user to restart and forget it
+- Laugh and close the ticket
+- Ask the user to click it again
+
+Q: Installing unapproved software on a user's laptop at the user's request is:
++ Not allowed; only approved software may be installed
+- Fine if it is popular
+- Required for good service
+- Allowed during lunch
+
+Q: Asset tags on company laptops help the help desk:
++ Track and manage equipment
+- Decorate the laptop
+- Increase the laptop's speed
+- Nothing
+
+Q: Sharing a user's personal information with another caller is:
++ Not allowed
+- Fine if they are on the same team
+- Required for teamwork
+- Allowed with a manager's nickname
+
+Q: When a ticket is resolved, the technician should:
++ Confirm with the user and record what was done
+- Close it without telling anyone
+- Leave it open for metrics
+- Delete it
+
+Q: A user is locked out after too many failed logins. This is:
++ A security control; unlock after verifying identity and check for attack signs
+- A bug to be disabled
+- The user's fault and should never be fixed
+- A reason to share accounts

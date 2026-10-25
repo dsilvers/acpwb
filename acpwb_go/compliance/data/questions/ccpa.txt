@@ -1,0 +1,66 @@
+# California Consumer Privacy Act (as amended by CPRA), in general terms.
+Q: The CCPA gives California residents the right to:
++ Know, delete, and correct personal information, and opt out of its sale or sharing
+- Receive free company stock
+- Edit the company website
+- Veto product launches
+
+Q: Since January 1, 2023, the CCPA's rights also cover:
++ Employees and job applicants who are California residents
+- Only customers who spend more than $100
+- Only residents of Los Angeles
+- Nobody new
+
+Q: A business must generally respond to a verifiable consumer request within:
++ 45 days, which can be extended once by another 45 days with notice
+- 24 hours
+- One year
+- Whenever the privacy team gets to it
+
+Q: A website covered by the CCPA that sells or shares personal information must offer:
++ A clear "Do Not Sell or Share My Personal Information" link or equivalent opt-out
+- A pop-up that cannot be closed
+- A fax number for opt-outs
+- A puzzle game to opt out
+
+Q: Under California's rules, a business must treat a browser Global Privacy Control signal as:
++ A valid request to opt out of sale or sharing
+- Spam
+- An optional suggestion
+- A request to delete the account
+
+Q: Charging a higher price to a consumer because they exercised a CCPA right is:
++ Prohibited discrimination under the law, except for permitted financial incentives
+- Encouraged
+- Required
+- Allowed on weekends
+
+Q: "Sensitive personal information" under CPRA includes:
++ Social Security numbers, precise geolocation, and account login credentials
+- Favorite colors
+- Job titles
+- Public press releases
+
+Q: If a customer calls asking what personal data ACPWB holds about them, you should:
++ Route the request to the Privacy team's request process
+- Read their file to them over the phone right away
+- Tell them we have no data
+- Ask them to submit the request by carrier pigeon
+
+Q: The agency that enforces California privacy law along with the Attorney General is:
++ The California Privacy Protection Agency
+- The California Department of Snacks
+- The Federal Aviation Administration
+- The Milwaukee County Clerk
+
+Q: Personal information collected for one purpose should be used for:
++ Purposes consistent with what consumers were told when it was collected
+- Any purpose the marketing team invents later
+- Resale without notice
+- Training games
+
+Q: Before a new vendor receives California consumer data, ACPWB should:
++ Have a contract that limits the vendor's use of the data
+- Send the data first and sign later
+- Assume the vendor is trustworthy
+- Ask the vendor to pinky-promise

@@ -1,0 +1,66 @@
+# Maintaining legacy systems (COBOL, FORTRAN, JCL, and friends).
+Q: Before changing a decades-old batch program that still runs payroll, you should:
++ Understand what it does, test the change, and follow change management
+- Rewrite it from memory over the weekend
+- Delete the comments to make it shorter
+- Change it directly in production
+
+Q: Credentials hard-coded in old source code should be:
++ Removed and moved to a secure store, with the credentials rotated
+- Left alone because the program is old
+- Copied into the new system
+- Printed in the listing
+
+Q: The best documentation for a legacy system is:
++ Current, written explanations kept with the code
+- The memory of one person who is retiring
+- A sticky note on the mainframe
+- Nothing; legacy code documents itself
+
+Q: A program's output that must match a published report exactly should be verified by:
++ Comparing test output against known correct results
+- Trusting it because it ran for 30 years
+- Checking that it printed something
+- Asking the operator
+
+Q: Knowledge transfer from retiring experts on legacy systems should:
++ Start well before they leave
+- Happen at their farewell lunch
+- Be skipped
+- Be done by email in their last hour
+
+Q: JCL that contains a USER= and PASSWORD= on the JOB card:
++ Exposes credentials to anyone who can read the job
+- Is best practice
+- Is required for all jobs
+- Encrypts the job
+
+Q: Old programs that store two-digit years:
++ Can mishandle dates across century boundaries
+- Are immune to date bugs
+- Save so much space they are worth it
+- Are required by law
+
+Q: Replacing a legacy system should include:
++ Running old and new in parallel and reconciling results before cutover
+- Turning off the old system first
+- Skipping data migration testing
+- Choosing the cheapest vendor only
+
+Q: Commented-out code from 1987 in a production program:
++ Should be cleaned up carefully under change control, not edited casually
+- Is executed on leap years
+- Must never be touched
+- Should be uncommented to see what happens
+
+Q: Access to mainframe production libraries should be:
++ Restricted and logged
+- Open to all developers
+- Shared with interns
+- Granted forever
+
+Q: When a legacy job abends at 2 a.m., the operator should:
++ Follow the documented restart procedure and notify the on-call programmer
+- Rerun it repeatedly until it works
+- Delete the input files
+- Go home

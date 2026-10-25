@@ -1,0 +1,61 @@
+# Financial close, budgets, and accounting integrity.
+
+Q: Recording revenue before it is earned to meet a quarterly target is:
++ Improper and can be financial fraud
+- An acceptable timing choice
+- Required by the sales plan
+- Allowed if reversed next quarter
+
+Q: A "side letter" that changes the terms of a customer contract without going through Legal and Finance is:
++ Prohibited, because it can affect how revenue is recorded
+- A sign of good customer service
+- Allowed for large customers
+- Allowed if handwritten
+
+Q: Budgets should be spent:
++ On legitimate business needs, not just to avoid losing the budget at year end
+- Entirely by December 31, no matter what
+- On team gifts first
+- On {EVENT} only
+
+Q: Accruals record:
++ Expenses incurred or revenue earned that have not yet been paid or received
+- The amount of coffee consumed
+- Personal savings
+- The CEO's travel plans
+
+Q: A manager asks you to move an expense into next quarter to hit this quarter's budget. You should:
++ Decline; expenses must be recorded in the period incurred, and report the request if pressured
+- Do it, since it is only a timing difference
+- Do it if the amount is small
+- Record half in each quarter
+
+Q: Reconciliations are performed to:
++ Confirm that account balances are accurate and supported
+- Reconcile coworkers after a disagreement
+- Plan the next {EVENT}
+- Decide who pays for lunch
+
+Q: "Cookie jar" reserves are:
++ Improperly inflated reserves used to smooth earnings, which is prohibited
+- Reserves of cookies in the {PLACE}
+- An approved accounting method
+- A type of petty cash
+
+Q: Channel stuffing means:
++ Shipping excess product to distributors to inflate current revenue
+- Filling the team chat
+- Stuffing envelopes
+- Cable organization
+
+Q: Overriding a financial control because "the CFO said so" without documentation is:
++ A control failure that should be reported
+- Efficient
+- Normal
+- Required
+
+Q: Purchase orders should be created:
++ Before the goods or services are received
+- After the invoice arrives
+- Never
+- At year end only

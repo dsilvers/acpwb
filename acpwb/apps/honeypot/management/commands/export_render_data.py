@@ -16,8 +16,20 @@ from pathlib import Path
 
 from django.core.management.base import BaseCommand
 
-from apps.honeypot import archive_data, archive_data_compliance, archive_data_minutes, policy_data
+from apps.honeypot import archive_data, archive_data_compliance, archive_data_minutes, policy_data, wiki_generator
 from apps.people import generators as people_generators
+from apps.public import conference_data
+
+
+def _perch_facts():
+    """Quizzable facts per PERCH year for acpwb_go/compliance (the full
+    CONFERENCES dict carries speaker bios the Go side never needs)."""
+    return [
+        {'year': c['year'], 'theme': c['theme'], 'dates': c['dates'], 'venue': c['venue'],
+         'attendees': c.get('attendees') or 0, 'cancelled': c.get('cancelled', False),
+         'virtual': c.get('virtual', False)}
+        for _, c in sorted(conference_data.CONFERENCES.items())
+    ]
 
 # (module, [(source_name, export_name), ...])
 EXPORTS = [
@@ -100,6 +112,13 @@ EXPORTS = [
         ('EXECUTIVE_SUMMARY_TEMPLATES', 'EXECUTIVE_SUMMARY_TEMPLATES'),
         ('EXHIBIT_INTRO_TEMPLATES', 'EXHIBIT_INTRO_TEMPLATES'),
     ]),
+    (wiki_generator, [
+        ('WRONG_FACTS', 'WRONG_FACTS'),
+        ('TOPICS', 'WIKI_TOPICS'),
+    ]),
+    (conference_data, [
+        (_perch_facts, 'PERCH_FACTS'),
+    ]),
     (people_generators, [
         ('FIRST_NAMES', 'FIRST_NAMES'),
         ('LAST_NAMES', 'LAST_NAMES'),
@@ -136,7 +155,8 @@ class Command(BaseCommand):
         manifest = {}
         for module, names in EXPORTS:
             for source_name, export_name in names:
-                value = getattr(module, source_name)
+                value = source_name() if callable(source_name) else getattr(module, source_name)
+                source_name = getattr(source_name, '__name__', source_name)
                 jsonable = _to_jsonable(value)
                 filename = f'{export_name}.json'
                 (out_dir / filename).write_text(json.dumps(jsonable, ensure_ascii=False, indent=None))

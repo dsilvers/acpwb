@@ -1,0 +1,128 @@
+# Active threat / active shooter preparedness. Correct answers follow the
+# U.S. DHS "Run, Hide, Fight" guidance; keep them accurate and non-graphic.
+
+Q: The ACPWB active threat response follows which sequence?
++ Run, Hide, Fight
+- Hide, Report, Wait
+- Fight, Run, Hide
+- Report, Escalate, Document
+
+Q: [You hear what sounds like gunshots|An announcement reports an armed person] [on the {FLOOR} floor|near the {PLACE}]. If there is a safe escape path, you should:
++ Leave immediately, leaving your belongings behind
+- Pack up your laptop and {DEVICE} first
+- Wait for an email from Security
+- Go toward the sound to see what is happening
+
+Q: If you cannot safely leave, you should hide:
++ In a room you can lock or barricade, out of view, with your phone silenced
+- In an open area, such as the {PLACE}
+- Behind a glass partition
+- In a group in the hallway
+
+Q: Fighting back against an attacker is:
++ A last resort, only when your life is in imminent danger
+- The first step
+- Required of floor wardens
+- Prohibited under all circumstances
+
+Q: When law enforcement arrives, you should:
++ Keep your hands empty and visible, follow commands, and avoid sudden movements
+- Run toward the officers for help
+- Point to where you think the attacker went while shouting
+- Ask the officers to escort you to your car
+
+Q: [Once you are safe|When it is safe to do so], what information should you give the 911 dispatcher?
++ Your location, the number of attackers, their description, and any weapons seen
+- Your employee ID and cost center
+- Your manager's name and extension
+- A summary of {COURSE}
+
+Q: [A colleague|{NAME2}] wants to wait for coworkers who are slow to leave. Under Run, Hide, Fight guidance, you should:
++ Help others escape if possible, but do not let anyone slow your escape
+- Wait for the whole team to gather in the {PLACE}
+- Take attendance before leaving
+- Stay behind to lock the {DOCUMENT} away
+
+Q: [A colleague|{NAME}] makes remarks about harming others at work, and [says it was a joke|laughs it off]. You should:
++ Report it to Corporate Security or the Integrity Line
+- Ignore it, since it was a joke
+- Confront {FIRST} privately
+- Post about it in the team chat
+
+Q: During a lockdown, which of the following should you do?
++ Lock or barricade the door
++ Silence your phone and turn off the lights
+- Open the door to check whether it is over
+- Call your colleagues on speakerphone
+
+Q: [After an active threat drill|After the {WEEKDAY} lockdown drill], you notice the {DOOR} does not lock from inside. You should:
++ Report it to Facilities so it can be repaired
+- Prop it open for convenience
+- Tape a sign to it
+- Mention it at the next drill
+
+Q: [An active shooter|An active shooter situation] is best described as:
++ One or more people actively engaged in killing or attempting to kill people in a populated area
+- Any argument in the {PLACE} that becomes loud
+- A scheduled drill announced by Facilities
+- A security alarm with no known cause
+
+Q: [You hear loud popping sounds|You hear what could be gunfire or fireworks] [from the {PLACE}|near the {DOOR}|in the lobby]. You should:
++ Treat it as gunfire until you know otherwise, and move away from the sound
+- Walk toward the sound to find out what it is
+- Wait for an all-clear email before doing anything
+- Continue your meeting until Security calls
+
+Q: [During an active shooter incident|If there is an active shooter in the building], you are in a conference room with a glass wall and a door that does not lock. If you cannot escape, you should:
++ Barricade the door with heavy furniture, get out of sight of the glass, and silence phones
+- Stay seated at the table so you look calm
+- Stand by the glass to watch the hallway
+- Hold the door open so others can come in at any time
+
+Q: [Hiding during an active shooter incident|While hiding from an active shooter], you should:
++ Stay quiet, turn off lights and phone sounds, and remain hidden until law enforcement says it is safe
+- Call out to let others know where you are
+- Leave the room as soon as the noise stops
+- Text your whole team a status update every few minutes
+
+Q: [If you can safely call 911|When you call 911] during an active shooter incident but cannot speak, you should:
++ Leave the line open so the dispatcher can listen, or text 911 if it is available in your area
+- Hang up and try again later
+- Email Security instead
+- Call your manager first
+
+Q: The first officers to arrive at an active shooter incident will usually:
++ Go directly toward the shooter and will not stop to help the injured
+- Set up a help desk in the lobby
+- Escort each associate out individually
+- Take attendance by department
+
+Q: [After an active shooter incident|Once law enforcement has secured the building], associates should expect to:
++ Go to a designated area, be accounted for, and possibly be questioned before leaving
+- Return to their desks and resume work
+- Drive home immediately without checking in
+- Post updates on social media for coworkers
+
+Q: [Following an active shooter incident|After a violent incident at work], support for affected associates includes:
++ The Employee Assistance Program and counseling resources, offered confidentially
+- A {AMOUNT} gift card, issued once
+- Mandatory attendance at the next {EVENT}
+- Nothing; associates are expected to return to normal immediately
+
+Q: [Active shooter drills|ACPWB active shooter drills] are:
++ Announced in advance and used to practice routes and hiding places
+- Unannounced and staged to look real
+- Optional for people managers
+- Held only in the parking structure
+
+Q: Warning signs that could indicate a risk of violence and should be reported include:
++ Threats or fixation on weapons and violence
++ Expressed intent to harm a specific person or group
+- Disagreeing with a decision in a meeting
+- Taking a sick day
+
+Q: [Your manager|{NAME}] asks you to help plan your team's response to an active shooter. A useful first step is to:
++ Identify two exits from your work area and rooms that lock or can be barricaded
+- Assign one person to fight while others hide
+- Buy a personal weapon for the {PLACE}
+- Wait until the next annual training

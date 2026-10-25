@@ -1,0 +1,67 @@
+# Reception, the lobby, lost and found, elevators, and restrooms.
+
+Q: A visitor arrives at reception without an appointment asking to see an executive. Reception should:
++ Contact the executive's office to confirm before allowing access
+- Send them up
+- Give them a badge and directions
+- Ask them to wait in the stairwell
+
+Q: Items found in the office should be:
++ Turned in to Security or the lost-and-found
+- Kept if no one claims them by lunch
+- Posted on social media
+- Sold at {EVENT} raffle
+
+Q: A found ACPWB laptop or phone should be:
++ Turned in to IT Security right away
+- Charged and used until the owner appears
+- Placed in the lost-and-found box with the umbrellas
+- Logged into to find the owner
+
+Q: Unclaimed lost-and-found items are typically:
++ Held for a set period, then donated or disposed of under the policy
+- Distributed to Security staff
+- Kept forever
+- Auctioned to the {COMMITTEE}
+
+Q: In a crowded elevator, it is courteous to:
++ Step aside to let people exit and avoid phone calls
+- Take a speakerphone call
+- Press every button
+- Hold the door for several minutes
+
+Q: Discussing confidential matters in the elevator is:
++ Not allowed; you do not know who is listening
+- Fine between floors
+- Fine if you whisper
+- Required to save time
+
+Q: A restroom leak or overflow should be:
++ Reported to Facilities right away
+- Ignored until it reaches the hallway
+- Fixed with paper towels only
+- Reported at the next {EVENT}
+
+Q: Under OSHA sanitation rules, employers must:
++ Make toilet facilities available so employees can use them when needed
+- Limit restroom breaks to two per day
+- Require a sign-out sheet
+- Charge for restroom use
+
+Q: Leaving the lobby door propped open for a delivery is:
++ A security risk; arrange deliveries through reception
+- Efficient
+- Allowed during business hours
+- Allowed on {WEEKDAY}s
+
+Q: Reception should verify visitors by:
++ Checking identification against the expected visitor list and issuing a temporary badge
+- Recognizing their face
+- Asking which team they like
+- Letting them sign any name
+
+Q: A courier asks reception to sign for a package addressed to someone who left ACPWB months ago. Reception should:
++ Follow the mail policy, notifying the manager or HR rather than opening or forwarding it to a home address
+- Open it
+- Keep it
+- Return it to the courier unopened and insult them

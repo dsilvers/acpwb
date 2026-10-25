@@ -1,0 +1,67 @@
+# CEO pay ratio disclosure (Item 402(u)).
+
+Q: The CEO pay ratio compares:
++ The CEO's annual total compensation to that of the median employee
+- The CEO's pay to the lowest-paid intern
+- The CEO's pay to the stock price
+- The CEO's height to the median employee's height
+
+Q: The "median employee" for the pay ratio is:
++ The employee whose pay falls in the middle when all employees' pay is ranked
+- The employee with the average salary
+- The employee who sits in the middle of the {FLOOR} floor
+- The employee chosen by the CEO
+
+Q: Companies may identify the median employee once and reuse that employee for:
++ Up to three years, unless there is a significant change to the workforce or pay arrangements
+- Forever
+- One week
+- As long as the median employee stays out of {CITY}
+
+Q: A CEO pay ratio of 300:1 means:
++ The CEO earned about 300 times what the median employee earned
+- The CEO works 300 times as many hours
+- There are 300 employees
+- The CEO has 300 direct reports
+
+Q: When calculating the pay ratio, companies may exclude non-U.S. employees under the de minimis exemption if they make up:
++ 5% or less of the total workforce
+- 50% or less
+- Any share, if they are in a different time zone
+- None; exclusions are never allowed
+
+Q: [A colleague|{NAME}] asks if the median employee is someone at ACPWB they know. You should:
++ Explain that the median employee's identity is not disclosed
+- Guess based on who drives a mid-size sedan
+- Look it up in {SYSTEM}
+- Ask the CEO
+
+Q: Companies may use a "consistently applied compensation measure" such as:
++ W-2 wages or payroll records to identify the median employee
+- Height
+- Years at the company only
+- Parking spot size
+
+Q: Seasonal and part-time employees in the pay ratio workforce:
++ Are generally included, though compensation may be annualized only for permanent employees
+- Are always excluded
+- Count twice
+- Count only in summer
+
+Q: The pay ratio rule was adopted under:
++ Section 953(b) of the Dodd-Frank Act
+- The Clean Air Act
+- The Bank Secrecy Act
+- {AGENCY} guidance
+
+Q: Supplemental pay ratios that adjust for factors like cost of living are:
++ Permitted if clearly identified and not more prominent than the required ratio
+- Prohibited
+- Required
+- Secret
+
+Q: A company may explain a high pay ratio by:
++ Describing its workforce composition and pay practices in the narrative disclosure
+- Hiding it
+- Rounding it down
+- Leaving it out

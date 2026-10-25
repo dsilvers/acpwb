@@ -1,0 +1,68 @@
+# Anti-money laundering. Correct answers follow the Bank Secrecy Act;
+# keep them accurate.
+
+Q: Money laundering is:
++ Disguising the source of money that came from criminal activity
+- Washing dollar bills that went through the laundry
+- Saving money for retirement
+- Paying vendors early
+
+Q: Under the Bank Secrecy Act, financial institutions must file a Currency Transaction Report for cash transactions over:
++ $10,000
+- $100
+- $1,000,000
+- {AMOUNT}
+
+Q: Breaking up cash deposits into smaller amounts to avoid reporting requirements is called:
++ Structuring, which is a federal crime even if the money is legitimate
+- Budgeting
+- Smart banking
+- Layering cake
+
+Q: Warning signs of money laundering include:
++ Unusual cash payments, payments from unrelated third parties, and reluctance to provide identifying information
+- Customers who pay on time
+- Customers who ask for receipts
+- Customers who use a company email address
+
+Q: If you suspect a transaction involves money laundering, you should:
++ Report it to Compliance and avoid tipping off the customer
+- Ask the customer directly if they are laundering money
+- Complete the transaction quickly
+- Post about it on social media
+
+Q: "Know Your Customer" (KYC) procedures require:
++ Verifying the identity of customers and understanding the nature of their business
+- Knowing each customer's birthday
+- Sending customers holiday cards
+- Meeting every customer in person
+
+Q: A vendor asks to be paid in cash, split into several payments just under the reporting threshold. This is:
++ A red flag for structuring that must be escalated
+- A reasonable request
+- Allowed for small vendors
+- Allowed if they provide an invoice
+
+Q: A Suspicious Activity Report (SAR) filed by a financial institution must be:
++ Kept confidential; the subject must not be told about it
+- Shared with the customer
+- Posted publicly
+- Discussed in the team chat
+
+Q: "Layering" in money laundering means:
++ Moving money through many transactions to hide its origin
+- Wearing layers of clothing
+- Stacking cash
+- Creating many folders
+
+Q: Real estate purchases through anonymous shell companies can be:
++ A money laundering risk
+- A standard investment
+- Required for privacy
+- Only a tax issue
+
+Q: Willful blindness to obvious red flags:
++ Can be treated as knowledge under the law
+- Protects you
+- Is good customer service
+- Is required

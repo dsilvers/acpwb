@@ -1,0 +1,67 @@
+# Personal data breach response. Notification rules follow GDPR Arts. 33–34
+# and U.S. state breach laws in general terms.
+Q: If you suspect personal data has been exposed, your first step is:
++ Report it to the Security or Privacy team immediately
+- Investigate quietly for a few weeks
+- Delete the evidence
+- Post about it on social media
+
+Q: Under GDPR, a controller must normally notify the supervisory authority of a reportable breach:
++ Within 72 hours of becoming aware of it
+- Within 72 business days
+- Only if the press finds out
+- At the next annual audit
+
+Q: Under GDPR, affected individuals must be told about a breach when it is likely to result in:
++ A high risk to their rights and freedoms
+- Any inconvenience at all
+- A delay in shipping
+- A change in the privacy policy
+
+Q: Which U.S. states have data breach notification laws?
++ All 50 states
+- Only California
+- Only states with ocean coastline
+- None; it is purely federal
+
+Q: A laptop holding customer data is stolen, but its disk is strongly encrypted and the key is safe. This is:
++ Still reported internally, and often not a notifiable breach because the data is unreadable
+- Ignored because laptops are cheap
+- Automatically notifiable to every customer worldwide
+- Reported only if the laptop was new
+
+Q: During a breach investigation, you should:
++ Preserve logs and evidence and follow the incident response team's direction
+- Wipe the affected systems right away
+- Contact the attacker to negotiate
+- Tell customers yourself before Legal reviews the facts
+
+Q: Sending a spreadsheet of employee Social Security numbers to the wrong external email address is:
++ A potential data breach that must be reported right away
+- Fine if you send a follow-up saying "please delete"
+- Only a problem if the recipient complains
+- A routine email error
+
+Q: Who decides whether regulators and individuals must be notified?
++ The Privacy, Legal, and Security teams, following the response plan
+- Whoever discovered the breach
+- The vendor involved
+- The first customer who asks
+
+Q: Breach records, including breaches that were not notifiable, should be:
++ Documented with the facts, effects, and actions taken
+- Shredded after the meeting
+- Kept only in someone's memory
+- Posted in the break room
+
+Q: A vendor that processes ACPWB personal data has a breach. The vendor should:
++ Notify ACPWB promptly, as required by our contract
+- Keep it quiet to protect the relationship
+- Notify only its own customers
+- Wait until contract renewal
+
+Q: Calling a breach "minor" in an email before the investigation is done is:
++ Unwise; describe facts, not conclusions, until the team has assessed it
+- Required to keep morale up
+- A best practice for legal privilege
+- The only allowed subject line

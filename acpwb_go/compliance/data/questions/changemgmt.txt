@@ -1,0 +1,66 @@
+# IT change management: CAB, standard/normal/emergency changes, rollbacks.
+Q: A change advisory board (CAB) exists to:
++ Review planned changes for risk, timing, and impact before they happen
+- Approve changes after they cause outages
+- Choose the team's lunch order
+- Replace testing
+
+Q: A "standard change" is:
++ A low-risk, pre-approved change that follows a documented procedure
+- Any change made by a senior engineer
+- A change made on a standard business day
+- A change nobody wrote down
+
+Q: An emergency change:
++ Fixes an urgent problem and still gets expedited approval and a post-review
+- Skips documentation forever
+- Is any change requested by an executive
+- Happens only during fire drills
+
+Q: Every normal change request should include:
++ A description, risk assessment, test plan, schedule, and rollback plan
+- A motivational quote
+- Only the requester's name
+- A promise that nothing will go wrong
+
+Q: A rollback plan describes:
++ How to undo the change if it fails
+- How to roll the server rack to a new room
+- How to roll out the change faster
+- How to blame another team
+
+Q: Making a production change during a change freeze without approval is:
++ A policy violation, even if the change works
+- Allowed if nobody notices
+- Encouraged near quarter end
+- Fine if you are confident
+
+Q: After a change is implemented, the owner should:
++ Verify that it worked and close the change record
+- Leave immediately for the weekend
+- Delete the change record
+- Make another unplanned change
+
+Q: Separation of duties in change management means:
++ The person who approves a change is not the person who wrote and deployed it alone
+- Engineers sit in separate rooms
+- Changes are split into tiny pieces
+- No one talks to the CAB
+
+Q: A change that caused an outage should be followed by:
++ A blameless post-incident review to learn and prevent a repeat
+- Quietly removing it from the change log
+- Finding someone to blame
+- A change freeze on all coffee machines
+
+Q: Configuration changes to firewalls are:
++ Changes that require the change process like any other
+- Exempt because they are quick
+- Only reviewed annually
+- Made by whoever has the password
+
+Q: Change records are useful during audits because they show:
++ Who approved what, when, and why
+- Which engineers type fastest
+- The weather during each change
+- Nothing; auditors ignore them

@@ -1,0 +1,66 @@
+# Canary tokens and deception technology.
+Q: A canary token is:
++ A decoy file, credential, or link that alerts Security when someone touches it
+- A bird mascot
+- A type of password manager
+- A vending machine coin
+
+Q: If you find unfamiliar credentials in a configuration file, you should:
++ Report them to Security rather than testing them
+- Try them to see what they unlock
+- Share them with coworkers
+- Delete the file
+
+Q: Canary tokens work because:
++ Legitimate users have no reason to use them, so any use is suspicious
+- They encrypt everything
+- They block all attacks
+- They are invisible to Security
+
+Q: Honeypot systems are designed to:
++ Attract and observe attackers without risking real systems
+- Store honey
+- Speed up the network
+- Replace backups
+
+Q: Employees should never:
++ Tamper with or disable security monitoring tools
+- Report alerts
+- Follow security policies
+- Lock their screens
+
+Q: An alert from a canary token means:
++ Someone accessed a decoy, which needs investigation
+- The network is fast
+- Backups completed
+- A bird is nearby
+
+Q: Deception tools must be deployed:
++ With Security approval and documented
+- By anyone
+- Secretly by individuals
+- On personal devices
+
+Q: Canary tokens placed in fake configuration files on a public website can reveal:
++ Who harvested the files and tried to use them
+- Nothing
+- Employee passwords
+- Customer data
+
+Q: Using a found credential, even "just to check," is:
++ Unauthorized access
+- Research
+- Allowed
+- Helpful
+
+Q: Security alerts from deception tools should be:
++ Triaged and investigated promptly
+- Ignored
+- Silenced
+- Celebrated
+
+Q: Discussing the location of canary tokens publicly:
++ Reduces their effectiveness
+- Improves them
+- Is required
+- Has no effect

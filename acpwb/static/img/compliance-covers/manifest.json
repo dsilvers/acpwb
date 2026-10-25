@@ -1,0 +1,135 @@
+{
+ "access-badge-renewal-attestation-1": {
+  "model": "flux-schnell",
+  "prompt": "a blank white access card on a navy lanyard resting on a glass desk, mid-century modern decor, warm golden-hour light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "access-badge-renewal-attestation-2": {
+  "model": "flux-schnell",
+  "prompt": "a security office counter with a card printer and a tray of blank badge cards, warm Midwestern office decor, cool overcast daylight, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "access-badge-renewal-attestation-3": {
+  "model": "flux-schnell",
+  "prompt": "a small black card reader beside a frosted glass office door, soft blue indicator light, sleek glass-and-steel decor, soft morning light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "access-badge-renewal-attestation-4": {
+  "model": "flux-schnell",
+  "prompt": "a row of glass security turnstiles in a modern marble lobby, mid-century modern decor, warm golden-hour light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "access-badge-renewal-attestation-5": {
+  "model": "flux-schnell",
+  "prompt": "a locked server rack cage behind chain-link fencing, blue indicator lights, sleek glass-and-steel decor, warm golden-hour light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "access-badge-renewal-attestation-6": {
+  "model": "flux-schnell",
+  "prompt": "a row of locked grey steel filing cabinets in a records room, mid-century modern decor, warm golden-hour light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "active-shooter-response-training-1": {
+  "prompt": "a long empty office corridor with closed solid wooden doors, calm even lighting, sleek glass-and-steel decor, soft morning light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-security-awareness-1": {
+  "model": "flux-schnell",
+  "prompt": "a laptop closed and secured with a steel cable lock to a desk, industrial loft decor with exposed brick, warm golden-hour light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-security-awareness-2": {
+  "model": "flux-schnell",
+  "prompt": "a security camera dome mounted on the ceiling of an empty corridor, contemporary decor with navy accents, cool overcast daylight, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-security-awareness-3": {
+  "model": "flux-schnell",
+  "prompt": "a locked server rack cage behind chain-link fencing, blue indicator lights, sleek glass-and-steel decor, soft morning light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-security-awareness-4": {
+  "model": "flux-schnell",
+  "prompt": "a row of locked grey steel filing cabinets in a records room, classic wood-paneled decor, soft morning light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-security-awareness-5": {
+  "model": "flux-schnell",
+  "prompt": "an empty desk with a laptop at night, the room lit only by a desk lamp, industrial loft decor with exposed brick, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-security-awareness-6": {
+  "model": "flux-schnell",
+  "prompt": "a desk with a closed laptop, a cup of coffee, and a steel fishing hook on a coaster, editorial still life, industrial loft decor with exposed brick, soft diffused window light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "clean-desk-policy-certification-1": {
+  "model": "flux-schnell",
+  "prompt": "a confidential shredding console bin with a slot in a quiet copy room, contemporary decor with navy accents, bright even midday light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "clean-desk-policy-certification-2": {
+  "model": "flux-schnell",
+  "prompt": "a locked under-desk pedestal drawer with a small key, clean office, warm Midwestern office decor, cool overcast daylight, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "clean-desk-policy-certification-3": {
+  "model": "flux-schnell",
+  "prompt": "a row of empty identical desks at the end of the day, chairs pushed in, soft evening light, sleek glass-and-steel decor, bright even midday light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "clean-desk-policy-certification-4": {
+  "model": "flux-schnell",
+  "prompt": "a perfectly clear white desk with only a closed laptop and a single plant, mid-century modern decor, soft diffused window light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "clean-desk-policy-certification-5": {
+  "model": "flux-schnell",
+  "prompt": "tall rolling archive shelves filled with uniform grey storage boxes, mid-century modern decor, soft morning light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "clean-desk-policy-certification-6": {
+  "model": "flux-schnell",
+  "prompt": "a document shredder beside a stack of sealed boxes in a storage room, mid-century modern decor, soft morning light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "cpr-and-aed-awareness-1": {
+  "prompt": "a bright yellow defibrillator cabinet mounted on a white lobby wall beside the elevators, minimalist Scandinavian decor, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "insider-trading-awareness-1": {
+  "model": "flux-schnell",
+  "prompt": "a gavel resting on a polished wooden table in a formal meeting room, warm Midwestern office decor, soft diffused window light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "labor-relations-fundamentals-1": {
+  "prompt": "a factory floor at dawn with idle machinery and long shadows, warm Midwestern office decor, cool overcast daylight, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "phishing-recognition-fundamentals-1": {
+  "model": "flux-schnell",
+  "prompt": "an empty desk with a laptop at night, the room lit only by a desk lamp, 1990s corporate decor with beige carpet, bright even midday light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "phishing-recognition-fundamentals-2": {
+  "model": "flux-schnell",
+  "prompt": "a closed laptop with a fishing lure resting on its lid, dark wood desk, moody light, 1990s corporate decor with beige carpet, warm golden-hour light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "phishing-recognition-fundamentals-3": {
+  "model": "flux-schnell",
+  "prompt": "a desk with a closed laptop, a cup of coffee, and a steel fishing hook on a coaster, editorial still life, contemporary decor with navy accents, bright even midday light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "phishing-recognition-fundamentals-4": {
+  "model": "flux-schnell",
+  "prompt": "a security camera dome mounted on the ceiling of an empty corridor, warm Midwestern office decor, soft diffused window light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "phishing-recognition-fundamentals-5": {
+  "model": "flux-schnell",
+  "prompt": "a laptop closed and secured with a steel cable lock to a desk, minimalist Scandinavian decor, bright even midday light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "phishing-recognition-fundamentals-6": {
+  "model": "flux-schnell",
+  "prompt": "a locked server rack cage behind chain-link fencing, blue indicator lights, minimalist Scandinavian decor, late evening light with long shadows, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "tailgating-and-piggybacking-awareness-1": {
+  "model": "flux-schnell",
+  "prompt": "a row of glass security turnstiles in a modern marble lobby, mid-century modern decor, soft diffused window light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "tailgating-and-piggybacking-awareness-2": {
+  "model": "flux-schnell",
+  "prompt": "a blank white access card on a navy lanyard resting on a glass desk, contemporary decor with navy accents, cool overcast daylight, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "tailgating-and-piggybacking-awareness-3": {
+  "model": "flux-schnell",
+  "prompt": "a small black card reader beside a frosted glass office door, soft blue indicator light, contemporary decor with navy accents, cool overcast daylight, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "tailgating-and-piggybacking-awareness-4": {
+  "model": "flux-schnell",
+  "prompt": "a security office counter with a card printer and a tray of blank badge cards, classic wood-paneled decor, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "tailgating-and-piggybacking-awareness-5": {
+  "model": "flux-schnell",
+  "prompt": "a security camera dome mounted on the ceiling of an empty corridor, classic wood-paneled decor, late evening light with long shadows, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "tailgating-and-piggybacking-awareness-6": {
+  "model": "flux-schnell",
+  "prompt": "a laptop closed and secured with a steel cable lock to a desk, classic wood-paneled decor, cool overcast daylight, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ }
+}

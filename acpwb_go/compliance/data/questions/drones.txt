@@ -1,0 +1,50 @@
+# Drones, smart buildings, and connected devices. Correct answers on drones
+# follow FAA Part 107.
+
+Q: Flying a drone for commercial purposes, such as filming an ACPWB facility, generally requires:
++ A remote pilot certificate under FAA Part 107 and compliance with airspace rules
+- Nothing
+- A fishing license
+- A smartphone app only
+
+Q: Under FAA Part 107, small drones may generally fly no higher than:
++ 400 feet above ground level, unless near a structure
+- 4,000 feet
+- 40 feet
+- As high as the battery allows
+
+Q: A drone flying over the ACPWB parking lot should be:
++ Reported to Security
+- Shot down
+- Chased
+- Ignored forever
+
+Q: Smart building sensors that track desk occupancy should:
++ Be disclosed to employees and used according to privacy policy
+- Track individuals secretly
+- Record audio
+- Be installed in restrooms
+
+Q: Connecting a personal smart device, like a smart plug or speaker, to the ACPWB network is:
++ Not allowed
+- Encouraged
+- Allowed on the {FLOOR} floor
+- Allowed for music
+
+Q: Badge readers and smart locks record:
++ Access events that may be reviewed for security purposes
+- Nothing
+- Only executive access
+- Employees' conversations
+
+Q: Default passwords on connected devices, such as cameras, should be:
++ Changed before the device is deployed
+- Kept for easy support
+- Posted on the device
+- Shared with {VENDOR}
+
+Q: A smart thermostat showing a temperature you dislike should be:
++ Adjusted through a Facilities request
+- Hacked
+- Covered with tape
+- Unplugged

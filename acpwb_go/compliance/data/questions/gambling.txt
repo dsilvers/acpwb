@@ -1,0 +1,49 @@
+# Office pools, gambling, raffles, and solicitation.
+
+Q: Office betting pools on sports tournaments are:
++ Not allowed under ACPWB policy, and may be illegal depending on state law
+- Required for team spirit
+- Allowed if the stakes are under {AMOUNT}
+- Allowed if run on {SYSTEM}
+
+Q: Fantasy sports leagues using ACPWB systems or work time are:
++ Not allowed
+- Allowed during meetings
+- Allowed if your manager plays
+- Allowed during the playoffs
+
+Q: Selling fundraiser items, such as cookies or candy, at work is:
++ Allowed only as permitted by the solicitation policy, such as in designated areas or channels
+- Allowed anywhere, any time
+- Prohibited for all causes
+- Required in March
+
+Q: Pressuring direct reports to buy items for your child's fundraiser is:
++ Inappropriate, because of the power imbalance
+- A leadership skill
+- Allowed if the cause is good
+- Required for team morale
+
+Q: Raffles at company events with paid tickets may be:
++ Regulated by state gaming laws and require approval
+- Always legal
+- Required for charity events
+- Run by anyone
+
+Q: Distributing literature or soliciting for a union in non-work areas during non-work time is:
++ Generally protected under the National Labor Relations Act
+- Prohibited everywhere
+- Allowed only by managers
+- Allowed only on {WEEKDAY}
+
+Q: Sending a company-wide email to sell your used car is:
++ Not allowed; use the approved classifieds channel if one exists
+- A great way to reach buyers
+- Allowed if the car is blue
+- Allowed if priced under {AMOUNT}
+
+Q: Running a side business selling products to coworkers during work time is:
++ Not allowed
+- Allowed if you offer a discount
+- Allowed in the {PLACE}
+- Required for networking

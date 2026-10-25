@@ -1,0 +1,66 @@
+# Fall protection. Answers follow OSHA 1910 Subpart D and 1926 Subpart M.
+Q: In general industry, OSHA requires fall protection at unprotected sides and edges at:
++ 4 feet or more above a lower level
+- 10 feet or more
+- 20 feet or more
+- Any height over 1 inch
+
+Q: In construction, OSHA's general fall protection trigger height is:
++ 6 feet
+- 4 feet
+- 12 feet
+- 25 feet
+
+Q: The top rail of a guardrail system must be:
++ 42 inches, plus or minus 3 inches, above the walking-working surface
+- 30 inches high
+- At least 60 inches high
+- At knee height
+
+Q: A body belt used as fall arrest equipment is:
++ Not allowed; personal fall arrest systems must use a full-body harness
+- The preferred option
+- Allowed for short jobs
+- Required in winter
+
+Q: An anchorage for a personal fall arrest system must support at least:
++ 5,000 pounds per attached worker, or be designed with a safety factor of two by a qualified person
+- 500 pounds
+- The worker's weight only
+- Whatever a ceiling tile can hold
+
+Q: Fall protection equipment should be inspected:
++ Before each use, and removed from service if damaged or after it arrests a fall
+- Once a year by the vendor only
+- Only if it looks dirty
+- After it fails
+
+Q: A covered hole in a floor must have a cover that is:
++ Secured and marked with the word "HOLE" or "COVER"
+- Made of cardboard
+- Unmarked to avoid confusion
+- Removed at the end of each shift
+
+Q: A personal fall arrest system must be rigged so a worker cannot free fall more than:
++ 6 feet, nor contact any lower level
+- 20 feet
+- 2 inches
+- Any distance
+
+Q: If a worker is suspended in a harness after a fall, the employer must:
++ Provide prompt rescue
+- Wait for the shift to end
+- Call the harness manufacturer
+- Leave them until they recover on their own
+
+Q: Workers using fall protection must:
++ Be trained by a qualified person to recognize hazards and use the equipment
+- Learn by watching others
+- Read the label once
+- Be over 6 feet tall
+
+Q: A skylight on a roof is:
++ A fall hazard that must be guarded or covered
+- Safe to stand on if it is new
+- Designed to hold people
+- Only a hazard at night

@@ -1,0 +1,67 @@
+# Economic sanctions (OFAC).
+
+Q: The Office of Foreign Assets Control (OFAC) administers:
++ U.S. economic and trade sanctions
+- Office supplies for federal agencies
+- The foreign exchange rate
+- Airport security
+
+Q: The Specially Designated Nationals (SDN) list contains:
++ Individuals and entities whose assets are blocked and with whom U.S. persons generally may not deal
+- The company's top salespeople
+- People with special parking permits
+- Members of the {COMMITTEE}
+
+Q: Before onboarding a new international vendor, ACPWB should:
++ Screen the vendor and its owners against sanctions lists
+- Ask the vendor if they are sanctioned
+- Skip screening for small contracts
+- Screen only if the vendor is in {CITY}
+
+Q: An entity owned 50% or more, in total, by blocked persons is:
++ Treated as blocked, even if it is not named on the SDN list
+- Free to do business with
+- Exempt if the name is different
+- Only blocked on weekends
+
+Q: A possible sanctions match during screening should be:
++ Held and escalated to Compliance for review before proceeding
+- Ignored if the name is spelled slightly differently
+- Approved to avoid delays
+- Approved if the vendor is friendly
+
+Q: Sanctions violations can result in:
++ Civil penalties even without intent, and criminal penalties for willful violations
+- No consequences for first offenses
+- A warning email only
+- A rebate
+
+Q: "U.S. persons" required to follow OFAC sanctions include:
++ U.S. citizens and permanent residents wherever located, entities organized in the U.S., and anyone in the U.S.
+- Only people in Washington, D.C.
+- Only government employees
+- Only banks
+
+Q: Facilitating a transaction by a foreign colleague that would be prohibited for a U.S. person is:
++ Prohibited facilitation
+- Allowed
+- Encouraged
+- Not covered
+
+Q: Screening should be repeated:
++ Periodically and when sanctions lists are updated
+- Never
+- Once at onboarding only
+- After a payment fails
+
+Q: Sanctions screening tools may return false positives, which should be:
++ Reviewed and documented before clearing
+- Cleared automatically
+- Blocked forever
+- Ignored
+
+Q: Shipping goods to a sanctioned country through an intermediary country is:
++ Evasion, and prohibited
+- Clever logistics
+- Allowed
+- Required for speed

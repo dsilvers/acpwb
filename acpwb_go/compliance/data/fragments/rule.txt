@@ -1,0 +1,45 @@
+# "Before You Begin" rules on a course page (3–6 per course, expanded with
+# the course's slots: {TOPIC}, {AGENCY}, {N}, {DAYS}, {DEVICE}, …).
+This assessment must be completed in one sitting[?, without interruption].
+Closing your browser will reset your progress to Question 1[? and notify your manager].
+[Mobile devices|Tablets|Smart watches] are not supported. [Some desktops are not supported either.|Please use an ACPWB-issued laptop.|Neither are most laptops.]
+You may not use the Back button. You may not use the Forward button.[? The Refresh button is discouraged.]
+Each question is timed. The timer is not displayed.
+Questions are drawn at random from a pool; your colleagues' answers will not help you.
+Your manager will be notified of your score[? within {N} business days].
+Your manager will be notified if you do not take this course.
+Completion is tracked for audit purposes and retained for [seven (7)|ten (10)|{N}] years.
+Associates who fail [three|{N}] attempts must attend an in-person remediation session[? on a {WEEKDAY}].
+Audio is required. Captions are available on request, by fax.
+Pop-up blockers must be disabled for the duration of the course.
+Your progress will NOT be saved.
+This course is optional and mandatory.
+[Allow|Set aside] at least {N}0 minutes. [The course takes about half that.|Most associates need longer.]
+This version of {TOPIC} replaces all earlier versions[?, including the one you completed {DAYS} days ago].
+Completing this course does not satisfy the {AGENCY} requirement, which has its own version of this course.
+You must score at least the passing mark on [every module|the final assessment|both attempts].
+[Headphones are|A quiet room is|A second monitor is] recommended.
+Do not take this course on behalf of another associate[?, even if they ask nicely].
+Screenshots of assessment questions are prohibited and will be detected.
+Questions must be answered in order. Skipped questions are marked incorrect.
+The course must be completed on the ACPWB network or VPN[? and not from the {PLACE}].
+Your certificate will display your name exactly as entered[?, including typos].
+Training completed after the due date is recorded as late, even if completed on time.
+Course materials may not be printed[?, except to the {FLOOR}-floor printer].
+If you experience technical issues, [restart your {DEVICE} and begin again|contact the Service Desk, then begin again|clear your browser cache and begin again].
+[Credit|CE credit] is awarded only after the attestation is signed.
+[This course contains|Some modules contain] [simulated|actual] audio recorded during {EVENT}.
+Associates on leave are not required to complete this course until {DAYS} days after their return.
+The assessment may include questions on [topics not covered in this course|material from earlier versions of this course|the ACPWB Compliance Glossary].
+Answers are final once selected. Please read each question carefully[? and then read it again].
+[Contractors|Interns|Visiting consultants] must also complete this course[? and may not bill time for it].
+[Course content is reviewed annually by the {DEPT} team.|Course content was last reviewed by {NAME}.]
+Your browser must allow cookies from acpwb.com[? and from no other site].
+Completion will be reported to the {AGENCY}[? upon request].
+[Live|In-person] sessions of this course are held in the {PLACE} on {WEEKDAY}s[? when the room is available].
+If you have already completed this course this year, you must complete it again.
+Please do not discuss assessment questions in the {PLACE}.
+Feedback on this course may be submitted after completion[?, but will not change it].
+This course was developed with input from {ORG}[? and has been reviewed by Legal].
+You have {N} attempts. Additional attempts may be requested from {DEPT}.
+Ensure your {DEVICE} is charged. Progress is lost if it powers off.

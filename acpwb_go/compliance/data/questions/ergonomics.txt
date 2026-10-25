@@ -1,0 +1,59 @@
+Q: The top of your monitor should be:
++ At or slightly below eye level, about an arm's length away
+- At least {N} inches above eye level
+- Angled toward the window
+- Wherever the cable reaches
+
+Q: How often should you take a micro-break from sustained keyboard work?
++ Every {N} minutes, for at least 30 seconds
+- Once per day, at lunch
+- Only when discomfort occurs
+- Never; breaks reduce productivity
+
+Q: Your feet should be:
++ Flat on the floor or on an approved footrest
+- Crossed at the ankles
+- Tucked under the chair
+- Resting on the CPU tower
+
+Q: Ergonomic equipment requests are submitted through:
++ Form {FORM}, with manager approval, fulfilled within {DAYS} business days
+- An email to the CEO
+- The vending machine
+- The Integrity Line
+
+Q: When lifting a box of printed reports, you should:
++ Bend at the knees, keep the load close, and avoid twisting
+- Bend at the waist to keep your knees safe
+- Lift quickly to minimize the time under load
+- Ask the box to be emailed instead
+
+Q: [Your monitor|The top of your monitor] should be positioned:
++ At or slightly below eye level, about an arm's length away
+- As high as possible, to improve posture
+- Directly against a window
+- At least {N} feet from your chair
+
+Q: [When sitting|While seated], your feet should be:
++ Flat on the floor or on a footrest
+- Tucked under the chair
+- Resting on the desk
+- Crossed at the ankle at all times
+
+Q: [Associates who work at a laptop|Laptop users] for long periods should:
++ Use an external keyboard, mouse, and monitor or a laptop stand
+- Hold the laptop on their lap for better circulation
+- Increase the font size to {N}0 points
+- Work standing on one foot
+
+Q: [Micro-breaks|Short movement breaks] are recommended:
++ Every 30 to 60 minutes, to stretch and change position
+- Once a week, on {WEEKDAY}
+- Only when pain begins
+- Never; they reduce productivity
+
+Q: [You develop|{NAME} reports] wrist discomfort after a busy week. The best next step is to:
++ Request an ergonomic assessment through Facilities
+- Wear a wrist brace from home and keep working
+- Switch to using the mouse with your other hand permanently
+- Ignore it until it goes away

@@ -1,0 +1,66 @@
+# TLS certificates and domain trust.
+Q: A TLS certificate allows a browser to:
++ Verify the website's identity and set up an encrypted connection
+- Speed up downloads
+- Block ads
+- Store passwords
+
+Q: An expired certificate causes:
++ Browser warnings and broken connections
+- Faster websites
+- Nothing
+- Free renewals
+
+Q: Certificate expiry dates should be:
++ Monitored, with automatic renewal where possible
+- Ignored
+- Changed manually by editing the file
+- Set to never expire
+
+Q: A certificate whose name does not match the website:
++ Triggers a warning and may indicate an attack or misconfiguration
+- Is fine
+- Is required
+- Is faster
+
+Q: Private keys for certificates must be:
++ Protected and never shared or emailed
+- Posted for convenience
+- Stored in chat
+- Shared with the vendor
+
+Q: Clicking through a certificate warning on an internal site:
++ Is risky; report the warning instead
+- Is always safe
+- Is required
+- Fixes it
+
+Q: Weak signature algorithms such as MD5 or SHA-1 in certificates:
++ Are insecure and no longer trusted
+- Are preferred
+- Are faster and safe
+- Are required
+
+Q: Certificate authority authorization (CAA) DNS records:
++ Limit which certificate authorities may issue certificates for a domain
+- Speed up email
+- Block spam
+- Store passwords
+
+Q: Wildcard certificates should be:
++ Used carefully because one key covers many hostnames
+- Used everywhere
+- Shared widely
+- Never renewed
+
+Q: A suspected private key compromise requires:
++ Revoking and replacing the certificate
+- Nothing
+- Renaming the website
+- Waiting for expiry
+
+Q: Certificate inventories help:
++ Track every certificate, owner, and expiry date
+- Decorate dashboards
+- Hide certificates
+- Nothing

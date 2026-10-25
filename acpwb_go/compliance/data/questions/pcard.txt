@@ -1,0 +1,61 @@
+# Corporate purchasing cards (P-cards) and corporate travel cards.
+
+Q: An ACPWB purchasing card may be used for:
++ Approved business purchases within the card's limits and policy
+- Personal purchases repaid later
+- Gift cards for yourself
+- Anything under {AMOUNT}
+
+Q: Lending your P-card to a coworker is:
++ Not allowed; the card is assigned to you alone
+- Allowed for team purchases
+- Allowed if they sign for it
+- Allowed if they buy you lunch
+
+Q: Two charges to the same vendor on the same day, each just under your single-transaction limit, may indicate:
++ A split purchase to avoid the limit, which violates policy
+- Good budgeting
+- A system glitch
+- Loyalty to the vendor
+
+Q: Receipts for P-card purchases should be:
++ Uploaded and reconciled by the deadline
+- Thrown away after the purchase
+- Kept in your wallet until year end
+- Mailed to the vendor
+
+Q: A lost or stolen corporate card should be reported:
++ Immediately to the card issuer and the card program administrator
+- At the end of the month
+- Only if fraudulent charges appear
+- To the {COMMITTEE}
+
+Q: Buying gift cards with a P-card is:
++ Generally prohibited unless specifically approved, due to fraud and tax risk
+- Encouraged for team morale
+- Allowed for any amount
+- Allowed if the gift cards are for {VENDOR}
+
+Q: Personal charges accidentally made on a corporate travel card should be:
++ Reported promptly and repaid according to policy
+- Hidden in the expense report
+- Ignored if small
+- Split with a coworker
+
+Q: P-card spending limits are set by:
++ The card program administrator based on role and approvals
+- The cardholder
+- The vendor
+- The {COMMITTEE}
+
+Q: Sales tax on P-card purchases:
++ Should be avoided where ACPWB is exempt, by providing the exemption certificate
+- Is always required
+- Is reimbursed to you personally
+- Is a fine
+
+Q: Using a P-card for a vendor that requires a contract:
++ Is not allowed; contracts go through Procurement
+- Is faster
+- Is required
+- Is encouraged

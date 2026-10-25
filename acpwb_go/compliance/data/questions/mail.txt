@@ -1,0 +1,62 @@
+# Suspicious mail and packages. Correct answers follow USPS and DHS
+# guidance; keep them accurate.
+
+Q: Warning signs of a suspicious letter or package include:
++ Excessive postage, no return address, restrictive markings such as "Personal," and misspelled words
+- A printed shipping label from a known vendor
+- A return address in {CITY}
+- A package that arrives on {WEEKDAY}
+
+Q: Oily stains, discoloration, or a strange odor on a package are:
++ Warning signs that should be reported
+- Normal for international shipping
+- Signs of a gift from the {COMMITTEE}
+- Nothing to worry about
+
+Q: If a suspicious package is found in the mailroom, you should:
++ Not touch or move it, leave the area, and call Security or 911
+- Open it carefully to check
+- Shake it to hear what is inside
+- Carry it outside to the parking lot
+
+Q: If powder spills out of an envelope you opened, you should:
++ Set it down gently, avoid brushing or cleaning it, leave the room, close the door, wash your hands, and call Security
+- Blow the powder off the desk
+- Taste it to identify it
+- Sweep it into the trash
+
+Q: A lopsided package with protruding wires is:
++ A warning sign; leave it alone and report it
+- A normal electronics delivery
+- A gift from {VENDOR}
+- Safe to x-ray at your desk
+
+Q: Personal packages delivered to the office should:
++ Follow the deliveries policy, since the mailroom is for business mail first
+- Be opened by the mailroom to check them
+- Be stored in the {PLACE} forever
+- Be shipped to the CEO's office
+
+Q: Mailroom staff screening incoming mail should:
++ Follow established procedures and wear the protective equipment provided
+- Open everything with bare hands quickly
+- Skip screening on busy days
+- Smell each package
+
+Q: A threatening letter received by mail should be:
++ Handled as little as possible, placed in a bag or folder, and given to Security
+- Thrown away
+- Posted on the bulletin board
+- Answered with a letter of your own
+
+Q: Packages addressed to a title instead of a person, such as "Head of Accounting," are:
++ One of the warning signs listed by the Postal Service, especially with other indicators
+- Always safe
+- Always dangerous
+- Required by mailroom policy
+
+Q: Using an ACPWB postage meter for personal mail is:
++ Not allowed
+- Allowed for holiday cards
+- Allowed under {AMOUNT}
+- Encouraged to use up the budget

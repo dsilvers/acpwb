@@ -1,0 +1,66 @@
+# Security in the software delivery pipeline.
+Q: "Shift left" in DevSecOps means:
++ Building security checks into early stages of development
+- Moving the security team's desks
+- Releasing on the left side of the week
+- Skipping testing
+
+Q: Secrets such as passwords and API keys used by pipelines should be stored in:
++ An approved secrets manager
+- The source code
+- A wiki page
+- The pipeline's log output
+
+Q: Software composition analysis (SCA) tools check for:
++ Known vulnerabilities and license issues in third-party libraries
+- Spelling mistakes in code comments
+- The composition of the team
+- How many lines each developer wrote
+
+Q: A build pipeline that downloads and runs scripts from random websites is:
++ A supply-chain risk
+- Efficient
+- A best practice
+- Required for speed
+
+Q: Container images should run as:
++ A non-root user whenever possible
+- Root, for convenience
+- The CEO's account
+- Any account that works
+
+Q: A critical vulnerability is found in a production dependency. The team should:
++ Assess exposure and patch or mitigate according to the vulnerability policy
+- Wait for the next annual release
+- Hide the scan result
+- Turn off the scanner
+
+Q: Infrastructure as code changes should be:
++ Reviewed and tested like application code
+- Applied directly in production by hand
+- Exempt from review
+- Approved by the cloud provider
+
+Q: Third-party CI/CD actions or plugins should be:
++ Approved and pinned to a specific version or commit
+- Pulled from the latest unreviewed branch
+- Written by strangers only
+- Updated automatically without review
+
+Q: Logs produced by builds and applications should never contain:
++ Passwords, tokens, or other secrets
+- Timestamps
+- Error codes
+- Build numbers
+
+Q: A software bill of materials (SBOM) lists:
++ The components and dependencies that make up a piece of software
+- Office supplies for the dev team
+- The team's lunch orders
+- The software's sales history
+
+Q: Production access for developers should be:
++ Limited, logged, and granted for specific needs
+- Permanent for everyone
+- Shared through one account
+- Unlogged for privacy

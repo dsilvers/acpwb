@@ -1,0 +1,66 @@
+# Pagers and paging systems (yes, some teams still carry them).
+Q: A pager message should never contain:
++ Passwords or confidential personal data
+- A callback number
+- A ticket number
+- A short summary
+
+Q: Paging messages can be:
++ Intercepted on older networks, so keep content minimal
+- Read only by the intended person
+- Encrypted automatically
+- Stored nowhere
+
+Q: When you are on call with a pager, you should:
++ Keep it charged, on, and within range
+- Leave it in your desk
+- Mute it at night
+- Lend it to a friend
+
+Q: Acknowledging a page lets the team know:
++ You received it and are responding
+- You are on vacation
+- You disagree
+- The issue is fixed
+
+Q: Overhead paging codes for emergencies should be:
++ Plain language where the policy calls for it, so everyone understands
+- Secret codes known by few
+- Played as music
+- Changed daily without notice
+
+Q: Group pages should be sent:
++ Only to people who need to respond
+- To everyone for visibility
+- Every minute
+- To customers
+
+Q: Testing the paging system is:
++ Done on a schedule with announcements so people know it is a test
+- Done without warning
+- Never done
+- Optional
+
+Q: A lost pager should be:
++ Reported so it can be deactivated
+- Replaced quietly
+- Ignored
+- Searched for next month
+
+Q: Escalation policies for pages define:
++ Who is paged next if no one acknowledges
+- Who pays for pagers
+- Pager colors
+- Lunch schedules
+
+Q: Pager fatigue from too many alerts should be:
++ Reported so alerts can be tuned
+- Accepted
+- Solved by turning off the pager
+- Ignored
+
+Q: Paging a coworker for non-urgent matters at 3 a.m. is:
++ Inappropriate; use the urgency levels correctly
+- Required
+- A team tradition
+- Encouraged

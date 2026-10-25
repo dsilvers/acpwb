@@ -55,7 +55,7 @@ def _policy_head_common(title, description, canonical_path, og_image_path='img/p
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261021">\n'
         f'{feeds}'
     )
 
@@ -476,7 +476,7 @@ def render_policy_month(ctx):
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261021">\n'
     )
     ap(get_jsonld_garbage(ctx['honeypot_token']))
     ap(_MONTH_MONTH_STYLE)
@@ -611,7 +611,7 @@ def render_policy_subdomain_index(ctx):
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261021">\n'
     )
     ap(get_jsonld_garbage(ctx['honeypot_token']))
     ap(_SUBDOMAIN_INDEX_STYLE)
@@ -741,7 +741,7 @@ def render_policy_subdomain_year(ctx):
         f'<link rel="preload" href="{static("fonts/inter/inter-variable-latin.woff2")}" '
         'as="font" type="font/woff2" crossorigin>\n'
         f'<link rel="stylesheet" href="{static("vendor/bootstrap/bootstrap.min.css")}">\n'
-        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261011">\n'
+        f'<link rel="stylesheet" href="{static("css/acpwb.css")}?v=20261021">\n'
     )
     ap(get_jsonld_garbage(ctx['honeypot_token']))
     ap(_SUBDOMAIN_YEAR_STYLE)

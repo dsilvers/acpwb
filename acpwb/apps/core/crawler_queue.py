@@ -577,3 +577,33 @@ def code_email_queue_length() -> int:
     except Exception:
         _mark_consumer_failure()
         return -1
+
+
+# ── /compliance/ milestones ─────────────────────────────────────────────────
+# acpwb_go pushes one item per (ip, course, attempt, event) per 30 days (see
+# visitqueue.PushComplianceCompletion); drain_compliance_queue inserts them
+# into honeypot.ComplianceCompletion.
+
+_COMPLIANCE_QUEUE_KEY = 'acpwb:compliance_queue'
+
+
+def pop_compliance_completions(count: int = 500):
+    """Same contract as pop_crawler_visits(), for the compliance queue."""
+    return _pop_visits(_COMPLIANCE_QUEUE_KEY, count)
+
+
+def recover_compliance_completions():
+    """Recover any orphaned compliance batches from a prior crashed run."""
+    return _recover_visits(_COMPLIANCE_QUEUE_KEY)
+
+
+def compliance_queue_length() -> int:
+    """Return the compliance queue depth, or -1 if Redis is unavailable."""
+    r = _get_consumer_client()
+    if r is None:
+        return -1
+    try:
+        return r.llen(_COMPLIANCE_QUEUE_KEY)
+    except Exception:
+        _mark_consumer_failure()
+        return -1

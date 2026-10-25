@@ -1,0 +1,66 @@
+# Data loss prevention.
+Q: Data loss prevention (DLP) tools are designed to:
++ Detect and block sensitive data from leaving the company improperly
+- Prevent employees from losing their lunch
+- Back up data
+- Speed up email
+
+Q: A DLP alert blocks your email because it contains Social Security numbers. You should:
++ Use the approved secure method, or remove the data if it is not needed
+- Split the numbers across several emails
+- Send it from personal email instead
+- Ask IT to turn off DLP for you
+
+Q: Uploading company files to a personal cloud drive is:
++ Prohibited and may be blocked and reported by DLP
+- Fine for backups
+- Encouraged for remote work
+- Allowed if you delete them later
+
+Q: Taking photos of confidential screens with a personal phone to work around controls is:
++ A policy violation
+- A clever shortcut
+- Allowed for meeting notes
+- Required for screenshots
+
+Q: Sensitivity labels on documents help DLP by:
++ Telling systems how the document must be protected
+- Making documents colorful
+- Increasing the file size
+- Decorating the header
+
+Q: A DLP false positive is:
++ An alert on content that is not actually sensitive
+- A sensitive file that was missed
+- A positive attitude about data
+- An error in payroll
+
+Q: If you believe a DLP block is wrong, you should:
++ Submit the business justification or ask Security to review it
+- Change the file extension to sneak it through
+- Zip it with a password
+- Print it and scan it at home
+
+Q: USB storage devices on company laptops are:
++ Restricted to approved, encrypted devices where allowed
+- Unrestricted
+- Required for every file transfer
+- Allowed for any device found in the parking lot
+
+Q: Forwarding all your work email to a personal account is:
++ Prohibited, and often blocked by mail rules
+- A good backup strategy
+- Allowed for vacations
+- Required for remote access
+
+Q: Printing confidential files at home is:
++ Discouraged and allowed only where the policy permits it, with secure disposal
+- Unlimited
+- Required for travel
+- Fine if you use recycled paper
+
+Q: DLP monitoring of company systems is:
++ Disclosed in the acceptable use policy
+- Secret
+- Illegal everywhere
+- Used only for lunch orders

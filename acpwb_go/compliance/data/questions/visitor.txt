@@ -1,0 +1,62 @@
+# Visitors and escorts.
+
+Q: A visitor [from {VENDOR}|for {EVENT}|for {NAME}] arrives at the {PLACE}. [Before entering secure areas|Before going upstairs], they must:
++ Sign in, show government-issued ID, and wear a visitor badge at all times
++ Be met and escorted by their ACPWB host
+- Wait for any associate to badge them in
+- Follow the next associate through the turnstile
+- Leave their ID with the receptionist as collateral
+
+Q: [Your visitor|The visitor you are hosting] [needs to use the restroom|wants a coffee|steps away to take a call]. You should:
++ Escort them, or have another associate escort them, at all times
+- Give them your badge
+- Tell them where to go and wait at your desk
+- Leave them unattended if they promise to return
+
+Q: At the end of a visit, the [host|visitor's host] must:
++ Escort the visitor out and return the visitor badge to reception
+- Let the visitor keep the badge as a souvenir
+- Walk them to the elevator only
+- Leave the badge active for future visits
+
+Q: [Someone|A person] [without a badge|wearing a visitor badge but no escort] is [in the {PLACE}|walking down the Executive Wing corridor]. You should:
++ Politely ask if you can help them find their host, and contact Security if unsure
+- Ignore them
+- Ask them for their password
+- Assume they are a new hire
+
+Q: [Your visitor|{NAME2}, your guest,] arrives {N} minutes early and asks to wait at your desk. You should:
++ Ask reception to seat them in the visitor waiting area until you collect them
+- Give them directions to your desk
+- Lend them your badge to get upstairs
+- Ask any associate passing by to bring them up
+
+Q: [Visitor badges|Temporary visitor badges] must be:
++ Returned to reception when the visitor leaves
+- Kept as a souvenir
+- Mailed back within {DAYS} days
+- Reused by the next visitor without re-registering
+
+Q: [A visitor|Your guest] needs to use the restroom. Under the Escort Standard, you should:
++ Walk them there and wait nearby to escort them back
+- Point the way and meet them back at the {PLACE}
+- Lend them your badge for the door
+- Ask them to hold it until the meeting ends
+
+Q: [Contractors with long-term assignments|Long-term contractors] should:
++ Be issued a contractor badge through Security rather than signing in daily as visitors
+- Sign in as visitors indefinitely
+- Share a badge with their manager
+- Enter through the loading dock
+
+Q: [Which of the following|What] must a visitor provide at reception?
++ Government-issued photo identification
++ The name of their ACPWB host
+- A copy of their résumé
+- Proof of parking validation
+
+Q: [A visitor you are hosting|Your visitor] starts photographing the {PLACE}. You should:
++ Politely ask them to stop, and explain that photography requires approval
+- Join them for a group photo
+- Ignore it, since visitors are not covered by policy
+- Confiscate the device

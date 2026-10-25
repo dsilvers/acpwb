@@ -1,0 +1,60 @@
+# Internal newsletters and communications.
+Q: Internal newsletter content must be:
++ Accurate and approved by the content owner
+- Rumors
+- Unreviewed
+- Copied from competitors
+
+Q: Photos of employees in newsletters require:
++ Their consent where required
+- Nothing
+- A secret photo
+- A filter
+
+Q: Newsletter articles should avoid:
++ Confidential customer details without approval
+- Team news
+- Celebrations
+- Policy updates
+
+Q: Forwarding internal newsletters outside the company is:
++ Not allowed unless marked for external use
+- Fine
+- Required
+- Encouraged
+
+Q: Celebrating birthdays in the newsletter should:
++ Respect privacy and only include people who opt in
+- Include everyone's birth year
+- Be mandatory
+- Include ages
+
+Q: Corrections to newsletter errors should be:
++ Published promptly
+- Ignored
+- Hidden
+- Deleted
+
+Q: Newsletter writing should be:
++ Clear and inclusive
+- Full of jargon
+- Offensive
+- Long
+
+Q: Links in internal newsletters should point to:
++ Approved, internal or trusted sites
+- Random sites
+- Personal accounts
+- Phishing tests only
+
+Q: Health information about employees in newsletters:
++ Should not be shared without consent
+- Is fine
+- Is required
+- Is news
+
+Q: Feedback on newsletters can be sent to:
++ The Communications team
+- Nobody
+- Social media
+- Competitors

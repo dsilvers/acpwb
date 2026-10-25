@@ -1,0 +1,66 @@
+# Facilities and equipment maintenance practices.
+Q: Preventive maintenance is:
++ Scheduled maintenance done to prevent breakdowns
+- Fixing things only after they fail
+- Maintenance on the weekends only
+- A type of insurance
+
+Q: Before maintenance on equipment with hazardous energy, technicians must:
++ Apply lockout/tagout and verify zero energy
+- Turn off the lights
+- Post a sticky note
+- Work quickly
+
+Q: Every maintenance job should be:
++ Recorded in a work order
+- Kept in the technician's memory
+- Done without records
+- Recorded only if it fails
+
+Q: Replacement parts should be:
++ Approved parts that meet the equipment's specifications
+- Whatever fits
+- Borrowed from another machine
+- Homemade
+
+Q: Contractors doing maintenance must:
++ Follow ACPWB's safety programs, including permits where needed
+- Bring their own rules
+- Skip lockout because they are experts
+- Work without supervision
+
+Q: A technician finds a defect that is outside their training. They should:
++ Stop and escalate to a qualified person
+- Try to fix it anyway
+- Ignore it
+- Leave it for the next shift without a note
+
+Q: Maintenance on fire protection systems must be:
++ Coordinated with Security and Facilities, with impairment procedures if systems are shut off
+- Done without telling anyone
+- Done during fire drills
+- Skipped if inconvenient
+
+Q: Tools left behind inside equipment after maintenance can:
++ Cause damage or injury; account for all tools before restart
+- Improve performance
+- Be collected next year
+- Be ignored
+
+Q: Maintenance records are useful because they:
++ Show history, support warranty claims, and help predict failures
+- Fill filing cabinets
+- Are required for parties
+- Have no use
+
+Q: Working on electrical equipment requires:
++ Qualified, trained personnel and proper PPE
+- Any volunteer
+- Rubber boots only
+- A strong flashlight
+
+Q: Ladders used for maintenance should be:
++ Inspected before use and the right type and height for the job
+- Any ladder nearby
+- Extended with boxes
+- Used as shelves

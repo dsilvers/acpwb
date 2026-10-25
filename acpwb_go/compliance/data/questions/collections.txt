@@ -1,0 +1,66 @@
+# Accounts receivable and collections conduct.
+Q: When contacting a customer about an overdue invoice, staff should be:
++ Professional, accurate, and respectful
+- Threatening, to speed things up
+- Vague about the amount
+- Anonymous
+
+Q: Before sending an account to collections, staff should confirm:
++ The invoice is accurate, was delivered, and is not under dispute
+- The customer's birthday
+- That the customer has other vendors
+- The sales rep's commission
+
+Q: A customer disputes an invoice. You should:
++ Log the dispute and route it for review before pursuing payment
+- Ignore the dispute and add late fees
+- Cancel the invoice without approval
+- Tell the customer disputes are not allowed
+
+Q: Writing off a bad debt requires:
++ Approval under the delegation of authority and proper documentation
+- Deleting the invoice from the system
+- The collector's personal decision
+- A coin flip
+
+Q: Days sales outstanding (DSO) measures:
++ How long, on average, it takes to collect payment after a sale
+- How many days the sales team takes off
+- The number of open sales jobs
+- Days since the last sales meeting
+
+Q: Accepting a customer payment in cash should:
++ Follow cash handling procedures with a receipt and prompt deposit
+- Be put in your desk drawer until Friday
+- Be counted by one person with no record
+- Be used for petty cash
+
+Q: Customer bank and card details collected for payment must be:
++ Protected under PCI and privacy rules, never stored in spreadsheets or email
+- Saved in a shared spreadsheet for convenience
+- Written on sticky notes
+- Shared in chat
+
+Q: Offering a customer an unapproved discount to collect faster is:
++ Not allowed without authorization under the pricing policy
+- Encouraged at quarter end
+- A collector's personal choice
+- Required by law
+
+Q: A credit hold on a customer account means:
++ New orders are paused until the account is reviewed or brought current
+- The customer receives free credit
+- The account is closed forever
+- Sales can ship anything they want
+
+Q: Applying a customer's payment to the wrong invoice to improve aging reports is:
++ Falsifying records and prohibited
+- Clever cash management
+- Required at quarter end
+- Fine if it is fixed next month
+
+Q: Unapplied cash that cannot be matched to an invoice should be:
++ Researched and documented until it is applied or refunded
+- Moved into miscellaneous income
+- Kept by the collector
+- Ignored forever

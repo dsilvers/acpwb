@@ -1,0 +1,68 @@
+# Layoffs and separations. Correct answers follow the WARN Act, OWBPA, and
+# COBRA; keep them accurate. The euphemisms go in the distractors.
+
+Q: Under the federal WARN Act, covered employers must give written notice of a plant closing or mass layoff:
++ At least 60 calendar days in advance
+- At least 2 weeks in advance
+- On the day of the layoff
+- Only if asked
+
+Q: The federal WARN Act generally applies to employers with:
++ 100 or more full-time employees
+- 5 or more employees
+- 10,000 or more employees
+- An office in {CITY}
+
+Q: An employer that fails to give required WARN notice may owe affected employees:
++ Back pay and benefits for up to 60 days of the violation
+- A handwritten apology
+- Nothing, if the layoff was a "rightsizing"
+- An ACPWB tote bag
+
+Q: Under the Older Workers Benefit Protection Act, an employee 40 or older asked to sign a release in a group layoff must be given:
++ At least 45 days to consider it and 7 days to revoke it after signing
+- 24 hours to sign
+- 1 day to consider it and no time to revoke
+- The weekend
+
+Q: After losing job-based health coverage, COBRA generally lets an employee keep group health coverage:
++ For up to 18 months, usually paying the full premium plus an administrative fee
+- For life, at no cost
+- For 30 days only
+- Only if they rejoin within a week
+
+Q: Some states, such as New York, have their own "mini-WARN" laws that:
++ May require more notice or cover smaller employers than the federal law
+- Cancel the federal WARN Act
+- Apply only to remote workers
+- Apply only on {WEEKDAY}s
+
+Q: The memo announcing the reorganization calls it "a strategic realignment of headcount to unlock synergies." This means:
++ Some positions are being eliminated
+- Everyone is getting a raise
+- The office is getting new chairs
+- The {COMMITTEE} has been renamed
+
+Q: Selecting employees for layoff should be based on:
++ Documented, job-related criteria applied consistently
+- Age
+- Who took leave
+- Who complained
+
+Q: Employees selected for layoff should be informed:
++ Respectfully and privately, with clear information about next steps
+- By group text
+- Through a public channel
+- By finding their badge deactivated with no explanation
+
+Q: Severance agreements may include:
++ A release of claims in exchange for severance pay
+- A ban on filing charges with the EEOC
+- A requirement to work unpaid
+- A non-disparagement clause that bars reporting violations to agencies
+
+Q: Unemployment insurance benefits:
++ Are administered by the state; laid-off employees may apply
+- Are paid by coworkers
+- Are not available after layoffs
+- Require the employer's permission to apply

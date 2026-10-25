@@ -1,0 +1,50 @@
+# Confined spaces and atmospheric hazards. Correct answers follow OSHA
+# 29 CFR 1910.146; keep them accurate.
+
+Q: A permit-required confined space is one that:
++ Is not designed for continuous occupancy, has limited entry or exit, and has a serious hazard such as a hazardous atmosphere
+- Is any small office
+- Is a crowded elevator
+- Is a phone booth
+
+Q: Before entry, the atmosphere in a confined space should be tested for:
++ Oxygen first, then flammable gases, then toxic gases
+- Temperature only
+- Noise
+- Odors only
+
+Q: The acceptable oxygen range for entering a confined space is generally:
++ 19.5% to 23.5%
+- 5% to 10%
+- 50% to 60%
+- Any level, if you hold your breath
+
+Q: Someone has collapsed inside a tank. Untrained coworkers should:
++ Not enter; call for the trained rescue team and 911
+- Rush in to pull them out
+- Lower a coworker in on a rope
+- Hold their breath and go in
+
+Q: An attendant stationed outside a permit space must:
++ Remain outside, monitor entrants, and summon rescue if needed
+- Go in to help with the work
+- Take a lunch break
+- Close the hatch
+
+Q: Carbon monoxide is dangerous because it is:
++ Colorless and odorless, and can be fatal
+- Bright yellow
+- Easy to smell
+- Only found outdoors
+
+Q: Entry permits for confined spaces must be:
++ Completed and posted before entry, listing hazards, tests, and the people involved
+- Completed after the work is done
+- Kept secret
+- Signed by anyone
+
+Q: Most confined space fatalities include:
++ Would-be rescuers who entered without proper training and equipment
+- Only the original entrant
+- Only supervisors
+- Only people over 60

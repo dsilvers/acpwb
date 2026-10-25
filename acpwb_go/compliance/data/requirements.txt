@@ -1,0 +1,117 @@
+# Course "Key Requirements": category | requirement | unit | min-max.
+# Each course draws a table of these (values fixed per course, shown on the
+# course page) and its questions ask about them. Category "any" fits every
+# course; otherwise it must match a question category in the course mix.
+any | complete this course after assignment | days | 7-60
+any | acknowledge policy updates | business days | 2-15
+any | report a suspected violation to Compliance | hours | 1-48
+any | retain your certificate of completion | years | 1-7
+any | complete recertification after expiry | days | 14-90
+any | respond to a Compliance Office inquiry | business days | 1-10
+badge | report a lost or stolen badge | hours | 1-24
+badge | renew an expiring badge | days | 5-45
+badge | request a badge photo update after a change in appearance | days | 7-60
+badge | return a visitor badge after a visit | minutes | 5-60
+badge | wait before a deactivated badge can be re-encoded | business days | 1-10
+security | change a password after a suspected compromise | hours | 1-24
+security | report a lost or stolen device | hours | 1-12
+security | lock an unattended workstation | seconds | 0-60
+security | install critical security updates | days | 1-14
+security | review user access rights | months | 1-12
+cleandesk | clear confidential material from a desk | minutes | 5-30
+cleandesk | collect documents from a shared printer | minutes | 1-15
+cleandesk | erase a conference room whiteboard after a meeting | minutes | 0-10
+phishing | report a suspicious email with the Report Phish button | minutes | 5-60
+phishing | report having clicked a suspicious link | minutes | 10-120
+insider | request pre-clearance before trading | business days | 1-5
+insider | wait after earnings are released before trading | trading days | 1-3
+insider | observe the cooling-off period for a trading plan | days | 30-120
+gifts | record a gift in the Gifts Register | days | 3-30
+gifts | obtain pre-approval for hospitality that includes travel | business days | 3-20
+ethics | disclose a new conflict of interest | days | 5-30
+ethics | update the annual conflicts attestation | months | 6-12
+conduct | complete the Code of Conduct certification after hire | days | 14-60
+harassment | report a harassment complaint to Human Resources | business hours | 4-48
+harassment | begin an investigation after a complaint | business days | 1-10
+records | retain compensation records | years | 3-10
+records | retain expense receipts | years | 3-7
+records | destroy records after their retention period ends | days | 30-180
+records | confirm receipt of a legal hold notice | business days | 1-5
+privacy | report a privacy incident | hours | 1-24
+privacy | route a data subject request to the Privacy Office | days | 1-10
+privacy | respond to a data subject request | days | 15-45
+export | screen a new international partner | business days | 1-10
+export | escalate a red flag to Trade Compliance | hours | 4-48
+ergonomics | take a micro-break from keyboard work | minutes | 20-60
+ergonomics | complete an ergonomic self-assessment after a workstation move | days | 5-30
+safety | report a workplace injury | hours | 1-24
+safety | complete an incident report after a near miss | business days | 1-5
+safety | reach the assembly point after an alarm | minutes | 3-15
+ai | review AI-generated content before use | hours | 1-72
+travel | submit an expense report after a trip | days | 7-60
+travel | book travel in advance through the travel portal | days | 7-21
+travel | provide receipts for expenses above the threshold | dollars | 25-100
+meetings | distribute meeting minutes | business days | 1-10
+meetings | release an unneeded room booking | hours | 2-48
+printing | collect a confidential print job | minutes | 1-10
+kitchen | label food stored in a shared refrigerator | days | 1-5
+parking | report a parking structure accident | days | 1-5
+accessibility | respond to an accommodation request | business days | 3-15
+leave | submit a leave request with documentation | days | 3-30
+procurement | obtain competitive bids for purchases | number of bids | 2-5
+continuity | test the department continuity plan | months | 6-12
+continuity | check in after an emergency notification | minutes | 15-120
+pay | escalate an unexplained pay gap | days | 7-45
+governance | distribute Board materials before a meeting | business days | 3-10
+remote | connect to the VPN after starting work remotely | minutes | 1-15
+visitor | register a visitor in advance | business days | 1-5
+email | report a misdirected email | hours | 1-12
+wellness | remove items from a fitness center locker | days | 1-7
+investigations | preserve records after notice of an investigation | hours | 1-24
+travel | submit an expense report after a trip ends | days | 5-30
+kitchen | remove labelled items from a shared refrigerator | days | 2-7
+safety | evacuate the building after an alarm sounds | minutes | 2-5
+visitor | sign visitors in at reception after arrival | minutes | 5-15
+visitor | return a visitor badge after sign-out | minutes | 5-30
+records | review your team's retention schedule after a reorganization | days | 30-90
+printing | release a held print job before it is deleted | hours | 4-48
+printing | collect confidential printouts | minutes | 1-10
+export | escalate a restricted party near-match | hours | 1-24
+meetings | release an unused room booking before the meeting | hours | 1-24
+phishing | report a suspicious message | minutes | 5-60
+any | update your learner profile after a role change | days | 5-30
+any | notify your manager of a missed training deadline | business days | 1-5
+any | complete a course you started | days | 7-45
+any | report a lost certificate to Compliance | business days | 1-10
+any | submit a question about course content | business days | 2-14
+any | provide your certificate number on request | business days | 1-5
+any | review the Code of Conduct after a policy change | days | 10-60
+any | acknowledge a new version of this course | business days | 3-20
+any | correct an error on your training transcript | days | 5-30
+any | complete the post-course survey | days | 3-21
+cpr | begin chest compressions after recognizing cardiac arrest | seconds | 10-30
+cpr | have an AED applied after a collapse | minutes | 3-5
+firstaid | restock a first aid kit after use | business days | 1-5
+firstaid | report a first aid incident | hours | 1-24
+threat | report a threatening statement to Security | hours | 1-4
+bombthreat | notify 911 after a bomb threat call ends | minutes | 1-5
+weather | reach a designated shelter after a tornado warning | minutes | 2-5
+violence | report a protective order to Security | business days | 1-5
+bloodborne | report an exposure incident | hours | 1-2
+hazcom | flush eyes after a chemical splash | minutes | 15-20
+elevator | report an elevator malfunction | hours | 1-4
+ai | register a new AI tool before first use | business days | 5-20
+ai | report an AI output error used in a decision | business days | 1-5
+rto | collect a re-activated badge after a return-to-office notice | business days | 1-10
+hotdesk | release an unused desk reservation | hours | 1-24
+hotdesk | clear a shared desk at the end of the day | minutes | 5-15
+hybrid | update your hybrid agreement after a schedule change | business days | 5-15
+remote | disclose outside employment | business days | 5-30
+calendar | respond to a meeting invitation | business days | 1-3
+calendar | send an agenda before a meeting | hours | 24-72
+pto | submit a planned PTO request | days | 7-30
+pto | record unplanned sick time | business days | 1-3
+parental | give notice of foreseeable FMLA leave | days | 30-30
+parental | respond to a pregnancy accommodation request | business days | 2-10
+union | report a manager's concern about union activity to Labor Relations | business days | 1-3
+union | file a grievance under the collective bargaining agreement | days | 10-30

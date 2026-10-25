@@ -1,0 +1,67 @@
+# Clawback policies (SEC Rule 10D-1 and listing standards).
+
+Q: Under SEC Rule 10D-1, listed companies must recover erroneously awarded incentive compensation after:
++ An accounting restatement
+- Any drop in the stock price
+- A bad performance review
+- An executive leaves for a competitor
+
+Q: The clawback lookback period under Rule 10D-1 covers incentive pay received during:
++ The three completed fiscal years before the date the company is required to prepare a restatement
+- The executive's entire career
+- The last 30 days
+- The fiscal year of {EVENT}
+
+Q: Under Rule 10D-1, recovery of erroneously awarded compensation is required:
++ Whether or not the executive was at fault for the misstatement
+- Only if the executive committed fraud
+- Only if the executive agrees
+- Only if the board votes unanimously
+
+Q: A company may indemnify an executive against a required clawback under Rule 10D-1:
++ No; indemnification is not allowed
+- Yes, with a handshake agreement
+- Yes, if paid through {VENDOR}
+- Only for bonuses under {AMOUNT}
+
+Q: "Erroneously awarded compensation" is the amount that:
++ Exceeds what would have been paid based on the restated results
+- The executive spent on travel
+- Was paid in cash rather than stock
+- Was paid on a Friday
+
+Q: The company's clawback policy must be:
++ Filed as an exhibit to its annual report
+- Kept secret from shareholders
+- Approved by each executive individually
+- Written in Latin
+
+Q: The clawback rule covers:
++ Current and former executive officers who received incentive compensation
+- Only current CEOs
+- All employees
+- Only board members
+
+Q: "Incentive-based compensation" under the rule is pay granted, earned, or vested based on:
++ Attaining a financial reporting measure
+- Years of service only
+- Attendance
+- Salary
+
+Q: A "little r" restatement that corrects errors not material to prior statements but would be material if left uncorrected:
++ Also triggers the clawback analysis
+- Is ignored
+- Only affects interns
+- Requires a celebration
+
+Q: Companies must disclose in the proxy statement:
++ Information about any recovery of erroneously awarded compensation
+- Executives' hobbies
+- Nothing
+- The CFO's home address
+
+Q: Recovering erroneously awarded compensation is excused only in limited cases, such as when:
++ The direct cost of recovery would exceed the amount recovered, after a reasonable attempt
+- The executive is popular
+- The amount is embarrassing
+- The board is busy

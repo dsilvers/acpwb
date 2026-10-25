@@ -1,0 +1,62 @@
+# Ladders and working at height. Correct answers follow OSHA and ANSI ladder
+# guidance (4-to-1 rule, three points of contact); keep them accurate.
+
+Q: The 4-to-1 rule for an extension ladder means:
++ For every 4 feet of height to where the ladder rests, the base should be 1 foot out from the wall
+- Four people should hold the ladder for every one person climbing it
+- The ladder may be used for 4 hours and then rest for 1
+- The ladder must be 4 times as tall as the person using it
+
+Q: When climbing a ladder, you should maintain:
++ Three points of contact: two hands and a foot, or two feet and a hand
+- One point of contact, to move quickly
+- Eye contact with your supervisor
+- Contact with {SYSTEM} help desk
+
+Q: When an extension ladder is used to reach a roof or landing, it should extend:
++ At least 3 feet above the landing
+- Exactly to the edge of the landing
+- At least 12 feet above the landing
+- Below the landing, so it does not stick out
+
+Q: The top cap of a stepladder is:
++ Not a step and must not be stood on
+- The best place to stand to reach high shelves
+- Reserved for managers
+- A seat for long tasks
+
+Q: [A stepladder|The stepladder in the {PLACE}] should be used only when:
++ It is fully opened with the spreaders locked, on firm level ground
+- It is leaned against a wall while folded
+- Someone is holding it at the top
+- It is placed on a desk for extra height
+
+Q: To change a light bulb above your desk, you should NOT stand on:
++ A rolling office chair
+- A stepladder approved for the task
+- The floor, using a bulb-changing pole
+- A step stool rated for your weight
+
+Q: While working on a ladder, you should keep your body:
++ Centered between the side rails, without overreaching
+- Leaning out as far as possible to save moving the ladder
+- Facing away from the ladder
+- On the very top rung
+
+Q: Before using a ladder, you should:
++ Inspect it for cracks, missing feet, loose rungs, and other damage
+- Paint it to cover any cracks
+- Weigh it
+- Register it with {SYSTEM}
+
+Q: Metal ladders should not be used:
++ Near exposed electrical wiring or power lines
+- Indoors
+- On Fridays
+- By anyone who has not completed the {COURSE}
+
+Q: [A ladder|The ladder near the {PLACE}] has a cracked rail. You should:
++ Tag it out of service and report it
+- Tape the crack and keep using it
+- Use it only for short climbs
+- Return it to the storage closet for the next person

@@ -220,7 +220,7 @@ def home(request):
     recent_projects = list(ProjectStory.objects.order_by('?')[:3])
     return render(request, 'public/home.html', {
         'recent_projects': recent_projects,
-        'recent_press_releases': _PRESS_RELEASES[:3],
+        'recent_press_releases': _PRESS_RELEASES[:6],
         'og_title': 'American Corporation for Public Well Being — Home',
         'og_description': 'The American Corporation for Public Well Being advances workforce equity and compensation transparency through rigorous research, benchmarking data, and public benefit initiatives.',
     })

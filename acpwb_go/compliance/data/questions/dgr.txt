@@ -1,0 +1,74 @@
+# Dangerous goods by air. Correct answers follow 49 CFR Parts 171-180,
+# the ICAO Technical Instructions, and IATA DGR in general terms.
+
+Q: Before anyone at ACPWB prepares a shipment of dangerous goods for air transport, they must:
++ Complete hazmat training and follow the classification, packing, marking, and labeling rules
+- Wrap the box in extra tape
+- Write "FRAGILE" on all sides
+- Ask the courier to keep it a secret
+
+Q: Shipping undeclared dangerous goods by air is:
++ Illegal and can bring large civil and criminal penalties
+- Allowed for small amounts
+- Allowed for internal mail between offices
+- Fine if the box is unlabeled
+
+Q: Lithium-ion batteries shipped by themselves, not packed with or in equipment, are identified as:
++ UN3480
+- UN0001
+- Office supplies
+- Class 12 Mystery Goods
+
+Q: Lithium-ion batteries shipped by themselves (UN3480) as cargo on passenger aircraft are:
++ Forbidden; they may go only on cargo aircraft, under strict limits
+- Allowed in unlimited quantities
+- Allowed if they are new
+- Allowed if they are wrapped in bubble wrap
+
+Q: For passengers, power banks over 160 watt-hours are:
++ Forbidden on passenger aircraft
+- Allowed in checked baggage
+- Allowed if fully charged
+- Allowed if they fit in a pocket
+
+Q: For passengers, spare lithium-ion batteries between 100 and 160 watt-hours generally require:
++ Airline approval, with a limit of two spare batteries
+- Nothing at all
+- A note from the CEO
+- Packing in checked baggage
+
+Q: A shipper offering dangerous goods by air usually certifies the shipment on a:
++ Shipper's Declaration for Dangerous Goods
+- Holiday card
+- Packing slip with a smiley face
+- Sticky note
+
+Q: Dry ice in passenger baggage is generally limited, with airline approval, to:
++ 2.5 kg (5.5 lb) per person
+- 25 kg per person
+- Any amount if it is for the office party
+- Nothing; it is never allowed
+
+Q: Spray paint and other flammable aerosols in passenger baggage are:
++ Forbidden in carry-on and checked baggage
+- Allowed in checked bags
+- Allowed if the cap is on
+- Allowed for marketing events
+
+Q: The Class 9 hazard label on a package indicates:
++ Miscellaneous dangerous goods, such as lithium batteries or dry ice
+- The ninth floor mailroom
+- A package for the board of directors
+- That the contents are harmless
+
+Q: If you find a damaged, leaking, or smoking package labeled as dangerous goods in the mailroom, you should:
++ Keep people away, notify your supervisor and the carrier, and follow the emergency response information
+- Open it to see what is inside
+- Tape it shut and send it on
+- Put it in the break-room refrigerator
+
+Q: Before an ACPWB event, a vendor offers to fly fireworks, fuel canisters, and lithium batteries to the venue as "regular freight." The correct response is:
++ Refuse; these are dangerous goods that require proper declaration and handling
+- Accept if the price is good
+- Accept and remove the labels
+- Ship them in employees' luggage instead

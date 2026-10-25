@@ -1,0 +1,61 @@
+# Wellness, the fitness center, and the Employee Assistance Program.
+
+Q: The Employee Assistance Program (EAP) is:
++ Confidential, free to associates and their household members, and available 24 hours a day
+- Available only to managers
+- Reported to your manager after each call
+- A paid service billed through payroll
+
+Q: Fitness center lockers [may be used|are available]:
++ During the day only; items left overnight are removed on {WEEKDAY}
+- Indefinitely, for personal storage
+- For storing confidential documents
+- Only by associates who exercise daily
+
+Q: [A colleague|{NAME}] seems [unusually stressed|withdrawn|overwhelmed] [lately|since {EVENT}]. An appropriate response is:
++ Check in privately and share information about the Employee Assistance Program
+- Discuss it with the team to gather opinions
+- Report {FIRST} to Security
+- Ignore it; it is none of your business
+
+Q: Participation in the ACPWB wellness challenge is:
++ Voluntary, and choosing not to participate has no effect on employment
+- Mandatory for associates on the {FLOOR} floor
+- Required to receive a performance rating
+- Tracked by your manager
+
+Q: [The Employee Assistance Program (EAP)|The EAP] is available to:
++ Associates and their household members, free of charge and confidentially
+- Only associates who are referred by their manager
+- Only people managers
+- Associates who have completed {N} years of service
+
+Q: [A colleague|{NAME}] seems withdrawn and mentions feeling overwhelmed. A supportive first step is to:
++ Check in privately and mention that the EAP is available
+- Report it to their manager as a performance concern
+- Tell the rest of the team, so they can help
+- Recommend they take an extended vacation
+
+Q: [Fitness center|Wellness center] equipment should be:
++ Wiped down after use, and faults reported to Facilities
+- Reserved by leaving a towel on it all day
+- Repaired by the user, if they are handy
+- Moved to the {PLACE} for better light
+
+Q: [Participation in|Taking part in] ACPWB wellness challenges is:
++ Voluntary, and has no effect on performance reviews
+- Required for associates on the {FLOOR} floor
+- Recorded in your personnel file
+- Required to qualify for the holiday party
+
+Q: [Wellness program data|Information from wellness screenings] is shared with ACPWB:
++ Only in aggregate, never in a form that identifies individuals
+- In full, with your manager
+- Only with {DEPT}
+- On the company intranet
+
+Q: [The quiet room|The ACPWB quiet room] on the {FLOOR} floor may be used for:
++ Rest, reflection, prayer, or nursing
+- Confidential phone calls only
+- Storage during renovations
+- Naps longer than {N} hours

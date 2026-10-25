@@ -1,0 +1,62 @@
+# Workers' compensation and OSHA recordkeeping. Correct answers follow
+# OSHA 29 CFR 1904; keep them accurate.
+
+Q: A work-related injury should be reported to your supervisor:
++ As soon as possible, even if it seems minor
+- Only if you need surgery
+- At year end
+- Only if a coworker saw it
+
+Q: Workers' compensation generally provides:
++ Medical care and wage replacement for work-related injuries and illnesses
+- A bonus for being injured
+- Coverage only for executives
+- Coverage only on {WEEKDAY}s
+
+Q: Discouraging employees from reporting injuries to keep a safety record clean is:
++ Prohibited; employees have a right to report injuries without retaliation
+- A good safety incentive
+- Required to win safety awards
+- Allowed if the injury is small
+
+Q: Employers with more than 10 employees in many industries must keep:
++ The OSHA Form 300 log of work-related injuries and illnesses
+- A diary of coffee consumption
+- A list of employees' hobbies
+- Nothing
+
+Q: The OSHA Form 300A annual summary must be posted:
++ From February 1 to April 30 each year
+- All year in the CEO's office
+- Never
+- During {EVENT}
+
+Q: Employers must report a work-related fatality to OSHA within:
++ 8 hours
+- 30 days
+- One year
+- One week
+
+Q: A work-related inpatient hospitalization, amputation, or loss of an eye must be reported to OSHA within:
++ 24 hours
+- 1 hour
+- 90 days
+- The next quarter
+
+Q: Employees have the right to:
++ Access the OSHA injury and illness log for their establishment, with some privacy protections
+- See their coworkers' medical records
+- Edit the log
+- Nothing
+
+Q: A first aid case, such as a bandage for a small cut, is:
++ Generally not recordable on the OSHA 300 log
+- Always recordable
+- A reportable fatality
+- An OSHA violation
+
+Q: Returning to work with light duty restrictions after an injury:
++ Should follow the doctor's restrictions, coordinated with HR
+- Means doing your normal job anyway
+- Is not allowed
+- Requires a new hire paperwork

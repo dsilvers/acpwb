@@ -1,0 +1,49 @@
+# Working across time zones and cultures.
+
+Q: Scheduling a recurring meeting for a global team should:
++ Rotate inconvenient times fairly or record the meeting for those who cannot attend
+- Always use headquarters' time zone
+- Be at midnight for everyone
+- Be at {TIMEOFDAY} for headquarters only
+
+Q: When writing to colleagues who use English as a second language, it helps to:
++ Write clearly and avoid idioms like "hit it out of the park"
+- Use as much slang as possible
+- Write in all capital letters
+- Write longer sentences
+
+Q: Holidays observed in other countries:
++ Should be considered when setting deadlines and meetings
+- Do not matter
+- Are the same everywhere
+- Are set by the {COMMITTEE}
+
+Q: Dates like 03/04 can be misread across countries because:
++ Some write month first and others day first; write "4 March" or use ISO dates
+- Calendars differ by year
+- Numbers mean different things abroad
+- Of time zones
+
+Q: A colleague in another region does not reply after hours. You should:
++ Wait for their working hours unless the matter is urgent
+- Escalate to their manager
+- Call their personal phone
+- Send ten follow-ups
+
+Q: Converting a meeting time for a colleague in another time zone should account for:
++ Daylight saving time changes, which differ between countries
+- Nothing; time zones are fixed
+- The weather
+- Only the hour, not the date
+
+Q: Cultural norms for feedback:
++ Vary, so adjust your style and check understanding
+- Are the same everywhere
+- Require shouting in some countries
+- Are set by {AGENCY}
+
+Q: Labor laws for employees in other countries:
++ Are set by local law and may differ greatly from U.S. law
+- Follow U.S. law
+- Do not apply to remote workers
+- Are optional

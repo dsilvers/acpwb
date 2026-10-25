@@ -1,0 +1,67 @@
+# Nonqualified deferred compensation (Internal Revenue Code Section 409A).
+
+Q: Section 409A of the Internal Revenue Code governs:
++ Nonqualified deferred compensation plans
+- Office parking
+- The 401(k) employer match only
+- The timing of {EVENT}
+
+Q: Under Section 409A, an election to defer salary must generally be made:
++ Before the start of the year in which the pay is earned
+- At any time, including after the pay is received
+- Only on the employee's birthday
+- During {EVENT}
+
+Q: A Section 409A violation can result in:
++ Immediate taxation of the deferred amounts plus an additional 20% tax for the employee
+- A warning letter only
+- A bonus
+- Nothing, since 409A is optional
+
+Q: Distributions from a 409A plan are permitted only upon specified events, such as:
++ Separation from service, disability, death, a fixed date, a change in control, or an unforeseeable emergency
+- Any request from the participant
+- A strong quarter
+- A vacation
+
+Q: A "specified employee" of a public company who separates from service generally must wait:
++ Six months before receiving 409A-covered payments
+- Six years
+- Six minutes
+- Until the next {EVENT}
+
+Q: Nonqualified deferred compensation is generally:
++ An unsecured promise to pay, subject to the company's general creditors
+- Guaranteed by the federal government
+- Held in a locked drawer in the {PLACE}
+- Paid in gold coins
+
+Q: Changing the time of payment in a 409A plan after the initial election:
++ Is restricted, generally requiring a delay of at least five years and a 12-month waiting period
+- Is unrestricted
+- Is prohibited forever
+- Can be done any day
+
+Q: A "rabbi trust" holding deferred compensation:
++ Remains subject to the company's creditors in bankruptcy
+- Protects the money from creditors entirely
+- Is managed by a rabbi
+- Is a 401(k)
+
+Q: Deferred compensation plans for executives are often called:
++ Nonqualified deferred compensation (NQDC) plans
+- Fully qualified plans
+- Pensions for interns
+- Savings bonds
+
+Q: Deferral elections in an NQDC plan should be:
++ Made in writing on time and kept on file
+- Made verbally
+- Changed whenever
+- Made by the plan administrator
+
+Q: Accelerating a 409A payment to cover a vacation is:
++ Generally not permitted
+- Allowed
+- Encouraged
+- Required in summer

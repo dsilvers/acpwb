@@ -1,0 +1,271 @@
+{% extends "dashboard/base.html" %}
+{% load humanize %}
+{% block title %}Compliance Center{% endblock %}
+{% block page_title %}Compliance Center{% endblock %}
+{% block nav_compliance %}active{% endblock %}
+
+{% block content %}
+<style>
+  .cc-bar { height: 14px; background: var(--gold); opacity: .85; min-width: 2px; }
+  .cc-bar.navy { background: var(--navy); opacity: .7; }
+  .cc-bar.red { background: #c62828; opacity: .75; }
+  .cc-hist { display: flex; align-items: flex-end; gap: 4px; height: 120px; }
+  .cc-hist > div { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .cc-hist .cc-col { width: 100%; background: var(--navy); opacity: .75; }
+  .cc-hist .cc-col.random { background: #c62828; }
+  .cc-hist small { font-size: .6rem; color: var(--muted); margin-top: .25rem; white-space: nowrap; }
+  .cc-pill { display: inline-block; font-size: .62rem; font-weight: 800; letter-spacing: .05em; padding: .1rem .4rem; text-transform: uppercase; }
+  .cc-reads { background: #fde2e1; color: #9b1c1c; }
+  .cc-muted { color: var(--muted); font-size: .72rem; }
+  .cc-window a { font-size: .75rem; padding: .2rem .6rem; border: 1px solid var(--border); text-decoration: none; color: var(--navy); background: white; }
+  .cc-window a.on { background: var(--navy); color: var(--gold); }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+  <div class="cc-muted">
+    Milestones (scores, certificates, typed-in learners) come from <code>ComplianceCompletion</code>; page counts, depth, and fan-out from acpwb_go's
+    per-day Redis counters (kept 45 days). {% if not redis_ok %}<b style="color:#c62828">Redis unavailable — page counters not shown.</b>{% endif %}
+  </div>
+  <div class="cc-window">
+    <a href="?days=1" class="{% if days == 1 %}on{% endif %}">24 hours</a>
+    <a href="?days=7" class="{% if days == 7 %}on{% endif %}">7 days</a>
+    <a href="?days=30" class="{% if days == 30 %}on{% endif %}">30 days</a>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg">
+    <div class="stat-card"><div class="label">Certificates Earned</div><div class="value">{{ certificates|intcomma }}</div><div class="sub">{{ pdfs|intcomma }} PDFs downloaded</div></div>
+  </div>
+  <div class="col-6 col-lg">
+    <div class="stat-card"><div class="label">Attempts Completed</div><div class="value">{{ completed_n|intcomma }}</div><div class="sub">{{ pass_rate }}% passed</div></div>
+  </div>
+  <div class="col-6 col-lg">
+    <div class="stat-card" style="border-top-color:{% if avg_score >= 50 %}#c62828{% else %}var(--gold){% endif %}"><div class="label">Average Score</div><div class="value">{{ avg_score }}%</div><div class="sub">random guessing ≈ {{ random_score }}%</div></div>
+  </div>
+  <div class="col-6 col-lg">
+    <div class="stat-card"><div class="label">Learners Identified</div><div class="value">{{ identified_n|intcomma }}</div><div class="sub">typed a name, email, or ID</div></div>
+  </div>
+  <div class="col-6 col-lg">
+    <div class="stat-card"><div class="label">Distinct Learner IPs</div><div class="value">{% if learner_ips is not None %}{{ learner_ips|intcomma }}{% else %}—{% endif %}</div><div class="sub">{% if page_total is not None %}{{ page_total|intcomma }} pages served{% endif %}</div></div>
+  </div>
+  <div class="col-6 col-lg">
+    <div class="stat-card"><div class="label">Spam to Instructors</div><div class="value">{{ match_count|intcomma }}</div><div class="sub">all time · harvested addresses</div></div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-5">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Score Distribution — Completed Attempts</h6></div>
+      <div class="section-card-body">
+        <div class="cc-hist">
+          {% for b in score_hist %}
+          <div title="{{ b.label }}: {{ b.count }}"><div class="cc-col{% if b.random %} random{% endif %}" style="height:{{ b.pct }}%;min-height:{% if b.count %}2{% else %}0{% endif %}px"></div><small>{{ b.label }}</small></div>
+          {% endfor %}
+        </div>
+        <p class="cc-muted mt-2 mb-0">A link-following crawler lands around the red bucket (≈{{ random_score }}%, one choice in four). Mass to the right of it means something is reading the questions.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Test-Takers by Agent</h6><span class="cc-muted">completed attempts</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>Agent</th><th>Traffic class</th><th>Attempts</th><th>Avg score</th><th>Pass</th><th>Certs</th><th>IPs</th></tr></thead>
+        <tbody>
+        {% for a in agents %}
+          <tr>
+            <td>{{ a.bot_type|default:"(before classification)" }} {% if a.reads %}<span class="cc-pill cc-reads" title="Average well above random guessing">reads questions</span>{% endif %}</td>
+            <td>{{ a.class_label }}</td>
+            <td>{{ a.attempts|intcomma }}</td>
+            <td>{{ a.avg }}%</td>
+            <td>{{ a.pass_rate }}%</td>
+            <td>{{ a.certificates|intcomma }}</td>
+            <td>{{ a.ips|intcomma }}</td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="7" class="cc-muted">No completed attempts in this window.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Funnel</h6></div>
+      <div class="section-card-body">
+        {% for f in funnel %}
+        <div class="d-flex align-items-center gap-2 mb-2" style="font-size:.78rem">
+          <div style="width:210px">{{ f.label }}</div>
+          <div style="flex:1"><div class="cc-bar" style="width:{{ f.pct }}%"></div></div>
+          <div style="width:80px;text-align:right">{{ f.count|intcomma }}</div>
+        </div>
+        {% empty %}
+        <p class="cc-muted mb-0">No page counters yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Certificates Earned — Daily</h6><span class="cc-muted">30 days</span></div>
+      <div class="section-card-body">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:90px">
+          {% for d in certs_daily.bars %}
+          <div title="{{ d.date }}: {{ d.count }}" style="flex:1;background:var(--gold);height:{{ d.pct }}%;min-height:{% if d.count %}2{% else %}0{% endif %}px;opacity:.85;min-width:2px"></div>
+          {% endfor %}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem"><span>{{ certs_daily.start }}</span><span>{{ certs_daily.end }}</span></div>
+        {% if pages_daily %}
+        <table class="dash-table w-100 mt-3">
+          <thead><tr><th>Day (UTC)</th><th>Pages served</th><th>Distinct IPs</th></tr></thead>
+          <tbody>{% for d in pages_daily reversed %}{% if forloop.counter <= 7 %}<tr><td>{{ d.date }}</td><td>{{ d.count|intcomma }}</td><td>{{ d.ips|intcomma }}</td></tr>{% endif %}{% endfor %}</tbody>
+        </table>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Crawl Shape — Answer Paths per Attempt</h6></div>
+      <div class="section-card-body">
+        <p class="cc-muted">Distinct answer paths explored per attempt that reached each question. 1.0 means a crawler walks a single path; 4 at question 2 and 16 at question 3 means it follows every choice.</p>
+        <table class="dash-table w-100">
+          <thead><tr><th>Question</th><th>Attempts</th><th>Paths</th><th>Paths / attempt</th><th style="width:40%"></th></tr></thead>
+          <tbody>
+          {% for f in fanout %}
+            <tr><td>{{ f.question }}</td><td>{{ f.attempts|intcomma }}</td><td>{{ f.paths|intcomma }}</td><td>{{ f.ratio }}</td><td><div class="cc-bar navy" style="width:{{ f.pct }}%"></div></td></tr>
+          {% empty %}
+            <tr><td colspan="5" class="cc-muted">No question pages counted yet.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Pages by Traffic Class</h6></div>
+      <div style="overflow-x:auto">
+      <table class="dash-table w-100">
+        <thead><tr><th>Page</th><th>Total</th>{% for c in class_cols %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+        <tbody>
+        {% for row in class_rows %}
+          <tr><td>{{ row.label }}</td><td><b>{{ row.total|intcomma }}</b></td>{% for v in row.cells %}<td>{{ v|intcomma }}</td>{% endfor %}</tr>
+        {% empty %}
+          <tr><td colspan="2" class="cc-muted">No page counters yet.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-7">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Certificate Leaderboard</h6><span class="cc-muted">by IP</span></div>
+      <table class="dash-table w-100">
+        <thead><tr><th>IP</th><th>Agent</th><th>Class</th><th>Certificates</th><th>Courses</th><th>Last</th></tr></thead>
+        <tbody>
+        {% for row in leaderboard %}
+          <tr><td><code>{{ row.ip_address }}</code></td><td>{{ row.bot_type|default:"—" }}</td><td>{{ row.class_label }}</td><td>{{ row.n|intcomma }}</td><td>{{ row.courses|intcomma }}</td><td class="cc-muted">{{ row.last|naturaltime }}</td></tr>
+        {% empty %}
+          <tr><td colspan="6" class="cc-muted">No certificates in this window.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Question Pages by Agent</h6></div>
+      <table class="dash-table w-100">
+        <tbody>
+        {% for t in top.bots %}<tr><td>{{ t.name|default:"—" }}</td><td style="width:45%"><div class="cc-bar navy" style="width:{{ t.pct }}%"></div></td><td style="text-align:right">{{ t.count|intcomma }}</td></tr>{% empty %}<tr><td class="cc-muted">No data.</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="section-card-header"><h6>Learners Who Identified Themselves</h6><span class="cc-muted">latest 100 · name / email / employee ID typed above question 1</span></div>
+  <div style="overflow-x:auto">
+  <table class="dash-table w-100">
+    <thead><tr><th>When</th><th>Name</th><th>Email</th><th>Employee ID</th><th>IP</th><th>Agent</th><th>Class</th><th>Course</th></tr></thead>
+    <tbody>
+    {% for row in identified %}
+      <tr>
+        <td class="cc-muted" style="white-space:nowrap">{{ row.timestamp|date:"M j, H:i" }}</td>
+        <td>{{ row.learner_name|default:"—" }}</td>
+        <td>{{ row.learner_email|default:"—" }}</td>
+        <td>{{ row.learner_employee_id|default:"—" }}</td>
+        <td><code>{{ row.ip_address }}</code></td>
+        <td>{{ row.bot_type|default:"—" }}</td>
+        <td>{{ row.class_label }}</td>
+        <td>{% if row.course %}<a href="/compliance/{{ row.course }}/" target="_blank" rel="noopener">{{ row.course }}</a>{% else %}—{% endif %}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="8" class="cc-muted">Nobody has typed in learner details in this window.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top Topics</h6></div>
+      <table class="dash-table w-100"><tbody>
+        {% for t in top.topics %}<tr><td><a href="/compliance/topic/{{ t.name }}/" target="_blank" rel="noopener">{{ t.name }}</a></td><td style="width:35%"><div class="cc-bar" style="width:{{ t.pct }}%"></div></td><td style="text-align:right">{{ t.count|intcomma }}</td></tr>{% empty %}<tr><td class="cc-muted">No data.</td></tr>{% endfor %}
+      </tbody></table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Top Agencies</h6></div>
+      <table class="dash-table w-100"><tbody>
+        {% for t in top.agencies %}<tr><td><a href="/compliance/{{ t.name }}/" target="_blank" rel="noopener">{{ t.name }}</a></td><td style="width:35%"><div class="cc-bar" style="width:{{ t.pct }}%"></div></td><td style="text-align:right">{{ t.count|intcomma }}</td></tr>{% empty %}<tr><td class="cc-muted">No data.</td></tr>{% endfor %}
+      </tbody></table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="section-card">
+      <div class="section-card-header"><h6>Exhibits Shown</h6></div>
+      <table class="dash-table w-100"><tbody>
+        {% for t in top.exhibits %}<tr><td>{{ t.name }}</td><td style="width:35%"><div class="cc-bar navy" style="width:{{ t.pct }}%"></div></td><td style="text-align:right">{{ t.count|intcomma }}</td></tr>{% empty %}<tr><td class="cc-muted">No data.</td></tr>{% endfor %}
+      </tbody></table>
+    </div>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="section-card-header"><h6>Inbound Mail to Compliance Addresses</h6><span class="cc-muted">instructor / CCO addresses shown on course pages</span></div>
+  <table class="dash-table w-100">
+    <thead><tr><th>Received</th><th>From</th><th>To</th><th>Subject</th><th>Harvested from</th></tr></thead>
+    <tbody>
+    {% for m in matches %}
+      <tr style="cursor:pointer" onclick="location.href='{% url 'dashboard-email-detail' m.inbound_email.pk %}'">
+        <td class="cc-muted" style="white-space:nowrap">{{ m.inbound_email.received_at|date:"M j, H:i" }}</td>
+        <td>{{ m.inbound_email.from_header|default:m.inbound_email.sender|truncatechars:40 }}</td>
+        <td>{{ m.inbound_email.recipient }}</td>
+        <td>{{ m.inbound_email.subject|truncatechars:60 }}</td>
+        <td><code>{{ m.source_code_email.path|truncatechars:60 }}</code></td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5" class="cc-muted">No mail to compliance addresses yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

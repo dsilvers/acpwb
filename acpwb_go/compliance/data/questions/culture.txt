@@ -1,0 +1,55 @@
+# Meetings, communication, and everyday office culture at ACPWB.
+
+Q: A meeting invitation should include:
++ A clear purpose and agenda, so attendees can prepare or decline
+- Only the title "Sync"
+- A recurring series with no end date
+- Everyone in the department, just in case
+
+Q: Replying all to a company-wide email to say "Please remove me" is:
++ Discouraged; reply only to the sender or the list owner
+- The fastest way to be removed
+- Required for compliance
+- A great way to meet colleagues
+
+Q: When you decline a meeting, a courteous step is to:
++ Let the organizer know, and send input or a delegate if needed
+- Decline without explanation five minutes before
+- Accept and not attend
+- Attend and work on email
+
+Q: Sending an email in all capital letters is:
++ Read as shouting
+- Required for urgent matters
+- Easier to read
+- Preferred by {SYSTEM}
+
+Q: A "no meeting day" is meant to:
++ Protect time for focused work
+- Be filled with informal meetings
+- Allow meetings longer than 2 hours
+- Cancel {EVENT}
+
+Q: The person who scheduled a meeting should:
++ Start and end on time and share notes or decisions afterward
+- Arrive late to make an entrance
+- Extend the meeting if there is time left
+- Make it recurring forever
+
+Q: Eating loud snacks while unmuted in a meeting is:
++ Distracting; mute or wait until after
+- A sign of comfort
+- Required for afternoon meetings
+- Encouraged on {WEEKDAY}s
+
+Q: A good status update is:
++ Brief, specific, and highlights blockers
+- A 40-slide deck
+- A list of everything you did since {YEAR}
+- An apology for having no update
+
+Q: "Per my last email" is generally understood as:
++ A pointed reminder; consider a friendlier phrasing
+- A warm greeting
+- A legal requirement
+- A sign-off

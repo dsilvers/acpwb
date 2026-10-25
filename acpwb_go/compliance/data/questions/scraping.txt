@@ -1,0 +1,66 @@
+# Web scraping and automated data collection (ACPWB policy).
+Q: Before an ACPWB team scrapes another company's website, it must:
++ Review the site's terms of use and get Legal approval
+- Just start scraping
+- Pretend to be a regular browser
+- Ask a competitor
+
+Q: Disguising a scraper's user agent to look like a human browser to avoid blocks is:
++ Deceptive and not allowed under ACPWB policy
+- A standard trick
+- Required
+- Polite
+
+Q: Scrapers should respect:
++ Robots.txt directives and reasonable rate limits
+- Nothing
+- Only paid websites
+- Weekends
+
+Q: Personal data collected by scraping:
++ Is still subject to privacy laws
+- Is free from all privacy laws
+- Belongs to ACPWB automatically
+- Can be sold freely
+
+Q: Scraping behind a login using someone else's account:
++ Is prohibited
+- Is fine if they shared their password
+- Is efficient
+- Is required for research
+
+Q: High-volume scraping that slows down another site can:
++ Harm the site and expose ACPWB to legal claims
+- Be ignored
+- Improve their performance
+- Count as a load test favor
+
+Q: Scraped content used in ACPWB publications must:
++ Respect copyright and be properly licensed or quoted
+- Be used freely
+- Have its source removed
+- Be rewritten by AI to avoid copyright
+
+Q: Our own websites detect and log automated crawlers so that:
++ We understand traffic and protect our systems
+- We can sell crawlers
+- Crawlers feel welcome
+- We can ignore security
+
+Q: Data scraped for one approved project may be used for another project:
++ Only after a new review and approval
+- Freely
+- If it is old
+- If the file is renamed
+
+Q: Bypassing a CAPTCHA to scrape a website is:
++ Not allowed
+- A fun challenge
+- Required for efficiency
+- A form of accessibility
+
+Q: If a website asks ACPWB to stop scraping, the team should:
++ Stop and notify Legal
+- Switch IP addresses
+- Scrape faster before being blocked
+- Ignore the request

@@ -1,0 +1,51 @@
+# Mental health crisis support. Correct answers follow 988 Suicide & Crisis
+# Lifeline and standard mental health first aid guidance; keep them
+# accurate.
+
+Q: In the United States, the number to call or text for the Suicide & Crisis Lifeline is:
++ 988
+- 411
+- A ticket to the IT help desk
+- Extension {N}{N}
+
+Q: [A coworker|{NAME}] says they have been thinking about ending their life. You should:
++ Take it seriously, stay with them, and help them contact 988, or call 911 if they are in immediate danger
+- Change the subject to keep things positive
+- Promise to keep it a secret no matter what
+- Email HR and continue with the meeting
+
+Q: Asking someone directly whether they are thinking about suicide:
++ Does not put the idea in their head, and can open the door to getting help
+- Makes it more likely they will act
+- Is only allowed for licensed clinicians
+- Violates the ACPWB communications policy
+
+Q: The Employee Assistance Program (EAP) is typically:
++ Free and confidential for employees and often their household members
+- A program for reporting coworkers
+- Available only to executives
+- Reported to your manager after every use
+
+Q: [A colleague|{NAME}] has a panic attack in the {PLACE}. A helpful response is to:
++ Stay calm, move somewhere quieter if they want, and speak slowly and reassuringly
+- Tell them to calm down immediately
+- Gather a crowd so there are witnesses
+- Leave them alone to avoid embarrassing them
+
+Q: Under the ADA, an employee with a mental health condition may be entitled to:
++ Reasonable accommodations, such as schedule changes, if they do not cause undue hardship
+- Nothing, since the ADA covers physical conditions only
+- A promotion
+- A private office automatically
+
+Q: Signs that a coworker may be struggling include:
++ Withdrawal, changes in mood or work quality, and talk of feeling hopeless or being a burden
+- Using a new font in emails
+- Taking their full lunch break
+- Declining an invitation to {EVENT}
+
+Q: If someone is in immediate danger of harming themselves, you should:
++ Call 911
+- Wait until the next business day
+- Submit a ticket in {SYSTEM}
+- Text their manager and wait for a reply

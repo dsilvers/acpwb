@@ -1,0 +1,62 @@
+# Requesting time off, meal and rest breaks. Correct answers on breaks
+# follow federal law; state laws add more.
+
+Q: Time off should be requested:
++ Through the HR system, with as much notice as the policy requires
+- By leaving a sticky note
+- After you return
+- By telling a coworker
+
+Q: Federal law requires employers to provide meal breaks:
++ No; meal break requirements come from state law, such as California's 30-minute meal period before the end of the fifth hour of work
+- Yes, one hour daily
+- Yes, three per day
+- Only on {WEEKDAY}s
+
+Q: A bona fide meal period of 30 minutes or more when you are fully relieved of duty is:
++ Generally unpaid under federal law
+- Always paid
+- Paid at overtime rates
+- Paid only if you eat at your desk
+
+Q: Eating lunch at your desk while answering customer calls is:
++ Not a bona fide meal break, so non-exempt employees must be paid for that time
+- An unpaid break
+- A rest break
+- Volunteering
+
+Q: Denying a vacation request is:
++ Allowed for business reasons, but must not be discriminatory or retaliatory
+- Never allowed
+- Required during {EVENT}
+- Allowed for any reason, including retaliation
+
+Q: Before going on vacation, you should:
++ Arrange coverage, set an out-of-office message, and share status updates
+- Leave without telling anyone
+- Change your password to something your team knows
+- Take your work laptop to the beach
+
+Q: Checking email constantly while on approved vacation:
++ Is usually unnecessary; trust your coverage plan
+- Is required
+- Earns extra PTO
+- Is prohibited by law
+
+Q: Lactation breaks for nursing employees are required under federal law:
++ Yes, under the PUMP Act, with a private space that is not a bathroom
+- No
+- Only for executives
+- Only in {CITY}
+
+Q: Time off for a medical appointment:
++ Can be taken under the sick leave or PTO policy
+- Must be taken as unpaid leave only
+- Is not allowed
+- Requires a vote
+
+Q: Swapping shifts with a coworker should be:
++ Approved by your supervisor and recorded accurately
+- Done secretly
+- Done for cash
+- Done on {SYSTEM} without approval

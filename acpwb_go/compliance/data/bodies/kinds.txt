@@ -1,0 +1,15 @@
+# Body type: slug | name pattern ({R} region, {D} domain).
+board | {R} Board of {D}
+commission | {R} {D} Commission
+office | {R} Office of {D}
+bureau | {R} Bureau of {D}
+council | {R} Council on {D}
+authority | {R} {D} Authority
+institute | {R} Institute for {D}
+registry | {R} {D} Registry
+directorate | {R} Directorate of {D}
+inspectorate | {R} {D} Inspectorate
+agency | {R} {D} Agency
+division | {R} Division of {D}
+panel | {R} {D} Review Panel
+ombudsman | {R} {D} Ombudsman

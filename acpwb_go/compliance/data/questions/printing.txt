@@ -1,0 +1,62 @@
+# Print management and the shared printer alcove.
+
+Q: [You|{NAME}] [send|sends] a [{DOCUMENT}|document marked CONFIDENTIAL] to the {FLOOR}-floor printer [and get pulled into a call|but the printer jams]. The REQUIRED practice is:
++ Use badge-release ("hold and release") printing so nothing prints until you are at the device
++ Retrieve the output within {N} minutes or cancel the job
+- Ask whoever is nearest to bring the pages to your desk
+- Leave the pages; printouts are considered internal
+- Print a second copy in case the first is lost
+
+Q: [You find|There is] a [stack of|single page of|stapled] printout[?s] [left on|sitting in] the shared printer tray [containing|that appears to contain] salary data. You should:
++ Place it in the locked shred console and report it to the Privacy Office
+- Read it to identify the owner
+- Leave it on the printer for the owner
+- Return it to {DEPT}, since it is probably theirs
+
+Q: Color printing [requires|is permitted with]:
++ Cost-center approval for jobs over {N} pages
+- No approval, provided the document contains charts
+- Approval from the CEO
+- A personal toner contribution
+
+Q: [Which of the following may be printed on the {PLACE} printer?|Which may be sent to a shared printer?]
++ A document classified PUBLIC or INTERNAL
+- [A RESTRICTED|An unredacted] {DOCUMENT}
+- A personal tax return
+- Anything, if collected within one minute
+
+Q: The [printer|multifunction device] [in the {PLACE}|on your floor] [displays an error|asks for an administrator password|offers to "scan to email"]. You should:
++ Contact the Service Desk and do not attempt to reconfigure the device
+- Enter "admin" as the password
+- Unplug it and plug it back in repeatedly
+- Scan the document to a personal email address instead
+
+Q: [Documents left on|Printouts left in] a shared printer tray after {N} hours are:
++ Collected by Facilities and shredded
+- Delivered to the owner's manager
+- Recycled with regular paper
+- Posted on the bulletin board
+
+Q: [Confidential documents|Documents classified Confidential] should be printed:
++ Using hold-and-release printing, collected immediately
+- On the printer nearest the {PLACE}
+- In color, so they are noticed
+- Only on {WEEKDAY}s
+
+Q: [The printer jams|A paper jam occurs] while printing a confidential {DOCUMENT}. You should:
++ Clear the jam, remove every partial page, and shred the damaged pages
+- Leave it for Facilities, with a note
+- Print it on another printer and forget the jammed one
+- Turn the printer off and on until it works
+
+Q: [Double-sided printing|Duplex printing] is:
++ The default setting on all ACPWB printers, to reduce paper use
+- Prohibited, because it confuses readers
+- Allowed only for executives
+- A security risk
+
+Q: [Personal printing|Printing personal documents] on ACPWB printers is:
++ Permitted occasionally, in small amounts, for non-confidential items
+- Unlimited
+- Prohibited, under all circumstances
+- Allowed if paid for with an {AMOUNT} donation

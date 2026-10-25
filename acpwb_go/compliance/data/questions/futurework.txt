@@ -1,0 +1,73 @@
+# Four-day weeks, sabbaticals, naps, and the right to disconnect.
+
+Q: In a four-day workweek pilot with 10-hour days, non-exempt employees under the federal FLSA:
++ Are owed overtime only for hours over 40 in the workweek
+- Are owed overtime for every hour over 8 in a day under federal law
+- Are not owed overtime at all
+- Are paid for five days
+
+Q: In California, non-exempt employees are generally owed overtime for:
++ Hours over 8 in a workday, unless a valid alternative workweek schedule is adopted
+- Hours over 12 in a week
+- Weekend hours only
+- No hours, ever
+
+Q: A sabbatical is:
++ An extended break from work, paid or unpaid, offered under a specific policy
+- A required holiday
+- A type of severance
+- A yoga retreat run by {VENDOR}
+
+Q: During a sabbatical, employees are generally expected to:
++ Disconnect from work, with coverage arranged in advance
+- Check email daily
+- Attend all meetings remotely
+- Work at a reduced rate
+
+Q: Countries such as France and Australia have laws giving employees:
++ A right to disconnect from work communications outside working hours, in certain circumstances
+- Unlimited vacation
+- Four-day weeks
+- Free coffee
+
+Q: Sending non-urgent messages at 11 p.m. can be made kinder by:
++ Scheduling them to arrive during the recipient's working hours
+- Marking them urgent
+- Sending them twice
+- Calling instead
+
+Q: Using the nap pod on the {FLOOR} floor is:
++ Allowed for short rests, per the booking rules
+- Allowed overnight
+- Prohibited
+- Required after {EVENT}
+
+Q: Sleeping at your desk during a meeting you are presenting is:
++ Not recommended
+- Allowed with your camera off
+- A sign of trust
+- An efficient use of time
+
+Q: Burnout is characterized by:
++ Exhaustion, cynicism or detachment from work, and reduced effectiveness
+- Too many vacations
+- Liking your job too much
+- A burnt smell in the kitchen
+
+Q: An employee showing signs of burnout should be:
++ Supported, for example with workload changes, time off, and EAP resources
+- Assigned more projects
+- Told to toughen up
+- Asked to lead {EVENT}
+
+Q: "Quiet quitting" usually refers to:
++ Doing only the required duties and not going beyond, often in response to burnout
+- Resigning silently by email
+- Leaving meetings without saying goodbye
+- Whispering in the quiet zone
+
+Q: Unlimited PTO works best when:
++ Managers model taking time off and help employees plan coverage
+- No one actually takes any
+- Requests are always denied
+- It replaces all holidays

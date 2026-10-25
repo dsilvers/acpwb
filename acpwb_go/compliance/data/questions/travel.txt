@@ -1,0 +1,59 @@
+Q: Receipts are required for any business expense of:
++ {AMOUNT} or more, submitted within {DAYS} days of the trip
+- More than $500 only
+- Meals only
+- Expenses incurred outside the United States only
+
+Q: The approved fare class for domestic flights under {N} hours is:
++ Economy, booked through the ACPWB travel portal
+- Business, if booked more than {N} days ahead
+- First class, for associates at the director level and above
+- Any class, if the associate pays the difference in points
+
+Q: Which of the following is a reimbursable expense?
++ Airport parking for the duration of the trip
+- In-room movies
+- Mini-bar purchases
+- Laundry for trips shorter than {N} days
+
+Q: When traveling with an ACPWB laptop, you must:
++ Keep it in your possession or a locked hotel safe at all times
+- Check it with your luggage
+- Leave it in the car, out of sight
+- Ask hotel staff to hold it
+
+Q: The per diem for meals in {CITY} is:
++ The amount published in the current ACPWB Travel Schedule, prorated on travel days
+- Unlimited, with receipts
+- {AMOUNT} per meal
+- Whatever the client spends
+
+Q: [Business travel|Flights for business travel] must be booked:
++ Through the ACPWB travel booking tool, in economy for flights under {N} hours
+- On any airline site, in any class
+- Through a personal travel agent
+- Only on {WEEKDAY}s
+
+Q: [Hotel minibar charges|Minibar purchases] on a business trip are:
++ Not reimbursable
+- Reimbursable up to {AMOUNT}
+- Reimbursable if shared
+- Reimbursable on the last night only
+
+Q: [While traveling|On a business trip], an ACPWB laptop should be:
++ Kept with you, or locked in the hotel safe, never left in a car
+- Checked in with luggage
+- Left in the rental car overnight
+- Lent to the hotel business center
+
+Q: [Receipts|Itemized receipts] are required for every expense over:
++ {AMOUNT}, or the threshold in the Travel & Expense Policy
+- Ten thousand dollars
+- Nothing; receipts are optional
+- Any amount spent on {WEEKDAY}
+
+Q: [Adding a personal vacation|Extending a business trip with personal days] is:
++ Allowed with approval, provided ACPWB pays no extra cost
+- Prohibited
+- Allowed, with ACPWB covering the extra hotel nights
+- Allowed only in {CITY}

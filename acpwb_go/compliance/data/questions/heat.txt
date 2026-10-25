@@ -1,0 +1,68 @@
+# Heat illness. Correct answers follow OSHA, NIOSH, CDC, and NWS heat
+# guidance; keep them accurate.
+
+Q: OSHA's three-word heat safety message is:
++ Water. Rest. Shade.
+- Hydrate. Caffeinate. Dominate.
+- Sweat. Persist. Report.
+- Shorts. Sandals. Sunscreen.
+
+Q: [A coworker|{NAME}] working outside is confused, slurring words, and has hot skin. You should:
++ Call 911, move them to a cooler place, and cool them right away with water or ice
+- Let them finish the shift and rest afterward
+- Give them a caffeinated energy drink
+- Send them home to sleep it off
+
+Q: Heat stroke is:
++ A medical emergency; call 911
+- A mild condition that passes with a short break
+- Something that only happens to people over 65
+- The same as a sunburn
+
+Q: Heavy sweating, weakness, nausea, and cold, clammy skin are signs of:
++ Heat exhaustion
+- Being too engaged in the work
+- Frostbite
+- An allergy to {VENDOR} products
+
+Q: Someone with heat exhaustion should:
++ Move to a cooler place, loosen clothing, and sip water, and get medical help if they vomit or symptoms get worse
+- Keep working to stay warmed up
+- Drink as much alcohol as possible
+- Take a hot shower
+
+Q: [Workers new to hot conditions|New workers in hot environments] are at higher risk of heat illness because:
++ Their bodies have not yet acclimatized; exposure should be built up gradually over the first days
+- They have not completed the {COURSE}
+- They tend to wear more layers
+- They are not yet on the payroll
+
+Q: During hot weather, workers should drink water:
++ Frequently, about one cup every 15 to 20 minutes, even if they are not thirsty
+- Only when they feel thirsty
+- Only at lunch
+- Only after the shift, to avoid restroom breaks
+
+Q: The National Weather Service "Danger" heat index category begins at a heat index of about:
++ 103°F
+- 75°F
+- 90°F
+- 140°F
+
+Q: The heat index measures:
++ How hot it feels when relative humidity is combined with the air temperature
+- How hot the parking lot is
+- The temperature in the server room
+- How many people are in a meeting room
+
+Q: Leaving a person or pet in a parked car on a warm day is:
++ Dangerous, even with the windows cracked, since the inside can heat up quickly
+- Fine for up to an hour with the windows cracked
+- Fine if the car is a light color
+- Fine in the visitor lot only
+
+Q: The ACPWB air conditioning fails on the {FLOOR} floor during a heat wave. A reasonable step is:
++ Report it to Facilities, move to a cooler area, and drink water
+- Hold {EVENT} in the warmest room to save energy
+- Remove the windows
+- Wait for the {COMMITTEE} to approve a fan

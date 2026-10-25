@@ -1,0 +1,66 @@
+# Research integrity for ACPWB reports.
+Q: ACPWB research reports must:
++ Accurately describe methods, data sources, and limitations
+- Hide limitations
+- Invent data when needed
+- Copy competitors' findings
+
+Q: Fabricating survey responses is:
++ Research misconduct
+- Data enrichment
+- Allowed for small samples
+- Required for deadlines
+
+Q: Changing a chart's scale to exaggerate a small difference is:
++ Misleading
+- Good design
+- Required
+- Harmless
+
+Q: Data from a small or unrepresentative sample should be:
++ Presented with appropriate caution
+- Presented as definitive
+- Hidden
+- Doubled
+
+Q: Citing sources in reports:
++ Gives credit and lets readers verify claims
+- Is optional
+- Is plagiarism
+- Slows reports
+
+Q: Plagiarism includes:
++ Using others' words or ideas without credit
+- Quoting with attribution
+- Citing sources
+- Summarizing your own work
+
+Q: Corrections to published reports should be:
++ Made promptly and noted
+- Hidden
+- Ignored
+- Delayed until next year
+
+Q: Conflicts of interest in sponsored research must be:
++ Disclosed
+- Hidden
+- Ignored
+- Celebrated
+
+Q: Raw research data should be:
++ Retained according to policy so results can be verified
+- Deleted after publishing
+- Kept on a personal drive
+- Shared publicly with personal data
+
+Q: Statistical significance:
++ Does not by itself mean a result is important in practice
+- Means a result is always true
+- Means the sample is large
+- Is optional decoration
+
+Q: Each ACPWB report includes a Report ID because it:
++ Identifies the report and helps track copies
+- Is decorative
+- Counts pages
+- Is the author's password

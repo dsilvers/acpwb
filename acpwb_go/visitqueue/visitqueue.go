@@ -385,7 +385,8 @@ const (
 )
 
 // PushCodeEmails registers the honeypot programmer addresses shown on a
-// legacy source-code page, so an inbound email to one of them can be traced
+// legacy source-code page (and /compliance/ instructor addresses, keyed by
+// course URL), so an inbound email to one of them can be traced
 // back to the exact page it was harvested from (drained into
 // honeypot.SourceCodeEmail by Django's drain_code_email_queue). A per
 // (address, path) SETNX dedupes repeat crawls of the same page.
@@ -425,4 +426,151 @@ func (q *Queue) PushCodeEmails(host, path, ip string, addrs []string) {
 	if n > 0 {
 		_, _ = push.Exec(ctx)
 	}
+}
+
+const (
+	complianceQueueKey = "acpwb:compliance_queue"
+	complianceSeenTTL  = 30 * 24 * time.Hour
+	complianceQueueMax = 1_000_000
+)
+
+// ComplianceCompletion is one /compliance/ milestone — an attempt finished,
+// a certificate served, or a learner identity typed in — drained into
+// honeypot.ComplianceCompletion by Django's drain_compliance_queue. Ordinary
+// question pages are not queued: their CrawlerVisit path already holds the
+// whole answer trail (acpwb_go compliance-score decodes it).
+type ComplianceCompletion struct {
+	Event, Course, Answers, CertID string
+	Attempt, Score                 int
+	Passed                         bool
+	LearnerName, LearnerEmail      string
+	LearnerEmployeeID              string
+	BotType                        string // botclassify label ("OpenAI GPTBot", "Other / Browser")
+	ClientClass                    string // acpwb_edge's X-Traffic-Class (known_bot, browser, headless, …)
+}
+
+// PushComplianceCompletion queues a milestone at most once per
+// (IP, course, attempt, event) every 30 days, so a crawler re-walking the
+// same finished attempt doesn't add rows.
+func (q *Queue) PushComplianceCompletion(r *http.Request, ip string, c ComplianceCompletion) {
+	if q == nil || q.client == nil {
+		return
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
+	defer cancel()
+	key := fmt.Sprintf("acpwb:compliance:%s|%s|%d|%s", ip, c.Course, c.Attempt, c.Event)
+	if ok, err := q.client.SetNX(ctx, key, "1", complianceSeenTTL).Result(); err != nil || !ok {
+		return
+	}
+	data, err := json.Marshal(map[string]any{
+		"event":               c.Event,
+		"course":              truncate(c.Course, 80),
+		"attempt":             c.Attempt,
+		"answers":             truncate(c.Answers, 32),
+		"score":               c.Score,
+		"passed":              c.Passed,
+		"cert_id":             c.CertID,
+		"learner_name":        truncate(c.LearnerName, 120),
+		"learner_email":       truncate(c.LearnerEmail, 254),
+		"learner_employee_id": truncate(c.LearnerEmployeeID, 64),
+		"bot_type":            truncate(c.BotType, 64),
+		"client_class":        truncate(c.ClientClass, 16),
+		"ip_address":          ip,
+		"user_agent":          truncate(r.UserAgent(), 512),
+		"host":                truncate(r.Host, 253),
+		"request_id":          requestIDValue(requestID(r.Header.Get("X-Request-Id"))),
+		"timestamp":           nowISO(),
+	})
+	if err != nil {
+		return
+	}
+	pipe := q.client.Pipeline()
+	pipe.RPush(ctx, complianceQueueKey, data)
+	pipe.LTrim(ctx, complianceQueueKey, -complianceQueueMax, -1)
+	_, _ = pipe.Exec(ctx)
+}
+
+// ── /compliance/ dashboard counters ─────────────────────────────────────
+
+// ComplianceStat is one served /compliance/ page, folded into per-day Redis
+// counters for the staff dashboard instead of a row per page view (the
+// CrawlerVisit row already exists; these are cheap aggregates of it).
+type ComplianceStat struct {
+	Kind, Topic, Agency, Course, Answers, Exhibit string
+	Attempt                                       int
+	IP, BotType, ClientClass                      string
+}
+
+const (
+	complianceStatTTL      = 45 * 24 * time.Hour
+	complianceStatMaxDepth = 25
+)
+
+// ComplianceStatKey is the Redis key for one day's counter of one kind
+// (Django's dashboard reads the same names: apps/core/compliance_stats.py).
+func ComplianceStatKey(day, name string) string { return "acpwb:cstat:" + day + ":" + name }
+
+// PushComplianceStats bumps the day's counters for one served page:
+//
+//	pages      hash  kind and kind|client_class → hits
+//	bots       hash  bot type → question-page hits
+//	topics     hash  course-type slug → hits
+//	exhibits   hash  exhibit kind → question-page hits
+//	depth      hash  answers so far → question/results hits
+//	agencies   zset  agency slug → hits
+//	ips        HLL   distinct IPs
+//	att:<d>    HLL   distinct (ip, course, attempt) that reached depth d
+//	fan:<d>    HLL   distinct (ip, course, attempt, answers) at depth d
+//
+// fan:<d> / att:<d> is the average number of answer paths each attempt
+// explored at depth d: 1 for a crawler walking one path, up to 4^d for one
+// following every choice.
+func (q *Queue) PushComplianceStats(st ComplianceStat) {
+	if q == nil || q.client == nil || st.Kind == "" {
+		return
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
+	defer cancel()
+	day := time.Now().UTC().Format("20060102")
+	k := func(name string) string { return ComplianceStatKey(day, name) }
+	class := st.ClientClass
+	if class == "" {
+		class = "unclassified"
+	}
+	pipe := q.client.Pipeline()
+	touched := []string{k("pages"), k("ips")}
+	pipe.HIncrBy(ctx, k("pages"), st.Kind, 1)
+	pipe.HIncrBy(ctx, k("pages"), st.Kind+"|"+class, 1)
+	pipe.PFAdd(ctx, k("ips"), st.IP)
+	if st.Topic != "" {
+		pipe.HIncrBy(ctx, k("topics"), st.Topic, 1)
+		touched = append(touched, k("topics"))
+	}
+	if st.Agency != "" {
+		pipe.ZIncrBy(ctx, k("agencies"), 1, st.Agency)
+		touched = append(touched, k("agencies"))
+	}
+	if st.Kind == "question" || st.Kind == "results" {
+		d := len(st.Answers)
+		pipe.HIncrBy(ctx, k("depth"), fmt.Sprint(d), 1)
+		touched = append(touched, k("depth"))
+		if d <= complianceStatMaxDepth {
+			att := fmt.Sprintf("%s|%s|%d", st.IP, st.Course, st.Attempt)
+			pipe.PFAdd(ctx, k(fmt.Sprintf("att:%d", d)), att)
+			pipe.PFAdd(ctx, k(fmt.Sprintf("fan:%d", d)), att+"|"+st.Answers)
+			touched = append(touched, k(fmt.Sprintf("att:%d", d)), k(fmt.Sprintf("fan:%d", d)))
+		}
+	}
+	if st.Kind == "question" {
+		pipe.HIncrBy(ctx, k("bots"), st.BotType, 1)
+		touched = append(touched, k("bots"))
+		if st.Exhibit != "" {
+			pipe.HIncrBy(ctx, k("exhibits"), st.Exhibit, 1)
+			touched = append(touched, k("exhibits"))
+		}
+	}
+	for _, key := range touched {
+		pipe.Expire(ctx, key, complianceStatTTL)
+	}
+	_, _ = pipe.Exec(ctx)
 }

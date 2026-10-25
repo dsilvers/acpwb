@@ -1,0 +1,49 @@
+# Email signatures, out-of-office messages, and auto-replies.
+
+Q: The ACPWB email signature should include:
++ Your name, title, and approved contact information in the standard format
+- Inspirational quotes and animated images
+- Your personal phone number and home address
+- A list of your favorite movies
+
+Q: An out-of-office message should include:
++ The dates you are away and who to contact for urgent matters
+- Your travel destination and hotel room number
+- The reason for your absence in detail
+- Your password for coverage
+
+Q: Out-of-office replies to external senders should:
++ Avoid sharing details that could help attackers, such as travel plans
+- Include your full itinerary
+- Include your manager's mobile number publicly
+- Include the {DOCUMENT}
+
+Q: Adding personal pronouns to your email signature is:
++ Optional
+- Required
+- Prohibited
+- Required only on {WEEKDAY}s
+
+Q: Legal disclaimers at the end of emails:
++ Should use the approved standard text, if required
+- Should be written by each employee
+- Make any email confidential automatically
+- Must be 5 paragraphs
+
+Q: Using a signature image that blocks the text of the email on phones is:
++ Something to avoid; keep signatures simple
+- Recommended
+- Required for branding
+- Required by {VENDOR}
+
+Q: An auto-reply that responds to every message in a mailing list can:
++ Flood the list, so check settings for lists
+- Improve engagement
+- Make you look busy
+- Unsubscribe you automatically
+
+Q: Setting an out-of-office message when you are only in a two-hour meeting is:
++ Unnecessary; use your calendar status instead
+- Required
+- Recommended for every meeting
+- Grounds for promotion

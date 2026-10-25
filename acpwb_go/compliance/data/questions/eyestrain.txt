@@ -1,0 +1,56 @@
+# Screens, eyestrain, and lighting. Correct answers follow American
+# Optometric Association guidance.
+
+Q: The 20-20-20 rule for reducing eyestrain means:
++ Every 20 minutes, look at something about 20 feet away for 20 seconds
+- Work 20 hours, rest 20 minutes, repeat 20 times
+- Use 20-point font at 20% brightness
+- Blink 20 times every 20 seconds
+
+Q: The top of a computer monitor should generally be:
++ At or slightly below eye level
+- Well above your head
+- At knee height
+- Behind you
+
+Q: A monitor is usually most comfortable at a distance of about:
++ An arm's length away
+- Three inches away
+- Across the room
+- On your lap
+
+Q: Glare on a screen can be reduced by:
++ Positioning the screen at a right angle to windows and adjusting lighting
+- Facing the screen directly toward a sunny window
+- Wearing sunglasses at night
+- Turning brightness to maximum
+
+Q: Dry eyes from screen use can be helped by:
++ Blinking more often and taking regular breaks
+- Staring harder at the screen
+- Turning the monitor off and on
+- Holding your breath
+
+Q: Laptop screens used for long periods are more comfortable when:
++ Raised with a stand and used with a separate keyboard and mouse
+- Placed flat on the desk and hunched over
+- Placed on a pillow
+- Held at arm's length
+
+Q: Text size on screens should be:
++ Large enough to read comfortably without leaning in
+- As small as possible to fit more
+- Always 8-point
+- Set by the {COMMITTEE}
+
+Q: Persistent headaches, blurred vision, or eye pain after screen work should be:
++ Discussed with an eye care professional
+- Ignored until they go away
+- Treated with more screen time
+- Reported to {VENDOR}
+
+Q: Dark mode on screens:
++ Is a personal preference; adjust contrast and brightness for comfort
+- Is required by policy
+- Damages monitors
+- Is prohibited after 5 p.m.

@@ -82,13 +82,20 @@ def speaker_avatar(name, initials_text, size=80):
     return avatar_card(name, initials_text, size)
 
 
-PROJECT_COVER_COUNT = 80
+# Project covers come from the generated report-cover pool
+# (static/img/report-covers/pool/<category>-<n>.webp, tools/generate_compliance_covers.py
+# --report-pool), so projects and reports share one set of images.
+_COVER_POOL_DIR = Path(__file__).resolve().parents[3] / "static" / "img" / "report-covers" / "pool"
+_COVER_POOL = sorted(p.name for p in _COVER_POOL_DIR.glob('*.webp')) if _COVER_POOL_DIR.is_dir() else []
 
 
 @register.filter
-def project_cover_idx(slug):
-    """Map a project slug to a deterministic 3-digit cover image index (000–079)."""
-    return str(int(hashlib.md5(str(slug).encode()).hexdigest(), 16) % PROJECT_COVER_COUNT).zfill(3)
+def project_cover_url(slug):
+    """Static URL of a project's cover: a pool image chosen by slug hash, or '' if the pool is empty."""
+    if not _COVER_POOL:
+        return ''
+    i = int(hashlib.md5(f'project_cover_{slug}'.encode()).hexdigest(), 16) % len(_COVER_POOL)
+    return static(f'img/report-covers/pool/{_COVER_POOL[i]}')
 
 
 @register.filter

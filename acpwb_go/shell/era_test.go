@@ -80,8 +80,8 @@ func TestRenderEraPage_Structure(t *testing.T) {
 	}
 
 	// Nav: era shell has its own 7-item list, distinct from base.html's 9.
-	if strings.Count(html, `class="nav-link"`) != 7 {
-		t.Errorf("expected 7 nav-link items in era nav, got %d", strings.Count(html, `class="nav-link"`))
+	if strings.Count(html, `class="nav-link"`) != 5 {
+		t.Errorf("expected 5 nav-link items in era nav, got %d", strings.Count(html, `class="nav-link"`))
 	}
 	if !strings.Contains(html, `navbar-expand-lg`) {
 		t.Errorf("expected navbar-expand-lg (era shell), not navbar-expand-xl (main shell)")

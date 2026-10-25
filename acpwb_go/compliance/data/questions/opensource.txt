@@ -1,0 +1,66 @@
+# Open source software use and contribution.
+Q: Open source software:
++ Comes with a license whose terms must be followed
+- Has no rules
+- Is always public domain
+- Is owned by whoever downloads it
+
+Q: Permissive licenses such as MIT and Apache 2.0 generally require:
++ Keeping copyright and license notices
+- Publishing all your source code
+- Paying a royalty
+- Nothing at all
+
+Q: Strong copyleft licenses such as the GPL may require:
++ Releasing source code of derivative works when distributed
+- Paying the author per user
+- Using the software only on weekends
+- Changing the software's name
+
+Q: Code found online with no license:
++ Should not be used, because no license means no permission
+- Is free to use
+- Becomes ACPWB's property
+- Can be used if you credit the author
+
+Q: Before contributing ACPWB code to an open source project, you need:
++ Approval under the open source contribution policy
+- Only your manager's nod
+- Nothing
+- The project's permission only
+
+Q: Open source dependencies should be:
++ Tracked and kept up to date for security fixes
+- Copied once and never updated
+- Hidden from scans
+- Forked without records
+
+Q: Removing a license notice from open source code:
++ Violates the license
+- Is a cleanup best practice
+- Is required by Legal
+- Saves bandwidth
+
+Q: A dependency with a known critical vulnerability should be:
++ Upgraded or mitigated under the vulnerability management policy
+- Ignored
+- Renamed
+- Rewritten from memory
+
+Q: The AGPL is notable because:
++ It can require sharing source code for software offered to users over a network
+- It is a font
+- It allows any use with no conditions
+- It only applies to games
+
+Q: Software composition analysis tools help:
++ Identify open source components, licenses, and vulnerabilities
+- Compose music
+- Write code automatically
+- Remove licenses
+
+Q: Using open source in a product shipped to customers should be:
++ Reviewed for license obligations before release
+- Hidden from customers
+- Done without review
+- Prohibited entirely

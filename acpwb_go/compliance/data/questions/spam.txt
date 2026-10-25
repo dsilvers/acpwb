@@ -1,0 +1,66 @@
+# Spam, junk mail, and unsolicited messages.
+Q: Unsolicited bulk email that you did not request is called:
++ Spam
+- A newsletter you signed up for
+- An invoice
+- A calendar invite
+
+Q: Clicking "unsubscribe" in an obviously fraudulent spam message:
++ Can confirm your address is active; report it as spam instead
+- Always removes you safely
+- Is required
+- Deletes the sender's account
+
+Q: The safest way to handle a suspicious message is to:
++ Use the "Report phishing" or "Report spam" button
+- Reply asking if it is real
+- Forward it to everyone
+- Click the links to check
+
+Q: Marketing emails sent by ACPWB must:
++ Follow anti-spam laws, including a working opt-out and an accurate sender
+- Hide the sender
+- Avoid unsubscribe links
+- Be sent to purchased lists without consent
+
+Q: Under the U.S. CAN-SPAM Act, opt-out requests must be honored within:
++ 10 business days
+- One year
+- Never
+- 24 minutes
+
+Q: Using a purchased email list for ACPWB marketing:
++ Requires Legal and Privacy review and is often not allowed
+- Is always fine
+- Is encouraged
+- Is the only way
+
+Q: Posting your work email address on public websites:
++ Increases spam; share it only where needed
+- Reduces spam
+- Has no effect
+- Is required
+
+Q: A message offering a prize for a contest you never entered is:
++ Likely spam or a scam
+- A lucky day
+- A legal notice
+- A promotion
+
+Q: Spam that contains threats or extortion should be:
++ Reported to Security
+- Paid
+- Answered
+- Forwarded to friends
+
+Q: Text message spam to a company phone should be:
++ Reported and deleted without clicking links
+- Answered with "STOP" and a password
+- Clicked to check
+- Saved forever
+
+Q: Our honeypot email addresses help the company:
++ Track which sources are harvesting addresses for spam
+- Send spam
+- Sell email lists
+- Read personal email

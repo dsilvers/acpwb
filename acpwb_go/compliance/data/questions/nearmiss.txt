@@ -1,0 +1,66 @@
+# Near misses and incident reporting (OSHA and NSC guidance in general terms).
+Q: A near miss is:
++ An event that could have caused injury or damage but did not
+- An injury that almost needed first aid
+- A missed deadline
+- A coworker who almost arrived late
+
+Q: Near misses should be reported because:
++ They reveal hazards before someone gets hurt
+- They count against your team's bonus
+- They are required to be hidden
+- They are funny stories
+
+Q: A box falls from a high shelf and lands where someone was standing a second earlier. You should:
++ Report it as a near miss and help get the storage fixed
+- Laugh and move on
+- Put the box back on the same shelf
+- Wait until someone is hurt
+
+Q: Reporting a near miss:
++ Should never lead to punishment for the reporter
+- Is grounds for discipline
+- Requires a witness
+- Must be done anonymously
+
+Q: Root cause analysis of a near miss asks:
++ Why the hazard existed and what will stop it from happening again
+- Who should be blamed
+- How to hide it
+- Whether the report can be deleted
+
+Q: Employees have the right to report injuries and hazards:
++ Without retaliation, under OSHA rules
+- Only through their supervisor
+- Only if their manager agrees
+- Only once a year
+
+Q: Incentive programs that discourage reporting injuries:
++ Can violate OSHA's anti-retaliation rules
+- Are required
+- Improve safety
+- Are a best practice
+
+Q: A near miss report should include:
++ What happened, where, when, and what could have happened
+- Only the reporter's opinion of coworkers
+- Nothing but a signature
+- A list of suspects
+
+Q: A slippery spot that nearly caused a fall should be:
++ Reported, marked, and cleaned up
+- Avoided by you only
+- Left for the next shift
+- Covered with a rug
+
+Q: Corrective actions from a near miss should be:
++ Assigned an owner and a due date and tracked to completion
+- Discussed and forgotten
+- Optional
+- Delegated to visitors
+
+Q: Leading indicators of safety, such as near miss reports, are valuable because:
++ They show risk before injuries happen
+- They look good in slides only
+- They replace training
+- They are easy to fake

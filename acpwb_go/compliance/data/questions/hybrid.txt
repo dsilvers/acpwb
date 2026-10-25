@@ -1,0 +1,61 @@
+# Hybrid work: schedules, expectations, and rules.
+
+Q: [Anchor days|Team anchor days] in a hybrid schedule are:
++ Days when the whole team is expected in the office together
+- Days when no one may come in
+- Days reserved for executives
+- Days on which meetings are prohibited
+
+Q: [Under the Hybrid Work Policy|Per the Hybrid Work Policy], your in-office days should be:
++ Agreed with your manager, recorded in your hybrid agreement, and kept consistently
+- Chosen each morning based on the weather
+- Whichever days the {PLACE} has free lunch
+- Kept secret from your team
+
+Q: [Hourly (non-exempt) associates|Non-exempt associates] working from home must:
++ Record all hours worked, including time spent checking email after hours
+- Only record time spent in the office
+- Work unpaid overtime at home
+- Round their hours to the nearest day
+
+Q: In a hybrid meeting with some people in the room and some remote, the organizer should:
++ Make sure remote attendees can see, hear, and contribute, for example by using a room camera and calling on them
+- Let in-room attendees speak first and remote attendees only if time permits
+- Turn off the remote audio to reduce noise
+- Hold side conversations in the room
+
+Q: {NAME} wants to change their in-office days from {WEEKDAY} to another day. {FIRST} should:
++ Discuss it with their manager and update the hybrid agreement
+- Just start coming in on the new day
+- Ask HR to change it without telling the manager
+- Swap badges with a colleague who has the other day
+
+Q: [Working remotely from another country|Working from another country] for more than a short trip:
++ Requires approval in advance, because of tax, immigration, data, and employment law
+- Is allowed if you stay on your normal hours
+- Is allowed if you use a VPN
+- Requires only an out-of-office message
+
+Q: [Hybrid associates|Associates on a hybrid schedule] are expected to be reachable during:
++ Their agreed working hours, wherever they are working
+- Any time, day or night
+- Only when in the office
+- Only between {TIMEOFDAY} and lunch
+
+Q: [A team member|{NAME2}] is always remote on the day the team makes decisions. A fair fix is to:
++ Move key decisions to anchor days or document them so everyone can contribute
+- Make decisions only when {FIRST2} is out
+- Require {FIRST2} to come in five days a week
+- Stop making decisions
+
+Q: [Hybrid schedule exceptions|Temporary exceptions to your hybrid schedule], such as for a family need, should be:
++ Requested from your manager and documented
+- Taken without telling anyone
+- Covered by having a colleague badge in for you
+- Avoided at all costs
+
+Q: [Equipment|Your equipment] for hybrid work, such as a laptop and headset, should:
++ Travel with you between home and office and be kept secure in transit
+- Be left in the car overnight
+- Be duplicated at your own expense
+- Be stored at the office on remote days

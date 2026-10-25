@@ -1,0 +1,60 @@
+# Tax compliance basics for employees.
+Q: Employees should not give customers:
++ Tax advice, unless it is their job and they are qualified
+- Invoices
+- Receipts
+- Product information
+
+Q: Form W-4 is used to:
++ Tell the employer how much federal income tax to withhold
+- Apply for jobs
+- Report injuries
+- Request PTO
+
+Q: Independent contractors usually receive:
++ Form 1099-NEC instead of Form W-2
+- Form W-2
+- No forms
+- Form I-9 only
+
+Q: Gifts and awards to employees are:
++ Often taxable income
+- Never taxable
+- Illegal
+- Deductible by employees
+
+Q: Sales tax on purchases must be:
++ Charged or paid as the law requires
+- Avoided
+- Ignored
+- Negotiated
+
+Q: Requests to change your tax withholding should go through:
++ The payroll system
+- Your manager
+- Email to anyone
+- Social media
+
+Q: Tax records must be kept:
++ For the periods required by law and policy
+- One day
+- Never
+- Forever on paper
+
+Q: Emails asking for employees' W-2s are often:
++ Phishing scams
+- Legitimate always
+- Required
+- Harmless
+
+Q: Transfer pricing rules govern:
++ Prices between related companies in different countries
+- Office moves
+- Employee transfers
+- Bus fares
+
+Q: Questions about company tax matters go to:
++ The Tax department
+- Coworkers
+- Online forums
+- Nobody

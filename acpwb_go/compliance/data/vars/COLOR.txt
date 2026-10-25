@@ -1,0 +1,7 @@
+flashing amber
+flashing red
+solid blue
+blinking red and green
+pale yellow
+purple
+dim white

@@ -1,0 +1,61 @@
+# Break room, kitchenette, and shared refrigerator.
+
+Q: [Items|Food items] [left|remaining] in the shared refrigerator [in the {PLACE}|on the {FLOOR} floor] after {WEEKDAY} at 3:00 p.m. [will be|are]:
++ Discarded by Facilities, including the containers
+- Donated to the next meeting
+- Labelled and kept for {N} more weeks
+- Considered available to anyone
+
+Q: Under the Workplace Food Service Standard, every item placed in a shared refrigerator must be labelled with:
++ The owner's name and the date it was stored
+- The owner's employee ID and salary grade
+- A calorie count
+- Nothing; labels create clutter
+
+Q: [A colleague|{NAME}] [microwaves|reheats] fish in the {PLACE} [?during the lunch hour]. Under the Code of Conduct, this is:
++ Discouraged, and any resulting complaints are referred to the Indoor Environmental Quality Committee
+- A reportable ethics violation
+- Grounds for immediate termination
+- Encouraged as a team-building activity
+
+Q: [Leftover catering|Leftover food] from {EVENT} may be:
++ Placed in the {PLACE} with a "Help Yourself" sign and the time it was set out
+- Taken home in bulk by the event organizer
+- Sold to colleagues to recover costs
+- Left in the conference room until it is gone
+
+Q: [You notice|Someone points out] that the coffee machine in the {PLACE} [is leaking|smells like smoke|is sparking]. You should:
++ Unplug it if safe to do so, post an out-of-service notice, and contact Facilities
+- Brew one more pot before reporting it
+- Pour water on it
+- Ignore it; the coffee machine is not ACPWB property
+
+Q: [The last person to take coffee|Whoever takes the last cup of coffee] from the {PLACE} carafe is expected to:
++ Brew a fresh pot or tell Facilities that supplies are out
+- Leave {N} drops for the next person
+- Sign the carafe log
+- Carry the carafe to the next floor
+
+Q: [Shared kitchen dishes|Dishes in the shared sink] should be:
++ Washed, dried, and put away by the person who used them
+- Left to soak for no more than {DAYS} days
+- Placed in a colleague's desk drawer
+- Considered communal property after {N} hours
+
+Q: [A colleague's|{NAME}'s] labelled lunch is missing from the refrigerator. Under the Shared Refrigerator Policy, this should be:
++ Reported to Facilities; taking another associate's food is a conduct matter
+- Investigated by {FIRST} personally, through the badge logs
+- Announced over the public address system
+- Accepted as part of shared refrigerator life
+
+Q: [Popcorn|Microwave popcorn] in the {PLACE} should be:
++ Cooked using the preset, never longer, and never left unattended
+- Cooked for {N} minutes on high
+- Cooked only on {WEEKDAY}s
+- Cooked only by members of the {COMMITTEE}
+
+Q: [Allergen information|Ingredient labels] for food brought to {EVENT} should be:
++ Displayed next to the dish, including common allergens
+- Kept on request with the event organizer
+- Optional, unless the dish contains fish
+- Provided only to people who ask twice

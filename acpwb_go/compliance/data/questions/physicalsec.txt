@@ -1,0 +1,61 @@
+# Whiteboards, shredding, keys, and lockers.
+
+Q: Before leaving a meeting room, you should:
++ Erase the whiteboard and collect any papers you brought
+- Leave the whiteboard for the next meeting
+- Take a photo of the whiteboard and post it
+- Write "DO NOT ERASE" on everything
+
+Q: A whiteboard in a glass-walled room facing the hallway should:
++ Not display confidential information visible to passers-by
+- Display the merger plan for visibility
+- Display passwords for convenience
+- Be decorated
+
+Q: Confidential paper documents should be disposed of:
++ In locked shredding bins
+- In the regular trash
+- In open recycling bins
+- In the {PLACE} sink
+
+Q: Torn-up confidential documents placed in a trash can are:
++ Not securely destroyed
+- Fully destroyed
+- Encrypted
+- Approved by {AGENCY}
+
+Q: Physical keys to ACPWB offices and cabinets should be:
++ Signed out, kept secure, and returned when no longer needed
+- Copied for friends
+- Hidden under the doormat
+- Labeled with the room they open and left on desks
+
+Q: A lost office key should be reported:
++ Promptly, so locks can be evaluated and changed if needed
+- Never
+- At year end
+- Only if it was a master key
+
+Q: Day lockers should be:
++ Emptied at the end of the day
+- Claimed permanently
+- Used to store food for weeks
+- Used to store confidential files unlocked
+
+Q: A shredding bin that is full should be:
++ Reported to Facilities for pickup, not overfilled or emptied into recycling
+- Emptied into the recycling bin
+- Stuffed with more paper
+- Left with papers stacked on top
+
+Q: The combination to a secure cabinet should be:
++ Shared only with authorized people and changed when someone leaves
+- Written on the cabinet
+- Posted on {SYSTEM}
+- The same as the office door code
+
+Q: Printing documents and leaving them on the printer is:
++ A confidentiality risk; collect printouts immediately or use secure print release
+- Fine during business hours
+- Required for shared printing
+- A clean desk best practice

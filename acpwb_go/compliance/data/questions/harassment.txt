@@ -1,0 +1,59 @@
+Q: Harassment is evaluated based on:
++ The impact on the recipient, not the intent of the speaker
+- Whether the speaker meant it as a joke
+- Whether anyone else laughed
+- The seniority of the speaker
+
+Q: {NAME} repeatedly makes comments about a colleague's accent during team meetings. As a bystander, an appropriate response is:
++ Intervene or support the colleague, and report the behavior
+- Wait to see whether the colleague complains
+- Laugh to defuse the tension
+- Raise it at the next annual review
+
+Q: Which of the following may constitute harassment?
++ Unwelcome comments about appearance
++ Offensive jokes sent by chat
++ Repeated unwanted invitations
+- A manager assigning work within your job description
+
+Q: A complaint of harassment must be reported to Human Resources within:
++ {N} business hours by any manager who receives it
+- {DAYS} days, if the complainant agrees
+- The current quarter
+- No fixed time; managers may handle it informally
+
+Q: Protections against harassment apply:
++ At work, at off-site events, during travel, and online
+- Only on ACPWB premises
+- Only during business hours
+- Only to full-time associates
+
+Q: [Harassment|Workplace harassment] can occur:
++ In person, by email or chat, on video calls, and at work-related events off site
+- Only in the office
+- Only during business hours
+- Only between a manager and a direct report
+
+Q: [You witness|You observe] a colleague repeatedly making jokes about {NAME2}'s accent. As a bystander, you can:
++ Interrupt or redirect, check in with {FIRST2} afterward, and report it
+- Laugh along, to keep the mood light
+- Wait to see whether {FIRST2} complains
+- Tell the joke-teller's team, so they know
+
+Q: [Whether conduct is harassment|Whether behaviour counts as harassment] depends on:
++ Its impact on the person and how a reasonable person would see it, not only the intent
+- Whether the person meant it as a joke
+- Whether the person is a high performer
+- How long the person has worked at ACPWB
+
+Q: [A manager|People managers] who receive a harassment complaint must:
++ Report it to People Operations promptly, even if asked to keep it to themselves
+- Investigate it personally
+- Keep it confidential if asked
+- Decide whether it is serious enough to report
+
+Q: [Unwelcome comments about|Unsolicited remarks about] a colleague's appearance are:
++ Potentially harassment, and should be avoided
+- Compliments, and always acceptable
+- Acceptable only on {WEEKDAY}s
+- Acceptable if made in a group

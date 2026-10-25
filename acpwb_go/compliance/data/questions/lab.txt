@@ -1,0 +1,67 @@
+# Laboratory safety. Answers follow the OSHA Laboratory Standard
+# (1910.1450) and common lab practice.
+Q: OSHA's Laboratory Standard requires each lab employer to have:
++ A written Chemical Hygiene Plan
+- A lab mascot
+- A coffee machine
+- A lab coat color policy only
+
+Q: Lab coats, safety glasses, and closed-toe shoes in a chemical lab are:
++ Required personal protective equipment
+- Optional on Fridays
+- Only for visitors
+- Fashion accessories
+
+Q: Before using a chemical for the first time, you should:
++ Read its Safety Data Sheet
+- Smell it
+- Taste a small amount
+- Ask a friend what it does
+
+Q: Long hair and loose clothing in a lab should be:
++ Tied back or secured
+- Worn loose for comfort
+- Used to clean spills
+- Ignored
+
+Q: Broken glassware should be:
++ Picked up with tools and placed in a designated broken glass container
+- Picked up by hand
+- Thrown in the regular trash
+- Left on the bench
+
+Q: Chemical waste should be:
++ Collected in labeled, compatible containers for proper disposal
+- Poured down the sink
+- Mixed together to save space
+- Left in open beakers
+
+Q: Working alone in a lab with hazardous materials:
++ Should be avoided, or done only with an approved check-in plan
+- Is encouraged for focus
+- Is required after hours
+- Has no risks
+
+Q: The location of the eyewash, safety shower, and fire extinguisher should be:
++ Known before you start work
+- Found during an emergency
+- Kept secret
+- Changed weekly
+
+Q: A small spill of a known, low-hazard chemical can be cleaned by:
++ Trained staff using the spill kit and proper PPE
+- Anyone using paper towels and bare hands
+- Ignoring it until it dries
+- Fanning it
+
+Q: Labeling a secondary container in the lab requires:
++ The chemical name and its hazards
+- Your initials only
+- No label for short-term use
+- A smiley face
+
+Q: Leaving experiments running unattended overnight requires:
++ Approval and a posted sign with contact information and hazards
+- Nothing
+- Turning off the fume hood
+- Locking the safety shower

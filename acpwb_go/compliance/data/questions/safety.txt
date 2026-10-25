@@ -1,0 +1,95 @@
+Q: When the fire alarm sounds, you should:
++ Leave by the nearest stairwell and report to the assembly point at {CITY} Plaza
+- Finish your current email
+- Take the elevator to save time
+- Wait for confirmation that it is not a drill
+
+Q: The AED nearest to the {FLOOR} floor is located:
++ In the kitchenette, next to the stairwell door that sticks
+- In the CEO's office
+- In the server room
+- At the security desk in the lobby only
+
+Q: A spill in the hallway should be:
++ Reported to Facilities and guarded until cleaned
+- Covered with copier paper
+- Walked around
+- Photographed for the newsletter
+
+Q: Which of the following must be reported as a workplace incident?
++ A slip with no injury
++ A paper cut that requires first aid
++ A near miss with a falling ceiling tile
+- A disagreement about the thermostat
+
+Q: Floor fire wardens are identified by:
++ An orange vest and a laminated floor plan
+- A whistle and a clipboard
+- A red hard hat
+- Their seniority
+
+Q: A suspicious package with no return address arrives for {NAME}. You should:
++ Leave it untouched, clear the area, and call Security
+- Open it carefully to identify the sender
+- Shake it gently to check the contents
+- Deliver it to {FIRST}'s desk
+
+Q: [A fire door|The fire door near the {PLACE}] is propped open with a wedge. You should:
++ Remove the wedge and report it to Facilities
+- Leave it, since it helps air circulation
+- Prop the other door open too
+- Tape a sign to it
+
+Q: [During an evacuation|While evacuating], the elevators should be:
++ Avoided; use the stairs
+- Used, if they arrive quickly
+- Used only by managers
+- Held for the fire warden
+
+Q: [The assembly point|The evacuation assembly point] for the ACPWB headquarters is:
++ The location posted on your floor's evacuation map
+- The parking structure, level {N}
+- Wherever you parked
+- The nearest coffee shop
+
+Q: [You trip|{NAME} trips] over a loose carpet tile but is not hurt. This should be:
++ Reported as a near miss so the hazard is fixed
+- Ignored, since nobody was hurt
+- Reported only if it happens {N} times
+- Fixed with tape
+
+Q: [Extension cords|Power strips] [daisy-chained|plugged into each other] under a desk are:
++ Prohibited; they are a fire hazard and should be reported to Facilities
+- Allowed if hidden by the desk
+- Allowed for up to {N} devices
+- Recommended for standing desks
+
+Q: [A space heater|A personal space heater] at your desk is:
++ Not permitted unless approved by Facilities
+- Allowed on the {FLOOR} floor only
+- Allowed if turned off on {WEEKDAY}s
+- Encouraged in winter
+
+Q: [Boxes|Supplies] stacked in front of an emergency exit or fire extinguisher should be:
++ Moved immediately; exits and equipment must never be blocked
+- Left, if labelled
+- Left until the next audit
+- Stacked higher, so they are visible
+
+Q: [A ceiling tile|A light fixture] above your desk is [sagging|stained|dripping]. You should:
++ Move away from it and report it to Facilities
+- Push it back into place with a broom
+- Ignore it unless it falls
+- Place a wastebasket under it and carry on
+
+Q: You must report a workplace injury, however minor:
++ The same day, to your manager and through the incident reporting system
+- Within {DAYS} days
+- Only if you need to leave work
+- Only if someone else saw it
+
+Q: [You feel unwell|A colleague feels unwell] at work [and cannot get home safely|and seems disoriented]. The right step is to:
++ Contact Security for help and, if it is an emergency, call 911
+- Drive them home
+- Let them rest in a supply closet
+- Wait until the end of the day

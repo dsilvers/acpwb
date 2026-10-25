@@ -1,0 +1,60 @@
+# HIPAA basics for employers and benefit plans.
+Q: HIPAA's Privacy Rule applies to:
++ Covered entities such as health plans and providers, and their business associates
+- Every employer's personnel files
+- All personal data
+- Only hospitals' cafeterias
+
+Q: An employee's sick note kept in the personnel file is:
++ Employment record information, not PHI under HIPAA, but still confidential
+- PHI under HIPAA
+- Public
+- Shareable
+
+Q: Employees who administer the company health plan:
++ Must protect plan PHI and not use it for employment decisions
+- Can share PHI with managers
+- Can use it for promotions
+- Can post it
+
+Q: The "minimum necessary" standard means:
++ Using or disclosing only the minimum PHI needed for the purpose
+- Using as much data as possible
+- Minimizing staff
+- Minimizing security
+
+Q: HIPAA breaches affecting individuals must be reported to them:
++ Without unreasonable delay and no later than 60 days after discovery
+- Within one year
+- Never
+- Only if requested
+
+Q: A business associate agreement is required when:
++ A vendor creates, receives, maintains, or transmits PHI for a covered entity
+- Hiring a caterer
+- Buying office supplies
+- Never
+
+Q: Asking the health plan for an employee's diagnosis to make a staffing decision is:
++ Not allowed
+- Allowed
+- Required
+- Normal
+
+Q: Individuals have the right under HIPAA to:
++ Access their own health records
+- Access coworkers' records
+- Delete all records
+- Sell records
+
+Q: Faxing or emailing PHI to the wrong recipient is:
++ A potential breach to report
+- Harmless
+- Fine
+- Required
+
+Q: Wellness program data held by a covered health plan is:
++ Protected under HIPAA
+- Public
+- For managers
+- Unprotected

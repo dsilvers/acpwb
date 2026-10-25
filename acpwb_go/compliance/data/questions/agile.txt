@@ -1,0 +1,73 @@
+# Agile ceremonies, stand-ups, and project delivery.
+
+Q: A daily stand-up is meant to be:
++ A short check-in on progress, plans, and blockers
+- A 90-minute status presentation
+- A meeting where everyone must stand on chairs
+- A performance review
+
+Q: A "blocker" in a stand-up is:
++ Something preventing progress that needs help to resolve
+- A coworker who talks too long
+- A calendar conflict with lunch
+- The {COMMITTEE}
+
+Q: A sprint retrospective is a time to:
++ Reflect on what went well and what to improve
+- Assign blame for missed work
+- Plan the holiday party
+- Review salaries
+
+Q: Work-in-progress (WIP) limits on a Kanban board help to:
++ Keep the team focused on finishing work before starting more
+- Limit how much work anyone may do in a week
+- Track overtime
+- Decorate the board
+
+Q: "Scope creep" refers to:
++ Uncontrolled growth in a project's requirements
+- A spooky coworker
+- An expanding mold problem in the {PLACE}
+- A new zoom feature
+
+Q: A project's "definition of done" is:
++ The agreed criteria that work must meet to be considered complete
+- When the deadline passes
+- When the manager stops asking
+- When {EVENT} is over
+
+Q: Estimating work in "story points" measures:
++ Relative effort or complexity, not hours
+- How interesting the story is
+- The number of pages in a report
+- Bonus points for the team
+
+Q: The critical path in a project schedule is:
++ The longest sequence of dependent tasks, which sets the earliest finish date
+- The path to the cafeteria
+- The most expensive task
+- The CEO's favorite task
+
+Q: A RACI chart identifies who is:
++ Responsible, Accountable, Consulted, and Informed
+- Ready, Available, Committed, and Inspired
+- Racing to finish first
+- Required to attend {EVENT}
+
+Q: Marking a task "done" when it is not, to make the dashboard green, is:
++ Misreporting, which undermines decisions
+- Agile optimism
+- Required at quarter end
+- Allowed if it will be done soon
+
+Q: A "spike" in agile work is:
++ A short, time-boxed investigation to answer a question or reduce uncertainty
+- A sudden increase in the coffee budget
+- A pointed comment in a retrospective
+- A type of fence
+
+Q: Changing priorities in the middle of a sprint should be:
++ Rare and agreed with the team, since it disrupts planned work
+- Daily
+- Done without telling the team
+- Required by {SYSTEM}

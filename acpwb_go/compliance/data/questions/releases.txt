@@ -1,0 +1,66 @@
+# Release management.
+Q: A release plan should include:
++ Scope, schedule, testing, approvals, communication, and a rollback plan
+- Only the release date
+- A motivational poster
+- The marketing slogan
+
+Q: Releasing to production on a Friday afternoon without support coverage:
++ Increases risk if something goes wrong over the weekend
+- Is best practice
+- Is required
+- Is always safe
+
+Q: Release notes should:
++ Describe changes clearly for users and support teams
+- Be secret
+- List only bugs
+- Be written after the next release
+
+Q: A staged or canary release:
++ Rolls out to a small group first to catch problems early
+- Releases birds
+- Releases to everyone at once
+- Skips testing
+
+Q: Feature flags can help:
++ Turn features on or off without redeploying
+- Mark features as finished
+- Decorate the code
+- Replace testing
+
+Q: Release approvals exist to ensure:
++ The change is ready, tested, and the right people know about it
+- Engineers wait longer
+- Managers can veto anything
+- Nothing
+
+Q: A release that breaks production should be:
++ Rolled back or fixed under the incident process, then reviewed
+- Left in place
+- Hidden from users
+- Celebrated
+
+Q: Hotfixes pushed directly to production without a ticket:
++ Violate change management and are not allowed except under emergency procedures
+- Are the fastest way
+- Are required
+- Are invisible
+
+Q: Customer-facing changes should be:
++ Communicated to support and customers as appropriate
+- Kept secret
+- Announced only after complaints
+- Announced on the wrong date
+
+Q: Release artifacts should be:
++ Built from version control in a repeatable pipeline
+- Built on a laptop and copied by hand
+- Emailed to the server
+- Edited after release
+
+Q: A release freeze is:
++ A period when non-emergency releases are paused
+- A cold server room
+- A frozen release party
+- A type of bug

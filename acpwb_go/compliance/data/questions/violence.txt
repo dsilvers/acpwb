@@ -1,0 +1,61 @@
+# Workplace violence prevention.
+
+Q: [A visitor|A customer from {VENDOR}] becomes agitated and starts shouting at the reception desk. The best first response is to:
++ Stay calm, speak slowly, keep a safe distance, and call Security if it escalates
+- Shout back to establish authority
+- Block the exit
+- Ask them to fill out Form {FORM}
+
+Q: [An associate|{NAME}] tells you they have a protective order against a former partner. They should be encouraged to:
++ Share it with Corporate Security so a safety plan can be made, including for the {DOOR}
+- Keep it private from everyone at ACPWB
+- Change desks without telling anyone
+- Post a photo of the person at reception
+
+Q: Which of the following should be reported as a potential workplace violence concern?
++ Threats, even if made as jokes
++ Intimidating behavior, such as following a colleague to their car
+- A heated debate in a meeting that ends respectfully
+- A colleague declining a meeting invitation
+
+Q: [Someone|An unknown person] is following you through the parking structure after hours. You should:
++ Go to a well-lit, populated area and call Security or 911
+- Confront them directly
+- Lead them to your car
+- Ignore it
+
+Q: [You receive|{NAME2} receives] a threatening voicemail at work. You should:
++ Save the message, write down the details, and report it to Security
+- Delete it immediately
+- Call the person back to confront them
+- Forward it to the whole department
+
+Q: Weapons on ACPWB premises are:
++ Prohibited except where permitted by law and approved by Security
+- Allowed in desk drawers
+- Allowed if unloaded
+- Allowed on {WEEKDAY}s
+
+Q: [The Security escort service|A Security escort] to the parking structure is available:
++ To any associate, at any hour, by calling the Security desk
+- Only to executives
+- Only after {DAYS} days of employment
+- Only in winter
+
+Q: A coworker makes a joke about bringing a weapon to work. You should:
++ Take it seriously and report it
+- Laugh
+- Ignore it
+- Add to the joke
+
+Q: A former employee who was terminated is seen in the lobby making threats. You should:
++ Avoid contact, move to safety, and contact Security or 911
+- Confront them
+- Let them in
+- Take photos close up
+
+Q: Domestic violence that may spill over into the workplace:
++ Can be reported to Security or HR to arrange safety measures
+- Should be kept secret
+- Is not ACPWB's concern
+- Requires the victim to quit

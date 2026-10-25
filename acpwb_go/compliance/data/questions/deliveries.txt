@@ -1,0 +1,49 @@
+# Personal deliveries, mailrooms, and package handling.
+
+Q: Having personal packages delivered to the office is:
++ Allowed only as the deliveries policy permits, such as small items picked up promptly
+- Unlimited, including furniture
+- Required to save time
+- Prohibited for everyone
+
+Q: Large personal deliveries, such as furniture or appliances, should be:
++ Sent to your home, not the office
+- Delivered to the lobby
+- Delivered to the {PLACE}
+- Assembled at your desk
+
+Q: Food delivery drivers should:
++ Meet you in the lobby rather than be given access to secure floors
+- Be badged in to your desk
+- Be given the door code
+- Wait in the stairwell
+
+Q: A package with your name arrives that you did not order. You should:
++ Treat it with caution and contact the mailroom or Security
+- Open it immediately
+- Assume it is a gift from {VENDOR}
+- Return it to sender without telling anyone
+
+Q: Shipping personal items using the ACPWB shipping account is:
++ Not allowed
+- Allowed during the holidays
+- Allowed under {AMOUNT}
+- Allowed if you reimburse it eventually
+
+Q: Packages left in the mailroom after a deadline may be:
++ Returned or disposed of under the policy
+- Opened and shared
+- Kept by mailroom staff
+- Auctioned at {EVENT}
+
+Q: Deliveries of hazardous items, such as lithium batteries, to the office should be:
++ Handled through the proper shipping and receiving procedures
+- Treated like any letter
+- Left in the sun
+- Stored under your desk
+
+Q: Signing for another person's package is:
++ Allowed only if they asked you and the policy allows it
+- Always allowed
+- Never allowed
+- Required for managers

@@ -1,0 +1,74 @@
+# CPR and AED awareness. Correct answers follow standard public guidance
+# (AHA / Red Cross); keep them accurate. The jokes go in the wrong answers.
+
+Q: [A colleague|{NAME}] collapses [in the {PLACE}|near the {DOOR}|during {EVENT}] and does not respond when you tap their shoulder and shout. What should you do FIRST?
++ Call 911 (or have someone call) and send someone for the nearest AED
+- Complete an incident report on Form {FORM}
+- Notify {FIRST}'s manager and wait for instructions
+- Check whether {FIRST} has completed {COURSE}
+
+Q: [An unresponsive adult|A coworker who has collapsed] is making occasional gasping sounds. This should be treated as:
++ Not breathing normally; begin CPR
+- Normal breathing; place them in the recovery position and wait
+- Snoring; let them rest
+- A sign they are recovering; offer water
+
+Q: For adult hands-only CPR, chest compressions should be delivered at a rate of:
++ 100 to 120 compressions per minute
+- 60 compressions per minute, to conserve energy
+- One compression every {N} seconds
+- As fast as possible, regardless of depth
+
+Q: For an adult, chest compressions should push down at least:
++ 2 inches (about 5 centimeters), allowing the chest to fully recoil between compressions
+- Half an inch, to avoid discomfort
+- 4 inches or more, without letting the chest rise
+- Only as deep as feels polite in a workplace setting
+
+Q: Where should your hands be placed for adult chest compressions?
++ On the center of the chest, on the lower half of the breastbone
+- On the upper left side of the chest, over the heart
+- On the stomach
+- Wherever the {DEPT} job aid indicates
+
+Q: [The AED arrives|Someone brings the AED from the {PLACE}]. The FIRST thing you should do with it is:
++ Turn it on and follow its voice prompts
+- Read the full manual
+- Confirm that you are an authorized AED user under Policy {POLICY}
+- Wait for Facilities to unlock it
+
+Q: While the AED is analyzing the heart rhythm or delivering a shock, rescuers should:
++ Make sure no one is touching the person
+- Continue compressions without pausing
+- Hold the person's hand for reassurance
+- Hold the pads in place
+
+Q: AED pads should be placed:
++ On bare, dry skin of the chest, as shown in the pictures on the pads
+- Over clothing, to preserve the person's dignity
+- On the back only
+- On any two locations, as long as they touch
+
+Q: [You are not trained in CPR|You have never taken a CPR class]. If an adult collapses and is not breathing normally, you should:
++ Call 911 and push hard and fast in the center of the chest (hands-only CPR) until help arrives
+- Do nothing, since only certified responders may help
+- Wait for someone who has completed {COURSE}
+- Search the intranet for the CPR policy
+
+Q: Once you begin CPR, you should continue until:
++ The person starts breathing, an AED or trained help takes over, or you are physically unable to continue
+- {N} minutes have passed
+- Your scheduled meeting begins
+- The end of the business day
+
+Q: [A colleague|{NAME2}] asks why ACPWB keeps an AED in the {PLACE}. The best answer is:
++ For sudden cardiac arrest, every minute without CPR and defibrillation reduces the chance of survival
+- They are required for the building's décor standard
+- They are used to recharge laptops during outages
+- They are for trained medical staff only
+
+Q: In most states, Good Samaritan laws:
++ Offer legal protection to people who give reasonable emergency help in good faith
+- Require you to complete Form {FORM} before helping
+- Apply only to licensed physicians
+- Prohibit associates from helping colleagues

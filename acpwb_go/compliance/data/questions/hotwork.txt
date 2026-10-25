@@ -1,0 +1,66 @@
+# Hot work. Answers follow NFPA 51B and OSHA 1910.252.
+Q: Hot work includes:
++ Welding, cutting, brazing, soldering, and grinding that produces sparks or flame
+- Working in a warm office
+- Making coffee
+- Sending urgent emails
+
+Q: Before hot work outside a designated area, you need:
++ A hot work permit issued after the area is inspected
+- A verbal OK from anyone nearby
+- Nothing if the job is short
+- A weather forecast
+
+Q: Under NFPA 51B, combustible materials within how many feet of hot work must be removed or protected?
++ 35 feet
+- 3 feet
+- 100 yards
+- 1 foot
+
+Q: A fire watch must be maintained during hot work and for at least:
++ 60 minutes after the work ends, under NFPA 51B
+- 5 minutes after the work ends
+- Until lunch
+- No time; fire watches are optional
+
+Q: The person on fire watch must:
++ Have an extinguisher, know how to use it, and know how to sound the alarm
+- Also be doing the welding
+- Leave when the welder leaves
+- Watch from another building
+
+Q: If the sprinkler system is out of service in the work area, hot work:
++ Should not be done unless the permit authorizing individual approves special precautions
+- Can proceed normally
+- Should go faster
+- Must be done at night
+
+Q: Openings in walls and floors near hot work should be:
++ Covered to keep sparks from falling through
+- Left open for ventilation
+- Filled with paper
+- Ignored
+
+Q: Hot work on a drum that held flammable liquid requires:
++ It to be cleaned and tested or made safe before cutting or welding
+- Nothing if it looks empty
+- Opening the cap and lighting a match to check
+- Tapping on it first
+
+Q: Before hot work, nearby smoke detectors may be:
++ Temporarily covered only under the permit, then restored when work ends
+- Removed permanently
+- Painted over
+- Unplugged forever
+
+Q: Hot work permits must be:
++ Posted at the job site and closed out when the fire watch ends
+- Kept in the office drawer
+- Signed after the job
+- Optional for contractors
+
+Q: Contractors performing hot work at ACPWB sites:
++ Must follow the ACPWB hot work permit program
+- Use their own rules only
+- Are exempt
+- Need no fire watch

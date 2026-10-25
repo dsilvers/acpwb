@@ -1,0 +1,66 @@
+# Code review practices and secure coding.
+Q: The main purpose of code review is to:
++ Catch defects, share knowledge, and keep code maintainable and secure
+- Prove who is the smartest engineer
+- Slow down releases
+- Count lines of code
+
+Q: A reviewer finds an API key committed in a pull request. The right response is:
++ Block the merge, have the key revoked and rotated, and remove it from history
+- Approve it and ask for a fix later
+- Delete the comment so nobody sees it
+- Copy the key for their own testing
+
+Q: User input that is placed directly into a SQL query string can lead to:
++ SQL injection
+- Faster queries
+- Better indexes
+- Automatic backups
+
+Q: The safest way to build database queries with user input is:
++ Parameterized queries or prepared statements
+- String concatenation with extra quotes
+- Asking users to type carefully
+- Removing every vowel from the input
+
+Q: Approving your own pull request for a production change is:
++ Not allowed where two-person review is required
+- Efficient
+- Encouraged on Fridays
+- Fine if you add a comment
+
+Q: Good review comments are:
++ Specific, respectful, and about the code rather than the person
+- Sarcastic, to keep things fun
+- Only emoji
+- About the author's personality
+
+Q: Large pull requests are harder to review well, so engineers should:
++ Break changes into smaller, focused pull requests
+- Combine a month of work into one
+- Hide changes in formatting commits
+- Skip review for large changes
+
+Q: Copying code from a website into a company product requires:
++ Checking the code's license and following the open source policy
+- Nothing; the internet is free
+- Removing the comments so nobody knows
+- Renaming the variables
+
+Q: Automated tests in a pull request should:
++ Pass before the change is merged
+- Be disabled when they fail
+- Run only after release
+- Be written by the reviewer later
+
+Q: A reviewer who does not understand part of a change should:
++ Ask questions until they do, or pull in someone who knows the area
+- Approve it anyway
+- Reject it without comment
+- Rewrite the whole thing
+
+Q: Error messages shown to users should:
++ Avoid revealing internal details such as stack traces or database names
+- Include the full stack trace for transparency
+- List the server's passwords for debugging
+- Be as funny as possible

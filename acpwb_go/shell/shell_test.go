@@ -51,7 +51,7 @@ func TestRenderPage_Structure(t *testing.T) {
 		`/static/favicon.svg`,
 		`/static/fonts/inter/inter-variable-latin.woff2`,
 		`/static/vendor/bootstrap/bootstrap.min.css`,
-		`/static/css/acpwb.css?v=20261011`,
+		`/static/css/acpwb.css?v=20261021`,
 		`/static/vendor/bootstrap/bootstrap.bundle.min.js`,
 	} {
 		if !strings.Contains(html, want) {
@@ -66,9 +66,9 @@ func TestRenderPage_Structure(t *testing.T) {
 
 	// Nav links (main nav) — all 9, unprefixed since SiteRoot == "".
 	for _, want := range []string{
-		`href="/"`, `href="/our-people/"`, `href="/mission/"`, `href="/projects/"`,
+		`href="/"`, `href="/our-people/"`, `href="/mission/"`,
 		`href="/reports/"`, `href="/presentations/"`, `href="/public-policy/"`,
-		`href="/partners/"`, `href="/contact/"`,
+		`href="/contact/"`,
 	} {
 		if !strings.Contains(html, want) {
 			t.Errorf("missing nav link %q", want)

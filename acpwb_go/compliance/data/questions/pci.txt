@@ -1,0 +1,66 @@
+# Payment card data. Answers follow PCI DSS in general terms.
+Q: PCI DSS is:
++ A security standard for organizations that store, process, or transmit payment card data
+- A tax form
+- A type of credit card
+- A vacation policy
+
+Q: After a card payment is authorized, the card verification code (CVV) may be stored:
++ Never
+- Forever
+- For 30 days
+- Only on paper
+
+Q: Taking card numbers by email or chat is:
++ Not allowed
+- Fine if the customer offers
+- Required for speed
+- Allowed with a password
+
+Q: When showing a card number on a screen or receipt, at most:
++ The first six and last four digits may be shown
+- All 16 digits
+- The middle eight digits
+- The CVV
+
+Q: Card data written on paper during a phone order must be:
++ Avoided; if it happens, secured and destroyed promptly by cross-cut shredding
+- Kept in the desk
+- Taped to the monitor
+- Filed with the order forever
+
+Q: Payment terminals should be inspected for:
++ Tampering or skimming devices
+- Dust only
+- Software ads
+- Color fading
+
+Q: Systems that handle card data should be:
++ Segmented from other networks and limited to authorized staff
+- On the guest Wi-Fi
+- Accessible to everyone
+- Unmonitored
+
+Q: Recording calls while customers read card numbers aloud:
++ Must be paused or the recording must be protected under PCI rules
+- Is fine and should be shared
+- Is required
+- Improves training
+
+Q: A customer emails their card number to you anyway. You should:
++ Not process it from email, delete it securely as instructed, and follow the procedure
+- Process it and reply
+- Forward it to billing
+- Save it for next time
+
+Q: Default passwords on payment systems:
++ Must be changed
+- Are fine
+- Are required by the vendor
+- Should be posted
+
+Q: A suspected card data breach should be reported:
++ Immediately to Security
+- At month end
+- Only if customers complain
+- To the card brands by the employee directly

@@ -1,0 +1,62 @@
+# Email and messaging.
+
+Q: [Before sending|Before you send] an email containing a {DOCUMENT}, you must:
++ Verify every recipient address, especially auto-completed ones
++ Apply the correct classification label
+- Add "CONFIDENTIAL" to the subject line instead of encrypting
+- BCC your personal account for safekeeping
+- Send it to the whole department to save time
+
+Q: [You accidentally|{NAME} accidentally] [send|sends] a {DOCUMENT} to [an external address|the wrong distribution list|all@acpwb.com]. The FIRST step is to:
++ Report it to the Privacy Office immediately and attempt to recall the message
+- Send a follow-up asking recipients to ignore it
+- Do nothing; email recall never works
+- Forward it to the correct recipient as well
+
+Q: Forwarding ACPWB email to a personal account is:
++ Prohibited
+- Allowed for travel
+- Allowed if the email is not marked confidential
+- Allowed on weekends
+
+Q: "Reply All" [should be|is to be] used:
++ Only when every recipient needs the response
+- For all responses, to keep everyone informed
+- To request removal from a distribution list
+- To say "thank you"
+
+Q: [You realize you have sent|You have accidentally sent] a {DOCUMENT} to the wrong external recipient. The FIRST thing you should do is:
++ Report it to the Privacy Office immediately, before trying to recall it
+- Send a follow-up asking the recipient to "please disregard"
+- Delete your copy from the Sent folder
+- Wait to see if the recipient notices
+
+Q: [When should you|Under what circumstances may you] use "Reply All"?
++ When every recipient needs your reply to do their work
+- Whenever you want to show you are engaged
+- To ask to be removed from the distribution list
+- To say "Thanks!" to {N} hundred colleagues
+
+Q: [An email|A message] arrives from {NAME2} with the subject "{DOCUMENT} - URGENT" and an attachment you were not expecting. You should:
++ Confirm with {FIRST2} through a separate channel before opening it
+- Open it quickly, since it is urgent
+- Forward it to your team to see if anyone recognizes it
+- Reply asking whether it is legitimate
+
+Q: [Confidential attachments|Attachments classified Confidential] sent outside ACPWB must be:
++ Sent through the approved secure-transfer tool
+- Zipped and renamed to something innocuous
+- Pasted into the body of the email
+- Printed and faxed
+
+Q: The [ACPWB email signature|standard signature block] may include:
++ Your name, title, department, and office phone number
+- An inspirational quote of your choosing
+- An animated logo
+- Your personal social media accounts
+
+Q: [Auto-forwarding|Automatically forwarding] ACPWB email to a personal account is:
++ Prohibited
+- Allowed for messages under {N} megabytes
+- Allowed while you are on vacation
+- Encouraged, as a backup

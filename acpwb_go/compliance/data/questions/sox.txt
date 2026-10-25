@@ -1,0 +1,61 @@
+# Sarbanes-Oxley and internal controls over financial reporting.
+
+Q: Section 302 of the Sarbanes-Oxley Act requires the CEO and CFO to:
++ Certify the accuracy of periodic financial reports and the effectiveness of disclosure controls
+- Personally audit every expense report
+- Sign every paycheck
+- Attend every {EVENT}
+
+Q: Section 404 of the Sarbanes-Oxley Act requires management to:
++ Assess and report on the effectiveness of internal control over financial reporting
+- Reduce the number of controls
+- Hire more accountants every year
+- Publish all internal emails
+
+Q: "Segregation of duties" means:
++ No single person controls all steps of a transaction, such as requesting, approving, and recording a payment
+- Employees sit in separate rooms
+- Duties are divided by alphabetical order
+- Managers do not talk to auditors
+
+Q: A control owner who discovers that a key control was not performed should:
++ Document it and report it so it can be evaluated and remediated
+- Perform it now and backdate the evidence
+- Hide it until after the audit
+- Ask a coworker to sign off instead
+
+Q: A "material weakness" is:
++ A deficiency that creates a reasonable possibility that a material misstatement will not be prevented or detected in time
+- A sore back from lifting binders
+- A weak password
+- Any spelling error in the annual report
+
+Q: Backdating a document to show that a control was performed on time is:
++ Falsification of records and may violate federal law
+- An acceptable cleanup step
+- Allowed if the control was performed eventually
+- Allowed with a manager's verbal approval
+
+Q: Destroying documents to obstruct a federal investigation can be punished under Sarbanes-Oxley by:
++ Fines and imprisonment of up to 20 years
+- A written warning
+- A reduced bonus
+- Nothing, if the documents were drafts
+
+Q: Evidence of a control's performance should be:
++ Retained so that it can be reviewed by management and auditors
+- Thrown away after the control is performed
+- Kept in your personal email
+- Stored on a sticky note
+
+Q: A user who can both create a vendor in {SYSTEM} and approve payments to it represents:
++ A segregation of duties conflict
+- An efficient workflow
+- A required control
+- A promotion opportunity
+
+Q: Journal entries posted at the end of a quarter without supporting documentation are:
++ A red flag that should be reviewed
+- Normal and need no review
+- Required to close the books on time
+- Approved automatically

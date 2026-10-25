@@ -1,0 +1,50 @@
+# Earthquakes and building emergencies. Correct answers follow FEMA and
+# Ready.gov guidance; keep them accurate.
+
+Q: When an earthquake starts, you should:
++ Drop, Cover, and Hold On
+- Run outside immediately
+- Stand in a doorway
+- Take the elevator to the lobby
+
+Q: The best place to take cover during an earthquake is:
++ Under a sturdy desk or table, away from windows and things that could fall
+- Next to a tall bookcase
+- Near the windows to see outside
+- In the elevator
+
+Q: If there is no table nearby during an earthquake, you should:
++ Drop to the ground next to an interior wall and cover your head and neck with your arms
+- Run to the stairs
+- Stand on a chair
+- Hold onto a window frame
+
+Q: After the shaking stops, you should:
++ Check yourself and others for injuries, expect aftershocks, and follow evacuation instructions
+- Immediately use the elevator
+- Light a candle to see
+- Return to your desk and finish emails
+
+Q: During a power outage in the office, you should:
++ Use a flashlight, not candles, and follow instructions from floor wardens
+- Light candles for ambiance
+- Use the elevator
+- Unplug the server room
+
+Q: If you smell gas after an earthquake, you should:
++ Leave the area and report it, without using light switches or open flames
+- Light a match to find the leak
+- Turn on the lights
+- Open the gas valve wider
+
+Q: Securing tall furniture and shelves to walls helps:
++ Prevent them from falling during an earthquake
+- Make the office look tidy
+- Hide cables
+- Improve Wi-Fi
+
+Q: During a flood warning, you should never:
++ Walk or drive through flood water; turn around, don't drown
+- Move to higher ground
+- Follow official instructions
+- Monitor weather alerts

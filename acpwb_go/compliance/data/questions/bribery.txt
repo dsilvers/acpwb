@@ -1,0 +1,55 @@
+# Anti-bribery and anti-corruption (FCPA, UK Bribery Act).
+
+Q: The U.S. Foreign Corrupt Practices Act prohibits:
++ Offering or giving anything of value to a foreign official to obtain or keep business
+- Doing business in foreign countries
+- Speaking with foreign officials
+- Buying lunch for a coworker
+
+Q: "Anything of value" under anti-bribery laws can include:
++ Cash, gifts, travel, meals, jobs for relatives, and charitable donations
+- Only cash payments over $1 million
+- Only gold bars
+- Nothing that is wrapped
+
+Q: A "facilitation payment" to speed up routine government action is:
++ Prohibited by ACPWB policy and illegal under many laws, including the UK Bribery Act
+- Required in some countries
+- Allowed if under {AMOUNT}
+- Allowed if recorded as "miscellaneous"
+
+Q: A third-party agent requests an unusually large commission paid to an offshore account. This is:
++ A red flag that requires due diligence and escalation to Compliance
+- A normal business practice
+- A good deal
+- A sign the agent is efficient
+
+Q: The FCPA's accounting provisions require companies to:
++ Keep accurate books and records and maintain internal accounting controls
+- Report every expense to the government
+- Keep all records in U.S. dollars
+- Use only paper records
+
+Q: A customs official suggests that a shipment could clear faster for a "small fee" paid in cash. You should:
++ Decline, document it, and contact Compliance
+- Pay it from your own money
+- Pay it and expense it as shipping
+- Negotiate a lower fee
+
+Q: Employees of state-owned companies may be considered:
++ Foreign officials under the FCPA
+- Private citizens only
+- Exempt from anti-bribery rules
+- Members of the {COMMITTEE}
+
+Q: Offering a job to a government official's relative to win a contract is:
++ A potential bribe
+- A recruiting win
+- Allowed if the relative is qualified on paper
+- Allowed if the official is retired next year
+
+Q: You suspect a colleague is making improper payments. You should:
++ Report it to Compliance or the ethics hotline
+- Investigate on your own by searching their desk
+- Ask them for a share
+- Ignore it, since it is not your money

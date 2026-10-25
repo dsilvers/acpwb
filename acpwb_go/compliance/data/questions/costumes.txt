@@ -1,0 +1,49 @@
+# Halloween, costumes, and themed dress days.
+
+Q: Halloween costumes at work should be:
++ Respectful, safe, and appropriate for the workplace
+- As scary as possible, including fake blood
+- Based on coworkers
+- Mandatory
+
+Q: Costumes that mock a culture, religion, race, or disability are:
++ Not allowed
+- Allowed if meant as a joke
+- Allowed at the party only
+- Allowed on {WEEKDAY}s
+
+Q: Costume weapons that look realistic are:
++ Not allowed at work
+- Allowed if made of plastic
+- Allowed in the lobby
+- Required for some costumes
+
+Q: Masks that fully cover the face in secure areas are:
++ Not allowed, because Security must be able to identify people
+- Required
+- Allowed if you wear your badge
+- Allowed only for executives
+
+Q: Costumes in warehouses or labs must:
++ Not interfere with PPE or create safety hazards
+- Replace PPE
+- Include capes near machinery
+- Be fireproof only
+
+Q: Participation in costume contests is:
++ Voluntary
+- Mandatory
+- Graded in reviews
+- Required for bonuses
+
+Q: Dressing as your manager for Halloween:
++ Should be done only if it is good-natured and they are comfortable with it
+- Is required
+- Is always fine
+- Must include a wig
+
+Q: Decorations for Halloween must not:
++ Block exits, cover sprinklers, or include open flames
+- Include pumpkins
+- Be orange
+- Stay up past October

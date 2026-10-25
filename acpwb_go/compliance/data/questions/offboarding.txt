@@ -1,0 +1,61 @@
+# Offboarding and departures.
+
+Q: When an employee leaves ACPWB, their system access should be removed:
++ Promptly, on or before their last day
+- Within six months
+- Only if they ask
+- After the farewell lunch
+
+Q: A departing employee may take with them:
++ Their personal items and personal copies of their own pay and benefits documents
+- Customer lists for their next job
+- Their laptop as a gift
+- Confidential project files for their portfolio
+
+Q: Emailing confidential files to your personal email before you resign is:
++ A policy violation that may also be illegal
+- A smart backup
+- Allowed for your own work
+- Allowed if you delete them later
+
+Q: An exit interview is meant to:
++ Gather honest feedback about the employee's experience
+- Convince the employee to stay at all costs
+- Assign blame
+- Collect the employee's passwords
+
+Q: Final pay must be provided:
++ By the deadline set by state law, which in some states is the last day of work
+- Whenever convenient
+- After the employee returns their badge, even if that is months later
+- Only if the employee asks twice
+
+Q: A manager announces a departure to the team. The announcement should:
++ Be respectful and avoid sharing the reason for leaving unless the employee agreed
+- Explain every reason in detail
+- Include a critique of the employee
+- Be posted with a party popper emoji if the departure was involuntary
+
+Q: Accounts owned by a departing employee, such as shared files and recurring meetings, should be:
++ Transferred to another owner before access is removed
+- Deleted immediately
+- Left for the employee to manage from home
+- Given to {VENDOR}
+
+Q: A former employee calls asking for a coworker's personal phone number. You should:
++ Not share it; personal contact information is confidential
+- Share it, since they used to work here
+- Share it if they sound friendly
+- Text it to them
+
+Q: Reference requests for former employees should be handled by:
++ HR, following the reference policy
+- Any coworker who remembers them
+- Their least favorite manager
+- The {COMMITTEE}
+
+Q: Badges returned by departing employees should be:
++ Deactivated and collected by Security
+- Given to the next new hire
+- Kept by the manager for spare use
+- Mailed to {CITY}

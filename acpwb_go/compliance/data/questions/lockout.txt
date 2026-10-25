@@ -1,0 +1,50 @@
+# Lockout/tagout (control of hazardous energy). Correct answers follow OSHA
+# 29 CFR 1910.147; keep them accurate.
+
+Q: The purpose of lockout/tagout is to:
++ Prevent machines from starting up or releasing stored energy while they are being serviced
+- Lock employees out of the building after hours
+- Track which employees used a machine last
+- Keep the {PLACE} closed on weekends
+
+Q: After locking out a machine, and before starting work, the authorized employee must:
++ Verify that the energy is isolated, for example by trying to start the machine with the controls
+- Assume it is safe because the lock is on
+- Ask a coworker if it looks off
+- Wait 24 hours
+
+Q: A lock applied during lockout may be removed by:
++ The authorized employee who applied it
+- Any supervisor who needs the machine running
+- Anyone with a key
+- The {COMMITTEE}
+
+Q: When several workers service the same machine, each authorized employee should:
++ Apply their own personal lock, often using a group lockout device
+- Share a single lock to save time
+- Rely on the first worker's lock
+- Use a sticky note on the switch instead
+
+Q: A tag used without a lock:
++ Is a warning only, and does not physically prevent the machine from being started
+- Is stronger than a lock
+- Allows the machine to be operated by authorized staff only
+- Is not allowed under any circumstances
+
+Q: Stored energy, such as in springs, capacitors, or pressurized lines, must be:
++ Released, blocked, or otherwise made safe before work begins
+- Ignored, since only electrical energy counts
+- Saved for later use
+- Reported to {DEPT} monthly
+
+Q: You find another worker's lock on a machine you need to use. You should:
++ Leave it on and find the worker or your supervisor
+- Cut the lock off
+- Use the machine around the lock
+- Remove the tag and leave the lock
+
+Q: Affected employees, who operate the machine but do not service it, must be:
++ Notified before the lockout is applied and after it is removed
+- Locked out with the machine
+- Kept unaware so they are not distracted
+- Asked to sign the lock

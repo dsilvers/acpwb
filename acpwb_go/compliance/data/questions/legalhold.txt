@@ -1,0 +1,61 @@
+# Legal holds and eDiscovery.
+
+Q: A legal hold notice requires you to:
++ Preserve all relevant documents and data, including email and chat, until Legal releases the hold
+- Delete documents that might be embarrassing
+- Forward the notice to the other side
+- Hold your breath
+
+Q: A legal hold overrides:
++ Normal records retention and deletion schedules for the covered information
+- All ACPWB policies
+- Your vacation plans
+- Nothing
+
+Q: You receive a legal hold notice but are about to receive a new laptop. You should:
++ Tell IT and Legal so your data is preserved before the old device is wiped
+- Let IT wipe the old laptop as usual
+- Copy only the files you like
+- Throw the old laptop away
+
+Q: Deleting documents subject to a legal hold can lead to:
++ Court sanctions, adverse inferences, and personal discipline
+- A cleaner inbox with no consequences
+- A faster lawsuit
+- A bonus
+
+Q: Auto-delete settings on chat or email for employees under a legal hold should be:
++ Suspended as directed by Legal and IT
+- Set to delete faster
+- Left alone
+- Set to delete only on {WEEKDAY}s
+
+Q: If you are unsure whether a document is covered by a legal hold, you should:
++ Preserve it and ask Legal
+- Delete it to be safe
+- Ask the opposing party
+- Flip a coin
+
+Q: A legal hold can cover:
++ Paper files, email, chat, text messages on work phones, shared drives, and personal devices used for work
+- Only paper files
+- Only documents with "legal" in the name
+- Only files saved on {SYSTEM}
+
+Q: A legal hold remains in effect until:
++ Legal sends a written release
+- The case is in the news
+- One year passes
+- You decide it is over
+
+Q: Personal text messages about work on a personal phone:
++ May be subject to a legal hold
+- Are never subject to a hold
+- Must be deleted
+- Are exempt
+
+Q: Moving documents under a legal hold to a new location without telling Legal:
++ Can complicate preservation; coordinate with Legal
+- Is required
+- Is encouraged
+- Destroys the hold

@@ -1,0 +1,66 @@
+# Revenue recognition basics (ASC 606 in general terms) and sales practices.
+Q: Under ASC 606, revenue is recognized when:
++ Control of promised goods or services transfers to the customer
+- Cash arrives in the bank, always
+- The contract is first discussed
+- The sales rep feels confident
+
+Q: The ASC 606 model has how many steps?
++ Five
+- Two
+- Ten
+- None
+
+Q: Shipping product early, before the customer asked for it, to hit a quarter-end target is:
++ An improper practice that can misstate revenue
+- Great salesmanship
+- Required
+- Fine if the customer is a friend
+
+Q: A "side letter" giving a customer extra return rights outside the contract:
++ Must never be made; all terms must be in the official contract and known to Finance
+- Is a sales best practice
+- Is optional paperwork
+- Helps auditors
+
+Q: Recording a sale before the customer has signed the contract is:
++ Not allowed
+- Fine if they verbally agreed
+- Required at quarter end
+- Encouraged
+
+Q: Multi-element deals, such as software plus support, require:
++ Allocating the price to each performance obligation
+- Recognizing everything on day one
+- Ignoring the support
+- Splitting evenly by month
+
+Q: "Channel stuffing" means:
++ Pushing more product to distributors than they can sell to inflate sales
+- Filling cable channels
+- A holiday promotion
+- Stocking the break room
+
+Q: Questions about how a deal's terms affect revenue should go to:
++ Revenue Accounting before the deal is signed
+- The customer
+- The sales team's group chat
+- Nobody
+
+Q: Discounts promised to a customer must be:
++ Approved and documented in the contract
+- Kept off the record
+- Given verbally only
+- Hidden from Finance
+
+Q: Bill-and-hold arrangements are acceptable only when:
++ Strict accounting criteria are met and the arrangement is documented
+- Sales needs a better quarter
+- The warehouse is full
+- The customer forgets
+
+Q: Altering a contract date to move revenue between quarters is:
++ Fraudulent and prohibited
+- Clever planning
+- Allowed with a pen
+- Common practice

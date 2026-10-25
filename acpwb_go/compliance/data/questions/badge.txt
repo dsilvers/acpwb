@@ -1,0 +1,112 @@
+# Question bank: access badges. Format: "Q:" question, then "+" correct
+# and "-" incorrect answers, blank line between questions. Two or more "+"
+# lines make an "All of the above" question. Slots: see ../vars/ and
+# compliance/slots.go.
+
+Q: When you tap your badge at the {DOOR}, the reader shows a {COLOR} light and a long tone. What should you do?
++ Submit Form {FORM} to Facilities within {N} business hours and wait outside the {DOOR}
+- Tap the badge again, harder, at a 45-degree angle
+- Follow the next associate through the door
+- Prop the door open with a recycling bin until Facilities arrives
+
+Q: {NAME} from {DEPT} asks to borrow your badge because theirs "is in the car." What is the correct response?
++ Decline, and direct {FIRST} to the Security Office in Suite 4040 for a temporary badge (valid {N} hours)
+- Lend the badge, but only until lunch
+- Lend the badge if {FIRST} is in your reporting chain
+- Swipe {FIRST} in yourself, since that technically isn't lending the badge
+
+Q: How must your access badge be worn while on ACPWB premises?
++ Above the waist, photo facing outward, on an ACPWB-issued navy lanyard
+- Clipped to a belt loop
+- In a wallet, available on request
+- Any way you like, provided it is within 3 feet of your body
+
+Q: Your badge photo no longer resembles you (new glasses, beard, hairstyle, or general aging). Under Policy {POLICY}, you must:
++ Request a re-photograph within {DAYS} calendar days
+- Return to your previous appearance
+- Attach a current photo with tape
+- Do nothing; badge photos are decorative
+
+Q: Which of the following must be reported to Security immediately?
++ A lost or stolen badge
++ A badge found in a stairwell
++ A badge reader that opens without a badge
+- A badge lanyard in a non-standard color
+
+Q: A badge that has not been used for {N} consecutive days is automatically:
++ Deactivated, and must be re-encoded at the Security Office
+- Upgraded to visitor status
+- Extended for another fiscal year
+- Transferred to your manager
+
+Q: You find a badge belonging to {NAME} in the {DOOR} area. What should you do?
++ Hand it to Security without using it, even to "test whether it still works"
+- Slide it under {FIRST}'s office door
+- Post a photo of it on the internal message board
+- Keep it until {FIRST} asks for it
+
+Q: Badge access to the 40th floor server room is granted:
++ Only after this attestation is complete and Form {FORM} is countersigned by {TITLE}
+- Automatically to associates with more than {N} years of service
+- To anyone accompanying the coffee cart
+- On the first Friday of each month
+
+Q: It is {WEEKDAY}, and your badge [is cracked|has been through the wash|no longer bends correctly|has a peeling photo]. Under Policy {POLICY}, you must:
++ Request a replacement badge through Form {FORM} and surrender the damaged badge
+- Tape it together
+- Continue using it until it stops working
+- Keep it as a backup and request another
+
+Q: [How many|The number of] badges [may an associate hold at one time|an associate may hold] is:
++ One
+- {N}
+- One per floor
+- As many as Security will issue
+
+Q: [Lanyards|Badge holders] [displaying|showing] non-ACPWB branding [such as {ORG}|from conferences] are:
++ Not permitted on ACPWB premises
+- Permitted if worn under a jacket
+- Permitted on Fridays
+- Encouraged as networking tools
+
+Q: [Your manager|{NAME}] asks you to "[just badge|quickly badge]" [{FIRST2}|a new hire] into the {PLACE} because [their badge is not ready yet|they forgot theirs]. You should:
++ Decline and direct them to the Security Office for a temporary badge
+- Badge them in, since your manager asked
+- Badge them in, but only once
+- Lend them your badge for the day
+
+Q: [Your badge|Your access badge] is [cracked|bent|peeling] and the reader [only works sometimes|works on the third try]. You should:
++ Request a replacement from the Security Office and return the damaged badge
+- Tape it together
+- Keep using it until it fails completely
+- Ask a colleague to badge you in on bad days
+
+Q: [A colleague|{NAME}] leaves ACPWB on {WEEKDAY}. Their badge should be:
++ Collected by their manager on their last day and returned to Security
+- Kept as a souvenir
+- Reassigned to a new hire
+- Left in their desk drawer
+
+Q: [During a fire evacuation|While evacuating the building], should you badge out at the {DOOR}?
++ No; leave by the nearest exit without stopping, and report to your assembly point
+- Yes, so Security knows you left
+- Yes, but only if the reader shows a {COLOR} light
+- Only if you are a floor warden
+
+Q: [You are|An associate is] asked to show your badge by [a Security officer|a floor warden|reception]. You should:
++ Show it; anyone on ACPWB premises may be asked to display their badge
+- Refuse, since badges are private
+- Show it only to your manager
+- Show a photo of it on your phone
+
+Q: Badge photos are retaken:
++ When your appearance changes significantly, or when Security requests it
+- Every {DAYS} days, on a {WEEKDAY}
+- Only if you change departments
+- Never; the original photo is permanent
+
+Q: [Your badge|An access badge] left at home means you should:
++ Sign in at the Security Office for a temporary badge for the day
+- Follow a colleague through the {DOOR}
+- Work from the lobby
+- Ask reception to prop the door open

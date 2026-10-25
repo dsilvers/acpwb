@@ -1,0 +1,59 @@
+Q: A government official offers to "expedite" a permit for ACPWB in exchange for a {AMOUNT} processing fee paid in cash. This is:
++ A potential bribe, which must be declined and reported to Compliance
+- A facilitation payment, which is always permitted
+- Acceptable if a receipt is provided
+- Acceptable if the amount is below the official's daily per diem
+
+Q: A "conflict of interest" exists when:
++ A personal interest could interfere, or appear to interfere, with ACPWB's interests
+- Two associates disagree in a meeting
+- A vendor is also a customer
+- You prefer one brand of coffee over another
+
+Q: Your spouse owns {VENDOR}, which is bidding on an ACPWB contract you are evaluating. You should:
++ Disclose the relationship in the Conflicts Register and recuse yourself
+- Evaluate the bid objectively and disclose afterward if it wins
+- Score {VENDOR} slightly lower to compensate
+- Ask your spouse to bid under a different name
+
+Q: Which of the following must be disclosed on Form {FORM}?
++ Outside employment
++ Board seats at other organizations
++ Financial interests in ACPWB vendors
+- Your weekend hobbies, unless they generate income
+
+Q: Under the ACPWB Code, "zero tolerance" means:
++ Every reported violation is investigated, regardless of seniority
+- Violations under {AMOUNT} are tolerated
+- Senior leaders receive one warning
+- Tolerance is reset each fiscal year
+
+Q: [Your manager|{NAME}, a senior manager,] asks you to "adjust" a quarterly figure so the team meets its target. You should:
++ Decline and report the request through the Integrity Line if needed
+- Make the change, since your manager is accountable
+- Make the change, but keep a copy of the original
+- Ask {DEPT} to make the change instead
+
+Q: [A former colleague|A recruiter from a competitor] asks you for a copy of an ACPWB pricing {DOCUMENT}. You should:
++ Refuse, since it is confidential ACPWB information
+- Send a version without the logo
+- Send only the summary page
+- Share it, since it will be public eventually
+
+Q: [Which of the following|What] is a sign of an ethical risk?
++ Pressure to meet a deadline "whatever it takes"
++ Being told "just this once, don't write it down"
+- A meeting that starts on time
+- A colleague who asks clarifying questions
+
+Q: [The ACPWB Integrity Line|The Integrity Line] may be used:
++ Anonymously, at any time, by associates and third parties
+- Only during business hours
+- Only by people managers
+- Only for concerns over {AMOUNT}
+
+Q: [You are unsure|You are not sure] whether an action is ethical. The ACPWB "front page test" asks:
++ Would you be comfortable if it were reported on the front page of the Milwaukee Journal Sentinel?
+- Would it fit on the front page of the intranet?
+- Has anyone else done it before?
+- Would your manager sign off on it?

@@ -1,0 +1,60 @@
+# Wearable devices at work.
+Q: Smart glasses that can record video are:
++ Restricted in confidential and secure areas
+- Encouraged everywhere
+- Required
+- Invisible
+
+Q: Fitness trackers paired to company phones:
++ Should follow device and privacy policies
+- Are required
+- Are banned
+- Need admin rights
+
+Q: Company wellness programs using wearables must:
++ Be voluntary and protect health data
+- Be mandatory
+- Share data with managers
+- Sell data
+
+Q: Wearables used for safety, such as fall detection, require:
++ Clear notice of what data is collected and how it is used
+- Secrecy
+- No policy
+- Employee passwords
+
+Q: Recording meetings with a smartwatch without consent may:
++ Violate policy and some state laws
+- Be fine
+- Be required
+- Be encouraged
+
+Q: Bluetooth wearables connected to company laptops should be:
++ Approved by IT
+- Any device
+- Paired with strangers
+- Unpaired
+
+Q: Wearable data about employees' health is:
++ Sensitive and must be protected
+- Public
+- Shared with coworkers
+- Unimportant
+
+Q: Lost wearables connected to work accounts should be:
++ Reported
+- Ignored
+- Replaced quietly
+- Forgotten
+
+Q: Biometric data from wearables may be subject to:
++ Biometric privacy laws in some states
+- No laws
+- Only sports rules
+- Tax law only
+
+Q: Using wearables while operating machinery should:
++ Follow safety rules about distractions
+- Be unlimited
+- Be required
+- Be ignored

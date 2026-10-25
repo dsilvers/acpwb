@@ -1,0 +1,55 @@
+# Attendance, punctuality, and time reporting.
+
+Q: If you will be late or absent, you should:
++ Notify your manager as early as possible using the method in the attendance policy
+- Tell a coworker to mention it eventually
+- Say nothing and arrive when you can
+- Post it on social media
+
+Q: Recording time you did not work on your timesheet is:
++ Time theft and falsification of records
+- Rounding
+- Allowed if you work late another day, without approval
+- Allowed for meetings that run short
+
+Q: Clocking in for a coworker who is running late is:
++ Not allowed; it is falsification of time records
+- A kind favor
+- Allowed if they buy coffee
+- Allowed once a month
+
+Q: An absence protected by law, such as FMLA leave or jury duty:
++ May not be counted against you under the attendance policy
+- Counts double
+- Must be made up on weekends
+- Requires a doctor's note for each day
+
+Q: Calling in sick for a day when you are not sick is:
++ Misuse of sick leave
+- A mental health day, always allowed under sick leave
+- Required before long weekends
+- Encouraged on {WEEKDAY}s
+
+Q: Many states and cities require employers to provide:
++ Paid sick leave, with rules on accrual and use
+- Unlimited sick leave
+- No sick leave
+- Sick leave only for executives
+
+Q: A pattern of absences right before and after holidays may be:
++ Discussed by the manager, while respecting protected leave rights
+- Ignored completely
+- Grounds for immediate termination
+- Rewarded
+
+Q: An employee arriving 15 minutes late due to a public transit delay should:
++ Let their manager know and follow the policy for recording time
+- Hide in the {PLACE} until noon
+- Blame a coworker
+- Leave 15 minutes early to balance it out
+
+Q: Non-exempt employees who start work before their shift:
++ Must record and be paid for that time
+- Volunteer that time to ACPWB
+- Are paid only if they ask
+- Are paid in snacks

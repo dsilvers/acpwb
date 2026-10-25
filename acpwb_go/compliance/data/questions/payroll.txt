@@ -1,0 +1,67 @@
+# Payroll, pay stubs, and direct deposit.
+
+Q: You receive an email asking you to update your direct deposit information through a link. You should:
++ Treat it as possible phishing and update banking details only through the official HR system
+- Click the link quickly before payday
+- Reply with your account number
+- Forward it to your bank
+
+Q: Pre-tax deductions, such as traditional 401(k) deferrals and many health premiums:
++ Reduce taxable wages
+- Increase taxable wages
+- Are taxed twice
+- Are optional for the IRS
+
+Q: If you are overpaid in error, you should:
++ Report it to Payroll so it can be corrected
+- Keep it as a reward
+- Spend it quickly before anyone notices
+- Split it with your team
+
+Q: Form W-4 is used to:
++ Tell your employer how much federal income tax to withhold
+- Request a new badge
+- Apply for vacation
+- Report a workplace injury
+
+Q: A pay stub typically shows:
++ Gross pay, deductions, taxes withheld, and net pay
+- Your coworkers' salaries
+- Your performance rating
+- Your parking space number
+
+Q: A coworker asks you to change their pay rate in {SYSTEM} as a favor. You should:
++ Refuse; pay changes require proper approval and segregation of duties
+- Do it if they promise to pay you back
+- Do it on a Friday when no one is checking
+- Ask them to do it themselves
+
+Q: Final paychecks that arrive late in some states can trigger:
++ Waiting time penalties
+- Nothing
+- A bonus for the employer
+- A new hire
+
+Q: Wage garnishment orders received by ACPWB must be:
++ Processed by Payroll according to law
+- Ignored
+- Forwarded to the employee's manager
+- Discussed with the team
+
+Q: Payroll information should be accessed by:
++ Authorized Payroll and HR staff only
+- Anyone curious
+- Managers for all employees
+- Vendors
+
+Q: A paycheck delivered by direct deposit should arrive:
++ On the scheduled payday
+- Whenever Payroll finishes lunch
+- Quarterly
+- After {EVENT}
+
+Q: Employees can generally view their pay stubs:
++ In the HR self-service system
+- Only on paper in the {PLACE}
+- Only once a year
+- Only with a manager present

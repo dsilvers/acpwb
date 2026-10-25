@@ -1,0 +1,60 @@
+# Daily stand-up meetings.
+Q: A daily stand-up should be:
++ Short and focused on progress, plans, and blockers
+- An hour-long status report
+- Optional for everyone
+- A problem-solving marathon
+
+Q: Blockers raised in stand-up should be:
++ Followed up after the meeting by the right people
+- Ignored
+- Solved in the stand-up at length
+- Hidden
+
+Q: Stand-ups work best when:
++ Everyone is on time and prepared
+- People arrive late
+- Nobody speaks
+- Managers interrogate
+
+Q: Detailed discussions during stand-up should be:
++ Taken offline after the meeting
+- Continued until done
+- Required
+- Forbidden forever
+
+Q: Remote team members in stand-ups should:
++ Be able to participate fully
+- Be ignored
+- Listen only
+- Turn off audio
+
+Q: Stand-ups are not for:
++ Blaming people
+- Sharing progress
+- Raising blockers
+- Coordinating
+
+Q: Updates in stand-up should be:
++ Honest about progress and problems
+- Always positive
+- Vague
+- Invented
+
+Q: Async stand-ups can work for:
++ Teams across time zones
+- Nobody
+- Only managers
+- Only weekends
+
+Q: Stand-up time should be:
++ Consistent and respected
+- Random
+- Late at night
+- Extended daily
+
+Q: If stand-ups feel useless, the team should:
++ Discuss it in a retrospective and adjust
+- Skip silently
+- Complain
+- Quit

@@ -1,0 +1,60 @@
+# Data residency and cross-border transfers.
+Q: Data residency rules describe:
++ Where data must be stored or processed
+- Where employees live
+- Data center addresses for mail
+- Nothing
+
+Q: Moving customer data to another country may require:
++ Legal safeguards, such as contractual clauses or approvals
+- Nothing
+- A courier
+- Customer passwords
+
+Q: Some countries require certain data to:
++ Stay within their borders
+- Be published
+- Be deleted
+- Be emailed
+
+Q: Before choosing a cloud region, teams should:
++ Check data residency requirements for that data
+- Pick the cheapest
+- Pick randomly
+- Ask vendors
+
+Q: Accessing EU personal data from the U.S. can count as:
++ A data transfer that needs safeguards
+- Nothing
+- Local processing
+- A backup
+
+Q: Data residency commitments in customer contracts must be:
++ Followed and tracked
+- Ignored
+- Changed silently
+- Forgotten
+
+Q: Backups of regulated data must follow:
++ The same residency rules as the original data
+- No rules
+- Different rules
+- Vendor rules only
+
+Q: Support engineers in other countries accessing customer data should:
++ Follow approved access processes
+- Access freely
+- Share credentials
+- Copy data locally
+
+Q: Questions about cross-border data transfers go to:
++ Privacy and Legal
+- Vendors
+- Coworkers
+- Nobody
+
+Q: Transfer impact assessments evaluate:
++ Risks of transferring data to another country's laws
+- Transfer pricing
+- Employee transfers
+- Furniture moves

@@ -1,0 +1,66 @@
+# EU General Data Protection Regulation basics.
+Q: GDPR applies to:
++ Organizations that process personal data of people in the EU in connection with offering goods or services or monitoring behavior there
+- Only companies headquartered in the EU
+- Only governments
+- Only paper records
+
+Q: How many lawful bases for processing personal data does GDPR list?
++ Six
+- One
+- Twelve
+- None
+
+Q: A data subject access request must generally be answered within:
++ One month, extendable by two further months for complex requests
+- One day
+- One year
+- Whenever convenient
+
+Q: The maximum GDPR fines can reach:
++ €20 million or 4% of worldwide annual turnover, whichever is higher
+- €100
+- 1% of the IT budget
+- Nothing; GDPR has no fines
+
+Q: Under GDPR, consent must be:
++ Freely given, specific, informed, and unambiguous
+- Assumed from silence
+- Buried in terms and conditions
+- Pre-ticked in a box
+
+Q: A Data Protection Impact Assessment (DPIA) is required when processing is:
++ Likely to result in a high risk to individuals
+- Fun
+- Done on Mondays
+- Never required
+
+Q: Transferring personal data from the EU to a country without an adequacy decision requires:
++ Appropriate safeguards, such as Standard Contractual Clauses
+- Nothing
+- A courier
+- The data subjects' passwords
+
+Q: "Data minimization" means:
++ Collecting only the personal data that is necessary for the purpose
+- Making data files smaller with compression
+- Collecting as much as possible just in case
+- Shrinking font sizes
+
+Q: The "right to erasure" allows individuals to:
++ Ask for their personal data to be deleted in certain circumstances
+- Erase other people's data
+- Delete company financial records
+- Erase their browser history at work
+
+Q: "Privacy by design" means:
++ Building data protection into systems and processes from the start
+- Designing a privacy screen for monitors
+- Adding a privacy notice after launch
+- Hiding the design documents
+
+Q: A processor acting on ACPWB's behalf must:
++ Follow ACPWB's documented instructions under a written contract
+- Do whatever it wants with the data
+- Sell the data to recover costs
+- Ignore ACPWB's instructions

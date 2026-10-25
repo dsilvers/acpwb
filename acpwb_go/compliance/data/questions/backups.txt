@@ -1,0 +1,66 @@
+# Backups and recovery: 3-2-1, immutability, restore testing.
+Q: The "3-2-1" backup rule means:
++ Three copies of data, on two kinds of media, with one copy offsite
+- Three backups a day, two of them on Fridays, one in your car
+- Three servers, two admins, one password
+- Back up every third file
+
+Q: The best proof that a backup works is:
++ A successful test restore
+- A green checkmark in the backup console
+- The size of the backup file
+- The vendor's brochure
+
+Q: To survive ransomware, at least one backup copy should be:
++ Immutable or offline, so an attacker cannot encrypt or delete it
+- Stored on the same file server it protects
+- Shared with Everyone for easy access
+- Named "NOT_A_BACKUP" to confuse attackers
+
+Q: A recovery point objective (RPO) describes:
++ How much data, measured in time, the business can afford to lose
+- How quickly the help desk answers the phone
+- The number of tapes in the vault
+- The point at which IT stops recovering
+
+Q: A recovery time objective (RTO) describes:
++ How long a system can be down before the impact is unacceptable
+- The time it takes to read the backup policy
+- The return-to-office schedule
+- The warranty on the backup appliance
+
+Q: Backup administrator accounts should:
++ Be separate from everyday accounts and protected with MFA
+- Share the domain admin password
+- Be used to check email
+- Never have a password, so restores are faster
+
+Q: You accidentally delete a shared folder. The best first step is:
++ Report it to the help desk right away so it can be restored
+- Recreate the files from memory
+- Blame the shared drive
+- Wait to see if anyone notices
+
+Q: Backups that contain personal data must be:
++ Protected and retained under the same rules as the original data
+- Exempt from all privacy rules
+- Kept forever in case of nostalgia
+- Emailed to the data owner monthly
+
+Q: Personal files such as vacation photos on company backup systems are:
++ Discouraged; company systems are for company data
+- Required for morale
+- Backed up twice as often
+- Automatically printed
+
+Q: When the backup console shows a failed job, you should:
++ Investigate and fix it, and confirm the next run succeeds
+- Clear the alert
+- Assume the next night will catch up
+- Disable alerts until the audit is over
+
+Q: Backup tapes or drives leaving the building must be:
++ Encrypted and tracked with a chain of custody
+- Labeled "Payroll" in large letters
+- Taken home by whoever is closest
+- Left in the lobby for the courier

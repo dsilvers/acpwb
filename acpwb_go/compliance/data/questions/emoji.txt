@@ -1,0 +1,73 @@
+# Emoji, reactions, and GIFs in business communication.
+
+Q: Reacting with a thumbs-up emoji to a request in chat usually means:
++ You saw it and agree or will do it, so do not use it if you will not
+- You strongly disagree
+- You are on vacation
+- You want a meeting
+
+Q: A thumbs-up reaction on a contract change in some court cases has been treated as:
++ Possible acceptance of the agreement, so react carefully to business terms
+- Meaningless in all cases
+- An official signature required by {AGENCY}
+- A request for a refund
+
+Q: The "eyes" emoji reaction on a message typically means:
++ "I'm looking at this"
+- "I am crying"
+- "This is spooky"
+- "Please escalate to the {COMMITTEE}"
+
+Q: Using emoji in an email to a regulator or an external auditor is:
++ Usually inappropriate; keep formal communication formal
+- Required for friendliness
+- Encouraged to build rapport
+- Required by {AGENCY}
+
+Q: A skull emoji (💀) from a younger colleague usually means:
++ Something was extremely funny
+- A safety incident occurred
+- They are threatening you
+- They want to discuss retirement plans
+
+Q: Sending a GIF in a channel announcing a coworker's family emergency is:
++ Inappropriate; respond with a simple, sincere message
+- A great way to lighten the mood
+- Required by policy
+- Encouraged on {WEEKDAY}s
+
+Q: The "white check mark" ✅ reaction is commonly used to show:
++ The task is done
+- The message is wrong
+- You are taking the afternoon off
+- You want a refund
+
+Q: Custom emoji uploaded to the ACPWB chat workspace must:
++ Follow the Code of Conduct and not mock coworkers
+- Include at least one coworker's face
+- Be approved by {VENDOR}
+- Be animated
+
+Q: Ending every message with "🙂" can come across as:
++ Passive-aggressive to some readers, depending on context
+- Legally binding
+- A security risk
+- A request for overtime
+
+Q: Emoji in a performance review are:
++ Not appropriate
+- Required for "Exceeds Expectations"
+- Allowed only as 🎉
+- Allowed if the review is positive
+
+Q: A coworker uses an emoji you find offensive. A good first step is to:
++ Let them know privately, or report it if it is harassment
+- Reply with a worse emoji
+- Leave the channel forever
+- Screenshot it for the holiday party
+
+Q: The "party popper" 🎉 is appropriate for:
++ Celebrating wins and milestones
+- Layoff announcements
+- Incident reports
+- Condolence messages

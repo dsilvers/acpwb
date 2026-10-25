@@ -1,0 +1,61 @@
+# Cryptocurrency, NFTs, and digital assets.
+
+Q: Accepting cryptocurrency as payment for ACPWB services requires:
++ Approval from Finance and Legal, due to accounting, tax, and sanctions risks
+- No approval
+- Only a digital wallet
+- Approval from {VENDOR}
+
+Q: Promoting a cryptocurrency on social media in exchange for payment without disclosure is:
++ A violation of FTC endorsement rules and possibly securities laws
+- Free advertising
+- Allowed under {AMOUNT}
+- Required for influencers
+
+Q: A message promising to double any cryptocurrency you send to an address is:
++ A scam
+- A limited-time investment
+- An ACPWB benefit
+- A new 401(k) option
+
+Q: Trading tokens of a company while aware of material nonpublic information about it can be:
++ Insider trading
+- Allowed, since crypto is unregulated
+- Allowed on weekends
+- Encouraged
+
+Q: Storing a crypto wallet's seed phrase on ACPWB systems is:
++ Not allowed for personal assets, and risky everywhere
+- Recommended for backup
+- Required by IT
+- Encrypted by default
+
+Q: An "NFT of the ACPWB logo" created by an employee is:
++ Not allowed; the logo is ACPWB intellectual property
+- A fun side project
+- Allowed if minted at night
+- Allowed if sold to coworkers
+
+Q: Ransom demands in cryptocurrency are:
++ Handled only by authorized leadership with Legal and Security
+- Paid by the first person who sees them
+- Ignored
+- Negotiated in the team chat
+
+Q: A coworker asks you to invest in their crypto token at work. You should:
++ Decline; soliciting coworkers for investments violates policy
+- Invest to be supportive
+- Invest using a P-card
+- Ask for a discount
+
+Q: Crypto ATMs asking you to pay a "government fine" are:
++ A common scam
+- An official payment method
+- Required by the IRS
+- Safe
+
+Q: Holding cryptocurrency of a company you oversee as a vendor:
++ May be a conflict of interest that needs disclosure
+- Is never a concern
+- Is required
+- Is encouraged

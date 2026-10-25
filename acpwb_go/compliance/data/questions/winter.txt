@@ -1,0 +1,68 @@
+# Cold stress and winter safety. Correct answers follow CDC/NIOSH and NWS
+# guidance; keep them accurate.
+
+Q: Signs of frostbite include:
++ Numbness and skin that looks white, grayish-yellow, or waxy
+- Bright red cheeks from laughing
+- Sweating
+- A strong urge to sing
+
+Q: Frostbitten skin should NOT be:
++ Rubbed or massaged, or warmed with a heating pad or fire
+- Protected from further cold
+- Warmed gently with warm (not hot) water if medical care is delayed
+- Seen by a medical professional
+
+Q: Shivering, confusion, slurred speech, and drowsiness in the cold are signs of:
++ Hypothermia, which is a medical emergency
+- Normal Monday fatigue
+- Too much coffee
+- A need for more training
+
+Q: For someone with suspected hypothermia, you should:
++ Call 911, move them somewhere warm, remove wet clothing, and warm the center of the body first
+- Give them alcohol to warm up
+- Rub their arms and legs vigorously
+- Have them run laps
+
+Q: The wind chill describes:
++ How cold it feels on exposed skin when wind is combined with temperature
+- The temperature inside the {PLACE}
+- A drink served at {EVENT}
+- The speed of the elevator
+
+Q: When walking on icy sidewalks, you should:
++ Take short, shuffling steps and walk flat-footed, like a penguin
+- Run to get inside faster
+- Carry heavy boxes in both arms
+- Text while walking to stay calm
+
+Q: A car stuck in snow with the engine running should:
++ Have the exhaust pipe cleared of snow to prevent carbon monoxide buildup
+- Be kept sealed with the windows up and the exhaust blocked
+- Be abandoned with the engine running
+- Be warmed with a charcoal grill inside
+
+Q: Layered clothing in the cold helps because:
++ Layers trap warm air and can be adjusted as you warm up or cool down
+- It makes you look busy
+- It is required by policy
+- One thick cotton layer is always best
+
+Q: Shoveling heavy snow can be risky because:
++ It is strenuous and can trigger heart problems, so pace yourself and take breaks
+- Snow is slippery only on Tuesdays
+- Shovels are sharp
+- It makes the {COMMITTEE} angry
+
+Q: Using a gas generator or grill inside a garage during a winter power outage is:
++ Dangerous because of carbon monoxide poisoning, even with the door open
+- Safe with the door open
+- Safe for short periods
+- Recommended for warmth
+
+Q: Wet clothing in the cold should be:
++ Changed as soon as possible, because wet clothes pull heat from the body
+- Kept on to dry naturally
+- Covered with a dry coat only
+- Ignored

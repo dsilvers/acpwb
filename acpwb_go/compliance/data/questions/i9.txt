@@ -1,0 +1,67 @@
+# Employment eligibility verification (Form I-9). Answers follow USCIS
+# guidance in general terms.
+Q: Form I-9 must be completed for:
++ Every new employee hired in the United States, citizens and noncitizens alike
+- Only noncitizens
+- Only part-time employees
+- Only employees who look foreign
+
+Q: The employee must complete Section 1 of Form I-9:
++ No later than the first day of employment
+- Within 90 days
+- At the end of the first year
+- Only if asked
+
+Q: The employer must complete Section 2 of Form I-9:
++ Within three business days of the employee's first day of work
+- Within 30 days
+- At the employee's first review
+- Never
+
+Q: When presenting documents for Form I-9, the employee:
++ May choose which acceptable documents to present
+- Must present a passport
+- Must present exactly what the employer asks for
+- Must present a birth certificate
+
+Q: Asking a lawful permanent resident to show a green card specifically, when they presented other acceptable documents, is:
++ Document abuse and may be unlawful discrimination
+- Required
+- A best practice
+- Fine if done politely
+
+Q: A combination of a List B document and a List C document can be used instead of:
++ A single List A document
+- Section 1
+- A Social Security number
+- A background check
+
+Q: Employers must keep each Form I-9 for:
++ Three years after the hire date or one year after employment ends, whichever is later
+- 30 days
+- Forever
+- Until the employee's first promotion
+
+Q: Documents presented for Form I-9 must be:
++ Unexpired and appear genuine and to relate to the employee
+- Photocopies only
+- Laminated
+- Expired, to prove history
+
+Q: E-Verify participants that meet the requirements may examine I-9 documents:
++ Remotely using the DHS-authorized alternative procedure
+- Over text message
+- Never; only in person forever
+- Through the employee's friends
+
+Q: Rehiring a former employee within three years of the original Form I-9 allows the employer to:
++ Use Supplement B to update or reverify instead of completing a new form
+- Skip all verification forever
+- Use the employee's old badge as proof
+- Ask a coworker to vouch
+
+Q: Completing Form I-9 only for applicants who "look foreign" is:
++ Unlawful discrimination
+- Efficient
+- Required by law
+- Allowed in some states

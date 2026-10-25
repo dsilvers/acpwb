@@ -642,6 +642,7 @@ func rootHandler(vq *visitqueue.Queue) http.HandlerFunc {
 	mainArchive := archiveHandler(vq)
 	mainPolicy := policyHandler(vq)
 	sourceIndex := sourceIndexHandler(vq)
+	complianceCenter := complianceHandler(vq)
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		host := strings.ToLower(r.Host)
@@ -669,6 +670,8 @@ func rootHandler(vq *visitqueue.Queue) http.HandlerFunc {
 			mainPolicy(w, r)
 		case r.URL.Path == "/source-code" || strings.HasPrefix(r.URL.Path, "/source-code/"):
 			sourceIndex(w, r)
+		case r.URL.Path == "/compliance" || strings.HasPrefix(r.URL.Path, "/compliance/"):
+			complianceCenter(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -676,6 +679,9 @@ func rootHandler(vq *visitqueue.Queue) http.HandlerFunc {
 }
 
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "compliance-score" {
+		os.Exit(complianceScore(os.Args[2:], os.Stdin, os.Stdout))
+	}
 	redisURL := os.Getenv("REDIS_URL")
 	if redisURL == "" {
 		redisURL = "redis://localhost:6379/0"

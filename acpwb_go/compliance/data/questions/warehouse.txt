@@ -1,0 +1,62 @@
+# Warehouses, forklifts, and the mailroom dock. Correct answers follow OSHA
+# 29 CFR 1910.178 and general industry guidance.
+
+Q: Forklifts may be operated only by:
++ Employees who have been trained and evaluated as competent
+- Anyone with a driver's license
+- Anyone who has watched it done
+- Visitors on a tour
+
+Q: Forklift operator performance must be evaluated at least once every:
++ Three years
+- Ten years
+- Month
+- {EVENT}
+
+Q: Pedestrians near forklifts should:
++ Stay in marked walkways and make eye contact with the operator before crossing
+- Walk behind forklifts closely
+- Ride on the forks for a lift
+- Assume the operator sees them
+
+Q: Riding on the forks of a forklift is:
++ Never allowed
+- Allowed for short distances
+- Allowed if holding on
+- Allowed for supervisors
+
+Q: A forklift with a defect, such as leaking hydraulic fluid, should be:
++ Removed from service until repaired
+- Used carefully
+- Used only for light loads
+- Driven to the far corner
+
+Q: Items stacked on warehouse shelves should be:
++ Stable, within the rack's load rating, and heavier items lower
+- As high as possible
+- Heaviest items on top
+- Balanced on the edges
+
+Q: A loading dock edge is dangerous because:
++ People and equipment can fall off it; keep clear of the edge and use dock locks
+- It is cold
+- Trucks are loud
+- It is far from the cafeteria
+
+Q: Before a forklift drives into a trailer, the trailer should be:
++ Secured with wheel chocks or a dock lock so it cannot move
+- Inspected for snacks
+- Left free to roll for flexibility
+- Lifted with the forklift
+
+Q: Pallet jacks should be pulled or pushed:
++ Under control, at a walking pace, without riding on them
+- As fast as possible
+- While riding on them like a scooter
+- By two people sitting on the load
+
+Q: Blind corners in a warehouse are safer with:
++ Convex mirrors, horns, and slowing down
+- Speeding up to get through quickly
+- Closed eyes
+- Music turned up

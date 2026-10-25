@@ -1,0 +1,110 @@
+# Aviation regulations (14 CFR). Correct answers follow the actual rules:
+# Parts 61, 91, 117, 121, 135, and NTSB Part 830.
+
+Q: Under 14 CFR 91.3, who is directly responsible for, and the final authority as to, the operation of an aircraft?
++ The pilot in command
+- The passenger with the most frequent-flyer miles
+- The ACPWB travel desk
+- Whoever booked the flight
+
+Q: Under 14 CFR 91.17, a crewmember may not act as a crewmember within how many hours of consuming alcohol?
++ 8 hours
+- 1 hour
+- 30 minutes, if it was a light beer
+- 24 minutes
+
+Q: Under 14 CFR 91.17, a crewmember may not fly with a blood alcohol concentration of:
++ 0.04 percent or greater
+- 0.08 percent or greater
+- 0.40 percent or greater
+- Any amount below "festive"
+
+Q: For a day VFR flight in an airplane, 14 CFR 91.151 requires enough fuel to reach the first point of intended landing and then fly at normal cruising speed for at least:
++ 30 minutes
+- 5 minutes
+- 2 hours
+- Until the snack cart comes around
+
+Q: For a night VFR flight in an airplane, the fuel reserve required by 14 CFR 91.151 is at least:
++ 45 minutes at normal cruising speed
+- 15 minutes
+- 30 seconds
+- No reserve is needed at night
+
+Q: The "sterile cockpit" rule (14 CFR 121.542) prohibits non-essential crew activity during critical phases of flight, which include taxi, takeoff, landing, and all other flight operations below:
++ 10,000 feet, except cruise flight
+- 40,000 feet
+- 1,000 feet
+- The clouds
+
+Q: Under 14 CFR 91.107, passengers must generally have their seat belts fastened during:
++ Movement on the surface, takeoff, and landing
+- Only during the safety demonstration
+- Only on international flights
+- Only if they are sitting in first class
+
+Q: Under 14 CFR 91.211, flight crew must use supplemental oxygen for any portion of a flight more than 30 minutes long at cabin pressure altitudes above:
++ 12,500 feet MSL, up to and including 14,000 feet
+- 1,250 feet
+- 25,000 feet only
+- Any altitude where the coffee tastes different
+
+Q: Under 14 CFR 91.211, every occupant must be provided supplemental oxygen at cabin pressure altitudes above:
++ 15,000 feet MSL
+- 5,000 feet
+- 50,000 feet
+- Sea level
+
+Q: Under the right-of-way rules in 14 CFR 91.113, which aircraft has the right of way over all other air traffic?
++ An aircraft in distress
+- The largest aircraft
+- The aircraft with the CEO on board
+- Whichever aircraft arrived first at the coffee shop
+
+Q: Among aircraft of different categories converging at about the same altitude, 14 CFR 91.113 gives the right of way first to:
++ A balloon
+- A jet airliner
+- A helicopter
+- A drone carrying sandwiches
+
+Q: Under NTSB Part 830, an aircraft accident in the United States must be reported:
++ Immediately, to the nearest NTSB office
+- Within 90 days, by email to Facilities
+- Only if there were witnesses
+- In the next quarterly newsletter
+
+Q: Before every flight, 14 CFR 91.103 requires the pilot in command to become familiar with all available information concerning the flight, including:
++ Weather reports and forecasts, fuel requirements, and runway lengths
+- The in-flight movie lineup
+- The ACPWB holiday party schedule
+- The names of the passengers' pets
+
+Q: An airline first officer in the United States generally needs an airline transport pilot certificate, which normally requires at least:
++ 1,500 hours of total flight time
+- 15 hours
+- A weekend course
+- A strong handshake
+
+Q: Since January 1, 2020, 14 CFR 91.225 generally requires aircraft flying in most controlled airspace that already required a transponder to be equipped with:
++ ADS-B Out
+- A fax machine
+- A satellite radio subscription
+- Bluetooth speakers
+
+Q: A Part 91 operator carrying passengers or property for compensation or hire, without an exception that applies, is:
++ Operating an illegal charter; such flights generally require a Part 135 or Part 121 certificate
+- Perfectly fine if the passengers pay in cash
+- Fine if the payment is called a "fuel donation"
+- Required only to collect a signed waiver
+
+Q: Under 14 CFR Part 117, airline pilot flight duty periods are limited mainly to manage:
++ Fatigue
+- Overtime costs only
+- Catering schedules
+- Uniform wear
+
+Q: In aviation weather reports, an airport with a ceiling below 1,000 feet or visibility below 3 statute miles is generally in which flight category?
++ IFR or lower
+- VFR
+- Clear and a million
+- Fully sunny

@@ -1,0 +1,66 @@
+# Encryption basics for employees.
+Q: Encrypting data at rest protects it when:
++ A device or disk is lost or stolen
+- A user is tricked into sharing it
+- Someone reads it over your shoulder
+- The power goes out
+
+Q: Encryption in transit, such as HTTPS, protects data:
++ As it travels across networks
+- On a printed page
+- In your memory
+- After it is deleted
+
+Q: Company laptops must have:
++ Full-disk encryption turned on
+- Encryption only on Fridays
+- A sticker that says "encrypted"
+- No encryption, to improve speed
+
+Q: Encryption keys should be:
++ Stored separately from the data and managed by approved tools
+- Written on the device they protect
+- Emailed to the whole team
+- Saved in the same folder as the data
+
+Q: A password-protected ZIP file sent by email should have its password:
++ Shared through a different channel, such as a phone call
+- Included in the same email
+- Set to "password"
+- Printed on the envelope
+
+Q: Creating your own encryption algorithm for a product is:
++ A bad idea; use well-reviewed, standard algorithms and libraries
+- Required for originality
+- The most secure approach
+- Mandatory for patents
+
+Q: A website without HTTPS that asks for your password should be:
++ Avoided, and reported if it claims to be an ACPWB site
+- Trusted if it has a nice logo
+- Used only during lunch
+- Bookmarked
+
+Q: Restricted data sent to an outside party should be sent:
++ Through an approved encrypted channel
+- In a regular email to save time
+- On a postcard
+- Through a public file-sharing link
+
+Q: Hashing is different from encryption because:
++ A hash is designed to be one-way and cannot be decrypted
+- Hashes are always longer
+- Hashes are only used for breakfast
+- There is no difference
+
+Q: Losing an encrypted, powered-off laptop:
++ Must still be reported immediately
+- Never needs to be reported
+- Is a reason to buy a new one quietly
+- Only matters if it was new
+
+Q: If you lose your encryption recovery key or password, you should:
++ Contact IT through the official process
+- Ask a stranger online
+- Try random passwords all night
+- Remove the hard drive

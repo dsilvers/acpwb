@@ -1,0 +1,61 @@
+# Open office etiquette.
+
+Q: Taking a phone call on speakerphone at your desk in an open office is:
++ Discouraged; use a headset, or move to a phone booth or meeting room
+- Encouraged, to share information with neighbors
+- Allowed for calls under 45 minutes
+- Required for calls with {VENDOR}
+
+Q: Reheating fish in the shared {PLACE} microwave is:
++ Permitted, but considerate associates are mindful of strong smells in shared spaces
+- A Code of Conduct violation punishable by termination
+- Encouraged on {WEEKDAY}s
+- Required before {EVENT}
+
+Q: A colleague is wearing headphones and looking at their screen intently. This usually means:
++ They are focusing; send a message instead of interrupting, unless it is urgent
+- They want you to tap them on the shoulder
+- They are available for a long chat
+- They are on fire
+
+Q: The temperature in the open office should be adjusted by:
++ Facilities, through a request
+- Whoever reaches the thermostat first
+- The {COMMITTEE}, by vote
+- Taping cardboard over the vents
+
+Q: Clipping your nails at your desk is:
++ Something to do at home
+- Allowed during the quarterly results call
+- Encouraged as a stress reliever
+- Allowed if you collect the clippings in a mug
+
+Q: [A colleague's|{NAME}'s] desk neighbor hums all day. The best first step is to:
++ Mention it to them kindly and privately
+- File an anonymous complaint with the {COMMITTEE}
+- Hum louder
+- Move their desk while they are at lunch
+
+Q: The "quiet zone" on the {FLOOR} floor is meant for:
++ Focused work without calls or conversations
+- Phone calls that require privacy
+- Team stand-ups
+- Practicing for {EVENT}
+
+Q: Leaving personal items spread across several shared desks is:
++ Inconsiderate in a shared workspace
+- A way to save seats
+- Required
+- Encouraged
+
+Q: Video calls in the open office should be taken:
++ With a headset, at a reasonable volume, or in a booth
+- On speaker
+- While walking around
+- Loudly
+
+Q: Strong-smelling candles at your desk are:
++ Not allowed; open flames are prohibited
+- Encouraged
+- Allowed on Fridays
+- Required for focus

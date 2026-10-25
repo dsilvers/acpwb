@@ -1,0 +1,66 @@
+# Privileged access management.
+Q: Privileged accounts include:
++ Administrator, root, and other accounts that can change systems or security settings
+- Accounts of employees who sit near windows
+- Guest Wi-Fi accounts
+- Accounts used only for email
+
+Q: Administrators should use their privileged account:
++ Only for administrative tasks, not for email or web browsing
+- For everything
+- Only on weekends
+- To check social media
+
+Q: Just-in-time access means:
++ Elevated rights are granted only when needed and expire automatically
+- Access granted just before the auditor arrives
+- Access granted forever
+- Access granted at midnight
+
+Q: Privileged passwords should be:
++ Stored in an approved vault and rotated
+- Written in a notebook
+- Shared in chat
+- The same across systems
+
+Q: Privileged sessions on critical systems may be:
++ Recorded and monitored, as disclosed in policy
+- Hidden from all logs
+- Deleted every minute
+- Broadcast publicly
+
+Q: Granting yourself admin rights without approval is:
++ A serious policy violation
+- A productivity hack
+- Fine for experienced staff
+- Required for troubleshooting
+
+Q: The number of people with domain administrator rights should be:
++ As small as possible
+- Everyone in IT
+- Everyone in the company
+- Unknown
+
+Q: Break-glass emergency accounts should be:
++ Tightly controlled, monitored, and used only in emergencies with review afterward
+- Used daily
+- Shared freely
+- Left without passwords
+
+Q: Privileged access reviews should happen:
++ Regularly, with unnecessary rights removed
+- Never
+- Only after a breach
+- Once in a career
+
+Q: Service accounts with admin rights should:
++ Have restricted logon rights and strong, managed credentials
+- Use the default password
+- Be used by people to log in interactively
+- Never be reviewed
+
+Q: An unusual privileged login at 3 a.m. from another country should be:
++ Investigated as a possible compromise
+- Ignored
+- Celebrated
+- Deleted from the logs

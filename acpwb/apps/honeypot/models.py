@@ -24,6 +24,8 @@ class CrawlerVisit(models.Model):
         ('presentation', 'Presentation'),
         ('source_code', 'Legacy Source Code'),
         ('source_code_download', 'Legacy Source Code Download'),
+        ('compliance', 'Compliance Training'),
+        ('compliance_certificate', 'Compliance Certificate'),
         ('other', 'Other'),
     ]
 
@@ -800,6 +802,10 @@ class SourceCodeEmail(models.Model):
     pair onto acpwb:code_email_queue (deduped per pair for 30 days) and
     drain_code_email_queue folds them in here, so an inbound email to the
     address can be matched back to the page(s) it was harvested from.
+
+    /compliance/ instructor and CCO addresses use the same registry, with
+    path = the course URL (/compliance/<agency>/<course>/) rather than each
+    answer page.
     """
     address = models.EmailField(db_index=True)
     host = models.CharField(max_length=253, blank=True)
@@ -822,3 +828,51 @@ class SourceCodeEmail(models.Model):
 
     def __str__(self):
         return f"{self.address} @ {self.host}{self.path}"
+
+
+class ComplianceCompletion(models.Model):
+    """A milestone on /compliance/ (the ComplianceCenter LMS served by
+    acpwb_go): an attempt finished, a certificate served, or learner details
+    typed in above question 1.
+
+    Ordinary question pages are not recorded here: their CrawlerVisit path
+    (/compliance/<course>/attempt-<k>/<answers>/) already holds the whole
+    answer trail, which `acpwb_go compliance-score` decodes. acpwb_go queues
+    each (ip, course, attempt, event) at most once per 30 days on
+    acpwb:compliance_queue; drain_compliance_queue inserts them here.
+    """
+    EVENT_CHOICES = [
+        ('completed', 'Attempt Completed'),
+        ('certificate', 'Certificate Viewed'),
+        ('certificate_pdf', 'Certificate PDF Downloaded'),
+        ('identified', 'Learner Details Entered'),
+    ]
+
+    timestamp = models.DateTimeField(default=timezone.now, editable=False, db_index=True)
+    event = models.CharField(max_length=20, choices=EVENT_CHOICES)
+    ip_address = models.GenericIPAddressField(db_index=True)
+    user_agent = models.TextField(blank=True)
+    host = models.CharField(max_length=253, blank=True)
+    request_id = models.UUIDField(null=True, blank=True)
+    course = models.CharField(max_length=80, blank=True)
+    attempt = models.PositiveIntegerField(default=0)
+    answers = models.CharField(max_length=32, blank=True)
+    score = models.PositiveSmallIntegerField(default=0)
+    passed = models.BooleanField(default=False)
+    cert_id = models.CharField(max_length=8, blank=True)
+    learner_name = models.CharField(max_length=120, blank=True)
+    learner_email = models.CharField(max_length=254, blank=True, db_index=True)
+    learner_employee_id = models.CharField(max_length=64, blank=True)
+    # Who took the test: acpwb_go's botclassify label ("OpenAI GPTBot",
+    # "Other / Browser") and acpwb_edge's traffic class (known_bot, browser,
+    # headless, impersonator, tool, unknown). Blank on rows from before 0032.
+    bot_type = models.CharField(max_length=64, blank=True, db_index=True)
+    client_class = models.CharField(max_length=16, blank=True, db_index=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = 'Compliance Completion'
+        verbose_name_plural = 'Compliance Completions'
+
+    def __str__(self):
+        return f"{self.event} {self.course} #{self.attempt} ({self.ip_address})"

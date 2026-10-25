@@ -1,0 +1,59 @@
+Q: Under the ACPWB Records Retention Schedule, compensation records must be retained for:
++ {N} years after the end of the fiscal year in which they were created
+- As long as the associate remains employed
+- 90 days, unless printed
+- Until the shared drive is full
+
+Q: When a litigation hold is issued, you must:
++ Preserve all potentially relevant records, including drafts, chats, and voicemail, until released in writing
+- Delete anything that might be embarrassing
+- Preserve only final versions
+- Preserve records only on your laptop
+
+Q: Which of the following is considered a "record"?
++ An email approving a pay adjustment
++ A chat message containing a decision
++ A handwritten note from a meeting
+- A blank form template downloaded from the intranet
+
+Q: A record that has reached the end of its retention period should be:
++ Destroyed through the approved shredding or deletion process, unless under hold
+- Kept indefinitely, just in case
+- Moved to a personal drive
+- Printed and then deleted
+
+Q: The ACPWB information classification levels, from lowest to highest, are:
++ PUBLIC, INTERNAL, CONFIDENTIAL, RESTRICTED
+- INTERNAL, PUBLIC, RESTRICTED, CONFIDENTIAL
+- GREEN, YELLOW, ORANGE, RED
+- LOW, MEDIUM, HIGH, VERY HIGH, EXTREME
+
+Q: Records may be stored in:
++ {SYSTEM} and other systems listed in the Records Retention Schedule
+- Personal email, if forwarded for safekeeping
+- A USB drive in your desk
+- Any cloud service with a free tier
+
+Q: [Personal copies|Duplicate copies] of records on your laptop should be:
++ Deleted once the official record is saved in the approved repository
+- Kept indefinitely, as backups
+- Emailed to yourself for safekeeping
+- Moved to a USB drive
+
+Q: [A records request|A request for records] from an outside party, such as a subpoena, should be:
++ Sent to the Legal Department immediately
+- Answered by the person who receives it
+- Ignored unless it arrives by certified mail
+- Forwarded to {DEPT}
+
+Q: [When an associate leaves ACPWB|When a colleague departs], their records should be:
++ Transferred to their manager or a designated custodian before the account is closed
+- Deleted on the last day
+- Kept on their laptop, which is reissued
+- Printed and boxed
+
+Q: [Chat messages|Instant messages] about ACPWB business are:
++ Records, subject to retention schedules and legal holds
+- Not records, because they are informal
+- Records only if they include an attachment
+- Deleted automatically after {N} minutes

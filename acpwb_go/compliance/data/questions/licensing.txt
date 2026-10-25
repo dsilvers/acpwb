@@ -1,0 +1,66 @@
+# Software license compliance.
+Q: Installing commercial software on more computers than the license allows is:
++ License infringement and prohibited
+- Fine if the software is expensive
+- Allowed for testing forever
+- Encouraged to save money
+
+Q: Software purchases must go through:
++ IT and Procurement so licenses can be tracked
+- Personal credit cards
+- Free trials renewed with new emails
+- Vendors' sales reps only
+
+Q: A "free for personal use" license usually means:
++ Business use requires a paid license
+- It is free for all purposes
+- It is free for companies with fewer than 1,000 employees
+- It is free on weekends
+
+Q: License keys found online for paid software should be:
++ Never used
+- Used if they work
+- Shared with the team
+- Saved for later
+
+Q: A vendor software audit is:
++ A review of whether license use matches entitlements, which can lead to large back fees
+- A friendly visit with snacks
+- Optional
+- An audit of the vendor's books
+
+Q: Using a former employer's software license at ACPWB is:
++ Not allowed
+- Fine if it is still active
+- Encouraged
+- Required for onboarding
+
+Q: Software that is no longer needed should be:
++ Uninstalled and its license reclaimed
+- Left installed just in case
+- Copied to a USB drive
+- Deleted without telling IT
+
+Q: Subscription software tied to a person's account should be:
++ Reassigned or cancelled when the person leaves
+- Kept on the person's personal card
+- Ignored
+- Renewed automatically forever
+
+Q: A license that allows "named users" means:
++ Each specific person using the software needs a license
+- Any number of people can share one name
+- Users must name their computer
+- The software names the users
+
+Q: Before using a free browser extension for work, you should:
++ Check that it is approved by IT
+- Install it if it has good reviews
+- Install every extension available
+- Ask the extension's developer
+
+Q: Records of software licenses and purchases should be:
++ Kept so the company can prove compliance
+- Thrown away after installation
+- Stored only on sticky notes
+- Kept by the vendor only

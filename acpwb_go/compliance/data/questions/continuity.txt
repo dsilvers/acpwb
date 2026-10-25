@@ -1,0 +1,61 @@
+# Business continuity and disaster recovery.
+
+Q: [If|When] the ACPWB building is [unavailable|closed unexpectedly|without power], associates should [first|FIRST]:
++ Check in through the emergency notification system and follow their department's continuity plan
+- Go to the building to see if it is really closed
+- Take the day off
+- Email the CEO for instructions
+
+Q: Business continuity plans must be [tested|exercised]:
++ At least annually, with results documented and gaps remediated
+- Only after an actual disaster
+- Whenever the plan owner has spare time
+- Every {N} years, if convenient
+
+Q: The ACPWB emergency assembly point [for headquarters|for 8833 East Michigan Street] is:
++ {CITY} Plaza, unless Security directs otherwise
+- The parking structure, level P2
+- The nearest coffee shop
+- Wherever your team decides
+
+Q: [Critical|Essential] records needed during an outage should be [kept|stored]:
++ In the approved backup systems listed in the continuity plan
+- On a USB drive in your pocket
+- In a personal cloud account
+- Printed in a binder at home
+
+Q: [Your business continuity plan|The {DEPT} continuity plan] must be [reviewed|tested] at least:
++ Once a year, and after any major change to the team or its systems
+- Once every {N} years, if remembered
+- Only after an actual disruption
+- Never; testing a plan wears it out
+
+Q: [During a building evacuation|If the {PLACE} is closed unexpectedly], associates should check the status of the office by:
++ Calling the ACPWB Status Line or checking the emergency notification system
+- Driving to the office to look
+- Asking the parking attendant
+- Waiting for the local news
+
+Q: A critical process owner is [on leave|unreachable|out of the country] during a disruption. The continuity plan should already name:
++ A trained backup who can perform the process
+- The owner's personal mobile number, to call repeatedly
+- A vendor who may know how it works
+- Nobody; critical processes wait for their owner
+
+Q: [Which of the following|What] belongs in a team's [continuity plan|recovery playbook]?
++ Contact trees, critical processes, recovery time objectives, and workarounds
++ The location of offline copies of key {DOCUMENT} templates
+- Associates' home addresses and alarm codes
+- The team's lunch preferences
+
+Q: [The recovery time objective (RTO)|An RTO] for a process means:
++ The maximum acceptable time before the process must be restored
+- The time it took to recover last time
+- How long associates may be out of the office
+- The time of day recovery is scheduled
+
+Q: After a continuity exercise, [the plan owner|{NAME}, the plan owner,] should:
++ Record lessons learned and update the plan within {DAYS} days
+- File the results and keep the plan unchanged
+- Declare the exercise a success, regardless of outcome
+- Schedule the same exercise for the following day

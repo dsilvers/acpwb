@@ -1,0 +1,66 @@
+# Logging and monitoring.
+Q: Security logs are important because they:
++ Help detect, investigate, and respond to incidents
+- Fill disks
+- Slow systems
+- Are decorations
+
+Q: Logs should be protected from:
++ Tampering and unauthorized access
+- Being read by Security
+- Being stored
+- Timestamps
+
+Q: Logs must not contain:
++ Passwords, full card numbers, or other secrets
+- Event types
+- Timestamps
+- User IDs
+
+Q: Turning off logging to save storage costs without approval is:
++ Not allowed
+- Smart
+- Required
+- Harmless
+
+Q: Accurate timestamps in logs require:
++ Synchronized clocks across systems
+- Manual entry
+- Guessing
+- Nothing
+
+Q: Log retention periods are set by:
++ Policy and legal or regulatory requirements
+- Disk space only
+- Individual engineers
+- Random choice
+
+Q: Centralized logging helps by:
++ Collecting logs in one protected place for analysis
+- Hiding logs
+- Deleting logs
+- Slowing analysis
+
+Q: A sudden stop in logs from a critical system should be:
++ Investigated, because it can indicate failure or tampering
+- Ignored
+- Celebrated
+- Expected
+
+Q: Access logs on public websites help identify:
++ Scanners, crawlers, and attacks
+- Employee birthdays
+- Weather
+- Nothing
+
+Q: Personal data in logs should be:
++ Minimized and protected
+- Maximized
+- Shared
+- Published
+
+Q: Alerts generated from logs should be:
++ Tuned to reduce noise while catching real problems
+- Turned off
+- Ignored
+- Sent to everyone

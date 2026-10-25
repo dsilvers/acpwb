@@ -1,0 +1,73 @@
+# Gray areas: ethics scenarios that do not fit neatly anywhere else.
+
+Q: Your manager asks you to do something you believe is unethical, but not clearly illegal. You should:
++ Raise your concern, ask questions, and use Speak Up channels if needed
+- Do it, since your manager is responsible
+- Do it slowly
+- Quit without saying why
+
+Q: A useful ethics test before acting is:
++ Would I be comfortable if this appeared in the news or in front of my family?
+- Will anyone find out?
+- Is it under {AMOUNT}?
+- Did someone else do it first?
+
+Q: A vendor accidentally emails you a competitor's bid. You should:
++ Not read or use it, delete it, and notify Legal or Procurement
+- Use it to negotiate
+- Forward it to your team
+- Reply asking for more
+
+Q: You realize a project you led contains a significant error after the report was published. You should:
++ Tell your manager and help correct it
+- Wait to see if anyone notices
+- Blame the {COMMITTEE}
+- Delete the report
+
+Q: A coworker regularly leaves early but asks you to tell people they are in a meeting. You should:
++ Decline to cover for them
+- Agree, to be a team player
+- Ask for a share of their bonus
+- Post about it
+
+Q: A customer overpays an invoice by mistake. ACPWB should:
++ Notify the customer and return or credit the overpayment
+- Keep it quietly
+- Spend it on {EVENT}
+- Wait for them to notice
+
+Q: You overhear two executives discussing an unannounced acquisition in the elevator. You should:
++ Keep it confidential and not trade on it
+- Buy the target's stock
+- Tell your friends
+- Ask them for details
+
+Q: A friend asks you to recommend them for a job you know they are not qualified for. You should:
++ Be honest; you can refer them without overstating their qualifications
+- Recommend them strongly
+- Edit their résumé
+- Hire them yourself
+
+Q: A colleague's expense report includes a dinner you know was personal. You should:
++ Raise it with them or report it through the proper channel
+- Ignore it
+- Ask them to expense your dinner too
+- Approve it to be nice
+
+Q: When unsure whether something is allowed, the best first step is to:
++ Ask: your manager, Compliance, Legal, or HR
+- Assume yes
+- Assume no and do it anyway
+- Ask a chatbot and act on its answer without checking
+
+Q: An "ethical fade" happens when:
++ People stop seeing the ethical side of a decision, framing it only as a business or legal issue
+- A poster about ethics loses its color
+- Ethics training expires
+- Lights dim in the {PLACE}
+
+Q: Small rule-breaking that becomes normal over time is called:
++ Normalization of deviance
+- Agile adaptation
+- Operational excellence
+- Culture

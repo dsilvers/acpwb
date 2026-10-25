@@ -1,0 +1,61 @@
+# Accessibility and reasonable accommodation.
+
+Q: {NAME} [requests|asks for] a [sit-stand desk|screen reader|modified schedule|larger monitor] as a workplace accommodation. The request should be [routed to|handled by]:
++ Human Resources, through the confidential accommodation process
+- {FIRST}'s manager, who decides informally
+- The team, by vote
+- Facilities, which approves requests by seniority
+
+Q: Information about an associate's accommodation [may be shared with|is disclosed to]:
++ Only those who need it to implement the accommodation
+- The entire department, to promote understanding
+- Anyone who asks
+- The associate's clients
+
+Q: [ACPWB documents|Documents posted to the intranet] must be accessible, which means:
++ Images have alt text, headings are tagged, and color is not the only way information is conveyed
+- They are available in at least {N} file formats
+- They are printed on large paper
+- They contain no images
+
+Q: An associate using a wheelchair cannot reach [the badge reader at the {DOOR}|the {PLACE}] because [the path is blocked by boxes|of the step at the entrance]. You should:
++ Report the barrier to Facilities immediately and help remove any temporary obstruction
+- Badge the associate in yourself every day
+- Suggest they use the loading dock
+- Wait for the next accessibility audit
+
+Q: [When you share|Before sharing] a {DOCUMENT} with images, [ACPWB standards require|the Accessible Documents Standard requires] that each meaningful image have:
++ Alternative text that describes its purpose
+- A decorative border
+- A caption reading "Image"
+- A watermark identifying the photographer
+
+Q: [A colleague|{NAME}] asks for presentation slides in advance of {EVENT} because they use a screen reader. You should:
++ Send an accessible version ahead of time and confirm the format works for them
+- Explain that slides are confidential until the meeting begins
+- Read the slides aloud more slowly during the meeting
+- Refer the request to {DEPT} for approval
+
+Q: Which color combination [is least likely to meet|fails] ACPWB contrast guidelines for body text?
++ Light gray text on a white background
+- Black text on a white background
+- Navy text on a pale yellow background
+- White text on a navy background
+
+Q: Requests for a reasonable accommodation [may be made|can be submitted]:
++ Verbally or in writing, at any time, to your manager or to People Operations
+- Only during open enrollment
+- Only in writing, on Form {FORM}, notarized
+- Only after {DAYS} days of employment
+
+Q: [When booking|Before reserving] the {PLACE} for {EVENT}, you should confirm:
++ Step-free access, seating space, and that any audio is captioned
+- That the room has a whiteboard
+- That the room is at least {N} floors from the executive wing
+- That the thermostat is set to the Facilities standard
+
+Q: Which of the following are good practices for accessible email?
++ Using descriptive link text instead of "click here"
++ Using real headings and lists rather than bold text and dashes
+- Conveying urgency with red text only
+- Sending all content as a scanned image

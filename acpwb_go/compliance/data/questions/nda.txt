@@ -1,0 +1,60 @@
+# Nondisclosure agreements.
+Q: An NDA is used to:
++ Protect confidential information shared between parties
+- Hide illegal conduct
+- Prevent reporting to regulators
+- Replace contracts
+
+Q: NDAs cannot lawfully prevent employees from:
++ Reporting possible violations of law to government agencies, such as the SEC
+- Keeping trade secrets
+- Following policies
+- Doing their jobs
+
+Q: The federal Speak Out Act limits enforcement of pre-dispute NDAs regarding:
++ Sexual harassment and sexual assault disputes
+- Software bugs
+- Holiday parties
+- Expense reports
+
+Q: Before sharing confidential information with a vendor, you should:
++ Confirm an NDA or contract with confidentiality terms is in place
+- Share and sign later
+- Ask the vendor to promise
+- Post it
+
+Q: NDA templates should be:
++ Approved by Legal
+- Downloaded from random websites
+- Written by sales
+- Skipped
+
+Q: An NDA marking does not protect information that is:
++ Already public
+- Confidential
+- Shared under the NDA
+- Trade secrets
+
+Q: Signing an NDA on behalf of ACPWB requires:
++ Signature authority under the delegation of authority
+- Any employee
+- Interns
+- No authority
+
+Q: Confidential information received under an NDA should be used:
++ Only for the purpose the NDA allows
+- For any purpose
+- For competitive advantage freely
+- For marketing
+
+Q: When an NDA expires, information should be:
++ Handled according to the NDA's return or destruction terms
+- Published
+- Shared freely
+- Sold
+
+Q: SEC Rule 21F-17 prohibits:
++ Impeding individuals from communicating with the SEC about possible securities violations
+- Filing reports
+- Confidentiality agreements entirely
+- Whistleblowing

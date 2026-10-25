@@ -1,0 +1,98 @@
+# Labor unions and the National Labor Relations Act. Correct answers follow
+# the NLRA as enforced by the NLRB; keep them accurate.
+
+Q: Section 7 of the National Labor Relations Act gives most private-sector employees the right to:
++ Form, join, or assist a union and engage in other concerted activities for mutual aid or protection, or to refrain from doing so
+- Strike at any time without any limits
+- Choose their own manager
+- Receive a union card from their employer
+
+Q: [Associates discussing pay and working conditions with each other|Coworkers talking with one another about wages, hours, and working conditions] is:
++ Protected concerted activity under the NLRA, whether or not a union is involved
+- A confidentiality violation
+- Allowed only on breaks in the {PLACE}
+- Allowed only with HR present
+
+Q: The acronym TIPS describes what managers must NOT do during union organizing. It stands for:
++ Threaten, Interrogate, Promise, Spy
+- Talk, Inform, Persuade, Supervise
+- Track, Investigate, Penalize, Suspend
+- Tell, Insist, Pressure, Survey
+
+Q: [A manager|{NAME}, a people manager,] asks a team member, "Who on our team has signed a union card?" This is:
++ Unlawful interrogation, and should not be asked
+- A normal question to understand the team
+- Allowed if asked casually at lunch
+- Allowed if the answer is kept confidential
+
+Q: [A manager|{NAME}] tells employees, "If the union gets in, we'll probably have to close this location." This is:
++ An unlawful threat
+- A lawful statement of opinion
+- Required disclosure under the NLRA
+- Lawful if said in a team meeting
+
+Q: [A manager|{NAME}] promises a raise to anyone who votes against the union. This is:
++ An unlawful promise of benefits
+- A lawful retention bonus
+- Lawful if the raise is small
+- Lawful if put in writing
+
+Q: [A manager|{NAME}] parks outside a union meeting to see who attends. This is:
++ Unlawful surveillance (or creating the impression of it)
+- Lawful, because the parking lot is public
+- Lawful if the manager does not take notes
+- A normal part of employee engagement
+
+Q: Under the NLRA, an employer may lawfully:
++ Share facts and its opinions about unionization, without threats or promises of benefits
+- Fire the employees who started the organizing campaign
+- Ask employees to report which coworkers support the union
+- Tell employees they will lose their jobs if they unionize
+
+Q: [Talking about the union|Soliciting coworkers to sign union cards] may generally be limited by a valid rule to:
++ Non-working time, such as breaks and lunch, when applied evenly to all non-work solicitation
+- Never; the employer may ban it entirely
+- Only outside the state
+- Only after a manager approves the message
+
+Q: [A union election|A secret-ballot union election] is conducted by:
++ The National Labor Relations Board
+- ACPWB's {DEPT} department
+- The union alone
+- The {COMMITTEE}
+
+Q: In a unionized workplace, an employee asked to attend an investigatory interview that they reasonably believe could lead to discipline may:
++ Request that a union representative be present (Weingarten rights)
+- Bring any family member
+- Refuse to attend under all circumstances
+- Require the employer to pay for a lawyer
+
+Q: [Under a collective bargaining agreement|In a unionized workplace], disputes about how the contract applies are usually resolved through:
++ The grievance procedure set out in the agreement
+- A coin toss
+- A vote of the {COMMITTEE}
+- The Integrity Line only
+
+Q: [Supervisors|Managers with authority to hire, fire, or discipline] are:
++ Generally not covered by the NLRA's organizing protections, and must not interfere with employees' rights
+- Required to join the union
+- Required to lead the organizing campaign
+- Allowed to vote twice
+
+Q: Retaliating against an employee for union activity, such as cutting their hours, is:
++ An unfair labor practice that can be charged with the NLRB
+- A normal scheduling decision
+- Lawful if the employee is new
+- Lawful if done after the election
+
+Q: An employee posts on social media, with coworkers commenting, about unsafe staffing levels at ACPWB. This is most likely:
++ Protected concerted activity
+- A confidentiality breach that justifies discipline
+- A violation of the brand guidelines
+- Defamation by default
+
+Q: Employees who choose not to support or join a union:
++ Have the right to refrain, and may not be coerced by either the employer or the union
+- Must join anyway
+- Lose access to the {PLACE}
+- Must pay a penalty to ACPWB

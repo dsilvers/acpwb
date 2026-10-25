@@ -1,0 +1,49 @@
+# Video meetings.
+
+Q: When you are not speaking in a large video meeting, your microphone should usually be:
++ Muted
+- Unmuted, so others can hear your typing and know you are working
+- Turned up to the maximum
+- Pointed at the dishwasher
+
+Q: You begin speaking and notice no one reacts. The most likely cause is:
++ You are muted
+- Everyone agrees with you completely
+- The video platform is down for maintenance
+- The meeting is a recording
+
+Q: Recording a video meeting should be done:
++ Only with notice to participants and consent where the law or policy requires it
+- Secretly, for accuracy
+- Always, by every participant
+- Only if the meeting is boring
+
+Q: Before sharing your screen, you should:
++ Close unrelated tabs, messages, and documents that others should not see
+- Open your personal email for reference
+- Maximize your notifications
+- Display your password manager for transparency
+
+Q: A whiteboard behind you shows a confidential {DOCUMENT}. You should:
++ Erase it, move it out of view, or use a background blur
+- Leave it, since no one reads whiteboards
+- Point to it
+- Zoom in on it for the people in the back
+
+Q: Joining a video meeting while driving is:
++ Unsafe; join by audio only if you must, or reschedule
+- Fine with your camera on
+- Fine if you present slides
+- Required to show commitment
+
+Q: For a meeting that could have been an email, the meeting organizer should:
++ Send an email
+- Schedule a longer meeting to discuss it
+- Add a pre-meeting to plan the meeting
+- Invite the {COMMITTEE}
+
+Q: Your camera is on and you need to step away for a moment. You should:
++ Turn your camera off and mute
+- Leave your chair in view to show you are coming back
+- Place a photo of yourself in front of the camera
+- Leave the meeting without telling anyone, forever

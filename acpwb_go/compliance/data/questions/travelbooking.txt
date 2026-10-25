@@ -1,0 +1,55 @@
+# Air travel, hotels, and meeting rooms.
+
+Q: Business-class airfare is generally allowed under the ACPWB travel policy only when:
++ The policy's conditions are met, such as flight length, and approval is obtained
+- You prefer it
+- Your manager is flying business
+- It is a {WEEKDAY}
+
+Q: Choosing a more expensive flight to earn personal airline miles is:
++ Not allowed when a lower-cost option meets the policy
+- Smart
+- Required
+- Encouraged on long trips
+
+Q: Hotel stays should be booked:
++ Through the approved travel program at or below the policy rate
+- At the nicest hotel nearby
+- Through a friend's rental
+- With personal points only
+
+Q: Hotel minibar and in-room movie charges are typically:
++ Not reimbursable
+- Reimbursable
+- Required
+- Shared with the team
+
+Q: Booking a meeting room and not using it is:
++ Inconsiderate; release rooms you do not need
+- A good way to reserve space
+- Required for meetings that might happen
+- Allowed for recurring meetings forever
+
+Q: A meeting room that is booked but empty 10 minutes after the start time:
++ May be released under the room-booking policy
+- Must stay empty all day
+- Belongs to the {COMMITTEE}
+- Can be locked
+
+Q: Lost luggage on a business trip should be:
++ Reported to the airline right away, and reasonable replacement items handled under the travel policy
+- Ignored
+- Billed to ACPWB without receipts
+- Replaced with luxury items
+
+Q: Travel time for non-exempt employees on business trips may be:
++ Paid work time, depending on when the travel occurs
+- Never paid
+- Paid at triple time
+- Paid only on {WEEKDAY}s
+
+Q: Upgrades paid for with your own miles are:
++ Fine, as long as the base fare meets the policy
+- Prohibited
+- Reimbursable
+- Required

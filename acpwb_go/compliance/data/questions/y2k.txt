@@ -1,0 +1,66 @@
+# The Year 2000 problem and other date bugs, for the archive-minded.
+Q: The Y2K problem came from:
++ Programs storing years as two digits, so 2000 could be read as 1900
+- Computers that could not count past 1999 megabytes
+- A virus written in 1999
+- A shortage of calendars
+
+Q: Y2K remediation involved:
++ Finding, fixing, and testing date logic in programs and data
+- Turning off all computers on December 31
+- Changing the year to 1999 permanently
+- Buying new calendars
+
+Q: "Windowing" was a Y2K fix that:
++ Interpreted two-digit years within a set range, such as 00–49 as 2000s
+- Opened office windows
+- Removed dates from programs
+- Added a Windows license
+
+Q: Was the year 2000 a leap year?
++ Yes; years divisible by 400 are leap years
+- No; century years are never leap years
+- Only in Europe
+- Only on the mainframe
+
+Q: The "Year 2038 problem" affects systems that:
++ Store time as a signed 32-bit count of seconds since January 1, 1970
+- Use paper calendars
+- Use COBOL only
+- Were built after 2038
+
+Q: A program that calculates age as 2025 minus a two-digit birth year of 85:
++ Gives the wrong answer unless the century is handled
+- Works perfectly
+- Crashes the building
+- Calculates 40 correctly every time
+
+Q: Old COBOL programs that still run payroll today should be:
++ Maintained and tested by people who understand them
+- Left untested
+- Replaced overnight without testing
+- Ignored
+
+Q: The lesson of Y2K for modern systems is:
++ Test edge cases such as dates, time zones, and leap years
+- Dates never matter
+- Only use two-digit years
+- Avoid calendars
+
+Q: Contingency plans for Y2K included:
++ Manual backup procedures and staff on site at midnight
+- Leaving town
+- Unplugging the internet
+- Writing letters to the year 2000
+
+Q: Daylight saving time changes can cause bugs when:
++ Code assumes every day has exactly 24 hours
+- Clocks are digital
+- People sleep in
+- It is sunny
+
+Q: Storing dates in a standard format such as ISO 8601 (YYYY-MM-DD) helps:
++ Avoid ambiguity between formats like 03/04 and 04/03
+- Make dates longer for fun
+- Hide dates
+- Confuse auditors

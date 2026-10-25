@@ -1,0 +1,62 @@
+# Customer data, CRM records, and accessibility of digital products.
+# Correct answers on accessibility follow the ADA and WCAG.
+
+Q: Customer data in the CRM should be accessed:
++ Only for legitimate business needs related to your role
+- Out of curiosity about famous customers
+- To find a date
+- To check on your neighbors
+
+Q: Exporting a full customer list to a personal spreadsheet is:
++ Not allowed without approval and a business need
+- Allowed for convenience
+- Required at year end
+- Allowed if the file is named "test"
+
+Q: Notes about customers in the CRM should be:
++ Professional and factual, since customers may be able to request them
+- Funny nicknames
+- Opinions about their appearance
+- Written in code
+
+Q: WCAG stands for:
++ Web Content Accessibility Guidelines
+- World Corporate Advertising Guide
+- Wisconsin Compliance Agency Group
+- Wide Color And Gradients
+
+Q: Images on ACPWB websites should have:
++ Alternative (alt) text describing them for people using screen readers
+- No text at all
+- The word "image"
+- The file name
+
+Q: Videos published by ACPWB should include:
++ Captions
+- Background music only
+- Autoplay with sound
+- Flashing lights
+
+Q: Websites that cannot be navigated using a keyboard alone are:
++ Inaccessible to many users with disabilities
+- More secure
+- Required by {AGENCY}
+- Faster
+
+Q: Color alone should not be used to convey meaning because:
++ People with color vision deficiency may not see the difference
+- Colors are expensive
+- Monitors are black and white
+- The brand guide forbids color
+
+Q: Customer data retained longer than needed:
++ Increases risk and should be deleted per the retention schedule
+- Is more valuable over time
+- Should be kept forever
+- Should be printed
+
+Q: A customer's request to correct inaccurate data should be:
++ Routed to the appropriate team and handled promptly
+- Ignored
+- Denied by default
+- Handled by {VENDOR}

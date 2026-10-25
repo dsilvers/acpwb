@@ -1,0 +1,55 @@
+# Conflicts of interest.
+
+Q: A conflict of interest exists when:
++ Personal interests could interfere, or appear to interfere, with your duties to ACPWB
+- Two meetings are scheduled at the same time
+- Two coworkers disagree
+- You prefer a different coffee brand
+
+Q: Your sister-in-law owns a company bidding on an ACPWB contract you manage. You should:
++ Disclose the relationship and remove yourself from the decision
+- Make sure her bid wins
+- Say nothing if her bid is the lowest
+- Ask her to use a different company name
+
+Q: Holding a significant financial investment in a vendor you oversee is:
++ A conflict that must be disclosed
+- A smart investment
+- Allowed if you do not tell anyone
+- Required for vendor managers
+
+Q: Accepting a seat on another company's board requires:
++ Prior approval under the outside activities policy
+- Nothing, if it is after hours
+- Only a business card
+- A vote of your team
+
+Q: A side business that competes with ACPWB is:
++ Not allowed
+- Allowed if run from your home
+- Allowed if you use your personal email
+- Allowed with a different logo
+
+Q: Using ACPWB time or equipment for an outside job is:
++ Not allowed
+- Allowed during slow weeks
+- Allowed for side jobs under {AMOUNT}
+- Allowed if your manager does not notice
+
+Q: Supervising a family member or romantic partner is:
++ A conflict that must be disclosed so the reporting relationship can be changed
+- Allowed if both agree
+- Allowed if you are fair
+- Encouraged for team cohesion
+
+Q: The annual conflict-of-interest disclosure should be:
++ Complete and updated whenever circumstances change
+- Copied from last year without review
+- Left blank if unsure
+- Completed by your manager on your behalf
+
+Q: A vendor offers you a consulting gig on weekends. You should:
++ Disclose it and get approval before accepting
+- Accept, since it is the weekend
+- Accept if you are paid in cash
+- Accept and bill them through {VENDOR}

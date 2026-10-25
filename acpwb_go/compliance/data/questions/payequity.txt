@@ -1,0 +1,67 @@
+# Pay equity. Correct answers follow the Equal Pay Act and Title VII.
+
+Q: The Equal Pay Act requires:
++ Equal pay for substantially equal work, regardless of sex
+- Everyone at ACPWB to earn exactly the same amount
+- Equal pay for different jobs at the same level
+- Pay to be set by seniority alone
+
+Q: Under the Equal Pay Act, pay differences may be justified by:
++ Seniority, merit, quantity or quality of production, or another factor other than sex
+- The employee's negotiating style
+- Which manager hired them
+- What their spouse earns
+
+Q: A pay equity analysis typically compares pay for:
++ Employees doing similar work, controlling for legitimate factors such as level, location, and experience
+- Every employee against the CEO
+- Employees with the same first name
+- Employees who sit near each other
+
+Q: When a pay equity analysis finds unexplained gaps, the company should:
++ Investigate and correct unjustified gaps
+- Hide the analysis
+- Lower everyone's pay to match
+- Wait until the next {EVENT}
+
+Q: Lowering one employee's pay to equalize it with a lower-paid coworker of another sex is:
++ Not allowed; the Equal Pay Act prohibits reducing wages to comply
+- The preferred approach
+- Allowed if done gradually
+- Allowed with the {COMMITTEE}'s approval
+
+Q: Basing a new hire's salary on their salary history:
++ Is prohibited in many states and cities, and can carry forward past pay gaps
+- Is required by federal law
+- Is the most accurate method
+- Is allowed only for executives
+
+Q: A pay equity audit conducted under attorney-client privilege:
++ Lets the company analyze pay with legal advice before deciding on adjustments
+- Is illegal
+- Must be published immediately
+- Replaces all pay decisions
+
+Q: Starting salaries negotiated differently by gender can:
++ Create pay gaps that persist over time
+- Never matter
+- Equal out automatically
+- Be fixed by bonuses alone
+
+Q: Comparing pay for "substantially equal" work considers:
++ Skill, effort, responsibility, and working conditions
+- Job titles only
+- Office location only
+- Favorite projects
+
+Q: The Lilly Ledbetter Fair Pay Act provides that each discriminatory paycheck:
++ Resets the time limit for filing a pay discrimination charge
+- Is legal
+- Must be returned
+- Is final
+
+Q: Pay compression occurs when:
++ New hires are paid close to or above experienced employees in the same role
+- Paychecks are folded
+- Salaries are compressed into fewer digits
+- Raises are given monthly

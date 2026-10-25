@@ -1,0 +1,60 @@
+# Location data and tracking.
+Q: Tracking employees' location through company devices requires:
++ A legitimate purpose and disclosure in policy
+- Nothing
+- Secrecy
+- A court order always
+
+Q: Tracking employees' personal phones off duty is:
++ Not appropriate
+- Required
+- Encouraged
+- Normal
+
+Q: Precise geolocation is considered:
++ Sensitive personal information under some privacy laws
+- Public
+- Harmless
+- Not data
+
+Q: Photos posted online can reveal:
++ Location data in metadata
+- Nothing
+- Only colors
+- Only time
+
+Q: Fleet telematics location data should be:
++ Used for the purposes described and protected
+- Shared publicly
+- Sold
+- Ignored
+
+Q: Sharing your real-time location publicly while traveling for work:
++ Can create safety and security risks
+- Is safe
+- Is required
+- Is encouraged
+
+Q: Customer location data collected by apps must:
++ Follow consent and privacy rules
+- Be collected freely
+- Be sold
+- Be shared with partners
+
+Q: Location history on company accounts should be:
++ Managed according to privacy settings and policy
+- Unlimited
+- Public
+- Ignored
+
+Q: Badge readers record:
++ When and where badges are used
+- Nothing
+- Employees' thoughts
+- Only names
+
+Q: Requests to access location data about an employee should go through:
++ HR and Legal
+- Any manager
+- Coworkers
+- Vendors

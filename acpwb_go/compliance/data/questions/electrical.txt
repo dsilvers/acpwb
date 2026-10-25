@@ -1,0 +1,61 @@
+# Electrical safety. Correct answers follow OSHA and NFPA guidance.
+
+Q: A power cord with damaged insulation should be:
++ Taken out of service and reported
+- Wrapped in tape and used
+- Used only for small devices
+- Plugged into a power strip instead
+
+Q: Plugging one power strip into another, known as daisy-chaining, is:
++ Not allowed; it can overload circuits and cause fires
+- Allowed if both are new
+- Allowed for holiday lights
+- The best way to add outlets
+
+Q: The space in front of an electrical panel should be:
++ Kept clear, typically at least 36 inches, so the panel can be reached quickly
+- Used for extra storage
+- Blocked by a filing cabinet for safety
+- Decorated for {EVENT}
+
+Q: Ground-fault circuit interrupters (GFCIs) are especially important:
++ Near water, such as in kitchens, break rooms, and restrooms
+- Only in server rooms
+- Only outdoors in summer
+- Never; they are optional
+
+Q: Extension cords should be:
++ Used temporarily, not as permanent wiring, and never run under rugs or through doorways
+- Run under carpets to hide them
+- Stapled to walls
+- Connected end to end across the office
+
+Q: If a coworker is being shocked by an electrical source, you should:
++ Not touch them; cut the power if you can do so safely and call 911
+- Pull them away with your hands
+- Throw water on them
+- Wait for the shock to stop
+
+Q: Only qualified, authorized people may:
++ Open electrical panels or work on electrical equipment
+- Plug in a laptop
+- Change a desk lamp bulb
+- Use a power strip
+
+Q: A space heater should be:
++ Approved by Facilities and plugged directly into a wall outlet, away from paper and fabric
+- Plugged into a power strip under the desk
+- Used to dry wet coats
+- Left on overnight
+
+Q: A burning smell from an outlet should be:
++ Reported to Facilities immediately, and the equipment unplugged if safe
+- Covered with air freshener
+- Ignored if it goes away
+- Reported at the next {EVENT}
+
+Q: Overhead power lines near a work area should be:
++ Avoided by at least 10 feet, which can include ladders and equipment
+- Touched to test if they are live
+- Used to hang decorations
+- Avoided only if they spark

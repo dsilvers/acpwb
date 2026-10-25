@@ -1,0 +1,61 @@
+# Parking structure, commuting, and fleet vehicles.
+
+Q: [When entering|On the way into] the parking structure, [the gate arm is already up|another car is close behind you|the badge reader is not working]. You should:
++ Badge in yourself and do not allow another vehicle to follow you through
+- Wave the following car through as a courtesy
+- Drive around the gate arm
+- Leave your car at the entrance and walk in
+
+Q: Reserved parking spaces on level P{N} are [assigned to|available to]:
++ Associates with an approved accommodation or a vehicle registered to the fleet
+- Anyone who arrives before 7:00 a.m.
+- Directors and above
+- Whoever has the largest vehicle
+
+Q: [You|{NAME}] [scrape|scrapes|bump|bumps] another car in the parking structure. [What is required?|The correct response is:]
++ Leave contact details, photograph the damage, and file Form {FORM} within {DAYS} days
+- Leave without reporting it, since the structure has cameras
+- Report it only if the other car is a fleet vehicle
+- Move your car to a different level
+
+Q: Commuter benefit funds may be used for:
++ Transit passes and eligible parking costs while commuting to work
+- Ride-share trips on weekends
+- Airport parking for vacations
+- Fuel for personal road trips
+
+Q: An ACPWB fleet vehicle may be [driven|used] by:
++ Authorized associates with a current license on file, for business purposes only
+- Any associate with a valid badge
+- Family members accompanying an associate
+- Anyone holding the keys
+
+Q: [The speed limit|The posted speed limit] in the ACPWB parking structure is:
++ 5 miles per hour
+- 15 miles per hour, or 25 when late
+- Whatever feels comfortable
+- {N} miles per hour on the ramps only
+
+Q: [Reserved spaces|Spaces marked "Reserved"] in the parking structure may be used by:
++ Only the permit holder they are assigned to
+- Anyone, after 10:00 a.m.
+- Visitors, if the permit holder is on vacation
+- Anyone driving an electric vehicle
+
+Q: [You scrape|You accidentally scrape] another car in the parking structure. You should:
++ Leave a note with your contact details and report it to Security
+- Drive away and park on another level
+- Wait for the owner, for as long as it takes
+- Touch up the paint yourself
+
+Q: [Electric vehicle charging stations|EV chargers] in the parking structure should be:
++ Vacated when charging is complete, within the posted time limit
+- Used as regular parking spaces
+- Used to charge personal e-scooters overnight
+- Reserved by leaving a cone
+
+Q: [A stranger|An unfamiliar person] asks you to let them into the parking structure through the {DOOR}. You should:
++ Decline, and direct them to the visitor entrance or Security
+- Let them in if they seem friendly
+- Let them in if they have a car
+- Ask them to wait while you get your car

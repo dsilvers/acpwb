@@ -1,0 +1,61 @@
+# Return to office: associates who worked remotely coming back on site.
+
+Q: [After working remotely for {N} years|After a long stretch of remote work], {NAME} returns to the office on {WEEKDAY}. On the first day back, {FIRST} should:
++ Collect a re-activated badge from Security and confirm your assigned desk or neighborhood
+- Follow a colleague through the {DOOR} until your badge works
+- Sit wherever looks comfortable, including in executive offices
+- Bring a personal space heater for your new desk
+
+Q: [Badge swipe data|Office attendance data] collected under the Return to Office program is used to:
++ Confirm attendance against the agreed in-office schedule, as described in the policy notice
+- Rank associates by popularity
+- Track how long you spend in the {PLACE}
+- Share with your neighbors
+
+Q: [Arriving|Swiping in] at the office, getting a coffee, and leaving [shortly afterward|within the hour] to work from home is:
++ Not consistent with the in-office expectation, which is time spent working on site
+- A creative way to meet the policy
+- Encouraged, since the coffee is free
+- Only a problem on {WEEKDAY}s
+
+Q: [An associate|{NAME2}] has a medical condition that makes daily commuting difficult. They should:
++ Request a reasonable accommodation through People Operations, which may include remote work
+- Simply stop coming in
+- Ask a colleague to badge in for them
+- Wait until they are disciplined before saying anything
+
+Q: [Returning associates|Associates returning to the office] who find the {PLACE} too noisy for calls should:
++ Use a phone room or focus room, and wear headphones on open-plan calls
+- Take all calls on speakerphone
+- Ask colleagues to stop talking
+- Return home without telling anyone
+
+Q: [Your manager|{NAME}] asks why you missed the team's in-office day. The best response is to:
++ Explain the reason honestly and agree on how to meet the schedule going forward
+- Say the badge reader must have failed
+- Point out that nobody else came in either
+- Say you were in a different building, if you were not
+
+Q: Associates who were hired as fully remote employees under a written agreement:
++ Keep the terms of that agreement unless it is changed through the proper process
+- Must start coming in five days a week immediately
+- Must move to Milwaukee within {DAYS} days
+- Lose their badge privileges permanently
+
+Q: [Personal items|Plants, photos, and personal items] left at your old desk during the remote-work period were:
++ Boxed by Facilities and held for pickup, as announced
+- Donated to the next {EVENT}
+- Shredded
+- Distributed to the {COMMITTEE}
+
+Q: [Commuting time|Time spent commuting] to the office on in-office days is generally:
++ Not working time, unless you are doing work during it
+- Paid at double time
+- Deducted from your PTO balance
+- Counted toward your in-office hours
+
+Q: [Your first week back|In your first week back], you notice that the {DOOR} badge readers and floor layout have changed. The best way to get up to speed is to:
++ Review the Return to Office guide and the updated floor map, and ask Facilities if anything is unclear
+- Rely on what you remember from before
+- Ask the AI chatbot to guess the floor layout
+- Wait for someone to notice you are lost

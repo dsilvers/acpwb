@@ -1,0 +1,66 @@
+# Patch and vulnerability management.
+Q: Security patches fix:
++ Known vulnerabilities that attackers may exploit
+- Spelling errors only
+- Hardware color
+- Cosmetic issues only
+
+Q: Postponing a required security update on your laptop for weeks:
++ Leaves it exposed and is not allowed under the patch policy
+- Is fine if you are busy
+- Improves performance
+- Saves battery
+
+Q: Critical vulnerabilities are generally patched:
++ Within the shortest timeframe set by the vulnerability policy
+- At the next annual maintenance
+- Never
+- Only on leap years
+
+Q: A system that cannot be patched should have:
++ Compensating controls and a documented exception
+- Its alerts turned off
+- Its owner promoted
+- Nothing
+
+Q: Patches for servers should normally be:
++ Tested and scheduled through change management
+- Installed directly in production without notice
+- Skipped if the server is old
+- Installed only by vendors
+
+Q: Restarting your computer when prompted after updates:
++ Completes the installation of many patches
+- Undoes the updates
+- Is optional forever
+- Deletes your files
+
+Q: A vulnerability scan report showing missing patches should be:
++ Assigned to system owners and remediated
+- Deleted
+- Ignored until the audit
+- Sent to the vendor
+
+Q: Unsupported, end-of-life software:
++ No longer receives security fixes and should be replaced or isolated
+- Is safer because attackers forgot it
+- Lasts forever
+- Is free
+
+Q: Browser and plugin updates are:
++ Important because browsers are a common attack path
+- Optional
+- Cosmetic
+- Dangerous
+
+Q: Zero-day vulnerabilities are:
++ Flaws exploited before a fix is available
+- Bugs found on day zero of a project
+- Holidays for IT
+- Patches released at midnight
+
+Q: Firmware on network equipment and printers:
++ Also needs updates for security
+- Never needs updates
+- Updates itself every hour
+- Is not software

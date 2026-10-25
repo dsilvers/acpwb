@@ -1,0 +1,68 @@
+# Parental leave, pregnancy, and lactation. Correct answers follow U.S.
+# federal law (FMLA, PWFA, PUMP Act); keep them accurate.
+
+Q: [Eligible employees|An eligible employee] under the federal Family and Medical Leave Act (FMLA) may take up to:
++ 12 workweeks of job-protected leave in a 12-month period for qualifying reasons, including the birth of a child
+- 2 weeks of unpaid leave, with manager approval
+- 52 weeks of fully paid leave
+- {N} days, at the manager's discretion
+
+Q: FMLA leave to bond with a new child must be taken:
++ Within 12 months of the birth or placement
+- Before the child is born
+- In a single block of exactly 12 weeks
+- Only by the birth parent
+
+Q: [Parents who adopt or foster|Associates welcoming a child through adoption or foster care] are:
++ Eligible for bonding leave on the same basis as birth parents under ACPWB policy and the FMLA
+- Not eligible for any leave
+- Eligible only if the child is under {N} months old
+- Eligible only for unpaid weekends
+
+Q: Under the Pregnant Workers Fairness Act, ACPWB must:
++ Provide reasonable accommodations for known limitations related to pregnancy, childbirth, or related conditions, unless they cause undue hardship
+- Require pregnant associates to take leave
+- Wait until a doctor's note is provided for every request, without discussion
+- Offer accommodations only after the child is born
+
+Q: A pregnant associate asks to sit during her shift and take extra water breaks. The manager should:
++ Engage with her and People Operations to provide the accommodation
+- Deny it, since sitting is not in the job description
+- Require her to go on leave instead
+- Ask her to find a coworker to cover her shifts permanently
+
+Q: Under the federal PUMP Act, employees who are nursing must be given:
++ Reasonable break time and a private space, other than a bathroom, to express breast milk for up to one year after the child's birth
+- A single 10-minute break per day
+- Access to the nearest restroom
+- Breaks only if they are salaried
+
+Q: [The lactation room|ACPWB's lactation room] on the {FLOOR} floor is:
++ Reserved for nursing associates, private, and bookable through Facilities
+- A spare meeting room for anyone
+- Used for storage during renovations
+- Open to visitors
+
+Q: Asking a job candidate whether she plans to have children is:
++ Not permitted; it can be evidence of discrimination
+- Allowed if asked politely
+- Required for roles with travel
+- Allowed after the second interview
+
+Q: [An associate returning from parental leave|When an associate returns from parental leave], they generally:
++ Return to the same or an equivalent position with the same pay and benefits
+- Restart their probationary period
+- Return at a lower grade until they "catch up"
+- Lose their seniority
+
+Q: [Paid parental leave|Paid family leave] available to an associate may depend on:
++ ACPWB's parental leave policy and state paid family leave programs where they work
+- The number of meetings they attended last year
+- The manager's opinion of the request
+- Nothing; all leave is unpaid
+
+Q: [A colleague|{NAME}] makes repeated jokes about a coworker's pregnancy and "part-time commitment." This is:
++ Potentially pregnancy discrimination or harassment, and should be reported
+- Harmless office humor
+- Acceptable if the coworker laughs
+- Only a problem if a manager says it

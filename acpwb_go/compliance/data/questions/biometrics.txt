@@ -1,0 +1,60 @@
+# Biometric data. Answers reflect Illinois BIPA and similar laws.
+Q: Biometric identifiers include:
++ Fingerprints, face geometry, voiceprints, and retina or iris scans
+- Job titles
+- Email addresses
+- Favorite colors
+
+Q: Illinois' Biometric Information Privacy Act requires private entities to:
++ Give written notice, get written consent, and publish a retention and destruction policy
+- Do nothing
+- Collect freely
+- Sell data
+
+Q: Biometric time clocks require:
++ Notice and consent where state law demands it
+- Nothing
+- Passwords
+- A photo ID
+
+Q: Selling or profiting from biometric data is:
++ Prohibited under BIPA
+- Allowed
+- Encouraged
+- Required
+
+Q: Biometric data must be stored:
++ Securely and destroyed when no longer needed under the policy
+- Forever
+- On paper
+- Publicly
+
+Q: Using face recognition to identify employees in photos without consent may:
++ Violate biometric privacy laws
+- Be fine
+- Be required
+- Be encouraged
+
+Q: Vendors processing biometric data for ACPWB need:
++ Contracts and review by Privacy and Legal
+- Nothing
+- A demo
+- A discount
+
+Q: Employees who decline biometric enrollment should:
++ Be offered an alternative where required
+- Be fired
+- Be forced
+- Be ignored
+
+Q: BIPA allows individuals to:
++ Sue for violations, with statutory damages
+- Do nothing
+- Only complain
+- Only report to HR
+
+Q: Questions about biometric programs go to:
++ Privacy and Legal
+- Vendors only
+- Coworkers
+- Nobody

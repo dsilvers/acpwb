@@ -1,0 +1,110 @@
+# Remote and hybrid work.
+
+Q: [When|While] working from [home|a coffee shop|an airport lounge|a hotel lobby], you must:
++ Connect through the ACPWB VPN and lock your screen whenever you step away
++ Position your screen so others cannot see confidential information
+- Use the most convenient open Wi-Fi network
+- Leave your laptop unattended if you will be back within {N} minutes
+- Let family members use your ACPWB {DEVICE}
+
+Q: [A family member|A roommate|Your teenager] [asks to borrow|wants to use] your ACPWB {DEVICE} [for homework|to stream a movie|"for five minutes"]. You should:
++ Decline; ACPWB devices are for authorized users only
+- Allow it, if you supervise
+- Allow it on weekends
+- Create a guest account
+
+Q: Confidential calls [may|should] be taken [in a public place|on a train|in a shared workspace]:
++ Only if you cannot be overheard; otherwise reschedule
+- Freely, using headphones
+- If you speak quietly
+- If the call is shorter than {N} minutes
+
+Q: [Printing|Printed copies of] confidential documents at home [is|are]:
++ Not permitted unless approved, and any copies must be returned for secure shredding
+- Allowed on any printer
+- Allowed if recycled afterward
+- Encouraged to reduce screen time
+
+Q: [When working from home|While working remotely], confidential calls should be taken:
++ Somewhere you cannot be overheard, with smart speakers muted or moved away
+- On speakerphone, so you can type
+- On a balcony, for better signal
+- In a coffee shop, using headphones only
+
+Q: [Your home Wi-Fi|A home wireless network] used for ACPWB work should:
++ Use WPA2 or better encryption with a password you changed from the default
+- Be open, so ACPWB IT can reach it
+- Be named "ACPWB-Corporate"
+- Share a password with your neighbors
+
+Q: [Family members|Others in your household] may use your ACPWB laptop:
++ Never
+- For homework, if supervised
+- On weekends
+- If they sign the Acceptable Use Policy
+
+Q: [Under your hybrid work agreement|Per the Hybrid Work Agreement], you must [be in the office|work on site] on:
++ The days agreed with your manager and recorded in the agreement
+- Whichever days the weather is nicest
+- Only {WEEKDAY}s
+- Days when the {PLACE} is not too crowded
+
+Q: [You plan to|You would like to] work from another state for {N} weeks. You should:
++ Get approval first, because it can affect tax and employment law obligations
+- Just go; nobody will know
+- Tell your team after you arrive
+- Use a VPN to appear as though you are in Milwaukee
+
+Q: [Printed documents|Paper records] used at home must be:
++ Stored securely and returned to the office for shredding
+- Placed in household recycling
+- Burned in the fireplace
+- Kept indefinitely, as a backup
+
+Q: [Holding a second full-time job|Working a second full-time job] during your ACPWB working hours without disclosure is:
++ A conflict of interest and a breach of your employment terms; outside work must be disclosed
+- Fine, if both jobs get done
+- Fine, if the other employer is not a competitor
+- Encouraged as professional development
+
+Q: [Mouse jigglers|Devices or software that fake activity] on an ACPWB laptop are:
++ Prohibited; they misrepresent your work status and may breach security policy
+- Allowed to prevent the screen from locking
+- Allowed on {WEEKDAY}s
+- Provided by IT on request
+
+Q: [Monitoring software|Activity monitoring] on ACPWB devices is:
++ Described in the Acceptable Use Policy, which associates acknowledge
+- Never used
+- Secret, and should not be asked about
+- Only used on executives
+
+Q: [Your camera|Turning your camera on] during routine remote meetings is:
++ Encouraged when practical, but not required unless the meeting needs it
+- Required at all times, including lunch
+- Prohibited for security reasons
+- Required only if your background is tidy
+
+Q: [A colleague in another time zone|{NAME2}, who works three hours behind you,] regularly gets meetings scheduled at {TIMEOFDAY} their time. The best fix is to:
++ Schedule within overlapping working hours and rotate inconvenient times
+- Tell {FIRST2} to move to Milwaukee
+- Record everything and never meet live
+- Keep the schedule; time zones are personal choices
+
+Q: [The home office stipend|ACPWB's home office stipend] may be used for:
++ Approved work equipment and supplies, as listed in the stipend policy
+- A new television
+- Rent
+- Anything, if receipts are not kept
+
+Q: [Feeling isolated|Isolation] while working remotely is:
++ Common; associates are encouraged to talk to their manager and use the EAP if needed
+- A sign of poor performance
+- Not something ACPWB discusses
+- Solved by working longer hours
+
+Q: [A child or family member appears|Your toddler wanders] into your video call. You should:
++ Handle it calmly and continue; ACPWB recognizes that home life happens
+- End the call immediately and file an incident report
+- Apologize to every attendee individually afterward
+- Turn off your camera for the rest of the year

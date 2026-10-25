@@ -1,0 +1,66 @@
+# Inventory control.
+Q: A cycle count is:
++ Counting a portion of inventory on a regular schedule instead of all at once
+- Counting bicycles in the parking lot
+- Counting the same item over and over
+- An annual party
+
+Q: Inventory adjustments to match a count should be:
++ Documented, investigated if large, and approved
+- Made quietly to hide shrink
+- Made by whoever is counting
+- Avoided by recounting until it matches
+
+Q: Shrink refers to:
++ Inventory loss from theft, damage, or errors
+- Smaller packaging
+- A warehouse that is getting smaller
+- Washing uniforms
+
+Q: The person who receives inventory should not also:
++ Approve payment for it and adjust inventory records without oversight
+- Sign the delivery receipt
+- Check the packing slip
+- Count the boxes
+
+Q: Damaged inventory should be:
++ Recorded and handled under the damaged goods procedure
+- Hidden behind good stock
+- Taken home
+- Sold for cash
+
+Q: Taking company inventory for personal use is:
++ Theft and prohibited
+- A perk
+- Allowed if it is going to be discarded
+- Allowed for small items
+
+Q: Blind counts, where the counter does not see the system quantity, help to:
++ Prevent counters from simply confirming the expected number
+- Count faster in the dark
+- Hide inventory
+- Save printer paper
+
+Q: Obsolete inventory should be:
++ Identified, reviewed, and written off or disposed of with approval
+- Kept forever
+- Moved to someone's garage
+- Recounted every day
+
+Q: Controlled or high-value items should be stored:
++ In secured locations with limited access and frequent counts
+- Near the exit for easy shipping
+- Unlabeled
+- In the break room
+
+Q: A shipment that arrives without a matching purchase order should be:
++ Held and reported to Purchasing for review
+- Accepted and used
+- Returned without telling anyone
+- Opened and kept
+
+Q: First-in, first-out (FIFO) rotation helps:
++ Use older stock before it expires or becomes obsolete
+- Fill the warehouse faster
+- Hide damaged goods
+- Speed up counts

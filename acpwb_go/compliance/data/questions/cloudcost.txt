@@ -1,0 +1,66 @@
+# Cloud cost management (FinOps).
+Q: The fastest way to cut waste in a cloud account is usually to:
++ Shut down idle resources and right-size oversized ones
+- Buy more reserved capacity for everything
+- Turn off billing alerts
+- Move every workload to the most expensive region
+
+Q: Every cloud resource should be tagged with:
++ An owner and a cost center, so spending can be traced
+- The engineer's favorite movie
+- Nothing; tags slow things down
+- The word "temporary"
+
+Q: A budget alert in the cloud console is meant to:
++ Warn owners before spending exceeds the plan
+- Shut down production automatically without warning
+- Email the CFO a congratulations card
+- Hide charges until the end of the year
+
+Q: Development environments left running overnight and on weekends:
++ Should be scheduled to stop when not in use
+- Must run 24/7 for morale
+- Are free on weekends
+- Improve uptime statistics
+
+Q: Data transfer out of a cloud provider:
++ Can carry significant charges and should be planned
+- Is always free
+- Is billed only on leap years
+- Is paid by the receiving website
+
+Q: Reserved or committed-use discounts make sense when:
++ A workload's usage is steady and predictable
+- A project might be cancelled next week
+- The team wants to spend the remaining budget
+- No one knows what the workload does
+
+Q: An unexpected spike on the cloud bill should be:
++ Investigated quickly, because it can signal a mistake or a compromised account
+- Ignored until the annual review
+- Paid without questions
+- Split across several cost centers
+
+Q: Old snapshots and backups that are past their retention period should be:
++ Deleted under the retention schedule, unless on legal hold
+- Kept forever "just in case"
+- Copied to a second region
+- Renamed
+
+Q: Who is responsible for a cloud resource's cost?
++ The team that owns it, as shown by its tags
+- The cloud provider
+- Whoever noticed the bill
+- Nobody
+
+Q: Giant virtual machines created "to be safe" are:
++ A common source of waste; start small and scale with evidence
+- Required by policy
+- Free if they are idle
+- The fastest way to save money
+
+Q: Cryptocurrency mining software appears on a company cloud server. This most likely means:
++ The account has been compromised and must be reported to Security
+- An engineer found a creative cost-saving idea
+- The provider is testing new features
+- The server is helping with the budget

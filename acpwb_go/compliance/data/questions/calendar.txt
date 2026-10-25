@@ -1,0 +1,79 @@
+# Calendar invites: procedures and courtesy.
+
+Q: [A meeting invitation|Every meeting invite] should include:
++ A purpose or agenda, the right attendees, and a meeting link or room
+- Only a subject line, to save time
+- The organizer's performance rating
+- A list of who declined last time
+
+Q: [You receive an invite|An invite arrives] for a meeting you cannot attend. Courtesy requires you to:
++ Decline promptly, ideally with a note or a suggested alternative time
+- Accept it and not attend
+- Ignore it until the meeting starts
+- Forward it to someone else without telling the organizer
+
+Q: [Scheduling a meeting|Booking a meeting] over a colleague's blocked "focus time" is:
++ Avoided unless it is urgent, and then only after asking them
+- Allowed, since focus time is optional
+- Required for meetings with executives
+- Encouraged on {WEEKDAY}s
+
+Q: [Forwarding a meeting invite|Adding new attendees to someone else's meeting] should be done:
++ With the organizer's agreement, especially for confidential topics
+- Freely, since invites are public
+- Only to external guests
+- Without telling anyone
+
+Q: [Optional attendees|People marked "optional"] on an invite are:
++ Welcome to attend but not expected to; the meeting should not depend on them
+- Required to attend anyway
+- Required to send a substitute
+- Removed if they decline
+
+Q: [A recurring meeting|A recurring weekly meeting] that has lost its purpose should be:
++ Reviewed by the organizer and shortened, made less frequent, or cancelled
+- Kept indefinitely out of tradition
+- Moved to {TIMEOFDAY} to discourage attendance
+- Renamed and continued
+
+Q: [When scheduling across time zones|For attendees in other time zones], the organizer should:
++ Check each attendee's working hours and use the calendar's time zone settings
+- Schedule in Milwaukee time and let others adjust
+- Avoid inviting anyone outside Central time
+- Send the invite without a time
+
+Q: [Ending meetings a few minutes early|Speedy meetings that end 5 to 10 minutes early] are encouraged so that:
++ Attendees have time to get to their next meeting or take a break
+- The organizer can leave first
+- Meetings can start late
+- The room can be double-booked
+
+Q: [A private medical appointment|Personal appointments] on your work calendar should be:
++ Marked private, so only the time shows as busy
+- Labelled in full detail
+- Kept off the calendar and explained afterward
+- Shared with the whole team
+
+Q: [Double-booking yourself|Accepting two meetings at the same time] is:
++ Best avoided; decline or reschedule one and tell the organizer
+- A sign of importance
+- Required for senior leaders
+- Solved by joining both on mute
+
+Q: [An AI notetaker|An automatic recording tool] added to a meeting invite should be:
++ Disclosed in the invite, approved by the organizer, and allowed only if all attendees are told
+- Added secretly to capture candid remarks
+- Required for every meeting
+- Invited as a regular attendee with no explanation
+
+Q: [Lunch hours|Blocked lunch hours] on a colleague's calendar should be:
++ Respected, unless there is no other time and they agree
+- Treated as open time
+- Booked over for working lunches without asking
+- Removed by IT
+
+Q: [A meeting invite from an unknown external sender|An unexpected calendar invite from outside ACPWB] containing a link should be:
++ Treated with caution; do not click the link, and report it if suspicious
+- Accepted, so it appears on your calendar
+- Forwarded to your team
+- Accepted and then deleted

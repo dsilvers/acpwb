@@ -1,0 +1,60 @@
+# Employee monitoring on company systems.
+Q: ACPWB may monitor company systems, devices, and accounts:
++ As described in the acceptable use policy
+- Secretly without any policy
+- Never
+- Only on weekends
+
+Q: Some states, such as New York, require employers to:
++ Give notice of electronic monitoring
+- Monitor everyone continuously
+- Ban monitoring
+- Record all calls
+
+Q: Personal use of company email means:
++ Messages may be monitored and are not private
+- Messages are private
+- Messages are deleted daily
+- Messages are encrypted from the company
+
+Q: Monitoring data should be:
++ Accessed only for legitimate purposes by authorized people
+- Browsed for fun
+- Shared widely
+- Sold
+
+Q: Monitoring employees' union activity is:
++ Unlawful surveillance under labor law
+- Allowed
+- Required
+- Normal
+
+Q: Video cameras are not allowed in:
++ Restrooms and locker rooms
+- Lobbies
+- Parking lots
+- Loading docks
+
+Q: Keystroke logging on company laptops requires:
++ A legitimate purpose, policy disclosure, and approval
+- Nothing
+- Secrecy
+- Employee passwords
+
+Q: Monitoring results used in discipline should be:
++ Accurate and reviewed by HR
+- Shared on social media
+- Used without context
+- Ignored
+
+Q: Managers asking IT to read an employee's email without a process is:
++ Not allowed; requests go through HR and Legal
+- Allowed
+- Required
+- Normal
+
+Q: Personal devices not enrolled in company management are:
++ Not monitored by the company
+- Fully monitored
+- Searched daily
+- Owned by ACPWB

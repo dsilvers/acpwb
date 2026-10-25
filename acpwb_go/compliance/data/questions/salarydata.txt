@@ -1,0 +1,66 @@
+# Handling compensation data.
+Q: Access to individual salary data is limited to:
++ People with a business need, such as HR, Payroll, and authorized managers
+- Everyone in the company
+- Anyone who asks
+- Vendors
+
+Q: Emailing a spreadsheet of salaries to the wrong person is:
++ A data incident that must be reported
+- Harmless
+- A way to promote transparency
+- Fine if you apologize
+
+Q: Employees discussing their own pay with each other is:
++ Generally protected by the National Labor Relations Act
+- Prohibited
+- Grounds for firing
+- Illegal
+
+Q: HR staff browsing coworkers' salaries out of curiosity is:
++ An abuse of access and a policy violation
+- A perk
+- Allowed
+- Required
+
+Q: Salary data sent to a compensation survey vendor should be:
++ Aggregated or de-identified as much as possible and sent securely
+- Sent with names and SSNs
+- Posted publicly
+- Sent by fax to a general number
+
+Q: Printing salary reports should be:
++ Done only on secure printers and shredded when no longer needed
+- Done on lobby printers
+- Left on the printer
+- Posted
+
+Q: Compensation spreadsheets should be stored:
++ In restricted folders, not on personal drives or shared links
+- On public links
+- On USB drives
+- In personal email
+
+Q: A manager sharing a direct report's salary with other team members is:
++ Inappropriate
+- Transparent
+- Required
+- Encouraged
+
+Q: Pay transparency laws require some employers to:
++ Disclose pay ranges in job postings
+- Publish every employee's salary
+- Hide all pay information
+- Pay everyone the same
+
+Q: Salary data used in pay equity analyses is often reviewed:
++ Under the direction of Legal to protect privilege
+- Publicly
+- By interns
+- On social media
+
+Q: Requests from outsiders for ACPWB salary information should be:
++ Referred to HR
+- Answered
+- Ignored
+- Posted

@@ -1,0 +1,61 @@
+# Training, certifications, and the ACPWB ComplianceCenter itself.
+
+Q: Required compliance training must be completed:
++ By the employee assigned, before the due date
+- By a coworker on your behalf
+- By an AI agent on your behalf
+- At any time, with no deadline
+
+Q: Sharing the answers to a compliance assessment is:
++ Not allowed; it defeats the purpose of the training
+- Helpful teamwork
+- Allowed in the team chat
+- Allowed if the answers are correct
+
+Q: A certificate of completion for a course you did not take yourself is:
++ Invalid and a falsification of records
+- Valid if you passed in spirit
+- Valid if your manager approves
+- Valid on {WEEKDAY}s
+
+Q: Continuing education (CE) credits are:
++ Credits earned for completing approved learning, often required for professional licenses
+- Coffee vouchers
+- Bonus points for {EVENT}
+- Optional decorations on certificates
+
+Q: Training records should be:
++ Accurate and kept according to the retention schedule
+- Edited to show full completion
+- Deleted after a month
+- Kept on sticky notes
+
+Q: Clicking through a training course without reading it:
++ Defeats the purpose, and you are still accountable for the content
+- Is the intended method
+- Earns extra credit
+- Is how most bots complete it
+
+Q: If a training course contains an error, you should:
++ Report it to the training team
+- Memorize the error
+- Correct it in your head and move on
+- Tweet about it
+
+Q: Accessibility accommodations for training, such as captions or extended time:
++ Can be requested and should be provided as appropriate
+- Are never available
+- Are only for executives
+- Require a vote
+
+Q: Taking the assessment many times by guessing until you pass:
++ May be permitted, but you are still expected to know the material
+- Is the only way to pass
+- Is required
+- Is cheating only on attempt 3
+
+Q: "Unverified Learner" on a certificate means:
++ The learner's identity was not confirmed
+- The learner is a VIP
+- The learner is a robot
+- The certificate is gold

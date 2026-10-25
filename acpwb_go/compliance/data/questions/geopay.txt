@@ -1,0 +1,60 @@
+# Geographic pay differentials.
+Q: Geographic pay differentials adjust pay based on:
++ Labor market costs in different locations
+- Employees' preferences
+- Weather
+- Random choice
+
+Q: Moving to a different location may:
++ Change pay according to the geographic pay policy
+- Never change pay
+- Always increase pay
+- Double pay
+
+Q: Remote employees must report:
++ Their work location accurately
+- Nothing
+- A fake location
+- Their vacation home
+
+Q: Working from a location without approval can affect:
++ Pay, taxes, and legal obligations
+- Nothing
+- Only Wi-Fi
+- Only time zones
+
+Q: Geographic differentials must be applied:
++ Consistently to everyone in the same location and role
+- Only to favorites
+- Randomly
+- Secretly
+
+Q: Pay transparency laws in some states require:
++ Posting pay ranges for jobs, including remote jobs that could be filled there
+- Nothing
+- Hiding ranges
+- Fixed pay
+
+Q: Location data used for pay should be:
++ Kept current in the HR system
+- Ignored
+- Guessed
+- Shared publicly
+
+Q: Questions about geographic pay go to:
++ Compensation or HR
+- Coworkers
+- Social media
+- Nobody
+
+Q: Geographic pay differentials are not:
++ A reason to discriminate based on protected characteristics
+- Market-based
+- Documented
+- Location-based
+
+Q: Pay ranges are reviewed:
++ Periodically using market data
+- Never
+- Daily
+- Randomly

@@ -1,0 +1,66 @@
+# Fax machines: still here, still sending.
+Q: Before faxing confidential information, you should:
++ Confirm the fax number and that the recipient is standing by
+- Send it to the general office number
+- Fax it twice to be sure
+- Skip the cover sheet
+
+Q: A fax cover sheet should include:
++ The sender, recipient, page count, and a confidentiality notice
+- A motivational quote
+- The sender's password
+- Nothing
+
+Q: Faxed documents that arrive on a shared machine should be:
++ Picked up promptly and delivered to the recipient
+- Left in the tray all week
+- Read by whoever walks by
+- Recycled
+
+Q: A fax sent to the wrong number containing personal data is:
++ A possible privacy incident that must be reported
+- Harmless because faxes are old
+- Fine if you send another
+- Not our problem
+
+Q: Faxes containing health information are subject to:
++ HIPAA safeguards where they apply
+- No rules at all
+- Only fax machine warranties
+- Weather regulations
+
+Q: Internet fax services used for company documents must be:
++ Approved by IT
+- Any free website
+- Paid with personal cards
+- Used without encryption
+
+Q: "Fax-back" verification of payment changes means:
++ Nothing on its own; verify bank changes by calling a known number
+- The change is automatically safe
+- The vendor is real
+- The bank approved it
+
+Q: A fax machine's memory may store:
++ Copies of sent and received documents, so it must be wiped before disposal
+- Nothing
+- Only phone numbers
+- Music
+
+Q: Junk faxes advertising products:
++ Are restricted by the Telephone Consumer Protection Act
+- Are always legal
+- Must be answered
+- Are a sales lead
+
+Q: Speed-dial numbers on shared fax machines should be:
++ Checked regularly so documents are not sent to outdated numbers
+- Never updated
+- Programmed by visitors
+- Hidden
+
+Q: Fax logs are useful because they:
++ Show what was sent, when, and to which number
+- Decorate the machine
+- Count paper
+- Replace cover sheets

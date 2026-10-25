@@ -1,0 +1,56 @@
+# Hiring and interviewing. Correct answers follow EEOC guidance (Title VII,
+# ADEA, ADA, GINA, PWFA); keep them accurate.
+
+Q: Which interview question should NOT be asked?
++ "Are you planning to have children?"
+- "Are you legally authorized to work in the United States?"
+- "Can you perform the essential functions of this job, with or without reasonable accommodation?"
+- "Tell me about a project you led."
+
+Q: Which interview question should NOT be asked?
++ "What year did you graduate from high school?"
+- "Why are you interested in this role?"
+- "Are you available to work the posted schedule?"
+- "What experience do you have with {SYSTEM}?"
+
+Q: Which interview question should NOT be asked?
++ "Which religious holidays do you observe?"
+- "Do you have experience presenting to the {COMMITTEE}?"
+- "Can you travel up to {N} times a year for this role?"
+- "How would you handle a disagreement with a coworker?"
+
+Q: Before a job offer is made, the ADA generally prohibits asking candidates:
++ Whether they have a disability, or about its nature and severity
+- About their prior work experience
+- Whether they can perform the job's essential functions
+- About their availability to start
+
+Q: Asking a candidate where their family is originally from is:
++ Inappropriate; it can suggest discrimination based on national origin
+- A good icebreaker
+- Required for the {FORM}
+- Allowed in second interviews
+
+Q: The Age Discrimination in Employment Act protects applicants and employees who are:
++ 40 years of age or older
+- Under 25
+- 65 or older only
+- Born in {YEAR}
+
+Q: Asking about an applicant's family medical history is:
++ Prohibited by the Genetic Information Nondiscrimination Act (GINA)
+- Required for all roles
+- Allowed if the applicant volunteers
+- Allowed after the second interview
+
+Q: An interviewer notices that a candidate is pregnant. The interviewer should:
++ Evaluate the candidate on qualifications only, since pregnancy discrimination is unlawful
+- Ask about her plans for maternity leave
+- Recommend a shorter interview
+- Note it on the scorecard
+
+Q: [Interview scorecards|Interview notes] should record:
++ Job-related observations about qualifications and answers
+- Observations about the candidate's appearance or accent
+- Whether the candidate would be fun at {EVENT}
+- The candidate's age, estimated

@@ -1,0 +1,62 @@
+# Wage and hour. Correct answers follow the federal Fair Labor Standards Act
+# (FLSA); keep them accurate. State law can add more, never less.
+
+Q: Under the FLSA, a non-exempt employee must be paid overtime for:
++ Hours worked over 40 in a workweek, at one and one-half times the regular rate
+- Hours worked over 8 in any single day, under federal law
+- Weekend hours only
+- Hours approved in advance by the {COMMITTEE} only
+
+Q: A non-exempt employee answers work emails from home after their shift. That time is:
++ Generally hours worked, and must be paid
+- Unpaid, because it happened at home
+- Paid only if the email was marked urgent
+- Paid in ACPWB Appreciation Points
+
+Q: A non-exempt employee works overtime that their manager did not authorize. The company:
++ Must pay for the time worked, and may address the policy violation separately
+- May refuse to pay for it
+- May pay it next year
+- May convert it to "volunteer hours"
+
+Q: Whether an employee is exempt from overtime depends on:
++ Salary level, salary basis, and the duties they actually perform
+- Their job title alone
+- Whether they have a parking space
+- Whether they are invited to {EVENT}
+
+Q: A private-sector employer offering "comp time" instead of overtime pay to non-exempt employees:
++ Is not allowed under the FLSA; overtime must be paid in wages
+- Is allowed if the employee agrees
+- Is required for all overtime
+- Is allowed only in {CITY}
+
+Q: For overtime purposes, a workweek is:
++ A fixed, recurring period of 168 hours (seven consecutive 24-hour days), and hours are not averaged across weeks
+- Any five days the manager chooses
+- The average of the last four weeks
+- Monday through Friday, ignoring weekends
+
+Q: Short rest breaks of 5 to 20 minutes, when an employer provides them, are:
++ Counted as hours worked and paid
+- Unpaid, and must be clocked out
+- Paid at half the regular rate
+- Deducted from PTO
+
+Q: [A manager|{NAME}, a supervisor,] asks a non-exempt employee to clock out and then finish one more task. This is:
++ Off-the-clock work, which is not allowed; all time worked must be recorded and paid
+- A common courtesy
+- Fine if the task takes under 20 minutes
+- Fine if the employee gets a coffee voucher
+
+Q: The current federal minimum wage under the FLSA is:
++ $7.25 an hour, though many states and cities set a higher minimum
+- $2.13 an hour for all employees
+- $15.00 an hour nationwide
+- Whatever {VENDOR} pays
+
+Q: Time spent in required training, such as this course, by a non-exempt employee is:
++ Generally hours worked, and must be paid
+- Unpaid, because it is for the employee's benefit
+- Paid only if they pass
+- Paid only for the first attempt

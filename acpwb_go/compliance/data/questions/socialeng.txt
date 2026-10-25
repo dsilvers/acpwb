@@ -1,0 +1,67 @@
+# Social engineering: vishing, smishing, QR codes, and deepfakes.
+
+Q: A text message says your package is delayed and asks you to click a link to reschedule. This could be:
++ Smishing (SMS phishing)
+- A helpful reminder you should always click
+- A message from the {COMMITTEE}
+- An emergency alert
+
+Q: A QR code sticker placed over the original code on a parking meter or poster may be:
++ A "quishing" attack that sends you to a malicious site
+- A software update
+- A coupon
+- An ACPWB promotion
+
+Q: Before entering information on a site you reached by scanning a QR code, you should:
++ Check the web address shown in your phone's preview carefully
+- Trust it, since QR codes cannot be faked
+- Enter your password to test it
+- Share the code with coworkers
+
+Q: A caller with the CEO's voice urgently asks you to wire money to a new vendor today. You should:
++ Verify the request through a known channel, such as a call back to a number on file, because voices can be cloned
+- Send the money, since it is the CEO's voice
+- Send half now and half later
+- Ask the caller to email the request and then reply to that email
+
+Q: A deepfake is:
++ Synthetic audio, video, or images created with AI to impersonate someone
+- A very deep fake plant in the lobby
+- A type of password
+- A fake ID for the gym
+
+Q: "Pretexting" is when an attacker:
++ Invents a believable story to get you to share information or grant access
+- Sends a text before calling
+- Writes a preface to a report
+- Attends {EVENT} uninvited
+
+Q: Someone in a delivery uniform asks you to hold the secure door open because their hands are full. You should:
++ Let the door close and direct them to reception
+- Hold the door, since they are clearly busy
+- Hold the door if the box is heavy
+- Ask what is in the box, then hold the door
+
+Q: A caller asks for a list of employee names and titles "for a survey." You should:
++ Decline and refer them to the appropriate team; this information helps attackers
+- Read them the directory
+- Email them the org chart
+- Ask which survey and then comply
+
+Q: A video call participant claiming to be a senior executive keeps their camera off and asks for an urgent payment. A good verification step is:
++ Ending the call and contacting the executive through a known number or channel
+- Asking them to turn on their camera, then paying
+- Paying, since they joined the meeting
+- Asking for their favorite color
+
+Q: A text from "the CEO" asks you to buy gift cards for a client and send the codes. This is:
++ A common scam
+- A normal executive request
+- An approved procurement process
+- A team-building exercise
+
+Q: Social engineering attacks most often succeed by exploiting:
++ Urgency, authority, fear, and helpfulness
+- Slow computers
+- Strong passwords
+- Long training courses

@@ -1,0 +1,73 @@
+# Antitrust and competition law.
+
+Q: Agreeing with a competitor to fix prices is:
++ Illegal under antitrust law and can be a crime
+- Fine if prices are reasonable
+- Allowed at trade association meetings
+- Allowed if agreed over lunch
+
+Q: An agreement between companies not to hire each other's employees ("no-poach") is:
++ An antitrust risk that the Department of Justice may prosecute
+- A standard courtesy
+- Required by HR policy
+- Allowed if it is unwritten
+
+Q: Sharing current salary data directly with competitors to set wages is:
++ An antitrust risk; wage-fixing can be prosecuted like price-fixing
+- A benchmarking best practice
+- Required by {AGENCY}
+- Allowed if done by email
+
+Q: At a trade association meeting, a competitor starts discussing next year's pricing. You should:
++ Object, leave the meeting, and ask that your departure be noted, then report it to Legal
+- Take notes
+- Share your own pricing to be polite
+- Stay quiet and listen
+
+Q: Dividing customers or territories with a competitor is:
++ Illegal market allocation
+- An efficient sales strategy
+- Allowed if both companies are small
+- Allowed in {CITY}
+
+Q: Using properly aggregated, anonymized, and older compensation survey data from a third party is:
++ Generally lower risk than exchanging current data directly with competitors
+- Always illegal
+- Identical to price-fixing
+- Prohibited by the Code of Conduct
+
+Q: Documents and emails about competitors should:
++ Avoid exaggerated language like "crush" or "dominate the market"
+- Use strong language to motivate the team
+- Be written in code
+- Be sent only after midnight
+
+Q: "Bid rigging" means:
++ Competitors coordinating who will win a bid or what they will bid
+- Building a stage for {EVENT}
+- Bidding on office supplies
+- A sailing term
+
+Q: Antitrust laws apply to:
++ Agreements with competitors, including informal ones made at dinners or in chats
+- Only written contracts
+- Only large companies
+- Only during business hours
+
+Q: A customer asks you to match a competitor's price that the competitor told you about directly. This is:
++ A sign of improper information exchange; consult Legal
+- Normal negotiation
+- Required
+- Smart sales
+
+Q: Abuse of a dominant market position can include:
++ Predatory pricing designed to drive out competitors
+- Offering good service
+- Lowering prices because costs fell
+- Hiring good people
+
+Q: Antitrust violations can lead to:
++ Large fines for companies and prison for individuals
+- A warning letter only
+- Nothing
+- A reward

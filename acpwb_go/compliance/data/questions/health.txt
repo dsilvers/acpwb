@@ -1,0 +1,49 @@
+# Health information privacy (HIPAA, ADA confidentiality, biometrics).
+
+Q: HIPAA privacy rules apply directly to:
++ Health plans, health care providers, and health care clearinghouses, and their business associates
+- Every employer for every piece of health information
+- Only hospitals in {CITY}
+- Fitness apps only
+
+Q: Medical information an employee shares to request an accommodation should be:
++ Kept confidential and stored separately from the personnel file
+- Shared with the team for awareness
+- Posted in {SYSTEM}
+- Added to the performance review
+
+Q: A manager learns an employee has a medical condition. The manager may:
++ Share it only with those who need to know, such as HR, to provide an accommodation
+- Tell the team so they can help
+- Mention it in the team chat
+- Ask the employee for more details at a team meeting
+
+Q: The Illinois Biometric Information Privacy Act requires employers collecting fingerprints or face scans to:
++ Give written notice, get written consent, and publish a retention and destruction policy
+- Collect biometrics from all visitors
+- Store biometrics forever
+- Share biometrics with vendors freely
+
+Q: Asking employees about their COVID-19, flu, or other vaccination status should be:
++ Handled by HR under applicable law, with responses kept confidential
+- Done by managers in team meetings
+- Posted on a public board
+- Done by {VENDOR}
+
+Q: Protected health information (PHI) sent by email outside the company should be:
++ Encrypted and sent only when permitted
+- Sent in the subject line for visibility
+- Sent from personal email
+- Printed and faxed to every office
+
+Q: Wellness program data is generally:
++ Reported to the employer only in aggregate, not by individual
+- Shared individually with managers
+- Posted on a leaderboard with diagnoses
+- Sold to {VENDOR}
+
+Q: Genetic information about an employee or their family:
++ Generally may not be requested or used in employment decisions under GINA
+- Must be collected for benefits
+- Can be used to plan staffing
+- Is allowed for executives only

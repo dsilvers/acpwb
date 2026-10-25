@@ -1,0 +1,67 @@
+# Political activity, lobbying, and charitable giving.
+
+Q: Using ACPWB funds for political contributions without approval from Legal is:
++ Prohibited
+- Allowed for small amounts
+- Allowed for candidates who support the company
+- Allowed during election years
+
+Q: Employees may take part in personal political activities:
++ On their own time, with their own resources, and without implying ACPWB support
+- Using the company letterhead
+- During work hours in the {PLACE}
+- Only if the company agrees with them
+
+Q: Contacting government officials to influence legislation on ACPWB's behalf may be:
++ Lobbying, which can require registration and disclosure
+- A personal hobby with no rules
+- Allowed for anyone with a business card
+- Only regulated in {CITY}
+
+Q: Pressuring a coworker to donate to a political candidate is:
++ Not allowed
+- Good team spirit
+- Required for managers
+- Allowed if the candidate is popular
+
+Q: A charitable donation requested by a government official who oversees ACPWB's permits should be:
++ Reviewed by Compliance before any commitment, because it could be seen as a bribe
+- Approved immediately to maintain the relationship
+- Made anonymously
+- Doubled to show goodwill
+
+Q: Matching gift programs generally match donations to:
++ Eligible nonprofit organizations as defined in the program rules
+- Any organization, including political parties
+- Your manager's favorite charity only
+- {VENDOR}
+
+Q: Running for local office as a private citizen while employed at ACPWB:
++ Is generally permitted, but must not use ACPWB resources or time and may require disclosure
+- Is prohibited
+- Requires CEO approval to win
+- Must be done in an ACPWB t-shirt
+
+Q: Political discussions at work should be:
++ Respectful, and must not become harassment
+- Required
+- Banned in all forms
+- Held during {EVENT}
+
+Q: A corporate political action committee (PAC) is funded by:
++ Voluntary contributions from eligible employees, not corporate treasury money for direct candidate contributions
+- Mandatory payroll deductions
+- Customer payments
+- Petty cash
+
+Q: Displaying campaign signs at your desk:
++ May be limited by policy to keep the workplace professional
+- Is required
+- Is protected in all cases
+- Must be lit
+
+Q: Gifts to elected officials must:
++ Follow strict ethics rules and be approved by Legal
+- Be as generous as possible
+- Be in cash
+- Be anonymous

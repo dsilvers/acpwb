@@ -1,0 +1,68 @@
+# Health accounts (HSA, FSA). Correct answers follow IRS rules; keep them
+# accurate.
+
+Q: To contribute to a Health Savings Account (HSA), you must generally be covered by:
++ A high-deductible health plan (HDHP), with no other disqualifying coverage
+- Any health plan
+- A dental plan only
+- A wellness challenge
+
+Q: HSA funds that are not used by the end of the year:
++ Roll over and remain yours, even if you change jobs
+- Are forfeited to the company
+- Expire on December 31
+- Are donated to {VENDOR}
+
+Q: A health care Flexible Spending Account (FSA) is generally:
++ Use-it-or-lose-it, though plans may offer a short grace period or a limited carryover
+- Fully portable to your next employer
+- Unlimited
+- Paid out as a bonus at year end
+
+Q: HSA withdrawals for qualified medical expenses are:
++ Tax-free
+- Taxed at 50%
+- Allowed only with a doctor's signature on Form {FORM}
+- Allowed only for the employee, never dependents
+
+Q: A dependent care FSA can be used for:
++ Eligible child or adult dependent care so the employee can work
+- Pet grooming
+- The employee's own gym membership
+- Lunches during {EVENT}
+
+Q: After age 65, HSA withdrawals for non-medical expenses are:
++ Taxed as income, but without the 20% additional tax
+- Prohibited
+- Tax-free
+- Allowed only for travel to {CITY}
+
+Q: Employer contributions to an employee's HSA:
++ Count toward the annual HSA contribution limit
+- Do not count toward any limit
+- Must be repaid
+- Are taxable
+
+Q: An HSA can be invested once it reaches:
++ The minimum balance set by the HSA provider, if any
+- $1 million
+- Never
+- Retirement only
+
+Q: Enrolling in Medicare generally:
++ Ends eligibility to contribute to an HSA
+- Doubles the HSA limit
+- Has no effect
+- Closes the HSA account
+
+Q: Keeping receipts for HSA withdrawals is important because:
++ You may need to show expenses were qualified if the IRS asks
+- The HSA expires without them
+- They are required to open the account
+- They earn interest
+
+Q: A limited-purpose FSA can be paired with an HSA for:
++ Dental and vision expenses
+- Rent
+- Groceries
+- Gym fees

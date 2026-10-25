@@ -1,0 +1,49 @@
+# Office moves, desk relocations, and packing.
+
+Q: Before an office move, confidential papers should be:
++ Shredded if no longer needed, or packed in locked crates
+- Thrown in open boxes
+- Left on the floor
+- Taken home
+
+Q: Moving crates should be labeled with:
++ Your name and new location, not with "Confidential HR Files"
+- The contents in large letters
+- Your password
+- Nothing
+
+Q: Lifting heavy items during a move should be:
++ Left to the movers, or done with proper lifting techniques and help
+- Done by twisting quickly
+- Done alone to save time
+- Done on a chair
+
+Q: IT equipment should be moved by:
++ IT or the authorized movers, following the move plan
+- Anyone with a cart
+- Visitors
+- Throwing it
+
+Q: Personal items left behind after a move may be:
++ Disposed of after a stated period
+- Kept forever
+- Shipped to your home free
+- Given to {VENDOR}
+
+Q: Unused furniture after a move should be:
++ Handled by Facilities through approved recycling or donation
+- Left in the hallway
+- Taken home without approval
+- Burned
+
+Q: Badge access after a move should be:
++ Updated for the new location and removed for the old one
+- Kept for both forever
+- Shared
+- Disabled entirely
+
+Q: Moving day is a good time to:
++ Clear out files that have passed their retention period, following the schedule
+- Delete everything
+- Keep everything
+- Shred documents on legal hold

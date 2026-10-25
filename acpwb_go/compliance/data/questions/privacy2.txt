@@ -1,0 +1,56 @@
+# International privacy (GDPR) and data subject rights. Correct answers
+# follow the EU GDPR; keep them accurate.
+
+Q: Under the GDPR, a data subject access request generally must be answered within:
++ One month, extendable by up to two more months for complex requests
+- One year
+- 24 hours
+- Whenever convenient
+
+Q: A personal data breach that poses a risk to individuals must be reported to the supervisory authority within:
++ 72 hours of becoming aware of it, where feasible
+- 30 days
+- One week
+- One hour
+
+Q: Under the GDPR, "personal data" includes:
++ Any information relating to an identified or identifiable person, such as names, email addresses, and IP addresses
+- Only Social Security numbers
+- Only information on paper
+- Only information about EU citizens living in {CITY}
+
+Q: The "right to erasure" lets individuals:
++ Ask for their personal data to be deleted in certain circumstances
+- Erase their mistakes from performance reviews
+- Erase other people's data
+- Delete the company website
+
+Q: Transferring EU employee data to the United States requires:
++ An approved transfer mechanism, such as the EU-U.S. Data Privacy Framework or standard contractual clauses
+- Nothing, if the data is encrypted
+- Approval from the {COMMITTEE}
+- A fax
+
+Q: "Data minimization" means:
++ Collecting only the personal data needed for a specific purpose
+- Using a smaller font
+- Compressing files
+- Deleting all data every Friday
+
+Q: Fines under the GDPR can reach:
++ Up to 4% of annual global turnover or €20 million, whichever is higher
+- €100
+- Nothing; the GDPR has no fines
+- One month of the CEO's salary
+
+Q: A former employee emails asking for a copy of the personal data ACPWB holds about them. You should:
++ Forward the request to the Privacy team right away so the deadline can be met
+- Ignore it, since they no longer work here
+- Send them their entire email inbox
+- Ask them to submit it by fax
+
+Q: Under California law, consumers and employees have the right to:
++ Know what personal information is collected about them and request its deletion, with exceptions
+- Edit the company's privacy policy
+- See their coworkers' data
+- Demand payment for their data

@@ -48,6 +48,9 @@ func TestAcpwbTargetMatchesNginx(t *testing.T) {
 		// Prefix locations.
 		{main, "/source-code/", AcpwbGo},
 		{main, "/source-code/1999/06/", AcpwbGo},
+		{main, "/compliance/", AcpwbGo},
+		{main, "/compliance/insider-trading-awareness-48213/attempt-1/ab/certificate.pdf", AcpwbGo},
+		{main, "/compliance", Django},
 		{main, "/public-policy/", AcpwbGo},
 		{main, "/public-policy/2024/03/", AcpwbGo},
 		{main, "/wiki/some-topic/", Django},

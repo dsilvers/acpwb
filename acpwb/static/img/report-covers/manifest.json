@@ -1,502 +1,602 @@
 {
-  "salary-compensation-benchmarking-survey-2024": {
-    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/salary-compensation-benchmarking-survey-2024.webp"
-  },
-  "annual-workforce-analytics-report-2024": {
-    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/annual-workforce-analytics-report-2024.webp"
-  },
-  "executive-compensation-study-2024": {
-    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/executive-compensation-study-2024.webp"
-  },
-  "corporate-governance-best-practices-white-paper": {
-    "prompt": "stacks of organized corporate documents with a pen and reading glasses on a mahogany desk, warm office lighting, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/corporate-governance-best-practices-white-paper.webp"
-  },
-  "esg-disclosure-framework-2024": {
-    "prompt": "wind turbines visible through the floor-to-ceiling window of a modern executive office, symbolic corporate environmental photo, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/esg-disclosure-framework-2024.webp"
-  },
-  "q3-economic-indicators-2024": {
-    "prompt": "modern financial district skyline at blue hour, glass towers reflected in a still water feature, architectural, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Economic",
-    "path": "img/report-covers/q3-economic-indicators-2024.webp"
-  },
-  "benefits-cost-analysis-2024": {
-    "prompt": "bright modern employee wellness center inside a corporate campus, yoga mats and natural light, lifestyle photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/benefits-cost-analysis-2024.webp"
-  },
-  "industry-wage-gap-analysis-2024": {
-    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/industry-wage-gap-analysis-2024.webp"
-  },
-  "fortune-500-ceo-pay-ratio-analysis": {
-    "prompt": "executive boardroom with printed reports and charts laid out on a polished table, navy and gold color scheme, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/fortune-500-ceo-pay-ratio-analysis.webp"
-  },
-  "state-of-workplace-report-2024": {
-    "prompt": "aerial view of busy corporate open office floor, rows of workstations, natural light through floor-to-ceiling windows, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/state-of-workplace-report-2024.webp"
-  },
-  "regulatory-compliance-costs-2024": {
-    "prompt": "glass and steel corporate headquarters exterior shot at dusk, reflections on windows, architectural photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/regulatory-compliance-costs-2024.webp"
-  },
-  "employee-satisfaction-survey-results-2024": {
-    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/employee-satisfaction-survey-results-2024.webp"
-  },
-  "regional-salary-differentials-2024": {
-    "prompt": "close-up of financial data charts and bar graphs on a glass desk, office environment with city view, depth of field blur, corporate documentary photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/regional-salary-differentials-2024.webp"
-  },
-  "board-composition-study-2024": {
-    "prompt": "close-up of a gavel on a polished wood desk with blurred legal documents in background, corporate governance concept, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/board-composition-study-2024.webp"
-  },
-  "retirement-readiness-index-2024": {
-    "prompt": "a large screen in a well-lit conference room displaying an employee benefits presentation, empty chairs facing the screen, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/retirement-readiness-index-2024.webp"
-  },
-  "public-sector-compensation-guide": {
-    "prompt": "executive boardroom with printed reports and charts laid out on a polished table, navy and gold color scheme, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/public-sector-compensation-guide.webp"
-  },
-  "healthcare-benefits-landscape-2024": {
-    "prompt": "employee benefit enrollment forms on a clean white desk with a pen, soft office lighting, documentary, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/healthcare-benefits-landscape-2024.webp"
-  },
-  "remote-work-impact-study-2024": {
-    "prompt": "aerial view of busy corporate open office floor, rows of workstations, natural light through floor-to-ceiling windows, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/remote-work-impact-study-2024.webp"
-  },
-  "national-salary-survey-2001": {
-    "prompt": "sleek conference room with laptops open to salary charts on the table, overhead view of desk with financial documents and graphs, corporate office, warm natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/national-salary-survey-2001.webp"
-  },
-  "corporate-pay-equity-study-1998": {
-    "prompt": "sleek conference room with laptops open to salary charts on the table, overhead view of desk with financial documents and graphs, corporate office, warm natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/corporate-pay-equity-study-1998.webp"
-  },
-  "workforce-demographics-report-2006": {
-    "prompt": "aerial view of busy corporate open office floor, rows of workstations, natural light through floor-to-ceiling windows, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/workforce-demographics-report-2006.webp"
-  },
-  "executive-benefits-survey-2003": {
-    "prompt": "modern corporate cafeteria with healthy food options displayed, clean and bright, natural light, lifestyle editorial, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/executive-benefits-survey-2003.webp"
-  },
-  "governance-disclosure-standards-2009": {
-    "prompt": "close-up of a gavel on a polished wood desk with blurred legal documents in background, corporate governance concept, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/governance-disclosure-standards-2009.webp"
-  },
-  "compensation-benchmarking-methodology-1995": {
-    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/compensation-benchmarking-methodology-1995.webp"
-  },
-  "annual-hr-metrics-report-2011": {
-    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/annual-hr-metrics-report-2011.webp"
-  },
-  "job-grade-architecture-white-paper-2007": {
-    "prompt": "sleek conference room with laptops open to salary charts on the table, overhead view of desk with financial documents and graphs, corporate office, warm natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/job-grade-architecture-white-paper-2007.webp"
-  },
-  "preliminary-job-architecture-review-assessment-2024-12a0": {
-    "prompt": "organized law books and corporate compliance binders on dark wood shelving, shallow depth of field, editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compliance",
-    "path": "img/report-covers/preliminary-job-architecture-review-assessment-2024-12a0.webp"
-  },
-  "regional-talent-retention-report-2021-0fd7": {
-    "prompt": "an executive conference room with a long table and empty chairs, prepared for a board meeting, formal lighting, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Leadership",
-    "path": "img/report-covers/regional-talent-retention-report-2021-0fd7.webp"
-  },
-  "supplemental-turnover-analysis-briefing-2022-4a66": {
-    "prompt": "stock market data on multiple computer monitors in a financial trading environment, dramatic blue lighting, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Economic",
-    "path": "img/report-covers/supplemental-turnover-analysis-briefing-2022-4a66.webp"
-  },
-  "cross-industry-gender-pay-gap-guide-2008-fa7b": {
-    "prompt": "a printed quarterly earnings report open on a conference table, reading glasses resting on the page, editorial still life, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Economic",
-    "path": "img/report-covers/cross-industry-gender-pay-gap-guide-2008-fa7b.webp"
-  },
-  "mid-year-geographic-pay-differentials-survey-2018-e65d": {
-    "prompt": "a tablet displaying sustainability metrics on a desk, with a background of urban greenery, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/mid-year-geographic-pay-differentials-survey-2018-e65d.webp"
-  },
-  "revised-remote-work-productivity-white-paper-2024-ab77": {
-    "prompt": "aerial view of a container port at dusk, cranes and stacked shipping containers, symbolizing global economic scale, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Economic",
-    "path": "img/report-covers/revised-remote-work-productivity-white-paper-2024-ab77.webp"
-  },
-  "national-incentive-compensation-index-2024-feea": {
-    "prompt": "laptops open to resume templates in a collaborative office space, notebooks and coffee on the table, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Talent Acquisition",
-    "path": "img/report-covers/national-incentive-compensation-index-2024-feea.webp"
-  },
-  "comprehensive-wage-band-calibration-white-paper-e4b7": {
-    "prompt": "financial district at sunrise through floor-to-ceiling office windows, reflecting the golden light across a polished conference table with documents, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/comprehensive-wage-band-calibration-white-paper-e4b7.webp"
-  },
-  "mid-year-executive-pay-white-paper-2020-1190": {
-    "prompt": "modern corporate IT operations center with multiple screens showing dashboards, empty workstations, blue ambient light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Technology",
-    "path": "img/report-covers/mid-year-executive-pay-white-paper-2020-1190.webp"
-  },
-  "longitudinal-turnover-analysis-study-2010-f0b1": {
-    "prompt": "a modern corporate breakout space with remnants of a celebration, like confetti and empty glasses, candid corporate photography style, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Retention",
-    "path": "img/report-covers/longitudinal-turnover-analysis-study-2010-f0b1.webp"
-  },
-  "strategic-healthcare-cost-trends-assessment-2010-f55e": {
-    "prompt": "modern corporate cafeteria with healthy food options displayed, clean and bright, natural light, lifestyle editorial, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/strategic-healthcare-cost-trends-assessment-2010-f55e.webp"
-  },
-  "supplemental-pay-transparency-compliance-report-2021-a52e": {
-    "prompt": "wind turbines visible through the floor-to-ceiling window of a modern executive office, symbolic corporate environmental photo, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/supplemental-pay-transparency-compliance-report-2021-a52e.webp"
-  },
-  "benchmark-pay-equity-analysis-2024-d685": {
-    "prompt": "professional documents and financial charts on a polished conference table, soft office lighting, corporate stock photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/benchmark-pay-equity-analysis-2024-d685.webp"
-  },
-  "final-hiring-cost-analysis-guide-2018-0f9e": {
-    "prompt": "interior of a LEED-certified office building: exposed timber, natural ventilation grilles, plants, daylight harvesting design, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/final-hiring-cost-analysis-guide-2018-0f9e.webp"
-  },
-  "biennial-pay-equity-study-2018-c2f3": {
-    "prompt": "a Kanban board on a glass wall covered in user story cards from a recent product sprint, tech office editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Technology",
-    "path": "img/report-covers/biennial-pay-equity-study-2018-c2f3.webp"
-  },
-  "baseline-retirement-plan-participation-study-2012-0451": {
-    "prompt": "corporate campus outdoor seating area with empty benches and architectural landscaping, suggesting a workforce at work inside, atmospheric, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/baseline-retirement-plan-participation-study-2012-0451.webp"
-  },
-  "strategic-ceo-pay-ratio-survey-2022-b8de": {
-    "prompt": "abstract visualization of collaboration between different generations, overlapping transparent circles of different sizes and colors, corporate documentary style, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Retention",
-    "path": "img/report-covers/strategic-ceo-pay-ratio-survey-2022-b8de.webp"
-  },
-  "comparative-workforce-planning-briefing-2014-edc5": {
-    "prompt": "elevator bank of a glass corporate tower at midday, polished steel doors, marble floor, implying scale and workforce size, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/comparative-workforce-planning-briefing-2014-edc5.webp"
-  },
-  "preliminary-workforce-demographics-study-2021-597d": {
-    "prompt": "empty boardroom with long polished mahogany table and leather chairs, city skyline visible through windows, golden hour light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/preliminary-workforce-demographics-study-2021-597d.webp"
-  },
-  "cross-industry-market-pricing-methodology-guide-2016-41a4": {
-    "prompt": "close-up of a gavel on a polished wood desk with blurred legal documents in background, corporate governance concept, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/cross-industry-market-pricing-methodology-guide-2016-41a4.webp"
-  },
-  "strategic-employee-engagement-index-survey-13e6": {
-    "prompt": "an executive conference room with a long table and empty chairs, prepared for a board meeting, formal lighting, editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Leadership",
-    "path": "img/report-covers/strategic-employee-engagement-index-survey-13e6.webp"
-  },
-  "comprehensive-turnover-analysis-study-2025-0d9e": {
-    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/comprehensive-turnover-analysis-study-2025-0d9e.webp"
-  },
-  "annual-benefits-utilization-guide-2017-e8a8": {
-    "prompt": "a signed compliance acknowledgment form under a desk lamp, pen still resting on it, institutional editorial photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compliance",
-    "path": "img/report-covers/annual-benefits-utilization-guide-2017-e8a8.webp"
-  },
-  "annual-salary-transparency-analysis-2024-44ca": {
-    "prompt": "rain water collection system and native plant landscaping at a corporate campus entrance, environmental branding photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/annual-salary-transparency-analysis-2024-44ca.webp"
-  },
-  "mid-year-executive-pay-analysis-2008-bc65": {
-    "prompt": "corporate sustainability dashboard on a large wall-mounted display in an empty lobby, showing carbon metrics and green targets, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/mid-year-executive-pay-analysis-2008-bc65.webp"
-  },
-  "preliminary-salary-transparency-index-2017-d6da": {
-    "prompt": "server cooling units and power distribution rows in a modern hyperscale data center, industrial scale, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Technology",
-    "path": "img/report-covers/preliminary-salary-transparency-index-2017-d6da.webp"
-  },
-  "cross-industry-remote-work-productivity-analysis-2019-4ab0": {
-    "prompt": "glass-walled conference room with laptops and notebooks open on a circular table, suggesting a recent meeting, professional corporate atmosphere, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/cross-industry-remote-work-productivity-analysis-2019-4ab0.webp"
-  },
-  "preliminary-pay-transparency-compliance-survey-2012-52f4": {
-    "prompt": "close-up of a printed workforce planning document with highlighted sections and margin notes, dark mahogany desk, warm lamp, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/preliminary-pay-transparency-compliance-survey-2012-52f4.webp"
-  },
-  "strategic-employee-engagement-index-briefing-2025-b58a": {
-    "prompt": "a large digital display showing complex architecture diagrams in a modern tech office, empty chairs around, corporate tech photo, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Technology",
-    "path": "img/report-covers/strategic-employee-engagement-index-briefing-2025-b58a.webp"
-  },
-  "biennial-workforce-planning-briefing-06fd": {
-    "prompt": "a dental and health insurance card resting on a marble surface, macro still life, shallow depth of field, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/biennial-workforce-planning-briefing-06fd.webp"
-  },
-  "preliminary-compliance-risk-analysis-2021-a75e": {
-    "prompt": "a multilingual welcome sign in a glass corporate lobby, inclusive branding, warm architectural interior light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Diversity & Inclusion",
-    "path": "img/report-covers/preliminary-compliance-risk-analysis-2021-a75e.webp"
-  },
-  "strategic-benefits-utilization-guide-2025-31ee": {
-    "prompt": "a printed engagement survey results report on a conference table, sticky note flags marking key sections, editorial documentary, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Retention",
-    "path": "img/report-covers/strategic-benefits-utilization-guide-2025-31ee.webp"
-  },
-  "quarterly-workforce-demographics-study-fbb6": {
-    "prompt": "modern corporate cafeteria with healthy food options displayed, clean and bright, natural light, lifestyle editorial, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/quarterly-workforce-demographics-study-fbb6.webp"
-  },
-  "strategic-compensation-benchmarking-study-2016-cecb": {
-    "prompt": "printed salary survey binders stacked neatly on a credenza in an executive office, morning light through venetian blinds, editorial still life, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/strategic-compensation-benchmarking-study-2016-cecb.webp"
-  },
-  "final-employee-engagement-index-guide-2009-77b1": {
-    "prompt": "a modern workshop space with round tables, colorful sticky notes with ideas on a large wall, representing collaboration, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Diversity & Inclusion",
-    "path": "img/report-covers/final-employee-engagement-index-guide-2009-77b1.webp"
-  },
-  "regional-salary-transparency-survey-2023-6486": {
-    "prompt": "abstract visualization of collaboration between different generations, overlapping transparent circles of different sizes and colors, corporate documentary style, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Retention",
-    "path": "img/report-covers/regional-salary-transparency-survey-2023-6486.webp"
-  },
-  "comprehensive-ceo-pay-ratio-study-2023-926f": {
-    "prompt": "printed salary survey binders stacked neatly on a credenza in an executive office, morning light through venetian blinds, editorial still life, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/comprehensive-ceo-pay-ratio-study-2023-926f.webp"
-  },
-  "revised-salary-transparency-study-e173": {
-    "prompt": "an executive suite hallway with framed annual report covers lining both walls, receding perspective, corporate heritage photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/revised-salary-transparency-study-e173.webp"
-  },
-  "annual-remote-work-productivity-study-ad56": {
-    "prompt": "an empty corporate job fair booth with branding and informational pamphlets, event photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Talent Acquisition",
-    "path": "img/report-covers/annual-remote-work-productivity-study-ad56.webp"
-  },
-  "benchmark-job-architecture-review-assessment-2006-56a9": {
-    "prompt": "a printed stack of resumes with a red pen resting on top, warm desk lamp, shallow depth of field editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Talent Acquisition",
-    "path": "img/report-covers/benchmark-job-architecture-review-assessment-2006-56a9.webp"
-  },
-  "expanded-employee-engagement-index-assessment-69f5": {
-    "prompt": "employee benefit enrollment forms on a clean white desk with a pen, soft office lighting, documentary, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/expanded-employee-engagement-index-assessment-69f5.webp"
-  },
-  "annual-workforce-demographics-survey-2015-775d": {
-    "prompt": "modern corporate lobby with marble floors and glass architecture, suggesting a business agreement, natural light, corporate editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/annual-workforce-demographics-survey-2015-775d.webp"
-  },
-  "biennial-skills-gap-assessment-analysis-914f": {
-    "prompt": "modern open-plan office with standing desks, large monitors showing compensation dashboards, clean corporate aesthetic, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/biennial-skills-gap-assessment-analysis-914f.webp"
-  },
-  "annual-pay-transparency-compliance-survey-2023-1bb7": {
-    "prompt": "close-up of a fingerprint scanner and keycard access panel on a secure corporate door, technology security concept, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compliance",
-    "path": "img/report-covers/annual-pay-transparency-compliance-survey-2023-1bb7.webp"
-  },
-  "cross-industry-compliance-risk-analysis-f1c1": {
-    "prompt": "a round table in a quiet office corner with two coffee cups and notebooks, suggesting a one-on-one coaching session, warm window light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Leadership",
-    "path": "img/report-covers/cross-industry-compliance-risk-analysis-f1c1.webp"
-  },
-  "trend-talent-retention-survey-e174": {
-    "prompt": "abstract mosaic wall art inside a corporate HQ lobby, many small tiles forming a unified design, symbolizing inclusion, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Diversity & Inclusion",
-    "path": "img/report-covers/trend-talent-retention-survey-e174.webp"
-  },
-  "biennial-board-effectiveness-guide-2024-9ba3": {
-    "prompt": "a MacBook Pro and external monitor showing a cloud infrastructure diagram on a minimal white desk, clean tech editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Technology",
-    "path": "img/report-covers/biennial-board-effectiveness-guide-2024-9ba3.webp"
-  },
-  "trend-diversity-metrics-briefing-2013-5ce1": {
-    "prompt": "an executive suite hallway with framed annual report covers lining both walls, receding perspective, corporate heritage photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/trend-diversity-metrics-briefing-2013-5ce1.webp"
-  },
-  "revised-retirement-plan-participation-report-2018-164d": {
-    "prompt": "corporate campus outdoor seating area with empty benches and architectural landscaping, suggesting a workforce at work inside, atmospheric, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/revised-retirement-plan-participation-report-2018-164d.webp"
-  },
-  "biennial-salary-transparency-survey-2023-fd91": {
-    "prompt": "a Kanban board on a glass wall covered in user story cards from a recent product sprint, tech office editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Technology",
-    "path": "img/report-covers/biennial-salary-transparency-survey-2023-fd91.webp"
-  },
-  "strategic-talent-retention-index-2023-83e5": {
-    "prompt": "close-up of a mechanical pencil resting on a printed compensation matrix spreadsheet, warm desk lamp, shallow depth of field, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/strategic-talent-retention-index-2023-83e5.webp"
-  },
-  "integrated-ceo-pay-ratio-white-paper-2022-8aa3": {
-    "prompt": "secure corporate data center with blurred server racks, blue technical lighting, emphasizing security and technology, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compliance",
-    "path": "img/report-covers/integrated-ceo-pay-ratio-white-paper-2022-8aa3.webp"
-  },
-  "baseline-talent-retention-index-2022-949d": {
-    "prompt": "a large digital display on an office wall showing an org chart and headcount metrics, empty conference chairs in foreground, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/baseline-talent-retention-index-2022-949d.webp"
-  },
-  "supplemental-hiring-cost-analysis-framework-2019-ed56": {
-    "prompt": "laptops open to resume templates in a collaborative office space, notebooks and coffee on the table, natural light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Talent Acquisition",
-    "path": "img/report-covers/supplemental-hiring-cost-analysis-framework-2019-ed56.webp"
-  },
-  "annual-pay-equity-white-paper-2024-585b": {
-    "prompt": "a company all-hands celebration event space, empty before the party: tables set, banners hung, balloons not yet released, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Retention",
-    "path": "img/report-covers/annual-pay-equity-white-paper-2024-585b.webp"
-  },
-  "revised-talent-retention-assessment-2007-8a14": {
-    "prompt": "a large screen in a well-lit conference room displaying an employee benefits presentation, empty chairs facing the screen, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/revised-talent-retention-assessment-2007-8a14.webp"
-  },
-  "final-remote-work-productivity-briefing-2024-cf37": {
-    "prompt": "aerial view of corporate campus with manicured grounds and trees, clean geometric architecture, drone photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/final-remote-work-productivity-briefing-2024-cf37.webp"
-  },
-  "baseline-remote-work-productivity-white-paper-2024-4659": {
-    "prompt": "two coffee cups and open notebooks on a shared desk in a warm, modern office, suggesting a mentoring session, warm editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Diversity & Inclusion",
-    "path": "img/report-covers/baseline-remote-work-productivity-white-paper-2024-4659.webp"
-  },
-  "biennial-employee-engagement-index-guide-2010-7b79": {
-    "prompt": "corporate campus outdoor seating area with empty benches and architectural landscaping, suggesting a workforce at work inside, atmospheric, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/biennial-employee-engagement-index-guide-2010-7b79.webp"
-  },
-  "strategic-wage-band-calibration-survey-2011-fee2": {
-    "prompt": "a modern, expansive office lobby with striking architecture, suggesting corporate power and confidence, corporate portrait photography style but with no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Leadership",
-    "path": "img/report-covers/strategic-wage-band-calibration-survey-2011-fee2.webp"
-  },
-  "preliminary-compliance-risk-guide-2005-072d": {
-    "prompt": "wide angle of an empty glass-walled boardroom with a projection screen showing a pay-equity bar chart, city skyline backdrop, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/preliminary-compliance-risk-guide-2005-072d.webp"
-  },
-  "comparative-diversity-metrics-index-2021-8e45": {
-    "prompt": "a benefits booklet and summary plan description fanned out on a clean white surface, clinical editorial still life, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/comparative-diversity-metrics-index-2021-8e45.webp"
-  },
-  "trend-turnover-analysis-framework-2023-7d67": {
-    "prompt": "wide shot of a bright corporate meditation or quiet room with soft cushions and diffused lighting, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/trend-turnover-analysis-framework-2023-7d67.webp"
-  },
-  "supplemental-workforce-demographics-guide-2022-9c2b": {
-    "prompt": "a bicycle-share station in front of a glass corporate headquarters, sustainability initiative, architectural lifestyle, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/supplemental-workforce-demographics-guide-2022-9c2b.webp"
-  },
-  "regional-hiring-cost-analysis-analysis-2009-01cd": {
-    "prompt": "a modern corporate breakout space with remnants of a celebration, like confetti and empty glasses, candid corporate photography style, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Retention",
-    "path": "img/report-covers/regional-hiring-cost-analysis-analysis-2009-01cd.webp"
-  },
-  "supplemental-gender-pay-gap-briefing-2022-5745": {
-    "prompt": "a glass building lobby with an LED ticker showing market data scrolling across the screen, architectural corporate, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Economic",
-    "path": "img/report-covers/supplemental-gender-pay-gap-briefing-2022-5745.webp"
-  },
-  "baseline-hiring-cost-analysis-framework-2012-6f8a": {
-    "prompt": "close-up of financial data charts and bar graphs on a glass desk, office environment with city view, depth of field blur, corporate documentary photography, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Compensation",
-    "path": "img/report-covers/baseline-hiring-cost-analysis-framework-2012-6f8a.webp"
-  },
-  "comparative-executive-pay-assessment-2010-1428": {
-    "prompt": "modern HR operations office: standing desks, multiple monitors, a half-filled coffee mug, late afternoon golden light, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/comparative-executive-pay-assessment-2010-1428.webp"
-  },
-  "longitudinal-incentive-compensation-framework-2020-6d8c": {
-    "prompt": "glass-walled conference room with laptops and notebooks open on a circular table, suggesting a recent meeting, professional corporate atmosphere, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Workforce",
-    "path": "img/report-covers/longitudinal-incentive-compensation-framework-2020-6d8c.webp"
-  },
-  "quarterly-market-pricing-methodology-briefing-2012-a9c1": {
-    "prompt": "modern corporate cafeteria with healthy food options displayed, clean and bright, natural light, lifestyle editorial, no people, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Benefits",
-    "path": "img/report-covers/quarterly-market-pricing-methodology-briefing-2012-a9c1.webp"
-  },
-  "biennial-incentive-compensation-guide-2014-fcea": {
-    "prompt": "a nameplate and water glass at a formal board meeting table, leather portfolio open in front, blurred room in background, editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Governance",
-    "path": "img/report-covers/biennial-incentive-compensation-guide-2014-fcea.webp"
-  },
-  "regional-compliance-risk-framework-9b64": {
-    "prompt": "a breakout room whiteboard covered in equity framework diagrams from a recent DEI workshop, empty chairs, editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Diversity & Inclusion",
-    "path": "img/report-covers/regional-compliance-risk-framework-9b64.webp"
-  },
-  "strategic-workforce-planning-report-2020-1972": {
-    "prompt": "solar panels covering the roof of a distribution center, aerial drone shot, clean geometric lines, blue sky, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "ESG",
-    "path": "img/report-covers/strategic-workforce-planning-report-2020-1972.webp"
-  },
-  "integrated-turnover-analysis-framework-2017-cf22": {
-    "prompt": "an exit interview room: two chairs, a table, a box of tissues, and a window, sparse and quietly corporate, editorial, professional corporate photography, 16:9 aspect ratio, muted navy and gold color palette",
-    "category": "Retention",
-    "path": "img/report-covers/integrated-turnover-analysis-framework-2017-cf22.webp"
-  }
+ "annual-benefits-utilization-guide-2017-e8a8": {
+  "category": "Compliance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-benefits-utilization-guide-2017-e8a8.webp",
+  "prompt": "a row of empty identical desks at the end of the day, chairs pushed in, soft evening light, contemporary decor with navy accents, late evening light with long shadows, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-hr-metrics-report-2011": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-hr-metrics-report-2011.webp",
+  "prompt": "a quiet library-style corporate lounge with leather chairs and bookshelves, 1990s corporate decor with beige carpet, late evening light with long shadows, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-pay-equity-white-paper-2024-585b": {
+  "category": "Retention",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-pay-equity-white-paper-2024-585b.webp",
+  "prompt": "a corner executive office with a clear desk and a leather chair facing a city view, minimalist Scandinavian decor, cool overcast daylight, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-pay-transparency-compliance-survey-2023-1bb7": {
+  "category": "Compliance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-pay-transparency-compliance-survey-2023-1bb7.webp",
+  "prompt": "a confidential shredding console bin with a slot in a quiet copy room, 1990s corporate decor with beige carpet, cool overcast daylight, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-remote-work-productivity-study-ad56": {
+  "category": "Talent Acquisition",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-remote-work-productivity-study-ad56.webp",
+  "prompt": "a boardroom with a speakerphone in the center of a polished table, mid-century modern decor, cool overcast daylight, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-salary-transparency-analysis-2024-44ca": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-salary-transparency-analysis-2024-44ca.webp",
+  "prompt": "a rooftop garden with raised planters on a corporate tower, city skyline behind, warm golden-hour light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-workforce-analytics-report-2024": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-workforce-analytics-report-2024.webp",
+  "prompt": "a long conference table with neatly aligned empty chairs and water glasses, classic wood-paneled decor, soft diffused window light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "annual-workforce-demographics-survey-2015-775d": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/annual-workforce-demographics-survey-2015-775d.webp",
+  "prompt": "an empty corporate atrium with tall windows and a polished stone floor, contemporary decor with navy accents, cool overcast daylight, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "baseline-hiring-cost-analysis-framework-2012-6f8a": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/baseline-hiring-cost-analysis-framework-2012-6f8a.webp",
+  "prompt": "an empty mahogany boardroom with leather chairs and a city view, warm Midwestern office decor, soft diffused window light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "baseline-remote-work-productivity-white-paper-2024-4659": {
+  "category": "Diversity & Inclusion",
+  "model": "flux-schnell",
+  "path": "img/report-covers/baseline-remote-work-productivity-white-paper-2024-4659.webp",
+  "prompt": "a wide automatic door with a push-button opener at a modern office entrance, bright even midday light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "baseline-retirement-plan-participation-study-2012-0451": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/baseline-retirement-plan-participation-study-2012-0451.webp",
+  "prompt": "rows of identical unassigned desks with monitors turned off and chairs pushed in, open-plan office, mid-century modern decor, soft morning light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "baseline-talent-retention-index-2022-949d": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/baseline-talent-retention-index-2022-949d.webp",
+  "prompt": "an empty hot-desking neighborhood with plants dividing clusters of white desks, mid-century modern decor, late evening light with long shadows, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "benchmark-job-architecture-review-assessment-2006-56a9": {
+  "category": "Talent Acquisition",
+  "model": "flux-schnell",
+  "path": "img/report-covers/benchmark-job-architecture-review-assessment-2006-56a9.webp",
+  "prompt": "an empty conference room with chairs around a long table, glass walls, afternoon light, 1990s corporate decor with beige carpet, late evening light with long shadows, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "benchmark-pay-equity-analysis-2024-d685": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/benchmark-pay-equity-analysis-2024-d685.webp",
+  "prompt": "a gavel resting on a polished wooden table in a formal meeting room, sleek glass-and-steel decor, late evening light with long shadows, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "benefits-cost-analysis-2024": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/benefits-cost-analysis-2024.webp",
+  "prompt": "a dish rack with clean mugs beside a stainless sink in an office kitchen, contemporary decor with navy accents, soft diffused window light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "biennial-board-effectiveness-guide-2024-9ba3": {
+  "category": "Technology",
+  "model": "flux-schnell",
+  "path": "img/report-covers/biennial-board-effectiveness-guide-2024-9ba3.webp",
+  "prompt": "a futuristic empty office with curved white desks and soft ambient lighting, classic wood-paneled decor, soft morning light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "biennial-employee-engagement-index-guide-2010-7b79": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/biennial-employee-engagement-index-guide-2010-7b79.webp",
+  "prompt": "a wall of small grey personal lockers in a modern office, industrial loft decor with exposed brick, cool overcast daylight, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "biennial-incentive-compensation-guide-2014-fcea": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/biennial-incentive-compensation-guide-2014-fcea.webp",
+  "prompt": "a quiet library-style corporate lounge with leather chairs and bookshelves, industrial loft decor with exposed brick, warm golden-hour light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "biennial-pay-equity-study-2018-c2f3": {
+  "category": "Technology",
+  "model": "flux-schnell",
+  "path": "img/report-covers/biennial-pay-equity-study-2018-c2f3.webp",
+  "prompt": "abstract glowing network of light filaments in a dark glass-walled room, minimalist Scandinavian decor, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "biennial-salary-transparency-survey-2023-fd91": {
+  "category": "Technology",
+  "model": "flux-schnell",
+  "path": "img/report-covers/biennial-salary-transparency-survey-2023-fd91.webp",
+  "prompt": "a sleek server room aisle with rows of glowing blue lights, symmetrical perspective, contemporary decor with navy accents, soft morning light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "biennial-skills-gap-assessment-analysis-914f": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/biennial-skills-gap-assessment-analysis-914f.webp",
+  "prompt": "an empty trading floor with rows of dark monitors at night, industrial loft decor with exposed brick, soft morning light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "biennial-workforce-planning-briefing-06fd": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/biennial-workforce-planning-briefing-06fd.webp",
+  "prompt": "a microwave and a kettle on a spotless office kitchenette counter, mid-century modern decor, warm golden-hour light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "board-composition-study-2024": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/board-composition-study-2024.webp",
+  "prompt": "an empty corporate atrium with tall windows and a polished stone floor, contemporary decor with navy accents, soft morning light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "comparative-diversity-metrics-index-2021-8e45": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/comparative-diversity-metrics-index-2021-8e45.webp",
+  "prompt": "a wide automatic door with a push-button opener at a modern office entrance, late evening light with long shadows, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "comparative-executive-pay-assessment-2010-1428": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/comparative-executive-pay-assessment-2010-1428.webp",
+  "prompt": "a video conference room with a large camera bar and empty chairs facing a blank wall display, mid-century modern decor, warm golden-hour light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "comparative-workforce-planning-briefing-2014-edc5": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/comparative-workforce-planning-briefing-2014-edc5.webp",
+  "prompt": "a half-empty open-plan office on a sunny weekday, every other desk unoccupied, warm Midwestern office decor, cool overcast daylight, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "compensation-benchmarking-methodology-1995": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/compensation-benchmarking-methodology-1995.webp",
+  "prompt": "a glass boardroom high above a city at night, chairs pushed in, warm Midwestern office decor, late evening light with long shadows, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "comprehensive-ceo-pay-ratio-study-2023-926f": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/comprehensive-ceo-pay-ratio-study-2023-926f.webp",
+  "prompt": "a closed leather portfolio and a brass desk lamp in a dark executive office, sleek glass-and-steel decor, late evening light with long shadows, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "comprehensive-turnover-analysis-study-2025-0d9e": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/comprehensive-turnover-analysis-study-2025-0d9e.webp",
+  "prompt": "a laptop bag resting on an empty desk next to a window overlooking the city, classic wood-paneled decor, late evening light with long shadows, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "comprehensive-wage-band-calibration-white-paper-e4b7": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/comprehensive-wage-band-calibration-white-paper-e4b7.webp",
+  "prompt": "a leather wallet and a stack of folded bills beside a closed ledger on a walnut desk, 1990s corporate decor with beige carpet, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "corporate-governance-best-practices-white-paper": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/corporate-governance-best-practices-white-paper.webp",
+  "prompt": "a long conference table with neatly aligned empty chairs and water glasses, 1990s corporate decor with beige carpet, soft diffused window light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "corporate-pay-equity-study-1998": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/corporate-pay-equity-study-1998.webp",
+  "prompt": "a brass desk lamp lighting a closed ledger and a mechanical pencil, dark wood desk, sleek glass-and-steel decor, soft morning light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "cross-industry-compliance-risk-analysis-f1c1": {
+  "category": "Leadership",
+  "model": "flux-schnell",
+  "path": "img/report-covers/cross-industry-compliance-risk-analysis-f1c1.webp",
+  "prompt": "a gavel resting on a polished wooden table in a formal meeting room, industrial loft decor with exposed brick, soft morning light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "cross-industry-gender-pay-gap-guide-2008-fa7b": {
+  "category": "Economic",
+  "model": "flux-schnell",
+  "path": "img/report-covers/cross-industry-gender-pay-gap-guide-2008-fa7b.webp",
+  "prompt": "a container port at dusk with gantry cranes and stacked shipping containers, soft morning light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "cross-industry-market-pricing-methodology-guide-2016-41a4": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/cross-industry-market-pricing-methodology-guide-2016-41a4.webp",
+  "prompt": "an empty mahogany boardroom with leather chairs and a city view, classic wood-paneled decor, soft diffused window light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "cross-industry-remote-work-productivity-analysis-2019-4ab0": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/cross-industry-remote-work-productivity-analysis-2019-4ab0.webp",
+  "prompt": "an office coffee station with a row of clean mugs, morning light, minimalist Scandinavian decor, bright even midday light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "employee-satisfaction-survey-results-2024": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/employee-satisfaction-survey-results-2024.webp",
+  "prompt": "an office lobby on a Monday morning with sunlight and empty turnstiles, minimalist Scandinavian decor, soft diffused window light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "esg-disclosure-framework-2024": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/esg-disclosure-framework-2024.webp",
+  "prompt": "a modern office building with a green living wall and rooftop solar panels under a clear blue sky, warm golden-hour light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "executive-benefits-survey-2003": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/executive-benefits-survey-2003.webp",
+  "prompt": "a calm nursing room in an office with soft lamp light and an armchair, sleek glass-and-steel decor, late evening light with long shadows, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "executive-compensation-study-2024": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/executive-compensation-study-2024.webp",
+  "prompt": "a calculator and a fountain pen on a polished desk, warm lamp light, warm Midwestern office decor, cool overcast daylight, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "expanded-employee-engagement-index-assessment-69f5": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/expanded-employee-engagement-index-assessment-69f5.webp",
+  "prompt": "a bright private lactation room with a comfortable armchair, a small refrigerator, and a sink, 1990s corporate decor with beige carpet, warm golden-hour light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "final-employee-engagement-index-guide-2009-77b1": {
+  "category": "Diversity & Inclusion",
+  "model": "flux-schnell",
+  "path": "img/report-covers/final-employee-engagement-index-guide-2009-77b1.webp",
+  "prompt": "an adjustable-height desk raised in an empty modern office, 1990s corporate decor with beige carpet, soft morning light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "final-hiring-cost-analysis-guide-2018-0f9e": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/final-hiring-cost-analysis-guide-2018-0f9e.webp",
+  "prompt": "wind turbines on a ridge seen through the floor-to-ceiling window of an empty boardroom, soft morning light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "final-remote-work-productivity-briefing-2024-cf37": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/final-remote-work-productivity-briefing-2024-cf37.webp",
+  "prompt": "a row of bicycles in a bike rack outside a glass office entrance, morning light, warm golden-hour light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "fortune-500-ceo-pay-ratio-analysis": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/fortune-500-ceo-pay-ratio-analysis.webp",
+  "prompt": "rows of empty desks in a finance department at dusk, chairs pushed in, minimalist Scandinavian decor, warm golden-hour light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "governance-disclosure-standards-2009": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/governance-disclosure-standards-2009.webp",
+  "prompt": "a gavel resting on a polished wooden table in a formal meeting room, classic wood-paneled decor, soft diffused window light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "healthcare-benefits-landscape-2024": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/healthcare-benefits-landscape-2024.webp",
+  "prompt": "a small potted plant and a baby rattle on an empty office desk, industrial loft decor with exposed brick, late evening light with long shadows, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "industry-wage-gap-analysis-2024": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/industry-wage-gap-analysis-2024.webp",
+  "prompt": "a neat stack of coins and a brass scale on a dark desk, editorial still life, warm Midwestern office decor, soft diffused window light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "integrated-ceo-pay-ratio-white-paper-2022-8aa3": {
+  "category": "Compliance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/integrated-ceo-pay-ratio-white-paper-2022-8aa3.webp",
+  "prompt": "a perfectly clear white desk with only a closed laptop and a single plant, warm Midwestern office decor, late evening light with long shadows, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "integrated-turnover-analysis-framework-2017-cf22": {
+  "category": "Retention",
+  "model": "flux-schnell",
+  "path": "img/report-covers/integrated-turnover-analysis-framework-2017-cf22.webp",
+  "prompt": "an empty auditorium with a single lectern lit by a spotlight on stage, contemporary decor with navy accents, warm golden-hour light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "job-grade-architecture-white-paper-2007": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/job-grade-architecture-white-paper-2007.webp",
+  "prompt": "a glass jar of coins on a windowsill in a quiet office, soft light, classic wood-paneled decor, late evening light with long shadows, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "longitudinal-incentive-compensation-framework-2020-6d8c": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/longitudinal-incentive-compensation-framework-2020-6d8c.webp",
+  "prompt": "freshly cleaned empty desks waiting under bright office lights, industrial loft decor with exposed brick, soft diffused window light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "longitudinal-turnover-analysis-study-2010-f0b1": {
+  "category": "Retention",
+  "model": "flux-schnell",
+  "path": "img/report-covers/longitudinal-turnover-analysis-study-2010-f0b1.webp",
+  "prompt": "a mountain-lodge conference room with floor-to-ceiling windows and empty chairs, classic wood-paneled decor, soft diffused window light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "mid-year-executive-pay-analysis-2008-bc65": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/mid-year-executive-pay-analysis-2008-bc65.webp",
+  "prompt": "a rain garden with native grasses at the entrance of a corporate campus, soft diffused window light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "mid-year-executive-pay-white-paper-2020-1190": {
+  "category": "Technology",
+  "model": "flux-schnell",
+  "path": "img/report-covers/mid-year-executive-pay-white-paper-2020-1190.webp",
+  "prompt": "a brass compass resting on a closed laptop, symbolic still life about guidance, minimalist Scandinavian decor, late evening light with long shadows, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "mid-year-geographic-pay-differentials-survey-2018-e65d": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/mid-year-geographic-pay-differentials-survey-2018-e65d.webp",
+  "prompt": "snow piled along an empty office parking lot under orange streetlights, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "national-incentive-compensation-index-2024-feea": {
+  "category": "Talent Acquisition",
+  "model": "flux-schnell",
+  "path": "img/report-covers/national-incentive-compensation-index-2024-feea.webp",
+  "prompt": "a small huddle room with four chairs and a round table, a pitcher of water, warm Midwestern office decor, late evening light with long shadows, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "national-salary-survey-2001": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/national-salary-survey-2001.webp",
+  "prompt": "an empty mahogany boardroom with leather chairs and a city view, classic wood-paneled decor, soft morning light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "preliminary-compliance-risk-analysis-2021-a75e": {
+  "category": "Diversity & Inclusion",
+  "model": "flux-schnell",
+  "path": "img/report-covers/preliminary-compliance-risk-analysis-2021-a75e.webp",
+  "prompt": "a gently sloped ramp beside stone steps at a corporate entrance, cool overcast daylight, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "preliminary-compliance-risk-guide-2005-072d": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/preliminary-compliance-risk-guide-2005-072d.webp",
+  "prompt": "a gavel resting on a polished wooden table in a formal meeting room, sleek glass-and-steel decor, late evening light with long shadows, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "preliminary-job-architecture-review-assessment-2024-12a0": {
+  "category": "Compliance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/preliminary-job-architecture-review-assessment-2024-12a0.webp",
+  "prompt": "a locked under-desk pedestal drawer with a small key, clean office, industrial loft decor with exposed brick, cool overcast daylight, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "preliminary-pay-transparency-compliance-survey-2012-52f4": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/preliminary-pay-transparency-compliance-survey-2012-52f4.webp",
+  "prompt": "a quiet library-style corporate lounge with leather chairs and bookshelves, sleek glass-and-steel decor, warm golden-hour light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "preliminary-salary-transparency-index-2017-d6da": {
+  "category": "Technology",
+  "model": "flux-schnell",
+  "path": "img/report-covers/preliminary-salary-transparency-index-2017-d6da.webp",
+  "prompt": "a security camera dome mounted on the ceiling of an empty corridor, minimalist Scandinavian decor, soft morning light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "preliminary-workforce-demographics-study-2021-597d": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/preliminary-workforce-demographics-study-2021-597d.webp",
+  "prompt": "a document shredder beside a stack of sealed boxes in a storage room, industrial loft decor with exposed brick, warm golden-hour light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "public-sector-compensation-guide": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/public-sector-compensation-guide.webp",
+  "prompt": "an empty trading floor with rows of dark monitors at night, warm Midwestern office decor, soft morning light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "q3-economic-indicators-2024": {
+  "category": "Economic",
+  "model": "flux-schnell",
+  "path": "img/report-covers/q3-economic-indicators-2024.webp",
+  "prompt": "long-exposure light trails on a downtown avenue between glass towers at night, warm golden-hour light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "quarterly-market-pricing-methodology-briefing-2012-a9c1": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/quarterly-market-pricing-methodology-briefing-2012-a9c1.webp",
+  "prompt": "a suitcase and a straw hat by an office door at the end of the day, sleek glass-and-steel decor, late evening light with long shadows, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "quarterly-workforce-demographics-study-fbb6": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/quarterly-workforce-demographics-study-fbb6.webp",
+  "prompt": "a closed laptop on a desk beside a pair of sunglasses and a beach hat, warm Midwestern office decor, soft diffused window light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "regional-compliance-risk-framework-9b64": {
+  "category": "Diversity & Inclusion",
+  "model": "flux-schnell",
+  "path": "img/report-covers/regional-compliance-risk-framework-9b64.webp",
+  "prompt": "an empty corporate atrium with tall windows and a polished stone floor, industrial loft decor with exposed brick, warm golden-hour light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "regional-hiring-cost-analysis-analysis-2009-01cd": {
+  "category": "Retention",
+  "model": "flux-schnell",
+  "path": "img/report-covers/regional-hiring-cost-analysis-analysis-2009-01cd.webp",
+  "prompt": "an empty conference room with chairs around a long table, glass walls, afternoon light, warm Midwestern office decor, late evening light with long shadows, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "regional-salary-differentials-2024": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/regional-salary-differentials-2024.webp",
+  "prompt": "a glass boardroom high above a city at night, chairs pushed in, industrial loft decor with exposed brick, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "regional-salary-transparency-survey-2023-6486": {
+  "category": "Retention",
+  "model": "flux-schnell",
+  "path": "img/report-covers/regional-salary-transparency-survey-2023-6486.webp",
+  "prompt": "a boardroom with a speakerphone in the center of a polished table, contemporary decor with navy accents, late evening light with long shadows, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "regional-talent-retention-report-2021-0fd7": {
+  "category": "Leadership",
+  "model": "flux-schnell",
+  "path": "img/report-covers/regional-talent-retention-report-2021-0fd7.webp",
+  "prompt": "an empty mahogany boardroom with leather chairs and a city view, industrial loft decor with exposed brick, soft morning light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "regulatory-compliance-costs-2024": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/regulatory-compliance-costs-2024.webp",
+  "prompt": "rows of identical bankers boxes on metal shelving in a records room, classic wood-paneled decor, bright even midday light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "remote-work-impact-study-2024": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/remote-work-impact-study-2024.webp",
+  "prompt": "a long conference table with neatly aligned empty chairs and water glasses, minimalist Scandinavian decor, cool overcast daylight, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "retirement-readiness-index-2024": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/retirement-readiness-index-2024.webp",
+  "prompt": "an empty office chair facing a window with a view of a lake on a sunny day, classic wood-paneled decor, cool overcast daylight, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "revised-remote-work-productivity-white-paper-2024-ab77": {
+  "category": "Economic",
+  "model": "flux-schnell",
+  "path": "img/report-covers/revised-remote-work-productivity-white-paper-2024-ab77.webp",
+  "prompt": "a financial district skyline at blue hour reflected in a still water feature, late evening light with long shadows, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "revised-retirement-plan-participation-report-2018-164d": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/revised-retirement-plan-participation-report-2018-164d.webp",
+  "prompt": "an empty corporate atrium with tall windows and a polished stone floor, warm Midwestern office decor, cool overcast daylight, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "revised-salary-transparency-study-e173": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/revised-salary-transparency-study-e173.webp",
+  "prompt": "a long corridor of compact mobile shelving units in a quiet archive, classic wood-paneled decor, bright even midday light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "revised-talent-retention-assessment-2007-8a14": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/revised-talent-retention-assessment-2007-8a14.webp",
+  "prompt": "an empty office fitness center with treadmills facing a window, classic wood-paneled decor, cool overcast daylight, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "salary-compensation-benchmarking-survey-2024": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/salary-compensation-benchmarking-survey-2024.webp",
+  "prompt": "a closed leather portfolio and a brass desk lamp in a dark executive office, classic wood-paneled decor, warm golden-hour light, symmetrical straight-on view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "state-of-workplace-report-2024": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/state-of-workplace-report-2024.webp",
+  "prompt": "rows of identical unassigned desks with monitors turned off and chairs pushed in, open-plan office, contemporary decor with navy accents, bright even midday light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-benefits-utilization-guide-2025-31ee": {
+  "category": "Retention",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-benefits-utilization-guide-2025-31ee.webp",
+  "prompt": "a small huddle room with four chairs and a round table, a pitcher of water, contemporary decor with navy accents, bright even midday light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-ceo-pay-ratio-survey-2022-b8de": {
+  "category": "Retention",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-ceo-pay-ratio-survey-2022-b8de.webp",
+  "prompt": "a closed laptop on a desk beside a pair of sunglasses and a beach hat, industrial loft decor with exposed brick, warm golden-hour light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-compensation-benchmarking-study-2016-cecb": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-compensation-benchmarking-study-2016-cecb.webp",
+  "prompt": "a leather wallet and a stack of folded bills beside a closed ledger on a walnut desk, warm Midwestern office decor, cool overcast daylight, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-employee-engagement-index-briefing-2025-b58a": {
+  "category": "Technology",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-employee-engagement-index-briefing-2025-b58a.webp",
+  "prompt": "a laptop closed and secured with a steel cable lock to a desk, sleek glass-and-steel decor, soft diffused window light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-employee-engagement-index-survey-13e6": {
+  "category": "Leadership",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-employee-engagement-index-survey-13e6.webp",
+  "prompt": "a corner executive office with a clear desk and a leather chair facing a city view, minimalist Scandinavian decor, cool overcast daylight, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-healthcare-cost-trends-assessment-2010-f55e": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-healthcare-cost-trends-assessment-2010-f55e.webp",
+  "prompt": "a bowl of fresh fruit on a break room counter in morning light, minimalist Scandinavian decor, soft morning light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-talent-retention-index-2023-83e5": {
+  "category": "Compensation",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-talent-retention-index-2023-83e5.webp",
+  "prompt": "a brass desk lamp lighting a closed ledger and a mechanical pencil, dark wood desk, industrial loft decor with exposed brick, warm golden-hour light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-wage-band-calibration-survey-2011-fee2": {
+  "category": "Leadership",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-wage-band-calibration-survey-2011-fee2.webp",
+  "prompt": "a mountain-lodge conference room with floor-to-ceiling windows and empty chairs, mid-century modern decor, warm golden-hour light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "strategic-workforce-planning-report-2020-1972": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/strategic-workforce-planning-report-2020-1972.webp",
+  "prompt": "a corporate campus at dusk under a heavy green-grey storm sky, trees bending in the wind, soft diffused window light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "supplemental-gender-pay-gap-briefing-2022-5745": {
+  "category": "Economic",
+  "model": "flux-schnell",
+  "path": "img/report-covers/supplemental-gender-pay-gap-briefing-2022-5745.webp",
+  "prompt": "an aerial view of a dense downtown commercial district at golden hour, warm golden-hour light, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "supplemental-hiring-cost-analysis-framework-2019-ed56": {
+  "category": "Talent Acquisition",
+  "model": "flux-schnell",
+  "path": "img/report-covers/supplemental-hiring-cost-analysis-framework-2019-ed56.webp",
+  "prompt": "two empty chairs facing each other across a small glass table in a bright meeting room, industrial loft decor with exposed brick, late evening light with long shadows, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "supplemental-pay-transparency-compliance-report-2021-a52e": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/supplemental-pay-transparency-compliance-report-2021-a52e.webp",
+  "prompt": "an interior windowless conference room with stacked chairs and a flashlight on the table, contemporary decor with navy accents, soft morning light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "supplemental-turnover-analysis-briefing-2022-4a66": {
+  "category": "Economic",
+  "model": "flux-schnell",
+  "path": "img/report-covers/supplemental-turnover-analysis-briefing-2022-4a66.webp",
+  "prompt": "a cargo plane on an empty airport apron at dawn, soft diffused window light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "supplemental-workforce-demographics-guide-2022-9c2b": {
+  "category": "ESG",
+  "model": "flux-schnell",
+  "path": "img/report-covers/supplemental-workforce-demographics-guide-2022-9c2b.webp",
+  "prompt": "dark storm clouds over a glass office tower, rain streaking the windows, soft diffused window light, close still-life composition. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "trend-diversity-metrics-briefing-2013-5ce1": {
+  "category": "Governance",
+  "model": "flux-schnell",
+  "path": "img/report-covers/trend-diversity-metrics-briefing-2013-5ce1.webp",
+  "prompt": "tall rolling archive shelves filled with uniform grey storage boxes, sleek glass-and-steel decor, soft diffused window light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "trend-talent-retention-survey-e174": {
+  "category": "Diversity & Inclusion",
+  "model": "flux-schnell",
+  "path": "img/report-covers/trend-talent-retention-survey-e174.webp",
+  "prompt": "a quiet library-style corporate lounge with leather chairs and bookshelves, 1990s corporate decor with beige carpet, soft morning light, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "trend-turnover-analysis-framework-2023-7d67": {
+  "category": "Benefits",
+  "model": "flux-schnell",
+  "path": "img/report-covers/trend-turnover-analysis-framework-2023-7d67.webp",
+  "prompt": "a quiet meditation room with floor cushions and plants, sleek glass-and-steel decor, warm golden-hour light, three-quarter view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
+ "workforce-demographics-report-2006": {
+  "category": "Workforce",
+  "model": "flux-schnell",
+  "path": "img/report-covers/workforce-demographics-report-2006.webp",
+  "prompt": "an empty hot-desking neighborhood with plants dividing clusters of white desks, classic wood-paneled decor, late evening light with long shadows, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ }
 }

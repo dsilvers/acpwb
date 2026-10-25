@@ -1,0 +1,49 @@
+# Ideas, hackathons, and innovation programs.
+
+Q: Ideas submitted to the ACPWB innovation program generally:
++ Belong to ACPWB under your invention assignment agreement
+- Belong to whoever submits first, personally
+- Belong to the judges
+- Belong to {VENDOR}
+
+Q: Hackathon projects should use:
++ Test or synthetic data, not real customer or employee data, unless approved
+- Production customer data for realism
+- Data scraped from competitors
+- Coworkers' passwords
+
+Q: Sharing an unreleased ACPWB product idea at a public meetup is:
++ Not allowed without approval; it may harm patent rights and confidentiality
+- Good networking
+- Required for feedback
+- Allowed if you do not use the name
+
+Q: A "lunch and learn" session is:
++ An informal learning session, often over lunch
+- A required certification exam
+- A cooking class
+- A meeting about lunch
+
+Q: Pilot projects using new software must:
++ Go through security and procurement review before using ACPWB data
+- Start immediately with a free trial
+- Use personal credit cards
+- Avoid IT to move faster
+
+Q: The "suggestion box" is meant for:
++ Constructive ideas and concerns
+- Lunch orders
+- Complaints about named coworkers' appearance
+- Resignation letters
+
+Q: Failure in an approved experiment should be:
++ Shared as learning
+- Hidden
+- Punished
+- Blamed on the {COMMITTEE}
+
+Q: Prototypes built at a hackathon should not be:
++ Deployed to production without normal review
+- Demonstrated
+- Documented
+- Celebrated

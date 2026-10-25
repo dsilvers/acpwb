@@ -1,0 +1,66 @@
+# Security incident response (NIST SP 800-61 phases in general terms).
+Q: The phases of incident response commonly include:
++ Preparation; detection and analysis; containment, eradication, and recovery; and post-incident activity
+- Panic, blame, cover-up, and vacation
+- Denial, anger, bargaining, and acceptance
+- Plan, do, check, act, then delete
+
+Q: The first thing an employee should do when they suspect a security incident is:
++ Report it immediately through the security reporting channel
+- Try to fix it themselves
+- Turn off every computer in the building
+- Wait to see if it gets worse
+
+Q: Containment during an incident aims to:
++ Limit the damage and stop the incident from spreading
+- Keep the incident secret from management
+- Contain the press release
+- Delete all logs
+
+Q: Logs and evidence during an incident should be:
++ Preserved; avoid wiping or rebuilding systems until the response team says so
+- Deleted to save space
+- Edited to look better
+- Shared publicly
+
+Q: An incident commander's role is to:
++ Coordinate the response and make decisions
+- Write all the code fixes alone
+- Talk to the press without approval
+- Assign blame
+
+Q: A "lessons learned" review after an incident should be:
++ Blameless, focused on improving processes and controls
+- A search for someone to fire
+- Skipped if the incident was small
+- Held only if the press noticed
+
+Q: If ransomware appears on your screen, you should:
++ Disconnect from the network if instructed, leave the device on, and report it immediately
+- Pay the ransom with a corporate card
+- Restart the computer repeatedly
+- Email the attackers
+
+Q: Communication with outside parties about an incident should be handled by:
++ Designated people in Legal, Communications, and Security
+- Whoever discovered the incident
+- The attacker
+- The vendor's sales rep
+
+Q: Incident response plans should be:
++ Tested through exercises such as tabletop simulations
+- Written and never read
+- Kept secret from the response team
+- Updated only after a breach
+
+Q: An incident severity level helps the team:
++ Prioritize response and decide who to involve
+- Choose the font for the report
+- Decide on lunch
+- Avoid escalation
+
+Q: Using personal messaging apps to coordinate an incident response:
++ Should be avoided unless they are approved, since records must be kept
+- Is required
+- Is more secure than company tools
+- Is the only option

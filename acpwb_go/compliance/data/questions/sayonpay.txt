@@ -1,0 +1,67 @@
+# Say-on-pay and shareholder votes (Dodd-Frank Section 951).
+
+Q: A say-on-pay vote is:
++ An advisory shareholder vote on the compensation of the named executive officers
+- A binding vote that sets each executive's salary
+- A vote by employees on their own raises
+- A vote on the cafeteria menu
+
+Q: Public companies must hold a say-on-pay vote at least once every:
++ Three years
+- Ten years
+- Month
+- Leap year
+
+Q: The "say-on-frequency" vote asks shareholders:
++ How often the say-on-pay vote should be held: every one, two, or three years
+- How often executives should be paid
+- How often the board should meet
+- How often {EVENT} should happen
+
+Q: When a say-on-pay proposal receives low support, a compensation committee typically:
++ Engages with shareholders and explains its response in the next proxy statement
+- Ignores it, since the vote is advisory
+- Holds the vote again until it passes
+- Blames the proxy advisors in a press release
+
+Q: Proxy advisory firms such as ISS and Glass Lewis:
++ Issue voting recommendations to institutional investors
+- Set executive pay for companies
+- Print the proxy statements
+- Count the votes at {EVENT}
+
+Q: An employee who owns company stock in the 401(k) plan:
++ May be able to direct how those shares are voted, depending on the plan
+- Must vote however their manager says
+- Loses the shares if they vote against management
+- Can vote only by fax
+
+Q: Say-on-golden-parachutes votes are required:
++ In connection with certain mergers or acquisitions
+- Every month
+- Never
+- At {EVENT}
+
+Q: A say-on-pay vote with less than 70% support is often considered:
++ A signal of significant shareholder concern
+- A strong endorsement
+- Irrelevant
+- A tie
+
+Q: Shareholders vote on say-on-pay through:
++ The proxy card, by mail, phone, internet, or at the annual meeting
+- Texting the CEO
+- A raffle
+- A show of hands in the lobby
+
+Q: Proxy statements are filed with:
++ The SEC
+- The county clerk
+- The {COMMITTEE}
+- The ACPWB cafeteria
+
+Q: Employees discussing their views on executive pay is:
++ Generally allowed and may be protected
+- Prohibited
+- Required
+- Illegal

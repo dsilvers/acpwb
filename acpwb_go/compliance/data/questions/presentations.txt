@@ -1,0 +1,67 @@
+# Presentations, slide decks, and screen sharing.
+
+Q: A slide deck shared outside ACPWB should be:
++ Reviewed for confidential information, including speaker notes and hidden slides
+- Sent as-is to save time
+- Sent with all comments visible
+- Sent with "Draft" in 72-point font to excuse errors
+
+Q: Speaker notes in a presentation file are:
++ Included when you share the file, so review them before sending
+- Automatically deleted when emailed
+- Visible only on {WEEKDAY}s
+- Encrypted by default
+
+Q: A chart that starts the y-axis at a value other than zero to exaggerate a small change is:
++ Misleading
+- A best practice
+- Required for growth charts
+- Required by {AGENCY}
+
+Q: Data in a presentation should:
++ Cite its source and date
+- Be rounded to look impressive
+- Be estimated if the real numbers are inconvenient
+- Use as many decimal places as possible
+
+Q: Before sharing your screen to present, you should:
++ Close unrelated windows and turn on "do not disturb"
+- Open your personal email
+- Leave notifications on for transparency
+- Open the {DOCUMENT} in another tab
+
+Q: A presentation with 80 slides for a 15-minute meeting is:
++ Too long; focus on key messages and use an appendix
+- Ideal
+- Required for executives
+- Too short
+
+Q: Using a competitor's confidential slides found online in an ACPWB deck is:
++ Not allowed; it may violate their rights and our Code of Conduct
+- Clever research
+- Allowed if you change the colors
+- Allowed if you cite them
+
+Q: Accessibility for slides includes:
++ Sufficient color contrast, readable fonts, and alt text for images
+- Neon text on bright backgrounds
+- 8-point font to fit more content
+- Animations on every bullet
+
+Q: The ACPWB slide template:
++ Should be used for external presentations to keep branding consistent
+- Is optional, including for customer pitches
+- May be modified freely with clip art
+- Is only for internal parties
+
+Q: Rehearsing a presentation helps because:
++ It keeps you on time and catches errors
+- It is required by {AGENCY}
+- It makes slides load faster
+- It replaces the need for slides
+
+Q: "Let's take this offline" in a presentation usually means:
++ Continue the discussion after the meeting with the relevant people
+- Disconnect from the internet
+- Go outside
+- Cancel the project

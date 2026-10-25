@@ -1,0 +1,61 @@
+# Third-party and vendor risk management.
+
+Q: Before engaging a new vendor that will handle ACPWB data, you should:
++ Complete the third-party risk assessment, including security and privacy review
+- Sign the contract and assess later
+- Ask the vendor if they are secure
+- Choose the vendor with the best logo
+
+Q: A vendor's sub-contractor will access ACPWB data. This should be:
++ Disclosed and covered by the contract and risk assessment
+- Ignored, since it is the vendor's business
+- Allowed only on weekends
+- Kept confidential from Procurement
+
+Q: Paying a vendor without a purchase order or contract:
++ Bypasses controls and is generally not allowed
+- Is faster and preferred
+- Is allowed for friends
+- Is required for urgent requests
+
+Q: A vendor emails new bank details and asks you to update their payment information. You should:
++ Verify the change by calling the vendor using a phone number already on file
+- Update it immediately
+- Reply to the email to confirm
+- Call the number in the email signature
+
+Q: Vendor performance should be:
++ Monitored against contract terms and service levels
+- Assumed to be good
+- Reviewed only if the vendor complains
+- Measured by how many gifts they send
+
+Q: When a vendor relationship ends, ACPWB should:
++ Remove the vendor's access and confirm the return or destruction of ACPWB data
+- Leave access in place in case they return
+- Delete the contract
+- Send a farewell cake
+
+Q: Sole-source purchases, without competitive bidding:
++ Require documented justification and approval
+- Are always prohibited
+- Are always preferred
+- Are allowed if the vendor is local
+
+Q: Fourth parties are:
++ Your vendor's vendors, which can also create risk
+- The fourth vendor you hire
+- Fourth-floor vendors
+- Imaginary
+
+Q: Vendor access to ACPWB systems should be:
++ Limited, monitored, and removed when no longer needed
+- Permanent
+- Shared accounts
+- Administrator by default
+
+Q: A vendor's data breach involving ACPWB data should be:
++ Reported to ACPWB promptly under the contract
+- Kept secret
+- Reported next year
+- Posted publicly first

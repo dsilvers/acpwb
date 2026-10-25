@@ -1,0 +1,55 @@
+# Executive compensation disclosure (SEC Regulation S-K Item 402).
+
+Q: The Summary Compensation Table in a public company's proxy statement reports pay for:
++ The named executive officers, generally the CEO, CFO, and three other most highly paid executives
+- Every employee earning over {AMOUNT}
+- The board's favorite executives
+- Executives who attended {EVENT}
+
+Q: The Compensation Discussion and Analysis (CD&A) explains:
++ The objectives and reasoning behind the company's executive pay decisions
+- Why the cafeteria raised prices
+- Each executive's home address
+- The weather during the fiscal year
+
+Q: Perquisites such as personal use of the corporate aircraft must generally be disclosed when their total value is:
++ $10,000 or more for a named executive officer
+- Over $1 million
+- Any amount, but only if someone asks
+- Never, since perks are private
+
+Q: [A colleague|{NAME}] asks you for the CEO's unreleased compensation figures before the proxy is filed. You should:
++ Decline; the information is confidential until it is publicly disclosed
+- Share them, since they will be public soon anyway
+- Share only the bonus figure
+- Post them in {SYSTEM} for transparency
+
+Q: "Total compensation" in the Summary Compensation Table includes:
++ Salary, bonus, stock and option awards, non-equity incentive pay, pension value changes, and all other compensation
+- Salary only
+- Salary and the holiday gift card
+- Whatever the executive reports on their own
+
+Q: Stock awards in the Summary Compensation Table are reported at:
++ Their grant date fair value
+- The price on the day the proxy is printed
+- The price the executive hopes for
+- Zero, until sold
+
+Q: A "golden parachute" refers to:
++ Payments and benefits an executive receives upon a change in control
+- An evacuation device in the executive suite
+- A gold-colored umbrella for {EVENT}
+- The bonus paid for skydiving team-building
+
+Q: Section 162(m) of the Internal Revenue Code generally limits a public company's tax deduction for pay to a covered executive to:
++ $1 million per year
+- $10,000 per year
+- $100 million per year
+- Whatever the board approves
+
+Q: Executive compensation decisions at most public companies are made by:
++ A compensation committee of independent directors
+- The executives themselves
+- A vote at the holiday party
+- {VENDOR}

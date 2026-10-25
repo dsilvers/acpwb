@@ -1,0 +1,61 @@
+# Desk sharing / hoteling / neighborhoods.
+
+Q: [Under the Desk Sharing Standard|In a shared-desk neighborhood], desks must be:
++ Booked in advance through the reservation tool and cleared at the end of each day
+- Claimed by leaving a jacket on the chair
+- Kept by whoever arrives first each week
+- Reserved for the full quarter at once
+
+Q: [At the end of the day|Before leaving], [you|associates using a shared desk] must:
++ Remove all personal items and papers, wipe down the desk, and store belongings in a locker
+- Leave a sticky note saying "back tomorrow"
+- Leave the monitor cable unplugged for the next person to find
+- Turn the chair to face the wall
+
+Q: [You booked a desk|Your desk reservation] for {WEEKDAY} but your plans change. You should:
++ Release the booking as soon as you know, so someone else can use it
+- Keep it in case you change your mind
+- Give it to a friend by letting them sign in as you
+- Ignore it; unused bookings expire eventually
+
+Q: [Someone|A colleague] is sitting at the desk you reserved. The best approach is to:
++ Politely show them your reservation and, if needed, ask the neighborhood host or Facilities for help
+- Sit on the edge of the desk until they leave
+- Remove their belongings while they are away
+- Report them to the Integrity Line immediately
+
+Q: [Monitors, docks, and keyboards|Shared desk equipment] at a hot desk should be:
++ Left connected and in working order, with faults reported to IT
+- Taken home for safekeeping
+- Unplugged and stacked under the desk
+- Rearranged to your personal preference and left that way
+
+Q: [Food|Lunch] at a shared desk is:
++ Allowed if you clean up completely, though the {PLACE} is preferred for meals
+- Prohibited by federal law
+- Only allowed if you share it
+- Only allowed on {WEEKDAY}s
+
+Q: [Neighborhood zones|Team neighborhoods] on the {FLOOR} floor are intended to:
++ Seat teams near each other on their in-office days
+- Assign permanent desks by seniority
+- Separate departments that disagree
+- Provide parking for visitors
+
+Q: [Booking a desk|Reserving a desk] you do not plan to use, so that your team "looks busy," is:
++ Not permitted; it blocks desks others need and skews space planning
+- Encouraged during audits
+- Allowed if you book fewer than {N} desks
+- Required for managers
+
+Q: [A colleague|{NAME}] leaves a confidential {DOCUMENT} at a shared desk overnight. The next person to use the desk should:
++ Put it in a confidential shred bin or hand it to Security, without reading it
+- Read it to identify the owner
+- Leave it where it is
+- Take a photo for the team chat
+
+Q: Lockers for associates who share desks are:
++ Assigned or booked through Facilities, and must be emptied according to the posted schedule
+- First come, first served, permanently
+- For storing food over the weekend
+- Available only to people managers

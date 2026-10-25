@@ -1,0 +1,74 @@
+# Personal protective equipment, hearing, and lifting. Correct answers
+# follow OSHA and NIOSH guidance; keep them accurate.
+
+Q: Personal protective equipment should be used:
++ As the last line of defense, after hazards are eliminated or controlled where possible
+- Instead of fixing hazards
+- Only when supervisors are present
+- Only for photos
+
+Q: Damaged PPE, such as a cracked hard hat, should be:
++ Replaced before work continues
+- Taped and reused
+- Worn backward
+- Kept as a souvenir
+
+Q: Under OSHA rules, required PPE is generally:
++ Paid for by the employer, with some exceptions such as ordinary safety-toe footwear
+- Paid for by the employee
+- Optional
+- Borrowed from coworkers
+
+Q: Safety glasses for impact protection should meet:
++ ANSI Z87.1
+- ISO 9001
+- The {COMMITTEE}'s fashion standards
+- No standard
+
+Q: OSHA requires a hearing conservation program when noise exposure reaches an 8-hour time-weighted average of:
++ 85 decibels (dBA)
+- 40 decibels
+- 120 decibels
+- 60 decibels
+
+Q: A simple sign that noise may be hazardous is when:
++ You must raise your voice to talk to someone about 3 feet away
+- You can hear a pin drop
+- Music is playing
+- The printer is running
+
+Q: Foam earplugs work best when:
++ Rolled thin and inserted fully so they expand to seal the ear canal
+- Placed loosely at the opening of the ear
+- Cut in half
+- Shared
+
+Q: When lifting a heavy box, you should:
++ Keep it close to your body, bend your knees, and avoid twisting
+- Bend at the waist with straight legs
+- Twist while lifting to save time
+- Lift it above your head first
+
+Q: If a load is too heavy or awkward to lift safely alone, you should:
++ Get help or use a cart or lifting device
+- Try anyway
+- Drag it with your foot
+- Ask the {COMMITTEE} for permission to struggle
+
+Q: Gloves used for chemicals should be:
++ The type specified for that chemical on the Safety Data Sheet
+- Any gloves, including cotton
+- Knitted winter gloves
+- Removed and reused inside out
+
+Q: Respirators that require a tight seal must be:
++ Fit-tested and used under a respiratory protection program
+- Worn by anyone, without training
+- Shared between employees
+- Worn with a beard trimmed into a point
+
+Q: High-visibility vests are worn to:
++ Make workers visible to drivers and equipment operators
+- Look official at {EVENT}
+- Keep warm
+- Identify executives

@@ -1,0 +1,67 @@
+# Multi-factor authentication (MFA).
+
+Q: Multi-factor authentication requires:
++ Two or more different types of evidence, such as something you know and something you have
+- Two passwords
+- Logging in twice
+- Approval from two managers
+
+Q: You receive an MFA push notification on your phone, but you are not trying to log in. You should:
++ Deny it and report it, since someone may have your password
+- Approve it to make it stop
+- Approve it if it is during work hours
+- Ignore it and go back to sleep
+
+Q: "MFA fatigue" or "push bombing" is an attack where:
++ The attacker sends repeated login prompts hoping you will approve one
+- Employees get tired of security training
+- MFA codes expire too quickly
+- Phones overheat from notifications
+
+Q: Number matching in MFA prompts helps because:
++ You must type the number shown on the login screen, which you only see if you are the one logging in
+- It makes the prompt more fun
+- It confirms your phone number
+- It speeds up login
+
+Q: Someone calls claiming to be from IT and asks you to read them the code just texted to your phone. You should:
++ Refuse and hang up, then report the call; never share MFA codes
+- Read them the code
+- Read them the code backwards
+- Ask them to call back tomorrow
+
+Q: A hardware security key is:
++ A physical device used as a phishing-resistant second factor
+- The key to the server room
+- A USB drive full of passwords
+- A spare office key
+
+Q: If you get a new phone, your authenticator app should be:
++ Moved or re-registered following IT's instructions before wiping the old phone
+- Left on the old phone
+- Disabled permanently
+- Shared with a family member
+
+Q: Text message (SMS) codes are considered:
++ Weaker than authenticator apps or security keys, because SIM swapping can intercept them
+- The strongest form of MFA
+- Unhackable
+- Prohibited by law
+
+Q: MFA protects against:
++ Account takeover when a password is stolen
+- Spam
+- Slow internet
+- Coffee spills
+
+Q: A login prompt shows a location in a country you have never visited. You should:
++ Deny the request and report it
+- Approve it, since VPNs change locations
+- Approve it if the time looks right
+- Book a trip there
+
+Q: Disabling MFA on your account to make logins faster is:
++ Not allowed
+- Allowed on {WEEKDAY}s
+- Allowed for executives
+- Recommended for productivity

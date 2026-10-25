@@ -1,0 +1,67 @@
+# Workplace discrimination law in general terms (Title VII, ADEA, ADA,
+# GINA, Pregnancy Discrimination Act). Answers are accurate.
+Q: Title VII of the Civil Rights Act prohibits employment discrimination based on:
++ Race, color, religion, sex, and national origin
+- Favorite sports team
+- Coffee preference
+- Job title
+
+Q: The U.S. Supreme Court held in Bostock v. Clayton County (2020) that Title VII's ban on sex discrimination includes discrimination based on:
++ Sexual orientation and gender identity
+- Height
+- Shoe size
+- Political party
+
+Q: The Age Discrimination in Employment Act protects workers who are:
++ 40 years of age or older
+- Under 25
+- Exactly 50
+- Any age except 40
+
+Q: Discrimination against an applicant because of a disability, when they can do the job with reasonable accommodation, is prohibited by:
++ The Americans with Disabilities Act
+- The Fair Labor Standards Act
+- The Clean Air Act
+- The Sherman Act
+
+Q: Using genetic information, including family medical history, in employment decisions is prohibited by:
++ GINA, the Genetic Information Nondiscrimination Act
+- The Family Medical Act of Milwaukee
+- OSHA
+- HIPAA only
+
+Q: Treating an employee differently because she is pregnant is:
++ Sex discrimination under the Pregnancy Discrimination Act
+- Allowed if the employee is new
+- Allowed for customer-facing roles
+- Required for safety
+
+Q: Discrimination can include:
++ Decisions about hiring, firing, pay, promotion, assignments, and training
+- Only firing
+- Only hiring
+- Only pay
+
+Q: A policy that looks neutral but disproportionately excludes a protected group without a business necessity may be:
++ Unlawful disparate impact discrimination
+- Always legal because it is neutral
+- Required by law
+- A best practice
+
+Q: An employee who files a discrimination complaint is protected against:
++ Retaliation for making the complaint
+- Ever receiving feedback again
+- All performance reviews
+- Nothing
+
+Q: Asking a job applicant about their national origin or religion in an interview is:
++ Improper and can be used as evidence of discrimination
+- A friendly icebreaker
+- Required for diversity statistics
+- Fine if you smile
+
+Q: A deadline to file a charge of discrimination with the EEOC is generally:
++ 180 days from the event, extended to 300 days in states with their own agency
+- 5 years
+- 10 days
+- There is no deadline

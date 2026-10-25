@@ -1,0 +1,55 @@
+# Ransomware and incident response.
+
+Q: If a ransom message appears on your screen, you should first:
++ Disconnect from the network and report it to IT Security immediately, without trying to fix it yourself
+- Pay the ransom with a P-card
+- Restart the computer repeatedly
+- Email the attackers to negotiate
+
+Q: Ransomware usually gets in through:
++ Phishing emails, stolen credentials, or unpatched systems
+- Clean desk violations
+- Long lunches
+- Excessive use of the stapler
+
+Q: Backups protect against ransomware best when they are:
++ Regular, tested, and stored separately from the main network
+- Kept on the same server
+- Made once a decade
+- Stored on a sticky note
+
+Q: Reporting a suspected security incident quickly matters because:
++ Fast containment limits the damage
+- It earns rewards points
+- It can be done only once a year
+- It avoids paperwork
+
+Q: You clicked a suspicious link and entered your password. You should:
++ Report it to IT Security right away and change your password as directed
+- Wait to see what happens
+- Delete the email and say nothing
+- Blame the sender
+
+Q: During an incident, communications with the media should come from:
++ Corporate Communications only
+- Whoever answers the phone
+- The person who clicked the link
+- The attackers
+
+Q: An incident response plan defines:
++ Roles, steps, and contacts for responding to a security incident
+- How to respond to compliments
+- The seating chart for {EVENT}
+- How to return a lost umbrella
+
+Q: Paying a ransom:
++ Does not guarantee data recovery and may violate sanctions laws; decisions are made only by authorized leadership
+- Always restores everything
+- Is required by insurance
+- Can be done by any employee
+
+Q: Turning off a computer infected with ransomware can sometimes:
++ Destroy evidence that investigators need, so follow IT Security's instructions
+- Remove the ransomware completely
+- Encrypt the files faster
+- Alert the attackers

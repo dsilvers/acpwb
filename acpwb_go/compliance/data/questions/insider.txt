@@ -1,0 +1,59 @@
+Q: "Material nonpublic information" (MNPI) is best defined as:
++ Information a reasonable investor would consider important that has not been broadly disclosed
+- Any information printed on ACPWB letterhead
+- Information discussed in a meeting of more than {N} people
+- Information shared after 5 p.m.
+
+Q: The quarterly blackout window begins:
++ {DAYS} calendar days before quarter end and ends one full trading day after earnings are released
+- On the day earnings are released
+- Whenever the CFO's calendar shows "OOO"
+- The first Monday of each month
+
+Q: Your neighbor asks whether "the quarter looked good." The correct response is:
++ "I can't discuss company matters," then change the subject to the weather
+- A thumbs-up, which is not technically a statement
+- A detailed answer, as long as no specific numbers are given
+- An invitation to read the next proxy statement in draft
+
+Q: Pre-clearance from the Office of the General Counsel is required before trading:
++ ACPWB-affiliated securities, including options and gifts of stock
+- Any security beginning with the letter "A"
+- Only trades larger than {AMOUNT}
+- Only on Fridays
+
+Q: You overhear {NAME} discussing a pending acquisition of {ORG} in an elevator. You should:
++ Not trade in {ORG}, not repeat the information, and notify Compliance
+- Buy a modest position, since overheard information is public
+- Tell family members, who are not employees
+- Wait {N} days, after which the information becomes public
+
+Q: A 10b5-1 trading plan must be adopted:
++ While you are not in possession of MNPI, and with a cooling-off period of at least {DAYS} days
+- After you learn MNPI, to protect the trade
+- Verbally, with your broker
+- Annually, on your work anniversary
+
+Q: [You overhear|You learn during {EVENT}] that ACPWB is about to announce a major acquisition. Before the announcement, you may:
++ Not trade ACPWB shares or the target's, nor tell anyone else
+- Buy shares in the target, but not in ACPWB
+- Tell family members, as long as they do not trade
+- Trade, if you place the order on a {WEEKDAY}
+
+Q: [Pre-clearance|Pre-clearance of trades] is required for:
++ Associates on the designated insider list, before any trade in ACPWB securities
+- Every associate, for every purchase over {AMOUNT}
+- Only executives buying more than {N} thousand shares
+- Nobody; it is voluntary
+
+Q: [Material nonpublic information|MNPI] remains confidential until:
++ It has been publicly disclosed and the market has had time to absorb it
+- It has been discussed at {N} meetings
+- The end of the quarter
+- Someone mentions it on social media
+
+Q: [A friend|Your neighbor] asks you whether "something big is going on" at ACPWB. You should:
++ Decline to comment on nonpublic company matters
+- Hint, without saying anything specific
+- Say nothing is happening, even if it is
+- Suggest they buy shares soon

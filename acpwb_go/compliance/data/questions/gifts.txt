@@ -1,0 +1,59 @@
+Q: The maximum value of a gift an associate may accept from a vendor without pre-approval is:
++ {AMOUNT} per vendor, per calendar year, in aggregate
+- Unlimited, if the gift is consumable
+- Any amount, if shared with the team
+- The amount on the gift receipt, divided by the number of recipients
+
+Q: {VENDOR} sends a fruit basket to the {DEPT} team during an active procurement. The team should:
++ Log the gift in the Gifts Register within {DAYS} days and decline future gifts until the award
+- Eat it quickly, before it becomes reportable
+- Return the basket with a note asking for cash instead
+- Distribute it to another department
+
+Q: Which of the following is NEVER an acceptable gift, regardless of value?
++ Cash or cash equivalents, including gift cards
+- A branded pen
+- A plate of cookies
+- A thank-you note
+
+Q: You are invited by {ORG} to a box at an away game, with travel and hotel included. Under Policy {POLICY}:
++ Hospitality including travel requires written pre-approval from Compliance
+- Hospitality is permitted if you leave before the fourth quarter
+- Hospitality is permitted if you pay for parking
+- Hospitality is permitted on weekends
+
+Q: A gift that is declined should be:
++ Returned with the standard ACPWB letter, and the declination logged
+- Donated to charity in your own name
+- Re-gifted to a vendor
+- Kept in a drawer in case the vendor asks
+
+Q: [A vendor|{VENDOR}] sends a fruit basket to your team during the holidays. Under the Gifts Policy, the team may:
++ Share it in the {PLACE} and record it in the Gift Register if over {AMOUNT}
+- Return it, along with a polite note declining all future fruit
+- Take it home individually
+- Ask {VENDOR} for a gift card instead
+
+Q: [Cash and cash equivalents|Gift cards and cash] from business partners:
++ May never be accepted, in any amount
+- May be accepted under {AMOUNT}
+- May be accepted if shared with the team
+- May be accepted during the holidays
+
+Q: [Tickets to a sporting event|Tickets to a Bucks game] offered by a vendor, without the vendor attending, are treated as:
++ A gift, subject to gift limits and approval
+- Business entertainment
+- A training opportunity
+- Exempt, because sports are not gifts
+
+Q: [Giving a gift to|Offering a gift to] a government official requires:
++ Prior approval from Compliance, in every case
+- Approval if over {AMOUNT}
+- A handwritten card
+- Nothing; officials are allowed to accept gifts
+
+Q: [A vendor|A business partner] invites you to speak at a conference in {CITY} and offers to pay for your travel. You should:
++ Seek approval first; ACPWB normally pays its own associates' travel
+- Accept, since speaking is work
+- Accept, and upgrade to first class
+- Decline, and attend on vacation instead

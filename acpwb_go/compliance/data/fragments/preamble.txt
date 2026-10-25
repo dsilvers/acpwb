@@ -1,0 +1,22 @@
+# Scenario lead-ins, prepended to about half of bank questions. Grammar:
+# [a|b] alternatives, [?x] optional, {SLOT} slots, {@name} fragments.
+It is {WEEKDAY} [morning|afternoon|evening][?, {TIMEOFDAY}], and [the office is [quiet|unusually busy|mostly empty]|{FLOOR} floor is [quiet|crowded|under renovation]].
+[During|Shortly after|In the middle of] {EVENT}, [you notice something|something comes up|an issue arises][? that requires a decision].
+You are [working late|covering for {FIRST2}|preparing for {EVENT}|finishing a {DOCUMENT}] [in|near] the {PLACE}.
+{NAME2} ({TITLE2}, {DEPT2}) [stops by your desk|sends you a chat message|calls your desk phone|catches you in the {PLACE}].
+[Consider the following scenario.|Read the scenario carefully.|Consider this situation.|The following is based on a real incident.]
+[Your manager|{NAME2}|The {DEPT2} team] [is out of the office|is unreachable|is in back-to-back meetings] [until {WEEKDAY}|for the rest of the day|this week].
+[Shortly after|Just before|An hour into] {EVENT}, [you receive an urgent request|your calendar fills up|a colleague asks for your help][? that cannot wait].
+You [have just returned from|are on your way to|are dialing into] {EVENT}[? with {NAME2}].
+[It is the last week of the quarter|It is the first day of the fiscal year|It is PERCH week|Facilities is testing the fire alarms today|The badge readers were updated overnight].
+[While|As] you [walk|head] [past|toward] the {PLACE}[?, {TIMEOFDAY}], you [notice|overhear|see] something that may need your attention.
+[It is {TIMEOFDAY}|It is late on {WEEKDAY}] and [most of {DEPT}|the {FLOOR} floor|the {PLACE}] has [gone home|emptied out|gone quiet][? for the day].
+{NAME2} forwards you [a message|a calendar invite|a {DOCUMENT}] with the note "[FYI|Thoughts?|Can you handle this?|See below.]"
+[The quarterly audit|A Facilities walkthrough|An internal review] [is scheduled for|begins] {WEEKDAY}, and [{NAME2}|your manager] asks you to [check|prepare] [a few things|the {PLACE}].
+You are [new to {DEPT}|filling in on the {DEPT} team|on your second week at ACPWB] and [are not yet sure of the procedures|want to get this right].
+[A vendor from {VENDOR}|A contractor from {VENDOR}|A consultant from {ORG}] is [on site|visiting|working] [in the {PLACE}|near your desk] [today|this week].
+[During|At the end of] a [long|busy|routine] {WEEKDAY}, {NAME2} [leans over|messages you|waves you over] with a question.
+[The {COMMITTEE} has|Your manager has|{DEPT} has] asked every associate to [review|re-read] Policy {POLICY} [this quarter|before {EVENT}].
+[You return from {EVENT}|You get back from lunch|You come back from a {N}-day vacation] to find [a stack of messages|a note on your chair|a change in procedure].
+[The {PLACE} is|The {DOOR} is|The printers are] [closed for maintenance|being renovated|temporarily out of service] [today|until {WEEKDAY}].
+{NAME2}, [who sits near you|from the desk across the aisle|on the {FLOOR} floor], [asks for a favor|has a quick question|wants your opinion].

@@ -1,0 +1,60 @@
+# Asynchronous collaboration.
+Q: Asynchronous communication means:
++ Not expecting an immediate response, so people can work across time zones
+- Never communicating
+- Only meetings
+- Only phone calls
+
+Q: A good async update includes:
++ Context, what is needed, and by when
+- Only "thoughts?"
+- Nothing
+- A single emoji
+
+Q: Response time expectations should be:
++ Agreed by the team
+- Instant always
+- Never
+- Random
+
+Q: Decisions made in chat threads should be:
++ Documented in a shared place
+- Lost in scrollback
+- Secret
+- Deleted
+
+Q: Recording meetings for people in other time zones:
++ Helps inclusion, with notice to attendees
+- Is prohibited
+- Is secret
+- Is required always
+
+Q: Messaging colleagues outside their working hours:
++ Is fine if no immediate response is expected
+- Requires immediate answers
+- Is prohibited
+- Must include urgency
+
+Q: Async work reduces:
++ Unnecessary meetings
+- Collaboration
+- Documentation
+- Trust
+
+Q: Urgent issues should be:
++ Escalated through the agreed urgent channel
+- Posted in a slow channel
+- Ignored
+- Emailed only
+
+Q: Status notes in chat tools help:
++ Others know when you are available
+- Hide work
+- Avoid work
+- Nothing
+
+Q: Async documentation should be:
++ Clear enough for someone to act without a meeting
+- Vague
+- Long
+- Missing

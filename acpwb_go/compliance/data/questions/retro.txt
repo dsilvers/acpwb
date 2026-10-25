@@ -1,0 +1,80 @@
+# Legacy office technology: Y2K, fax, voicemail, floppy disks, pagers, and
+# the mainframe. (From the ACPWB Archives.)
+
+Q: The "Y2K problem" was caused by:
++ Programs storing years as two digits, so "00" could be read as 1900 instead of 2000
+- A virus released in 1999
+- Clocks running out of batteries
+- The {COMMITTEE} forgetting to renew a license
+
+Q: A system using a two-digit year with a "pivot" of 50 would read "49" as:
++ 2049
+- 1949
+- 1849
+- Nothing; it would crash
+
+Q: A fax cover sheet for a confidential document should include:
++ A confidentiality notice, the number of pages, and the sender's contact information
+- Only a smiley face
+- The recipient's password
+- The document itself, on one page
+
+Q: Sending a confidential fax to the wrong number should be:
++ Reported as a possible data incident
+- Ignored, since faxes are obsolete
+- Fixed by sending it again to the same number
+- Celebrated as a successful transmission
+
+Q: A 3.5-inch floppy disk is write-protected when:
++ The sliding tab is moved so the square hole is open
+- The disk is upside down
+- The label says "PROTECTED"
+- The metal shutter is removed
+
+Q: A standard high-density 3.5-inch floppy disk holds about:
++ 1.44 MB
+- 1.44 GB
+- 144 KB
+- 14.4 TB
+
+Q: Voicemail greetings should be:
++ Current and professional, including when you will be out of office
+- Recorded once in {YEAR} and never updated
+- A song
+- Left as the default robot voice forever
+
+Q: A full voicemail box:
++ Means callers cannot leave messages; clear old messages regularly
+- Is a sign of popularity
+- Is required by policy
+- Upgrades to email automatically
+
+Q: Leaving a confidential document on the fax machine's output tray is:
++ A clean desk and confidentiality risk; collect faxes promptly
+- Allowed, since only trusted people walk by
+- Encouraged for sharing
+- Required for record-keeping
+
+Q: JCL, in mainframe computing, stands for:
++ Job Control Language
+- Java Coffee Lounge
+- Junior Compliance Liaison
+- Just Call Later
+
+Q: A batch job on the mainframe that fails overnight should be:
++ Investigated and rerun under change control, not edited directly in production
+- Left until someone complains
+- Fixed by deleting the error log
+- Run again 47 times
+
+Q: A pager beeping in a meeting in 1994 meant:
++ Someone needed you to call them back
+- The meeting was over
+- A fire drill
+- Your parking meter expired
+
+Q: Retired backup tapes and old floppy disks containing ACPWB data must be:
++ Securely destroyed according to the media disposal policy
+- Donated to a museum
+- Thrown in the trash
+- Reused as coasters

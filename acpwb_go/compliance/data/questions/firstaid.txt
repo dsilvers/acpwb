@@ -1,0 +1,74 @@
+# Basic first aid. Correct answers follow standard public guidance; keep them
+# accurate.
+
+Q: [A colleague|{NAME}] [cuts their hand badly on the paper cutter|is bleeding heavily from the forearm after a fall in the {PLACE}]. The FIRST step to control the bleeding is to:
++ Apply firm, direct pressure to the wound with a clean cloth or dressing
+- Rinse the wound under the break room tap for {N} minutes
+- Raise the issue at the next {COMMITTEE} meeting
+- Apply ice and wait
+
+Q: Firm pressure is not stopping life-threatening bleeding from an arm or leg. The next step, while waiting for help, is to:
++ Apply a tourniquet above the wound, if one is available and you know how
+- Remove the dressing to check whether it has stopped
+- Ask the person to walk to the {PLACE}
+- Give the person something to eat
+
+Q: [During|At] {EVENT}, [a colleague|{NAME2}] is choking, cannot speak or cough, and is clutching their throat. You should:
++ Call for help and give abdominal thrusts (and back blows, if trained), continuing until the object comes out or they become unresponsive
+- Give them a glass of water
+- Wait for them to stop on their own
+- Ask whether they have completed a food-safety acknowledgement
+
+Q: [A colleague|{NAME}] is coughing forcefully after something "went down the wrong way" but can still speak. You should:
++ Encourage them to keep coughing and stay with them
+- Begin abdominal thrusts immediately
+- Slap them on the back as hard as possible
+- Leave them to recover privately
+
+Q: [A colleague|{NAME2}] begins having a seizure [in the {PLACE}|during a meeting]. You should:
++ Clear the area, cushion their head, and time the seizure; never put anything in their mouth
+- Hold them still until it stops
+- Put a pen or wallet between their teeth
+- Pour water on their face
+
+Q: You should call 911 for a seizure if:
++ It lasts longer than 5 minutes, the person is injured, or another seizure follows
+- It happens on a {WEEKDAY}
+- The person asks you not to
+- Only if they have not completed {COURSE}
+
+Q: [A colleague|{NAME}] with a known severe allergy has trouble breathing after eating at {EVENT}. You should:
++ Call 911 and help them use their epinephrine auto-injector
+- Offer an antacid
+- Ask them to wait until the event ends
+- Look up the catering contract
+
+Q: [A colleague|{NAME2}] burns their hand on the {PLACE} coffee machine. The best first step is to:
++ Cool the burn under cool running water for at least 10 minutes
+- Apply butter
+- Apply ice directly to the skin
+- Cover it tightly and keep working
+
+Q: [A colleague|{NAME}] suddenly has a drooping face, arm weakness, and slurred speech. You should:
++ Call 911 immediately and note the time symptoms started
+- Suggest they lie down for an hour
+- Drive them home
+- Give them aspirin and coffee
+
+Q: [A colleague|{NAME2}] feels faint after standing in a long line at {EVENT}. You should:
++ Help them lie down, raise their legs if possible, and call for help if they do not recover quickly
+- Have them stand and walk it off
+- Give them a sugary drink while they are unconscious
+- Splash them with cold water
+
+Q: [The first aid kit|First aid kits] on each floor [is|are] located:
++ Where shown on the floor's emergency map, and should be restocked through Facilities after use
+- In the {PLACE}, behind the vending machine
+- At the Security Office in Suite 4040, Tuesdays only
+- Wherever the last person left it
+
+Q: [Someone falls down the stairwell|A colleague falls on the stairs near the {DOOR}] and complains of neck pain. You should:
++ Keep them still, call 911, and not move them unless they are in danger
+- Help them up and walk them to the {PLACE}
+- Carry them to the elevator
+- Ask them to try turning their head

@@ -1,0 +1,66 @@
+# Third-party and vendor risk management.
+Q: Third-party risk management evaluates:
++ The risks vendors bring, such as security, financial, compliance, and continuity risks
+- Only vendor prices
+- Vendors' holiday cards
+- Nothing after contract signing
+
+Q: Before a vendor gets access to restricted data, ACPWB requires:
++ A security review and contract terms that protect the data
+- Only a purchase order
+- A handshake
+- The vendor's word
+
+Q: A vendor's SOC 2 Type II report describes:
++ How well its security controls operated over a period of time
+- Its annual revenue
+- Its marketing plans
+- Its employees' hobbies
+
+Q: Vendor risk reviews should be repeated:
++ Periodically, based on the vendor's risk level
+- Never
+- Only when the vendor asks
+- Every day
+
+Q: A critical vendor going out of business is a:
++ Continuity risk that should have a contingency plan
+- Good thing
+- Not our problem
+- Billing issue
+
+Q: Vendors' subcontractors that handle our data:
++ Must be disclosed and meet the same requirements
+- Are exempt
+- Are secret
+- Do not matter
+
+Q: A vendor reports a security breach. ACPWB should:
++ Activate the incident response process and assess impact
+- Wait for the news
+- Ignore it
+- Cancel the contract without reviewing
+
+Q: Onboarding a vendor without a risk review because it is "urgent":
++ Is not allowed; use the expedited review process instead
+- Is fine
+- Is encouraged
+- Is required
+
+Q: Vendors should be given access:
++ Only to the systems and data they need
+- To everything for convenience
+- Through shared employee accounts
+- Forever
+
+Q: Vendor offboarding should include:
++ Removing access and confirming data return or destruction
+- A farewell party only
+- Nothing
+- Keeping their access active
+
+Q: Concentration risk means:
++ Relying heavily on a single vendor for critical services
+- Vendors not paying attention
+- Too many meetings
+- Staff working too hard

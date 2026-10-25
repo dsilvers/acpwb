@@ -1,0 +1,61 @@
+# Pay equity and pay transparency.
+
+Q: [Under ACPWB policy|According to the Pay Transparency Standard], [a job posting|every external job posting] must include:
++ A good-faith salary range for the position
+- The salary of the previous incumbent
+- The hiring manager's salary
+- Nothing about pay, to preserve flexibility
+
+Q: Associates [may|are permitted to] discuss their own pay with coworkers:
++ Yes; that right is protected, and retaliation for it is prohibited
+- Only with their manager's permission
+- Only after leaving ACPWB
+- Never
+
+Q: A pay equity analysis [identifies|finds] an unexplained gap of {pct}% [between|across] {regions} groups in {DEPT}. The REQUIRED next step is:
++ Escalate the finding to the Pay Equity Committee for review and remediation
+- Round the gap down to zero
+- Delete the analysis
+- Wait until the gap grows larger
+
+Q: [Salary history|Prior pay] [may be|can be] used in setting a new hire's pay:
++ No; ACPWB does not ask for or rely on salary history
+- Yes, as the primary factor
+- Only if the candidate volunteers it
+- Only for executive roles
+
+Q: Which ACPWB event is dedicated to pay equity and remuneration?
++ PERCH
+- The quarterly town hall
+- The holiday party
+- Open enrollment
+
+Q: [Associates|Employees] at ACPWB may discuss their own pay with colleagues:
++ Yes; the right to discuss pay is protected
+- Only after {DAYS} days of service
+- Only with written approval from {DEPT}
+- Never; pay is confidential
+
+Q: [Job postings|External job postings] for ACPWB roles in states with pay transparency laws must include:
++ The good-faith pay range for the position
+- The salary of the previous person in the role
+- A statement that pay is negotiable
+- Nothing about pay
+
+Q: [When setting|In setting] a new hire's starting salary, managers should rely on:
++ The role's pay range and job-related factors such as relevant experience
+- The candidate's salary history
+- What the candidate seems willing to accept
+- The pay of the manager's friends at other companies
+
+Q: [A pay equity review|Pay equity analysis] at ACPWB compares:
++ Pay for similar work, controlling for legitimate job-related factors
+- Each associate's pay with the CEO's
+- Pay across companies in {CITY}
+- Salaries with parking costs
+
+Q: [An associate|{NAME}] asks why their pay is lower than a colleague's in the same role. The manager should:
++ Explain the job-related factors and involve the Total Rewards team if a review is needed
+- Refuse to discuss it
+- Reduce the colleague's pay
+- Tell {FIRST} that pay is determined at random

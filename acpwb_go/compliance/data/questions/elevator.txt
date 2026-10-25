@@ -1,0 +1,61 @@
+# Elevators and stairwells.
+
+Q: [You are trapped|You become stuck] in an elevator between floors. You should:
++ Press the alarm or emergency call button, stay calm, and wait for help
+- Pry the doors open and climb out
+- Jump to reset the elevator
+- Use the escape hatch
+
+Q: During a fire alarm, elevators should be:
++ Avoided; use the stairs
+- Used, if they arrive quickly
+- Used by anyone carrying a laptop
+- Held for the floor warden
+
+Q: [Stairwell doors|The fire doors in stairwell C] should be:
++ Kept closed; they keep smoke out of the stairwell
+- Propped open for air circulation
+- Locked from both sides
+- Decorated for the holidays
+
+Q: [The elevator doors|Elevator doors] begin to close on [a colleague|{NAME}] carrying boxes. You should:
++ Press the door-open button rather than reaching into the doors
+- Put your hand between the doors
+- Kick the doors
+- Let them close; the next elevator will come
+
+Q: [An elevator|The {FLOOR} floor elevator] is making grinding noises and stopping unevenly. You should:
++ Stop using it and report it to Facilities
+- Continue using it until it stops working
+- Ride it alone, to reduce weight
+- Mention it in your next survey response
+
+Q: If you are trapped in a stalled elevator, you should:
++ Press the alarm or call button and wait for help, without trying to climb out
+- Pry the doors open
+- Climb through the ceiling hatch
+- Jump to restart it
+
+Q: An elevator that stops between floors with the doors partly open should be:
++ Left alone until trained responders arrive
+- Exited by jumping down
+- Pushed by hand
+- Used anyway
+
+Q: The elevator inspection certificate should be:
++ Current, and an expired one reported to Facilities
+- Ignored
+- Removed
+- Laminated
+
+Q: Overloading an elevator beyond its posted capacity is:
++ Unsafe and not allowed
+- Fine if everyone breathes in
+- Required at rush hour
+- Allowed for moves
+
+Q: During a fire alarm, elevators typically:
++ Return to a designated floor and are taken out of normal service
+- Speed up
+- Stop working forever
+- Play music

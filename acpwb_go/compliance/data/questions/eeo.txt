@@ -1,0 +1,56 @@
+# Equal employment opportunity basics. Correct answers follow federal EEO
+# law (Title VII, ADEA, ADA, GINA, PDA, PWFA); keep them accurate.
+
+Q: Federal law prohibits employment discrimination based on:
++ Race, color, religion, sex (including pregnancy, sexual orientation, and gender identity), national origin, age 40 or older, disability, and genetic information
+- Favorite sports team
+- Coffee preference
+- Whether someone attends {EVENT}
+
+Q: Under federal law, discrimination based on sexual orientation or gender identity is:
++ Prohibited as sex discrimination under Title VII
+- Allowed
+- Allowed in small offices
+- Allowed on {WEEKDAY}s
+
+Q: The Equal Employment Opportunity Commission (EEOC) is:
++ The federal agency that enforces federal workplace anti-discrimination laws
+- An ACPWB committee
+- A vendor
+- A union
+
+Q: An employee generally must file a charge with the EEOC within:
++ 180 days of the discriminatory act, extended to 300 days in many states with their own agency
+- 5 days
+- 10 years
+- Whenever they like
+
+Q: Federal EEO laws generally apply to private employers with at least:
++ 15 employees (20 for age discrimination)
+- 1 employee
+- 1,000 employees
+- 50 employees for all laws
+
+Q: Treating an employee worse because they filed a discrimination complaint is:
++ Retaliation, which is unlawful
+- Allowed if the complaint was not proven
+- A normal consequence
+- Allowed after a year
+
+Q: A neutral policy that disproportionately excludes a protected group without being job-related is:
++ Potentially unlawful "disparate impact" discrimination
+- Always lawful
+- Required by law
+- A best practice
+
+Q: Asking every female applicant about childcare plans, but no male applicants, is:
++ Discriminatory
+- Thorough
+- Required
+- Allowed if asked politely
+
+Q: EEO posters ("Know Your Rights: Workplace Discrimination is Illegal") must be:
++ Displayed where employees and applicants can see them
+- Hidden in a drawer
+- Displayed only in {CITY}
+- Optional

@@ -1,0 +1,67 @@
+# Chemical safety in shops and labs. Answers follow OSHA Hazard
+# Communication (1910.1200) and Laboratory Standard (1910.1450) basics.
+Q: Every chemical container in the workplace, including a spray bottle you filled, must:
++ Be labeled with the product name and its hazards
+- Be unlabeled to keep things tidy
+- Have the purchaser's name only
+- Be labeled only if it is red
+
+Q: Safety Data Sheets (SDS) must be:
++ Readily accessible to employees on every shift
+- Locked in the manager's desk
+- Read only by the purchasing department
+- Discarded when the chemical arrives
+
+Q: When diluting a concentrated acid, you should:
++ Add the acid slowly to the water
+- Add the water quickly to the acid
+- Mix them in your mouth
+- Shake them in a closed container
+
+Q: Pipetting by mouth is:
++ Prohibited; always use a pipette bulb or pipetter
+- Fine for water-based solutions
+- Required for accuracy
+- Allowed if you are careful
+
+Q: A chemical fume hood works best when:
++ The sash is kept as low as practical and work is done at least 6 in inside
+- The sash is fully raised at all times
+- It is used to store boxes
+- The fan is turned off to save energy
+
+Q: Oxidizers should be stored:
++ Away from flammable and combustible materials
+- Next to flammable solvents to save space
+- On the top shelf above eye level
+- In unlabeled containers
+
+Q: If a chemical splashes in your eyes, you should:
++ Flush with the eyewash for at least 15 minutes and get medical help
+- Rub your eyes and keep working
+- Wait for it to stop burning
+- Flush for 10 seconds
+
+Q: Chemicals should not be stored:
++ Above eye level or on the floor in walkways
+- In approved cabinets
+- By compatibility group
+- With their SDS available
+
+Q: Food and drinks in a chemical lab are:
++ Prohibited in areas where chemicals are used or stored
+- Fine if the lid is on
+- Allowed in the chemical refrigerator
+- Encouraged during long experiments
+
+Q: An unknown, unlabeled chemical container is found in the shop. You should:
++ Leave it alone and report it to EHS for identification and disposal
+- Sniff it to identify it
+- Pour it down the drain
+- Use it if it looks like water
+
+Q: The "signal word" DANGER on a chemical label means:
++ The chemical has a more severe hazard than one labeled WARNING
+- The chemical is harmless
+- The label is decorative
+- The chemical is out of date

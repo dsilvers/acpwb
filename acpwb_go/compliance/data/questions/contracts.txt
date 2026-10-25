@@ -1,0 +1,49 @@
+# Contracts and ethical negotiation.
+
+Q: A contract should be signed only after:
++ Required reviews are complete and the signer has authority
+- The other side signs first
+- It is printed in color
+- {EVENT}
+
+Q: Negotiating with a vendor, it is appropriate to:
++ Push for better terms honestly
+- Lie about a competing offer that does not exist
+- Threaten the vendor's personal reputation
+- Promise future business you cannot guarantee
+
+Q: Automatic renewal clauses in contracts should be:
++ Tracked so the contract can be renewed or cancelled on purpose
+- Ignored
+- Removed by hand after signing
+- Hidden from Finance
+
+Q: Starting work with a vendor before the contract is signed is:
++ Generally not allowed, because terms like confidentiality and liability are not yet in place
+- Encouraged to save time
+- Allowed for friends
+- Required for urgent projects
+
+Q: Indemnification clauses:
++ Allocate responsibility for certain losses and should be reviewed by Legal
+- Are decorative
+- Mean the vendor pays for everything
+- Are only for insurance companies
+
+Q: A vendor contract that allows them to use ACPWB data to train their AI models:
++ Requires review and may need to be negotiated out
+- Is standard and harmless
+- Is required
+- Is good for the vendor relationship
+
+Q: Signed contracts should be stored:
++ In the official contract repository
+- In your personal email
+- On your desk
+- In the {PLACE}
+
+Q: A verbal side agreement that changes a signed contract is:
++ Not allowed; amendments must be in writing and approved
+- Binding and preferred
+- A sign of trust
+- Required by {AGENCY}

@@ -11,6 +11,7 @@
 # and the scoring output has been checked against it.
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_fingerprint_queue' >> /var/log/acpwb-fingerprint-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_code_email_queue' >> /var/log/acpwb-code-email-drain.log 2>&1
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_compliance_queue' >> /var/log/acpwb-compliance-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_conn_queue' >> /var/log/acpwb-edge-conn-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_request_queue' >> /var/log/acpwb-edge-request-drain.log 2>&1
 # Hourly rollups of edge traffic (EdgeIPHour, EdgeFingerprintHour) for the

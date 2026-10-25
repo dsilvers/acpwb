@@ -1,0 +1,68 @@
+# Bomb threats and suspicious items. Correct answers follow standard public
+# guidance (CISA bomb threat checklist); keep them accurate.
+
+Q: You receive a phone call in which the caller says there is a bomb in the building. You should:
++ Stay calm, keep the caller talking, and note their exact words, voice, and background sounds on the Bomb Threat Checklist
+- Hang up immediately
+- Transfer the caller to {DEPT}
+- Ask the caller to email the details instead
+
+Q: After a bomb threat call ends, you should:
++ Not hang up the phone, and call 911 from a different phone
+- Hang up and return to work
+- Post the details on the intranet
+- Call the number back
+
+Q: [You find|{NAME} points out] an unattended package [in the {PLACE}|near the {DOOR}] with wires visible and no label. You should:
++ Not touch or move it, leave the area, and notify Security from a safe distance
+- Open it to identify the owner
+- Carry it to the mailroom
+- Shake it gently to check the contents
+
+Q: Near a suspected explosive device, you should avoid:
++ Using radios or cell phones nearby
+- Leaving the area
+- Telling others to move away
+- Calling Security from a safe distance
+
+Q: Which of the following is a common sign of a suspicious package?
++ Excessive postage, no return address, or an oily stain
++ Restrictive markings such as "Personal — Do Not X-ray"
+- A company logo
+- A tracking number
+
+Q: [A bomb threat checklist|The Bomb Threat Checklist] should be kept:
++ Near every phone that receives outside calls
+- In the Legal Department only
+- In a locked drawer at home
+- On the intranet, behind a sign-in
+
+Q: [During|If you are told to evacuate during] a bomb threat evacuation, you should:
++ Take your personal items with you, if it is safe, so they are not mistaken for suspicious items
+- Leave all bags on your desk
+- Stay at your desk until you see something
+- Use the elevator for speed
+
+Q: During a bomb threat call, you should try to keep the caller talking and note:
++ Exact words, voice characteristics, background noise, and the time of the call
+- Your lunch plans
+- Nothing
+- The caller's favorite song
+
+Q: After a bomb threat call ends, you should:
++ Not hang up the phone if possible, and report it immediately to Security and 911
+- Call the number back
+- Post about it
+- Wait until the end of the day
+
+Q: Using cell phones or radios near a suspected explosive device:
++ Should be avoided, as directed by Security and responders
+- Is encouraged for photos
+- Is required
+- Is safe
+
+Q: Searching for suspicious items after a threat is directed by:
++ Security and law enforcement, using the building's procedures
+- Anyone who is curious
+- The {COMMITTEE}
+- Visitors

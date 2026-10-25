@@ -1,0 +1,61 @@
+# Workplace relationships and family members.
+
+Q: A romantic relationship between a manager and someone in their reporting line:
++ Must be disclosed so the reporting relationship can be changed
+- Is allowed if kept secret
+- Is a private matter that does not affect work
+- Is encouraged for collaboration
+
+Q: Asking a coworker on a date after they have already said no is:
++ Unwelcome conduct that can be harassment
+- Persistence
+- Allowed once more at {EVENT}
+- A team-building activity
+
+Q: Hiring a relative into your own department without disclosure is:
++ A conflict of interest
+- Efficient recruiting
+- Allowed if they are qualified
+- Required by the family leave policy
+
+Q: Public displays of affection at work should be:
++ Kept professional
+- Encouraged in meetings
+- Required at {EVENT}
+- Recorded in {SYSTEM}
+
+Q: When a workplace relationship ends, both employees should:
++ Continue to treat each other professionally; retaliation and harassment are prohibited
+- Request that the other be fired
+- Move to opposite sides of the building
+- Announce it on the team chat
+
+Q: Relatives of employees may be hired at ACPWB:
++ If they do not report to or work under the influence of their relative, and the hiring process is fair
+- Never
+- Only if they are cousins
+- Only through {VENDOR}
+
+Q: Favoritism toward a friend in assigning projects is:
++ Unfair and can create legal risk
+- A management perk
+- Allowed for best friends only
+- Required for morale
+
+Q: Gifts between coworkers in a relationship where one supervises the other:
++ Can create the appearance of favoritism
+- Are required
+- Are fine
+- Must be expensive
+
+Q: Disclosing a relationship to HR is:
++ Confidential, handled to manage conflicts
+- Announced to the team
+- Recorded publicly
+- Ignored
+
+Q: A consensual relationship policy applies to:
++ Employees, including senior leaders
+- Interns only
+- Remote workers only
+- Nobody

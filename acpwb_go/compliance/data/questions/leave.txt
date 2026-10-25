@@ -1,0 +1,61 @@
+# Leave administration.
+
+Q: [Requests for|To request] [jury duty|civic|bereavement|medical] leave, associates must:
++ Submit the request in Workday with supporting documentation within {DAYS} days
+- Tell a coworker, who informs the manager
+- Simply stop coming to work
+- Post their absence on the team calendar only
+
+Q: Information about an associate's medical leave may be shared with:
++ Only Human Resources and those who need it to administer the leave
+- The associate's team, so they can send flowers
+- Anyone who asks why the associate is out
+- Clients affected by the absence
+
+Q: [While on leave|During approved leave], {NAME} [is asked|receives a request] to "[quickly review|just look at]" a {DOCUMENT}. The correct response from {FIRST}'s manager is to:
++ Reassign the work and not contact {FIRST} for work tasks during leave
+- Send it anyway, marked "no rush"
+- Ask {FIRST} to review it from a personal email account
+- Count the review as half a day of work
+
+Q: Unused vacation [days|hours] [at year end|on December 31]:
++ Are handled according to the ACPWB Time Off Policy and applicable state law
+- Are automatically donated to PERCH
+- Are converted to compliance training credits
+- Expire at midnight with no exceptions
+
+Q: [An associate|{NAME}] tells their manager they need time off for a family member's surgery. The manager should:
++ Refer them to the Leave Administration team, which determines eligibility
+- Decide whether the reason is serious enough
+- Ask for the family member's medical records
+- Suggest they use vacation days instead
+
+Q: [Medical information|Health details] shared in support of a leave request should be:
++ Kept confidential and stored separately from the personnel file
+- Shared with the team so they understand
+- Placed in the personnel file
+- Discussed at the next team meeting
+
+Q: [While an associate is on approved leave|During approved leave], their manager may contact them:
++ For limited, necessary business matters, such as returning equipment or confirming a return date
+- Daily, to ask for status updates
+- To assign work that can be done from home
+- Never, under any circumstances, including to say congratulations
+
+Q: [Taking approved leave|Approved leave] may be considered in performance reviews:
++ Not at all; it is protected
+- Only if it exceeded {DAYS} days
+- Only for people managers
+- As a minor factor
+
+Q: [Intermittent leave|Leave taken intermittently] means:
++ Leave taken in separate blocks of time, or on a reduced schedule, for a single qualifying reason
+- Leave the manager may interrupt
+- Leave taken only on {WEEKDAY}s
+- Leave that is not paid
+
+Q: When an associate returns from leave, they are generally entitled to:
++ The same or an equivalent position
+- A new position chosen by their manager
+- A probationary period of {DAYS} days
+- A desk on the {FLOOR} floor

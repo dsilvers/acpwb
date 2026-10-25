@@ -1,0 +1,55 @@
+# Workplace chat (Slack, Teams, and the ACPWB Internal Messenger).
+
+Q: [Using @channel|Notifying everyone in the channel] to announce that there is cake in the {PLACE} is:
++ Discouraged; it notifies hundreds of people, some of whom are asleep
+- Encouraged, since cake is time-sensitive
+- Required by the {COMMITTEE}
+- Allowed only for carrot cake
+
+Q: A message that says only "hey" or "got a sec?" with no context:
++ Should include the question, so the recipient can answer when they are available
+- Is the preferred greeting at ACPWB
+- Must be answered within 30 seconds
+- Should be followed by "?" every minute until answered
+
+Q: Replies to a specific message in a busy channel should be:
++ Kept in a thread
+- Posted as new messages so everyone sees them
+- Sent as a direct message to the whole team
+- Printed and posted in the {PLACE}
+
+Q: Customer account numbers and Social Security numbers may be posted in chat:
++ Never in open channels; use approved secure systems for sensitive data
+- In any channel with fewer than 50 members
+- If followed by the "eyes" emoji
+- In the #random channel only
+
+Q: [Your chat status|Your status] reads "In a meeting" but you are on vacation. You should:
++ Set an out-of-office status and, if needed, a note on who is covering
+- Leave it, to look busy
+- Change it to "Always available"
+- Set it to "In a meeting" permanently
+
+Q: You accidentally post a confidential {DOCUMENT} to the wrong channel. You should:
++ Delete it, tell the channel owner and your manager, and report it per the incident process
+- Leave it and hope no one notices
+- Post more messages so it scrolls out of view
+- Rename the channel
+
+Q: Reacting to a manager's announcement of layoffs with the "party popper" emoji is:
++ Likely to be read as insensitive
+- A sign of strong engagement
+- Required to acknowledge receipt
+- Neutral, because emojis have no meaning
+
+Q: Messages sent in workplace chat:
++ May be retained and reviewed under ACPWB records and eDiscovery policies
+- Disappear forever after 24 hours
+- Are private, even in company channels
+- Are never read by anyone, including the recipient
+
+Q: Before messaging a colleague [late at night|on a weekend|in another time zone], consider:
++ Scheduling the message for their working hours
+- Calling them instead to be sure they see it
+- Marking it urgent to get a faster reply
+- Sending it to their personal phone number

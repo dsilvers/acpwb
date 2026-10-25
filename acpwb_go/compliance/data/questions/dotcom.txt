@@ -1,0 +1,66 @@
+# Stock options and the lessons of the dot-com era.
+Q: A stock option gives the holder:
++ The right to buy shares at a set price for a period of time
+- Free shares immediately
+- An obligation to buy shares
+- A guaranteed profit
+
+Q: "Underwater" options are options whose exercise price is:
++ Higher than the current share price
+- Lower than the current share price
+- Equal to zero
+- Stored in a pool
+
+Q: Vesting schedules mean options:
++ Become exercisable over time, often with a cliff
+- Are exercisable immediately
+- Expire on hire
+- Are given to customers
+
+Q: Backdating option grants to an earlier, lower price without proper disclosure is:
++ Improper and has led to enforcement actions
+- A perk
+- Standard practice
+- Required
+
+Q: Trading company stock based on material nonpublic information is:
++ Insider trading
+- Investing
+- Allowed for options
+- Encouraged
+
+Q: Putting all your savings in your employer's stock:
++ Concentrates risk; many dot-com employees lost both jobs and savings
+- Is always safe
+- Is required
+- Is the best strategy
+
+Q: When exercising options, employees should:
++ Understand the tax consequences and follow trading windows
+- Ignore taxes
+- Exercise during blackout periods
+- Ask coworkers for tips
+
+Q: Option grant documents explain:
++ The number of options, exercise price, vesting, and expiration
+- The company's lunch menu
+- Nothing
+- Parking rules
+
+Q: Hype in company communications about stock price is:
++ Not allowed; statements must be accurate and approved
+- Encouraged
+- Required
+- Harmless
+
+Q: When you leave the company, unvested options usually:
++ Are forfeited under the plan
+- Vest immediately
+- Double
+- Transfer to a friend
+
+Q: Questions about your equity awards should go to:
++ The stock plan administrator or HR
+- Online forums
+- Your manager's guess
+- The receptionist

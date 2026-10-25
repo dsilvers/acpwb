@@ -1,0 +1,66 @@
+# Mobile device security.
+Q: Your work phone should be protected with:
++ A screen lock and a strong passcode or biometric
+- No lock, for convenience
+- The code 1234
+- A sticker
+
+Q: A lost or stolen phone that has work data should be:
++ Reported to IT immediately so it can be locked or wiped
+- Reported only if it was expensive
+- Reported next month
+- Ignored if it had a case
+
+Q: Apps for work data should come from:
++ The official app store or the company's app catalog
+- Links in text messages
+- File-sharing sites
+- Unknown websites
+
+Q: Public USB charging stations can be risky because:
++ A compromised port could try to access data; use your own charger or a data-blocking adapter
+- They charge too fast
+- They are always free
+- They cause rain
+
+Q: Mobile device management (MDM) lets the company:
++ Enforce security settings and remove work data from enrolled devices
+- Read all your personal messages
+- Track your weekend location without disclosure
+- Make calls for you
+
+Q: Text messages claiming to be from IT asking you to install a "security update" via a link are:
++ Likely smishing; do not tap the link and report the message
+- Always legitimate
+- Required by policy
+- A free upgrade
+
+Q: Jailbreaking or rooting a phone used for work:
++ Weakens its security and is not allowed
+- Improves security
+- Is required for some apps
+- Has no effect
+
+Q: Bluetooth on your phone in public places should be:
++ Turned off when not in use, and unknown pairing requests rejected
+- Left open for anyone to connect
+- Named after your employer
+- Used to share files with strangers
+
+Q: Operating system updates on your phone should be:
++ Installed promptly
+- Avoided forever
+- Installed only once a year
+- Installed only if the phone is new
+
+Q: Taking photos of confidential documents with your phone is:
++ Not allowed unless approved for a business purpose
+- A great way to take notes
+- Required for backups
+- Allowed if you delete them later
+
+Q: Leaving your phone unlocked on a café table while you get coffee:
++ Is risky; lock it and keep it with you
+- Is fine in Milwaukee
+- Improves battery life
+- Is required for the loyalty app

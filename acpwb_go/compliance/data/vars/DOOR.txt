@@ -1,0 +1,10 @@
+north lobby turnstile
+40th-floor east entrance
+loading dock door
+parking structure elevator
+data center mantrap
+Suite 4040 reception door
+fitness center door
+mailroom entrance
+stairwell C re-entry door
+Executive Wing glass doors

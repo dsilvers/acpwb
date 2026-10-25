@@ -1,0 +1,66 @@
+# On-call duty and pay (FLSA on-call rules in general terms).
+Q: Under the FLSA, on-call time is generally working time for a non-exempt employee when:
++ The restrictions are so tight the employee cannot use the time for their own purposes
+- The employee carries a phone
+- The employee is asleep
+- It is a weekend
+
+Q: Time a non-exempt employee spends responding to an on-call page is:
++ Hours worked that must be recorded and paid
+- Unpaid volunteer time
+- Paid only if it lasts an hour
+- Paid in compensatory time off only
+
+Q: Before an on-call shift, the engineer should:
++ Confirm their contact methods work and know the escalation path
+- Turn off notifications
+- Plan a camping trip with no signal
+- Give the pager to a friend
+
+Q: Handing off on-call duty should include:
++ A summary of open issues and anything to watch
+- Nothing; the next person will figure it out
+- A list of complaints
+- A quiz
+
+Q: If you cannot respond to a page, you should:
++ Escalate to the backup per the rotation
+- Ignore it
+- Silence it
+- Respond tomorrow
+
+Q: On-call engineers should not:
++ Consume alcohol or other substances that impair their ability to respond
+- Eat dinner
+- Sleep
+- Leave the house at all
+
+Q: A runbook is:
++ Documented steps for handling common alerts and incidents
+- A jogging schedule
+- A list of on-call snacks
+- A vendor contract
+
+Q: Too many noisy alerts during on-call should be:
++ Reported so alerts can be tuned
+- Silenced permanently without review
+- Accepted as normal
+- Forwarded to customers
+
+Q: Swapping on-call shifts should:
++ Be recorded in the schedule so pages reach the right person
+- Be secret
+- Be done after the shift starts
+- Require no notice
+
+Q: After an on-call incident, the engineer should:
++ Document what happened and any follow-up actions
+- Forget it
+- Delete the alert history
+- Blame the previous shift
+
+Q: On-call schedules should be designed to:
++ Distribute load fairly and allow rest
+- Put the newest person on call every weekend
+- Prevent anyone from sleeping
+- Avoid managers

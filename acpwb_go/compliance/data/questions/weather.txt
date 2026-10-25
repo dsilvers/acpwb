@@ -1,0 +1,62 @@
+# Severe weather and shelter-in-place. Correct answers follow standard public
+# guidance (NWS / Ready.gov); keep them accurate.
+
+Q: A tornado warning is issued [while you are on the {FLOOR} floor|during {EVENT}]. You should go to:
++ An interior room or stairwell on the lowest floor possible, away from windows
+- The {PLACE}, to watch the storm
+- The parking structure, to move your car
+- The roof
+
+Q: The difference between a tornado watch and a tornado warning is:
++ A watch means conditions are favorable; a warning means a tornado has been sighted or indicated on radar
+- A warning is less serious than a watch
+- There is no difference
+- A watch applies only to Milwaukee
+
+Q: [During a shelter-in-place order for an outdoor chemical release|If authorities order a shelter-in-place for an outside air hazard], associates should:
++ Stay indoors, close windows and doors, and move to an interior room while Facilities shuts down outside air intake
+- Open windows for ventilation
+- Leave the building immediately by car
+- Go outside to see what is happening
+
+Q: [Lightning|A thunderstorm] is approaching while you are [in the parking structure|walking to {EVENT}]. You should:
++ Go indoors and stay there until 30 minutes after the last thunder
+- Shelter under a tree
+- Wait it out in the open
+- Hold a metal umbrella
+
+Q: During a severe storm, the elevators should be:
++ Avoided, in case power is lost
+- Used to reach shelter faster
+- Used only by managers
+- Held for Facilities
+
+Q: When the office closes for weather, associates find out through:
++ The emergency notification system and the ACPWB Status Line
+- Rumors in the {PLACE}
+- The local news only
+- An announcement at the next {EVENT}
+
+Q: [In extreme cold|During a winter storm], associates who must travel to the office should:
++ Keep an emergency kit in their car and let someone know their route and arrival time
+- Leave the car running unattended to warm it up
+- Drive faster to spend less time outdoors
+- Skip winter gear to save space
+
+Q: A tornado watch means:
++ Conditions are favorable for tornadoes; be prepared to act
+- A tornado is occurring now
+- Nothing
+- A clock shaped like a tornado
+
+Q: A tornado warning means:
++ A tornado has been sighted or indicated by radar; take shelter now
+- Prepare to take shelter tomorrow
+- A drill
+- Look outside
+
+Q: "When thunder roars, go indoors" means:
++ Lightning can strike when you can hear thunder, so get inside
+- Go to the roof
+- Stay on the golf course
+- Stand under a tree

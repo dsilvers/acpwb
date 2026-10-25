@@ -1,0 +1,55 @@
+# Music, headphones, noise, and focus.
+
+Q: Listening to music at your desk in an open office should be:
++ Done with headphones at a volume others cannot hear
+- Played on speakers for the team
+- Played at full volume to block noise
+- Played only on {WEEKDAY}s
+
+Q: Noise-canceling headphones while working in the warehouse are:
++ Not allowed where you need to hear alarms, vehicles, or instructions
+- Required everywhere
+- Allowed with music at maximum volume
+- Allowed for forklift drivers
+
+Q: Wearing one earbud while walking through a parking garage:
++ Is safer than two, but staying alert to traffic is what matters
+- Is required
+- Is prohibited by {AGENCY}
+- Improves balance
+
+Q: A "focus time" block on your calendar means:
++ You prefer not to be booked into meetings during that time
+- You are available for any meeting
+- You are on vacation
+- You are focusing on {EVENT}
+
+Q: Interrupting a coworker who has a "Do Not Disturb" sign up is:
++ Appropriate only for urgent matters
+- Always fine
+- Required every hour
+- Encouraged for collaboration
+
+Q: Taking phone calls in the quiet zone is:
++ Not allowed; move to a phone booth or meeting room
+- Allowed if you whisper
+- Allowed for short calls
+- Allowed on speaker
+
+Q: Background noise during a video call is reduced by:
++ Muting when not speaking and using a headset
+- Typing harder
+- Moving closer to the dishwasher
+- Turning the volume up
+
+Q: Singing along to your headphones at your desk is:
++ Probably audible to your neighbors
+- Silent, as long as your eyes are closed
+- Allowed during {EVENT}
+- Required on Fridays
+
+Q: White noise machines at individual desks:
++ May be allowed if they are quiet and approved by Facilities
+- Are required
+- Must be set to whale sounds
+- Must be plugged into power strips under the desk

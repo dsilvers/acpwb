@@ -1,0 +1,49 @@
+# Photography, badge photos, headshots, and recording at work.
+
+Q: Taking photos inside ACPWB offices to post publicly should:
++ Avoid screens, whiteboards, documents, badges, and people who have not agreed
+- Include as much detail as possible
+- Include the server room
+- Feature the {DOCUMENT}
+
+Q: Badge photos are used for:
++ Identifying you for building access and directories
+- Marketing campaigns
+- Social media without consent
+- Facial recognition by {VENDOR} without notice
+
+Q: Photographing a coworker without permission and posting it is:
++ Disrespectful and may violate policy
+- A fun surprise
+- Required for team pages
+- Allowed during {EVENT}
+
+Q: Using a professional headshot on internal profiles is:
++ Encouraged but optional
+- Required with a smile
+- Prohibited
+- Required with your pet
+
+Q: Photos at company events used in marketing require:
++ Consent from identifiable people, typically through a release
+- No consent if they were at a work event
+- Payment to every person
+- A vote
+
+Q: Recording video in restrooms or locker rooms is:
++ Prohibited
+- Allowed for security
+- Allowed with notice
+- Allowed for training
+
+Q: Drone photography of ACPWB facilities for business purposes requires:
++ Approval, and an FAA-certified remote pilot under Part 107 for commercial use
+- Nothing; drones are toys
+- Only a smartphone
+- A parade permit
+
+Q: A screenshot of a confidential video call shared outside ACPWB is:
++ A confidentiality breach
+- Fine if it is cropped
+- A souvenir
+- Allowed if the call was recorded anyway

@@ -1,0 +1,39 @@
+# Course outline modules (between "Introduction" and "Knowledge Check").
+{TOPIC}: [Why It Matters|The Basics|An Overview|What Has Changed]
+Scope and Applicability[?: Who Must Comply]
+Key Definitions[? (See the Compliance Glossary)]
+Your Responsibilities[? as an Associate| as a People Manager| Under {POLICY}]
+Roles of [Managers and Supervisors|the {DEPT} Team|Compliance Partners|Control Owners]
+Reporting Obligations[? and Deadlines]
+Recognizing Red Flags[? in the Workplace| During Busy Periods| in the {PLACE}]
+Case Study: [The|A] [Misplaced|Misdirected|Unshredded|Overshared] {DOCUMENT}
+Case Study: [What Happened|Lessons Learned] [During|After] {EVENT}
+Case Study: {NAME} and the [Borrowed Badge|Propped Door|Unlabelled Container|Forwarded Email|Generous Vendor]
+Consequences of Non-Compliance[? (Including Termination)]
+Frequently Asked Questions[? (Updated)]
+Where to Get Help[? After Hours]
+Recent Regulatory Developments[? from the {AGENCY}]
+Policy Exceptions (There Are None)
+Understanding the {AGENCY}[?'s Expectations|: A Primer]
+Policy {POLICY}, Section by Section
+Working with {ORG}[? and Other Third Parties]
+[Scenarios|Situations] in the {PLACE}
+Using Your [Laptop|Phone|Tablet|Badge|Desk Phone] [Safely|Responsibly|in Compliance]
+Escalation Paths[? and Decision Trees]
+Documentation and Recordkeeping[? Requirements]
+[Interactive|Video] Simulation: [A Day in|A Week in|An Afternoon in] {DEPT}
+Myths and Misconceptions About {TOPIC}
+Global Considerations[? for Associates Outside Milwaukee]
+[Special Considerations|What's Different] for [Contractors|Interns|Remote Associates|New Hires]
+Key Requirements[? at a Glance]
+[Quiz|Checkpoint]: [Test Your Understanding|Are You Paying Attention?]
+Lessons Learned [from|Since] [the Last Audit|PERCH {YEAR}|the Last Examination]
+Data, Metrics, and Reporting[? to the {COMMITTEE}]
+Message from the [Chief Compliance Officer|General Counsel|{TITLE}]
+Templates and Forms[? (Including Form {FORM})]
+The {TOPIC} Decision Tree
+When to Say No[? Politely]
+Common Mistakes and How to Avoid Them
+Self-Assessment: [Where Do You Stand?|Rate Your Own Compliance]
+Reviewing Your Previous Attempt
+Attestation & Acknowledgement[? of {POLICY}]

@@ -1,0 +1,66 @@
+# The False Claims Act and government contracts (U.S., in general terms).
+Q: The False Claims Act imposes liability on anyone who:
++ Knowingly submits, or causes to be submitted, a false claim for payment to the federal government
+- Disagrees with a government agency
+- Bids on government contracts
+- Pays taxes late
+
+Q: Damages under the False Claims Act can be:
++ Up to three times the government's losses, plus civil penalties per claim
+- Limited to a warning
+- Paid only in services
+- Zero
+
+Q: A "qui tam" action is:
++ A lawsuit filed by a private whistleblower on behalf of the government
+- A type of invoice
+- A government holiday
+- A contract clause
+
+Q: A successful qui tam whistleblower may receive:
++ A share of the government's recovery, generally 15 to 30 percent
+- Nothing
+- A medal only
+- All of the recovery
+
+Q: Billing the government for hours not worked is:
++ A false claim
+- Rounding
+- Allowed for estimates
+- Normal practice
+
+Q: "Knowingly" under the False Claims Act includes:
++ Actual knowledge, deliberate ignorance, or reckless disregard of the truth
+- Only written confessions
+- Only intent to steal
+- Nothing
+
+Q: Retaliating against an employee who investigates or reports a false claim is:
++ Prohibited under the act's anti-retaliation provision
+- Allowed
+- Required
+- A best practice
+
+Q: Certifying compliance with contract requirements you know were not met:
++ Can create False Claims Act liability
+- Is fine if the work was mostly done
+- Is required to get paid
+- Is harmless
+
+Q: Charging costs to a government contract that belong to a commercial project is:
++ Mischarging and prohibited
+- Cost sharing
+- Efficient
+- Allowed at year end
+
+Q: If you have concerns about government billing, you should:
++ Raise them with Legal, Compliance, or the Ethics Hotline
+- Keep quiet
+- Fix invoices yourself
+- Ask the government auditor for advice informally
+
+Q: Keeping overpayments from the government that you know about:
++ Can itself violate the False Claims Act
+- Is a windfall
+- Is allowed
+- Must be spent

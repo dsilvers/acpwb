@@ -1,0 +1,55 @@
+# Internal and external audits.
+
+Q: When an auditor asks for documents, you should:
++ Provide complete, accurate information through the coordinated audit request process
+- Provide only the documents that make your team look good
+- Ignore the request until a second reminder
+- Edit the documents before sending them
+
+Q: Misleading or coercing an auditor is:
++ Prohibited, and can violate SEC rules
+- An acceptable negotiating tactic
+- Allowed if the finding is wrong
+- Allowed during {EVENT}
+
+Q: External auditor independence means the audit firm:
++ Must not have relationships or provide services that impair its objectivity
+- Works from an independent office in {CITY}
+- Chooses its own audit fees
+- Never speaks with management
+
+Q: An internal audit finding is best addressed by:
++ An action plan with an owner and a due date
+- Arguing until the finding is removed
+- Ignoring it, since internal audit is not external
+- Renaming the process
+
+Q: Audit work papers and evidence should be:
++ Kept for the required retention period
+- Deleted after the audit report is issued
+- Shared on social media
+- Printed in color only
+
+Q: The "three lines" model describes:
++ Business management, risk and compliance oversight, and independent internal audit
+- Three lines in the cafeteria
+- Three phone lines for the help desk
+- The three most important slides in the deck
+
+Q: [An auditor|{NAME}, an auditor,] asks for system access to test controls. Access should be:
++ Read-only and limited to what is needed for the testing
+- Full administrator access, to save time
+- Shared using your own password
+- Denied, since auditors cannot be trusted
+
+Q: An auditor finds an exception in a sample. Management should:
++ Investigate the cause and assess whether it affects other transactions
+- Replace the sample with a better one
+- Argue that one exception does not count
+- Ask the auditor to sample again until it passes
+
+Q: Internal audit reports to:
++ The audit committee of the board, functionally, to preserve independence
+- The department being audited
+- {VENDOR}
+- Whoever requests the audit

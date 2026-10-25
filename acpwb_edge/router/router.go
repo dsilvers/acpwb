@@ -90,6 +90,7 @@ var prefixLocations = []struct{ prefix, target string }{
 	{"/static/", Static},
 	{"/archive/", Django},
 	{"/source-code/", AcpwbGo},
+	{"/compliance/", AcpwbGo},
 	{"/public-policy/", AcpwbGo},
 	{"/wiki/", Django},
 	{"/reports/", Django},

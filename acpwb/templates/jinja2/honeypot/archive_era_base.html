@@ -25,7 +25,7 @@
 
   <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20261011">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20261021">
 
   <link rel="alternate" type="application/atom+xml" title="ACPWB Archive Feed" href="https://acpwb.com/feeds/archive.xml">
   <link rel="alternate" type="application/rss+xml" title="ACPWB Reports &amp; Publications" href="https://acpwb.com/feeds/reports.xml">
@@ -51,9 +51,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Contact</a></li>
       </ul>
     </div>
@@ -135,6 +133,7 @@
               <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
               <li><a href="{{ site_root }}{{ url('faq') }}">FAQ</a></li>
               <li><a href="{{ site_root }}{{ url('press_releases') }}">Press Releases</a></li>
+              <li><a href="{{ site_root }}/compliance/">Compliance</a></li>
               <li><a href="{{ site_root }}{{ url('do-not-sell') }}">Do Not Sell My Info</a></li>
               <li><a href="{{ site_root }}{{ url('accessibility') }}">Accessibility</a></li>
               <li><a href="{{ site_root }}{{ url('trademarks') }}">Trademarks</a></li>

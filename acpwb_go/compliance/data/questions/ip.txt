@@ -1,0 +1,55 @@
+# Intellectual property, confidentiality agreements, and trade secrets.
+
+Q: A trade secret is:
++ Valuable business information kept confidential through reasonable measures
+- Any secret about a coworker
+- A recipe posted publicly
+- A rumor about {EVENT}
+
+Q: Bringing a former employer's confidential documents to ACPWB is:
++ Not allowed and may violate the law
+- Helpful to the team
+- Allowed if you summarize them
+- Allowed if they are on a USB drive
+
+Q: Inventions created within the scope of your job at ACPWB generally:
++ Belong to ACPWB under your invention assignment agreement
+- Belong to whoever thought of it first
+- Belong to the {COMMITTEE}
+- Belong to no one
+
+Q: A nondisclosure agreement (NDA) should be signed:
++ Before sharing confidential information with an outside party
+- After the meeting, if things go well
+- Only if the other side asks
+- By whoever is nearest
+
+Q: Using images found on the internet in an ACPWB presentation:
++ May infringe copyright unless they are licensed or permitted
+- Is always allowed
+- Is allowed if you shrink them
+- Is allowed if you add a filter
+
+Q: Under the Defend Trade Secrets Act, employees who disclose trade secrets in confidence to a government official to report a suspected violation of law are:
++ Immune from liability for that disclosure
+- Liable for damages
+- Fired automatically
+- Required to notify the company first
+
+Q: Open-source software used in ACPWB products must be:
++ Reviewed for license obligations before use
+- Used freely without review
+- Renamed to look proprietary
+- Avoided entirely, under all circumstances
+
+Q: Noncompete agreements:
++ Are restricted or banned in some states, such as California, and enforceability varies by state
+- Are enforceable everywhere for any length
+- Prevent you from ever working again
+- Apply only to interns
+
+Q: The ACPWB logo may be used:
++ According to brand guidelines, in approved materials
+- On personal business cards for side jobs
+- By vendors without permission
+- In any color, stretched to fit

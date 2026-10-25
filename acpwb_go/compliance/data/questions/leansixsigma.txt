@@ -1,0 +1,66 @@
+# Lean and Six Sigma basics for process improvement projects.
+Q: DMAIC stands for:
++ Define, Measure, Analyze, Improve, Control
+- Design, Make, Assemble, Inspect, Close
+- Decide, Manage, Approve, Implement, Celebrate
+- Document, Meet, Agree, Ignore, Complain
+
+Q: In Lean, "muda" means:
++ Waste
+- Value
+- Speed
+- Quality
+
+Q: Which is one of the classic types of waste in Lean?
++ Waiting
+- Customer value
+- Standard work
+- Continuous flow
+
+Q: A process map helps a team:
++ See each step of a process and where problems occur
+- Find the office
+- Replace data
+- Decide lunch
+
+Q: A "5 Whys" exercise is used to:
++ Find the root cause of a problem
+- Interview candidates
+- Approve budgets
+- Write slogans
+
+Q: Six Sigma aims to reduce:
++ Variation and defects
+- Headcount only
+- Customer satisfaction
+- Documentation
+
+Q: The Control phase of DMAIC focuses on:
++ Keeping the improvement in place over time
+- Controlling people
+- Cancelling the project
+- Starting over
+
+Q: Kaizen means:
++ Continuous improvement through small, ongoing changes
+- A big one-time reorganization
+- A type of tea
+- A Lean tool for blame
+
+Q: Gemba walks involve:
++ Going to where the work happens to observe and learn
+- Walking for exercise
+- Visiting competitors
+- Avoiding the floor
+
+Q: Improvement project data should be:
++ Accurate and collected consistently
+- Adjusted to show success
+- Invented
+- Estimated loosely
+
+Q: 5S stands for:
++ Sort, Set in order, Shine, Standardize, Sustain
+- Sell, Ship, Score, Spend, Save
+- Sleep, Snack, Sit, Stand, Stretch
+- Start, Stop, Skip, Speed, Slow

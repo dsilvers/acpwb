@@ -1,0 +1,61 @@
+# Recognition, awards, and engagement surveys.
+
+Q: Peer recognition points may be given:
++ For genuine contributions, under the program rules
+- In exchange for points back
+- To yourself through a second account
+- Only to your friends
+
+Q: Engagement survey results are usually shown to managers only when:
++ Enough people respond to protect anonymity, such as a minimum group size
+- At least one person responds
+- The manager asks nicely
+- The survey closes on {WEEKDAY}
+
+Q: Trying to identify who wrote an anonymous survey comment is:
++ Not allowed and undermines trust in the survey
+- A good leadership practice
+- Required to address feedback
+- Allowed for negative comments
+
+Q: Award gifts and gift cards given to employees are generally:
++ Taxable income, unless a specific exception applies
+- Never taxable
+- Taxable only for executives
+- Paid by {VENDOR}
+
+Q: Responding to the engagement survey honestly helps because:
++ Leaders can act on real issues
+- It guarantees a raise
+- It ends the survey sooner
+- It is graded
+
+Q: A manager tells the team, "Let's all give 5s on the survey so we look good." This is:
++ Inappropriate pressure that undermines the survey
+- Good team spirit
+- Required for bonus eligibility
+- Allowed once a year
+
+Q: Long-service awards typically recognize:
++ Years of service milestones
+- The longest meeting
+- The oldest coffee mug
+- The longest commute
+
+Q: Recognition should be:
++ Specific about what the person did
+- Generic
+- Only for executives
+- Given only at {EVENT}
+
+Q: Public recognition for someone who prefers privacy:
++ Can be adapted to a private thank-you
+- Must be public
+- Must be on stage
+- Must include a speech
+
+Q: Nominating yourself for a peer award is:
++ Usually not allowed by program rules
+- Encouraged
+- Required
+- Anonymous

@@ -1,0 +1,71 @@
+Q: An email from "{ORG} Payroll" says your direct deposit will be suspended in {N} hours unless you confirm your details. The most likely explanation is:
++ It is a phishing attempt and should be reported with the "Report Phish" button
+- {ORG} has taken over ACPWB payroll
+- Direct deposit expires every {N} months
+- A test of the email system that requires no action
+
+Q: Which of the following is a common indicator of a phishing email?
++ A sense of urgency
++ A sender address that does not match the display name
++ A request for credentials or payment
+- The ACPWB logo in the signature
+
+Q: You clicked a link in a suspicious email and entered your password. What is the FIRST thing you should do?
++ Call the Service Desk immediately and change your password from a known-good device
+- Delete the email so nobody else clicks it
+- Wait to see if anything happens
+- Forward the email to colleagues to warn them
+
+Q: An invoice from {VENDOR} arrives with new bank details "effective immediately." You should:
++ Verify the change by calling {VENDOR} at a number already on file, not one in the email
+- Update the details, since vendors change banks often
+- Reply to the email to confirm the change
+- Pay half to the old account and half to the new one
+
+Q: The {DEPT} Director emails you from a personal address asking you to buy {N} gift cards for a client event and send the codes. This is:
++ A gift card scam, to be reported, and not paid
+- Standard practice for client events
+- Acceptable if the amount is below {AMOUNT}
+- Acceptable if the Director replies "urgent"
+
+Q: The "Report Phish" button sends the message to:
++ The Security Operations Center, which reviews it within {N} business days
+- The original sender, as a warning
+- Your manager
+- The recycle bin
+
+Q: [A text message|An SMS|A message on a messaging app] [claiming to be from|that appears to come from] {NAME2}, the {TITLE2}, [asks you to|urges you to] [buy gift cards|wire funds to a vendor|approve an invoice] [before|by] {TIMEOFDAY}. You should:
++ Verify the request through a known phone number or in person before acting
+- Act quickly, since executives are busy
+- Reply to the message to ask if it is legitimate
+- Forward it to {DEPT} for processing
+
+Q: A [shared document|file-sharing link] arrives from {VENDOR} [that you were not expecting|with a request to sign in to view it]. You should:
++ Confirm with {VENDOR} through a known contact before opening it
+- Sign in with your ACPWB credentials to view it
+- Open it on a personal device instead
+- Forward it to colleagues to see if they can open it
+
+Q: [Which of the following is the safest way|The safest way] to check a link in an email is:
++ Hover over it to inspect the real destination, and when in doubt, do not click
+- Click it quickly and close the page
+- Click it on your phone instead
+- Reply asking the sender if it is safe
+
+Q: [A caller|Someone on the phone] says they are from ACPWB IT and asks for your multi-factor authentication code. You should:
++ Hang up; IT will never ask for your code, and report the call
+- Read the code slowly, so they get it right
+- Ask them for their employee ID first
+- Give them yesterday's code
+
+Q: [You receive|A message arrives with] a QR code in an email asking you to "re-validate your mailbox." You should:
++ Not scan it, and report it with the Report Phish button
+- Scan it with your personal phone instead
+- Forward it to your team
+- Scan it, then change your password
+
+Q: [After you report|Once you have reported] a phishing email, you should:
++ Delete it from your inbox
+- Reply to the sender, to let them know you caught them
+- Forward it to colleagues as a warning
+- Keep it in a folder labelled "Phish"

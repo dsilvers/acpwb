@@ -1,0 +1,68 @@
+# Onboarding, I-9 verification, and background checks. Correct answers
+# follow USCIS Form I-9 rules and the Fair Credit Reporting Act.
+
+Q: A new employee must complete Section 1 of Form I-9:
++ No later than their first day of work
+- Within 90 days
+- Before the job interview
+- At the first {EVENT}
+
+Q: The employer must complete Section 2 of Form I-9, examining the employee's documents:
++ Within three business days of the employee's first day of work
+- Within one year
+- Only if the employee looks foreign
+- Before the offer letter
+
+Q: When verifying I-9 documents, an employer may:
++ Let the employee choose which acceptable documents to present
+- Require a passport from everyone
+- Require more documents from employees with accents
+- Refuse documents that expire next year
+
+Q: Before obtaining a background check report from a consumer reporting agency, the employer must:
++ Give a standalone written disclosure and get the applicant's written authorization
+- Do nothing, since background checks are public
+- Ask the applicant's references
+- Notify {AGENCY}
+
+Q: If an employer may reject an applicant based on a background report, the FCRA requires:
++ A pre-adverse action notice with a copy of the report and a summary of rights, before the final decision
+- A rejection by text
+- No notice at all
+- A notice only if the applicant asks
+
+Q: On their first day, a new hire should receive:
++ Their equipment, access, and an introduction to required policies and training
+- The entire Code of Conduct to memorize by lunch
+- A seat in the {PLACE} with no laptop for three weeks
+- A password written on a sticky note
+
+Q: New hire access to systems should be:
++ Based on the role's needs, requested through the standard process
+- A copy of their manager's access
+- Administrator access, to avoid tickets
+- Granted by {VENDOR}
+
+Q: A new hire buddy program aims to:
++ Give new employees a go-to colleague for questions and introductions
+- Assign someone to monitor new hires
+- Replace the manager
+- Organize carpooling to {CITY}
+
+Q: An offer letter should be:
++ Consistent with the approved terms and reviewed before it is sent
+- Edited freely by the recruiter
+- Sent before approval to save time
+- Written on a napkin
+
+Q: Re-verification of I-9 work authorization is required when:
++ An employee's temporary employment authorization expires
+- An employee changes desks
+- A U.S. passport expires
+- An employee changes their name on {SYSTEM}
+
+Q: "Ban the box" laws in many states and cities:
++ Delay questions about criminal history until later in the hiring process
+- Ban cardboard boxes in offices
+- Ban background checks entirely
+- Ban checkbox forms

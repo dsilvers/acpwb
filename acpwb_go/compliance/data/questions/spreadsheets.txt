@@ -1,0 +1,73 @@
+# Spreadsheets, data handling, and end-user computing controls.
+
+Q: Hiding a column with salary data in a spreadsheet before sharing it:
++ Does not remove the data; anyone can unhide it, so delete it or share a clean copy
+- Fully protects the data
+- Encrypts the column
+- Notifies the recipient
+
+Q: A spreadsheet used to calculate financial results should have:
++ Version control, review, and protected formulas
+- Formulas anyone can overwrite
+- No backup
+- Its name changed daily
+
+Q: Typing a hard-coded number over a formula in a key spreadsheet is:
++ A common error that can go unnoticed; document and review any overrides
+- A best practice
+- Required at year end
+- Invisible to auditors
+
+Q: Before sending a spreadsheet externally, check for:
++ Hidden sheets, hidden rows and columns, comments, and personal data
+- Font consistency only
+- Cell colors
+- The {COMMITTEE}'s approval of the file name
+
+Q: Linking spreadsheets to files on your personal drive is:
++ Risky; links break and data may leave controlled storage
+- Recommended
+- Required for sharing
+- Encrypted
+
+Q: Pivot tables summarizing employee data should:
++ Not reveal individual information when groups are small
+- Show every name for transparency
+- Be posted in {SYSTEM} for all
+- Be printed in color
+
+Q: The file name "FINAL_v7_REALLYFINAL_edit2.xlsx" suggests:
++ Version control would help
+- The file is final
+- The file is encrypted
+- The file was approved by {AGENCY}
+
+Q: Auto-filling a column of dates that turns "1-2" into "January 2" is:
++ A formatting error to check for before using the data
+- Always correct
+- A security feature
+- {SYSTEM} upgrade
+
+Q: Personal data in a spreadsheet should be:
++ Limited to what is needed and stored in approved locations
+- Kept forever, just in case
+- Shared on public links
+- Copied to a USB drive
+
+Q: A spreadsheet with a macro from an unknown sender should be:
++ Opened only with macros disabled, or reported as suspicious
+- Opened with macros enabled to see the cool features
+- Forwarded to everyone
+- Printed
+
+Q: Sorting a single column without the rest of the table can:
++ Scramble the data so rows no longer match
+- Improve accuracy
+- Encrypt the data
+- Delete duplicates automatically
+
+Q: A spreadsheet that the whole company depends on, maintained by one person, is:
++ A "key person" risk that should be documented and backed up
+- Normal and fine
+- A sign of efficiency
+- Required by {AGENCY}

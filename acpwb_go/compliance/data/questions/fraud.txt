@@ -1,0 +1,66 @@
+# Occupational fraud awareness.
+Q: The "fraud triangle" describes three conditions that often lead to fraud:
++ Pressure, opportunity, and rationalization
+- Profit, power, and popularity
+- Planning, payment, and promotion
+- Policies, procedures, and paperwork
+
+Q: A common red flag of employee fraud is:
++ Living beyond one's means or refusing to take vacation
+- Taking regular vacations
+- Asking questions in training
+- Arriving on time
+
+Q: If you suspect fraud, you should:
++ Report it to the Ethics Hotline, Internal Audit, or Legal
+- Investigate on your own and confront the person
+- Ignore it unless you are sure
+- Tell coworkers first
+
+Q: The most common way occupational fraud is detected is:
++ Tips from employees, customers, or vendors
+- Luck
+- The weather
+- Annual parties
+
+Q: Segregation of duties prevents fraud by:
++ Making sure no single person controls a transaction from start to finish
+- Separating the office into zones
+- Splitting large purchases into small ones
+- Giving everyone the same access
+
+Q: Creating a fake vendor to receive payments is an example of:
++ Billing fraud
+- Supplier diversity
+- A cost-saving measure
+- Vendor onboarding
+
+Q: Expense reports for meals that never happened are:
++ Expense reimbursement fraud
+- Estimates
+- Allowed if small
+- A form of tip
+
+Q: Changing financial records to meet a quarterly target is:
++ Financial statement fraud and prohibited
+- Earnings management best practice
+- Required by the board
+- Fine if reversed next quarter
+
+Q: Employees who report suspected fraud in good faith are:
++ Protected from retaliation
+- Required to prove it first
+- Responsible for the investigation
+- Paid a commission
+
+Q: A vendor asks you to approve an invoice for work you know was not done. You should:
++ Refuse and report it
+- Approve it if the amount is small
+- Approve it and dispute it later
+- Split the invoice
+
+Q: Keeping evidence such as documents or emails related to suspected fraud is:
++ Important; do not delete or alter anything
+- Unnecessary
+- The fraudster's job
+- Prohibited

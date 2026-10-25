@@ -1,0 +1,49 @@
+# Document control, versions, and policy management.
+
+Q: The official version of an ACPWB policy is:
++ The one published in the policy repository
+- The copy in your downloads folder
+- The one printed in {YEAR}
+- The one your manager remembers
+
+Q: Before relying on a printed procedure, you should:
++ Check that it matches the current version
+- Assume it is current
+- Initial it
+- Laminate it
+
+Q: Editing a controlled document without following the change process is:
++ Not allowed
+- Encouraged for speed
+- Allowed for typos only, even in safety procedures
+- Allowed if no one notices
+
+Q: Revision history on a document records:
++ What changed, when, and who approved it
+- How many people read it
+- The author's favorite font
+- The weather
+
+Q: Obsolete versions of procedures should be:
++ Archived and removed from active use
+- Kept on the shop floor for reference
+- Mixed with current versions
+- Handed out at {EVENT}
+
+Q: A document's classification label, such as "Confidential," should be:
++ Applied when it is created and respected when it is shared
+- Added only if someone asks
+- Removed before emailing
+- Chosen at random
+
+Q: Policies are generally reviewed:
++ On a set schedule and when laws or business needs change
+- Never
+- Only after an incident
+- Only by {VENDOR}
+
+Q: Attestation that you read a policy means:
++ You confirm you have read and will follow it
+- You agree to edit it
+- You never have to read it again
+- You approve it as an owner

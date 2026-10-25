@@ -1,0 +1,61 @@
+# Internal investigations.
+
+Q: You are interviewed as a witness in an internal investigation. You [must|should]:
++ Answer truthfully and keep the investigation confidential
+- Discuss the questions with colleagues afterward
+- Bring a written statement prepared with the subject
+- Decline to participate
+
+Q: [The subject of|A person under] an investigation [asks you|wants to know] what you told investigators. You should:
++ Decline to discuss it and tell the investigator about the request
+- Share a summary to be fair
+- Share only the parts that concern them
+- Ask them what they told investigators first
+
+Q: [Deleting|Altering] [records|messages|files] related to an investigation is:
++ Prohibited, and may itself be grounds for discipline
+- Allowed if they are personal
+- Allowed after {DAYS} days
+- Allowed if Legal is not watching
+
+Q: Investigation outcomes are [shared with|communicated to]:
++ Those with a need to know, as determined by the investigator
+- All associates, in the newsletter
+- The complainant's entire team
+- Anyone who asks
+
+Q: [You are asked to be interviewed|You have been asked to serve] as a witness in a workplace investigation. You should:
++ Answer truthfully and keep the matter confidential
+- Discuss your answers with the other witnesses first
+- Decline, since witnesses are not protected
+- Record the interview on your phone without asking
+
+Q: [An investigator|The investigator assigned to the matter] asks you to bring relevant documents. You should:
++ Preserve and provide them, without editing or deleting anything
+- Bring only the documents that support your view
+- Summarize them from memory
+- Delete personal notes first
+
+Q: [Retaliation against|Adverse treatment of] someone who participates in an investigation is:
++ Prohibited, and itself a violation of the Code of Conduct
+- Permitted if the complaint is not substantiated
+- Permitted after {DAYS} days
+- A matter for the manager's discretion
+
+Q: [After an investigation closes|Once the investigation concludes], the person who raised the concern can expect:
++ To be told that it has concluded, though not always the details of the outcome
+- A full copy of the investigation file
+- A public announcement
+- A written apology from the subject
+
+Q: Investigation [notes|interview notes] should be:
++ Accurate, factual, and stored in the approved case management system
+- Written in shorthand known only to the investigator
+- Kept on a personal device
+- Shared with the subject's team
+
+Q: [A colleague|{NAME}] tells you they are "pretty sure" who filed a complaint. You should:
++ Avoid speculating and remind {FIRST} that the process is confidential
+- Help {FIRST} confirm it
+- Let the subject know, as a courtesy
+- Post about it in the team chat

@@ -1,0 +1,60 @@
+# Lost and found.
+Q: Items found in the office should be:
++ Turned in to Security or reception
+- Kept
+- Sold
+- Thrown away
+
+Q: A found laptop or phone should be:
++ Turned in without looking through it
+- Unlocked to find the owner
+- Kept
+- Wiped
+
+Q: A found badge should be:
++ Turned in to Security right away so it can be checked
+- Used
+- Kept
+- Thrown away
+
+Q: USB drives found in the parking lot should be:
++ Turned in to IT Security, not plugged in
+- Plugged in to find the owner
+- Kept
+- Thrown away
+
+Q: Found documents with confidential information should be:
++ Turned in to Security or the document's owner
+- Read
+- Shared
+- Recycled
+
+Q: Unclaimed lost-and-found items are:
++ Handled under the lost-and-found policy after a holding period
+- Kept by finders
+- Sold by staff
+- Kept forever
+
+Q: Lost company equipment must be:
++ Reported promptly
+- Replaced quietly
+- Ignored
+- Hidden
+
+Q: Found cash should be:
++ Turned in and logged
+- Kept
+- Spent
+- Split
+
+Q: Found keys should be:
++ Turned in to Security or Facilities
+- Tested in doors
+- Kept
+- Copied
+
+Q: Lost-and-found logs help:
++ Return items and show accountability
+- Nothing
+- Hide items
+- Waste time

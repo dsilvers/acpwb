@@ -1,0 +1,143 @@
+# Compliance glossary: term | definition. Asked as "Which best defines X?",
+# "Which term means …?", and True/False with another term's definition.
+Access control | The process of granting or denying entry to facilities and systems based on authorization
+Acceptable use | The permitted ways associates may use ACPWB technology resources
+Accommodation | A change to the work environment that enables an associate with a disability to perform their job
+Affirmative defense | A legal justification that, if proven, defeats liability even when the underlying facts are true
+Anti-retaliation | Protection for associates who raise concerns in good faith from adverse treatment
+Attestation | A signed statement confirming that an associate has read, understood, and will comply with a policy
+Audit trail | A chronological record of system activity that allows events to be reconstructed
+Background check | Verification of a candidate's identity, history, and qualifications before hire
+Badge reader | A device that reads an access credential and unlocks a door if the holder is authorized
+Beneficial owner | The individual who ultimately owns or controls an entity
+Blackout period | A window during which designated insiders may not trade company securities
+Breach notification | The process of informing affected individuals and regulators of a data breach
+Business continuity | The capability to keep critical operations running during a disruption
+Clawback | The recovery of compensation that was paid on the basis of results later restated
+Clean desk | The practice of leaving no confidential material visible or unattended at a workspace
+Code of Conduct | The document that sets out the standards of behavior expected of every associate
+Conflict of interest | A situation in which a personal interest could interfere with an associate's duties to ACPWB
+Consent | A freely given, specific, and informed agreement to the processing of personal information
+Control owner | The person accountable for the design and operation of a specific internal control
+Corrective action | A step taken to eliminate the cause of a finding and prevent its recurrence
+Custodian | A person identified as holding records relevant to a legal hold
+Data minimization | Collecting and keeping only the personal information needed for a stated purpose
+Data processing agreement | A contract that governs how a vendor handles personal information on ACPWB's behalf
+Deemed export | The release of controlled technology to a foreign person within the United States
+Delegation of authority | The written assignment of approval limits to specific roles
+Due diligence | A reasonable investigation of a person or entity before entering a relationship
+Encryption | Converting information into a form that cannot be read without the correct key
+Escalation | Referring an issue to a higher level of authority for decision
+Escort | An authorized associate who accompanies a visitor at all times
+Exempt employee | An employee not entitled to overtime pay under wage and hour law
+Facilitation payment | A small payment made to speed up a routine government action
+Fiduciary duty | The obligation to act in the best interest of another party
+Finding | An observation that a control or requirement was not met
+Gift register | The log in which gifts and hospitality offered to associates are recorded
+Hold and release printing | Printing that waits at the device until the user authenticates with a badge
+Incident | An event that compromises, or could compromise, people, property, or information
+Information classification | Labelling information by sensitivity to determine how it must be handled
+Insider | A person with access to material nonpublic information about a company
+Integrity Line | ACPWB's confidential channel for raising concerns, available 24 hours a day
+Internal control | A process designed to provide reasonable assurance about reliability and compliance
+Kickback | An improper payment returned to a person in exchange for awarding business
+Least privilege | Granting users only the access they need to perform their duties
+Legal hold | An instruction to preserve all records relevant to actual or anticipated litigation
+Lockout | Disabling an account after repeated failed sign-in attempts
+Mantrap | A small space with two interlocking doors that allows only one person through at a time
+Material nonpublic information | Information a reasonable investor would consider important that has not been disclosed
+Multi-factor authentication | Verifying identity with two or more independent types of evidence
+Near miss | An event that could have caused harm but did not
+Need to know | The principle that information is shared only with those who require it for their role
+Non-disclosure agreement | A contract in which the parties agree to keep specified information confidential
+Pay equity | Paying employees equally for substantially similar work regardless of protected characteristics
+Pay range | The minimum and maximum pay established for a position
+Personal information | Any information relating to an identified or identifiable individual
+Phishing | A fraudulent message designed to trick the recipient into revealing information or taking an action
+Piggybacking | Entering a secured area with the knowledge of an authorized person who holds the door
+Policy exception | A documented, approved deviation from a policy requirement
+Politically exposed person | An individual entrusted with a prominent public function
+Pre-clearance | Approval required before an insider trades company securities
+Privileged access | Access that allows administrative control over systems or data
+Protected class | A group of people protected from discrimination under law
+Proxy statement | The document provided to shareholders before a vote at an annual meeting
+Reasonable assurance | A high, but not absolute, level of confidence
+Recertification | Repeating training or attestation when a certification expires
+Records retention schedule | The list of how long each type of record must be kept
+Recusal | Stepping away from a decision because of a conflict of interest
+Red flag | A warning sign that requires further review
+Remediation | The work done to correct a deficiency
+Restricted party | A person or entity on a government list with whom dealings are prohibited or limited
+Risk appetite | The amount of risk an organization is willing to accept in pursuit of its objectives
+Root cause | The underlying reason a problem occurred
+Sanctions screening | Checking parties against government sanctions lists before doing business
+Segregation of duties | Dividing responsibilities so that no single person controls an entire transaction
+Shoulder surfing | Observing someone's screen or keyboard to obtain information
+Social engineering | Manipulating people into breaking security procedures
+Spear phishing | A phishing message tailored to a specific person or role
+Structuring | Breaking up transactions to avoid reporting thresholds
+Subject access request | A request by an individual to see the personal information held about them
+Tailgating | Following an authorized person through a secured door without their knowledge
+Third party | Any vendor, consultant, agent, or partner that is not an ACPWB associate
+Tone at the top | The ethical climate set by an organization's leadership
+Two-person rule | A requirement that certain actions be performed by two authorized people together
+Unauthorized disclosure | Sharing information with someone who is not permitted to receive it
+Visitor badge | A temporary credential identifying a person who must be escorted
+Vishing | Fraud attempted over the telephone
+Watermark | An identifier embedded in a document to establish its origin
+Whistleblower | A person who reports suspected wrongdoing
+Workstation lock | Securing a computer screen so it cannot be used until the user signs in again
+Zero tolerance | The policy that every reported violation is investigated, regardless of seniority
+Compa-ratio | An associate's salary divided by the midpoint of their pay range
+Pay range midpoint | The value halfway between the minimum and maximum of a pay range
+Retention trigger | The event, such as the end of the calendar year, from which a retention period is counted
+Hold and release | A printing method that keeps a job at the printer until the owner authenticates
+Assembly point | The location outside a building where evacuees gather to be accounted for
+Escort standard | The rule that visitors must be accompanied by an associate while on site
+Restricted party list | A government list of entities with which certain transactions are prohibited
+Lookalike domain | A web or email domain designed to resemble a trusted one
+Reply-To spoofing | Setting a reply address that differs from the visible sender to redirect responses
+Itemized receipt | A receipt listing each item purchased, its price, and the date
+Non-reimbursable expense | A cost incurred while traveling that the company will not repay
+Storage period | The number of days a labelled item may remain in a shared refrigerator
+Near-match | A screening result that resembles a listed party despite differences in spelling or punctuation
+Release window | The period during which a held print job may be released before it is deleted
+Audit sweep | An unannounced inspection of workspaces for policy compliance
+Floor warden | An associate trained to direct colleagues during an evacuation of their floor
+Booking etiquette | Expectations for reserving, using, and releasing shared rooms
+Gift threshold | The value above which a gift requires disclosure or pre-approval
+AED | An automated external defibrillator, a portable device that analyzes heart rhythm and can deliver a shock
+Hands-only CPR | Chest compressions without rescue breaths, recommended for bystanders helping an adult who collapses
+Sudden cardiac arrest | A condition in which the heart suddenly stops beating effectively
+Tourniquet | A band applied above a limb wound to stop life-threatening bleeding
+Abdominal thrusts | Upward thrusts below the ribcage used to clear an airway obstruction in a choking adult
+Universal precautions | Treating all blood and certain body fluids as potentially infectious
+Exposure incident | Contact with blood or other potentially infectious material through the eyes, mouth, or broken skin
+Safety Data Sheet | A document describing a chemical's hazards, safe handling, and emergency measures
+Shelter in place | Staying inside a building and sealing it off from an outside hazard
+Tornado warning | An alert that a tornado has been sighted or indicated on radar
+Lockdown | A response in which occupants secure themselves in rooms during a threat
+Run, Hide, Fight | The recommended sequence of responses to an active threat
+Bomb threat checklist | A form used to record details of a threatening call while it is in progress
+Good Samaritan law | A law that protects people who give reasonable emergency help in good faith
+Hallucination | A confident but false output produced by an AI system
+Deepfake | AI-generated audio, video, or images that imitate a real person
+Human in the loop | A process in which a person reviews and is accountable for AI-assisted decisions
+Anchor day | A day when an entire hybrid team is expected in the office together
+Coffee badging | Swiping into the office briefly to register attendance, then leaving to work elsewhere
+Hot desking | Using unassigned desks booked as needed rather than a permanent personal desk
+Neighborhood | An area of shared desks reserved for a team on its in-office days
+Hybrid agreement | A documented arrangement setting an associate's in-office and remote days
+Overemployment | Holding more than one full-time job at the same time, often without disclosure
+Quiet vacationing | Taking time off while appearing to work, instead of requesting leave
+Unlimited PTO | A discretionary time-off policy with no accrued balance
+Carryover cap | The maximum PTO balance that may roll over into the next year
+FMLA | The Family and Medical Leave Act, which provides eligible employees up to 12 workweeks of job-protected leave per year for qualifying reasons
+Pregnant Workers Fairness Act | A federal law requiring reasonable accommodations for known limitations related to pregnancy and childbirth
+PUMP Act | A federal law giving nursing employees break time and a private, non-bathroom space to express milk
+Protected concerted activity | Employees acting together about wages, hours, or working conditions, protected by the NLRA
+Collective bargaining agreement | A contract between an employer and a union setting terms of employment
+Grievance | A formal complaint that a collective bargaining agreement has been violated
+Weingarten rights | A union employee's right to representation at an investigatory interview that could lead to discipline
+Union steward | A coworker who represents union members in grievances and workplace issues
+NLRB | The National Labor Relations Board, which runs union elections and enforces the NLRA

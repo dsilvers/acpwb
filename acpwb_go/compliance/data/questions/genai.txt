@@ -1,0 +1,66 @@
+# Generative AI at work.
+Q: Before pasting text into a generative AI tool, you should check:
++ Whether the tool is approved for that type of data
+- Whether the tool has a friendly name
+- Whether your coworker uses it
+- Nothing
+
+Q: Generative AI can produce confident answers that are false. This is often called:
++ Hallucination
+- Optimization
+- Encryption
+- Compliance
+
+Q: Output from a generative AI tool used in customer communications must be:
++ Reviewed by a person for accuracy before it is sent
+- Sent as-is to save time
+- Signed by the AI tool
+- Translated into binary
+
+Q: Pasting a customer contract into a free, public AI chatbot is:
++ Not allowed; use only approved tools for confidential data
+- Fine if you delete the chat later
+- Encouraged for faster reviews
+- Required by Legal
+
+Q: Using AI to write code for production requires:
++ The same review, testing, and license checks as any other code
+- No review because AI is perfect
+- Removing all comments
+- Approval from the AI
+
+Q: AI-generated images used in marketing should:
++ Follow brand, copyright, and disclosure guidance
+- Include real people's faces without consent
+- Copy a competitor's ad style exactly
+- Be used without review
+
+Q: Using AI to make decisions about hiring or promotion:
++ Needs review for bias and compliance with employment laws
+- Removes all legal risk
+- Is required by policy
+- Is fine without human oversight
+
+Q: If an AI tool gives you a citation for a legal or regulatory claim, you should:
++ Verify that the source exists and says what the tool claims
+- Assume it is correct
+- Add more citations to be safe
+- Remove the date
+
+Q: Prompts and outputs in an approved enterprise AI tool are:
++ Company records subject to the same policies as other business data
+- Private and exempt from all policies
+- Deleted by law every hour
+- Owned by the AI
+
+Q: Creating fake reviews or testimonials with AI is:
++ Deceptive and prohibited
+- Creative marketing
+- Allowed if the product is good
+- Required for launches
+
+Q: If you are unsure whether an AI use is allowed, you should:
++ Check the AI acceptable use policy or ask the AI governance team
+- Ask the AI if it is allowed
+- Proceed and see what happens
+- Use a personal account instead

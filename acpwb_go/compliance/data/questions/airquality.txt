@@ -1,0 +1,61 @@
+# Indoor air quality, mold, and comfort.
+
+Q: Visible mold or a musty smell in the office should be:
++ Reported to Facilities
+- Covered with paint
+- Ignored
+- Sprayed with perfume
+
+Q: Persistent headaches or eye irritation that improve when you leave the building should be:
++ Reported, since they may indicate an indoor air quality issue
+- Ignored
+- Treated with more coffee
+- Reported to {VENDOR}
+
+Q: Blocking air vents with boxes or paper:
++ Reduces ventilation and should be avoided
+- Improves airflow
+- Saves energy safely
+- Is required in winter
+
+Q: Water leaks and stains on ceiling tiles should be:
++ Reported promptly to prevent mold
+- Painted over
+- Left to dry
+- Decorated
+
+Q: Air fresheners and plug-in scented oils at desks:
++ May bother coworkers with sensitivities and may be restricted
+- Are required
+- Improve air quality
+- Are safe on power strips
+
+Q: Carbon dioxide levels in a crowded meeting room can:
++ Rise and make people feel drowsy; ventilation helps
+- Cause fires
+- Improve focus
+- Make the coffee taste better
+
+Q: Using an unapproved portable air purifier with an ozone generator is:
++ Not recommended; ozone can irritate the lungs
+- Recommended
+- Required
+- Neutral
+
+Q: Idling vehicles near building air intakes can:
++ Draw exhaust fumes into the building
+- Improve ventilation
+- Charge the building
+- Nothing
+
+Q: Cleaning products used in the office should be:
++ Approved products used as directed, never mixed
+- Mixed for extra strength
+- Brought from home
+- Used in large quantities
+
+Q: Wildfire smoke days may require:
++ Keeping windows closed and following air quality guidance
+- Opening all windows
+- Outdoor lunches
+- Holding {EVENT} on the roof

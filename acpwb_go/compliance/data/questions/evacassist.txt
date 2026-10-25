@@ -1,0 +1,62 @@
+# Evacuation for people with disabilities and emergency preparedness.
+# Correct answers follow FEMA, Ready.gov, and ADA guidance.
+
+Q: An "area of refuge" in a building is:
++ A protected space, often in a stairwell landing, where people who cannot use stairs can wait for assistance during an evacuation
+- The break room
+- The CEO's office
+- A storage closet
+
+Q: Employees who may need help evacuating can:
++ Create a personal emergency evacuation plan with Security or their floor warden
+- Be left behind
+- Use the elevator during a fire
+- Wait at their desk
+
+Q: Evacuation chairs should be used by:
++ Trained people only
+- Anyone, for fun
+- Visitors
+- Floor wardens racing each other
+
+Q: During a fire evacuation, elevators should:
++ Not be used unless the fire department directs their use
+- Be used first by everyone
+- Be used for heavy items
+- Be held open
+
+Q: A basic emergency kit for home or work typically includes:
++ Water, food, a flashlight, batteries, a first aid kit, and medications for several days
+- Only snacks
+- Only a phone charger
+- Only {DOCUMENT}
+
+Q: During a chemical release outside the building, "shelter in place" means:
++ Stay inside, close windows and doors, and follow instructions, including shutting off ventilation if directed
+- Go outside to see what happened
+- Open all windows
+- Drive away immediately
+
+Q: Visual alarms, such as strobe lights, help:
++ People who are deaf or hard of hearing know when an alarm sounds
+- Decorate the office
+- Signal lunch
+- Test the lights
+
+Q: Service animals during an evacuation should:
++ Stay with their handler
+- Be left behind
+- Be evacuated separately
+- Be put in the elevator alone
+
+Q: Floor wardens should account for people by:
++ Following the headcount procedure at the assembly point
+- Guessing
+- Counting cars in the parking lot
+- Asking the {COMMITTEE}
+
+Q: Visitors in the building during an evacuation should:
++ Leave with their host and be accounted for at the assembly point
+- Stay at reception
+- Wander
+- Take the elevator

@@ -146,7 +146,7 @@
         <tr><th style="font-size:.72rem;color:var(--muted)">Delay</th><td style="font-size:.8rem">{{ m.original_visit.timestamp|timesince:email.received_at }} between page view and email</td></tr>
         {% endif %}
         {% if m.source_code_email %}
-        <tr><td colspan="2" style="background:var(--surface);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em">Source-code page &middot; {{ m.match_confidence }}</td></tr>
+        <tr><td colspan="2" style="background:var(--surface);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{% if m.source_code_email.path|slice:":12" == "/compliance/" %}Compliance course page{% else %}Source-code page{% endif %} &middot; {{ m.match_confidence }}</td></tr>
         <tr><th style="width:140px;font-size:.72rem;color:var(--muted)">Page</th><td style="font-size:.75rem;font-family:monospace;word-break:break-all">{{ m.source_code_email.host }}{{ m.source_code_email.path }}</td></tr>
         <tr><th style="font-size:.72rem;color:var(--muted)">First served</th><td style="font-size:.8rem">{{ m.source_code_email.first_seen|date:"Y-m-d H:i:s" }} UTC to <span style="font-family:monospace">{{ m.source_code_email.first_ip|default:"unknown IP" }}</span></td></tr>
         <tr><th style="font-size:.72rem;color:var(--muted)">Last served</th><td style="font-size:.8rem">{{ m.source_code_email.last_seen|date:"Y-m-d H:i:s" }} UTC &middot; {{ m.source_code_email.times_served }} time{{ m.source_code_email.times_served|pluralize }}</td></tr>

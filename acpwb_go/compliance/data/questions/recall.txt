@@ -1,0 +1,60 @@
+# Product safety and recalls. Answers follow CPSC Section 15(b) in general terms.
+Q: Under Section 15(b) of the Consumer Product Safety Act, a company must report to the CPSC:
++ Within 24 hours of getting information reasonably supporting that a product has a defect that could create a substantial hazard
+- Within one year
+- Only after a lawsuit
+- Never
+
+Q: A customer report of a product catching fire should be:
++ Escalated immediately to the product safety team
+- Treated as a routine complaint
+- Ignored
+- Answered with a coupon
+
+Q: Product safety complaints must be:
++ Logged and preserved
+- Deleted
+- Edited
+- Hidden
+
+Q: Waiting to report until the investigation is complete:
++ Can violate the reporting deadline
+- Is required
+- Is best practice
+- Is safe
+
+Q: A recall plan should include:
++ How to notify customers, retrieve products, and offer remedies
+- Nothing
+- A press release only
+- Blame
+
+Q: Selling a product that is under recall is:
++ Illegal
+- Allowed
+- Required
+- Profitable and fine
+
+Q: Recall communications should be:
++ Clear, accurate, and approved
+- Vague
+- Delayed
+- Secret
+
+Q: Employees who notice a safety issue with an ACPWB product should:
++ Report it right away
+- Wait
+- Fix it quietly
+- Ignore it
+
+Q: Records about product incidents must be:
++ Retained under policy
+- Destroyed
+- Hidden
+- Shared publicly
+
+Q: Product safety decisions should prioritize:
++ Customer safety
+- Short-term sales
+- Avoiding paperwork
+- Press coverage

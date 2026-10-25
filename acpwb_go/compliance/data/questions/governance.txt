@@ -1,0 +1,61 @@
+# Board and corporate governance.
+
+Q: Materials for the {COMMITTEE} [must be|are to be] distributed to members:
++ At least {N} business days before the meeting, through the Board Portal
+- On paper, at the start of the meeting
+- By personal email, for convenience
+- After the meeting, for the record
+
+Q: A director has a [financial interest|family relationship] [in|with] a matter before the Board. The director should:
++ Disclose the interest and recuse themself from discussion and voting
+- Vote, but abstain from discussion
+- Discuss the matter, but abstain from voting
+- Resign immediately
+
+Q: Who may speak to [the media|investors|analysts] about Board deliberations?
++ Only the Chair or an authorized spokesperson
+- Any director
+- Any associate who attended
+- The Board's caterer
+
+Q: [Executive sessions|Sessions without management present] are held:
++ At every regularly scheduled Board meeting
+- Only when management asks
+- Never
+- Once every {N} years
+
+Q: [Board materials|Materials for the {COMMITTEE}] should be distributed to members:
++ Through the secure board portal, at least {DAYS} days before the meeting
+- By personal email, the night before
+- In printed binders left at reception
+- On a shared drive open to all associates
+
+Q: [A director|A committee member] has a financial interest in a vendor under discussion. They should:
++ Disclose the interest and recuse themselves from the discussion and vote
+- Vote, but abstain from discussion
+- Discuss, but abstain from voting
+- Do nothing, provided the interest is under {AMOUNT}
+
+Q: [The minutes of|Minutes from] a {COMMITTEE} meeting should record:
++ Attendance, actions taken, and decisions, not a word-for-word transcript
+- Everything said, including side conversations
+- Only the items that passed
+- The refreshments served
+
+Q: A [quorum|meeting quorum] is:
++ The minimum number of members who must be present for business to be conducted
+- The maximum number of attendees allowed in the {PLACE}
+- The chair's tie-breaking vote
+- A formal objection to the agenda
+
+Q: [The ACPWB delegation of authority matrix|The delegation of authority matrix] determines:
++ Who may approve commitments, and up to what amount
+- Who may sit at the head of the boardroom table
+- Which departments receive parking spaces
+- How committees are named
+
+Q: Which of the following [requires|require] {COMMITTEE} approval [under the charter|under its charter]?
++ Changes to the committee's own charter
++ Engagement of the independent auditor
+- Ordering office supplies
+- Scheduling the holiday party

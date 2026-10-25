@@ -1,0 +1,60 @@
+# Knowledge management and transfer.
+Q: Knowledge transfer before an employee leaves should include:
++ Documenting processes, contacts, and open work
+- Nothing
+- A goodbye card only
+- Deleting files
+
+Q: Critical knowledge held by only one person is:
++ A risk that should be reduced through documentation and cross-training
+- Job security
+- Required
+- Harmless
+
+Q: Team documentation should be stored:
++ In shared, approved locations
+- On personal drives
+- In personal email
+- On sticky notes
+
+Q: Outdated documentation should be:
++ Updated or archived
+- Kept as current
+- Deleted without notice
+- Ignored
+
+Q: Cross-training helps:
++ Teams cover for each other
+- Slow work
+- Confuse people
+- Nothing
+
+Q: Lessons learned from projects should be:
++ Captured and shared
+- Forgotten
+- Hidden
+- Blamed
+
+Q: Confidential knowledge should be:
++ Shared only with people who need it
+- Shared with everyone
+- Posted
+- Sold
+
+Q: Taking team documentation when leaving the company is:
++ Not allowed
+- Fine
+- Required
+- Encouraged
+
+Q: Knowledge bases help customers and employees by:
++ Answering common questions consistently
+- Hiding answers
+- Increasing tickets
+- Nothing
+
+Q: The best time to document a process is:
++ While doing it, not after the expert leaves
+- Never
+- After it breaks
+- At retirement

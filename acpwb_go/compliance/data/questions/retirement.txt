@@ -1,0 +1,50 @@
+# Retirement plans (401(k), ERISA). Correct answers follow ERISA and IRS
+# rules as generally applied; keep them accurate.
+
+Q: An employer 401(k) "match" is:
++ An employer contribution based on how much the employee defers
+- A matchbook given at retirement parties
+- A tie-breaker in a pay dispute
+- A contribution made only if the stock goes up
+
+Q: Your own salary deferrals to a 401(k) plan are:
++ Always 100% vested
+- Vested after three years
+- Vested only if you stay until retirement
+- Owned by the plan administrator
+
+Q: People who manage a retirement plan's investments or administration under ERISA must act:
++ Solely in the interest of plan participants and beneficiaries, as fiduciaries
+- In the interest of the company's quarterly earnings
+- In the interest of {VENDOR}
+- However the {COMMITTEE} prefers
+
+Q: An employee who is 50 or older can generally make:
++ Additional "catch-up" contributions above the standard 401(k) deferral limit
+- Unlimited contributions
+- Contributions only in cash
+- Contributions on behalf of coworkers
+
+Q: Taking money out of a traditional 401(k) before age 59½ generally results in:
++ Income tax plus a 10% additional tax, unless an exception applies
+- No tax at all
+- Loss of your job
+- A free toaster
+
+Q: The Summary Plan Description (SPD) is:
++ A plain-language document explaining how the plan works, which participants are entitled to receive
+- A confidential executive memo
+- A sales brochure from {VENDOR}
+- The plan's password
+
+Q: An employee asks HR which 401(k) fund to choose. HR should:
++ Provide plan information and educational resources, without giving personal investment advice
+- Recommend the fund their manager uses
+- Pick the fund with the best name
+- Recommend ACPWB stock for everyone
+
+Q: Rolling a 401(k) balance directly into an IRA when leaving a job is:
++ Generally a non-taxable transfer if done as a direct rollover
+- Taxed at 100%
+- Prohibited by ERISA
+- Allowed only on {WEEKDAY}s

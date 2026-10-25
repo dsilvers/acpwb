@@ -1,0 +1,71 @@
+Q: A caller identifies themself as "{NAME} from the IT Service Desk" and asks for your one-time passcode to "finish a migration." You should:
++ Hang up and call the Service Desk back at the number on the intranet
+- Read the code slowly so they can write it down
+- Provide the code only if the caller knows your employee ID
+- Provide only the first {N} digits
+
+Q: Your ACPWB password must be changed every:
++ {DAYS} days, and must not match any of your previous {N} passwords
+- Time you feel uneasy
+- Fiscal quarter, on the first business Monday
+- Never; long passwords do not expire
+
+Q: Which of the following is an acceptable place to store your password?
++ The ACPWB-approved password manager
+- A sticky note under your keyboard
+- A sticky note under your mouse pad (more secure than the keyboard)
+- In the "Notes" field of your own contact card
+
+Q: You notice an unfamiliar USB drive labelled "{SYSTEM} — Q{N} Bonuses" in the break room. You should:
++ Turn it in to Security without plugging it into anything
+- Plug it into a shared kiosk to identify the owner
+- Plug it into your laptop, but only with Wi-Fi turned off
+- Take it home to check it on a personal computer
+
+Q: When leaving your workstation, even briefly, you must:
++ Lock the screen (Windows key + L)
+- Turn the monitor to face the wall
+- Place a "back in 5" sign on the keyboard
+- Ask a colleague to watch the screen
+
+Q: Which systems may be accessed from a personal device?
++ Only {SYSTEM}, through the approved remote gateway
+- Any system that loads in a browser
+- All systems, provided the device has a case
+- None, except on weekends
+
+Q: You receive a multi-factor push notification you did not request. You should:
++ Deny it and report it to the Service Desk within {N} hours
+- Approve it, since it is probably the system checking in
+- Approve it to make the notifications stop
+- Ignore it until it times out, then approve the next one
+
+Q: Security incidents must be reported:
++ Immediately, through the Integrity Line or the Service Desk
+- At the next quarterly town hall
+- Only once you have confirmed the incident yourself
+- Only if they involve more than {AMOUNT}
+
+Q: [Your|A] [{DEVICE}|laptop] is [lost|stolen|left in a taxi|missing after {EVENT}]. [How quickly|Within what time] must you report it?
++ Immediately, and no later than {N} hours, to the Service Desk
+- At the end of the week
+- Only if it contained confidential files
+- After searching for it for {DAYS} days
+
+Q: [Which of the following passwords|Which password] meets the ACPWB Authentication Standard?
++ A long passphrase of unrelated words, stored in the password manager
+- Acpwb{N}!
+- Your badge number
+- Password{N}
+
+Q: A [pop-up|browser window|message] [claims|says] your computer is infected and [asks you to call a number|offers a free cleanup tool]. You should:
++ Close the browser and report it to the Service Desk without calling or installing anything
+- Call the number to resolve it quickly
+- Install the tool, then report it
+- Restart your computer {N} times
+
+Q: Software may be installed on ACPWB {DEVICE}s:
++ Only from the ACPWB Software Center or with Service Desk approval
+- From any reputable website
+- If a colleague recommends it
+- If it is free

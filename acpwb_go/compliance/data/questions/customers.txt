@@ -1,0 +1,74 @@
+# Customer complaints, sales practices, and marketing. Correct answers on
+# marketing follow CAN-SPAM, the TCPA, and FTC rules.
+
+Q: A customer complaint should be:
++ Logged, acknowledged, and routed to the right team for resolution
+- Deleted if it is rude
+- Answered with a template that says "noted"
+- Forwarded to the {COMMITTEE} for laughs
+
+Q: Promising a customer something ACPWB cannot deliver to close a deal is:
++ Misleading and not allowed
+- Good sales technique
+- Allowed at quarter end
+- Allowed if the customer is large
+
+Q: Under CAN-SPAM, a commercial email must:
++ Include a working unsubscribe option and a valid physical postal address
+- Be sent only on {WEEKDAY}s
+- Include the CEO's photo
+- Be in all capital letters
+
+Q: Unsubscribe requests under CAN-SPAM must be honored within:
++ 10 business days
+- 1 year
+- 90 days
+- Never
+
+Q: Sending marketing text messages using an autodialer generally requires:
++ Prior express written consent under the TCPA
+- Nothing
+- A phone number only
+- A coupon
+
+Q: Calling a customer who has asked not to be called is:
++ Not allowed; honor do-not-call requests
+- Persistence
+- Allowed for good deals
+- Allowed from a personal phone
+
+Q: A sales contest that rewards opening accounts customers did not ask for would be:
++ Harmful and possibly illegal; unauthorized accounts are fraud
+- A creative incentive
+- Allowed if customers do not complain
+- Required for growth
+
+Q: A customer offers a gift to thank you for resolving their complaint. You should:
++ Follow the gifts policy, which usually allows only modest, infrequent gifts
+- Accept anything
+- Ask for cash instead
+- Ask for a bigger gift
+
+Q: Endorsements by employees of ACPWB products online must:
++ Disclose the employment relationship
+- Pretend to be from independent customers
+- Use fake names
+- Be written by {VENDOR}
+
+Q: A customer asks for their personal data to be deleted. You should:
++ Forward it to the Privacy team, which handles such requests under applicable law
+- Delete everything immediately yourself
+- Ignore it
+- Ask them to fax a form
+
+Q: "Free" offers in advertising must:
++ Clearly disclose any conditions or obligations
+- Hide conditions in fine print
+- Never be free
+- Require a purchase that is not mentioned
+
+Q: Disparaging a competitor with false claims is:
++ Not allowed and can be unlawful
+- Effective marketing
+- Allowed in private conversations with customers
+- Allowed if true-ish

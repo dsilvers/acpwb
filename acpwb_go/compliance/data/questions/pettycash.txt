@@ -1,0 +1,61 @@
+# Petty cash, gift cards, and cash handling.
+
+Q: Petty cash should be:
++ Kept locked, reconciled regularly, and supported by receipts
+- Kept in an open jar
+- Used for personal loans
+- Counted once a year
+
+Q: Borrowing from petty cash with a promise to repay is:
++ Not allowed
+- Fine if repaid by Friday
+- Allowed for lunch
+- Allowed for managers
+
+Q: Cash handling duties should be:
++ Separated, so the person counting cash is not the only one recording it
+- Done by one person alone
+- Done by whoever is closest
+- Done in the {PLACE}
+
+Q: A cash shortage discovered during reconciliation should be:
++ Reported to your manager and Finance right away
+- Covered with your own money quietly
+- Ignored
+- Blamed on the last person
+
+Q: Gift cards held by ACPWB for awards should be:
++ Logged and kept secure like cash
+- Kept in an unlocked drawer
+- Given to friends
+- Used for coffee
+
+Q: Accepting cash tips from customers is:
++ Governed by the gifts policy; usually not allowed
+- Always allowed
+- Required
+- Allowed under {AMOUNT}
+
+Q: Counterfeit bills suspected in a cash deposit should be:
++ Set aside, not returned to the customer, and reported following procedures
+- Spent quickly
+- Returned to the customer
+- Kept as a souvenir
+
+Q: Petty cash vouchers should be signed by:
++ The person receiving the cash and the custodian
+- Nobody
+- A visitor
+- The vendor
+
+Q: Petty cash may be used for:
++ Small, approved business purchases
+- Personal loans
+- Gifts to the custodian
+- Payroll
+
+Q: The petty cash custodian changing should trigger:
++ A count and handover document
+- Nothing
+- A party
+- A new key only

@@ -1,0 +1,61 @@
+# Worker classification (employees vs. independent contractors).
+
+Q: Whether a worker is an employee or an independent contractor depends on:
++ The actual working relationship, such as control and economic dependence, not just the contract's label
+- What the worker prefers
+- Whether they have a business card
+- The color of their badge
+
+Q: A "contractor" who works full-time, uses ACPWB equipment, follows a set schedule, and is supervised like staff:
++ May be misclassified and actually be an employee
+- Is definitely a contractor
+- Must be paid in cash
+- Is a consultant
+
+Q: Misclassifying employees as contractors can result in:
++ Back wages, overtime, taxes, penalties, and benefits liability
+- A bonus for the department
+- Nothing, if the contract is signed
+- A warning only
+
+Q: Contingent workers provided by a staffing agency should:
++ Be managed through the agency for matters like discipline and pay
+- Receive ACPWB stock awards
+- Be added to the internal employee directory as employees
+- Be invited to vote in the {COMMITTEE}
+
+Q: An unpaid internship at a for-profit company is generally lawful only when:
++ The intern, not the employer, is the primary beneficiary of the arrangement
+- The intern agrees in writing
+- The intern is a relative
+- The internship is shorter than {DAYS} days
+
+Q: Under the Department of Labor's approach, a key question for classification is whether the worker is:
++ Economically dependent on the company or truly in business for themselves
+- Friendly with the manager
+- Paid by check
+- Over 25
+
+Q: A former employee rehired to do the same job as a "contractor" is:
++ A misclassification red flag
+- A standard cost saving
+- Required after a layoff
+- Allowed if they agree
+
+Q: Independent contractors generally:
++ Control how they do the work, use their own tools, and can work for others
+- Have ACPWB email signatures and business cards
+- Attend mandatory staff meetings
+- Get performance reviews from ACPWB managers
+
+Q: California's "ABC test" presumes a worker is an employee unless:
++ The worker is free from control, does work outside the usual course of the business, and has an independent business
+- They sign a contract
+- They work from home
+- They are paid weekly
+
+Q: Contractor time should be approved:
++ Against the statement of work, through the vendor management process
+- On ACPWB employee timesheets
+- By coworkers
+- By {VENDOR} alone

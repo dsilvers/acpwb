@@ -18,7 +18,7 @@
   <link rel="icon" type="image/svg+xml" href="{{ static('favicon.svg') }}">
   <link rel="preload" href="{{ static('fonts/inter/inter-variable-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ static('vendor/bootstrap/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20261011">
+  <link rel="stylesheet" href="{{ static('css/acpwb.css') }}?v=20261021">
   {% include "partials/_jsonld_garbage.html" %}
 <style>
 .hb-section-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); padding-bottom:.3rem; border-bottom:1px solid var(--border); margin-bottom:.9rem; }
@@ -47,10 +47,9 @@
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('home') }}">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('our-people') }}">Our People</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('mission') }}">Mission</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('project-list') }}">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('reports-list') }}">Reports</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('public-policy-index') }}">Policy</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('partners') }}">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ site_root }}/compliance/">Compliance</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
       </ul>
     </div>
@@ -190,6 +189,7 @@
               <li><a href="{{ site_root }}{{ url('contact') }}">Contact</a></li>
               <li><a href="{{ site_root }}{{ url('faq') }}">FAQ</a></li>
               <li><a href="{{ site_root }}{{ url('press_releases') }}">Press Releases</a></li>
+              <li><a href="{{ site_root }}/compliance/">Compliance</a></li>
               <li><a href="{{ site_root }}{{ url('do-not-sell') }}">Do Not Sell My Info</a></li>
               <li><a href="{{ site_root }}{{ url('accessibility') }}">Accessibility</a></li>
               <li><a href="{{ site_root }}{{ url('trademarks') }}">Trademarks</a></li>

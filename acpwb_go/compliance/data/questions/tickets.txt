@@ -1,0 +1,66 @@
+# IT ticketing practices.
+Q: Every request to IT should be submitted as:
++ A ticket, so it can be tracked
+- A hallway conversation only
+- A sticky note
+- A text to a friend in IT
+
+Q: A good ticket includes:
++ What happened, when, the error message, and what you already tried
+- Only "it's broken"
+- A long complaint
+- Your password
+
+Q: Ticket priority should be based on:
++ Impact and urgency
+- Who yells the loudest
+- The requester's title only
+- Alphabetical order
+
+Q: Closing tickets without fixing the issue to improve metrics is:
++ Misleading and not allowed
+- Efficient
+- Required
+- Smart
+
+Q: Sensitive data such as passwords should be:
++ Never included in ticket text
+- Included for faster fixes
+- Included in the subject
+- Bolded
+
+Q: Duplicate tickets for the same issue should be:
++ Linked or merged
+- Kept separate to look busy
+- Deleted without notice
+- Assigned randomly
+
+Q: A ticket that needs another team should be:
++ Reassigned with notes, not just bounced
+- Closed
+- Ignored
+- Emailed to everyone
+
+Q: Users should respond to ticket questions:
++ Promptly, so work can continue
+- Never
+- Only after a week
+- Through a new ticket each time
+
+Q: A known error database helps:
++ Fix recurring problems faster
+- Hide problems
+- Increase tickets
+- Delay fixes
+
+Q: Escalating a ticket because it is near its SLA deadline is:
++ Appropriate under the support process
+- Cheating
+- Not allowed
+- Rude
+
+Q: Ticket history is useful for:
++ Spotting trends and improving services
+- Gossip
+- Punishing users
+- Nothing

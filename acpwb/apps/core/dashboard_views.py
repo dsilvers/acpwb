@@ -7,6 +7,7 @@ rows; no caching layer is needed.  Run precalc_dashboard on a 30-minute cron.
 
 Recent records (last 50 visits, last 5 emails, etc.) are always live queries.
 """
+from collections import Counter
 from datetime import date, timedelta
 
 from django.conf import settings
@@ -14,20 +15,22 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
-from django.db.models import Count, Max, Q
+from django.db.models import Avg, Count, Max, Q
+from django.db.models.functions import TruncDate
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.utils.http import content_disposition_header
 
 from apps.core.models import DashboardStat
 from apps.honeypot.models import (
-    ArchiveVisit, CanaryToken, CrawlerVisit, EdgeConnection, EdgeRequest, InternalLoginAttempt,
+    ArchiveVisit, CanaryToken, ComplianceCompletion, CrawlerVisit, EdgeConnection, EdgeRequest, InternalLoginAttempt,
 )
 from apps.people.models import PeoplePageVisit
 from apps.projects.models import ProjectPageVisit
 from apps.public.models import ConferenceRegistration, DataOptOutRequest, JobApplication, JobApplicationDocument
 from apps.webhooks import replies
-from apps.webhooks.models import CallLog, InboundEmail, VoicemailRecording
+from apps.webhooks.models import CallLog, HoneypotMatch, InboundEmail, VoicemailRecording
 
 
 # ── Stat helpers ──────────────────────────────────────────────────────────────
@@ -314,7 +317,7 @@ def honeypot_traps(request):
     by_trap = _stat('crawlers.by_trap_type', {})
     trap_totals = _trap_counts(by_trap)
 
-    CONTENT_KEYS = {'wiki', 'report_list', 'report_download', 'dataset', 'api', 'well_known', 'pow', 'handbook', 'process_improvement', 'source_code', 'source_code_download'}
+    CONTENT_KEYS = {'wiki', 'report_list', 'report_download', 'dataset', 'api', 'well_known', 'pow', 'handbook', 'process_improvement', 'source_code', 'source_code_download', 'compliance', 'compliance_certificate'}
     SCANNER_KEYS = {'scanner_probe', 'env_probe', 'wp_probe', 'webshell_probe'}
 
     content_total = sum(by_trap.get(k, 0) for k in CONTENT_KEYS)
@@ -628,3 +631,161 @@ def conference_registrations(request):
         'type_rows': type_rows,
         'recent': recent,
     })
+
+
+# ── /compliance/ (ComplianceCenter) ──────────────────────────────────────
+
+# Expected score from guessing: most questions have four choices, some two
+# (True/False) or five ("All of the above").
+COMPLIANCE_RANDOM_SCORE = 26
+
+_CLIENT_CLASS_LABELS = {
+    'known_bot': 'Known bot', 'tool': 'Tool / script', 'browser': 'Browser',
+    'headless': 'Headless / automated', 'impersonator': 'Impersonator', 'unknown': 'Unknown', '': '—',
+    'unclassified': 'Unclassified',
+}
+
+_FUNNEL_KINDS = [
+    ('catalog', 'Catalog'), ('agencies', 'Agency directory'), ('sponsor', 'Agency page'), ('topics', 'Topic index'),
+    ('topic', 'Topic page'), ('sitemap', 'Sitemaps'), ('course', 'Course page'), ('question', 'Question pages'),
+    ('results', 'Results pages'), ('certificate', 'Certificate pages'), ('certificate_pdf', 'Certificate PDFs'),
+    ('verify', 'Verification pages'), ('transcript', 'Transcript'),
+]
+
+
+def _bucket_scores(rows):
+    """[(score, n)] → 10 buckets of 10 points (100 lands in the last)."""
+    buckets = [0] * 10
+    for score, n in rows:
+        buckets[min(score // 10, 9)] += n
+    peak = max(buckets) or 1
+    return [{'label': f'{i * 10}–{i * 10 + 9 if i < 9 else 100}%', 'count': c, 'pct': round(c * 100 / peak),
+             'random': i * 10 <= COMPLIANCE_RANDOM_SCORE < i * 10 + 10} for i, c in enumerate(buckets)]
+
+
+def _top_list(counter, limit=15):
+    items = counter.most_common(limit)
+    peak = items[0][1] if items else 1
+    return [{'name': k, 'count': v, 'pct': round(v * 100 / peak)} for k, v in items]
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def compliance(request):
+    from apps.core import compliance_stats
+
+    try:
+        days = int(request.GET.get('days', 7))
+    except ValueError:
+        days = 7
+    days = days if days in (1, 7, 30) else 7
+    since = timezone.now() - timedelta(days=days)
+
+    comps = ComplianceCompletion.objects.filter(timestamp__gte=since)
+    completed = comps.filter(event='completed')
+    summary = completed.aggregate(n=Count('id'), avg=Avg('score'), passed=Count('id', filter=Q(passed=True)))
+    event_counts = dict(comps.values_list('event').annotate(n=Count('id')))
+
+    # Score vs. random guessing, overall and per agent.
+    score_hist = _bucket_scores(completed.values_list('score').annotate(n=Count('id')))
+    agents = list(
+        completed.values('bot_type', 'client_class')
+        .annotate(attempts=Count('id'), avg=Avg('score'), passed=Count('id', filter=Q(passed=True)),
+                  ips=Count('ip_address', distinct=True))
+        .order_by('-attempts')[:25]
+    )
+    certs_by_agent = dict(
+        comps.filter(event='certificate').values_list('bot_type').annotate(n=Count('id'))
+    )
+    for a in agents:
+        a['avg'] = round(a['avg'] or 0)
+        a['pass_rate'] = round(a['passed'] * 100 / a['attempts']) if a['attempts'] else 0
+        a['certificates'] = certs_by_agent.get(a['bot_type'], 0)
+        a['class_label'] = _CLIENT_CLASS_LABELS.get(a['client_class'], a['client_class'])
+        a['reads'] = a['attempts'] >= 3 and a['avg'] >= 50
+
+    leaderboard = list(
+        comps.filter(event='certificate').values('ip_address', 'bot_type', 'client_class')
+        .annotate(n=Count('id'), courses=Count('course', distinct=True), last=Max('timestamp'))
+        .order_by('-n')[:15]
+    )
+    for row in leaderboard:
+        row['class_label'] = _CLIENT_CLASS_LABELS.get(row['client_class'], row['client_class'])
+
+    daily_rows = (
+        ComplianceCompletion.objects.filter(timestamp__gte=timezone.now() - timedelta(days=30), event__in=['certificate', 'completed'])
+        .annotate(day=TruncDate('timestamp')).values('day', 'event').annotate(n=Count('id'))
+    )
+    certs_daily = {r['day'].isoformat(): r['n'] for r in daily_rows if r['event'] == 'certificate'}
+
+    identified = list(comps.filter(event='identified').order_by('-timestamp')[:100])
+    for row in identified:
+        row.class_label = _CLIENT_CLASS_LABELS.get(row.client_class, row.client_class)
+
+    matches_qs = HoneypotMatch.objects.filter(source_code_email__path__startswith='/compliance/')
+    matches = list(matches_qs.select_related('inbound_email', 'source_code_email').order_by('-matched_at')[:20])
+
+    stats = compliance_stats.read(days)
+    funnel, class_cols, class_rows, fanout = [], [], [], []
+    top = {}
+    if stats:
+        attempts_started = stats['fanout'][0]['attempts'] if stats['fanout'] and stats['fanout'][0]['depth'] == 0 else 0
+        reached5 = next((f['attempts'] for f in stats['fanout'] if f['depth'] == 4), 0)
+        steps = [
+            ('Course page views', stats['pages'].get('course', 0)),
+            ('Attempts started (distinct)', attempts_started),
+            ('Attempts reaching question 5', reached5),
+            ('Attempts completed', summary['n'] or 0),
+            ('Attempts passed', summary['passed'] or 0),
+            ('Certificates viewed', event_counts.get('certificate', 0)),
+            ('Certificate PDFs downloaded', event_counts.get('certificate_pdf', 0)),
+        ]
+        peak = max((v for _, v in steps), default=1) or 1
+        funnel = [{'label': k, 'count': v, 'pct': max(1, round(v * 100 / peak)) if v else 0} for k, v in steps]
+        classes = Counter()
+        for per in stats['by_class'].values():
+            classes.update(per)
+        class_cols = [c for c, _ in classes.most_common()]
+        for kind, label in _FUNNEL_KINDS:
+            total = stats['pages'].get(kind, 0)
+            if total:
+                per = stats['by_class'].get(kind, {})
+                class_rows.append({'label': label, 'total': total, 'cells': [per.get(c, 0) for c in class_cols]})
+        class_cols = [_CLIENT_CLASS_LABELS.get(c, c) for c in class_cols]
+        fanout = stats['fanout']
+        fpeak = max((f['ratio'] for f in fanout), default=1) or 1
+        for f in fanout:
+            f['pct'] = round(f['ratio'] * 100 / fpeak)
+        top = {
+            'topics': _top_list(stats['topics']),
+            'agencies': _top_list(stats['agencies']),
+            'exhibits': _top_list(stats['exhibits']),
+            'bots': _top_list(stats['bots']),
+        }
+
+    ctx = {
+        'days': days,
+        'random_score': COMPLIANCE_RANDOM_SCORE,
+        'completed_n': summary['n'] or 0,
+        'avg_score': round(summary['avg'] or 0),
+        'pass_rate': round((summary['passed'] or 0) * 100 / summary['n']) if summary['n'] else 0,
+        'certificates': event_counts.get('certificate', 0),
+        'pdfs': event_counts.get('certificate_pdf', 0),
+        'identified_n': event_counts.get('identified', 0),
+        'learner_ips': stats['ips_total'] if stats else None,
+        'page_total': sum(stats['pages'].values()) if stats else None,
+        'score_hist': score_hist,
+        'agents': agents,
+        'leaderboard': leaderboard,
+        'certs_daily': _daily_bars(certs_daily, 30),
+        'pages_daily': stats['daily'] if stats else [],
+        'identified': identified,
+        'match_count': matches_qs.count(),
+        'matches': matches,
+        'funnel': funnel,
+        'class_cols': class_cols,
+        'class_rows': class_rows,
+        'fanout': fanout,
+        'top': top,
+        'redis_ok': stats is not None,
+    }
+    return render(request, 'dashboard/compliance.html', ctx)

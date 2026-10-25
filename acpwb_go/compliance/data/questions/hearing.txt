@@ -1,0 +1,66 @@
+# Hearing conservation. Answers follow OSHA 1910.95.
+Q: OSHA requires a hearing conservation program when noise exposure equals or exceeds:
++ An 8-hour time-weighted average of 85 dBA
+- 50 dBA
+- 120 dBA
+- Any noise at all
+
+Q: OSHA's permissible exposure limit for noise is:
++ 90 dBA as an 8-hour time-weighted average
+- 70 dBA
+- 140 dBA
+- 100 dBA for 12 hours
+
+Q: Under OSHA's 5-dB exchange rate, each 5 dBA increase above 90 dBA:
++ Cuts the allowed exposure time in half
+- Doubles the allowed exposure time
+- Has no effect
+- Requires a day off
+
+Q: Employees in a hearing conservation program must receive:
++ A baseline audiogram and annual audiograms
+- Just one test at retirement
+- No testing
+- A test only after an injury
+
+Q: Hearing protectors for employees in the program must be:
++ Provided at no cost, with a choice of suitable types
+- Purchased by employees
+- Shared between workers
+- Optional decorations
+
+Q: Training for employees in the hearing conservation program must be repeated:
++ Annually
+- Every 10 years
+- Never
+- Only at hire
+
+Q: A standard threshold shift is:
++ An average change of 10 dB or more at 2000, 3000, and 4000 Hz in either ear, compared to baseline
+- A change in work shift
+- A volume knob setting
+- A threshold on a doorway
+
+Q: The noise reduction rating (NRR) on hearing protectors:
++ Indicates how much noise the protector can reduce under lab conditions
+- Is the product's price
+- Shows how many hours to wear it
+- Is a radio frequency
+
+Q: Foam earplugs work best when:
++ Rolled, inserted deep into the ear canal, and held until they expand
+- Placed loosely on the outside of the ear
+- Cut in half
+- Reused for months without cleaning
+
+Q: A sign of overexposure to noise is:
++ Ringing in the ears or muffled hearing after work
+- Better hearing after work
+- Feeling hungry
+- Itchy elbows
+
+Q: A good rule of thumb is that noise may be hazardous if:
++ You must raise your voice to talk to someone an arm's length away
+- You can hear birds outside
+- It sounds like music
+- It is quiet

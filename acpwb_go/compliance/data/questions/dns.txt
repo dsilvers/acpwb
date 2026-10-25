@@ -1,0 +1,66 @@
+# DNS management.
+Q: DNS translates:
++ Domain names into IP addresses
+- Languages
+- Currencies
+- Passwords
+
+Q: Changes to company DNS records must go through:
++ Change management with the right approvals
+- Anyone with a login
+- Marketing directly
+- Vendors without review
+
+Q: An SPF record set to "+all":
++ Lets any server send mail as the domain
+- Blocks all spam
+- Is the safest option
+- Is required
+
+Q: DMARC helps protect a domain by:
++ Telling receivers how to handle mail that fails SPF and DKIM checks
+- Encrypting email
+- Speeding up mail
+- Blocking all attachments
+
+Q: Dangling DNS records pointing to deleted cloud resources can lead to:
++ Subdomain takeover
+- Faster websites
+- Nothing
+- Better SEO
+
+Q: Registrar accounts for company domains should have:
++ Strong MFA and limited access
+- Shared passwords
+- A personal email address
+- No protection
+
+Q: Domain renewal dates should be:
++ Tracked with auto-renew enabled
+- Ignored
+- Left to individuals
+- Changed often
+
+Q: Typosquatted domains such as "acpvvb.com" are often used for:
++ Phishing
+- Customer support
+- Backups
+- Testing
+
+Q: Low DNS TTL values before a planned change help:
++ Changes propagate faster
+- Slow down websites
+- Block email
+- Nothing
+
+Q: Unknown DNS changes should be:
++ Investigated as possible tampering
+- Ignored
+- Reverted without notice
+- Celebrated
+
+Q: The DNS records for acpwb.com are managed by:
++ The network team under change control
+- Anyone in the company
+- The domain's visitors
+- Search engines

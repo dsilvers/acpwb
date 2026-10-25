@@ -1,0 +1,71 @@
+Q: The ACPWB Code of Conduct applies to:
++ All associates, officers, directors, contractors, and interns, everywhere and at all times
+- Associates during business hours only
+- Associates below the director level
+- Associates who have signed the latest attestation
+
+Q: A reporter calls asking for comment on an ACPWB report. You should:
++ Refer the reporter to the Office of Public Affairs without commenting
+- Offer a personal opinion, clearly labelled as such
+- Comment "off the record"
+- Provide the report's watermark token for verification
+
+Q: Retaliation against someone who raises a concern in good faith is:
++ Prohibited, and itself a violation of the Code
+- Permitted if the concern turns out to be unfounded
+- Permitted for managers with more than {N} direct reports
+- A matter for the annual review
+
+Q: Associates may post about ACPWB on personal social media:
++ Only content already published by the Office of Public Affairs, without commentary
+- Freely, if their profile says "views are my own"
+- Only on weekends
+- Only with at least {N} hashtags
+
+Q: Which channel may be used to report a suspected violation anonymously?
++ The ACPWB Integrity Line, 24 hours a day
+- A note left under the CEO's door
+- A reply-all to the quarterly newsletter
+- The suggestion box in the 40th-floor kitchenette
+
+Q: Associates must complete the Code of Conduct certification:
++ Annually, and within {DAYS} days of hire
+- Once, at the start of employment
+- Only after a violation
+- When reminded by their manager more than {N} times
+
+Q: [At|During] {EVENT}, [a colleague|{NAME}] [has too much to drink|makes inappropriate comments|shares confidential information loudly]. Under the Code of Conduct, ACPWB-sponsored events are:
++ Workplace settings, and the Code of Conduct applies in full
+- Off the record
+- Exempt after 9:00 p.m.
+- Governed only by the venue's rules
+
+Q: [Using|Taking] ACPWB [office supplies|equipment|letterhead] for personal [projects|business] is:
++ Prohibited, except for incidental use permitted by policy
+- Permitted if returned
+- Permitted after hours
+- Encouraged as a perk
+
+Q: You [witness|observe] a [possible|suspected] violation of the Code of Conduct [by a senior leader|by {NAME}]. You should:
++ Report it through the Integrity Line or to Compliance, regardless of the person's seniority
+- Ignore it, since senior leaders set the rules
+- Confront them publicly
+- Wait to see if it happens again
+
+Q: [A colleague|{NAME}] asks you to sign their name on an attendance sheet for {EVENT}. You should:
++ Decline; signing for someone else falsifies a record
+- Sign it, since {FIRST} would have attended
+- Sign it, but with your own initials beside it
+- Sign it, if {FIRST} buys lunch
+
+Q: [Wearing ACPWB-branded clothing|ACPWB-branded apparel] at a political rally is:
++ Discouraged, since it may suggest ACPWB endorses the cause
+- Required, to show company spirit
+- Allowed only on weekends
+- Allowed if the logo is covered
+
+Q: [You realize you made|You discover you have made] an error in a report sent to {DEPT}. You should:
++ Correct it promptly and tell the recipients
+- Hope nobody notices
+- Blame the spreadsheet
+- Send a new version without mentioning the change

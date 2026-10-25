@@ -1,0 +1,59 @@
+Q: A "deemed export" occurs when:
++ Controlled technology is released to a foreign person, even inside the United States
+- A shipment is delayed at customs
+- An associate travels abroad with a laptop
+- A report is downloaded from acpwb.com
+
+Q: Before engaging a new international partner, you must:
++ Screen the partner against the restricted party lists
+- Confirm the partner has a website
+- Exchange business cards
+- Wait {DAYS} days
+
+Q: Which of the following may require an export license?
++ Encryption software
++ Technical data shared by email
++ Hand-carried prototypes
+- An ACPWB tote bag
+
+Q: A customer asks you to ship to a freight forwarder in a third country and to omit the end user. This is:
++ A red flag that must be escalated to Trade Compliance
+- A routine logistics request
+- Acceptable for orders under {AMOUNT}
+- Acceptable if the forwarder is reputable
+
+Q: Export control violations can result in:
++ Civil and criminal penalties for both the company and the individual
+- A warning letter only
+- Penalties only for the company
+- Nothing, if the violation was unintentional
+
+Q: [Before shipping|Prior to sending] a prototype to a partner in {CITY}, you must confirm:
++ Its export classification and whether a license is required
+- That the box is the correct size
+- That {VENDOR} offers next-day shipping
+- That the partner has a website
+
+Q: [Sharing controlled technical data|Showing controlled technical drawings] with a foreign national visiting the {PLACE} may be:
++ A "deemed export" that requires authorization
+- Fine, because it happens on U.S. soil
+- Fine, if the visitor signs the visitor log
+- Fine, if only shown on a screen
+
+Q: [A screening hit|A possible match] on the restricted party list for a new customer means you should:
++ Stop the transaction and escalate to Trade Compliance
+- Proceed and note the hit in the file
+- Ask the customer whether they are on the list
+- Change one letter of the name and screen again
+
+Q: [Traveling abroad with|Taking abroad] an ACPWB laptop containing controlled technology requires:
++ Pre-travel review by Trade Compliance
+- A sturdy laptop bag
+- Turning the laptop off during the flight
+- Nothing, if the laptop is encrypted
+
+Q: [Red flags|Warning signs] in an export transaction include:
++ A customer reluctant to say where the item will be used
++ Payment offered in cash, well above the list price
+- A purchase order on company letterhead
+- A request for a standard warranty

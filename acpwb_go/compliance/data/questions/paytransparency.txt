@@ -1,0 +1,61 @@
+# Pay transparency laws.
+
+Q: Many states and cities, including Colorado, California, Washington, Illinois, and New York City, require job postings to include:
++ A good-faith pay range
+- The previous incumbent's salary
+- The hiring manager's salary
+- A photo of the office
+
+Q: A "good-faith" pay range is:
++ The range the employer honestly expects to pay for the role
+- From $1 to $10 million, to be safe
+- The range the candidate requests
+- Whatever {VENDOR} suggests
+
+Q: An employee asks their manager what the pay range is for their current role. In jurisdictions with pay transparency laws, the manager should:
++ Provide it or direct them to the HR process for requesting it
+- Refuse and note the question in their file
+- Make up a number
+- Ask why they want to know
+
+Q: Discussing your own pay with coworkers is:
++ Generally protected under the National Labor Relations Act
+- Prohibited by the Code of Conduct
+- Allowed only after hours
+- Allowed only in {CITY}
+
+Q: A remote job posting that could be filled by someone in a pay-transparency jurisdiction:
++ May need to include a pay range under that jurisdiction's law
+- Never needs a range, since it is remote
+- Must include the range for every city in the world
+- Must be posted in Latin
+
+Q: Pay transparency laws in some jurisdictions also require employers to:
++ Disclose the pay range to current employees for internal promotions or transfers
+- Publish every employee's salary
+- Pay everyone the top of the range
+- Remove ranges after hiring
+
+Q: A job posting with a pay range of "$40,000 to $400,000" for an entry-level role:
++ Likely does not reflect a good-faith range
+- Is ideal
+- Is required
+- Is attractive to candidates
+
+Q: Retaliating against an employee for asking about pay ranges is:
++ Prohibited under pay transparency and labor laws
+- Allowed
+- Required
+- Allowed if they ask twice
+
+Q: The EU Pay Transparency Directive requires employers to:
++ Give applicants pay information and report on gender pay gaps
+- Pay everyone the same
+- Ban salary negotiation
+- Publish CEO home addresses
+
+Q: Updating a posted pay range when the budget changes should be:
++ Done so the posting stays accurate
+- Avoided
+- Done after hiring only
+- Done in secret

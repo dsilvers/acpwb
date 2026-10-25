@@ -1,0 +1,68 @@
+# Bloodborne pathogens and exposure control for office settings. Correct
+# answers follow standard guidance (universal precautions); keep them accurate.
+
+Q: Under universal precautions, blood and body fluids should be treated as:
++ Potentially infectious, regardless of whose they are
+- Safe, if they belong to a colleague
+- Safe after {N} minutes
+- Hazardous only if visibly discolored
+
+Q: [You find|{NAME} reports] blood on the floor [of the {PLACE}|near the {DOOR}]. Unless you are trained and equipped, you should:
++ Keep others away and contact Facilities for a trained cleanup
+- Wipe it up with paper towels
+- Cover it with a doormat
+- Mop it with the break room mop
+
+Q: [A used needle|A discarded syringe] is found in an office restroom. You should:
++ Not touch it, keep others away, and notify Facilities
+- Throw it in the regular trash
+- Recap it and place it in your desk
+- Flush it
+
+Q: [You are|A colleague is] splashed with another person's blood while giving first aid. The first step is to:
++ Wash the area with soap and water (flush eyes or mouth with water), then report it immediately for medical evaluation
+- Wait to see if symptoms develop
+- Apply hand sanitizer and keep working
+- Report it at your next performance review
+
+Q: Personal protective equipment for first aid, such as gloves, is found:
++ In the first aid kits on each floor
+- Only at the Security Office
+- In the {PLACE} refrigerator
+- Nowhere; associates bring their own
+
+Q: An exposure incident should be reported:
++ Immediately, so medical evaluation can begin as soon as possible
+- Within {DAYS} days
+- Only if the person is a stranger
+- At the end of the quarter
+
+Q: Under OSHA's Bloodborne Pathogens Standard, employees with occupational exposure must be offered:
++ The hepatitis B vaccine at no cost
+- A gift card
+- Nothing
+- A discount
+
+Q: A blood spill should be cleaned using:
++ Gloves and an approved disinfectant, by trained personnel
+- Bare hands and water
+- A personal towel
+- Air drying
+
+Q: Used needles found in a restroom should be:
++ Left alone and reported to Facilities for safe disposal
+- Picked up and thrown away
+- Recapped
+- Placed in the recycling bin
+
+Q: Universal precautions mean:
++ Treating all blood and certain body fluids as if they are infectious
+- Being polite to everyone
+- Wearing gloves always
+- Precautions only for known illnesses
+
+Q: After a possible exposure to someone else's blood, you should:
++ Wash the area with soap and water, report it right away, and seek medical evaluation
+- Wait and see
+- Hide it
+- Rinse with coffee

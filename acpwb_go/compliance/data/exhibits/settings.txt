@@ -1,0 +1,342 @@
+# Settings-screen exhibits: a settings panel where one (or a few) values
+# break policy. Each block:
+#   == kind | TITLE | noun (what the question counts)
+#   cats: bank categories
+#   ask: "which" question (exactly one setting is wrong)
+#   count: "how many" question (zero to two settings are wrong)
+#   ~ Setting label | compliant value | non-compliant value
+# Values "On" and "Off" are drawn as toggle switches.
+
+== meetingsettings | Video meeting settings — Quarterly All-Hands | setting
+cats: video, meetings, privacy, security
+ask: Which setting goes against the external meeting security standard?
+count: How many settings must be changed to meet the meeting security standard?
+~ Waiting room | On | Off
+~ Meeting passcode | Required | None
+~ Who can share screen | Host only | Anyone
+~ Recording notice to participants | On | Off
+~ Join before host | Off | On
+~ Allow removed participants to rejoin | Off | On
+~ Meeting link | Invite only | Posted on public calendar
+~ Cloud recording retention | 90 days | Forever
+
+== laptopsettings | Device security — LT-4471 | setting
+cats: devices, encryption, security, remote
+ask: Which setting is out of compliance with the endpoint standard?
+count: How many settings fail the endpoint standard?
+~ Disk encryption | On | Off
+~ Screen lock after inactivity | 5 minutes | Never
+~ Firewall | On | Off
+~ Automatic updates | On | Off
+~ Endpoint protection | Running | Disabled
+~ Local administrator rights | Off | On
+~ USB storage | Read-only | Full access
+~ Remote wipe enrollment | Enrolled | Not enrolled
+
+== phoneperms | Phone app permissions — "Flashlight Pro" | permission
+cats: devices, privacy, mobile
+ask: A flashlight app needs only the camera flash. Which permission should be denied?
+count: How many of these permissions should be turned off for a flashlight app?
+~ Camera flash | Allowed | Allowed
+~ Notifications | Off | Off
+~ Location | Never | Always
+~ Contacts | Not allowed | Allowed
+~ Microphone | Not allowed | Allowed
+~ Photos | None | All photos
+~ Background app refresh | Off | On
+~ Bluetooth | Not allowed | Allowed
+
+== browsersettings | Browser settings — shared kiosk in the lobby | setting
+cats: lobby, devices, passwords, visitor
+ask: Which setting is unsafe on a shared kiosk?
+count: How many settings are unsafe on a shared kiosk?
+~ Offer to save passwords | Off | On
+~ Autofill payment cards | Off | On
+~ Clear history on exit | On | Off
+~ Third-party cookies | Blocked | Allowed
+~ Safe Browsing | Enhanced | Off
+~ Sync with personal account | Off | On
+~ Extensions | Approved list only | Any
+~ Pop-ups | Blocked | Allowed
+
+== bucketsettings | Cloud storage — acpwb-hr-exports | setting
+cats: cloud, privacy, records, customerdata
+ask: Which setting exposes the bucket's HR files?
+count: How many settings must be fixed before HR data can be stored here?
+~ Public access | Blocked | Allowed
+~ Default encryption | On | Off
+~ Versioning | Enabled | Suspended
+~ Access logging | On | Off
+~ Object ownership | Bucket owner enforced | Object writer
+~ Public website hosting | Off | On
+~ Lifecycle: delete after | 7 years | Never
+
+== reposettings | Repository settings — acpwb/payroll-batch | setting
+cats: devsecops, secrets, codereview, ip
+ask: Which setting violates the source code protection standard?
+count: How many settings violate the source code protection standard?
+~ Visibility | Private | Public
+~ Secret scanning | On | Off
+~ Branch protection on main | Required reviews: 2 | None
+~ Force pushes to main | Blocked | Allowed
+~ Dependency alerts | On | Off
+~ Outside collaborators | 0 | 14
+~ Signed commits | Required | Optional
+
+== aisettings | AI assistant — workspace settings | setting
+cats: ai, genai, chatbots, privacy
+ask: Which setting violates the AI acceptable use policy?
+count: How many settings violate the AI acceptable use policy?
+~ Use my conversations to train models | Off | On
+~ Share chats by public link | Off | On
+~ Data retention | 30 days | Indefinite
+~ Account type | Enterprise (SSO) | Personal free account
+~ File uploads | Approved workspace only | Any source
+~ Third-party plugins | Approved list only | Any plugin
+
+== calendarsharing | Calendar sharing — CFO's calendar | setting
+cats: calendar, privacy, insider, socialeng
+ask: Which sharing setting exposes confidential information?
+count: How many sharing settings must be tightened?
+~ Organization | Free/busy only | All details
+~ Public link | Off | On
+~ Executive assistant | Edit | Edit
+~ External partners | None | All details
+~ Event titles in free/busy | Hidden | Shown
+~ Subscribe via ICS feed | Off | On
+
+== wifisettings | Hotspot settings — trade show booth | setting
+cats: network, travel, conferences, devices
+ask: Which hotspot setting is insecure?
+count: How many hotspot settings are insecure?
+~ Security | WPA3 | Open (no password)
+~ Password | Long random passphrase | password123
+~ Network name | ACPWB-Booth | Free Airport WiFi
+~ Device discovery | Off | On
+~ Admin page from Wi-Fi | Off | On
+~ Firmware | Up to date | 2019 version
+
+== remotedesktop | Remote access — fin-ws-07 | setting
+cats: remote, ransomware, network, security
+ask: Which setting creates the biggest ransomware risk?
+count: How many settings must change to meet the remote access standard?
+~ Remote Desktop exposed to internet | No | Yes
+~ Access through | VPN with MFA | Direct (port 3389)
+~ Network Level Authentication | On | Off
+~ Account lockout | 5 attempts | Disabled
+~ Session recording | On | Off
+~ Idle disconnect | 15 minutes | Never
+
+== doorschedule | Access control — Main lobby doors | setting
+cats: physicalsec, badge, lobby, closures
+ask: Which setting leaves the building insecure?
+count: How many door settings must be corrected?
+~ Unlock schedule | Mon–Fri 7 a.m.–6 p.m. | 24 hours, 7 days
+~ Holiday override | Locked | Unlocked
+~ Door-held-open alarm | 30 seconds | Off
+~ Forced-door alarm | On | Off
+~ After-hours access | Badge + PIN | Badge only
+~ Fire alarm release | Unlock on alarm | Stay locked
+
+== mailboxsettings | Mailbox settings — accounts payable | setting
+cats: email, phishing, fraud, wires
+ask: Which setting is a sign the mailbox has been compromised?
+count: How many settings look like an attacker's changes?
+~ Forwarding | Off | Forward all mail to ap.acpwb@outlook.com
+~ Inbox rule: "invoice" | Move to Invoices folder | Delete and mark read
+~ Delegates | AP Manager | Unknown user (ext-0091)
+~ Signature | Standard AP signature | Standard AP signature
+~ Auto-reply | Off | Off
+~ MFA method | Authenticator app | SMS to new number
+
+== printersettings | Multifunction printer — 3F-SECURE-01 | setting
+cats: printing, privacy, cleandesk, network
+ask: Which setting undermines confidential printing?
+count: How many printer settings need to be fixed?
+~ Secure print release | Badge required | Off
+~ Default admin password | Changed | admin/admin
+~ Hard drive encryption | On | Off
+~ Scan to email | Internal domains only | Any address
+~ Firmware updates | Automatic | Never
+~ Job history visible to | Admins | Everyone
+
+== confroomdisplay | Conference room display — Boardroom | setting
+cats: meetings, privacy, physicalsec, video
+ask: Which setting could expose a confidential meeting?
+count: How many display settings need to change?
+~ Screen visible from lobby glass | Privacy film on | Clear glass
+~ Auto-join scheduled meetings | Off | On
+~ Show next meeting title on panel | Hidden | Shown
+~ Wireless casting | PIN required | Open to anyone
+~ Camera when idle | Shutter closed | On
+~ Whiteboard auto-save to cloud | Off | On
+
+== smartspeaker | Smart speaker — Executive conference room | setting
+cats: privacy, devices, iot, physicalsec
+ask: Which setting is the biggest confidentiality risk?
+count: How many settings would IT turn off?
+~ Always listening for wake word | Off | On
+~ Voice recordings saved | Never | Forever
+~ Linked personal account | None | Executive's personal account
+~ Purchases by voice | Off | On
+~ Drop-in calling | Off | On
+~ Firmware | Up to date | Up to date
+
+== socialprofile | Professional profile — public settings | setting
+cats: social, socialeng, privacy, travel
+ask: Which profile setting gives a social engineer the most help?
+count: How many profile settings overshare?
+~ Employer | ACPWB | ACPWB
+~ Profile photo | Headshot | Photo holding employee badge
+~ Current location | Milwaukee area | Hotel room 1412, Chicago
+~ Org chart visibility | Hidden | Full reporting chain
+~ Contact info | Work email only | Personal cell and home address
+~ Travel calendar | Hidden | Public
+
+== apikeysettings | API key — reports-feed | setting
+cats: secrets, devsecops, cloud, identity
+ask: Which key setting breaks the API key standard?
+count: How many key settings break the API key standard?
+~ Scopes | reports.read | Full account access
+~ Expires | 90 days | Never
+~ Allowed IPs | Integration server only | Any
+~ Stored in | Secrets manager | Spreadsheet on the shared drive
+~ Owner | Integration team | Former employee
+~ Last rotated | 21 days ago | 1,400 days ago
+
+== mfasettings | Sign-in security — your account | setting
+cats: mfa, passwords, identity, phishing
+ask: Which setting is weakest against account takeover?
+count: How many settings fall short of the identity standard?
+~ Primary MFA | Security key | None
+~ Backup MFA | Authenticator app | SMS only
+~ Push approval | Number matching | Simple approve button
+~ Password | Unique passphrase | Reused from a personal site
+~ Recovery email | Work alternate | Shared family inbox
+~ Trusted devices | 2 managed devices | 14 devices
+
+== backupsettings | Backup policy — HR file server | setting
+cats: backups, ransomware, continuity, records
+ask: Which setting would make recovery from ransomware fail?
+count: How many backup settings miss the standard?
+~ Frequency | Nightly | Monthly
+~ Last successful backup | Last night | 47 days ago
+~ Immutable copy | On | Off
+~ Offsite copy | Yes | No
+~ Restore test | Last quarter | Never
+~ Backup admin MFA | Required | Not required
+
+== chatretention | Chat workspace — Legal team | setting
+cats: legalhold, chat, records, investigations
+ask: The team is under a legal hold. Which setting must be changed?
+count: How many settings conflict with the legal hold?
+~ Message retention | Keep everything | Delete after 7 days
+~ Disappearing messages | Off | On
+~ Users can delete messages | Off | On
+~ Export for eDiscovery | Enabled | Disabled
+~ Personal device app | Managed only | Any device
+~ Channel archival | Archive | Delete
+
+== payrollsettings | Payroll system — direct deposit changes | setting
+cats: payroll, fraud, socialeng, identity
+ask: Which setting makes direct deposit fraud easier?
+count: How many settings weaken direct deposit change controls?
+~ Change verification | Callback to number on file | Email confirmation only
+~ Notification to old account owner | On | Off
+~ Changes within 3 days of payday | Held for review | Allowed
+~ Self-service MFA | Required | Not required
+~ Bulk changes by HR | Two approvers | One approver
+
+== kioskvisitor | Visitor kiosk — lobby | setting
+cats: visitor, lobby, privacy, physicalsec
+ask: Which visitor kiosk setting is a privacy problem?
+count: How many kiosk settings need to change?
+~ Sign-in list visible to next visitor | Hidden | Shown
+~ Photo capture | Badge only | Stored forever
+~ Host notification | Text to host | Text to host
+~ NDA prompt for restricted areas | On | Off
+~ Visitor data retention | 1 year | Indefinite
+~ Guest Wi-Fi | Separate network | Corporate network
+
+== evchargersettings | EV chargers — Lot B | setting
+cats: parking, sustainability, electrical
+ask: Which setting breaks the EV charging policy?
+count: How many settings break the EV charging policy?
+~ Session limit | 4 hours | Unlimited
+~ Idle fee after charge complete | On | Off
+~ Ground-fault protection | On | Off
+~ Cable management | Retractor in use | Cable on walkway
+~ Accessible charger | 1 of 8 | 0 of 8
+
+== thermostat | Building automation — Floor 3 | setting
+cats: sustainability, facilities, energy
+ask: Which schedule setting wastes the most energy?
+count: How many settings miss the energy policy?
+~ Occupied hours | Mon–Fri 7 a.m.–6 p.m. | 24 hours, 7 days
+~ Unoccupied setback | On | Off
+~ Lights after hours | Occupancy sensors | Always on
+~ Holiday schedule | Applied | Not applied
+~ Cooling setpoint | 75°F | 64°F
+
+== guestwifi | Guest Wi-Fi — conference center | setting
+cats: network, visitor, conferences
+ask: Which guest network setting is a security problem?
+count: How many guest network settings must change?
+~ Isolation from corporate network | On | Off
+~ Client isolation | On | Off
+~ Password rotation | Weekly | Never
+~ Bandwidth limit per guest | 10 Mbps | None
+~ Captive portal terms | Shown | Skipped
+~ Admin console reachable from guest | No | Yes
+
+== recordingsettings | Call center recording — settings | setting
+cats: privacy, customers, customerdata, pci
+ask: Which recording setting creates a payment card compliance problem?
+count: How many settings must change?
+~ Pause recording during card entry | Automatic | Off
+~ Two-party consent announcement | On | Off
+~ Recording retention | 1 year | Forever
+~ Access to recordings | QA team | All staff
+~ Transcripts redact numbers | On | Off
+
+== dlpsettings | Data loss prevention — email policy | setting
+cats: dlp, privacy, email, customerdata
+ask: Which DLP setting lets Social Security numbers leave unprotected?
+count: How many DLP settings are too permissive?
+~ SSN detection | Block external | Log only
+~ Card number detection | Block external | Log only
+~ Encryption for Restricted labels | Required | Optional
+~ User override | With justification | Silent
+~ Personal webmail uploads | Blocked | Allowed
+
+== mdmsettings | Mobile device management — BYOD profile | setting
+cats: devices, mobile, privacy, remote
+ask: Which setting breaks the BYOD standard?
+count: How many BYOD settings must be fixed?
+~ Work profile | Separate container | None
+~ Device passcode | 6 digits minimum | Not required
+~ Jailbroken or rooted devices | Blocked | Allowed
+~ Selective wipe | Work data only | Full device wipe
+~ OS version | Supported releases only | Any
+~ Copy/paste from work to personal apps | Blocked | Allowed
+
+== websitesettings | Website admin — events microsite | setting
+cats: network, devsecops, brand
+ask: Which setting is a security problem on a public website?
+count: How many settings must be fixed before launch?
+~ HTTPS | Required | Optional
+~ Admin login | SSO with MFA | admin / password
+~ Plugins | Up to date | 11 updates pending
+~ Directory listing | Off | On
+~ Error pages | Generic | Full stack traces
+~ Robots.txt | Allows public pages | Allows public pages
+
+== timeclock | Time clock settings — retail store | setting
+cats: wage, timekeeping, payroll
+ask: Which time clock setting could cheat employees of pay they are owed?
+count: How many time clock settings could cause wage violations?
+~ Rounding | Nearest quarter hour, both ways | Always down
+~ Auto-deduct meal break | Off | On, even if not taken
+~ Edits by managers | Logged with reason | Silent
+~ Pre-shift work | Paid | Unpaid
+~ Overtime alert | At 38 hours | Off

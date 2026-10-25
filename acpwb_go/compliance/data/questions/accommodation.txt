@@ -1,0 +1,62 @@
+# Religious, disability, and pregnancy accommodations. Correct answers
+# follow Title VII, the ADA, and the Pregnant Workers Fairness Act.
+
+Q: Under Title VII, an employer must reasonably accommodate an employee's religious practice unless it would cause:
++ Undue hardship, meaning substantial increased costs in relation to the conduct of the business
+- Any inconvenience at all
+- A schedule change
+- A coworker to complain
+
+Q: An employee asks to swap shifts to observe a religious holiday. A reasonable response is to:
++ Consider the request and help arrange a swap or schedule change where possible
+- Deny it, since holidays are fixed
+- Ask them to prove their beliefs
+- Tell them to use {EVENT} instead
+
+Q: The ADA's "interactive process" is:
++ A good-faith discussion between the employer and employee to identify an effective accommodation
+- A video game
+- An online form that auto-denies requests
+- A conversation only with the employee's doctor
+
+Q: The Pregnant Workers Fairness Act requires reasonable accommodations for:
++ Known limitations related to pregnancy, childbirth, or related medical conditions, absent undue hardship
+- Only pregnancies with complications
+- Only the employee's partner
+- Nothing; it is advisory
+
+Q: Under the PWFA, an employer may NOT:
++ Force an employee to take leave if another reasonable accommodation is available
+- Discuss accommodations
+- Provide a stool for a cashier
+- Allow extra breaks
+
+Q: An employee requests an accommodation but does not use the words "reasonable accommodation." The employer should:
++ Treat it as a request and begin the process
+- Ignore it until the magic words are used
+- Ask the employee to submit Form {FORM} three times
+- Deny it
+
+Q: Accommodation examples can include:
++ Schedule changes, modified equipment, remote work, or job restructuring
+- Extra vacation for coworkers
+- A bigger bonus
+- A private jet
+
+Q: Asking a candidate whether they need religious accommodation before making a hiring decision is:
++ Inappropriate; evaluate qualifications first
+- Required by law
+- Recommended for planning
+- Allowed for weekend roles
+
+Q: Dress and grooming policies may need exceptions for:
++ Religious attire and practices, such as head coverings or beards
+- Sports team jerseys
+- Halloween costumes
+- Fashion trends
+
+Q: Medical documentation supporting an accommodation should be:
++ Kept confidential and separate from the personnel file
+- Shared with the team
+- Kept on the manager's desk
+- Scanned into {SYSTEM} as a public file

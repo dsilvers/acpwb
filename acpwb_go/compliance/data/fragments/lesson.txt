@@ -1,0 +1,21 @@
+# Lessons under a module (0–3 per module).
+[Video|Reading|Slide deck|Podcast|Infographic]: [Overview|Deep Dive|Recap|What You Need to Know][? ({N} min)]
+Interactive scenario: {NAME} in the {PLACE}
+Policy excerpt: Section {POLICY}
+[Knowledge check|Practice question|Flash poll][? ({N} questions)]
+Downloadable job aid: [Quick Reference Card|Decision Tree|Checklist][? (PDF)]
+[Discussion|Reflection] prompt: [What would you do?|Have you seen this happen?|Who would you call?]
+Message from {NAME}, {TITLE}
+Glossary review: [{N}|several|all] key terms
+Case file: {DOCUMENT}
+Recorded session from {EVENT}
+Exhibit walkthrough: [reading a {DOCUMENT}|the {PLACE} floor plan|a sample expense report|a visitor sign-in log]
+[Worked example|Guided practice]: [calculating a retention date|totaling an expense report|finding the nearest exit|reading a pay range]
+Photo audit: [a desk on the {FLOOR} floor|the {PLACE}|a shared printer tray]
+[Spot the difference|Find the issue]: [two versions of a {DOCUMENT}|a phishing message|a print queue]
+Myth or fact? [{N} common misconceptions|What associates get wrong]
+[Audio|Video] interview with {NAME}, {TITLE}[? ({N} min)]
+Annotated policy: Section {POLICY}[? with commentary from Legal]
+Self-check: [{N}|several] [scenarios|exhibits|short questions][? (not scored)]
+Timeline: how [a near miss|an incident|a policy change] [unfolded|was handled] in {DEPT}
+Printable poster for the {PLACE}

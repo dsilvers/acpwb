@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="ACPWB 9001½ Certified-ish seal">
+  <title>ACPWB 9001½ — Certified-ish</title>
+  <defs>
+    <!-- Top arc runs clockwise over the top; bottom arc runs counter-clockwise under
+         the bottom so its letters stay upright. Baselines sit at r=90 (top) and
+         r=101 (bottom) so both rows of caps occupy the same band, r≈90–101. -->
+    <path id="arc-top" d="M 30 120 A 90 90 0 0 1 210 120"/>
+    <path id="arc-bottom" d="M 19 120 A 101 101 0 0 0 221 120"/>
+  </defs>
+
+  <circle cx="120" cy="120" r="118" fill="#0A1628"/>
+  <circle cx="120" cy="120" r="112" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <circle cx="120" cy="120" r="76" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <circle cx="120" cy="120" r="70" fill="#F4F1E8" stroke="#C9A84C" stroke-width="3"/>
+
+  <g font-family="Georgia, 'Times New Roman', serif" font-weight="bold" fill="#C9A84C">
+    <text font-size="15" letter-spacing="2.5">
+      <textPath href="#arc-top" startOffset="50%" text-anchor="middle">QUALITY-ADJACENT</textPath>
+    </text>
+    <text font-size="13" letter-spacing="2.5">
+      <textPath href="#arc-bottom" startOffset="50%" text-anchor="middle">MANAGEMENT SYSTEM</textPath>
+    </text>
+    <!-- Separators at 9 and 3 o'clock, in the gap between the two arcs. -->
+    <text x="25" y="125" font-size="14" text-anchor="middle">★</text>
+    <text x="215" y="125" font-size="14" text-anchor="middle">★</text>
+  </g>
+
+  <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+    <text x="120" y="102" font-size="19" font-weight="bold" letter-spacing="1" fill="#0A1628">ACPWB</text>
+    <text x="120" y="137" font-size="32" font-weight="bold" fill="#0A1628">9001½</text>
+    <line x1="88" y1="147" x2="152" y2="147" stroke="#C9A84C" stroke-width="1"/>
+    <text x="120" y="163" font-size="13" font-style="italic" fill="#8a2b2b">Certified-ish</text>
+  </g>
+</svg>

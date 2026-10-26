@@ -133,6 +133,7 @@ def test_sitemap_pages_includes_new_pages(client):
     content = response.content.decode()
     assert '/faq/' in content
     assert '/awards/' in content
+    assert '/certification/' in content
     assert '/privacy/do-not-sell/' in content
     assert '/site-map/' in content
     assert '/accessibility/' in content

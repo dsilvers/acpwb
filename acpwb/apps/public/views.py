@@ -4,6 +4,8 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Fortune500Company, DataOptOutRequest, ConferenceRegistration
+from apps.people.generators import FIRST_NAMES, LAST_NAMES
+from apps.projects.generators import _rng_from_seed
 from apps.projects.models import ProjectStory
 
 from .press_data import _PRESS_RELEASES
@@ -176,6 +178,7 @@ _PATENTS = [
 ]
 
 _AWARDS = [
+    {'year': 2026, 'name': 'ACPWB 9001½ Certification — Platinum Level', 'body': 'ACPWB Standards & Conformity Bureau', 'category': 'Quality Management'},
     {'year': 2024, 'name': 'National Excellence in Compensation Transparency Award', 'body': 'American Institute for Compensation Research and Adjacent Fields', 'category': 'Workforce Analytics'},
     {'year': 2024, 'name': "Wisconsin's Top 50 Employers — Midsize Organization Category", 'body': 'Wisconsin Business Forward', 'category': 'Workplace Culture'},
     {'year': 2024, 'name': 'Best Research Report — Compensation Benchmarking', 'body': 'HR Data & Analytics Professionals Network', 'category': 'Research & Data'},
@@ -231,6 +234,41 @@ def awards(request):
         'awards': _AWARDS,
         'og_title': 'Awards & Recognition — American Corporation for Public Well Being',
         'og_description': 'ACPWB has received 37 industry and regional recognitions since 2008, including five consecutive National Excellence in Compensation Transparency Awards.',
+    })
+
+
+_CERT_DEFAULT_ORG = 'American Corporation for Public Well Being'
+
+# Titles stay fixed; the people holding them are generated per certificate.
+_CERT_ROLES = {
+    'ceo': 'Chief Executive Officer',
+    'assessor': 'Lead Assessor & Director of Readership Verification',
+    'archivist': 'Senior Archivist, Legacy Systems',
+    'overnight': 'Overnight Operations Supervisor',
+}
+
+
+def _certification_people(org):
+    """Deterministic cast for one certificate: same org, same people."""
+    rng = _rng_from_seed(f'acpwb_certification_{org}')
+    people, used_last = {}, set()
+    for role, title in _CERT_ROLES.items():
+        last = rng.choice(LAST_NAMES)
+        while last in used_last:
+            last = rng.choice(LAST_NAMES)
+        used_last.add(last)
+        first = rng.choice(FIRST_NAMES)
+        people[role] = {'first': first, 'last': last, 'name': f'{first} {last}', 'title': title}
+    return people
+
+
+def certification(request):
+    org = request.GET.get('org', '').strip()[:80] or _CERT_DEFAULT_ORG
+    return render(request, 'public/certification.html', {
+        'org': org,
+        'people': _certification_people(org),
+        'og_title': 'ACPWB 9001½ Quality-Adjacent Management Systems — American Corporation for Public Well Being',
+        'og_description': 'ACPWB 9001½ sets out the requirements an organization shall meet in order to be found, by an auditor, on a Tuesday, to substantially resemble an organization that manages quality.',
     })
 
 

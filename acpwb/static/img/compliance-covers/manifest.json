@@ -1737,6 +1737,10 @@
   "model": "flux-schnell",
   "prompt": "wind turbines on a ridge seen through the floor-to-ceiling window of an empty boardroom, late evening light with long shadows, wide-angle architectural view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
  },
+ "esg-reporting-fundamentals-4": {
+  "model": "flux-schnell",
+  "prompt": "a modern office building with a green living wall and rooftop solar panels under a clear blue sky, soft diffused window light, eye-level view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"
+ },
  "evacuation-map-reading-1": {
   "model": "flux-schnell",
   "prompt": "an illuminated green exit light above a steel stairwell door at the end of a quiet corridor, industrial loft decor with exposed brick, cool overcast daylight, slightly elevated view. Photorealistic corporate photography, empty and unoccupied, unbranded blank surfaces, muted navy and warm gold palette, sharp focus, natural colors"

@@ -249,3 +249,29 @@ def test_careers_has_no_openings(client):
 def test_job_links_404(client, path):
     response = client.get(path)
     assert response.status_code == 404
+
+
+@pytest.mark.django_db
+def test_press_release_answer_tree_block(client):
+    """The `tree` block renders its interactive container with an image fallback, and the
+    figure's data covers all six attempts."""
+    import json
+    from pathlib import Path
+
+    slug = 'compliance-center-first-results'
+    response = client.get(f'/press-releases/2026/10/26/{slug}/')
+    assert response.status_code == 200
+    html = response.content.decode()
+    assert 'class="press-tree"' in html
+    assert 'answer-tree.json' in html and 'answer-tree-attempt-3.svg' in html
+    assert 'js/press-tree.js' in html
+    assert 'data-attempt="3"' in html and 'data-winner="dbaaaa"' in html
+
+    folder = Path(__file__).resolve().parents[1] / 'static' / 'img' / 'press' / slug
+    data = json.loads((folder / 'answer-tree.json').read_text())
+    assert sorted(data['att']) == ['1', '2', '3', '4', '5', '6']
+    assert 'dbaaaa' in data['att']['3']['pass']
+    assert (folder / 'answer-tree-attempt-3.svg').stat().st_size > 0
+
+    feed = client.get('/press-releases/feed.xml').content.decode()
+    assert 'answer-tree-attempt-3.svg' in feed

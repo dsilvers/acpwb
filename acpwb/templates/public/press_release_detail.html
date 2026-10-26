@@ -94,6 +94,37 @@
           </div>
           {% if block.note %}<p style="font-size:.78rem;color:#666;margin:.75rem 0 0;line-height:1.5">{{ block.note }}</p>{% endif %}
         </figure>
+        {% elif block.type == 'tree' %}
+        <figure style="margin:0 0 2rem;background:var(--white);border-top:3px solid var(--gold);padding:1rem 1.1rem .9rem">
+          {% if block.caption %}<figcaption style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.6rem">{{ block.caption }}</figcaption>{% endif %}
+          <div class="press-tree" data-src="{% static block.data %}" data-attempt="{{ block.attempt }}" data-winner="{{ block.winner }}" data-winner-attempt="{{ block.winner_attempt }}">
+            <img src="{% static block.fallback %}" alt="{{ block.alt }}" loading="lazy" style="width:100%;height:auto;display:block">
+          </div>
+          {% if block.note %}<p style="font-size:.78rem;color:#666;margin:.6rem 0 0;line-height:1.5">{{ block.note }}</p>{% endif %}
+        </figure>
+        <style>
+          .press-tree.pt-live .pt-bar{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin-bottom:.6rem}
+          .press-tree .pt-seg{display:flex}
+          .press-tree .pt-seg button,.press-tree .pt-play{font:inherit;font-size:1.05rem;font-weight:700;color:var(--navy);background:var(--cream);border:1px solid #cfc7ad;padding:.6rem 1.15rem;min-width:3rem;cursor:pointer;margin-left:-1px}
+          .press-tree .pt-seg button:first-child{margin-left:0;border-radius:3px 0 0 3px}
+          .press-tree .pt-seg button:last-child{border-radius:0 3px 3px 0}
+          .press-tree .pt-play{border-radius:3px;margin-left:0}
+          .press-tree .pt-seg button[aria-pressed="true"]{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+          .press-tree button:focus-visible,.press-tree input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+          .press-tree .pt-time{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+          .press-tree .pt-time input{flex:1;min-width:0;accent-color:var(--navy)}
+          .press-tree .pt-clock{font-size:.78rem;color:#555;white-space:nowrap}
+          .press-tree .pt-stage{display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start}
+          .press-tree .pt-cv{flex:1 1 320px;min-width:0;max-width:560px;aspect-ratio:1}
+          .press-tree canvas{width:100%;height:100%;display:block;touch-action:none}
+          .press-tree .pt-side{flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:.9rem}
+          .press-tree .pt-k{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#777}
+          .press-tree .pt-v{font-size:1.25rem;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+          .press-tree .pt-ramp{height:10px;margin:.3rem 0}
+          .press-tree .pt-lg{display:flex;justify-content:space-between;gap:.5rem;font-size:.72rem;color:#666}
+          .press-tree .pt-read{font-size:.78rem;line-height:1.55;color:#333;border:1px solid #ddd;padding:.6rem .7rem;min-height:5.5rem;overflow-wrap:anywhere}
+        </style>
+        <script src="{% static 'js/press-tree.js' %}" defer></script>
         {% elif block.type == 'list' %}
         <ul style="font-size:1rem;line-height:1.7;color:#222;margin-bottom:1.6rem;padding-left:1.2rem">
           {% for item in block.items %}

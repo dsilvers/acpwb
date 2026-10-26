@@ -3,7 +3,8 @@
 <ul>{% for stat in block.items %}<li><strong>{{ stat.value }}</strong> — {{ stat.label }}</li>{% endfor %}</ul>{% elif block.type == 'table' %}
 <table>{% if block.caption %}<caption>{{ block.caption }}</caption>{% endif %}<thead><tr>{% for h in block.headers %}<th>{{ h }}</th>{% endfor %}</tr></thead><tbody>{% for row in block.rows %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>{% if block.note %}
 <p><em>{{ block.note }}</em></p>{% endif %}{% elif block.type == 'image' %}
-<figure><img src="{% static block.src %}" alt="{{ block.alt }}">{% if block.caption %}<figcaption>{{ block.caption }}{% if block.note %} {{ block.note }}{% endif %}</figcaption>{% endif %}</figure>{% elif block.type == 'gallery' %}{% if block.caption %}
+<figure><img src="{% static block.src %}" alt="{{ block.alt }}">{% if block.caption %}<figcaption>{{ block.caption }}{% if block.note %} {{ block.note }}{% endif %}</figcaption>{% endif %}</figure>{% elif block.type == 'tree' %}
+<figure><img src="{% static block.fallback %}" alt="{{ block.alt }}">{% if block.caption %}<figcaption>{{ block.caption }}{% if block.note %} {{ block.note }}{% endif %}</figcaption>{% endif %}</figure>{% elif block.type == 'gallery' %}{% if block.caption %}
 <p><strong>{{ block.caption }}</strong></p>{% endif %}{% for item in block.items %}
 <figure><a href="{% static item.src %}"><img src="{% static item.thumb %}" alt="{{ item.alt }}"></a><figcaption>{{ item.caption }}</figcaption></figure>{% endfor %}{% if block.note %}
 <p><em>{{ block.note }}</em></p>{% endif %}{% elif block.type == 'list' %}

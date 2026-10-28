@@ -29,6 +29,10 @@ from apps.core.reputation_scoring import ABSOLUTE_PROOF_TRAP_TYPES
 _LOCK_FILE = '/tmp/acpwb-rollup-edge-hour.lock'
 _WATERMARK_KEY = 'edge_rollup_watermark'  # {'hour': ISO of the last hour rolled up}
 ROLLUP_DELAY = timedelta(minutes=15)
+# An hour is one chunk and chunks compress after 6h, so a rollup that falls
+# behind reads chunks the compression policy wants to lock exclusively.
+_LOCK_TIMEOUT = '30s'
+_STATEMENT_TIMEOUT = '20min'
 # Requests of a connection accepted near the end of an hour land in the
 # next one; join them for this long past the hour.
 _REQUEST_SPILL = timedelta(minutes=15)
@@ -219,6 +223,11 @@ def rollup_hour(start):
         'traps': list(ABSOLUTE_PROOF_TRAP_TYPES), 'pool_ips': POOL_IPS,
     }
     with transaction.atomic(), connection.cursor() as cur:
+        # Fail the hour rather than hold locks that stall the compression
+        # policy (and the dashboard queued behind it); the next run retries.
+        # SET LOCAL: reset at commit, so safe through pgbouncer.
+        cur.execute(f"SET LOCAL lock_timeout = '{_LOCK_TIMEOUT}'")
+        cur.execute(f"SET LOCAL statement_timeout = '{_STATEMENT_TIMEOUT}'")
         for table in ('edgeiphour', 'edgefingerprinthour', 'edgeclienthour'):
             cur.execute(f'DELETE FROM honeypot_{table} WHERE hour = %s', [start])
         cur.execute(_CLIENT_SQL, params)  # first: the IP rollup reads its pool cookies

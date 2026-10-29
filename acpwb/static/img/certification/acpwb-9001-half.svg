@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="ACPWB 9001½ Certified-ish seal">
-  <title>ACPWB 9001½ — Certified-ish</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="ACPWB 9001½ Certified seal">
+  <title>ACPWB 9001½ — Certified</title>
   <defs>
     <!-- Top arc runs clockwise over the top; bottom arc runs counter-clockwise under
          the bottom so its letters stay upright. Baselines sit at r=90 (top) and
@@ -29,6 +29,6 @@
     <text x="120" y="102" font-size="19" font-weight="bold" letter-spacing="1" fill="#0A1628">ACPWB</text>
     <text x="120" y="137" font-size="32" font-weight="bold" fill="#0A1628">9001½</text>
     <line x1="88" y1="147" x2="152" y2="147" stroke="#C9A84C" stroke-width="1"/>
-    <text x="120" y="163" font-size="13" font-style="italic" fill="#8a2b2b">Certified-ish</text>
+    <text x="120" y="163" font-size="13" font-style="italic" fill="#8a2b2b">Certified</text>
   </g>
 </svg>

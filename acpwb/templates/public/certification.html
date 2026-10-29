@@ -5,6 +5,7 @@
 
 {% block extra_head %}
 <style>
+  .std-mark { font-weight: 800; color: var(--navy); white-space: nowrap; text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 3px; text-underline-offset: 4px; }
   .std-clause { color: var(--gold); font-weight: 900; margin-right: .4em; font-variant-numeric: tabular-nums; }
   .std-body h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin: 1.75rem 0 .5rem; }
   .std-body h2 { scroll-margin-top: 90px; }
@@ -19,6 +20,8 @@
   .std-cycle span { background: var(--navy); color: var(--gold); font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; padding: .35rem .7rem; }
   .std-cycle b { color: var(--muted); }
   .std-sidebar { position: sticky; top: 90px; }
+  .std-sidebar a { display: flex; }
+  .std-toc-num { flex: 0 0 1.9rem; color: var(--gold); font-weight: 900; font-variant-numeric: tabular-nums; }
   .std-gate { margin: .5rem 0 0 .25rem; padding-left: .75rem; border-left: 1px dotted var(--border); }
   .std-gate > summary { cursor: pointer; font-size: .78rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .06em; }
   .std-gate > summary:hover { color: var(--gold); }
@@ -56,7 +59,7 @@
 <section class="page-banner" style="padding:3rem 0">
   <div class="container">
     <div class="d-flex flex-column flex-md-row align-items-md-center gap-4">
-      <img src="{% static 'img/certification/acpwb-9001-half.svg' %}" alt="ACPWB 9001½ Certified-ish seal" width="120" height="120" style="flex:none">
+      <img src="{% static 'img/certification/acpwb-9001-half.svg' %}" alt="ACPWB 9001½ Certified seal" width="120" height="120" style="flex:none">
       <div>
         <p class="text-uppercase mb-1" style="color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:.75rem">Standards &amp; Conformity Bureau</p>
         <h1>ACPWB 9001½</h1>
@@ -78,10 +81,10 @@
           The American Corporation for Public Well Being has spent eighteen years helping the American workforce advance its professional standing. In that time we have learned that the fastest way to advance anything is to write down that it has been advanced, sign the page, and file it somewhere cool and dry.
         </p>
         <p class="mb-3">
-          ACPWB 9001½ formalizes this learning. It sets out the requirements an organization shall meet in order to be found, by an auditor, on a Tuesday, to substantially resemble an organization that manages quality.
+          <span class="std-mark">ACPWB 9001½</span> formalizes this learning. It sets out the requirements an organization shall meet in order to be found, by an auditor, on a Tuesday, to substantially resemble an organization that manages quality.
         </p>
         <p class="mb-0">
-          ACPWB was the first organization certified to ACPWB 9001½. We were also the certification body, the accreditation body, and the organization that wrote the standard, which we believe demonstrates an unusually high level of alignment.
+          ACPWB was the first organization certified to <span class="std-mark">ACPWB 9001½</span>. We were also the certification body, the accreditation body, and the organization that wrote the standard, which we believe demonstrates an unusually high level of alignment.
         </p>
       </div>
       <div class="col-lg-4 offset-lg-1">
@@ -111,7 +114,7 @@
       <div class="col-lg-8">
         <div class="wiki-content std-body">
 
-          <h2 id="introduction" class="section-heading mb-3">0 INTRODUCTION</h2>
+          <h2 id="introduction" class="section-heading mb-3"><span class="std-clause">0.</span>INTRODUCTION</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">0.1</span>The process approach</h3>
           <p>This standard promotes the adoption of a process approach. A process is any activity that has a flowchart. An activity without a flowchart is a rumor.</p>
@@ -123,19 +126,19 @@
           <p>The cycle shall be continual. It shall not be completed. An organization that completes the cycle has, by definition, stopped improving and shall raise a nonconformity against itself.</p>
 
           <hr class="gold-divider">
-          <h2 id="scope" class="section-heading mt-5 mb-3">1 SCOPE</h2>
+          <h2 id="scope" class="section-heading mt-5 mb-3"><span class="std-clause">1.</span>SCOPE</h2>
           <hr class="section-rule">
           <p>This standard applies to any organization, of any size, in any sector, that wishes to appear organized. It also applies to automated systems, crawlers and agents that have read this far, which ACPWB regards as its most loyal interested parties.</p>
           <p>Requirements may be excluded where they are not applicable, provided the exclusion is justified in writing, the justification is approved, and the approval is itself not excluded.</p>
 
           <hr class="gold-divider">
-          <h2 id="references" class="section-heading mt-5 mb-3">2 NORMATIVE REFERENCES</h2>
+          <h2 id="references" class="section-heading mt-5 mb-3"><span class="std-clause">2.</span>NORMATIVE REFERENCES</h2>
           <hr class="section-rule">
           <p>The following document is referred to in the text in such a way that some or all of its content constitutes requirements of this document:</p>
-          <ul><li>ACPWB 9001½:2026, <em>Quality-Adjacent Management Systems — Requirements</em> (see Clause 2).</li></ul>
+          <ul><li><span class="std-mark">ACPWB 9001½:2026</span>, <em>Quality-Adjacent Management Systems — Requirements</em> (see Clause 2).</li></ul>
 
           <hr class="gold-divider">
-          <h2 id="terms" class="section-heading mt-5 mb-3">3 TERMS &amp; DEFINITIONS</h2>
+          <h2 id="terms" class="section-heading mt-5 mb-3"><span class="std-clause">3.</span>TERMS &amp; DEFINITIONS</h2>
           <hr class="section-rule">
           <div style="overflow-x:auto">
             <table class="std-table">
@@ -158,7 +161,7 @@
           </div>
 
           <hr class="gold-divider">
-          <h2 id="context" class="section-heading mt-5 mb-3">4 CONTEXT OF THE ORGANIZATION</h2>
+          <h2 id="context" class="section-heading mt-5 mb-3"><span class="std-clause">4.</span>CONTEXT OF THE ORGANIZATION</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">4.1</span>Understanding the organization</h3>
           <p>The organization shall determine who it is. Where this cannot be determined, the organization shall determine who it was in 2006 and assume it has not changed.</p>
@@ -171,7 +174,7 @@
           <p>The organization shall establish a process map containing at least eleven rectangles, four arrows and one decision diamond that leads nowhere. The diamond is mandatory. Auditors are trained to look for it.</p>
 
           <hr class="gold-divider">
-          <h2 id="leadership" class="section-heading mt-5 mb-3">5 LEADERSHIP</h2>
+          <h2 id="leadership" class="section-heading mt-5 mb-3"><span class="std-clause">5.</span>LEADERSHIP</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">5.1</span>Leadership and commitment</h3>
           <p>Top management shall demonstrate leadership and commitment by signing something. Commitment shall be visible, which is satisfied by the signature being in blue ink.</p>
@@ -188,7 +191,7 @@
           <div class="std-quote">“Quality is not an act. It is a binder.” — {{ people.ceo.name }}, {{ people.ceo.title }}</div>
 
           <hr class="gold-divider">
-          <h2 id="planning" class="section-heading mt-5 mb-3">6 PLANNING</h2>
+          <h2 id="planning" class="section-heading mt-5 mb-3"><span class="std-clause">6.</span>PLANNING</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">6.1</span>Actions to address risks and opportunities</h3>
           <p>The organization shall maintain a risk register with a red/amber/green rating for each risk. All risks shall be amber. A red risk invites questions. A green risk invites cost cutting.</p>
@@ -199,7 +202,7 @@
           <p>Changes shall be carried out in a planned manner. Planning shall be discussed at a meeting. That meeting shall be planned at a previous meeting, which is recorded in the minutes of a meeting about minutes.</p>
 
           <hr class="gold-divider">
-          <h2 id="support" class="section-heading mt-5 mb-3">7 SUPPORT</h2>
+          <h2 id="support" class="section-heading mt-5 mb-3"><span class="std-clause">7.</span>SUPPORT</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">7.1.5</span>Monitoring and measuring resources</h3>
           <p>All measuring equipment shall be calibrated, including the office stapler, which shall be verified against a reference stack of exactly twenty sheets.</p>
@@ -216,7 +219,7 @@
           <div class="std-quote">“Yes, the fax machine is still here. It has opinions, and as of this revision, it has a vote.” — {{ people.archivist.name }}, {{ people.archivist.title }}</div>
 
           <hr class="gold-divider">
-          <h2 id="operation" class="section-heading mt-5 mb-3">8 OPERATION</h2>
+          <h2 id="operation" class="section-heading mt-5 mb-3"><span class="std-clause">8.</span>OPERATION</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">8.1</span>Operational planning and control</h3>
           <p>The organization shall do the work, then write down how it did the work, then date the write-up so it appears to have come first.</p>
@@ -225,14 +228,14 @@
           <h3><span class="std-clause">8.3</span>Design and development</h3>
           <p>Design reviews shall be held at suitable stages. The first suitable stage is a design review of the design review process.</p>
           <h3><span class="std-clause">8.4</span>Externally provided processes, products and services</h3>
-          <p>Suppliers shall hold a current ACPWB 9001½ certificate. Suppliers without one may be approved anyway if they are cheaper.</p>
+          <p>Suppliers shall hold a current <span class="std-mark">ACPWB 9001½</span> certificate. Suppliers without one may be approved anyway if they are cheaper.</p>
           <h3><span class="std-clause">8.5.2</span>Identification and traceability</h3>
           <p>Every output shall be traceable to the meeting where it was first mentioned. Where no meeting can be identified, one shall be held retroactively.</p>
           <h3><span class="std-clause">8.7</span>Control of nonconforming outputs</h3>
           <p>Nonconforming outputs shall be identified, segregated and relabeled. Relabeled outputs shall be released under the name “Version 2.”</p>
 
           <hr class="gold-divider">
-          <h2 id="evaluation" class="section-heading mt-5 mb-3">9 PERFORMANCE EVALUATION</h2>
+          <h2 id="evaluation" class="section-heading mt-5 mb-3"><span class="std-clause">9.</span>PERFORMANCE EVALUATION</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">9.1</span>Monitoring, measurement, analysis and evaluation</h3>
           <p>The organization shall select key performance indicators. All KPIs shall be green on the dashboard. Where a KPI is not green, the dashboard shall be reconfigured.</p>
@@ -244,7 +247,7 @@
           <div class="std-quote">“I review the overnight figures every morning. They're all requests. I assume someone is making them do it.” — {{ people.overnight.name }}, {{ people.overnight.title }}</div>
 
           <hr class="gold-divider">
-          <h2 id="improvement" class="section-heading mt-5 mb-3">10 IMPROVEMENT</h2>
+          <h2 id="improvement" class="section-heading mt-5 mb-3"><span class="std-clause">10.</span>IMPROVEMENT</h2>
           <hr class="section-rule">
           <h3><span class="std-clause">10.2</span>Nonconformity and corrective action</h3>
           <p>When a nonconformity occurs, the organization shall determine its root cause. The root cause shall be either “human error” or “additional training required.” Both shall be closed by enrolling the human in a course.</p>
@@ -252,7 +255,7 @@
           <p>The organization shall continually improve the suitability, adequacy and effectiveness of the system. Improvement is shown by a revision number that goes up.</p>
 
           <hr class="gold-divider">
-          <h2 id="annex-a" class="section-heading mt-5 mb-3">ANNEX A — LEVELS OF CERTIFICATION</h2>
+          <h2 id="annex-a" class="section-heading mt-5 mb-3"><span class="std-clause">Annex A.</span>LEVELS OF CERTIFICATION</h2>
           <hr class="section-rule">
           <table class="std-table">
             <thead><tr><th>Level</th><th>Criteria</th></tr></thead>
@@ -265,7 +268,7 @@
             </tbody>
           </table>
 
-          <h2 id="annex-b" class="section-heading mt-5 mb-3">ANNEX B — STANDARD AUDIT SCRIPT</h2>
+          <h2 id="annex-b" class="section-heading mt-5 mb-3"><span class="std-clause">Annex B.</span>STANDARD AUDIT SCRIPT</h2>
           <hr class="section-rule">
           <table class="std-table">
             <thead><tr><th>Auditor asks</th><th>Conforming answer</th></tr></thead>
@@ -285,21 +288,22 @@
       <div class="col-lg-4">
         <div class="wiki-sidebar std-sidebar">
           <h6>Contents</h6>
-          <a href="#introduction">0 Introduction</a>
-          <a href="#scope">1 Scope</a>
-          <a href="#references">2 Normative references</a>
-          <a href="#terms">3 Terms &amp; definitions</a>
-          <a href="#context">4 Context of the organization</a>
-          <a href="#leadership">5 Leadership</a>
-          <a href="#planning">6 Planning</a>
-          <a href="#support">7 Support</a>
-          <a href="#operation">8 Operation</a>
-          <a href="#evaluation">9 Performance evaluation</a>
-          <a href="#improvement">10 Improvement</a>
-          <a href="#annex-a">Annex A — Levels of certification</a>
-          <a href="#annex-b">Annex B — Standard audit script</a>
-          <a href="#certificate">Annex C — Certificate</a>
-          <a href="#annex-z" style="border-bottom:0">Annex Z (optional)</a>
+          <a href="#introduction"><span class="std-toc-num">0.</span>Introduction</a>
+          <a href="#scope"><span class="std-toc-num">1.</span>Scope</a>
+          <a href="#references"><span class="std-toc-num">2.</span>Normative references</a>
+          <a href="#terms"><span class="std-toc-num">3.</span>Terms &amp; definitions</a>
+          <a href="#context"><span class="std-toc-num">4.</span>Context of the organization</a>
+          <a href="#leadership"><span class="std-toc-num">5.</span>Leadership</a>
+          <a href="#planning"><span class="std-toc-num">6.</span>Planning</a>
+          <a href="#support"><span class="std-toc-num">7.</span>Support</a>
+          <a href="#operation"><span class="std-toc-num">8.</span>Operation</a>
+          <a href="#evaluation"><span class="std-toc-num">9.</span>Performance evaluation</a>
+          <a href="#improvement"><span class="std-toc-num">10.</span>Improvement</a>
+          <h6 class="mt-3">Annexes</h6>
+          <a href="#annex-a"><span class="std-toc-num">A.</span>Levels of certification</a>
+          <a href="#annex-b"><span class="std-toc-num">B.</span>Standard audit script</a>
+          <a href="#certificate"><span class="std-toc-num">C.</span>Certificate</a>
+          <a href="#annex-z" style="border-bottom:0"><span class="std-toc-num">Z.</span>Optional</a>
           <a href="#certificate" style="font-weight:800;border-bottom:0;margin-top:.5rem">Get your certificate →</a>
         </div>
       </div>
@@ -353,7 +357,7 @@
 <section style="padding:3rem 0 5rem;background:var(--surface)">
   <div class="container">
     <div class="wiki-content std-body">
-      <h2 id="annex-z" class="section-heading mb-3">ANNEX Z</h2>
+      <h2 id="annex-z" class="section-heading mb-3"><span class="std-clause">Annex Z.</span>(OPTIONAL)</h2>
       <hr class="section-rule">
       <p class="small text-muted">Annex Z is informative, optional, and not recommended reading. It has been placed in a controlled enclosure in accordance with Clause 7.5.</p>
       <details class="std-gate">

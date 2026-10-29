@@ -108,6 +108,7 @@ var footerCol3 = []navItem{
 	{"FAQ", "/faq/"},
 	{"Press Releases", "/press-releases/"},
 	{"Compliance", "/compliance/"},
+	{"Certification", "/certification/"},
 	{"Do Not Sell My Info", "/privacy/do-not-sell/"},
 	{"Accessibility", "/accessibility/"},
 	{"Trademarks", "/trademarks/"},

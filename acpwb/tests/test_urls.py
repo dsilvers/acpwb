@@ -183,6 +183,42 @@ def test_accessibility_200(client):
 
 
 @pytest.mark.django_db
+def test_certification_200(client):
+    response = client.get('/certification/')
+    assert response.status_code == 200
+    content = response.content.decode()
+    assert 'ACPWB 9001½' in content
+    assert 'acpwb-9001-half.svg' in content
+    # The legal notice must stay on the page.
+    assert 'not affiliated with' in content
+
+
+@pytest.mark.django_db
+def test_certification_names_seeded_by_org(client):
+    from apps.public.views import _certification_people
+
+    first = client.get('/certification/?org=Pinnacle Group').content.decode()
+    again = client.get('/certification/?org=Pinnacle Group').content.decode()
+    other = client.get('/certification/?org=Apex Consulting').content.decode()
+    pinnacle = _certification_people('Pinnacle Group')
+    apex = _certification_people('Apex Consulting')
+
+    assert pinnacle == _certification_people('Pinnacle Group')
+    assert pinnacle['assessor']['name'] in first
+    assert pinnacle['assessor']['name'] in again
+    assert apex['assessor']['name'] in other
+    assert pinnacle != apex
+    # Annex Z sits after the certificate.
+    assert first.index('id="certificate-print"') < first.index('id="annex-z"')
+
+
+@pytest.mark.django_db
+def test_awards_links_certification(client):
+    response = client.get('/awards/')
+    assert '/certification/' in response.content.decode()
+
+
+@pytest.mark.django_db
 def test_trademarks_200(client):
     response = client.get('/trademarks/')
     assert response.status_code == 200

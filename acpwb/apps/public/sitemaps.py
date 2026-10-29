@@ -11,7 +11,7 @@ class StaticPagesSitemap(Sitemap):
     def items(self):
         return [
             'home', 'mission', 'our-people', 'careers', 'partners',
-            'awards', 'patents', 'faq',
+            'awards', 'certification', 'patents', 'faq',
             'privacy', 'do-not-sell', 'accessibility', 'trademarks', 'site-map',
             'presentation-landing',
         ]

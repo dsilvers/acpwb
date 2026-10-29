@@ -20,7 +20,7 @@ from django.db.models.functions import TruncDate
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from django.utils.http import content_disposition_header
+from django.utils.http import content_disposition_header, url_has_allowed_host_and_scheme
 
 from apps.core.models import DashboardStat
 from apps.honeypot.models import (
@@ -630,6 +630,49 @@ def conference_registrations(request):
         'total': total,
         'type_rows': type_rows,
         'recent': recent,
+    })
+
+
+@staff_member_required(login_url='/django-admin/login/')
+def privacy_requests(request):
+    """Do Not Sell / Delete / Access requests submitted at /privacy/do-not-sell/."""
+    if request.method == 'POST':
+        req = get_object_or_404(DataOptOutRequest, pk=request.POST.get('id'))
+        req.processed = request.POST.get('processed') == '1'
+        req.save(update_fields=['processed'])
+        nxt = request.POST.get('next', '')
+        if not url_has_allowed_host_and_scheme(nxt, allowed_hosts={request.get_host()}):
+            nxt = 'dashboard-privacy'
+        return redirect(nxt)
+
+    request_type = request.GET.get('type', '')
+    status = request.GET.get('status', '')
+
+    qs = DataOptOutRequest.objects.all()
+    if request_type in dict(DataOptOutRequest.REQUEST_CHOICES):
+        qs = qs.filter(request_type=request_type)
+    else:
+        request_type = ''
+    if status == 'pending':
+        qs = qs.filter(processed=False)
+    elif status == 'done':
+        qs = qs.filter(processed=True)
+    else:
+        status = ''
+
+    by_type = dict(DataOptOutRequest.objects.values_list('request_type').annotate(c=Count('id')))
+    page = Paginator(qs.order_by('-created_at'), 50).get_page(request.GET.get('page'))
+    return render(request, 'dashboard/privacy.html', {
+        'total': sum(by_type.values()),
+        'pending': DataOptOutRequest.objects.filter(processed=False).count(),
+        'type_rows': [
+            {'key': k, 'label': label, 'count': by_type.get(k, 0)}
+            for k, label in DataOptOutRequest.REQUEST_CHOICES
+        ],
+        'page': page,
+        'request_type': request_type,
+        'status': status,
+        'filter_qs': '&'.join(f'{k}={v}' for k, v in (('type', request_type), ('status', status)) if v),
     })
 
 

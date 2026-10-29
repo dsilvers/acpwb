@@ -1,0 +1,94 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Privacy Requests{% endblock %}
+{% block page_title %}Privacy Requests{% endblock %}
+{% block nav_privacy %}active{% endblock %}
+
+{% block content %}
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="border-top-color:#15803d">
+      <div class="label">Total Requests</div>
+      <div class="value">{{ total }}</div>
+      <div class="sub">all time</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">Unprocessed</div>
+      <div class="value">{{ pending }}</div>
+      <div class="sub">awaiting action</div>
+    </div>
+  </div>
+  {% for row in type_rows %}
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="label">{{ row.label }}</div>
+      <div class="value">{{ row.count }}</div>
+      <div class="sub"><a href="?type={{ row.key }}">filter</a></div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="section-card mb-4">
+  <div class="section-card-header">
+    <h6>Requests</h6>
+    <form method="get" style="display:flex;gap:.5rem;align-items:center;font-size:.78rem">
+      <select name="type" onchange="this.form.submit()">
+        <option value="">All types</option>
+        {% for row in type_rows %}
+        <option value="{{ row.key }}" {% if row.key == request_type %}selected{% endif %}>{{ row.label }}</option>
+        {% endfor %}
+      </select>
+      <select name="status" onchange="this.form.submit()">
+        <option value="">Any status</option>
+        <option value="pending" {% if status == 'pending' %}selected{% endif %}>Unprocessed</option>
+        <option value="done" {% if status == 'done' %}selected{% endif %}>Processed</option>
+      </select>
+      <span style="color:var(--dash-muted)">{{ page.paginator.count }} shown</span>
+    </form>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead>
+        <tr><th>When</th><th>Name</th><th>Email</th><th>Type</th><th>State</th><th>Message</th><th>IP</th><th>Processed</th></tr>
+      </thead>
+      <tbody>
+        {% for r in page %}
+        <tr>
+          <td style="white-space:nowrap;font-size:.75rem;color:var(--dash-muted)">{{ r.created_at|date:"M j, Y H:i" }}</td>
+          <td style="font-weight:600">{{ r.name }}</td>
+          <td style="font-size:.78rem">{{ r.email }}</td>
+          <td><span class="trap-badge">{{ r.get_request_type_display }}</span></td>
+          <td style="font-size:.78rem;color:var(--dash-muted)">{{ r.state|default:"—" }}</td>
+          <td style="font-size:.78rem;max-width:280px;white-space:pre-wrap">{{ r.message|default:"—" }}</td>
+          <td style="font-family:monospace;font-size:.72rem;color:var(--dash-muted)">{{ r.ip_address }}</td>
+          <td>
+            <form method="post" style="margin:0">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{ r.pk }}">
+              <input type="hidden" name="processed" value="{% if r.processed %}0{% else %}1{% endif %}">
+              <input type="hidden" name="next" value="{{ request.get_full_path }}">
+              <button type="submit" class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:.1rem .5rem">
+                {% if r.processed %}&#10003; Done{% else %}Mark done{% endif %}
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" style="text-align:center;color:var(--dash-muted);padding:2rem">No requests.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if page.paginator.num_pages > 1 %}
+  <div style="padding:.75rem 1rem;font-size:.8rem;display:flex;gap:1rem">
+    {% if page.has_previous %}<a href="?{% if filter_qs %}{{ filter_qs }}&{% endif %}page={{ page.previous_page_number }}">&laquo; Newer</a>{% endif %}
+    <span style="color:var(--dash-muted)">Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+    {% if page.has_next %}<a href="?{% if filter_qs %}{{ filter_qs }}&{% endif %}page={{ page.next_page_number }}">Older &raquo;</a>{% endif %}
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

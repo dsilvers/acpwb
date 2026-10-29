@@ -145,3 +145,38 @@ def test_dashboard_edge_shows_requests(staff_client):
     assert 'AAAAAAAAAAAAAAAAAAAAAA' in content
     assert 'rejected' in content
     assert '/static/x.css' in content
+
+
+# ── Privacy requests ───────────────────────────────────────────────────────────
+
+@pytest.fixture
+def privacy_requests_data(db):
+    from apps.public.models import DataOptOutRequest
+    a = DataOptOutRequest.objects.create(name='Ann', email='ann@example.com', request_type='do_not_sell', ip_address='1.2.3.4', message='stop selling')
+    b = DataOptOutRequest.objects.create(name='Bob', email='bob@example.com', request_type='delete', ip_address='1.2.3.5', processed=True)
+    return a, b
+
+
+@pytest.mark.django_db
+def test_privacy_requires_staff(client):
+    assert client.get('/acpwb-dashboard/privacy/').status_code == 302
+
+
+@pytest.mark.django_db
+def test_privacy_lists_and_filters(staff_client, privacy_requests_data):
+    r = staff_client.get('/acpwb-dashboard/privacy/')
+    assert r.status_code == 200
+    assert b'ann@example.com' in r.content and b'bob@example.com' in r.content
+    r = staff_client.get('/acpwb-dashboard/privacy/?type=do_not_sell')
+    assert b'ann@example.com' in r.content and b'bob@example.com' not in r.content
+    r = staff_client.get('/acpwb-dashboard/privacy/?status=done')
+    assert b'bob@example.com' in r.content and b'ann@example.com' not in r.content
+
+
+@pytest.mark.django_db
+def test_privacy_mark_processed(staff_client, privacy_requests_data):
+    a, _ = privacy_requests_data
+    r = staff_client.post('/acpwb-dashboard/privacy/', {'id': a.pk, 'processed': '1'})
+    assert r.status_code == 302
+    a.refresh_from_db()
+    assert a.processed is True

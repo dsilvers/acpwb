@@ -1,5 +1,9 @@
 import json
+import re
+from datetime import datetime, timedelta
+
 import pytest
+from django.utils import timezone
 from unittest.mock import patch
 from apps.honeypot.models import CrawlerVisit, WikiPage, ArchiveVisit
 from apps.honeypot.wiki_generator import generate_wiki_page
@@ -239,6 +243,19 @@ def test_robots_txt_has_disallow_entries(client):
     response = client.get('/.well-known/robots.txt')
     content = response.content.decode()
     assert 'Disallow:' in content
+
+
+@pytest.mark.django_db
+def test_security_txt(client):
+    response = client.get('/.well-known/security.txt')
+    assert response.status_code == 200
+    assert response['Content-Type'] == 'text/plain; charset=utf-8'
+    content = response.content.decode()
+    assert 'Contact: mailto:security@acpwb.com' in content
+    assert 'Canonical: https://acpwb.com/.well-known/security.txt' in content
+    expires = re.search(r'^Expires: (\S+)$', content, re.M).group(1)
+    expires_at = datetime.fromisoformat(expires)
+    assert timezone.now() < expires_at < timezone.now() + timedelta(days=365)
 
 
 # ── Ghost link traps ───────────────────────────────────────────────────────────

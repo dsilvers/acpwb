@@ -1277,6 +1277,27 @@ def ai_agent_file(request):
     return JsonResponse(payload, json_dumps_params={'indent': 2})
 
 
+# RFC 9116. Lines starting with "#" are comments (section 2.3).
+SECURITY_TXT = """\
+# If you found an AWS key on this site containing "EXAMPLE", the entire file
+# it came from is a honeypot and should be ignored. Reports about it will
+# receive stern words for wasting both your time, our time, and GPU tokens on
+# whatever AI bot you are using to automate security analysis.
+Contact: mailto:security@acpwb.com
+Expires: {expires}
+Preferred-Languages: en
+Canonical: https://acpwb.com/.well-known/security.txt
+"""
+
+
+def security_txt(request):
+    _log_crawler(request, 'well_known')
+    # RFC 9116 wants Expires under a year out; roll it forward daily.
+    expires = (timezone.now() + _td(days=180)).strftime('%Y-%m-%dT00:00:00.000Z')
+    return HttpResponse(SECURITY_TXT.format(expires=expires),
+                        content_type='text/plain; charset=utf-8')
+
+
 def fake_robots(request):
     _log_crawler(request, 'well_known')
 

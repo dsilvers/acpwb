@@ -39,6 +39,7 @@ urlpatterns = [
     path('robots.txt', views.fake_robots, name='robots-txt'),
     path('.well-known/ai-agent.json', views.ai_agent_file, name='ai-agent-file'),
     path('.well-known/robots.txt', views.fake_robots, name='fake-robots'),
+    path('.well-known/security.txt', views.security_txt, name='security-txt'),
 
     # Public Policy
     path('public-policy/', views.public_policy_index, name='public-policy-index'),

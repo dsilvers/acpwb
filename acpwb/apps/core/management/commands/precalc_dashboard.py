@@ -22,7 +22,7 @@ import time
 from datetime import timedelta
 
 from django.core.management.base import BaseCommand
-from django.db import transaction
+from django.db import DatabaseError, connections, transaction
 from django.db.models import Avg, Count, Max, Q, Sum
 from django.db.models.functions import TruncDate, TruncMinute
 from django.utils import timezone
@@ -153,7 +153,7 @@ class Command(BaseCommand):
                     self._update_opt_outs()
 
                 self._update_canary()
-                self._update_edge()
+                self._update_edge_throttled()
                 self._update_graphs()
 
             elapsed = time.monotonic() - run_start
@@ -939,7 +939,34 @@ class Command(BaseCommand):
 
         self.stdout.write(f'  canary: {count} triggered')
 
-    # ── EdgeConnection (rolling 24h window — always recomputed) ───────────────
+    # ── EdgeConnection (rolling 24h window) ───────────────────────────────────
+
+    # Edge chunks are 1 hour, so the 24h window is ~24 chunks (most of them
+    # compressed) read by ~10 aggregates: a run took over 4 hours in Oct
+    # 2026 and kept the box at load 47. Recompute it at most this often.
+    EDGE_SUMMARY_MIN_INTERVAL = timedelta(hours=2)
+    # Per statement. A timed-out attempt keeps the previous summary and is
+    # not retried until the next interval, so a slow day can't pin the box.
+    EDGE_SUMMARY_STATEMENT_TIMEOUT = '10min'
+
+    def _update_edge_throttled(self):
+        attempt = DashboardStat.objects.filter(key='edge.summary_attempt').first()
+        if attempt and timezone.now() - attempt.updated_at < self.EDGE_SUMMARY_MIN_INTERVAL:
+            self.stdout.write('  edge: summary attempted recently — skipping.')
+            return
+        self._set_stat('edge.summary_attempt', {})
+        # The 'direct' alias bypasses PgBouncer, so a session SET is safe
+        # here (it would leak through transaction pooling).
+        direct = connections['direct']
+        with direct.cursor() as cur:
+            cur.execute(f"SET statement_timeout = '{self.EDGE_SUMMARY_STATEMENT_TIMEOUT}'")
+        try:
+            self._update_edge()
+        except DatabaseError as exc:
+            self.stdout.write(f'  edge: summary failed ({exc.__class__.__name__}); keeping the previous one.')
+        finally:
+            with direct.cursor() as cur:
+                cur.execute('RESET statement_timeout')
 
     def _update_edge(self):
         """Connection-level TLS/HTTP fingerprint summary from acpwb_edge.

@@ -231,6 +231,11 @@ def rollup_hour(start):
         cur.execute(f"SET LOCAL statement_timeout = '{_STATEMENT_TIMEOUT}'")
         # The sorts (~700MB an hour) otherwise spill to disk.
         cur.execute(f"SET LOCAL work_mem = '{_WORK_MEM}'")
+        # The IP statement joins millions of requests to the client rows this
+        # transaction has just inserted. Those have no statistics yet, so the
+        # planner estimates 1 row and picks a nested loop: quadratic, 20+ min
+        # an hour with many pool cookies. Every join here is a big equi-join.
+        cur.execute('SET LOCAL enable_nestloop = off')
         for table in ('edgeiphour', 'edgefingerprinthour', 'edgeclienthour'):
             cur.execute(f'DELETE FROM honeypot_{table} WHERE hour = %s', [start])
         cur.execute(_CLIENT_SQL, params)  # first: the IP rollup reads its pool cookies

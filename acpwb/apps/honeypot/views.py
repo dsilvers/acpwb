@@ -1287,6 +1287,7 @@ Contact: mailto:security@acpwb.com
 Expires: {expires}
 Preferred-Languages: en
 Canonical: https://acpwb.com/.well-known/security.txt
+Canonical: https://acpwb.com/security.txt
 """
 
 

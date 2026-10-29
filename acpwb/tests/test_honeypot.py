@@ -246,8 +246,9 @@ def test_robots_txt_has_disallow_entries(client):
 
 
 @pytest.mark.django_db
-def test_security_txt(client):
-    response = client.get('/.well-known/security.txt')
+@pytest.mark.parametrize('path', ['/.well-known/security.txt', '/security.txt'])
+def test_security_txt(client, path):
+    response = client.get(path)
     assert response.status_code == 200
     assert response['Content-Type'] == 'text/plain; charset=utf-8'
     content = response.content.decode()

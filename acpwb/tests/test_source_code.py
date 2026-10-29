@@ -61,6 +61,24 @@ def test_drain_upsert_creates_then_updates():
 
 
 @pytest.mark.django_db
+def test_drain_bulk_upsert_merges_and_counts():
+    from apps.core.management.commands.drain_code_email_queue import upsert_code_emails
+    a = {'address': 'Ann.Lee@acpwb.com', 'host': 'acpwb.com', 'path': '/compliance/x/y/',
+         'ip_address': '10.0.0.1', 'timestamp': '2026-10-10T05:00:00+00:00'}
+    batch = [a, {**a, 'timestamp': '2026-10-12T05:00:00+00:00'},   # repeat within the batch
+             {**a, 'path': '/compliance/x/z/'}, {'address': '', 'path': '/p/'}, {'address': 'a@b.c', 'path': ''}]
+    assert upsert_code_emails(batch) == 2
+    row = SourceCodeEmail.objects.get(address='ann.lee@acpwb.com', path='/compliance/x/y/')
+    assert row.times_served == 2
+    assert row.first_seen.isoformat() == '2026-10-10T05:00:00+00:00'
+    assert row.last_seen.isoformat() == '2026-10-12T05:00:00+00:00'
+    # A later batch updates existing rows and creates none.
+    assert upsert_code_emails([{**a, 'timestamp': '2026-10-13T05:00:00+00:00'}]) == 0
+    row.refresh_from_db()
+    assert row.times_served == 3 and row.last_seen.isoformat() == '2026-10-13T05:00:00+00:00'
+
+
+@pytest.mark.django_db
 def test_inbound_email_matches_source_code_page():
     from apps.webhooks.views import _match_honeypot
     page = SourceCodeEmail.objects.create(address='gail.hargrove@acpwb.com', host='acpwb.com',

@@ -33,6 +33,7 @@ ROLLUP_DELAY = timedelta(minutes=15)
 # behind reads chunks the compression policy wants to lock exclusively.
 _LOCK_TIMEOUT = '30s'
 _STATEMENT_TIMEOUT = '20min'
+_WORK_MEM = '1GB'
 # Requests of a connection accepted near the end of an hour land in the
 # next one; join them for this long past the hour.
 _REQUEST_SPILL = timedelta(minutes=15)
@@ -228,6 +229,8 @@ def rollup_hour(start):
         # SET LOCAL: reset at commit, so safe through pgbouncer.
         cur.execute(f"SET LOCAL lock_timeout = '{_LOCK_TIMEOUT}'")
         cur.execute(f"SET LOCAL statement_timeout = '{_STATEMENT_TIMEOUT}'")
+        # The sorts (~700MB an hour) otherwise spill to disk.
+        cur.execute(f"SET LOCAL work_mem = '{_WORK_MEM}'")
         for table in ('edgeiphour', 'edgefingerprinthour', 'edgeclienthour'):
             cur.execute(f'DELETE FROM honeypot_{table} WHERE hour = %s', [start])
         cur.execute(_CLIENT_SQL, params)  # first: the IP rollup reads its pool cookies

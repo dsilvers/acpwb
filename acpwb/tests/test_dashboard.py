@@ -1,4 +1,5 @@
 import pytest
+from unittest.mock import patch
 from django.contrib.auth.models import User
 
 
@@ -72,7 +73,8 @@ def test_dashboard_people_200(staff_client):
 
 @pytest.mark.django_db
 def test_dashboard_shows_crawler_data(client, staff_client):
-    client.get('/internal/portal/')
+    with patch('apps.core.crawler_queue.push_crawler_visit', return_value=False):
+        client.get('/internal/portal/')
     response = staff_client.get('/acpwb-dashboard/')
     assert response.status_code == 200
     # recent_crawlers is a live query — shows trap type even before precalc runs

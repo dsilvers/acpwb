@@ -145,10 +145,9 @@ def test_well_known_robots(client):
 
 
 @pytest.mark.django_db
-def test_contact_redirects_to_our_people(client):
+def test_contact_200(client):
     response = client.get('/contact/')
-    assert response.status_code in (301, 302)
-    assert '/our-people/' in response['Location']
+    assert response.status_code == 200
 
 
 # New public pages

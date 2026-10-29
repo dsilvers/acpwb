@@ -55,10 +55,11 @@ def test_archive_never_404(client):
 
 
 @pytest.mark.django_db
-def test_archive_has_continue_reading_link(client):
+def test_archive_has_next_link_deeper(client):
     response = client.get('/3/15/article/?__year=2024')
     content = response.content.decode()
-    assert 'Continue Reading' in content or 'continue' in content.lower()
+    assert 'Next in Series' in content
+    assert 'href="/03/15/article/' in content
 
 
 @pytest.mark.django_db

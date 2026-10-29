@@ -381,7 +381,9 @@ func (q *Queue) PushVisit(v Visit) {
 
 const (
 	codeEmailQueueKey = "acpwb:code_email_queue"
-	codeEmailSeenTTL  = 30 * 24 * time.Hour
+	// Short: /compliance/ is endless, so each (address, path) key is a new
+	// Redis key — 30 days of them was ~80M keys, and the queue 13M deep.
+	codeEmailSeenTTL = 48 * time.Hour
 )
 
 // PushCodeEmails registers the honeypot programmer addresses shown on a

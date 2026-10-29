@@ -70,7 +70,7 @@ def upsert_code_emails(items):
             row['first'], row['last'], row['n'] = min(row['first'], ts), max(row['last'], ts), row['n'] + 1
 
     table = SourceCodeEmail._meta.db_table
-    keys = list(merged)
+    keys = sorted(merged)  # index order: far fewer pages touched in the big table
     created = 0
     for i in range(0, len(keys), _BULK_CHUNK):
         chunk = keys[i:i + _BULK_CHUNK]

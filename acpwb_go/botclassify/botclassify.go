@@ -80,6 +80,7 @@ var botPatternDefs = []struct {
 	{"PerplexityBot", "Perplexity"},
 	{"Google-Extended", "Google-Extended (AI)"},
 	{"meta-externalagent", "Meta ExternalAgent"},
+	{"meta-webindexer", "Meta WebIndexer"},
 	{"FacebookBot", "Meta FacebookBot"},
 	{"Applebot-Extended", "Apple Applebot-Extended"},
 	{"Bytespider", "ByteDance Bytespider"},
@@ -90,6 +91,11 @@ var botPatternDefs = []struct {
 	{"CCBot", "Common Crawl"},
 	{"cohere-ai", "Cohere"},
 	{"Timpibot", "Timpi"},
+	{"ShapBot", "Parallel ShapBot"},
+	{"Reflectionbot", "Reflection AI"},
+	{"YouBot", "You.com YouBot"},
+	{"Keenable", "Keenable"}, // KeenableBot, Keenable-SearchBot, Keenable-User
+	{"LinkupBot", "Linkup"},
 	// Search engines
 	{"Nexus 5X Build/MMB29P", "Googlebot Mobile"}, // Googlebot mobile fingerprint (before Googlebot)
 	{"Googlebot", "Googlebot"},
@@ -105,6 +111,7 @@ var botPatternDefs = []struct {
 	{"sogou", "Sogou"},
 	{"360Spider", "360Spider"},
 	{"SeznamBot", "Seznam"},
+	{"Bravebot", "Bravebot"},
 	// SEO/marketing crawlers
 	{"SemrushBot", "SemrushBot"},
 	{"AhrefsBot", "AhrefsBot"},
@@ -118,6 +125,14 @@ var botPatternDefs = []struct {
 	{"AwarioBot", "AwarioBot"},
 	{"BitSightBot", "BitSightBot"},
 	{"zgrab", "zgrab"},
+	{"AionBot", "AionBot"}, // operator unknown; Oracle Cloud, ignores robots.txt
+	{"Cortex-Xpanse", "Palo Alto Xpanse"},
+	{"AdsBot-Google", "AdsBot-Google"},
+	{"TikTokSpider", "TikTokSpider"},
+	{"HubSpot Crawler", "HubSpot Crawler"},
+	{"BuiltWith", "BuiltWith"},
+	{"TechnicalSEO.com", "TechnicalSEO"},
+	{"PimEyes", "PimEyes"},
 	// Social
 	{"Twitterbot", "Twitterbot"},
 	{"facebookexternalhit", "Facebook Scraper"},
@@ -192,6 +207,8 @@ var aiBots = map[string]struct{}{
 	"Meta FacebookBot": {}, "Meta ExternalAgent": {}, "Apple Applebot-Extended": {},
 	"Amazonbot": {}, "Diffbot": {}, "Omgilibot": {}, "Webzio": {},
 	"Common Crawl": {}, "Cohere": {}, "Timpi": {},
+	"Meta WebIndexer": {}, "Parallel ShapBot": {}, "Reflection AI": {}, "You.com YouBot": {},
+	"Keenable": {}, "Linkup": {},
 	"Alibaba Qwen": {}, // IP-range classified
 	"Tencent":      {},
 }
@@ -200,7 +217,7 @@ var searchBots = map[string]struct{}{
 	"Googlebot": {}, "Googlebot Mobile": {}, "GoogleOther": {},
 	"Bingbot": {}, "Bing Preview": {}, "MSN Bot": {},
 	"Baiduspider": {}, "YandexBot": {}, "Yahoo Slurp": {}, "DuckDuckBot": {},
-	"Applebot": {}, "Sogou": {}, "360Spider": {}, "Seznam": {},
+	"Applebot": {}, "Sogou": {}, "360Spider": {}, "Seznam": {}, "Bravebot": {},
 }
 
 var scraperBots = map[string]struct{}{

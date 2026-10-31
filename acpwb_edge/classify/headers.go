@@ -81,7 +81,7 @@ func hasHeader(names []string, want string) bool {
 }
 
 var (
-	// "(compatible; KeenableBot/1.0; +https://…)", "…); compatible; ShapBot/0.1.0"
+	// "(compatible; SleepBot/1.0; +http://…)", "…); compatible; SEOJuice-SearchBot/1.0"
 	compatibleRe = regexp.MustCompile(`(?i)compatible;\s*([^;()]+?)\s*(?:[;)]|$)`)
 	botWordRe    = regexp.MustCompile(`(?i)bot|crawl|spider|scan|fetch|scrap|archiv|monitor|preview`)
 )

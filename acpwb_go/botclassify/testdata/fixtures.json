@@ -1042,6 +1042,118 @@
       "classify_ua": "Other / Browser",
       "classify_ip": "",
       "classify_ua_or_ip": "Other / Browser"
+    },
+    {
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ShapBot/0.1.0",
+      "ip": "1.2.3.4",
+      "classify_ua": "Parallel ShapBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Parallel ShapBot"
+    },
+    {
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Reflectionbot/1.0; +https://reflection.ai/bot) Chrome/151.0.0.0 Safari/537.36",
+      "ip": "1.2.3.4",
+      "classify_ua": "Reflection AI",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Reflection AI"
+    },
+    {
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; YouBot/1.0; +https://docs.you.com/youbot; env:prod) Chrome/142.0.0.0 Safari/537.36",
+      "ip": "1.2.3.4",
+      "classify_ua": "You.com YouBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "You.com YouBot"
+    },
+    {
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; KeenableBot/1.0; +https://keenable.ai/bot)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Keenable",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Keenable"
+    },
+    {
+      "ua": "LinkupBot/1.0 (LinkupBot for web indexing; https://linkup.so/bot; bot@linkup.so)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Linkup",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Linkup"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Meta-WebIndexer/1.0; +https://developers.facebook.com/docs/sharing/webmasters/crawler)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Meta WebIndexer",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Meta WebIndexer"
+    },
+    {
+      "ua": "Mozilla/5.0 (compatible; Bravebot/1.0; +https://brave.com/search/)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Bravebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Bravebot"
+    },
+    {
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 (compatible; AionBot/1.0)",
+      "ip": "1.2.3.4",
+      "classify_ua": "AionBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "AionBot"
+    },
+    {
+      "ua": "Hello from Palo Alto Networks, find out more about our scans in https://docs-cortex.paloaltonetworks.com/r/1/Cortex-Xpanse/Scanning-activity",
+      "ip": "1.2.3.4",
+      "classify_ua": "Palo Alto Xpanse",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Palo Alto Xpanse"
+    },
+    {
+      "ua": "AdsBot-Google (+http://www.google.com/adsbot.html)",
+      "ip": "1.2.3.4",
+      "classify_ua": "AdsBot-Google",
+      "classify_ip": "",
+      "classify_ua_or_ip": "AdsBot-Google"
+    },
+    {
+      "ua": "Mozilla/5.0 (Linux; Android 5.0) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; TikTokSpider; ttspider-feedback@tiktok.com)",
+      "ip": "1.2.3.4",
+      "classify_ua": "TikTokSpider",
+      "classify_ip": "",
+      "classify_ua_or_ip": "TikTokSpider"
+    },
+    {
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; HubSpot Crawler; +https://www.hubspot.com) Chrome/131.0.0.0 Safari/537.36",
+      "ip": "1.2.3.4",
+      "classify_ua": "HubSpot Crawler",
+      "classify_ip": "",
+      "classify_ua_or_ip": "HubSpot Crawler"
+    },
+    {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; compatible; BuiltWith/1.4; rb.gy/xprgqj) Chrome/131.0.0.0 Safari/537.36",
+      "ip": "1.2.3.4",
+      "classify_ua": "BuiltWith",
+      "classify_ip": "",
+      "classify_ua_or_ip": "BuiltWith"
+    },
+    {
+      "ua": "TechnicalSEO.com Spider Bot/2.0",
+      "ip": "1.2.3.4",
+      "classify_ua": "TechnicalSEO",
+      "classify_ip": "",
+      "classify_ua_or_ip": "TechnicalSEO"
+    },
+    {
+      "ua": "pimeyes-downloader-api/0.1",
+      "ip": "1.2.3.4",
+      "classify_ua": "PimEyes",
+      "classify_ip": "",
+      "classify_ua_or_ip": "PimEyes"
+    },
+    {
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)",
+      "ip": "1.2.3.4",
+      "classify_ua": "Other / Browser",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Other / Browser"
     }
   ],
   "group_cases": [
@@ -1054,7 +1166,15 @@
       "group": "Search Engines"
     },
     {
+      "bot_type": "AdsBot-Google",
+      "group": "SEO / Other Bots"
+    },
+    {
       "bot_type": "AhrefsBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "AionBot",
       "group": "SEO / Other Bots"
     },
     {
@@ -1103,6 +1223,14 @@
     },
     {
       "bot_type": "BitSightBot",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Bravebot",
+      "group": "Search Engines"
+    },
+    {
+      "bot_type": "BuiltWith",
       "group": "SEO / Other Bots"
     },
     {
@@ -1166,6 +1294,10 @@
       "group": "SEO / Other Bots"
     },
     {
+      "bot_type": "HubSpot Crawler",
+      "group": "SEO / Other Bots"
+    },
+    {
       "bot_type": "INTERNEXUS Scraper Pool",
       "group": "SEO / Other Bots"
     },
@@ -1182,8 +1314,16 @@
       "group": "Generic Scrapers"
     },
     {
+      "bot_type": "Keenable",
+      "group": "AI Crawlers"
+    },
+    {
       "bot_type": "LinkedIn",
       "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Linkup",
+      "group": "AI Crawlers"
     },
     {
       "bot_type": "MSN Bot",
@@ -1199,6 +1339,10 @@
     },
     {
       "bot_type": "Meta FacebookBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Meta WebIndexer",
       "group": "AI Crawlers"
     },
     {
@@ -1226,8 +1370,20 @@
       "group": "Other / Browser"
     },
     {
+      "bot_type": "Palo Alto Xpanse",
+      "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Parallel ShapBot",
+      "group": "AI Crawlers"
+    },
+    {
       "bot_type": "Perplexity",
       "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "PimEyes",
+      "group": "SEO / Other Bots"
     },
     {
       "bot_type": "Pipl",
@@ -1236,6 +1392,10 @@
     {
       "bot_type": "Python Requests",
       "group": "Generic Scrapers"
+    },
+    {
+      "bot_type": "Reflection AI",
+      "group": "AI Crawlers"
     },
     {
       "bot_type": "SERankingBacklinksBot",
@@ -1258,8 +1418,16 @@
       "group": "Search Engines"
     },
     {
+      "bot_type": "TechnicalSEO",
+      "group": "SEO / Other Bots"
+    },
+    {
       "bot_type": "Tencent",
       "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "TikTokSpider",
+      "group": "SEO / Other Bots"
     },
     {
       "bot_type": "Timpi",
@@ -1284,6 +1452,10 @@
     {
       "bot_type": "YandexBot",
       "group": "Search Engines"
+    },
+    {
+      "bot_type": "You.com YouBot",
+      "group": "AI Crawlers"
     },
     {
       "bot_type": "ZoominfoBot",

@@ -1,7 +1,12 @@
 package edgequeue
 
 import (
+	"bufio"
+	"fmt"
 	"net"
+	"strconv"
+	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
 )
@@ -39,6 +44,111 @@ func TestPushNeverBlocksWhenRedisDown(t *testing.T) {
 		if q.Pushed(key) != 0 {
 			t.Fatalf("%s: pushed %d with no Redis", key, q.Pushed(key))
 		}
+	}
+}
+
+// fakeRedis answers just enough RESP for a pipelined RPUSH + LTRIM and counts
+// the values pushed.
+func fakeRedis(t *testing.T, l net.Listener, pushed *atomic.Int64) {
+	t.Helper()
+	t.Cleanup(func() { l.Close() })
+	go func() {
+		for {
+			c, err := l.Accept()
+			if err != nil {
+				return
+			}
+			go func() {
+				defer c.Close()
+				r := bufio.NewReader(c)
+				for {
+					args, err := readCommand(r)
+					if err != nil {
+						return
+					}
+					reply := "+OK\r\n"
+					switch strings.ToLower(args[0]) {
+					case "hello":
+						reply = "-ERR unknown command\r\n"
+					case "rpush":
+						pushed.Add(int64(len(args) - 2))
+						reply = fmt.Sprintf(":%d\r\n", pushed.Load())
+					}
+					if _, err := c.Write([]byte(reply)); err != nil {
+						return
+					}
+				}
+			}()
+		}
+	}()
+}
+
+func readCommand(r *bufio.Reader) ([]string, error) {
+	line, err := r.ReadString('\n')
+	if err != nil {
+		return nil, err
+	}
+	n, err := strconv.Atoi(strings.TrimSpace(line[1:]))
+	if err != nil {
+		return nil, err
+	}
+	args := make([]string, n)
+	for i := range args {
+		if _, err := r.ReadString('\n'); err != nil { // $<len>
+			return nil, err
+		}
+		if args[i], err = r.ReadString('\n'); err != nil {
+			return nil, err
+		}
+		args[i] = strings.TrimSpace(args[i])
+	}
+	return args, nil
+}
+
+// A short Redis failure must cost nothing: the failed batch is retried and
+// what arrives meanwhile waits in the channel.
+func TestFailedPushIsRetriedWithoutLoss(t *testing.T) {
+	l, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatal(err)
+	}
+	addr := l.Addr().String()
+	l.Close() // down at first
+
+	q, err := New("redis://"+addr+"/0", 1000)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	q.Push(ConnQueue, 0)
+	deadline := time.Now().Add(10 * time.Second)
+	for q.PushFailures(ConnQueue) == 0 {
+		if time.Now().After(deadline) {
+			t.Fatal("no failed push recorded")
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
+	const n = 1000
+	for i := 1; i < n; i++ {
+		q.Push(ConnQueue, i)
+	}
+
+	if l, err = net.Listen("tcp", addr); err != nil {
+		t.Fatal(err)
+	}
+	var pushed atomic.Int64
+	fakeRedis(t, l, &pushed)
+	for q.Pushed(ConnQueue) < n {
+		if time.Now().After(deadline) {
+			t.Fatalf("pushed %d of %d", q.Pushed(ConnQueue), n)
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
+	if got := pushed.Load(); got != n {
+		t.Fatalf("redis received %d, want %d", got, n)
+	}
+	if d := q.Dropped(ConnQueue); d != 0 {
+		t.Fatalf("dropped %d", d)
 	}
 }
 

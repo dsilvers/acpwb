@@ -6,8 +6,10 @@
 //
 // Pushing never blocks a connection: each kind has its own bounded channel
 // and worker sending pipelined batches, so a flood of one kind can't crowd
-// out the other. If a channel is full or Redis is down, records are
-// dropped and counted per kind; drops are logged once a minute and
+// out the other. A failed push is retried until it lands while the channel
+// holds what arrives meanwhile (the drains dedupe, so a push that timed out
+// but landed is harmless). Records are dropped only when a channel is full
+// or at shutdown, counted per kind; drops are logged once a minute and
 // published with the stats.
 package edgequeue
 
@@ -32,9 +34,8 @@ const (
 	maxBatch     = 500
 	batchWait    = 50 * time.Millisecond
 	pushTimeout  = 2 * time.Second
-	// After a failed push, records are dropped for this long instead of
-	// piling up retries against a Redis that's down.
-	backoff = 5 * time.Second
+	// Pause between retries of a failed push.
+	retryWait = time.Second
 )
 
 // Kinds lists the queues, with the short name used in stats.
@@ -52,8 +53,12 @@ type lane struct {
 	key     string
 	ch      chan []byte
 	done    chan struct{}
-	dropped atomic.Int64
+	dropped atomic.Int64 // every lost record, whatever the reason
+	full    atomic.Int64 // of those, lost to a full channel
 	pushed  atomic.Int64
+	// Failed pushes, retried; not lost records.
+	pushFailures atomic.Int64
+	failingSince time.Time // worker only
 }
 
 // New connects lazily: an unreachable Redis at startup isn't an error.
@@ -100,15 +105,17 @@ func (q *Queue) Push(key string, v any) {
 	case l.ch <- data:
 	default:
 		l.dropped.Add(1)
+		l.full.Add(1)
 	}
 }
 
-// Dropped and Pushed report key's counters since startup.
-func (q *Queue) Dropped(key string) int64 { return q.lanes[key].dropped.Load() }
-func (q *Queue) Pushed(key string) int64  { return q.lanes[key].pushed.Load() }
+// Dropped, Pushed and PushFailures report key's counters since startup.
+func (q *Queue) Dropped(key string) int64      { return q.lanes[key].dropped.Load() }
+func (q *Queue) Pushed(key string) int64       { return q.lanes[key].pushed.Load() }
+func (q *Queue) PushFailures(key string) int64 { return q.lanes[key].pushFailures.Load() }
 
-// Close flushes what's queued (best effort, bounded by pushTimeout) and
-// stops the workers. No Push may follow it.
+// Close flushes what's queued (best effort: a failing push ends it, and the
+// rest is dropped) and stops the workers. No Push may follow it.
 func (q *Queue) Close() {
 	if q == nil {
 		return
@@ -127,7 +134,6 @@ func (q *Queue) Close() {
 
 func (q *Queue) run(l *lane) {
 	defer close(l.done)
-	var downUntil time.Time
 	batch := make([]any, 0, maxBatch)
 	for {
 		first, ok := <-l.ch
@@ -152,17 +158,49 @@ func (q *Queue) run(l *lane) {
 		}
 		timer.Stop()
 
-		if time.Now().Before(downUntil) {
-			l.dropped.Add(int64(len(batch)))
-		} else if err := q.send(l.key, batch); err != nil {
-			l.dropped.Add(int64(len(batch)))
-			downUntil = time.Now().Add(backoff)
-		} else {
-			l.pushed.Add(int64(len(batch)))
-		}
+		q.deliver(l, batch)
 		if closed {
 			return
 		}
+	}
+}
+
+// deliver pushes batch, retrying until it lands. While it retries nothing
+// leaves the channel, so an outage longer than the channel can hold costs
+// the newest records instead of whatever arrives during a short failure.
+func (q *Queue) deliver(l *lane, batch []any) {
+	for {
+		if !l.failingSince.IsZero() && q.stopping() {
+			l.dropped.Add(int64(len(batch)))
+			return
+		}
+		err := q.send(l.key, batch)
+		if err == nil {
+			l.pushed.Add(int64(len(batch)))
+			if !l.failingSince.IsZero() {
+				log.Printf("edgequeue: %s pushes recovered after %v", Kinds[l.key], time.Since(l.failingSince).Round(time.Millisecond))
+				l.failingSince = time.Time{}
+			}
+			return
+		}
+		l.pushFailures.Add(1)
+		if l.failingSince.IsZero() {
+			l.failingSince = time.Now()
+			log.Printf("edgequeue: pushing %d %s records failed, retrying: %v", len(batch), Kinds[l.key], err)
+		}
+		select {
+		case <-q.stop:
+		case <-time.After(retryWait):
+		}
+	}
+}
+
+func (q *Queue) stopping() bool {
+	select {
+	case <-q.stop:
+		return true
+	default:
+		return false
 	}
 }
 
@@ -197,7 +235,9 @@ func (q *Queue) reportDrops() {
 	}
 }
 
-// Stats returns records_pushed_<kind> / records_dropped_<kind> counters.
+// Stats returns records_pushed_<kind> / records_dropped_<kind> counters,
+// plus records_dropped_full_<kind> (the part of the drops lost to a full
+// channel) and push_failures_<kind> (failed attempts, each retried).
 func (q *Queue) Stats() map[string]int64 {
 	st := map[string]int64{}
 	if q == nil {
@@ -206,6 +246,8 @@ func (q *Queue) Stats() map[string]int64 {
 	for key, l := range q.lanes {
 		st["records_pushed_"+Kinds[key]] = l.pushed.Load()
 		st["records_dropped_"+Kinds[key]] = l.dropped.Load()
+		st["records_dropped_full_"+Kinds[key]] = l.full.Load()
+		st["push_failures_"+Kinds[key]] = l.pushFailures.Load()
 	}
 	return st
 }

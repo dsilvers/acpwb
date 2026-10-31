@@ -61,6 +61,7 @@ Watermark, three layers: visible footer "Report ID: {token}", invisible span (`f
 - **Tagline:** "Money doesn't buy happiness, but it darn well comes close to doing so."
 - **Employee headshots:** 400 WebP at `static/img/headshots/`, 300×300px. `{% headshot_or_avatar seed initials size %}` — `HEADSHOT_DIR` uses `parents[3]` (tag file is 3 levels deep from project root)
 - **Project cover images:** `{{ slug|project_cover_url }}` — MD5 pick from the `static/img/report-covers/pool/` images (shared with reports); the old `project-covers/` set was removed
+- **Spoofed vendors:** vendor bot names from outside published IP ranges become `Spoofed <vendor>`; see `acpwb/apps/core/CLAUDE.md`
 - **Partners:** Fortune 500 fixture, 40 random per load (`order_by('?')[:40]`)
 - **Reports:** seed = slug, 1993–2025 date range, 26 named reports + synthetic beyond page 3
 - **`makemigrations` runs on every boot** — idempotent, simplifies dev

@@ -1,5 +1,7 @@
 import pytest
-from apps.core.bot_classify import classify_ua, classify_ua_group
+from apps.core.bot_classify import (
+    bot_type_to_group, classify_ua, classify_ua_group, classify_ua_or_ip, spoofed_vendor,
+)
 
 
 @pytest.mark.parametrize("ua,expected", [
@@ -47,8 +49,8 @@ from apps.core.bot_classify import classify_ua, classify_ua_group
     ('TechnicalSEO.com Spider Bot/2.0', 'TechnicalSEO'),
     ('pimeyes-downloader-api/0.1', 'PimEyes'),
     # Vendor names being spoofed on this site stay unclassified until real traffic shows up
-    ('Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)', 'Other / Browser'),
-    ('DuckAssistBot/1.1 (https://duckduckgo.com/duckassistbot)', 'Other / Browser'),
+    ('Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)', 'Perplexity-User'),
+    ('DuckAssistBot/1.1 (https://duckduckgo.com/duckassistbot)', 'DuckAssistBot'),
     # Generic scrapers
     ('python-requests/2.28.0', 'Python Requests'),
     ('curl/7.88.1', 'cURL'),
@@ -119,3 +121,33 @@ def test_classify_ua_case_insensitive():
 ])
 def test_classify_ua_group(ua, expected_group):
     assert classify_ua_group(ua) == expected_group
+
+
+@pytest.mark.parametrize('ua,ip,expected', [
+    ('ClaudeBot/1.0', '216.73.216.1', 'Anthropic ClaudeBot'),  # published range
+    ('ClaudeBot/1.0', '35.231.36.121', 'Spoofed Anthropic'),
+    ('Claude-User/1.0; +claudebot@anthropic.com', '35.231.36.121', 'Spoofed Anthropic'),
+    ('Claude-User/1.0; +claudebot@anthropic.com', '216.73.216.1', 'Anthropic Claude-User'),
+    ('Mozilla/5.0 (compatible; Googlebot/2.1)', '35.231.36.121', 'Spoofed Google'),
+    ('GPTBot/1.4', '104.28.196.55', 'Spoofed OpenAI'),
+    ('bingbot/2.0', '35.231.36.121', 'Spoofed Bing'),
+    ('DuckAssistBot/1.1', '35.231.36.121', 'Spoofed DuckDuckGo'),
+    ('Perplexity-User/1.0', '35.231.36.121', 'Spoofed Perplexity'),
+    ('ClaudeBot/1.0', '127.0.0.1', 'Anthropic ClaudeBot'),  # not a public address
+    ('ClaudeBot/1.0', '10.1.2.3', 'Anthropic ClaudeBot'),
+    ('ClaudeBot/1.0', '', 'Anthropic ClaudeBot'),
+    ('ClaudeBot/1.0', 'garbage', 'Anthropic ClaudeBot'),
+    ('AionBot/1.0', '35.231.36.121', 'AionBot'),  # no published list
+    ('Mozilla/5.0 (Macintosh) Claude/1.0 Chrome/140 Electron/38', '35.231.36.121', 'Other / Browser'),  # desktop app
+])
+def test_spoofed_vendor(ua, ip, expected):
+    assert classify_ua_or_ip(ua, ip) == expected
+
+
+def test_ipv6_range_checked():
+    assert spoofed_vendor('Googlebot', '2001:4860:4801:10::1') is None
+    assert spoofed_vendor('Googlebot', '2001:db8::1') == 'Spoofed Google'
+
+
+def test_spoofed_group():
+    assert bot_type_to_group('Spoofed Google') == 'Spoofed Vendors'

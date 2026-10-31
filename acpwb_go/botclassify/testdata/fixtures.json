@@ -5,112 +5,112 @@
       "ip": "1.2.3.4",
       "classify_ua": "OpenAI GPTBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "OpenAI GPTBot"
+      "classify_ua_or_ip": "Spoofed OpenAI"
     },
     {
       "ua": "Mozilla/5.0 (compatible; GPTBOT/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "OpenAI GPTBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "OpenAI GPTBot"
+      "classify_ua_or_ip": "Spoofed OpenAI"
     },
     {
       "ua": "Mozilla/5.0 (compatible; OAI-SearchBot/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "OpenAI SearchBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "OpenAI SearchBot"
+      "classify_ua_or_ip": "Spoofed OpenAI"
     },
     {
       "ua": "Mozilla/5.0 (compatible; OAI-SEARCHBOT/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "OpenAI SearchBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "OpenAI SearchBot"
+      "classify_ua_or_ip": "Spoofed OpenAI"
     },
     {
       "ua": "Mozilla/5.0 (compatible; ChatGPT-User/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "OpenAI ChatGPT",
       "classify_ip": "",
-      "classify_ua_or_ip": "OpenAI ChatGPT"
+      "classify_ua_or_ip": "Spoofed OpenAI"
     },
     {
       "ua": "Mozilla/5.0 (compatible; CHATGPT-USER/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "OpenAI ChatGPT",
       "classify_ip": "",
-      "classify_ua_or_ip": "OpenAI ChatGPT"
+      "classify_ua_or_ip": "Spoofed OpenAI"
     },
     {
       "ua": "Mozilla/5.0 (compatible; ClaudeBot/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "Anthropic ClaudeBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "Anthropic ClaudeBot"
+      "classify_ua_or_ip": "Spoofed Anthropic"
     },
     {
       "ua": "Mozilla/5.0 (compatible; CLAUDEBOT/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Anthropic ClaudeBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "Anthropic ClaudeBot"
+      "classify_ua_or_ip": "Spoofed Anthropic"
     },
     {
       "ua": "Mozilla/5.0 (compatible; Claude-Web/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "Anthropic Claude",
       "classify_ip": "",
-      "classify_ua_or_ip": "Anthropic Claude"
+      "classify_ua_or_ip": "Spoofed Anthropic"
     },
     {
       "ua": "Mozilla/5.0 (compatible; CLAUDE-WEB/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Anthropic Claude",
       "classify_ip": "",
-      "classify_ua_or_ip": "Anthropic Claude"
+      "classify_ua_or_ip": "Spoofed Anthropic"
     },
     {
       "ua": "Mozilla/5.0 (compatible; anthropic-ai/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "Anthropic",
       "classify_ip": "",
-      "classify_ua_or_ip": "Anthropic"
+      "classify_ua_or_ip": "Spoofed Anthropic"
     },
     {
       "ua": "Mozilla/5.0 (compatible; ANTHROPIC-AI/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Anthropic",
       "classify_ip": "",
-      "classify_ua_or_ip": "Anthropic"
+      "classify_ua_or_ip": "Spoofed Anthropic"
     },
     {
       "ua": "Mozilla/5.0 (compatible; PerplexityBot/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "Perplexity",
       "classify_ip": "",
-      "classify_ua_or_ip": "Perplexity"
+      "classify_ua_or_ip": "Spoofed Perplexity"
     },
     {
       "ua": "Mozilla/5.0 (compatible; PERPLEXITYBOT/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Perplexity",
       "classify_ip": "",
-      "classify_ua_or_ip": "Perplexity"
+      "classify_ua_or_ip": "Spoofed Perplexity"
     },
     {
       "ua": "Mozilla/5.0 (compatible; Google-Extended/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "Google-Extended (AI)",
       "classify_ip": "",
-      "classify_ua_or_ip": "Google-Extended (AI)"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; GOOGLE-EXTENDED/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Google-Extended (AI)",
       "classify_ip": "",
-      "classify_ua_or_ip": "Google-Extended (AI)"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; meta-externalagent/1.0; +http://example.com/bot)",
@@ -271,56 +271,56 @@
       "ip": "1.2.3.4",
       "classify_ua": "Googlebot Mobile",
       "classify_ip": "",
-      "classify_ua_or_ip": "Googlebot Mobile"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; NEXUS 5X BUILD/MMB29P/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Googlebot Mobile",
       "classify_ip": "",
-      "classify_ua_or_ip": "Googlebot Mobile"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; Googlebot/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "Googlebot",
       "classify_ip": "",
-      "classify_ua_or_ip": "Googlebot"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; GOOGLEBOT/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Googlebot",
       "classify_ip": "",
-      "classify_ua_or_ip": "Googlebot"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; GoogleOther/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "GoogleOther",
       "classify_ip": "",
-      "classify_ua_or_ip": "GoogleOther"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; GOOGLEOTHER/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "GoogleOther",
       "classify_ip": "",
-      "classify_ua_or_ip": "GoogleOther"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (compatible; bingbot/1.0; +http://example.com/bot)",
       "ip": "1.2.3.4",
       "classify_ua": "Bingbot",
       "classify_ip": "",
-      "classify_ua_or_ip": "Bingbot"
+      "classify_ua_or_ip": "Spoofed Bing"
     },
     {
       "ua": "Mozilla/5.0 (compatible; BINGBOT/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "Bingbot",
       "classify_ip": "",
-      "classify_ua_or_ip": "Bingbot"
+      "classify_ua_or_ip": "Spoofed Bing"
     },
     {
       "ua": "Mozilla/5.0 (compatible; BingPreview/1.0; +http://example.com/bot)",
@@ -397,14 +397,14 @@
       "ip": "1.2.3.4",
       "classify_ua": "DuckDuckBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "DuckDuckBot"
+      "classify_ua_or_ip": "Spoofed DuckDuckGo"
     },
     {
       "ua": "Mozilla/5.0 (compatible; DUCKDUCKBOT/1.0)",
       "ip": "1.2.3.4",
       "classify_ua": "DuckDuckBot",
       "classify_ip": "",
-      "classify_ua_or_ip": "DuckDuckBot"
+      "classify_ua_or_ip": "Spoofed DuckDuckGo"
     },
     {
       "ua": "Mozilla/5.0 (compatible; Applebot/1.0; +http://example.com/bot)",
@@ -887,7 +887,7 @@
       "ip": "1.2.3.4",
       "classify_ua": "Googlebot Mobile",
       "classify_ip": "",
-      "classify_ua_or_ip": "Googlebot Mobile"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "",
@@ -1111,7 +1111,7 @@
       "ip": "1.2.3.4",
       "classify_ua": "AdsBot-Google",
       "classify_ip": "",
-      "classify_ua_or_ip": "AdsBot-Google"
+      "classify_ua_or_ip": "Spoofed Google"
     },
     {
       "ua": "Mozilla/5.0 (Linux; Android 5.0) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; TikTokSpider; ttspider-feedback@tiktok.com)",
@@ -1151,9 +1151,121 @@
     {
       "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)",
       "ip": "1.2.3.4",
-      "classify_ua": "Other / Browser",
+      "classify_ua": "Perplexity-User",
       "classify_ip": "",
-      "classify_ua_or_ip": "Other / Browser"
+      "classify_ua_or_ip": "Spoofed Perplexity"
+    },
+    {
+      "ua": "Claude-User/1.0; +claudebot@anthropic.com",
+      "ip": "216.73.216.1",
+      "classify_ua": "Anthropic Claude-User",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic Claude-User"
+    },
+    {
+      "ua": "Claude-User/1.0; +claudebot@anthropic.com",
+      "ip": "35.231.36.121",
+      "classify_ua": "Anthropic Claude-User",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed Anthropic"
+    },
+    {
+      "ua": "Claude-SearchBot/1.0; +claudebot@anthropic.com",
+      "ip": "35.231.36.121",
+      "classify_ua": "Anthropic Claude-SearchBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed Anthropic"
+    },
+    {
+      "ua": "ClaudeBot/1.0",
+      "ip": "216.73.216.1",
+      "classify_ua": "Anthropic ClaudeBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic ClaudeBot"
+    },
+    {
+      "ua": "ClaudeBot/1.0",
+      "ip": "127.0.0.1",
+      "classify_ua": "Anthropic ClaudeBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic ClaudeBot"
+    },
+    {
+      "ua": "ClaudeBot/1.0",
+      "ip": "10.1.2.3",
+      "classify_ua": "Anthropic ClaudeBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic ClaudeBot"
+    },
+    {
+      "ua": "ClaudeBot/1.0",
+      "ip": "garbage",
+      "classify_ua": "Anthropic ClaudeBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Anthropic ClaudeBot"
+    },
+    {
+      "ua": "Googlebot/2.1",
+      "ip": "2001:4860:4801:10::1",
+      "classify_ua": "Googlebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Googlebot"
+    },
+    {
+      "ua": "Googlebot/2.1",
+      "ip": "2001:db8::1",
+      "classify_ua": "Googlebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed Google"
+    },
+    {
+      "ua": "Googlebot/2.1",
+      "ip": "::ffff:35.231.36.121",
+      "classify_ua": "Googlebot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed Google"
+    },
+    {
+      "ua": "OAI-AdsBot/1.0",
+      "ip": "35.231.36.121",
+      "classify_ua": "OpenAI AdsBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed OpenAI"
+    },
+    {
+      "ua": "Perplexity-User/1.0",
+      "ip": "35.231.36.121",
+      "classify_ua": "Perplexity-User",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed Perplexity"
+    },
+    {
+      "ua": "DuckAssistBot/1.1",
+      "ip": "35.231.36.121",
+      "classify_ua": "DuckAssistBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed DuckDuckGo"
+    },
+    {
+      "ua": "Google-Agent",
+      "ip": "35.231.36.121",
+      "classify_ua": "Google-Agent",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed Google"
+    },
+    {
+      "ua": "bingbot/2.0",
+      "ip": "35.231.36.121",
+      "classify_ua": "Bingbot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "Spoofed Bing"
+    },
+    {
+      "ua": "AionBot/1.0",
+      "ip": "35.231.36.121",
+      "classify_ua": "AionBot",
+      "classify_ip": "",
+      "classify_ua_or_ip": "AionBot"
     }
   ],
   "group_cases": [
@@ -1488,6 +1600,38 @@
     {
       "bot_type": "zgrab",
       "group": "SEO / Other Bots"
+    },
+    {
+      "bot_type": "Anthropic Claude-User",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Anthropic Claude-SearchBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "OpenAI AdsBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Perplexity-User",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "DuckAssistBot",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Google-Agent",
+      "group": "AI Crawlers"
+    },
+    {
+      "bot_type": "Spoofed Google",
+      "group": "Spoofed Vendors"
+    },
+    {
+      "bot_type": "Spoofed Anthropic",
+      "group": "Spoofed Vendors"
     }
   ]
 }

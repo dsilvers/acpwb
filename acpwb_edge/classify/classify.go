@@ -104,6 +104,10 @@ func Classify(in Input) Result {
 
 	// Self-declared bots and HTTP libraries first, as bot_classify does.
 	if bot := botclassify.ClassifyUA(in.UA); bot != "Other / Browser" && bot != "(empty user agent)" {
+		if spoofed := botclassify.SpoofedVendor(bot, in.IP); spoofed != "" {
+			res.Class, res.Label, res.Group = ClassImpersonator, spoofed, botclassify.BotTypeToGroup(spoofed)
+			return res
+		}
 		group := botclassify.BotTypeToGroup(bot)
 		res.Label, res.Group = bot, group
 		if group == "Generic Scrapers" {

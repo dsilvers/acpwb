@@ -70,9 +70,19 @@ func TestBotTypeToGroupParityWithPython(t *testing.T) {
 // Every BOT_PATTERNS entry must actually be present in the Go port with the
 // exact same name — catches a silently-dropped or renamed pattern that the
 // fixture cases above wouldn't necessarily surface if both sides dropped it.
+func TestVendorRangesMatchDjango(t *testing.T) {
+	theirs, err := os.ReadFile("../../acpwb/apps/core/vendor_ranges.tsv")
+	if err != nil {
+		t.Skip("acpwb not checked out alongside:", err)
+	}
+	if string(theirs) != vendorRangesTSV {
+		t.Fatal("vendor_ranges.tsv differs from Django's: run deploy/refresh_vendor_ranges.py")
+	}
+}
+
 func TestAllPatternsPresent(t *testing.T) {
-	if len(botPatternDefs) != 78 {
-		t.Errorf("botPatternDefs has %d entries, want 78 (matching BOT_PATTERNS in bot_classify.py)", len(botPatternDefs))
+	if len(botPatternDefs) != 84 {
+		t.Errorf("botPatternDefs has %d entries, want 84 (matching BOT_PATTERNS in bot_classify.py)", len(botPatternDefs))
 	}
 	if len(ipBotRangeDefs) != 11 {
 		t.Errorf("ipBotRangeDefs has %d entries, want 11 (matching _IP_BOT_RANGE_DEFS)", len(ipBotRangeDefs))

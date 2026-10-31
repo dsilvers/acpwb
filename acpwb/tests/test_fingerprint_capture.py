@@ -239,6 +239,42 @@ def test_drain_edge_request_queue_persists_and_dedupes(private_edge_queue):
     assert rows[0].ja4.startswith('t13d131000_') and rows[0].signals == 3
 
 
+@pytest.mark.django_db
+def test_drain_extra_worker_skips_recovery_and_has_its_own_lock(private_edge_queue):
+    import fcntl
+    import json
+    from apps.core import crawler_queue
+    from apps.core.management.commands.drain_edge_request_queue import Command
+    from apps.honeypot.models import EdgeRequest
+    queue_key = crawler_queue._EDGE_REQUEST_QUEUE_KEY
+    record = {
+        'timestamp': '2026-01-01T00:00:00.000000+00:00',
+        'request_id': '1f8fad5b-d9cb-469f-a165-70867728950e',
+        'conn_id': '7c9e6679-7425-40de-944b-e07fc1f90ae7',
+        'ip_address': '192.0.2.12',
+        'protocol': 'HTTP/2.0', 'method': 'GET', 'host': 'acpwb.com', 'path': '/', 'query': '',
+        'status': 200, 'route': 'django', 'error': '', 'response_bytes': 1, 'duration_us': 1,
+    }
+    r = crawler_queue._get_client()
+    r.rpush(queue_key, json.dumps(record))
+    # Another worker's batch, still in flight.
+    _, in_flight = crawler_queue.pop_edge_requests(1)
+    r.rpush(queue_key, json.dumps({**record, 'request_id': '2f8fad5b-d9cb-469f-a165-70867728950e'}))
+
+    # Worker 0 holding its lock doesn't stop worker 1.
+    with open(Command.lock_file, 'w') as held:
+        fcntl.flock(held, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        call_command('drain_edge_request_queue', worker=1, stdout=io.StringIO())
+
+    rows = EdgeRequest.objects.filter(ip_address='192.0.2.12')
+    assert [str(row.request_id)[:8] for row in rows] == ['2f8fad5b']
+    assert r.exists(in_flight)  # left for worker 0 to recover
+
+    call_command('drain_edge_request_queue', stdout=io.StringIO())
+    assert EdgeRequest.objects.filter(ip_address='192.0.2.12').count() == 2
+    assert not r.exists(in_flight)
+
+
 def test_traffic_signal_names():
     from apps.core.traffic_signals import BIT, signal_names
     assert signal_names(0) == []

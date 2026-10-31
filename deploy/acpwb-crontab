@@ -15,6 +15,9 @@
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_compliance_queue' >> /var/log/acpwb-compliance-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_conn_queue' >> /var/log/acpwb-edge-conn-drain.log 2>&1
 * * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_request_queue' >> /var/log/acpwb-edge-request-drain.log 2>&1
+# One worker can't keep up with this queue at current traffic.
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_request_queue --worker 1' >> /var/log/acpwb-edge-request-drain.log 2>&1
+* * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py drain_edge_request_queue --worker 2' >> /var/log/acpwb-edge-request-drain.log 2>&1
 # Hourly rollups of edge traffic (EdgeIPHour, EdgeFingerprintHour) for the
 # dashboard's who's-really-visiting panels and reputation scoring. Rolls up
 # each hour 15 minutes after it ends; ~20s per hour of traffic.

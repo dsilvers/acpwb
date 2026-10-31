@@ -38,13 +38,19 @@ class Command(BaseCommand):
         parser.add_argument('--batch', type=int, default=500)
         parser.add_argument('--max-batches', type=int, default=0)
         parser.add_argument('--max-seconds', type=int, default=55)
+        # Extra workers for a queue one process can't keep up with. Each pops
+        # its own batches, so they only need separate locks. Only worker 0
+        # recovers, or workers would replay each other's in-flight batches.
+        parser.add_argument('--worker', type=int, default=0)
 
     def _log(self, msg):
         ts = datetime.now(timezone.utc).isoformat()
         self.stdout.write(f'[{ts}] {msg}')
 
     def handle(self, *args, **options):
-        with open(self.lock_file, 'w') as lock_fh:
+        worker = options['worker']
+        lock_file = f'{self.lock_file}.{worker}' if worker else self.lock_file
+        with open(lock_file, 'w') as lock_fh:
             try:
                 fcntl.flock(lock_fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
             except OSError:
@@ -96,8 +102,9 @@ class Command(BaseCommand):
         started = time.monotonic()
 
         recovered = 0
-        for items, batch_key in self.recover():
-            recovered += self._process_batch(items, batch_key)
+        if not options['worker']:
+            for items, batch_key in self.recover():
+                recovered += self._process_batch(items, batch_key)
         if recovered:
             self._log(f'Recovered {recovered} record(s) from a prior interrupted run.')
 

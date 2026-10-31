@@ -48,6 +48,9 @@ Environment=EDGE_ASN_DB=/home/acpwb/acpwb/acpwb/var/geoip/GeoLite2-ASN.mmdb
 #Environment=EDGE_HEADER_TIMEOUT_SECONDS=5
 #Environment=EDGE_IDLE_TIMEOUT_SECONDS=15
 #Environment=EDGE_STALL_TIMEOUT_SECONDS=15
+# Records kept per Redis queue if the drains fall behind; the oldest go first.
+# About 1.2 KB each, so this is up to 6 GB per queue.
+Environment=EDGE_QUEUE_MAX=5000000
 # Key exchange: X25519 (as nginx/OpenSSL 3.0 did); 1 = Go's default, which
 # prefers hybrid post-quantum X25519MLKEM768.
 #Environment=EDGE_PQ_KEX=0

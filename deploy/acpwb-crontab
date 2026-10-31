@@ -1,4 +1,5 @@
 # ACPWB production cron jobs — install with: crontab -u acpwb deploy/acpwb-crontab
+# Install on the app node only; the jobs reach Postgres through DB_HOST in .env.
 #
 # cron does not load .env, so each job sources it manually before invoking manage.py
 */30 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py precalc_dashboard' >> /var/log/acpwb-precalc.log 2>&1

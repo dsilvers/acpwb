@@ -1,7 +1,62 @@
 # ACPWB production deploy (no Docker)
 
 Assumes project checked out to `/home/acpwb/acpwb`, run as system user `acpwb`,
-with Postgres 16 + TimescaleDB and Redis installed locally on the box.
+on two nodes joined by a private network: an app node (edge, Go, gunicorn, WS
+services, Redis, cron) and a DB node (Postgres 16 + TimescaleDB, PgBouncer).
+See "Two-node layout" below. Incident notes further down describe the earlier
+single-box setup.
+
+## Two-node layout
+
+**DB node**
+
+- Keep the Postgres data directory on its own disk, mounted by label in
+  `/etc/fstab`, because device letters can change across reboots. A bind mount
+  of that disk onto `/var/lib/postgresql` keeps the Debian paths working.
+- Postgres listens on `localhost` and the private address (`listen_addresses`
+  in a `conf.d` file), with one `pg_hba.conf` line for the private subnet:
+  ```
+  host    acpwb    acpwb    <private-subnet>    scram-sha-256
+  ```
+- PgBouncer runs here, not on the app node, because Django's `direct` database
+  alias reuses `DB_HOST` with `DB_DIRECT_PORT`. Install `deploy/pgbouncer.ini`
+  and add the private address to `listen_addr`.
+- The firewall allows only SSH on the public interface, and everything on the
+  private one.
+
+**App node**
+
+- `.env` points at the DB node:
+  ```
+  DB_HOST=<db-private-address>
+  DB_PORT=6432
+  DB_DIRECT_PORT=5432
+  ```
+- Redis stays local. A large dataset takes minutes to load, longer than
+  systemd's default start timeout, so add a `redis-server` override with
+  `TimeoutStartSec=infinity`, or it's killed and restarted mid-load.
+- The firewall allows SSH, 80 and 443 on the public interface, and everything
+  on the private one.
+- Install the sysctls with only `deploy/99-acpwb-netstack.conf` setting
+  `net.core.somaxconn`: a later file with a lower value silently wins, and
+  Redis logs a backlog warning.
+- `acpwb` needs direnv and pyenv in its shell for `./manage.py` to work by
+  hand. Units and cron use the venv's full path, so they work either way.
+
+**Moving a database to a new OS**
+
+A file-level copy to a newer Ubuntu changes the glibc collation version. Rebuild
+the indexes that use the default collation, then run
+`ALTER DATABASE ... REFRESH COLLATION VERSION`. TimescaleDB refuses
+`REINDEX INDEX` on a hypertable's parent indexes; those parents hold no rows,
+so leave them out and rebuild the chunk indexes.
+
+Keep `cron` stopped and disabled during a cutover, because a stop alone doesn't
+survive a reboot. If Redis is restored from an older dump, its queues hold
+records that were already drained: trim those before starting the drains.
+
+The dashboard's graphs are images written by `precalc_dashboard`, so a graph
+can show old data until the next run finishes, even when the tables are current.
 
 ## Install units
 
@@ -249,9 +304,9 @@ drains sat idle for their first minutes in production.
 
 ## Before starting
 
-- `.env` at `/home/acpwb/acpwb/.env` must exist, with `DB_HOST=127.0.0.1` (not
-  `db` — that was the Docker Compose service name) and `DJANGO_SETTINGS_MODULE`
-  pointed at the production settings module.
+- `.env` at `/home/acpwb/acpwb/.env` must exist, with `DB_HOST` set to the DB
+  node's private address (not `db` — that was the Docker Compose service name)
+  and `DJANGO_SETTINGS_MODULE` pointed at the production settings module.
 - On boxes provisioned with `direnv`/`layout pyenv`, the venv direnv creates at
   `.direnv/python-<version>/` is the one all units should point at — that's
   what these unit files assume. It won't have `websockets` installed by

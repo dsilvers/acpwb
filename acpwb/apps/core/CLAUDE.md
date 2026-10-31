@@ -36,5 +36,6 @@ Second product line in progress: catalog/score traffic for a future real-time bl
 | `drain_compliance_queue` | Pop `acpwb:compliance_queue` → bulk-insert `ComplianceCompletion` (/compliance/ milestones). 1-min cron. |
 | `drain_edge_conn_queue` | Pop `acpwb:edge_conn_queue` (pushed by acpwb_edge) → bulk-insert `EdgeConnection`. 1-min cron. |
 | `drain_edge_request_queue` | Pop `acpwb:edge_request_queue` (pushed by acpwb_edge) → bulk-insert `EdgeRequest`. 1-min cron. |
+| `rollup_crawler_minute` | `CrawlerVisit` → `CrawlerMinute` (per minute, bot and trap), recounting the last 30 min. 5-min cron. `--from`/`--to` re-runs a range (needed after reclassifying bots); `--backfill --from` fills older history from a saved cursor. |
 
 Production cron schedules: `deploy/CLAUDE.md`.

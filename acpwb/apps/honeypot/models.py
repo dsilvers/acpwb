@@ -876,3 +876,40 @@ class ComplianceCompletion(models.Model):
 
     def __str__(self):
         return f"{self.event} {self.course} #{self.attempt} ({self.ip_address})"
+
+
+class CrawlerMinute(models.Model):
+    """One row per (minute, bot, trap): how many CrawlerVisits there were.
+    Built by rollup_crawler_minute from the raw table. Small (about 50k rows
+    a day) and kept forever: per-bot and per-trap trends read this, because
+    CrawlerVisit runs to 100M+ rows a day and DashboardStat only keeps daily
+    totals, top-N lists and all-time counters.
+
+    bot_type is whatever was classified when the visit was stored, so a
+    reclassification only shows up here once that range is re-run (--from).
+
+    A TimescaleDB hypertable (migration 0033): no primary key;
+    minute + bot_type + bot_group + trap_type is unique. Not compressed,
+    since re-runs replace rows and the table stays small without it.
+    """
+    minute = models.DateTimeField()
+    bot_type = models.CharField(max_length=64, blank=True)
+    bot_group = models.CharField(max_length=64, blank=True)
+    trap_type = models.CharField(max_length=32)
+    count = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-minute']
+        indexes = [
+            models.Index(fields=['bot_type', 'minute']),
+            models.Index(fields=['trap_type', 'minute']),
+            models.Index(fields=['bot_group', 'minute']),
+        ]
+        constraints = [
+            models.UniqueConstraint(fields=['minute', 'bot_type', 'bot_group', 'trap_type'],
+                                    name='honeypot_crawlerminute_uniq'),
+        ]
+        verbose_name = 'Crawler Minute'
+
+    def __str__(self):
+        return f"{self.bot_type or '(blank)'} / {self.trap_type} @ {self.minute:%Y-%m-%d %H:%M}: {self.count}"

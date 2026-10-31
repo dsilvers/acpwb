@@ -22,6 +22,9 @@
 # dashboard's who's-really-visiting panels and reputation scoring. Rolls up
 # each hour 15 minutes after it ends; ~20s per hour of traffic.
 */15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py rollup_edge_hour' >> /var/log/acpwb-edge-rollup.log 2>&1
+# Per-minute crawler visits by bot and trap (CrawlerMinute), for the Grafana
+# trend graphs. Recounts the last 30 minutes each run, for late drains.
+*/5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py rollup_crawler_minute' >> /var/log/acpwb-crawler-minute.log 2>&1
 */5 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py score_ip_reputation' >> /var/log/acpwb-score-ip-reputation.log 2>&1
 */15 * * * * cd /home/acpwb/acpwb && bash -c 'set -a; source .env; set +a; exec /home/acpwb/acpwb/.direnv/python-3.14/bin/python /home/acpwb/acpwb/acpwb/manage.py publish_ip_reputation' >> /var/log/acpwb-publish-ip-reputation.log 2>&1
 

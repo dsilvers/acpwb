@@ -22,6 +22,7 @@ docker compose exec web pytest  # run tests
 
 - `people.PeoplePageVisit` / `GeneratedEmployee` — every `/our-people/` load and the fake employees shown
 - `honeypot.CrawlerVisit` / `ArchiveVisit` — all bot/trap activity (`trap_type`, `host`). Timestamp is `default=timezone.now, editable=False` (NOT `auto_now_add`) so Redis-queued records preserve request time
+- `honeypot.CrawlerMinute` — per-minute visit counts by `bot_type`, `bot_group` and `trap_type`, built by `rollup_crawler_minute`; read this for trends, never aggregate `CrawlerVisit` from a dashboard
 - `honeypot.IPIntelligence` — one row per IP (GeoLite2 + hosting/Tor heuristics); joined to CrawlerVisit by IP value only, never an FK (hypertable)
 - `honeypot.RequestFingerprint`, `IPReputationScore`, `PublishedIPReputation` — residential proxy detection (see `acpwb/apps/core/CLAUDE.md`)
 - `honeypot.SourceCodeEmail` — programmer address per source-code page (queued by acpwb_go); lets `_match_honeypot` trace spam to the page

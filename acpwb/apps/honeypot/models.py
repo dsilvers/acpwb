@@ -886,7 +886,8 @@ class CrawlerMinute(models.Model):
     totals, top-N lists and all-time counters.
 
     bot_type is whatever was classified when the visit was stored, so a
-    reclassification only shows up here once that range is re-run (--from).
+    reclassification only shows up here once that range is rebuilt
+    (--reclassify; a plain --from re-run reads the stored labels).
 
     A TimescaleDB hypertable (migration 0033): no primary key;
     minute + bot_type + bot_group + trap_type is unique. Not compressed,
